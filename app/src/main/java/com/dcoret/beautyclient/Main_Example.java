@@ -11,17 +11,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Main_Example extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    LinearLayout layout;
+    TextView service;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main__example);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+         layout=findViewById(R.id.layout);
+         service=findViewById(R.id.service);
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
@@ -101,6 +107,16 @@ public class Main_Example extends AppCompatActivity
     }
 
     public void services(View view) {
+
+//        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+//        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+//
+//        if(service.getVisibility()==View.INVISIBLE) {
+//
+//            service.startAnimation(slideUp);
+//            service.setVisibility(View.VISIBLE);
+//        }
+
         Intent intent=new Intent(this, Services.class);
         startActivity(intent);
 

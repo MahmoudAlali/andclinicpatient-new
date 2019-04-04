@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,9 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.view.Window;
-import android.widget.TextView;
 
 public class MyReservations extends AppCompatActivity {
 
@@ -166,12 +161,13 @@ public class MyReservations extends AppCompatActivity {
 
                 return one;
             }else if(position==1) {
-                TabThree three=new TabThree();
-                return three;
-
-            }else if(position==2) {
                 TabTwo two=new TabTwo();
                 return two;
+
+
+            }else if(position==2) {
+                TabThree three=new TabThree();
+                return three;
             }
 return null;
         }

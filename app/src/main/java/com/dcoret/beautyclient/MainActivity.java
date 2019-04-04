@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     static double latit;
     static double longit;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         forgetpass = findViewById(R.id.forgetpass);
         register = findViewById(R.id.register);
 
-
+        forgetpass();
     }
 
     public void login(View view) {
@@ -59,20 +60,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    LocationManager locationManager;
-    LocationListener locationListener;
+   static LocationManager locationManager;
+   static LocationListener locationListener;
+   static Location location1;
+   static double latitud,longitud;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void forgetpass(View view) {
+    public  void forgetpass() {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                        Toast.makeText(getApplicationContext()
-                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
-                    register.setText(location.getLatitude()+" : "+location.getLongitude());
+                latitud=location.getLatitude();
+                longitud=location.getLongitude();
+//                        Toast.makeText(getApplicationContext()
+//                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
+//                    register.setText(location.getLatitude()+" : "+location.getLongitude());
 
                }
 
@@ -163,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    public void forgetpass(View view) {
+    }
 }
