@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="البحث"
+        app:showAsAction="always"
+        >
+    </item>
+    <item
+        android:id="@+id/notify"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="الاشعارات"
+        app:showAsAction="always"
+        >
+
+    </item>
+    <item
+        android:id="@+id/shoppingcart"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="الاشعارات"
+        app:showAsAction="always"
+        >
+
+    </item>
+
+
+</menu>

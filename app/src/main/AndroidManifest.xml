@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dcoret.beautyclient">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,6 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".Exampleee_just"
+            android:label="@string/title_activity_exampleee_just"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +23,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Login" />
+        <activity android:name=".Register" />
+        <activity android:name=".MainPage" />
+        <activity android:name=".ForgetMyPass" />
+        <activity android:name=".Services" />
+        <activity android:name=".Offers" />
+        <activity android:name=".Reservation" />
+        <activity android:name=".ManageAccount" />
+        <activity android:name=".ExtraServices" />
+        <activity android:name=".CustomerService" />
+        <activity android:name=".FavoritesList" />
+        <activity android:name=".MyProfile" />
+        <activity android:name=".Point" />
+        <activity android:name=".Main_Example" />
+        <activity
+            android:name=".MyReservations"
+            android:label="@string/title_activity_my_reservations"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyResrvation"
+            android:label="@string/title_activity_my_resrvation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyReservation"
+            android:label="@string/title_activity_my_reservation"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">BeautyClient</string>
+    <string name="title_activity_my_reservations">MyReservations</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="title_activity_my_resrvation">MyResrvation</string>
+    <string name="title_activity_my_reservation">MyReservation</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_exampleee_just">Exampleee_just</string>
+    <string-array name="cities">
+        <item>الكل</item>
+        <item>الرياض</item>
+        <item>مكة</item>
+        <item>المدينة المنورة</item>
+        <item>بريدة</item>
+        <item>تبوك</item>
+        <item>الدمام</item>
+        <item>جدة</item>
+        <item>الاحساء</item>
+        <item>القطيف</item>
+        <item>الطائف</item>
+        <item>نجران</item>
+        <item>الجبيل</item>
+        <item>الخبر</item>
+        <item>عرعر</item>
+        <item>جيزان</item>
+        <item>سهيات</item>
+        <item>بيش</item>
+        <item>الفريش</item>
+        <item>بارق</item>
+        <item>الافلاج</item>
+
+
+    </string-array>
 </resources>

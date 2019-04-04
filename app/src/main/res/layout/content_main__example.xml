@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Main_Example"
+    tools:showIn="@layout/app_bar_main__example">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/bbbb"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:titleTextColor="#70179C"
+            app:theme="@style/ToolbarColoredBackArrow"
+            app:popupTheme="@style/AppTheme"
+            app:title="Beauty"
+            app:navigationIcon="@drawable/ic_menu_black_24dp"
+
+
+
+            />
+        <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/shadow1"
+            android:elevation="10dp">
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchview"
+                android:background="@drawable/shadow1"
+
+                android:gravity="top"
+                android:searchIcon="@drawable/ic_search_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:onClick="mypoint"
+                    android:background="@drawable/shadow1"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:elevation="10dp"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="نقاطي"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:onClick="myreservation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:weightSum="3"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:background="@drawable/shadow1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="حجوزاتي"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:weightSum="3"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:onClick="extraServices"
+                    android:background="@drawable/shadow1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="خدمات اضافية"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:weightSum="3"
+                    android:elevation="10dp"
+                    android:onClick="services"
+                    android:background="@drawable/shadow1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="الخدمات"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shadow1"
+                    android:elevation="10dp"
+                    android:onClick="offers"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="ابرز العروض"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp"
+                    android:layout_weight="1"
+                    android:elevation="10dp"
+                    android:onClick="manageAccount"
+                    android:background="@drawable/shadow1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bee"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+
+                        android:text="ادارة حسابي"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#70179C"
+    android:orientation="vertical"
+
+    android:weightSum="6"
+    android:paddingTop="100dp"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shadow1"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="اسم المستخدم" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shadow1"
+            android:gravity="center"
+            android:hint="كلمة السر"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="textPersonName"
+      />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="182dp"
+            android:layout_height="45dp"
+
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shadowcolor"
+            android:onClick="login"
+            android:text="تسجيل الدخول"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+
+        <TextView
+            android:id="@+id/forgetpass"
+            android:layout_width="156dp"
+            android:layout_height="27dp"
+
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:onClick="forgetpass"
+            android:text="هل نسيت كلمة السر"
+            android:textAllCaps="false"
+
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.443"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login" />
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="156dp"
+            android:layout_height="27dp"
+            android:onClick="register"
+            android:text="انشاء حساب جديد"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
