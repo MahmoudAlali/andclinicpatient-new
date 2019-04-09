@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:background="@color/prime"
+    android:padding="10dp"
+    >
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ما نوع الخدمات التي تريدها ؟"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#fff"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/beauty"
+            android:textSize="24dp"
+            android:textColor="#fff"
+            android:text="ازياء"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+        <Button
+            android:id="@+id/fashion"
+            android:textSize="24dp"
+            android:textColor="#fff"
+            android:text="تجميل"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+</LinearLayout>

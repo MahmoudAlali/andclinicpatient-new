@@ -1,5 +1,6 @@
 package com.dcoret.beautyclient;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,32 +12,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Main_Example extends AppCompatActivity
+public class BeautyMainPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     LinearLayout layout;
     TextView service;
+    View view;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main__example);
+        setContentView(R.layout.activity_main_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
          layout=findViewById(R.id.layout);
          service=findViewById(R.id.service);
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
-
+            toolbar=findViewById(R.id.toolbar);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
-
+        view = View.inflate(this, R.layout.activity_main_page, null);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -69,7 +70,23 @@ public class Main_Example extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+//            PopupMenu popup = new PopupMenu(this,toolbar );
+//            popup.getMenuInflater().inflate(R.menu.bar_menu3, popup.getMenu());
+//
+//            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                public boolean onMenuItemClick(MenuItem item) {
+//                    Toast.makeText(getApplicationContext(), "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+//                    return true;
+//                }
+//            });
+//            popup.show();//showing popup menu
             return true;
+        }else if(id==R.id.shoppingcart){
+            Intent intent=new Intent(this,ShoppingCart.class);
+            startActivity(intent);
+        }else if(id==R.id.notify){
+            Intent intent=new Intent(this,Notification.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -91,8 +108,10 @@ public class Main_Example extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.rate_app) {
+            Dialog dialog=new Dialog(this);
+            dialog.setContentView(R.layout.rating_dialog);
+            dialog.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,7 +136,7 @@ public class Main_Example extends AppCompatActivity
 //            service.setVisibility(View.VISIBLE);
 //        }
 
-        Intent intent=new Intent(this, Services.class);
+        Intent intent=new Intent(this, ServiceType.class);
         startActivity(intent);
 
     }
@@ -135,7 +154,7 @@ public class Main_Example extends AppCompatActivity
 
 
     public void manageAccount(View view) {
-        Intent intent=new Intent(this,ManageAccount.class);
+        Intent intent=new Intent(this,ManageAccounts.class);
         startActivity(intent);
     }
 

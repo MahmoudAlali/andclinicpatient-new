@@ -7,17 +7,19 @@
     android:layout_height="350dp"
     android:layout_gravity="center"
     android:background="@drawable/shadowolor"
-    android:layout_margin="32dp">
+    android:layout_margin="32dp"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/filter_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center|top"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="حسب البعد كم"
+        android:background="@drawable/shadow1"
+        android:hint="حسب البعد  كم"
         android:inputType="textPersonName"
         android:textAlignment="center" />
 
@@ -30,25 +32,27 @@
         <EditText
             android:id="@+id/filter_price_to"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="90dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint=" الى "
+            android:background="@drawable/shadow1"
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
         <EditText
             android:id="@+id/filter_price_from"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="90dp"
             android:layout_weight="1"
             android:ems="10"
             android:layout_marginLeft="10dp"
 
             android:hint="السعر من "
+            android:background="@drawable/shadow1"
             android:inputType="textPersonName"
             android:textAlignment="center" />
     </LinearLayout>
@@ -60,7 +64,7 @@
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:background="@drawable/shadowcolor"
+        android:background="@drawable/shadow1"
         android:text="فلترة"
         android:textSize="24dp" />
         <LinearLayout
@@ -73,10 +77,11 @@
                 android:layout_weight="1"
                 android:id="@+id/rank_dialog_filter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:ems="10"
+                android:background="@drawable/shadow1"
                 android:hint="حسب التقييم"
                 android:inputType="textPersonName"
                 android:textAlignment="center" />
@@ -84,13 +89,14 @@
             <Spinner
                 android:id="@+id/city_filter_dialog"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:ems="10"
                 android:hint="حسب التقييم"
-                android:inputType="textPersonName"
+                android:background="@drawable/shadow1"
+
                 android:textAlignment="center" />
 
         </LinearLayout>

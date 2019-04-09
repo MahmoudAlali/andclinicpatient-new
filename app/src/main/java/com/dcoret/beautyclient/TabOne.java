@@ -7,12 +7,16 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -56,6 +60,11 @@ public class TabOne extends Fragment {
          view= inflater.inflate(R.layout.tab_one,container,false);
         FloatingActionButton floatingActionButton=view.findViewById(R.id.fab1);
 //        Toast.makeText(MyReservations.context,"ookkk",Toast.LENGTH_LONG).show();
+        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.list);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,10 +176,17 @@ public class TabOne extends Fragment {
                         String[] arr3 = ranktmp.toArray(new String[j]);
                         String[] arr4 = citiestmp.toArray(new String[j]);
                         Location_Beauty[] arr5 = locationstmp.toArray(new Location_Beauty[j]);
+                        if(grid==false){
                         recyclerView=view.findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
                         recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,arr1,arr2,arr3,arr4,arr5));
-                        dialog.cancel();
+
+                        }else{
+                            recyclerView = view.findViewById(R.id.recycleview);
+                            recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                        }
+                            dialog.cancel();
                         }else{
                             Toast.makeText(MyReservations.context,"NO thing to show",Toast.LENGTH_LONG).show();
 
@@ -187,4 +203,30 @@ public class TabOne extends Fragment {
 
 
     }
+boolean grid=false;
+
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.list:
+                            grid=false;
+                            recyclerView=view.findViewById(R.id.recycleview);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                            return true;
+                        case R.id.grid:
+                            grid=true;
+                            recyclerView = view.findViewById(R.id.recycleview);
+                            recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                            return true;
+                    }
+
+                    return false;
+                }
+            };
 }
+
+

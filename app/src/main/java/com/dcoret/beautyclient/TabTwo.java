@@ -109,9 +109,12 @@ public class TabTwo extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10F));
+                try {
+                    googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
+                }catch (Exception e){
 
+                }
 
                 for (int i=1;i<items.length-2;i++){
                     sydney = new LatLng( locations[i].getLatitude(),  locations[i].getLongtude());
@@ -121,9 +124,12 @@ public class TabTwo extends Fragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    googleMap.addMarker(new MarkerOptions().position(sydney).title(items[i]).snippet("Test From Beauty Client Google Maps"));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10F));
+                    try {
+                        googleMap.addMarker(new MarkerOptions().position(sydney).title(items[i]).snippet("Test From Beauty Client Google Maps"));
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
+                    }catch (Exception e){
 
+                    }
                 }
 
 

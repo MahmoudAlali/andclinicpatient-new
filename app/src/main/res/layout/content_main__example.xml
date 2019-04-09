@@ -7,7 +7,7 @@
     android:weightSum="3"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Main_Example"
+    tools:context=".BeautyMainPage"
     tools:showIn="@layout/app_bar_main__example">
 
     <android.support.design.widget.AppBarLayout
@@ -29,7 +29,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:popupTheme="@style/AppTheme"
             app:theme="@style/ToolbarColoredBackArrow"
-
+            app:title="Beauty"
             app:navigationIcon="@drawable/ic_menu_black_24dp"
 
 
@@ -53,7 +53,7 @@
                 app:navigationIcon="@drawable/ic_menu_black_24dp"
                 app:popupTheme="@style/AppTheme"
                 app:theme="@style/ToolbarColoredBackArrow"
-                app:title="Beauty"
+
                 app:titleTextColor="#70179C" />
             <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
             <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
@@ -199,7 +199,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
-                            android:onClick="services"
+                            android:onClick="offers"
                             android:orientation="vertical"
                             android:foreground="?android:attr/selectableItemBackground"
 
@@ -222,14 +222,14 @@
                                     android:gravity="center"
                                     android:textColor="#70179C"
                                     />
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:layout_weight="3"
                                     android:layout_width="300dp"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="3"
                                     android:background="@drawable/ic_discount"
-                                    android:textColor="#000"
-                                    />
+                                    android:gravity="center"
+                                    android:textColor="#000" />
 
                             </LinearLayout>
                             <LinearLayout
@@ -266,7 +266,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/shadow1"
                         android:elevation="10dp"
-                        android:onClick="services"
+                        android:onClick="myreservation"
                         android:orientation="vertical"
                         android:weightSum="4">
 
@@ -333,7 +333,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
-                            android:onClick="services"
+                            android:onClick="manageAccount"
                             android:orientation="vertical"
                             android:weightSum="4">
 
@@ -401,7 +401,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
-                            android:onClick="services"
+                            android:onClick="mypoint"
                             android:orientation="vertical"
                             android:weightSum="4">
 
@@ -468,7 +468,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
-                            android:onClick="services"
+                            android:onClick="extraServices"
                             android:orientation="vertical"
                             android:weightSum="4">
 

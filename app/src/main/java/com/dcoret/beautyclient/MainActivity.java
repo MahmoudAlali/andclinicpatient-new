@@ -2,8 +2,10 @@ package com.dcoret.beautyclient;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,11 +16,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView forgetpass, register;
     static double latit;
     static double longit;
+    LinearLayout linearLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -41,15 +43,45 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         forgetpass = findViewById(R.id.forgetpass);
         register = findViewById(R.id.register);
+        linearLayout=findViewById(R.id.layout_login );
+//        forgetpass();
 
-        forgetpass();
+        getlocation();
     }
 
     public void login(View view) {
         if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-            Intent intent = new Intent(getApplicationContext(), Main_Example.class);
-            finish();
-            startActivity(intent);
+
+            final Dialog dialog=new Dialog(this);
+            dialog.setContentView(R.layout.type_services_dialog);
+            Button beauty=dialog.findViewById(R.id.beauty);
+            Button fashion=dialog.findViewById(R.id.fashion);
+
+
+            beauty.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
+                    finish();
+                    startActivity(intent);
+                }
+            });
+
+            fashion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
+                    finish();
+                    startActivity(intent);
+                }
+            });
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.show();
+
+
+
 
 
         } else {
@@ -66,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
    static double latitud,longitud;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public  void forgetpass() {
+    public   void getlocation() {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -170,5 +202,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void forgetpass(View view) {
+        Intent intent=new Intent(this,CreateOffers.class);
+        startActivity(intent);
+
+
     }
 }

@@ -2,11 +2,10 @@ package com.dcoret.beautyclient;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +15,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import java.security.Provider;
 
 /**
  * This class show me the items of the services in recycle view \n
@@ -47,6 +44,20 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.cities=cities;
         this.location_beauties=location_beauties;
 
+
+    }
+
+
+    boolean grid ;
+    public ServicesAdapter(Context context,String items[],String[] price,String[] rank,String[] cities,Location_Beauty[] location_beauties,boolean grid){
+        this.context=context;
+        this.items=items;
+        this.price=price;
+        this.rank=rank;
+        this.cities=cities;
+        this.location_beauties=location_beauties;
+        this.grid=grid;
+
     }
 
 
@@ -60,7 +71,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context);
-        View row=inflater.inflate(R.layout.service_layout_example_list,parent,false);
+        View row;
+        if(grid==false) {
+             row = inflater.inflate(R.layout.service_layout_example_list, parent, false);
+        } else {
+          row = inflater.inflate(R.layout.service_layout_example_grid, parent, false);
+        }
         ServicesAdapter.Item item=new ServicesAdapter.Item(row);
         return item;
     }
@@ -79,6 +95,21 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((ServicesAdapter.Item)holder).textView.setText(items[position]);
         ((Item)holder).price.setText(price[position]);
         ((Item)holder).rank.setText(rank[position]);
+
+        ((Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(context, ServiceDetails.class);
+                    context.startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                }
+        });
+
+
+
        try {
              dialog = new Dialog(Services.context);
              dialog1 = new Dialog(Services.context);
@@ -171,6 +202,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
         });
+        ((Item) holder).rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog=new Dialog(MyReservations.context)
+                        ;
+                dialog.setContentView(R.layout.rating_dialog);
+                dialog.show();
+            }
+        });
     }
 
     @Override
@@ -183,7 +223,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     public class Item extends RecyclerView.ViewHolder {
 
-        TextView textView,price,rank;
+        TextView textView,price,rate,rank;
         TextView more_btn;
         Button resrv_btn;
 
@@ -197,6 +237,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             rank=itemView.findViewById(R.id.rank);
             resrv_btn=itemView.findViewById(R.id.reserv_btn);
             more_btn=itemView.findViewById(R.id.more_btn);
+            rate=itemView.findViewById(R.id.rate);
+
         }
     }
 }

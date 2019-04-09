@@ -4,12 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Offers">
+    tools:context=".Offers"
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_weight="1"
         android:id="@+id/review"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <android.support.design.widget.BottomNavigationView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation"
+        tools:ignore="BottomAppBar"
+        android:layout_weight="9"
+        android:background="#A359C9"
+        app:itemIconTint="@android:color/darker_gray"
+        app:itemTextColor="#fff"
+        app:menu="@menu/navbarbottom"
+        ></android.support.design.widget.BottomNavigationView>
 
 </LinearLayout>

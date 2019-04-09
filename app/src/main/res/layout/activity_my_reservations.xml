@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/appbar_padding_top"
-        android:background="#A359C9"
+        android:background="@color/primedark"
 
         android:theme="@style/AppTheme.AppBarOverlay">
 

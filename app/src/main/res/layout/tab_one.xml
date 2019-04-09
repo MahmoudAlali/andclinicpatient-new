@@ -12,7 +12,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="652dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -28,8 +28,20 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="90dp"
-        app:backgroundTint="#A359C9"
+        app:backgroundTint="@color/primedark"
         app:srcCompat="@drawable/ic_filter_list_black_24dp"
         tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primedark"
+        app:itemIconTint="@android:color/darker_gray"
+        app:itemTextColor="#fff"
+        android:id="@+id/navigation"
+        app:menu="@menu/navbarbottom"
+        android:layout_gravity="bottom" />
     <!--android:layout_margin="@dimen/fab_margin"-->
 </android.support.design.widget.CoordinatorLayout>
+
+

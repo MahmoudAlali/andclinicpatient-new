@@ -2,6 +2,7 @@ package com.dcoret.beautyclient;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -50,6 +51,17 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         ((Item)holder).textView.setText(items[position]);
+        ((ReservationsAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(context, ReservationDetails.class);
+                    context.startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
             }
 
@@ -61,7 +73,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
         MyClickListener listener;
 
-            TextView textView,more_btn;
+            TextView textView,more_btn,rate;
             Button resrv_btn;
         public Item(View itemView, MyClickListener listener) {
             super(itemView);

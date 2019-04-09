@@ -20,14 +20,15 @@ public class ManageAccount extends AppCompatActivity {
         Intent intent=new Intent(this,MyProfile.class);
         startActivity(intent);
     }
+    public void mypoint(View view) {
+        Intent intent=new Intent(this, Point.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.bar_menu2, menu);
         return true;
     }
-    public void mypoint(View view) {
-        Intent intent=new Intent(this, Point.class);
-        startActivity(intent);
-    }
+
 }

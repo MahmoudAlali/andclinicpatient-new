@@ -36,6 +36,7 @@ public class Services extends AppCompatActivity {
         setTitle("الخدمات");
         context=this;
         recyclerView=findViewById(R.id.service_re_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(),items,prices,rank,city,locations));
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);

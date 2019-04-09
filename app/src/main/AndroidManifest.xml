@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dcoret.beautyclient">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -18,7 +17,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ShoppingCart"></activity>
+        <activity android:name=".SearchInterface" />
+        <activity android:name=".Notification" />
+        <activity android:name=".ReservationDetails" />
+        <activity android:name=".OfferDetails" />
+        <activity android:name=".ServiceDetails" />
+        <activity android:name=".EditProfile" />
+        <activity
+            android:name=".ManageAccounts"
+            android:label="@string/title_activity_manage_accounts"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateOffers" />
+        <activity android:name=".ServiceType" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,7 +44,7 @@
 
         <activity
             android:name=".GoogleMaps"
-            android:label="@string/title_activity_google_maps"></activity>
+            android:label="@string/title_activity_google_maps" />
         <activity
             android:name=".Exampleee_just"
             android:label="@string/title_activity_exampleee_just"
@@ -58,7 +69,7 @@
         <activity android:name=".FavoritesList" />
         <activity android:name=".MyProfile" />
         <activity android:name=".Point" />
-        <activity android:name=".Main_Example" />
+        <activity android:name=".BeautyMainPage" />
         <activity
             android:name=".MyReservations"
             android:label="@string/title_activity_my_reservations"
