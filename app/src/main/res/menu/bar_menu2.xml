@@ -17,10 +17,6 @@
         >
 
     </item>
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
 
-        app:showAsAction="never" />
 
 </menu>

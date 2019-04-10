@@ -49,13 +49,14 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         ((Item)holder).textView.setText(items[position]);
         ((ReservationsAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     Intent intent = new Intent(context, ReservationDetails.class);
+                    intent.putExtra("reservation_name",items[position]);
                     context.startActivity(intent);
                 }catch (Exception e){
                     Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();

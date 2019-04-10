@@ -31,9 +31,7 @@
             app:theme="@style/ToolbarColoredBackArrow"
             app:title="Beauty"
             app:navigationIcon="@drawable/ic_menu_black_24dp"
-
-
-            app:titleTextColor="#70179C">
+            app:titleTextColor="#fff">
             <!--android:background="@drawable/bbbb"-->
 
 
@@ -53,8 +51,7 @@
                 app:navigationIcon="@drawable/ic_menu_black_24dp"
                 app:popupTheme="@style/AppTheme"
                 app:theme="@style/ToolbarColoredBackArrow"
-
-                app:titleTextColor="#70179C" />
+                app:titleTextColor="#fff" />
             <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
             <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
 

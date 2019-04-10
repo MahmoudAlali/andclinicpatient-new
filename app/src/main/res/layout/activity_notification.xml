@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Notification">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+
+        app:title="  الاشعارات "
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="#fff"
+
+
+        ></android.support.v7.widget.Toolbar>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notify_re_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>

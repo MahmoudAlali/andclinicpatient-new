@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void forgetpass(View view) {
-        Intent intent=new Intent(this,CreateOffers.class);
+        Intent intent=new Intent(this,ForgetMyPass.class);
         startActivity(intent);
 
 

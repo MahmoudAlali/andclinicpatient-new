@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -91,22 +92,32 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         ((ServicesAdapter.Item)holder).textView.setText(items[position]);
         ((Item)holder).price.setText(price[position]);
         ((Item)holder).rank.setText(rank[position]);
 
-        ((Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+        ((Item) holder).service_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(context, ServiceDetails.class);
-                    context.startActivity(intent);
-                }catch (Exception e){
-                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
-                }
-                }
+                Intent intent=new Intent(context,ServiceDetails.class);
+                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
+                context.startActivity(intent);
+            }
         });
+
+
+//        ((Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    Intent intent = new Intent(context, ServiceDetails.class);
+//                    context.startActivity(intent);
+//                }catch (Exception e){
+//                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+//                }
+//                }
+//        });
 
 
 
@@ -162,6 +173,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         });
 
+
+
         canceldate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,15 +215,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
         });
-        ((Item) holder).rate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog=new Dialog(MyReservations.context)
-                        ;
-                dialog.setContentView(R.layout.rating_dialog);
-                dialog.show();
-            }
-        });
+//        ((Item) holder).rate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Dialog dialog=new Dialog(MyReservations.context)
+//                        ;
+//                dialog.setContentView(R.layout.rating_dialog);
+//                dialog.show();
+//            }
+//        });
     }
 
     @Override
@@ -221,23 +234,26 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     /**
      * @see android.support.v7.widget.RecyclerView.ViewHolder
      */
-    public class Item extends RecyclerView.ViewHolder {
+    public static class Item extends RecyclerView.ViewHolder {
 
         TextView textView,price,rate,rank;
         TextView more_btn;
         Button resrv_btn;
+        LinearLayout service_details;
 
         /**
          * @param itemView
          */
         public Item(View itemView) {
             super(itemView);
+
             textView=itemView.findViewById(R.id.rname);
             price=itemView.findViewById(R.id.price);
             rank=itemView.findViewById(R.id.rank);
             resrv_btn=itemView.findViewById(R.id.reserv_btn);
             more_btn=itemView.findViewById(R.id.more_btn);
             rate=itemView.findViewById(R.id.rate);
+            service_details=itemView.findViewById(R.id.service_details);
 
         }
     }

@@ -1,7 +1,11 @@
 package com.dcoret.beautyclient;
 
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BeautyMainPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +27,7 @@ public class BeautyMainPage extends AppCompatActivity
     TextView service;
     View view;
     Toolbar toolbar;
+    SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,26 @@ public class BeautyMainPage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        searchView=findViewById(R.id.searchview);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),Search.class);
+                startActivity(intent);
+            }
+        });
+
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),Search.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -53,14 +80,16 @@ public class BeautyMainPage extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+        Menu menu;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.bar_menu2, menu);
+        this.menu=menu;
         return true;
     }
 
+    Boolean searchbool=false;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -84,6 +113,9 @@ public class BeautyMainPage extends AppCompatActivity
         }else if(id==R.id.shoppingcart){
             Intent intent=new Intent(this,ShoppingCart.class);
             startActivity(intent);
+
+            searchbool=true;
+
         }else if(id==R.id.notify){
             Intent intent=new Intent(this,Notification.class);
             startActivity(intent);
@@ -110,6 +142,7 @@ public class BeautyMainPage extends AppCompatActivity
 
         } else if (id == R.id.rate_app) {
             Dialog dialog=new Dialog(this);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.setContentView(R.layout.rating_dialog);
             dialog.show();
         }

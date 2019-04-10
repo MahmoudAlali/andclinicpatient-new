@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Search">
+
+
+  <SearchView
+      android:id="@+id/search_view_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/shadow2"
+      android:layout_marginTop="2dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginLeft="10dp"
+      ></SearchView>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="2"
+      >
+
+    <EditText
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/shadow2"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:hint="السعر المطلوب"/>
+    <EditText
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/shadow2"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:hint="حسب البعد"/>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="2"
+      >
+
+    <EditText
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/shadow2"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:hint=" مزودة الخدمة"/>
+    <EditText
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/shadow2"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:hint="حسب نسبة الخصم"/>
+  </LinearLayout>
+  <EditText
+
+      android:layout_marginRight="10dp"
+      android:layout_marginLeft="10dp"
+      android:background="@drawable/shadow2"
+      android:layout_marginTop="10dp"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="44dp"
+      android:hint="حسب  موقع تقديم الخدمة"/>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="النتائج"
+        />
+
+  </LinearLayout>
+
+
+
+
+</LinearLayout>
