@@ -136,9 +136,28 @@ public class BeautyMainPage extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+        }else if (id == R.id.compare) {
+
+            Intent intent=new Intent(getApplicationContext(),Compartion.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_manage) {
 
+         } else if (id == R.id.help) {
+            Intent intent=new Intent(getApplicationContext(),Help.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
+            Intent intent=new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String sharebody="تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store";
+            String sharesub="Beauty";
+            intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
+            intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            startActivity(Intent.createChooser(intent,"Share using"));
+
+        } else if (id == R.id.favorites) {
+            Intent intent=new Intent(getApplicationContext(),Favorites.class);
+            startActivity(intent);
 
         } else if (id == R.id.rate_app) {
             Dialog dialog=new Dialog(this);

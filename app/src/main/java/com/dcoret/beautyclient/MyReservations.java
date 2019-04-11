@@ -1,6 +1,7 @@
 package com.dcoret.beautyclient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class MyReservations extends AppCompatActivity {
 
@@ -77,7 +79,7 @@ public class MyReservations extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_reservations, menu);
+        getMenuInflater().inflate(R.menu.bar_menu_compare, menu);
         return true;
     }
 
@@ -91,6 +93,14 @@ public class MyReservations extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if(id==R.id.compare){
+            if(ServicesAdapter.comparenum==2) {
+                Intent intent = new Intent(getApplicationContext(), Compartion.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(getApplicationContext(),"There no Comparation enugh",Toast.LENGTH_LONG).show();
+
+            }
         }
 
         return super.onOptionsItemSelected(item);

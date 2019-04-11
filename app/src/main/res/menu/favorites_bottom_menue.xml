@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/provider_menu"
+        android:icon="@drawable/ic_leaf"
+        android:title="مزودين"
+        app:showAsAction="always"
+        >
+
+    </item>
+    <item
+        android:id="@+id/service_menu"
+        android:icon="@drawable/ic_service"
+        android:title=" خدمات"
+        app:showAsAction="always"
+        >
+    </item>
+
+    <item
+        android:id="@+id/offer_menu"
+        android:icon="@drawable/ic_discount"
+        android:title=" عروض"
+        app:showAsAction="always"
+        >
+    </item>
+
+
+
+
+</menu>

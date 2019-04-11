@@ -1,20 +1,28 @@
 package com.dcoret.beautyclient;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.Location_Beauty;
 import com.dcoret.beautyclient.MainActivity;
@@ -63,11 +71,13 @@ public class TabTwo extends Fragment {
     LocationManager locationManager;
     LocationListener locationListener;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_google_maps, container, false);
         mMapView = (MapView) view.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
+        getlocation();
 
         mMapView.onResume(); // needed to get the map to display immediately
 
@@ -101,11 +111,11 @@ public class TabTwo extends Fragment {
                 // For dropping a marker at a point on the Map
                 LatLng sydney;
                 Geocoder geo;
-                 sydney = new LatLng( MainActivity.latitud,  MainActivity.longitud);
+                 sydney = new LatLng( locations[0].getLatitude(), locations[0].getLongtude());
                 geo = new Geocoder(MyReservations.context, Locale.getDefault());
                 List<Address> addresses =new ArrayList<>();
                 try {
-                   addresses = geo.getFromLocation(MainActivity.latitud, MainActivity.longitud, 1);
+                   addresses = geo.getFromLocation(latitud, longitud, 1);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -113,7 +123,7 @@ public class TabTwo extends Fragment {
                     googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
                 }catch (Exception e){
-
+                    Toast.makeText(getActivity().getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG).show();
                 }
 
                 for (int i=1;i<items.length-2;i++){
@@ -171,6 +181,77 @@ public class TabTwo extends Fragment {
         mMapView.onLowMemory();
     }
 
+    static double latit;
+    static double longit;
+
+    static Location location1;
+    static double latitud,longitud;
+    @SuppressLint("MissingPermission")
+    void configure(){
+//        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public     void getlocation() {
+//        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
+//        startActivity(intent);
+        locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().LOCATION_SERVICE);
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitud=location.getLatitude();
+                longitud=location.getLongitude();
+//                        Toast.makeText(getApplicationContext()
+//                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
+//                    register.setText(location.getLatitude()+" : "+location.getLongitude());
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.INTERNET
+
+            },10);
+//                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+
+//                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+//                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        configure();
+    }
 
 
 }

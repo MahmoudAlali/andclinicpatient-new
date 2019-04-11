@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("تسجيل الدخول");
+        Intent intent=new Intent(this,BeautyMainPage.class);
+        startActivity(intent);
+
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayout=findViewById(R.id.layout_login );
 //        forgetpass();
 
-        getlocation();
+//        getlocation();
     }
 
     public void login(View view) {
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
    static double latitud,longitud;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public   void getlocation() {
+    public     void getlocation() {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Help">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_fav"
+        android:layout_width="match_parent"
+        app:titleTextColor="#fff"
+        app:title="  المساعدة  "
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+
+
+        ></android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+
+        android:layout_width="match_parent"
+        android:layout_height="421dp"
+        android:layout_weight="9"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!--<Button-->
+        <!--android:id="@+id/button7"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:onClick="myservices"-->
+        <!--android:background="@color/primedark"-->
+        <!--android:text="الخدمات" />-->
+        <android.support.design.widget.BottomNavigationView
+            android:layoutDirection="rtl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primedark"
+            app:itemIconTint="@android:color/darker_gray"
+            app:itemTextColor="#fff"
+            android:id="@+id/navigation"
+            app:menu="@menu/help_bottom_menue"
+            android:layout_gravity="bottom" />
+        <!--android:layout_margin="@dimen/fab_margin"-->
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

@@ -12,11 +12,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
-        android:layout_height="652dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_marginBottom="64dp"
+        android:layout_height="match_parent"
 
-
+        >
     </android.support.v7.widget.RecyclerView>
 
 
@@ -33,14 +32,15 @@
         tools:ignore="VectorDrawableCompat" />
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="@color/primedark"
         app:itemIconTint="@android:color/darker_gray"
         app:itemTextColor="#fff"
-        android:id="@+id/navigation"
-        app:menu="@menu/navbarbottom"
-        android:layout_gravity="bottom" />
+        app:menu="@menu/navbarbottom" />
     <!--android:layout_margin="@dimen/fab_margin"-->
 </android.support.design.widget.CoordinatorLayout>
 

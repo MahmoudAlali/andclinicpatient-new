@@ -3,6 +3,7 @@ package com.dcoret.beautyclient;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -87,6 +88,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     String date;
     Dialog dialog1,dialog;
+    static int comparenum=0;
     /**
      * @param holder
      * @param position
@@ -103,6 +105,35 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 Intent intent=new Intent(context,ServiceDetails.class);
                 intent.putExtra("service_name",((Item) holder).textView.getText().toString());
                 context.startActivity(intent);
+            }
+        });
+
+
+        ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(((Item) holder).compare.isActivated() ){
+                    comparenum--;
+                    Toast.makeText(MyReservations.context,comparenum+"",Toast.LENGTH_LONG).show();
+                    ((Item) holder).compare.setTextColor(Color.WHITE);
+                    ((Item) holder).compare.setActivated(false);
+                }else if(((Item) holder).compare.isActivated()==false && comparenum < 2){
+                 ((Item) holder).compare.setActivated(true);
+                    comparenum++;
+                    ((Item) holder).compare.setTextColor(Color.GREEN);
+                    Toast.makeText(MyReservations.context,comparenum+"",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+
+        ((Item) holder).favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_star_black_24dp);
+//                ((Item) holder).favorites.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_black_24dp, 0, 0, 0);
             }
         });
 
@@ -236,9 +267,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView textView,price,rate,rank;
+        TextView favorites, textView,price,compare,rank,resrv_btn;
         TextView more_btn;
-        Button resrv_btn;
+
         LinearLayout service_details;
 
         /**
@@ -252,8 +283,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             rank=itemView.findViewById(R.id.rank);
             resrv_btn=itemView.findViewById(R.id.reserv_btn);
             more_btn=itemView.findViewById(R.id.more_btn);
-            rate=itemView.findViewById(R.id.rate);
+            compare=itemView.findViewById(R.id.compare);
             service_details=itemView.findViewById(R.id.service_details);
+            favorites=itemView.findViewById(R.id.favorites_star);
 
         }
     }
