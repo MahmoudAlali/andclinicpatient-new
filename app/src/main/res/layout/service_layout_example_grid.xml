@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="250dp"
     android:orientation="vertical"
     android:background="@drawable/shadow1"
     android:layout_margin="16dp"
+    android:id="@+id/service_details"
     android:elevation="16dp"
-    android:weightSum="4">
+    >
 
     <LinearLayout
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:background="@drawable/shadow1"
             android:orientation="horizontal">
 
@@ -85,25 +86,16 @@
     android:layout_weight="1"
     android:orientation="horizontal">
     <TextView
-    android:id="@+id/price"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:gravity="center"
-    android:text="500 ر.س"
-    android:textColor="#fff"
-    android:textSize="18sp"
-    android:textStyle="bold" />
-    <TextView
-        android:id="@+id/rank"
+        android:id="@+id/pro_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text=""
+        android:text=" اسم المزودة"
         android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        />
+
+
 </LinearLayout>
 
 
@@ -117,29 +109,49 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:orientation="horizontal">
-
                     <TextView
-                        android:id="@+id/more_btn"
+                        android:id="@+id/price"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text=" المزيد"
+                        android:text="500 ر.س"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text=""
                         android:textColor="#fff"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/reserv_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:background="@android:color/transparent"
-                        android:text="حجز "
-                        android:textColor="#fff"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/more_btn"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text=" المزيد"-->
+                        <!--android:textColor="#fff"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/reserv_btn"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:background="@android:color/transparent"-->
+                        <!--android:text="حجز "-->
+                        <!--android:textColor="#fff"-->
+                        <!--android:textSize="18sp"-->
+                        <!--android:textStyle="bold" />-->
 
                 </LinearLayout>
             </LinearLayout>

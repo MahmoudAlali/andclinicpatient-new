@@ -9,10 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.dcoret.beautyclient.DataClass.Location_Beauty;
+
 public class Services extends AppCompatActivity {
     static Context context;
     RecyclerView recyclerView;
     String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
+    boolean[] fav={
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+    };
     String[] prices={"100","500","450","123","345","411"};
     String[] rank={"4.1","3.2","3.5","4.7","4.4","3.0"};
     String[] city={"الرياض","الدمام","مكة","الرياض","جدة","الدمام","مكة","مكة","الطائف","مكة"};
@@ -38,7 +48,7 @@ public class Services extends AppCompatActivity {
         recyclerView=findViewById(R.id.service_re_view);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(),items,prices,rank,city,locations));
+        recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(),items,prices,rank,city,locations,fav));
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

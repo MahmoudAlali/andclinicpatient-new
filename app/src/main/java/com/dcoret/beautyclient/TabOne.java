@@ -25,17 +25,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.DataClass.DataService;
+import com.dcoret.beautyclient.DataClass.Location_Beauty;
+
 import java.util.ArrayList;
 
 public class TabOne extends Fragment {
 
     RecyclerView recyclerView;
 
-    String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
-    String[] prices={"100","500","450","123","345","411","800","900","600","300"};
-    String[] rank={"4.1","3.2","3.5","4.7","4.4","3.0","3.0","2.5","2.0","1.5"};
-    String[] city={"الرياض","الدمام","مكة","الرياض","جدة","الدمام","مكة","مكة","الطائف","مكة"};
-    Location_Beauty[] locations={
+  static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
+    static   String[] prices={"100","500","450","123","345","411","800","900","600","300"};
+    static   String[] rank={"4.1","3.2","3.5","4.7","4.4","3.0","3.0","2.5","2.0","1.5"};
+    static  String[] city={"الرياض","الدمام","مكة","الرياض","جدة","الدمام","مكة","مكة","الطائف","مكة"};
+    static Location_Beauty[] locations={
             new Location_Beauty(32.7792842,35.8816735),
             new Location_Beauty(31.964383, 35.918756),
             new Location_Beauty(32.709566, 36.137142),
@@ -47,6 +50,23 @@ public class TabOne extends Fragment {
             new Location_Beauty(33.506590, 36.299474),
             new Location_Beauty(33.546086, 36.200597),
     };
+    static boolean[] fav={
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+    };
+
+
+    static ArrayList<DataService> dataServices=new ArrayList<>();
+
+
 
     ArrayList<String> itemstmp=new ArrayList<>();
     ArrayList<String> pricestmp=new ArrayList<>();
@@ -57,8 +77,10 @@ public class TabOne extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-         view= inflater.inflate(R.layout.tab_one,container,false);
+
+        view= inflater.inflate(R.layout.tab_one,container,false);
         FloatingActionButton floatingActionButton=view.findViewById(R.id.fab1);
+        FloatingActionButton floatingActionButton2=view.findViewById(R.id.fab2);
 //        Toast.makeText(MyReservations.context,"ookkk",Toast.LENGTH_LONG).show();
         BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.list);
@@ -179,12 +201,12 @@ public class TabOne extends Fragment {
                         if(grid==false){
                         recyclerView=view.findViewById(R.id.recycleview);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-                        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,arr1,arr2,arr3,arr4,arr5));
+                        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,arr1,arr2,arr3,arr4,arr5,fav));
 
                         }else{
                             recyclerView = view.findViewById(R.id.recycleview);
                             recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
-                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
                         }
                             dialog.cancel();
                         }else{
@@ -196,9 +218,23 @@ public class TabOne extends Fragment {
 
             }
         });
+
+        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog  dialog = new Dialog(MyReservations.context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                dialog.setContentView(R.layout.arrangement_dialog);
+                dialog.setTitle("Filtering");
+
+                dialog.show();
+            }
+        });
+
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations));
+        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,fav));
         return view;
 
 
@@ -214,13 +250,13 @@ boolean grid=false;
                             grid=false;
                             recyclerView=view.findViewById(R.id.recycleview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
                             return true;
                         case R.id.grid:
                             grid=true;
                             recyclerView = view.findViewById(R.id.recycleview);
                             recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
-                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid));
+                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
                             return true;
                     }
 

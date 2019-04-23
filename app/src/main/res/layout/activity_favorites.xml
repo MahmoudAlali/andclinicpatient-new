@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Favorites">
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_fav"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         app:titleTextColor="#fff"
         app:title="  قائمة المفضلة "
@@ -16,8 +17,6 @@
         app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
-
-
         ></android.support.v7.widget.Toolbar>
 
 

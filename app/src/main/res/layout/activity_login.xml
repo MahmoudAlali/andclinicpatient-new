@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-
+        app:titleTextColor="#fff"
         app:title=" تسجيل الدخول                           "
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"

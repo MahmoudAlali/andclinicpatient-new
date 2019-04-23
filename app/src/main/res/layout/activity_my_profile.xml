@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".MyProfile">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:title=" بروفايلي"
+        app:titleTextColor="#FFF"
+        ></android.support.v7.widget.Toolbar>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="321dp">
@@ -14,7 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@drawable/gradientbackground"
+            android:background="@color/prime"
             android:orientation="vertical">
 
             <ImageView
@@ -65,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="10"
-                        android:textColor="@color/startblue"
+                        android:textColor="@color/prime"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -89,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="1205"
-                        android:textColor="@color/startblue"
+                        android:textColor="@color/prime"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -120,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingRight="10dp"
+                android:textSize="20sp"
                 android:text="Dcoet@Dcoretl.com"
                 android:textStyle="bold" />
 
@@ -128,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="الايميل: "
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -144,6 +159,7 @@
                 android:layout_height="match_parent"
                 android:paddingRight="10dp"
                 android:text="+9999999999"
+                android:textSize="20sp"
                 android:textStyle="bold"
 
                 />
@@ -153,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="جوال: "
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -169,6 +186,7 @@
                 android:layout_height="match_parent"
                 android:paddingRight="10dp"
                 android:text="12040003232"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -176,57 +194,31 @@
 
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-
+                android:textSize="20sp"
                 android:text="رقم الهوية: "
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="9dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp">
-            <!--<ImageView-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:src=""/>-->
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Gender: "-->
-            <!--android:textStyle="bold" />-->
-            <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:paddingLeft="20dp"-->
-            <!--android:text="Male"-->
-            <!--android:textStyle="bold" />-->
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="72dp"
-            android:layout_gravity="bottom|center"
-            android:paddingTop="9dp"
-            android:weightSum="3">
-
+            android:gravity="center"
+           >
             <Button
                 android:id="@+id/button"
-                android:layout_width="176dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|bottom"
+                android:background="@drawable/shadow2"
                 android:onClick="editprofile"
-                android:background="@drawable/buttonstyle"
                 android:text="تعديل المعلومات الشخصية"
-
-                android:textColor="#fff" />
-
+                android:layout_marginBottom="10dp"
+                android:textColor="#000" />
         </LinearLayout>
+
+
 
     </LinearLayout>
 

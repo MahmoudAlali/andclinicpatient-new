@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.DataClass;
 
 public class Location_Beauty {
 

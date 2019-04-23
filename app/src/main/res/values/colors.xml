@@ -8,4 +8,5 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0b83e6</color>
     <color name="graylight">#fafafa</color>
+    <color name="gray">#DDDDDD</color>
 </resources>

@@ -9,13 +9,14 @@
     tools:context=".Reservation">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-
-        app:title=" تسجيل الدخول "
+            android:id="@+id/toolbar"
+        app:title=" حجوزاتي "
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primedark"
-        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="#fff"
 
 
         ></android.support.v7.widget.Toolbar>

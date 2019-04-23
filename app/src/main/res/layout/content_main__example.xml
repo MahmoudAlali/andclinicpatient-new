@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="3"
     android:orientation="vertical"
+    android:weightSum="3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".BeautyMainPage"
     tools:showIn="@layout/app_bar_main__example">
@@ -13,10 +13,9 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:theme="@style/ToolbarColoredBackArrow"
-        app:popupTheme="@style/AppTheme"
         android:fitsSystemWindows="true"
-        >
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -27,10 +26,10 @@
             app:contentScrim="#70179C"
             app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:navigationIcon="@drawable/ic_menu_black_24dp"
             app:popupTheme="@style/AppTheme"
             app:theme="@style/ToolbarColoredBackArrow"
             app:title="Beauty"
-            app:navigationIcon="@drawable/ic_menu_black_24dp"
             app:titleTextColor="#fff">
             <!--android:background="@drawable/bbbb"-->
 
@@ -48,6 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
+                android:elevation="10dp"
+                android:paddingBottom="10dp"
                 app:navigationIcon="@drawable/ic_menu_black_24dp"
                 app:popupTheme="@style/AppTheme"
                 app:theme="@style/ToolbarColoredBackArrow"
@@ -64,8 +65,7 @@
         android:layout_height="match_parent"
 
         android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <android.support.v7.widget.CardView
@@ -73,8 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             app:cardElevation="5dp"
-            app:cardUseCompatPadding="true"
-            >
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
 
@@ -88,20 +87,17 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:background="@drawable/shadow1"
-                    android:elevation="10dp">
+                    android:elevation="5dp">
 
                     <SearchView
+                        android:id="@+id/searchview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/searchview"
                         android:background="@drawable/shadow1"
-
                         android:gravity="top"
                         android:searchIcon="@drawable/ic_search_black_24dp" />
 
                 </LinearLayout>
-
-
 
 
                 <LinearLayout
@@ -118,107 +114,112 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:weightSum="6">
+
                         <LinearLayout
                             android:id="@+id/layout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="services"
                             android:orientation="vertical"
-                            android:weightSum="4"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            >
+                            android:weightSum="4">
 
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:weightSum="4"
-                                >
+                                android:weightSum="4">
+
                                 <TextView
                                     android:id="@+id/service"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
 
-                                    android:text="الخدمات"
+                                    android:gravity="center"
                                     android:paddingRight="10dp"
-                                    android:textSize="20dp"
-                                    android:gravity="center"
+                                    android:text="الخدمات"
                                     android:textColor="#70179C"
-                                    />
+                                    android:textSize="20dp" />
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:layout_weight="3"
                                     android:layout_width="300dp"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="3"
                                     android:background="@drawable/ic_lipstick"
-                                    android:textColor="#000"
-                                    />
+                                    android:gravity="center"
+                                    android:textColor="#000" />
 
                             </LinearLayout>
+
                             <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:layout_weight="2"
-                                android:weightSum="3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                            <TextView
-                                android:gravity="center"
-                                android:text="400 خدمة متاحة"
-                                android:layout_weight="2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                            <!--<TextView-->
+                                android:weightSum="3">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
+                                <!--<TextView-->
                                 <!--android:text=""-->
                                 <!--android:layout_weight="2"-->
-                                    <!--android:layout_width="match_parent"-->
-                                    <!--android:layout_height="match_parent" />-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="match_parent" />-->
                                 <TextView
 
-                                    android:gravity="center"
-                                    android:text="يمكنك حجز خدماتك بسهولة"
-                                    android:layout_weight="1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
                             </LinearLayout>
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="offers"
                             android:orientation="vertical"
-                            android:foreground="?android:attr/selectableItemBackground"
 
                             android:weightSum="4">
 
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:weightSum="4"
-                                >
+                                android:weightSum="4">
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:text="ابرز العروض"
-                                    android:paddingRight="10dp"
-                                    android:textSize="20dp"
                                     android:gravity="center"
+                                    android:paddingRight="10dp"
+                                    android:text="ابرز العروض"
                                     android:textColor="#70179C"
-                                    />
+                                    android:textSize="20dp" />
 
                                 <TextView
                                     android:layout_width="300dp"
@@ -229,16 +230,18 @@
                                     android:textColor="#000" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="2">
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:text="400 خدمة متاحة"
-                                    android:layout_weight="2"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
                                 <!--<TextView-->
                                 <!--android:text=""-->
                                 <!--android:layout_weight="2"-->
@@ -246,132 +249,139 @@
                                 <!--android:layout_height="match_parent" />-->
                                 <TextView
 
-                                    android:gravity="center"
-                                    android:text="يمكنك حجز خدماتك بسهولة"
-                                    android:layout_weight="1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
                             </LinearLayout>
 
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="16dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow1"
-                        android:elevation="10dp"
-                        android:onClick="myreservation"
-                        android:orientation="vertical"
-                        android:weightSum="4">
 
                         <LinearLayout
-                            android:layout_weight="2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="4"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="حجوزاتي"
-                                android:paddingRight="10dp"
-                                android:textSize="20dp"
-                                android:gravity="center"
-                                android:textColor="#70179C"
-                                />
-                            <TextView
-                                android:gravity="center"
-                                android:layout_weight="3"
-                                android:layout_width="300dp"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/ic_booking"
-                                android:textColor="#000"
-                                />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_weight="2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <TextView
-                                android:gravity="center"
-                                android:text="400 خدمة متاحة"
-                                android:layout_weight="2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                            <!--<TextView-->
-                            <!--android:text=""-->
-                            <!--android:layout_weight="2"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent" />-->
-                            <TextView
-
-                                android:gravity="center"
-                                android:text="يمكنك حجز خدماتك بسهولة"
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                        <LinearLayout
-                            android:foreground="?android:attr/selectableItemBackground"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="myreservation"
+                            android:orientation="vertical"
+                            android:weightSum="4">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:orientation="horizontal"
+                                android:weightSum="4">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:paddingRight="10dp"
+                                    android:text="حجوزاتي"
+                                    android:textColor="#70179C"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="300dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:background="@drawable/ic_booking_1"
+                                    android:gravity="center"
+                                    android:textColor="#000" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
+                                <!--<TextView-->
+                                <!--android:text=""-->
+                                <!--android:layout_weight="2"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="match_parent" />-->
+                                <TextView
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shadow1"
+                            android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="manageAccount"
                             android:orientation="vertical"
                             android:weightSum="4">
 
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:weightSum="4"
-                                >
+                                android:weightSum="4">
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:text="ادارة حسابي"
+                                    android:gravity="center"
                                     android:paddingRight="10dp"
-                                    android:textSize="20dp"
-                                    android:gravity="center"
+                                    android:text="ادارة حسابي"
                                     android:textColor="#70179C"
-                                    />
+                                    android:textSize="20dp" />
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:layout_weight="3"
                                     android:layout_width="300dp"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="3"
                                     android:background="@drawable/ic_accounting"
-                                    android:textColor="#000"
-                                    />
+                                    android:gravity="center"
+                                    android:textColor="#000" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="2">
 
                                 <TextView
-                                    android:gravity="center"
-                                    android:text="400 خدمة متاحة"
-                                    android:layout_weight="2"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
                                 <!--<TextView-->
                                 <!--android:text=""-->
                                 <!--android:layout_weight="2"-->
@@ -379,66 +389,70 @@
                                 <!--android:layout_height="match_parent" />-->
                                 <TextView
 
-                                    android:gravity="center"
-                                    android:text="يمكنك حجز خدماتك بسهولة"
-                                    android:layout_weight="1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
 
                             </LinearLayout>
 
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:foreground="?android:attr/selectableItemBackground"
 
+                        <LinearLayout
                             android:layout_width="match_parent"
+
                             android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="mypoint"
                             android:orientation="vertical"
                             android:weightSum="4">
 
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:weightSum="4"
-                                >
+                                android:weightSum="4">
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:text="نقاطي"
+                                    android:gravity="center"
                                     android:paddingRight="10dp"
-                                    android:textSize="20dp"
-                                    android:gravity="center"
+                                    android:text="نقاطي"
                                     android:textColor="#70179C"
-                                    />
+                                    android:textSize="20dp" />
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:layout_weight="3"
                                     android:layout_width="300dp"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="3"
                                     android:background="@drawable/ic_badge"
-                                    android:textColor="#000"
-                                    />
+                                    android:gravity="center"
+                                    android:textColor="#000" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="2">
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:text="400 خدمة متاحة"
-                                    android:layout_weight="2"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
                                 <!--<TextView-->
                                 <!--android:text=""-->
                                 <!--android:layout_weight="2"-->
@@ -446,66 +460,70 @@
                                 <!--android:layout_height="match_parent" />-->
                                 <TextView
 
-                                    android:gravity="center"
-                                    android:text="يمكنك حجز خدماتك بسهولة"
-                                    android:layout_weight="1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
 
                             </LinearLayout>
 
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:foreground="?android:attr/selectableItemBackground"
 
+                        <LinearLayout
                             android:layout_width="match_parent"
+
                             android:layout_height="match_parent"
-                            android:layout_margin="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/shadow1"
                             android:elevation="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="extraServices"
                             android:orientation="vertical"
                             android:weightSum="4">
 
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="2"
                                 android:orientation="horizontal"
-                                android:weightSum="4"
-                                >
+                                android:weightSum="4">
+
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:text="خدمات اضافية"
+                                    android:gravity="center"
                                     android:paddingRight="10dp"
-                                    android:textSize="20dp"
-                                    android:gravity="center"
+                                    android:text="خدمات اضافية"
                                     android:textColor="#70179C"
-                                    />
+                                    android:textSize="20dp" />
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:layout_weight="3"
                                     android:layout_width="300dp"
                                     android:layout_height="match_parent"
+                                    android:layout_weight="3"
                                     android:background="@drawable/ic_additional"
-                                    android:textColor="#000"
-                                    />
+                                    android:gravity="center"
+                                    android:textColor="#000" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_weight="2"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="2">
+
                                 <TextView
-                                    android:gravity="center"
-                                    android:text="400 خدمة متاحة"
-                                    android:layout_weight="2"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center"
+                                    android:text="400 خدمة متاحة" />
                                 <!--<TextView-->
                                 <!--android:text=""-->
                                 <!--android:layout_weight="2"-->
@@ -513,11 +531,11 @@
                                 <!--android:layout_height="match_parent" />-->
                                 <TextView
 
-                                    android:gravity="center"
-                                    android:text="يمكنك حجز خدماتك بسهولة"
-                                    android:layout_weight="1"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent" />
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="يمكنك حجز خدماتك بسهولة" />
 
                             </LinearLayout>
 
@@ -527,212 +545,205 @@
                     </LinearLayout>
 
 
+                </LinearLayout>
             </LinearLayout>
-            </LinearLayout>
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_margin="16dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:background="@drawable/shadow1"-->
-                            <!--android:elevation="10dp"-->
-                            <!--android:onClick="offers"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:weightSum="3">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/shadow1"-->
+            <!--android:elevation="10dp"-->
+            <!--android:onClick="offers"-->
+            <!--android:orientation="vertical"-->
+            <!--android:weightSum="3">-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@drawable/bee"-->
-                                <!--android:gravity="center"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/bee"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:gravity="center_horizontal"-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal"-->
 
-                                <!--android:text="ابرز العروض"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--android:text="ابرز العروض"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                        <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_margin="16dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:background="@drawable/shadow1"-->
-                            <!--android:elevation="10dp"-->
-                            <!--android:onClick="manageAccount"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:weightSum="3">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/shadow1"-->
+            <!--android:elevation="10dp"-->
+            <!--android:onClick="manageAccount"-->
+            <!--android:orientation="vertical"-->
+            <!--android:weightSum="3">-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@drawable/bee"-->
-                                <!--android:gravity="center"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/bee"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:gravity="center_horizontal"-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal"-->
 
-                                <!--android:text="ادارة حسابي"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--android:text="ادارة حسابي"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                        <!--</LinearLayout>-->
-
+            <!--</LinearLayout>-->
 
 
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/shadow1"-->
+            <!--android:elevation="10dp"-->
+            <!--android:onClick="myreservation"-->
+            <!--android:orientation="vertical"-->
+            <!--android:weightSum="3">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/bee"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal"-->
+
+            <!--android:text="حجوزاتي"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:onClick="mypoint"-->
+            <!--android:background="@drawable/shadow1"-->
+            <!--android:weightSum="3"-->
+            <!--android:orientation="vertical"-->
+            <!--android:elevation="10dp"-->
+            <!--android:padding="3dp">-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/bee"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="1"-->
+
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal"-->
+
+            <!--android:text="نقاطي"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_margin="16dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:background="@drawable/shadow1"-->
-                            <!--android:elevation="10dp"-->
-                            <!--android:onClick="myreservation"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:weightSum="3">-->
+            <!--</LinearLayout>-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:background="@drawable/bee"-->
-                                <!--android:gravity="center"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:weightSum="3"-->
+            <!--android:layout_weight="1"-->
+            <!--android:elevation="10dp"-->
+            <!--android:onClick="extraServices"-->
+            <!--android:background="@drawable/shadow1"-->
+            <!--android:orientation="vertical">-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/bee"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:gravity="center_horizontal"-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_horizontal"-->
 
-                                <!--android:text="حجوزاتي"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--android:text="خدمات اضافية"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="18dp" />-->
 
-                        <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_margin="16dp"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:onClick="mypoint"-->
-                            <!--android:background="@drawable/shadow1"-->
-                            <!--android:weightSum="3"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:elevation="10dp"-->
-                            <!--android:padding="3dp">-->
+            <!--</LinearLayout>-->
 
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:background="@drawable/bee"-->
-                                <!--android:gravity="center"-->
-                                <!--android:layout_weight="1"-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="400dp"-->
 
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
-
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:gravity="center_horizontal"-->
-
-                                <!--android:text="نقاطي"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:weightSum="3">-->
 
 
-                        <!--</LinearLayout>-->
-
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_margin="16dp"-->
-                            <!--android:weightSum="3"-->
-                            <!--android:layout_weight="1"-->
-                            <!--android:elevation="10dp"-->
-                            <!--android:onClick="extraServices"-->
-                            <!--android:background="@drawable/shadow1"-->
-                            <!--android:orientation="vertical">-->
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:background="@drawable/bee"-->
-                                <!--android:gravity="center"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
-
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="match_parent"-->
-                                <!--android:layout_weight="1"-->
-                                <!--android:gravity="center_horizontal"-->
-
-                                <!--android:text="خدمات اضافية"-->
-                                <!--android:textColor="@android:color/black"-->
-                                <!--android:textSize="18dp" />-->
-
-                        <!--</LinearLayout>-->
-
-                    <!--</LinearLayout>-->
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="400dp"-->
-
-                        <!--android:layout_weight="1"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:weightSum="3">-->
-
-
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
 
             <!--</LinearLayout>-->
 
 
-
-
         </android.support.v7.widget.CardView>
-
 
 
     </android.support.v4.widget.NestedScrollView>
 
     <!--<LinearLayout-->
 
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:orientation="vertical">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="vertical">-->
 
 
-
-       <!---->
-        <!--</LinearLayout>-->
-    </android.support.design.widget.CoordinatorLayout>
+    <!---->
+    <!--</LinearLayout>-->
+</android.support.design.widget.CoordinatorLayout>
 
 
 

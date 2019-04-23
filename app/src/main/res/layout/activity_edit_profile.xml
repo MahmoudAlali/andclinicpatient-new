@@ -4,17 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".EditProfile">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:title="تعديل المعلومات الشخصية"
+        app:titleTextColor="#FFF"
+        >
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
+        <EditText
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="الاسم"
+            android:gravity="center"
+            android:background="@drawable/shadow2"
             />
+              <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="رقم الهاتف"
+            android:gravity="center"
+            android:background="@drawable/shadow2"
+            />
+
+            <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="رقم هاتف ثابت  "
+            android:gravity="center"
+            android:background="@drawable/shadow2"
+            />
+
+        <EditText
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="البريد الالكتروني "
+            android:gravity="center"
+            android:background="@drawable/shadow2"
+            />
+
+        <Button
+            android:id="@+id/editText2"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shadow2"
+            android:gravity="center"
+            android:text="تعديل " />
+
 
     </LinearLayout>
 

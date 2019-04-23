@@ -1,9 +1,12 @@
 package com.dcoret.beautyclient;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ public class BeautyMainPage extends AppCompatActivity
     View view;
     Toolbar toolbar;
     SearchView searchView;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,7 @@ public class BeautyMainPage extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         view = View.inflate(this, R.layout.activity_main_page, null);
         toggle.syncState();
+        context=this;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -164,6 +169,27 @@ public class BeautyMainPage extends AppCompatActivity
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.setContentView(R.layout.rating_dialog);
             dialog.show();
+        }else if (id == R.id.signout) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Logout")
+                    .setMessage("هل تريد تسجيل الخروج ؟")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = getSharedPreferences("LOGIN", MODE_PRIVATE).edit();
+                            editor.remove("name"); // will delete key name
+                            editor.remove("pass"); // will delete key pass
+                            editor.commit();
+                            Intent intent=new Intent(context,MainActivity.class);
+                            MainActivity.logout=true;
+                            startActivity(intent);
+
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

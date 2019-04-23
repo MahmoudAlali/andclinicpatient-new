@@ -72,7 +72,7 @@
         android:weightSum="3"
         android:elevation="16dp"
         android:background="@drawable/shadow1"
-        android:onClick="service"
+        android:onClick="servicestabs"
         >
         <TextView
             android:layout_weight="1"

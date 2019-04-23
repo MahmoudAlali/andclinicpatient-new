@@ -10,78 +10,87 @@
     android:layout_margin="32dp"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/filter_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center|top"
-
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:background="@drawable/shadow1"
-        android:hint="حسب البعد  كم"
-        android:inputType="textPersonName"
-        android:textAlignment="center" />
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="2"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/filter_price_to"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint=" الى "
-            android:background="@drawable/shadow1"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/filter_price_from"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="90dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:layout_marginLeft="10dp"
-
-            android:hint="السعر من "
-            android:background="@drawable/shadow1"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/filter_apply"
-        android:layout_width="149dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:background="@drawable/shadow1"
-        android:text="فلترة"
-        android:textSize="24dp" />
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/filter_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shadow1"
+            android:ems="10"
+            android:hint="حسب اسم المزودة"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/filter_name2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shadow1"
+            android:ems="10"
+            android:hint="حسب البعد  كم"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="2"
-            >
+            android:layout_marginTop="10dp"
+            android:weightSum="2">
+
             <EditText
+                android:layout_marginRight="10dp"
+                android:id="@+id/filter_price_to"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
+                android:background="@drawable/shadow1"
+                android:ems="10"
+                android:hint=" الى "
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/filter_price_from"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+
+                android:layout_weight="1"
+                android:background="@drawable/shadow1"
+
+                android:ems="10"
+                android:hint="السعر من "
+                android:inputType="textPersonName"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+
+            android:weightSum="2">
+
+            <EditText
                 android:id="@+id/rank_dialog_filter"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:ems="10"
+                android:layout_weight="1"
                 android:background="@drawable/shadow1"
+                android:ems="10"
                 android:hint="حسب التقييم"
                 android:inputType="textPersonName"
                 android:textAlignment="center" />
@@ -91,14 +100,28 @@
                 android:layout_width="250dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shadow1"
                 android:ems="10"
                 android:hint="حسب التقييم"
-                android:background="@drawable/shadow1"
 
                 android:textAlignment="center" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/filter_apply"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shadow1"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="فلترة"
+            android:textSize="24dp" />
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

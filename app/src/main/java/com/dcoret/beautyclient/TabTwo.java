@@ -11,23 +11,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.Location_Beauty;
-import com.dcoret.beautyclient.MainActivity;
-import com.dcoret.beautyclient.MyReservations;
-import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -80,12 +74,17 @@ public class TabTwo extends Fragment {
         getlocation();
 
         mMapView.onResume(); // needed to get the map to display immediately
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        MapsInitializer.initialize(getActivity().getApplicationContext());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                }
+            }).start();
 
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -96,7 +95,7 @@ public class TabTwo extends Fragment {
                 googleMap = mMap;
 
                 // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(MyReservations.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MyReservations.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
                     // here to request the missing permissions, and then overriding
@@ -112,7 +111,7 @@ public class TabTwo extends Fragment {
                 LatLng sydney;
                 Geocoder geo;
                  sydney = new LatLng( locations[0].getLatitude(), locations[0].getLongtude());
-                geo = new Geocoder(MyReservations.context, Locale.getDefault());
+                geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
                 List<Address> addresses =new ArrayList<>();
                 try {
                    addresses = geo.getFromLocation(latitud, longitud, 1);
@@ -120,6 +119,11 @@ public class TabTwo extends Fragment {
                     e.printStackTrace();
                 }
                 try {
+                    try {
+                        addresses = geo.getFromLocation(locations[0].getLatitude(), locations[0].getLongtude(), 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
                 }catch (Exception e){
@@ -128,7 +132,7 @@ public class TabTwo extends Fragment {
 
                 for (int i=1;i<items.length-2;i++){
                     sydney = new LatLng( locations[i].getLatitude(),  locations[i].getLongtude());
-                    geo = new Geocoder(MyReservations.context, Locale.getDefault());
+                    geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
                     try {
                         addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
                     } catch (IOException e) {

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     TextView forgetpass, register;
     static double latit;
     static double longit;
+   public static boolean logout=false;
     LinearLayout linearLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -37,10 +39,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        setContentView(R.layout.activity_beauty_main_page_2);
         setTitle("تسجيل الدخول");
-        Intent intent=new Intent(this,BeautyMainPage.class);
-        startActivity(intent);
 
+
+        String name=null,pass=null;
+        SharedPreferences prefs = getSharedPreferences("LOGIN", MODE_PRIVATE);
+        if(logout==false) {
+            name = prefs.getString("name", null);
+            pass = prefs.getString("pass", null);
+            try {
+                if (name.equals("admin") && pass.equals("admin")) {
+//                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(this, BeautyMainPage_2.class);
+                    finish();
+                    startActivity(intent);
+                }
+            }catch (NullPointerException e){
+
+            }
+        }
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
@@ -53,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
+
+
+
         if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
 
             final Dialog dialog=new Dialog(this);
@@ -64,8 +86,17 @@ public class MainActivity extends AppCompatActivity {
             beauty.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
+                    // shared preference
+                    SharedPreferences.Editor editor = getSharedPreferences("LOGIN", MODE_PRIVATE).edit();
+                    editor.putString("name",username.getText().toString());
+                    editor.putString("pass", password.getText().toString());
+                    editor.apply();
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage_2.class);
                     dialog.cancel();
-                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
+
+//                    Toast.makeText(getApplicationContext(),"beauty",Toast.LENGTH_LONG).show();
                     finish();
                     startActivity(intent);
                 }
@@ -74,8 +105,14 @@ public class MainActivity extends AppCompatActivity {
             fashion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences.Editor editor = getSharedPreferences("LOGIN", MODE_PRIVATE).edit();
+                    editor.putString("name",username.getText().toString());
+                    editor.putString("pass", password.getText().toString());
+                    editor.apply();
+//                    Toast.makeText(getApplicationContext(),"fashion",Toast.LENGTH_LONG).show();
+
                     dialog.cancel();
-                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage_2.class);
                     finish();
                     startActivity(intent);
                 }
@@ -136,12 +173,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
-
                 requestPermissions(new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.INTERNET
-
                 },10);
 //                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
@@ -183,23 +218,23 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     public void register(View view) {
-//        Intent intent=new Intent(getApplicationContext(),Register.class);
-//        startActivity(intent);
+        Intent intent=new Intent(getApplicationContext(),Register.class);
+        startActivity(intent);
 
 
 //        LatLng latLngA = new LatLng(12.3456789,98.7654321);
 //        LatLng latLngB = new LatLng(98.7654321,12.3456789);
 
-        Location locationA = new Location("point A");
-        locationA.setLatitude(32.7792842);
-        locationA.setLongitude(35.8816735);
-        Location locationB = new Location("point B");
-        locationB.setLatitude(32.626967);
-        locationB.setLongitude(36.103520);
-
-        double distance = locationA.distanceTo(locationB);
-        distance=distance/1000;
-        register.setText(distance+"");
+//        Location locationA = new Location("point A");
+//        locationA.setLatitude(32.7792842);
+//        locationA.setLongitude(35.8816735);
+//        Location locationB = new Location("point B");
+//        locationB.setLatitude(32.626967);
+//        locationB.setLongitude(36.103520);
+//
+//        double distance = locationA.distanceTo(locationB);
+//        distance=distance/1000;
+//        register.setText(distance+"");
 
     }
 

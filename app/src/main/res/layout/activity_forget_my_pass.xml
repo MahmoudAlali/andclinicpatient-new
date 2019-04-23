@@ -9,11 +9,11 @@
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-
+        app:titleTextColor="#fff"
         app:title="تسجيل الدخول"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"
-        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
 

@@ -72,7 +72,22 @@ public class MyReservations extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getSupportActionBar();
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
     }
 
 
@@ -94,14 +109,22 @@ public class MyReservations extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if(id==R.id.compare){
-            if(ServicesAdapter.comparenum==2) {
+            if(ServicesAdapter.comparenum>=2) {
                 Intent intent = new Intent(getApplicationContext(), Compartion.class);
                 startActivity(intent);
             }else {
                 Toast.makeText(getApplicationContext(),"There no Comparation enugh",Toast.LENGTH_LONG).show();
 
             }
+        }else if(id==R.id.shoppingcart){
+            Intent intent=new Intent(this,ShoppingCart.class);
+            startActivity(intent);
+
+        }else if(id==R.id.notify){
+            Intent intent=new Intent(this,Notification.class);
+            startActivity(intent);
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -139,7 +162,7 @@ public class MyReservations extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView;
+                           View rootView;
 
                          rootView = inflater.inflate(R.layout.tab_one, container, false);
                         return rootView;

@@ -21,7 +21,11 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/content_main__example" />
+        layout="@layout/activity_beauty_main_page_2" />
+
+
+    <!--layout="@layout/content_main__example"-->
+
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/floatingActionButton"-->

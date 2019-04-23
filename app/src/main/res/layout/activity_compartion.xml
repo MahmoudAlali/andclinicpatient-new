@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,8 +15,9 @@
     android:orientation="vertical"
     tools:context=".Compartion">
 
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_fav"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         app:titleTextColor="#fff"
         app:title="المقارنة"
@@ -22,13 +31,484 @@
         ></android.support.v7.widget.Toolbar>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleview"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycleview"-->
 
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="421dp"-->
+        <!--android:layout_weight="9"-->
+
+
+
+
+        <!--/>-->
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="421dp"
-        android:layout_weight="9"
-        />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/service_name_compare"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/service_compare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/prime"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:background="@color/prime"
+                    android:gravity="center"
+                    android:text="/"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@color/prime"
+                    android:text="اسم الخدمة"
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/prime"
+                    android:text="المزودة "
+
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/prime"
+                    android:text="السعر "
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/prime"
+                    android:text="التقييم "
+
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/prime"
+                    android:text="المكان "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/prime"
+                    android:text="العنوان "
+
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="15dp"
+                    android:text=" "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:background="@color/prime"
+                    android:gravity="center"
+                    android:text="serv1"
+                    android:textSize="20dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="service1"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="provider1"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="400"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="4.5"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="منزل-صالة"
+                    android:textDirection="rtl"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="مكة المكرمة"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/shadow2"
+                    android:gravity="center"
+                    android:text="حجز"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:background="@color/prime"
+                    android:gravity="center"
+                    android:text="serv2"
+                    android:textSize="20dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="service2"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="provider2"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="450"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="3.7"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="المناسبة"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="جدة"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shadow2"
+                    android:gravity="center"
+                    android:text="حجز"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/therd_col_serv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/therd_serv_compare"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:background="@color/prime"
+                    android:gravity="center"
+                    android:text="serv3"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="service2"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="provider2"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="450"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="3.7"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:text="المناسبة"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="جدة"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shadow2"
+                    android:gravity="center"
+                    android:text="حجز"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="vertical">-->
+
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@color/gray"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="service2"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="provider2"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:background="@color/gray"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="450"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="3.7"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:background="@color/gray"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="المناسبة"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="جدة"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="34dp"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:background="@drawable/shadow2"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="حجز"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:textStyle="bold" />-->
+
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -46,15 +526,15 @@
         <!--android:background="@color/primedark"-->
         <!--android:text="الخدمات" />-->
         <android.support.design.widget.BottomNavigationView
-            android:layoutDirection="rtl"
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:background="@color/primedark"
+            android:layoutDirection="rtl"
             app:itemIconTint="@android:color/darker_gray"
             app:itemTextColor="#fff"
-            android:id="@+id/navigation"
-            app:menu="@menu/compare_bottom_menue"
-            android:layout_gravity="bottom" />
+            app:menu="@menu/compare_bottom_menue" />
         <!--android:layout_margin="@dimen/fab_margin"-->
 
 
@@ -63,3 +543,15 @@
 
 
 </LinearLayout>
+<!--<android.support.design.widget.NavigationView-->
+<!--android:id="@+id/nav_view"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_gravity="start"-->
+<!--android:fitsSystemWindows="true"-->
+<!--android:background="@drawable/shadow_prime"-->
+<!--app:itemTextColor="#fff"-->
+<!--app:itemIconTint="#fff"-->
+<!--app:headerLayout="@layout/nav_header_main__example"-->
+<!--app:menu="@menu/activity_main__example_drawer" />-->
+    </android.support.v4.widget.DrawerLayout>
