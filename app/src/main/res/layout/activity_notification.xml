@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Notification">
+    tools:context=".Activities.Notification">
+
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        app:title="  الاشعارات "
+        app:title="الاشعارات"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primedark"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
+        app:titleMarginStart="@dimen/standard_175"
         app:titleTextColor="#fff"
-
-
         ></android.support.v7.widget.Toolbar>
 
 

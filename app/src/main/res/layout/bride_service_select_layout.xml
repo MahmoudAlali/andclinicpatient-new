@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:weightSum="2"
+    android:orientation="horizontal"
+    android:layoutDirection="rtl"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/shadow_prime"
+    android:layout_margin="10dp"
+    android:layout_height="75dp"
+    >
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select"
+        android:layout_marginRight="5dp"
+        />
+
+    <TextView
+        android:id="@+id/service_name"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="اسم الخدمة"
+        android:textSize="20dp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/price"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="السعر "
+
+        android:textSize="20dp"
+        android:gravity="center"
+        />
+
+</LinearLayout>

@@ -6,14 +6,23 @@ public class DataOffer {
     DataService[] services;
     double price;
     boolean fav;
+    double rate;
 
-    public DataOffer(String name, DataService[] services, double price, boolean fav) {
+    public DataOffer(String name, DataService[] services, double price,double rate, boolean fav) {
         this.name = name;
         this.services = services;
         this.price = price;
         this.fav = fav;
+        this.rate=rate;
     }
 
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 
     public String getName() {
         return name;

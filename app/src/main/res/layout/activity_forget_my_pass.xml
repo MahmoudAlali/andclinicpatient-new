@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ForgetMyPass"
+    tools:context=".Activities.ForgetMyPass"
     android:background="@color/prime"
     android:orientation="vertical">
     <android.support.v7.widget.Toolbar

@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Offers"
+    tools:context=".Activities.Offers"
     android:orientation="vertical"
     android:weightSum="10">
 
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:id="@+id/toolbar"-->
-        <!--app:title=" تسجيل الدخول "-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@color/primedark"-->
-        <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
-        <!--app:popupTheme="@style/AppTheme"-->
-        <!--app:titleTextColor="#fff"-->
-        <!--app:theme="@style/ToolbarColoredBackArrow"-->
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        app:title="العروض"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:popupTheme="@style/AppTheme"
+        app:titleTextColor="#fff"
+        app:titleMarginStart="@dimen/standard_175"
+        app:theme="@style/ToolbarColoredBackArrow"
 
 
-        <!--&gt;</android.support.v7.widget.Toolbar>-->
+        ></android.support.v7.widget.Toolbar>
 
 
     <LinearLayout
@@ -29,19 +29,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <!--<android.support.design.widget.BottomNavigationView-->
-
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:id="@+id/navigation"-->
-            <!--tools:ignore="BottomAppBar"-->
-
-            <!--android:background="@color/primedark"-->
-            <!--app:itemIconTint="@android:color/darker_gray"-->
-            <!--app:itemTextColor="#fff"-->
-            <!--app:menu="@menu/navbarbottom"-->
-            <!--&gt;</android.support.design.widget.BottomNavigationView>-->
-
     <android.support.v7.widget.RecyclerView
         android:layout_weight="1"
         android:id="@+id/review"

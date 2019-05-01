@@ -16,14 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.dcoret.beautyclient.BeautyMainPage_2;
-import com.dcoret.beautyclient.ExtraServices;
-import com.dcoret.beautyclient.Favorites;
-import com.dcoret.beautyclient.Help;
-import com.dcoret.beautyclient.MainActivity;
-import com.dcoret.beautyclient.MyReservations;
+import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
+import com.dcoret.beautyclient.Activities.ExtraServices;
+import com.dcoret.beautyclient.Activities.Favorites;
+import com.dcoret.beautyclient.Activities.Help;
+import com.dcoret.beautyclient.Activities.MainActivity;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Setting;
+import com.dcoret.beautyclient.Activities.Setting;
 
 public class MoreFragment extends Fragment {
 LinearLayout services_tabs;

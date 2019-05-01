@@ -5,8 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MapFiltering">
+    tools:context=".Activities.MapFiltering">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primedark"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title="الخريطة"
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="#fff" />
     <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:id="@+id/map"
         android:layout_width="match_parent"

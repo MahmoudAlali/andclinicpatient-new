@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShoppingCart">
+
+    tools:context=".Activities.ShoppingCart">
     
     
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:id="@+id/toolbar"
-        app:title="  سلة المشتريات "
+        app:title="سلة المشتريات"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primedark"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:titleMarginStart="@dimen/standard_175"
         app:popupTheme="@style/AppTheme"
         app:titleTextColor="#fff"
         app:theme="@style/ToolbarColoredBackArrow"
@@ -22,34 +23,43 @@
 
         ></android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="12">
+
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="?attr/actionBarSize"
             android:id="@+id/shop_cart_re_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_weight="1">
 
         </android.support.v7.widget.RecyclerView>
 
 
-        <android.support.design.widget.BottomNavigationView
+        <!--<android.support.design.widget.BottomNavigationView-->
 
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:background="@color/primedark"
-            app:itemIconTint="@android:color/darker_gray"
-            app:itemTextColor="#fff"
-            app:menu="@menu/pay"
-            tools:ignore="BottomAppBar"></android.support.design.widget.BottomNavigationView>
+            <!--android:id="@+id/navigation"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_weight="11"-->
+            <!--android:background="@color/primedark"-->
+            <!--app:itemIconTint="@android:color/darker_gray"-->
+            <!--app:itemTextColor="#fff"-->
+            <!--app:menu="@menu/pay"-->
+            <!--tools:ignore="BottomAppBar"></android.support.design.widget.BottomNavigationView>-->
 
-    </LinearLayout>
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--app:backgroundTint="@color/primedark"-->
+            <!--android:src="@drawable/ic_payment_black_24dp"-->
+           <!--/>-->
+
     
     
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

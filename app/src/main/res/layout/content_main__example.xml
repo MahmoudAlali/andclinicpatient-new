@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".BeautyMainPage"
+    tools:context=".Activities.BeautyMainPage"
     tools:showIn="@layout/app_bar_main__example">
 
     <android.support.design.widget.AppBarLayout

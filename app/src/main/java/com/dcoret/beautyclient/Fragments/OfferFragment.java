@@ -8,15 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcoret.beautyclient.BeautyMainPage_2;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.R;
+
+import java.util.ArrayList;
 
 public class OfferFragment extends Fragment {
 
     RecyclerView recyclerView;
+    public static  String name="offerfragment";
     DataService[] services=new DataService[]{
             new DataService(1,"service1",30,4.5,false,true),
             new DataService(1,"service2",40,4.5,false,true),
@@ -58,13 +61,16 @@ public class OfferFragment extends Fragment {
 
     };
 
-    DataOffer offers[]=new DataOffer[]{
-            new DataOffer("offer1",services,150,false),
-            new DataOffer("offer2",services1,150,false),
-            new DataOffer("offer3",service2,150,false),
-            new DataOffer("offer4",service4,150,false),
-            new DataOffer("offer5",service5,150,false),
-    };
+//    DataOffer offers[]= OffersData.offers;
+ArrayList<DataOffer> offers= new ArrayList<>();
+
+//            new DataOffer[]{
+//            new DataOffer("offer1",services,150,false),
+//            new DataOffer("offer2",services1,150,false),
+//            new DataOffer("offer3",service2,150,false),
+//            new DataOffer("offer4",service4,150,false),
+//            new DataOffer("offer5",service5,150,false),
+//    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +78,7 @@ public class OfferFragment extends Fragment {
         recyclerView= view.findViewById(R.id.review);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 //        recyclerView.setAdapter(new ReservationAdapter(getApplicationContext(),items));
-        recyclerView.setAdapter(new OffersAdapter(getActivity().getApplicationContext(),offers,false));
+        recyclerView.setAdapter(new OffersAdapter(getActivity().getApplicationContext(),offers,false,name));
 
 
         return view;

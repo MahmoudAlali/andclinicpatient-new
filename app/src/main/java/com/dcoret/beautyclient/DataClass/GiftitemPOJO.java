@@ -60,7 +60,31 @@ public class GiftitemPOJO {
             CreatedAt = createdAt;
         }
 
-        String item_name, item_image, item_price, Item_URL, Item_type_code, WishCount, CreatedAt;
+        String item_name;
+
+    public String getItem_provider_name() {
+        return item_provider_name;
+    }
+
+    public void setItem_provider_name(String item_provider_name) {
+        this.item_provider_name = item_provider_name;
+    }
+
+    public String getSum() {
+        return sum;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+    String item_provider_name;
+    String item_image;
+    String item_price;
+    String Item_URL;
+    String Item_type_code;
+    String WishCount;
+    String CreatedAt;
+        String sum;
 
     }
 

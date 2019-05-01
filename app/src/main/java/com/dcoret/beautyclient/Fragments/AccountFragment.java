@@ -10,8 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.dcoret.beautyclient.MyProfile;
-import com.dcoret.beautyclient.Point;
+import com.dcoret.beautyclient.Activities.MyProfile;
+import com.dcoret.beautyclient.Activities.Point;
 import com.dcoret.beautyclient.R;
 
 public class AccountFragment extends Fragment {

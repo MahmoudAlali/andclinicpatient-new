@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/grid"
+        android:icon="@drawable/ic_leaf"
+        android:title="Service"/>
+
+    <item
+        android:id="@+id/list"
+        android:icon="@drawable/ic_discount_white"
+        android:title="Offers"/>
+</menu>

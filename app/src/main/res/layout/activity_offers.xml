@@ -4,48 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Offers"
+    tools:context=".Activities.Offers"
     android:orientation="vertical"
     android:weightSum="10">
 
-    <android.support.v7.widget.Toolbar
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:id="@+id/toolbar"
-        app:title=" تسجيل الدخول "
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
         android:background="@color/primedark"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
-        app:popupTheme="@style/AppTheme"
-        app:titleTextColor="#fff"
-        app:theme="@style/ToolbarColoredBackArrow"
 
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        ></android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="@color/primedark"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+            app:title="العروسة">
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="خدمات" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عروض" />
+
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:id="@+id/tabItem3"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="ابرز العروض" />-->
+
+        </android.support.design.widget.TabLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="12">
+        >
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_weight="1"
-        android:id="@+id/review"
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_weight="1"-->
+        <!--android:id="@+id/review"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="11"-->
+            <!--android:orientation="vertical"-->
+            <!--&gt;-->
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <android.support.design.widget.BottomNavigationView
+            <!--<Switch-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="List"-->
+                <!--android:layoutDirection="rtl"-->
+                <!--android:textSize="20dp"-->
+                <!---->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--/>-->
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/navigation"
-        tools:ignore="BottomAppBar"
-        android:layout_weight="11"
-        android:background="@color/primedark"
-        app:itemIconTint="@android:color/darker_gray"
-        app:itemTextColor="#fff"
-        app:menu="@menu/navbarbottom"
-        ></android.support.design.widget.BottomNavigationView>
+
+
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/navigation"
+                tools:ignore="BottomAppBar"
+                android:background="@color/primedark"
+                app:itemIconTint="@android:color/darker_gray"
+                app:itemTextColor="#fff"
+                app:menu="@menu/service_offer_menu"
+                ></android.support.design.widget.BottomNavigationView>
+
+        </LinearLayout>
+
+
     </LinearLayout>
-</LinearLayout>
