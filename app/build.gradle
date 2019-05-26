@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.dcoret.beautyclient"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -46,5 +46,30 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:16.0.1'
     implementation 'com.android.volley:volley:1.1.1'
     implementation project(':paytabs_sdk-v3.0.3')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:multidex:1.0.2'
+    api project(path: ':FORTSDKv1.5')
+    implementation('com.android.support:appcompat-v7:+') {
+        transitive = true;
+    }
+    api 'com.victor:lib:1.0.1'
+    api 'com.google.code.gson:gson:2.8.0'
+    api 'com.shamanland:fonticon:0.1.8'
+    api('com.nispok:snackbar:2.11.+') {
+        // exclusion is not necessary, but generally a good idea.
+        exclude group: 'com.google.android', module: 'support-v4'
+    }
+    api 'com.google.guava:guava:19.0'
+    api 'org.bouncycastle:bcprov-jdk16:1.46'
+    api 'commons-codec:commons-codec:1.10'
+    implementation project(':FORTSDKv1.5')
+    //------- verification code sms retriever
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-identity:15.0.0'
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:15.0.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.0'
+    implementation 'com.github.wangjiegulu:rfab:2.0.0'
+    implementation 'com.github.clans:fab:1.6.4'
 }
 apply plugin: 'com.google.gms.google-services'

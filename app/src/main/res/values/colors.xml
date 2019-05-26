@@ -2,11 +2,14 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#F3709D</color>
+    <color name="colorAccentend">#D3295F</color>
+    <color name="blue">#05A8FA</color>
     <color name="prime">#A359C9</color>
     <color name="primedark">#70179C</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0b83e6</color>
     <color name="graylight">#fafafa</color>
-    <color name="gray">#DDDDDD</color>
+    <color name="gray">#EEEEFC</color>
+    <color name="end_gray">#D6DBDE</color>
 </resources>

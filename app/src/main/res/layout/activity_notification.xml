@@ -8,28 +8,23 @@
     tools:context=".Activities.Notification">
 
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        app:title="الاشعارات"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primedark"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_menu_wihte_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
         app:titleMarginStart="@dimen/standard_175"
-        app:titleTextColor="#fff"
-        ></android.support.v7.widget.Toolbar>
+        app:titleTextColor="@color/end_gray" />
 
-
-    <android.support.v7.widget.RecyclerView
+        <android.support.v7.widget.RecyclerView
         android:id="@+id/notify_re_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-
-
     </android.support.v7.widget.RecyclerView>
 
 

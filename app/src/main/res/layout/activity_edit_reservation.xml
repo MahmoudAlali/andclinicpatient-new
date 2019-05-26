@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
+
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="@dimen/standard_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service name/Promotion"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="20dp"
+            />
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_button"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="5dp"
+            android:text="اختاري الوقت و التاريخ"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@android:color/holo_red_dark"
+            />
+        <Spinner
+            android:gravity="center"
+            android:id="@+id/servicePlace"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_button"
+            android:background="@drawable/shadow_button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="5dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="@dimen/standard_80"
+                android:layout_height="@dimen/standard_30"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_close_black_24dp"
+                android:elevation="5dp"
+                />
+            <TextView
+                android:text="Hottel"
+                android:textSize="18dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@color/gray"
+                android:elevation="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#000"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            ></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:weightSum="2"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layoutDirection="rtl"
+            android:weightSum="2"
+            android:layout_marginTop="@dimen/standard_20"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/end_gray"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="الوقت المتوقع للخدمة:"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:hint="دقيقة"
+                    android:background="@drawable/shadow_button"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text" />
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/shadow_button"
+                    android:hint="ساعة"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_button"
+            android:background="@drawable/shadow_button"
+            android:text="أضافة فرد"
+            android:textSize="18dp"
+            android:id="@+id/add_person"
+            />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/myroot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="40dp"
+                ></LinearLayout>
+
+            <!-- add layout for reservations-->
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_button"
+            android:onClick="addtoshoppingcart"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorAccent"
+            android:text="اضافة للعربة"
+            android:textSize="18dp" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

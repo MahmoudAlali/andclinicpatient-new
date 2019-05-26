@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/one"
+        android:title="حجوزاتي في انتظار التأكيد"/>
+
+    <item
+        android:id="@+id/two"
+        android:title="حجوزاتي مدفوعة العربون"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="حجوزاتي المؤكدة"/>
+    <item
+        android:id="@+id/four"
+        android:title="حجوزاتي السابقة"/>
+    <item
+        android:id="@+id/five"
+        android:title="حجوزاتي الملغاة"/>
+
+</menu>

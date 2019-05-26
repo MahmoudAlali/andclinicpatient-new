@@ -36,17 +36,17 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
             }
         });
 
-        service_com_name=findViewById(R.id.service_name_compare);
-        therd_col=findViewById(R.id.therd_col_serv);
-        service_comperation=findViewById(R.id.service_compare);
-        therd_serv=findViewById(R.id.therd_serv_compare);
-        if(ServicesAdapter.comparenum==2) {
-            service_comperation.setWeightSum(3);
-            therd_col.setVisibility(View.GONE);
-        }else {
-
-        }
-
+//        service_com_name=findViewById(R.id.service_name_compare);
+//        therd_col=findViewById(R.id.therd_col_serv);
+//        service_comperation=findViewById(R.id.service_compare);
+//        therd_serv=findViewById(R.id.therd_serv_compare);
+//        if(ServicesAdapter.comparenum==2) {
+//            service_comperation.setWeightSum(3);
+//            therd_col.setVisibility(View.GONE);
+//        }else {
+//
+//        }
+//
 
 
     }

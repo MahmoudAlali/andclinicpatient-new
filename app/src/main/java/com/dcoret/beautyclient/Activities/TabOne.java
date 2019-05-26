@@ -4,6 +4,7 @@ package com.dcoret.beautyclient.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -11,10 +12,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,16 +27,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.DataExample.ServicesData;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment2;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
 public class TabOne extends Fragment {
 
-    RecyclerView recyclerView;
+   static RecyclerView recyclerView;
 
   static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
    static String[] providers_name={"SANA'A","HIBA","NOUR","LAMA","NOUR","HIBA","FIHA'A","SANA'A","LAMA","KAMAR"};
@@ -72,183 +76,47 @@ public class TabOne extends Fragment {
     static ArrayList<DataService> dataServices=new ArrayList<>();
 
 
-
     ArrayList<String> itemstmp=new ArrayList<>();
     ArrayList<String> pricestmp=new ArrayList<>();
     ArrayList<String> ranktmp=new ArrayList<>();
     ArrayList<String> citiestmp=new ArrayList<>();
     ArrayList<Location_Beauty> locationstmp=new ArrayList<Location_Beauty>();
-    View view;
+    static View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-//            for (int i=0;i<items.length;i++) {
-//                dataServices.add(new DataService(0, items[i],providers_name[i],Double.parseDouble(prices[i]),Double.parseDouble(rank[i]),city[i],locations[i],fav[i],false));
-//            }
-       new ServicesData(dataServices);
+        if(dataServices.isEmpty()) {
+            new ServicesData(dataServices);
+        }
 
-
-                view= inflater.inflate(R.layout.tab_one,container,false);
-        FloatingActionButton floatingActionButton=view.findViewById(R.id.fab1);
-        FloatingActionButton floatingActionButton2=view.findViewById(R.id.fab2);
-//        Toast.makeText(MyReservations.context,"ookkk",Toast.LENGTH_LONG).show();
-        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.list);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                Toast.makeText(MyReservations.context,"ookkk",Toast.LENGTH_LONG).show();
-
-              @SuppressLint("ResourceType")
-              final Dialog  dialog = new Dialog(MyReservations.context);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                dialog.setContentView(R.layout.filter_dialog);
-                dialog.setTitle("Filtering");
-
-                dialog.show();
-                final EditText filtername=dialog.findViewById(R.id.filter_name);
-                final EditText filterpricefrom=dialog.findViewById(R.id.filter_price_from);
-                final EditText filterpriceto=dialog.findViewById(R.id.filter_price_to);
-                final EditText rankfilter=dialog.findViewById(R.id.rank_dialog_filter);
-                TextView filterapply=dialog.findViewById(R.id.filter_apply);
-                Spinner city_filter_dialog=dialog.findViewById(R.id.city_filter_dialog);
-                ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(MyReservations.context,R.array.cities,android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                city_filter_dialog.setAdapter(adapter);
-
-//                filterapply.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        String filter=filtername.getText().toString();
-//                        String pfrom=filterpricefrom.getText().toString();
-//                        String pto=filterpriceto.getText().toString();
-//                        String rnk=rankfilter.getText().toString();
-//                        itemstmp.clear();
-//                        pricestmp.clear();
-//                        ranktmp.clear();
-//                        citiestmp.clear();
-//                        locationstmp.clear();
-//                        int i=0;
-//                        int j=0;
-//                        for (i=0;i<items.length;i++){
-//
-//                            Location locationA = new Location("point A");
-//                            locationA.setLatitude(32.7792842);
-//                            locationA.setLongitude(35.8816735);
-//                            Location locationB = new Location("point B");
-//                            locationB.setLatitude(locations[i].getLatitude());
-//                            locationB.setLongitude(locations[i].getLongtude());
-//
-//                            double distance = locationA.distanceTo(locationB);
-//                            distance=distance/1000;
-//                            Toast.makeText(MyReservations.context,distance+"",Toast.LENGTH_LONG).show();
-//                                if(distance<=Double.parseDouble(filter)){
-//
-//                                    itemstmp.add(items[i]);
-//                                    pricestmp.add(prices[i]);
-//                                    ranktmp.add(rank[i]);
-//                                    citiestmp.add(city[i]);
-//                                    locationstmp.add(locations[i]);
-//                                    j++;
-//
-//                                }
-//
-//
-//                            if(filter.equals(items[i] )&& !filter.isEmpty()){
-//                                itemstmp.add(items[i]);
-//                                pricestmp.add(prices[i]);
-//                                ranktmp.add(rank[i]);
-//                                citiestmp.add(city[i]);
-//                                locationstmp.add(locations[i]);
-//                                j++;
-//
-//                            }else if(!pfrom.isEmpty() && !pto.isEmpty()){
-//
-//
-//                                    int pfromdata=Integer.parseInt(prices[i]);
-//                                    int ptodata=Integer.parseInt(prices[i]);
-//                                    int pfdialog=Integer.parseInt(pfrom);
-//                                    int ptodialog=Integer.parseInt(pto);
-//                                    if(pfromdata>=pfdialog && ptodata<=ptodialog ){
-//                                        itemstmp.add(items[i]);
-//                                        pricestmp.add(prices[i]);
-//                                        ranktmp.add(rank[i]);
-//                                        citiestmp.add(city[i]);
-//                                        locationstmp.add(locations[i]);
-//                                        j++;
-//
-//                                    }
-//
-//
-//                            }else if(!rnk.isEmpty()){
-//
-//                                    double rnkdialog=Double.parseDouble(rnk);
-//                                    double rnkdata=Double.parseDouble(rank[i]);
-//                                    if(rnkdata>=rnkdialog){
-//                                        itemstmp.add(items[i]);
-//                                        pricestmp.add(prices[i]);
-//                                        ranktmp.add(rank[i]);
-//                                        citiestmp.add(city[i]);
-//                                        locationstmp.add(locations[i]);
-//                                        j++;
-//
-//                                }
-//                            }
-//                        }
-//
-//                        if(!itemstmp.isEmpty()){
-//                        String[] arr1 = itemstmp.toArray(new String[j]);
-//                        String[] arr2 = pricestmp.toArray(new String[j]);
-//                        String[] arr3 = ranktmp.toArray(new String[j]);
-//                        String[] arr4 = citiestmp.toArray(new String[j]);
-//                        Location_Beauty[] arr5 = locationstmp.toArray(new Location_Beauty[j]);
-//                        if(grid==false){
-//                        recyclerView=view.findViewById(R.id.recycleview);
-//                        recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-//                        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,arr1,arr2,arr3,arr4,arr5,fav));
-//
-//                        }else{
-//                            recyclerView = view.findViewById(R.id.recycleview);
-//                            recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
-//                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
-//                        }
-//                            dialog.cancel();
-//                        }else{
-//                            Toast.makeText(MyReservations.context,"NO thing to show",Toast.LENGTH_LONG).show();
-//
-//                        }
-//                    }
-//                });
-//
-            }
-        });
-
-        floatingActionButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog  dialog = new Dialog(MyReservations.context);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                dialog.setContentView(R.layout.arrangement_dialog);
-                dialog.setTitle("Filtering");
-
-                dialog.show();
-            }
-        });
+        view= inflater.inflate(R.layout.tab_one,container,false);
 
         recyclerView=view.findViewById(R.id.recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-//        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,fav));
-        recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,dataServices));
+        recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
+//        recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items,prices,rank,city,locations,fav));
+        recyclerView.setAdapter(new ServicesAdapterNew(BeautyMainPage.context,items,true,R.layout.service_layout_adapter_last));
         return view;
 
 
+    }
+
+    public static void gridlistitems(){
+        if (ServicesAdapterNew.list==true) {
+        Log.d("gridlist",ServicesAdapterNew.list+"");
+            recyclerView = view.findViewById(R.id.recycleview);
+            recyclerView.setLayoutManager(new GridLayoutManager(BeautyMainPage.context,2));
+//        recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items,prices,rank,city,locations,fav));
+            recyclerView.setAdapter(new ServicesAdapterNew(BeautyMainPage.context, items,ServicesAdapterNew.list,R.layout.service_layout_adapter_grid_last));
+            ServicesAdapterNew.list=false;
+        }else {
+            Log.d("gridlist",ServicesAdapterNew.list+"");
+            recyclerView = view.findViewById(R.id.recycleview);
+            recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
+//        recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items,prices,rank,city,locations,fav));
+            recyclerView.setAdapter(new ServicesAdapterNew(BeautyMainPage.context, items,ServicesAdapterNew.list,R.layout.service_layout_adapter_last));
+            ServicesAdapterNew.list=true;
+        }
     }
 boolean grid=false;
 
@@ -260,17 +128,16 @@ boolean grid=false;
                         case R.id.list:
                             grid=false;
                             recyclerView=view.findViewById(R.id.recycleview);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-//                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
-                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,dataServices));
-
+                            recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
+//                            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items,prices,rank,city,locations,grid,fav));
+                            recyclerView.setAdapter(new ServicesAdapterNew(BeautyMainPage.context,items));
                             return true;
                         case R.id.grid:
                             grid=true;
                             recyclerView = view.findViewById(R.id.recycleview);
-                            recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
-//                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,items,prices,rank,city,locations,grid,fav));
-                            recyclerView.setAdapter(new ServicesAdapter(MyReservations.context,dataServices));
+                            recyclerView.setLayoutManager(new GridLayoutManager(BeautyMainPage.context, 2));
+//                            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items,prices,rank,city,locations,grid,fav));
+                            recyclerView.setAdapter(new ServicesAdapterNew(BeautyMainPage.context,items));
 
                             return true;
                     }

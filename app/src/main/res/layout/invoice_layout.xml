@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@color/end_gray"-->
+        <!--app:popupTheme="@style/AppTheme"-->
+        <!--app:theme="@style/ToolbarColoredBackArrow"-->
+        <!--app:navigationIcon="@drawable/ic_menu_wihte_24dp"-->
+        <!--app:titleMarginStart="@dimen/standard_175"-->
+        <!--app:titleTextColor="#fff" />-->
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:background="@color/end_gray"
+    app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+    app:popupTheme="@style/AppTheme"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:title=""
+    app:titleMarginStart="@dimen/standard_175"
+    app:titleTextColor="@color/end_gray" />
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#000"
+        android:text="فاتورتي"
+        android:gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        />
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_gray_dialog"
+
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="اسم الخدمة"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+            <ImageView
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_print_black_24dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="400 R"
+                android:textSize="18dp"
+                android:textColor="#000"
+
+                android:gravity="center"
+                />
+
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="سعر الخدمة"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="4"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="12/12/2020 , 19:30"
+                android:textColor="#000"
+
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="توقيت الخدمة"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

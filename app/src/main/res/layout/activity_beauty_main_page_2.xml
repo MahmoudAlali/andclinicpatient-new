@@ -215,142 +215,142 @@
 
     <!--</com.github.clans.fab.FloatingActionMenu>-->
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_anchor="@+id/fab"
-    app:layout_anchorGravity="center"
-    android:orientation="vertical"
-    android:id="@+id/shopping_cart_layout"
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:layout_anchor="@+id/fab"-->
+    <!--app:layout_anchorGravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--android:id="@+id/shopping_cart_layout"-->
 
-    android:layoutDirection="rtl">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/shopping_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_shopping_cart_white_24dp"
-        app:fabSize="mini"
-        android:layout_marginTop="20dp"
-        app:layout_anchor="@+id/fab"
-        app:layout_anchorGravity="center"
-        />
-    <TextView
-        android:id="@+id/shopping_cart_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="5dp"
-        android:textColor="#fff"
-        />
-</LinearLayout>
-
-
-
-    <LinearLayout
-        android:id="@+id/notification_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@+id/fab"
-        android:orientation="vertical"
-        app:layout_anchorGravity="center">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_notifications_wihte_24dp"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/fab"
-        android:layout_marginTop="20dp"
-
-        app:layout_anchorGravity="center"
-
-        />
-
-        <TextView
-            android:id="@+id/notification_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="#fff"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@+id/fab"
-        android:orientation="vertical"
-        android:layoutDirection="rtl"
-        android:id="@+id/map_layout"
-        app:layout_anchorGravity="center">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_map_black_24dp"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/fab"
-        android:layout_marginTop="20dp"
-
-        app:layout_anchorGravity="center"
-
-        />
-        <TextView
-            android:id="@+id/map_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="5dp"
-            android:textColor="#fff"
-
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@+id/fab"
-        android:id="@+id/more_layout"
-        android:orientation="vertical"
-        app:layout_anchorGravity="center">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-
-        android:src="@drawable/ic_more_vert_black_24dp"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/fab"
-        app:layout_anchorGravity="center"
-
-        />
-        <TextView
-            android:id="@+id/more_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="#fff"
-
-            />
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="198dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:src="@drawable/ic_add_black_24dp"
-        app:layout_anchor="@id/bottom_app_bar"
+    <!--android:layoutDirection="rtl">-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/shopping_cart"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_shopping_cart_white_24dp"-->
+        <!--app:fabSize="mini"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--app:layout_anchorGravity="center"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/shopping_cart_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:textColor="#fff"-->
+        <!--/>-->
+<!--</LinearLayout>-->
 
 
-        />
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/notification_layout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_anchorGravity="center">-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/notification"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_notifications_wihte_24dp"-->
+        <!--app:fabSize="mini"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--android:layout_marginTop="20dp"-->
+
+        <!--app:layout_anchorGravity="center"-->
+
+        <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/notification_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:textColor="#fff"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layoutDirection="rtl"-->
+        <!--android:id="@+id/map_layout"-->
+        <!--app:layout_anchorGravity="center">-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/map"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_map_black_24dp"-->
+        <!--app:fabSize="mini"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--android:layout_marginTop="20dp"-->
+
+        <!--app:layout_anchorGravity="center"-->
+
+        <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/map_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:textColor="#fff"-->
+
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--android:id="@+id/more_layout"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_anchorGravity="center">-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/more"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20dp"-->
+
+        <!--android:src="@drawable/ic_more_vert_black_24dp"-->
+        <!--app:fabSize="mini"-->
+        <!--app:layout_anchor="@+id/fab"-->
+        <!--app:layout_anchorGravity="center"-->
+
+        <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/more_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:textColor="#fff"-->
+
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="198dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:backgroundTint="@color/colorAccent"-->
+        <!--android:src="@drawable/ic_add_black_24dp"-->
+        <!--app:layout_anchor="@id/bottom_app_bar"-->
+
+
+        <!--/>-->
 
 
 </android.support.design.widget.CoordinatorLayout>

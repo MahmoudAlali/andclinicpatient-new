@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/grid"
+        android:id="@+id/beauty"
         android:icon="@drawable/ic_leaf"
-        android:title="Service"/>
+        android:title="عروض التجميل"
+        />
 
     <item
-        android:id="@+id/list"
-        android:icon="@drawable/ic_discount_white"
-        android:title="Offers"/>
+        android:id="@+id/fashion"
+        android:icon="@drawable/ic_bride"
+        android:title="عروض تصميم الازياء"
+        />
 </menu>

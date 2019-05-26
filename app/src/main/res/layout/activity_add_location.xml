@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddLocation">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"
+        android:layoutDirection="rtl"
+        android:weightSum="4">
+        <EditText
+            android:layout_weight="1"
+            android:background="@drawable/shadow_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_edit_text"
+            android:hint="ابحثي عن عنوان او منطقة"
+            android:gravity="center"
+            />
+        <Button
+            android:textColor="#fff"
+            android:text="بحث"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="3"
+            android:background="@drawable/shadow_button_blue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="match_parent"
+        android:weightSum="14">
+
+
+        <com.google.android.gms.maps.MapView
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:id="@+id/map1"
+            android:layout_marginBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.google.android.gms.maps.MapView>
+
+        <LinearLayout
+            android:layout_weight="13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_add_site"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center"
+                android:text="اضافة"
+                />
+            <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/high_button"-->
+            <!--android:background="@drawable/shadow_button_blue"-->
+            <!--android:text="اضافة موقع"-->
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

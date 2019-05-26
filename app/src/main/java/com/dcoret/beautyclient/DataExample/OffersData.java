@@ -9,9 +9,9 @@ public class OffersData {
     public static   DataService[] services=new DataService[]{
             new DataService(1,"service1","SANA'A",30,4.5,false,true),
             new DataService(1,"service2","SANA'A",40,4.5,false,true),
-            new DataService(1,"service3","SANA'A",20,4.5,false,true),
-            new DataService(1,"service4","SANA'A",50,4.5,false,true),
-            new DataService(1,"service5","SANA'A",50,4.5,false,true),
+//            new DataService(1,"service3","SANA'A",20,4.5,false,true),
+//            new DataService(1,"service4","SANA'A",50,4.5,false,true),
+//            new DataService(1,"service5","SANA'A",50,4.5,false,true),
 
     };
     public static   DataService[] services1=new DataService[]{
@@ -67,8 +67,13 @@ public class OffersData {
       allservices.add(service4);
       allservices.add(service5);
        for (int i=0;i<allservices.size();i++){
-           offers.add(new DataOffer("offer"+i+1,allservices.get(i),getprice(allservices.get(i)),4.5,false));
-      }
+           if(i>2) {
+               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"o"));
+           }else {
+               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"os"));
+
+           }
+           }
 
        }
 

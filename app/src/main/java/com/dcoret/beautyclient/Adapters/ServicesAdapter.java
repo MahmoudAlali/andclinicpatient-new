@@ -23,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.dcoret.beautyclient.API.ReservationDialog;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
@@ -64,7 +66,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param items
      */
     public ServicesAdapter(Context context,String items[],String[] price,String[] rank,String[] cities,Location_Beauty[] location_beauties , boolean []fav){
-        this.context=context;
+        this.context=BeautyMainPage.context;
         this.items=items;
         this.price=price;
         this.rank=rank;
@@ -88,9 +90,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.fav=fav;
 
     }
-    public ServicesAdapter(Context context, ArrayList<DataService> dataServices){
+    public ServicesAdapter(Context context, String[] items){
         this.context=context;
-        this.dataServices=dataServices;
+        this.items=items;
 
     }
 
@@ -104,12 +106,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(context.getApplicationContext());
+        LayoutInflater inflater=LayoutInflater.from(context);
         View row;
         if(grid==false) {
-             row = inflater.inflate(R.layout.service_layout_example, parent, false);
+             row = inflater.inflate(R.layout.service_layout_last, parent, false);
         } else {
-          row = inflater.inflate(R.layout.service_layout_example, parent, false);
+          row = inflater.inflate(R.layout.service_layout_last, parent, false);
         }
         ServicesAdapter.Item item=new ServicesAdapter.Item(row);
         return item;
@@ -127,262 +129,219 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        try {
-            ((ServicesAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
-            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
-            ((Item) holder).pro_name.setText(dataServices.get(position).getProvider_name());
-            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
-            if(fav[position]){
-                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-                Favorites.dataServices.add(new DataService(0
-                        ,items[position]
-                        ,Double.parseDouble(price[position])
-                        ,Double.parseDouble(rank[position])
-                        ,true
-                        ,false
-
-                ));
-                fav[position]=true;            }
-        }catch (Exception e){
-            ((ServicesAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
-            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
-            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
-            if(!dataServices.get(position).isFav()) {
-                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
-
-
-            }else {
-                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-
-
-            }
-            }
-
-
-        ((Item) holder).service_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(context, ServiceDetails.class);
-                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
-                context.startActivity(intent);
-            }
-        });
-
-            try {
-                ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (((Item) holder).compare.isActivated()) {
-                            comparenum--;
-                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
-                            ((Item) holder).compare.setTextColor(Color.WHITE);
-                            ((Item) holder).compare.setActivated(false);
-                        } else if (((Item) holder).compare.isActivated() == false && comparenum < 3) {
-                            ((Item) holder).compare.setActivated(true);
-                            comparenum++;
-                            ((Item) holder).compare.setTextColor(Color.GREEN);
-                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
-
-                        }
-
-                    }
-                        });
-        }catch (Exception e){
-
-
-        }
-
-
-        try {
-
-    ((Item) holder).favorites.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try {
-                if (dataServices.get(position).isFav()) {
-                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
-
-                    fav[position] = false;
-                    dataServices.get(position).setFav(false);
-                } else   {
-                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-//                    Favorites.dataServices.add(new DataService(0
-//                            , items[position]
-//                            , Double.parseDouble(price[position])
-//                            , Double.parseDouble(rank[position])
-//                            , true
-//                            , false
-//                    ));
-//                    fav[position] = false;
-                    dataServices.get(position).setFav(false);
-
-
-
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-//                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-                try {
-                    Favorites.dataServices.remove(position);
-                    notifyDataSetChanged();
-
-                }catch (Exception ee){
-                    ee.printStackTrace();
-                }
-
-            }
-
-        }
-    });
-        }catch (Exception e){
-
-        }
-
-//        ((Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+//        try {
+//            ((ServicesAdapter.Item)holder).textView.setText(items[position]);
+//            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
+//            ((Item) holder).pro_name.setText(dataServices.get(position).getProvider_name());
+//            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
+//            if(fav[position]){
+//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
+//                Favorites.dataServices.add(new DataService(0
+//                        ,items[position]
+//                        ,Double.parseDouble(price[position])
+//                        ,Double.parseDouble(rank[position])
+//                        ,true
+//                        ,false
+//
+//                ));
+//                fav[position]=true;            }
+//        }catch (Exception e){
+//            ((ServicesAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
+//            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
+//            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
+//            if(!dataServices.get(position).isFav()) {
+//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
+//
+//
+//            }else {
+//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
+//            }
+//            }
+//
+//
+//        ((Item) holder).service_details.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                try {
-//                    Intent intent = new Intent(context, ServiceDetails.class);
-//                    context.startActivity(intent);
-//                }catch (Exception e){
-//                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
-//                }
-//                }
+//                Intent intent=new Intent(context, ServiceDetails.class);
+//                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
+//                intent.putExtra("provider_name",((Item) holder).pro_name.getText().toString());
+//                intent.putExtra("price",((Item) holder).price.getText().toString());
+////                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
+//                context.startActivity(intent);
+//            }
 //        });
+//
+//            try {
+//                ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (((Item) holder).compare.isActivated()) {
+//                            comparenum--;
+//                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
+//                            ((Item) holder).compare.setTextColor(Color.WHITE);
+//                            ((Item) holder).compare.setActivated(false);
+//                        } else if (((Item) holder).compare.isActivated() == false && comparenum < 3) {
+//                            ((Item) holder).compare.setActivated(true);
+//                            comparenum++;
+//                            ((Item) holder).compare.setTextColor(Color.GREEN);
+//                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
+//
+//                        }
+//
+//                    }
+//                        });
+//        }catch (Exception e){
+//
+//
+//        }
+//
+//
+//        try {
+//
+//    ((Item) holder).favorites.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            try {
+//                if (dataServices.get(position).isFav()) {
+//                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
+//
+//                    fav[position] = false;
+//                    dataServices.get(position).setFav(false);
+//                } else   {
+//                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
+////                    Favorites.dataServices.add(new DataService(0
+////                            , items[position]
+////                            , Double.parseDouble(price[position])
+////                            , Double.parseDouble(rank[position])
+////                            , true
+////                            , false
+////                    ));
+////                    fav[position] = false;
+//                    dataServices.get(position).setFav(false);
+//
+//
+//
+//                }
+//            }catch (Exception e){
+//                e.printStackTrace();
+////                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
+//                try {
+//                    Favorites.dataServices.remove(position);
+//                    notifyDataSetChanged();
+//
+//                }catch (Exception ee){
+//                    ee.printStackTrace();
+//                }
+//
+//            }
+//
+//        }
+//    });
+//        }catch (Exception e){
+//
+//        }
+//
+//       try {
+//             dialog = new Dialog(BeautyMainPage.context);
+//             dialog1 = new Dialog(BeautyMainPage.context);
+//
+//       }catch (Exception e){
+//            e.printStackTrace();
+////           dialog = new Dialog(Offers.context);
+////           dialog1 = new Dialog(Offers.context);
+//       }
+//
+//        dialog.setContentView(R.layout.dialog_calender);
+//        dialog1.setContentView(R.layout.dialog_calender_time);
+//        final DatePicker datePicker=dialog.findViewById(R.id.date);
+//        final TimePicker timePicker=dialog1.findViewById(R.id.time);
+//
+//         okdate=dialog.findViewById(R.id.ok_date);
+//          oktime=dialog1.findViewById(R.id.ok_time);
+//         canceldate=dialog.findViewById(R.id.cancel_date);
+//         canceltime=dialog1.findViewById(R.id.cancel_time);
+//try {
+//    ((Item) holder).resrv_btn.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//
+//            try {
+//                ReservationDialog.dateDialog(BeautyMainPage.context,((Item) holder).textView.getText().toString(),"s");
+//            }catch (Exception e){
+//                ReservationDialog.dateDialog(BeautyMainPage.context,((Item) holder).textView.getText().toString(),"s");
+//            }
+//
+////            dialog.show();
+////            canceldate.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    dialog.cancel();
+////                }
+////            });
+////            canceltime.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    dialog1.cancel();
+////                }
+////            });
+////            okdate.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    date=datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+" - ";
+////                    dialog.cancel();
+////                    dialog1.show();
+////                }
+////            });
+////            oktime.setOnClickListener(new View.OnClickListener() {
+////                @RequiresApi(api = Build.VERSION_CODES.M)
+////                @Override
+////                public void onClick(View v) {
+////                    date=date+timePicker.getHour()+":"+timePicker.getMinute()+"";
+////                    dialog1.cancel();
+////                    try{
+////                        Toast.makeText(context.getApplicationContext(),((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
+////                        ShoppingCartFragment.dataServices.add(new DataService(0
+////                                ,items[position]
+////                                ,Double.parseDouble(price[position])
+////                                ,Double.parseDouble(rank[position])
+////                                ,false
+////                                ,false
+////                        ));
+////                        Reservation.services.add(new DataService(0
+////                                ,items[position]
+////                                ,Double.parseDouble(price[position])
+////                                ,Double.parseDouble(rank[position])
+////                                ,false
+////                                ,false
+////                        ));
+////                        //----------notification for reserve service
+//
+////                    }catch (Exception e){
+////                        e.printStackTrace();
+//
+//
+////                    }
+//
+//
+//                }
+//            });
+//
+//
+//
+//        }catch (Exception e)
+//        {
+//
+//            e.printStackTrace();
+//
+//        }
 
-
-
-       try {
-             dialog = new Dialog(MyReservations.context);
-             dialog1 = new Dialog(MyReservations.context);
-
-       }catch (Exception e){
-
-           dialog = new Dialog(Offers.context);
-           dialog1 = new Dialog(Offers.context);
-       }
-
-        dialog.setContentView(R.layout.dialog_calender);
-        dialog1.setContentView(R.layout.dialog_calender_time);
-        final DatePicker datePicker=dialog.findViewById(R.id.date);
-        final TimePicker timePicker=dialog1.findViewById(R.id.time);
-
-         okdate=dialog.findViewById(R.id.ok_date);
-          oktime=dialog1.findViewById(R.id.ok_time);
-         canceldate=dialog.findViewById(R.id.cancel_date);
-         canceltime=dialog1.findViewById(R.id.cancel_time);
-try {
-    ((Item) holder).resrv_btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-
-            dialog.show();
-            canceldate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                }
-            });
-
-            canceltime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog1.cancel();
-                }
-            });
-
-            okdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //              dialog.setContentView(R.layout.dialog_calender_time);
-                    date=datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+" - ";
-                    dialog.cancel();
-
-                    dialog1.show();
-                }
-            });
-            oktime.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
-                @Override
-                public void onClick(View v) {
-
-                    date=date+timePicker.getHour()+":"+timePicker.getMinute()+"";
-                    dialog1.cancel();
-
-                    try{
-
-                        Toast.makeText(context.getApplicationContext(),((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
-                        ShoppingCartFragment.dataServices.add(new DataService(0
-                                ,items[position]
-                                ,Double.parseDouble(price[position])
-                                ,Double.parseDouble(rank[position])
-                                ,false
-                                ,false
-                        ));
-                        Reservation.services.add(new DataService(0
-                                ,items[position]
-                                ,Double.parseDouble(price[position])
-                                ,Double.parseDouble(rank[position])
-                                ,false
-                                ,false
-                        ));
-                        //----------notification for reserve service
-                        new PushNotifications().sendnotification_provider(context.getApplicationContext(),"services","تم حجز خدمة من قبل احد الزبائن","accept","cancel");
-//                        sendnotification_provider(ServicesData.context,"خدمات","تم حجز خدمة من قبل احد الزبائن");
-//                        Toast.makeText(ServicesData.context,"Done",Toast.LENGTH_LONG).show();
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-//                        Toast.makeText(MyReservations.context,((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
-//                        Log.d("arraysize",ShoppingCart.dataServices.size()+"");
-//                        ShoppingCart.dataServices.add(new DataService(0
-//                                ,items[position]
-//                                ,Double.parseDouble(price[position])
-//                                ,Double.parseDouble(rank[position])
-//                                ,false
-//                                ,false
-//                        ));
-
-//                        Reservation.services.add(new DataService(0
-//                                ,items[position]
-//                                ,Double.parseDouble(price[position])
-//                                ,Double.parseDouble(rank[position])
-//                                ,false
-//                                ,false
-//                        ));
-//                        //----------notification for reserve service
-//                        sendnotification_provider(MyReservations.context,"services","تم حجز خدمة من قبل احد الزبائن","accept","cancel");
-////                        Toast.makeText(MyReservations.context,"Done",Toast.LENGTH_LONG).show();
-
-
-                    }
-
-
-                }
-            });
-
-        }
-
-    });
-
-        }catch (Exception e)
-        {
-
-            e.printStackTrace();
-
-        }
-
-        //        ((Item) holder).rate.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                Dialog dialog=new Dialog(MyReservations.context)
-        //                        ;
-        //                dialog.setContentView(R.layout.rating_dialog);
-        //                dialog.show();
-        //            }
-        //        });
             }
+
+
+
+
+
+
 
     @Override
     public int getItemCount() {

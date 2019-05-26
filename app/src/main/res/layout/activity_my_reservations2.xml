@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Activities.MyReservations">
+
+
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@color/primedark"-->
+        <!--app:layout_scrollFlags="scroll|enterAlways"-->
+        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+        <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
+        <!--app:title="الخدمات">-->
+
+        <!--</android.support.v7.widget.Toolbar>-->
+        <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
+   <android.support.design.bottomappbar.BottomAppBar
+       android:layout_marginTop="?attr/actionBarSize"
+       android:layout_width="match_parent"
+       android:backgroundTint="@color/end_gray"
+       android:layout_height="?attr/actionBarSize">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <TextView
+               android:id="@+id/servicetabclick"
+               android:layout_weight="1"
+               android:textSize="18dp"
+               android:gravity="center"
+               android:textColor="#000"
+               android:text="مقدمات الخدمة"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
+
+           <TextView
+               android:textColor="#000"
+
+               android:id="@+id/offertabclick"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:text="أبرز العروض"
+               android:textSize="18dp" />
+           <TextView
+               android:textColor="#000"
+
+               android:id="@+id/maptabclick"
+               android:layout_weight="1"
+               android:textSize="18dp"
+               android:gravity="center"
+               android:text="الخريطة"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent" />
+       </LinearLayout>
+   </android.support.design.bottomappbar.BottomAppBar>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="end|bottom"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="64dp"
+        app:backgroundTint="@color/endblue"
+        app:srcCompat="@drawable/ic_filter_list_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="40dp"
+        app:fabSize="mini"
+        android:layout_marginBottom="130dp"
+        app:backgroundTint="@color/endblue"
+        app:srcCompat="@drawable/ic_descending_arrangement"
+        tools:ignore="VectorDrawableCompat" />
+</android.support.design.widget.CoordinatorLayout>

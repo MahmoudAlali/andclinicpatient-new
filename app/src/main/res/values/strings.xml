@@ -5,6 +5,8 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <string name="title_activity_my_resrvation">MyResrvation</string>
     <string name="title_activity_my_reservation">MyReservation</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -20,8 +22,29 @@
         <item>انثى</item>
 
     </string-array>
+
+    <string-array name="age">
+        <item>فوق 15 سنة</item>
+        <item>تحت 15 سنة</item>
+
+    </string-array>
+
+    <string-array name="employee">
+        <item>الموظفة 1</item>
+        <item>الموظفة 2</item>
+        <item>الموظفة 3</item>
+    </string-array>
+
+    <string-array name="service_place">
+        <item>اختاري مكان الخدمة</item>
+        <item>منزل</item>
+        <item>فندق</item>
+        <item>قاعة</item>
+        <item>صالون</item>
+
+    </string-array>
     <string-array name="cities">
-        <item>الكل</item>
+        <item>اسم المدينة</item>
         <item>الرياض</item>
         <item>مكة</item>
         <item>المدينة المنورة</item>
@@ -62,4 +85,6 @@
     <string name="title_activity_manage_accounts">ManageAccounts</string>
     <string name="title_activity_bride">Bride</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_google_map">Map</string>
 </resources>

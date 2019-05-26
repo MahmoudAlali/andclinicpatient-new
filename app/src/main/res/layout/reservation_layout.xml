@@ -2,9 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
-
-    android:paddingTop="10dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_offers_layout"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+   >
 
     <!--<android.support.v7.widget.CardView-->
         <!--android:layout_width="match_parent"-->
@@ -28,11 +32,11 @@
             android:foreground="?android:attr/selectableItemBackground"
 
             android:elevation="16dp"
-            android:background="@color/prime">
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:weightSum="2">
@@ -42,7 +46,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/rname"
                         android:layout_width="match_parent"
@@ -50,14 +53,49 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="اسم الحجز"
+                        android:textColor="#000"
                         android:textSize="18sp"
+                        android:layout_marginBottom="5dp"
                         android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@android:color/holo_red_dark"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12PM"
+                        android:textColor="@color/primedark"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    />
+                    <TextView
+                        android:textColor="@color/primedark"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12/5/2019"
+                        android:textSize="18dp"
+                        android:gravity="center"
+                        />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layoutDirection="rtl"
+                    android:layout_marginBottom="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -67,9 +105,20 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="تعديل"
+                        android:textColor="@color/endblue"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/cancel_re1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/endblue"
+                        android:text="تأجيل"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/cancel_re"
                         android:layout_width="match_parent"
@@ -77,26 +126,40 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="الغاء"
+                        android:textColor="@color/endblue"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
 
                 <LinearLayout
+                    android:weightSum="2"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="@drawable/beauty"
-                    android:orientation="horizontal">
-                </LinearLayout>
+                    android:layoutDirection="rtl"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="تقييم"
+                        android:textSize="16dp"
+                        android:textColor="@color/endblue"
+                        android:gravity="center"
+                        />
 
+                    <TextView
+                        android:id="@+id/export_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="اصدار فاتورة"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
 
     <!--</android.support.v7.widget.CardView>-->
+</LinearLayout>
 </LinearLayout>

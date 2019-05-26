@@ -15,16 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
-    <android.support.design.widget.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/navigation"
-        tools:ignore="BottomAppBar"
-        android:layout_weight="9"
-        android:background="@color/primedark"
-        app:itemIconTint="@android:color/darker_gray"
-        app:itemTextColor="#fff"
-        app:menu="@menu/navbarbottom"
-        ></android.support.design.widget.BottomNavigationView>
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/navigation"-->
+        <!--tools:ignore="BottomAppBar"-->
+        <!--android:layout_weight="9"-->
+        <!--android:background="@color/primedark"-->
+        <!--app:itemIconTint="@android:color/darker_gray"-->
+        <!--app:itemTextColor="#fff"-->
+        <!--app:menu="@menu/navbarbottom"-->
+        <!--&gt;</android.support.design.widget.BottomNavigationView>-->
 
 </LinearLayout>

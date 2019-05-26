@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/notify"
-        android:icon="@drawable/ic_notifications_wihte_24dp"
-        android:title="الاشعارات"
+        android:id="@+id/gridlist"
+        android:icon="@drawable/ic_grid_on_black_24dp"
+        android:title="قائمة"
         app:showAsAction="always"
         >
 
     </item>
-    <item
-        android:id="@+id/shoppingcart"
-        android:icon="@drawable/ic_shopping_cart_white_24dp"
-        android:title="السلة"
-        app:showAsAction="always"
-        >
+    <!--<item-->
+        <!--android:id="@+id/shoppingcart"-->
+        <!--android:icon="@drawable/ic_shopping_cart_white_24dp"-->
+        <!--android:title="السلة"-->
+        <!--app:showAsAction="always"-->
+        <!--&gt;-->
 
-    </item>
+    <!--</item>-->
 
     <item
         android:id="@+id/compare"

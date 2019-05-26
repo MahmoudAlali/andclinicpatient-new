@@ -7,6 +7,7 @@ public class DataOffer {
     double price;
     boolean fav;
     double rate;
+    String offer_type;
 
     public DataOffer(String name, DataService[] services, double price,double rate, boolean fav) {
         this.name = name;
@@ -14,6 +15,22 @@ public class DataOffer {
         this.price = price;
         this.fav = fav;
         this.rate=rate;
+    }
+    public DataOffer(String name, DataService[] services, double price,double rate, boolean fav,String offer_type) {
+        this.name = name;
+        this.services = services;
+        this.price = price;
+        this.fav = fav;
+        this.rate=rate;
+        this.offer_type=offer_type;
+    }
+
+    public String getOffer_type() {
+        return offer_type;
+    }
+
+    public void setOffer_type(String offer_type) {
+        this.offer_type = offer_type;
     }
 
     public double getRate() {

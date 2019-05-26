@@ -4,101 +4,181 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/prime"
+    android:background="@color/end_gray"
     android:orientation="vertical"
     tools:context=".Activities.Register">
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:layout_width="match_parent"-->
 
-        app:title="انشاء حساب"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
-        app:popupTheme="@style/AppTheme"
-        app:theme="@style/ToolbarColoredBackArrow"
-            app:titleTextColor="#fff"
-        ></android.support.v7.widget.Toolbar>
+        <!--app:title="انشاء حساب"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
+        <!--app:popupTheme="@style/AppTheme"-->
+        <!--app:theme="@style/ToolbarColoredBackArrow"-->
+            <!--app:titleTextColor="#fff"-->
+        <!--&gt;</android.support.v7.widget.Toolbar>-->
 
     <EditText
-        android:layout_marginTop="100dp"
-        android:id="@+id/editText4"
+        android:layout_marginTop="@dimen/standard_20"
+        android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/high_edit_text"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shadow1"
-        android:gravity="center"
+        android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="الاسم" />
+        android:hint="الاسم(اختياري)" />
+
+    <!--<EditText-->
+        <!--android:id="@+id/editText5"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:background="@drawable/shadow_edit_text"-->
+        <!--android:ems="10"-->
+        <!--android:hint="رقم الهوية" />-->
+
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/phone"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/high_edit_text"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shadow1"
-        android:gravity="center"
+        android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="رقم الهوية" />
+        android:hint="رقم الهاتف" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/high_edit_text"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shadow1"
-        android:gravity="center"
+        android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="البريد الالكتروني"
-        />
+        android:hint="البريد الالكتروني(اختياري)" />
 
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/shadow1"
-        android:gravity="center"
-        android:ems="10"
-        android:hint="الجوال"
-        />
     <Spinner
         android:id="@+id/gender_spinner"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_30"
         android:layout_gravity="center"
-        android:layout_marginBottom="20dp"></Spinner>
-    <RadioButton
-        android:id="@+id/radioButton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shadow_button_spinner"></Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:color/holo_purple"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:inputType="textPassword"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shadow_edit_text"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="كلمة السر" />
+
+
+    <EditText
+        android:id="@+id/confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shadow_edit_text"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:hint="تأكيد كلمة السر" />
+    <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="السماح لـ (اسم التطبيق) بالوصول لموقعك أثناء الاستخدام"
+        android:gravity="center"
+        android:id="@+id/show_map"
+        android:textColor="@color/primedark"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:weightSum="3"
+        android:orientation="vertical">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:layout_weight="1"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".Activities.Register"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <LinearLayout
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:layout_weight="2"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <CheckBox
+        android:id="@+id/privacy_policy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:layoutDirection="rtl"
-        android:text="اوافق على اتفاقية استخدام التطبيق"
-        android:textSize="18sp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_gravity="center"
-         />
+        android:text="الموافقة على سياسة التطبيق وبيان الخصوصية"
+        android:textColor="@color/primedark"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="182dp"
-        android:layout_height="45dp"
-        android:background="@drawable/shadow1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
         android:layout_gravity="center"
-        android:text="تسجيل"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shadow_button_blue"
+        android:elevation="5dp"
+        android:onClick="registerAction"
+        android:text="موافق"
+        android:textColor="@android:color/white" />
+</LinearLayout>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>

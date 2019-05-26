@@ -2,6 +2,8 @@ package com.dcoret.beautyclient.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -23,10 +25,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapterNew;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataExample.OffersData;
@@ -39,7 +45,8 @@ public class Offers extends AppCompatActivity {
     RecyclerView recyclerView;
     String[] items={"Offer 1","Offer 2","Offer 3","Offer 4","Offer 5","Offer 6"};
     public static  String name="offers";
-
+    BottomNavigationView navigation;
+    TextView offer_text;
 ArrayList<DataService> arr=new ArrayList<>();
 
 
@@ -87,88 +94,53 @@ ArrayList<DataService> arr=new ArrayList<>();
     ArrayList<DataOffer> offers= new ArrayList<>();
 
 //            new DataOffer[]{
-//      new DataOffer("offer1",services,150,false),
 //      new DataOffer("offer2",services1,150,false),
 //      new DataOffer("offer3",service2,150,false),
 //      new DataOffer("offer4",service4,150,false),
 //      new DataOffer("offer5",service5,150,false),
 //    };
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offers);
+        setContentView(R.layout.offers_layout);
         setTitle("ابرز العروض");
-        Toolbar toolbar=findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        new ReservationDialog("offers");
         arr.add(services1[0]);
         arr.add(services1[1]);
         arr.add(services1[2]);
-        context=this;
 
+        context = this;
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.list);
+        offer_text = findViewById(R.id.offer_text);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.beauty);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-//        recyclerView=findViewById(R.id.review);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(new OffersAdapter(getApplicationContext(),offers,false,"offers"));
-
-
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        recyclerView = findViewById(R.id.offers_recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(new OffersAdapterNew(getApplicationContext(), items ));
     }
-
-
-
 
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.list:
-                            recyclerView = findViewById(R.id.review);
+                        case R.id.beauty:
+                            offer_text.setText("ابرز عروض التجميل");
+//                            navigation.setItemIconTintList(ColorStateList.valueOf(Color.parseColor("#66BBF3")));
+//                            navigation.setItemTextColor(ColorStateList.valueOf(Color.parseColor("#66BBF3")));
+                            recyclerView = findViewById(R.id.offers_recycleview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                            recyclerView.setAdapter(new OffersAdapter(getApplicationContext(), offers, false,"offers"));
+                            recyclerView.setAdapter(new OffersAdapterNew(getApplicationContext(), items ));
                             return true;
-                        case R.id.grid:
-                            recyclerView =findViewById(R.id.review);
-//                            recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                        case R.id.fashion:
+                            offer_text.setText("ابرز عروض الازياء");
+                            recyclerView =findViewById(R.id.offers_recycleview);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
                             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                            recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(), arr));
+                            recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(), items));
                             return true;
                     }
 
@@ -191,81 +163,13 @@ ArrayList<DataService> arr=new ArrayList<>();
      * A placeholder fragment containing a simple view.
      */
     static int section;
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
+    public void servicesBeauty(View view) {
+        Intent in=new Intent(context,BeautyMainPage.class);
+        startActivity(in);
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-
-
-        public static Offers.PlaceholderFragment newInstance(int sectionNumber) {
-            Offers.PlaceholderFragment fragment = new Offers.PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            section=sectionNumber;
-            fragment.setArguments(args);
-
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView;
-
-            rootView = inflater.inflate(R.layout.tab_one, container, false);
-            return rootView;
-
-
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
-        }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 0) {
-//                return PlaceholderFragment.newInstance(0);
-                ServiceTab one = new ServiceTab();
-
-                return one;
-            } else if (position == 1) {
-                OffersTab two = new OffersTab();
-                return two;
-
-
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 2;
-        }
-    }
 
 
 

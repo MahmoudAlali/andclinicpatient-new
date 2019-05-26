@@ -23,17 +23,6 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_notification, container, false);
-//        services_tabs=view.findViewById(R.id.services_tabs);
-//        services_tabs.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(getActivity().getApplicationContext(), MyReservations.class);
-//                startActivity(intent);
-//            }
-//        });
-        recyclerView = view.findViewById(R.id.notify_re_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recyclerView.setAdapter(new NotificationAdapter(getActivity().getApplicationContext(), notify));
 
         return view;
     }

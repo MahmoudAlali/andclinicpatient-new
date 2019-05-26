@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.ReservationDialog;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
+import com.dcoret.beautyclient.Activities.MyReservations;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.Activities.OfferDetails;
@@ -28,6 +32,7 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     String items[];
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
+    ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
     public OffersAdapter(Context context,String items[]){
         this.context=context;
         this.items=items;
@@ -53,12 +58,14 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(context);
+            LayoutInflater inflater = LayoutInflater.from(BeautyMainPage.context);
             View row;
         if(grid==false) {
-             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
+//             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
+             row = inflater.inflate(R.layout.offers_layout_last, parent, false);
         }else {
-             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
+//             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
+             row = inflater.inflate(R.layout.offers_layout_last, parent, false);
         }
 
 
@@ -68,15 +75,19 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        ((OffersAdapter.Item)holder).textView.setText(offers.get(position).getName());
-        ((Item)holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
-        ((Item) holder).price.setText(offers.get(position).getPrice()+"");
-        ((Item) holder).rating.setText(offers.get(position).getRate()+"");
-        ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+
+        try {
+            ((OffersAdapter.Item) holder).textView.setText(offers.get(position).getName());
+            ((Item) holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
+            ((Item) holder).price.setText(offers.get(position).getPrice() + "");
+            ((Item) holder).rating.setText(offers.get(position).getRate() + "");
+            OFFER_RESERVATION_TYPE.add(offers.get(position).getOffer_type());
+            ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    try {
 //                    if (name.equals(Offers.name)) {
 //                        Intent intent = new Intent(context, BrideServicesSelecting.class);
 //                        intent.putExtra("offer_name", offers[position].getName());
@@ -84,58 +95,72 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //                        Log.d("Offers","ok");
 //                    } else {
                         Intent intent = new Intent(context, OfferDetails.class);
-                    intent.putExtra("offer_name", offers.get(position).getName());
-                    context.startActivity(intent);
+                        intent.putExtra("offer_name", offers.get(position).getName());
+                        context.startActivity(intent);
 //                        Log.d("Offers","ok2");
 
 //                    }
-                }catch (Exception e){
-                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
 
             try {
                 ((Item) holder).reserv_offer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for (int i=0;i<offers.get(position).getServices().length;i++) {
+                        for (int i = 0; i < offers.get(position).getServices().length; i++) {
                             ShoppingCartFragment.dataServices.add(offers.get(position).getServices()[i]);
                             Reservation.services.add(offers.get(position).getServices()[i]);
                         }
-                        Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
-                        new PushNotifications().sendnotification_provider(context,"offers","تم حجز عرض من قبل احد الزبائن","accept","cancel");
+//                        Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
+                        try {
+                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
+                                ReservationDialog.multiReservationDialog(ReservationDialog.getcontext(), offers.get(position));
+                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
+                                Log.d("Position", position + "");
+                                ReservationDialog.dateDialog(ReservationDialog.getcontext(), offers.get(position).getName(), "o");
+
+//                              ReservationDialog.dateDialog(ReservationDialog.getcontext(), ((Item) holder).textView.getText().toString(), "o");
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            // error in back to main page
+                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
+                                ReservationDialog.multiReservationDialog(BeautyMainPage_2.context, offers.get(position));
+                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
+                                ReservationDialog.dateDialog(BeautyMainPage_2.context, ((Item) holder).textView.getText().toString(), "o");
+                            }
+                        }
                     }
                 });
 
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
-
-
-
-
-
-
 
 
 //        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Dialog dialog=new Dialog(Offers.context);
+//                ReservationDialog dialog=new ReservationDialog(Offers.context);
 //                dialog.setContentView(R.layout.rating_dialog);
 //                dialog.setTitle("تقييم العرض");
 //                dialog.show();
 //
 //            }
 //        });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
         try {
-            Log.d("Offersize",offers.size()+"");
+//            Log.d("Offersize",offers.size()+"");
             return offers.size();
 
         }catch (Exception e){

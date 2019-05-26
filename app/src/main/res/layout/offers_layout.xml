@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Offers"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/appbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="@dimen/appbar_padding_top"-->
+        <!--android:background="@color/primedark"-->
+
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/primedark"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+            <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
+            <!--app:title="العروسة">-->
+
+        <!--</android.support.v7.widget.Toolbar>-->
+
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tabs"-->
+            <!--android:layout_width="match_parent"-->
+
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:id="@+id/tabItem"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="خدمات" />-->
+
+            <!--<android.support.design.widget.TabItem-->
+                <!--android:id="@+id/tabItem2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="عروض" />-->
+
+            <!--&lt;!&ndash;<android.support.design.widget.TabItem&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/tabItem3"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="ابرز العروض" />&ndash;&gt;-->
+
+        <!--</android.support.design.widget.TabLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--/>-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="servicesBeauty"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/shadow_service_tab"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="@dimen/standard_40"
+                    android:background="@drawable/ic_lipstick" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="خدمات التجميل"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+
+                android:layout_weight="1"
+                android:background="@drawable/shadow_fashion_tab"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="@dimen/standard_40"
+                    android:background="@drawable/ic_bride" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="خدمات تصميم الازياء"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/primedark"
+           />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/offer_text"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ابرز عروض التجميل"
+                android:gravity="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:background="@color/gray"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="?attr/actionBarSize">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/offers_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navigation"
+            android:layout_gravity="bottom"
+            tools:ignore="BottomAppBar"
+            android:background="@color/end_gray"
+            app:itemIconTint="@drawable/bottom_nav_selector"
+            app:itemTextColor="@drawable/bottom_nav_selector"
+            app:menu="@menu/service_offer_menu"
+            ></android.support.design.widget.BottomNavigationView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+    </LinearLayout>

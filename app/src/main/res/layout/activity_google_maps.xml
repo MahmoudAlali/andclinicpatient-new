@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="horizontal"
+    android:weightSum="2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.GoogleMaps" />
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    >
+    <Button
+        android:text="الخدمات"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:background="@drawable/shadow_button_add_site"
+        />
+    <Button
+        android:text="العروض"
+        android:textColor="#fff"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:background="@drawable/shadow_button_blue"
+        />
+</LinearLayout>
+    <com.google.android.gms.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="@dimen/standard_50"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</android.support.design.widget.CoordinatorLayout>

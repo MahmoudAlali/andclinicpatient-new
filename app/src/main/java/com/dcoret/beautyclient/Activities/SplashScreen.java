@@ -3,7 +3,10 @@ package com.dcoret.beautyclient.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +33,13 @@ import java.util.Map;
 public class SplashScreen extends AppCompatActivity {
     Context context;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         FirebaseApp.initializeApp(SplashScreen.this);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         context = this;
         final Thread splash = new Thread() {
             @Override
@@ -49,7 +54,7 @@ public class SplashScreen extends AppCompatActivity {
                     if (name.equals("admin") && pass.equals("admin")) {
 //                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(context, BeautyMainPage_2.class);
+                        Intent intent = new Intent(context, BeautyMainPage.class);
                         finish();
                         startActivity(intent);
                     } else {

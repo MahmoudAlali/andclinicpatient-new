@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
@@ -243,7 +244,7 @@ public class ServiceTab extends Fragment {
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(Offers.context));
 //        recyclerView.setAdapter(new ServicesAdapter(Offers.context,items,prices,rank,city,locations,fav));
-        recyclerView.setAdapter(new ServicesAdapter(getActivity().getApplicationContext(),dataServices));
+        recyclerView.setAdapter(new ServicesAdapterNew(getActivity().getApplicationContext(),items));
         return view;
 
 
@@ -260,7 +261,7 @@ public class ServiceTab extends Fragment {
                             recyclerView=view.findViewById(R.id.recycleview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(Offers.context));
 //                            recyclerView.setAdapter(new ServicesAdapter(Offers.context,items,prices,rank,city,locations,grid,fav));
-                            recyclerView.setAdapter(new ServicesAdapter(Offers.context,dataServices));
+                            recyclerView.setAdapter(new ServicesAdapterNew(Offers.context,items));
 
                             return true;
                         case R.id.grid:
@@ -268,7 +269,7 @@ public class ServiceTab extends Fragment {
                             recyclerView = view.findViewById(R.id.recycleview);
                             recyclerView.setLayoutManager(new GridLayoutManager(Offers.context, 2));
 //                            recyclerView.setAdapter(new ServicesAdapter(Offers.context,items,prices,rank,city,locations,grid,fav));
-                            recyclerView.setAdapter(new ServicesAdapter(Offers.context,dataServices));
+                            recyclerView.setAdapter(new ServicesAdapterNew(Offers.context,items));
 
                             return true;
                     }

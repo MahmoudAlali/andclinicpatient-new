@@ -30,7 +30,7 @@ public class Favorites extends AppCompatActivity {
 
            recyclerView=findViewById(R.id.recycleview);
            recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-           recyclerView.setAdapter(new FavouriteAdapter(this,dataServices));
+//           recyclerView.setAdapter(new FavouriteAdapter(this,items));
 
 //           toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 //               @Override

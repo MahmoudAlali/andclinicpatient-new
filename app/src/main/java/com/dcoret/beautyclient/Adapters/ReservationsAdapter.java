@@ -1,19 +1,30 @@
 package com.dcoret.beautyclient.Adapters;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
+import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.DataService;
+import com.dcoret.beautyclient.EditReservation;
+import com.dcoret.beautyclient.Fragments.EditReservationFragment;
+import com.dcoret.beautyclient.Fragments.InvoioceFragment;
+import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.Activities.ReservationDetails;
@@ -27,6 +38,10 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     String items[];
     RecyclerView.ViewHolder holder;
     ArrayList <DataService> services;
+    ArrayList<DataReservation> reservations;
+    Fragment fragment;
+    FragmentManager fm;
+    FragmentTransaction fragmentTransaction;
     public ReservationsAdapter(Context context,String items[]){
         this.context=context;
         this.items=items;
@@ -62,7 +77,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ((Item)holder).textView.setText(services.get(position).getName());
+        ((Item)holder).textView.setText(items[position]);
         ((ReservationsAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,61 +91,55 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         });
 
+
+
+
+
+        //---------- Edit reservation listener--------------
+        ((Item) holder).edit_re.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        //---------- cancel reservation listener------------
         ((Item) holder).cancel_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(services.get(position).isIsoffer()){
+//                if(items.length==0){
+//                    AlertDialog.Builder dialog;
+//                    try {
+//                       dialog= new AlertDialog.Builder(BeautyMainPage.context);
+//                    }catch (Exception e){
+//                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
+//
+//                    }
+//                          dialog.setTitle("Cancel Reservation")
+//                            .setMessage("سوف يتم الغاء كامل العرض و حذف الخدمات الاخرى المتعلقة به,هل انت متأكد ؟")
+//                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    int id = services.get(position).getOfferid();
+//                                    int size = services.size();
+//                                }
+//                            })
+//                            // A null listener allows the button to dismiss the dialog and take no further action.
+//                            .setNegativeButton(android.R.string.no, null)
+//                            .setIcon(android.R.drawable.ic_dialog_alert)
+//                            .show();
+//                }else {
                     AlertDialog.Builder dialog;
                     try {
-                       dialog= new AlertDialog.Builder(Reservation.context);
+                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
                     }catch (Exception e){
-                        dialog= new AlertDialog.Builder(BeautyMainPage_2.context);
-
-                    }
-                          dialog.setTitle("Cancel Reservation")
-                            .setMessage("سوف يتم الغاء كامل العرض و حذف الخدمات الاخرى المتعلقة به,هل انت متأكد ؟")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    int id=services.get(position).getOfferid();
-                                    int size=services.size();
-                                    for (int i=0; i<services.size();i++) {
-                                        if (services.get(i).isIsoffer() && id == services.get(i).getOfferid()) {
-                                            services.remove(i);
-                                            if(size>services.size()){
-                                                size=services.size();
-                                                i=0;
-                                            }
-
-                                        }
-                                    }
-                                    if(services.get(0).getOfferid()==id){
-                                        services.remove(0);
-                                    }
-                                    notifyDataSetChanged();
-                                }
-                            })
-
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }else {
-                    AlertDialog.Builder dialog;
-                    try {
-                        dialog= new AlertDialog.Builder(Reservation.context);
-                    }catch (Exception e){
-                        dialog= new AlertDialog.Builder(BeautyMainPage_2.context);
+                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
 
                     }
                            dialog .setTitle("Cancel Reservation")
                             .setMessage("هل انت متأكد انك تريد الغاء الحجز ؟")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    services.remove(position);
-                                    notifyDataSetChanged();
-
-
-
 
                                 }
                             })
@@ -141,6 +150,30 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                             .show();
                 }
 
+//            }
+        });
+
+        ((Item) holder).export_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Log.d("InvoiceF","ok");
+                fragment = new InvoioceFragment();
+                fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        ((Item) holder).edit_re.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent=new Intent(BeautyMainPage.context, EditReservation.class);
+//                BeautyMainPage.context.startActivity(intent);
+                fragment = new EditReservationFragment();
+                fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -149,19 +182,20 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return services.size();
+        return items.length;
     }
 
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
         MyClickListener listener;
 
-            TextView textView,cancel_re,edit_re;
+            TextView textView,cancel_re,edit_re,export_invoice;
 
         public Item(View itemView, MyClickListener listener) {
             super(itemView);
             textView=itemView.findViewById(R.id.rname);
             cancel_re=itemView.findViewById(R.id.cancel_re);
             edit_re=itemView.findViewById(R.id.edit_re);
+            export_invoice=itemView.findViewById(R.id.export_invoice);
 
 //            more_btn=itemView.findViewById(R.id.more_btn);
             this.listener = listener;

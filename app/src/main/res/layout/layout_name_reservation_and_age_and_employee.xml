@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:padding="5dp"
+    android:background="@drawable/shadow_edit_text_border"
+    android:layoutDirection="rtl"
+    android:layout_width="match_parent"
+    android:layout_height="35dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:hint="الاسم"
+        android:background="@drawable/shadow_edit_text"
+        android:gravity="center"
+        />
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:background="@color/end_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Spinner
+            android:id="@+id/agespinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            ></Spinner>
+
+        <Spinner
+            android:id="@+id/employeespinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            ></Spinner>
+
+    </LinearLayout>
+
+</LinearLayout>

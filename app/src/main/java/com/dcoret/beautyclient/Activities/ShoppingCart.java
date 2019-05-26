@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.Adapters.ShopCartAdapter;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.GiftitemPOJO;
+import com.dcoret.beautyclient.PayFort.FortRequest;
 import com.dcoret.beautyclient.R;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -39,6 +40,9 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.payfort.fort.android.sdk.base.FortSdk;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 import com.paytabs.paytabs_sdk.payment.ui.activities.PayTabActivity;
 import com.paytabs.paytabs_sdk.utils.PaymentParams;
 
@@ -387,12 +391,19 @@ public class ShoppingCart extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         if(id==item.getItemId()){
             try {
-                createbill();
+//                createbill();
+
+
+
+
+//----------------------- paytabs-----------
 //            Intent in = new Intent(getApplicationContext(), PayTabActivity.class);
 //            in.putExtra(PaymentParams.MERCHANT_EMAIL, "hazem.ali1466@gmail.com"); //this a demo account for testing the sdk
 //            in.putExtra(PaymentParams.SECRET_KEY,"wfF0RRqIQeQezZ72c5DUjLBjtcCwqTlW90X0SnJICzWcy4eKaSFuEhO7tqEUkZRu0OuScdBPNy1lCf6N8MhM46TxwxsRxjlx7Qpk");//Add your Secret Key Here
@@ -428,12 +439,12 @@ public class ShoppingCart extends AppCompatActivity {
 //            in.putExtra(PaymentParams.IS_TOKENIZATION, true);
 //            startActivityForResult(in, PaymentParams.PAYMENT_REQUEST_CODE);
 
-            createPdfWrapper();
+//            createPdfWrapper();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (DocumentException e) {
-            e.printStackTrace();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (DocumentException e) {
+//            e.printStackTrace();
         }catch (Exception e){
                 e.printStackTrace();
             }
@@ -442,6 +453,9 @@ public class ShoppingCart extends AppCompatActivity {
     }
         return true;
     }
+
+
+
 }
 
 

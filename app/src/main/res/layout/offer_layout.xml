@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp">
+    >
 
     <!--<android.support.v7.widget.CardView-->
         <!--android:layout_width="match_parent"-->
@@ -27,7 +27,6 @@
             android:layout_marginRight="4dp"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:elevation="16dp"
             android:background="@drawable/shadow1"
           >
 
@@ -177,11 +176,12 @@
                     android:layout_weight="2"
                     android:background="@drawable/beauty"
                     android:orientation="horizontal">
+
                     <TextView
-                        android:layout_margin="3dp"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="@drawable/ic_discount"/>
+                        android:layout_margin="3dp"
+                        android:background="@drawable/ic_discount" />
 
 
                 </LinearLayout>

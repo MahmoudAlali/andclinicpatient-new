@@ -2,43 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<group-->
-        <!--android:checkableBehavior="single">-->
-        <!--<item-->
-            <!--android:id="@+id/nav_camera"-->
-            <!--android:icon="@drawable/ic_menu_camera"-->
-            <!--android:title="Import" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_gallery"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Gallery" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_slideshow"-->
-            <!--android:icon="@drawable/ic_menu_slideshow"-->
-            <!--android:title="Slideshow" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_manage"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="Tools" />-->
-    <!--</group>-->
 
     <item android:title="">
         <menu>
             <item
-                android:id="@+id/favorites"
+                android:id="@+id/manageaccount"
                 android:icon="@drawable/ic_favorite_black_24dp"
-                android:title="قائمة المفضلة" />
+                android:title="إدارة حسابي" />
             <item
             android:id="@+id/rate_app"
             android:icon="@drawable/ic_medal"
             android:title="تقييم التطبيق" />
             <item
-                android:id="@+id/compare"
+                android:id="@+id/points"
                 android:icon="@drawable/ic_compare"
-                android:title="مقارنة خدمتين" />
+                android:title="نقاطي" />
 
             <item
                 android:id="@+id/setting"
@@ -56,9 +36,9 @@
                 android:icon="@drawable/ic_help_black_24dp"
                 android:title=" مساعدة" />
             <item
-            android:id="@+id/about"
+            android:id="@+id/callsalon"
             android:icon="@drawable/ic_icons8_about"
-            android:title=" حول" />
+            android:title=" اتصال بصالون" />
 
             <item
                 android:id="@+id/signout"
@@ -68,9 +48,9 @@
 
         </menu>
     </item>
-    <item android:title=""
+    <!--<item android:title=""-->
 
-        >
+        <!--&gt;-->
         <!--<menu >-->
 
             <!--<item-->
@@ -92,6 +72,6 @@
 
         <!--</menu>-->
 
-    </item>
+    <!--</item>-->
 
 </menu>

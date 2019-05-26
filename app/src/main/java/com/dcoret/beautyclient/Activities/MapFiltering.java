@@ -26,7 +26,7 @@ Context context;
         getSupportFragmentManager().beginTransaction().replace(R.id.map,fragment).commit();
         context=this;
 
-        filter=findViewById(R.id.filter);
+//        filter=findViewById(R.id.filter);
 
         filter.setOnClickListener(new View.OnClickListener() {
             @Override

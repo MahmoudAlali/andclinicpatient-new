@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer"
+    tools:context=".Activities.BeautyMainPage">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:layout_gravity="top"-->
+            <!--android:background="@color/end_gray"-->
+            <!--app:navigationIcon="@drawable/ic_menu_wihte_24dp"-->
+            <!--app:popupTheme="@style/AppTheme"-->
+            <!--app:theme="@style/ToolbarColoredBackArrow"-->
+            <!--app:title=""-->
+            <!--app:titleMarginStart="@dimen/standard_175"-->
+            <!--app:titleTextColor="@color/end_gray" />-->
+        <!--android:layout_marginTop="?attr/actionBarSize"-->
+        <LinearLayout
+            android:id="@+id/fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@android:color/white"
+            android:layout_marginBottom="64dp"
+            android:orientation="vertical"></LinearLayout>
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navigation"
+            android:layout_gravity="bottom"
+            tools:ignore="BottomAppBar"
+            android:background="@color/end_gray"
+            app:itemIconTint="@drawable/bottom_nav_selector"
+            app:itemTextColor="@drawable/bottom_nav_selector"
+            app:menu="@menu/service_nav_tabs_menu"
+            ></android.support.design.widget.BottomNavigationView>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/shadow1"
+        app:itemTextColor="#000"
+
+        app:itemIconTint="@color/colorAccent"
+        app:menu="@menu/activity_main__example_drawer">
+        <!--app:headerLayout="@layout/nav_header_main__example"-->
+    </android.support.design.widget.NavigationView>
+
+
+
+
+    <!--<android.support.design.bottomappbar.BottomAppBar-->
+        <!--android:id="@+id/bottom_app_bar"-->
+        <!--style="@style/Widget.MaterialComponents.BottomAppBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--app:actionLayout="@layout/activity_compartion"-->
+        <!--app:backgroundTint="@color/primedark"-->
+        <!--app:fabAlignmentMode="center"-->
+        <!--app:fabCradleRoundedCornerRadius="16dp"-->
+        <!--app:menu="@menu/bar_menu3">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:weightSum="5">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/services"-->
+                <!--android:onClick="service"-->
+                <!--android:layout_weight="1">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1">-->
+                    <!--<ImageButton-->
+                        <!--android:onClick="service"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@android:color/transparent"-->
+                        <!--android:src="@drawable/ic_leaf"-->
+                        <!--android:layout_weight="1">-->
+
+                    <!--</ImageButton>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/service_text"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="الخدمات"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textColor="#fff"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/reservation"-->
+                <!--android:onClick="reservation"-->
+                <!--android:layout_weight="1">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1">-->
+                    <!--<ImageButton-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:onClick="reservation"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@android:color/transparent"-->
+                        <!--android:src="@drawable/ic_booking"-->
+                        <!--android:layout_weight="1">-->
+
+                    <!--</ImageButton>-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/reservation_text"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="حجوزاتي"-->
+                        <!--android:textColor="#fff" />-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1">-->
+
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/offers"-->
+                <!--android:onClick="offers"-->
+                <!--android:layout_weight="1">-->
+                <!--<ImageButton-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:onClick="offers"-->
+                    <!--android:background="@android:color/transparent"-->
+                    <!--android:src="@drawable/ic_discount_white"-->
+                    <!--android:layout_weight="1">-->
+
+                <!--</ImageButton>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/offer_text"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="ابرز العروض"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="#fff"/>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/account"-->
+                <!--android:onClick="account"-->
+                <!--android:layout_weight="1">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_weight="1">-->
+                    <!--<ImageButton-->
+                        <!--android:onClick="account"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="@android:color/transparent"-->
+                        <!--android:src="@drawable/ic_account"-->
+                        <!--android:layout_weight="1">-->
+
+                    <!--</ImageButton>-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/account_text"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="حسابي"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textColor="#fff"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+
+    <!--</android.support.design.bottomappbar.BottomAppBar>-->
+
+
+    <!--<com.github.clans.fab.FloatingActionMenu-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:id="@+id/floatingactionmenu"-->
+    <!--app:menu_showShadow="true"-->
+    <!--app:menu_fab_label=""-->
+    <!--app:menu_openDirection="up"-->
+    <!--app:menu_backgroundColor="@android:color/transparent"-->
+    <!--app:layout_anchor="@id/bottom_app_bar"-->
+    <!---->
+    <!--&gt;-->
+
+
+    <!--</com.github.clans.fab.FloatingActionMenu>-->
+
+
+
+
+
+
+</android.support.v4.widget.DrawerLayout>

@@ -5,56 +5,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
     android:orientation="vertical" >
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
-        android:layout_marginBottom="64dp"
         android:layout_height="match_parent"
 
-        >
-    </android.support.v7.widget.RecyclerView>
+
+        ></android.support.v7.widget.RecyclerView>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="90dp"
-        app:backgroundTint="@color/primedark"
-        app:srcCompat="@drawable/ic_filter_list_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="81dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="40dp"
-        app:fabSize="mini"
-        android:layout_marginBottom="150dp"
-        app:backgroundTint="@color/primedark"
-        app:srcCompat="@drawable/ic_descending_arrangement"
-        tools:ignore="VectorDrawableCompat" />
 
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/primedark"
-        app:itemIconTint="@android:color/darker_gray"
-        app:itemTextColor="#fff"
-        app:menu="@menu/navbarbottom" />
+
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background="@color/primedark"-->
+        <!--app:itemIconTint="@android:color/darker_gray"-->
+        <!--app:itemTextColor="#fff"-->
+        <!--app:menu="@menu/navbarbottom" />-->
     <!--android:layout_margin="@dimen/fab_margin"-->
 </android.support.design.widget.CoordinatorLayout>
 

@@ -1,8 +1,8 @@
 package com.dcoret.beautyclient.Activities;
 
+import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapterTab;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataExample.OffersData;
@@ -86,15 +87,16 @@ public class TabThree extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_two, container, false);
-        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.list);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.list);
+//        BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.navigation);
+//        navigation.setSelectedItemId(R.id.list);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        navigation.setSelectedItemId(R.id.list);
 
 
         recyclerView = view.findViewById(R.id.offers_recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-        recyclerView.setAdapter(new OffersAdapter(MyReservations.context, offers, false,name));
+        recyclerView.setAdapter(new OffersAdapterTab(BeautyMainPage.context, items));
+
 
         return view;
     }
@@ -107,12 +109,12 @@ public class TabThree extends Fragment {
                         case R.id.list:
                             recyclerView = view.findViewById(R.id.offers_recycleview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-                            recyclerView.setAdapter(new OffersAdapter(MyReservations.context, offers, false,name));
+                            recyclerView.setAdapter(new OffersAdapterTab(BeautyMainPage.context, items));
                             return true;
                         case R.id.grid:
                             recyclerView = view.findViewById(R.id.offers_recycleview);
-                            recyclerView.setLayoutManager(new GridLayoutManager(MyReservations.context, 2));
-                            recyclerView.setAdapter(new OffersAdapter(MyReservations.context, offers, true,name));
+                            recyclerView.setLayoutManager(new GridLayoutManager(BeautyMainPage.context, 2));
+                            recyclerView.setAdapter(new OffersAdapterTab(MyReservations.context, offers, true,name));
                             return true;
                     }
 

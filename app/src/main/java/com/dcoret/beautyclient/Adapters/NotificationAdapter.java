@@ -54,7 +54,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Dialog dialog=new Dialog(Offers.context);
+//                ReservationDialog dialog=new ReservationDialog(Offers.context);
 //                dialog.setContentView(R.layout.rating_dialog);
 //                dialog.setTitle("تقييم العرض");
 //                dialog.show();

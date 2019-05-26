@@ -1,6 +1,7 @@
 package com.dcoret.beautyclient.Activities;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -11,9 +12,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.MoreFragment;
@@ -38,7 +43,13 @@ import com.dcoret.beautyclient.Fragments.OfferFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
+import com.dcoret.beautyclient.PayFort.FortRequest;
 import com.dcoret.beautyclient.R;
+import com.google.android.gms.auth.api.credentials.HintRequest;
+import com.payfort.fort.android.sdk.base.FortSdk;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
+import com.payfort.sdk.android.dependancies.base.FortInterfaces;
 import com.paytabs.paytabs_sdk.utils.PaymentParams;
 
 import org.json.JSONObject;
@@ -49,6 +60,7 @@ import java.util.Map;
 public class BeautyMainPage_2 extends AppCompatActivity
 //        implements NavigationView.OnNavigationItemSelectedListener
 {
+
 
    public static Context context;
     Dialog dialog=null ;
@@ -62,15 +74,19 @@ public class BeautyMainPage_2 extends AppCompatActivity
     CoordinatorLayout coor;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beauty_main_page_2);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.end_gray));
+
         Toolbar toolbar=findViewById(R.id.bottom_app_bar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
+        new ReservationDialog("mainpage");
         context=this;
         offers=findViewById(R.id.offers);
         service=findViewById(R.id.services);
@@ -87,15 +103,15 @@ public class BeautyMainPage_2 extends AppCompatActivity
         account_text=findViewById(R.id.account_text);
 
 
-        shopping_cart_text=findViewById(R.id.shopping_cart_text);
-        more_text=findViewById(R.id.more_text);
-        notification_text=findViewById(R.id.notification_text);
-        map_text=findViewById(R.id.map_text);
-
-        shopping_cart_layout=findViewById(R.id.shopping_cart_layout);
-        more_layout=findViewById(R.id.more_layout);
-        notification_layout=findViewById(R.id.notification_layout);
-        map_layout=findViewById(R.id.map_layout);
+//        shopping_cart_text=findViewById(R.id.shopping_cart_text);
+//        more_text=findViewById(R.id.more_text);
+//        notification_text=findViewById(R.id.notification_text);
+//        map_text=findViewById(R.id.map_text);
+//
+//        shopping_cart_layout=findViewById(R.id.shopping_cart_layout);
+//        more_layout=findViewById(R.id.more_layout);
+//        notification_layout=findViewById(R.id.notification_layout);
+//        map_layout=findViewById(R.id.map_layout);
 
         offer_text.setTextColor(Color.MAGENTA);
         service_text.setTextColor(Color.WHITE);
@@ -107,8 +123,6 @@ public class BeautyMainPage_2 extends AppCompatActivity
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
-
-
 
 
 
@@ -148,11 +162,11 @@ public class BeautyMainPage_2 extends AppCompatActivity
         });
 
 
-
-        map = (FloatingActionButton) findViewById(R.id.map);
-        shopping_cart = (FloatingActionButton) findViewById(R.id.shopping_cart);
-        notification = (FloatingActionButton) findViewById(R.id.notification);
-        more = (FloatingActionButton) findViewById(R.id.more);
+//
+//        map = (FloatingActionButton) findViewById(R.id.map);
+//        shopping_cart = (FloatingActionButton) findViewById(R.id.shopping_cart);
+//        notification = (FloatingActionButton) findViewById(R.id.notification);
+//        more = (FloatingActionButton) findViewById(R.id.more);
 
 
 
@@ -224,31 +238,31 @@ public class BeautyMainPage_2 extends AppCompatActivity
 //
 //            }
 //        });
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeFABMenu();
-//                Toast.makeText(context, token_client,Toast.LENGTH_LONG).show();
-//                sendnotification_client("Hello","Test From client to client");
+//        notification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                closeFABMenu();
+////                Toast.makeText(context, token_client,Toast.LENGTH_LONG).show();
+////                sendnotification_client("Hello","Test From client to client");
+////
+////                Intent intent=new Intent(getApplicationContext(),Notification.class);
+////                startActivity(intent);
 //
-//                Intent intent=new Intent(getApplicationContext(),Notification.class);
-//                startActivity(intent);
-
-
-                offer_text.setTextColor(Color.WHITE);
-                service_text.setTextColor(Color.WHITE);
-                reservation_text.setTextColor(Color.WHITE);
-                account_text.setTextColor(Color.WHITE);
-
-                fragment = new NotificationFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commit();
-
-
-            }
-        });
+//
+//                offer_text.setTextColor(Color.WHITE);
+//                service_text.setTextColor(Color.WHITE);
+//                reservation_text.setTextColor(Color.WHITE);
+//                account_text.setTextColor(Color.WHITE);
+//
+//                fragment = new NotificationFragment();
+//                fm = getFragmentManager();
+//                fragmentTransaction = fm.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment, fragment);
+//                fragmentTransaction.commit();
+//
+//
+//            }
+//        });
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -597,7 +611,7 @@ public class BeautyMainPage_2 extends AppCompatActivity
 //            startActivity(intent);
 //
 //        } else if (id == R.id.rate_app) {
-//            Dialog dialog=new Dialog(this);
+//            ReservationDialog dialog=new ReservationDialog(this);
 //            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 //            dialog.setContentView(R.layout.rating_dialog);
 //            dialog.show();
@@ -696,23 +710,46 @@ we will mark the transaction as unsafe
 
 
     // Result for Pay Gateway
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+////        if (resultCode == RESULT_OK && requestCode == PaymentParams.PAYMENT_REQUEST_CODE) {
+////            Log.e("Tag", data.getStringExtra(PaymentParams.RESPONSE_CODE));
+////            Log.e("Tag", data.getStringExtra(PaymentParams.TRANSACTION_ID));
+////            if (data.hasExtra(PaymentParams.TOKEN) && !data.getStringExtra(PaymentParams.TOKEN).isEmpty()) {
+////                Log.e("Tag", data.getStringExtra(PaymentParams.TOKEN));
+////                Log.e("Tag", data.getStringExtra(PaymentParams.CUSTOMER_EMAIL));
+////                Log.e("Tag", data.getStringExtra(PaymentParams.CUSTOMER_PASSWORD));
+////            }
+////        }else {
+////            Log.e("Tag", data.getStringExtra(PaymentParams.RESPONSE_CODE));
+////            Log.e("Tag", data.getStringExtra(PaymentParams.TRANSACTION_ID));
+////        }
+//
+//            super.onActivityResult(requestCode, resultCode, data);
+//            fortCallback.onActivityResult(requestCode,resultCode,data);
+////        }
+//
+//    }
+//
+//
+//    private static FortCallBackManager fortCallback = null;
+//
+//    public static void payfort(){
+//        fortCallback = FortCallback.Factory.create();
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PaymentParams.PAYMENT_REQUEST_CODE) {
-            Log.e("Tag", data.getStringExtra(PaymentParams.RESPONSE_CODE));
-            Log.e("Tag", data.getStringExtra(PaymentParams.TRANSACTION_ID));
-            if (data.hasExtra(PaymentParams.TOKEN) && !data.getStringExtra(PaymentParams.TOKEN).isEmpty()) {
-                Log.e("Tag", data.getStringExtra(PaymentParams.TOKEN));
-                Log.e("Tag", data.getStringExtra(PaymentParams.CUSTOMER_EMAIL));
-                Log.e("Tag", data.getStringExtra(PaymentParams.CUSTOMER_PASSWORD));
-            }
-        }else {
-            Log.e("Tag", data.getStringExtra(PaymentParams.RESPONSE_CODE));
-            Log.e("Tag", data.getStringExtra(PaymentParams.TRANSACTION_ID));
-        }
-    }
+
+
+
+
+
+
+
+
+
+
 
 }
 

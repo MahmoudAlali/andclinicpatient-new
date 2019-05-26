@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
+
 //        setContentView(R.layout.activity_beauty_main_page_2);
         setTitle("تسجيل الدخول");
 
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 if (name.equals("admin") && pass.equals("admin")) {
 //                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(this, BeautyMainPage_2.class);
+                    Intent intent = new Intent(this, BeautyMainPage.class);
                     finish();
                     startActivity(intent);
                 }
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("name",username.getText().toString());
                     editor.putString("pass", password.getText().toString());
                     editor.apply();
-                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage_2.class);
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
                     dialog.cancel();
 
 //                    Toast.makeText(getApplicationContext(),"beauty",Toast.LENGTH_LONG).show();
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(),"fashion",Toast.LENGTH_LONG).show();
 
                     dialog.cancel();
-                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage_2.class);
+                    Intent intent = new Intent(getApplicationContext(), BeautyMainPage.class);
                     finish();
                     startActivity(intent);
                 }
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
    static double latitud,longitud;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public     void getlocation() {
+    public   void getlocation() {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

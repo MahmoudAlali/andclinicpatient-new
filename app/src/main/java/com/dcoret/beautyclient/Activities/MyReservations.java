@@ -20,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.R;
 
 public class MyReservations extends AppCompatActivity {
@@ -48,8 +50,9 @@ public class MyReservations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_reservations);
         context=this;
-//        Window window = getWindow();
-//        window.setStatusBarColor();
+//        ReservationDialog.context_dialog="myreservation";
+        new ReservationDialog("myreservation");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,9 +79,9 @@ public class MyReservations extends AppCompatActivity {
 //            }
 //        });
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar();
+//        getSupportActionBar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,35 +103,28 @@ public class MyReservations extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.bar_menu_compare, menu);
         return true;
     }
-
+    int id ;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+      id= item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }else if(id==R.id.compare){
-            if(ServicesAdapter.comparenum>=2) {
+            if(ServicesAdapterNew.comparenum>=2) {
                 Intent intent = new Intent(getApplicationContext(), Compartion.class);
                 startActivity(intent);
             }else {
-                Toast.makeText(getApplicationContext(),"There no Comparation enugh",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"لطفاً,يرجى اختيار خدمتين على الاقل للمقارنة بينهما",Toast.LENGTH_LONG).show();
 
             }
-        }else if(id==R.id.shoppingcart){
-            Intent intent=new Intent(this,ShoppingCart.class);
-            startActivity(intent);
+        }else if(id==R.id.gridlist){
 
-        }else if(id==R.id.notify){
-            Intent intent=new Intent(this,Notification.class);
-            startActivity(intent);
-        }
-
-
+                    }
         return super.onOptionsItemSelected(item);
     }
 
@@ -136,6 +132,9 @@ public class MyReservations extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     static int section;
+
+
+
     public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -169,11 +168,6 @@ public class MyReservations extends AppCompatActivity {
 
                          rootView = inflater.inflate(R.layout.tab_one, container, false);
                         return rootView;
-
-
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
         }
     }
 
@@ -192,20 +186,16 @@ public class MyReservations extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position==0){
-//                return PlaceholderFragment.newInstance(0);
                 TabOne one=new TabOne();
-
-                return one;
+                return null;
             }else if(position==1) {
                 TabTwo two=new TabTwo();
-                return two;
-
-
+                return null;
             }else if(position==2) {
                 TabThree three=new TabThree();
-                return three;
+                return null;
             }
-return null;
+                return null;
         }
 
         @Override
@@ -214,4 +204,8 @@ return null;
             return 3;
         }
     }
+
+
+
+
 }

@@ -13,34 +13,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/appbar_padding_top"
-        android:background="@color/primedark"
-
+        android:background="@color/end_gray"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@color/primedark"-->
+        <!--app:layout_scrollFlags="scroll|enterAlways"-->
+        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+        <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
+        <!--app:title="الخدمات">-->
+
+        <!--</android.support.v7.widget.Toolbar>-->
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:background="@color/primedark"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
-            app:title="الخدمات">
-
-        </android.support.v7.widget.Toolbar>
-
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="#000"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="فلترة" />
+                android:text="مقدمات الخدمة" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"

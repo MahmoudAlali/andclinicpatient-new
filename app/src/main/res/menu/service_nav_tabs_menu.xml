@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/services"
+        android:icon="@drawable/ic_leaf"
+        android:title="خدمات"
+        />
+
+    <item
+        android:id="@+id/reservations"
+        android:icon="@drawable/ic_booking"
+        android:title="حجوزاتي"
+        />
+    <item
+        android:id="@+id/service_bag"
+        android:icon="@drawable/ic_bag"
+        android:title="حقيبة الخدمات"
+        />
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_favorite_heart_button"
+        android:title="المفضلة"
+        />
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/ic_notifications_wihte_24dp"
+        android:title="الاشعارات"
+        />
+
+</menu>

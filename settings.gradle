@@ -1,1 +1,1 @@
-include ':app', ':paytabs_sdk-v3.0.3'
+include ':app', ':paytabs_sdk-v3.0.3', ':FORTSDKv1.5'

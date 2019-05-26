@@ -5,18 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.ManageAccounts"
+    tools:context=".Fragments.AccountFragment"
     >
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primedark"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
-        app:title="حسابي"
+        app:title=""
         app:titleMarginStart="@dimen/standard_175"
-        app:titleTextColor="#fff" />
+        app:titleTextColor="@color/end_gray" />
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@color/end_gray"-->
+        <!--app:popupTheme="@style/AppTheme"-->
+        <!--app:theme="@style/ToolbarColoredBackArrow"-->
+        <!--app:title="Back"-->
+        <!--app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"-->
+        <!--app:titleTextColor="@color/endblue"-->
+        <!--/>-->
 
     <!--<android.support.design.widget.AppBarLayout-->
     <!--android:layout_width="match_parent"-->
@@ -82,22 +95,147 @@
         <!--app:titleTextColor="#fff"-->
 
 
-        <!--&gt;</android.support.v7.widget.Toolbar>-->
+        <!--&gt;</android.support.v7.wixdget.Toolbar>-->
     <android.support.v4.widget.NestedScrollView
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:clipToPadding="false"
+        android:background="#CCCCCC"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
 
-            <ListView
-                android:id="@+id/list_view"
+            <!--<ListView-->
+                <!--android:id="@+id/list_view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="300dp"></ListView>-->
+            <LinearLayout
+            android:layout_marginTop="@dimen/standard_20"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layoutDirection="rtl"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الاسم: "
+                android:textSize="@dimen/standard_20"
+                android:textStyle="bold"   />
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="300dp"></ListView>
+                android:layout_height="@dimen/high_edit_text"
+                android:background="@drawable/shadow1"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+
+                />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/standard_20"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layoutDirection="rtl"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="البريد: "
+                    android:textSize="@dimen/standard_20"
+                    android:textStyle="bold"   />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:background="@drawable/shadow1"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="name@example.com"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/standard_20"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layoutDirection="rtl"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الهاتف: "
+                    android:textSize="@dimen/standard_20"
+                    android:textStyle="bold"   />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:background="@drawable/shadow1"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+
+                    />
+            </LinearLayout>
+            <Button
+                android:id="@+id/add_del_site"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_blue"
+                android:text="اضافة و حذف عنوان"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/background_dark"
+                ></LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/colorAccent"
+                android:text="العناوين المسجلة"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="@dimen/standard_20"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
+
+                android:background="@android:color/white"
+                android:orientation="horizontal"></com.google.android.gms.maps.MapView>
+            <Button
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_blue"
+                android:text="حفظ بياناتي"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                />
+            <Button
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_blue"
+                android:text="حذف حسابي"
+                android:textColor="#fff"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
 
 
