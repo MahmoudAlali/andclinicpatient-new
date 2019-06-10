@@ -24,9 +24,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.Mapfragment;
 import com.dcoret.beautyclient.Activities.MyProfile;
@@ -68,7 +71,7 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
     String[] array = new String[] {"بروفايلي", "نقاطي", "ايقاف الحساب","حذف الحساب"};
     ListView listView;
     Button add_del_site;
-
+    public static boolean edit_flag;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -77,6 +80,9 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    EditText e_bdb_mobile,e_bdb_name,e_bdb_email,e_pass,e_c_pass,old_pass;
+    Button save;
+    TextView edit;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -85,6 +91,39 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
 
 
 
+        e_bdb_email=view.findViewById(R.id.e_bdb_email);
+        e_bdb_name=view.findViewById(R.id.e_bdb_name);
+        e_bdb_mobile=view.findViewById(R.id.e_bdb_mobile);
+        e_pass=view.findViewById(R.id.pass);
+        e_c_pass=view.findViewById(R.id.c_pass);
+        old_pass=view.findViewById(R.id.old_pass);
+        save=view.findViewById(R.id.save);
+        edit=view.findViewById(R.id.edit);
+//        e_pass.setText("1234");
+//        e_c_pass.setText("1234");
+
+        old_pass.setEnabled(false);
+        e_c_pass.setEnabled(false);
+        e_pass.setEnabled(false);
+        old_pass.setText("123456");
+        e_c_pass.setText("123456");
+        e_pass.setText("123456");
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                old_pass.setText("");
+                e_c_pass.setText("");
+                e_pass.setText("");
+                old_pass.setEnabled(true);
+                e_c_pass.setEnabled(true);
+                e_pass.setEnabled(true);
+                edit_flag=true;
+            }
+        });
+
+
+
+        APICall.detailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",e_bdb_name,e_bdb_email,e_bdb_mobile,null,BeautyMainPage.context);
         BeautyMainPage.FRAGMENT_NAME="";
         BeautyMainPage.FRAGMENT_NAME="ACCOUNTFRAGMENT";
         add_del_site=view.findViewById(R.id.add_del_site);
@@ -97,29 +136,12 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
-//                Intent intent=new Intent(BeautyMainPage.context, GoogleMapBeauty.class);
-//                startActivity(intent);
             }
         });
 //        mMapView = (MapView) view.findViewById(R.id.map);
 //
         Log.d("fargmentname",BeautyMainPage.FRAGMENT_NAME);
-//        mMapView.onCreate(savedInstanceState);
-//        getlocation();
-//        mMapView.onResume(); // needed to get the map to display immediately
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    MapsInitializer.initialize(getActivity().getApplicationContext());
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }).start();
 
-//        addFragment(new MapFragment(),false,"map");
         mMapView = view.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // needed to get the map to display immediately
@@ -130,80 +152,21 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
             e.printStackTrace();
         }
 
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, array);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (position == 0) {
-//                    Intent intent = new Intent(getActivity().getApplicationContext(), MyProfile.class);
-//                    startActivity(intent);
-////                    Toast.makeText(getApplicationContext(), parent.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-//                } else if (position == 1) {
-//                    Intent intent = new Intent(getActivity().getApplicationContext(), Point.class);
-//                    startActivity(intent);
-////                    Toast.makeText(getApplicationContext(), parent.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-//
-//                }
-//            }
-//        });
-//        mMapView.getMapAsync(new OnMapReadyCallback() {
-//            @Override
-//            public void onMapReady(GoogleMapBeauty mMap) {
-//
-//
-//                googleMap = mMap;
-//
-//                // For showing a move to my location button
-//                if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//                googleMap.setMyLocationEnabled(true);
-//
-//                // For dropping a marker at a point on the Map
-//                LatLng sydney;
-//                Geocoder geo;
-//                sydney = new LatLng( locations[0].getLatitude(), locations[0].getLongtude());
-//                geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
-//                List<Address> addresses =new ArrayList<>();
-//                try {
-//                    addresses = geo.getFromLocation(latitud, longitud, 1);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                try {
-//                    try {
-//                        addresses = geo.getFromLocation(locations[0].getLatitude(), locations[0].getLongtude(), 1);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
-//                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
-//                }catch (Exception e){
-//                    Toast.makeText(getActivity().getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG).show();
-//                }
-//
-//                // For zooming automatically to the location of the marker
-//                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-//                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//            }
-//        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (e_pass.getText().toString().equals(e_c_pass.getText().toString())){
+                    APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),e_pass.getText().toString(),old_pass.getText().toString(),BeautyMainPage.context);
+                }else {
+                    APICall.showSweetDialog(BeautyMainPage.context,"عذراً","كلمة السر غير متطابقة الرجاء التأكد");
+                }
 
+            }
+        });
         ((BeautyMainPage) getActivity()).setOnBackPressedListener(this);
         return view;
     }
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mMapView.onResume();
-//    }
+
 
     @Override
     public void onPause() {
@@ -236,8 +199,8 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public     void getlocation() {
+         @RequiresApi(api = Build.VERSION_CODES.M)
+         public    void getlocation() {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().LOCATION_SERVICE);
@@ -247,9 +210,6 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
             public void onLocationChanged(Location location) {
                 latitud=location.getLatitude();
                 longitud=location.getLongitude();
-//                        Toast.makeText(getApplicationContext()
-//                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
-//                    register.setText(location.getLatitude()+" : "+location.getLongitude());
 
             }
 
@@ -279,30 +239,13 @@ public class AccountFragment extends Fragment implements BeautyMainPage.OnBackPr
                     Manifest.permission.INTERNET
 
             },10);
-//                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
-//                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
         configure();
     }
-//    public void addFragment(Fragment fragment, boolean addToBackStack, String tag) {
-//        FragmentManager manager = getActivity().getFragmentManager();
-//        FragmentTransaction ft = manager.beginTransaction();
-//
-//        if (addToBackStack) {
-//            ft.addToBackStack(tag);
-//        }
-//        ft.replace(R.id.map, fragment, tag);
-//        ft.commitAllowingStateLoss();
+
 //    }
 
     @Override

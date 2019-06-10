@@ -4,7 +4,7 @@
     android:layout_height="200dp"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/shadow_prime"
+    android:background="@drawable/shadow_button"
     android:weightSum="4">
 
     <LinearLayout

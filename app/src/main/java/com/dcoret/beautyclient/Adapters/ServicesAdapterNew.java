@@ -31,6 +31,7 @@ import com.dcoret.beautyclient.Activities.MyReservations;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.Activities.ServiceDetails;
 import com.dcoret.beautyclient.AddReservation;
+import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
@@ -63,11 +64,16 @@ public class ServicesAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHo
     boolean[] fav;
     ArrayList<DataService> dataServices;
     ArrayList<DataService> favDataServices=new ArrayList<>();
-
+    ArrayList<BrowseServiceItem> itemArrayList;
 
     public ServicesAdapterNew(Context context,String[] items){
         this.context=context;
         this.items=items;
+    }
+    public ServicesAdapterNew(Context context,ArrayList<BrowseServiceItem> itemArrayList,int layout){
+        this.context=context;
+        this.itemArrayList=itemArrayList;
+        this.layout=layout;
     }
 
     public ServicesAdapterNew(Context context,String[] items,Boolean list,int layout){
@@ -105,11 +111,11 @@ public class ServicesAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.fav=fav;
 
     }
-    public ServicesAdapterNew(Context context, ArrayList<DataService> dataServices){
-        this.context=context;
-        this.dataServices=dataServices;
-
-    }
+//    public ServicesAdapterNew(Context context, ArrayList<DataService> dataServices){
+//        this.context=context;
+//        this.dataServices=dataServices;
+//
+//    }
 
 
     /**
@@ -378,13 +384,8 @@ public class ServicesAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        try {
-            return items.length;
 
-        }catch (Exception e){
-            return dataServices.size();
-
-        }
+            return itemArrayList.size();
     }
 
     /**

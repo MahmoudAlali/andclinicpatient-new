@@ -51,10 +51,11 @@ public class SplashScreen extends AppCompatActivity {
 
                     name = prefs.getString("name", null);
                     pass = prefs.getString("pass", null);
-                    if (name.equals("admin") && pass.equals("admin")) {
+//                    Log.d("name",name);
+                    if (!name.isEmpty()) {
 //                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(context, BeautyMainPage.class);
+                        Intent intent = new Intent(context, Offers.class);
                         finish();
                         startActivity(intent);
                     } else {
@@ -66,6 +67,7 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
+                    Log.d("name","null");
                     Intent intent = new Intent(context, MainActivity.class);
                     finish();
                     startActivity(intent);

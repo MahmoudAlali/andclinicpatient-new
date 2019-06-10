@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".Activities.MapFiltering">
+    tools:context=".Activities.MapFiltering"
+    >
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,102 +18,125 @@
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:title=""
+        app:titleTextColor="@color/end_gray"
+        />
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/nscrolview"-->
+        <!--android:layout_marginTop="?attr/actionBarSize"-->
+        <!--android:layout_height="match_parent">-->
 
-        app:titleTextColor="@color/end_gray" />
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
+
+
+    <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Spinner
+
+            android:id="@+id/location_title"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <LinearLayout
-                android:orientation="horizontal"
+            android:layout_height="wrap_content"></Spinner>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <EditText
+                android:id="@+id/search_map"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:weightSum="4">
-                <EditText
-                    android:id="@+id/search_map"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shadow_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:hint="ابحثي عن عنوان او منطقة"
-                    android:gravity="center"
-                    />
-                <Button
-                    android:id="@+id/search_map_btn"
-                    android:textColor="#fff"
-                    android:text="بحث"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/shadow_edit_text"
+                android:gravity="center"
+                android:hint="ابحثي عن عنوان او منطقة" />
 
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="3"
-                    android:background="@drawable/shadow_button_blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
+            <Button
+                android:id="@+id/search_map_btn"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="match_parent">
-                <com.google.android.gms.maps.MapView
-                    android:orientation="vertical"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="500dp">
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
 
-                </com.google.android.gms.maps.MapView>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:orientation="vertical"
-                    >
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_button"
-                        android:background="@drawable/shadow_button_add_site"
-                        android:layout_marginBottom="5dp"
-                        android:text="اضافة"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_button"
-                        android:background="@drawable/shadow_button_blue"
-                        android:text="اضافة موقع"
-                        />
-                </LinearLayout>
-
-
-            </LinearLayout>
+                android:layout_weight="3"
+                android:background="@drawable/shadow_button_blue"
+                android:gravity="center"
+                android:text="بحث"
+                android:textColor="#fff" />
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:weightSum="7">
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/filter"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_marginBottom="32dp"-->
-        <!--android:layout_marginRight="15dp"-->
-        <!--app:backgroundTint="@color/primedark"-->
-        <!--android:src="@drawable/ic_filter_list_black_24dp"-->
-        <!--/>-->
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical"></com.google.android.gms.maps.MapView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_weight="6"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/add_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_button"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shadow_button_add_site"
+                    android:text="اضافة" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/del_loc"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_button"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shadow_button_blue"
+                        android:text="حذف موقع" />
+
+                    <Button
+                        android:id="@+id/edit_loc"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_button"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shadow_button_blue"
+                        android:text="تعديل موقع" />
 
 
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

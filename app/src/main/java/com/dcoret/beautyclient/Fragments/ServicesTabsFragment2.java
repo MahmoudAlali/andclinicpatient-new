@@ -240,7 +240,7 @@ public class ServicesTabsFragment2 extends Fragment
             Intent intent=new Intent(BeautyMainPage.context,Notification.class);
             startActivity(intent);
         }else if(id==R.id.gridlist){
-            TabOne.gridlistitems();
+//            TabOne.gridlistitems();
             if (ServicesAdapterNew.list)
             menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_grid_on_black_24dp));
             else

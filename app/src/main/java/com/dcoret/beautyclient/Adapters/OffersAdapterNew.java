@@ -11,14 +11,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.Activities.OfferDetails;
+import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.DataClass.DataOffer;
+import com.dcoret.beautyclient.DataClass.ServiceItem;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -28,10 +33,15 @@ public class OffersAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
     String items[];
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
+    ArrayList<ServiceItem> serviceItems;
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
     public OffersAdapterNew(Context context, String items[]){
         this.context=context;
         this.items=items;
+    }
+    public OffersAdapterNew(Context context, ArrayList<ServiceItem> serviceItems){
+        this.context=context;
+        this.serviceItems=serviceItems;
     }
     public OffersAdapterNew(Context context, String items[], boolean grid){
         this.context=context;
@@ -51,16 +61,19 @@ public class OffersAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
+    JSONObject object;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(context);
             View row;
+
+//        object=APICall.browseclass(Offers.context);
+
         if(grid==false) {
-//             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
              row = inflater.inflate(R.layout.offers_layout_last, parent, false);
         }else {
-//             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
              row = inflater.inflate(R.layout.offers_layout_last, parent, false);
         }
 
@@ -84,18 +97,9 @@ public class OffersAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View v) {
 
                     try {
-//                    if (name.equals(Offers.name)) {
-//                        Intent intent = new Intent(context, BrideServicesSelecting.class);
-//                        intent.putExtra("offer_name", offers[position].getName());
-//                        context.startActivity(intent);
-//                        Log.d("Offers","ok");
-//                    } else {
                         Intent intent = new Intent(context, OfferDetails.class);
                         intent.putExtra("offer_name", offers.get(position).getName());
                         context.startActivity(intent);
-//                        Log.d("Offers","ok2");
-
-//                    }
                     } catch (Exception e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -138,18 +142,8 @@ public class OffersAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
 
 
-//        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReservationDialog dialog=new ReservationDialog(Offers.context);
-//                dialog.setContentView(R.layout.rating_dialog);
-//                dialog.setTitle("تقييم العرض");
-//                dialog.show();
-//
-//            }
-//        });
         }catch (Exception e){
-            e.printStackTrace();
+//        Toast.makeText(context,e.getMessage()+"",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -157,7 +151,7 @@ public class OffersAdapterNew extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         try {
 //            Log.d("Offersize",offers.size()+"");
-            return items.length;
+            return serviceItems.size();
 
         }catch (Exception e){
             e.getMessage();
