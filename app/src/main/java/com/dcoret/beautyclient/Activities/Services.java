@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapter1;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
@@ -50,7 +50,7 @@ public class Services extends AppCompatActivity {
         recyclerView=findViewById(R.id.service_re_view);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ServicesAdapter(getApplicationContext(),items,prices,rank,city,locations,fav));
+        recyclerView.setAdapter(new ServicesAdapter1(getApplicationContext(),items,prices,rank,city,locations,fav));
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

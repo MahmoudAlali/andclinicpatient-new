@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="130dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shadow_button"
+        android:layout_height="@dimen/standard_50"
+        android:text="@string/refresh"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

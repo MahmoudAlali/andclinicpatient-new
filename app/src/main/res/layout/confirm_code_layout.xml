@@ -44,7 +44,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/shadow_edit_text"
             android:gravity="center"
-            android:hint="code" />
+            android:hint="@string/Code" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="2dp"
                 android:gravity="center"
-                android:text="تأكيد"
+                android:text="@string/ConfirmAlert"
                 android:textColor="@color/endblue"
                 android:textSize="15dp" />
 
@@ -80,7 +80,7 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="5dp"
                 android:gravity="center"
-                android:text="إعادة ارسال الرمز"
+                android:text="@string/ResendCode"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="15dp" />
         </LinearLayout>

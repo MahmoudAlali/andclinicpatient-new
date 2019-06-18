@@ -8,7 +8,7 @@
     android:orientation="vertical"
 
     android:weightSum="6"
-    tools:context=".Activities.MainActivity">
+    tools:context=".Activities.Login">
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:layout_width="match_parent"-->
         <!--app:titleTextColor="#fff"-->
@@ -60,7 +60,7 @@
             android:background="@drawable/shadow_edit_text"
             android:gravity="center"
             android:elevation="5dp"
-            android:hint="رقم الهاتف /اسم المستخدم" />
+            android:hint="@string/usernamehint" />
 
         <EditText
             android:id="@+id/password"
@@ -73,7 +73,7 @@
             android:background="@drawable/shadow_edit_text"
             android:gravity="center"
             android:elevation="5dp"
-            android:hint="كلمة السر"
+            android:hint="@string/passwordhint"
             android:inputType="textPersonName" />
 
         <Button
@@ -85,7 +85,7 @@
             android:layout_marginBottom="10dp"
             android:onClick="login"
             android:elevation="5dp"
-            android:text="تسجيل الدخول"
+            android:text="@string/signin"
             android:textColor="@color/endblue"
       />
 
@@ -97,7 +97,7 @@
             android:layout_marginBottom="10dp"
             android:onClick="forgetpass"
             android:background="@drawable/shadow_button"
-            android:text=" نسيتي كلمة السر الخاصة بك"
+            android:text="@string/forgetmypas"
             android:textAllCaps="false"
             android:elevation="5dp"
             android:textColor="@color/endblue"
@@ -111,7 +111,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:textColor="@color/endblue"
-            android:text="لتصفح التطبيق"
+            android:text="@string/enterasaguset"
             android:background="@drawable/shadow_button"
             android:textAllCaps="false"
             android:elevation="5dp"
@@ -128,7 +128,7 @@
             android:onClick="register"
             android:elevation="5dp"
             android:textColor="@android:color/white"
-            android:text="إنشاء حساب" />
+            android:text="@string/signupText" />
 
     </LinearLayout>
 

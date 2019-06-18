@@ -112,7 +112,7 @@ public class ShopCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
 
-//        ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+//        ((OffersAdapter1.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                try {

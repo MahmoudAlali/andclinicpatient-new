@@ -20,7 +20,7 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.Activities.ExtraServices;
 import com.dcoret.beautyclient.Activities.Favorites;
 import com.dcoret.beautyclient.Activities.Help;
-import com.dcoret.beautyclient.Activities.MainActivity;
+import com.dcoret.beautyclient.Activities.Login;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.Activities.Setting;
 
@@ -55,7 +55,6 @@ ListView listView;
                     intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
                     intent.putExtra(Intent.EXTRA_TEXT,sharebody);
                     startActivity(Intent.createChooser(intent,"Share using"));
-
                 } else if (position == 5) {
                     Intent intent=new Intent(getActivity().getApplicationContext(), Help.class);
                     startActivity(intent);
@@ -77,8 +76,8 @@ ListView listView;
                                     editor.remove("name"); // will delete key name
                                     editor.remove("pass"); // will delete key pass
                                     editor.commit();
-                                    Intent intent=new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                                    MainActivity.logout=true;
+                                    Intent intent=new Intent(getActivity().getApplicationContext(), Login.class);
+                                    Login.logout=true;
                                     getActivity().finish();
 
                                     startActivity(intent);

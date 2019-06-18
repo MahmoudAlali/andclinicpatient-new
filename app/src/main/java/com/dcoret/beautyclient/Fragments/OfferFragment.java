@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dcoret.beautyclient.Adapters.OffersAdapter1;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.Adapters.OffersAdapter;
-import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ ArrayList<DataOffer> offers= new ArrayList<>();
         recyclerView= view.findViewById(R.id.review);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 //        recyclerView.setAdapter(new ReservationAdapter(getApplicationContext(),items));
-        recyclerView.setAdapter(new OffersAdapter(getActivity().getApplicationContext(),offers,false,name));
+        recyclerView.setAdapter(new OffersAdapter1(getActivity().getApplicationContext(),offers,false,name));
 
 
         return view;

@@ -5,16 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@color/end_gray"-->
-        <!--app:popupTheme="@style/AppTheme"-->
-        <!--app:theme="@style/ToolbarColoredBackArrow"-->
-        <!--app:navigationIcon="@drawable/ic_menu_wihte_24dp"-->
-        <!--app:titleMarginStart="@dimen/standard_175"-->
-        <!--app:titleTextColor="#fff" />-->
 
     <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"

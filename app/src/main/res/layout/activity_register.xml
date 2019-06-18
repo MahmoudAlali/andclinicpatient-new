@@ -30,7 +30,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="الاسم(اختياري)" />
+        android:hint="@string/UserNameTextField" />
 
     <!--<EditText-->
         <!--android:id="@+id/editText5"-->
@@ -55,7 +55,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="رقم الهاتف" />
+        android:hint="@string/MobileNumberTextField" />
 
     <EditText
         android:id="@+id/email"
@@ -67,7 +67,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
-        android:hint="البريد الالكتروني(اختياري)" />
+        android:hint="@string/EmailAddressTextField" />
 
     <Spinner
         android:id="@+id/gender_spinner"
@@ -98,7 +98,7 @@
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:gravity="center"
-        android:hint="كلمة السر" />
+        android:hint="@string/PasswordTextField" />
 
 
     <EditText
@@ -113,13 +113,13 @@
         android:ems="10"
         android:inputType="textPassword"
         android:gravity="center"
-        android:hint="تأكيد كلمة السر" />
+        android:hint="@string/ConfirmPasswordTextField" />
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="السماح لـ (اسم التطبيق) بالوصول لموقعك أثناء الاستخدام"
+        android:text="@string/AccessYourLocationCheckBox"
         android:gravity="center"
         android:id="@+id/show_map"
         android:textColor="@color/primedark"
@@ -158,9 +158,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:text="الموافقة على سياسة التطبيق وبيان الخصوصية"
+        android:text="@string/PolicyCheckBox"
         android:textColor="@color/primedark"
-        android:textSize="18sp" />
+        android:textSize="14dp" />
 
     <Button
         android:id="@+id/button2"
@@ -173,7 +173,7 @@
         android:background="@drawable/shadow_button_blue"
         android:elevation="5dp"
         android:onClick="registerAction"
-        android:text="موافق"
+        android:text="@string/OkButtnTitle"
         android:textColor="@android:color/white" />
 </LinearLayout>
 

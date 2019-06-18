@@ -41,21 +41,6 @@
                 android:textSize="15dp" />
         </android.support.design.widget.CoordinatorLayout>
 
-
-
-
-        <!--<EditText-->
-            <!--android:id="@+id/code"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/high_edit_text"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:background="@drawable/shadow_edit_text"-->
-            <!--android:layout_marginRight="5dp"-->
-            <!--android:hint="code"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_gravity="center"/>-->
         <LinearLayout
             android:layout_weight="2"
             android:gravity="bottom"

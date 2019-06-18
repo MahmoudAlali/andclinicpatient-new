@@ -1,18 +1,15 @@
 package com.dcoret.beautyclient.Activities;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,18 +20,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,17 +37,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Adapters.OffersAdapterNew;
-import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
-import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
-import com.dcoret.beautyclient.Fragments.OfferFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
-import com.dcoret.beautyclient.Fragments.ServicesTabsFragment2;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 
 import org.json.JSONException;
@@ -68,39 +55,37 @@ import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Headers;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
-public class BeautyMainPage extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-
-
+public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static NavigationView navigationView;
     public static String FRAGMENT_NAME="";
     LinearLayout layout;
     View view;
     Toolbar toolbar;
-    DrawerLayout mDrawerLayout;
+    public  static DrawerLayout mDrawerLayout;
+//    NavigationView navigationView;
     ActionBarDrawerToggle mToggle;
     public static Context context;
     BottomNavigationView navigation;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services_tabs_layout);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
         context=this;
         navigation=findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.services);
+        layout=findViewById(R.id.fragment);
+
+
+
 
         fragment = new ServiceFragment();
         fm = getFragmentManager();
@@ -111,25 +96,17 @@ public class BeautyMainPage extends AppCompatActivity
 
 
         mDrawerLayout=findViewById(R.id.drawer);
+        mDrawerLayout.setLayoutDirection(View.LAYOUT_DIRECTION_INHERIT);
         mToggle=new ActionBarDrawerToggle(BeautyMainPage.this,mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-//    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//        navigationView.setForegroundGravity(Gravity.NO_GRAVITY);
-//        }
-//    });
     }
 
     /*
     * ACCOUNTFRAGMENT
     * MAPFRAGMENT
-    *
     * SERVICETABFRAGMENT
     * COMPAREFRAGMENT
     * */
@@ -138,7 +115,7 @@ public class BeautyMainPage extends AppCompatActivity
     @Override
     public void onBackPressed() {
             if (FRAGMENT_NAME.equals("MAPFRAGMENT")) {
-            Log.d("doback",2+"");
+//            Log.d("doback",2+"");
             doback=0;
             fragment = new AccountFragment();
             fm = getFragmentManager();
@@ -147,7 +124,6 @@ public class BeautyMainPage extends AppCompatActivity
             fragmentTransaction.commit();
                 FRAGMENT_NAME="";
             }else if (FRAGMENT_NAME.equals("ACCOUNTFRAGMENT")){
-            Log.d("doback",1+"");
             FRAGMENT_NAME="";
             fragment = new ServiceFragment();
             fm = getFragmentManager();
@@ -163,7 +139,7 @@ public class BeautyMainPage extends AppCompatActivity
                 fragmentTransaction.commit();
                 FRAGMENT_NAME="";
             }else if (FRAGMENT_NAME.equals("COMPAREFRAGMENT")){
-                fragment = new ServicesTabsFragment2();
+                fragment = new ServicesTabsFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -191,7 +167,7 @@ public class BeautyMainPage extends AppCompatActivity
                     .setMessage("هل تريد الخروج من التطبيق؟")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            BeautyMainPage.super.onBackPressed();
+                            System.exit(0);
                         }
                     }).setNegativeButton(android.R.string.no,null);
 
@@ -204,46 +180,31 @@ public class BeautyMainPage extends AppCompatActivity
         }
     }
     }
-//      public static   Menu menu;
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.bar_menu2, menu);
-//        this.menu=menu;
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-//            PopupMenu popup = new PopupMenu(this,toolbar );
-//            popup.getMenuInflater().inflate(R.menu.bar_menu3, popup.getMenu());
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
 //
-//            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                public boolean onMenuItemClick(MenuItem item) {
-//                    Toast.makeText(getApplicationContext(), "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-//                    return true;
-//                }
-//            });
-//            popup.show();//showing popup menu
-            return true;
-        }else if(id==R.id.shoppingcart){
-            Intent intent=new Intent(this,ShoppingCart.class);
-            startActivity(intent);
-
-
-        }else if(id==R.id.notify){
-            Intent intent=new Intent(this,Notification.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }else if(id==R.id.shoppingcart){
+//            Intent intent=new Intent(this,ShoppingCart.class);
+//            startActivity(intent);
+//        }else if(id==R.id.notify){
+//            Intent intent=new Intent(this,Notification.class);
+//            startActivity(intent);
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -258,16 +219,10 @@ public class BeautyMainPage extends AppCompatActivity
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commit();
-
-
-
         }else if (id == R.id.compare) {
-
             Intent intent=new Intent(getApplicationContext(),Compartion.class);
             startActivity(intent);
-
         } else if (id == R.id.nav_manage) {
-
          } else if (id == R.id.help) {
             Intent intent=new Intent(getApplicationContext(),Help.class);
             startActivity(intent);
@@ -297,31 +252,16 @@ public class BeautyMainPage extends AppCompatActivity
                 public void onClick(View v) {
 //                    sendrating((int)ratingBar.getRating());
                     dialog.cancel();
-//                    serviceBrowse(context,"1");
-//                    APICall.okHttpServiceBrowse(context,"1");
+                    APICall.rateApp(ratingBar.getRating()+"","http://clientapp.dcoret.com/api/rating/rateApp",BeautyMainPage.context);
+//                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse","en","4","1"
+//                            ,"6","4","0"
+//                            ,"34","36.47792","0"
+//                            ,"35","36.23389","0"
+//                            ,"2","10000","0"
+//                            ,BeautyMainPage.context);
 
-//                    APICall.rateApp(ratingBar.getRating()+"","http://clientapp.dcoret.com/api/rating/rateApp",BeautyMainPage.context);
-
-//                    test
-//            APICall.deleteAccount("http://clientapp.dcoret.com/api/auth/user/deleteAccount",BeautyMainPage.context);
-            // http://clientapp.dcoret.com/api/auth/user/deleteAccount
-//                    APICall.detailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",BeautyMainPage.context);
-//                    APICall.addAddress("http://clientapp.dcoret.com/api/auth/user/addAddress","7","43.89598895","35.99999","home",BeautyMainPage.context);
-//                    APICall.updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress","7","43.89598895","35.99999","home",BeautyMainPage.context);
-                    APICall.unfav("http://clientapp.dcoret.com/api/auth/user/addFav","2","10",BeautyMainPage.context);
-//                    APICall.unfav("http://clientapp.dcoret.com/api/auth/user/unFav","2","10",BeautyMainPage.context);
-                APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
-
-                    try {
-                        postRequest();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-//            new BrowseService().execute("1");
-//           APICall.getData(context,"http://clientapp.dcoret.com/api/service/browseService",null,"1");
                 }
             });
-
 
             dialog.show();
         }else if (id == R.id.signout) {
@@ -333,107 +273,17 @@ public class BeautyMainPage extends AppCompatActivity
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             APICall.logout("http://clientapp.dcoret.com/api/auth/user/logout",BeautyMainPage.context);
-
-
-
                         }
                     })
-
                     // A null listener allows the button to dismiss the dialog and take no further action.
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    ProgressDialog pd;
-    String data;
-    private void sendrating(final int rating) {
-            try {
-                RequestQueue requestQueue = Volley.newRequestQueue(this);
-                String URL = "http://clientapp.dcoret.com/api/rating/rateApp";
-
-                JSONObject jsonBody = new JSONObject();
-
-                jsonBody.put("bdb_rate",rating);
-//                jsonBody.put("password", pass);
-                pd= new ProgressDialog(BeautyMainPage.this);
-                pd.setMessage("جار التحقق");
-                pd.show();
-                JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("Token",response.toString());
-                        data=response.toString();
-                        pd.dismiss();
-                        Toast.makeText(BeautyMainPage.context,"شكراً لك, تقييمك لنا يسهم في تطورنا.",Toast.LENGTH_SHORT).show();
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error :",error.toString());
-                        data=error.toString();
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Response:  " + data, Toast.LENGTH_SHORT).show();
-
-//                    onBackPressed();
-
-                    }
-                }) {
-
-                    @Override
-                    public String getBodyContentType() {
-
-                        return "application/json; charset=utf-8";
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        final Map<String, String> headers = new HashMap<>();
-                        String accesstoken="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQyZmZlN2Q5NmYzNzM4OWRhZDNjMDllMDk5NGQwZDY4ODdmNGI0YzMxMzlmYjZhOTE1MTc5NWIwMzVmYTE5MDBhODI0NzI3NThmYTM2MDFhIn0.eyJhdWQiOiIxIiwianRpIjoiNDJmZmU3ZDk2ZjM3Mzg5ZGFkM2MwOWUwOTk0ZDBkNjg4N2Y0YjRjMzEzOWZiNmE5MTUxNzk1YjAzNWZhMTkwMGE4MjQ3Mjc1OGZhMzYwMWEiLCJpYXQiOjE1NTgyOTY3ODEsIm5iZiI6MTU1ODI5Njc4MSwiZXhwIjoxNTg5OTE5MTgxLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MG04uKIgEjPHwU_bo3ai_f1oGhOJdk0DQr5_KFQYKAZOj5EUM7ZVi08JnefgSB9R9rPAE3VcZaIBCGJ2OrjI0zO3K7PQZEQ2m-gmdsMye4sMGL2LeRrm6aHOKpJDY_jdpJMgFgbOL3oFh9XbVxbha0f0ofhOhiSl4oIfZ8-G7VzWZPuwA1dIt1QfgqjfWBSpWd9JPe7s3PrwrcUcXIF8qObjl6MqWQ3I33I8g2-Vc9O7b356_21Un_XP6lYbZMN4VWKUifqYiO2t509M6RjUovDI_cd9a30EHB7hTdIkmxHP2JKudwHbHil7cEkel7UQAvfJrbcapm60Jb8fucWoAtedtuPpxYEgxAZ0HqZNi5ynPoO1VIygHOiYvI8iNzNwkRMJ5quV4PIK4SaGArZs6Nd5Pz9vXKc-apWo2WzDZ9R1KQg0y3LNNRyMPmGjVN_8u3QixbomiXuPoOAsKuZzzCsRZMdQ2sug0nlm69BiCSbq3Zn40gmIqTXAhG1AIcm2WqgCqi9SKWyWOBc8Tv2NnnccH_FCkUCPCa54ZRMsMGrkycG6oV1wYQkpBKF1lS0yx2NCX0RJGFLEATkMKRX1wdKOgjmyALtk5IBsN9KOr6rBl4sWEQb0zsVgzaTdHqex4j0a03jtsbq8RplKJeY5SbJOUv-o8EC6gjMbJzCa5ik";
-
-                        headers.put("Authorization", "Bearer " + accesstoken);
-//                        headers.put("Authorization",
-                        headers.put("Content-Type", "application/json");
-//                        headers.put("X-Requested-With", "XMLHttpRequest");
-                        return headers;
-                    }
-
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<String, String>();
-                        params.put("bdb_rate", rating+"");
-//                        params.put("password", pass);
-                        return params;
-                    }
-
-
-                };
-                Log.d("Request", jsonOblect.getBody().toString());
-                Log.d("Request", jsonOblect.getUrl());
-                Log.d("Request", jsonOblect.getBodyContentType());
-                requestQueue.add(jsonOblect);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                pd.dismiss();
-
-            }
-            // Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
-
-
-
-
-
-    }
-
-
-
-
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -487,33 +337,11 @@ public class BeautyMainPage extends AppCompatActivity
                     return false;
                 }
             };
-    protected OnBackPressedListener onBackPressedListener;
-    public static int dobacknumber;
-    public interface OnBackPressedListener {
-        int doBack();
-    }
-    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
-        this.onBackPressedListener = onBackPressedListener;
-    }
 
 
 
-    protected OnBackPressedListener2 onBackPressedListener2;
-    public interface OnBackPressedListener2 {
-        int doBack();
-    }
-    public void setOnBackPressedListener2(OnBackPressedListener2 onBackPressedListener) {
-        this.onBackPressedListener2 = onBackPressedListener2;
-    }
-
-
-
-    @Override
-    protected void onDestroy() {
-        onBackPressedListener = null;
-        super.onDestroy();
-    }
-JSONObject object;
+    //-------- not used---------------
+    JSONObject object;
     public  JSONObject serviceBrowse(final Context context, final String bdb_ser_id){
         SharedPreferences sharedPreferences=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
         final String  token=sharedPreferences.getString("token",null);
@@ -586,6 +414,8 @@ JSONObject object;
         return null;
     }
         String mMessage="";
+
+    //-------- not used-------------
     public String postRequest() throws IOException {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         String url = "http://clientapp.dcoret.com/api/service/browseService";

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/price"
+        android:title="السعر"/>
+
+    <item
+        android:id="@+id/rate_service"
+        android:title="تقييم الخدمة"/>
+
+    <item
+        android:id="@+id/rate_provoder"
+        android:title="تقييم المزودة"/>
+    <item
+        android:id="@+id/far"
+        android:title="البعد"/>
+    <item
+        android:id="@+id/salon_name_provider"
+        android:title="الصالون و اسم المزودة"/>
+    <item
+        android:id="@+id/place_service"
+        android:title="مكان الخدمة"/>
+</menu>

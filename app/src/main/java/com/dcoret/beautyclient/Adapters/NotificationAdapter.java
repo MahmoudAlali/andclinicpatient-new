@@ -39,7 +39,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((NotificationAdapter.Item)holder).textView.setText(items[position]);
-//        ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+//        ((OffersAdapter1.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                try {

@@ -12,10 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapter1;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -95,7 +94,7 @@ ArrayList<DataOffer> offers= new ArrayList<>();
 
         recyclerView = view.findViewById(R.id.offers_recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(Offers.context));
-        recyclerView.setAdapter(new OffersAdapter(Offers.context, offers, false,name));
+        recyclerView.setAdapter(new OffersAdapter1(Offers.context, offers, false,name));
 
         return view;
     }
@@ -108,12 +107,12 @@ ArrayList<DataOffer> offers= new ArrayList<>();
                         case R.id.list:
                             recyclerView = view.findViewById(R.id.offers_recycleview);
                             recyclerView.setLayoutManager(new LinearLayoutManager(Offers.context));
-                            recyclerView.setAdapter(new OffersAdapter(Offers.context, offers, false,name));
+                            recyclerView.setAdapter(new OffersAdapter1(Offers.context, offers, false,name));
                             return true;
                         case R.id.grid:
                             recyclerView = view.findViewById(R.id.offers_recycleview);
                             recyclerView.setLayoutManager(new GridLayoutManager(Offers.context, 2));
-                            recyclerView.setAdapter(new OffersAdapter(Offers.context, offers, true,name));
+                            recyclerView.setAdapter(new OffersAdapter1(Offers.context, offers, true,name));
                             return true;
                     }
 

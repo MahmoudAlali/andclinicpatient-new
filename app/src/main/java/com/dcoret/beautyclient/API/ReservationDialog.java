@@ -99,7 +99,7 @@ public class ReservationDialog {
                 dialog1.cancel();
 //                   try{
                 Toast.makeText(context.getApplicationContext(),
-//                               ((ServicesAdapter.Item) holder).textView.getText().toString()+"   "+
+//                               ((ServicesAdapter1.Item) holder).textView.getText().toString()+"   "+
                         date, Toast.LENGTH_LONG).show();
 
 

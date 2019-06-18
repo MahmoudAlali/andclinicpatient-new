@@ -11,16 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.R;
 
 public class CompareFragment extends Fragment  {
-LinearLayout services_tabs;
-LinearLayout bride_service,service_hair;
+
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
@@ -35,15 +32,13 @@ LinearLayout bride_service,service_hair;
             @Override
             public void onClick(View v) {
 //                tabselected(servicetab,offertab,maptab);
-                fragment = new ServicesTabsFragment2();
+                fragment = new ServicesTabsFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
             }
         });
-
-
                 return view;
     }
 

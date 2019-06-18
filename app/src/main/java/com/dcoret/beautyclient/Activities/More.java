@@ -70,8 +70,8 @@ Context context;
                                     editor.remove("name"); // will delete key name
                                     editor.remove("pass"); // will delete key pass
                                     editor.commit();
-                                    Intent intent=new Intent(context,MainActivity.class);
-                                    MainActivity.logout=true;
+                                    Intent intent=new Intent(context, Login.class);
+                                    Login.logout=true;
                                     finish();
 
                                     startActivity(intent);

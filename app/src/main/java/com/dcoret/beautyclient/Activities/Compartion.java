@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.R;
 
 public class Compartion extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,7 +39,7 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
 //        therd_col=findViewById(R.id.therd_col_serv);
 //        service_comperation=findViewById(R.id.service_compare);
 //        therd_serv=findViewById(R.id.therd_serv_compare);
-//        if(ServicesAdapter.comparenum==2) {
+//        if(ServicesAdapter1.comparenum==2) {
 //            service_comperation.setWeightSum(3);
 //            therd_col.setVisibility(View.GONE);
 //        }else {

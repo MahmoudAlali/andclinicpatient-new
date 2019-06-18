@@ -3,28 +3,28 @@
     <item
         android:id="@+id/services"
         android:icon="@drawable/ic_leaf"
-        android:title="خدمات"
+        android:title="@string/service"
         />
 
     <item
         android:id="@+id/reservations"
         android:icon="@drawable/ic_booking"
-        android:title="حجوزاتي"
+        android:title="@string/reservations"
         />
     <item
         android:id="@+id/service_bag"
         android:icon="@drawable/ic_bag"
-        android:title="حقيبة الخدمات"
+        android:title="@string/bag_reservation"
         />
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_favorite_heart_button"
-        android:title="المفضلة"
+        android:title="@string/favorites"
         />
     <item
         android:id="@+id/notification"
         android:icon="@drawable/ic_notifications_wihte_24dp"
-        android:title="الاشعارات"
+        android:title="@string/notification"
         />
 
 </menu>

@@ -57,8 +57,8 @@ public class SearchAdapter   extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((OffersAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
-        ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+        ((OffersAdapter1.Item)holder).textView.setText(dataServices.get(position).getName());
+        ((OffersAdapter1.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {

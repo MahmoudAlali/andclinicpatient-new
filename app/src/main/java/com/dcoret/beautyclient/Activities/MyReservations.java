@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
-import com.dcoret.beautyclient.Adapters.ServicesAdapterNew;
 import com.dcoret.beautyclient.R;
 
 public class MyReservations extends AppCompatActivity {
@@ -115,7 +114,7 @@ public class MyReservations extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }else if(id==R.id.compare){
-            if(ServicesAdapterNew.comparenum>=2) {
+            if(ServicesAdapter.comparenum>=2) {
                 Intent intent = new Intent(getApplicationContext(), Compartion.class);
                 startActivity(intent);
             }else {
@@ -189,10 +188,10 @@ public class MyReservations extends AppCompatActivity {
                 TabOne one=new TabOne();
                 return null;
             }else if(position==1) {
-                TabTwo two=new TabTwo();
+                TabThree two=new TabThree();
                 return null;
             }else if(position==2) {
-                TabThree three=new TabThree();
+                TabTwo three=new TabTwo();
                 return null;
             }
                 return null;

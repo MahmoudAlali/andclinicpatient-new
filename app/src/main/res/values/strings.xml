@@ -1,21 +1,139 @@
 <resources>
     <string name="app_name">BeautyClient</string>
-    <string name="title_activity_my_reservations">MyReservations</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="title_activity_my_reservations" translatable="false">MyReservations</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="tab_text_3" translatable="false">Tab 3</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="title_activity_my_resrvation">MyResrvation</string>
-    <string name="title_activity_my_reservation">MyReservation</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_exampleee_just">Exampleee_just</string>
+    <string name="title_activity_my_resrvation" translatable="false">MyResrvation</string>
+    <string name="title_activity_my_reservation" translatable="false">MyReservation</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_exampleee_just" translatable="false">Exampleee_just</string>
+
+
+
+
+    <string name="signin">SignIn</string>
+    <string name="forgetmypas">For get my password</string>
+    <string name="enterasaguset">Enter as a guest</string>
+    <string name="usernamehint">Enter your Mobile Number</string>
+    <string name="passwordhint">Password</string>
+    <string name="EnterActivationCode">Enter Activation Code</string>
+    <string name="signupText">Signup</string>
+
+
+    <string name="nice">Nice</string>
+    <string name="Null"> </string>
+    <string name="WrongMobNumberAlert">Please enter a valid mobile number</string>
+    <string name="WrongPass">Wrong Password</string>
+    <string name="EntermobnumberAlert">Please enter your mobile number</string>
+    <string name="EnterPassAlert">Please enter your password</string>
+    <string name="EnterActivationCodeAlert">Please enter the activation code</string>
+    <string name="ActivationCodeMustBeFourDigistAlert">Activation code must be four digist</string>
+    <string name="CheckInternetConnectionAlert">Please check your internet connection</string>
+    <string name="SomethingWentWrongAlert">Something went wrong, please try again</string>
+    <string name="MobNumberActivatedAlert">Your mobile number has been activated, you can now sign in</string>
+    <string name="InputCodeWrongAlert">The input code is wrong, please try again</string>
+    <string name="ResendCodeAlert">Resend Code</string>
+    <string name="VerificationCodeSentAlert">Verification code was sent to your phone, please enter the code</string>
+    <string name="CancelAlert">Cancel</string>
+    <string name="MobNoNotRegisteredAlert">Mobile number not registered, please register</string>
+    <string name="PsswordIncorrectAlert">Password incorrect, please try again</string>
+    <string name="MobNoIncorrectAlert">Mobile number incorrect, please try again</string>
+    <string name="ReSendActivationCodeAlert">Your mobile number has not been activated, the activation code has been sent to
+    your mobile phone, please enter it</string>
+    <string name="ChangeLnaguageMessage">You can change application language at any time from settings inside the
+    application</string>
+    <string name="ok">Ok</string>
+    <string name="SentPasswordAlert">Please enter your sent password</string>
+    <string name="SuccessResetPasswordAlert">You can now sign in using your new password</string>
+    <string name="UserNameTextField">User name (Optional)</string>
+    <string name="MobileNumberTextField">Mobile number</string>
+    <string name="EmailAddressTextField">Email address (Optional)</string>
+    <string name="PasswordTextField">Password</string>
+    <string name="ConfirmPasswordTextField">Confirm Password</string>
+    <string name="CityButtonTitle">Choose city name</string>
+    <string name="AccessYourLocationCheckBox">The application would like to use your location</string>
+    <string name="PolicyCheckBox">I agree to the Application Name Agreement and privacy</string>
+    <string name="OkButtnTitle">Ok</string>
+    <string name="buttnPicturePosition">0</string>
+    <string name="NavigationBackButton">Back</string>
+    <string name="ConfirmAlert">Ok</string>
+    <string name="PasswordNotMatchAlert">Password does not match</string>
+    <string name="ExuseMeAlert">ExcuseMe!</string>
+    <string name="EnterMobAndPass">Enter Mobile Number and Password</string>
+    <string name="ApplicationPolicyAlert">The application policy must first be approved</string>
+    <string name="MobEmailTakenAlert">Mobile number and email address are already taken, please try another</string>
+    <string name="MobTakenAlert">Mobile number is already taken, please try another</string>
+    <string name="EmailTakenAlert">Email address is already taken, please try another</string>
+    <string name="InvalidEmail">This email address is invalid, please rewrite it</string>
+    <string name="InvalidPassword">Password length must be 6, Password must contain one uppercase letter, at least one number
+    and at least one letter of lowercase</string>
+    <string name="SendNewPass">New Password was sent to your phone</string>
+    <string name="numberNotActivatedAlert">This Number is already registered,Please activate it by entering the verification code</string>
+    <string name="EnterVerificationCode">Please Enter Verification Code</string>
+    <string name="ResendCode">Resend Code</string>
+    <string name="Code">Code</string>
+    <string name="Direction">ltr</string>
+
+    <!--account fragment -->
+    <string name="name">name:</string>
+    <string name="phone">phone:</string>
+    <string name="Email">Email:</string>
+    <string name="password">Password</string>
+    <string name="edit">edit</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="add_delete_location">Add and Delete Location</string>
+    <string name="Registered_Addresses">Registered Addresses</string>
+    <string name="save">Save</string>
+    <string name="Delete_account">Delete My Account</string>
+    <!-- Nav Bottom-->
+    <string name="service">Services</string>
+    <string name="reservations">Reservations</string>
+    <string name="bag_reservation">Bag Reservations</string>
+    <string name="favorites">Favorites</string>
+    <string name="notification">Notification</string>
+
+    <!--  toast rate app-->
+    <string name="rate_toast">Your assessment of us contributes to our development, thank you</string>
+    <!-- nav drawer-->
+    <string name="manage_account">Manage Account</string>
+    <string name="rate_app">Rate Application</string>
+    <string name="points">My Points</string>
+    <string name="setting">Setting</string>
+    <string name="share_app">Share Application</string>
+    <string name="help">Help</string>
+    <string name="call_salon">Call Salon</string>
+    <string name="sigin_out">Sigin out</string>
+    <string name="check_internet_con">Please check internet connection</string>
+    <string name="refresh">Refresh</string>
+
+
+    <string name="ClickonmapAlert">Please Click on the Map To select the desired location </string>
+    <string name="Recievedrequest">We Received your order,Will reply within 30 minutes</string>
+    <string name="EnterNumberofCustomers">Please, Enter Number Of Customers</string>
+    <string name="Backicon">@drawable/ic_keyboard_arrow_left_black_24dp</string>
+
+
+
+
+
+
+
+
+
+
+
+
     <string-array name="gender">
         <item>الجنس</item>
         <item>ذكر</item>
@@ -44,7 +162,7 @@
 
     </string-array>
     <string-array name="cities">
-        <item>اسم المدينة</item>
+        <item>City Name</item>
         <item>الرياض</item>
         <item>مكة</item>
         <item>المدينة المنورة</item>

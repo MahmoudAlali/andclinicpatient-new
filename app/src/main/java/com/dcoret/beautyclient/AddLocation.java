@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.Activities.Register;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
@@ -66,7 +67,7 @@ public class AddLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_location);
 
-        showSweetDialog(AddLocation.this,"تنبيه!","يرجى النقر على الخريطة للحصول على المكان المطلوب");
+       APICall.showSweetDialog(AddLocation.this,R.string.ExuseMeAlert,R.string.ClickonmapAlert);
 
 
         mMapView = (MapView) findViewById(R.id.map1);
@@ -86,23 +87,10 @@ public class AddLocation extends AppCompatActivity {
             }
         }).start();
 
-//        googleMap.setOnMapClickListener(new GoogleMapBeauty.OnMapClickListener() {
-//            @Override
-//            public void onMapClick(LatLng point) {
-////                allPoints.add(point);
-//                googleMap.clear();
-//                googleMap.addMarker(new MarkerOptions().position(point));
-//            }
-//        });
-
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
-
-
                 googleMap = mMap;
-
                 // For showing a move to my location button
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -142,19 +130,6 @@ public class AddLocation extends AppCompatActivity {
 //                for (int i=1;i<items.length-2;i++){
                     sydney = new LatLng( locations[0].getLatitude(),  locations[0].getLongtude());
                     geo = new Geocoder(getApplicationContext(), Locale.getDefault());
-//                    try {
-//                        addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    try {
-//                        googleMap.addMarker(new MarkerOptions().position(sydney).title(items[i]).snippet("Test From Beauty Client Google Maps"));
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
-//                    }catch (Exception e){
-//
-//                    }
-//                }
-
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
@@ -167,67 +142,15 @@ public class AddLocation extends AppCompatActivity {
 
     }
 
-
-    void showSweetDialog(final Context context, String texttitle, String textmessage){
-            final Dialog dialog = new Dialog(context);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.setContentView(R.layout.sweet_dialog_layout);
-            TextView message = dialog.findViewById(R.id.message);
-            TextView title = dialog.findViewById(R.id.title);
-            TextView confirm = dialog.findViewById(R.id.confirm);
-//                TextView resend_code = dialog.findViewById(R.id.resend_code);
-            title.setText(texttitle);
-            message.setText(textmessage);
-            confirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                }
-            });
-            dialog.show();
-        }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mMapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mMapView.onLowMemory();
-    }
-
-    static double latit;
-    static double longit;
-
-    static Location location1;
     static double latitud,longitud;
     @SuppressLint("MissingPermission")
     void configure(){
-//        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public     void getlocation() {
-//        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
-//        startActivity(intent);
+    public  void getlocation() {
         locationManager = (LocationManager) getApplicationContext().getSystemService(getApplicationContext().LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
@@ -235,10 +158,6 @@ public class AddLocation extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 latitud=location.getLatitude();
                 longitud=location.getLongitude();
-//                        Toast.makeText(getApplicationContext()
-//                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
-//                    register.setText(location.getLatitude()+" : "+location.getLongitude());
-
             }
 
             @Override
@@ -267,22 +186,9 @@ public class AddLocation extends AppCompatActivity {
                     Manifest.permission.INTERNET
 
             },10);
-//                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-
-//                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
         configure();
     }
-
-
-
 }

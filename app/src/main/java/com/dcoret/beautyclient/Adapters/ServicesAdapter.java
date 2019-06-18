@@ -3,38 +3,29 @@ package com.dcoret.beautyclient.Adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.Offers;
+import com.dcoret.beautyclient.AddReservation;
+import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
-import com.dcoret.beautyclient.Activities.Favorites;
-import com.dcoret.beautyclient.Activities.MyReservations;
-import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.Reservation;
-import com.dcoret.beautyclient.Service.PushNotifications;
-import com.dcoret.beautyclient.Activities.ServiceDetails;
 
 import org.json.JSONObject;
 
@@ -45,28 +36,49 @@ import java.util.Map;
 /**
  * This class show me the items of the services in recycle view \n
  *hhhhhhhhhhh
- * @see android.support.v7.widget.RecyclerView.Adapter
+ * @see RecyclerView.Adapter
  * @author Mahmoud Alali
  */
 public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     TextView canceltime,canceldate,okdate,oktime;
 
     Context context;
-    String items[];
+    public static boolean list;
+//    String items[];
+    static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
+
     String[] price;
     String[] rank;
     String[] cities;
+    int layout;
     Location_Beauty[] location_beauties;
     boolean[] fav;
     ArrayList<DataService> dataServices;
     ArrayList<DataService> favDataServices=new ArrayList<>();
+    ArrayList<BrowseServiceItem> itemArrayList;
 
+    public ServicesAdapter(Context context, String[] items){
+        this.context=context;
+        this.items=items;
+    }
+    public ServicesAdapter(Context context, ArrayList<BrowseServiceItem> itemArrayList, int layout){
+        this.context=context;
+        this.itemArrayList=itemArrayList;
+        this.layout=layout;
+    }
+
+    public ServicesAdapter(Context context, String[] items, Boolean list, int layout){
+        this.context=context;
+        this.items=items;
+        this.list=list;
+        this.layout=layout;
+    }
     /**
      * @param context
      * @param items
      */
-    public ServicesAdapter(Context context,String items[],String[] price,String[] rank,String[] cities,Location_Beauty[] location_beauties , boolean []fav){
-        this.context=BeautyMainPage.context;
+    public ServicesAdapter(Context context, String items[], String[] price, String[] rank, String[] cities, Location_Beauty[] location_beauties , boolean []fav){
+        this.context=context;
         this.items=items;
         this.price=price;
         this.rank=rank;
@@ -79,7 +91,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     boolean grid ;
-    public ServicesAdapter(Context context,String items[],String[] price,String[] rank,String[] cities,Location_Beauty[] location_beauties,boolean grid,boolean[] fav){
+    public ServicesAdapter(Context context, String items[], String[] price, String[] rank, String[] cities, Location_Beauty[] location_beauties, boolean grid, boolean[] fav){
         this.context=context;
         this.items=items;
         this.price=price;
@@ -90,11 +102,11 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.fav=fav;
 
     }
-    public ServicesAdapter(Context context, String[] items){
-        this.context=context;
-        this.items=items;
-
-    }
+//    public ServicesAdapter(Context context, ArrayList<DataService> dataServices){
+//        this.context=context;
+//        this.dataServices=dataServices;
+//
+//    }
 
 
     /**
@@ -106,13 +118,13 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(context);
+        LayoutInflater inflater=LayoutInflater.from(context.getApplicationContext());
         View row;
-        if(grid==false) {
-             row = inflater.inflate(R.layout.service_layout_last, parent, false);
-        } else {
-          row = inflater.inflate(R.layout.service_layout_last, parent, false);
-        }
+//        if(grid==false) {
+             row = inflater.inflate(layout, parent, false);
+//        } else {
+//          row = inflater.inflate(R.layout.service_layout_last, parent, false);
+//        }
         ServicesAdapter.Item item=new ServicesAdapter.Item(row);
         return item;
     }
@@ -129,8 +141,29 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-//        try {
-//            ((ServicesAdapter.Item)holder).textView.setText(items[position]);
+        try {
+            ((Item)holder).service_name.setText(items[position]);
+            ((Item) holder).service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        comparenum+=1;
+                    }else {
+                        comparenum-=1;
+                    }
+                }
+            });
+
+
+            ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(BeautyMainPage.context, AddReservation.class);
+                    context.startActivity(intent);
+                }
+            });
+
+
 //            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
 //            ((Item) holder).pro_name.setText(dataServices.get(position).getProvider_name());
 //            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
@@ -145,7 +178,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //
 //                ));
 //                fav[position]=true;            }
-//        }catch (Exception e){
+        }catch (Exception e){
+            e.printStackTrace();
 //            ((ServicesAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
 //            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
 //            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
@@ -168,16 +202,16 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                intent.putExtra("price",((Item) holder).price.getText().toString());
 ////                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
 //                context.startActivity(intent);
-//            }
+            }
 //        });
 //
 //            try {
-//                ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (((Item) holder).compare.isActivated()) {
-//                            comparenum--;
-//                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
+////                ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View v) {
+////                        if (((Item) holder).compare.isActivated()) {
+////                            comparenum--;
+////                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
 //                            ((Item) holder).compare.setTextColor(Color.WHITE);
 //                            ((Item) holder).compare.setActivated(false);
 //                        } else if (((Item) holder).compare.isActivated() == false && comparenum < 3) {
@@ -242,13 +276,13 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        }
 //
 //       try {
-//             dialog = new Dialog(BeautyMainPage.context);
-//             dialog1 = new Dialog(BeautyMainPage.context);
+//             dialog = new Dialog(MyReservations.context);
+//             dialog1 = new Dialog(MyReservations.context);
 //
 //       }catch (Exception e){
-//            e.printStackTrace();
-////           dialog = new Dialog(Offers.context);
-////           dialog1 = new Dialog(Offers.context);
+//
+//           dialog = new Dialog(Offers.context);
+//           dialog1 = new Dialog(Offers.context);
 //       }
 //
 //        dialog.setContentView(R.layout.dialog_calender);
@@ -266,67 +300,69 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //        public void onClick(View v) {
 //
 //            try {
-//                ReservationDialog.dateDialog(BeautyMainPage.context,((Item) holder).textView.getText().toString(),"s");
+//                ReservationDialog.dateDialog(MyReservations.context,((Item) holder).textView.getText().toString(),"s");
 //            }catch (Exception e){
-//                ReservationDialog.dateDialog(BeautyMainPage.context,((Item) holder).textView.getText().toString(),"s");
+//                ReservationDialog.dateDialog(Offers.context,((Item) holder).textView.getText().toString(),"s");
 //            }
-//
-////            dialog.show();
-////            canceldate.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    dialog.cancel();
-////                }
-////            });
-////            canceltime.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    dialog1.cancel();
-////                }
-////            });
-////            okdate.setOnClickListener(new View.OnClickListener() {
-////                @Override
-////                public void onClick(View v) {
-////                    date=datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+" - ";
-////                    dialog.cancel();
-////                    dialog1.show();
-////                }
-////            });
-////            oktime.setOnClickListener(new View.OnClickListener() {
-////                @RequiresApi(api = Build.VERSION_CODES.M)
-////                @Override
-////                public void onClick(View v) {
-////                    date=date+timePicker.getHour()+":"+timePicker.getMinute()+"";
-////                    dialog1.cancel();
-////                    try{
-////                        Toast.makeText(context.getApplicationContext(),((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
-////                        ShoppingCartFragment.dataServices.add(new DataService(0
-////                                ,items[position]
-////                                ,Double.parseDouble(price[position])
-////                                ,Double.parseDouble(rank[position])
-////                                ,false
-////                                ,false
-////                        ));
-////                        Reservation.services.add(new DataService(0
-////                                ,items[position]
-////                                ,Double.parseDouble(price[position])
-////                                ,Double.parseDouble(rank[position])
-////                                ,false
-////                                ,false
-////                        ));
-////                        //----------notification for reserve service
-//
-////                    }catch (Exception e){
-////                        e.printStackTrace();
-//
-//
-////                    }
-//
+
+//            dialog.show();
+//            canceldate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog.cancel();
+//                }
+//            });
+//            canceltime.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog1.cancel();
+//                }
+//            });
+//            okdate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    date=datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+" - ";
+//                    dialog.cancel();
+//                    dialog1.show();
+//                }
+//            });
+//            oktime.setOnClickListener(new View.OnClickListener() {
+//                @RequiresApi(api = Build.VERSION_CODES.M)
+//                @Override
+//                public void onClick(View v) {
+//                    date=date+timePicker.getHour()+":"+timePicker.getMinute()+"";
+//                    dialog1.cancel();
+//                    try{
+//                        Toast.makeText(context.getApplicationContext(),((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
+//                        ShoppingCartFragment.dataServices.add(new DataService(0
+//                                ,items[position]
+//                                ,Double.parseDouble(price[position])
+//                                ,Double.parseDouble(rank[position])
+//                                ,false
+//                                ,false
+//                        ));
+//                        Reservation.services.add(new DataService(0
+//                                ,items[position]
+//                                ,Double.parseDouble(price[position])
+//                                ,Double.parseDouble(rank[position])
+//                                ,false
+//                                ,false
+//                        ));
+//                        //----------notification for reserve service
+
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+
+
+//                    }
+
 //
 //                }
 //            });
 //
+////        }
 //
+////    });
 //
 //        }catch (Exception e)
 //        {
@@ -337,31 +373,22 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
 
-
-
-
-
-
-
     @Override
     public int getItemCount() {
-        try {
-            return items.length;
-
-        }catch (Exception e){
-            return dataServices.size();
-
-        }
+//        Log.e("ELementSize",itemArrayList.size()+"");
+            return itemArrayList.size();
     }
 
     /**
-     * @see android.support.v7.widget.RecyclerView.ViewHolder
+     * @see RecyclerView.ViewHolder
      */
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView favorites, textView,price,rank,resrv_btn;
+        TextView  service_name,service_price;
         TextView pro_name;
-        CheckBox compare;
+        RatingBar service_rate;
+        ImageView service_add,service_fav;
+        CheckBox service_compare;
         LinearLayout service_details;
 
         /**
@@ -370,15 +397,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public Item(View itemView) {
             super(itemView);
 
-            textView=itemView.findViewById(R.id.rname);
-            price=itemView.findViewById(R.id.price);
-            rank=itemView.findViewById(R.id.rank);
-            resrv_btn=itemView.findViewById(R.id.reserv_btn);
+            service_name=itemView.findViewById(R.id.service_name);
+            service_price=itemView.findViewById(R.id.service_price);
+            service_add=itemView.findViewById(R.id.service_add);
+            service_rate=itemView.findViewById(R.id.service_rate);
             pro_name=itemView.findViewById(R.id.pro_name);
 //            more_btn=itemView.findViewById(R.id.more_btn);
-            compare=itemView.findViewById(R.id.compare);
-            service_details=itemView.findViewById(R.id.service_details);
-            favorites=itemView.findViewById(R.id.favorites_star);
+            service_compare=itemView.findViewById(R.id.service_compare);
+//            service_details=itemView.findViewById(R.id.service_details);
+            service_fav=itemView.findViewById(R.id.service_fav);
 
         }
     }

@@ -20,11 +20,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.Activities.Register;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
-import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
+
 
 public class AddReservation extends AppCompatActivity
        {
@@ -32,12 +33,10 @@ public class AddReservation extends AppCompatActivity
     Fragment fragment;
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-           Spinner servicePlace;
-
-           LinearLayout myRoot;
-           EditText numreservation;
-
-           Spinner spinner1,spinner2;
+    Spinner servicePlace;
+    LinearLayout myRoot;
+    EditText numreservation;
+    Spinner spinner1,spinner2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +58,6 @@ public class AddReservation extends AppCompatActivity
         });
 
 
-
-
-
     servicePlace.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -78,23 +74,40 @@ public class AddReservation extends AppCompatActivity
     });
 
     }
-
-
-
     public void selectDateAndTime(View view) {
         Intent intent=new Intent(this,ResevationDate.class);
         startActivity(intent);
     }
+   @Override
+   public void onBackPressed() {
+       super.onBackPressed();
+   }
+   public void addreservation(View view) {
+       myRoot.removeAllViews();
+       View child = getLayoutInflater().inflate(R.layout.layout_name_reservation_and_age_and_employee, null);
+       LinearLayout a = new LinearLayout(this);
+       spinner1=child.findViewById(R.id.agespinner);
+       ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(this,R.array.age,android.R.layout.simple_spinner_item);
+       adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+       spinner1.setAdapter(adapter1);
 
-           @Override
-           public void onBackPressed() {
-               super.onBackPressed();
-           }
+       spinner2=child.findViewById(R.id.employeespinner);
+       ArrayAdapter<CharSequence> adapter2=ArrayAdapter.createFromResource(this,R.array.employee,android.R.layout.simple_spinner_item);
+       adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+       spinner2.setAdapter(adapter2);
 
-           public void addreservation(View view) {
-               myRoot.removeAllViews();
-               View child = getLayoutInflater().inflate(R.layout.layout_name_reservation_and_age_and_employee, null);
-               LinearLayout a = new LinearLayout(this);
+       a.setOrientation(LinearLayout.VERTICAL);
+       a.addView(child);
+       myRoot.addView(a);
+   }
+   public void addMultiReservation(View view) {
+
+       if (numreservation.getText().toString().isEmpty()){
+          APICall.showSweetDialog(AddReservation.this,R.string.ExuseMeAlert,R.string.EnterNumberofCustomers);
+       }else {
+           myRoot.removeAllViews();
+           for (int i = 0; i < Integer.parseInt(numreservation.getText().toString()); i++) {
+               View child = LayoutInflater.from(this).inflate(R.layout.layout_name_reservation_and_age_and_employee,myRoot, false);
                spinner1=child.findViewById(R.id.agespinner);
                ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(this,R.array.age,android.R.layout.simple_spinner_item);
                adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -105,62 +118,17 @@ public class AddReservation extends AppCompatActivity
                adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                spinner2.setAdapter(adapter2);
 
+               LinearLayout a = new LinearLayout(this);
                a.setOrientation(LinearLayout.VERTICAL);
                a.addView(child);
                myRoot.addView(a);
            }
-
-           public void addMultiReservation(View view) {
-
-               if (numreservation.getText().toString().isEmpty()){
-                    showSweetDialog(AddReservation.this,"لطفا!ً","الرجاء إدخال عدد الاشخاص");
-               }else {
-                   myRoot.removeAllViews();
-                   for (int i = 0; i < Integer.parseInt(numreservation.getText().toString()); i++) {
-                       View child = LayoutInflater.from(this).inflate(R.layout.layout_name_reservation_and_age_and_employee,myRoot, false);
-                       spinner1=child.findViewById(R.id.agespinner);
-                       ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(this,R.array.age,android.R.layout.simple_spinner_item);
-                       adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                       spinner1.setAdapter(adapter1);
-
-                       spinner2=child.findViewById(R.id.employeespinner);
-                       ArrayAdapter<CharSequence> adapter2=ArrayAdapter.createFromResource(this,R.array.employee,android.R.layout.simple_spinner_item);
-                       adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-                       spinner2.setAdapter(adapter2);
-
-                       LinearLayout a = new LinearLayout(this);
-                       a.setOrientation(LinearLayout.VERTICAL);
-                       a.addView(child);
-                       myRoot.addView(a);
-                   }
-               }
-
-    }
-
-
-           void showSweetDialog(final Context context, String texttitle, String textmessage){
-
-                   final Dialog dialog = new Dialog(context);
-                   dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                   dialog.setContentView(R.layout.sweet_dialog_layout);
-                   TextView message = dialog.findViewById(R.id.message);
-                   TextView title = dialog.findViewById(R.id.title);
-                   TextView confirm = dialog.findViewById(R.id.confirm);
-//                TextView resend_code = dialog.findViewById(R.id.resend_code);
-                   title.setText(texttitle);
-                   message.setText(textmessage);
-                   confirm.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           dialog.cancel();
-                       }
-                   });
-                   dialog.show();
-               }
-
-
-           public void addtoshoppingcart(View view) {
-            showSweetDialog(AddReservation.this,"","  استقبلنا طلبك, سيتم الرد خلال 30 دقيقة");
-
-    }
        }
+
+}
+   public void addtoshoppingcart(View view) {
+        // We Received your request,Will reply within 30 minutes
+   APICall.showSweetDialog(AddReservation.this,R.string.Null,R.string.Recievedrequest);
+
+}
+}

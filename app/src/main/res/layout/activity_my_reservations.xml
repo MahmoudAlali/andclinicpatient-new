@@ -34,7 +34,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
         android:background="@color/end_gray"
-        app:navigationIcon="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:navigationIcon="@string/Backicon"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:title=""

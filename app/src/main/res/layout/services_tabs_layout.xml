@@ -8,43 +8,38 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer"
     tools:context=".Activities.BeautyMainPage">
-    <android.support.design.widget.CoordinatorLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="9"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:layout_gravity="top"-->
-            <!--android:background="@color/end_gray"-->
-            <!--app:navigationIcon="@drawable/ic_menu_wihte_24dp"-->
-            <!--app:popupTheme="@style/AppTheme"-->
-            <!--app:theme="@style/ToolbarColoredBackArrow"-->
-            <!--app:title=""-->
-            <!--app:titleMarginStart="@dimen/standard_175"-->
-            <!--app:titleTextColor="@color/end_gray" />-->
-        <!--android:layout_marginTop="?attr/actionBarSize"-->
         <LinearLayout
+            android:layout_weight="1"
             android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="@android:color/white"
             android:layout_marginBottom="64dp"
             android:orientation="vertical"></LinearLayout>
-        <android.support.design.widget.BottomNavigationView
+        <LinearLayout
+            android:layout_weight="8"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/navigation"
-            android:layout_gravity="bottom"
-            tools:ignore="BottomAppBar"
-            android:background="@color/end_gray"
-            app:itemIconTint="@drawable/bottom_nav_selector"
-            app:itemTextColor="@drawable/bottom_nav_selector"
-            app:menu="@menu/service_nav_tabs_menu"
-            ></android.support.design.widget.BottomNavigationView>
-    </android.support.design.widget.CoordinatorLayout>
+            android:layout_height="match_parent">
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:id="@+id/navigation"
+                android:layout_gravity="bottom"
+                tools:ignore="BottomAppBar"
+                android:background="@color/end_gray"
+                app:itemIconTint="@drawable/bottom_nav_selector"
+                app:itemTextColor="@drawable/bottom_nav_selector"
+                app:menu="@menu/service_nav_tabs_menu"
+                ></android.support.design.widget.BottomNavigationView>
+
+        </LinearLayout>
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

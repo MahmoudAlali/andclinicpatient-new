@@ -26,7 +26,6 @@ public class PushNotifications {
 
 
    public static void sendnotification_provider(Context context,String token_provider,String title,String body ,String action1,String action2) {
-
         try{
             RequestQueue queue = Volley.newRequestQueue(context);
             String url = "https://fcm.googleapis.com/fcm/send";
