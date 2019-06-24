@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/one"
-        android:title="حجوزاتي في انتظار التأكيد"/>
+        android:title="@string/MyReservationsPendingConfirmation"/>
 
     <item
         android:id="@+id/two"
-        android:title="حجوزاتي مدفوعة العربون"/>
+        android:title="@string/MyReservationArePaidOut"/>
 
     <item
         android:id="@+id/three"
-        android:title="حجوزاتي المؤكدة"/>
+        android:title="@string/MyConfirmedReservation"/>
     <item
         android:id="@+id/four"
-        android:title="حجوزاتي السابقة"/>
+        android:title="@string/MyPreviousReservation"/>
     <item
         android:id="@+id/five"
-        android:title="حجوزاتي الملغاة"/>
+        android:title="@string/MyCanceledReservation"/>
 
 </menu>

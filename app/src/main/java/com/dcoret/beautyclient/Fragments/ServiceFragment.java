@@ -38,7 +38,7 @@ public class ServiceFragment extends Fragment {
         service_hair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragment = new ServicesTabsFragment();
+                fragment = new PlaceServiceFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);

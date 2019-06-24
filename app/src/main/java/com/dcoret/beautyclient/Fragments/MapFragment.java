@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -52,7 +53,7 @@ import java.util.List;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
-    ArrayList<String> arrayList=new ArrayList<>();
+    public  static ArrayList<String> arrayList=new ArrayList<>();
 
     MapView map;
     TextView search_map;
@@ -62,6 +63,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap mMap;
     int i;
     Spinner location_titles;
+    static int del_Flag=0;
+    static int edit_Flag=0;
 
 
     @Override
@@ -75,10 +78,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         del_loc = view.findViewById(R.id.del_loc);
         location_titles=view.findViewById(R.id.location_title);
 
-
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationTitles);
         ArrayAdapter<String> karant_adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
         karant_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         location_titles.setAdapter(karant_adapter);
+
+        location_titles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for (int i=0;i<locationTitles.size();i++){
+                    Log.e("mapCamera",location_titles.getSelectedItem().toString());
+                    if(location_titles.getSelectedItem().toString().equals(locationTitles.get(i).getTitle())){
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
+                            Log.e("mapCamera","ok");
+                        }
+                    }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         map.onCreate(savedInstanceState);
         map.onResume(); // needed to get the map to display immediately
@@ -122,20 +144,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
-                if (edit_loc.getText().toString().equals("تعديل موقع")){
+                if (edit_Flag==0 ){
+                    edit_Flag=1;
                     add_loc.setEnabled(false);
                     del_loc.setEnabled(false);
                     flag_add_delete_location = 2;
-                    edit_loc.setText("انتهيت من التعديل");
-                    APICall.showSweetDialog(BeautyMainPage.context,"لطفاً","من فضلك اضغطي على المواقع المحددة لتعديلها");
+                    edit_loc.setText(R.string.finishedediting);
+                    APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.clicksitestoedit);
                     Log.e("edit", flag_add_delete_location + "");
                 }else {
+                    edit_Flag=0;
                     flag_add_delete_location = 0;
-                    edit_loc.setText("تعديل موقع");
+                    edit_loc.setText(R.string.editlocation);
                     Log.e("edit", flag_add_delete_location + "");
                     add_loc.setEnabled(true);
                     del_loc.setEnabled(true);
-                    Toast.makeText(BeautyMainPage.context,"تم تعديل المواقع ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(BeautyMainPage.context,R.string.Sitesmodified,Toast.LENGTH_LONG).show();
                     mMap.clear();
                     for (int i = 0; i < locationTitles.size(); i++) {
                         mMap.addMarker(new MarkerOptions()
@@ -151,25 +175,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         add_loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    APICall.titlemapdialog(BeautyMainPage.context, "لطفاً", "من فضلك ضع اسم لموقعك!", latLngtmp, mMap, marker,flag_add_delete_location);
+                    APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
                  Log.d("Remove", "false");
             }
         });
+
         del_loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(del_loc.getText().toString().equals("حذف موقع")) {
+                if(del_Flag==0) {
+                    del_Flag=1;
                     add_loc.setEnabled(false);
                     edit_loc.setEnabled(false);
                     flag_add_delete_location = 1;
-                    del_loc.setText("انتهيت من الحذف.");
-                    APICall.showSweetDialog(BeautyMainPage.context,"لطفاً","من فضلك اضغطي على المواقع المحددة لحذفها");
+                    del_loc.setText(R.string.finisheddeleting);
+                    APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.clicksitestodelete);
                 }else {
+                    del_Flag=0;
                     add_loc.setEnabled(true);
                     edit_loc.setEnabled(true);
                     flag_add_delete_location = 0;
-                    del_loc.setText("حذف موقع");
-                    Toast.makeText(BeautyMainPage.context,"تم الحذف ",Toast.LENGTH_LONG).show();
+                    del_loc.setText(R.string.deletelocation);
+                    Toast.makeText(BeautyMainPage.context,R.string.finisheddeleting,Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -277,7 +304,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             if (marker.getTitle().equals(locationTitles.get(i).getTitle())) {
                                          latLngtmp=locationTitles.get(i).getLatLng();
                                                 locationTitles.remove(i);
-                                APICall.titlemapdialog(BeautyMainPage.context, "لطفاً", "من فضلك ضع اسم لموقعك!", latLngtmp, mMap, marker,flag_add_delete_location);
+                                APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
                             }
                         }
                     }else {

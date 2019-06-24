@@ -37,19 +37,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.DataClass.Cities;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.test.Main2Activity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,6 +77,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    public static ArrayList<Cities> cities=new ArrayList();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -102,7 +107,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         mToggle.syncState();
          navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //---------------get cities in background-----------------
+        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
     }
+
+
 
     /*
     * ACCOUNTFRAGMENT
@@ -132,7 +142,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commit();
                 FRAGMENT_NAME="";
         }else if (FRAGMENT_NAME.equals("SERVICETABFRAGMENT")){
-                fragment = new ServiceFragment();
+                fragment = new PlaceServiceFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -153,6 +163,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
 
+            }else if (FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")){
+
+                fragment = new ServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+
             }else  {
         if(navigation.getSelectedItemId()!=R.id.services){
             navigation.setSelectedItemId(R.id.services);
@@ -163,8 +181,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commit();
         }else {
             AlertDialog.Builder builder=  new AlertDialog.Builder(context);
-            builder.setTitle("خروج")
-                    .setMessage("هل تريد الخروج من التطبيق؟")
+            builder.setTitle(R.string.Exit)
+                    .setMessage(R.string.ExitMessage)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             System.exit(0);
@@ -224,15 +242,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
          } else if (id == R.id.help) {
-            Intent intent=new Intent(getApplicationContext(),Help.class);
+            Intent intent=new Intent(getApplicationContext(), Main2Activity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
             Intent intent=new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            String sharebody="تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store";
+//            String sharebody=R.string.shareAppMessage;
             String sharesub="Beauty";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
-            intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            intent.putExtra(Intent.EXTRA_TEXT,R.string.shareAppMessage);
             startActivity(Intent.createChooser(intent,"Share using"));
 
         } else if (id == R.id.favorites) {
@@ -268,8 +286,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
             new AlertDialog.Builder(context)
-                    .setTitle("Logout")
-                    .setMessage("هل تريد تسجيل الخروج ؟")
+                    .setTitle(R.string.sigin_out)
+                    .setMessage(R.string.Signout)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             APICall.logout("http://clientapp.dcoret.com/api/auth/user/logout",BeautyMainPage.context);

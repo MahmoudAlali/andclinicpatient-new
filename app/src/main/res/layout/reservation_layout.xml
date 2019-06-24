@@ -52,7 +52,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="اسم الحجز"
+                        android:text="@string/ServiceName"
                         android:textColor="#000"
                         android:textSize="18sp"
                         android:layout_marginBottom="5dp"
@@ -94,7 +94,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layoutDirection="rtl"
                     android:layout_marginBottom="15dp"
                     android:orientation="horizontal">
 
@@ -104,7 +103,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="تعديل"
+                        android:text="@string/Edit"
                         android:textColor="@color/endblue"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -116,16 +115,17 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textColor="@color/endblue"
-                        android:text="تأجيل"
+                        android:text="@string/Delay"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/cancel_re"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="الغاء"
+                        android:text="@string/CancelAlert"
                         android:textColor="@color/endblue"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -135,13 +135,12 @@
                     android:weightSum="2"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layoutDirection="rtl"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="تقييم"
+                        android:text="@string/Evaluation"
                         android:textSize="16dp"
                         android:textColor="@color/endblue"
                         android:gravity="center"
@@ -153,7 +152,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="اصدار فاتورة"
+                        android:text="@string/Createinvoice"
                         android:textColor="#000"
                         android:textSize="16dp" />
                 </LinearLayout>

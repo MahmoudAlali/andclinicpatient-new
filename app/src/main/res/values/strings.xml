@@ -18,8 +18,6 @@
     <string name="title_activity_exampleee_just" translatable="false">Exampleee_just</string>
 
 
-
-
     <string name="signin">SignIn</string>
     <string name="forgetmypas">For get my password</string>
     <string name="enterasaguset">Enter as a guest</string>
@@ -52,6 +50,7 @@
     <string name="ChangeLnaguageMessage">You can change application language at any time from settings inside the
     application</string>
     <string name="ok">Ok</string>
+    <string name="Search">Search</string>
     <string name="SentPasswordAlert">Please enter your sent password</string>
     <string name="SuccessResetPasswordAlert">You can now sign in using your new password</string>
     <string name="UserNameTextField">User name (Optional)</string>
@@ -77,8 +76,10 @@
     <string name="InvalidPassword">Password length must be 6, Password must contain one uppercase letter, at least one number
     and at least one letter of lowercase</string>
     <string name="SendNewPass">New Password was sent to your phone</string>
+    <string name="CantFindNum">We can not find a user with that mobile</string>
     <string name="numberNotActivatedAlert">This Number is already registered,Please activate it by entering the verification code</string>
     <string name="EnterVerificationCode">Please Enter Verification Code</string>
+    <string name="InvalidFormatNum">The mobile Number format is invalid.</string>
     <string name="ResendCode">Resend Code</string>
     <string name="Code">Code</string>
     <string name="Direction">ltr</string>
@@ -123,17 +124,105 @@
     <string name="EnterNumberofCustomers">Please, Enter Number Of Customers</string>
     <string name="Backicon">@drawable/ic_keyboard_arrow_left_black_24dp</string>
 
+    <!--Service fragment-->
+    <string name="bride">bride</string>
+    <string name="Hairdressing">Hairdressing</string>
+    <string name="Haircut">Hair cut</string>
+    <string name="makeup">makeup</string>
+    <string name="Manicure">Manicure</string>
+    <string name="Skincare">Skin Care</string>
+    <string name="hairpigment">hair pigment</string>
+    <!--Bag res-->
+    <string name="Bookallcourierservices">Book all courier services</string>
+    <string name="Deleteallcourierservices">Delete all courier services</string>
+    <string name="ServiceName">Service Name</string>
+    <string name="ServicePlace">Service Place</string>
+    <string name="reminingtime">Remaining time to delete service is 15 minutes</string>
+    <string name="delete">Delete</string>
+    <!--compare-->
+    <string name="ServiceNamecom">Service Name:</string>
+    <string name="ProviderNamecom">Provider Name:</string>
+    <string name="Rating">Rating:</string>
+    <string name="ServicePlacecom">Service Place:</string>
+    <string name="SaloonLocation">Saloon Location:</string>
+
+    <!--Edit reservation-->
+    <string name="ServiceNamePromotion">Service name/Promotion</string>
+    <string name="Choosetimeanddate">Choose time and date</string>
+    <string name="Expectedservicetime">Expected service time:</string>
+    <string name="minutes">minutes</string>
+    <string name="hour">hour</string>
+    <string name="Addperson">Add a person</string>
+    <string name="Addtocart">Add to cart</string>
+
+    <!--Favoriate-->
+    <string name="book">Book</string>
+    <!--invoice-->
+    <string name="bill">My Bill</string>
+    <string name="ServiceNamebill">Service Name</string>
+    <string name="servicePrice">Service Price</string>
+    <string name="ServiceTime">Service Time</string>
+
+    <!--Map Fragment-->
+    <string name="searchaddressandregion">Search for an address or region</string>
+    <string name="search">Search</string>
+    <string name="addlocation">Add Location</string>
+    <string name="deletelocation">Delete Location</string>
+    <string name="editlocation">Edit Location</string>
+    <string name="finishedediting">finished editing</string>
+    <string name="clicksitestoedit">Please click on the selected sites to edit</string>
+    <string name="Sitesmodified">Sites modified</string>
+    <string name="putnamesite">Please put a name for your site!</string>
+    <string name="finisheddeleting">finished deleting</string>
+    <string name="clicksitestodelete">Please click on the selected sites to delete it</string>
+    <string name="Deleted">Deleted</string>
+
+    <!--Reservation -->
+    <string name="Allmyreservations">All reservations</string>
+    <string name="MyReservationWithinOffers">reservation in offers</string>
+    <string name="MyReservationsPendingConfirmation">reservation pending confirmation</string>
+    <string name="MyReservationArePaidOut">reservation are paid out</string>
+    <string name="MyConfirmedReservation"> confirmed reservation</string>
+    <string name="MyPreviousReservation"> previous reservation</string>
+    <string name="MyCanceledReservation"> canceled reservation</string>
+    <string name="Reservationsexecuted">Reservations executed</string>
+    <string name="ReservationsPending">Reservations pending</string>
+    <string name="ReservationsTomorrow">Reservations tomorrow</string>
+    <string name="Delay">Delay</string>
+    <string name="Edit">Edit</string>
+    <string name="Createinvoice">Create invoice</string>
+    <string name="Evaluation">Evaluation</string>
 
 
+    <!--offers-->
+    <string name="BeautyServices">Beauty Services</string>
+    <string name="BeautyOffers"> Beauty Offers</string>
+    <string name="FashionDesignOffers">Fashion Design Offers</string>
+    <string name="OFFonBeautyService">30% OFF on beauty service</string>
+    <string name="FashionDesignServices">Fashion Design Services</string>
+    <string name="FeaturedBeautyShows">Featured Beauty Shows</string>
 
 
+    <string name="familiyBeauty">You have successfully joined the family. Now you can enjoy great services</string>
 
 
+    <string name="SmoeThingWrong">There is something wrong please try again</string>
+    <string name="old_password_wrong">Wrong Old Password, Please Try Again </string>
+    <string name="EditFinished">Data modified successfully </string>
+    <string name="Exit">Exit </string>
 
+    <string name="DeleteAccount">Delete Account</string>
+    <string name="DeleteAccountMessage">Do you really want to delete your account?</string>
 
+    <string name="Signout">Do you want to sign out? </string>
+    <string name="ExitMessage">Do you want to exit the app? </string>
 
+    <string name="shareAppMessage">Beauty application for beauty and design services download it now from the App Store</string>
 
-
+    <!--service place frag-->
+    <string name="PlaceService">Service Place</string>
+    <string name="ServicePrice">Service Price</string>
+    <string name="ServiceRate">Service Evaluation</string>
     <string-array name="gender">
         <item>الجنس</item>
         <item>ذكر</item>

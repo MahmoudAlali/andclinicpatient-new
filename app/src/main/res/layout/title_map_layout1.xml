@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="center"
+
+    android:orientation="horizontal"
+    >
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="@drawable/shadow_map_title"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textColor="#FFF"
+                android:text="Alaa Salon"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/standard_20"
+                android:textColor="#FFF"
+                android:text="4.5 Stars"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="@dimen/standard_50"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/standard_20"
+                android:textColor="#FFF"
+                android:text="400 RS"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                />
+            <Button
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:textSize="@dimen/standard_20"
+                android:textColor="#FFF"
+                android:text="Book"
+                android:background="@drawable/shadowcolor_yellow"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="match_parent"></LinearLayout>
+    </LinearLayout>
+</LinearLayout>

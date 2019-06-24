@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -37,12 +38,14 @@ public class AddReservation extends AppCompatActivity
     LinearLayout myRoot;
     EditText numreservation;
     Spinner spinner1,spinner2;
+    static Button dateandtime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_reservation);
 
         servicePlace=findViewById(R.id.servicePlace);
+        dateandtime=findViewById(R.id.dateandtime);
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.service_place,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         servicePlace.setAdapter(adapter);
@@ -127,8 +130,33 @@ public class AddReservation extends AppCompatActivity
 
 }
    public void addtoshoppingcart(View view) {
-        // We Received your request,Will reply within 30 minutes
-   APICall.showSweetDialog(AddReservation.this,R.string.Null,R.string.Recievedrequest);
+            // We Received your request,Will reply within 30 minutes
+//            APICall.showSweetDialog(AddReservation.this,R.string.Null,R.string.Recievedrequest);
+       final Dialog dialog = new Dialog(AddReservation.this);
+       dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+       dialog.setContentView(R.layout.sweet_dialog_layout);
+       TextView message = dialog.findViewById(R.id.message);
+       TextView title = dialog.findViewById(R.id.title);
+       TextView confirm = dialog.findViewById(R.id.confirm);
+       //                TextView resend_code = dialog.findViewById(R.id.resend_code);
+       title.setText("");
+       message.setText(R.string.Recievedrequest);
+       confirm.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               dialog.cancel();
+               onBackPressed();
+           }
+       });
+       dialog.show();
 
-}
+            }
+
+           public static void setDateAndTime(String date,String time){
+
+
+               dateandtime.setText(date+"--"+time);
+
+
+           }
 }

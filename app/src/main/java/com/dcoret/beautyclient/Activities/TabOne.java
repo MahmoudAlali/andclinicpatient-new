@@ -5,6 +5,8 @@ package com.dcoret.beautyclient.Activities;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,13 +25,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 
 import org.json.JSONArray;
@@ -47,8 +58,8 @@ import okhttp3.RequestBody;
 
 public class TabOne extends Fragment {
 
-   static RecyclerView recyclerView;
- static   ArrayList<BrowseServiceItem> arrayList;
+   public static RecyclerView recyclerView;
+ public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();;
    static  ServicesAdapter servicesAdapter;
     static ProgressDialog pd;
 
@@ -57,68 +68,25 @@ public class TabOne extends Fragment {
     static String data= null;
 
     static View view;
-
+    ImageButton filter;
     @Nullable
     @Override
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-
+        arrayList.clear();
         view= inflater.inflate(R.layout.tab_one,container,false);
+        filter =view.findViewById(R.id.filter);
 
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
-        arrayList=new ArrayList<>();
-        servicesAdapter=new ServicesAdapter(BeautyMainPage.context,arrayList,R.layout.service_layout_adapter_last);
+        servicesAdapter=new ServicesAdapter(BeautyMainPage.context,  TabOne.arrayList,R.layout.service_layout_adapter_last);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(servicesAdapter);
-
         browseService();
 
-          return view;
+        return view;
         }
-
-
-    public static void gridlistitems(){
-        if (ServicesAdapter.list==true) {
-        Log.d("gridlist", ServicesAdapter.list+"");
-            recyclerView = view.findViewById(R.id.recycleview);
-            recyclerView.setLayoutManager(new GridLayoutManager(BeautyMainPage.context,2));
-//        recyclerView.setAdapter(new ServicesAdapter1(BeautyMainPage.context,items,prices,rank,city,locations,fav));
-            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context, items, ServicesAdapter.list,R.layout.service_layout_adapter_grid_last));
-            ServicesAdapter.list=false;
-        }else {
-            Log.d("gridlist", ServicesAdapter.list+"");
-            recyclerView = view.findViewById(R.id.recycleview);
-            recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
-//        recyclerView.setAdapter(new ServicesAdapter1(BeautyMainPage.context,items,prices,rank,city,locations,fav));
-            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context, items, ServicesAdapter.list,R.layout.service_layout_adapter_last));
-            ServicesAdapter.list=true;
-        }
-    }
-    boolean grid=false;
-    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.list:
-                            grid=false;
-                            recyclerView=view.findViewById(R.id.recycleview);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
-                            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items));
-                            return true;
-                        case R.id.grid:
-                            grid=true;
-                            recyclerView = view.findViewById(R.id.recycleview);
-                            recyclerView.setLayoutManager(new GridLayoutManager(BeautyMainPage.context, 2));
-                            recyclerView.setAdapter(new ServicesAdapter(BeautyMainPage.context,items));
-                            return true;
-                    }
-                    return false;
-                }
-            };
-
 
 
     //---------- not used-----------------
@@ -252,6 +220,13 @@ public class TabOne extends Fragment {
 
             }
         });
+    }
+
+
+    public static void refreshRV(){
+//        arrayList.add(null);
+        servicesAdapter.notifyDataSetChanged();
+
     }
 
 

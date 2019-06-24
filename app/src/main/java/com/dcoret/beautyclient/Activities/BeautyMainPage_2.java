@@ -1,7 +1,6 @@
 package com.dcoret.beautyclient.Activities;
 
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -9,8 +8,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -27,7 +24,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,20 +33,10 @@ import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
-import com.dcoret.beautyclient.Fragments.MoreFragment;
-import com.dcoret.beautyclient.Fragments.NotificationFragment;
-import com.dcoret.beautyclient.Fragments.OfferFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
-import com.dcoret.beautyclient.PayFort.FortRequest;
 import com.dcoret.beautyclient.R;
-import com.google.android.gms.auth.api.credentials.HintRequest;
-import com.payfort.fort.android.sdk.base.FortSdk;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
-import com.payfort.sdk.android.dependancies.base.FortInterfaces;
-import com.paytabs.paytabs_sdk.utils.PaymentParams;
 
 import org.json.JSONObject;
 
@@ -118,11 +104,11 @@ public class BeautyMainPage_2 extends AppCompatActivity
         reservation_text.setTextColor(Color.WHITE);
         account_text.setTextColor(Color.WHITE);
 
-        fragment = new OfferFragment();
-        fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, fragment);
-        fragmentTransaction.commit();
+//        fragment = new OfferFragment();
+//        fm = getFragmentManager();
+//        fragmentTransaction = fm.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragment, fragment);
+//        fragmentTransaction.commit();
 
 
 
@@ -298,11 +284,11 @@ public class BeautyMainPage_2 extends AppCompatActivity
                 reservation_text.setTextColor(Color.WHITE);
                 account_text.setTextColor(Color.WHITE);
 
-                fragment = new MoreFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commit();
+//                fragment = new MoreFragment();
+//                fm = getFragmentManager();
+//                fragmentTransaction = fm.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment, fragment);
+//                fragmentTransaction.commit();
 
             }
         });
@@ -425,17 +411,17 @@ public class BeautyMainPage_2 extends AppCompatActivity
         service_text.setTextColor(Color.WHITE);
         reservation_text.setTextColor(Color.WHITE);
         account_text.setTextColor(Color.WHITE);
-        fragment = new OfferFragment();
+//        fragment = new OfferFragment();
 
 //        mDrawable.setColorFilter(new
 //                PorterDuffColorFilter(Color.MAGENTA, PorterDuff.Mode.MULTIPLY));   Drawable mDrawable = context.getResources().getDrawable(R.drawable.ic_leaf);
 
 
-        fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, fragment);
-        fragmentTransaction.commit();
-        closeFABMenu();
+//        fm = getFragmentManager();
+//        fragmentTransaction = fm.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragment, fragment);
+//        fragmentTransaction.commit();
+//        closeFABMenu();
 
     }
 
@@ -665,11 +651,11 @@ public class BeautyMainPage_2 extends AppCompatActivity
             reservation_text.setTextColor(Color.WHITE);
             account_text.setTextColor(Color.WHITE);
             closeFABMenu();
-            fragment = new OfferFragment();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commit();
+//            fragment = new OfferFragment();
+//            fm = getFragmentManager();
+//            fragmentTransaction = fm.beginTransaction();
+//            fragmentTransaction.replace(R.id.fragment, fragment);
+//            fragmentTransaction.commit();
         }
 
         }

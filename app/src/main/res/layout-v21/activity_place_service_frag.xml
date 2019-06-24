@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:background="@color/end_gray"
+    app:navigationIcon="@string/Backicon"
+    app:popupTheme="@style/AppTheme"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:title=""
+    app:titleMarginStart="@dimen/standard_175"
+    app:titleTextColor="@color/end_gray" />
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_75"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:id="@+id/service_place"
+                    android:elevation="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_40"
+                    android:background="@drawable/shadow_place_service_layout"
+                    ></Spinner>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_marginTop="@dimen/standard_75"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:layout_gravity="center"
+                    android:id="@+id/service_price"
+                    android:elevation="5dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_50"
+                    android:background="@drawable/shadow_button_add_site"
+                    ></Spinner>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_marginTop="@dimen/standard_75"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:layout_gravity="center"
+                    android:id="@+id/service_rate"
+                    android:elevation="5dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_50"
+                    android:textAlignment="center"
+                    android:background="@drawable/shadow_rate"
+                    ></Spinner>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/standard_20"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/standard_30"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/ok"
+        android:textColor="@color/endblue"
+        android:background="@drawable/shadow_place_layout"/>
+
+</android.support.design.widget.CoordinatorLayout>

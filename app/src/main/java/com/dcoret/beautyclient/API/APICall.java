@@ -28,7 +28,12 @@ import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.Login;
 import com.dcoret.beautyclient.Activities.Offers;
+import com.dcoret.beautyclient.Activities.Services;
+import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
+import com.dcoret.beautyclient.DataClass.Cities;
+import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
 import com.dcoret.beautyclient.DataClass.LocationTitles;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
@@ -43,6 +48,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import okhttp3.Call;
@@ -294,7 +300,6 @@ public class APICall {
                 postdata.put("bdb_loc_long", "134");
                 postdata.put("bdb_loc_lat", "54");
                 postdata.put("bdb_city", "1");
-    //            postdata.put("password", "12345");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -307,8 +312,6 @@ public class APICall {
                     .post(body)
                     .addHeader("Content-Type","multipart/form-data")
                     .addHeader("Accept","application/json")
-    //                .header("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQyZmZlN2Q5NmYzNzM4OWRhZDNjMDllMDk5NGQwZDY4ODdmNGI0YzMxMzlmYjZhOTE1MTc5NWIwMzVmYTE5MDBhODI0NzI3NThmYTM2MDFhIn0.eyJhdWQiOiIxIiwianRpIjoiNDJmZmU3ZDk2ZjM3Mzg5ZGFkM2MwOWUwOTk0ZDBkNjg4N2Y0YjRjMzEzOWZiNmE5MTUxNzk1YjAzNWZhMTkwMGE4MjQ3Mjc1OGZhMzYwMWEiLCJpYXQiOjE1NTgyOTY3ODEsIm5iZiI6MTU1ODI5Njc4MSwiZXhwIjoxNTg5OTE5MTgxLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MG04uKIgEjPHwU_bo3ai_f1oGhOJdk0DQr5_KFQYKAZOj5EUM7ZVi08JnefgSB9R9rPAE3VcZaIBCGJ2OrjI0zO3K7PQZEQ2m-gmdsMye4sMGL2LeRrm6aHOKpJDY_jdpJMgFgbOL3oFh9XbVxbha0f0ofhOhiSl4oIfZ8-G7VzWZPuwA1dIt1QfgqjfWBSpWd9JPe7s3PrwrcUcXIF8qObjl6MqWQ3I33I8g2-Vc9O7b356_21Un_XP6lYbZMN4VWKUifqYiO2t509M6RjUovDI_cd9a30EHB7hTdIkmxHP2JKudwHbHil7cEkel7UQAvfJrbcapm60Jb8fucWoAtedtuPpxYEgxAZ0HqZNi5ynPoO1VIygHOiYvI8iNzNwkRMJ5quV4PIK4SaGArZs6Nd5Pz9vXKc-apWo2WzDZ9R1KQg0y3LNNRyMPmGjVN_8u3QixbomiXuPoOAsKuZzzCsRZMdQ2sug0nlm69BiCSbq3Zn40gmIqTXAhG1AIcm2WqgCqi9SKWyWOBc8Tv2NnnccH_FCkUCPCa54ZRMsMGrkycG6oV1wYQkpBKF1lS0yx2NCX0RJGFLEATkMKRX1wdKOgjmyALtk5IBsN9KOr6rBl4sWEQb0zsVgzaTdHqex4j0a03jtsbq8RplKJeY5SbJOUv-o8EC6gjMbJzCa5ik")
-    //                .header("Content-Type", "application/json")
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
@@ -383,6 +386,13 @@ public class APICall {
                                         phone,
                                         context);
                                 showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
+                            }else if (error.equals("The bdb mobile format is invalid.")){
+                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+//                            for email address
+                            }else if (error.equals("The bdb mobile format is invalid.")){
+                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+                            }else if(error.equals("bdb_mobile is already exists and activated")) {
+                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.MobTakenAlert,false);
                             }
                         }
                     }catch (final JSONException je){
@@ -741,7 +751,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, "تم انضمامك لعائلة .... بنجاح,يمكنك الآن التمتع بالخدمات الرائعة", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, R.string.familiyBeauty, Toast.LENGTH_LONG).show();
                                 SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
 //                               if (!name.isEmpty()) {
                                 editor.putString("name", "ok");
@@ -757,15 +767,15 @@ public class APICall {
                         });
                     }else {
 
-                        showSweetDialog(context,"لطفاً","الرمز المدخل خاطئ, يرجى التحقق",token,true,"");
+                        showSweetDialog(context,R.string.nice,R.string.InputCodeWrongAlert,token,true,"");
 
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context,j.toString(),Toast.LENGTH_LONG).show();
-
-                            }
-                        });
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(context,j.toString(),Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        });
                     }
 
                 }catch (JSONException je){
@@ -1026,8 +1036,8 @@ public class APICall {
         //-------------------------------------------------------
         public  static  void  deleteAccount(final  String url,final Context context){
             new AlertDialog.Builder(context)
-                    .setTitle("Delete Account")
-                    .setMessage("هل تريدين بالفعل حذف حسابك ؟")
+                    .setTitle(R.string.DeleteAccount)
+                    .setMessage(R.string.DeleteAccountMessage)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 //                            APICall.logout("http://clientapp.dcoret.com/api/auth/user/logout",BeautyMainPage.context);
@@ -1122,7 +1132,7 @@ public class APICall {
                                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toast.makeText(context, "هناك خطأ ما يرجى المحاولة مرة اخرى", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(context, R.string.SmoeThingWrong, Toast.LENGTH_LONG).show();
                                                 }
                                             });
                                         }
@@ -1578,7 +1588,7 @@ public class APICall {
                                                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                                                 @Override
                                                                 public void run() {
-                                                                    APICall.showSweetDialog(BeautyMainPage.context, "", "لقد تم تعديل البيانات بنجاح");
+                                                                    APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
                                                                 }
                                                             });
                                                         } else {
@@ -1586,7 +1596,7 @@ public class APICall {
                                                                 @Override
                                                                 public void run() {
                                                                     try {
-                                                                        APICall.showSweetDialog(BeautyMainPage.context, "عذراً", "هناك خطأ" + jsonObject.getString("message"));
+                                                                        APICall.showSweetDialog(BeautyMainPage.context, "", "Error:" + jsonObject.getString("message"));
                                                                     } catch (JSONException e) {
                                                                         e.printStackTrace();
                                                                     }
@@ -1615,7 +1625,7 @@ public class APICall {
                                                 @Override
                                                 public void run() {
                                                     pd.dismiss();
-                                                    showSweetDialog(context, "عذراً", "يجب ان تحتوي كلمة السر على 6 خانات على الاقل و 10 على الاكثر و حرف واحد كبير على لاقل و رقم على الاقل");
+                                                    showSweetDialog(context, R.string.ExuseMeAlert, R.string.InvalidPassword);
 
                                                 }
                                             });
@@ -1625,7 +1635,7 @@ public class APICall {
                                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                showSweetDialog(context, "عذراً", "كلمة السر القديمة خاطئة!");
+                                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.old_password_wrong);
                                             }
                                         });
                                     }
@@ -1637,7 +1647,7 @@ public class APICall {
                                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            showSweetDialog(context, "عذراً", mMessage + "هناك خطأ! ");
+                                            showSweetDialog(context, "",  "Wrong: "+mMessage );
                                         }
                                     });
 
@@ -1739,7 +1749,7 @@ public class APICall {
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    APICall.showSweetDialog(BeautyMainPage.context, "", "لقد تم تعديل البيانات بنجاح");
+                                    APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
                                 }
                             });
                         } else {
@@ -1747,7 +1757,7 @@ public class APICall {
                                 @Override
                                 public void run() {
                                     try {
-                                        APICall.showSweetDialog(BeautyMainPage.context, "عذراً", "هناك خطأ" + j.getString("message"));
+                                        APICall.showSweetDialog(BeautyMainPage.context,"", "Error: " + j.getString("message"));
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -1922,12 +1932,33 @@ public class APICall {
                         public void onResponse(Call call, okhttp3.Response response) throws IOException {
                             mMessage = response.body().string();
                             Log.e("TAG", mMessage);
-                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(context, R.string.SendNewPass, Toast.LENGTH_LONG).show();
+                            try {
+                                JSONObject jsonObject=new JSONObject(mMessage);
+                                String success=jsonObject.getString("success");
+                                if (success.equals("true")){
+                                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, R.string.SendNewPass, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }else{
+                                    String message=jsonObject.getString("error");
+                                    if (message.equals("We can not find a user with that mobile")){
+                                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.CantFindNum);
+//                                                Toast.makeText(context, R.string.CantFindNum, Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
                                 }
-                            });
+                            }catch (JSONException je){
+                                je.printStackTrace();
+                            }
+
+
                             d.dismiss();
                             pd.dismiss();
                         }
@@ -2259,8 +2290,8 @@ public class APICall {
         //---------------- get cities--------------------
         public  static  String  getcities(final  String url,final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+//        pd=new ProgressDialog(context);
+//        pd.show();
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -2280,7 +2311,7 @@ public class APICall {
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage();
                 Log.w("failure Response", mMessage);
-                pd.dismiss();
+//                pd.dismiss();
 
                 if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
@@ -2324,8 +2355,27 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.d("token",gettoken(context));
-                Log.e("TAG", mMessage);
-                pd.dismiss();
+                Log.e("TAGCities", mMessage);
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success=jsonObject.getString("success");
+                    if (success.equals("true")){
+                        JSONArray citiesArr=jsonObject.getJSONArray("cities");
+                        for (int i=0;i<citiesArr.length();i++){
+                            JSONObject city=citiesArr.getJSONObject(i);
+                            String bdb_id=city.getString("bdb_id");
+                            String bdb_region_id=city.getString("bdb_region_id");
+                            String bdb_name=city.getString("bdb_name");
+                            String bdb_name_ar=city.getString("bdb_name_ar");
+                            String bdb_default_dim=city.getString("bdb_default_dim");
+                            BeautyMainPage.cities.add(new Cities(bdb_id,bdb_region_id,bdb_name,bdb_name_ar,bdb_default_dim));
+                        }
+                        Log.e("CITIES",BeautyMainPage.cities.size()+"");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+//                pd.dismiss();
             }
         });
 
@@ -2334,29 +2384,39 @@ public class APICall {
 
 }
         //------------- automated Browse ----------------------
-        public  static  String  automatedBrowse(final  String url,String lang,String itemPerPage,String pageNum,
-                String num1,String value11,String value12,
-                String num2,String value21,String value22,
-                String num3,String value31,String value32 ,
-                String num4,String value41,String value42 ,final Context context){
+        public  static  String  automatedBrowse(final  String url,String lang,String itemPerPage,String pageNum,final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             pd=new ProgressDialog(context);
             pd.show();
             OkHttpClient client = new OkHttpClient();
-            JSONObject postdata = new JSONObject();
-            String jsonpost="{\t\"lang\":\""+lang+"\",\n" +
-                    "\t\t\"ItemPerPage\":"+itemPerPage+",\t\n" +
-                    "\t\t\"PageNum\":"+pageNum+",\n" +
+
+
+            String temp="{\t\"lang\":\"en\",\n" +
+                    "\t\t\"ItemPerPage\":4,\t\n" +
+                    "\t\t\"PageNum\":1,\n" +
                     "\t\t\"Filter\":[ \n" +
-                    "\t\t\t{\"num\":"+num1+",\"value1\":"+value11+",\"value2\":"+value12+"} ,\n" +
-                    "\t\t\t{\"num\":"+num2+",\"value1\":"+value21+",\"value2\":"+value22+"}  ,\n" +
-                    "\t\t\t{\"num\":"+num3+",\"value1\":"+value31+",\"value2\":"+value32+"} ,\n" +
-                    "\t\t\t{\"num\":"+num4+",\"value1\":"+value41+",\"value2\":"+value42+"} ]\n" +
+                    "\t\t\t{\"num\":5,\"value1\":1,\"value2\":1} ,\n" +
+                    "\t\t\t{\"num\":6,\"value1\":4,\"value2\":0}  ,\n" +
+                    "\t\t\t{\"num\":34,\"value1\":36.47792,\"value2\":0}  ,\n" +
+                    "\t\t\t{\"num\":35,\"value1\":36.23389,\"value2\":0} \n" +
+                    "\t\t\t\n" +
+                    "\t\t ]\n" +
                     "\t\n" +
                     "}";
 
+            String ttt="{\t\"lang\":\"en\",\n" +
+                    "\t\t\"ItemPerPage\":4,\t\n" +
+                    "\t\t\"PageNum\":1,\n" +
+                    "\t\t\"Filter\":[ \n" +
+                    "\t{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
+                    "\t\t\t{\"num\":35,\"value1\":36.23389,\"value2\":0},"+
+                    getFilterList()+  // need to try catch
+                    "\t\t\t]\n" +
+                    "}";
 
-            RequestBody body = RequestBody.create(MEDIA_TYPE, jsonpost);
+
+            Log.e("JSONPOST",ttt);
+             final RequestBody body = RequestBody.create(MEDIA_TYPE, ttt);
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
                     .post(body)
@@ -2416,8 +2476,87 @@ public class APICall {
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     mMessage = response.body().string();
 //                    Log.d("token",gettoken(context));
-                    Log.e("TAG", mMessage);
+                    Log.e("TAG123", mMessage);
                     pd.dismiss();
+
+                    try{
+                        JSONObject jsonObject=new JSONObject(mMessage);
+                        String success=jsonObject.getString("success");
+                        Log.e("success",success);
+                        final String message=jsonObject.getString("message");
+                        if (success.equals("true")){
+                            if (message.equals("success get services")){
+                            JSONObject data=jsonObject.getJSONObject("data");
+                            JSONArray sersup=data.getJSONArray("sersup");
+                            Log.e("SizeSERSUP",sersup.length()+"");
+                            TabOne.arrayList.clear();
+
+                            for (int i=0;i<sersup.length();i++){
+                                JSONObject jarray = sersup.getJSONObject(i);
+                                String bdb_ser_sup_id = jarray.getString("bdb_ser_sup_id");
+//                                        bdb_ser_salon = jarray.getString("bdb_ser_salon"),
+//                                        bdb_ser_home = jarray.getString("bdb_ser_home"),
+//                                        bdb_ser_hall = jarray.getString("bdb_ser_hall"),
+//                                        bdb_ser_salon_price = jarray.getString("bdb_ser_salon_price"),
+//                                        bdb_ser_home_price = jarray.getString("bdb_ser_home_price"),
+//                                        bdb_ser_hall_price = jarray.getString("bdb_ser_hall_price"),
+//                                        bdb_time = jarray.getString("bdb_time"),
+//                                        bdb_max_clients = jarray.getString("bdb_max_clients"),
+//                                        bdb_ser_id = jarray.getString("bdb_ser_id"),
+//                                        bdb_sup_id = jarray.getString("bdb_sup_id"),
+//                                        bdb_is_offer = jarray.getString("bdb_is_offer"),
+//                                        bdb_offer_status = jarray.getString("bdb_offer_status"),
+//                                        bdb_offer_start = jarray.getString("bdb_offer_start"),
+//                                        bdb_offer_end = jarray.getString("bdb_offer_end"),
+//                                        bdb_pack_code = jarray.getString("bdb_pack_code"),
+//                                        bdb_is_best = jarray.getString("bdb_is_best"),
+//                                        bdb_orgin_id = jarray.getString("bdb_orgin_id"),
+//                                        bdb_is_current_price = jarray.getString("bdb_is_current_price"),
+//                                        bdb_user_offer_num = jarray.getString("bdb_user_offer_num"),
+//                                        bdb_hotel = jarray.getString("bdb_hotel"),
+//                                        bdb_hotel_price = jarray.getString("bdb_hotel_price");
+                                BrowseServiceItem bsi = new BrowseServiceItem(bdb_ser_sup_id, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",  "", "", "");
+                                TabOne.arrayList.add(bsi);
+
+
+
+                            }
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    TabOne.refreshRV();
+
+                                }
+                            });
+                            Log.e("ARRAYLIST",TabOne.arrayList.size()+"");
+
+                            TabOne.recyclerView.invalidate();
+                        }else if (message.equals("there is no providers with your search filters")){
+                                TabOne.arrayList.clear();
+                                ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        TabOne.refreshRV();
+                                        Toast.makeText(BeautyMainPage.context,message,Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                    }catch (JSONException je){
+
+                        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                                      @Override
+                                      public void run() {
+                                          TabOne.arrayList.clear();
+                                          TabOne.refreshRV();
+                                      }
+                                  });
+
+                        je.printStackTrace();
+                    }
+
+
+
                 }
             });
 
@@ -2461,9 +2600,42 @@ public class APICall {
             });
 
         }
+        public static void titlemapdialog(final Context context, final int texttitle, final int textmessage, final LatLng latLng, final GoogleMap mMap, final Marker marker, final int flag) {
+            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (flag==2 || flag==0){
+                        dialog = new Dialog(context);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        dialog.setContentView(R.layout.map_title_layout);
+                        TextView message = dialog.findViewById(R.id.message);
+                        final TextView title = dialog.findViewById(R.id.title);
+                        title.setText(texttitle);
+                        final EditText code = dialog.findViewById(R.id.code);
+                        TextView confirm = dialog.findViewById(R.id.confirm);
+                        message.setText(textmessage);
+                        confirm.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.cancel();
+                                addtitle( code.getText().toString(),latLng,marker);
+                            }
+
+
+                        });
+                        dialog.show();
+                       }else {
+                        marker.showInfoWindow();
+                    }
+                }
+
+            });
+
+        }
         private static void addtitle(String title,LatLng latLng ,Marker marker) {
             marker.setTitle(title);
             MapFragment.locationTitles.add(new LocationTitles(latLng,title));
+            MapFragment.arrayList.add(title);
         }
         public  static  void showSweetDialog(Context context,String texttitle,String textmessage){
 
@@ -2486,25 +2658,72 @@ public class APICall {
 
     }
         public  static  void showSweetDialog(Context context,int texttitle,int textmessage){
-        final Dialog dialog = new Dialog(context);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.sweet_dialog_layout);
-        TextView message = dialog.findViewById(R.id.message);
-        TextView title = dialog.findViewById(R.id.title);
-        TextView confirm = dialog.findViewById(R.id.confirm);
-    //                TextView resend_code = dialog.findViewById(R.id.resend_code);
-        title.setText(texttitle);
-        message.setText(textmessage);
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-            }
-        });
-        dialog.show();
+                   final Dialog dialog = new Dialog(context);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.sweet_dialog_layout);
+            TextView message = dialog.findViewById(R.id.message);
+            TextView title = dialog.findViewById(R.id.title);
+            TextView confirm = dialog.findViewById(R.id.confirm);
+            //                TextView resend_code = dialog.findViewById(R.id.resend_code);
+            title.setText(texttitle);
+            message.setText(textmessage);
+            confirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
 
     }
         public static void showSweetDialog(final Context context, final String texttitle, final String textmessage, final String activation_number , final Boolean iscode, final String number) {
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (iscode) {
+                    dialog = new Dialog(context);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.confirm_code_layout);
+                    TextView message = dialog.findViewById(R.id.message);
+                    TextView title = dialog.findViewById(R.id.title);
+                    title.setText(texttitle);
+                    final EditText code = dialog.findViewById(R.id.code);
+                    TextView confirm = dialog.findViewById(R.id.confirm);
+                    TextView resend_code = dialog.findViewById(R.id.resend_code);
+                    message.setText(textmessage);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                            //----------toast for congratulations---------
+                            activeAccount("http://clientapp.dcoret.com/api/auth/user/register/activate",
+                                    code.getText().toString(),
+                                    context);
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    final Dialog dialog = new Dialog(context);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.sweet_dialog_layout);
+                    TextView message = dialog.findViewById(R.id.message);
+                    TextView title = dialog.findViewById(R.id.title);
+                    TextView confirm = dialog.findViewById(R.id.confirm);
+                    title.setText(texttitle);
+                    message.setText(textmessage);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+                    dialog.show();
+                }
+            }
+        });
+
+    }
+        public static void showSweetDialog(final Context context, final int texttitle, final int textmessage, final String activation_number , final Boolean iscode, final String number) {
         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -2687,6 +2906,83 @@ public class APICall {
 
         return false;
         }
+
+        //---------------- filter and sort model --------------------
+     static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
+        public static String getFilterList(){
+            String filter="";
+//            Log.e("filterlist",filterList.get(19).getValue1());
+            for (int i=0;i<filterList.size();i++){
+//                    "{\"num\":"+num1+",\"value1\":"+value11+",\"value2\":"+value12+"} ,\n" +
+
+                if (!filterList.get(i).getNum().equals("")){
+                filter=filter + "{\"num\":"+filterList.get(i).getNum()+",\"value1\":"+filterList.get(i).getValue1()+",\"value2\":"+filterList.get(i).getValue2()+"} ,";
+                }
+            }
+            Log.e("STRINGFILTER",filter.length()+"");
+            try {
+              filter=filter.substring(0,filter.length()-1);
+                Log.e("STRINGFILTERAfter",filter);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        return filter;
+        }
+        static  void initFilterList(){
+             if (filterList.size()==0)
+             for (int i=0;i<=35;i++){
+                 filterList.add(new FilterAndSortModel("","",""));
+             }
+             Log.e("numberOFFilterList",filterList.size()+"");
+         }
+        public static void  filterSortAlgorithm(String num,String value1,String value2 ){
+            initFilterList();
+                int index = Integer.parseInt(num);
+
+                if(!value1.equals(""))
+                    filterList.set(index, new FilterAndSortModel(num, value1, value2));
+
+                Log.e("index",filterList.get(index).getNum()+":"+filterList.get(index).getValue1()+":"+filterList.get(index).getValue2()+"");
+
+            }
+        public  static void clearFilterList(){
+                filterList.clear();
+            }
+
+//
+//    String num2,String value21,String value22,
+//    String num3,String value31,String value32,
+//    String num4,String value41,String value42,
+//    String num5,String value51,String value52,
+//    String num6,String value61,String value62,
+//    String num7,String value71,String value72,
+//    String num8,String value81,String value82,
+//    String num9,String value91,String value92,
+//    String num10,String value101,String value102,
+//    String num11,String value111,String value112,
+//    String num12,String value121,String value122,
+//    String num13,String value131,String value132,
+//    String num14,String value141,String value142,
+//    String num15,String value151,String value152,
+//    String num16,String value161,String value162,
+//    String num17,String value171,String value172,
+//    String num18,String value181,String value182,
+//    String num19,String value191,String value192,
+//    String num20,String value201,String value202,
+//    String num21,String value211,String value212,
+//    String num22,String value221,String value222,
+//    String num23,String value231,String value232,
+//    String num24,String value241,String value242,
+//    String num25,String value251,String value252,
+//    String num26,String value261,String value262,
+//    String num27,String value271,String value272,
+//    String num28,String value281,String value282,
+//    String num29,String value291,String value292,
+//    String num30,String value301,String value302
+
+
+
 
 }
 

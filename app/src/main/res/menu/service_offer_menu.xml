@@ -3,12 +3,12 @@
     <item
         android:id="@+id/beauty"
         android:icon="@drawable/ic_leaf"
-        android:title="عروض التجميل"
+        android:title="@string/BeautyOffers"
         />
 
     <item
         android:id="@+id/fashion"
         android:icon="@drawable/ic_bride"
-        android:title="عروض تصميم الازياء"
+        android:title="@string/FashionDesignOffers"
         />
 </menu>

@@ -17,6 +17,7 @@
     <string name="EntermobnumberAlert">من فضلك ادخلي رقم الجوال</string>
     <string name="EnterPassAlert">من فضلك ادخلي كلمة السر</string>
     <string name="EnterActivationCodeAlert">يرجى إدخال رمز التفعيل</string>
+    <string name="InvalidFormatNum">صيغة هذا الرقم خاطئة, الرجاء المحاولة مرة اخرى</string>
     <string name="ActivationCodeMustBeFourDigistAlert">\"يجب أن يكون رمز التفعيل أربعة أرقام</string>
     <string name="CheckInternetConnectionAlert">الرجاء التحقق من اتصال االنترنت الخاص بك</string>
     <string name="SomethingWentWrongAlert">حدث خطأ ما. أعد المحاولة من فضلك</string>
@@ -31,6 +32,7 @@
     <string name="ReSendActivationCodeAlert">لم يتم تنشيط هاتفك ، تم إرسال رمز التفعيل إلى هاتفك المحمول ، يرجى إدخاله\"</string>
     <string name="ChangeLnaguageMessage">يمكن ك تغيير لغة التطبيق في اي وقت من الضبط</string>
     <string name="ok">حسناً</string>
+    <string name="Search">بحث</string>
     <string name="UserNameTextField">اسم المستخدم(اختياري)</string>
     <string name="MobileNumberTextField">رقم الهاتف</string>
     <string name="EmailAddressTextField">البريد الالكتروني (اختياري)</string>
@@ -56,6 +58,8 @@
 </string>
     <string name="SendNewPass">تم إرسال كلمة السر الجديدة إلى هاتفك, الرجاء التحقق</string>
     <string name="numberNotActivatedAlert">هذا الرقم مسجل مسبقاً, يرجى تفعيله بإدخال رمز التحقق</string>
+    <string name="CantFindNum">لم نستطع ايجاد حساب لهذا الرقم, يرجى التأكد</string>
+
     <string name="EnterVerificationCode">من فضلك,ادخلي رمز التحقق</string>
     <string name="ResendCode">إعادة ارسال الرمز</string>
     <string name="Code">رمز التحقق</string>
@@ -73,6 +77,7 @@
     <string name="password">كلمة المرور</string>
     <string name="edit">تعديل</string>
     <string name="old_password">كلمة المرور القديمة</string>
+    <string name="old_password_wrong"> كلمة المرور القديمة خاطئة, يرجى التأكد </string>
     <string name="new_password">كلمة المرور الجديدة</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
     <string name="add_delete_location">اضافة و حذف عنوان</string>
@@ -98,6 +103,101 @@
     <string name="sigin_out">تسجيل الخروج</string>
     <string name="check_internet_con">الرجاء التحقق من اتصال الانترنت الخاص بك</string>
     <string name="refresh">تحديث</string>
+
+    <!--Service fragment-->
+    <string name="bride">العروسة</string>
+    <string name="Hairdressing">تصفيف شعر</string>
+    <string name="Haircut">قص شعر</string>
+    <string name="makeup">مكياج</string>
+    <string name="Manicure">منكير</string>
+    <string name="Skincare">عناية بالبشرة</string>
+    <string name="hairpigment">صبغة شعر</string>
+
+    <!--Bag res-->
+    <string name="Bookallcourierservices">حجز جميع خدمات الحقيبة</string>
+    <string name="Deleteallcourierservices">حذف جميع خدمات الحقيبة</string>
+    <string name="ServiceName">اسم الخدمة</string>
+    <string name="ServicePlace">مكان الخدمة</string>
+    <string name="reminingtime">الوقت المتبقي لحذف الخدمة 15 دقيقة</string>
+    <string name="delete">حذف</string>
+    <!--compare-->
+    <string name="ServiceNamecom">اسم الخدمة:</string>
+    <string name="ProviderNamecom">اسم المزودة:</string>
+    <string name="Rating">التقييم:</string>
+    <string name="ServicePlacecom">مكان الخدمة:</string>
+    <string name="SaloonLocation">عنوان الصالون:</string>
+
+    <!--Edit reservation-->
+    <string name="ServiceNamePromotion">اسم الخدمة/العرض</string>
+    <string name="Choosetimeanddate">اختاري الوقت و التاريخ</string>
+    <string name="Expectedservicetime">الوقت المتوقع للخدمة:</string>
+    <string name="minutes">دقيقة</string>
+    <string name="hour">ساعة</string>
+    <string name="Addperson">أضافة فرد</string>
+    <string name="Addtocart">اضافة للعربة</string>
+    <!--Favoriate-->
+    <string name="book">حجز</string>
+    <!--invoice-->
+    <string name="bill">فاتورتي</string>
+    <string name="ServiceNamebill">اسم الخدمة</string>
+    <string name="servicePrice">سعر الخدمة</string>
+    <string name="ServiceTime">توقيت الخدمة</string>
+    <!--Map Fragment-->
+    <string name="searchaddressandregion">ابحثي عن عنوان او منطقة</string>
+    <string name="search">بحث</string>
+    <string name="addlocation">إضافة</string>
+    <string name="deletelocation">حذف موقع</string>
+    <string name="editlocation">تعديل موقع</string>
+    <string name="finishedediting">انتهيت من التعديل</string>
+    <string name="clicksitestoedit">من فضلك اضغطي على المواقع المحددة لتعديلها</string>
+    <string name="Sitesmodified">تم تعديل المواقع</string>
+    <string name="putnamesite">من فضلك ضع اسم لموقعك!</string>
+    <string name="finisheddeleting">انتهيت من الحذف</string>
+    <string name="clicksitestodelete">من فضلك اضغطي على المواقع المحددة لحذفها</string>
+    <string name="Deleted">تم الحذف</string>
+
+    <!--Reservation -->
+    <string name="Allmyreservations">جميع حجوزاتي</string>
+    <string name="MyReservationWithinOffers">حجوزاتي داخل عروض</string>
+    <string name="MyReservationsPendingConfirmation">حجوزاتي في انتظار التأكيد</string>
+    <string name="MyReservationArePaidOut">حجوزاتي مدفوعة العربون</string>
+    <string name="MyConfirmedReservation">حجوزاتي المؤكدة</string>
+    <string name="MyPreviousReservation">حجوزاتي السابقة</string>
+    <string name="MyCanceledReservation">حجوزاتي الملغاة</string>
+    <string name="Reservationsexecuted">حجوزات منفذة</string>
+    <string name="ReservationsPending">حجوزات بانتظار العربون</string>
+    <string name="ReservationsTomorrow">حجوزات الغد</string>
+    <string name="Delay">تأجيل</string>
+    <string name="Edit">تعديل</string>
+    <string name="Createinvoice">اصدار فاتورة</string>
+    <string name="Evaluation">تقييم</string>
+
+
+    <!--offers-->
+    <string name="BeautyServices">خدمات التجميل</string>
+    <string name="FashionDesignServices">خدمات تصميم الازياء</string>
+    <string name="BeautyOffers"> عروض التجميل</string>
+    <string name="FashionDesignOffers">عروض تصميم الازياء</string>
+    <string name="OFFonBeautyService">خصم 30% على خدمة التجميل</string>
+    <string name="FeaturedBeautyShows">ابرز عروض التجميل</string>
+    <string name="familiyBeauty">تم انضمامك لعائلة .... بنجاح,يمكنك الآن التمتع بالخدمات الرائعة</string>
+
+
+    <string name="SmoeThingWrong">هناك خطأ ما يرجى المحاولة مرة اخرى</string>
+    <string name="EditFinished">تم تعديل البيانات بنجاح</string>
+    <string name="Exit">خروج </string>
+    <string name="ExitMessage">هل تريد الخروج من التطبيق؟ </string>
+    <string name="Signout">هل تريد تسجيل الخروج ؟</string>
+    <string name="DeleteAccount">حذف الحساب</string>
+    <string name="DeleteAccountMessage">هل تريدين بالفعل حذف حسابك ؟</string>
+
+    <string name="shareAppMessage">تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store</string>
+<!--service place frag-->
+    <string name="PlaceService">مكان الخدمة</string>
+    <string name="ServicePrice">سعر الخدمة</string>
+    <string name="ServiceRate">تقييم الخدمة</string>
+
+
 
     <string-array name="cities">
         <item>اسم المدينة</item>

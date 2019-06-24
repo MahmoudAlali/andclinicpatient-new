@@ -43,6 +43,7 @@
             android:layout_gravity="center"
             android:foregroundGravity="center"
             android:layout_marginTop="@dimen/standard_30"
+            android:id="@+id/timePicker"
 
             ></TimePicker>
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="270dp"
+    android:layout_gravity="center"
+    android:background="@drawable/shadow_gray_dialog"
+   android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/standard_20"
+            android:gravity="center"
+            android:text="Service Place"
+            android:textColor="#000"
+            android:textSize="@dimen/standard_20" />
+
+        <RadioGroup
+            android:id="@+id/service_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:gravity="center"/>
+        <RadioButton
+            android:id="@+id/salon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salon"
+            android:gravity="center"/>
+        <RadioButton
+            android:id="@+id/hall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hall"
+            android:gravity="center"/>
+        <RadioButton
+            android:id="@+id/hotel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hotel"
+            android:gravity="center"/>
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/standard_20"
+            android:orientation="horizontal"/>
+
+
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/search"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:background="@drawable/shadow_gray_dialog"
+        android:textSize="@dimen/standard_20"
+        android:text="Search"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/endblue"
+        android:elevation="5dp"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

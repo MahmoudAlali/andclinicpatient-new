@@ -20,10 +20,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:gravity="center"
-            android:text="الوقت المتبقي لحذف الخدمة 15 دقيقة"
+            android:text="@string/reminingtime"
             android:textColor="@android:color/holo_red_dark"
             />
 
@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service Name"
+            android:text="@string/ServiceName"
             android:textSize="16dp"
             android:textColor="#000"
             android:layout_marginBottom="10dp"
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="مكان الخدمة"
+                    android:text="@string/ServicePlace"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:layout_weight="1"
@@ -88,7 +88,7 @@
                 />
             <TextView
                 android:layout_weight="1"
-                android:text="حذف"
+                android:text="@string/delete"
                 android:textColor="#000"
                 android:gravity="center"
                 android:textStyle="bold"

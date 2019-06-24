@@ -47,9 +47,8 @@ public class Offers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.offers_layout);
-        setTitle("ابرز العروض");
         pd=new ProgressDialog(this);
-        pd.setMessage("جار التحقق....");
+//        pd.setMessage("جار التحقق....");
         pd.show();
 //        view= inflater.inflate(R.layout.tab_one,container,false);
 

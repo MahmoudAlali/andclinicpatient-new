@@ -71,7 +71,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="العروسة"
+                        android:text="@string/bride"
                         android:gravity="center"
                         android:textColor="#000"
                         android:textSize="20dp"
@@ -120,10 +120,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="تصفيف شعر"
+            android:text="@string/Hairdressing"
             android:gravity="center"
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
              </LinearLayout>
 
             </LinearLayout>
@@ -152,7 +152,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="قص شعر"
+                        android:text="@string/Haircut"
                         android:gravity="center"
                         android:textColor="#000"
                         android:textSize="20dp"
@@ -184,7 +184,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="مكياج"
+                        android:text="@string/makeup"
                         android:gravity="center"
                         android:textColor="#000"
                         android:textSize="20dp"
@@ -228,7 +228,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="مناكير"
+                        android:text="@string/Manicure"
                         android:textColor="#000"
                         android:textSize="20dp" />
                 </LinearLayout>
@@ -257,7 +257,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="عناية بالبشرة"
+                        android:text="@string/Skincare"
                         android:gravity="center"
                         android:textColor="#000"
                         android:textSize="20dp"
@@ -289,10 +289,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="صبغة شعر"
+                        android:text="@string/hairpigment"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         />
                 </LinearLayout>
 

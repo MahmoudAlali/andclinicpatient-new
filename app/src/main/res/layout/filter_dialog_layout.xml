@@ -72,16 +72,16 @@
             android:textColor="#000"
             android:layout_marginBottom="5dp"
             />
-        <CheckBox
-            android:id="@+id/place_service"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="مكان الخدمة"
-            android:gravity="center"
-            android:textSize="@dimen/standard_20"
-            android:textColor="#000"
-            android:layout_marginBottom="5dp"
-            />
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/service_place"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="مكان الخدمة"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="@dimen/standard_20" />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

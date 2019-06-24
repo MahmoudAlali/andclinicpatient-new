@@ -10,19 +10,6 @@
     android:weightSum="10">
 
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:id="@+id/toolbar"-->
-        <!--app:title="الحجوزات"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@color/primedark"-->
-        <!--app:popupTheme="@style/AppTheme"-->
-        <!--app:titleTextColor="#fff"-->
-        <!--app:titleMarginStart="@dimen/standard_175"-->
-        <!--app:theme="@style/ToolbarColoredBackArrow"-->
-
-
-        <!--&gt;</android.support.v7.widget.Toolbar>-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -76,54 +63,66 @@
                 android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 android:weightSum="2">
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
 
                 <Button
                     android:id="@+id/all_reservation"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_button"
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
+
                     android:layout_weight="1"
                     android:background="@drawable/shadow_button_add_site"
-                    android:text="جميع حجوزاتي"
+                    android:text="@string/Allmyreservations"
                     android:textColor="#fff"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
 
                 <Button
                     android:id="@+id/reservation_inside_offer"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_button"
-                    android:layout_marginLeft="5dp"
+
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/shadow_button_blue"
-                    android:text="حجوزاتي داخل عروض"
+                    android:text="@string/MyReservationWithinOffers"
                     android:textColor="#fff"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
+                <LinearLayout
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"></LinearLayout>
             </LinearLayout>
+
 
 
         </LinearLayout>
 
 
     </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
-            android:layout_weight="1"
             android:id="@+id/review"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab3"-->
-        <!--android:layout_width="@dimen/standard_45"-->
-        <!--android:layout_height="@dimen/standard_45"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@drawable/fab_add"-->
-        <!--/>-->
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fab="http://schemas.android.com/apk/res-auto"
@@ -184,7 +183,7 @@
                 android:src="@drawable/ic_reservation"
 
                 fab:fab_colorNormal="@color/endblue"
-                fab:fab_label="حجوزات منفذة"
+                fab:fab_label="@string/Reservationsexecuted"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -195,7 +194,7 @@
                 android:src="@drawable/ic_reservation"
                 fab:fab_colorNormal="@color/endblue"
 
-                fab:fab_label="حجوزات بانتظار العربون"
+                fab:fab_label="@string/ReservationsPending"
                 fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -204,38 +203,11 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_reservation"
                 fab:fab_colorNormal="@color/endblue"
-                fab:fab_label="حجوزات الغد"
+                fab:fab_label="@string/ReservationsTomorrow"
                 fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
 
     </FrameLayout>
-
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab2"-->
-        <!--android:layout_width="@dimen/standard_45"-->
-        <!--android:layout_height="@dimen/standard_45"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@drawable/fab_add"-->
-
-        <!--/>-->
-
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab1"-->
-        <!--android:layout_width="@dimen/standard_45"-->
-        <!--android:layout_height="@dimen/standard_45"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@drawable/fab_add"-->
-        <!--/>-->
-
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_margin="@dimen/fab_margin"-->
-        <!--app:srcCompat="@drawable/fab_add" />-->
 
 </android.support.design.widget.CoordinatorLayout>

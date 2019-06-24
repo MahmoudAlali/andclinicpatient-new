@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/standard_30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service name/Promotion"
+            android:text="@string/ServiceNamePromotion"
             android:textStyle="bold"
             android:gravity="center"
             android:textSize="20dp"
@@ -42,7 +42,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:elevation="5dp"
-            android:text="اختاري الوقت و التاريخ"
+            android:text="@string/Choosetimeanddate"
             android:textStyle="bold"
             android:textSize="18dp"
             android:textColor="@android:color/holo_red_dark"
@@ -121,7 +121,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layoutDirection="rtl"
+
             android:weightSum="2"
             android:layout_marginTop="@dimen/standard_20"
             android:layout_marginLeft="10dp"
@@ -136,7 +136,7 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:text="الوقت المتوقع للخدمة:"
+                android:text="@string/Expectedservicetime"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <LinearLayout
@@ -147,7 +147,7 @@
                 <EditText
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:hint="دقيقة"
+                    android:hint="@string/minutes"
                     android:background="@drawable/shadow_button"
                     android:gravity="center"
                     android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                 <EditText
                     android:layout_marginRight="5dp"
                     android:background="@drawable/shadow_button"
-                    android:hint="ساعة"
+                    android:hint="@string/hour"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -174,7 +174,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/high_button"
             android:background="@drawable/shadow_button"
-            android:text="أضافة فرد"
+            android:text="@string/Addperson"
             android:textSize="18dp"
             android:id="@+id/add_person"
             />
@@ -211,7 +211,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="5dp"
             android:background="@color/colorAccent"
-            android:text="اضافة للعربة"
+            android:text="@string/Addtocart"
             android:textSize="18dp" />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

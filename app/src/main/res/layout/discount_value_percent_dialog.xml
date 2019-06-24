@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center"
+    android:background="@drawable/shadow_gray_dialog"
+   android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/standard_30"
+            android:gravity="center"
+            android:text="Discount Percent"
+            android:textColor="#000"
+            android:textSize="@dimen/standard_20" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/standard_20"
+            android:layout_marginBottom="@dimen/standard_20"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="match_parent"></LinearLayout>
+
+            <EditText
+                android:id="@+id/minval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shadow_edit_text"
+                android:gravity="center"
+                android:text="30" />
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="match_parent"></LinearLayout>
+
+
+            <EditText
+                android:id="@+id/maxval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shadow_edit_text"
+                android:gravity="center"
+                android:text="1000" />
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="match_parent"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar
+                android:id="@+id/rangeSeekbar5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/standard_20"
+                app:bar_color="@color/graylight"
+                app:bar_highlight_color="@color/endblue"
+                app:corner_radius="10"
+                app:data_type="_integer"
+                app:max_value="1000"
+                app:min_value="0"
+                app:steps="5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/textMin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="0 %"
+                android:textSize="@dimen/standard_20" />
+
+            <TextView
+                android:id="@+id/textMax1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="100 %"
+                android:textSize="@dimen/standard_20" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/search"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:background="@drawable/shadow_gray_dialog"
+        android:textSize="@dimen/standard_20"
+        android:text="Search"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/endblue"
+        android:elevation="5dp"/>
+</android.support.design.widget.CoordinatorLayout>

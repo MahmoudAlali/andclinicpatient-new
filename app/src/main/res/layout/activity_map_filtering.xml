@@ -44,7 +44,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layoutDirection="rtl"
             android:orientation="horizontal"
             android:weightSum="4">
 
@@ -56,19 +55,22 @@
                 android:layout_weight="1"
                 android:background="@drawable/shadow_edit_text"
                 android:gravity="center"
-                android:hint="ابحثي عن عنوان او منطقة" />
+                android:hint="@string/searchaddressandregion" />
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"></LinearLayout>
 
             <Button
                 android:id="@+id/search_map_btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+
 
                 android:layout_weight="3"
                 android:background="@drawable/shadow_button_blue"
                 android:gravity="center"
-                android:text="بحث"
+                android:text="@string/search"
                 android:textColor="#fff" />
         </LinearLayout>
 
@@ -103,7 +105,7 @@
                     android:layout_height="@dimen/high_button"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/shadow_button_add_site"
-                    android:text="اضافة" />
+                    android:text="@string/addlocation" />
 
                 <LinearLayout
                     android:layout_weight="1"
@@ -116,19 +118,23 @@
                         android:id="@+id/del_loc"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_button"
-                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/shadow_button_blue"
-                        android:text="حذف موقع" />
+                        android:text="@string/deletelocation" />
+                    <LinearLayout
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"></LinearLayout>
+                    <LinearLayout
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"></LinearLayout>
 
                     <Button
                         android:id="@+id/edit_loc"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_button"
-                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
                         android:background="@drawable/shadow_button_blue"
-                        android:text="تعديل موقع" />
+                        android:text="@string/editlocation" />
 
 
                 </LinearLayout>

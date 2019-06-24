@@ -6,6 +6,7 @@
     android:layout_width="320dp"
     android:layout_height="300dp"
     android:layout_gravity="center"
+    android:layoutDirection="ltr"
     android:background="@drawable/shadow_gray_dialog"
    android:padding="10dp">
 
@@ -118,7 +119,7 @@
         android:layout_height="@dimen/high_button"
         android:background="@drawable/shadow_gray_dialog"
         android:textSize="@dimen/standard_20"
-        android:text="Search"
+        android:text="@string/search"
         android:layout_gravity="bottom"
         android:layout_marginBottom="10dp"
         android:textColor="@color/endblue"

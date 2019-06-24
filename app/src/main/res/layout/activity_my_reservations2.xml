@@ -33,12 +33,13 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
+
             <ImageButton
                 android:id="@+id/filter"
-                android:src="@drawable/ic_filter_list_black_24dp"
                 android:layout_width="@dimen/standard_40"
+                android:layout_height="match_parent"
                 android:elevation="5dp"
-                android:layout_height="match_parent" />
+                android:src="@drawable/ic_filter_list_black_24dp" />
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
@@ -50,14 +51,17 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
+
             <Spinner
+                android:id="@+id/citiesSpinner"
                 android:layout_width="170dp"
-                android:background="@drawable/shadow_gray_dialog"
-                android:layout_height="match_parent"></Spinner>
+                android:layout_height="match_parent"
+                android:background="@drawable/shadow_gray_dialog"></Spinner>
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
             <ImageButton
+                android:id="@+id/compare"
                 android:background="@drawable/ic_compare_arrows_black_24dp"
                 android:layout_width="@dimen/standard_30"
                 android:elevation="5dp"
@@ -66,20 +70,22 @@
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
             <ImageButton
-                android:background="@drawable/ic_grid_on_black_24dp"
+                android:id="@+id/gridlist"
+                android:src="@drawable/ic_view_list_black_24dp"
                 android:layout_width="@dimen/standard_30"
                 android:elevation="5dp"
                 android:layout_height="@dimen/standard_30" />
 
         </LinearLayout>
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="@color/graylight"
             android:elevation="5dp"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize">
                 <TextView
                     android:id="@+id/servicetabclick"
                     android:layout_weight="1"
@@ -89,10 +95,8 @@
                     android:text="مقدمات الخدمة"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
                 <TextView
                     android:textColor="#000"
-
                     android:id="@+id/offertabclick"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -111,37 +115,91 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+
+
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/pages"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_30">
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@drawable/shadow_prime"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_arrow_back_black_24dp"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Previous Page"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Page"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="@drawable/shadowcolor_yellow"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Next Page"
+                    android:textSize="12dp"
+                    android:textColor="#000" />
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_arrow_forward_black_24dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"></LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+
             android:orientation="vertical"
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_marginLeft="32dp"-->
-        <!--android:layout_marginRight="32dp"-->
-        <!--android:layout_marginBottom="64dp"-->
-        <!--app:backgroundTint="@color/endblue"-->
-        <!--app:srcCompat="@drawable/ic_filter_list_black_24dp"-->
-        <!--tools:ignore="VectorDrawableCompat" />-->
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab2"-->
-        <!--android:layout_width="81dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:layout_marginLeft="35dp"-->
-        <!--android:layout_marginRight="40dp"-->
-        <!--app:fabSize="mini"-->
-        <!--android:layout_marginBottom="130dp"-->
-        <!--app:backgroundTint="@color/endblue"-->
-        <!--app:srcCompat="@drawable/ic_descending_arrangement"-->
-        <!--tools:ignore="VectorDrawableCompat" />-->
+
 
 
 </android.support.design.widget.CoordinatorLayout>

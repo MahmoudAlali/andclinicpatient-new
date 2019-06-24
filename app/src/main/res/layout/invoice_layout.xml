@@ -5,16 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@color/end_gray"-->
-        <!--app:popupTheme="@style/AppTheme"-->
-        <!--app:theme="@style/ToolbarColoredBackArrow"-->
-        <!--app:navigationIcon="@drawable/ic_menu_wihte_24dp"-->
-        <!--app:titleMarginStart="@dimen/standard_175"-->
-        <!--app:titleTextColor="#fff" />-->
+
 
     <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
@@ -38,7 +29,7 @@
         android:textStyle="bold"
         android:textSize="18dp"
         android:textColor="#000"
-        android:text="فاتورتي"
+        android:text="@string/bill"
         android:gravity="center"
         android:layout_marginTop="?attr/actionBarSize"
         />
@@ -59,13 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="4"
-            android:layoutDirection="rtl"
             android:orientation="horizontal">
             <TextView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="اسم الخدمة"
+                android:text="@string/ServiceName"
                 android:textSize="18dp"
                 android:textColor="#000"
                 android:textStyle="bold"
@@ -87,6 +77,17 @@
             android:layout_marginBottom="15dp"
             android:orientation="horizontal">
             <TextView
+
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/servicePrice"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                />
+
+            <TextView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -97,16 +98,7 @@
                 android:gravity="center"
                 />
 
-            <TextView
 
-                android:layout_weight="3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="سعر الخدمة"
-                android:textSize="18dp"
-                android:textColor="#000"
-                android:textStyle="bold"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,6 +107,14 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/ServiceTime"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -126,14 +126,7 @@
 
                 android:textSize="18dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="توقيت الخدمة"
-                android:textColor="#000"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>
