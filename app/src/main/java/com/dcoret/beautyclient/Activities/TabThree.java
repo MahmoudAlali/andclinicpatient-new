@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,9 +21,11 @@ import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -84,24 +87,62 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     LocationListener locationListener;
     MapWrapperLayout mapWrapperLayout;
     LayoutInflater layoutInflater;
-
+    ProgressDialog pd;
+//    MapView mMapView;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_google_maps, container, false);
-        mMapView = (MapView) view.findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
+//        View importPanel = ((ViewStub) view.findViewById(R.id.stub_import)).inflate();
+//        mMapView =  view.findViewById(R.id.map);
+//        mMapView.onCreate(savedInstanceState);
 
           mapWrapperLayout = view.findViewById(R.id.map_relative_layout);
 
 
 
-//        getlocation();
+        // Fixing Later Map loading Delay
+        pd=new ProgressDialog(BeautyMainPage.context);
+        pd.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                        mMapView = new MapView(BeautyMainPage.context);
+                        mapWrapperLayout.addView(mMapView);
+                        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
 
-        mMapView.onResume(); // needed to get the map to display immediately
+                                    if (mMapView!=null) {
+                                        Thread.sleep(1000);
+                                    }
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                mMapView.onCreate(savedInstanceState);
+                                pd.dismiss();
+                                mMapView.getMapAsync(TabThree.this);
+                                mMapView.onResume(); // needed to get the map to display immediately
+                            }
+                        });
+
+
+                }catch (Exception ignored){
+                    ignored.printStackTrace();
+                }
+            }
+        }).start();
+
+//        getlocation();
+                try {
+
+                }catch (Exception e){
+
+                }
         MapsInitializer.initialize(getActivity().getApplicationContext());
 
-        mMapView.getMapAsync(this);
 
 
         return view;
@@ -173,10 +214,11 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
 
     private ViewGroup infoWindow;
-    private TextView infoTitle;
+    private TextView infoTitle,infoPrice;
     private TextView infoSnippet;
     private ImageButton infoButton;
     private OnInfoWindowElemTouchListener infoButtonListener;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMapReady(GoogleMap mMap) {
         googleMap = mMap;
@@ -189,7 +231,8 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         // We want to reuse the info window for all the markers,
         // so let's create only one class member instance
         this.infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
-//        this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
+        this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
+        this.infoPrice = (TextView)infoWindow.findViewById(R.id.price);
 //        this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
         this.infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
 
@@ -242,8 +285,8 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
+//            googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
         } catch (Exception e) {
             Toast.makeText(getActivity().getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
         }
@@ -255,16 +298,21 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1; i < items.length - 2; i++) {
-                    sydney = new LatLng(locations[i].getLatitude(), locations[i].getLongtude());
+//                for (int i = 1; i < TabOne.arrayList.size() ; i++) {
+                Log.e("TabOne.arrayList.size",TabOne.arrayList.size()+"");
+                for (int i = 0; i < TabOne.arrayList.size() ; i++) {
+                    sydney = new LatLng(Double.parseDouble( TabOne.arrayList.get(i).getLatitude()),Double.parseDouble(TabOne.arrayList.get(i).getLongitude()));
                     geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
+//                    try {
+//                        addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
                     try {
-                        addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        googleMap.addMarker(new MarkerOptions().position(sydney).title(items[i]).snippet("Test From Beauty Client Google Maps"));
+                        googleMap.addMarker(new MarkerOptions().position(sydney).title(TabOne.arrayList.get(i).getBdb_sup_name()).snippet("Test From Beauty Client Google Maps"));
+                        infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
+                        infoPrice.setText(TabOne.arrayList.get(i).getBdb_ser_hall_price());
+
 //                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
                     } catch (Exception e) {
 
@@ -273,30 +321,22 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             }
         });
 
-//            }
-//        }).start();
-
 
         // For zooming automatically to the location of the marker
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(locations[0].getLatitude(), locations[0].getLongtude())).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
 
-
+        // for enter add + button and reserve service
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
-                // Setting up the infoWindow with current's marker info
-//                infoTitle.setText("Helllooo");
-//                infoSnippet.setText(marker.getSnippet());
                 infoButtonListener.setMarker(marker);
-//
 //                 We must call this to set the current marker and infoWindow references
 //                 to the MapWrapperLayout
                 mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
                 return infoWindow;
-
             }
 
             @Override

@@ -196,6 +196,7 @@
     <string name="PlaceService">مكان الخدمة</string>
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
+    <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
 
 
 
@@ -224,5 +225,12 @@
 
 
     </string-array>
+    <string-array name="service_place">
+        <item>مكان الخدمة</item>
+        <item>صالون</item>
+        <item>بيت</item>
+        <item>صالة</item>
+        <item>فندق</item>
 
+    </string-array>
 </resources>

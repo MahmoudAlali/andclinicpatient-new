@@ -65,13 +65,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Spinner location_titles;
     static int del_Flag=0;
     static int edit_Flag=0;
-
+    ArrayAdapter<String> adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.activity_map_filtering, container, false);
-        BeautyMainPage.FRAGMENT_NAME =  "MAPFRAGMENT";
+        if (BeautyMainPage.FRAGMENT_NAME.equals("SPINNER")){
+         BeautyMainPage.FRAGMENT_NAME="MAPFRAGMENTSPINNER";
+        }else {
+            BeautyMainPage.FRAGMENT_NAME = "MAPFRAGMENT";
+        }
         map = view.findViewById(R.id.map);
         add_loc = view.findViewById(R.id.add_loc);
         edit_loc = view.findViewById(R.id.edit_loc);
@@ -79,13 +82,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         location_titles=view.findViewById(R.id.location_title);
 
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationTitles);
-        ArrayAdapter<String> karant_adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
-        karant_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        location_titles.setAdapter(karant_adapter);
-
+       adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        location_titles.setAdapter(adapter);
         location_titles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("mapCamera",location_titles.getSelectedItem().toString());
                 for (int i=0;i<locationTitles.size();i++){
                     Log.e("mapCamera",location_titles.getSelectedItem().toString());
                     if(location_titles.getSelectedItem().toString().equals(locationTitles.get(i).getTitle())){
@@ -276,22 +279,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     Log.e("Delete","ok");
                                     Log.e("marker", marker.getPosition().toString());
                                     Log.e("title", marker.getTitle());
+
+
                                     for ( i = 0; i < locationTitles.size(); i++) {
                                         if (marker.getTitle().equals(locationTitles.get(i).getTitle())) {
-                                                            locationTitles.remove(i);
-                                                            marker.remove();
+
+//                                                            for (int j=0;j<arrayList.size();i++){
+//                                                               if (arrayList.get(j).equals(locationTitles.get(i)))
+//                                                                arrayList.remove(j);
+//                                                            }
+                                            locationTitles.remove(i);
+                                            marker.remove();
                                                         }
                                         }
                                     mMap.clear();
+                                    arrayList.clear();
                                     for (int i = 0; i < locationTitles.size(); i++) {
                                         mMap.addMarker(new MarkerOptions()
                                                 .position(locationTitles.get(i).getLatLng())
                                                 .title(locationTitles.get(i).getTitle())
                                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
                                         );
-
+                                        arrayList.add(locationTitles.get(i).getTitle());
 
                                     }
+                                    location_titles.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+
                                 } else {
                                     marker.showInfoWindow();
                                 }

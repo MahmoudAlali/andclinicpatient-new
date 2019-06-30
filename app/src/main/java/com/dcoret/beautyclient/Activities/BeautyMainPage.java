@@ -124,6 +124,10 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     int doback=0,doback2=0;
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }else
             if (FRAGMENT_NAME.equals("MAPFRAGMENT")) {
 //            Log.d("doback",2+"");
             doback=0;
@@ -141,7 +145,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commit();
                 FRAGMENT_NAME="";
-        }else if (FRAGMENT_NAME.equals("SERVICETABFRAGMENT")){
+        }else if (FRAGMENT_NAME.equals("MAPFRAGMENTSPINNER")){
+                fragment = new PlaceServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("SERVICETABFRAGMENT")){
                 fragment = new PlaceServiceFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -170,6 +180,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
+                FRAGMENT_NAME="SERVICEFRAGMENT";
 
             }else  {
         if(navigation.getSelectedItemId()!=R.id.services){
@@ -192,10 +203,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             builder.show();
         }
             Log.d("doback","NO");
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
+
     }
     }
 

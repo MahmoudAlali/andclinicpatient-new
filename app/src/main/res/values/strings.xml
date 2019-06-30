@@ -218,6 +218,7 @@
     <string name="ExitMessage">Do you want to exit the app? </string>
 
     <string name="shareAppMessage">Beauty application for beauty and design services download it now from the App Store</string>
+    <string name="select_city_alert">Please Select an City</string>
 
     <!--service place frag-->
     <string name="PlaceService">Service Place</string>
@@ -243,13 +244,37 @@
     </string-array>
 
     <string-array name="service_place">
-        <item>اختاري مكان الخدمة</item>
-        <item>منزل</item>
-        <item>فندق</item>
-        <item>قاعة</item>
-        <item>صالون</item>
+        <item>Place Service</item>
+        <item>Salon</item>
+        <item>Home</item>
+        <item>Hall</item>
+        <item>Hotel</item>
 
     </string-array>
+
+
+    <string-array name="service_price">
+        <item>Service Price</item>
+        <!--<item>Salon</item>-->
+        <!--<item>Home</item>-->
+    <!--<item>Hall</item>-->
+    <!--<item>Hotel</item>-->
+
+</string-array>
+
+
+<string-array name="service_rate">
+<item>Service Rate</item>
+<!--<item>Salon</item>-->
+<!--<item>Home</item>-->
+<!--<item>Hall</item>-->
+<!--<item>Hotel</item>-->
+
+</string-array>
+
+
+
+
     <string-array name="cities">
         <item>City Name</item>
         <item>الرياض</item>

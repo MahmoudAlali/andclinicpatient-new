@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,6 +82,7 @@ public class TabTwo extends Fragment {
 //    };
 
     View view;
+    SwipeRefreshLayout pullToRefresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +91,17 @@ public class TabTwo extends Fragment {
 //        navigation.setSelectedItemId(R.id.list);
 //        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 //        navigation.setSelectedItemId(R.id.list);
+
+
+        pullToRefresh = view.findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+//                browseService(true); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+
 
 
         recyclerView = view.findViewById(R.id.offers_recycleview);

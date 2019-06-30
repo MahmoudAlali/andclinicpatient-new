@@ -6,14 +6,20 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
+import com.dcoret.beautyclient.DataClass.ServiceFilter;
 import com.dcoret.beautyclient.R;
+
+import java.util.ArrayList;
 
 public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
@@ -22,6 +28,10 @@ public class ServiceFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
+    public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
+    public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
+
+    public static int bdb_ser_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
@@ -38,6 +48,9 @@ public class ServiceFragment extends Fragment {
         service_hair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                serviceFilters.set(33, new ServiceFilter(false, rateService.getText().toString()));
+                Log.e("BDB_SER_ID","1");
+                APICall.filterSortAlgorithm("33", "1", "0");
                 fragment = new PlaceServiceFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

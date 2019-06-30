@@ -37,6 +37,8 @@ import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
 import com.dcoret.beautyclient.DataClass.LocationTitles;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -2290,6 +2292,8 @@ public class APICall {
         //---------------- get cities--------------------
         public  static  String  getcities(final  String url,final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
+            PlaceServiceFragment.citiyname.clear();
+            PlaceServiceFragment.citiyname.add(((AppCompatActivity)BeautyMainPage.context).getResources().getResourceEntryName(R.string.PlaceService));
 //        pd=new ProgressDialog(context);
 //        pd.show();
         OkHttpClient client = new OkHttpClient();
@@ -2369,6 +2373,8 @@ public class APICall {
                             String bdb_name_ar=city.getString("bdb_name_ar");
                             String bdb_default_dim=city.getString("bdb_default_dim");
                             BeautyMainPage.cities.add(new Cities(bdb_id,bdb_region_id,bdb_name,bdb_name_ar,bdb_default_dim));
+
+                            PlaceServiceFragment.citiyname.add(bdb_name);
                         }
                         Log.e("CITIES",BeautyMainPage.cities.size()+"");
                     }
@@ -2384,34 +2390,28 @@ public class APICall {
 
 }
         //------------- automated Browse ----------------------
-        public  static  String  automatedBrowse(final  String url,String lang,String itemPerPage,String pageNum,final Context context){
+        public  static  String  automatedBrowse(final  String url, final String lang, final String itemPerPage, final String pageNum, final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             pd=new ProgressDialog(context);
             pd.show();
             OkHttpClient client = new OkHttpClient();
 
 
-            String temp="{\t\"lang\":\"en\",\n" +
-                    "\t\t\"ItemPerPage\":4,\t\n" +
-                    "\t\t\"PageNum\":1,\n" +
-                    "\t\t\"Filter\":[ \n" +
-                    "\t\t\t{\"num\":5,\"value1\":1,\"value2\":1} ,\n" +
-                    "\t\t\t{\"num\":6,\"value1\":4,\"value2\":0}  ,\n" +
-                    "\t\t\t{\"num\":34,\"value1\":36.47792,\"value2\":0}  ,\n" +
-                    "\t\t\t{\"num\":35,\"value1\":36.23389,\"value2\":0} \n" +
-                    "\t\t\t\n" +
-                    "\t\t ]\n" +
-                    "\t\n" +
+            String temp="{\"lang\":\"en\",\"ItemPerPage\":8,\"PageNum\":\""+pageNum+"\",\"Filter\":[" +
+                    "{\"num\":6,\"value1\":4,\"value2\":0}," +
+                    "{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
+                    "{\"num\":35,\"value1\":36.23389,\"value2\":0}" +
+                    "]" +
                     "}";
 
-            String ttt="{\t\"lang\":\"en\",\n" +
-                    "\t\t\"ItemPerPage\":4,\t\n" +
-                    "\t\t\"PageNum\":1,\n" +
-                    "\t\t\"Filter\":[ \n" +
-                    "\t{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
-                    "\t\t\t{\"num\":35,\"value1\":36.23389,\"value2\":0},"+
+            String ttt="{\"lang\":\"en\"," +
+                    "\"ItemPerPage\":20," +
+                    "\"PageNum\":\""+pageNum+"\"," +
+                    "\"Filter\":[" +
+                    getCityId()+
                     getFilterList()+  // need to try catch
                     "\t\t\t]\n" +
+//                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
                     "}";
 
 
@@ -2433,6 +2433,7 @@ public class APICall {
                     mMessage = e.getMessage();
                     Log.w("failure Response", mMessage);
                     pd.dismiss();
+                    TabOne.pullToRefresh.setRefreshing(false);
 
                     if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
@@ -2443,15 +2444,38 @@ public class APICall {
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                final TextView confirm = dialog.findViewById(R.id.confirm);
                                 TextView message = dialog.findViewById(R.id.message);
                                 TextView title = dialog.findViewById(R.id.title);
-                                title.setText(R.string.Null);
+                                title.setText(R.string.ExuseMeAlert);
                                 message.setText(R.string.check_internet_con);
                                 confirm.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
+
+                                    }
+                                });
+                                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialog) {
+//
+                                                Log.e("refreshDialog","ok");
+                                                final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
+                                                refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                                refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                                refreshDialog.setContentView(R.layout.refresh_btn_dialog);
+                                                Button refresh=refreshDialog.findViewById(R.id.refresh);
+                                                refresh.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        automatedBrowse(url,lang,itemPerPage,pageNum,context);
+                                                        refreshDialog.cancel();
+                                                    }
+                                                });
+                                                refreshDialog.show();
+
+
 
                                     }
                                 });
@@ -2478,44 +2502,73 @@ public class APICall {
 //                    Log.d("token",gettoken(context));
                     Log.e("TAG123", mMessage);
                     pd.dismiss();
+                    TabOne.pullToRefresh.setRefreshing(false);
 
                     try{
                         JSONObject jsonObject=new JSONObject(mMessage);
                         String success=jsonObject.getString("success");
                         Log.e("success",success);
-                        final String message=jsonObject.getString("message");
+                        String message;
+                        try {
+                             message=jsonObject.getString("message");
+                        }catch (JSONException je){
+                            message=jsonObject.getString("error");
+                        }
                         if (success.equals("true")){
                             if (message.equals("success get services")){
                             JSONObject data=jsonObject.getJSONObject("data");
+                            String totalitem=data.getString("TotalItem");
+                            if (totalitem.equals("0")){
+                                TabOne.arrayList.clear();
+                                ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(BeautyMainPage.context,"there is no suppliered services with your search filters",Toast.LENGTH_LONG).show();
+                                        TabOne.refreshRV();
+                                    }
+                                });
+
+                            }else {
                             JSONArray sersup=data.getJSONArray("sersup");
                             Log.e("SizeSERSUP",sersup.length()+"");
                             TabOne.arrayList.clear();
 
                             for (int i=0;i<sersup.length();i++){
                                 JSONObject jarray = sersup.getJSONObject(i);
-                                String bdb_ser_sup_id = jarray.getString("bdb_ser_sup_id");
-//                                        bdb_ser_salon = jarray.getString("bdb_ser_salon"),
-//                                        bdb_ser_home = jarray.getString("bdb_ser_home"),
-//                                        bdb_ser_hall = jarray.getString("bdb_ser_hall"),
-//                                        bdb_ser_salon_price = jarray.getString("bdb_ser_salon_price"),
-//                                        bdb_ser_home_price = jarray.getString("bdb_ser_home_price"),
-//                                        bdb_ser_hall_price = jarray.getString("bdb_ser_hall_price"),
-//                                        bdb_time = jarray.getString("bdb_time"),
-//                                        bdb_max_clients = jarray.getString("bdb_max_clients"),
-//                                        bdb_ser_id = jarray.getString("bdb_ser_id"),
-//                                        bdb_sup_id = jarray.getString("bdb_sup_id"),
-//                                        bdb_is_offer = jarray.getString("bdb_is_offer"),
-//                                        bdb_offer_status = jarray.getString("bdb_offer_status"),
-//                                        bdb_offer_start = jarray.getString("bdb_offer_start"),
-//                                        bdb_offer_end = jarray.getString("bdb_offer_end"),
-//                                        bdb_pack_code = jarray.getString("bdb_pack_code"),
-//                                        bdb_is_best = jarray.getString("bdb_is_best"),
-//                                        bdb_orgin_id = jarray.getString("bdb_orgin_id"),
-//                                        bdb_is_current_price = jarray.getString("bdb_is_current_price"),
-//                                        bdb_user_offer_num = jarray.getString("bdb_user_offer_num"),
-//                                        bdb_hotel = jarray.getString("bdb_hotel"),
-//                                        bdb_hotel_price = jarray.getString("bdb_hotel_price");
-                                BrowseServiceItem bsi = new BrowseServiceItem(bdb_ser_sup_id, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",  "", "", "");
+                                String bdb_ser_sup_id=jarray.getString("bdb_ser_sup_id"),
+                                        bdb_sup_name=jarray.getString("bdb_sup_name"),
+                                        bdb_sup_rating=jarray.getString("bdb_sup_rating"),
+                                        bdb_emp_rating=jarray.getString("bdb_emp_rating"),
+                                        totalRating=jarray.getString("totalRating"),
+                                        bdb_ser_home=jarray.getString("bdb_ser_home"),
+                                        bdb_ser_hall=jarray.getString("bdb_ser_hall"),
+                                        bdb_ser_salon=jarray.getString("bdb_ser_salon"),
+                                        bdb_hotel=jarray.getString("bdb_hotel"),
+                                        bdb_ser_home_price=jarray.getString("bdb_ser_home_price"),
+                                        bdb_ser_hall_price=jarray.getString("bdb_ser_hall_price"),
+                                        bdb_ser_salon_price=jarray.getString("bdb_ser_salon_price"),
+                                        bdb_hotel_price=jarray.getString("bdb_hotel_price"),
+                                        distance=jarray.getString("distance"),
+                                        longitude=jarray.getString("longitude"),
+                                        latitude=jarray.getString("latitude"),
+                                        is_fav_sup=jarray.getString("is_fav_sup");
+                                BrowseServiceItem bsi = new BrowseServiceItem(bdb_ser_sup_id,
+                                                                            bdb_sup_name,
+                                                                            bdb_sup_rating,
+                                                                            bdb_emp_rating,
+                                                                            totalRating,
+                                                                            bdb_ser_home,
+                                                                            bdb_ser_hall,
+                                                                            bdb_ser_salon,
+                                                                            bdb_hotel,
+                                                                            bdb_ser_home_price,
+                                                                            bdb_ser_hall_price,
+                                                                            bdb_ser_salon_price,
+                                                                            bdb_hotel_price,
+                                                                            distance,
+                                                                            longitude,
+                                                                            latitude,
+                                                                            is_fav_sup);
                                 TabOne.arrayList.add(bsi);
 
 
@@ -2531,18 +2584,21 @@ public class APICall {
                             Log.e("ARRAYLIST",TabOne.arrayList.size()+"");
 
                             TabOne.recyclerView.invalidate();
-                        }else if (message.equals("there is no providers with your search filters")){
+                            }
+
+                            }else if (message.equals("there is no providers with your search filters")){
                                 TabOne.arrayList.clear();
                                 ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         TabOne.refreshRV();
-                                        Toast.makeText(BeautyMainPage.context,message,Toast.LENGTH_LONG).show();
+                                        Toast.makeText(BeautyMainPage.context,"There is no Provider with your search filter",Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
                     }catch (JSONException je){
+//                        there is no suppliered services with your search filters
 
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                                       @Override
@@ -2908,15 +2964,39 @@ public class APICall {
         }
 
         //---------------- filter and sort model --------------------
-     static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
+        static String city;
+        static double latt,lang;
+        public static  void setCityId(int id){
+            city= "{\"num\":6,\"value1\":"+id+",\"value2\":0},"+
+//                    getLatLng();
+                    "\t{\"num\":34,\"value1\":36.47792,\"value2\":0},\n" +
+                    "\t{\"num\":35,\"value1\":36.23389,\"value2\":0}";
+        }
+
+        public static String getCityId(){
+            return city;
+        }
+
+        public static void setlocation(double lat,double lng){
+            latt=lat;
+            lang=lng;
+        }
+        public static String getLatLng(){
+            LatLng latLng=new LatLng(latt,lang);
+            return  "\t{\"num\":34,\"value1\":"+latLng.latitude+",\"value2\":0},\n" +
+                    "\t{\"num\":35,\"value1\":"+latLng.longitude+",\"value2\":0} ";
+        }
+
+
+
         public static String getFilterList(){
-            String filter="";
-//            Log.e("filterlist",filterList.get(19).getValue1());
-            for (int i=0;i<filterList.size();i++){
+            String filter=",";
+//            Log.e("filterlist",ServiceFragment.filterList.get(19).getValue1());
+            for (int i=0;i<ServiceFragment.filterList.size();i++){
 //                    "{\"num\":"+num1+",\"value1\":"+value11+",\"value2\":"+value12+"} ,\n" +
 
-                if (!filterList.get(i).getNum().equals("")){
-                filter=filter + "{\"num\":"+filterList.get(i).getNum()+",\"value1\":"+filterList.get(i).getValue1()+",\"value2\":"+filterList.get(i).getValue2()+"} ,";
+                if (!ServiceFragment.filterList.get(i).getNum().equals("")){
+                filter=filter + "{\"num\":"+ServiceFragment.filterList.get(i).getNum()+",\"value1\":"+ServiceFragment.filterList.get(i).getValue1()+",\"value2\":"+ServiceFragment.filterList.get(i).getValue2()+"} ,";
                 }
             }
             Log.e("STRINGFILTER",filter.length()+"");
@@ -2930,56 +3010,28 @@ public class APICall {
         return filter;
         }
         static  void initFilterList(){
-             if (filterList.size()==0)
+             if (ServiceFragment.filterList.size()==0)
              for (int i=0;i<=35;i++){
-                 filterList.add(new FilterAndSortModel("","",""));
+                 ServiceFragment.filterList.add(new FilterAndSortModel("","",""));
              }
-             Log.e("numberOFFilterList",filterList.size()+"");
+             Log.e("numberOFFilterList",ServiceFragment.filterList.size()+"");
          }
         public static void  filterSortAlgorithm(String num,String value1,String value2 ){
             initFilterList();
                 int index = Integer.parseInt(num);
-
                 if(!value1.equals(""))
-                    filterList.set(index, new FilterAndSortModel(num, value1, value2));
+                    ServiceFragment.filterList.set(index, new FilterAndSortModel(num, value1, value2));
+                else
+                    ServiceFragment.filterList.set(index, new FilterAndSortModel("", "", ""));
 
-                Log.e("index",filterList.get(index).getNum()+":"+filterList.get(index).getValue1()+":"+filterList.get(index).getValue2()+"");
+                Log.e("index",ServiceFragment.filterList.get(index).getNum()+":"+ServiceFragment.filterList.get(index).getValue1()+":"+ServiceFragment.filterList.get(index).getValue2()+"");
 
             }
         public  static void clearFilterList(){
-                filterList.clear();
+                ServiceFragment.filterList.clear();
             }
 
-//
-//    String num2,String value21,String value22,
-//    String num3,String value31,String value32,
-//    String num4,String value41,String value42,
-//    String num5,String value51,String value52,
-//    String num6,String value61,String value62,
-//    String num7,String value71,String value72,
-//    String num8,String value81,String value82,
-//    String num9,String value91,String value92,
-//    String num10,String value101,String value102,
-//    String num11,String value111,String value112,
-//    String num12,String value121,String value122,
-//    String num13,String value131,String value132,
-//    String num14,String value141,String value142,
-//    String num15,String value151,String value152,
-//    String num16,String value161,String value162,
-//    String num17,String value171,String value172,
-//    String num18,String value181,String value182,
-//    String num19,String value191,String value192,
-//    String num20,String value201,String value202,
-//    String num21,String value211,String value212,
-//    String num22,String value221,String value222,
-//    String num23,String value231,String value232,
-//    String num24,String value241,String value242,
-//    String num25,String value251,String value252,
-//    String num26,String value261,String value262,
-//    String num27,String value271,String value272,
-//    String num28,String value281,String value282,
-//    String num29,String value291,String value292,
-//    String num30,String value301,String value302
+
 
 
 

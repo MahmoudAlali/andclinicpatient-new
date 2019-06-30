@@ -32,12 +32,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="3"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/standard_50"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:background="@drawable/shadow_place_service_layout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <Spinner
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:id="@+id/my_location"
+                    android:elevation="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/standard_40"
 
+                    ></Spinner>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_50"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/standard_75"
+                android:background="@drawable/shadow_place_service_layout"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
                 <Spinner
                     android:layout_gravity="center"
                     android:textAlignment="center"
@@ -46,72 +71,58 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/standard_40"
-                    android:background="@drawable/shadow_place_service_layout"
-                    ></Spinner>
 
+                    ></Spinner>
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_marginTop="@dimen/standard_75"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Spinner
+                <Button
+                    android:background="@drawable/shadow_button_add_site"
                     android:layout_gravity="center"
                     android:id="@+id/service_price"
                     android:elevation="5dp"
                     android:textAlignment="center"
                     android:gravity="center"
+                    android:text="@string/servicePrice"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="@dimen/standard_75"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_50"
-                    android:background="@drawable/shadow_button_add_site"
-                    ></Spinner>
+                    ></Button>
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_marginTop="@dimen/standard_75"
-                android:orientation="horizontal"
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/service_rate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/standard_50"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="@string/ServiceRate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="@dimen/standard_75"
+                android:background="@drawable/shadow_rate"
+                android:foregroundGravity="center"
+                ></Button>
+            <!--<Button-->
+                <!--android:layout_gravity="center"-->
+                <!--android:id="@+id/service_distance"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/standard_50"-->
+                <!--android:textAlignment="center"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="@dimen/standard_75"-->
+                <!--android:background="@drawable/shadow_rate"-->
+                <!--android:foregroundGravity="center"-->
+                <!--&gt;</Button>-->
 
-                <Spinner
-                    android:layout_gravity="center"
-                    android:id="@+id/service_rate"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/standard_50"
-                    android:textAlignment="center"
-                    android:background="@drawable/shadow_rate"
-                    ></Spinner>
 
-            </LinearLayout>
 
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

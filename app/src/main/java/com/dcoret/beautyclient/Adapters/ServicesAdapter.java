@@ -142,28 +142,31 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
-            ((Item)holder).service_name.setText(items[position]);
-            ((Item) holder).service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        comparenum+=1;
-                    }else {
-                        comparenum-=1;
+            if (layout==R.layout.service_layout_adapter_last) {
+                ((Item) holder).service_name.setText(itemArrayList.get(position).getBdb_sup_name());
+                ((Item) holder).service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            comparenum += 1;
+                        } else {
+                            comparenum -= 1;
+                        }
                     }
-                }
-            });
+                });
 
+                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter());
+                ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(BeautyMainPage.context, AddReservation.class);
+                        context.startActivity(intent);
+                    }
+                });
 
-            ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(BeautyMainPage.context, AddReservation.class);
-                    context.startActivity(intent);
-                }
-            });
+            }else {
 
-
+            }
 //            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
 //            ((Item) holder).pro_name.setText(dataServices.get(position).getProvider_name());
 //            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");

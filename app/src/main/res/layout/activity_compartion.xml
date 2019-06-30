@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -17,17 +18,11 @@
         app:navigationIcon="@string/Backicon"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
-        app:title=""
-        app:titleMarginStart="@dimen/standard_175"
         app:titleTextColor="@color/end_gray" />
-<LinearLayout
-    android:layout_marginTop="64dp"
-    android:orientation="horizontal"
-    android:weightSum="4"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:weightSum="6"
         android:orientation="vertical"
         android:layout_weight="1"
@@ -226,8 +221,6 @@
     </LinearLayout>
 
 
-</LinearLayout>
 
 
-
-    </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>

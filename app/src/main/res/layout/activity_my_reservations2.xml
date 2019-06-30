@@ -130,6 +130,7 @@
                 android:layout_width="5dp"
                 android:layout_height="match_parent"></LinearLayout>
             <LinearLayout
+                android:id="@+id/pagePrev"
                 android:orientation="horizontal"
                 android:background="@drawable/shadow_prime"
                 android:layout_weight="1"
@@ -156,6 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/pagenum"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Page"
@@ -164,6 +166,7 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/pageNext"
                 android:orientation="horizontal"
                 android:weightSum="3"
                 android:background="@drawable/shadowcolor_yellow"
