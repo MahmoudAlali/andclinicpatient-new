@@ -306,6 +306,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     location_titles.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
 
+                                    //------------- for spinner in place service /init spinner
+                                    PlaceServiceFragment.mylocationId=0;
                                 } else {
                                     marker.showInfoWindow();
                                 }

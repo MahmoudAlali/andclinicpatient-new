@@ -144,6 +144,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         try {
             if (layout==R.layout.service_layout_adapter_last) {
                 ((Item) holder).service_name.setText(itemArrayList.get(position).getBdb_sup_name());
+                ((Item) holder).pro_name.setText(itemArrayList.get(position).getBdb_sup_name());
                 ((Item) holder).service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -155,7 +156,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                 });
 
-                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter());
+                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
+                ((Item) holder).service_rate.setEnabled(false);
+                ((Item) holder).service_rate.setRating(Float.parseFloat(itemArrayList.get(position).getBdb_sup_rating()));
                 ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -165,6 +168,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 });
 
             }else {
+                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
 
             }
 //            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
@@ -274,105 +278,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //
 //        }
 //    });
-//        }catch (Exception e){
-//
-//        }
-//
-//       try {
-//             dialog = new Dialog(MyReservations.context);
-//             dialog1 = new Dialog(MyReservations.context);
-//
-//       }catch (Exception e){
-//
-//           dialog = new Dialog(Offers.context);
-//           dialog1 = new Dialog(Offers.context);
-//       }
-//
-//        dialog.setContentView(R.layout.dialog_calender);
-//        dialog1.setContentView(R.layout.dialog_calender_time);
-//        final DatePicker datePicker=dialog.findViewById(R.id.date);
-//        final TimePicker timePicker=dialog1.findViewById(R.id.time);
-//
-//         okdate=dialog.findViewById(R.id.ok_date);
-//          oktime=dialog1.findViewById(R.id.ok_time);
-//         canceldate=dialog.findViewById(R.id.cancel_date);
-//         canceltime=dialog1.findViewById(R.id.cancel_time);
-//try {
-//    ((Item) holder).resrv_btn.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//            try {
-//                ReservationDialog.dateDialog(MyReservations.context,((Item) holder).textView.getText().toString(),"s");
-//            }catch (Exception e){
-//                ReservationDialog.dateDialog(Offers.context,((Item) holder).textView.getText().toString(),"s");
-//            }
 
-//            dialog.show();
-//            canceldate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.cancel();
-//                }
-//            });
-//            canceltime.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog1.cancel();
-//                }
-//            });
-//            okdate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    date=datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+" - ";
-//                    dialog.cancel();
-//                    dialog1.show();
-//                }
-//            });
-//            oktime.setOnClickListener(new View.OnClickListener() {
-//                @RequiresApi(api = Build.VERSION_CODES.M)
-//                @Override
-//                public void onClick(View v) {
-//                    date=date+timePicker.getHour()+":"+timePicker.getMinute()+"";
-//                    dialog1.cancel();
-//                    try{
-//                        Toast.makeText(context.getApplicationContext(),((Item) holder).textView.getText().toString()+"   "+date,Toast.LENGTH_LONG).show();
-//                        ShoppingCartFragment.dataServices.add(new DataService(0
-//                                ,items[position]
-//                                ,Double.parseDouble(price[position])
-//                                ,Double.parseDouble(rank[position])
-//                                ,false
-//                                ,false
-//                        ));
-//                        Reservation.services.add(new DataService(0
-//                                ,items[position]
-//                                ,Double.parseDouble(price[position])
-//                                ,Double.parseDouble(rank[position])
-//                                ,false
-//                                ,false
-//                        ));
-//                        //----------notification for reserve service
-
-//                    }catch (Exception e){
-//                        e.printStackTrace();
-
-
-//                    }
-
-//
-//                }
-//            });
-//
-////        }
-//
-////    });
-//
-//        }catch (Exception e)
-//        {
-//
-//            e.printStackTrace();
-//
-//        }
 
             }
 
@@ -404,7 +310,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             service_price=itemView.findViewById(R.id.service_price);
             service_add=itemView.findViewById(R.id.service_add);
             service_rate=itemView.findViewById(R.id.service_rate);
-            pro_name=itemView.findViewById(R.id.pro_name);
+            pro_name=itemView.findViewById(R.id.provider_name);
 //            more_btn=itemView.findViewById(R.id.more_btn);
             service_compare=itemView.findViewById(R.id.service_compare);
 //            service_details=itemView.findViewById(R.id.service_details);

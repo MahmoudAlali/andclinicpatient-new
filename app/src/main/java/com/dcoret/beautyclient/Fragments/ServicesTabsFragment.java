@@ -808,7 +808,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     });
 
 
-                    //------------------- rate provider filte------------------
+                    //------------------- rate provider filter------------------
                     final CheckBox rateProvider = dialog.findViewById(R.id.rate_provoder);
                     rateProvider.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override

@@ -1,5 +1,6 @@
 package com.dcoret.beautyclient.Activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,6 +41,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.API.PushNotifications;
 import com.dcoret.beautyclient.DataClass.Cities;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
@@ -64,6 +69,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
 public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private int ACCESS_FINE_LOCATION=90;
+    private int ACCESS_COARSE_LOCATION=91;
+    private int WRITE_EXTERNAL_STORAGE=92;
+    private int READ_EXTERNAL_STORAGE=93;
+    private int READ_PHONE_STATE=94;
+    private int ACCESS_NETWORK_STATE=95;
+
+
+
     public static NavigationView navigationView;
     public static String FRAGMENT_NAME="";
     LinearLayout layout;
@@ -85,6 +100,41 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services_tabs_layout);
         context=this;
+
+        //------- test notificatoin-----------
+        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
+        //------------------------- permissions check------------------
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
+        ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED) {
+//
+//        ) {
+//            Toast.makeText(this,"Granted",Toast.LENGTH_LONG).show();
+        }else {
+            Log.e("requestLoc","OK");
+            requestLocationPermission();
+        }
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
+//                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED) {
+//            Toast.makeText(this,"Granted",Toast.LENGTH_LONG).show();
+//        }else {
+//            Log.e("requestStorage","OK");
+//            requestStoragePermission();
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         navigation=findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.services);
         layout=findViewById(R.id.fragment);
@@ -112,6 +162,90 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
     }
 
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                &&
+                ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)
+        ){
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    , Manifest.permission.READ_EXTERNAL_STORAGE
+            },READ_EXTERNAL_STORAGE);
+//            new AlertDialog.Builder(this)
+//                    .setTitle("Permission Needed")
+//                    .setMessage("This Permission Needed because of This and That")
+//                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            ActivityCompat.requestPermissions(BeautyMainPage.this,new String[]{
+//                                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+//                                    , Manifest.permission.READ_EXTERNAL_STORAGE
+//                            },READ_EXTERNAL_STORAGE);
+//                        }
+//                    })
+//                    .setNegativeButton(R.string.CancelAlert, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    }).create().show();
+        }else {
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    , Manifest.permission.READ_EXTERNAL_STORAGE
+            },READ_EXTERNAL_STORAGE);
+        }
+
+    }
+
+
+
+    public void requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                &&
+            ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+        ){
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission Needed")
+                    .setMessage("This Permission Needed because of This and That")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(BeautyMainPage.this,new String[]{
+                                    Manifest.permission.ACCESS_FINE_LOCATION
+                                    , Manifest.permission.ACCESS_COARSE_LOCATION
+                            },ACCESS_FINE_LOCATION);
+                        }
+                    })
+                    .setNegativeButton(R.string.CancelAlert, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        }
+                    }).create().show();
+        }else {
+            ActivityCompat.requestPermissions(this,new String[]{
+                     Manifest.permission.ACCESS_FINE_LOCATION
+                    ,Manifest.permission.ACCESS_COARSE_LOCATION
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_PHONE_STATE
+                    ,Manifest.permission.ACCESS_NETWORK_STATE
+                    },ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==ACCESS_FINE_LOCATION){
+            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"Permission Granted",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,"Permission Denied",Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
 
     /*
@@ -482,6 +616,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             }
         });
         return mMessage;
-    }
 
+    }
 }

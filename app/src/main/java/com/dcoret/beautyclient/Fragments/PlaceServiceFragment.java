@@ -66,6 +66,7 @@ public class PlaceServiceFragment extends Fragment {
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
+    public static int mylocationId=0;
 //    public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
 
 
@@ -152,12 +153,13 @@ public class PlaceServiceFragment extends Fragment {
          locatioAdapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_dropdown_item, mylocation);
         locatioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mylocationSpinner.setAdapter(locatioAdapter);
-
+        mylocationSpinner.setSelection(mylocationId);
 
         mylocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
+                    mylocationId=position;
                     LocationManager locationManager = (LocationManager)
                             ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
 //                    LocationListener locationListener = new MyLocation();
@@ -204,6 +206,7 @@ public class PlaceServiceFragment extends Fragment {
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();
                     BeautyMainPage.FRAGMENT_NAME="SPINNER";
+
                 }else {
                     for (int i=0;i<MapFragment.locationTitles.size();i++){
                         if (mylocationSpinner.getSelectedItem().toString().equals(MapFragment.locationTitles.get(i).getTitle())){
@@ -217,6 +220,8 @@ public class PlaceServiceFragment extends Fragment {
 
                         }
                     }
+                    mylocationId=position;
+
 //                    MapFragment.locationTitles
 
                 }

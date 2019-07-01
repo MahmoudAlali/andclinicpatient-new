@@ -85,7 +85,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         SharedPreferences.Editor editor = getSharedPreferences("REG_ID", MODE_PRIVATE).edit();
         editor.putString("token_client",token);
         editor.apply();
-        Log.d("preference","ok");
+        Log.e("preference",token);
 
     }
 

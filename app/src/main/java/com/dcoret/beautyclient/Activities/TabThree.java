@@ -29,13 +29,16 @@ import android.view.ViewStub;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appolica.interactiveinfowindow.InfoWindow;
 import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
 import com.dcoret.beautyclient.AddReservation;
+import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.ResevationDate;
 import com.dcoret.beautyclient.test.MapWrapperLayout;
@@ -163,7 +166,6 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 //        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
 //        startActivity(intent);
         locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().LOCATION_SERVICE);
-
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -214,6 +216,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
 
     private ViewGroup infoWindow;
+    private RatingBar service_rate;
     private TextView infoTitle,infoPrice;
     private TextView infoSnippet;
     private ImageButton infoButton;
@@ -230,16 +233,18 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
         // We want to reuse the info window for all the markers,
         // so let's create only one class member instance
-        this.infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
-        this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
-        this.infoPrice = (TextView)infoWindow.findViewById(R.id.price);
-//        this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
-        this.infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
+
+        infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
+        infoTitle = (TextView)infoWindow.findViewById(R.id.title);
+        infoPrice = (TextView)infoWindow.findViewById(R.id.price);
+        service_rate=infoWindow.findViewById(R.id.service_rate);
+//        infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
+        infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
 
         // Setting custom OnTouchListener which deals with the pressed state
         // so it shows up
-        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
-               null,
+        infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
+                null,
                 null)
         {
             @Override
@@ -251,7 +256,32 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                 startActivity(i);
             }
         };
-        this.infoButton.setOnTouchListener(infoButtonListener);
+        infoButton.setOnTouchListener(infoButtonListener);
+
+
+//
+//        this.infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
+//        this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
+//        this.infoPrice = (TextView)infoWindow.findViewById(R.id.price);
+////        this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
+//        this.infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
+
+//        // Setting custom OnTouchListener which deals with the pressed state
+//        // so it shows up
+//        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
+//               null,
+//                null)
+//        {
+//            @Override
+//            protected void onClickConfirmed(View v, Marker marker) {
+//                // Here we can perform some action triggered after clicking the button
+////                Toast.makeText(BeautyMainPage.context, "تم حج", Toast.LENGTH_SHORT).show();
+//
+//                Intent i=new Intent(BeautyMainPage.context, AddReservation.class);
+//                startActivity(i);
+//            }
+//        };
+//        this.infoButton.setOnTouchListener(infoButtonListener);
 
 
 
@@ -267,7 +297,26 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+              for (int i=0;i< TabOne.arrayList.size();i++){
+               if (marker.getPosition().longitude==Double.parseDouble(TabOne.arrayList.get(i).getLongitude())
+                       && marker.getPosition().latitude==Double.parseDouble(TabOne.arrayList.get(i).getLatitude())){
+                    infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
+                    infoPrice.setText(TabOne.arrayList.get(i).getPriceByFilter());
+                    service_rate.setEnabled(false);
+                    service_rate.setRating(Float.parseFloat(TabOne.arrayList.get(i).getBdb_sup_rating()));
+               }
+              }
+                marker.showInfoWindow();
+
+                return false;
+            }
+        });
         googleMap.setMyLocationEnabled(true);
+
 
         // For dropping a marker at a point on the Map
 
@@ -310,8 +359,8 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 //                    }
                     try {
                         googleMap.addMarker(new MarkerOptions().position(sydney).title(TabOne.arrayList.get(i).getBdb_sup_name()).snippet("Test From Beauty Client Google Maps"));
-                        infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
-                        infoPrice.setText(TabOne.arrayList.get(i).getBdb_ser_hall_price());
+//                        infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
+//                        infoPrice.setText(TabOne.arrayList.get(i).getBdb_ser_hall_price());
 
 //                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
                     } catch (Exception e) {
