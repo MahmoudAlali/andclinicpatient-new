@@ -51,12 +51,14 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
-
-            <Spinner
-                android:id="@+id/citiesSpinner"
-                android:layout_width="170dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/shadow_gray_dialog"></Spinner>
+<LinearLayout
+    android:layout_width="@dimen/standard_175"
+    android:layout_height="match_parent"></LinearLayout>
+            <!--<Spinner-->
+                <!--android:id="@+id/citiesSpinner"-->
+                <!--android:layout_width="170dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/shadow_gray_dialog"></Spinner>-->
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>

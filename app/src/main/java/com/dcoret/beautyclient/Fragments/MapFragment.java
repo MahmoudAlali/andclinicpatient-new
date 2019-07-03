@@ -50,6 +50,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
@@ -60,7 +61,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Button searchmap_btn;
     Geocoder geocoder;
     Button add_loc,del_loc,edit_loc;
-    GoogleMap mMap;
+   public static GoogleMap mMap;
     int i;
     Spinner location_titles;
     static int del_Flag=0;
@@ -222,6 +223,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        APICall.getdetailsUser(BeautyMainPage.context);
         mMap = googleMap;
 
         for (int i=0;i<locationTitles.size();i++){
@@ -267,6 +269,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
+
+
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
@@ -275,6 +279,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(final Marker marker) {
+
                                 if (flag_add_delete_location == 1) {
                                     Log.e("Delete","ok");
                                     Log.e("marker", marker.getPosition().toString());

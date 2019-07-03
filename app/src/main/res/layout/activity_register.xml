@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:hint="@string/UserNameTextField" />
@@ -52,7 +52,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:hint="@string/MobileNumberTextField" />
@@ -64,7 +64,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:hint="@string/EmailAddressTextField" />
@@ -76,7 +76,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_button_spinner"></Spinner>
         <TextView
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="textPassword"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:gravity="center"
@@ -108,22 +108,12 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:inputType="textPassword"
         android:gravity="center"
         android:hint="@string/ConfirmPasswordTextField" />
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/AccessYourLocationCheckBox"
-        android:gravity="center"
-        android:id="@+id/show_map"
-        android:textColor="@color/primedark"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,17 +121,52 @@
         android:gravity="bottom"
         android:weightSum="3"
         android:orientation="vertical">
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
-            android:layout_weight="1"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".Activities.Register"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <Button
+                android:id="@+id/cur_location"
+                android:text="Current Location"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_blue"/>
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <Button
+                android:id="@+id/anthor_location"
+                android:text="Another Location"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button_add_site"/>
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="match_parent"></LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/map"
+                android:layout_weight="1"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Activities.Register"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
     android:layout_gravity="bottom"
@@ -150,17 +175,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <CheckBox
-        android:id="@+id/privacy_policy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/PolicyCheckBox"
-        android:textColor="@color/primedark"
-        android:textSize="14dp" />
+            <CheckBox
+
+                android:id="@+id/privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/PolicyCheckBox"
+                android:textColor="@color/primedark"
+                android:textSize="14dp" />
 
     <Button
         android:id="@+id/button2"

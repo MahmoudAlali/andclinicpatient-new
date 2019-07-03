@@ -2,23 +2,28 @@ package com.dcoret.beautyclient.Activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -28,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,13 +50,20 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     EditText name, phone, email, password, confirm_password;
     CheckBox privacy_policy;
     public static Context context;
+    public static int ACCESS_FINE_LOCATION = 90;
     MapView mMapView;
-    private GoogleMap googleMap;
-//    public static final String TAG = Login.class.getSimpleName();
+    public static GoogleMap googleMap;
+    //    public static final String TAG = Login.class.getSimpleName();
     private SMSReceiver smsReceiver;
     CheckBox show_map;
     SupportMapFragment mapFragment;
-    String  activation_number="";
+    String activation_number = "";
+    Button current_location,another_location;
+    public static double lat,lang;
+    Fragment fragment;
+    FragmentManager fm;
+    FragmentTransaction fragmentTransaction;
+    public static Boolean IsSelectedLocation=false;
 
 
     @Override
@@ -59,6 +72,8 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_register);
         context = this;
         name = findViewById(R.id.name);
+        current_location = findViewById(R.id.cur_location);
+        another_location = findViewById(R.id.anthor_location);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -67,21 +82,45 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        mapFragment.getView().setVisibility(View.INVISIBLE);
+//        mapFragment.getView().setVisibility(View.INVISIBLE);
 
-        show_map = findViewById(R.id.show_map);
-        show_map.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            requestLocationPermission();
+        }
+
+
+        another_location.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mapFragment.getView().setVisibility(View.VISIBLE);
-                } else {
+            public void onClick(View v) {
+                Intent intent=new Intent(Register.this,MapFiltering.class);
+                startActivity(intent);
 
-                    mapFragment.getView().setVisibility(View.INVISIBLE);
-
-                }
+//                fragment = new ServiceFragment();
+//                fm = getFragmentManager();
+//                fragmentTransaction = fm.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment, fragment);
+//                fragmentTransaction.commit();
             }
         });
+
+//        show_map = findViewById(R.id.show_map);
+//        show_map.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    mapFragment.getView().setVisibility(View.VISIBLE);
+//                } else {
+//
+//                    mapFragment.getView().setVisibility(View.INVISIBLE);
+//
+//                }
+//            }
+//        });
+
+
         gender_spinner = findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -98,14 +137,24 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.EnterMobAndPass);
         } else if (!privacy_policy.isChecked()) {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.ApplicationPolicyAlert);
-        } else {
-     APICall.new_user(email.getText().toString(), name.getText().toString(), phone.getText().toString(), password.getText().toString()
-                    , confirm_password.getText().toString(), "154", "-34", "1", "1","http://clientapp.dcoret.com/api/auth/user/register/new_user", context);
+            privacy_policy.setChecked(true);
+        } else if (!IsSelectedLocation){
+            APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),"You can't Register Without Location!" );
+
+        }else {
+//            , "http://clientapp.dcoret.com/api/auth/user/register/new_user", context
+            Log.e("lat_Lang",lat+","+lang);
+            APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
+            ,confirm_password.getText().toString(),lang+"",lat+"","its Me","its Me","http://clientapp.dcoret.com/api/auth/user/register/new_user",Register.this);
         }
     }
+
     @Override
     public void onMapReady(final GoogleMap googleMap) {
+//        googleMap.clear();
         this.googleMap = googleMap;
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -117,25 +166,74 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             return;
         }
         this.googleMap.setMyLocationEnabled(true);
-
-        googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-
+        current_location.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMyLocationChange(Location arg0) {
-                // TODO Auto-generated method stub
+            public void onClick(View v) {
+                Toast.makeText(Register.this,"Please Wait while Processing",Toast.LENGTH_SHORT).show();
+                googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                    @Override
+                    public void onMyLocationChange(Location arg0) {
+                        // TODO Auto-generated method stub
+                        lat=arg0.getLatitude();
+                        lang=arg0.getLongitude();
+                        googleMap.clear();
+                        googleMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
 
-                LatLng myLatLng = new LatLng(arg0.getLatitude(),
-                        arg0.getLongitude());
-                CameraPosition myPosition = new CameraPosition.Builder()
-                        .target(myLatLng).zoom(10f).bearing(90).tilt(30).build();
+                        LatLng myLatLng = new LatLng(arg0.getLatitude(),
+                                arg0.getLongitude());
+                        CameraPosition myPosition = new CameraPosition.Builder()
+                                .target(myLatLng).zoom(10f).bearing(90).tilt(30).build();
 
-                googleMap.animateCamera(
-                        CameraUpdateFactory.newCameraPosition(myPosition));
+                        googleMap.animateCamera(
+                                CameraUpdateFactory.newCameraPosition(myPosition));
+                    }
+                });
+
+                IsSelectedLocation=true;
+
             }
         });
 
+
     }
 
+
+
+
+    public void requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                &&
+                ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+        ){
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission Needed")
+                    .setMessage("This Permission Needed because of This and That")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(Register.this,new String[]{
+                                    Manifest.permission.ACCESS_FINE_LOCATION
+                                    , Manifest.permission.ACCESS_COARSE_LOCATION
+                            },ACCESS_FINE_LOCATION);
+                        }
+                    })
+                    .setNegativeButton(R.string.CancelAlert, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create().show();
+        }else {
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                    ,Manifest.permission.ACCESS_COARSE_LOCATION
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_PHONE_STATE
+                    ,Manifest.permission.ACCESS_NETWORK_STATE
+            },ACCESS_FINE_LOCATION);
+        }
+    }
 }

@@ -70,7 +70,7 @@ import okhttp3.RequestBody;
 
 public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int ACCESS_FINE_LOCATION=90;
+    public static int ACCESS_FINE_LOCATION=90;
     private int ACCESS_COARSE_LOCATION=91;
     private int WRITE_EXTERNAL_STORAGE=92;
     private int READ_EXTERNAL_STORAGE=93;
@@ -102,7 +102,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         context=this;
 
         //------- test notificatoin-----------
-        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
+//        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
         //------------------------- permissions check------------------
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
@@ -159,7 +159,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         //---------------get cities in background-----------------
-        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
+//        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
     }
 
     private void requestStoragePermission() {

@@ -66,7 +66,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
     Toolbar toolbar;
-    Spinner citiesSpinner;
+//    Spinner citiesSpinner;
     public static Boolean gridlistcheck=false;
     String service_place_name="";
 //    public static ArrayList<ServiceFilter> ServiceFragment.serviceFilters=new ArrayList<>();
@@ -110,7 +110,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         setHasOptionsMenu(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        citiesSpinner =view.findViewById(R.id.citiesSpinner);
+//        citiesSpinner =view.findViewById(R.id.citiesSpinner);
         filter =view.findViewById(R.id.filter);
         compare =view.findViewById(R.id.compare);
         gridlist =view.findViewById(R.id.gridlist);
@@ -132,48 +132,48 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         for (int i = 0; i < BeautyMainPage.cities.size(); i++) {
             citiyname.add(BeautyMainPage.cities.get(i).getBdb_name());
         }
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(BeautyMainPage.context,  android.R.layout.simple_spinner_dropdown_item,citiyname);
-        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-        citiesSpinner.setAdapter(adapter);
-
-        if (adapter.getCount()==1){
-            Log.e("getCities","http://clientapp.dcoret.com/api/auth/user/getCities");
-            citiyname.clear();
-            adapter.notifyDataSetChanged();
-        }else {
-            if (citiyname.size()!=0){
-                citiesSpinner.setSelection(cityId);
-            }
-        }
+//        ArrayAdapter<String> adapter =
+//                new ArrayAdapter<String>(BeautyMainPage.context,  android.R.layout.simple_spinner_dropdown_item,citiyname);
+//        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+//        citiesSpinner.setAdapter(adapter);
+//
+//        if (adapter.getCount()==1){
+//            Log.e("getCities","http://clientapp.dcoret.com/api/auth/user/getCities");
+//            citiyname.clear();
+//            adapter.notifyDataSetChanged();
+//        }else {
+//            if (citiyname.size()!=0){
+//                citiesSpinner.setSelection(cityId);
+//            }
+//        }
 
         //bubble info
-        if (cityId==0){
-//               new BubbleShowCaseBuilder(getActivity()) //Activity instance
-//                    .title(getResources().getString(R.string.ExuseMeAlert))//Any title for the bubble view
-//                     .description("Please Select an City for Filter Service and Offers... ")
-//                    .targetView(citiesSpinner) //View to point out
-//                    .show(); //Display the ShowCase
-        }else {
-            APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
-        }
+//        if (cityId==0){
+////               new BubbleShowCaseBuilder(getActivity()) //Activity instance
+////                    .title(getResources().getString(R.string.ExuseMeAlert))//Any title for the bubble view
+////                     .description("Please Select an City for Filter Service and Offers... ")
+////                    .targetView(citiesSpinner) //View to point out
+////                    .show(); //Display the ShowCase
+//        }else {
+//            APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
+//        }
 //        adapter.notifyDataSetChanged();
-        citiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position!=0){
-                    cityId=position;
-                    APICall.setCityId(position);
-                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        citiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (position!=0){
+//                    cityId=position;
+//                    APICall.setCityId(position);
+//                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 //        citiesSpinner.setSelection(PlaceServiceFragment.citiyitemSelected);
 
         //--------------------- back press--
@@ -212,14 +212,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (citiesSpinner.getSelectedItemPosition()==0){
-                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.select_city_alert);
-                        }
-                    });
-                }else
+//                if (citiesSpinner.getSelectedItemPosition()==0){
+//                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.select_city_alert);
+//                        }
+//                    });
+//                }else
                 if (TABFLAG == 1) {
 
                     final Dialog dialog = new Dialog(BeautyMainPage.context);
