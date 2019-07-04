@@ -21,7 +21,7 @@
         app:titleMarginStart="@dimen/standard_175"
         app:titleTextColor="@color/end_gray" />
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
@@ -53,10 +53,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/name"
+                    android:layout_gravity="center"
                     android:textSize="@dimen/standard_20"
                     android:textStyle="bold" />
 
                 <EditText
+                    android:gravity="center"
                     android:id="@+id/e_bdb_name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
@@ -79,9 +81,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Email"
                     android:textSize="@dimen/standard_20"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:textStyle="bold" />
 
                 <EditText
+                    android:gravity="center"
                     android:id="@+id/e_bdb_email"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
@@ -97,14 +102,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layoutDirection="inherit"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/phone"
@@ -112,11 +115,11 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:gravity="center"
                     android:id="@+id/e_bdb_mobile"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/shadow1"
                     android:enabled="false"
@@ -126,8 +129,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layoutDirection="rtl"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
 
@@ -187,52 +189,65 @@
                     android:background="@drawable/shadow1" />
             </LinearLayout>
 
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="5dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:background="@android:color/background_dark"></LinearLayout>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:background="@color/colorAccent"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/Registered_Addresses"-->
+                <!--android:textColor="#000"-->
+                <!--android:textSize="@dimen/standard_20"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<com.google.android.gms.maps.MapView-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="250dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--android:orientation="horizontal"></com.google.android.gms.maps.MapView>-->
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <Button
-                android:id="@+id/add_del_site"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/shadow_button_blue"
-                android:text="@string/add_delete_location"
-                android:textColor="#fff" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@android:color/background_dark"></LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                android:text="@string/Registered_Addresses"
-                android:textColor="#000"
-                android:textSize="@dimen/standard_20"
-                android:textStyle="bold" />
-
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white"
-                android:orientation="horizontal"></com.google.android.gms.maps.MapView>
-
-            <Button
+                android:layout_marginBottom="10dp"
                 android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/shadow_button_blue"
+                android:background="@drawable/shadow_button_add_site"
                 android:text="@string/save"
-                android:textColor="#fff" />
+                android:textColor="#000" />
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:id="@+id/add_del_site"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shadow_pink"
+                android:text="@string/add_delete_location"
+                android:textColor="#000" />
 
             <Button
                 android:id="@+id/deleteaccount"
@@ -240,11 +255,12 @@
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/shadow_button_blue"
+                android:background="@drawable/shadow_brown"
                 android:text="@string/Delete_account"
-                android:textColor="#fff" />
+                android:textColor="#000" />
+
         </LinearLayout>
 
 
-    </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
 </android.support.design.widget.CoordinatorLayout>

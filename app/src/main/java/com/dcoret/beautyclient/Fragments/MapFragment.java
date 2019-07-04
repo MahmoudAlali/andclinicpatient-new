@@ -5,6 +5,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -12,13 +13,17 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +31,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +65,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
     public  static ArrayList<String> arrayList=new ArrayList<>();
 
+    LinearLayout my_loc_layout;
     MapView map;
     TextView search_map;
     Button searchmap_btn;
@@ -63,10 +73,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Button add_loc,del_loc,edit_loc;
    public static GoogleMap mMap;
     int i;
+     ArrayList<String> listItems=new ArrayList<String>();
+
     Spinner location_titles;
+    Button my_location_btn;
     static int del_Flag=0;
     static int edit_Flag=0;
     ArrayAdapter<String> adapter;
+    public static ArrayList<String> my_loc=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,38 +91,75 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             BeautyMainPage.FRAGMENT_NAME = "MAPFRAGMENT";
         }
         map = view.findViewById(R.id.map);
+        my_location_btn = view.findViewById(R.id.my_location_btn);
         add_loc = view.findViewById(R.id.add_loc);
         edit_loc = view.findViewById(R.id.edit_loc);
         del_loc = view.findViewById(R.id.del_loc);
-        location_titles=view.findViewById(R.id.location_title);
+        my_loc_layout = view.findViewById(R.id.my_loc_layout);
+//        location_titles=view.findViewById(R.id.location_title);
 
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationTitles);
-       adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        location_titles.setAdapter(adapter);
-        location_titles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//       adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        location_titles.setAdapter(adapter);
+//        location_titles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Log.e("mapCamera",location_titles.getSelectedItem().toString());
+//                for (int i=0;i<locationTitles.size();i++){
+//                    Log.e("mapCamera",location_titles.getSelectedItem().toString());
+//                    if(location_titles.getSelectedItem().toString().equals(locationTitles.get(i).getTitle())){
+//                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
+//                            Log.e("mapCamera","ok");
+//                        }
+//                    }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+        my_loc_layout.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("mapCamera",location_titles.getSelectedItem().toString());
-                for (int i=0;i<locationTitles.size();i++){
-                    Log.e("mapCamera",location_titles.getSelectedItem().toString());
-                    if(location_titles.getSelectedItem().toString().equals(locationTitles.get(i).getTitle())){
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
-                            Log.e("mapCamera","ok");
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(BeautyMainPage.context, my_location_btn);
+//                listItems.add("rrrrrrr");
+//                listItems.add("rrrrrrr");
+//                listItems.add("rrrrrrr");
+//                listItems.add("rrrrrrr");
+//                setPopUpWindow();
+//
+//                ArrayAdapter<String> dapter=new ArrayAdapter<String>(BeautyMainPage.context,
+//                        android.R.layout.simple_list_item_1,
+//                        listItems);
+//                listView.setAdapter(adapter);
+//                listView.
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        String name=item.getTitle().toString();
+                        for(int i=0;i<locationTitles.size();i++){
+                            if (name.equals(locationTitles.get(i).getTitle())){
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
+                            }
                         }
+                        return false;
                     }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                });
+                for (int i=0;i<locationTitles.size();i++){
+                    String title=locationTitles.get(i).getTitle();
+                    popup.getMenu().add(title);
+                }
+//                popup.inflate(R.menu.popup_menu);
+                popup.show();
+//                popup.showAsDropDown(v,-153,0);
             }
         });
-
-
         map.onCreate(savedInstanceState);
         map.onResume(); // needed to get the map to display immediately
-
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -153,6 +204,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     add_loc.setEnabled(false);
                     del_loc.setEnabled(false);
                     flag_add_delete_location = 2;
+                    mMap.clear();
+                    APICall.getdetailsUser(BeautyMainPage.context);
                     edit_loc.setText(R.string.finishedediting);
                     APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.clicksitestoedit);
                     Log.e("edit", flag_add_delete_location + "");
@@ -220,6 +273,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     LatLng latLngtmp;
     int flag_add_delete_location=0;
     Marker marker;
+    PopupWindow popupMenu;
+    ListView listView;
+    private void setPopUpWindow() {
+        LayoutInflater inflater = (LayoutInflater)
+                ((AppCompatActivity)BeautyMainPage.context).getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+       View view = inflater.inflate(R.layout.popup_window, null);
+
+        listView =  view.findViewById(R.id.listview);
+//        Pause = (RelativeLayout) view.findViewById(R.id.pause_btn);
+//        Stop = (RelativeLayout) view.findViewById(R.id.stop_btn);
+
+          popupMenu = new PopupWindow(view, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -325,6 +391,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             if (marker.getTitle().equals(locationTitles.get(i).getTitle())) {
                                          latLngtmp=locationTitles.get(i).getLatLng();
                                                 locationTitles.remove(i);
+                                                Log.e("LatLang",latLngtmp.latitude+","+latLngtmp.longitude);
                                 APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
                             }
                         }

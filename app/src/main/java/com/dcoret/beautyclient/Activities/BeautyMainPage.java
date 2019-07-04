@@ -253,6 +253,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     * MAPFRAGMENT
     * SERVICETABFRAGMENT
     * COMPAREFRAGMENT
+    * DELETEACCOUNT
     * */
 
     int doback=0,doback2=0;
@@ -306,6 +307,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
+
+            }else if (FRAGMENT_NAME.equals("DELETEACCOUNT")){
+
+                fragment = new AccountFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+//                FRAGMENT_NAME="A";
 
             }else if (FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")){
 

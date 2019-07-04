@@ -33,11 +33,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Spinner
+<LinearLayout
+    android:id="@+id/my_loc_layout"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:id="@+id/my_location_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my location"
+        />
+</LinearLayout>
 
-            android:id="@+id/location_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
+        <!--<Spinner-->
+
+            <!--android:id="@+id/location_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"></Spinner>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,7 +96,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical"
-            android:weightSum="7">
+            android:weightSum="6">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map"
@@ -92,57 +107,69 @@
                 android:layout_weight="1"
                 android:orientation="vertical"></com.google.android.gms.maps.MapView>
 
-            <LinearLayout
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_weight="5"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="6"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/add_loc"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_button"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/shadow_button_add_site"
-                    android:text="@string/addlocation" />
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/del_loc"
+                        android:id="@+id/add_loc"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_button"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow_button_blue"
-                        android:text="@string/deletelocation" />
-                    <LinearLayout
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"></LinearLayout>
-                    <LinearLayout
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"></LinearLayout>
+                        android:background="@drawable/shadow_button_add_site"
+                        android:text="@string/addlocation" />
 
-                    <Button
-                        android:id="@+id/edit_loc"
+                    <LinearLayout
+                        android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_button"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow_button_blue"
-                        android:text="@string/editlocation" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
+                        <Button
+                            android:id="@+id/del_loc"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/high_button"
+                            android:layout_weight="1"
+                            android:background="@drawable/shadow_button_blue"
+                            android:text="@string/deletelocation" />
+                        <LinearLayout
+                            android:layout_width="5dp"
+                            android:layout_height="@dimen/high_button"></LinearLayout>
+                        <LinearLayout
+                            android:layout_width="5dp"
+                            android:layout_height="@dimen/high_button"></LinearLayout>
+
+                        <Button
+                            android:id="@+id/edit_loc"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/high_button"
+                            android:layout_weight="1"
+                            android:background="@drawable/shadow_button_blue"
+                            android:text="@string/editlocation" />
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
+            </android.support.design.widget.CoordinatorLayout>
 
 
         </LinearLayout>
     </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=" android:layout_height=&quot;match_paren" />-->
 
 </android.support.design.widget.CoordinatorLayout>

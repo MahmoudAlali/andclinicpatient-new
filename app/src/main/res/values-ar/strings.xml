@@ -199,6 +199,18 @@
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
 
 
+    <!--Delete Account-->
+    <string name="ServiceCovering">لم احصل على خدمات تغطي منطقتي/مدينتي</string>
+    <string name="ProNotShard">المزودة/ الصالون المطلوب غير مشترك للتطبيق</string>
+    <string name="OtherReasons">أسباب أخرى</string>
+    <string name="TechnicalReason">هناك أسباب تقنية تعيق استخدام التطبيق</string>
+    <string name="ManyOption">التطبيق لا يقدم خيارات واسعة</string>
+    <string name="ServiceAvailable">لم تتوفر خدمات خارجية/منزلية في منطقتي/مدينتي</string>
+    <string name="PricesRealistic">الأسعار غير مقاربة للواقع</string>
+    <string name="HandleApp">لم استطع التعامل مع التطبيق</string>
+    <string name="ShareMoreDetails">مشاركة المزيد من التفاصيل</string>
+    <string name="send">ارسال</string>
+
 
     <string-array name="cities">
         <item>اسم المدينة</item>

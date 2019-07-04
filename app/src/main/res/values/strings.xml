@@ -85,8 +85,8 @@
     <string name="Direction">ltr</string>
 
     <!--account fragment -->
-    <string name="name">name:</string>
-    <string name="phone">phone:</string>
+    <string name="name">Name:</string>
+    <string name="phone">Phone:</string>
     <string name="Email">Email:</string>
     <string name="password">Password</string>
     <string name="edit">edit</string>
@@ -224,6 +224,19 @@
     <string name="PlaceService">Service Place</string>
     <string name="ServicePrice">Service Price</string>
     <string name="ServiceRate">Service Evaluation</string>
+
+    <!--Delete Account-->
+    <string name="ServiceCovering">I did not get services covering my area / city</string>
+    <string name="ProNotShard">The requested provider / salon is not shared for the app</string>
+    <string name="OtherReasons">other reasons</string>
+    <string name="TechnicalReason">There are technical reasons that hinder app usage</string>
+    <string name="ManyOption">The application does not offer many options</string>
+    <string name="ServiceAvailable">No external / home services available in my / Area</string>
+    <string name="PricesRealistic">Prices are not realistic</string>
+    <string name="HandleApp">I could not handle the application</string>
+    <string name="ShareMoreDetails">Share more details</string>
+    <string name="send">send</string>
+
     <string-array name="gender">
         <item>الجنس</item>
         <item>ذكر</item>

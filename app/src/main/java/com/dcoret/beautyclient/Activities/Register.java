@@ -3,6 +3,7 @@ package com.dcoret.beautyclient.Activities;
 import android.Manifest;
 import android.app.AlertDialog;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,6 +13,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -44,6 +47,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+
 
 public class Register extends AppCompatActivity implements OnMapReadyCallback {
     Spinner gender_spinner;
@@ -64,7 +70,9 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     public static Boolean IsSelectedLocation=false;
-
+    public static String my_description,description;
+    Geocoder geocoder;
+    public static boolean iscurrent_location=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,10 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         privacy_policy = findViewById(R.id.privacy_policy);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+         geocoder=new Geocoder(context);
+
+
         mapFragment.getMapAsync(this);
 //        mapFragment.getView().setVisibility(View.INVISIBLE);
 
@@ -145,7 +157,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
 //            , "http://clientapp.dcoret.com/api/auth/user/register/new_user", context
             Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
-            ,confirm_password.getText().toString(),lang+"",lat+"","its Me","its Me","http://clientapp.dcoret.com/api/auth/user/register/new_user",Register.this);
+            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,"http://clientapp.dcoret.com/api/auth/user/register/new_user",Register.this);
         }
     }
 
@@ -169,31 +181,69 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         current_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Register.this,"Please Wait while Processing",Toast.LENGTH_SHORT).show();
-                googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-
+                iscurrent_location=true;
+                final Dialog d=new Dialog(context);
+                d.setContentView(R.layout.enter_text_dialog);
+                TextView title=d.findViewById(R.id.title);
+                final EditText addr_title=d.findViewById(R.id.message);
+                TextView ok=d.findViewById(R.id.confirm);
+                title.setText("Please enter Address Details");
+                ok.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onMyLocationChange(Location arg0) {
-                        // TODO Auto-generated method stub
-                        lat=arg0.getLatitude();
-                        lang=arg0.getLongitude();
-                        googleMap.clear();
-                        googleMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                    public void onClick(View v) {
+                        my_description=addr_title.getText().toString();
+                        try {
 
-                        LatLng myLatLng = new LatLng(arg0.getLatitude(),
-                                arg0.getLongitude());
-                        CameraPosition myPosition = new CameraPosition.Builder()
-                                .target(myLatLng).zoom(10f).bearing(90).tilt(30).build();
+                            d.cancel();
+                            Toast.makeText(Register.this,"Please Wait while Processing",Toast.LENGTH_SHORT).show();
+                            googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 
-                        googleMap.animateCamera(
-                                CameraUpdateFactory.newCameraPosition(myPosition));
-                    }
+                                @Override
+                                public void onMyLocationChange(Location arg0) {
+                                    Log.e("iscurrent",Register.iscurrent_location+"");
+
+                                    if (iscurrent_location){
+
+                                        // TODO Auto-generated method stub
+                                        lat = arg0.getLatitude();
+                                    lang = arg0.getLongitude();
+                                    googleMap.clear();
+                                    googleMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title(my_description));
+
+                                    LatLng myLatLng = new LatLng(arg0.getLatitude(),
+                                            arg0.getLongitude());
+                                    CameraPosition myPosition = new CameraPosition.Builder()
+                                            .target(myLatLng).zoom(10f).bearing(90).tilt(30).build();
+                                    List<Address> addresses = null;
+                                    try {
+                                        addresses = geocoder.getFromLocation(lat, lang, 1);
+                                        description = addresses.get(0).getAdminArea();
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    Log.e("Desc", description + ":" + my_description);
+                                    googleMap.animateCamera(
+                                            CameraUpdateFactory.newCameraPosition(myPosition));
+                                }
+                            }
+                            });
+
+                            IsSelectedLocation=true;
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(Register.context,"There is an erorr,Please Try Again",Toast.LENGTH_SHORT).show();
+                        d.cancel();
+                        }
+                        }
                 });
 
-                IsSelectedLocation=true;
 
+                d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                d.show();
             }
-        });
+
+            });
 
 
     }

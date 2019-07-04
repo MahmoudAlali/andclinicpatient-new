@@ -447,8 +447,8 @@ public class APICall {
                 postdata.put("bdb_gender", gender);
                 postdata.put("password", password);
                 postdata.put("c_password", confirm_password);
-                postdata.put("bdb_loc_long", "134");
-                postdata.put("bdb_loc_lat", "54");
+                postdata.put("bdb_loc_long", loc_long);
+                postdata.put("bdb_loc_lat", loc_lat);
                 postdata.put("bdb_descr",description );
                 postdata.put("bdb_my_descr", my_description);
 //                postdata.put("bdb_city", "1");
@@ -1191,7 +1191,7 @@ public class APICall {
 
     }
         //-------------------------------------------------------
-        public  static  void  deleteAccount(final  String url,final Context context){
+        public  static  void  deleteAccount(final  String url, final String bdb_del_reason, final String bdb_del_message , final Context context){
             new AlertDialog.Builder(context)
                     .setTitle(R.string.DeleteAccount)
                     .setMessage(R.string.DeleteAccountMessage)
@@ -1201,10 +1201,16 @@ public class APICall {
                             MediaType MEDIA_TYPE = MediaType.parse("application/json");
                             pd=new ProgressDialog(context);
                             pd.show();
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+
                             OkHttpClient client = new OkHttpClient();
                             JSONObject postdata = new JSONObject();
-
+                            try {
+                                postdata.put("bdb_del_reason", bdb_del_reason);
+                                postdata.put("bdb_del_message", bdb_del_message);
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
 
                             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
@@ -1398,9 +1404,25 @@ public class APICall {
                     public void onResponse(Call call, okhttp3.Response response) throws IOException {
                         mMessage = response.body().string();
                         Log.e("TAG", mMessage);
-                        MapFragment.locationTitles.add(new LocationTitles(new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long)),my_description));
-                        MapFragment.arrayList.add(my_description);
-                        pd.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(mMessage);
+                            String success=jsonObject.getString("success");
+                            if (success.equals("true")){
+                                MapFragment.locationTitles.add(new LocationTitles(new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long)),my_description));
+                                MapFragment.arrayList.add(my_description);
+                                pd.dismiss();
+                            }      else {
+
+                            }
+
+                        }catch (JSONException je){
+                            je.printStackTrace();
+                            pd.dismiss();
+
+                        }
+
+
+
 
 
 
@@ -1619,16 +1641,16 @@ public class APICall {
                             });
                         }else {
                             getdetailsUser(context);
-//                            for (int i=0;i<MapFragment.locationTitles.size();i++){
-//                                if (MapFragment.locationTitles.get(i).getLatLng().latitude==Double.parseDouble(bdb_loc_lat)
-//                                    && MapFragment.locationTitles.get(i).getLatLng().longitude==Double.parseDouble(bdb_loc_long)){
-//                            MapFragment.locationTitles.set(i,new LocationTitles(new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long)),bdb_my_descr));
-//                            MapFragment.arrayList.set(i,bdb_address_id);
-//
-//                                }
-                            }
-                            Log.e("Location_titles",MapFragment.locationTitles.toString());
+                            for (int i = 0; i < MapFragment.locationTitles.size(); i++) {
+                                if (MapFragment.locationTitles.get(i).getLatLng().latitude == Double.parseDouble(bdb_loc_lat)
+                                        && MapFragment.locationTitles.get(i).getLatLng().longitude == Double.parseDouble(bdb_loc_long)) {
+                                    MapFragment.locationTitles.set(i, new LocationTitles(new LatLng(Double.parseDouble(bdb_loc_lat), Double.parseDouble(bdb_loc_long)), bdb_my_descr));
+                                    MapFragment.arrayList.set(i, bdb_address_id);
 
+                                }
+                            }
+                            Log.e("Location_titles", MapFragment.locationTitles.toString());
+                        }
                     }catch (JSONException je){
                         je.printStackTrace();
                     }
@@ -1888,7 +1910,7 @@ public class APICall {
             JSONObject postdata = new JSONObject();
             try {
             postdata.put("bdb_name", bdb_name);
-//            postdata.put("bdb_email", bdb_email);
+            postdata.put("bdb_email", bdb_email);
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -1952,6 +1974,8 @@ public class APICall {
                     mMessage = response.body().string();
                     Log.e("TAG", mMessage);
                     pd.dismiss();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+
                     try {
                         final JSONObject j=new JSONObject(mMessage);
                         String success=j.getString("success");
@@ -1962,17 +1986,23 @@ public class APICall {
                                     APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
                                 }
                             });
+                            editor.putString("bdb_name", bdb_name);
+                            editor.putString("bdb_email", bdb_email);
                         } else {
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     try {
                                         APICall.showSweetDialog(BeautyMainPage.context,"", "Error: " + j.getString("message"));
+
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
                             });
+
+                            editor.putString("bdb_name", null);
+                            editor.putString("bdb_email", null);
                         }
                     } catch (JSONException je) {
                             je.printStackTrace();
@@ -1980,11 +2010,7 @@ public class APICall {
                         e.printStackTrace();
 
                     }
-                    SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
-                    editor.putString("bdb_name", bdb_name);
-//                    editor.putString("bdb_email", bdb_email);
                     editor.commit();
-
                     pd.dismiss();
 
 
@@ -2497,106 +2523,107 @@ public class APICall {
     return mMessage;
 
 }
-        //---------------- get cities--------------------
-        public  static  String  getcities(final  String url,final Context context){
-        MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            PlaceServiceFragment.citiyname.clear();
-            PlaceServiceFragment.citiyname.add(((AppCompatActivity)BeautyMainPage.context).getResources().getResourceEntryName(R.string.PlaceService));
-//        pd=new ProgressDialog(context);
-//        pd.show();
-        OkHttpClient client = new OkHttpClient();
-        JSONObject postdata = new JSONObject();
 
-
-
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
-        okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(url)
-                .post(body)
-                .addHeader("Content-Type","application/json")
-    //                .addHeader("X-Requested-With","XMLHttpRequest")
-                .header("Authorization","Bearer "+gettoken(context))
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                mMessage = e.getMessage();
-                Log.w("failure Response", mMessage);
-//                pd.dismiss();
-
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            TextView confirm = dialog.findViewById(R.id.confirm);
-                            TextView message = dialog.findViewById(R.id.message);
-                            TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.Null);
-                            message.setText(R.string.check_internet_con);
-                            confirm.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.cancel();
-
-                                }
-                            });
-                            dialog.show();
-
-                        }
-                    });
-
-
-                }else {
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onResponse(Call call, okhttp3.Response response) throws IOException {
-                mMessage = response.body().string();
-                Log.d("token",gettoken(context));
-                Log.e("TAGCities", mMessage);
-                try{
-                    JSONObject jsonObject=new JSONObject(mMessage);
-                    String success=jsonObject.getString("success");
-                    if (success.equals("true")){
-                        JSONArray citiesArr=jsonObject.getJSONArray("cities");
-                        for (int i=0;i<citiesArr.length();i++){
-                            JSONObject city=citiesArr.getJSONObject(i);
-                            String bdb_id=city.getString("bdb_id");
-                            String bdb_region_id=city.getString("bdb_region_id");
-                            String bdb_name=city.getString("bdb_name");
-                            String bdb_name_ar=city.getString("bdb_name_ar");
-                            String bdb_default_dim=city.getString("bdb_default_dim");
-                            BeautyMainPage.cities.add(new Cities(bdb_id,bdb_region_id,bdb_name,bdb_name_ar,bdb_default_dim));
-
-                            PlaceServiceFragment.citiyname.add(bdb_name);
-                        }
-                        Log.e("CITIES",BeautyMainPage.cities.size()+"");
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-//                pd.dismiss();
-            }
-        });
-
-        Log.d("MessageResponse",mMessage);
-        return mMessage;
-
-}
+//---------------- get cities--------------------
+//        public  static  String  getcities(final  String url,final Context context){
+//        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+//            PlaceServiceFragment.citiyname.clear();
+//            PlaceServiceFragment.citiyname.add(((AppCompatActivity)BeautyMainPage.context).getResources().getResourceEntryName(R.string.PlaceService));
+////        pd=new ProgressDialog(context);
+////        pd.show();
+//        OkHttpClient client = new OkHttpClient();
+//        JSONObject postdata = new JSONObject();
+//
+//
+//
+//        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+//        okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(url)
+//                .post(body)
+//                .addHeader("Content-Type","application/json")
+//    //                .addHeader("X-Requested-With","XMLHttpRequest")
+//                .header("Authorization","Bearer "+gettoken(context))
+//                .build();
+//
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                mMessage = e.getMessage();
+//                Log.w("failure Response", mMessage);
+////                pd.dismiss();
+//
+//                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+////                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+//                            TextView confirm = dialog.findViewById(R.id.confirm);
+//                            TextView message = dialog.findViewById(R.id.message);
+//                            TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+//                            confirm.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    dialog.cancel();
+//
+//                                }
+//                            });
+//                            dialog.show();
+//
+//                        }
+//                    });
+//
+//
+//                }else {
+//                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+//                mMessage = response.body().string();
+//                Log.d("token",gettoken(context));
+//                Log.e("TAGCities", mMessage);
+//                try{
+//                    JSONObject jsonObject=new JSONObject(mMessage);
+//                    String success=jsonObject.getString("success");
+//                    if (success.equals("true")){
+//                        JSONArray citiesArr=jsonObject.getJSONArray("cities");
+//                        for (int i=0;i<citiesArr.length();i++){
+//                            JSONObject city=citiesArr.getJSONObject(i);
+//                            String bdb_id=city.getString("bdb_id");
+//                            String bdb_region_id=city.getString("bdb_region_id");
+//                            String bdb_name=city.getString("bdb_name");
+//                            String bdb_name_ar=city.getString("bdb_name_ar");
+//                            String bdb_default_dim=city.getString("bdb_default_dim");
+//                            BeautyMainPage.cities.add(new Cities(bdb_id,bdb_region_id,bdb_name,bdb_name_ar,bdb_default_dim));
+//
+//                            PlaceServiceFragment.citiyname.add(bdb_name);
+//                        }
+//                        Log.e("CITIES",BeautyMainPage.cities.size()+"");
+//                    }
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+////                pd.dismiss();
+//            }
+//        });
+//
+//        Log.d("MessageResponse",mMessage);
+//        return mMessage;
+//
+//}
         //------------- automated Browse ----------------------
         public  static  String  automatedBrowse(final  String url, final String lang, final String itemPerPage, final String pageNum, final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -2935,12 +2962,6 @@ public class APICall {
                             String data=preferences.getString("addressUser",null);
                             getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
                                     preferences.getString("bdb_email",null), preferences.getString("bdb_mobile",null),namelocality,title,latLng,BeautyMainPage.context);
-
-
-
-
-
-
                         }
                     }
                 });
@@ -3250,14 +3271,12 @@ public class APICall {
             latt=lat;
             lang=lng;
         }
+
         public static String getLatLng(){
             LatLng latLng=new LatLng(latt,lang);
             return  "\t{\"num\":34,\"value1\":"+latLng.latitude+",\"value2\":0},\n" +
                     "\t{\"num\":35,\"value1\":"+latLng.longitude+",\"value2\":0} ";
         }
-
-
-
         public static String getFilterList(){
             String filter=",";
 //            Log.e("filterlist",ServiceFragment.filterList.get(19).getValue1());
@@ -3421,6 +3440,7 @@ public class APICall {
 //                                JSONObject jsonObject1 = new JSONObject(data);
                                     final JSONArray addressUser=jsonObject.getJSONArray("address");
                                     MapFragment.locationTitles.clear();
+//                                    MapFragment.my_loc.clear();
 
 
 
@@ -3434,9 +3454,9 @@ public class APICall {
                                                     lat = adr.getDouble("bdb_loc_lat");
                                                     langg = adr.getDouble("bdb_loc_long");
                                                     description = adr.getString("bdb_my_descr");
-                                                    Log.e("My_Info", lat + "_" + langg + "_" + description);
+//                                                    Log.e("My_Info", lat + "_" + langg + "_" + description);
                                                     MapFragment.locationTitles.add(new LocationTitles(new LatLng(lat,langg),description));
-
+//                                                    MapFragment.my_loc.add(description);
                                                     MapFragment.mMap.addMarker(new MarkerOptions()
                                                             .title(description)
                                                             .position(new LatLng(lat, langg))
@@ -3605,7 +3625,7 @@ public class APICall {
                                         Log.e("BDB_title_INFO",titleInfo);
                                         pd.dismiss();
                                         updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress",latLng.longitude+""
-                                                ,latLng.longitude+"",add_id,namelocality,titleInfo,context);
+                                                ,latLng.latitude+"",add_id,namelocality,titleInfo,context);
                                         break;
                                     }
                                 }

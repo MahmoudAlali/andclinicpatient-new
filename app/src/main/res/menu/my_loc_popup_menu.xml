@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/one"
+        android:title="@string/MyReservationsPendingConfirmation"/>
+
+    <item
+        android:id="@+id/two"
+        android:title="@string/MyReservationArePaidOut"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="@string/MyConfirmedReservation"/>
+    <item
+        android:id="@+id/four"
+        android:title="@string/MyPreviousReservation"/>
+    <item
+        android:id="@+id/five"
+        android:title="@string/MyCanceledReservation"/>
+
+</menu>

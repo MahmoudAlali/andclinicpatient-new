@@ -85,7 +85,12 @@ public class AccountFragment extends Fragment  {
         deleteaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.deleteAccount("http://clientapp.dcoret.com/api/auth/user/deleteAccount",BeautyMainPage.context);
+//                APICall.deleteAccount("http://clientapp.dcoret.com/api/auth/user/deleteAccount",BeautyMainPage.context);
+                fragment = new DeleteAccountFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -107,15 +112,15 @@ public class AccountFragment extends Fragment  {
 
         Log.d("fargmentname",BeautyMainPage.FRAGMENT_NAME);
 
-        mMapView = view.findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
-        mMapView.onResume(); // needed to get the map to display immediately
+//        mMapView = view.findViewById(R.id.map);
+//        mMapView.onCreate(savedInstanceState);
+//        mMapView.onResume(); // needed to get the map to display immediately
 
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            MapsInitializer.initialize(getActivity().getApplicationContext());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
