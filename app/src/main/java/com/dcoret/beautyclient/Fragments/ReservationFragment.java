@@ -1,9 +1,7 @@
 package com.dcoret.beautyclient.Fragments;
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,20 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsInsideOfferAdapter;
 import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.github.clans.fab.FloatingActionMenu;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReservationFragment extends Fragment {
     FloatingActionMenu fbmenu;

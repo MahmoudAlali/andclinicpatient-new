@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.ShoppingCart;
 
 import java.util.ArrayList;
 
@@ -59,53 +57,9 @@ public class ShopCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 final ArrayList<Integer> removeditem=new ArrayList();
                 if(dataServices.get(position).isIsoffer()){
-                    new AlertDialog.Builder(BeautyMainPage_2.context)
-                            .setTitle("Cancel Reservation")
-                            .setMessage("سوف يتم الغاء كامل العرض و حذف الخدمات الاخرى المتعلقة به,هل انت متأكد ؟")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    int id=dataServices.get(position).getOfferid();
-                                    int size=dataServices.size();
-                                    for (int i=0; i<dataServices.size();i++) {
-                                        if (dataServices.get(i).isIsoffer() && id == dataServices.get(i).getOfferid()) {
-                                                   dataServices.remove(i);
-                                            if(size>dataServices.size()){
-                                                size=dataServices.size();
-                                                i=0;
-                                            }
 
-                                        }
-                                    }
-                                    if(dataServices.get(0).getOfferid()==id){
-                                        dataServices.remove(0);
-                                    }
-                                        notifyDataSetChanged();
-                                }
-                            })
-
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
                 }else {
-                    new AlertDialog.Builder(BeautyMainPage_2.context)
-                            .setTitle("Cancel Reservation")
-                            .setMessage("هل انت متأكد انك تريد الغاء الحجز ؟")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dataServices.remove(position);
-                                    notifyDataSetChanged();
 
-
-
-
-                                }
-                            })
-
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
                 }
             }
         });

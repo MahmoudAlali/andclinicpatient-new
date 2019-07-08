@@ -13,7 +13,6 @@ public class FavoritesList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_list);
-//        setTitle("");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

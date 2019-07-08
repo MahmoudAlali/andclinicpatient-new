@@ -1,33 +1,20 @@
 package com.dcoret.beautyclient.Fragments;
 
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -41,29 +28,24 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.MapfragmentAddSite;
 
-import com.dcoret.beautyclient.DataClass.LocationTitles;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-    public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
-    public  static ArrayList<String> arrayList=new ArrayList<>();
+//    public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
+//    public  static ArrayList<String> arrayList=new ArrayList<>();
 
     LinearLayout my_loc_layout;
     MapView map;
@@ -141,16 +123,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         String name=item.getTitle().toString();
-                        for(int i=0;i<locationTitles.size();i++){
-                            if (name.equals(locationTitles.get(i).getTitle())){
-                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
+                        for(int i=0;i<AccountFragment.locationTitles.size();i++){
+                            if (name.equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())){
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(AccountFragment.locationTitles.get(i).getLatLng(), 10));
                             }
                         }
                         return false;
                     }
                 });
-                for (int i=0;i<locationTitles.size();i++){
-                    String title=locationTitles.get(i).getTitle();
+                for (int i=0;i<AccountFragment.locationTitles.size();i++){
+                    String title=AccountFragment.locationTitles.get(i).getBdb_my_descr();
                     popup.getMenu().add(title);
                 }
 //                popup.inflate(R.menu.popup_menu);
@@ -217,14 +199,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     add_loc.setEnabled(true);
                     del_loc.setEnabled(true);
                     Toast.makeText(BeautyMainPage.context,R.string.Sitesmodified,Toast.LENGTH_LONG).show();
-                    mMap.clear();
-                    for (int i = 0; i < locationTitles.size(); i++) {
-                        mMap.addMarker(new MarkerOptions()
-                                .position(locationTitles.get(i).getLatLng())
-                                .title(locationTitles.get(i).getTitle())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
-                        );
-                    }
+//                    mMap.clear();
+//                    for (int i = 0; i < AccountFragment.locationTitles.size(); i++) {
+//                        mMap.addMarker(new MarkerOptions()
+//                                .position(AccountFragment.locationTitles.get(i).getLatLng())
+//                                .title(AccountFragment.locationTitles.get(i).getBdb_my_descr())
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
+//                        );
+//                    }
                 }
                 onMapReady(mMap);
             }
@@ -292,13 +274,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         APICall.getdetailsUser(BeautyMainPage.context);
         mMap = googleMap;
 
-        for (int i=0;i<locationTitles.size();i++){
+        for (int i=0;i<AccountFragment.locationTitles.size();i++){
             mMap.addMarker(new MarkerOptions()
-                    .position(locationTitles.get(i).getLatLng())
-                    .title(locationTitles.get(i).getTitle())
+                    .position(AccountFragment.locationTitles.get(i).getLatLng())
+                    .title(AccountFragment.locationTitles.get(i).getBdb_my_descr())
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
             );
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(AccountFragment.locationTitles.get(i).getLatLng(), 10));
 
             // Setting the position for the marker
         }
@@ -319,10 +301,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                     // Clears the previously touched position
                     mMap.clear();
-                    for (int i = 0; i < locationTitles.size(); i++) {
+                    for (int i = 0; i < AccountFragment.locationTitles.size(); i++) {
                         mMap.addMarker(new MarkerOptions()
-                                .position(locationTitles.get(i).getLatLng())
-                                .title(locationTitles.get(i).getTitle())
+                                .position(AccountFragment.locationTitles.get(i).getLatLng())
+                                .title(AccountFragment.locationTitles.get(i).getBdb_my_descr())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
                         );
                         // Setting the position for the marker
@@ -352,30 +334,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     Log.e("title", marker.getTitle());
 
 
-                                    for ( i = 0; i < locationTitles.size(); i++) {
-                                        if (marker.getTitle().equals(locationTitles.get(i).getTitle())) {
+                                    for ( i = 0; i < AccountFragment.locationTitles.size(); i++) {
+                                        if (marker.getPosition().equals(AccountFragment.locationTitles.get(i).getLatLng())) {
+
 
 //                                                            for (int j=0;j<arrayList.size();i++){
 //                                                               if (arrayList.get(j).equals(locationTitles.get(i)))
 //                                                                arrayList.remove(j);
 //                                                            }
-                                            locationTitles.remove(i);
-                                            marker.remove();
+                                            APICall.deleteAddress("http://clientapp.dcoret.com/api/auth/user/deleteAddress",AccountFragment.locationTitles.get(i).getId(),i,marker,BeautyMainPage.context);
+//                                            marker.remove();
                                                         }
                                         }
                                     mMap.clear();
-                                    arrayList.clear();
-                                    for (int i = 0; i < locationTitles.size(); i++) {
+                                    AccountFragment. arrayList.clear();
+                                    for (int i = 0; i < AccountFragment.locationTitles.size(); i++) {
                                         mMap.addMarker(new MarkerOptions()
-                                                .position(locationTitles.get(i).getLatLng())
-                                                .title(locationTitles.get(i).getTitle())
+                                                .position(AccountFragment.locationTitles.get(i).getLatLng())
+                                                .title(AccountFragment.locationTitles.get(i).getBdb_my_descr())
                                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
                                         );
-                                        arrayList.add(locationTitles.get(i).getTitle());
+                                        AccountFragment.arrayList.add(AccountFragment.locationTitles.get(i).getBdb_my_descr());
 
                                     }
-                                    location_titles.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
+//                                    location_titles.setAdapter(adapter);
+//                                    adapter.notifyDataSetChanged();
 
                                     //------------- for spinner in place service /init spinner
                                     PlaceServiceFragment.mylocationId=0;
@@ -387,10 +370,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         });
                     } else if (flag_add_delete_location==2){
                         LatLng latLngtmp=null;
-                        for ( i = 0; i < locationTitles.size(); i++) {
-                            if (marker.getTitle().equals(locationTitles.get(i).getTitle())) {
-                                         latLngtmp=locationTitles.get(i).getLatLng();
-                                                locationTitles.remove(i);
+                        for ( i = 0; i < AccountFragment.locationTitles.size(); i++) {
+                            if (marker.getTitle().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())) {
+                                         latLngtmp=AccountFragment.locationTitles.get(i).getLatLng();
+                                        AccountFragment.locationTitles.remove(i);
                                                 Log.e("LatLang",latLngtmp.latitude+","+latLngtmp.longitude);
                                 APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
                             }

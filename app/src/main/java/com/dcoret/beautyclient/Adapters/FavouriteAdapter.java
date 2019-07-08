@@ -2,21 +2,12 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,15 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
-import com.dcoret.beautyclient.Activities.Favorites;
-import com.dcoret.beautyclient.Activities.MyReservations;
-import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.Reservation;
-import com.dcoret.beautyclient.Service.PushNotifications;
-import com.dcoret.beautyclient.Activities.ServiceDetails;
-import com.dcoret.beautyclient.Activities.Services;
-import com.dcoret.beautyclient.Activities.ShoppingCart;
 
 import org.json.JSONObject;
 

@@ -128,10 +128,10 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             ServiceFragment.serviceFilters.add(new ServiceFilter(false,""));
         }
         Log.e("ServiceFilterSize",ServiceFragment.serviceFilters.size()+"");
-        citiyname.add("Select Citiy");
-        for (int i = 0; i < BeautyMainPage.cities.size(); i++) {
-            citiyname.add(BeautyMainPage.cities.get(i).getBdb_name());
-        }
+//        citiyname.add("Select Citiy");
+//        for (int i = 0; i < BeautyMainPage.cities.size(); i++) {
+//            citiyname.add(BeautyMainPage.cities.get(i).getBdb_name());
+//        }
 //        ArrayAdapter<String> adapter =
 //                new ArrayAdapter<String>(BeautyMainPage.context,  android.R.layout.simple_spinner_dropdown_item,citiyname);
 //        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);

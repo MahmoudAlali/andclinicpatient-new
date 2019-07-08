@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
-import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.R;
@@ -26,7 +24,7 @@ public class BagReservationFragment extends Fragment {
     RecyclerView recyclerView;
     String[] items={"Resrvation 1","Resrvation 2","Resrvation 3","Resrvation 4","Resrvation 5","Resrvation 6"};
     //an error
-     ArrayList<DataService> services= Reservation.services;
+//     ArrayList<DataService> services= Reservation.services;
     public static ArrayList<DataReservation> reservations=new ArrayList<>();
 
 

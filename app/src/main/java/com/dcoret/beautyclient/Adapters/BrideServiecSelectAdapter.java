@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.Activities.BrideServicesSelecting;
 import com.dcoret.beautyclient.R;
 
 

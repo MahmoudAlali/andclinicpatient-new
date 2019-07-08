@@ -12,10 +12,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.Activities.MyReservations;
 import com.dcoret.beautyclient.Activities.Offers;
-import com.dcoret.beautyclient.Activities.ReservationDetails;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
@@ -69,20 +67,19 @@ public class ReservationDialog {
         });
 
     }
-    public static Context getcontext(){
-        try {
-            if (context_dialog.equals("mainpage")) {
-                return BeautyMainPage_2.context;
-            } else if (context_dialog.equals("offers")) {
-                return Offers.context;
-            } else if (context_dialog.equals("myreservation")) {
-                return MyReservations.context;
-            }
-        }catch (Exception e){
-            return BeautyMainPage_2.context;
-        }
-        return null;
-    }
+//    public static Context getcontext(){
+//        try {
+//            if (context_dialog.equals("mainpage")) {
+////                return BeautyMainPage_2.context;
+//            } else if (context_dialog.equals("offers")) {
+//                return Offers.context;
+//            } else if (context_dialog.equals("myreservation")) {
+//                return MyReservations.context;
+//            }
+//        }catch (Exception e){
+//        }
+//        return null;
+//    }
        static ArrayList<String> times=new ArrayList<>();
     static void timeDialog(final Context context, final String name,final  String type) {
         dialog1 = new Dialog(context);

@@ -1,7 +1,6 @@
 package com.dcoret.beautyclient.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.Activities.OfferDetails;
-import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
@@ -80,7 +77,7 @@ public class BrideAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                     public void onClick(View v) {
                         for (int i=0;i<offers[position].getServices().length;i++) {
                             ShoppingCartFragment.dataServices.add(offers[position].getServices()[i]);
-                            Reservation.services.add(offers[position].getServices()[i]);
+//                            Reservation.services.add(offers[position].getServices()[i]);
                         }
                         Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
                         new PushNotifications().sendnotification_provider(context,"offers","تم حجز عرض من قبل احد الزبائن","accept","cancel");

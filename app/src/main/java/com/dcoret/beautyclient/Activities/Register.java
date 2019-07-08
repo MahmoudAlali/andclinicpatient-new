@@ -52,7 +52,8 @@ import java.util.List;
 
 
 public class Register extends AppCompatActivity implements OnMapReadyCallback {
-    Spinner gender_spinner;
+
+    Spinner cities_spinner;
     EditText name, phone, email, password, confirm_password;
     CheckBox privacy_policy;
     public static Context context;
@@ -103,40 +104,22 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             requestLocationPermission();
         }
 
-
+        //----------------- go to anther location interface-------------------------
         another_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Register.this,MapFiltering.class);
                 startActivity(intent);
-
-//                fragment = new ServiceFragment();
-//                fm = getFragmentManager();
-//                fragmentTransaction = fm.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment, fragment);
-//                fragmentTransaction.commit();
             }
         });
 
-//        show_map = findViewById(R.id.show_map);
-//        show_map.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    mapFragment.getView().setVisibility(View.VISIBLE);
-//                } else {
-//
-//                    mapFragment.getView().setVisibility(View.INVISIBLE);
-//
-//                }
-//            }
-//        });
 
 
-        gender_spinner = findViewById(R.id.gender_spinner);
+
+        cities_spinner = findViewById(R.id.gender_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        gender_spinner.setAdapter(adapter);
+        cities_spinner.setAdapter(adapter);
     }
 
     //--- when confirm register and click ok-----
@@ -154,18 +137,16 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),"You can't Register Without Location!" );
 
         }else {
-//            , "http://clientapp.dcoret.com/api/auth/user/register/new_user", context
-            Log.e("lat_Lang",lat+","+lang);
+//            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
             ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,"http://clientapp.dcoret.com/api/auth/user/register/new_user",Register.this);
         }
     }
 
+    //----------------- show map ----------------------
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-//        googleMap.clear();
         this.googleMap = googleMap;
-
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -178,6 +159,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             return;
         }
         this.googleMap.setMyLocationEnabled(true);
+        //-----------------  select current location -------------
         current_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +175,6 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
                     public void onClick(View v) {
                         my_description=addr_title.getText().toString();
                         try {
-
                             d.cancel();
                             Toast.makeText(Register.this,"Please Wait while Processing",Toast.LENGTH_SHORT).show();
                             googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
@@ -251,6 +232,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
 
 
 
+    //-------------------- request permission-------------------
     public void requestLocationPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
                 &&

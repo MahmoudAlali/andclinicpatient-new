@@ -17,9 +17,12 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.DataClass.LocationTitles;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+
+import java.util.ArrayList;
 
 
 public class AccountFragment extends Fragment  {
@@ -34,11 +37,15 @@ public class AccountFragment extends Fragment  {
     Button save,deleteaccount;
     TextView edit;
 
+
+
+    public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
+    public  static ArrayList<String> arrayList=new ArrayList<>();
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_manage_accounts_frag, container, false);
-
 
         toolbar=view.findViewById(R.id.toolbar);
         e_bdb_email=view.findViewById(R.id.e_bdb_email);

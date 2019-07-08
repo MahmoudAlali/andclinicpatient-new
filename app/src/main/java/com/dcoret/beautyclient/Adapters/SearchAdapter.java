@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.Activities.OfferDetails;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -61,12 +60,7 @@ public class SearchAdapter   extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((OffersAdapter1.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(context, OfferDetails.class);
-                    context.startActivity(intent);
-                }catch (Exception e){
-                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 

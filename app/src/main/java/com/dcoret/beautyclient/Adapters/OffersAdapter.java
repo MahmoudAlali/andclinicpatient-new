@@ -2,6 +2,7 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,9 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.ReservationDialog;
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
-import com.dcoret.beautyclient.Activities.OfferDetails;
-import com.dcoret.beautyclient.Activities.Reservation;
+import com.dcoret.beautyclient.DataClass.BestOfferItem;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.ServiceItem;
 import com.dcoret.beautyclient.DataExample.OffersData;
@@ -23,6 +22,7 @@ import com.dcoret.beautyclient.R;
 
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -32,14 +32,20 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
     ArrayList<ServiceItem> serviceItems;
+    ArrayList<BestOfferItem> bestOfferItems;
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
     public OffersAdapter(Context context, String items[]){
         this.context=context;
         this.items=items;
     }
-    public OffersAdapter(Context context, ArrayList<ServiceItem> serviceItems){
+//    public OffersAdapter(Context context, ArrayList<ServiceItem> serviceItems){
+//        this.context=context;
+//        this.serviceItems=serviceItems;
+//    }
+
+    public OffersAdapter(Context context, ArrayList<BestOfferItem> bestOfferItems){
         this.context=context;
-        this.serviceItems=serviceItems;
+        this.bestOfferItems=bestOfferItems;
     }
     public OffersAdapter(Context context, String items[], boolean grid){
         this.context=context;
@@ -83,8 +89,24 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        float old_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getOld_price())+"");
+        old_prc = Float.parseFloat(df.format(old_prc));
+        float new_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getNew_price())+"");
+        new_prc = Float.parseFloat(df.format(new_prc));
+        float tot_dis=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getTotal_discount())+"");
+        tot_dis = Float.parseFloat(df.format(tot_dis));
 
+
+        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
+        ((Item)holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
+        ((Item) holder).old_price.setText(old_prc+"");
+        ((Item) holder).new_price.setText(new_prc+"");
+        ((Item) holder).total_dis.setText("dis: "+tot_dis+"%");
+        ((Item)holder).old_price.setPaintFlags(((Item)holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         try {
+
             ((OffersAdapter.Item) holder).textView.setText(offers.get(position).getName());
             ((Item) holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
             ((Item) holder).price.setText(offers.get(position).getPrice() + "");
@@ -94,50 +116,9 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onClick(View v) {
 
-                    try {
-                        Intent intent = new Intent(context, OfferDetails.class);
-                        intent.putExtra("offer_name", offers.get(position).getName());
-                        context.startActivity(intent);
-                    } catch (Exception e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+
                 }
             });
-
-            try {
-                ((Item) holder).reserv_offer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        for (int i = 0; i < offers.get(position).getServices().length; i++) {
-                            ShoppingCartFragment.dataServices.add(offers.get(position).getServices()[i]);
-                            Reservation.services.add(offers.get(position).getServices()[i]);
-                        }
-//                        Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
-                        try {
-                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-                                ReservationDialog.multiReservationDialog(ReservationDialog.getcontext(), offers.get(position));
-                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-                                Log.d("Position", position + "");
-                                ReservationDialog.dateDialog(ReservationDialog.getcontext(), offers.get(position).getName(), "o");
-
-//                              ReservationDialog.dateDialog(ReservationDialog.getcontext(), ((Item) holder).textView.getText().toString(), "o");
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            // error in back to main page
-                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-                                ReservationDialog.multiReservationDialog(BeautyMainPage_2.context, offers.get(position));
-                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-                                ReservationDialog.dateDialog(BeautyMainPage_2.context, ((Item) holder).textView.getText().toString(), "o");
-                            }
-                        }
-                    }
-                });
-
-
-            } catch (Exception e) {
-
-            }
 
 
         }catch (Exception e){
@@ -148,7 +129,7 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         try {
-            return serviceItems.size();
+            return bestOfferItems.size();
         }catch (Exception e){
             e.getMessage();
             return 0;
@@ -156,7 +137,7 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     }
     public static class Item extends RecyclerView.ViewHolder {
-        TextView textView,rating,price,pro_name,reserv_offer;
+        TextView textView,pack_code,rating,price,pro_name,reserv_offer,ser_count,total_dis,new_price,old_price;
         public Item(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.rname);
@@ -164,6 +145,11 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             reserv_offer = itemView.findViewById(R.id.reserv_offer);
             rating = itemView.findViewById(R.id.rank);
             price = itemView.findViewById(R.id.price);
+            ser_count = itemView.findViewById(R.id.ser_count);
+            pack_code = itemView.findViewById(R.id.packCode);
+            total_dis = itemView.findViewById(R.id.total_dis);
+            new_price = itemView.findViewById(R.id.new_price);
+            old_price = itemView.findViewById(R.id.old_price);
         }
     }
 //    static String token_provider="enTW789hyvs:APA91bGyfEMJKFEZ6NuhvCFAg_Abx6rB9kmdMEW6vPnGRSKJJ3BQNDaKtISf59GuWyS7tBWNdT-ZLOkn3-Nz3IzHZfB911syZzHsRfjk64KGcfG0FAQ0wEAxuFc9buspiowZJmJsQ7lP";

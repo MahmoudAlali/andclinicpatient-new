@@ -19,25 +19,11 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-//        Toolbar toolbar=findViewById(R.id.toolbar);
-//        getSupportActionBar();
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView = findViewById(R.id.notify_re_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(new NotificationAdapter(getApplicationContext(), notify));
 
     }
-//    @Override public boolean onNavigateUp(){
-//        finish();
-//        return true;
-//    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -19,8 +19,6 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.R;
 
 public class Compartion extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
-    LinearLayout service_com_name,therd_col,service_comperation;
-    TextView therd_serv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +32,6 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
                 onBackPressed();
             }
         });
-
-//        service_com_name=findViewById(R.id.service_name_compare);
-//        therd_col=findViewById(R.id.therd_col_serv);
-//        service_comperation=findViewById(R.id.service_compare);
-//        therd_serv=findViewById(R.id.therd_serv_compare);
-//        if(ServicesAdapter1.comparenum==2) {
-//            service_comperation.setWeightSum(3);
-//            therd_col.setVisibility(View.GONE);
-//        }else {
-//
-//        }
-//
-
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,28 +40,21 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
         return true;
     }
 
-
-
-
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
             return true;
         }else if(id==R.id.shoppingcart){
             Intent intent=new Intent(this,ShoppingCart.class);
             startActivity(intent);
-
         }else if(id==R.id.notify){
             Intent intent=new Intent(this,Notification.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -100,8 +77,8 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.help) {
-            Intent intent=new Intent(getApplicationContext(),Help.class);
-            startActivity(intent);
+//            Intent intent=new Intent(getApplicationContext(),Help.class);
+//            startActivity(intent);
         } else if (id == R.id.nav_share) {
             Intent intent=new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
@@ -112,8 +89,8 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
             startActivity(Intent.createChooser(intent,"Share using"));
 
         } else if (id == R.id.favorites) {
-            Intent intent=new Intent(getApplicationContext(),Favorites.class);
-            startActivity(intent);
+//            Intent intent=new Intent(getApplicationContext(),Favorites.class);
+//            startActivity(intent);
 
         } else if (id == R.id.rate_app) {
             Dialog dialog=new Dialog(this);

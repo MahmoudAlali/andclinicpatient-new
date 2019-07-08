@@ -64,135 +64,15 @@ public class Mapfragment extends Fragment implements OnMapReadyCallback{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_google_maps, container, false);
-//        mMapView = (MapView) view.findViewById(R.id.map);
         SupportMapFragment mapFragment=(SupportMapFragment)getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
         if (mapFragment==null){
             FragmentManager fm=getFragmentManager();
             FragmentTransaction ft=fm.beginTransaction();
             mapFragment=SupportMapFragment.newInstance();
             ft.replace(R.id.map,mapFragment);
-
         }
         mapFragment.getMapAsync(this);
-//        mMapView.onCreate(savedInstanceState);
-//        getlocation();
-
-      
-
-//        mMapView.onResume(); // needed to get the map to display immediately
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        MapsInitializer.initialize(getActivity().getApplicationContext());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            }).start();
-
-
-//            googleMap.setOnMapClickListener(new GoogleMapBeauty.OnMapClickListener() {
-//                @Override
-//                public void onMapClick(LatLng latLng) {
-//                    // Creating a marker
-//                    MarkerOptions markerOptions = new MarkerOptions();
-//
-//                    // Setting the position for the marker
-//                    markerOptions.position(latLng);
-//
-//                    // Setting the title for the marker.
-//                    // This will be displayed on taping the marker
-//                    markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-//
-//                    // Clears the previously touched position
-//                    googleMap.clear();
-//
-//                    // Animating to the touched position
-//                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-//
-//                    // Placing a marker on the touched position
-//                    googleMap.addMarker(markerOptions);
-//                }
-//            });
-
-
-
-
-//        mMapView.getMapAsync(new OnMapReadyCallback() {
-//            @Override
-//            public void onMapReady(GoogleMapBeauty mMap) {
-//
-//
-//                googleMap = mMap;
-//
-//                // For showing a move to my location button
-//                if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    // TODO: Consider calling
-//                    //    ActivityCompat#requestPermissions
-//                    // here to request the missing permissions, and then overriding
-//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                    //                                          int[] grantResults)
-//                    // to handle the case where the user grants the permission. See the documentation
-//                    // for ActivityCompat#requestPermissions for more details.
-//                    return;
-//                }
-//                googleMap.setMyLocationEnabled(true);
-//
-//                // For dropping a marker at a point on the Map
-//                LatLng sydney;
-//                Geocoder geo;
-//                 sydney = new LatLng( locations[0].getLatitude(), locations[0].getLongtude());
-//                geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
-//                List<Address> addresses =new ArrayList<>();
-//                try {
-//                   addresses = geo.getFromLocation(latitud, longitud, 1);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                try {
-//                    try {
-//                        addresses = geo.getFromLocation(locations[0].getLatitude(), locations[0].getLongtude(), 1);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
-//                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
-//                }catch (Exception e){
-//                    Toast.makeText(getActivity().getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG).show();
-//                }
-//
-////                for (int i=1;i<items.length-2;i++){
-////                    sydney = new LatLng( locations[i].getLatitude(),  locations[i].getLongtude());
-////                    geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
-////                    try {
-////                        addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
-////                    } catch (IOException e) {
-////                        e.printStackTrace();
-////                    }
-////                    try {
-////                        googleMap.addMarker(new MarkerOptions().position(sydney).title(items[i]).snippet("Test From Beauty Client Google Maps"));
-////                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
-////                    }catch (Exception e){
-////
-////                    }
-////                }
-//
-//
-//                // For zooming automatically to the location of the marker
-//                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-//                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//            }
-//        });
-//
-
-
-
-
-
         return view;
     }
 
@@ -227,7 +107,6 @@ public class Mapfragment extends Fragment implements OnMapReadyCallback{
     static double latitud,longitud;
     @SuppressLint("MissingPermission")
     void configure(){
-//        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
@@ -276,16 +155,6 @@ public class Mapfragment extends Fragment implements OnMapReadyCallback{
                     Manifest.permission.INTERNET
 
             },10);
-//                locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
-
-//                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-//                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
@@ -295,8 +164,5 @@ public class Mapfragment extends Fragment implements OnMapReadyCallback{
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-
-
     }
 }

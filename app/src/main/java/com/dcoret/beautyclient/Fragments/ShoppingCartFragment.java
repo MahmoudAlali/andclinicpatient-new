@@ -1,7 +1,6 @@
 package com.dcoret.beautyclient.Fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +24,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.Activities.Payment;
 import com.dcoret.beautyclient.Adapters.ShopCartAdapter;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.GiftitemPOJO;
-import com.dcoret.beautyclient.PayFort.FortRequest;
 import com.dcoret.beautyclient.R;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -42,10 +39,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.payfort.fort.android.sdk.base.FortSdk;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
-import com.payfort.sdk.android.dependancies.base.FortInterfaces;
 import com.paytabs.paytabs_sdk.payment.ui.activities.PayTabActivity;
 import com.paytabs.paytabs_sdk.utils.PaymentParams;
 
@@ -55,12 +48,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
 
 public class ShoppingCartFragment extends Fragment {
 

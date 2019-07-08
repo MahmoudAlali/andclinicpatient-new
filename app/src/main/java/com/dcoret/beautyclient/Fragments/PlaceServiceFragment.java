@@ -81,8 +81,8 @@ public class PlaceServiceFragment extends Fragment {
         mylocation.clear();
         mylocation.add("موقعي");
         mylocation.add("current location");
-        for (int i = 0; i < MapFragment.arrayList.size(); i++)
-            mylocation.add(MapFragment.arrayList.get(i));
+        for (int i = 0; i < AccountFragment.arrayList.size(); i++)
+            mylocation.add(AccountFragment.arrayList.get(i));
         mylocation.add("new Location");
 
 
@@ -208,12 +208,12 @@ public class PlaceServiceFragment extends Fragment {
                     BeautyMainPage.FRAGMENT_NAME="SPINNER";
 
                 }else {
-                    for (int i=0;i<MapFragment.locationTitles.size();i++){
-                        if (mylocationSpinner.getSelectedItem().toString().equals(MapFragment.locationTitles.get(i).getTitle())){
+                    for (int i=0;i<AccountFragment.locationTitles.size();i++){
+                        if (mylocationSpinner.getSelectedItem().toString().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())){
                             Log.e("Spinner",mylocationSpinner.getSelectedItem().toString());
-                            Log.e("Loction_title",MapFragment.locationTitles.get(i).getTitle()+":"+MapFragment.locationTitles.get(i).getLatLng());
-                            lat=MapFragment.locationTitles.get(i).getLatLng().latitude;
-                            lng=MapFragment.locationTitles.get(i).getLatLng().longitude;
+                            Log.e("Loction_title",AccountFragment.locationTitles.get(i).getBdb_my_descr()+":"+AccountFragment.locationTitles.get(i).getLatLng());
+                            lat=AccountFragment.locationTitles.get(i).getLatLng().latitude;
+                            lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
 //                            lng=location.getLongitude();
                             Log.e("LATLANG",lat+":"+lng);
                             APICall.setlocation(lat,lng);

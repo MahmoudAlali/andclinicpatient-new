@@ -13,13 +13,10 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.Activities.OfferDetails;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.Reservation;
 
 import java.util.ArrayList;
 
@@ -91,9 +88,9 @@ public class OffersAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                        context.startActivity(intent);
 //                        Log.d("Offers","ok");
 //                    } else {
-                        Intent intent = new Intent(context, OfferDetails.class);
-                        intent.putExtra("offer_name", offers.get(position).getName());
-                        context.startActivity(intent);
+//                        Intent intent = new Intent(context, OfferDetails.class);
+//                        intent.putExtra("offer_name", offers.get(position).getName());
+//                        context.startActivity(intent);
 //                        Log.d("Offers","ok2");
 
 //                    }
@@ -102,42 +99,6 @@ public class OffersAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     }
                 }
             });
-
-            try {
-                ((Item) holder).reserv_offer.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        for (int i = 0; i < offers.get(position).getServices().length; i++) {
-                            ShoppingCartFragment.dataServices.add(offers.get(position).getServices()[i]);
-                            Reservation.services.add(offers.get(position).getServices()[i]);
-                        }
-//                        Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
-                        try {
-                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-                                ReservationDialog.multiReservationDialog(ReservationDialog.getcontext(), offers.get(position));
-                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-                                Log.d("Position", position + "");
-                                ReservationDialog.dateDialog(ReservationDialog.getcontext(), offers.get(position).getName(), "o");
-
-//                              ReservationDialog.dateDialog(ReservationDialog.getcontext(), ((Item) holder).textView.getText().toString(), "o");
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            // error in back to main page
-                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-                                ReservationDialog.multiReservationDialog(BeautyMainPage_2.context, offers.get(position));
-                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-                                ReservationDialog.dateDialog(BeautyMainPage_2.context, ((Item) holder).textView.getText().toString(), "o");
-                            }
-                        }
-                    }
-                });
-
-
-            } catch (Exception e) {
-
-            }
-
 
 //        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
 //            @Override

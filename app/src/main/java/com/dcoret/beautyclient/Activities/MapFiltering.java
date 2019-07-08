@@ -31,11 +31,12 @@ import java.util.List;
 public class MapFiltering extends AppCompatActivity implements OnMapReadyCallback {
 
     MapView map;
-    FloatingActionButton filter;
     Context context;
     Button ok;
     GoogleMap mMap;
     Boolean select_loc=false;
+    Geocoder geocoder=new Geocoder(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class MapFiltering extends AppCompatActivity implements OnMapReadyCallbac
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //--------- for site in map from anther or current----------------
                 Register.iscurrent_location=false;
                 if (select_loc){
                     onBackPressed();
@@ -59,44 +61,21 @@ public class MapFiltering extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e("iscurrent",Register.iscurrent_location+"");
             }
         });
-//        Fragment fragment = new Mapfragment();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.map,fragment).commit();
         context=this;
-
         map.onCreate(savedInstanceState);
         map.onResume(); // needed to get the map to display immediately
-
         try {
+            //-------------- init map-----------
             MapsInitializer.initialize(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
         Log.d("FRAGMENTNAME", BeautyMainPage.FRAGMENT_NAME);
-
-//        geocoder = new Geocoder(getActivity().getApplicationContext());
-//        search_map = view.findViewById(R.id.search_map);
-//        searchmap_btn = view.findViewById(R.id.search_map_btn);
         map.getMapAsync(this);
-
-
-//        filter=findViewById(R.id.filter);
-
-//        filter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Dialog  dialog = new Dialog(context);
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//
-//                dialog.setContentView(R.layout.filter_dialog);
-//                dialog.setTitle("Filtering");
-//
-//                dialog.show();
-//            }
-//        });
-
-
     }
-Geocoder geocoder=new Geocoder(this);
+
+
+
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap=googleMap;
@@ -113,21 +92,16 @@ Geocoder geocoder=new Geocoder(this);
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       Register.my_description=addr_title.getText().toString();
+                        Register.my_description=addr_title.getText().toString();
                         try {
                             List<Address> addresses=geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                             Register.description=addresses.get(0).getAdminArea();
-//                            Log.e("Desc",description+":"+my_description);
-
                             mMap.addMarker(new MarkerOptions()
                                             .title(Register.my_description)
                                             .position(latLng)
-//                                .position(new LatLng(123.23,12333.23))
                             );
-
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
-//                map.
                             Register.lat=latLng.latitude;
                             Register.lang=latLng.longitude;
                             select_loc=true;

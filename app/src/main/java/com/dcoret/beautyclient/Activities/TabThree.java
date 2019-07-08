@@ -65,12 +65,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         // Required empty public constructor
     }
 
-    RecyclerView recyclerView;
-    String[] items = {"Service1", "Service2", "Service3", "Service4", "Service5", "Service6", "Service7", "Service8", "Service9", "Service10"};
-    String[] prices = {"100", "500", "450", "123", "345", "411", "800", "900", "600", "300"};
-    String[] rank = {"4.1", "3.2", "3.5", "4.7", "4.4", "3.0", "3.0", "2.5", "2.0", "1.5"};
-    String[] city = {"الرياض", "الدمام", "مكة", "الرياض", "جدة", "الدمام", "مكة", "مكة", "الطائف", "مكة"};
-    Location_Beauty[] locations = {
+       Location_Beauty[] locations = {
             new Location_Beauty(32.7792842, 35.8816735),
             new Location_Beauty(31.964383, 35.918756),
             new Location_Beauty(32.709566, 36.137142),
@@ -96,17 +91,10 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_google_maps, container, false);
-//        View importPanel = ((ViewStub) view.findViewById(R.id.stub_import)).inflate();
-//        mMapView =  view.findViewById(R.id.map);
-//        mMapView.onCreate(savedInstanceState);
 
           mapWrapperLayout = view.findViewById(R.id.map_relative_layout);
 
-
-
         // Fixing Later Map loading Delay
-        pd=new ProgressDialog(BeautyMainPage.context);
-        pd.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -125,56 +113,38 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                                     e.printStackTrace();
                                 }
                                 mMapView.onCreate(savedInstanceState);
-                                pd.dismiss();
                                 mMapView.getMapAsync(TabThree.this);
                                 mMapView.onResume(); // needed to get the map to display immediately
                             }
                         });
-
-
                 }catch (Exception ignored){
                     ignored.printStackTrace();
                 }
             }
         }).start();
 
-//        getlocation();
-                try {
-
-                }catch (Exception e){
-
-                }
         MapsInitializer.initialize(getActivity().getApplicationContext());
-
-
 
         return view;
     }
 
     static double latitud, longitud;
-
+// --------- get my location by location Manager----------
     @SuppressLint("MissingPermission")
     void configure() {
 //        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void getlocation() {
-//        Intent intent=new Intent(getApplicationContext(),ForgetMyPass.class);
-//        startActivity(intent);
         locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 latitud = location.getLatitude();
                 longitud = location.getLongitude();
-//                        Toast.makeText(getApplicationContext()
-//                                ,"lat: "+location.getLatitude()+" long: "+location.getLongitude(),Toast.LENGTH_LONG).show();
-//                    register.setText(location.getLatitude()+" : "+location.getLongitude());
-
             }
 
             @Override
@@ -196,13 +166,14 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
         if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-
-            requestPermissions(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.INTERNET
-
-            }, 10);
+            ActivityCompat.requestPermissions(getActivity(),new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                    ,Manifest.permission.ACCESS_COARSE_LOCATION
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_PHONE_STATE
+                    ,Manifest.permission.ACCESS_NETWORK_STATE
+            },BeautyMainPage.ACCESS_FINE_LOCATION);
             return;
         }
 
@@ -218,7 +189,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     private ViewGroup infoWindow;
     private RatingBar service_rate;
     private TextView infoTitle,infoPrice;
-    private TextView infoSnippet;
+//    private TextView infoSnippet;
     private ImageButton infoButton;
     private OnInfoWindowElemTouchListener infoButtonListener;
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -226,6 +197,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap mMap) {
         googleMap = mMap;
 
+        //------------------------ info title ---------------------
         // MapWrapperLayout initialization
         // 39 - default marker height
         // 20 - offset between the default InfoWindow bottom edge and it's content bottom edge
@@ -235,11 +207,10 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         // so let's create only one class member instance
 
         infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
-        infoTitle = (TextView)infoWindow.findViewById(R.id.title);
-        infoPrice = (TextView)infoWindow.findViewById(R.id.price);
+        infoTitle = infoWindow.findViewById(R.id.title);
+        infoPrice = infoWindow.findViewById(R.id.price);
         service_rate=infoWindow.findViewById(R.id.service_rate);
-//        infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
-        infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
+        infoButton = infoWindow.findViewById(R.id.book);
 
         // Setting custom OnTouchListener which deals with the pressed state
         // so it shows up
@@ -259,34 +230,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         infoButton.setOnTouchListener(infoButtonListener);
 
 
-//
-//        this.infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
-//        this.infoTitle = (TextView)infoWindow.findViewById(R.id.title);
-//        this.infoPrice = (TextView)infoWindow.findViewById(R.id.price);
-////        this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
-//        this.infoButton = (ImageButton)infoWindow.findViewById(R.id.book);
 
-//        // Setting custom OnTouchListener which deals with the pressed state
-//        // so it shows up
-//        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton,
-//               null,
-//                null)
-//        {
-//            @Override
-//            protected void onClickConfirmed(View v, Marker marker) {
-//                // Here we can perform some action triggered after clicking the button
-////                Toast.makeText(BeautyMainPage.context, "تم حج", Toast.LENGTH_SHORT).show();
-//
-//                Intent i=new Intent(BeautyMainPage.context, AddReservation.class);
-//                startActivity(i);
-//            }
-//        };
-//        this.infoButton.setOnTouchListener(infoButtonListener);
-
-
-
-//        final InfoWindow infoWindow = new InfoWindow();
-        // For showing a move to my location button
         if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -298,6 +242,8 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             return;
         }
 
+
+        //---------------show custom info title-------------------
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -320,7 +266,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
         // For dropping a marker at a point on the Map
 
-        sydney = new LatLng(locations[0].getLatitude(), locations[0].getLongtude());
+//        sydney = new LatLng(locations[0].getLatitude(), locations[0].getLongtude());
         geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
         addresses = new ArrayList<>();
         try {
@@ -341,34 +287,23 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         }
 
 
-//        new Thread(new Runnable() {
+//        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
-        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-//                for (int i = 1; i < TabOne.arrayList.size() ; i++) {
-                Log.e("TabOne.arrayList.size",TabOne.arrayList.size()+"");
-                for (int i = 0; i < TabOne.arrayList.size() ; i++) {
-                    sydney = new LatLng(Double.parseDouble( TabOne.arrayList.get(i).getLatitude()),Double.parseDouble(TabOne.arrayList.get(i).getLongitude()));
-                    geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
+////                for (int i = 1; i < TabOne.arrayList.size() ; i++) {
+//                Log.e("TabOne.arrayList.size",TabOne.arrayList.size()+"");
+//                for (int i = 0; i < TabOne.arrayList.size() ; i++) {
+//                    sydney = new LatLng(Double.parseDouble( TabOne.arrayList.get(i).getLatitude()),Double.parseDouble(TabOne.arrayList.get(i).getLongitude()));
+//                    geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
+//
 //                    try {
-//                        addresses = geo.getFromLocation(locations[i].getLatitude(), locations[i].getLongtude(), 1);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
+//                        googleMap.addMarker(new MarkerOptions().position(sydney).title(TabOne.arrayList.get(i).getBdb_sup_name()).snippet("Test From Beauty Client Google Maps"));
+//                    } catch (Exception e) {
+//
 //                    }
-                    try {
-                        googleMap.addMarker(new MarkerOptions().position(sydney).title(TabOne.arrayList.get(i).getBdb_sup_name()).snippet("Test From Beauty Client Google Maps"));
-//                        infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
-//                        infoPrice.setText(TabOne.arrayList.get(i).getBdb_ser_hall_price());
-
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        });
+//                }
+//            }
+//        });
 
 
         // For zooming automatically to the location of the marker

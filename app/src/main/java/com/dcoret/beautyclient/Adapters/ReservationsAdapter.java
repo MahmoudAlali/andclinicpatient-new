@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.BeautyMainPage_2;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.EditReservation;
 import com.dcoret.beautyclient.Fragments.EditReservationFragment;
 import com.dcoret.beautyclient.Fragments.InvoioceFragment;
-import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.Activities.Reservation;
 import com.dcoret.beautyclient.Activities.ReservationDetails;
 
 import java.util.ArrayList;
