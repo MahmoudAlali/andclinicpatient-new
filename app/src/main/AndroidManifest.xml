@@ -20,12 +20,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".test.Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".EditReservation" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Fragments.EditReservation" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -39,12 +40,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".GoogleMapBeauty"
+            android:name=".Fragments.GoogleMapBeauty"
             android:label="@string/title_activity_google_map" />
-        <activity android:name=".AddLocation" />
-        <activity android:name=".ReservationTime" />
-        <activity android:name=".ResevationDate" />
-        <activity android:name=".AddReservation" />
+        <activity android:name=".Fragments.AddLocation" />
+        <activity android:name=".Fragments.ReservationTime" />
+        <activity android:name=".Fragments.ResevationDate" />
+        <activity android:name=".Fragments.AddReservation" />
         <activity android:name=".Activities.Payment" />
 
         <service android:name=".Service.MyFirebaseInstanceService">
@@ -101,14 +102,7 @@
             android:name=".Activities.MyReservations"
             android:label="@string/title_activity_my_reservations"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MyResrvation"
-            android:label="@string/title_activity_my_resrvation"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MyReservation"
-            android:label="@string/title_activity_my_reservation"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

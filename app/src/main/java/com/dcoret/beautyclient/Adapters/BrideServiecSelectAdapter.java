@@ -26,14 +26,6 @@ public class BrideServiecSelectAdapter extends RecyclerView.Adapter<RecyclerView
     double sum=0d;
 
 
-    public BrideServiecSelectAdapter(Context context, ArrayList<String> names, ArrayList<String> prices){
-        this.context=context;
-        this.prices=prices;
-        this.names=names;
-
-    }
-
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,12 +37,9 @@ public class BrideServiecSelectAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-
-
-            Log.d("names", names.toString());
+//            Log.d("names", names.toString());
             ((Item) holder).textView.setText(names.get(position) + "");
             ((Item) holder).price.setText(prices.get(position) + "");
-
             ((Item) holder).select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -59,9 +48,6 @@ public class BrideServiecSelectAdapter extends RecyclerView.Adapter<RecyclerView
                     }
                 }
             });
-
-
-
 
     }
 

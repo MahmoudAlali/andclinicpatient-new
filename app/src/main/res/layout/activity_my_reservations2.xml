@@ -94,17 +94,18 @@
                     android:textSize="18dp"
                     android:gravity="center"
                     android:textColor="#000"
-                    android:text="مقدمات الخدمة"
+                    android:text="@string/services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
                 <TextView
-                    android:textColor="#000"
                     android:id="@+id/offertabclick"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="أبرز العروض"
+                    android:text="@string/Offers"
+                    android:textColor="#000"
                     android:textSize="18dp" />
                 <TextView
                     android:textColor="#000"
@@ -113,7 +114,7 @@
                     android:layout_weight="1"
                     android:textSize="18dp"
                     android:gravity="center"
-                    android:text="الخريطة"
+                    android:text="@string/Map"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -148,7 +149,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Previous Page"
+                    android:text="@string/PreviousPage"
                     android:textColor="#000"
                     android:textSize="12dp"
                     android:gravity="center"
@@ -162,7 +163,7 @@
                     android:id="@+id/pagenum"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Page"
+                    android:text="@string/page"
                     android:textColor="#000"
                     android:gravity="center"
                     />
@@ -181,7 +182,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Next Page"
+                    android:text="@string/NextPage"
                     android:textSize="12dp"
                     android:textColor="#000" />
                 <ImageView

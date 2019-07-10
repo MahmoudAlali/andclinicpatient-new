@@ -86,6 +86,12 @@ public class TabOne extends Fragment {
             }
         });
 
+        if (ServicesTabsFragment.updateServ){
+            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
+            ServicesTabsFragment.updateServ=false;
+            ServicesTabsFragment.updateoffr=true;
+
+        }
 
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
@@ -93,26 +99,14 @@ public class TabOne extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(servicesAdapter);
-        if (arrayList.size()==0 ) {
-           if (ServicesTabsFragment.cityId!=0){
-//               APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "8", pagenum+"", BeautyMainPage.context);
 
-           }else {
-
-           }
-        }else {
-
-        }
-
-        return view;
+            return view;
         }
 
 
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
-//        arrayList.add(null);
         servicesAdapter.notifyDataSetChanged();
-
     }
 
 

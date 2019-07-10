@@ -39,28 +39,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((NotificationAdapter.Item)holder).textView.setText(items[position]);
-//        ((OffersAdapter1.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    Intent intent = new Intent(context, OfferDetails.class);
-//                    context.startActivity(intent);
-//                }catch (Exception e){
-//                    Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
-//        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReservationDialog dialog=new ReservationDialog(Offers.context);
-//                dialog.setContentView(R.layout.rating_dialog);
-//                dialog.setTitle("تقييم العرض");
-//                dialog.show();
-//
-//            }
-//        });
     }
 
     @Override
@@ -75,7 +53,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public Item(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.notyfication_main);
-//            rating = itemView.findViewById(R.id.rating);
         }
     }
 }

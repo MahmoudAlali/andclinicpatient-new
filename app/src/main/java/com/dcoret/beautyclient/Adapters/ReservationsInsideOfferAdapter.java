@@ -47,18 +47,13 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
             @Override
             public void resrve(int p) {
                 Toast.makeText(context,"ok",Toast.LENGTH_LONG).show();
-
             }
-
             @Override
             public void more(int p) {
                 Toast.makeText(context,"ok",Toast.LENGTH_LONG).show();
-
             }
         });
         return item;
-
-
     }
 
     @Override
@@ -77,10 +72,6 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
             }
         });
 
-
-
-
-
         //---------- Edit reservation listener--------------
         ((Item) holder).edit_re.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +79,6 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
 
             }
         });
-
-
         //---------- cancel reservation listener------------
         ((Item) holder).cancel_re.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,28 +104,6 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
                             .setNegativeButton(android.R.string.no, null)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-//                }else {
-//                    AlertDialog.Builder dialog;
-//                    try {
-//                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
-//                    }catch (Exception e){
-//                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
-//
-//                    }
-//                           dialog .setTitle("Cancel Reservation")
-//                            .setMessage("هل انت متأكد انك تريد الغاء الحجز ؟")
-//                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//
-//                                }
-//                            })
-//
-//                            // A null listener allows the button to dismiss the dialog and take no further action.
-//                            .setNegativeButton(android.R.string.no, null)
-//                            .setIcon(android.R.drawable.ic_dialog_alert)
-//                            .show();
-//                }
-
             }
         });
 
@@ -158,12 +125,7 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
             textView=itemView.findViewById(R.id.rname);
             cancel_re=itemView.findViewById(R.id.cancel_re);
             edit_re=itemView.findViewById(R.id.edit_re);
-
-//            more_btn=itemView.findViewById(R.id.more_btn);
             this.listener = listener;
-
-//            resrv_btn.setOnClickListener();
-//            more_btn.setOnClickListener(this);
         }
 
         @Override
@@ -172,9 +134,7 @@ public class ReservationsInsideOfferAdapter extends RecyclerView.Adapter<Recycle
                 case R.id.reserv_btn:
                     listener.resrve(this.getLayoutPosition());
                     break;
-//                case R.id.more_btn:
-//                    listener.more(this.getLayoutPosition());
-//                    break;
+
                 default:
                     break;
             }

@@ -119,16 +119,6 @@ public class AccountFragment extends Fragment  {
 
         Log.d("fargmentname",BeautyMainPage.FRAGMENT_NAME);
 
-//        mMapView = view.findViewById(R.id.map);
-//        mMapView.onCreate(savedInstanceState);
-//        mMapView.onResume(); // needed to get the map to display immediately
-
-//        try {
-//            MapsInitializer.initialize(getActivity().getApplicationContext());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +136,6 @@ public class AccountFragment extends Fragment  {
 
             }
         });
-//        ((BeautyMainPage) getActivity()).setOnBackPressedListener(this);
         return view;
     }
 

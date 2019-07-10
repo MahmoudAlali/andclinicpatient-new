@@ -3,12 +3,12 @@ package com.dcoret.beautyclient.Activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -17,30 +17,23 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appolica.interactiveinfowindow.InfoWindow;
-import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
-import com.dcoret.beautyclient.AddReservation;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
+import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Fragments.AddReservation;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
-import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.ResevationDate;
 import com.dcoret.beautyclient.test.MapWrapperLayout;
 import com.dcoret.beautyclient.test.OnInfoWindowElemTouchListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,6 +41,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -55,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +80,9 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     LocationListener locationListener;
     MapWrapperLayout mapWrapperLayout;
     LayoutInflater layoutInflater;
+    TextView service_sw,offer_sw;
+    //--- 0 is service, 1 is offers---
+    public static int showOnMap=0;
     ProgressDialog pd;
 //    MapView mMapView;
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -93,6 +91,53 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         view = inflater.inflate(R.layout.activity_google_maps, container, false);
 
           mapWrapperLayout = view.findViewById(R.id.map_relative_layout);
+        service_sw = view.findViewById(R.id.service_Sw);
+        offer_sw = view.findViewById(R.id.offer_sw);
+
+
+
+        //---------- manual switch ------------
+        offer_sw.setBackgroundResource(android.R.color.transparent);
+        service_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+        showOnMap=0;
+
+        service_sw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                offer_sw.setBackgroundResource(android.R.color.transparent);
+                service_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+                showOnMap=0;
+                googleMap.clear();
+                for (int i=0;i< TabOne.arrayList.size();i++){
+                    Double lat=Double.parseDouble(TabOne.arrayList.get(i).getLatitude());
+                    Double lng=Double.parseDouble(TabOne.arrayList.get(i).getLongitude());
+                    Log.e("lng_lat",lat+":"+lng);
+                    googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lng))
+
+                    );
+                }
+            }
+        });
+        offer_sw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                service_sw.setBackgroundResource(android.R.color.transparent);
+                offer_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+                showOnMap=1;
+                googleMap.clear();
+//                TabTwo.arrayList.size();
+                for (int i=0;i< TabTwo.arrayList.size();i++){
+                    Double lat=Double.parseDouble(TabTwo.arrayList.get(i).getLatitude());
+                    Double lng=Double.parseDouble(TabTwo.arrayList.get(i).getLongitude());
+                    Log.e("lng_lat_offer",lat+":"+lng);
+                    Log.e("lng_lat_offer",TabTwo.arrayList.size()+"");
+                    googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lng))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
+
+                    );
+                }
+            }
+        });
 
         // Fixing Later Map loading Delay
         new Thread(new Runnable() {
@@ -180,7 +225,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         configure();
     }
 
-    LatLng sydney;
+//    LatLng sydney;
     Geocoder geo;
     List<Address> addresses;
 
@@ -188,7 +233,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
     private ViewGroup infoWindow;
     private RatingBar service_rate;
-    private TextView infoTitle,infoPrice;
+    private TextView infoTitle,infoPrice,infoldPrice;
 //    private TextView infoSnippet;
     private ImageButton infoButton;
     private OnInfoWindowElemTouchListener infoButtonListener;
@@ -209,6 +254,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
         infoWindow = (ViewGroup)getLayoutInflater().inflate(R.layout.title_map_layout, null);
         infoTitle = infoWindow.findViewById(R.id.title);
         infoPrice = infoWindow.findViewById(R.id.price);
+        infoldPrice = infoWindow.findViewById(R.id.old_price);
         service_rate=infoWindow.findViewById(R.id.service_rate);
         infoButton = infoWindow.findViewById(R.id.book);
 
@@ -242,31 +288,58 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             return;
         }
 
+                for (int i=0;i< TabOne.arrayList.size();i++){
+
+                    Double lat=Double.parseDouble(TabOne.arrayList.get(i).getLatitude());
+                    Double lng=Double.parseDouble(TabOne.arrayList.get(i).getLongitude());
+                    Log.e("lng_lat",lat+":"+lng);
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lng)));
+        }
+
+        final DecimalFormat df = new DecimalFormat("0.0");
 
         //---------------show custom info title-------------------
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-              for (int i=0;i< TabOne.arrayList.size();i++){
-               if (marker.getPosition().longitude==Double.parseDouble(TabOne.arrayList.get(i).getLongitude())
-                       && marker.getPosition().latitude==Double.parseDouble(TabOne.arrayList.get(i).getLatitude())){
-                    infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
-                    infoPrice.setText(TabOne.arrayList.get(i).getPriceByFilter());
-                    service_rate.setEnabled(false);
-                    service_rate.setRating(Float.parseFloat(TabOne.arrayList.get(i).getBdb_sup_rating()));
-               }
-              }
+                if (showOnMap==0) {
+                    for (int i = 0; i < TabOne.arrayList.size(); i++) {
+                        if (marker.getPosition().longitude == Double.parseDouble(TabOne.arrayList.get(i).getLongitude())
+                                && marker.getPosition().latitude == Double.parseDouble(TabOne.arrayList.get(i).getLatitude())) {
+                            infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
+                            infoPrice.setText(TabOne.arrayList.get(i).getPriceByFilter());
+                            infoldPrice.setText("");
+                            service_rate.setVisibility(View.VISIBLE);
+                            service_rate.setEnabled(false);
+                            service_rate.setRating(Float.parseFloat(TabOne.arrayList.get(i).getBdb_sup_rating()));
+                        }
+                    }
+                }else{
+                    for (int i = 0; i < TabTwo.arrayList.size(); i++) {
+                        if (marker.getPosition().longitude == Double.parseDouble(TabTwo.arrayList.get(i).getLongitude())
+                                && marker.getPosition().latitude == Double.parseDouble(TabTwo.arrayList.get(i).getLatitude())) {
+                            infoTitle.setText(TabTwo.arrayList.get(i).getBdb_sup_name());
+                            infoPrice.setText(TabTwo.arrayList.get(i).getNewPrice());
+                            float old_prc=Float.parseFloat(Double.parseDouble(TabTwo.arrayList.get(i).getOldPrice())+"");
+                            old_prc = Float.parseFloat(df.format(old_prc));
+                            infoldPrice.setText(old_prc+"");
+                            infoldPrice.setPaintFlags(infoldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
+                            service_rate.setEnabled(false);
+                            service_rate.setVisibility(View.GONE);
+//                            service_rate.setRating(Float.parseFloat(TabTwo.arrayList.get(i).getBdb_sup_rating()));
+                        }
+                    }
+                }
                 marker.showInfoWindow();
 
                 return false;
             }
         });
         googleMap.setMyLocationEnabled(true);
-
-
         // For dropping a marker at a point on the Map
 
-//        sydney = new LatLng(locations[0].getLatitude(), locations[0].getLongtude());
         geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
         addresses = new ArrayList<>();
         try {
@@ -280,37 +353,14 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            googleMap.addMarker(new MarkerOptions().position(sydney).title(addresses.get(0).getFeatureName()).snippet("Test From Beauty Client Google Maps"));
-//            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10F));
         } catch (Exception e) {
             Toast.makeText(getActivity().getApplicationContext(), e.getMessage().toString(), Toast.LENGTH_LONG).show();
         }
 
 
-//        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-////                for (int i = 1; i < TabOne.arrayList.size() ; i++) {
-//                Log.e("TabOne.arrayList.size",TabOne.arrayList.size()+"");
-//                for (int i = 0; i < TabOne.arrayList.size() ; i++) {
-//                    sydney = new LatLng(Double.parseDouble( TabOne.arrayList.get(i).getLatitude()),Double.parseDouble(TabOne.arrayList.get(i).getLongitude()));
-//                    geo = new Geocoder(getActivity().getApplicationContext(), Locale.getDefault());
-//
-//                    try {
-//                        googleMap.addMarker(new MarkerOptions().position(sydney).title(TabOne.arrayList.get(i).getBdb_sup_name()).snippet("Test From Beauty Client Google Maps"));
-//                    } catch (Exception e) {
-//
-//                    }
-//                }
-//            }
-//        });
-
-
         // For zooming automatically to the location of the marker
         CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(locations[0].getLatitude(), locations[0].getLongtude())).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
 
         // for enter add + button and reserve service
         googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -322,13 +372,13 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                 mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
                 return infoWindow;
             }
-
             @Override
             public View getInfoContents(Marker marker) {
            return null;
             }
         });
     }
+//-----------    for Title info dialog
     public static int getPixelsFromDp(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int)(dp * scale + 0.5f);

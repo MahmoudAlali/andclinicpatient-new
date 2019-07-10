@@ -212,6 +212,20 @@
     <string name="send">ارسال</string>
 
 
+    <string name="services">مقدمات الخدمة</string>
+    <string name="Offers">أبرز العروض</string>
+    <string name="Map">الخريطة</string>
+
+    <string name="page">الصفحة</string>
+    <string name="NextPage">الصفحة التالية</string>
+    <string name="PreviousPage"> الصفحة السابقة</string>
+    <string name="num_of_times">عدد مرات حجز العرض:</string>
+    <string name="end_offer">هذا العرض ساري حتى:</string>
+    <string name="on">تخفيض على</string>
+    <string name="onservice">من الخدمات</string>
+
+
+
     <string-array name="cities">
         <item>اسم المدينة</item>
         <item>الرياض</item>

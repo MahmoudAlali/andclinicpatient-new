@@ -51,6 +51,7 @@ import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
+import com.dcoret.beautyclient.Fragments.SettingFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.test.Main2Activity;
 
@@ -224,8 +225,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commit();
                 FRAGMENT_NAME="";
+//
         }else if (FRAGMENT_NAME.equals("MAPFRAGMENTSPINNER")){
                 fragment = new PlaceServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("SETTING")){
+                fragment = new ServiceFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -293,6 +301,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         if (id == R.id.manageaccount) {
             fragment = new AccountFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+        }else if (id == R.id.setting) {
+            fragment = new SettingFragment();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);

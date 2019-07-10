@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.Fragments;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,10 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import com.dcoret.beautyclient.R;
 
 public class EditReservation extends AppCompatActivity {
 

@@ -67,19 +67,6 @@ public class ReservationDialog {
         });
 
     }
-//    public static Context getcontext(){
-//        try {
-//            if (context_dialog.equals("mainpage")) {
-////                return BeautyMainPage_2.context;
-//            } else if (context_dialog.equals("offers")) {
-//                return Offers.context;
-//            } else if (context_dialog.equals("myreservation")) {
-//                return MyReservations.context;
-//            }
-//        }catch (Exception e){
-//        }
-//        return null;
-//    }
        static ArrayList<String> times=new ArrayList<>();
     static void timeDialog(final Context context, final String name,final  String type) {
         dialog1 = new Dialog(context);
@@ -130,80 +117,80 @@ public class ReservationDialog {
     }
 
     static TextView service_name;
-   public static void multiReservationDialog(final Context context, final DataOffer dataOffer){
-        Log.d("dataoffersize",dataOffer.getServices().length+"");
-        final ArrayList<Dialog> dialogs=new ArrayList<>();
-        for (int i=0;i<dataOffer.getServices().length;i++){
-
-                dialogs.add(new Dialog(context));
-                Log.d("offers_name", i + dataOffer.getServices()[i].getName() + "");
-
-            }
-        int i;
-        for( i=0;i<dialogs.size();i++) {
-            Log.d("iii", i + "");
-            dialogs.get(i).setContentView(R.layout.dialog_calender);
-             final DatePicker datePicker = dialogs.get(i).findViewById(R.id.date);
-            okdate = dialogs.get(i).findViewById(R.id.ok_date);
-            canceldate = dialogs.get(i).findViewById(R.id.cancel_date);
-            service_name = dialogs.get(i).findViewById(R.id.service_name);
-            service_name.setText(dataOffer.getServices()[i].getName());
-            dialogs.get(i).show();
+//   public static void multiReservationDialog(final Context context, final DataOffer dataOffer){
+//        Log.d("dataoffersize",dataOffer.getServices().length+"");
+//        final ArrayList<Dialog> dialogs=new ArrayList<>();
+//        for (int i=0;i<dataOffer.getServices().length;i++){
+//
+//                dialogs.add(new Dialog(context));
+//                Log.d("offers_name", i + dataOffer.getServices()[i].getName() + "");
+//
+//            }
+//        int i;
+//        for( i=0;i<dialogs.size();i++) {
+//            Log.d("iii", i + "");
+//            dialogs.get(i).setContentView(R.layout.dialog_calender);
+//             final DatePicker datePicker = dialogs.get(i).findViewById(R.id.date);
+//            okdate = dialogs.get(i).findViewById(R.id.ok_date);
+//            canceldate = dialogs.get(i).findViewById(R.id.cancel_date);
+//            service_name = dialogs.get(i).findViewById(R.id.service_name);
+//            service_name.setText(dataOffer.getServices()[i].getName());
+//            dialogs.get(i).show();
+////            final int finalI = i;
 //            final int finalI = i;
-            final int finalI = i;
-            canceldate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialogs.get(finalI).cancel();
-                }
-            });
-            final int finalI1 = i;
-            okdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int month=datePicker.getMonth()+1;
-                    date = datePicker.getDayOfMonth() + "/" +month + " - ";
-                    dialogs.get(finalI1).cancel();
-//                timeDialog(context,name,type);
-                    dialog1.show();
-                }
-            });
-//       dialog.show();
-            dialog1 = new Dialog(context);
-            dialog1.setContentView(R.layout.dialog_calender_time);
-            final TimePicker timePicker = dialog1.findViewById(R.id.time);
-            oktime = dialog1.findViewById(R.id.ok_time);
-            canceltime = dialog1.findViewById(R.id.cancel_time);
-            canceltime.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog1.dismiss();
-                }
-            });
-            oktime.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
-                @Override
-                public void onClick(View v) {
-//               int month=timePicker.getMonth()+1;
-                    date = date + timePicker.getHour() + ":" + timePicker.getMinute() + "";
-                    times.add(date);
-                    date="";
-
-//               date = date + timePicker.getHour() + ":" + timePicker.getMinute() + "";
-                    dialog1.cancel();
-                }
-            });
-        }
-
-
-   dialogs.get(0).setOnDismissListener(new DialogInterface.OnDismissListener() {
-         @Override
-            public void onDismiss(DialogInterface dialog) {
-             //----------- send notification to provider ----------------------------
-             new PushNotifications().sendnotification_provider(context, "Offers", "تم حجز العرض " + dataOffer.getName() + "بتاريخ: " + date, "accept", "cancel");
-            }
-        });
-
-   }
+//            canceldate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialogs.get(finalI).cancel();
+//                }
+//            });
+//            final int finalI1 = i;
+//            okdate.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int month=datePicker.getMonth()+1;
+//                    date = datePicker.getDayOfMonth() + "/" +month + " - ";
+//                    dialogs.get(finalI1).cancel();
+////                timeDialog(context,name,type);
+//                    dialog1.show();
+//                }
+//            });
+////       dialog.show();
+//            dialog1 = new Dialog(context);
+//            dialog1.setContentView(R.layout.dialog_calender_time);
+//            final TimePicker timePicker = dialog1.findViewById(R.id.time);
+//            oktime = dialog1.findViewById(R.id.ok_time);
+//            canceltime = dialog1.findViewById(R.id.cancel_time);
+//            canceltime.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dialog1.dismiss();
+//                }
+//            });
+//            oktime.setOnClickListener(new View.OnClickListener() {
+//                @RequiresApi(api = Build.VERSION_CODES.M)
+//                @Override
+//                public void onClick(View v) {
+////               int month=timePicker.getMonth()+1;
+//                    date = date + timePicker.getHour() + ":" + timePicker.getMinute() + "";
+//                    times.add(date);
+//                    date="";
+//
+////               date = date + timePicker.getHour() + ":" + timePicker.getMinute() + "";
+//                    dialog1.cancel();
+//                }
+//            });
+//        }
+//
+//
+//   dialogs.get(0).setOnDismissListener(new DialogInterface.OnDismissListener() {
+//         @Override
+//            public void onDismiss(DialogInterface dialog) {
+//             //----------- send notification to provider ----------------------------
+//             new PushNotifications().sendnotification_provider(context, "Offers", "تم حجز العرض " + dataOffer.getName() + "بتاريخ: " + date, "accept", "cancel");
+//            }
+//        });
+//
+//   }
 }
 

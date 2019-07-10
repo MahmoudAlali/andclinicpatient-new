@@ -46,19 +46,20 @@ public class Offers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.offers_layout);
 
-
+        context=this;
         //----------------init recycle view ----------------------------
+//        if (bestOfferItems.size()>0){
+            bestOfferItems.clear();
+//        }
         recyclerView=findViewById(R.id.offers_recycleview);
         recyclerView.setHasFixedSize(true);
         bestOffer=new OffersAdapter(this,bestOfferItems);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(bestOffer);
-
         //------------------------ call API bestOffers and get items-----------------
         APICall.bestOffer(Offers.this);
     }
-
     //-------------------- go to main page -----------------------
     public void servicesBeauty(View view) {
         Intent in=new Intent(this,BeautyMainPage.class);
@@ -66,6 +67,4 @@ public class Offers extends AppCompatActivity {
         finish();
 
     }
-
-
 }

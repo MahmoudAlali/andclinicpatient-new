@@ -20,9 +20,6 @@ import com.dcoret.beautyclient.R;
 
 
 public class NotificationFragment extends Fragment {
-
-    RecyclerView recyclerView;
-
     Toolbar toolbar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

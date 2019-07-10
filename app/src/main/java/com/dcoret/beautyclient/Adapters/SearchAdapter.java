@@ -63,20 +63,6 @@ public class SearchAdapter   extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
         });
-
-
-
-
-//        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReservationDialog dialog=new ReservationDialog(Offers.context);
-//                dialog.setContentView(R.layout.rating_dialog);
-//                dialog.setTitle("تقييم العرض");
-//                dialog.show();
-//
-//            }
-//        });
     }
 
 

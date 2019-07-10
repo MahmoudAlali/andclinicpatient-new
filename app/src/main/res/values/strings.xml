@@ -99,6 +99,7 @@
     <string name="Delete_account">Delete My Account</string>
     <!-- Nav Bottom-->
     <string name="service">Services</string>
+    <string name="onservice">Services</string>
     <string name="reservations">Reservations</string>
     <string name="bag_reservation">Bag Reservations</string>
     <string name="favorites">Favorites</string>
@@ -223,7 +224,7 @@
     <!--service place frag-->
     <string name="PlaceService">Service Place</string>
     <string name="ServicePrice">Service Price</string>
-    <string name="ServiceRate">Service Evaluation</string>
+    <string name="ServiceRate">Service Rate</string>
 
     <!--Delete Account-->
     <string name="ServiceCovering">I did not get services covering my area / city</string>
@@ -236,6 +237,19 @@
     <string name="HandleApp">I could not handle the application</string>
     <string name="ShareMoreDetails">Share more details</string>
     <string name="send">send</string>
+
+
+    <string name="services">Services</string>
+    <string name="Offers">Offers</string>
+    <string name="Map">Map</string>
+
+    <string name="page">Page</string>
+    <string name="NextPage">Next Page</string>
+    <string name="PreviousPage">Previous Page</string>
+    <string name="num_of_times">Number of offer Reservation:</string>
+    <string name="end_offer">This offer is valid until:</string>
+    <string name="on">on</string>
+
 
     <string-array name="gender">
         <item>الجنس</item>
@@ -270,22 +284,20 @@
         <item>Service Price</item>
         <!--<item>Salon</item>-->
         <!--<item>Home</item>-->
-    <!--<item>Hall</item>-->
-    <!--<item>Hotel</item>-->
+        <!--<item>Hall</item>-->
+        <!--<item>Hotel</item>-->
 
-</string-array>
-
-
-<string-array name="service_rate">
-<item>Service Rate</item>
-<!--<item>Salon</item>-->
-<!--<item>Home</item>-->
-<!--<item>Hall</item>-->
-<!--<item>Hotel</item>-->
-
-</string-array>
+    </string-array>
 
 
+    <string-array name="service_rate">
+        <item>Service Rate</item>
+        <!--<item>Salon</item>-->
+        <!--<item>Home</item>-->
+        <!--<item>Hall</item>-->
+        <!--<item>Hotel</item>-->
+
+    </string-array>
 
 
     <string-array name="cities">

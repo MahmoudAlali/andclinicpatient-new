@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.Fragments;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.R;
 
 public class ResevationDate extends AppCompatActivity  {
 

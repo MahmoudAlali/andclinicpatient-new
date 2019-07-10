@@ -83,50 +83,7 @@ public class ShoppingCartFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         recyclerView.setAdapter(new ShopCartAdapter(getActivity().getApplicationContext(), dataServices));
 
-
-
         MyList1 = new ArrayList<>();
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-//
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-//
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-//
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-
-
-
-
-
-
-
-
-
-
         return view;
     }
 
@@ -243,11 +200,6 @@ public class ShoppingCartFragment extends Fragment {
             docsFolder.mkdir();
             Log.i(TAG, "Created a new directory for PDF");
         }
-//        Calendar calendar = Calendar.getInstance();
-//        TimeZone tz = TimeZone.getDefault();
-//        calendar.setTimeInMillis(timestamp * 1000);
-//        calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateString = formatter.format(new Date(Long.parseLong("10000")));
@@ -364,36 +316,7 @@ public class ShoppingCartFragment extends Fragment {
         giftitemPOJO.setItem_type_code("-");
         giftitemPOJO.setCreatedAt("13:00");
         MyList1.add(giftitemPOJO);
-
-
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-//
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-//
-//        giftitemPOJO = new GiftitemPOJO();
-//        giftitemPOJO.setItem_name("make up");
-//        giftitemPOJO.setItem_price("500");
-//        giftitemPOJO.setItem_URL("123");
-//        giftitemPOJO.setItem_type_code("123");
-//        giftitemPOJO.setCreatedAt("13:00");
-//        MyList1.add(giftitemPOJO);
-
     }
-
-
-
 }
 
 

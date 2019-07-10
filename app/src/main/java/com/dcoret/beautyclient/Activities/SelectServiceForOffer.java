@@ -12,9 +12,5 @@ public class SelectServiceForOffer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_service_for_offer);
 
-
-
-
-
     }
 }

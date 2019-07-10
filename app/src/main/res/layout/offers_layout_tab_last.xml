@@ -29,9 +29,10 @@
                     android:layout_marginRight="20dp"
                     />
                 <TextView
+                    android:id="@+id/num_of_times"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     android:textColor="@color/primedark"
                     android:text="عدد مرات حجز العرض 10"
@@ -72,16 +73,34 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="@color/prime"/>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_info"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/offer_end"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16dp"
+                    android:textColor="@color/colorAccentend"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+
+            </android.support.design.widget.CoordinatorLayout>
+
+
             <TextView
-                android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="العرض ساري من 5/5/19 الى 20/5/19"
-            android:textSize="16dp"
-            android:textColor="@color/colorAccentend"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"/>
-            <TextView
+                android:id="@+id/discountVal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="30% OFF for airbush tan"
@@ -89,14 +108,37 @@
                 android:textSize="16dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="40 R"
-                android:textColor="@color/primedark"
-                android:textSize="16dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"/>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/old_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="40 R"
+                    android:textColor="@color/primedark"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+                <View
+                    android:layout_width="@dimen/standard_20"
+                    android:layout_height="match_parent"></View>
+
+                <TextView
+                    android:id="@+id/new_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="40 R"
+                    android:textColor="@color/primedark"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,6 +151,7 @@
                     android:scaleX="0.5"
                     android:numStars="5"/>
                 <TextView
+                    android:id="@+id/pro_name"
                     android:text="Provider name"
                     android:textColor="@color/prime"
                     android:gravity="center"

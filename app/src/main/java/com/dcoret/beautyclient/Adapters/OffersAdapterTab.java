@@ -1,18 +1,29 @@
 package com.dcoret.beautyclient.Adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;
@@ -20,7 +31,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     String items[];
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
-    ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
+
     public OffersAdapterTab(Context context, String items[]){
         this.context=context;
         this.items=items;
@@ -30,16 +41,11 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.items=items;
         this.grid=grid;
     }
-
-
-    public OffersAdapterTab(Context context, ArrayList<DataOffer> offers, boolean grid, String name){
+    public OffersAdapterTab(Context context, ArrayList<DataOffer> offers){
         this.context=context;
         this.offers=offers;
-        this.grid=grid;
-        this.name=name;
+
         new OffersData(offers);
-
-
     }
 
 
@@ -48,11 +54,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(context);
             View row;
-
-//             row = inflater.inflate(R.layout.offer_layout_example, parent, false);
              row = inflater.inflate(R.layout.offers_layout_tab_last, parent, false);
-
-
 
             OffersAdapterTab.Item item = new OffersAdapterTab.Item(row);
 
@@ -61,93 +63,58 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-
+        DecimalFormat df = new DecimalFormat("0.0");
+        float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
+        float discountval=Float.parseFloat(Double.parseDouble(offers.get(position).getDiscount())+"");
+        old_prc = Float.parseFloat(df.format(old_prc));
+        discountval = Float.parseFloat(df.format(discountval));
+        ((Item)holder).pro_name.setText(offers.get(position).getBdb_sup_name());
+        ((Item)holder).new_price.setText(offers.get(position).getNewPrice());
+        ((Item)holder).num_of_times.setText(context.getResources().getText(R.string.num_of_times)+offers.get(position).getNum_of_times());
+        ((Item)holder).old_price.setText(old_prc+"");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String newDateString=null ;
+        Date d = null;
         try {
-//            ((OffersAdapterTab.Item) holder).textView.setText(offers.get(position).getName());
-//            ((Item) holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
-//            ((Item) holder).price.setText(offers.get(position).getPrice() + "");
-//            ((Item) holder).rating.setText(offers.get(position).getRate() + "");
-//            OFFER_RESERVATION_TYPE.add(offers.get(position).getOffer_type());
-//            ((OffersAdapterTab.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    try {
-////                    if (name.equals(Offers.name)) {
-////                        Intent intent = new Intent(context, BrideServicesSelecting.class);
-////                        intent.putExtra("offer_name", offers[position].getName());
-////                        context.startActivity(intent);
-////                        Log.d("Offers","ok");
-////                    } else {
-//                        Intent intent = new Intent(context, OfferDetails.class);
-//                        intent.putExtra("offer_name", offers.get(position).getName());
-//                        context.startActivity(intent);
-////                        Log.d("Offers","ok2");
-//
-////                    }
-//                    } catch (Exception e) {
-//                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            });
-//
-//            try {
-//                ((Item) holder).reserv_offer.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        for (int i = 0; i < offers.get(position).getServices().length; i++) {
-//                            ShoppingCartFragment.dataServices.add(offers.get(position).getServices()[i]);
-//                            Reservation.services.add(offers.get(position).getServices()[i]);
-//                        }
-////                        Toast.makeText(context,"Offers Reserved",Toast.LENGTH_LONG).show();
-//                        try {
-//                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-//                                ReservationDialog.multiReservationDialog(ReservationDialog.getcontext(), offers.get(position));
-//                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-//                                Log.d("Position", position + "");
-//                                ReservationDialog.dateDialog(ReservationDialog.getcontext(), offers.get(position).getName(), "o");
-//
-////                              ReservationDialog.dateDialog(ReservationDialog.getcontext(), ((Item) holder).textView.getText().toString(), "o");
-//                            }
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            // error in back to main page
-//                            if (OFFER_RESERVATION_TYPE.get(position).equals("os")) {
-//                                ReservationDialog.multiReservationDialog(BeautyMainPage_2.context, offers.get(position));
-//                            } else if (OFFER_RESERVATION_TYPE.get(position).equals("o")) {
-//                                ReservationDialog.dateDialog(BeautyMainPage_2.context, ((Item) holder).textView.getText().toString(), "o");
-//                            }
-//                        }
-//                    }
-//                });
-//
-//
-//            } catch (Exception e) {
-//
-//            }
-
-
-//        ((Item) holder).rating.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ReservationDialog dialog=new ReservationDialog(Offers.context);
-//                dialog.setContentView(R.layout.rating_dialog);
-//                dialog.setTitle("تقييم العرض");
-//                dialog.show();
-//
-//            }
-//        });
-        }catch (Exception e){
+            d = sdf.parse(offers.get(position).getBdb_offer_end());
+            newDateString= sdf.format(d);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+        ((Item)holder).offer_end.setText(context.getResources().getText(R.string.end_offer)+newDateString);
+        ((Item)holder).discount.setText(discountval+"% "+context.getResources().getString(R.string.on)+" "+offers.get(position).getService_count()+" "+context.getResources().getString(R.string.onservice));
+        ((Item)holder).old_price.setPaintFlags(((Item)holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        ((Item)holder).info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    JSONArray jsonArray= offers.get(position).getPack_data();
+
+                    PopupMenu popup = new PopupMenu(context,((Item)holder).info);
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject=jsonArray.getJSONObject(i);
+                        String bdb_ser_name=jsonObject.getString("bdb_ser_name");
+                        popup.getMenu().add(bdb_ser_name);
+//                       if (i==jsonArray.length()-1){
+//                           infoItem.append(bdb_name_ar);
+//                       }else {
+//                           infoItem.append(bdb_name_ar+"\n");
+//                       }
+                    }
+                    popup.show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         try {
-//            Log.d("Offersize",offers.size()+"");
-            return items.length;
-
+            return offers.size();
         }catch (Exception e){
             e.getMessage();
             return 0;
@@ -156,65 +123,19 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView textView,rating,price,pro_name,reserv_offer;
-
-
-
+        TextView pro_name,new_price,old_price,discount,num_of_times,offer_end;
+        ImageView info;
         public Item(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.rname);
             pro_name = itemView.findViewById(R.id.pro_name);
-            reserv_offer = itemView.findViewById(R.id.reserv_offer);
-            rating = itemView.findViewById(R.id.rank);
-            price = itemView.findViewById(R.id.price);
+            new_price = itemView.findViewById(R.id.new_price);
+            old_price = itemView.findViewById(R.id.old_price);
+            discount = itemView.findViewById(R.id.discountVal);
+            num_of_times = itemView.findViewById(R.id.num_of_times);
+            info = itemView.findViewById(R.id.info);
+            offer_end = itemView.findViewById(R.id.offer_end);
+
         }
     }
-//    static String token_provider="enTW789hyvs:APA91bGyfEMJKFEZ6NuhvCFAg_Abx6rB9kmdMEW6vPnGRSKJJ3BQNDaKtISf59GuWyS7tBWNdT-ZLOkn3-Nz3IzHZfB911syZzHsRfjk64KGcfG0FAQ0wEAxuFc9buspiowZJmJsQ7lP";
-//    static String api_key_header_value_provider = "Key=AAAAAAXCVwM:APA91bFiJYACTd-gZPdHrymnwcypg2IQ6JfSdTqUWqt95VANEyTe7H8NAn2nUnwfoau63QdJTXrxpLR5ZyDQ2-PL6TfPCCH7JJrocD1-SkfE7qrfMIqZvu09ICnD72OqAzuB-o85WawO";
-//
-//    static void sendnotification_provider(Context context,String title,String body ,String action1,String action2) {
-//
-//        try{
-//            RequestQueue queue = Volley.newRequestQueue(context);
-//            String url = "https://fcm.googleapis.com/fcm/send";
-//            JSONObject data1 = new JSONObject();
-//            data1.put("title", title);
-//            data1.put("body", body);
-//            data1.put("action1" ,action1);
-//            data1.put("action2" ,action2);
-//            JSONObject notification_data = new JSONObject();
-//            notification_data.put("to",token_provider);
-//            notification_data.put("data", data1);
-//            System.out.println(notification_data);
-//
-//            JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
-//                @Override
-//                public void onResponse(JSONObject response) {
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//
-//                }
-//            }){
-//                @Override
-//                public Map<String, String> getHeaders() {
-//                    Map<String, String> headers = new HashMap<>();
-//                    headers.put("Content-Type", "application/json");
-//                    headers.put("Authorization", api_key_header_value_provider);
-//                    System.out.println("Send to provider");
-//                    return headers;
-//                }
-//            };
-//
-//            queue.add(request);
-//            System.out.println(request);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
-
 
 }

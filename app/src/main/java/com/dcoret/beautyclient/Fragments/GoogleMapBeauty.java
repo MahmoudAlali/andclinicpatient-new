@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.Fragments;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

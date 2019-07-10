@@ -36,6 +36,10 @@ public class ServiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
         service_hair=view.findViewById(R.id.service_hair);
+        for (int i=1;i<=35;i++){
+            serviceFilters.add(new ServiceFilter(false,""));
+        }
+        Log.e("service_filter",serviceFilters.size()+"");
 
         toolbar= view.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

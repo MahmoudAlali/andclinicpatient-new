@@ -66,14 +66,14 @@ public class OffersData {
       allservices.add(services1);
       allservices.add(service4);
       allservices.add(service5);
-       for (int i=0;i<allservices.size();i++){
-           if(i>2) {
-               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"o"));
-           }else {
-               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"os"));
-
-           }
-           }
+//       for (int i=0;i<allservices.size();i++){
+//           if(i>2) {
+//               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"o"));
+//           }else {
+//               offers.add(new DataOffer("offer" + i + 1, allservices.get(i), getprice(allservices.get(i)), 4.5, false,"os"));
+//
+//           }
+//           }
 
        }
 

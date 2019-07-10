@@ -4,28 +4,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.ReservationDialog;
+import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.DataClass.BestOfferItem;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.ServiceItem;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
+import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;
     Boolean grid=false;
     String items[];
@@ -80,50 +86,75 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }else {
              row = inflater.inflate(R.layout.offers_layout_last, parent, false);
         }
-
-
             OffersAdapter.Item item = new OffersAdapter.Item(row);
-
         return item;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+//---------------------for prices decimal format-----------------
         DecimalFormat df = new DecimalFormat("0.00");
         float old_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getOld_price())+"");
         old_prc = Float.parseFloat(df.format(old_prc));
         float new_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getNew_price())+"");
         new_prc = Float.parseFloat(df.format(new_prc));
+        DecimalFormat df1 = new DecimalFormat("0");
         float tot_dis=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getTotal_discount())+"");
-        tot_dis = Float.parseFloat(df.format(tot_dis));
+//        tot_dis = df1.format(tot_dis);
 
 
-        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
+//        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
         ((Item)holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
-        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
+//        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
         ((Item) holder).old_price.setText(old_prc+"");
         ((Item) holder).new_price.setText(new_prc+"");
-        ((Item) holder).total_dis.setText("dis: "+tot_dis+"%");
+        ((Item) holder).total_dis.setText(df1.format(tot_dis)+"% on "+bestOfferItems.get(position).getService_count()+" services");
         ((Item)holder).old_price.setPaintFlags(((Item)holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        try {
+        ((Item)holder).info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               JSONArray jsonArray= bestOfferItems.get(position).getSersup_ids();
+//               StringBuilder infoItem=new StringBuilder();
+               try {
+                   PopupMenu popup = new PopupMenu(context,((Item)holder).info);
+                   for(int i=0;i<jsonArray.length();i++){
+                       JSONObject jsonObject=jsonArray.getJSONObject(i);
+                       String bdb_name_ar=jsonObject.getString("bdb_name_ar");
+                       popup.getMenu().add(bdb_name_ar);
+//                       if (i==jsonArray.length()-1){
+//                           infoItem.append(bdb_name_ar);
+//                       }else {
+//                           infoItem.append(bdb_name_ar+"\n");
+//                       }
+                   }
+                   popup.show();
+               }catch (Exception e){
+                   e.printStackTrace();
+               }
 
-            ((OffersAdapter.Item) holder).textView.setText(offers.get(position).getName());
-            ((Item) holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
-            ((Item) holder).price.setText(offers.get(position).getPrice() + "");
-            ((Item) holder).rating.setText(offers.get(position).getRate() + "");
-            OFFER_RESERVATION_TYPE.add(offers.get(position).getOffer_type());
-            ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
 
-                }
-            });
-
-
-        }catch (Exception e){
-//        Toast.makeText(context,e.getMessage()+"",Toast.LENGTH_LONG).show();
-        }
+//                new BubbleShowCaseBuilder((AppCompatActivity)context) //Activity instance
+//                        .title(infoItem.toString()) //Any title for the bubble view
+//                        .targetView(((Item)holder).info) //View to point out
+//                        .show(); //Display the ShowCase
+            }
+        });
+//        try {
+//
+//            ((OffersAdapter.Item) holder).textView.setText(offers.get(position).getName());
+//            ((Item) holder).pro_name.setText(offers.get(position).getServices()[0].getProvider_name());
+//            ((Item) holder).price.setText(offers.get(position).getPrice() + "");
+//            ((Item) holder).rating.setText(offers.get(position).getRate() + "");
+//            OFFER_RESERVATION_TYPE.add(offers.get(position).getOffer_type());
+//            ((OffersAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                }
+//            });
+//        }catch (Exception e){
+////        Toast.makeText(context,e.getMessage()+"",Toast.LENGTH_LONG).show();
+//        }
     }
 
     @Override
@@ -138,66 +169,20 @@ public class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
     public static class Item extends RecyclerView.ViewHolder {
         TextView textView,pack_code,rating,price,pro_name,reserv_offer,ser_count,total_dis,new_price,old_price;
+        ImageView info;
         public Item(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.rname);
             pro_name = itemView.findViewById(R.id.pro_name);
+            info = itemView.findViewById(R.id.info);
             reserv_offer = itemView.findViewById(R.id.reserv_offer);
             rating = itemView.findViewById(R.id.rank);
             price = itemView.findViewById(R.id.price);
-            ser_count = itemView.findViewById(R.id.ser_count);
-            pack_code = itemView.findViewById(R.id.packCode);
+//            ser_count = itemView.findViewById(R.id.ser_count);
+//            pack_code = itemView.findViewById(R.id.packCode);
             total_dis = itemView.findViewById(R.id.total_dis);
             new_price = itemView.findViewById(R.id.new_price);
             old_price = itemView.findViewById(R.id.old_price);
         }
     }
-//    static String token_provider="enTW789hyvs:APA91bGyfEMJKFEZ6NuhvCFAg_Abx6rB9kmdMEW6vPnGRSKJJ3BQNDaKtISf59GuWyS7tBWNdT-ZLOkn3-Nz3IzHZfB911syZzHsRfjk64KGcfG0FAQ0wEAxuFc9buspiowZJmJsQ7lP";
-//    static String api_key_header_value_provider = "Key=AAAAAAXCVwM:APA91bFiJYACTd-gZPdHrymnwcypg2IQ6JfSdTqUWqt95VANEyTe7H8NAn2nUnwfoau63QdJTXrxpLR5ZyDQ2-PL6TfPCCH7JJrocD1-SkfE7qrfMIqZvu09ICnD72OqAzuB-o85WawO";
-//
-//    static void sendnotification_provider(Context context,String title,String body ,String action1,String action2) {
-//
-//        try{
-//            RequestQueue queue = Volley.newRequestQueue(context);
-//            String url = "https://fcm.googleapis.com/fcm/send";
-//            JSONObject data1 = new JSONObject();
-//            data1.put("title", title);
-//            data1.put("body", body);
-//            data1.put("action1" ,action1);
-//            data1.put("action2" ,action2);
-//            JSONObject notification_data = new JSONObject();
-//            notification_data.put("to",token_provider);
-//            notification_data.put("data", data1);
-//            System.out.println(notification_data);
-//
-//            JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
-//                @Override
-//                public void onResponse(JSONObject response) {
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//
-//                }
-//            }){
-//                @Override
-//                public Map<String, String> getHeaders() {
-//                    Map<String, String> headers = new HashMap<>();
-//                    headers.put("Content-Type", "application/json");
-//                    headers.put("Authorization", api_key_header_value_provider);
-//                    System.out.println("Send to provider");
-//                    return headers;
-//                }
-//            };
-//
-//            queue.add(request);
-//            System.out.println(request);
-//
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-
 }

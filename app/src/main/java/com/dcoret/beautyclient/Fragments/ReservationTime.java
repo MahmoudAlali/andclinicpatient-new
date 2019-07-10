@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.Fragments;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import com.dcoret.beautyclient.R;
 
 public class ReservationTime extends AppCompatActivity {
 

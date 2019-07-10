@@ -3,6 +3,7 @@ package com.dcoret.beautyclient.Activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -44,21 +45,21 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     EditText username, password;
-    Button login;
+    Button login,new_user;
     TextView forgetpass, register;
     static double latit;
     static double longit;
    public static boolean logout=false;
     LinearLayout linearLayout;
     ProgressDialog pd;
-
+    Context context;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
-
+        context=this;
 
         String name,pass;
         SharedPreferences prefs = getSharedPreferences("LOGIN", MODE_PRIVATE);
@@ -79,7 +80,18 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.login);
         forgetpass = findViewById(R.id.forgetpass);
         register = findViewById(R.id.register);
+        new_user = findViewById(R.id.new_user);
         linearLayout=findViewById(R.id.layout_login );
+
+
+        new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,Register.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void login(View view) {
@@ -94,9 +106,6 @@ public class Login extends AppCompatActivity {
     public void forgetpass(View view) {
         APICall.reset_pass("http://clientapp.dcoret.com/api/password/user/reset", Login.this);
     }
-    public void register(View view) {
-        Intent intent=new Intent(getApplicationContext(),Register.class);
-        startActivity(intent);
-    }
+
 
 }

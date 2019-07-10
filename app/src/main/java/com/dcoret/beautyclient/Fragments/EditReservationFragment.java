@@ -1,8 +1,6 @@
 package com.dcoret.beautyclient.Fragments;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,15 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.EditReservation;
 import com.dcoret.beautyclient.R;
 
 public class EditReservationFragment extends Fragment {
-LinearLayout services_tabs;
-LinearLayout bride_service,service_hair;
-    Fragment fragment;
-    FragmentManager fm;
-    FragmentTransaction fragmentTransaction;
     Spinner servicePlace;
     View child;
     LinearLayout myRoot;
@@ -54,7 +46,6 @@ LinearLayout bride_service,service_hair;
                 ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age,android.R.layout.simple_spinner_item);
                 adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spinner1.setAdapter(adapter1);
-//                myRoot.addView(child);
                 spinner2=child.findViewById(R.id.employeespinner);
                 ArrayAdapter<CharSequence> adapter2=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.employee,android.R.layout.simple_spinner_item);
                 adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

@@ -48,26 +48,20 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 public class PlaceServiceFragment extends Fragment {
-    //    LinearLayout services_tabs;
-    LinearLayout bride_service, service_hair;
+    LinearLayout  service_hair;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
-    public static ArrayList citiyname = new ArrayList();
-    public static ArrayList placeServiceList = new ArrayList();
     public static ArrayList mylocation = new ArrayList();
-//    public static LatLng latLng;
     public static double lat,lng;
-    ArrayList price = new ArrayList();
-    ArrayList rate = new ArrayList();
     Button ok, priceService, rateService;
     Spinner mylocationSpinner, placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
     public static int mylocationId=0;
-//    public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
+    Button distance;
 
 
 
@@ -87,17 +81,132 @@ public class PlaceServiceFragment extends Fragment {
 
 
         BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
-        Resources res = getResources();
 
         placeSpinner = view.findViewById(R.id.service_place);
         mylocationSpinner = view.findViewById(R.id.my_location);
         priceService = view.findViewById(R.id.service_price);
         rateService = view.findViewById(R.id.service_rate);
+        distance = view.findViewById(R.id.distance);
         ok = view.findViewById(R.id.ok);
 
 
+
+        for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
+            if (i == 2) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+                    priceService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    price.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+
+                }
+            } else if (i == 3) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+                    rateService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    rateService.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                }
+            } else if (i == 4) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                    rateProvider.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    rateProvider.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                }
+            } else if (i == 5) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+                    distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                }
+            } else if (i == 7) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+                    priceService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    servicePlace.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                }
+            } else if (i == 1) {
+//                                    price.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                    price.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+            }
+
+        }
+
+
+
+
+
+
+
+
+        distance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //-------------- range distance filter--------------------
+//                        if (distance.isChecked()) {
+                            final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
+                            rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
+                            rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                            // get seekbar from view
+                            final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
+//                            rangeSeekbar.setMaxValue(100);
+                            // get min and max text view
+                            TextView title = rangeDistanceDialog.findViewById(R.id.title);
+                            title.setText("Distance Range");
+                            final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
+                            final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
+                            final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
+                            final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
+                            Button search = rangeDistanceDialog.findViewById(R.id.search);
+                            // set listener
+                            rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+                                @Override
+                                public void valueChanged(Number minValue, Number maxValue) {
+                                    tvMin.setText(String.valueOf(minValue));
+                                    Min.setText(String.valueOf(minValue));
+                                    Max.setText(String.valueOf(maxValue));
+                                    tvMax.setText(String.valueOf(maxValue));
+                                }
+                            });
+
+                            // set final value listener
+                            rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+                                @Override
+                                public void finalValue(Number minValue, Number maxValue) {
+                                    Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+                                }
+                            });
+
+                            search.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    rangeDistanceDialog.dismiss();
+                                    distance.setText("Distance: " + Min.getText().toString() + "-" + Max.getText().toString());
+                                    APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
+                                    ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
+
+                                }
+                            });
+
+
+                            rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+//                                    distance.setChecked(false);
+                                    distance.setText("Distance");
+                                    APICall.filterSortAlgorithm("2", "", "");
+                                    ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+
+                                }
+                            });
+                            rangeDistanceDialog.show();
+
+//                        } else {
+//                            distance.setText("البعد");
+//                            APICall.filterSortAlgorithm("2", "", "");
+//                            ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+//
+//                        }
+
+            }
+        });
+
+
         final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, android.R.layout.simple_spinner_item);
-        //new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_dropdown_item,placeServiceList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeSpinner.setAdapter(adapter);
 
@@ -146,10 +255,6 @@ public class PlaceServiceFragment extends Fragment {
             }
         });
 
-//
-
-//        price.add(res.getResourceEntryName(R.string.ServicePrice));
-//        final ArrayAdapter mylocationSpinner= ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.service_price,android.R.layout.simple_spinner_item);
          locatioAdapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_dropdown_item, mylocation);
         locatioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mylocationSpinner.setAdapter(locatioAdapter);
@@ -162,7 +267,6 @@ public class PlaceServiceFragment extends Fragment {
                     mylocationId=position;
                     LocationManager locationManager = (LocationManager)
                             ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
-//                    LocationListener locationListener = new MyLocation();
                     if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
@@ -173,7 +277,6 @@ public class PlaceServiceFragment extends Fragment {
                         // for ActivityCompat#requestPermissions for more details.
                         return;
                     }
-//                    Log.e("EEEEEEEEEEEEEEEEEEE","ok");
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
@@ -202,7 +305,6 @@ public class PlaceServiceFragment extends Fragment {
                     fragment = new MapFragment();
                     fm = getActivity().getFragmentManager();
                     fragmentTransaction = fm.beginTransaction();
-//                    fragmentTransaction.detach(fragment);
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();
                     BeautyMainPage.FRAGMENT_NAME="SPINNER";
@@ -217,13 +319,9 @@ public class PlaceServiceFragment extends Fragment {
 //                            lng=location.getLongitude();
                             Log.e("LATLANG",lat+":"+lng);
                             APICall.setlocation(lat,lng);
-
                         }
                     }
                     mylocationId=position;
-
-//                    MapFragment.locationTitles
-
                 }
             }
 
@@ -232,19 +330,7 @@ public class PlaceServiceFragment extends Fragment {
 
             }
         });
-
-
-
-
-
-//        rate.add(res.getString(R.string.ServiceRate));
-//        final ArrayAdapter adapterrate= ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.service_rate,android.R.layout.simple_spinner_item);
-////        ArrayAdapter adapterrate=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_dropdown_item,rate);
-//        adapterrate.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-//        rateSpinner.setAdapter(adapterrate);
-
         toolbar= view.findViewById(R.id.toolbar);
-
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,9 +338,7 @@ public class PlaceServiceFragment extends Fragment {
 //                // If the navigation drawer is not open then open it, if its already open then close it.
 //                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
 //                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
-
                 ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
-
             }
         });
 
@@ -280,8 +364,6 @@ public class PlaceServiceFragment extends Fragment {
                     fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();
-//                citiyname.remove(1);
-
                 }
             }
         });
@@ -397,15 +479,7 @@ public class PlaceServiceFragment extends Fragment {
 
                     }
                 });
-
                 rateServiceDialog.show();
-//            } else {
-//                rateService.setText("تقييم الخدمة");
-//                APICall.filterSortAlgorithm("22", "", "");
-//                serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
-//
-//
-//            }
             }
         });
 

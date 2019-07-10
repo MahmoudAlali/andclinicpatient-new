@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/end_gray"
     android:orientation="vertical"
-    tools:context=".Activities.Register">
+    >
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:layout_width="match_parent"-->
 

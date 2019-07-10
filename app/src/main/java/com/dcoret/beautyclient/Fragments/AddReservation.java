@@ -1,12 +1,10 @@
-package com.dcoret.beautyclient;
+package com.dcoret.beautyclient.Fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,13 +17,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.Offers;
-import com.dcoret.beautyclient.Activities.Register;
-import com.dcoret.beautyclient.Fragments.ServiceFragment;
+import com.dcoret.beautyclient.R;
 
 
 public class AddReservation extends AppCompatActivity

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:background="@color/end_gray"
+    app:navigationIcon="@drawable/ic_menu_wihte_24dp"
+    app:popupTheme="@style/AppTheme"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:title=""
+    app:titleMarginStart="@dimen/standard_175"
+    app:titleTextColor="@color/end_gray" />
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/arabic"
+                android:textStyle="bold"
+                android:textSize="@dimen/standard_20"
+                android:gravity="center"
+                android:text="اللغة العربية"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/shadow_place_layout"
+                android:layout_marginBottom="@dimen/standard_20"
+                android:layout_height="@dimen/standard_155" />
+            <TextView
+                android:id="@+id/english"
+                android:textStyle="bold"
+                android:textSize="@dimen/standard_20"
+                android:gravity="center"
+                android:text="اللغة الانجليزية"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/shadow_rate"
+                android:layout_height="@dimen/standard_155" />
+            <EditText
+                android:layout_marginTop="@dimen/standard_20"
+                android:id="@+id/token"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:hint="Token"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_155" />
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</android.support.design.widget.CoordinatorLayout>

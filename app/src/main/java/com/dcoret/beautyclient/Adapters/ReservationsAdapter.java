@@ -86,10 +86,6 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         });
 
-
-
-
-
         //---------- Edit reservation listener--------------
         ((Item) holder).edit_re.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,32 +94,10 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         });
 
-
         //---------- cancel reservation listener------------
         ((Item) holder).cancel_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(items.length==0){
-//                    AlertDialog.Builder dialog;
-//                    try {
-//                       dialog= new AlertDialog.Builder(BeautyMainPage.context);
-//                    }catch (Exception e){
-//                        dialog= new AlertDialog.Builder(BeautyMainPage.context);
-//
-//                    }
-//                          dialog.setTitle("Cancel Reservation")
-//                            .setMessage("سوف يتم الغاء كامل العرض و حذف الخدمات الاخرى المتعلقة به,هل انت متأكد ؟")
-//                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    int id = services.get(position).getOfferid();
-//                                    int size = services.size();
-//                                }
-//                            })
-//                            // A null listener allows the button to dismiss the dialog and take no further action.
-//                            .setNegativeButton(android.R.string.no, null)
-//                            .setIcon(android.R.drawable.ic_dialog_alert)
-//                            .show();
-//                }else {
                     AlertDialog.Builder dialog;
                     try {
                         dialog= new AlertDialog.Builder(BeautyMainPage.context);
@@ -191,12 +165,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             cancel_re=itemView.findViewById(R.id.cancel_re);
             edit_re=itemView.findViewById(R.id.edit_re);
             export_invoice=itemView.findViewById(R.id.export_invoice);
-
-//            more_btn=itemView.findViewById(R.id.more_btn);
             this.listener = listener;
-
-//            resrv_btn.setOnClickListener();
-//            more_btn.setOnClickListener(this);
         }
 
         @Override

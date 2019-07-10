@@ -74,9 +74,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     int TABFLAG=1;
     public static int ItemPageNum=4;
     ArrayList<String> citiyname=new ArrayList<>();
-    public static int cityId=4;
+    public static Boolean updateServ=true;
+    public static Boolean updateoffr=true;
+
     TextView pagenum;
     LinearLayout pageNext,pagePrev;
+
+    //-------- for check if get services------
+    static boolean Isservice=false;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +95,12 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         pagenum.setText("Page"+TabOne.pagenum);
         BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
 //        Log.d("doback",BeautyMainPage.FRAGMENT_NAME);
+
+        if (updateServ) {
+            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+            updateServ=false;
+        }
+//        APICall.automatedBrowse()
         pageNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,60 +134,11 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
 
-        //---------------- cities----------------
-        for (int i=0;i<8;i++){
-            ServiceFragment.serviceFilters.add(new ServiceFilter(false,""));
-        }
+//        //---------------- cities----------------
+//        for (int i=0;i<8;i++){
+//            ServiceFragment.serviceFilters.add(new ServiceFilter(false,""));
+//        }
         Log.e("ServiceFilterSize",ServiceFragment.serviceFilters.size()+"");
-//        citiyname.add("Select Citiy");
-//        for (int i = 0; i < BeautyMainPage.cities.size(); i++) {
-//            citiyname.add(BeautyMainPage.cities.get(i).getBdb_name());
-//        }
-//        ArrayAdapter<String> adapter =
-//                new ArrayAdapter<String>(BeautyMainPage.context,  android.R.layout.simple_spinner_dropdown_item,citiyname);
-//        adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-//        citiesSpinner.setAdapter(adapter);
-//
-//        if (adapter.getCount()==1){
-//            Log.e("getCities","http://clientapp.dcoret.com/api/auth/user/getCities");
-//            citiyname.clear();
-//            adapter.notifyDataSetChanged();
-//        }else {
-//            if (citiyname.size()!=0){
-//                citiesSpinner.setSelection(cityId);
-//            }
-//        }
-
-        //bubble info
-//        if (cityId==0){
-////               new BubbleShowCaseBuilder(getActivity()) //Activity instance
-////                    .title(getResources().getString(R.string.ExuseMeAlert))//Any title for the bubble view
-////                     .description("Please Select an City for Filter Service and Offers... ")
-////                    .targetView(citiesSpinner) //View to point out
-////                    .show(); //Display the ShowCase
-//        }else {
-//            APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
-//        }
-//        adapter.notifyDataSetChanged();
-//        citiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if (position!=0){
-//                    cityId=position;
-//                    APICall.setCityId(position);
-//                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//        citiesSpinner.setSelection(PlaceServiceFragment.citiyitemSelected);
-
-        //--------------------- back press--
         toolbar.setNavigationOnClickListener(this);
 
         //-------------------- Grid List---------------
@@ -220,7 +182,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //                        }
 //                    });
 //                }else
-                if (TABFLAG == 1) {
+//                if (TABFLAG == 1) {
 
                     final Dialog dialog = new Dialog(BeautyMainPage.context);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -229,9 +191,13 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     //-------------- range price filter--------------------
                     price = dialog.findViewById(R.id.price);
+                    if (TABFLAG==2){
+                        price.setEnabled(false);
+                    }
                     price.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
 
                                 if (price.isChecked()) {
                                 final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
@@ -303,6 +269,9 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     //------------------- rate service filte------------------
                     rateService = dialog.findViewById(R.id.rate_service);
+                if (TABFLAG==2){
+                    rateService.setEnabled(false);
+                }
                     rateService.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -351,7 +320,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                 rateServiceDialog.show();
                             } else {
                                 rateService.setText("تقييم الخدمة");
-                                APICall.filterSortAlgorithm("22", "", "");
+                                APICall.filterSortAlgorithm("5", "", "");
                                 ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
 
 
@@ -495,8 +464,16 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                             dialog.cancel();
 //                        TabOne.browseService();
 
-                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-//                            APICall.clearFilterList();
+                            if (TABFLAG==1) {
+                                APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                                updateServ=false;
+                                updateoffr=true;
+                            }else if (TABFLAG==2){
+                                APICall.automatedBrowseOffers("8", "1", BeautyMainPage.context);
+                                updateServ=true;
+                                updateoffr=false;
+                            }
+                            //                            APICall.clearFilterList();
 //                            APICall.filterSortAlgorithm("6",  citiesSpinner.getSelectedItemPosition()+"", "0");
 
 
@@ -633,7 +610,6 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
 
-
                     for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
                         if (i == 2) {
                             if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
@@ -675,396 +651,484 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
                     dialog.show();
-                } else if (TABFLAG == 2) {
-                    final Dialog dialog = new Dialog(BeautyMainPage.context);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                    dialog.setContentView(R.layout.filter_dialog_offer_layout);
-
-                    //-------------- range price filter--------------------
-                    final CheckBox price = dialog.findViewById(R.id.price);
-                    price.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-
-                            if (isChecked) {
-                                final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
-                                rangePriceDialog.setContentView(R.layout.price_range_dialog);
-                                rangePriceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                                // get seekbar from view
-                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangePriceDialog.findViewById(R.id.rangeSeekbar5);
-
-                                // get min and max text view
-                                final TextView tvMin = rangePriceDialog.findViewById(R.id.textMin1);
-                                final TextView tvMax = rangePriceDialog.findViewById(R.id.textMax1);
-                                final EditText Min = rangePriceDialog.findViewById(R.id.minval);
-                                final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
-                                Button search = rangePriceDialog.findViewById(R.id.search);
-                                // set listener
-                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-                                    @Override
-                                    public void valueChanged(Number minValue, Number maxValue) {
-                                        tvMin.setText(String.valueOf(minValue));
-                                        Min.setText(String.valueOf(minValue));
-                                        Max.setText(String.valueOf(maxValue));
-                                        tvMax.setText(String.valueOf(maxValue));
-                                    }
-                                });
-
-                                // set final value listener
-                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
-                                    @Override
-                                    public void finalValue(Number minValue, Number maxValue) {
-                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
-                                    }
-                                });
-
-                                search.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rangePriceDialog.dismiss();
-                                        price.setText("السعر " + Min.getText().toString() + "-" + Max.getText().toString());
-                                        APICall.filterSortAlgorithm("19", Max.getText().toString(), Min.getText().toString());
-                                    }
-                                });
-
-                                rangePriceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        price.setChecked(false);
-                                        price.setText("السعر");
-                                        APICall.filterSortAlgorithm("19", "", "");
-
-                                    }
-                                });
-
-                                rangePriceDialog.show();
-
-
-                            } else {
-                                price.setText("السعر");
-                                APICall.filterSortAlgorithm("19", "", "");
-                            }
-                        }
-
-
-                    });
-
-                    //------------------- rate service filte------------------
-                    final CheckBox rateService = dialog.findViewById(R.id.rate_service);
-                    //------------- this service not available now ------------
-                    rateService.setText("تقييم العرض");
-                    rateService.setEnabled(false);
-                    //-----------------------------------------------------
-                    rateService.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                            if (isChecked) {
-                                final Dialog rateServiceDialog = new Dialog(BeautyMainPage.context);
-                                rateServiceDialog.setContentView(R.layout.rating_dialog);
-                                Button ok = rateServiceDialog.findViewById(R.id.ok);
-                                Button cancel = rateServiceDialog.findViewById(R.id.cancel);
-                                final RatingBar ratingBar = rateServiceDialog.findViewById(R.id.ratingBar);
-
-                                ok.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rateServiceDialog.dismiss();
-                                        rateService.setText("تقييم العرض " + (int) ratingBar.getRating());
-                                        APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
-                                    }
-                                });
-
-
-                                cancel.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rateService.setChecked(false);
-                                        rateServiceDialog.dismiss();
-                                    }
-                                });
-                                rateServiceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                                rateServiceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        rateService.setChecked(false);
-                                        rateService.setText("تقييم العرض");
-                                        APICall.filterSortAlgorithm("22", "", "");
-
-                                    }
-                                });
-
-                                rateServiceDialog.show();
-                            } else {
-                                rateService.setText("تقييم العرض");
-                                APICall.filterSortAlgorithm("22", "", "");
-
-                            }
-                        }
-                    });
-
-
-                    //------------------- rate provider filter------------------
-                    final CheckBox rateProvider = dialog.findViewById(R.id.rate_provoder);
-                    rateProvider.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                final Dialog rateProviderDialog = new Dialog(BeautyMainPage.context);
-                                rateProviderDialog.setContentView(R.layout.rating_dialog);
-                                Button ok = rateProviderDialog.findViewById(R.id.ok);
-                                Button cancel = rateProviderDialog.findViewById(R.id.cancel);
-                                final RatingBar ratingBar = rateProviderDialog.findViewById(R.id.ratingBar);
-
-                                ok.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rateProviderDialog.dismiss();
-                                        rateProvider.setText("تقييم المزودة " + (int) ratingBar.getRating());
-                                        APICall.filterSortAlgorithm("28", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
-                                    }
-                                });
-
-
-                                cancel.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rateProvider.setChecked(false);
-                                        rateProviderDialog.cancel();
-                                    }
-                                });
-                                rateProviderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                                rateProviderDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        rateProvider.setChecked(false);
-                                        rateProvider.setText("تقييم المزودة");
-                                        APICall.filterSortAlgorithm("26", "", "");
-                                    }
-                                });
-                                rateProviderDialog.show();
-                            } else {
-                                rateProvider.setText("تقييم المزودة");
-                                APICall.filterSortAlgorithm("26", "", "");
-                            }
-                        }
-                    });
-                    //-------------- range distance filter--------------------
-                    final CheckBox distance = dialog.findViewById(R.id.far);
-                    distance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-
-                            if (isChecked) {
-                                final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
-                                rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
-                                rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                                // get seekbar from view
-                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
-//                            rangeSeekbar.setMaxValue(100);
-                                // get min and max text view
-                                TextView title = rangeDistanceDialog.findViewById(R.id.title);
-                                title.setText("Distance Range");
-                                final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
-                                final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
-                                final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
-                                final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
-                                Button search = rangeDistanceDialog.findViewById(R.id.search);
-                                // set listener
-                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-                                    @Override
-                                    public void valueChanged(Number minValue, Number maxValue) {
-                                        tvMin.setText(String.valueOf(minValue));
-                                        Min.setText(String.valueOf(minValue));
-                                        Max.setText(String.valueOf(maxValue));
-                                        tvMax.setText(String.valueOf(maxValue));
-                                    }
-                                });
-
-                                // set final value listener
-                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
-                                    @Override
-                                    public void finalValue(Number minValue, Number maxValue) {
-                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
-                                    }
-                                });
-
-                                search.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rangeDistanceDialog.dismiss();
-                                        distance.setText("البعد " + Min.getText().toString() + "-" + Max.getText().toString());
-                                        APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
-                                    }
-                                });
-
-
-                                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        distance.setChecked(false);
-                                        distance.setText("البعد");
-                                        APICall.filterSortAlgorithm("2", "", "");
-                                    }
-                                });
-                                rangeDistanceDialog.show();
-
-                            } else {
-                                distance.setText("البعد");
-                                APICall.filterSortAlgorithm("2", "", "");
-                            }
-                        }
-
-
-                    });
-
-                    final Button filterBtnDialog = dialog.findViewById(R.id.filter);
-                    filterBtnDialog.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.cancel();
-//                        TabOne.browseService();
-
-                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-                            APICall.clearFilterList();
-
-                        }
-                    });
-
-                    //---------------- active Date--------------------
-                    activeDate=dialog.findViewById(R.id.activeDate);
-                    activeDate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (activeDate.isChecked()) {
-                                final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
-                                namesalonDialog.setContentView(R.layout.active_date_dialog);
-                                namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                final DatePicker date=namesalonDialog.findViewById(R.id.date);
-                                Button search = namesalonDialog.findViewById(R.id.search);
-                                search.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        if (date.getDayOfMonth()!=0){
-                                            namesalonDialog.dismiss();
-                                            String dateText=date.getMonth()+":"+date.getDayOfMonth();
-                                            activeDate.setText("التاريخ النشط: " +dateText);
-                                            APICall.filterSortAlgorithm("3","\""+dateText+"\"" , null);
-                                            ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, activeDate.getText().toString()));
-
-                                        }else {
-                                            namesalonDialog.cancel();
-                                            activeDate.setText("التاريخ النشط");
-                                            APICall.filterSortAlgorithm("3", "", "");
-                                            ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, activeDate.getText().toString()));
-
-                                        }
-
-
-
-
-                                    }
-                                });
-                                namesalonDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        activeDate.setChecked(false);
-                                        activeDate.setText("التاريخ النشط");
-                                        APICall.filterSortAlgorithm("3", "", "");
-                                        ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, activeDate.getText().toString()));
-
-                                    }
-                                });
-                                namesalonDialog.show();
-
-                            }else {
-//                                nameSalonOrProvider.setChecked(false);
-                                activeDate.setText("التاريخ النشط");
-                                APICall.filterSortAlgorithm("3", "", "");
-                                ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, activeDate.getText().toString()));
-
-                            }
-                        }
-                    });
-
-                    //---------------- Discount val--------------------
-                    discountVal=dialog.findViewById(R.id.discountVal);
-                    discountVal.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (discountVal.isChecked()) {
-                                final Dialog discountDialog = new Dialog(BeautyMainPage.context);
-
-                                discountDialog.setContentView(R.layout.discount_value_percent_dialog);
-                                discountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                // get seekbar from view
-                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) discountDialog.findViewById(R.id.rangeSeekbar5);
-                                rangeSeekbar.setMaxValue(100);
-                                // get min and max text discountDialog
-                                final TextView tvMin = discountDialog.findViewById(R.id.textMin1);
-                                final TextView tvMax = discountDialog.findViewById(R.id.textMax1);
-                                final EditText Min = discountDialog.findViewById(R.id.minval);
-                                final EditText Max = discountDialog.findViewById(R.id.maxval);
-                                Button search = discountDialog.findViewById(R.id.search);
-                                // set listener
-                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-                                    @Override
-                                    public void valueChanged(Number minValue, Number maxValue) {
-                                        tvMin.setText(String.valueOf(minValue)+"%");
-                                        Min.setText(String.valueOf(minValue));
-                                        Max.setText(String.valueOf(maxValue));
-                                        tvMax.setText(String.valueOf(maxValue)+"%");
-                                    }
-                                });
-
-                                // set final value listener
-                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
-                                    @Override
-                                    public void finalValue(Number minValue, Number maxValue) {
-                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
-                                    }
-                                });
-
-                                search.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        discountDialog.dismiss();
-                                        discountVal.setText("نسبة الخصم المئوية:  " + Min.getText().toString() + "% -" + Max.getText().toString()+"%");
-                                        APICall.filterSortAlgorithm("19", Max.getText().toString(), Min.getText().toString());
-                                    }
-                                });
-
-                                discountDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        discountVal.setChecked(false);
-                                        discountVal.setText("نسبة الخصم المئوية");
-                                        APICall.filterSortAlgorithm("19", "", "");
-
-                                    }
-                                });
-
-                                discountDialog.show();
-
-
-                            } else {
-                                discountVal.setText("نسبة الخصم المئوية");
-                                APICall.filterSortAlgorithm("19", "", "");
-                            }
-                        }
-                    });
-
-
-                    dialog.show();
-                }
-
+//                }
+
+                //--------------------- for offers in the future--------------
+//                else if (TABFLAG == 2) {
+//                    final Dialog dialog = new Dialog(BeautyMainPage.context);
+//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+//                    dialog.setContentView(R.layout.filter_dialog_offer_layout);
+//
+//                    //-------------- range price filter--------------------
+//                    final CheckBox price = dialog.findViewById(R.id.price);
+//                    price.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (price.isChecked()) {
+//                                final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
+//                                rangePriceDialog.setContentView(R.layout.price_range_dialog);
+//                                rangePriceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+//                                // get seekbar from view
+//                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangePriceDialog.findViewById(R.id.rangeSeekbar5);
+//
+//                                // get min and max text view
+//                                final TextView tvMin = rangePriceDialog.findViewById(R.id.textMin1);
+//                                final TextView tvMax = rangePriceDialog.findViewById(R.id.textMax1);
+//                                final EditText Min = rangePriceDialog.findViewById(R.id.minval);
+//                                final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
+//                                Button search = rangePriceDialog.findViewById(R.id.search);
+//                                // set listener
+//                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//                                    @Override
+//                                    public void valueChanged(Number minValue, Number maxValue) {
+//                                        tvMin.setText(String.valueOf(minValue));
+//                                        Min.setText(String.valueOf(minValue));
+//                                        Max.setText(String.valueOf(maxValue));
+//                                        tvMax.setText(String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                // set final value listener
+//                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+//                                    @Override
+//                                    public void finalValue(Number minValue, Number maxValue) {
+//                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                search.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        rangePriceDialog.dismiss();
+//                                        price.setText("السعر " + Min.getText().toString() + "-" + Max.getText().toString());
+//                                        APICall.filterSortAlgorithm("19", Max.getText().toString(), Min.getText().toString());
+//                                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, price.getText().toString()));
+//
+//                                    }
+//                                });
+//
+//                                rangePriceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        price.setChecked(false);
+//                                        price.setText("السعر");
+//                                        APICall.filterSortAlgorithm("19", "", "");
+//                                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price.getText().toString()));
+//
+//
+//                                    }
+//                                });
+//
+//                                rangePriceDialog.show();
+//
+//
+//                            } else {
+//                                price.setText("السعر");
+//                                APICall.filterSortAlgorithm("19", "", "");
+//                                ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price.getText().toString()));
+//
+//                            }
+//                        }
+//                    });
+//
+//
+//
+//
+//
+//                    //------------------- rate service filte------------------
+//                    final CheckBox rateService = dialog.findViewById(R.id.rate_service);
+//                    //------------- this service not available now ------------
+//                    rateService.setText("تقييم العرض");
+//                    rateService.setEnabled(false);
+//                    //-----------------------------------------------------
+////                    rateService.setOnClickListener(new View.OnClickListener() {
+////                        @Override
+////                        public void onClick(View v) {
+////                            if (rateService.isChecked()) {
+////                                final Dialog rateServiceDialog = new Dialog(BeautyMainPage.context);
+////                                rateServiceDialog.setContentView(R.layout.rating_dialog);
+////                                Button ok = rateServiceDialog.findViewById(R.id.ok);
+////                                Button cancel = rateServiceDialog.findViewById(R.id.cancel);
+////                                final RatingBar ratingBar = rateServiceDialog.findViewById(R.id.ratingBar);
+////
+////                                ok.setOnClickListener(new View.OnClickListener() {
+////                                    @Override
+////                                    public void onClick(View v) {
+////                                        rateServiceDialog.dismiss();
+////                                        rateService.setText("تقييم العرض " + (int) ratingBar.getRating());
+////                                        APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
+////                                    }
+////                                });
+////
+////
+////                                cancel.setOnClickListener(new View.OnClickListener() {
+////                                    @Override
+////                                    public void onClick(View v) {
+////                                        rateService.setChecked(false);
+////                                        rateServiceDialog.dismiss();
+////                                    }
+////                                });
+////                                rateServiceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+////
+////                                rateServiceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+////                                    @Override
+////                                    public void onCancel(DialogInterface dialog) {
+////                                        rateService.setChecked(false);
+////                                        rateService.setText("تقييم العرض");
+////                                        APICall.filterSortAlgorithm("22", "", "");
+////
+////                                    }
+////                                });
+////
+////                                rateServiceDialog.show();
+////                            } else {
+////                                rateService.setText("تقييم العرض");
+////                                APICall.filterSortAlgorithm("22", "", "");
+////
+////                            }
+////                        }
+////                    });
+//
+//
+//
+//
+//
+//                    //------------------- rate provider filter------------------
+//                    final CheckBox rateProvider = dialog.findViewById(R.id.rate_provoder);
+//                    rateProvider.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (rateProvider.isChecked()) {
+//                                final Dialog rateProviderDialog = new Dialog(BeautyMainPage.context);
+//                                rateProviderDialog.setContentView(R.layout.rating_dialog);
+//                                Button ok = rateProviderDialog.findViewById(R.id.ok);
+//                                Button cancel = rateProviderDialog.findViewById(R.id.cancel);
+//                                final RatingBar ratingBar = rateProviderDialog.findViewById(R.id.ratingBar);
+//
+//
+//
+//                                ok.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        rateProviderDialog.dismiss();
+//                                        rateProvider.setText("تقييم المزودة " + (int) ratingBar.getRating());
+//                                        APICall.filterSortAlgorithm("28", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
+//                                        ServiceFragment.serviceFilters.set(4, new ServiceFilter(true, rateProvider.getText().toString()));
+//                                        Log.e("rateprovider","ok");
+//                                    }
+//                                });
+//
+//
+//                                cancel.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        rateProvider.setChecked(false);
+//                                        rateProviderDialog.cancel();
+//                                        ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
+//                                        Log.e("rateprovider","cancell");
+//
+//                                    }
+//                                });
+//                                rateProviderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+//                                rateProviderDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        rateProvider.setChecked(false);
+//                                        rateProvider.setText("تقييم المزودة");
+//                                        APICall.filterSortAlgorithm("28", "", "");
+//                                        ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
+//                                        Log.e("rateprovider","cancel");
+//
+//                                    }
+//                                });
+//                                rateProviderDialog.show();
+//                            } else {
+//                                rateProvider.setText("تقييم المزودة");
+//                                APICall.filterSortAlgorithm("28", "", "");
+//                                ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
+//                                Log.e("rateprovider","else");
+//
+//                            }
+//                        }
+//                    });
+//
+//
+//                    //-------------- range distance filter--------------------
+//                    final CheckBox distance = dialog.findViewById(R.id.far);
+//                    distance.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (distance.isChecked()) {
+//                                final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
+//                                rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
+//                                rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+//                                // get seekbar from view
+//                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
+////                            rangeSeekbar.setMaxValue(100);
+//                                // get min and max text view
+//                                TextView title = rangeDistanceDialog.findViewById(R.id.title);
+//                                title.setText("Distance Range");
+//                                final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
+//                                final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
+//                                final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
+//                                final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
+//                                Button search = rangeDistanceDialog.findViewById(R.id.search);
+//                                // set listener
+//                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//                                    @Override
+//                                    public void valueChanged(Number minValue, Number maxValue) {
+//                                        tvMin.setText(String.valueOf(minValue));
+//                                        Min.setText(String.valueOf(minValue));
+//                                        Max.setText(String.valueOf(maxValue));
+//                                        tvMax.setText(String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                // set final value listener
+//                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+//                                    @Override
+//                                    public void finalValue(Number minValue, Number maxValue) {
+//                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                search.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        rangeDistanceDialog.dismiss();
+//                                        distance.setText("البعد " + Min.getText().toString() + "-" + Max.getText().toString());
+//                                        APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
+//                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, activeDate.getText().toString()));
+//
+//                                    }
+//                                });
+//
+//
+//                                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        distance.setChecked(false);
+//                                        distance.setText("البعد");
+//                                        APICall.filterSortAlgorithm("2", "", "");
+//                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+//
+//                                    }
+//                                });
+//                                rangeDistanceDialog.show();
+//
+//                            } else {
+//                                distance.setText("البعد");
+//                                APICall.filterSortAlgorithm("2", "", "");
+//                                ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+//                            }
+//                        }
+//                    });
+//
+//
+//
+//
+//                    final Button filterBtnDialog = dialog.findViewById(R.id.filter);
+//                    filterBtnDialog.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            dialog.cancel();
+////                        TabOne.browseService();
+//
+//                            TabTwo.arrayList.clear();
+//                            TabTwo.offersAdapterTab.notifyDataSetChanged();
+//                            Log.e("SizeTTAR",TabTwo.arrayList.size()+"");
+//                            APICall.automatedBrowseOffers( "8", "1", BeautyMainPage.context);
+////                            APICall.clearFilterList();
+//
+//                        }
+//                    });
+//
+//                    //---------------- active Date--------------------
+//                    activeDate=dialog.findViewById(R.id.activeDate);
+//                    activeDate.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (activeDate.isChecked()) {
+//                                final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
+//                                namesalonDialog.setContentView(R.layout.active_date_dialog);
+//                                namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                                final DatePicker date=namesalonDialog.findViewById(R.id.date);
+//                                Button search = namesalonDialog.findViewById(R.id.search);
+//                                search.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        if (date.getDayOfMonth()!=0){
+//                                            namesalonDialog.dismiss();
+//                                            String dateText=date.getMonth()+":"+date.getDayOfMonth();
+//                                            activeDate.setText("التاريخ النشط: " +dateText);
+//                                            APICall.filterSortAlgorithm("3","\""+dateText+"\"" , null);
+//                                            ServiceFragment.serviceFilters.set(8, new ServiceFilter(true, activeDate.getText().toString()));
+//
+//                                        }else {
+//                                            namesalonDialog.cancel();
+//                                            activeDate.setText("التاريخ النشط");
+////                                            APICall.filterSortAlgorithm("3", "", "");
+//                                            ServiceFragment.serviceFilters.set(8, new ServiceFilter(false, activeDate.getText().toString()));
+//
+//                                        }
+//
+//
+//
+//
+//                                    }
+//                                });
+//                                namesalonDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        activeDate.setChecked(false);
+//                                        activeDate.setText("التاريخ النشط");
+//                                        APICall.filterSortAlgorithm("3", "", "");
+//                                        ServiceFragment.serviceFilters.set(8, new ServiceFilter(false, activeDate.getText().toString()));
+//
+//                                    }
+//                                });
+//                                namesalonDialog.show();
+//
+//                            }else {
+////                                nameSalonOrProvider.setChecked(false);
+//                                activeDate.setText("التاريخ النشط");
+//                                APICall.filterSortAlgorithm("3", "", "");
+//                                ServiceFragment.serviceFilters.set(8, new ServiceFilter(false, activeDate.getText().toString()));
+//
+//                            }
+//                        }
+//                    });
+//
+//                    //---------------- Discount val--------------------
+//                    discountVal=dialog.findViewById(R.id.discountVal);
+//                    discountVal.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (discountVal.isChecked()) {
+//                                final Dialog discountDialog = new Dialog(BeautyMainPage.context);
+//
+//                                discountDialog.setContentView(R.layout.discount_value_percent_dialog);
+//                                discountDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                                // get seekbar from view
+//                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) discountDialog.findViewById(R.id.rangeSeekbar5);
+//                                rangeSeekbar.setMaxValue(100);
+//                                // get min and max text discountDialog
+//                                final TextView tvMin = discountDialog.findViewById(R.id.textMin1);
+//                                final TextView tvMax = discountDialog.findViewById(R.id.textMax1);
+//                                final EditText Min = discountDialog.findViewById(R.id.minval);
+//                                final EditText Max = discountDialog.findViewById(R.id.maxval);
+//                                Button search = discountDialog.findViewById(R.id.search);
+//                                // set listener
+//                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//                                    @Override
+//                                    public void valueChanged(Number minValue, Number maxValue) {
+//                                        tvMin.setText(String.valueOf(minValue)+"%");
+//                                        Min.setText(String.valueOf(minValue));
+//                                        Max.setText(String.valueOf(maxValue));
+//                                        tvMax.setText(String.valueOf(maxValue)+"%");
+//                                    }
+//                                });
+//
+//                                // set final value listener
+//                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+//                                    @Override
+//                                    public void finalValue(Number minValue, Number maxValue) {
+//                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                search.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        discountDialog.dismiss();
+//                                        discountVal.setText("نسبة الخصم المئوية:  " + Min.getText().toString() + "% -" + Max.getText().toString()+"%");
+//                                        APICall.filterSortAlgorithm("19", Max.getText().toString(), Min.getText().toString());
+//                                        ServiceFragment.serviceFilters.set(9, new ServiceFilter(true, discountVal.getText().toString()));
+//                                    }
+//                                });
+//
+//                                discountDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        discountVal.setChecked(false);
+//                                        discountVal.setText("نسبة الخصم المئوية");
+//                                        APICall.filterSortAlgorithm("19", "", "");
+//                                        ServiceFragment.serviceFilters.set(9, new ServiceFilter(false, discountVal.getText().toString()));
+//
+//
+//                                    }
+//                                });
+//
+//                                discountDialog.show();
+//
+//
+//                            } else {
+//                                discountVal.setText("نسبة الخصم المئوية");
+//                                APICall.filterSortAlgorithm("19", "", "");
+//                                ServiceFragment.serviceFilters.set(9, new ServiceFilter(false, discountVal.getText().toString()));
+//                            }
+//                        }
+//                    });
+//
+//
+////                    2 price, 3 rate service, 4 rate prov, 5 distance, 6 service place,7 name salon,8 active date, 9per%
+//
+//                    for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
+//                              if (i == 2) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                price.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                price.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//                            }
+//                        } else if (i == 3) {
+////                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+////                                rateService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+////                                rateService.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+////                            }
+//                        } else if (i == 4) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                rateProvider.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                rateProvider.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//
+//                            }
+//                        } else if (i == 5) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//                            }
+//                        } else if (i == 7) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                nameSalonOrProvider.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                nameSalonOrProvider.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//                            }
+//                        } else if (i == 6) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                servicePlace.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                servicePlace.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//                            }
+//                        } else if (i == 8) {
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                activeDate.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                activeDate.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//
+//                        }
+//                        }else if (i == 9) {
+//                                  if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                      discountVal.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                      discountVal.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//
+//                                  }
+//                              }
+//
+//                    }
+//
+//
+//                    dialog.show();
+//                }
+//
 
             }
 

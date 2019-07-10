@@ -78,46 +78,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         edit_loc = view.findViewById(R.id.edit_loc);
         del_loc = view.findViewById(R.id.del_loc);
         my_loc_layout = view.findViewById(R.id.my_loc_layout);
-//        location_titles=view.findViewById(R.id.location_title);
 
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, locationTitles);
-//       adapter = new ArrayAdapter<>(BeautyMainPage.context, android.R.layout.simple_spinner_item,arrayList);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        location_titles.setAdapter(adapter);
-//        location_titles.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Log.e("mapCamera",location_titles.getSelectedItem().toString());
-//                for (int i=0;i<locationTitles.size();i++){
-//                    Log.e("mapCamera",location_titles.getSelectedItem().toString());
-//                    if(location_titles.getSelectedItem().toString().equals(locationTitles.get(i).getTitle())){
-//                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationTitles.get(i).getLatLng(), 10));
-//                            Log.e("mapCamera","ok");
-//                        }
-//                    }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
         my_loc_layout.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(BeautyMainPage.context, my_location_btn);
-//                listItems.add("rrrrrrr");
-//                listItems.add("rrrrrrr");
-//                listItems.add("rrrrrrr");
-//                listItems.add("rrrrrrr");
-//                setPopUpWindow();
-//
-//                ArrayAdapter<String> dapter=new ArrayAdapter<String>(BeautyMainPage.context,
-//                        android.R.layout.simple_list_item_1,
-//                        listItems);
-//                listView.setAdapter(adapter);
-//                listView.
+
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -199,14 +166,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     add_loc.setEnabled(true);
                     del_loc.setEnabled(true);
                     Toast.makeText(BeautyMainPage.context,R.string.Sitesmodified,Toast.LENGTH_LONG).show();
-//                    mMap.clear();
-//                    for (int i = 0; i < AccountFragment.locationTitles.size(); i++) {
-//                        mMap.addMarker(new MarkerOptions()
-//                                .position(AccountFragment.locationTitles.get(i).getLatLng())
-//                                .title(AccountFragment.locationTitles.get(i).getBdb_my_descr())
-//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))
-//                        );
-//                    }
                 }
                 onMapReady(mMap);
             }
@@ -263,8 +222,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
        View view = inflater.inflate(R.layout.popup_window, null);
 
         listView =  view.findViewById(R.id.listview);
-//        Pause = (RelativeLayout) view.findViewById(R.id.pause_btn);
-//        Stop = (RelativeLayout) view.findViewById(R.id.stop_btn);
 
           popupMenu = new PopupWindow(view, 300, RelativeLayout.LayoutParams.WRAP_CONTENT, true);
     }
@@ -337,14 +294,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     for ( i = 0; i < AccountFragment.locationTitles.size(); i++) {
                                         if (marker.getPosition().equals(AccountFragment.locationTitles.get(i).getLatLng())) {
 
-
-//                                                            for (int j=0;j<arrayList.size();i++){
-//                                                               if (arrayList.get(j).equals(locationTitles.get(i)))
-//                                                                arrayList.remove(j);
-//                                                            }
                                             APICall.deleteAddress("http://clientapp.dcoret.com/api/auth/user/deleteAddress",AccountFragment.locationTitles.get(i).getId(),i,marker,BeautyMainPage.context);
-//                                            marker.remove();
-                                                        }
+                                        }
                                         }
                                     mMap.clear();
                                     AccountFragment. arrayList.clear();
@@ -357,8 +308,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                         AccountFragment.arrayList.add(AccountFragment.locationTitles.get(i).getBdb_my_descr());
 
                                     }
-//                                    location_titles.setAdapter(adapter);
-//                                    adapter.notifyDataSetChanged();
 
                                     //------------- for spinner in place service /init spinner
                                     PlaceServiceFragment.mylocationId=0;

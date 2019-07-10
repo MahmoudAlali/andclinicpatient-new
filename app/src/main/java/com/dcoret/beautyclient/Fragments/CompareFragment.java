@@ -31,7 +31,6 @@ public class CompareFragment extends Fragment  {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                tabselected(servicetab,offertab,maptab);
                 fragment = new ServicesTabsFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -42,13 +41,4 @@ public class CompareFragment extends Fragment  {
                 return view;
     }
 
-//    @Override
-//    public void doBack() {
-//        Log.d("doback","ok");
-//        fragment = new ServiceFragment();
-//        fm = getFragmentManager();
-//        fragmentTransaction = fm.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment, fragment);
-//        fragmentTransaction.commit();
-//    }
 }

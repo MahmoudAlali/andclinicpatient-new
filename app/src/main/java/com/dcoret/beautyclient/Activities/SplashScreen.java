@@ -3,12 +3,14 @@ package com.dcoret.beautyclient.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,11 +30,13 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class SplashScreen extends AppCompatActivity {
     Context context;
-
+    SharedPreferences sharedPreferences;
+    public static String ln;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,19 @@ public class SplashScreen extends AppCompatActivity {
         FirebaseApp.initializeApp(SplashScreen.this);
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         context = this;
+        sharedPreferences=getSharedPreferences("LOGIN",MODE_PRIVATE);
+         ln=sharedPreferences.getString("lang","en");
+
+        Resources res = getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.setLocale(new Locale(ln.toLowerCase())); // API 17+ only.
+        // Use conf.locale = new Locale(...) if targeting lower versions
+        res.updateConfiguration(conf, dm);
+
+
+
         final Thread splash = new Thread() {
             @Override
             public void run() {

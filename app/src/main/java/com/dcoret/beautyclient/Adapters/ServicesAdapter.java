@@ -15,23 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.AddReservation;
+import com.dcoret.beautyclient.Fragments.AddReservation;
 import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class show me the items of the services in recycle view \n
@@ -44,7 +34,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     Context context;
     public static boolean list;
-//    String items[];
     static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
 
     String[] price;
@@ -53,8 +42,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     int layout;
     Location_Beauty[] location_beauties;
     boolean[] fav;
-    ArrayList<DataService> dataServices;
-    ArrayList<DataService> favDataServices=new ArrayList<>();
     ArrayList<BrowseServiceItem> itemArrayList;
 
     public ServicesAdapter(Context context, String[] items){
@@ -85,8 +72,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.cities=cities;
         this.location_beauties=location_beauties;
         this.fav=fav;
-
-
     }
 
 
@@ -102,12 +87,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.fav=fav;
 
     }
-//    public ServicesAdapter(Context context, ArrayList<DataService> dataServices){
-//        this.context=context;
-//        this.dataServices=dataServices;
-//
-//    }
-
 
     /**
      * @param parent
@@ -120,17 +99,10 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context.getApplicationContext());
         View row;
-//        if(grid==false) {
-             row = inflater.inflate(layout, parent, false);
-//        } else {
-//          row = inflater.inflate(R.layout.service_layout_last, parent, false);
-//        }
+        row = inflater.inflate(layout, parent, false);
         ServicesAdapter.Item item=new ServicesAdapter.Item(row);
         return item;
     }
-
-
-
 
     String date;
     Dialog dialog1,dialog;
@@ -171,120 +143,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
 
             }
-//            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
-//            ((Item) holder).pro_name.setText(dataServices.get(position).getProvider_name());
-//            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
-//            if(fav[position]){
-//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-//                Favorites.dataServices.add(new DataService(0
-//                        ,items[position]
-//                        ,Double.parseDouble(price[position])
-//                        ,Double.parseDouble(rank[position])
-//                        ,true
-//                        ,false
-//
-//                ));
-//                fav[position]=true;            }
         }catch (Exception e){
             e.printStackTrace();
-//            ((ServicesAdapter.Item)holder).textView.setText(dataServices.get(position).getName());
-//            ((Item)holder).price.setText(dataServices.get(position).getPrice()+"");
-//            ((Item)holder).rank.setText(dataServices.get(position).getRating()+"");
-//            if(!dataServices.get(position).isFav()) {
-//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
-//
-//
-//            }else {
-//                ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-//            }
-//            }
-//
-//
-//        ((Item) holder).service_details.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(context, ServiceDetails.class);
-//                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
-//                intent.putExtra("provider_name",((Item) holder).pro_name.getText().toString());
-//                intent.putExtra("price",((Item) holder).price.getText().toString());
-////                intent.putExtra("service_name",((Item) holder).textView.getText().toString());
-//                context.startActivity(intent);
+
             }
-//        });
-//
-//            try {
-////                ((Item) holder).compare.setOnClickListener(new View.OnClickListener() {
-////                    @Override
-////                    public void onClick(View v) {
-////                        if (((Item) holder).compare.isActivated()) {
-////                            comparenum--;
-////                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
-//                            ((Item) holder).compare.setTextColor(Color.WHITE);
-//                            ((Item) holder).compare.setActivated(false);
-//                        } else if (((Item) holder).compare.isActivated() == false && comparenum < 3) {
-//                            ((Item) holder).compare.setActivated(true);
-//                            comparenum++;
-//                            ((Item) holder).compare.setTextColor(Color.GREEN);
-//                            Toast.makeText(context.getApplicationContext(), comparenum + "", Toast.LENGTH_LONG).show();
-//
-//                        }
-//
-//                    }
-//                        });
-//        }catch (Exception e){
-//
-//
-//        }
-//
-//
-//        try {
-//
-//    ((Item) holder).favorites.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            try {
-//                if (dataServices.get(position).isFav()) {
-//                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_heart);
-//
-//                    fav[position] = false;
-//                    dataServices.get(position).setFav(false);
-//                } else   {
-//                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-////                    Favorites.dataServices.add(new DataService(0
-////                            , items[position]
-////                            , Double.parseDouble(price[position])
-////                            , Double.parseDouble(rank[position])
-////                            , true
-////                            , false
-////                    ));
-////                    fav[position] = false;
-//                    dataServices.get(position).setFav(false);
-//
-//
-//
-//                }
-//            }catch (Exception e){
-//                e.printStackTrace();
-////                    ((Item) holder).favorites.setBackgroundResource(R.drawable.ic_favorite_heart_button);
-//                try {
-//                    Favorites.dataServices.remove(position);
-//                    notifyDataSetChanged();
-//
-//                }catch (Exception ee){
-//                    ee.printStackTrace();
-//                }
-//
-//            }
-//
-//        }
-//    });
-
-
             }
 
     @Override
     public int getItemCount() {
-//        Log.e("ELementSize",itemArrayList.size()+"");
             return itemArrayList.size();
     }
 
@@ -317,54 +183,5 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             service_fav=itemView.findViewById(R.id.service_fav);
 
         }
-    }
-
-
-    static String token_provider="enTW789hyvs:APA91bGyfEMJKFEZ6NuhvCFAg_Abx6rB9kmdMEW6vPnGRSKJJ3BQNDaKtISf59GuWyS7tBWNdT-ZLOkn3-Nz3IzHZfB911syZzHsRfjk64KGcfG0FAQ0wEAxuFc9buspiowZJmJsQ7lP";
-    static String api_key_header_value_provider = "Key=AAAAAAXCVwM:APA91bFiJYACTd-gZPdHrymnwcypg2IQ6JfSdTqUWqt95VANEyTe7H8NAn2nUnwfoau63QdJTXrxpLR5ZyDQ2-PL6TfPCCH7JJrocD1-SkfE7qrfMIqZvu09ICnD72OqAzuB-o85WawO";
-
-
-    static void sendnotification_provider(Context context,String title,String body ,String action1,String action2) {
-
-        try{
-            RequestQueue queue = Volley.newRequestQueue(context);
-            String url = "https://fcm.googleapis.com/fcm/send";
-            JSONObject data1 = new JSONObject();
-            data1.put("title", title);
-            data1.put("body", body);
-            data1.put("action1" ,action1);
-            data1.put("action2" ,action2);
-            JSONObject notification_data = new JSONObject();
-            notification_data.put("to",token_provider);
-            notification_data.put("data", data1);
-            System.out.println(notification_data);
-
-            JsonObjectRequest request = new JsonObjectRequest(url, notification_data, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }){
-                @Override
-                public Map<String, String> getHeaders() {
-                    Map<String, String> headers = new HashMap<>();
-                    headers.put("Content-Type", "application/json");
-                    headers.put("Authorization", api_key_header_value_provider);
-                    System.out.println("Send to provider");
-                    return headers;
-                }
-            };
-
-            queue.add(request);
-            System.out.println(request);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
     }
 }

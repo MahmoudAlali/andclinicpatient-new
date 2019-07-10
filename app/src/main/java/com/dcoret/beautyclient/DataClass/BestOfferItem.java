@@ -1,5 +1,7 @@
 package com.dcoret.beautyclient.DataClass;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class BestOfferItem {
@@ -10,9 +12,9 @@ public class BestOfferItem {
 //            "sersup_ids"
 
         String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount;
-        ArrayList<String> sersup_ids;
+        JSONArray sersup_ids;
 
-    public BestOfferItem(String pack_code, String service_count, String provider_name, ArrayList<String> sersup_ids) {
+    public BestOfferItem(String pack_code, String service_count, String provider_name, JSONArray sersup_ids) {
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -29,6 +31,15 @@ public class BestOfferItem {
         this.total_discount = total_discount;
     }
 
+    public BestOfferItem( String pack_code, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids) {
+        this.pack_code = pack_code;
+        this.service_count = service_count;
+        this.provider_name = provider_name;
+        this.old_price = old_price;
+        this.new_price = new_price;
+        this.total_discount = total_discount;
+        this.sersup_ids=sersup_ids;
+    }
 
     public String getOld_price() {
         return old_price;
@@ -86,11 +97,11 @@ public class BestOfferItem {
         this.provider_name = provider_name;
     }
 
-    public ArrayList<String> getSersup_ids() {
+    public JSONArray getSersup_ids() {
         return sersup_ids;
     }
 
-    public void setSersup_ids(ArrayList<String> sersup_ids) {
+    public void setSersup_ids(JSONArray sersup_ids) {
         this.sersup_ids = sersup_ids;
     }
 }

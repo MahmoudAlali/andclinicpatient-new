@@ -17,104 +17,13 @@
             android:weightSum="3"
             >
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
                 android:layout_weight="2"
                 android:src="@drawable/ic_sale"/>
-
-            <TextView
-                android:id="@+id/packCode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="#1"
-                android:gravity="center"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content">
-                    </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Service Count:"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content">
-                    </LinearLayout>
-                <TextView
-                    android:id="@+id/ser_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content">
-                    </LinearLayout>
-                     <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Provider Name:"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content">
-                    </LinearLayout>
-                     <TextView
-                    android:id="@+id/pro_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="wrap_content">
-                    </LinearLayout>
-                </LinearLayout>
-
-
-            </LinearLayout>
-            <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -125,10 +34,10 @@
                     android:layout_height="match_parent"
                     android:text="old price"
                     android:textStyle="bold"
-                    android:textColor="#E74C3C"
+                    android:textColor="#000"
                     android:textSize="@dimen/standard_20"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
+
+                    android:gravity="center"/>
                 <TextView
                     android:id="@+id/new_price"
                     android:layout_weight="1"
@@ -138,22 +47,71 @@
                     android:textStyle="bold"
                     android:textColor="#17202A"
                     android:textSize="@dimen/standard_20"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
+                    android:gravity="center"/>
+                <ImageView
+                    android:layout_margin="5dp"
+                    android:id="@+id/add"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_add_black_24dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/standard_20"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="1"
+                android:weightSum="8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/total_dis"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="total dis"
-                    android:textStyle="bold"
+                    android:text="discount"
                     android:textSize="@dimen/standard_20"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="bottom|center"/>
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    />
 
-
+                <ImageView
+                    android:id="@+id/info"
+                    android:layout_weight="7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_info"
+                    />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/pro_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Name Provider"
+                    android:textSize="@dimen/standard_20"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

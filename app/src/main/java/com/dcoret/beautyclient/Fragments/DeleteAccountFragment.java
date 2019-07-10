@@ -51,7 +51,6 @@ public class DeleteAccountFragment extends Fragment  {
                     }else {
                         msg=message.getText().toString();
                     }
-
                     APICall.deleteAccount("http://clientapp.dcoret.com/api/auth/user/deleteAccount",reason,msg,BeautyMainPage.context);
 
                 }else {
@@ -60,7 +59,6 @@ public class DeleteAccountFragment extends Fragment  {
 
             }
         });
-
 
         return view;
     }

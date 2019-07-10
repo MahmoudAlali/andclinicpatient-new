@@ -79,6 +79,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         context = this;
         name = findViewById(R.id.name);
         current_location = findViewById(R.id.cur_location);
@@ -88,15 +89,10 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         password = findViewById(R.id.password);
         confirm_password = findViewById(R.id.confirm_password);
         privacy_policy = findViewById(R.id.privacy_policy);
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
          geocoder=new Geocoder(context);
 
-
         mapFragment.getMapAsync(this);
-//        mapFragment.getView().setVisibility(View.INVISIBLE);
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
@@ -112,8 +108,6 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
-
-
 
 
         cities_spinner = findViewById(R.id.gender_spinner);
@@ -135,7 +129,6 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             privacy_policy.setChecked(true);
         } else if (!IsSelectedLocation){
             APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),"You can't Register Without Location!" );
-
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
@@ -218,8 +211,6 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
                         }
                         }
                 });
-
-
                 d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 d.show();
             }
@@ -228,9 +219,6 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
 
 
     }
-
-
-
 
     //-------------------- request permission-------------------
     public void requestLocationPermission() {
