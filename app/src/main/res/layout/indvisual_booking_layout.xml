@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="75dp"
+    android:layout_margin="7dp"
+    android:layout_height="75dp">
+
+    <LinearLayout
+        android:background="@drawable/border_gray"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="75dp"
+        android:layout_height="75dp">
+        <LinearLayout
+            android:id="@+id/calLayout"
+            android:background="@drawable/white_shadow"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dayofweek"
+                android:textColor="@color/prime"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Sunday"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/dayofmonth"
+                android:textColor="@color/prime"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

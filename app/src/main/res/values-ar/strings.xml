@@ -226,6 +226,12 @@
 
 
 
+    <string name="Individual_booking">حجز فردي</string>
+    <string name="Group_Booking">حجز جماعي</string>
+    <string name="Compare">مقارنة</string>
+
+
+
     <string-array name="cities">
         <item>اسم المدينة</item>
         <item>الرياض</item>

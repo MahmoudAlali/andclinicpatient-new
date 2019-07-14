@@ -2335,7 +2335,8 @@ public class APICall {
                                         distance=jarray.getString("distance"),
                                         longitude=jarray.getString("longitude"),
                                         latitude=jarray.getString("latitude"),
-                                        is_fav_sup=jarray.getString("is_fav_sup");
+                                        is_fav_sup=jarray.getString("is_fav_sup"),
+                                bdb_booking_period=jarray.getString("bdb_booking_period");
                                 BrowseServiceItem bsi = new BrowseServiceItem(bdb_ser_sup_id,
                                                                             bdb_sup_name,
                                                                             bdb_sup_rating,
@@ -2352,7 +2353,8 @@ public class APICall {
                                                                             distance,
                                                                             longitude,
                                                                             latitude,
-                                                                            is_fav_sup);
+                                                                            is_fav_sup,
+                                                                            bdb_booking_period);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 TabOne.arrayList.add(bsi);
@@ -2714,7 +2716,7 @@ public class APICall {
                                     , latLng.latitude + "", namelocality, title, context);
                         }else {
                             SharedPreferences preferences=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
-                            String data=preferences.getString("addressUser",null);
+//                           String data=preferences.getString("addressUser",null);
                             getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
                                     preferences.getString("bdb_email",null), preferences.getString("bdb_mobile",null),namelocality,title,latLng,BeautyMainPage.context);
                         }

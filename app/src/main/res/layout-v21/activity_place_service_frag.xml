@@ -53,10 +53,11 @@
                         android:layout_margin="5dp"
                         android:src="@drawable/icons8_marker_64"/>
 
-                    <Spinner
+                    <Button
+                        android:background="@android:color/transparent"
                         android:id="@+id/my_location"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/standard_40"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -64,7 +65,7 @@
                         android:gravity="center"
                         android:textAlignment="center"
 
-                        ></Spinner>
+                        ></Button>
                 </LinearLayout>
 
                 <LinearLayout

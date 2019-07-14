@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -29,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,15 +55,16 @@ public class PlaceServiceFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
-    public static ArrayList mylocation = new ArrayList();
+    public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
     Button ok, priceService, rateService;
-    Spinner mylocationSpinner, placeSpinner;
+    Spinner  placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
-    public static int mylocationId=0;
-    Button distance;
+    public static String mylocationId="موقعي";
+    Button distance,mylocationbtn;
+    static  boolean fregmentIsFirstOpen=false;
 
 
 
@@ -72,18 +75,14 @@ public class PlaceServiceFragment extends Fragment {
 
 
         //---------------------init my location spinner-----------
-        mylocation.clear();
-        mylocation.add("موقعي");
-        mylocation.add("current location");
-        for (int i = 0; i < AccountFragment.arrayList.size(); i++)
-            mylocation.add(AccountFragment.arrayList.get(i));
-        mylocation.add("new Location");
+
+
 
 
         BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
 
         placeSpinner = view.findViewById(R.id.service_place);
-        mylocationSpinner = view.findViewById(R.id.my_location);
+        mylocationbtn = view.findViewById(R.id.my_location);
         priceService = view.findViewById(R.id.service_price);
         rateService = view.findViewById(R.id.service_rate);
         distance = view.findViewById(R.id.distance);
@@ -143,7 +142,7 @@ public class PlaceServiceFragment extends Fragment {
 
                             // get seekbar from view
                             final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
-//                            rangeSeekbar.setMaxValue(100);
+                            rangeSeekbar.setMaxValue(10000);
                             // get min and max text view
                             TextView title = rangeDistanceDialog.findViewById(R.id.title);
                             title.setText("Distance Range");
@@ -255,81 +254,186 @@ public class PlaceServiceFragment extends Fragment {
             }
         });
 
-         locatioAdapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_dropdown_item, mylocation);
-        locatioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mylocationSpinner.setAdapter(locatioAdapter);
-        mylocationSpinner.setSelection(mylocationId);
 
-        mylocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+
+//         locatioAdapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_dropdown_item, mylocation);
+//        locatioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        mylocationSpinner.setAdapter(locatioAdapter);
+//        mylocationSpinner.setSelection(mylocationId);
+        if (fregmentIsFirstOpen==false){
+            APICall.getdetailsUser(BeautyMainPage.context);
+            fregmentIsFirstOpen=true;
+        }
+
+
+
+        Log.e("Size",mylocation.size()+"");
+
+        mylocationbtn.setText(mylocationId);
+        mylocationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    mylocationId=position;
-                    LocationManager locationManager = (LocationManager)
-                            ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
-                    if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
-                        @Override
-                        public void onLocationChanged(Location location) {
-                            lat=location.getLatitude();
-                            lng=location.getLongitude();
-                            Log.e("LATLANG",lat+":"+lng);
-                            APICall.setlocation(lat,lng);
-                        }
-
-                        @Override
-                        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                        }
-
-                        @Override
-                        public void onProviderEnabled(String provider) {
-
-                        }
-
-                        @Override
-                        public void onProviderDisabled(String provider) {
-
-                        }
-                    });
-                }else if (position==locatioAdapter.getCount()-1){
-                    fragment = new MapFragment();
-                    fm = getActivity().getFragmentManager();
-                    fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, fragment);
-                    fragmentTransaction.commit();
-                    BeautyMainPage.FRAGMENT_NAME="SPINNER";
-
-                }else {
-                    for (int i=0;i<AccountFragment.locationTitles.size();i++){
-                        if (mylocationSpinner.getSelectedItem().toString().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())){
-                            Log.e("Spinner",mylocationSpinner.getSelectedItem().toString());
-                            Log.e("Loction_title",AccountFragment.locationTitles.get(i).getBdb_my_descr()+":"+AccountFragment.locationTitles.get(i).getLatLng());
-                            lat=AccountFragment.locationTitles.get(i).getLatLng().latitude;
-                            lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
-//                            lng=location.getLongitude();
-                            Log.e("LATLANG",lat+":"+lng);
-                            APICall.setlocation(lat,lng);
-                        }
-                    }
-                    mylocationId=position;
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+                mylocation.clear();
+                mylocation.add("موقعي");
+                mylocation.add("current location");
+                for (int i = 0; i < AccountFragment.locationTitles.size(); i++)
+                    mylocation.add(AccountFragment.locationTitles.get(i).getBdb_my_descr());
+                mylocation.add("new Location");
+                for (int i=0;i<mylocation.size();i++) {
+                    popupMenu.getMenu().add(mylocation.get(i));
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().equals("current location")) {
+                            mylocationId=item.getTitle().toString();
+                            mylocationbtn.setText(mylocationId);
+                            LocationManager locationManager = (LocationManager)
+                                    ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
+                            if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                // TODO: Consider calling
+                                //    ActivityCompat#requestPermissions
+                                // here to request the missing permissions, and then overriding
+                                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                //                                          int[] grantResults)
+                                // to handle the case where the user grants the permission. See the documentation
+                                // for ActivityCompat#requestPermissions for more details.
+
+                            }
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
+                                @Override
+                                public void onLocationChanged(Location location) {
+                                    lat=location.getLatitude();
+                                    lng=location.getLongitude();
+                                    Log.e("LATLANG",lat+":"+lng);
+                                    APICall.setlocation(lat,lng);
+                                }
+
+                                @Override
+                                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                                }
+
+                                @Override
+                                public void onProviderEnabled(String provider) {
+
+                                }
+
+                                @Override
+                                public void onProviderDisabled(String provider) {
+
+                                }
+                            });
+                        }else if (item.getTitle().equals("new Location")){
+                            fragment = new MapFragment();
+                            fm = getActivity().getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, fragment);
+                            fragmentTransaction.commit();
+                            BeautyMainPage.FRAGMENT_NAME="SPINNER";
+
+                        }else {
+                            for (int i=0;i<AccountFragment.locationTitles.size();i++){
+                                if (item.getTitle().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())){
+                                    Log.e("Spinner",item.getTitle().toString());
+                                    Log.e("Loction_title",AccountFragment.locationTitles.get(i).getBdb_my_descr()+":"+AccountFragment.locationTitles.get(i).getLatLng());
+                                    lat=AccountFragment.locationTitles.get(i).getLatLng().latitude;
+                                    lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
+//                            lng=location.getLongitude();
+                                    Log.e("LATLANG",lat+":"+lng);
+                                    APICall.setlocation(lat,lng);
+                                }
+                            }
+                            mylocationId=item.getTitle().toString();
+                            mylocationbtn.setText(mylocationId);
+                        }
+
+
+                        return false;
+                    }
+                });
+
+
+                popupMenu.show();
 
             }
         });
+
+
+//        mylocationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (position == 0) {
+//                    mylocationId=position;
+//                    LocationManager locationManager = (LocationManager)
+//                            ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
+//                    if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                        // TODO: Consider calling
+//                        //    ActivityCompat#requestPermissions
+//                        // here to request the missing permissions, and then overriding
+//                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                        //                                          int[] grantResults)
+//                        // to handle the case where the user grants the permission. See the documentation
+//                        // for ActivityCompat#requestPermissions for more details.
+//                        return;
+//                    }
+//                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
+//                        @Override
+//                        public void onLocationChanged(Location location) {
+//                            lat=location.getLatitude();
+//                            lng=location.getLongitude();
+//                            Log.e("LATLANG",lat+":"+lng);
+//                            APICall.setlocation(lat,lng);
+//                        }
+//
+//                        @Override
+//                        public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onProviderEnabled(String provider) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onProviderDisabled(String provider) {
+//
+//                        }
+//                    });
+//                }else if (position==locatioAdapter.getCount()-1){
+//                    fragment = new MapFragment();
+//                    fm = getActivity().getFragmentManager();
+//                    fragmentTransaction = fm.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment, fragment);
+//                    fragmentTransaction.commit();
+//                    BeautyMainPage.FRAGMENT_NAME="SPINNER";
+//
+//                }else {
+//                    for (int i=0;i<AccountFragment.locationTitles.size();i++){
+//                        if (mylocationSpinner.getSelectedItem().toString().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())){
+//                            Log.e("Spinner",mylocationSpinner.getSelectedItem().toString());
+//                            Log.e("Loction_title",AccountFragment.locationTitles.get(i).getBdb_my_descr()+":"+AccountFragment.locationTitles.get(i).getLatLng());
+//                            lat=AccountFragment.locationTitles.get(i).getLatLng().latitude;
+//                            lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
+////                            lng=location.getLongitude();
+//                            Log.e("LATLANG",lat+":"+lng);
+//                            APICall.setlocation(lat,lng);
+//                        }
+//                    }
+//                    mylocationId=position;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
         toolbar= view.findViewById(R.id.toolbar);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -346,7 +450,7 @@ public class PlaceServiceFragment extends Fragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mylocationSpinner.getSelectedItemPosition()==0){
+                if(mylocationbtn.getText().toString().equals("موقعي")){
 
                     APICall.showSweetDialog(BeautyMainPage.context,"","you have to choose a location to proceed");
 

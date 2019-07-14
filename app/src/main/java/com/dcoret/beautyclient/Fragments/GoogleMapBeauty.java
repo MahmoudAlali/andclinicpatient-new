@@ -44,7 +44,6 @@ public class GoogleMapBeauty extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
         search_map=findViewById(R.id.search_map);
         search_map_btn=findViewById(R.id.search_map_btn);
-//        getLocationFromAddress("درعا");
 
         search_map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +65,6 @@ public class GoogleMapBeauty extends FragmentActivity implements OnMapReadyCallb
                                 .position(latLng));
                         // Zoom in the Google Map
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-//                        Toast.makeText(BeautyMainPage.context, statename + latitude + latLng, Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

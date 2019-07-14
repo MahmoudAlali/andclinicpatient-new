@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.IndividualBooking"></activity>
         <activity
             android:name=".test.Main2Activity"
             android:label="@string/title_activity_main2"
@@ -102,7 +103,10 @@
             android:name=".Activities.MyReservations"
             android:label="@string/title_activity_my_reservations"
             android:theme="@style/AppTheme.NoActionBar" />
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

@@ -310,7 +310,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     }
 
                                     //------------- for spinner in place service /init spinner
-                                    PlaceServiceFragment.mylocationId=0;
+                                    PlaceServiceFragment.mylocationId="موقعي";
                                 } else {
                                     marker.showInfoWindow();
                                 }

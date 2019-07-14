@@ -86,6 +86,69 @@
             android:elevation="5dp"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+
+                    android:background="@drawable/shadow_rate"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="5dp"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/icons8_marker_64"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:id="@+id/my_location"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/standard_30"
+                        android:text="my Location"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="@dimen/standard_20"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:background="@drawable/shadow_rate"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="5dp"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/icons8_map_pinpoint_64"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:id="@+id/distance"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/standard_30"
+                        android:text="distance"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
                 <TextView

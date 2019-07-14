@@ -10,6 +10,7 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0b83e6</color>
     <color name="graylight">#fafafa</color>
+    <color name="green">#2ECC71</color>
     <color name="gray">#EEEEFC</color>
     <color name="end_gray">#D6DBDE</color>
 </resources>

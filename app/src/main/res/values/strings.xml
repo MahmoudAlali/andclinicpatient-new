@@ -251,6 +251,11 @@
     <string name="on">on</string>
 
 
+    <string name="Individual_booking">Individual booking</string>
+    <string name="Group_Booking">Group Booking</string>
+    <string name="Compare">Compare</string>
+
+
     <string-array name="gender">
         <item>الجنس</item>
         <item>ذكر</item>

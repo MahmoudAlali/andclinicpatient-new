@@ -1,15 +1,22 @@
 package com.dcoret.beautyclient.Fragments;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,6 +37,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -62,6 +70,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
    public static TextView servicetab,offertab,maptab;
+   TextView myLocationbtn,distancebtn;
     static ImageButton filter,compare,gridlist;
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
@@ -89,12 +98,169 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
         //-------------- init service filter array-----------
         // 1 city name, 2 price, 3 rate service ,4 rate provider, 5 distance , 6 saloon or pro name, 7 service place
+        myLocationbtn=view.findViewById(R.id.my_location);
+        distancebtn=view.findViewById(R.id.distance);
         pagenum=view.findViewById(R.id.pagenum);
         pageNext=view.findViewById(R.id.pageNext);
         pagePrev=view.findViewById(R.id.pagePrev);
         pagenum.setText("Page"+TabOne.pagenum);
         BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
 //        Log.d("doback",BeautyMainPage.FRAGMENT_NAME);
+
+
+        myLocationbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+                for (int i=1;i<PlaceServiceFragment.mylocation.size();i++) {
+                    popupMenu.getMenu().add(PlaceServiceFragment.mylocation.get(i));
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            String i = item.getTitle().toString();
+                            Log.e("ItemID",i+"");
+                            if (i.equals("current location")) {
+                                LocationManager locationManager = (LocationManager)
+                                        ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
+                                if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                }
+                                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
+                                    @Override
+                                    public void onLocationChanged(Location location) {
+                                        PlaceServiceFragment.lat = location.getLatitude();
+                                        PlaceServiceFragment.lng = location.getLongitude();
+                                        Log.e("LATLANG", PlaceServiceFragment.lat + ":" + PlaceServiceFragment.lng);
+                                        APICall.setlocation(PlaceServiceFragment.lat, PlaceServiceFragment.lng);
+                                    }
+
+                                    @Override
+                                    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                                    }
+
+                                    @Override
+                                    public void onProviderEnabled(String provider) {
+
+                                    }
+
+                                    @Override
+                                    public void onProviderDisabled(String provider) {
+
+                                    }
+                                });
+                            }
+                            if (i.equals("new Location")){
+                                fragment = new MapFragment();
+                                fm = getActivity().getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commit();
+//                                BeautyMainPage.FRAGMENT_NAME="SPINNER";
+                            }
+                        return true;
+                        }
+
+
+                    });
+                }
+                popupMenu.show();
+                }
+        });
+        distancebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
+                rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
+                rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                // get seekbar from view
+                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
+                rangeSeekbar.setMaxValue(10000);
+                // get min and max text view
+                TextView title = rangeDistanceDialog.findViewById(R.id.title);
+                title.setText("Distance Range");
+                final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
+                final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
+                final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
+                final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
+                Button search = rangeDistanceDialog.findViewById(R.id.search);
+                // set listener
+                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+                    @Override
+                    public void valueChanged(Number minValue, Number maxValue) {
+                        tvMin.setText(String.valueOf(minValue));
+                        Min.setText(String.valueOf(minValue));
+                        Max.setText(String.valueOf(maxValue));
+                        tvMax.setText(String.valueOf(maxValue));
+                    }
+                });
+
+                // set final value listener
+                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+                    @Override
+                    public void finalValue(Number minValue, Number maxValue) {
+                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+                    }
+                });
+
+                search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rangeDistanceDialog.dismiss();
+                        distancebtn.setText("<=" + Max.getText().toString());
+                        APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
+                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtn.getText().toString()));
+
+                        if (TABFLAG==1){
+                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                            APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                        }else {
+                            APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        }
+
+
+
+                    }
+                });
+
+//
+//                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                    @Override
+//                    public void onCancel(DialogInterface dialog) {
+////                                    distance.setChecked(false);
+//                        distancebtn.setText("distance");
+//                        APICall.filterSortAlgorithm("2", "", "");
+//                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distancebtn.getText().toString()));
+//
+//                    }
+//                });
+                rangeDistanceDialog.show();
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         if (updateServ) {
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
@@ -380,79 +546,79 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                         }
                     });
                     //-------------- range distance filter--------------------
-                    distance = dialog.findViewById(R.id.far);
-                    distance.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                if (distance.isChecked()) {
-                                final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
-                                rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
-                                rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                                // get seekbar from view
-                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
-//                            rangeSeekbar.setMaxValue(100);
-                                // get min and max text view
-                                TextView title = rangeDistanceDialog.findViewById(R.id.title);
-                                title.setText("Distance Range");
-                                final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
-                                final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
-                                final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
-                                final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
-                                Button search = rangeDistanceDialog.findViewById(R.id.search);
-                                // set listener
-                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-                                    @Override
-                                    public void valueChanged(Number minValue, Number maxValue) {
-                                        tvMin.setText(String.valueOf(minValue));
-                                        Min.setText(String.valueOf(minValue));
-                                        Max.setText(String.valueOf(maxValue));
-                                        tvMax.setText(String.valueOf(maxValue));
-                                    }
-                                });
-
-                                // set final value listener
-                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
-                                    @Override
-                                    public void finalValue(Number minValue, Number maxValue) {
-                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
-                                    }
-                                });
-
-                                search.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        rangeDistanceDialog.dismiss();
-                                        distance.setText("البعد " + Min.getText().toString() + "-" + Max.getText().toString());
-                                        APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
-                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
-
-                                    }
-                                });
-
-
-                                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                        distance.setChecked(false);
-                                        distance.setText("البعد");
-                                        APICall.filterSortAlgorithm("2", "", "");
-                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
-
-                                    }
-                                });
-                                rangeDistanceDialog.show();
-
-                            } else {
-                                distance.setText("البعد");
-                                APICall.filterSortAlgorithm("2", "", "");
-                                ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
-
-                            }
-                        }
-
-
-                    });
+//                    distance = dialog.findViewById(R.id.far);
+//                    distance.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                                if (distance.isChecked()) {
+//                                final Dialog rangeDistanceDialog = new Dialog(BeautyMainPage.context);
+//                                rangeDistanceDialog.setContentView(R.layout.price_range_dialog);
+//                                rangeDistanceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+//                                // get seekbar from view
+//                                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangeDistanceDialog.findViewById(R.id.rangeSeekbar5);
+////                            rangeSeekbar.setMaxValue(100);
+//                                // get min and max text view
+//                                TextView title = rangeDistanceDialog.findViewById(R.id.title);
+//                                title.setText("Distance Range");
+//                                final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
+//                                final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
+//                                final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
+//                                final EditText Max = rangeDistanceDialog.findViewById(R.id.maxval);
+//                                Button search = rangeDistanceDialog.findViewById(R.id.search);
+//                                // set listener
+//                                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//                                    @Override
+//                                    public void valueChanged(Number minValue, Number maxValue) {
+//                                        tvMin.setText(String.valueOf(minValue));
+//                                        Min.setText(String.valueOf(minValue));
+//                                        Max.setText(String.valueOf(maxValue));
+//                                        tvMax.setText(String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                // set final value listener
+//                                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+//                                    @Override
+//                                    public void finalValue(Number minValue, Number maxValue) {
+//                                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+//                                    }
+//                                });
+//
+//                                search.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        rangeDistanceDialog.dismiss();
+//                                        distance.setText("البعد " + Min.getText().toString() + "-" + Max.getText().toString());
+//                                        APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
+//                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
+//
+//                                    }
+//                                });
+//
+//
+//                                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                    @Override
+//                                    public void onCancel(DialogInterface dialog) {
+//                                        distance.setChecked(false);
+//                                        distance.setText("البعد");
+//                                        APICall.filterSortAlgorithm("2", "", "");
+//                                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+//
+//                                    }
+//                                });
+//                                rangeDistanceDialog.show();
+//
+//                            } else {
+//                                distance.setText("البعد");
+//                                APICall.filterSortAlgorithm("2", "", "");
+//                                ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+//
+//                            }
+//                        }
+//
+//
+//                    });
 
 
 
