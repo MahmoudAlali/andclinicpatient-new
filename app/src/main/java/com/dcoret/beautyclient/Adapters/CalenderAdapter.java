@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.IndividualBooking;
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DateClass;
 import com.dcoret.beautyclient.R;
@@ -63,8 +65,18 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((Item)holder).dayOfMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((Item)holder).calLayout.setBackgroundResource(R.color.green);
-
+                ((Item)holder).calLayout.setBackgroundResource(R.drawable.border_selected);
+                Log.e("bdb_id",IndividualBooking.bdb_id);
+                APICall.searchBooking("15","","",context);
+//                ArrayList tmpnames=new ArrayList();
+//                tmpnames.add("Alaa");
+//                tmpnames.add("Hala");
+//                tmpnames.add("EMMA");
+//                tmpnames.add("Sali");
+//                tmpnames.add("Huda");
+//                for(int i=0;i<5;i++) {
+//                    IndividualBooking.addLayout(tmpnames.get(i).toString(), "");
+//                }
             }
         });
         ((Item)holder).dayOfWeek.setText(dateClasses.get(position).getDayOfWeek());

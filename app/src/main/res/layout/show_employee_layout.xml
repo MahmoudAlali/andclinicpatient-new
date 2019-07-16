@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@drawable/shadow_place_layout"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="@dimen/pf_10dp_space"
+    android:layout_marginLeft="@dimen/pf_10dp_space"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/emp_name"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Employee Name :"
+        android:textColor="#000"
+        />
+
+    <Spinner
+        android:id="@+id/avl_time"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

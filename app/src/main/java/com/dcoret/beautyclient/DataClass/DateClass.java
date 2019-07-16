@@ -2,9 +2,9 @@ package com.dcoret.beautyclient.DataClass;
 
 public class DateClass {
     String dayOfWeek;
-    int dayOfMonth;
+    String dayOfMonth;
 
-    public DateClass(String dayOfWeek, int dayOfMonth) {
+    public DateClass(String dayOfWeek, String dayOfMonth) {
         this.dayOfWeek = dayOfWeek;
         this.dayOfMonth = dayOfMonth;
     }
@@ -17,11 +17,11 @@ public class DateClass {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public int getDayOfMonth() {
+    public String getDayOfMonth() {
         return dayOfMonth;
     }
 
-    public void setDayOfMonth(int dayOfMonth) {
+    public void setDayOfMonth(String dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
     }
 }

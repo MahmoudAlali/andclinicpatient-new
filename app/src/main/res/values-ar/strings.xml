@@ -229,6 +229,19 @@
     <string name="Individual_booking">حجز فردي</string>
     <string name="Group_Booking">حجز جماعي</string>
     <string name="Compare">مقارنة</string>
+    <string name="Distance_Range">مجال البعد</string>
+    <string name="distance">البعد</string>
+    <string name="MyLocation">موقعي</string>
+    <string name="Service_Eval">تقييم الخدمة </string>
+    <string name="Provider_Eval">تقييم المزودة</string>
+    <string name="salon_provider_name">اسم المزودة او الصالون</string>
+    <string name="Price">السعر</string>
+    <string name="current_location">الموقع الحالي</string>
+    <string name="new_location">موقع جديد</string>
+    <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
+    <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
+    <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
+
 
 
 

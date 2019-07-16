@@ -151,14 +151,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
-                                if (item.getTitle().equals(context.getResources().getString(R.string.Individual_booking)))
-                                {
-                            ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
-                        Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
-//                        intent.putExtra("Service Name","")
-                        intent.putExtra("Provider Name",itemArrayList.get(position).getBdb_sup_name());
-                        intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
-                        context.startActivity(intent);
+                                if (item.getTitle().equals(context.getResources().getString(R.string.Individual_booking))) {
+                                        ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
+                                        Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
+                //                        intent.putExtra("Service Name","")
+                                        intent.putExtra("Provider Name",itemArrayList.get(position).getBdb_sup_name());
+                                        intent.putExtra("bdb_ser_sup_id",itemArrayList.get(position).getBdb_ser_sup_id());
+                                        intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
+                                        context.startActivity(intent);
                                 }else {
 
                                 }
@@ -266,7 +266,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                     Log.e("Saturday",day+"");
             }
-            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.DAY_OF_MONTH)));
+            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.DAY_OF_MONTH)+"/"+now.get(Calendar.MONTH)+"/"+now.get(Calendar.YEAR)));
 
         }
 

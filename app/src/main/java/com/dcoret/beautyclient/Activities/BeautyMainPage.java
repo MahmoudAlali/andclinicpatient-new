@@ -217,6 +217,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commit();
                 FRAGMENT_NAME="";
+            }else if (FRAGMENT_NAME.equals("TABS")){
+                fragment = new ServicesTabsFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }else if (FRAGMENT_NAME.equals("ACCOUNTFRAGMENT")){
             FRAGMENT_NAME="";
             fragment = new ServiceFragment();

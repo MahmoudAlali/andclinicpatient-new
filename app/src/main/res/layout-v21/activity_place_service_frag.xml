@@ -144,6 +144,7 @@
         android:textAlignment="center"></Button>
 </LinearLayout>
                 <LinearLayout
+                    android:layout_marginBottom="@dimen/standard_20"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_40"
                     android:layout_marginLeft="10dp"
@@ -171,22 +172,7 @@
                     android:background="@android:color/transparent"
                     android:textAlignment="center"></Button>
                 </LinearLayout>
-                <!--<Button-->
-                <!--android:layout_gravity="center"-->
-                <!--android:id="@+id/service_distance"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/standard_50"-->
-                <!--android:textAlignment="center"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:layout_marginTop="@dimen/standard_75"-->
-                <!--android:background="@drawable/shadow_rate"-->
-                <!--android:foregroundGravity="center"-->
-                <!--&gt;</Button>-->
-
-
-            </LinearLayout>
+                      </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
 
         </LinearLayout>

@@ -69,6 +69,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.activity_map_filtering, container, false);
         if (BeautyMainPage.FRAGMENT_NAME.equals("SPINNER")){
          BeautyMainPage.FRAGMENT_NAME="MAPFRAGMENTSPINNER";
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Tabs")){
+            BeautyMainPage.FRAGMENT_NAME="TABS";
         }else {
             BeautyMainPage.FRAGMENT_NAME = "MAPFRAGMENT";
         }
@@ -310,7 +312,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     }
 
                                     //------------- for spinner in place service /init spinner
-                                    PlaceServiceFragment.mylocationId="موقعي";
+                                    PlaceServiceFragment.mylocationId=getResources().getString(R.string.MyLocation);
                                 } else {
                                     marker.showInfoWindow();
                                 }

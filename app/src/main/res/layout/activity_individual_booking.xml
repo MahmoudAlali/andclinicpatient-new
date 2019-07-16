@@ -24,88 +24,54 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ServiceNamecom"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textSize="@dimen/standard_20"
+                    android:text="Hair Cut"
+                    android:textColor="#000"
                     />
                 <TextView
-                    android:gravity="center"
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Service Value"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_20"
+                    android:textColor="#000"
+                    android:text="Provider Name"
                     />
-
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ProviderNamecom"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textSize="@dimen/standard_20"
+                    android:text="22 R"
+                    android:textColor="#000"
                     />
                 <TextView
-                    android:gravity="center"
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Provider Name "
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_20"
+                    android:textColor="#000"
+                    android:text="Provider Name"
                     />
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Service Price:"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textSize="@dimen/standard_20"
-                    />
-                <TextView
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price Value"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_20"
-                    />
-
-            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -113,46 +79,42 @@
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="wrap_content">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="@color/gray"
-                />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/CancelAlert"
-                    android:textSize="15dp"
-                    android:textColor="@color/prime"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/prime"
-                    android:gravity="center"
-                    android:text="12:15 07/07/2019"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Today"
-                    android:textColor="@color/blue"
-                    android:gravity="center"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp">-->
+                <!--<TextView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="@string/CancelAlert"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:textColor="@color/prime"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textStyle="bold"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textColor="@color/prime"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="12:15 07/07/2019"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="Today"-->
+                    <!--android:textColor="@color/blue"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"
@@ -165,43 +127,133 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/gray"
+
                 android:layout_height="wrap_content"/>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="10dp"
                 android:background="@color/white"
                 />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycleviewtime"
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:id="@+id/show_emp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/gray"
-                android:orientation="horizontal"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                android:layout_height="match_parent">
+                <ExpandableListView
+                    android:layout_weight="1"
+                    android:id="@+id/expandableListView"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                    android:divider="@android:color/darker_gray"
+                    android:dividerHeight="0.5dp" />
+                <Button
+                    android:layout_marginTop="100dp"
+                    android:layout_width="@dimen/width_button"
+                    android:layout_height="@dimen/high_button"
+                    android:layout_marginBottom="10dp"
+                    android:text="Next"
+                    android:textColor="#000"
+                    android:background="@drawable/shadow_button_add_site"
+                    android:layout_gravity="bottom|center"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:background="@drawable/border_blue"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/offer_sw"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/high_button"-->
+                    <!--android:text="Choose Employee"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:background="@color/blue"-->
+                    <!--android:gravity="center"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/service_Sw"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/high_button"-->
+                    <!--android:text="Choose any Employee"-->
+                    <!--android:textColor="@color/blue"-->
+                    <!--android:gravity="center"-->
+                    <!--/>-->
+
+            <!--</LinearLayout>-->
 
 
-            <TimePicker
-                android:theme="@style/MyTimePickerWidgetStyle"
-                android:id="@+id/timePicker"
-                android:layout_width="match_parent"
-                android:layout_height="194dp"
-                android:timePickerMode="spinner" />
-            <Button
-                android:layout_marginTop="10dp"
-                android:layout_width="@dimen/width_button"
-                android:layout_height="@dimen/high_button"
-                android:layout_marginBottom="10dp"
-                android:text="Done"
-                android:textColor="@color/white"
-                android:background="@drawable/shadow_prime"
-                android:layout_gravity="center"
-                android:gravity="center"
-                />
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recycleviewtime"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:background="@color/gray"-->
+                <!--android:orientation="horizontal"-->
+                <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager" />-->
+
+            <!--<LinearLayout-->
+                <!--android:background="@drawable/shadow_button_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginBottom="@dimen/pf_10dp_space"-->
+                <!--android:layout_marginTop="@dimen/pf_25dp_space"-->
+                <!--android:layout_height="@dimen/standard_30">-->
+
+
+            <!--</LinearLayout>-->
+            <!--<Button-->
+                <!--android:id="@+id/choose_time"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/high_button"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="@dimen/pf_25dp_space"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:background="@drawable/shadow_button_choosetime"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Choose Time"></Button>-->
+
+            <!--<Button-->
+                <!--android:background="@drawable/shadow_button_spinner"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginBottom="@dimen/pf_10dp_space"-->
+                <!--android:layout_marginTop="@dimen/pf_25dp_space"-->
+                <!--android:id="@+id/emp_name"-->
+                <!--android:text="Employee Name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/high_button"></Button>-->
+            <!--<LinearLayout-->
+                <!--android:background="@drawable/shadow_gray_dialog"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginTop="@dimen/pf_25dp_space"-->
+                <!--android:layout_height="@dimen/standard_30">-->
+                <!--&lt;!&ndash;<Spinner&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/choose_time"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"></Spinner>&ndash;&gt;-->
+            <!--</LinearLayout>-->
+
+
         </LinearLayout>
     </LinearLayout>
-
 
 
 

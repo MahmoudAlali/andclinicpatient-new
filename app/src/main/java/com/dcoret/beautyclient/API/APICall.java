@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.IndividualBooking;
 import com.dcoret.beautyclient.Activities.Login;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.Activities.Services;
@@ -2193,7 +2194,7 @@ public class APICall {
                     "]" +
                     "}";
 
-            String ttt="{\"lang\":\"en\"," +
+            String jsonPostData="{\"lang\":\"en\"," +
                     "\"ItemPerPage\":20," +
                     "\"PageNum\":\""+pageNum+"\"," +
                     "\"Filter\":[" +
@@ -2204,8 +2205,8 @@ public class APICall {
                     "}";
 
 
-            Log.e("JSONPOST",ttt);
-             final RequestBody body = RequestBody.create(MEDIA_TYPE, ttt);
+            Log.e("JSONPOST",jsonPostData);
+             final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
                     .post(body)
@@ -2213,7 +2214,6 @@ public class APICall {
                     .addHeader("Accept","application/json")
                     .addHeader("X-Requested-With","XMLHttpRequest")
                     .header("Authorization","Bearer "+gettoken(context))
-//                    .header()
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
@@ -2248,7 +2248,6 @@ public class APICall {
                                 dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                                     @Override
                                     public void onCancel(DialogInterface dialog) {
-//
                                                 Log.e("refreshDialog","ok");
                                                 final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
                                                 refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -2283,7 +2282,6 @@ public class APICall {
                 @Override
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     mMessage = response.body().string();
-//                    Log.d("token",gettoken(context));
                     Log.e("TAG123", mMessage);
                     pd.dismiss();
                     TabOne.pullToRefresh.setRefreshing(false);
@@ -2387,7 +2385,6 @@ public class APICall {
                         }
                     }catch (JSONException je){
 //                        there is no suppliered services with your search filters
-
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                                       @Override
                                       public void run() {
@@ -2422,21 +2419,20 @@ public class APICall {
                 "\t]\n" +
                 "}";
 
-        String ttt="{\"lang\":\"en\"," +
+        String jsonPostData="{\"lang\":\"en\"," +
                 "\"ItemPerPage\":20," +
                 "\"PageNum\":\""+pageNum+"\"," +
                 "\"Filter\":[" +
                 "{\"num\":7,\"value1\":1}," +
-              "\t{\"num\":34,\"value1\":21.1236547} , \n" +
-                "\t{\"num\":35,\"value1\":39.1236547}  "+
+                getCityId()+
                 getFilterList()+  // need to try catch
                 "\t\t\t]\n" +
 //                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
                 "}";
 
 
-        Log.e("JSONPOST",ttt);
-        final RequestBody body = RequestBody.create(MEDIA_TYPE, ttt);
+        Log.e("JSONPOST",jsonPostData);
+        final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url("http://clientapp.dcoret.com/api/service/offer/automatedBrowse")
                 .post(body)
@@ -2444,7 +2440,6 @@ public class APICall {
                 .addHeader("Accept","application/json")
                 .addHeader("X-Requested-With","XMLHttpRequest")
                 .header("Authorization","Bearer "+gettoken(context))
-//                    .header()
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -3068,8 +3063,8 @@ public class APICall {
                 ServiceFragment.filterList.clear();
             }
 
-     static Double lat,langg;
-     static  String description;
+
+
          public    static void getdetailsUser(final Context context){
                 String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
                 MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -3361,7 +3356,163 @@ public class APICall {
             Log.d("MessageResponse", mMessage);
         }
 
-    }
+
+
+
+
+
+
+        //----------------search bookin API--------
+//    "bdb_ser_sup_id":15,
+//            "bdb_start_date":"2019-07-15",
+//            "bdb_start_time":"13:00"
+        public  static  void  searchBooking(final String bdb_ser_sup_id,String bdb_start_date,String bdb_start_time ,final Context context){
+
+            IndividualBooking.listHashMap.clear();
+           IndividualBooking.listDataHeader.clear();
+
+            bdb_start_date=  "2019-07-15";
+            bdb_start_time=  "13:00";
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+            pd=new ProgressDialog(context);
+            pd.show();
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+            OkHttpClient client = new OkHttpClient();
+            JSONObject postdata = new JSONObject();
+            try {
+
+                postdata.put("bdb_ser_sup_id", bdb_ser_sup_id);
+                postdata.put("bdb_start_date", bdb_start_date);
+                postdata.put("bdb_start_time", bdb_start_time);
+//            postdata.put("password", "12345");
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url("http://clientapp.dcoret.com/api/booking/searchBooking")
+                    .post(body)
+                    .addHeader("Content-Type","application/json")
+                    .header("Authorization", "Bearer "+gettoken(context))
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage().toString();
+                    Log.w("failure Response", mMessage);
+                    pd.dismiss();
+
+
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+                    }else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+                    }
+
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    Log.e("SearchBooking", mMessage);
+                    pd.dismiss();
+                    try {
+                        JSONObject j=new JSONObject(mMessage);
+                        String success=j.getString("success");
+                        if (success.equals("true"))
+                        {
+                            JSONArray times=j.getJSONArray("data");
+                            for (int i=0;i<times.length();i++){
+                                JSONObject timesItem=times.getJSONObject(i);
+                                String sup_id=timesItem.getString("sup_id");
+                                String sup_name=timesItem.getString("sup_name");
+                                //--------------- add Name Emp to list------------
+                                IndividualBooking.listDataHeader.add(sup_name);
+                                String avaliablity=timesItem.getString("avaliablity");
+                                if (avaliablity.equals("1")){
+                                    JSONArray actualTimes=timesItem.getJSONArray("actualTimes");
+                                    for (int k=0;k<actualTimes.length();k++){
+                                        JSONObject actualTimeItem=actualTimes.getJSONObject(k);
+                                        Log.e("ActualTimeitem",actualTimeItem.toString());
+                                        String from=actualTimeItem.getString("from");
+                                        String to=actualTimeItem.getString("to");
+                                        ArrayList a=IndividualBooking.splitTime(from,to);
+                                        IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+//                                        IndividualBooking.addLayout(sup_name,a);
+                                    }
+                                }else {
+                                    ArrayList a=new ArrayList();
+                                    a.add("0");
+                                    IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+
+//                                    IndividualBooking.addLayout(sup_name,a);
+
+                                }
+                            }
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    IndividualBooking.listAdapter.notifyDataSetChanged();
+                                    IndividualBooking.listView.setAdapter(IndividualBooking.listAdapter);
+                                }
+                            });
+
+
+                        }
+                    }catch (final JSONException je){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    }
+
+                }
+
+            });
+//        Log.d("MessageResponse",mMessage);
+        }
+
+
+
+
+
+}
 
 
 

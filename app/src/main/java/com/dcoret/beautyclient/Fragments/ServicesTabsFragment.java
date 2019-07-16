@@ -69,16 +69,15 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     Fragment fragment;
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-   public static TextView servicetab,offertab,maptab;
-   TextView myLocationbtn,distancebtn;
+    public static TextView servicetab,offertab,maptab;
     static ImageButton filter,compare,gridlist;
+    public static Boolean gridlistcheck=false;
+    static boolean Isservice=false;
+    TextView myLocationbtn,distancebtn;
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
     Toolbar toolbar;
-//    Spinner citiesSpinner;
-    public static Boolean gridlistcheck=false;
     String service_place_name="";
-//    public static ArrayList<ServiceFilter> ServiceFragment.serviceFilters=new ArrayList<>();
     LinearLayout pages;
     int TABFLAG=1;
     public static int ItemPageNum=4;
@@ -90,7 +89,6 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     LinearLayout pageNext,pagePrev;
 
     //-------- for check if get services------
-    static boolean Isservice=false;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,6 +106,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //        Log.d("doback",BeautyMainPage.FRAGMENT_NAME);
 
 
+        myLocationbtn.setText(PlaceServiceFragment.mylocationId);
         myLocationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,8 +117,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             String i = item.getTitle().toString();
-                            Log.e("ItemID",i+"");
-                            if (i.equals("current location")) {
+                            if (i.equals(getResources().getString(R.string.current_location))) {
                                 LocationManager locationManager = (LocationManager)
                                         ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
                                 if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -156,13 +154,13 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     }
                                 });
                             }
-                            if (i.equals("new Location")){
+                            if (i.equals(getResources().getString(R.string.new_location))){
                                 fragment = new MapFragment();
                                 fm = getActivity().getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);
                                 fragmentTransaction.commit();
-//                                BeautyMainPage.FRAGMENT_NAME="SPINNER";
+                                BeautyMainPage.FRAGMENT_NAME="Tabs";
                             }
                         return true;
                         }
@@ -173,6 +171,16 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 popupMenu.show();
                 }
         });
+        for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
+            if (i == 5) {
+                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+                    distancebtn.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                }
+
+            }
+        }
+
         distancebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +193,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 rangeSeekbar.setMaxValue(10000);
                 // get min and max text view
                 TextView title = rangeDistanceDialog.findViewById(R.id.title);
-                title.setText("Distance Range");
+                title.setText(getResources().getText(R.string.Distance_Range));
                 final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
                 final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
                 final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
@@ -214,7 +222,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onClick(View v) {
                         rangeDistanceDialog.dismiss();
-                        distancebtn.setText("<=" + Max.getText().toString());
+                        distancebtn.setText(R.string.distance+":"+Min.getText().toString()+"-" + Max.getText().toString());
                         APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                         ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtn.getText().toString()));
 
@@ -232,35 +240,9 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     }
                 });
 
-//
-//                rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                    @Override
-//                    public void onCancel(DialogInterface dialog) {
-////                                    distance.setChecked(false);
-//                        distancebtn.setText("distance");
-//                        APICall.filterSortAlgorithm("2", "", "");
-//                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distancebtn.getText().toString()));
-//
-//                    }
-//                });
                 rangeDistanceDialog.show();
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         if (updateServ) {
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
@@ -300,10 +282,6 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
 
-//        //---------------- cities----------------
-//        for (int i=0;i<8;i++){
-//            ServiceFragment.serviceFilters.add(new ServiceFilter(false,""));
-//        }
         Log.e("ServiceFilterSize",ServiceFragment.serviceFilters.size()+"");
         toolbar.setNavigationOnClickListener(this);
 
@@ -402,7 +380,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onClick(View v) {
                                         rangePriceDialog.dismiss();
-                                        price.setText("السعر " + Min.getText().toString() + "-" + Max.getText().toString());
+                                        price.setText(getResources().getText(R.string.Price) + Min.getText().toString() + "-" + Max.getText().toString());
                                         APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                         ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, price.getText().toString()));
 
@@ -413,7 +391,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onCancel(DialogInterface dialog) {
                                         price.setChecked(false);
-                                        price.setText("السعر");
+                                        price.setText(getResources().getText(R.string.Price));
                                         APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", "", "");
                                         ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price.getText().toString()));
                                     }
@@ -423,7 +401,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
                             } else {
-                                price.setText("السعر");
+                                price.setText(getResources().getText(R.string.Price));
                                 APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", "", "");
                                 ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price.getText().toString()));
 
@@ -452,7 +430,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onClick(View v) {
                                         rateServiceDialog.dismiss();
-                                        rateService.setText("تقييم الخدمة " + (int) ratingBar.getRating());
+                                        rateService.setText(getResources().getText(R.string.Service_Eval)+"" + (int) ratingBar.getRating());
                                         APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
 
@@ -475,7 +453,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onCancel(DialogInterface dialog) {
                                         rateService.setChecked(false);
-                                        rateService.setText("تقييم الخدمة");
+                                        rateService.setText(getResources().getText(R.string.Service_Eval));
                                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
 
                                         APICall.filterSortAlgorithm("5", "", "");
@@ -485,7 +463,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                                 rateServiceDialog.show();
                             } else {
-                                rateService.setText("تقييم الخدمة");
+                                rateService.setText(getResources().getText(R.string.Service_Eval));
                                 APICall.filterSortAlgorithm("5", "", "");
                                 ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
 
@@ -511,7 +489,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onClick(View v) {
                                         rateProviderDialog.dismiss();
-                                        rateProvider.setText("تقييم المزودة " + (int) ratingBar.getRating());
+                                        rateProvider.setText(getResources().getText(R.string.Provider_Eval)+"" + (int) ratingBar.getRating());
                                         APICall.filterSortAlgorithm("28", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                                         ServiceFragment.serviceFilters.set(4, new ServiceFilter(true, rateProvider.getText().toString()));
                                     }
@@ -531,14 +509,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onCancel(DialogInterface dialog) {
                                         rateProvider.setChecked(false);
-                                        rateProvider.setText("تقييم المزودة");
+                                        rateProvider.setText(getResources().getText(R.string.Provider_Eval));
                                         APICall.filterSortAlgorithm("28", "", "");
                                         ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
                                     }
                                 });
                                 rateProviderDialog.show();
                             } else {
-                                rateProvider.setText("تقييم المزودة");
+                                rateProvider.setText(getResources().getText(R.string.Provider_Eval)+"");
                                 APICall.filterSortAlgorithm("28", "", "");
                                 ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
 
@@ -662,13 +640,13 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     public void onClick(View v) {
                                         if (!name.getText().toString().isEmpty()){
                                             namesalonDialog.dismiss();
-                                            nameSalonOrProvider.setText("الصالون او اسم المزودة: " +name.getText().toString());
+                                            nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name)+":" +name.getText().toString());
                                             APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
                                             ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, nameSalonOrProvider.getText().toString()));
 
                                         }else {
                                             namesalonDialog.cancel();
-                                            nameSalonOrProvider.setText("الصالون او اسم المزودة");
+                                            nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                             APICall.filterSortAlgorithm("3", "", "");
                                             ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
 
@@ -683,7 +661,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onCancel(DialogInterface dialog) {
                                         nameSalonOrProvider.setChecked(false);
-                                        nameSalonOrProvider.setText("الصالون او اسم المزودة");
+                                        nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                         APICall.filterSortAlgorithm("3", "", "");
                                         ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
 
@@ -693,7 +671,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                             }else {
 //                                nameSalonOrProvider.setChecked(false);
-                                nameSalonOrProvider.setText("الصالون او اسم المزودة");
+                                nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                 APICall.filterSortAlgorithm("3", "", "");
                                 ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
 
@@ -794,10 +772,10 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                             rateProvider.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
                             }
                         } else if (i == 5) {
-                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                                distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-                                distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-                            }
+//                            if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+//                                distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                                distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+//                            }
                         } else if (i == 6) {
                             if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
                                 nameSalonOrProvider.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
