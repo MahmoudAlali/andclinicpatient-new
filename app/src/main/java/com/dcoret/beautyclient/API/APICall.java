@@ -15,6 +15,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -75,6 +76,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
 public class APICall {
+
 
 
 
@@ -3366,13 +3368,12 @@ public class APICall {
 //    "bdb_ser_sup_id":15,
 //            "bdb_start_date":"2019-07-15",
 //            "bdb_start_time":"13:00"
-        public  static  void  searchBooking(final String bdb_ser_sup_id,String bdb_start_date,String bdb_start_time ,final Context context){
+        public  static  void  searchBooking(final String bdb_ser_sup_id,String bdb_start_date ,final Context context){
 
             IndividualBooking.listHashMap.clear();
            IndividualBooking.listDataHeader.clear();
 
             bdb_start_date=  "2019-07-15";
-            bdb_start_time=  "13:00";
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             pd=new ProgressDialog(context);
             pd.show();
@@ -3383,7 +3384,6 @@ public class APICall {
 
                 postdata.put("bdb_ser_sup_id", bdb_ser_sup_id);
                 postdata.put("bdb_start_date", bdb_start_date);
-                postdata.put("bdb_start_time", bdb_start_time);
 //            postdata.put("password", "12345");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
@@ -3461,26 +3461,38 @@ public class APICall {
                                 String sup_name=timesItem.getString("sup_name");
                                 //--------------- add Name Emp to list------------
                                 IndividualBooking.listDataHeader.add(sup_name);
-                                String avaliablity=timesItem.getString("avaliablity");
-                                if (avaliablity.equals("1")){
-                                    JSONArray actualTimes=timesItem.getJSONArray("actualTimes");
-                                    for (int k=0;k<actualTimes.length();k++){
-                                        JSONObject actualTimeItem=actualTimes.getJSONObject(k);
-                                        Log.e("ActualTimeitem",actualTimeItem.toString());
+//                                String avaliablity=timesItem.getString("avaliablity");
+//                                if (avaliablity.equals("1")){
+                                    JSONArray freeTimes=timesItem.getJSONArray("freeTimes");
+                                ArrayList a=new ArrayList();
+                                for (int k=0;k<freeTimes.length();k++){
+                                        JSONObject actualTimeItem=freeTimes.getJSONObject(k);
+                                        Log.e("Free Times",actualTimeItem.toString());
                                         String from=actualTimeItem.getString("from");
                                         String to=actualTimeItem.getString("to");
-                                        ArrayList a=IndividualBooking.splitTime(from,to);
-                                        IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
-//                                        IndividualBooking.addLayout(sup_name,a);
+                                        Log.e("SizeALIST",a.size()+"");
+                                        ArrayList atmp=IndividualBooking.splitTime(from,to);
+                                        a.addAll(atmp);
+                                    IndividualBooking.alltimes.addAll(atmp);
                                     }
-                                }else {
-                                    ArrayList a=new ArrayList();
-                                    a.add("0");
-                                    IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+                                IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+                                //--------- remove iteration--------------
+                                for (int c=0;c<IndividualBooking.alltimes.size();c++){
+                                        for (int d=c+1;d<IndividualBooking.alltimes.size();d++)
+                                    if(IndividualBooking.alltimes.get(c).equals(IndividualBooking.alltimes.get(d))){
+                                        IndividualBooking.alltimes.remove(d);
+                                    }
+                                }
+
+
+//                                }else {
+//                                    ArrayList a=new ArrayList();
+//                                    a.add("0");
+//                                    IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
 
 //                                    IndividualBooking.addLayout(sup_name,a);
 
-                                }
+//                                }
                             }
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
@@ -3508,6 +3520,161 @@ public class APICall {
 //        Log.d("MessageResponse",mMessage);
         }
 
+    public  static  void  searchBooking1(final String bdb_ser_sup_id,String bdb_start_date,String bdb_start_time ,final Context context){
+
+        IndividualBooking.listHashMap.clear();
+        IndividualBooking.listDataHeader.clear();
+
+        bdb_start_date=  "2019-07-15";
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        pd=new ProgressDialog(context);
+        pd.show();
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+
+            postdata.put("bdb_ser_sup_id", bdb_ser_sup_id);
+            postdata.put("bdb_start_date", bdb_start_date);
+            postdata.put("bdb_start_time", bdb_start_time);
+//            postdata.put("password", "12345");
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/searchBooking")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        final String finalBdb_start_date = bdb_start_date;
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("SearchBooking", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true"))
+                    {
+                        JSONArray times=j.getJSONArray("data");
+                        for (int i=0;i<times.length();i++){
+                            JSONObject timesItem=times.getJSONObject(i);
+                            String sup_id=timesItem.getString("sup_id");
+                            String sup_name=timesItem.getString("sup_name");
+                            //--------------- add Name Emp to list------------
+//                            IndividualBooking.listDataHeader.add(sup_name);
+
+                                String avaliablity=timesItem.getString("avaliablity");
+//                                if (avaliablity.equals("1")){
+//                            JSONArray freeTimes=timesItem.getJSONArray("freeTimes");
+//                            ArrayList a=new ArrayList();
+//                            for (int k=0;k<freeTimes.length();k++){
+//                                JSONObject actualTimeItem=freeTimes.getJSONObject(k);
+//                                Log.e("Free Times",actualTimeItem.toString());
+//                                String from=actualTimeItem.getString("from");
+//                                String to=actualTimeItem.getString("to");
+//                                Log.e("SizeALIST",a.size()+"");
+//                                ArrayList atmp=IndividualBooking.splitTime(from,to);
+//                                a.addAll(atmp);
+////                                IndividualBooking.addLayout(sup_name,a);
+//
+////                                        IndividualBooking.addLayout(sup_name,a);
+//                            }
+                            IndividualBooking.addLayout(sup_name,avaliablity);
+
+                            Log.e("SIZEALLTIMES",IndividualBooking.alltimes.size()+"");
+
+//                            IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+
+//                                }else {
+//                                    ArrayList a=new ArrayList();
+//                                    a.add("0");
+//                                    IndividualBooking.listHashMap.put(IndividualBooking.listDataHeader.get(i),a);
+
+//                                    IndividualBooking.addLayout(sup_name,a);
+
+//                                }
+                        }
+
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                IndividualBooking.listAdapter.notifyDataSetChanged();
+                                IndividualBooking.listView.setAdapter(IndividualBooking.listAdapter);
+                            }
+                        });
+
+
+                    }
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
 
 
 

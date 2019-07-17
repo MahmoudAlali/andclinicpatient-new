@@ -9,13 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.CalenderAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
@@ -30,13 +36,16 @@ import java.util.List;
 
 public class IndividualBooking extends AppCompatActivity {
 
-
+   public static ArrayList alltimes=new ArrayList();
     public static ExpandableListView listView;
     public static CustomExpandableListAdapter listAdapter;
     public static List<String> listDataHeader=new ArrayList<>();
     public static HashMap<String,List<String>> listHashMap=new HashMap<>();
+    //------------ for spinner array-------------------
+    public static ArrayList<String> freeTimes=new ArrayList<>();
 
 
+    Spinner alltimesSpinner;
 
     static Context context;
     RecyclerView recyclerView,recyclerViewtime;
@@ -58,11 +67,36 @@ public class IndividualBooking extends AppCompatActivity {
 
 
         recyclerView=findViewById(R.id.recycleview);
+
         recyclerView.setHasFixedSize(true);
         CalenderAdapter calenderAdapter =new CalenderAdapter(this, ServicesAdapter.dateClasses);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(calenderAdapter);
+
+
+        alltimesSpinner=findViewById(R.id.alltimesSpinner);
+        alltimes.add("Select Time");
+        ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item,alltimes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.notifyDataSetChanged();
+        alltimesSpinner.setAdapter(adapter);
+
+        alltimesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position !=0){
+                    Log.e("TIMESESP",alltimesSpinner.getSelectedItem()+"");
+                    APICall.searchBooking1("15","",alltimesSpinner.getSelectedItem().toString(),context);
+                    listView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         showEmp=findViewById(R.id.show_emp);
@@ -77,6 +111,9 @@ public class IndividualBooking extends AppCompatActivity {
         listAdapter=new CustomExpandableListAdapter(this,listDataHeader,listHashMap);
         listAdapter.notifyDataSetChanged();
 //        listView.setAdapter(listAdapter);
+
+
+
 
 
 
@@ -124,26 +161,36 @@ public class IndividualBooking extends AppCompatActivity {
     }
 
 
-    public static void addLayout(String name, final ArrayList times) {
+    public static void addLayout(String name ,String avaliablity) {
         final View layout2 = LayoutInflater.from(context).inflate(R.layout.show_employee_layout, showEmp, false);
 
-        final TextView emp_name =  layout2.findViewById(R.id.emp_name);
-        final Spinner avliable_time =  layout2.findViewById(R.id.avl_time);
+        final RadioButton emp_name =  layout2.findViewById(R.id.emp_name);
+//        final Spinner avliable_time =  layout2.findViewById(R.id.avl_time);
 
         emp_name.setText(name);
-        ArrayAdapter adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item,times);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        avliable_time.setAdapter(adapter);
+        if (avaliablity.equals("0")){
+            emp_name.setEnabled(false);
+            emp_name.setBackgroundResource(R.color.pf_red);
+        }else if (avaliablity.equals("1")){
+            emp_name.setEnabled(true);
+            emp_name.setBackgroundResource(R.color.green);
+        }else {
+            emp_name.setEnabled(false);
+            emp_name.setBackgroundResource(R.color.pf_light_yellow);
+        }
+//        ArrayAdapter adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item,times);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        avliable_time.setAdapter(adapter);
 
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (times.size()==1 && times.get(0).equals("0")){
-                    emp_name.setEnabled(false);
-                    avliable_time.setEnabled(false);
-                    times.set(0,"No Times Available for booking ");
-                    layout2.setEnabled(false);
-                }
+//                if (times.size()==1 && times.get(0).equals("0")){
+//                    emp_name.setEnabled(false);
+//                    avliable_time.setEnabled(false);
+//                    times.set(0,"No Times Available for booking ");
+
+//                }
                 showEmp.addView(layout2);
 
             }
@@ -160,12 +207,12 @@ public class IndividualBooking extends AppCompatActivity {
             try{
                  sdf = new SimpleDateFormat("HH:mm:ss");
                  sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                Log.e("endDate",d+"");
+//                Log.e("endDate",d+"");
                 Date enddate = sdf.parse(to);
                 Date startDate = sdf.parse(from);
-                Log.e("endDate",enddate+"");
-                Log.e("StartDate",startDate+"");
-                Log.e("Compare",enddate.compareTo(enddate)+"");
+//                Log.e("endDate",enddate+"");
+//                Log.e("StartDate",startDate+"");
+//                Log.e("Compare",enddate.compareTo(enddate)+"");
 
                 while (startDate.compareTo(enddate)==-1) {
 //                    SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
@@ -178,7 +225,7 @@ public class IndividualBooking extends AppCompatActivity {
                     cal.add(Calendar.MINUTE, 15); // adds 15 min
 
                     startDate=cal.getTime(); // returns new date object, one hour in the future
-                    Log.e("new StartDate",startDate+"");
+//                    Log.e("new StartDate",startDate+"");
             }
             }catch (Exception e){
                 e.printStackTrace();

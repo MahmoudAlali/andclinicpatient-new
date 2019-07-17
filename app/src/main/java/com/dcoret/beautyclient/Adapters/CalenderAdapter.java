@@ -67,7 +67,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 ((Item)holder).calLayout.setBackgroundResource(R.drawable.border_selected);
                 Log.e("bdb_id",IndividualBooking.bdb_id);
-                APICall.searchBooking("15","","",context);
+                APICall.searchBooking("15","",context);
 //                ArrayList tmpnames=new ArrayList();
 //                tmpnames.add("Alaa");
 //                tmpnames.add("Hala");

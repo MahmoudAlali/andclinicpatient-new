@@ -135,12 +135,29 @@
                 android:background="@color/white"
                 />
             <LinearLayout
-
+                android:layout_marginRight="@dimen/pf_10dp_space"
+                android:layout_marginLeft="@dimen/pf_10dp_space"
                 android:orientation="vertical"
-                android:id="@+id/show_emp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <Spinner
+                    android:id="@+id/alltimesSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/shadow_button_choosetime"></Spinner>
+
+             <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:id="@+id/show_emp"
+                 android:layout_height="wrap_content">
+
+
+             </LinearLayout>
+
                 <ExpandableListView
+                    android:layout_marginTop="@dimen/pf_10dp_space"
                     android:layout_weight="1"
                     android:id="@+id/expandableListView"
                     android:layout_height="match_parent"
@@ -149,8 +166,8 @@
                     android:divider="@android:color/darker_gray"
                     android:dividerHeight="0.5dp" />
                 <Button
-                    android:layout_marginTop="100dp"
-                    android:layout_width="@dimen/width_button"
+                    android:layout_marginTop="@dimen/pf_10dp_space"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/high_button"
                     android:layout_marginBottom="10dp"
                     android:text="Next"
