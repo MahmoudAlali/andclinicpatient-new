@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
-    LinearLayout bride_service,service_hair;
+    LinearLayout bride_service,service_hair,group_res;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
@@ -42,6 +42,7 @@ public class ServiceFragment extends Fragment {
         Log.e("service_filter",serviceFilters.size()+"");
 
         toolbar= view.findViewById(R.id.toolbar);
+        group_res= view.findViewById(R.id.group_res);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +65,17 @@ public class ServiceFragment extends Fragment {
         });
 
 
+        group_res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new PlaceServiceGroupFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +84,6 @@ public class ServiceFragment extends Fragment {
                 else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
-
         return view;
     }
 }

@@ -103,6 +103,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services_tabs_layout);
 
+
         //------- test notificatoin-----------
         //        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
         //------------------------- permissions check------------------
@@ -128,6 +129,25 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
+
+
+        Intent intent=getIntent();
+        try {
+            String tabselected = intent.getStringExtra("tabselected");
+            Log.e("tabddddd",tabselected);
+            if (tabselected.equals("bag")) {
+//                navigation=findViewById(R.id.navigation);
+                navigation.setSelectedItemId(R.id.service_bag);
+                fragment = new BagReservationFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

@@ -29,27 +29,70 @@
             app:theme="@style/ToolbarColoredBackArrow"
             app:title=""
             app:titleMarginStart="@dimen/standard_175"
-            app:titleTextColor="@color/end_gray" />
+            app:titleTextColor="@color/end_gray" >
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
 
-    <LinearLayout
-        android:id="@+id/reserv_btn_filter"
-        android:layout_marginTop="5dp"
-        android:layout_width="200dp"
-        android:layout_height="@dimen/high_button"
-        android:background="@drawable/shadow_button"
-        android:layoutDirection="rtl"
-        android:layout_gravity="end"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical">
-            <TextView
-                android:layout_width="@dimen/standard_30"
-                android:layout_height="@dimen/standard_30"
-               android:background="@drawable/ic_filter_list_black1_24dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                />
-    </LinearLayout>
+                    />
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    />
+                <ImageView
+                    android:id="@+id/reserv_btn_filter"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_filter_list_black_blue_24dp"
+                    android:background="@android:color/transparent"
+                    />
+                <Space
+                    android:layout_width="@dimen/pf_10dp_space"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/sort"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_descending_arrangement_blue"
+                    />
+                <Space
+                    android:layout_width="@dimen/pf_10dp_space"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="@dimen/high_button"-->
+        <!--android:background="@drawable/shadow_button"-->
+        <!--android:layoutDirection="rtl"-->
+        <!--android:layout_gravity="end"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:orientation="vertical">-->
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/standard_30"-->
+                <!--android:layout_height="@dimen/standard_30"-->
+               <!--android:background="@drawable/ic_filter_list_black1_24dp"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_gravity="center"-->
+                <!--/>-->
+    <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,7 +136,6 @@
                     android:id="@+id/reservation_inside_offer"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_button"
-
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/shadow_button_blue"
@@ -107,20 +149,18 @@
                     android:layout_width="5dp"
                     android:layout_height="match_parent"></LinearLayout>
             </LinearLayout>
-
-
-
         </LinearLayout>
-
-
     </LinearLayout>
-
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/review"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 

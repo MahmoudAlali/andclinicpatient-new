@@ -168,47 +168,12 @@
                     android:layout_marginRight="10dp"
                     android:foregroundGravity="center"
                     android:gravity="center"
-                    android:text="@string/ServiceRate"
+                    android:text="@string/Provider_Rate"
                     android:background="@android:color/transparent"
                     android:textAlignment="center"></Button>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/pf_5dp_space"
-                    android:background="#000"
-                    android:layout_marginLeft="@dimen/pf_10dp_space"
-                    android:layout_marginRight="@dimen/pf_10dp_space"
-                    />
-                <LinearLayout
-                    android:layout_marginBottom="@dimen/standard_20"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/standard_40"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/standard_30"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/shadow_button_spinner"
-                    android:elevation="5dp"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/icons8_average_2_64" />
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:foregroundGravity="center"
-                        android:gravity="center"
-                        android:text="@string/OfferPrice"
-                        android:background="@android:color/transparent"
-                        android:textAlignment="center"></Button>
-                </LinearLayout>
-                      </LinearLayout>
+            </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
 
         </LinearLayout>

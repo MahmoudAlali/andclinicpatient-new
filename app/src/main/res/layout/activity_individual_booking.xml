@@ -42,6 +42,7 @@
                     android:textColor="#000"
                     />
                 <TextView
+                    android:id="@+id/provider_name"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,18 +57,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/price"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="22 R"
-                    android:textColor="#000"
+                    android:textColor="@color/pf_red"
                     />
                 <TextView
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#000"
-                    android:text="Provider Name"
+                    android:text="Salon/HairCut"
                     />
 
             </LinearLayout>
@@ -75,47 +77,10 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="@dimen/standard_20"
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="wrap_content">
-
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="40dp">-->
-                <!--<TextView-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="@string/CancelAlert"-->
-                    <!--android:textSize="15dp"-->
-                    <!--android:textColor="@color/prime"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textStyle="bold"-->
-                    <!--/>-->
-                <!--<TextView-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:textColor="@color/prime"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="12:15 07/07/2019"-->
-                    <!--android:textSize="15dp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--/>-->
-                <!--<TextView-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="Today"-->
-                    <!--android:textColor="@color/blue"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textSize="15dp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--/>-->
-            <!--</LinearLayout>-->
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
@@ -140,42 +105,116 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_marginBottom="@dimen/pf_10dp_space"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:text="busy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                        <Space
+                            android:layout_width="@dimen/pf_5dp_space"
+                            android:layout_height="match_parent" />
+                        <TextView
+
+                            android:background="@color/pf_light_yellow"
+                            android:layout_width="@dimen/standard_20"
+                            android:layout_height="@dimen/standard_20"
+                            android:layout_marginBottom="@dimen/pf_10dp_space"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="allowed" />
+                        <Space
+                            android:layout_width="15dp"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:background="@color/pf_green"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginBottom="@dimen/pf_10dp_space"/>
+                    </LinearLayout>
+                    <LinearLayout
+
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="on Vacation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                        <Space
+                            android:layout_width="15dp"
+                            android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:background="@color/pf_red"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginBottom="@dimen/pf_10dp_space"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/pf_5dp_space"
+                    android:background="#000"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"/>
                 <Spinner
                     android:id="@+id/alltimesSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:background="@drawable/shadow_button_choosetime"></Spinner>
-
-             <LinearLayout
-                 android:orientation="vertical"
-                 android:layout_width="match_parent"
-                 android:id="@+id/show_emp"
-                 android:layout_height="wrap_content">
-
-
-             </LinearLayout>
-
-                <ExpandableListView
-                    android:layout_marginTop="@dimen/pf_10dp_space"
-                    android:layout_weight="1"
-                    android:id="@+id/expandableListView"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:layout_marginTop="@dimen/pf_5dp_space"
                     android:layout_width="match_parent"
-                    android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                    android:divider="@android:color/darker_gray"
-                    android:dividerHeight="0.5dp" />
-                <Button
-                    android:layout_marginTop="@dimen/pf_10dp_space"
+                    android:layout_height="@dimen/pf_5dp_space"
+                    android:background="#000"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"/>
+            <android.support.v4.widget.NestedScrollView
+                android:layout_marginBottom="@dimen/standard_40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioGroup
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_button"
-                    android:layout_marginBottom="10dp"
-                    android:text="Next"
-                    android:textColor="#000"
-                    android:background="@drawable/shadow_button_add_site"
-                    android:layout_gravity="bottom|center"
-                    android:gravity="center"
-                    />
+                    android:id="@+id/show_emp"
+                    android:layout_height="wrap_content"
+
+                    >
+
+
+                </RadioGroup>
+            </android.support.v4.widget.NestedScrollView>
+
+
+                <!--<ExpandableListView-->
+                    <!--android:id="@+id/expandableListView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/pf_10dp_space"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:divider="@android:color/darker_gray"-->
+                    <!--android:dividerHeight="0.5dp"-->
+                    <!--android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />-->
+
 
             </LinearLayout>
             <!--<LinearLayout-->
@@ -272,8 +311,19 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
+    <Button
+        android:id="@+id/addtocart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:layout_gravity="bottom|center"
+        android:layout_marginLeft="@dimen/pf_10dp_space"
+        android:layout_marginTop="@dimen/pf_10dp_space"
+        android:layout_marginRight="@dimen/pf_10dp_space"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shadow_button_add_site"
+        android:gravity="center"
+        android:text="@string/Addtocart"
+        android:textColor="#000" />
 
 
 

@@ -93,53 +93,60 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //---------------------for prices decimal format-----------------
-        DecimalFormat df = new DecimalFormat("0.00");
-        float old_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getOld_price())+"");
-        old_prc = Float.parseFloat(df.format(old_prc));
-        float new_prc=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getNew_price())+"");
-        new_prc = Float.parseFloat(df.format(new_prc));
-        DecimalFormat df1 = new DecimalFormat("0");
-        float tot_dis=Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getTotal_discount())+"");
+        try {
+            DecimalFormat df = new DecimalFormat("0.00");
+            float old_prc = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getOld_price()) + "");
+            old_prc = Float.parseFloat(df.format(old_prc));
+            float new_prc = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getNew_price()) + "");
+            new_prc = Float.parseFloat(df.format(new_prc));
+            DecimalFormat df1 = new DecimalFormat("0");
+            float tot_dis = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) + "");
 //        tot_dis = df1.format(tot_dis);
 
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
-        ((Item)holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+            ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
-        ((Item) holder).old_price.setText(old_prc+"");
-        ((Item) holder).new_price.setText(new_prc+"");
-        ((Item) holder).total_dis.setText(df1.format(tot_dis)+"% on "+bestOfferItems.get(position).getService_count()+" services");
-        ((Item)holder).old_price.setPaintFlags(((Item)holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        ((Item)holder).info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               JSONArray jsonArray= bestOfferItems.get(position).getSersup_ids();
+            ((Item) holder).old_price.setText(old_prc + "");
+            ((Item) holder).new_price.setText(new_prc + "");
+            ((Item) holder).total_dis.setText(df1.format(tot_dis) + "% on " + bestOfferItems.get(position).getService_count() + " services");
+            ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    JSONArray jsonArray = bestOfferItems.get(position).getSersup_ids();
 //               StringBuilder infoItem=new StringBuilder();
-               try {
-                   PopupMenu popup = new PopupMenu(context,((Item)holder).info);
-                   for(int i=0;i<jsonArray.length();i++){
-                       JSONObject jsonObject=jsonArray.getJSONObject(i);
-                       String bdb_name_ar=jsonObject.getString("bdb_name_ar");
-                       popup.getMenu().add(bdb_name_ar);
+                    try {
+                        PopupMenu popup = new PopupMenu(context, ((Item) holder).info);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String bdb_name_ar = jsonObject.getString("bdb_name_ar");
+                            popup.getMenu().add(bdb_name_ar);
 //                       if (i==jsonArray.length()-1){
 //                           infoItem.append(bdb_name_ar);
 //                       }else {
 //                           infoItem.append(bdb_name_ar+"\n");
 //                       }
-                   }
-                   popup.show();
-               }catch (Exception e){
-                   e.printStackTrace();
-               }
+                        }
 
+                        popup.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
 
 //                new BubbleShowCaseBuilder((AppCompatActivity)context) //Activity instance
 //                        .title(infoItem.toString()) //Any title for the bubble view
 //                        .targetView(((Item)holder).info) //View to point out
 //                        .show(); //Display the ShowCase
-            }
-        });
+                }
+            });
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 //        try {
 //
 //            ((OffersAdapter.Item) holder).textView.setText(offers.get(position).getName());

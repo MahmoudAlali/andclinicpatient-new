@@ -106,6 +106,7 @@
 
     <!--Service fragment-->
     <string name="bride">العروسة</string>
+    <string name="groupReservation">حجز جماعي</string>
     <string name="Hairdressing">تصفيف شعر</string>
     <string name="Haircut">قص شعر</string>
     <string name="makeup">مكياج</string>
@@ -118,7 +119,7 @@
     <string name="Deleteallcourierservices">حذف جميع خدمات الحقيبة</string>
     <string name="ServiceName">اسم الخدمة</string>
     <string name="ServicePlace">مكان الخدمة</string>
-    <string name="reminingtime">الوقت المتبقي لحذف الخدمة 15 دقيقة</string>
+    <string name="reminingtime">الوقت المتبقي لحذف الخدمة </string>
     <string name="delete">حذف</string>
     <!--compare-->
     <string name="ServiceNamecom">اسم الخدمة:</string>
@@ -194,6 +195,7 @@
     <string name="shareAppMessage">تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store</string>
 <!--service place frag-->
     <string name="PlaceService">مكان الخدمة</string>
+    <string name="OfferPrice">سعر العرض</string>
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
@@ -230,8 +232,10 @@
     <string name="Group_Booking">حجز جماعي</string>
     <string name="Compare">مقارنة</string>
     <string name="Distance_Range">مجال البعد</string>
+    <string name="Reserve">حجز</string>
     <string name="distance">البعد</string>
     <string name="MyLocation">موقعي</string>
+    <string name="Provider_Rate">تقييم المزودة</string>
     <string name="Service_Eval">تقييم الخدمة </string>
     <string name="Provider_Eval">تقييم المزودة</string>
     <string name="salon_provider_name">اسم المزودة او الصالون</string>

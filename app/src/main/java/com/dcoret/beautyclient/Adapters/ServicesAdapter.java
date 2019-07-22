@@ -266,7 +266,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                     Log.e("Saturday",day+"");
             }
-            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.DAY_OF_MONTH)+"/"+now.get(Calendar.MONTH)+"/"+now.get(Calendar.YEAR)));
+            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.YEAR)+"-"+now.get(Calendar.MONTH)+"-"+now.get(Calendar.DAY_OF_MONTH)));
 
         }
 

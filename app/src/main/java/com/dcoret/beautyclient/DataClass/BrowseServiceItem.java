@@ -22,7 +22,7 @@ public class BrowseServiceItem {
                     longitude,
                     latitude,
                     is_fav_sup,
-                     bdb_booking_period;
+                    bdb_booking_period;
 
 
     public BrowseServiceItem(String bdb_ser_sup_id, String bdb_sup_name, String bdb_sup_rating, String bdb_emp_rating, String totalRating, String bdb_ser_home, String bdb_ser_hall, String bdb_ser_salon, String bdb_hotel, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_ser_salon_price, String bdb_hotel_price, String distance, String longitude, String latitude, String is_fav_sup) {

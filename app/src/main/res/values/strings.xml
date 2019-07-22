@@ -127,6 +127,7 @@
 
     <!--Service fragment-->
     <string name="bride">bride</string>
+    <string name="groupReservation">Group Reservation</string>
     <string name="Hairdressing">Hairdressing</string>
     <string name="Haircut">Hair cut</string>
     <string name="makeup">makeup</string>
@@ -138,7 +139,7 @@
     <string name="Deleteallcourierservices">Delete all courier services</string>
     <string name="ServiceName">Service Name</string>
     <string name="ServicePlace">Service Place</string>
-    <string name="reminingtime">Remaining time to delete service is 15 minutes</string>
+    <string name="reminingtime">Remaining time to delete service is </string>
     <string name="delete">Delete</string>
     <!--compare-->
     <string name="ServiceNamecom">Service Name:</string>
@@ -225,6 +226,7 @@
     <string name="PlaceService">Service Place</string>
     <string name="ServicePrice">Service Price</string>
     <string name="ServiceRate">Service Rate</string>
+    <string name="OfferPrice">Offer Price</string>
 
     <!--Delete Account-->
     <string name="ServiceCovering">I did not get services covering my area / city</string>
@@ -258,12 +260,14 @@
     <string name="MyLocation">My Location</string>
     <string name="Service_Eval">Service Evaluation</string>
     <string name="Provider_Eval">Provider Evaluation</string>
+    <string name="Provider_Rate">Provider Rate</string>
     <string name="salon_provider_name">Salon Name or Provider</string>
     <string name="Price">price</string>
     <string name="Distance_Range">Distance Range</string>
 
     <string name="current_location">Current Location</string>
     <string name="new_location">New Location</string>
+    <string name="Reserve">Reserve</string>
     <string name="location_proceed">you have to choose a location to proceed</string>
     <string name="place_proceed">you have to choose a service place to proceed</string>
     <string name="distance_proceed">you have to choose a distance to proceed</string>
@@ -351,7 +355,6 @@
 
     </string-array>
     <string-array name="days">
-
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -363,6 +366,32 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+
+
+
+
+    <string-array name="add_service">
+        <item>Add Service</item>
+        <item>Hair Cut</item>
+        <item>Coloring</item>
+        <item>Makeup</item>
+    </string-array>
+
+    <string-array name="age_range">
+        <item>Age Range</item>
+        <item>5-15</item>
+        <item>16-25</item>
+        <item>26-35</item>
+    </string-array>
+
+    <string-array name="client_status">
+        <item>Client Status</item>
+        <!--<item>Coloring</item>-->
+        <!--<item>Makeup</item>-->
+    </string-array>
+
+
+
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_manage_accounts">ManageAccounts</string>
     <string name="title_activity_bride">Bride</string>

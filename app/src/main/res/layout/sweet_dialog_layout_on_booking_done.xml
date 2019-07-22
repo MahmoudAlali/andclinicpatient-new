@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:background="@drawable/shadow_dialog"
+    android:layout_gravity="center">
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:orientation="vertical">
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="@dimen/standard_20"
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="Your Booking has been added to your booking bag successfully"
+                android:textSize="15dp" />
+        </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+        <!--<EditText-->
+            <!--android:id="@+id/code"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/high_edit_text"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:background="@drawable/shadow_edit_text"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:hint="code"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_gravity="center"/>-->
+        <LinearLayout
+            android:layout_weight="2"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/end_gray"/>
+            <Button
+                android:id="@+id/service"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="2dp"
+                android:text="Continue Services"
+                android:gravity="center"
+                android:textColor="@color/endblue"
+                android:background="@android:color/transparent"
+                android:textSize="15dp" />
+            <Button
+                android:id="@+id/finishbooking"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="2dp"
+                android:text="Finish booking my services"
+                android:gravity="center"
+                android:background="@android:color/transparent"
+                android:textColor="@color/endblue"
+                android:textSize="15dp" />
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/end_gray"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/resend_code"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/high_button"-->
+                <!--android:layout_gravity="bottom|center"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="إعادة ارسال الرمز"-->
+                <!--android:textSize="15dp"-->
+                <!--android:textColor="@android:color/holo_red_dark"-->
+                <!--/>-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -28,11 +28,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="3"
+            android:weightSum="4"
             android:orientation="horizontal">
-
-
-
             <LinearLayout
                 android:id="@+id/bride_service"
                 android:layout_width="match_parent"
@@ -58,23 +55,47 @@
                 android:elevation="16dp"
                 android:padding="5dp">
                 <LinearLayout
-                    android:id="@+id/bride"
+                    android:id="@+id/group_res"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/shadow_service_type_icon"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_bride2"/>
+                        android:src="@drawable/icons8_join_48"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/groupReservation"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+                <LinearLayout
+                    android:id="@+id/bride"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:src="@drawable/icons8_bride_48"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/bride"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="20dp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -84,9 +105,9 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:elevation="16dp"
-                android:layout_margin="5dp"
-                >
+                android:layout_margin="5dp">
             </LinearLayout>
+
 
         </LinearLayout>
         <LinearLayout
@@ -123,7 +144,7 @@
             android:text="@string/Hairdressing"
             android:gravity="center"
             android:textColor="#000"
-            android:textSize="18dp" />
+             />
              </LinearLayout>
 
             </LinearLayout>
@@ -155,7 +176,7 @@
                         android:text="@string/Haircut"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="20dp"
+
                         />
                 </LinearLayout>
 
@@ -187,7 +208,7 @@
                         android:text="@string/makeup"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="20dp"
+
                         />
                 </LinearLayout>
 
@@ -230,7 +251,7 @@
                         android:gravity="center"
                         android:text="@string/Manicure"
                         android:textColor="#000"
-                        android:textSize="20dp" />
+                        />
                 </LinearLayout>
 
             </LinearLayout>
@@ -260,7 +281,7 @@
                         android:text="@string/Skincare"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="20dp"
+
                         />
                 </LinearLayout>
 
@@ -292,7 +313,7 @@
                         android:text="@string/hairpigment"
                         android:gravity="center"
                         android:textColor="#000"
-                        android:textSize="18dp"
+
                         />
                 </LinearLayout>
 

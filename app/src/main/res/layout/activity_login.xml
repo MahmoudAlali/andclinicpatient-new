@@ -1,135 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     android:orientation="vertical"
-
     android:weightSum="6"
     tools:context=".Activities.Login">
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:layout_width="match_parent"-->
-        <!--app:titleTextColor="#fff"-->
-        <!--app:title=" تسجيل الدخول                           "-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="@android:color/transparent"-->
-
-        <!--app:popupTheme="@style/AppTheme"-->
-        <!--app:theme="@style/ToolbarColoredBackArrow"-->
-
-        <!--&gt;</android.support.v7.widget.Toolbar>-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Beauty In Your Pocket"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
-
-
-    <LinearLayout
-        android:id="@+id/layout_login"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_marginTop="@dimen/pf_10dp_space"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="2"
-
-        android:orientation="vertical">
+        android:layout_marginBottom="@dimen/pf_10dp_space">
         <LinearLayout
+            android:id="@+id/layout_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+
+            android:orientation="vertical">
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:src="@drawable/bbbb"
-                android:layout_marginBottom="@dimen/standard_20"/>
+                android:layout_height="wrap_content"
+                android:text="Beauty In Your Pocket"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:src="@drawable/bbbb"
+                    android:layout_marginBottom="@dimen/standard_20"/>
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shadow_edit_text"
+                android:gravity="center"
+                android:elevation="5dp"
+                android:hint="@string/usernamehint" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shadow_edit_text"
+                android:gravity="center"
+                android:elevation="5dp"
+                android:hint="@string/passwordhint"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="300dp"
+                android:layout_height="@dimen/high_button"
+                android:background="@drawable/shadow_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:onClick="login"
+                android:elevation="5dp"
+                android:text="@string/signin"
+                android:textColor="@color/endblue"
+                />
+
+            <Button
+                android:id="@+id/forgetpass"
+                android:layout_width="300dp"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:onClick="forgetpass"
+                android:background="@drawable/shadow_button"
+                android:text="@string/forgetmypas"
+                android:textAllCaps="false"
+                android:elevation="5dp"
+                android:textColor="@color/endblue"
+
+                />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="300dp"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/endblue"
+                android:text="@string/enterasaguset"
+                android:background="@drawable/shadow_button"
+                android:textAllCaps="false"
+                android:elevation="5dp"
+
+                />
+
+            <Button
+                android:id="@+id/new_user"
+                android:layout_width="350dp"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="bottom|center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/shadow_button_blue"
+                android:onClick="register"
+                android:elevation="5dp"
+                android:textColor="@android:color/white"
+                android:text="@string/signupText" />
+
         </LinearLayout>
 
+    </android.support.v4.widget.NestedScrollView>
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/high_edit_text"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/shadow_edit_text"
-            android:gravity="center"
-            android:elevation="5dp"
-            android:hint="@string/usernamehint" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/high_edit_text"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow_edit_text"
-            android:gravity="center"
-            android:elevation="5dp"
-            android:hint="@string/passwordhint"
-            android:inputType="textPersonName" />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="300dp"
-            android:layout_height="@dimen/high_button"
-            android:background="@drawable/shadow_button"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:onClick="login"
-            android:elevation="5dp"
-            android:text="@string/signin"
-            android:textColor="@color/endblue"
-      />
-
-        <Button
-            android:id="@+id/forgetpass"
-            android:layout_width="300dp"
-            android:layout_height="@dimen/high_button"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:onClick="forgetpass"
-            android:background="@drawable/shadow_button"
-            android:text="@string/forgetmypas"
-            android:textAllCaps="false"
-            android:elevation="5dp"
-            android:textColor="@color/endblue"
-
-            />
-
-        <Button
-            android:id="@+id/register"
-            android:layout_width="300dp"
-            android:layout_height="@dimen/high_button"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/endblue"
-            android:text="@string/enterasaguset"
-            android:background="@drawable/shadow_button"
-            android:textAllCaps="false"
-            android:elevation="5dp"
-
-            />
-
-        <Button
-            android:id="@+id/new_user"
-            android:layout_width="350dp"
-            android:layout_height="@dimen/high_button"
-            android:layout_gravity="bottom|center"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/shadow_button_blue"
-            android:onClick="register"
-            android:elevation="5dp"
-            android:textColor="@android:color/white"
-            android:text="@string/signupText" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

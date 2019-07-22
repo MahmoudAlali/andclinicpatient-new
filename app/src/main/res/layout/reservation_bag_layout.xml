@@ -3,29 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/shadow_gray_dialog">
+    android:background="@drawable/shadow_white_bag">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="3">
         <LinearLayout
-
+            android:background="@drawable/shadow_button_add_site"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="@string/reminingtime"
-            android:textColor="@android:color/holo_red_dark"
-            />
+            <TextView
+                android:id="@+id/remainingTime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:gravity="center"
+                android:text="@string/reminingtime"
+                android:textColor="@android:color/white"
+                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/prime"/>
 
         </LinearLayout>
         <LinearLayout
@@ -33,19 +36,66 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/prime"/>
-            <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ServiceName"
-            android:textSize="16dp"
-            android:textColor="#000"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"/>
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="3dp"-->
+            <!--android:background="@color/prime"/>-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/provider_name"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provider Name"
+                    android:textSize="16dp"
+                    android:textColor="#000"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/service_name"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ServiceName"
+                    android:textSize="16dp"
+                    android:textColor="#000"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="18-7-2019"
+                    android:textSize="16dp"
+                    android:textColor="#000"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="13:00"
+                    android:textSize="16dp"
+                    android:textColor="#000"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,6 +104,7 @@
                 android:layout_marginBottom="5dp"
                 android:layoutDirection="rtl">
                 <TextView
+                    android:id="@+id/service_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ServicePlace"
@@ -62,20 +113,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     />
-                <TextView
-                    android:layout_weight="1"
-                    android:text="12 PM"
-                    android:textColor="@color/prime"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
             </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:weightSum="2"
+            android:weightSum="3"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layoutDirection="rtl">
@@ -87,6 +132,17 @@
                 android:gravity="center"
                 />
             <TextView
+                android:id="@+id/reserve"
+                android:layout_weight="1"
+                android:text="@string/Reserve"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textStyle="bold"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/delete"
                 android:layout_weight="1"
                 android:text="@string/delete"
                 android:textColor="#000"

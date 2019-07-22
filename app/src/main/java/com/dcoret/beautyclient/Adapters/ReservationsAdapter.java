@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.Fragments.EditReservationFragment;
@@ -32,7 +34,8 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Context context;
     String items[];
     RecyclerView.ViewHolder holder;
-    ArrayList <DataService> services;
+//    ArrayList <DataService> services;
+    ArrayList <BookingAutomatedBrowseData> bookingAutomatedBrowseData;
     ArrayList<DataReservation> reservations;
     Fragment fragment;
     FragmentManager fm;
@@ -41,9 +44,9 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.context=context;
         this.items=items;
     }
-    public ReservationsAdapter(Context context, ArrayList <DataService> services){
+    public ReservationsAdapter(Context context, ArrayList <BookingAutomatedBrowseData> bookingAutomatedBrowseData){
         this.context=context;
-        this.services=services;
+        this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
     }
 
     @NonNull
@@ -72,13 +75,15 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ((Item)holder).textView.setText(items[position]);
+        ((Item)holder).textView.setText(bookingAutomatedBrowseData.get(position).getService_en_name());
+        ((Item)holder).time.setText(bookingAutomatedBrowseData.get(position).getBdb_start_time());
+        ((Item)holder).date.setText(bookingAutomatedBrowseData.get(position).getBdb_start_date());
         ((ReservationsAdapter.Item) holder).textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     Intent intent = new Intent(context, ReservationDetails.class);
-                    intent.putExtra("reservation_name",services.get(position).getName());
+//                    intent.putExtra("reservation_name",services.get(position).getName());
                     context.startActivity(intent);
                 }catch (Exception e){
                     Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
@@ -151,17 +156,20 @@ public class ReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return items.length;
+//        Log.e("bookingAutomated",bookingAutomatedBrowseData.size()+"");
+        return bookingAutomatedBrowseData.size();
     }
 
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
         MyClickListener listener;
 
-            TextView textView,cancel_re,edit_re,export_invoice;
+            TextView textView,cancel_re,edit_re,export_invoice,date,time;
 
         public Item(View itemView, MyClickListener listener) {
             super(itemView);
             textView=itemView.findViewById(R.id.rname);
+            date=itemView.findViewById(R.id.date);
+            time=itemView.findViewById(R.id.time);
             cancel_re=itemView.findViewById(R.id.cancel_re);
             edit_re=itemView.findViewById(R.id.edit_re);
             export_invoice=itemView.findViewById(R.id.export_invoice);

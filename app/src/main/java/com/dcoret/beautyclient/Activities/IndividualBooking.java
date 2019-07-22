@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -20,12 +21,15 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.API.LayoutList;
 import com.dcoret.beautyclient.Adapters.CalenderAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataClass.TimeClass;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,34 +41,53 @@ import java.util.List;
 public class IndividualBooking extends AppCompatActivity {
 
    public static ArrayList alltimes=new ArrayList();
-    public static ExpandableListView listView;
+//   public static ArrayList times=new ArrayList();
+//    public static ExpandableListView listView;
     public static CustomExpandableListAdapter listAdapter;
     public static List<String> listDataHeader=new ArrayList<>();
     public static HashMap<String,List<String>> listHashMap=new HashMap<>();
     //------------ for spinner array-------------------
-    public static ArrayList<String> freeTimes=new ArrayList<>();
+//    public static ArrayList<String> freeTimes=new ArrayList<>();
+    public static ArrayList empid=new ArrayList();
+    public static ArrayList<LayoutList> layoutLists=new ArrayList<>();
+    public static int idforemp;
+    public static String dateSelected;
+    public  static String starttime;
+    public  static String startdate;
+    public  static String emp_id;
+    static String bdb_ser_salon,bdb_ser_home,bdb_ser_hall,bdb_ser_hotel;
 
 
-    Spinner alltimesSpinner;
+
+    public static Spinner alltimesSpinner;
 
     static Context context;
     RecyclerView recyclerView,recyclerViewtime;
     String [] item={"1","2","3","4","1","2","3","4","1","2","3","4"};
-    public static String bdb_id;
+    public static String bdb_id,txtProviderName,txtPrice;
     public static LinearLayout showEmp;
+    TextView providerName,price;
+    Button addtocart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_booking);
         Intent intent= getIntent();
         context=this;
+        emp_id="";
          bdb_id=intent.getStringExtra("bdb_ser_sup_id");
+        txtProviderName=intent.getStringExtra("Provider Name");
+        txtPrice=intent.getStringExtra("Price");
 
+
+         providerName=findViewById(R.id.provider_name);
+         price=findViewById(R.id.price);
+
+         providerName.setText(txtProviderName);
+        price.setText(txtPrice);
 
         context=this;
 //        splitTime("2019-07-15T09:00:00.000000Z","2019-07-15T12:00:00.000000Z");
-
-
 
         recyclerView=findViewById(R.id.recycleview);
 
@@ -76,7 +99,8 @@ public class IndividualBooking extends AppCompatActivity {
 
 
         alltimesSpinner=findViewById(R.id.alltimesSpinner);
-        alltimes.add("Select Time");
+        alltimes.add("Booking Time");
+        alltimes.add("Remove Time Selected");
         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item,alltimes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.notifyDataSetChanged();
@@ -85,10 +109,20 @@ public class IndividualBooking extends AppCompatActivity {
         alltimesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position !=0){
+                if (position==0){
+
+                }else if (position==1){
+                    Log.e("TimeSpinner",alltimesSpinner.getSelectedItem().toString());
+                    APICall.searchBooking("15",dateSelected,context);
+
+                }else{
+                    idforemp=-1;
                     Log.e("TIMESESP",alltimesSpinner.getSelectedItem()+"");
+                    Log.e("TIMESESP",alltimesSpinner.getSelectedItemPosition()+"");
+                    Log.e("TIMESESP",alltimesSpinner.getSelectedItemId()+"");
+                    showEmp.removeAllViews();
                     APICall.searchBooking1("15","",alltimesSpinner.getSelectedItem().toString(),context);
-                    listView.setVisibility(View.GONE);
+//                    listView.setVisibility(View.GONE);
                 }
             }
 
@@ -98,76 +132,123 @@ public class IndividualBooking extends AppCompatActivity {
             }
         });
 
-
         showEmp=findViewById(R.id.show_emp);
 //        showEmp.addView(R.layout.show_employee_layout);
-
-
-
-
-        listView=findViewById(R.id.expandableListView);
-//        initData();
-
-        listAdapter=new CustomExpandableListAdapter(this,listDataHeader,listHashMap);
-        listAdapter.notifyDataSetChanged();
+//        listView=findViewById(R.id.expandableListView);
+//        listAdapter=new CustomExpandableListAdapter(this,listDataHeader,listHashMap);
+//        listAdapter.notifyDataSetChanged();
 //        listView.setAdapter(listAdapter);
 
+        addtocart=findViewById(R.id.addtocart);
+        addtocart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (layouttype == 1){
+                    if (idforemp==-1) {
+                        APICall.showSweetDialog(context,"","Please, Select an Employee!");
 
+//                        Toast.makeText(IndividualBooking.this, "", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (PlaceServiceFragment.placeId == 1) {
+                            bdb_ser_home = "1";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 30) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "1";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 31) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "1";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 32) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "1";
+                        }
 
+                        if (!layoutLists.get(idforemp).getAvlTime().getSelectedItem().toString().equals("Time")) {
+                            starttime = layoutLists.get(idforemp).getAvlTime().getSelectedItem().toString();
+//                        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
+//                        Date startdt=null;
+//                       try {
+//                           startdt =sdf.parse(startdate);
+//                       }catch (Exception e){
+//                           e.printStackTrace();
+//                       }
+                            APICall.getServiceTime(bdb_id, emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
+                        } else {
+                            APICall.showSweetDialog(context,"","Please, Select an Time..");
+//                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            }else {
+                    if (idforemp==-1) {
+                        APICall.showSweetDialog(context,"","Please, Select an Employee!");
 
+//                        Toast.makeText(IndividualBooking.this, "", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (PlaceServiceFragment.placeId == 1) {
+                            bdb_ser_home = "1";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 30) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "1";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 31) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "1";
+                            bdb_ser_salon = "0";
+                        } else if (PlaceServiceFragment.placeId == 32) {
+                            bdb_ser_home = "0";
+                            bdb_ser_hall = "0";
+                            bdb_ser_hotel = "0";
+                            bdb_ser_salon = "1";
+                        }
 
+                        if (alltimesSpinner.getSelectedItemPosition()!=0 || alltimesSpinner.getSelectedItemPosition()!=1) {
+                            starttime = alltimesSpinner.getSelectedItem().toString();
+//                        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
+//                        Date startdt=null;
+//                       try {
+//                           startdt =sdf.parse(startdate);
+//                       }catch (Exception e){
+//                           e.printStackTrace();
+//                       }
+                            APICall.getServiceTime(bdb_id, emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
+                        } else {
+                            APICall.showSweetDialog(context,"","Please, Select an Time..");
+
+//                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                Log.e("emp",idforemp+":"+emp_id+":"+starttime+":"+startdate);
+            }
+        });
 
     }
 
-    private void initData() {
-        listDataHeader=new ArrayList<>();
-        listHashMap=new HashMap<>();
 
-        listDataHeader.add("emp1");
-        listDataHeader.add("emp2");
-        listDataHeader.add("emp3");
-        listDataHeader.add("emp4");
-
-        List<String> timeemp1=new ArrayList<>();
-        timeemp1.add("09:00");
-        timeemp1.add("09:15");
-        timeemp1.add("09:30");
-        timeemp1.add("09:45");
-        timeemp1.add("10:00");
-        List<String> timeemp2=new ArrayList<>();
-        timeemp2.add("09:00");
-        timeemp2.add("09:15");
-        timeemp2.add("09:30");
-        timeemp2.add("09:45");
-        timeemp2.add("10:00");
-        List<String> timeemp3=new ArrayList<>();
-        timeemp3.add("09:00");
-        timeemp3.add("09:15");
-        timeemp3.add("09:30");
-        timeemp3.add("09:45");
-        timeemp3.add("10:00");
-        List<String> timeemp4=new ArrayList<>();
-        timeemp4.add("09:00");
-        timeemp4.add("09:15");
-        timeemp4.add("09:30");
-        timeemp4.add("09:45");
-        timeemp4.add("10:00");
-
-
-        listHashMap.put(listDataHeader.get(0),timeemp1);
-        listHashMap.put(listDataHeader.get(1),timeemp2);
-        listHashMap.put(listDataHeader.get(2),timeemp3);
-        listHashMap.put(listDataHeader.get(3),timeemp4);
-    }
-
-
-    public static void addLayout(String name ,String avaliablity) {
-        final View layout2 = LayoutInflater.from(context).inflate(R.layout.show_employee_layout, showEmp, false);
-
+   static int layouttype;
+    public static void addLayout(String name,String avaliablity) {
+        layouttype=0;
+        final View layout2;
+             layout2 = LayoutInflater.from(context).inflate(R.layout.show_employee_layout, showEmp, false);
         final RadioButton emp_name =  layout2.findViewById(R.id.emp_name);
-//        final Spinner avliable_time =  layout2.findViewById(R.id.avl_time);
-
         emp_name.setText(name);
+
+//        layoutLists.add(new LayoutList(emp_name,avliable_time));
+
         if (avaliablity.equals("0")){
             emp_name.setEnabled(false);
             emp_name.setBackgroundResource(R.color.pf_red);
@@ -178,25 +259,100 @@ public class IndividualBooking extends AppCompatActivity {
             emp_name.setEnabled(false);
             emp_name.setBackgroundResource(R.color.pf_light_yellow);
         }
-//        ArrayAdapter adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item,times);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        avliable_time.setAdapter(adapter);
-
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                if (times.size()==1 && times.get(0).equals("0")){
-//                    emp_name.setEnabled(false);
-//                    avliable_time.setEnabled(false);
-//                    times.set(0,"No Times Available for booking ");
-
-//                }
                 showEmp.addView(layout2);
+            }
+        });
 
+        emp_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < layoutLists.size(); i++) {
+//                    Log.e("empName",emp_name.getText()+"");
+//                    Log.e("empNameList",layoutLists.get(i).getEmpName().getText()+"");
+                    if (!emp_name.getText().toString().equals(layoutLists.get(i).getEmpName().getText())) {
+                        layoutLists.get(i).getEmpName().setChecked(false);
+                        emp_id=empid.get(i).toString();
+                        starttime=alltimesSpinner.getSelectedItem().toString();
+
+                    }else {
+                        idforemp=i;
+                    }
+
+                }
             }
         });
     }
 
+
+    public static void addLayout(String name,String avaliablity,ArrayList times) {
+        layouttype=1;
+        final View layout2;
+        ArrayList timeslist=new ArrayList();
+        timeslist.add("Time");
+        timeslist.addAll(times);
+            layout2 = LayoutInflater.from(context).inflate(R.layout.show_employee_with_time_layout, showEmp, false);
+         final RadioButton emp_name =  layout2.findViewById(R.id.emp_name);
+         Spinner avliable_time = layout2.findViewById(R.id.avl_time);
+         LinearLayout colorsp = layout2.findViewById(R.id.colorsp);
+
+
+        emp_name.setText(name);
+        layoutLists.add(new LayoutList(emp_name,avliable_time));
+
+
+        if (avaliablity.equals("0")){
+            emp_name.setEnabled(false);
+            avliable_time.setEnabled(false);
+            emp_name.setBackgroundResource(R.color.pf_red);
+            colorsp.setBackgroundResource(R.color.pf_red);
+        }else if (avaliablity.equals("1")){
+            emp_name.setEnabled(true);
+            avliable_time.setEnabled(true);
+            emp_name.setBackgroundResource(R.color.green);
+            colorsp.setBackgroundResource(R.color.green);
+        }else {
+            emp_name.setEnabled(false);
+            avliable_time.setEnabled(false);
+            emp_name.setBackgroundResource(R.color.pf_light_yellow);
+            colorsp.setBackgroundResource(R.color.pf_light_yellow);
+        }
+
+            ArrayAdapter adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, timeslist);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            avliable_time.setAdapter(adapter);
+
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showEmp.addView(layout2);
+            }
+        });
+
+
+
+
+
+        emp_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < layoutLists.size(); i++) {
+//                    Log.e("empName",emp_name.getText()+"");
+//                    Log.e("empNameList",layoutLists.get(i).getEmpName().getText()+"");
+                    if (!emp_name.getText().toString().equals(layoutLists.get(i).getEmpName().getText())) {
+                        layoutLists.get(i).getEmpName().setChecked(false);
+                        emp_id=empid.get(i).toString();
+                    }else {
+                        idforemp=i;
+                    }
+
+                }
+            }
+        });
+
+    }
 
     public static ArrayList splitTime(String from,String to){
 //            DateFormat df = new SimpleDateFormat("HH:mm");
@@ -205,26 +361,20 @@ public class IndividualBooking extends AppCompatActivity {
         SimpleDateFormat sdf,sdf1;
         ArrayList timeSplites=new ArrayList();
             try{
-                 sdf = new SimpleDateFormat("HH:mm:ss");
-                 sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                 sdf = new SimpleDateFormat("HH:mm");
+//                 sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 //                Log.e("endDate",d+"");
                 Date enddate = sdf.parse(to);
                 Date startDate = sdf.parse(from);
-//                Log.e("endDate",enddate+"");
-//                Log.e("StartDate",startDate+"");
-//                Log.e("Compare",enddate.compareTo(enddate)+"");
+///                Log.e("endDate",enddate+"");
 
                 while (startDate.compareTo(enddate)==-1) {
-//                    SimpleDateFormat format1 = new SimpleDateFormat("HH:mm");
-//                    System.out.println(cal.getTime());
-                    // Output "Wed Sep 26 14:23:28 EST 2012"
 
-//                    System.out.println(formatted);
-                    timeSplites.add(startDate.getHours()+":"+startDate.getMinutes());
+                    timeSplites.add(sdf.format(startDate));
                     cal.setTime(startDate); // sets calendar time/date
                     cal.add(Calendar.MINUTE, 15); // adds 15 min
-
                     startDate=cal.getTime(); // returns new date object, one hour in the future
+
 //                    Log.e("new StartDate",startDate+"");
             }
             }catch (Exception e){

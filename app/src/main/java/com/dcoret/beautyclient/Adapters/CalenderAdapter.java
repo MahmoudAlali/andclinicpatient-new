@@ -26,6 +26,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Boolean grid=false;
     String items[];
     DataOffer[] offers;
+    static  LinearLayout postionSelected;
 
     ArrayList<DateClass> dateClasses;
     public CalenderAdapter(Context context, ArrayList<DateClass> dateClasses){
@@ -65,18 +66,22 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((Item)holder).dayOfMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                IndividualBooking.idforemp=-1;
+                IndividualBooking.alltimesSpinner.setSelection(0);
+                try{
+                    postionSelected.setBackgroundResource(R.drawable.border_gray);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                IndividualBooking.startdate= ((Item)holder).dayOfMonth.getText().toString();
+
+                postionSelected=((Item)holder).calLayout;
                 ((Item)holder).calLayout.setBackgroundResource(R.drawable.border_selected);
                 Log.e("bdb_id",IndividualBooking.bdb_id);
-                APICall.searchBooking("15","",context);
-//                ArrayList tmpnames=new ArrayList();
-//                tmpnames.add("Alaa");
-//                tmpnames.add("Hala");
-//                tmpnames.add("EMMA");
-//                tmpnames.add("Sali");
-//                tmpnames.add("Huda");
-//                for(int i=0;i<5;i++) {
-//                    IndividualBooking.addLayout(tmpnames.get(i).toString(), "");
-//                }
+                Log.e("bdb_id",((Item)holder).dayOfMonth.getText().toString());
+                IndividualBooking.showEmp.removeAllViews();
+                IndividualBooking.dateSelected=((Item)holder).dayOfMonth.getText().toString();
+                APICall.searchBooking("15",((Item)holder).dayOfMonth.getText().toString(),context);
             }
         });
         ((Item)holder).dayOfWeek.setText(dateClasses.get(position).getDayOfWeek());
