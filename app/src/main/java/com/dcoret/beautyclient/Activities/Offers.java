@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
@@ -59,6 +61,10 @@ public class Offers extends AppCompatActivity {
         recyclerView.setAdapter(bestOffer);
         //------------------------ call API bestOffers and get items-----------------
         APICall.bestOffer(Offers.this);
+
+        //-------------------------------call BagReservation after 5 minutes
+
+
     }
     //-------------------- go to main page -----------------------
     public void servicesBeauty(View view) {
@@ -67,4 +73,8 @@ public class Offers extends AppCompatActivity {
         finish();
 
     }
+
+
+
+
 }

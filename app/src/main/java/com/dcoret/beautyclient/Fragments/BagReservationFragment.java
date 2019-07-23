@@ -50,11 +50,11 @@ public class BagReservationFragment extends Fragment {
                 APICall.getCart(BeautyMainPage.context);
             }
         });
-//        if (isFirstOpen){
+        if (isFirstOpen){
             getCarts.clear();
             APICall.getCart(BeautyMainPage.context);
-//            isFirstOpen=false;
-//        }
+            isFirstOpen=false;
+        }
         toolbar=view.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

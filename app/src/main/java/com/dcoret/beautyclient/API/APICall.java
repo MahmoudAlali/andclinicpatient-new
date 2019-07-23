@@ -3877,6 +3877,153 @@ public class APICall {
 //        Log.d("MessageResponse",mMessage);
     }
 
+
+
+
+    public  static  void  getCart(final Context context,Boolean refresh){
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+//        pd=new ProgressDialog(context);
+//        BagReservationFragment.pullToRefresh.setRefreshing(false);
+//        pd.show();
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/getCart")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        pd.dismiss();
+//                        BagReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        pd.dismiss();
+//                        BagReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true"))
+                    {
+                        BagReservationFragment.getCarts.clear();
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject items=data.getJSONObject(i);
+                            String bdb_id=items.getString("bdb_id"),
+                                    bdb_ser_sup_id=items.getString("bdb_ser_sup_id"),
+                                    bdb_price=items.getString("bdb_price"),
+                                    bdb_start_date=items.getString("bdb_start_date"),
+                                    bdb_start_time=items.getString("bdb_start_time"),
+                                    supplier_name=items.getString("supplier_name"),
+                                    bdb_service_name_ar=items.getString("bdb_service_name_ar"),
+                                    bdb_service_name_en=items.getString("bdb_service_name_en"),
+                                    bdb_ser_hotel=items.getString("bdb_ser_hotel"),
+                                    bdb_ser_hall=items.getString("bdb_ser_hall"),
+                                    bdb_ser_home=items.getString("bdb_ser_home"),
+                                    bdb_ser_salon=items.getString("bdb_ser_salon");
+                            BagReservationFragment.getCarts.add(new GetCart(
+                                    bdb_id
+                                    ,bdb_ser_sup_id
+                                    ,bdb_price
+                                    ,bdb_start_date
+                                    ,bdb_start_time
+                                    ,supplier_name
+                                    ,bdb_service_name_ar
+                                    ,bdb_service_name_en
+                                    ,bdb_ser_hotel
+                                    ,bdb_ser_hall
+                                    ,bdb_ser_home
+                                    ,bdb_ser_salon
+                            ));
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//                                BagReservationFragment.bagReservationAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+
     //--------------get service time then addcart---------------
     public  static  void  getServiceTime(final String bdb_ser_sup_id, final String bdb_employee_id, final String bdb_price, final String bdb_ser_salon, final String bdb_ser_home, final String bdb_ser_hall, final String bdb_ser_hotel, final String bdb_start_date, final String bdb_start_time, final Context context){
 

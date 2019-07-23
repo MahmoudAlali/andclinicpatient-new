@@ -29,7 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;
@@ -94,22 +96,16 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //---------------------for prices decimal format-----------------
         try {
-            DecimalFormat df = new DecimalFormat("0.00");
-            float old_prc = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getOld_price()) + "");
-            old_prc = Float.parseFloat(df.format(old_prc));
-            float new_prc = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getNew_price()) + "");
-            new_prc = Float.parseFloat(df.format(new_prc));
-            DecimalFormat df1 = new DecimalFormat("0");
-            float tot_dis = Float.parseFloat(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) + "");
-//        tot_dis = df1.format(tot_dis);
-
+            float old_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getOld_price()) ));
+            float new_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getNew_price()) ));
+            float tot_dis = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) ));
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
             ((Item) holder).old_price.setText(old_prc + "");
             ((Item) holder).new_price.setText(new_prc + "");
-            ((Item) holder).total_dis.setText(df1.format(tot_dis) + "% on " + bestOfferItems.get(position).getService_count() + " services");
+            ((Item) holder).total_dis.setText(nFormatePercent(tot_dis) + "% on " + bestOfferItems.get(position).getService_count() + " services");
             ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -173,6 +169,19 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             return 0;
         }
 
+
+    }
+    public static String nFormate(double d) {
+        NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
+        nf.setMaximumFractionDigits(2);
+        String st= nf.format(d);
+        return st;
+    }
+    public static String nFormatePercent(double d) {
+        NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
+        nf.setMaximumFractionDigits(0);
+        String st= nf.format(d);
+        return st;
     }
     public static class Item extends RecyclerView.ViewHolder {
         TextView textView,pack_code,rating,price,pro_name,reserv_offer,ser_count,total_dis,new_price,old_price;
