@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,10 +37,11 @@ import okhttp3.RequestBody;
 public class Offers extends AppCompatActivity {
     public static Context context;
     RecyclerView recyclerView;
+    public static SwipeRefreshLayout pullToRefresh;
     public static   ArrayList<BestOfferItem> bestOfferItems=new ArrayList<>();
     public static OffersAdapter bestOffer;
     public static  String name="offers";
-
+    static Boolean isFirstOpen=true;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -51,7 +53,20 @@ public class Offers extends AppCompatActivity {
         context=this;
         //----------------init recycle view ----------------------------
 //        if (bestOfferItems.size()>0){
+        pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                bestOfferItems.clear();
+                APICall.bestOffer(Offers.this);
+            }
+        });
+        if (isFirstOpen){
             bestOfferItems.clear();
+            APICall.bestOffer(Offers.this);
+            isFirstOpen=false;
+        }
+
 //        }
         recyclerView=findViewById(R.id.offers_recycleview);
         recyclerView.setHasFixedSize(true);
@@ -60,7 +75,7 @@ public class Offers extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(bestOffer);
         //------------------------ call API bestOffers and get items-----------------
-        APICall.bestOffer(Offers.this);
+//        APICall.bestOffer(Offers.this);
 
         //-------------------------------call BagReservation after 5 minutes
 

@@ -9,7 +9,6 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -33,17 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.API.PushNotifications;
-import com.dcoret.beautyclient.DataClass.Cities;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
@@ -163,25 +152,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         //---------------get cities in background-----------------
         //        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
 
-
-
-
-
-
-
         cutdownBagReservation();
-
-
-
-
     }
 
-
+   //-----------  refresh bag reservation every 5 minutes
     public void cutdownBagReservation(){
         new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Toast.makeText(context,"seconds remaining: " + millisUntilFinished / 1000,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"seconds remaining: " + millisUntilFinished / 1000,Toast.LENGTH_SHORT).show();
 //                mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
 
@@ -193,7 +172,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }.start();
     }
 
-
+    //---- request permission for application =------------
     public void requestLocationPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
                 &&

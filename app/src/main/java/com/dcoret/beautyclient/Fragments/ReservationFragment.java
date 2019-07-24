@@ -49,8 +49,7 @@ public class ReservationFragment extends Fragment {
          view= inflater.inflate(R.layout.activity_reservation_frag, container, false);
 
 
-
-
+         //------------ init variables-----------
         toolbar=view.findViewById(R.id.toolbar);
         sortbtn=view.findViewById(R.id.sort);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);

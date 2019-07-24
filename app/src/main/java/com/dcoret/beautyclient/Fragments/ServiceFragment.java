@@ -36,6 +36,8 @@ public class ServiceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
         service_hair=view.findViewById(R.id.service_hair);
+
+        //--------- init service filter list ------------
         for (int i=1;i<=35;i++){
             serviceFilters.add(new ServiceFilter(false,""));
         }
@@ -49,7 +51,7 @@ public class ServiceFragment extends Fragment {
                 BeautyMainPage.navigationView.setForegroundGravity(Gravity.END);
             }
         });
-
+        //--------------- service hair cut btn---------------
         service_hair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +66,7 @@ public class ServiceFragment extends Fragment {
             }
         });
 
-
+        //--------------- group reservation btn------------
         group_res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +78,8 @@ public class ServiceFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        //------------------ toolbar icon btn
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

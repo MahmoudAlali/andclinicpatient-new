@@ -102,6 +102,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="?attr/actionBarSize">
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/pullToRefresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/offers_recycleview"
                 android:layout_width="match_parent"
@@ -109,6 +113,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp">
             </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
         <android.support.design.widget.BottomNavigationView
             android:layout_width="match_parent"

@@ -218,6 +218,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Marker marker;
     PopupWindow popupMenu;
     ListView listView;
+    //----------not used------
     private void setPopUpWindow() {
         LayoutInflater inflater = (LayoutInflater)
                 ((AppCompatActivity)BeautyMainPage.context).getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
