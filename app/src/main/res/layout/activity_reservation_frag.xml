@@ -151,16 +151,41 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/pullToRefresh"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/review"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="حجوزات ملغاة"
+                android:gravity="center"/>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/pullToRefresh"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" حجوزات ملغاة من نوع اخر"
+                android:gravity="center"/>
+
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/review_cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

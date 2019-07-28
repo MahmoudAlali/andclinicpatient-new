@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginRight="@dimen/pf_10dp_space"
+    android:layout_marginLeft="@dimen/pf_10dp_space"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:background="@drawable/shadow_fashon_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="@dimen/pf_10dp_space"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="@dimen/standard_50"
+                android:layout_height="@dimen/standard_50"
+                android:src="@drawable/ic_flower" />
+
+
+            <TextView
+                android:id="@+id/client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/standard_20"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Client Name"
+                android:textColor="@color/colorAccent"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/standard_50"
+                android:layout_height="@dimen/standard_50"
+                android:src="@drawable/ic_flower" />
+
+            <Space
+                android:layout_width="@dimen/pf_10dp_space"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/salon_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Salon Name"
+            android:textSize="18dp" />
+
+     <LinearLayout
+         android:id="@+id/service_layout"
+         android:orientation="vertical"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"></LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

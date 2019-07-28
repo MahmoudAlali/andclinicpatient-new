@@ -36,8 +36,10 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
@@ -165,7 +167,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             }
 
             public void onFinish() {
-                APICall.getCart(BeautyMainPage.context,false);
+//                APICall.getCart(BeautyMainPage.context,false);
 //                mTextField.setText("done!");
                 cutdownBagReservation();
             }
@@ -245,6 +247,24 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 FRAGMENT_NAME="";
             }else if (FRAGMENT_NAME.equals("TABS")){
                 fragment = new ServicesTabsFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("GroupReservationFragment")){
+                fragment = new PlaceServiceGroupFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("HairSpecificationsFragment")){
+                fragment = new GroupReservationFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("GroupReservationResultFragment")){
+                fragment = new GroupReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);

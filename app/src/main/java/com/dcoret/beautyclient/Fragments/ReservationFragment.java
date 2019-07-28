@@ -32,11 +32,13 @@ import java.util.ArrayList;
 public class ReservationFragment extends Fragment {
     FloatingActionMenu fbmenu;
     ImageView reserv_btn_filter,sortbtn;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView , recyclerView_cancel;
     public static String filter="",sort="";
     public static SwipeRefreshLayout pullToRefresh;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
+    public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData_cancel=new ArrayList<>();
     public static ReservationsAdapter reservationsAdapter;
+    public static ReservationsAdapter reservationsAdapter_cancel;
     String[] items={"Resrvation 1","Resrvation 2","Resrvation 3","Resrvation 4","Resrvation 5","Resrvation 6"};
     public static ArrayList<DataReservation> reservations=new ArrayList<>();
     Button allreservation,resrevation_iside_offer;
@@ -79,9 +81,21 @@ public class ReservationFragment extends Fragment {
         allreservation=view.findViewById(R.id.all_reservation);
         resrevation_iside_offer=view.findViewById(R.id.reservation_inside_offer);
         recyclerView=view.findViewById(R.id.review);
+
+
+        recyclerView_cancel=view.findViewById(R.id.review_cancel);
+
+        //------------- invisible --------
+        recyclerView_cancel.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         reservationsAdapter=new ReservationsAdapter(getActivity().getApplicationContext(),bookingAutomatedBrowseData);
         recyclerView.setAdapter(reservationsAdapter);
+
+        recyclerView_cancel.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        reservationsAdapter_cancel=new ReservationsAdapter(getActivity().getApplicationContext(),bookingAutomatedBrowseData_cancel);
+        recyclerView_cancel.setAdapter(reservationsAdapter_cancel);
+//
+
         sortbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,9 +164,13 @@ public class ReservationFragment extends Fragment {
                             APICall.bookingFilter("1","3","");
                             APICall.bookingAutomatedBrowse("en","10","1",filter,sort,BeautyMainPage.context);
                         }else if (id==R.id.five){
-                            //---------cancel
+                            //---------cancel---------
+                            bookingAutomatedBrowseData_cancel.clear();
+                            recyclerView_cancel.setVisibility(View.VISIBLE);
                             filter=APICall.bookingFilter("1","4","0");
                             APICall.bookingAutomatedBrowse("en","10","1",filter,sort,BeautyMainPage.context);
+//                            filter=APICall.bookingFilter("1","5","0");
+                            APICall.bookingAutomatedBrowsecancel("en","10","1",filter,sort,false,BeautyMainPage.context);
                         }
                         return true;
                     }
