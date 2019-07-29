@@ -35,7 +35,7 @@ public class HairSpecificationsFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     String[] itemname ={
-            "",
+            "طول الشعر",
             "درجة رقم1",
             "درجة رقم2",
             "درجة رقم3",
@@ -44,13 +44,22 @@ public class HairSpecificationsFragment extends Fragment {
 
 
     String itemname1[]={
-            "كثافة الشعر"
+            "كثافة الشعر",
+            "درجة رقم1",
+            "درجة رقم2",
+            "درجة رقم3",
+            "درجة رقم4"
     };
     String itemname2[]={
-            "درجة تجعيد الشعر"
+            "درجة تجعيد الشعر",
+            "درجة رقم1",
+            "درجة رقم2",
+            "درجة رقم3",
+            "درجة رقم4"
     };
 
     Integer[] imgid={
+            R.drawable.ic_keyboard_arrow_down_black_24dp,
             R.drawable.pic1,
             R.drawable.pic2,
             R.drawable.pic3,
@@ -67,17 +76,19 @@ public class HairSpecificationsFragment extends Fragment {
         hair_items=view.findViewById(R.id.hair_layout);
         next=view.findViewById(R.id.next);
 
-        for (int i=0;i<GroupReservationFragment.items;i++) {
+        for (int i=0;i<GroupReservationFragment.ishairService.size();i++) {
             View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.hair_layout, hair_items, false);
 
             Spinner hair_lngth = layout2.findViewById(R.id.Hair_length);
+            TextView service_name = layout2.findViewById(R.id.service_name);
+            service_name.setText(GroupReservationFragment.clientsViewData.get(i).getAdd_service().getSelectedItem()+"");
             CustomListAdapter adapter=new CustomListAdapter(getActivity(), itemname, imgid);
             hair_lngth.setAdapter(adapter);
 
             TextView name=layout2.findViewById(R.id.name);
             TextView phone_number=layout2.findViewById(R.id.phone_number);
-            name.setText(GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString());
-            phone_number.setText(GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText().toString());
+            name.setText(GroupReservationFragment.clientsViewData.get(GroupReservationFragment.ishairService.get(i) ).getClient_name().getText().toString());
+            phone_number.setText(GroupReservationFragment.clientsViewData.get(GroupReservationFragment.ishairService.get(i)).getPhone_number().getText().toString());
 
             Spinner hair_dnsty = layout2.findViewById(R.id.Hair_density);
             ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(BeautyMainPage.context,

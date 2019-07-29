@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -57,6 +59,8 @@ public class PlaceServiceGroupFragment extends Fragment {
     public static String mylocationId="";
     Button distance,mylocationbtn;
     static  boolean fregmentIsFirstOpen=false;
+    Button date;
+    public static  String dateFilter="";
 
 
 
@@ -188,7 +192,9 @@ public class PlaceServiceGroupFragment extends Fragment {
 
 
         final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapter.setDropDownViewResource(R.layout.spinner_center_item);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeSpinner.setAdapter(adapter);
 
         switch (placeId) {
@@ -477,6 +483,27 @@ public class PlaceServiceGroupFragment extends Fragment {
                 });
                 rateServiceDialog.show();
             }
+        });
+
+        date=view.findViewById(R.id.date);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(BeautyMainPage.context);
+                dialog.setContentView(R.layout.active_date_dialog);
+                Button search=dialog.findViewById(R.id.search);
+                final DatePicker datePicker=dialog.findViewById(R.id.date);
+                search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        date.setText("date:"+datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
+                        dateFilter=datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth();
+                    }
+                });
+            dialog.show();
+            }
+
         });
 
         return view;

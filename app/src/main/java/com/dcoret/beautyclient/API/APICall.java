@@ -53,6 +53,7 @@ import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
@@ -5033,6 +5034,79 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
+
+
+    public static String getlatlng(){
+            String latlng;
+            latlng="\t{\"num\":34,\"value1\":"+PlaceServiceGroupFragment.lat+",\"value2\":0},\n" +
+                    "\t{\"num\":35,\"value1\":"+PlaceServiceGroupFragment.lng+",\"value2\":0},";
+            Log.e("LatLong",latlng);
+        return latlng;
+    }
+
+    public static String getPrice(){
+            String price;
+            price="{\"num\":11,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
+        Log.e("price",price);
+        return price;
+    }
+
+    public static  String getDate(){
+        String date;
+        date="\"date\":"+PlaceServiceGroupFragment.dateFilter;
+        Log.e("Date",date);
+        return date;
+    }
+
+
+    public static String getClients(){
+            String clients = null;
+        try {
+
+            for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++) {
+                if (i == 0) {
+                    clients = "\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
+                } else {
+                    clients = clients + "\t,{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
+                }
+                Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+
+                    for (int i1 = 0; i1 < GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size(); i++) {
+                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                        if (i1 == 0) {
+                            clients = clients + "{\"ser_id\":" +GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(GroupReservationFragment.postions.get(i1)).toString() + ",\"ser_time\":60}\n";
+                        } else {
+                            clients = clients + ",{\"ser_id\":" + GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(GroupReservationFragment.postions.get(i1)).toString()+ ",\"ser_time\":60}\n";
+                        }
+                    }
+
+                }
+            }catch (Exception e){
+            e.printStackTrace();
+        }
+        clients=clients+"}";
+
+            Log.e("clients",clients);
+        return clients;
+    }
+//{"Filter":	[
+//	{"num":34,"value1":21.529023,"value2":0},
+//	{"num":35,"value1":39.2147311,"value2":0},
+//	{"num":11,"value1":1,"value2":0}
+//	],
+//	"date":"2019-07-20",
+//		"clients":[
+//			{"client_name":"hanaa","services":[
+//									{"ser_id":2,"ser_time":60},
+//									{"ser_id":1,"ser_time":30}]
+//									},
+//			{"client_name":"sara","services":[
+//									{"ser_id":2,"ser_time":30}]
+//
+//			},
+//			{"client_name":"lama","services":[
+//									{"ser_id":1,"ser_time":60}]}]
+//}
 
 }
 

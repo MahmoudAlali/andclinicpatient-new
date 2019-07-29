@@ -11,38 +11,35 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.R;
 
+import java.util.ArrayList;
 
 
-public class CustomListAdapter extends ArrayAdapter<String> {
+public class CustomListAdapterWithoutImage extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] itemname;
-    private final Integer[] imgid;
+    private final ArrayList<String> itemname;
 
-    public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid) {
+
+    public CustomListAdapterWithoutImage(Activity context, ArrayList<String> itemname) {
         super(context, R.layout.row_layout,itemname);
         // TODO Auto-generated constructor stub
 
         this.context=context;
         this.itemname=itemname;
-        this.imgid=imgid;
+
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.row_layout, null,true);
+        View rowView=inflater.inflate(R.layout.row_layout_without_image, null,true);
 
         TextView txtTitle =  rowView.findViewById(R.id.name);
         ImageView imageView =  rowView.findViewById(R.id.icon);
 //        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
-        txtTitle.setText(itemname[position]);
-        try {
-            imageView.setImageResource(imgid[position]);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        txtTitle.setText(itemname.get(position));
+
 //        extratxt.setText("Description "+itemname[position]);
         return rowView;
 
@@ -57,12 +54,8 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         ImageView imageView =  rowView.findViewById(R.id.icon);
 //        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
-        txtTitle.setText(itemname[position]);
-        try {
-            imageView.setImageResource(imgid[position]);
-        }catch (Exception e){
-            e.printStackTrace();
-    }
+        txtTitle.setText(itemname.get(position));
+
 //        extratxt.setText("Description "+itemname[position]);
         return rowView;
 

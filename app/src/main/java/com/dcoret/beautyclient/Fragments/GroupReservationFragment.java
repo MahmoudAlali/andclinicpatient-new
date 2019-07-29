@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,10 +26,13 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataClass.ClientsViewData;
+import com.dcoret.beautyclient.DataClass.CustomListAdapter;
+import com.dcoret.beautyclient.DataClass.CustomListAdapterWithoutImage;
 import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
 import com.dcoret.beautyclient.DataClass.ServiceFilter;
 import com.dcoret.beautyclient.DataClass.ServiceItem;
 import com.dcoret.beautyclient.DataClass.ServiceItems;
+import com.dcoret.beautyclient.DataClass.ServicesForClientGroup;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -47,7 +51,8 @@ public class GroupReservationFragment extends Fragment {
 
     //------------ save view client--------
     public static ArrayList<ClientsViewData> clientsViewData=new ArrayList<>();
-    static int ishairService=0;
+    public static ArrayList<Integer> ishairService=new ArrayList();
+    public static ArrayList<Integer> postions=new ArrayList();
 
 
     Fragment fragment;
@@ -79,7 +84,7 @@ public class GroupReservationFragment extends Fragment {
             }
         });
         items=0;
-        ishairService=0;
+        ishairService.clear();
         clientsViewData.clear();
         add_client.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +94,38 @@ public class GroupReservationFragment extends Fragment {
 
                 EditText client_name=layout2.findViewById(R.id.client_name);
                 EditText phone_number=layout2.findViewById(R.id.phone_number);
-                final Spinner add_service=layout2.findViewById(R.id.add_service);
+                final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
-                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
+
+                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
+
+                    public View getView(int position, View convertView,ViewGroup parent) {
+
+                        View v = super.getView(position, convertView, parent);
+
+                        ((TextView) v).setTextSize(16);
+//                        ((TextView) v).setGravity(Gravity.CENTER);
+                        ((TextView) v).setGravity(Gravity.RIGHT);
+
+                        return v;
+
+                    }
+
+                    public View getDropDownView(int position, View convertView,ViewGroup parent) {
+
+                        View v = super.getDropDownView(position, convertView,parent);
+
+                        ((TextView) v).setGravity(Gravity.RIGHT);
+                        return v;
+
+                    }
+
+                };
+                adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
+
+                final ArrayList<String> servicesForClientGroups=new ArrayList<>();
 
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -103,9 +135,20 @@ public class GroupReservationFragment extends Fragment {
                          TextView textView = view1.findViewById(R.id.service_name);
                          textView.setText(add_service.getSelectedItem().toString());
                          adding_name_service.addView(view1);
+
+
+                         servicesForClientGroups.add(add_service.getSelectedItem().toString());
+
+
                      }
-                        if (add_service.getSelectedItem().toString().equals("Hair cut")){
-                            ishairService++;
+                     if (position!=0){
+                         postions.add(position-1);
+                     }
+                        if (position!=0 && servicesList.get(position-1).getBdb_is_fixed_price().equals("1")){
+                            ishairService.add(items-1);
+                            Log.e("PostionID",position+"");
+                            Log.e("PostionID",servicesList.get(position-1).getBdb_name()+"");
+                            Log.e("PostionID",servicesList.get(position-1).getBdb_is_fixed_price()+"");
                         }
                     }
                     @Override
@@ -124,7 +167,7 @@ public class GroupReservationFragment extends Fragment {
                 client_status.setAdapter(adapter_client_status);
 
 
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status));
+                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups));
 
                 clients.addView(layout2);
             }
@@ -145,9 +188,8 @@ public class GroupReservationFragment extends Fragment {
 
                 if (alert==1){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Complete All Data..");
-
                 }else {
-                    if (ishairService > 0) {
+                    if (ishairService.size() > 0) {
                         fragment = new HairSpecificationsFragment();
                         fm = getFragmentManager();
                         fragmentTransaction = fm.beginTransaction();
@@ -162,6 +204,12 @@ public class GroupReservationFragment extends Fragment {
 
                     }
                 }
+
+            APICall.getlatlng();
+            APICall.getPrice();
+            APICall.getDate();
+            APICall.getClients();
+
             }
         });
 

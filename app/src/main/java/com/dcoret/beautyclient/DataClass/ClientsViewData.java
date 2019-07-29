@@ -3,9 +3,12 @@ package com.dcoret.beautyclient.DataClass;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class ClientsViewData {
     EditText client_name,phone_number;
     Spinner add_service,age_range,client_status;
+    ArrayList servicesSelected;
 
     public ClientsViewData(EditText client_name, Spinner add_service, Spinner age_range, Spinner client_status) {
         this.client_name = client_name;
@@ -20,6 +23,23 @@ public class ClientsViewData {
         this.add_service = add_service;
         this.age_range = age_range;
         this.client_status = client_status;
+    }
+
+    public ClientsViewData(EditText client_name, EditText phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList servicesSelected) {
+        this.client_name = client_name;
+        this.phone_number = phone_number;
+        this.add_service = add_service;
+        this.age_range = age_range;
+        this.client_status = client_status;
+        this.servicesSelected = servicesSelected;
+    }
+
+    public ArrayList getServicesSelected() {
+        return servicesSelected;
+    }
+
+    public void setServicesSelected(ArrayList servicesSelected) {
+        this.servicesSelected = servicesSelected;
     }
 
     public EditText getPhone_number() {
