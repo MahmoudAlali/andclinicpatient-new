@@ -35,7 +35,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Client Name"
-                android:textColor="@color/colorAccent"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -58,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Salon Name"
+            android:text="Phone Number"
             android:textSize="18dp" />
 
      <LinearLayout

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#000"
+        android:layout_marginBottom="5dp"
+        ></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="My Booking"
+        android:gravity="center"
+        android:textSize="@dimen/standard_20"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="My Booking"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="@dimen/standard_20"/>
+    <EditText
+        android:id="@+id/client_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="My Booking"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="@dimen/standard_20"/>
+    <EditText
+        android:id="@+id/phone_num"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone"
+        android:text="My Booking"
+        android:gravity="center"
+        android:textSize="@dimen/standard_20"/>
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="7dp"
+        android:layout_height="@dimen/standard_30">
+
+        <Spinner
+            android:id="@+id/add_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"></Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/adding_service_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></LinearLayout>
+</LinearLayout>

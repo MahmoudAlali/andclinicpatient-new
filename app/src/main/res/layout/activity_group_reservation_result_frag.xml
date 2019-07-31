@@ -19,14 +19,29 @@
     app:titleMarginStart="@dimen/standard_175"
     app:titleTextColor="@color/end_gray" />
     <LinearLayout
+        android:weightSum="3"
+        android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycleview"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/pf_10dp_space"
+            android:gravity="center"
+            android:text="Clients names may be changed accoding to thier account names"
+            android:textColor="@color/colorAccentend"/>
 
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_weight="2"-->
+            <!--android:id="@+id/recycleview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>-->
+<ExpandableListView
+    android:layout_weight="1"
+    android:id="@+id/list_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></ExpandableListView>
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

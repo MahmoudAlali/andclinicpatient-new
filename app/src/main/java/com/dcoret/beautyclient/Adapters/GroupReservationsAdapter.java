@@ -7,9 +7,11 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +19,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.ReservationDetails;
 import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.ReservationClients;
+import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
 import com.dcoret.beautyclient.Fragments.EditReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.InvoioceFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -42,13 +49,14 @@ public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.
     FragmentTransaction fragmentTransaction;
 
     ArrayList<ReservationClients> reservationClients;
+    ArrayList<SerchGroupBookingData> serchGroupBookingData;
     public GroupReservationsAdapter(Context context, String items[]){
         this.context=context;
         this.items=items;
     }
-    public GroupReservationsAdapter(Context context, ArrayList<ReservationClients> reservationClients){
+    public GroupReservationsAdapter(Context context, ArrayList<SerchGroupBookingData> serchGroupBookingData){
         this.context=context;
-        this.reservationClients=reservationClients;
+        this.serchGroupBookingData=serchGroupBookingData;
     }
 
     @NonNull
@@ -78,28 +86,33 @@ public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
-        ((Item)holder).client_name.setText(reservationClients.get(position).getClientName());
-        ((Item)holder).salon_name.setText(reservationClients.get(position).getSalonName());
-        for (int i=0;i<reservationClients.get(position).getReservationClientsEmployees().size();i++){
-            View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.service_layout, ((Item)holder).service_layout, false);
-        TextView service_name=layout2.findViewById(R.id.service_name);
-        TextView employee_name=layout2.findViewById(R.id.employee_name);
-        TextView day=layout2.findViewById(R.id.day);
-        TextView time=layout2.findViewById(R.id.time);
-            service_name.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getServiceName());
-            employee_name.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getEmployeeName());
-            day.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getDay());
-            time.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getTime());
-            ((Item)holder).service_layout.addView(layout2);
 
-        }
+//        ((Item)holder).client_name.setText(serchGroupBookingData.get(position).getCompleteSolutions().get());
+//        ((Item)holder).salon_name.setText(serchGroupBookingData.get(position).getSalon_name());
+//        Log.e("emmm",serchGroupBookingData.get(position).getClient_response().getSolutions().size()+"");
+//        for (int i=0;i<serchGroupBookingData.get(position).getClient_response().getSolutions().size();i++){
+//            View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.service_layout, ((Item)holder).service_layout, false);
+//        TextView service_name=layout2.findViewById(R.id.service_name);
+//        TextView employee_name=layout2.findViewById(R.id.employee_name);
+//        TextView day=layout2.findViewById(R.id.day);
+//        TextView time=layout2.findViewById(R.id.time);
+//
+//            service_name.setText(serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getSer_name());
+//            APICall.getSupName(employee_name,serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getSup_id(),BeautyMainPage.context);
+////            employee_name.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getEmployeeName());
+//            day.setText(PlaceServiceGroupFragment.dateFilter);
+//            time.setText(serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getFrom());
+//            ((Item)holder).service_layout.addView(layout2);
+
+//            notifyDataSetChanged();
+//        }
 
     }
 
     @Override
     public int getItemCount() {
-//        Log.e("bookingAutomated",bookingAutomatedBrowseData.size()+"");
-        return reservationClients.size();
+        Log.e("bookingAutomated",serchGroupBookingData.size()+"");
+        return serchGroupBookingData.size();
     }
 
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {

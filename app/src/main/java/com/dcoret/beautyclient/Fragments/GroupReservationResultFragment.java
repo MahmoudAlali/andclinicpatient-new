@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.DataClass.ReservationClients;
 import com.dcoret.beautyclient.DataClass.ReservationClientsEmployee;
@@ -32,13 +34,18 @@ public class GroupReservationResultFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
 
+        public static ExpandableListView listView;
+    public static CustomExpandableListAdapter listAdapter;
+
+
+
     RecyclerView recyclerView;
     ArrayList<ReservationClientsEmployee> reservationClientsEmployees1=new ArrayList<>();
     ArrayList<ReservationClientsEmployee> reservationClientsEmployees2=new ArrayList<>();
     ArrayList<ReservationClientsEmployee> reservationClientsEmployees3=new ArrayList<>();
     ArrayList<ReservationClients> reservationClients=new ArrayList<>();
 
-
+    public static GroupReservationsAdapter adapter;
 
     String items[]={"1","2","3","4","5"};
 
@@ -50,7 +57,7 @@ public class GroupReservationResultFragment extends Fragment {
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
 
 
-
+        APICall.searchGroupBooking(BeautyMainPage.context);
 //        ArrayList<ArrayList<ReservationClientsEmployee>> nn=new ArrayList<>();
 //        nn.add(reservationClientsEmployees1);
 //        nn.add(reservationClientsEmployees2);
@@ -65,21 +72,26 @@ public class GroupReservationResultFragment extends Fragment {
 //        reservationClientsEmployees3.add(new ReservationClientsEmployee("service9","employee8","sunday","12:00"));
 //        reservationClientsEmployees3.add(new ReservationClientsEmployee("service9","employee8","sunday","12:00"));
 
-        for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++){
-                ArrayList<ReservationClientsEmployee> reservationClientsEmployees=new ArrayList<>();
-                for (int j=0;j<GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size();j++)
-                reservationClientsEmployees.add(new ReservationClientsEmployee(GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).toString(),"emp "+j,"Saturday","12:00"));
-                    reservationClients.add(new ReservationClients(GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString(),"salon1",reservationClientsEmployees));
-
-        }
+//        for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++){
+//                ArrayList<ReservationClientsEmployee> reservationClientsEmployees=new ArrayList<>();
+//                for (int j=0;j<GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size();j++)
+//                reservationClientsEmployees.add(new ReservationClientsEmployee(GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).toString(),"emp "+j,"Saturday","12:00"));
+//                    reservationClients.add(new ReservationClients(GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString(),"salon1",reservationClientsEmployees));
+//
+//        }
 //        reservationClients.add(new ReservationClients("client2","salon2",reservationClientsEmployees2));
 //        reservationClients.add(new ReservationClients("client3","salon3",reservationClientsEmployees3));
+//        GroupReservationFragment.serchGroupBookingData.clear();
+//        recyclerView=view.findViewById(R.id.recycleview);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+//       adapter=new GroupReservationsAdapter(BeautyMainPage.context,GroupReservationFragment.serchGroupBookingData);
+//
+                listView=view.findViewById(R.id.list_view);
+//        listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,GroupReservationFragment.serchGroupBookingData,GroupReservationFragment.serchGroupBookingData);
 
-        recyclerView=view.findViewById(R.id.recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        GroupReservationsAdapter adapter=new GroupReservationsAdapter(BeautyMainPage.context,reservationClients);
 
-        recyclerView.setAdapter(adapter);
+
+//        recyclerView.setAdapter(adapter);
 
         return view;
     }

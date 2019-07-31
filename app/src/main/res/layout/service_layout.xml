@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="employee Name"
         android:textSize="18dp" />
     <LinearLayout
         android:layout_width="match_parent"

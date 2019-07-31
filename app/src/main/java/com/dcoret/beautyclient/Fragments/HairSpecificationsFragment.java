@@ -81,7 +81,7 @@ public class HairSpecificationsFragment extends Fragment {
 
             Spinner hair_lngth = layout2.findViewById(R.id.Hair_length);
             TextView service_name = layout2.findViewById(R.id.service_name);
-            service_name.setText(GroupReservationFragment.clientsViewData.get(i).getAdd_service().getSelectedItem()+"");
+//            service_name.setText(GroupReservationFragment.clientsViewData.get(i).getAdd_service().getSelectedItem()+"");
             CustomListAdapter adapter=new CustomListAdapter(getActivity(), itemname, imgid);
             hair_lngth.setAdapter(adapter);
 
