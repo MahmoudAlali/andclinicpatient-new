@@ -52,7 +52,7 @@ public class PlaceServiceGroupFragment extends Fragment {
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
     Button ok, priceService, rateService;
-    Spinner  placeSpinner;
+    public static Spinner  placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
@@ -61,6 +61,8 @@ public class PlaceServiceGroupFragment extends Fragment {
     static  boolean fregmentIsFirstOpen=false;
     Button date;
     public static  String dateFilter="";
+    public static String maxPrice,minPrice;
+
 
 
 
@@ -373,7 +375,6 @@ public class PlaceServiceGroupFragment extends Fragment {
             }
         });
 
-
         priceService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -414,6 +415,10 @@ public class PlaceServiceGroupFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     rangePriceDialog.dismiss();
+
+                                   //-----------------
+                                   maxPrice= Max.getText().toString();
+                                   minPrice= Min.getText().toString();
                                     priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm(PlaceServiceGroupFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));

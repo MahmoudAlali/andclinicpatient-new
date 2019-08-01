@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="horizontal"
+    android:weightSum="4"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:layout_weight="1"
         android:id="@+id/service_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/high_edit_text"
@@ -10,5 +13,10 @@
         android:gravity="center"
         android:textStyle="bold"
         />
-
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_weight="3"
+        android:layout_width="@dimen/pf_100_txt_size"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_close_black_24dp"/>
 </LinearLayout>

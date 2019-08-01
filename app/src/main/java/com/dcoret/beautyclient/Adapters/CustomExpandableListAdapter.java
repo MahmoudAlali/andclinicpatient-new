@@ -82,7 +82,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Log.e("serchSTR",searchBookingDataSTRS.size()+"");
+//        Log.e("serchSTR",searchBookingDataSTRS.size()+"");
 
         return stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition);
     }
@@ -103,7 +103,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         //------------------- titles--------------------------
         String listTitle =  (String) getGroup(groupPosition);
@@ -122,7 +122,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
+                       APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
+//                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -137,6 +138,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         try {
+
+
 //            for (int j = 0; j < expandableListDetail1.get(groupPosition).getCompleteSolutions().size(); j++) {
                 if (convertView == null) {
                     LayoutInflater layoutInflater = (LayoutInflater) this.context
@@ -151,9 +154,16 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 client_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name());
                 salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name());
 
+//                stringArrayListHashMap.clear();
 
+
+            client_name.setTextColor(Color.parseColor("#000000"));
+            salon_name.setTextColor(Color.parseColor("#000000"));
                 //----------------- error in this if ----------
-                if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_current_user().equals("1")){
+            Log.e("postionISCU",stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_current_user());
+            Log.e("postionISCU",salons.get(groupPosition));
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_current_user().equals("1")){
+                   Log.e("postionISCU",stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_current_user());
                     client_name.setTextColor(Color.parseColor("#D3295F"));
 //                    client_name.setHintTextColor(R.color.colorAccentend);
                     salon_name.setTextColor(Color.parseColor("#D3295F"));
@@ -162,6 +172,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
                 Log.e("postion " ,stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().size() + "");
 //            stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().clear();
+
                 service_layout.removeAllViews();
                 for (int i = 0; i < stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().size(); i++) {
                     View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.service_layout, service_layout, false);

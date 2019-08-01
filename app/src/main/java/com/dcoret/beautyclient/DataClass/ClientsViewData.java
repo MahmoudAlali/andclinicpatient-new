@@ -11,7 +11,7 @@ public class ClientsViewData {
     EditText client_name,phone_number;
     Spinner add_service,age_range,client_status;
     ArrayList<ServicesIDS> servicesSelected;
-    String is_current_user;
+    String is_current_user,id;
 
 
     public ClientsViewData(EditText client_name, Spinner add_service, Spinner age_range, Spinner client_status) {
@@ -46,6 +46,26 @@ public class ClientsViewData {
         this.client_status = client_status;
         this.servicesSelected = servicesSelected;
         this.is_current_user = is_current_user;
+    }
+
+
+    public ClientsViewData(EditText client_name, EditText phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList<ServicesIDS> servicesSelected, String is_current_user, String id) {
+        this.client_name = client_name;
+        this.phone_number = phone_number;
+        this.add_service = add_service;
+        this.age_range = age_range;
+        this.client_status = client_status;
+        this.servicesSelected = servicesSelected;
+        this.is_current_user = is_current_user;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public ArrayList<ServicesIDS> getServicesSelected() {

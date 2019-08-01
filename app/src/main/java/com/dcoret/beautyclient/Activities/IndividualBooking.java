@@ -63,7 +63,7 @@ public class IndividualBooking extends AppCompatActivity {
 
     static Context context;
     RecyclerView recyclerView,recyclerViewtime;
-    String [] item={"1","2","3","4","1","2","3","4","1","2","3","4"};
+//    String [] item={"1","2","3","4","1","2","3","4","1","2","3","4"};
     public static String bdb_id,txtProviderName,txtPrice;
     public static LinearLayout showEmp;
     TextView providerName,price;

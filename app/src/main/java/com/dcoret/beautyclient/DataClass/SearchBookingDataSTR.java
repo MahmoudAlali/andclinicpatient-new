@@ -3,7 +3,7 @@ package com.dcoret.beautyclient.DataClass;
 import java.util.ArrayList;
 
 public class SearchBookingDataSTR {
-    String salon_id,salon_name,client_response,client_name,is_current_user;
+    String salon_id,salon_name,client_response,client_name,is_current_user,client_id;
     ArrayList<Solution> solutions;
 
 
@@ -22,6 +22,24 @@ public class SearchBookingDataSTR {
         this.client_name = client_name;
         this.is_current_user = is_current_user;
         this.solutions = solutions;
+    }
+
+    public SearchBookingDataSTR(String salon_id, String salon_name, String client_response, String client_name, String is_current_user, String client_id, ArrayList<Solution> solutions) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.client_response = client_response;
+        this.client_name = client_name;
+        this.is_current_user = is_current_user;
+        this.client_id = client_id;
+        this.solutions = solutions;
+    }
+
+    public String getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(String client_id) {
+        this.client_id = client_id;
     }
 
     public String getIs_current_user() {
@@ -73,7 +91,22 @@ public class SearchBookingDataSTR {
     }
 
     public static class Solution{
-        String ser_id,ser_name,ser_name_ar,emp_id,sup_id,ser_sup_id,from,to;
+        String ser_id,
+                ser_name,
+                ser_name_ar,
+                emp_id,
+                sup_id,
+                ser_sup_id,
+                from,
+                to,
+                bdb_ser_home_price,
+                bdb_ser_hall_price,
+                bdb_hotel_price,
+                bdb_ser_salon_price,
+                bdb_ser_home,
+                bdb_ser_salon,
+                bdb_ser_hall,
+                bdb_hotel;
 
 
         public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String sup_id, String ser_sup_id, String from, String to) {
@@ -87,6 +120,89 @@ public class SearchBookingDataSTR {
             this.to = to;
         }
 
+
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel) {
+            this.ser_id = ser_id;
+            this.ser_name = ser_name;
+            this.ser_name_ar = ser_name_ar;
+            this.emp_id = emp_id;
+            this.sup_id = sup_id;
+            this.ser_sup_id = ser_sup_id;
+            this.from = from;
+            this.to = to;
+            this.bdb_ser_home_price = bdb_ser_home_price;
+            this.bdb_ser_hall_price = bdb_ser_hall_price;
+            this.bdb_hotel_price = bdb_hotel_price;
+            this.bdb_ser_salon_price = bdb_ser_salon_price;
+            this.bdb_ser_home = bdb_ser_home;
+            this.bdb_ser_salon = bdb_ser_salon;
+            this.bdb_ser_hall = bdb_ser_hall;
+            this.bdb_hotel = bdb_hotel;
+        }
+
+        public String getBdb_ser_home_price() {
+            return bdb_ser_home_price;
+        }
+
+        public void setBdb_ser_home_price(String bdb_ser_home_price) {
+            this.bdb_ser_home_price = bdb_ser_home_price;
+        }
+
+        public String getBdb_ser_hall_price() {
+            return bdb_ser_hall_price;
+        }
+
+        public void setBdb_ser_hall_price(String bdb_ser_hall_price) {
+            this.bdb_ser_hall_price = bdb_ser_hall_price;
+        }
+
+        public String getBdb_hotel_price() {
+            return bdb_hotel_price;
+        }
+
+        public void setBdb_hotel_price(String bdb_hotel_price) {
+            this.bdb_hotel_price = bdb_hotel_price;
+        }
+
+        public String getBdb_ser_salon_price() {
+            return bdb_ser_salon_price;
+        }
+
+        public void setBdb_ser_salon_price(String bdb_ser_salon_price) {
+            this.bdb_ser_salon_price = bdb_ser_salon_price;
+        }
+
+        public String getBdb_ser_home() {
+            return bdb_ser_home;
+        }
+
+        public void setBdb_ser_home(String bdb_ser_home) {
+            this.bdb_ser_home = bdb_ser_home;
+        }
+
+        public String getBdb_ser_salon() {
+            return bdb_ser_salon;
+        }
+
+        public void setBdb_ser_salon(String bdb_ser_salon) {
+            this.bdb_ser_salon = bdb_ser_salon;
+        }
+
+        public String getBdb_ser_hall() {
+            return bdb_ser_hall;
+        }
+
+        public void setBdb_ser_hall(String bdb_ser_hall) {
+            this.bdb_ser_hall = bdb_ser_hall;
+        }
+
+        public String getBdb_hotel() {
+            return bdb_hotel;
+        }
+
+        public void setBdb_hotel(String bdb_hotel) {
+            this.bdb_hotel = bdb_hotel;
+        }
 
         public String getSer_id() {
             return ser_id;

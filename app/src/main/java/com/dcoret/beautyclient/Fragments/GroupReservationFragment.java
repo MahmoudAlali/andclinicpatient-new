@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
@@ -46,6 +47,9 @@ public class GroupReservationFragment extends Fragment {
     Button add_client, add_me,choose_occision;
     LinearLayout clients,bookme;
     static int items=0;
+    static int viewcount=0;
+    String myid="";
+    View mylayout;
     Button next;
     public static ArrayList<ServiceItems> servicesList=new ArrayList<>();
     public static ArrayList<String> serviceNameList=new ArrayList<>();
@@ -72,7 +76,7 @@ public class GroupReservationFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.activity_group_reservation_frag, container, false);
+        final View view= inflater.inflate(R.layout.activity_group_reservation_frag, container, false);
 
 
         BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
@@ -98,14 +102,19 @@ public class GroupReservationFragment extends Fragment {
             }
         });
         items=0;
+        viewcount=0;
         ishairService.clear();
         clientsViewData.clear();
         add_client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items++;
-                View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.client_layout, clients, false);
 
+                items++;
+                final String ic;
+                ic="client"+items;
+                final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.client_layout, clients, false);
+
+                ImageView delete=layout2.findViewById(R.id.delete);
                 EditText client_name=layout2.findViewById(R.id.client_name);
                 EditText phone_number=layout2.findViewById(R.id.phone_number);
                 final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
@@ -145,13 +154,39 @@ public class GroupReservationFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                      if (position!=0) {
-                         View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
+                       viewcount++;
+                          final String vc;
+                         vc="view"+viewcount;
+                         final View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
                          TextView textView = view1.findViewById(R.id.service_name);
                          textView.setText(add_service.getSelectedItem().toString());
+                         ImageView delete = view1.findViewById(R.id.delete);
+                         delete.setOnClickListener(new View.OnClickListener() {
+                             @Override
+                             public void onClick(View v) {
+                                 adding_name_service.removeView(view1);
+                                 for (int i=0;i<servicesForClientGroups.size();i++){
+                                     if (servicesForClientGroups.get(i).getViewnum().equals(vc)){
+                                       try {
+                                           servicesForClientGroups.remove(i);
+                                       }catch (Exception ee)
+                                       {
+                                           ee.printStackTrace();
+                                       }
+                                       }
+                                 }
+//
+//                                 servicesForClientGroups.remove(vc-1);
+                                 Log.e("servicesForClientGroups",servicesForClientGroups.size()+"");
+
+                             }
+                         });
+
                          adding_name_service.addView(view1);
 
 
-                         servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString()));
+                         servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString(),vc));
+
 
 
                      }
@@ -181,7 +216,22 @@ public class GroupReservationFragment extends Fragment {
                 client_status.setAdapter(adapter_client_status);
 
 
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0"));
+                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
+
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clients.removeView(layout2);
+                        for (int i=0;i<clientsViewData.size();i++){
+                            if (clientsViewData.get(i).getId().equals(ic)){
+                                clientsViewData.remove(i);
+                            }
+                        }
+//                        clientsViewData.remove(ic-1);
+                        Log.e("clientsViewData",clientsViewData.size()+"");
+                        Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
+                    }
+                });
 
                 clients.addView(layout2);
             }
@@ -193,29 +243,41 @@ public class GroupReservationFragment extends Fragment {
         add_me.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items++;
-                View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.my_booking, bookme, false);
 
-                SharedPreferences sh=BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-                try{
-                    sh.getString("bdb_name",null).equals("");
-                }catch (NullPointerException npe){
-                    APICall.detailsUser1("http://clientapp.dcoret.com/api/auth/user/detailsUser",BeautyMainPage.context);
+
+                if (add_me.getText().equals("Add Me")){
+                    add_me.setText("Remove Me");
+                    items++;
+                    //items++;
+                final String ic;
+                ic="client"+items;
+                final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.my_booking, bookme, false);
+
+                //------------ sp for delete-------
+                mylayout=layout2;
+                    myid=ic;
+                    //------------------
+                    SharedPreferences sh = BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                try {
+                    sh.getString("bdb_name", null).equals("");
+                } catch (NullPointerException npe) {
+                    APICall.detailsUser1("http://clientapp.dcoret.com/api/auth/user/detailsUser", BeautyMainPage.context);
 //                    editor.putString("bdb_name","");
 //                    editor.commit();
                 }
 
 
+                EditText client_name = layout2.findViewById(R.id.client_name);
+                EditText phone_number = layout2.findViewById(R.id.phone_num);
+                final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
+                final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
+//                    ImageView delete=layout2.findViewById(R.id.delete);
 
-                EditText client_name=layout2.findViewById(R.id.client_name);
-                EditText phone_number=layout2.findViewById(R.id.phone_num);
-                final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
-                final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
 //                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
 
-                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
+                adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
 
-                    public View getView(int position, View convertView,ViewGroup parent) {
+                    public View getView(int position, View convertView, ViewGroup parent) {
 
                         View v = super.getView(position, convertView, parent);
 
@@ -227,9 +289,9 @@ public class GroupReservationFragment extends Fragment {
 
                     }
 
-                    public View getDropDownView(int position, View convertView,ViewGroup parent) {
+                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
-                        View v = super.getDropDownView(position, convertView,parent);
+                        View v = super.getDropDownView(position, convertView, parent);
 
                         ((TextView) v).setGravity(Gravity.CENTER);
                         return v;
@@ -240,32 +302,57 @@ public class GroupReservationFragment extends Fragment {
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
 
-                final ArrayList<ServicesIDS> servicesForClientGroups=new ArrayList<>();
+                final ArrayList<ServicesIDS> servicesForClientGroups = new ArrayList<>();
 
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if (position!=0) {
-                            View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
+                        if (position != 0) {
+                            viewcount++;
+                            final String vc;
+                            vc="view"+viewcount;
+                            final View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
                             TextView textView = view1.findViewById(R.id.service_name);
+
                             textView.setText(add_service.getSelectedItem().toString());
                             adding_name_service.addView(view1);
 
+                            ImageView delete = view1.findViewById(R.id.delete);
+                            delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    adding_name_service.removeView(view1);
+                                    for (int i=0;i<servicesForClientGroups.size();i++){
+                                        if (servicesForClientGroups.get(i).getViewnum().equals(vc)){
+                                            try {
+                                                servicesForClientGroups.remove(i);
+                                            }catch (Exception ee)
+                                            {
+                                                ee.printStackTrace();
+                                            }
+                                        }
+                                    }
+//
+//                                 servicesForClientGroups.remove(vc-1);
+                                    Log.e("servicesForClientGroups",servicesForClientGroups.size()+"");
 
-                            servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString()));
+                                }
+                            });
+                            servicesForClientGroups.add(new ServicesIDS(servicesList.get(position - 1).getBdb_ser_id(), add_service.getSelectedItem().toString(),vc));
 
 
                         }
 //                     if (position!=0){
 //                         postions.add(position-1);
 //                     }
-                        if (position!=0 && servicesList.get(position-1).getBdb_is_fixed_price().equals("1")){
-                            ishairService.add(items-1);
-                            Log.e("PostionID",position+"");
-                            Log.e("PostionID",servicesList.get(position-1).getBdb_name()+"");
-                            Log.e("PostionID",servicesList.get(position-1).getBdb_is_fixed_price()+"");
+                        if (position != 0 && servicesList.get(position - 1).getBdb_is_fixed_price().equals("1")) {
+                            ishairService.add(items - 1);
+                            Log.e("PostionID", position + "");
+                            Log.e("PostionID", servicesList.get(position - 1).getBdb_name() + "");
+                            Log.e("PostionID", servicesList.get(position - 1).getBdb_is_fixed_price() + "");
                         }
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -283,13 +370,35 @@ public class GroupReservationFragment extends Fragment {
 //
 
 
-
-                client_name.setText(sh.getString("bdb_name",""));
-                phone_number.setText(sh.getString("bdb_mobile",""));
-
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,null,null,servicesForClientGroups,"1"));
+                client_name.setText(sh.getString("bdb_name", ""));
+                phone_number.setText(sh.getString("bdb_mobile", ""));
+//                    delete.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//
+//                        }
+//                    });
+                clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
 
                 bookme.addView(layout2);
+
+
+            }else {
+
+                    //----------------- remove add me -----------------
+                    bookme.removeView(mylayout);
+                    for (int i=0;i<clientsViewData.size();i++){
+                        if (clientsViewData.get(i).getId().equals(myid)){
+                            clientsViewData.remove(i);
+                            add_me.setText("Add Me");
+                        }
+                    }
+//                        clientsViewData.remove(ic-1);
+                    Log.e("clientsViewData",clientsViewData.size()+"");
+                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
+
+
+                }
             }
         });
 
