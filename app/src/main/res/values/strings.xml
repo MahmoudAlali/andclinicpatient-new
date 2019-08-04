@@ -128,6 +128,7 @@
     <!--Service fragment-->
     <string name="bride">bride</string>
     <string name="groupReservation">Group Reservation</string>
+    <string name="group_Reservation_another">Reservation for others</string>
     <string name="Hairdressing">Hairdressing</string>
     <string name="Haircut">Hair cut</string>
     <string name="makeup">makeup</string>
@@ -163,6 +164,7 @@
     <string name="bill">My Bill</string>
     <string name="ServiceNamebill">Service Name</string>
     <string name="servicePrice">Service Price</string>
+    <string name="date">Date</string>
     <string name="ServiceTime">Service Time</string>
 
     <!--Map Fragment-->

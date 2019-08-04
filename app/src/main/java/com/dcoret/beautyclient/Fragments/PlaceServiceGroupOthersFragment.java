@@ -17,7 +17,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +42,7 @@ import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
-public class PlaceServiceGroupFragment extends Fragment {
+public class PlaceServiceGroupOthersFragment extends Fragment {
     LinearLayout  service_hair;
     Fragment fragment;
     FragmentManager fm;
@@ -68,7 +67,7 @@ public class PlaceServiceGroupFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_place_service_group_frag, container, false);
+        View view = inflater.inflate(R.layout.activity_place_service_group_others_frag, container, false);
         service_hair = view.findViewById(R.id.service_hair);
 
 
@@ -377,7 +376,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                 }else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
-                    fragment = new GroupReservationFragment();
+                    fragment = new GroupReservationOthersFragment();
                     fm = getActivity().getFragmentManager();
                     fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment, fragment);
@@ -431,7 +430,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                                    maxPrice= Max.getText().toString();
                                    minPrice= Min.getText().toString();
                                     priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
-                                    APICall.filterSortAlgorithm(PlaceServiceGroupFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
+                                    APICall.filterSortAlgorithm(PlaceServiceGroupOthersFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
 
                                 }

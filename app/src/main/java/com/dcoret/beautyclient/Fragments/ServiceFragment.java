@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
-    LinearLayout bride_service,service_hair,group_res;
+    LinearLayout bride_service,service_hair,group_res,group_res_another;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
@@ -45,6 +45,7 @@ public class ServiceFragment extends Fragment {
 
         toolbar= view.findViewById(R.id.toolbar);
         group_res= view.findViewById(R.id.group_res);
+        group_res_another=view.findViewById(R.id.group_res_another);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +80,19 @@ public class ServiceFragment extends Fragment {
             }
         });
 
-        //------------------ toolbar icon btn
+        //---------------  reservation for others-----------
+        group_res_another.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new PlaceServiceGroupOthersFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        //------------------ toolbar icon btn ------------
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

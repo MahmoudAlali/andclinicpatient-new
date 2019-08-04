@@ -28,25 +28,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="4"
+            android:weightSum="3"
             android:orientation="horizontal">
-            <LinearLayout
-                android:id="@+id/bride_service"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
-                >
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:weightSum="3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:id="@+id/bride_service"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="5dp"-->
+                <!--android:elevation="16dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:weightSum="3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="vertical">-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -81,6 +81,32 @@
                 android:elevation="16dp"
                 android:padding="5dp">
                 <LinearLayout
+                    android:id="@+id/group_res_another"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:src="@drawable/icons8_join_48"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/group_Reservation_another"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+                <LinearLayout
                     android:id="@+id/bride"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
@@ -99,14 +125,14 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp">
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="5dp"-->
+                <!--android:elevation="16dp"-->
+                <!--android:layout_margin="5dp">-->
+            <!--</LinearLayout>-->
 
 
         </LinearLayout>

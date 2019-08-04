@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:background="@color/end_gray"
+    app:navigationIcon="@string/Backicon"
+    app:popupTheme="@style/AppTheme"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:title=""
+    app:titleMarginStart="@dimen/standard_175"
+    app:titleTextColor="@color/end_gray" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginLeft="@dimen/pf_10dp_space"
+        android:layout_marginRight="@dimen/pf_10dp_space"
+        android:layout_marginBottom="3dp"
+        android:orientation="vertical" >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/pf_10dp_space"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/pf_5dp_space"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/choose_occision"
+                android:layout_marginBottom="@dimen/pf_10dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:background="@drawable/shadow_button"
+                android:text="Choose Occasion"
+
+                />
+<LinearLayout
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/add_client"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"
+        android:background="@drawable/shadow_button_add_site"
+        android:text="Add New Client" />
+
+</LinearLayout>
+
+
+
+        </LinearLayout>
+      <android.support.v4.widget.NestedScrollView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginBottom="@dimen/standard_55">
+          <LinearLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+              <LinearLayout
+                  android:id="@+id/bookme"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  ></LinearLayout>
+              <LinearLayout
+                  android:id="@+id/clients"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  ></LinearLayout>
+          </LinearLayout>
+
+      </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_button"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/pf_5dp_space"
+        android:layout_marginLeft="@dimen/pf_10dp_space"
+        android:layout_marginRight="@dimen/pf_10dp_space"
+        android:background="@drawable/shadow_button_add_site"
+        android:text="Next"
+        android:id="@+id/next"
+        />
+</android.support.design.widget.CoordinatorLayout>

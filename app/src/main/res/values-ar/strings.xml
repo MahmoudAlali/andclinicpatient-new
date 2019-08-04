@@ -107,6 +107,7 @@
     <!--Service fragment-->
     <string name="bride">العروسة</string>
     <string name="groupReservation">حجز جماعي</string>
+    <string name="group_Reservation_another">حجز للغير</string>
     <string name="Hairdressing">تصفيف شعر</string>
     <string name="Haircut">قص شعر</string>
     <string name="makeup">مكياج</string>
@@ -142,6 +143,7 @@
     <string name="bill">فاتورتي</string>
     <string name="ServiceNamebill">اسم الخدمة</string>
     <string name="servicePrice">سعر الخدمة</string>
+    <string name="date">التاريخ</string>
     <string name="ServiceTime">توقيت الخدمة</string>
     <!--Map Fragment-->
     <string name="searchaddressandregion">ابحثي عن عنوان او منطقة</string>

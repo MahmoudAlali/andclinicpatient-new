@@ -54,10 +54,13 @@ import com.dcoret.beautyclient.DataClass.ServiceItems;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationOtherResultFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationResultFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
@@ -5165,7 +5168,9 @@ public class APICall {
                             String   images=jsonObject.getString("images");
 
                             GroupReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,images));
+                            GroupReservationOthersFragment.servicesList.add(new ServiceItems(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,images));
                             GroupReservationFragment.serviceNameList.add(bdb_name);
+                            GroupReservationOthersFragment.serviceNameList.add(bdb_name);
 
                         }
 
@@ -5204,7 +5209,6 @@ public class APICall {
                     "\t{\"num\":35,\"value1\":"+PlaceServiceGroupFragment.lng+",\"value2\":0},";
 
 
-
             latlng="\t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
                     "\t{\"num\":35,\"value1\":39.2147311,\"value2\":0},";
 //            Log.e("LatLong",latlng);
@@ -5213,20 +5217,20 @@ public class APICall {
     public static String getPrice(){
             String price="";
             if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==1) {
-                price = "{\"num\":32,\"value1\":" + PlaceServiceGroupFragment.maxPrice + ",\"value2\":"+ PlaceServiceGroupFragment.minPrice+"},";
+                price = "{\"num\":32,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
                 price=price+"{\"num\":9,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
 
             }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==2) {
 
-                price = "{\"num\":1,\"value1\":" + PlaceServiceGroupFragment.maxPrice + ",\"value2\":"+ PlaceServiceGroupFragment.minPrice+"},";
+                price = "{\"num\":1,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
                 price=price+"{\"num\":8,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
 
             }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==3) {
-                price = "{\"num\":30,\"value1\":" + PlaceServiceGroupFragment.maxPrice + ",\"value2\":"+ PlaceServiceGroupFragment.minPrice+"},";
+                price = "{\"num\":30,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
                 price=price+"{\"num\":10,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
 
             }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==4) {
-                price = "{\"num\":31,\"value1\":" + PlaceServiceGroupFragment.maxPrice + ",\"value2\":"+ PlaceServiceGroupFragment.minPrice+"},";
+                price = "{\"num\":31,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
                 price=price+"{\"num\":11,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
 
             }
@@ -5429,27 +5433,33 @@ public class APICall {
                         JSONArray completeSolutions1 = d.getJSONArray("CompleteSolutions");
                         for (int l=0;l<completeSolutions1.length();l++) {
                             ArrayList<SearchBookingDataSTR> searchBookingDataSTRS=new ArrayList<>();
-                            JSONArray completeSolutions = completeSolutions1.getJSONArray(l);
+                            JSONObject completeSolutions = completeSolutions1.getJSONObject(l);
 
-                            salons.add(completeSolutions.getJSONObject(0).getString("salon_name"));
-                            try {
-                                Log.e("SalonAdd",completeSolutions.getJSONObject(0).getString("salon_name")+"");
-                                Log.e("completeSolutions1",completeSolutions1.length()+"");
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
+                            //------------------ not used until now-------------
+                            String total_price=completeSolutions.getString("total_price");
 
-                            for (int i = 0; i < completeSolutions.length(); i++) {
-                                JSONObject data = completeSolutions.getJSONObject(i);
+                            salons.add(completeSolutions.getJSONArray("solution").getJSONObject(0).getString("salon_name"));
+//                            try {
+//                                Log.e("SalonAdd",completeSolutions.getJSONObject(0).getString("salon_name")+"");
+//                                Log.e("completeSolutions1",completeSolutions1.length()+"");
+//                            }catch (Exception e){
+//                                e.printStackTrace();
+//                            }
+
+                                    JSONArray sol=completeSolutions.getJSONArray("solution");
+
+                                    for (int i = 0; i < sol.length(); i++) {
+                                JSONObject data = sol.getJSONObject(i);
                                 String salon_id = data.getString("salon_id");
-//                                String salon_name = data.getString("salon_name");
+                                String salonName = data.getString("salon_name");
                                 JSONObject client_response = data.getJSONObject("client_response");
                                 String is_current_user = client_response.getString("is_current_user");
+                                //-----------phone number=----------
                                 String salon_name = client_response.getString("client_phone");
                                 String client_id = client_response.getString("client_id");
                                 String client_name = client_response.getString("client_name");
                                 JSONArray solutions = client_response.getJSONArray("solutions");
-                                ArrayList<SerchGroupBookingData.Solutions> solutionsArrayList = new ArrayList<>();
+//                                ArrayList<SerchGroupBookingData.Solutions> solutionsArrayList = new ArrayList<>();
 
                                 ArrayList<SearchBookingDataSTR.Solution> solutionsArr=new ArrayList<>();
                                 for (int k = 0; k < solutions.length(); k++) {
@@ -5459,6 +5469,7 @@ public class APICall {
                                     String ser_name = data1.getString("ser_name");
                                     String ser_name_ar = data1.getString("ser_name_ar");
                                     String emp_id = data1.getString("emp_id");
+                                    String emp_name = data1.getString("emp_name");
                                     String sup_id = data1.getString("sup_id");
                                     String ser_sup_id = data1.getString("ser_sup_id");
                                     String from = data1.getString("from");
@@ -5479,16 +5490,16 @@ public class APICall {
 
 
 //                                    solutionsArrayList.add(new SerchGroupBookingData.Solutions(ser_id, emp_id, sup_id, ser_sup_id, from, to, old_from, old_to, new_from, new_to, client_name, ser_name, ser_name_ar,is_current_user));
-                                    solutionsArr.add(new SearchBookingDataSTR.Solution(ser_id,ser_name,ser_name_ar,emp_id,sup_id,ser_sup_id,from,to,bdb_ser_home_price,bdb_ser_hall_price,bdb_hotel_price,bdb_ser_salon_price,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel));
+                                    solutionsArr.add(new SearchBookingDataSTR.Solution(ser_id,ser_name,ser_name_ar,emp_id,emp_name,sup_id,ser_sup_id,from,to,bdb_ser_home_price,bdb_ser_hall_price,bdb_hotel_price,bdb_ser_salon_price,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel));
                                 }
 
 //                                client_responseArrayList.add(new SerchGroupBookingData.ClientResponse(client_name, solutionsArrayList));
 //
 //                            }
 
-                                GroupReservationFragment.solutionsCounts.add(new SerchGroupBookingData.SolutionsCount(salon_id, salon_name, new SerchGroupBookingData.ClientResponse(client_name, solutionsArrayList)));
+//                                GroupReservationFragment.solutionsCounts.add(new SerchGroupBookingData.SolutionsCount(salon_id, salon_name, new SerchGroupBookingData.ClientResponse(client_name, solutionsArrayList)));
 
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,client_name,client_name,is_current_user,client_id,solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,client_name,client_name,is_current_user,client_id,solutionsArr));
                                stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
                             }
@@ -5541,6 +5552,238 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
+
+    public  static  void  searchGroupBookingOther( final Context context){
+        salons.clear();
+        stringArrayListMap.clear();
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                pd=new ProgressDialog(context);
+//                ReservationFragment.pullToRefresh.setRefreshing(true);
+                pd.show();
+            }
+        });
+
+        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+        String filter=GroupFilterBookingforOther();
+        String ff=" {\"Filter\":\t[\n" +
+                "    \t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
+                "    \t{\"num\":35,\"value1\":39.2147311,\"value2\":0},{\"num\":1,\"value1\":0,\"value2\":1000},{\"num\":8,\"value1\":1,\"value2\":0}\t],\n" +
+                "    \"date\":\"2019-7-1\",\t\t\"clients\":[\t{\"client_name\":\"basma\",\"client_phone\":\"0500112233\",\"is_current_user\":1,\"services\":[\n" +
+                "    {\"ser_id\":2,\"ser_time\":60}\n" +
+                "    ,{\"ser_id\":1,\"ser_time\":60}\n" +
+                "    ]},\t{\"client_name\":\"c1\",\"client_phone\":\"11221\",\"is_current_user\":0,\"services\":[\n" +
+                "    {\"ser_id\":2,\"ser_time\":60}\n" +
+                "    ]}]}";
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+//                        searchBookingDataSTRS.clear();
+//
+// ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    final JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    final String message=j.getString("message");
+                    if (success.equals("true")) {
+                        JSONObject d = j.getJSONObject("data");
+
+                        JSONArray completeSolutions1 = d.getJSONArray("CompleteSolutions");
+                        for (int l=0;l<completeSolutions1.length();l++) {
+                            ArrayList<SearchBookingDataSTR> searchBookingDataSTRS=new ArrayList<>();
+                            JSONObject completeSolutions = completeSolutions1.getJSONObject(l);
+
+                            //------------------ not used until now-------------
+                            String total_price=completeSolutions.getString("total_price");
+
+                            salons.add(completeSolutions.getJSONArray("solution").getJSONObject(0).getString("salon_name"));
+//                            try {
+//                                Log.e("SalonAdd",completeSolutions.getJSONObject(0).getString("salon_name")+"");
+//                                Log.e("completeSolutions1",completeSolutions1.length()+"");
+//                            }catch (Exception e){
+//                                e.printStackTrace();
+//                            }
+
+                            JSONArray sol=completeSolutions.getJSONArray("solution");
+
+                            for (int i = 0; i < sol.length(); i++) {
+                                JSONObject data = sol.getJSONObject(i);
+                                String salon_id = data.getString("salon_id");
+                                String salonName = data.getString("salon_name");
+                                JSONObject client_response = data.getJSONObject("client_response");
+                                String is_current_user = client_response.getString("is_current_user");
+                                //-----------phone number=----------
+                                String salon_name = client_response.getString("client_phone");
+                                String client_id = client_response.getString("client_id");
+                                String client_name = client_response.getString("client_name");
+                                JSONArray solutions = client_response.getJSONArray("solutions");
+//                                ArrayList<SerchGroupBookingData.Solutions> solutionsArrayList = new ArrayList<>();
+
+                                ArrayList<SearchBookingDataSTR.Solution> solutionsArr=new ArrayList<>();
+                                for (int k = 0; k < solutions.length(); k++) {
+                                    JSONObject data1 = solutions.getJSONObject(k);
+                                    Log.e("data1",data1+"");
+                                    String ser_id = data1.getString("ser_id");
+                                    String ser_name = data1.getString("ser_name");
+                                    String ser_name_ar = data1.getString("ser_name_ar");
+                                    String emp_id = data1.getString("emp_id");
+                                    String emp_name = data1.getString("emp_name");
+                                    String sup_id = data1.getString("sup_id");
+                                    String ser_sup_id = data1.getString("ser_sup_id");
+                                    String from = data1.getString("from");
+                                    String to = data1.getString("to");
+//                                    String old_from = data1.getString("old_from");
+//                                    String old_to = data1.getString("old_to");
+//                                    String new_from = data1.getString("new_from");
+//                                    String new_to = data1.getString("new_to");
+                                    String client_name1 = data1.getString("client_name");
+                                    String bdb_ser_home_price = data1.getString("bdb_ser_home_price");
+                                    String bdb_ser_hall_price = data1.getString("bdb_ser_hall_price");
+                                    String bdb_hotel_price = data1.getString("bdb_hotel_price");
+                                    String bdb_ser_salon_price = data1.getString("bdb_ser_salon_price");
+                                    String bdb_ser_home = data1.getString("bdb_ser_home");
+                                    String bdb_ser_salon = data1.getString("bdb_ser_salon");
+                                    String bdb_ser_hall = data1.getString("bdb_ser_salon");
+                                    String bdb_hotel = data1.getString("bdb_hotel");
+
+
+//                                    solutionsArrayList.add(new SerchGroupBookingData.Solutions(ser_id, emp_id, sup_id, ser_sup_id, from, to, old_from, old_to, new_from, new_to, client_name, ser_name, ser_name_ar,is_current_user));
+                                    solutionsArr.add(new SearchBookingDataSTR.Solution(ser_id,ser_name,ser_name_ar,emp_id,emp_name,sup_id,ser_sup_id,from,to,bdb_ser_home_price,bdb_ser_hall_price,bdb_hotel_price,bdb_ser_salon_price,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel));
+                                }
+
+//                                client_responseArrayList.add(new SerchGroupBookingData.ClientResponse(client_name, solutionsArrayList));
+//
+//                            }
+
+//                                GroupReservationFragment.solutionsCounts.add(new SerchGroupBookingData.SolutionsCount(salon_id, salon_name, new SerchGroupBookingData.ClientResponse(client_name, solutionsArrayList)));
+
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,client_name,client_name,is_current_user,client_id,solutionsArr));
+                                stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
+
+                            }
+                            GroupReservationOthersFragment.serchGroupBookingData.add(new SerchGroupBookingData(GroupReservationOthersFragment.solutionsCounts));
+
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+//                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
+                                GroupReservationOtherResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+//                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
+                                GroupReservationOtherResultFragment.listView.setAdapter(GroupReservationOtherResultFragment.listAdapter);
+                                GroupReservationOtherResultFragment.listAdapter.notifyDataSetChanged();
+                                Log.e("SalonSize",salons.size()+"");
+//                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
+
+                            }
+                        });
+                    }else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            Log.e("jeMessage",je.getMessage());
+                        }
+                    });
+
+                }
+
+            }
+
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
+
+
     //---- get supplier name for any service------------
     public  static  void  getSupName(final TextView emp_name , final String bdb_sup_id, final Context context){
 
@@ -6029,6 +6272,114 @@ public class APICall {
 
 
 
+
+
+
+
+
+
+
+    public static String getlatlngforOther(){
+        String latlng;
+        latlng="\t{\"num\":34,\"value1\":"+PlaceServiceGroupFragment.lat+",\"value2\":0},\n" +
+                "\t{\"num\":35,\"value1\":"+PlaceServiceGroupFragment.lng+",\"value2\":0},";
+
+
+        latlng="\t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
+                "\t{\"num\":35,\"value1\":39.2147311,\"value2\":0},";
+//            Log.e("LatLong",latlng);
+        return latlng;
+    }
+    public static String getPriceforOther(){
+        String price="";
+        if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
+            price = "{\"num\":32,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
+            price=price+"{\"num\":9,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
+
+        }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
+
+            price = "{\"num\":1,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
+            price=price+"{\"num\":8,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
+
+        }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
+            price = "{\"num\":30,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
+            price=price+"{\"num\":10,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
+
+        }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==4) {
+            price = "{\"num\":31,\"value1\":" + PlaceServiceGroupFragment.minPrice + ",\"value2\":"+ PlaceServiceGroupFragment.maxPrice+"},";
+            price=price+"{\"num\":11,\"value1\":"+PlaceServiceGroupFragment.placeId+",\"value2\":0}";
+
+        }
+        return price;
+    }
+    public static String getPricePlaceforOther(){
+        String price;
+        price="{\"num\":11,\"value1\":"+PlaceServiceGroupOthersFragment.placeId+",\"value2\":0}";
+//        Log.e("price",price);
+        return price;
+    }
+    public static  String getDateforOther(){
+        String date;
+        date="\"date\":\""+PlaceServiceGroupOthersFragment.dateFilter+"\",";
+//        Log.e("Date",date);
+        return date;
+    }
+    public static String getClientsforOther(){
+        String clients = null;
+        try {
+
+            for (int i = 0; i< GroupReservationOthersFragment.clientsViewData.size(); i++) {
+                if (i == 0) {
+                    clients = "\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()+",\"services\":[\n";
+                } else {
+//                    clients = clients + "\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
+                    clients = clients+"\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()+",\"services\":[\n";
+
+                }
+                Log.e("SIZE",""+GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size());
+
+                for (int j = 0; j < GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size(); j++) {
+//                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                    if (j == 0) {
+                        clients = clients + "{\"ser_id\":" +GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId() + ",\"ser_time\":60}\n";
+                    } else {
+                        clients = clients + ",{\"ser_id\":" + GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId()+ ",\"ser_time\":60}\n";
+                    }
+                }
+                if (GroupReservationOthersFragment.clientsViewData.size()==1){
+                    clients=clients+"]}";
+                }else if (i==GroupReservationOthersFragment.clientsViewData.size()-1){
+                    clients=clients+"]}";
+
+                }else {
+                    clients=clients+"]},";
+
+                }
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        clients=clients+"]}";
+
+//            Log.e("clients",clients);
+        return clients;
+    }
+    public static String GroupFilterBookingforOther(){
+        String filter;
+
+        filter="{\"Filter\":\t[\n" +
+                getlatlngforOther()+
+                getPriceforOther()+
+//                    getPricePlace()+
+                "\t],\n" +
+                getDateforOther() +
+                "\t\t\"clients\":["+
+                getClientsforOther();
+
+        Log.e("Filter",filter);
+        return filter;
+    }
 
 
 
