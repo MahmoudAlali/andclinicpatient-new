@@ -67,67 +67,69 @@
     </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/frag"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="7">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:layout_weight="1"
-                android:id="@+id/pullToRefresh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/review"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1" />
-            </android.support.v4.widget.SwipeRefreshLayout>
+            <!--<android.support.v4.widget.SwipeRefreshLayout-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/pullToRefresh"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_weight="6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical">
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/review"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_weight="1" />-->
+            <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layoutDirection="rtl"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+            <!--<LinearLayout-->
+                <!--android:layout_weight="6"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="bottom"-->
+                <!--android:orientation="vertical">-->
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_button"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow_place_layout"
-                        android:text="@string/Bookallcourierservices"
-                        android:textColor="@color/blue"
-                        />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:layoutDirection="rtl"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:weightSum="2">-->
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_button"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow_button_spinner"
-                        android:text="@string/Deleteallcourierservices"
-                        android:textColor="@color/blue"
-                        />
-                </LinearLayout>
+                    <!--<Button-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/high_button"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@drawable/shadow_place_layout"-->
+                        <!--android:text="@string/Bookallcourierservices"-->
+                        <!--android:textColor="@color/blue"-->
+                        <!--/>-->
+
+                    <!--<Button-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/high_button"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@drawable/shadow_button_spinner"-->
+                        <!--android:text="@string/Deleteallcourierservices"-->
+                        <!--android:textColor="@color/blue"-->
+                        <!--/>-->
+                <!--</LinearLayout>-->
 
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
         </LinearLayout>
 

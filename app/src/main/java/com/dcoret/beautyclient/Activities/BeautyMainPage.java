@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
+import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
@@ -440,7 +441,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             return true;
                         case R.id.service_bag:
                             FRAGMENT_NAME="";
-                            fragment = new BagReservationFragment();
+                            fragment = new BagReservationTestFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, fragment);

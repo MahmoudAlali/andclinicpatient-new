@@ -29,7 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
+public class
+CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<SerchGroupBookingData> expandableListTitle;
     private List<SerchGroupBookingData> expandableListDetail1;
@@ -45,26 +46,8 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         this.stringArrayListHashMap = stringArrayListHashMap;
     }
 
-    public CustomExpandableListAdapter(Context context, List<SerchGroupBookingData> expandableListTitle,
-                                       List<SerchGroupBookingData> expandableListDetail1){
-        this.context = context;
-        this.expandableListTitle = expandableListTitle;
-        this.expandableListDetail1 = expandableListDetail1;
-    }
-    public CustomExpandableListAdapter(Context context, ArrayList<String> salons
-                                     , ArrayList<SearchBookingDataSTR> searchBookingDataSTRS){
-        this.context = context;
-        this.salons = salons;
-        this.searchBookingDataSTRS = searchBookingDataSTRS;
-    }
-
     @Override
     public int getGroupCount() {
-
-//        for (int i=0;i<salons.size();i++){
-//            isopen.add(false);
-//        }
-
         return salons.size();
     }
 
@@ -75,20 +58,13 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-
-
-
-//        Log.e("SalonSize",salons.size()+"");
         return salons.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-//        Log.e("serchSTR",searchBookingDataSTRS.size()+"");
-
         return stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition);
     }
-
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
@@ -211,19 +187,19 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
                        }
                    }catch (Exception e){
                        e.printStackTrace();
-                       if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
-
-                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
+//                       if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
+//                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+//
+//                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
                            priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
-
-                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
-
-                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==4) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
-
-                       }
+//
+//                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
+//                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+//
+//                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==4) {
+//                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+//
+//                       }
 
 
                    }
@@ -234,19 +210,11 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 //                    day.setText(PlaceServiceGroupFragment.dateFilter);
                     time.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom());
                     service_layout.addView(layout2);
-
-//            notifyDataSetChanged();
                 }
-
-
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
-//        TextView expandedListTextView = (TextView) convertView
-//                .findViewById(R.id.expandedListItem);
-//        expandedListTextView.setText(expandedListText);
         return convertView;
     }
 

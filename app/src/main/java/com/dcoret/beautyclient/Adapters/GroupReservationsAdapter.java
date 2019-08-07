@@ -86,27 +86,6 @@ public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
-
-//        ((Item)holder).client_name.setText(serchGroupBookingData.get(position).getCompleteSolutions().get());
-//        ((Item)holder).salon_name.setText(serchGroupBookingData.get(position).getSalon_name());
-//        Log.e("emmm",serchGroupBookingData.get(position).getClient_response().getSolutions().size()+"");
-//        for (int i=0;i<serchGroupBookingData.get(position).getClient_response().getSolutions().size();i++){
-//            View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.service_layout, ((Item)holder).service_layout, false);
-//        TextView service_name=layout2.findViewById(R.id.service_name);
-//        TextView employee_name=layout2.findViewById(R.id.employee_name);
-//        TextView day=layout2.findViewById(R.id.day);
-//        TextView time=layout2.findViewById(R.id.time);
-//
-//            service_name.setText(serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getSer_name());
-//            APICall.getSupName(employee_name,serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getSup_id(),BeautyMainPage.context);
-////            employee_name.setText(reservationClients.get(position).getReservationClientsEmployees().get(i).getEmployeeName());
-//            day.setText(PlaceServiceGroupFragment.dateFilter);
-//            time.setText(serchGroupBookingData.get(position).getClient_response().getSolutions().get(i).getFrom());
-//            ((Item)holder).service_layout.addView(layout2);
-
-//            notifyDataSetChanged();
-//        }
-
     }
 
     @Override
@@ -135,9 +114,6 @@ public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.
                 case R.id.reserv_btn:
                     listener.resrve(this.getLayoutPosition());
                     break;
-//                case R.id.more_btn:
-//                    listener.more(this.getLayoutPosition());
-//                    break;
                 default:
                     break;
             }

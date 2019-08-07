@@ -18,6 +18,7 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.ReservationDetails;
 import com.dcoret.beautyclient.DataClass.DataReservation;
 import com.dcoret.beautyclient.DataClass.DataService;
+import com.dcoret.beautyclient.DataClass.GetAllCart;
 import com.dcoret.beautyclient.DataClass.GetCart;
 import com.dcoret.beautyclient.R;
 
@@ -28,17 +29,18 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     Context context;
     String items[];
-    ArrayList<GetCart> getCarts;
+//    ArrayList<GetCart> getCarts;
     RecyclerView.ViewHolder holder;
+    ArrayList<GetAllCart> getAllCarts;
 
-    public BagReservationAdapter(Context context, String items[]){
+    public BagReservationAdapter(Context context,ArrayList<GetAllCart> getAllCarts){
         this.context=context;
-        this.items=items;
+        this.getAllCarts=getAllCarts;
     }
-    public BagReservationAdapter(Context context, ArrayList<GetCart> getCarts){
-        this.context=context;
-        this.getCarts=getCarts;
-    }
+//    public BagReservationAdapter(Context context, ArrayList<GetCart> getCarts){
+//        this.context=context;
+//        this.getCarts=getCarts;
+//    }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,14 +52,14 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        ((Item)holder).service_name.setText(getCarts.get(position).getBdb_service_name_en());
+        ((Item)holder).service_name.setText(getAllCarts.get(position).getBdb_service_name_en());
 //        Timer timer=new Timer();
         new CountDownTimer(300000, 3000) {
 
             public void onTick(long millisUntilFinished) {
               int minuts= (int)millisUntilFinished / (60*1000);
               String m=minuts+"";
-                ((Item)holder).remainingTime.setText(context.getResources().getText(R.string.reminingtime)+m+"minutes");
+                ((Item)holder).remainingTime.setText(context.getResources().getText(R.string.reminingtime)+" "+m+" minutes");
             }
 
             public void onFinish() {
@@ -65,20 +67,20 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         }.start();
 
-        ((Item)holder).mDate.setText(getCarts.get(position).getBdb_start_date());
+        ((Item)holder).mDate.setText(getAllCarts.get(position).getBdb_start_date());
 
-        ((Item)holder).mTime.setText(getCarts.get(position).getBdb_start_time());
-        ((Item)holder).provider_name.setText(getCarts.get(position).getSupplier_name());
+        ((Item)holder).mTime.setText(getAllCarts.get(position).getBdb_start_time());
+        ((Item)holder).provider_name.setText(getAllCarts.get(position).getSupplier_name());
         ((Item)holder).reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.moveCartToBooking(getCarts.get(position).getBdb_id(),position,BeautyMainPage.context);
+                APICall.moveCartToBooking(getAllCarts.get(position).getBdb_id(),"0",position,BeautyMainPage.context);
             }
         });
         ((Item)holder).delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.deletFromCart(getCarts.get(position).getBdb_id(),position,BeautyMainPage.context);
+                APICall.deletFromCart(getAllCarts.get(position).getBdb_id(),position,BeautyMainPage.context);
             }
         });
 //        ((Item)holder).service_place.setText(getCarts.get(position).get());
@@ -87,7 +89,7 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return getCarts.size();
+        return getAllCarts.size();
     }
 
     public class Item extends RecyclerView.ViewHolder  {
@@ -112,5 +114,7 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     }
+
+
 
 }

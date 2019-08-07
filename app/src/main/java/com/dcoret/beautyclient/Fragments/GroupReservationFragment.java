@@ -43,7 +43,7 @@ import com.dcoret.beautyclient.R;
 import java.util.ArrayList;
 
 public class GroupReservationFragment extends Fragment {
-//    LinearLayout services_tabs;
+
     Button add_client, add_me,choose_occision;
     LinearLayout clients,bookme;
     static int items=0;
@@ -55,25 +55,19 @@ public class GroupReservationFragment extends Fragment {
     public static ArrayList<String> serviceNameList=new ArrayList<>();
     public static ArrayAdapter adapter;
 
-
-
-
-
+    //-----------not used --------------
     public static ArrayList<SerchGroupBookingData> serchGroupBookingData = new ArrayList<>();
     public static ArrayList<SerchGroupBookingData.SolutionsCount> solutionsCounts = new ArrayList<>();
-
-    public static ArrayList<String> salons=new ArrayList<>();
-
 
     //------------ save view client--------
     public static ArrayList<ClientsViewData> clientsViewData=new ArrayList<>();
     public static ArrayList<Integer> ishairService=new ArrayList();
-//    public static ArrayList<Integer> postions=new ArrayList();
 
 
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.activity_group_reservation_frag, container, false);
@@ -81,12 +75,13 @@ public class GroupReservationFragment extends Fragment {
 
         BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
 
+        //---------- find views------------------
         add_client=view.findViewById(R.id.add_client);
         add_me=view.findViewById(R.id.add_me);
         choose_occision=view.findViewById(R.id.choose_occision);
         clients=view.findViewById(R.id.clients);
         bookme=view.findViewById(R.id.bookme);
-
+        //----------------------------------------
         servicesList.clear();
         serviceNameList.clear();
         serviceNameList.add("Choose Service");
@@ -114,13 +109,18 @@ public class GroupReservationFragment extends Fragment {
                 ic="client"+items;
                 final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.client_layout, clients, false);
 
+                //---------- find views------------------
                 ImageView delete=layout2.findViewById(R.id.delete);
                 EditText client_name=layout2.findViewById(R.id.client_name);
                 EditText phone_number=layout2.findViewById(R.id.phone_number);
                 final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
+                //------------------------------------------------
 //                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
 
+
+
+                //----------- adapter add services----------
                 adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
 
                     public View getView(int position, View convertView,ViewGroup parent) {
@@ -147,9 +147,12 @@ public class GroupReservationFragment extends Fragment {
                 };
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
+                //--------------------------------------------
 
+
+
+                //----------------------------- click add service0---------------------------
                 final ArrayList<ServicesIDS> servicesForClientGroups=new ArrayList<>();
-
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -184,15 +187,8 @@ public class GroupReservationFragment extends Fragment {
 
                          adding_name_service.addView(view1);
 
-
                          servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString(),vc));
-
-
-
                      }
-//                     if (position!=0){
-//                         postions.add(position-1);
-//                     }
                         if (position!=0 && servicesList.get(position-1).getBdb_is_fixed_price().equals("1")){
                             ishairService.add(items-1);
                             Log.e("PostionID",position+"");
@@ -205,11 +201,15 @@ public class GroupReservationFragment extends Fragment {
 
                     }
                 });
+
+
+                //------------------ adapter for spinner age_range------
                 Spinner age_range=layout2.findViewById(R.id.age_range);
                 ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 age_range.setAdapter(adapter_age_range);
 
+                //------------------ adapter for spinner client status---------
                 Spinner client_status=layout2.findViewById(R.id.client_status);
                 ArrayAdapter adapter_client_status=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.client_status,android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -218,6 +218,7 @@ public class GroupReservationFragment extends Fragment {
 
                 clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
 
+               //------------------ delete click btn----------------
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -240,11 +241,11 @@ public class GroupReservationFragment extends Fragment {
 
 
 
+
+        //---------------- add me click btn-------------------
         add_me.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (add_me.getText().equals("Add Me")){
                     add_me.setText("Remove Me");
                     items++;
@@ -267,14 +268,13 @@ public class GroupReservationFragment extends Fragment {
                 }
 
 
+                //--------- find views --------------------
                 EditText client_name = layout2.findViewById(R.id.client_name);
                 EditText phone_number = layout2.findViewById(R.id.phone_num);
                 final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
-//                    ImageView delete=layout2.findViewById(R.id.delete);
 
-//                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
-
+                //------------------ adapter for add services----------------------
                 adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
 
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -303,7 +303,6 @@ public class GroupReservationFragment extends Fragment {
                 add_service.setAdapter(adapter);
 
                 final ArrayList<ServicesIDS> servicesForClientGroups = new ArrayList<>();
-
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -358,31 +357,13 @@ public class GroupReservationFragment extends Fragment {
 
                     }
                 });
-//                Spinner age_range=layout2.findViewById(R.id.age_range);
-//                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,android.R.layout.simple_spinner_item);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                age_range.setAdapter(adapter_age_range);
-//
-//                Spinner client_status=layout2.findViewById(R.id.client_status);
-//                ArrayAdapter adapter_client_status=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.client_status,android.R.layout.simple_spinner_item);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                client_status.setAdapter(adapter_client_status);
-//
 
 
                 client_name.setText(sh.getString("bdb_name", ""));
                 phone_number.setText(sh.getString("bdb_mobile", ""));
-//                    delete.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//
-//                        }
-//                    });
+
                 clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
-
                 bookme.addView(layout2);
-
-
             }else {
 
                     //----------------- remove add me -----------------
@@ -394,10 +375,8 @@ public class GroupReservationFragment extends Fragment {
                         }
                     }
 //                        clientsViewData.remove(ic-1);
-                    Log.e("clientsViewData",clientsViewData.size()+"");
-                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
-
-
+//                    Log.e("clientsViewData",clientsViewData.size()+"");
+//                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
                 }
             }
         });
@@ -409,7 +388,7 @@ public class GroupReservationFragment extends Fragment {
 
 
 
-
+        //------------------click next btn----------------------
         next=view.findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -431,11 +410,8 @@ public class GroupReservationFragment extends Fragment {
                         APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add yourself to complete Process");
                     }else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size()==1){
                         APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add another client with you");
-
                     }else {
-
                     // =------------is hair service go to anthor fragment----------
-
                     if (ishairService.size() > 0) {
                         fragment = new HairSpecificationsFragment();
                         fm = getFragmentManager();
@@ -451,18 +427,11 @@ public class GroupReservationFragment extends Fragment {
                     }
                     }
                 }
-
-//            APICall.getlatlng();
-//            APICall.getPrice();
-//            APICall.getDate();
-//            APICall.getClients();
+            //----- call group filter for booking -------------
             APICall.GroupFilterBooking();
 
             }
         });
-
-
-
         return view;
     }
 }

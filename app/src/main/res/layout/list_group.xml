@@ -15,7 +15,7 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
-    <ImageView
+    <TextView
         android:layout_weight="4"
         android:id="@+id/book"
         android:layout_width="match_parent"
@@ -23,6 +23,7 @@
         android:textColor="@android:color/black"
         android:src="@drawable/ic_add_black_24dp"
         android:gravity="center"
+        android:text="Reserve"
 android:padding="7dp"
         />
 </LinearLayout>

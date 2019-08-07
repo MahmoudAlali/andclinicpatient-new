@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
-    LinearLayout bride_service,service_hair,group_res,group_res_another;
+    LinearLayout bride_service,multiple_individual_booking,service_hair,group_res,group_res_another;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
@@ -92,6 +92,20 @@ public class ServiceFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+        //-------------Multiple individual booking
+        multiple_individual_booking=view.findViewById(R.id.individual_res_multi);
+        multiple_individual_booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new PlaceServiceGroupOthersFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
         //------------------ toolbar icon btn ------------
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

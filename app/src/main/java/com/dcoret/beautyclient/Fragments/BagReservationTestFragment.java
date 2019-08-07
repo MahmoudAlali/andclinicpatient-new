@@ -1,6 +1,7 @@
 package com.dcoret.beautyclient.Fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -12,21 +13,22 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.TabOne;
+import com.dcoret.beautyclient.Activities.TabOneBag;
+import com.dcoret.beautyclient.Activities.TabSingleBag;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
 import com.dcoret.beautyclient.DataClass.AddToCart;
 import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.DataClass.GetCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
-public class BagReservationFragment extends Fragment {
+public class BagReservationTestFragment extends Fragment {
 
     RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
@@ -38,25 +40,31 @@ public class BagReservationFragment extends Fragment {
     public static ArrayList<DataReservation> reservations=new ArrayList<>();
 
 
+
+    Fragment fragment;
+    android.app.FragmentManager fm;
+    FragmentTransaction fragmentTransaction;
+
+
     Toolbar toolbar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.activity_bag_reservation_frag, container, false);
+        View view= inflater.inflate(R.layout.activity_bag_reservation_test_frag, container, false);
 
         findViews(view);
-
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getCarts.clear();
-                APICall.getCart(BeautyMainPage.context);
-            }
-        });
-        if (isFirstOpen){
-            getCarts.clear();
-            APICall.getCart(BeautyMainPage.context);
-            isFirstOpen=false;
-        }
+//
+//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getCarts.clear();
+//                APICall.getCart(BeautyMainPage.context);
+//            }
+//        });
+//        if (isFirstOpen){
+//            getCarts.clear();
+//            APICall.getCart(BeautyMainPage.context);
+//            isFirstOpen=false;
+//        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,13 +73,25 @@ public class BagReservationFragment extends Fragment {
                 else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
+        APICall.getAllCart(BeautyMainPage.context);
 
+        tabselected(individualReservation,groupReservation,otherResevation);
+        fragment = new TabSingleBag();
+        fm = getFragmentManager();
+        fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.frag, fragment);
+        fragmentTransaction.commit();
 
         //=------------------ tab selected----------------
         individualReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tabselected(individualReservation,groupReservation,otherResevation);
+                fragment = new TabSingleBag();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.frag, fragment);
+                fragmentTransaction.commit();
             }
         });
 
@@ -79,6 +99,11 @@ public class BagReservationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tabselected(groupReservation,individualReservation,otherResevation);
+                fragment = new TabOneBag();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.frag, fragment);
+                fragmentTransaction.commit();
 
             }
         });
@@ -91,9 +116,9 @@ public class BagReservationFragment extends Fragment {
         });
         //--------------------------------------------------------
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        bagReservationAdapter=new BagReservationAdapter(getActivity().getApplicationContext(),APICall.singleBookingList);
-        recyclerView.setAdapter(bagReservationAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+//        bagReservationAdapter=new BagReservationAdapter(getActivity().getApplicationContext(),getCarts);
+//        recyclerView.setAdapter(bagReservationAdapter);
 
 
         return view;
@@ -112,9 +137,9 @@ public class BagReservationFragment extends Fragment {
     }
 
     void findViews(View view){
-        pullToRefresh = view.findViewById(R.id.pullToRefresh);
+//        pullToRefresh = view.findViewById(R.id.pullToRefresh);
         toolbar=view.findViewById(R.id.toolbar);
-        recyclerView=view.findViewById(R.id.review);
+//        recyclerView=view.findViewById(R.id.review);
         individualReservation=view.findViewById(R.id.individualRes);
         groupReservation=view.findViewById(R.id.groupRes);
         otherResevation=view.findViewById(R.id.otherRes);
