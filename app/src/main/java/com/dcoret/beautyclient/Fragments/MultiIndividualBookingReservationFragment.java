@@ -63,11 +63,11 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         final View view= inflater.inflate(R.layout.activity_multi_ind_booking_reservation_frag, container, false);
 
 
-        BeautyMainPage.FRAGMENT_NAME="MultIndvidualBooking";
+        BeautyMainPage.FRAGMENT_NAME="MultiIndividualBookingReservationFragment";
 
         //---------- find views------------------
 //        add_client=view.findViewById(R.id.add_client);
-        add_me=view.findViewById(R.id.add_me);
+//        add_me=view.findViewById(R.id.add_me);
         choose_occision=view.findViewById(R.id.choose_occision);
         clients=view.findViewById(R.id.clients);
         bookme=view.findViewById(R.id.bookme);
@@ -90,154 +90,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         viewcount=0;
         ishairService.clear();
         clientsViewData.clear();
-//        add_client.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                items++;
-//                final String ic;
-//                ic="client"+items;
-//                final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.client_layout, clients, false);
-//
-//                //---------- find views------------------
-//                ImageView delete=layout2.findViewById(R.id.delete);
-//                EditText client_name=layout2.findViewById(R.id.client_name);
-//                EditText phone_number=layout2.findViewById(R.id.phone_number);
-//                final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
-//                final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
-//                //------------------------------------------------
-////                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
-//
-//
-//
-//                //----------- adapter add services----------
-//                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
-//
-//                    public View getView(int position, View convertView,ViewGroup parent) {
-//
-//                        View v = super.getView(position, convertView, parent);
-//
-//                        ((TextView) v).setTextSize(16);
-////                        ((TextView) v).setGravity(Gravity.CENTER);
-//                        ((TextView) v).setGravity(Gravity.RIGHT);
-//
-//                        return v;
-//
-//                    }
-//
-//                    public View getDropDownView(int position, View convertView,ViewGroup parent) {
-//
-//                        View v = super.getDropDownView(position, convertView,parent);
-//
-//                        ((TextView) v).setGravity(Gravity.RIGHT);
-//                        return v;
-//
-//                    }
-//
-//                };
-//                adapter.setDropDownViewResource(R.layout.spinner_center_item);
-//                add_service.setAdapter(adapter);
-//                //--------------------------------------------
-//
-//
-//
-//                //----------------------------- click add service0---------------------------
-//                final ArrayList<ServicesIDS> servicesForClientGroups=new ArrayList<>();
-//                add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                     if (position!=0) {
-//                       viewcount++;
-//                          final String vc;
-//                         vc="view"+viewcount;
-//                         final View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
-//                         TextView textView = view1.findViewById(R.id.service_name);
-//                         textView.setText(add_service.getSelectedItem().toString());
-//                         ImageView delete = view1.findViewById(R.id.delete);
-//                         delete.setOnClickListener(new View.OnClickListener() {
-//                             @Override
-//                             public void onClick(View v) {
-//                                 adding_name_service.removeView(view1);
-//                                 for (int i=0;i<servicesForClientGroups.size();i++){
-//                                     if (servicesForClientGroups.get(i).getViewnum().equals(vc)){
-//                                       try {
-//                                           servicesForClientGroups.remove(i);
-//                                       }catch (Exception ee)
-//                                       {
-//                                           ee.printStackTrace();
-//                                       }
-//                                       }
-//                                 }
-////
-////                                 servicesForClientGroups.remove(vc-1);
-//                                 Log.e("servicesForClientGroups",servicesForClientGroups.size()+"");
-//
-//                             }
-//                         });
-//
-//                         adding_name_service.addView(view1);
-//
-//                         servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString(),vc));
-//                     }
-//                        if (position!=0 && servicesList.get(position-1).getBdb_is_fixed_price().equals("1")){
-//                            ishairService.add(items-1);
-//                            Log.e("PostionID",position+"");
-//                            Log.e("PostionID",servicesList.get(position-1).getBdb_name()+"");
-//                            Log.e("PostionID",servicesList.get(position-1).getBdb_is_fixed_price()+"");
-//                        }
-//                    }
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                    }
-//                });
-//
-//
-//                //------------------ adapter for spinner age_range------
-//                Spinner age_range=layout2.findViewById(R.id.age_range);
-//                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,android.R.layout.simple_spinner_item);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                age_range.setAdapter(adapter_age_range);
-//
-//                //------------------ adapter for spinner client status---------
-//                Spinner client_status=layout2.findViewById(R.id.client_status);
-//                ArrayAdapter adapter_client_status=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.client_status,android.R.layout.simple_spinner_item);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                client_status.setAdapter(adapter_client_status);
-//
-//
-//                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
-//
-//               //------------------ delete click btn----------------
-//                delete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        clients.removeView(layout2);
-//                        for (int i=0;i<clientsViewData.size();i++){
-//                            if (clientsViewData.get(i).getId().equals(ic)){
-//                                clientsViewData.remove(i);
-//                            }
-//                        }
-////                        clientsViewData.remove(ic-1);
-//                        Log.e("clientsViewData",clientsViewData.size()+"");
-//                        Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
-//                    }
-//                });
-//
-//                clients.addView(layout2);
-//            }
-//        });
 
 
-
-
-
-        //---------------- add me click btn-------------------
-        add_me.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (add_me.getText().equals("Add Me")){
-                    add_me.setText("Remove Me");
                     items++;
                     //items++;
                 final String ic;
@@ -354,22 +208,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
                 clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
                 bookme.addView(layout2);
-            }else {
 
-                    //----------------- remove add me -----------------
-                    bookme.removeView(mylayout);
-                    for (int i=0;i<clientsViewData.size();i++){
-                        if (clientsViewData.get(i).getId().equals(myid)){
-                            clientsViewData.remove(i);
-                            add_me.setText("Add Me");
-                        }
-                    }
-//                        clientsViewData.remove(ic-1);
-//                    Log.e("clientsViewData",clientsViewData.size()+"");
-//                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
-                }
-            }
-        });
 
 
 
@@ -396,11 +235,6 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Complete All Data..");
                 }else {
 
-                    if (add_me.getText().toString().equals("Add Me")) {
-                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add yourself to complete Process");
-//                    }else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size()==1){
-//                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add another client with you");
-                    }else {
                     // =------------is hair service go to anthor fragment----------
 //                    if (ishairService.size() > 0) {
 //                        fragment = new HairSpecificationsFragment();
@@ -415,7 +249,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                         fragmentTransaction.replace(R.id.fragment, fragment);
                         fragmentTransaction.commit();
 //                    }
-                    }
+
                 }
             //----- call group filter for booking -------------
             APICall.GroupFilterBookingMulti();

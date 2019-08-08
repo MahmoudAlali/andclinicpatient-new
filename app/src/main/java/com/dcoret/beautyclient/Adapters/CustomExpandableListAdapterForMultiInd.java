@@ -96,7 +96,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
+                            APICall.addGroupItem(   APICall.getClientsInfoForMulti(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                         }
                     });

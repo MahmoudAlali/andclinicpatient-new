@@ -38,9 +38,11 @@ import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
@@ -48,19 +50,6 @@ import com.dcoret.beautyclient.Fragments.SettingFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.test.Main2Activity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 
 
 
@@ -127,7 +116,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Intent intent=getIntent();
         try {
             String tabselected = intent.getStringExtra("tabselected");
-            Log.e("tabddddd",tabselected);
+//            Log.e("tabddddd",tabselected);
             if (tabselected.equals("bag")) {
 //                navigation=findViewById(R.id.navigation);
                 navigation.setSelectedItemId(R.id.service_bag);
@@ -266,6 +255,18 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction.commit();
             }else if (FRAGMENT_NAME.equals("GroupReservationResultFragment")){
                 fragment = new GroupReservationFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("MultiIndividualBookingReservationFragment")){
+                fragment = new PlaceServiceMultipleBookingFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
+                fragment = new MultiIndividualBookingReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);

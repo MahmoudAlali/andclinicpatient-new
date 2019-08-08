@@ -47,7 +47,7 @@ public class MultiBookingIndividualResult extends Fragment {
         View view= inflater.inflate(R.layout.activity_group_reservation_result_frag, container, false);
 
 
-        BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
+        BeautyMainPage.FRAGMENT_NAME="MultiBookingIndividualResult";
 
 
         APICall.searchGroupBookingMulti(BeautyMainPage.context);
