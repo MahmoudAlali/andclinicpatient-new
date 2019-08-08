@@ -98,7 +98,7 @@ public class ServiceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 APICall.filterSortAlgorithm("33", "1", "0");
-                fragment = new PlaceServiceGroupOthersFragment();
+                fragment = new PlaceServiceMultipleBookingFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);

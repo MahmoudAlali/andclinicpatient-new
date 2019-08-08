@@ -5,6 +5,7 @@ public class GetAllCart {
         String bdb_id,
                 bdb_ser_sup_id,
                 bdb_employee_id,
+                bdb_emp_name,
                 bdb_price,
                 bdb_start_date,
                 bdb_start_time,
@@ -42,8 +43,37 @@ public class GetAllCart {
             this.bdb_main_booking = bdb_main_booking;
         }
 
+    public GetAllCart(String bdb_id, String bdb_ser_sup_id, String bdb_employee_id, String bdb_emp_name, String bdb_price, String bdb_start_date, String bdb_start_time, String supplier_name, String bdb_service_name_ar, String bdb_service_name_en, String bdb_ser_hotel, String bdb_ser_hall, String bdb_ser_home, String bdb_ser_salon, String bdb_is_group_booking, String bdb_user_name, String bdb_user_phone, String bdb_pack_booking, String bdb_main_booking) {
+        this.bdb_id = bdb_id;
+        this.bdb_ser_sup_id = bdb_ser_sup_id;
+        this.bdb_employee_id = bdb_employee_id;
+        this.bdb_emp_name = bdb_emp_name;
+        this.bdb_price = bdb_price;
+        this.bdb_start_date = bdb_start_date;
+        this.bdb_start_time = bdb_start_time;
+        this.supplier_name = supplier_name;
+        this.bdb_service_name_ar = bdb_service_name_ar;
+        this.bdb_service_name_en = bdb_service_name_en;
+        this.bdb_ser_hotel = bdb_ser_hotel;
+        this.bdb_ser_hall = bdb_ser_hall;
+        this.bdb_ser_home = bdb_ser_home;
+        this.bdb_ser_salon = bdb_ser_salon;
+        this.bdb_is_group_booking = bdb_is_group_booking;
+        this.bdb_user_name = bdb_user_name;
+        this.bdb_user_phone = bdb_user_phone;
+        this.bdb_pack_booking = bdb_pack_booking;
+        this.bdb_main_booking = bdb_main_booking;
+    }
 
-        public String getBdb_id() {
+    public String getBdb_emp_name() {
+        return bdb_emp_name;
+    }
+
+    public void setBdb_emp_name(String bdb_emp_name) {
+        this.bdb_emp_name = bdb_emp_name;
+    }
+
+    public String getBdb_id() {
             return bdb_id;
         }
 
@@ -192,6 +222,7 @@ public class GetAllCart {
         String   bdb_id,
                 bdb_ser_sup_id,
                 bdb_employee_id,
+                bdb_emp_name,
                 bdb_price,
                 bdb_start_date,
                 bdb_start_time,
@@ -229,6 +260,36 @@ public class GetAllCart {
             this.bdb_main_booking = bdb_main_booking;
         }
 
+        public GroupBooking(String groupBookingName, String bdb_id, String bdb_ser_sup_id, String bdb_employee_id, String bdb_emp_name, String bdb_price, String bdb_start_date, String bdb_start_time, String supplier_name, String bdb_service_name_ar, String bdb_service_name_en, String bdb_ser_hotel, String bdb_ser_hall, String bdb_ser_home, String bdb_ser_salon, String bdb_is_group_booking, String bdb_user_name, String bdb_user_phone, String bdb_pack_booking, String bdb_main_booking) {
+            this.groupBookingName = groupBookingName;
+            this.bdb_id = bdb_id;
+            this.bdb_ser_sup_id = bdb_ser_sup_id;
+            this.bdb_employee_id = bdb_employee_id;
+            this.bdb_emp_name = bdb_emp_name;
+            this.bdb_price = bdb_price;
+            this.bdb_start_date = bdb_start_date;
+            this.bdb_start_time = bdb_start_time;
+            this.supplier_name = supplier_name;
+            this.bdb_service_name_ar = bdb_service_name_ar;
+            this.bdb_service_name_en = bdb_service_name_en;
+            this.bdb_ser_hotel = bdb_ser_hotel;
+            this.bdb_ser_hall = bdb_ser_hall;
+            this.bdb_ser_home = bdb_ser_home;
+            this.bdb_ser_salon = bdb_ser_salon;
+            this.bdb_is_group_booking = bdb_is_group_booking;
+            this.bdb_user_name = bdb_user_name;
+            this.bdb_user_phone = bdb_user_phone;
+            this.bdb_pack_booking = bdb_pack_booking;
+            this.bdb_main_booking = bdb_main_booking;
+        }
+
+        public String getBdb_emp_name() {
+            return bdb_emp_name;
+        }
+
+        public void setBdb_emp_name(String bdb_emp_name) {
+            this.bdb_emp_name = bdb_emp_name;
+        }
 
         public String getGroupBookingName() {
             return groupBookingName;

@@ -54,7 +54,7 @@ public class IndividualBooking extends AppCompatActivity {
     public static String dateSelected;
     public  static String starttime;
     public  static String startdate;
-    public  static String emp_id;
+    public  static String emp_id,emp_name;
     static String bdb_ser_salon,bdb_ser_home,bdb_ser_hall,bdb_ser_hotel;
 
 
@@ -173,6 +173,7 @@ public class IndividualBooking extends AppCompatActivity {
 
                         if (!layoutLists.get(idforemp).getAvlTime().getSelectedItem().toString().equals("Time")) {
                             starttime = layoutLists.get(idforemp).getAvlTime().getSelectedItem().toString();
+                            emp_name = layoutLists.get(idforemp).getEmpName().getText().toString();
 //                        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
 //                        Date startdt=null;
 //                       try {
@@ -180,7 +181,7 @@ public class IndividualBooking extends AppCompatActivity {
 //                       }catch (Exception e){
 //                           e.printStackTrace();
 //                       }
-                            APICall.getServiceTime(bdb_id, emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
+                            APICall.getServiceTime(bdb_id,  emp_name,emp_id,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
 //                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
@@ -223,7 +224,7 @@ public class IndividualBooking extends AppCompatActivity {
 //                       }catch (Exception e){
 //                           e.printStackTrace();
 //                       }
-                            APICall.getServiceTime(bdb_id, emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
+                            APICall.getServiceTime(bdb_id, emp_name,emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
 

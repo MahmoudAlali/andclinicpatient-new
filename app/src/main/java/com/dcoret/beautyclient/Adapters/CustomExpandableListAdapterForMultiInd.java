@@ -10,27 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class
-CustomExpandableListAdapter extends BaseExpandableListAdapter {
+CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
     private Context context;
     private List<SerchGroupBookingData> expandableListTitle;
     private List<SerchGroupBookingData> expandableListDetail1;
@@ -40,7 +36,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
     ArrayList<TextView> listTitleTextViews=new ArrayList<>();
     Map<String,ArrayList<SearchBookingDataSTR>> stringArrayListHashMap;
 
-    public CustomExpandableListAdapter(Context context, ArrayList<String> salons, Map<String, ArrayList<SearchBookingDataSTR>> stringArrayListHashMap) {
+    public CustomExpandableListAdapterForMultiInd(Context context, ArrayList<String> salons, Map<String, ArrayList<SearchBookingDataSTR>> stringArrayListHashMap) {
         this.context = context;
         this.salons = salons;
         this.stringArrayListHashMap = stringArrayListHashMap;
@@ -175,13 +171,13 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                   String priceService="";
 
                    try {
-                       if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==1) {
+                       if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
                            priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==2) {
+                       }else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==2) {
                            priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==3) {
+                       }else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==3) {
                            priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==4) {
+                       }else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==4) {
                            priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
 
                        }

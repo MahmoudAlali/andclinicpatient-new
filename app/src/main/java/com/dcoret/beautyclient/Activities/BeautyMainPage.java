@@ -131,7 +131,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             if (tabselected.equals("bag")) {
 //                navigation=findViewById(R.id.navigation);
                 navigation.setSelectedItemId(R.id.service_bag);
-                fragment = new BagReservationFragment();
+                fragment = new BagReservationTestFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
