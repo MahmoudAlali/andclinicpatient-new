@@ -26,9 +26,7 @@ import java.util.ArrayList;
 public class TabTwo extends Fragment {
 
     public static RecyclerView recyclerView;
-    String[] items = {"Offer 1", "Offer 2", "Offer 3", "Offer 4", "Offer 5", "Offer 6", "Offer 7", "Offer 8", "Offer 9", "Offer 10"
-            , "Offer 11", "Offer 12", "Offer 13", "Offer 14", "Offer 15", "Offer 16", "Offer 17", "Offer 18", "Offer 19", "Offer 20"
-    };
+
 
 
 

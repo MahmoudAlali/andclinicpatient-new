@@ -502,7 +502,11 @@ public class PlaceServiceGroupFragment extends Fragment {
         });
 
         date=view.findViewById(R.id.date);
-        date.setText(R.string.date);
+        if (ServiceFragment.date.equals("")) {
+            date.setText(R.string.date);
+        }else {
+            date.setText(ServiceFragment.date);
+        }
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -514,8 +518,10 @@ public class PlaceServiceGroupFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        date.setText("date:"+datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
-                        dateFilter=datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth();
+                        int month=datePicker.getMonth()+1;
+                        date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
+                        dateFilter=datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
+                        ServiceFragment.date=dateFilter;
                     }
                 });
                 dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

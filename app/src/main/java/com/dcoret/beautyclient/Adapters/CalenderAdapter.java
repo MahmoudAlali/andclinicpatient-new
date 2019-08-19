@@ -68,6 +68,8 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 IndividualBooking.idforemp=-1;
                 IndividualBooking.alltimesSpinner.setSelection(0);
+
+                postionSelected=((Item)holder).calLayout;
                 try{
                     postionSelected.setBackgroundResource(R.drawable.border_gray);
                 }catch (Exception e){
@@ -75,7 +77,6 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
                 IndividualBooking.startdate= ((Item)holder).dayOfMonth.getText().toString();
 
-                postionSelected=((Item)holder).calLayout;
                 ((Item)holder).calLayout.setBackgroundResource(R.drawable.border_selected);
                 Log.e("bdb_id",IndividualBooking.bdb_id);
                 Log.e("bdb_id",((Item)holder).dayOfMonth.getText().toString());

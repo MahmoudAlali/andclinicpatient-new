@@ -144,27 +144,30 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-                        popupMenu.getMenu().add(context.getResources().getString(R.string.Individual_booking));
-                        popupMenu.getMenu().add(context.getResources().getString(R.string.Group_Booking));
-                        popupMenu.show();
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                if (item.getTitle().equals(context.getResources().getString(R.string.Individual_booking))) {
-                                        ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
-                                        Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
-                //                        intent.putExtra("Service Name","")
-                                        intent.putExtra("Provider Name",itemArrayList.get(position).getBdb_sup_name());
-                                        intent.putExtra("bdb_ser_sup_id",itemArrayList.get(position).getBdb_ser_sup_id());
-                                        intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
-                                        context.startActivity(intent);
-                                }else {
 
-                                }
-                                    return false;
-                            }
-                        });
+                        ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
+                        Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
+                        //                        intent.putExtra("Service Name","")
+                        intent.putExtra("Provider Name",itemArrayList.get(position).getBdb_sup_name());
+                        intent.putExtra("bdb_ser_sup_id",itemArrayList.get(position).getBdb_ser_sup_id());
+                        intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
+                        context.startActivity(intent);
+
+//                        PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+//                        popupMenu.getMenu().add(context.getResources().getString(R.string.Individual_booking));
+//                        popupMenu.getMenu().add(context.getResources().getString(R.string.Group_Booking));
+//                        popupMenu.show();
+//                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                            @Override
+//                            public boolean onMenuItemClick(MenuItem item) {
+//                                if (item.getTitle().equals(context.getResources().getString(R.string.Individual_booking))) {
+//
+//                                }else {
+//
+//                                }
+//                                    return false;
+//                            }
+//                        });
 
                     }
                 });
