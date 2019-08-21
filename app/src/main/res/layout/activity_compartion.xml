@@ -20,6 +20,11 @@
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="@color/end_gray" />
 
+    <LinearLayout
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -46,6 +51,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/sr1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,6 +60,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/sr2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -74,13 +81,14 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/ServiceNamecom"
+                android:text="@string/ProviderNamecom"
                 android:textStyle="bold"
                 android:textColor="@color/prime"
                 android:gravity="center"
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/pr1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -89,6 +97,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/pr2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -117,6 +126,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/ev1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -125,6 +135,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/ev2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -152,6 +163,7 @@
             android:textSize="@dimen/standard_20"
             />
         <TextView
+            android:id="@+id/place1"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -160,6 +172,7 @@
             android:textSize="@dimen/standard_20"
             />
         <TextView
+            android:id="@+id/place2"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -181,13 +194,14 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/SaloonLocation"
+                android:text="@string/Price"
                 android:textStyle="bold"
                 android:textColor="@color/prime"
                 android:gravity="center"
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/loc1"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -196,6 +210,7 @@
                 android:textSize="@dimen/standard_20"
                 />
             <TextView
+                android:id="@+id/loc2"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -213,9 +228,71 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </LinearLayout>
-
-
-
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/item3compare"
+        android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:background="@color/gray"
+                android:id="@+id/sr3"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:gravity="center"
+                android:textSize="@dimen/standard_20"
+                />
+        <TextView
+            android:id="@+id/pro3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        <TextView
+            android:background="@color/gray"
+            android:id="@+id/ev3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        <TextView
+            android:id="@+id/place3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        <TextView
+            android:background="@color/gray"
+            android:id="@+id/price3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        </LinearLayout>
 
 
     </LinearLayout>

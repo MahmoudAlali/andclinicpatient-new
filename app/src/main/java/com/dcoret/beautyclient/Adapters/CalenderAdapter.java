@@ -33,18 +33,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.context=context;
         this.dateClasses=dateClasses;
     }
-    public CalenderAdapter(Context context, String items[], boolean grid){
-        this.context=context;
-        this.items=items;
-        this.grid=grid;
-    }
 
-
-    public CalenderAdapter(Context context, DataOffer[] offers, boolean grid){
-        this.context=context;
-        this.offers=offers;
-        this.grid=grid;
-    }
 
 
     @NonNull

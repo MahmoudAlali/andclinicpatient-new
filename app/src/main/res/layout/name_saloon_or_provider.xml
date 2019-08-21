@@ -33,7 +33,7 @@
             android:orientation="horizontal">
 
 
-            <EditText
+            <Spinner
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"

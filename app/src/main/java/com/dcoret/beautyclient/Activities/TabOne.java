@@ -62,7 +62,7 @@ public class TabOne extends Fragment {
 
     public static RecyclerView recyclerView;
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
-    static  ServicesAdapter servicesAdapter;
+    public static  ServicesAdapter servicesAdapter;
 
     public static SwipeRefreshLayout pullToRefresh;
 
@@ -81,6 +81,8 @@ public class TabOne extends Fragment {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                arrayList.clear();
+                servicesAdapter.notifyDataSetChanged();
                     //---------------------call API for Services and get items-------------
                     APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
             }
@@ -90,7 +92,6 @@ public class TabOne extends Fragment {
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
             ServicesTabsFragment.updateServ=false;
             ServicesTabsFragment.updateoffr=true;
-
         }
 
         recyclerView=view.findViewById(R.id.recycleview);

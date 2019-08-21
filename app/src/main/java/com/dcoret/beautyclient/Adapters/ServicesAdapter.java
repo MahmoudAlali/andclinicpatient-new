@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
@@ -25,6 +26,7 @@ import com.dcoret.beautyclient.DataClass.DateClass;
 import com.dcoret.beautyclient.Fragments.AddReservation;
 import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;
@@ -39,12 +41,21 @@ import java.util.Calendar;
  * @author Mahmoud Alali
  */
 public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static String bdb_ser_salon2="";
+    public static String bdb_hotel2="";
+    public static String bdb_ser_hall2="";
+    public static String bdb_ser_home2="";
     TextView canceltime,canceldate,okdate,oktime;
 
     Context context;
     public static boolean list;
     static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};
     public  static ArrayList<DateClass> dateClasses=new ArrayList<>() ;
+    public static String srName1,srName2,srName3,spname1,spname2,spname3,ev1,ev2,ev3,place1,place2,place3,address1,address2,price1,price2,price3;
+    public static String bdb_ser_home,bdb_ser_hall,bdb_ser_salon,bdb_hotel;
+    public static String bdb_ser_home1,bdb_ser_hall1,bdb_ser_salon1,bdb_hotel1;
+//    public static String bdb_ser_home2,bdb_ser_hall2,bdb_ser_salon2,bdb_hotel2;
+    int postion1,postion2;
 
     String[] price;
     String[] rank;
@@ -124,23 +135,79 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
-            if (layout==R.layout.service_layout_adapter_last) {
+
                 ((Item) holder).service_name.setText(itemArrayList.get(position).getBdb_sup_name());
                 ((Item) holder).pro_name.setText(itemArrayList.get(position).getBdb_sup_name());
-                ((Item) holder).service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                if (position==postion1 || position==postion2){
+//                    ((Item) holder).service_compare.setChecked(true);
+//                }
+                ((Item) holder).service_compare.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            comparenum += 1;
-                        } else {
-                            comparenum -= 1;
+                    public void onClick(View v) {
+                        if (((Item) holder).service_compare.isChecked()){
+                        if (comparenum==3){
+                            ((Item) holder).service_compare.setChecked(false);
+                            APICall.showSweetDialog(context,"Alert!","Can't compare more than Three services..");
+//                            Toast.makeText(context,"Can't compare more than two services..",Toast.LENGTH_SHORT).show();
+                        }else {
+                            if (comparenum == 0) {
+                                comparenum = 1;
+                                srName1 = ((Item) holder).service_name.getText().toString();
+                                spname1 = ((Item) holder).pro_name.getText().toString();
+                                ev1 = itemArrayList.get(position).getTotalRating() + "Stars";
+                                price1 = ((Item) holder).service_price.getText().toString();
+
+                                bdb_ser_home = itemArrayList.get(position).getBdb_ser_home();
+                                bdb_ser_salon = itemArrayList.get(position).getBdb_ser_salon();
+                                bdb_ser_hall = itemArrayList.get(position).getBdb_ser_hall();
+                                bdb_hotel = itemArrayList.get(position).getBdb_hotel();
+
+                                Log.e("plc1", bdb_ser_home + "," + bdb_ser_salon + "," + bdb_ser_hall + "," + bdb_hotel);
+                                place1 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+//                                postion1=position;
+                            } else if (comparenum == 1) {
+                                comparenum = 2;
+                                srName2 = ((Item) holder).service_name.getText().toString();
+                                spname2 = ((Item) holder).pro_name.getText().toString();
+                                ev2 = itemArrayList.get(position).getTotalRating() + "Stars";
+                                price2 = ((Item) holder).service_price.getText().toString();
+                                place2 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+                                bdb_ser_home1 = itemArrayList.get(position).getBdb_ser_home();
+                                bdb_ser_salon1 = itemArrayList.get(position).getBdb_ser_salon();
+                                bdb_ser_hall1 = itemArrayList.get(position).getBdb_ser_hall();
+                                bdb_hotel1 = itemArrayList.get(position).getBdb_hotel();
+//                                postion2=position;
+                                Log.e("plc2", bdb_ser_home1 + "," + bdb_ser_salon1 + "," + bdb_ser_hall1 + "," + bdb_hotel1);
+                            } else if (comparenum == 2) {
+                                comparenum=3;
+                                srName3= ((Item) holder).service_name.getText().toString();
+                                spname3= ((Item) holder).pro_name.getText().toString();
+                                ev3= itemArrayList.get(position).getTotalRating()+"Stars";
+                                price3=((Item) holder).service_price.getText().toString();
+                                place3= PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+                                bdb_ser_home2=itemArrayList.get(position).getBdb_ser_home();
+                                bdb_ser_salon2=itemArrayList.get(position).getBdb_ser_salon();
+                                bdb_ser_hall2=itemArrayList.get(position).getBdb_ser_hall();
+                                bdb_hotel2=itemArrayList.get(position).getBdb_hotel();
+//                                postion2=position;
+                                Log.e("plc3",bdb_ser_home2+","+bdb_ser_salon2+","+bdb_ser_hall2+","+bdb_hotel2);
+
+                            }
+                        }
+                    }else {
+                            comparenum--;
                         }
                     }
                 });
 
                 ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
-                ((Item) holder).service_rate.setEnabled(false);
-                ((Item) holder).service_rate.setRating(Float.parseFloat(itemArrayList.get(position).getBdb_sup_rating()));
+               try {
+                   ((Item) holder).service_rate.setEnabled(false);
+                   ((Item) holder).service_rate.setRating(Float.parseFloat(itemArrayList.get(position).getTotalRating()));
+               }catch (Exception ee){
+                   ee.printStackTrace();
+               }
+
                 ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,29 +220,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
                         context.startActivity(intent);
 
-//                        PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-//                        popupMenu.getMenu().add(context.getResources().getString(R.string.Individual_booking));
-//                        popupMenu.getMenu().add(context.getResources().getString(R.string.Group_Booking));
-//                        popupMenu.show();
-//                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                            @Override
-//                            public boolean onMenuItemClick(MenuItem item) {
-//                                if (item.getTitle().equals(context.getResources().getString(R.string.Individual_booking))) {
-//
-//                                }else {
-//
-//                                }
-//                                    return false;
-//                            }
-//                        });
+
 
                     }
                 });
 
-            }else {
-                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
 
-            }
         }catch (Exception e){
             e.printStackTrace();
 
@@ -218,7 +268,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public  ArrayList<DateClass> ListOfDates(int priod){
+    public static ArrayList<DateClass> ListOfDates(int priod){
         Calendar now = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         Log.e("Today is ","");
@@ -269,7 +319,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                     Log.e("Saturday",day+"");
             }
-            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.YEAR)+"-"+now.get(Calendar.MONTH)+"-"+now.get(Calendar.DAY_OF_MONTH)));
+            int month=now.get(Calendar.MONTH)+1;
+            dateClasses.add(new DateClass(dayofweek,now.get(Calendar.YEAR)+"-"+month+"-"+now.get(Calendar.DAY_OF_MONTH)));
 
         }
 

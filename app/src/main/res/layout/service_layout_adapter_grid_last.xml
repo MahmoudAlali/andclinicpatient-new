@@ -27,6 +27,20 @@
             android:layout_weight="3"
 
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/service_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="srname"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/provider_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="prname"
+                android:gravity="center"/>
             <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="2"
@@ -43,6 +57,7 @@
                 android:gravity="center"
                 />
                 <CheckBox
+                    android:id="@+id/service_compare"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

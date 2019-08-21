@@ -144,6 +144,7 @@
     <string name="delete">Delete</string>
     <!--compare-->
     <string name="ServiceNamecom">Service Name:</string>
+    <string name="suppliereNamecom">Supplier Name:</string>
     <string name="ProviderNamecom">Provider Name:</string>
     <string name="Rating">Rating:</string>
     <string name="ServicePlacecom">Service Place:</string>
@@ -257,7 +258,7 @@
 
     <string name="Individual_booking">Individual booking</string>
     <string name="Group_Booking">Group Booking</string>
-    <string name="Compare">Compare</string>
+    <string name="Compare2">Compare</string>
     <string name="distance">Distance</string>
     <string name="MyLocation">My Location</string>
     <string name="Service_Eval">Service Evaluation</string>

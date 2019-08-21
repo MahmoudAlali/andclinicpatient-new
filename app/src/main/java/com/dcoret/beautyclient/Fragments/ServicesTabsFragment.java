@@ -57,6 +57,7 @@ import com.dcoret.beautyclient.Activities.TabThree;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataClass.Cities;
 import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataClass.SupInfoClass;
 import com.dcoret.beautyclient.R;
 import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
@@ -65,28 +66,33 @@ import java.util.Date;
 
 public class ServicesTabsFragment extends Fragment implements View.OnClickListener {
 
-    CheckBox price,distance,rateService,rateProvider,servicePlace,nameSalonOrProvider,discountVal,activeDate;
+    public static CheckBox price,distance,rateService,rateProvider,servicePlace,nameSalonOrProvider,discountVal,activeDate;
     Fragment fragment;
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     public static TextView servicetab,offertab,maptab;
-    static ImageButton filter,compare,gridlist;
+    public static ImageButton filter,compare,sort,gridlist;
     public static Boolean gridlistcheck=false;
     static boolean Isservice=false;
     TextView myLocationbtn,distancebtn;
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
+    public static  String bdb_name="";
     Toolbar toolbar;
     String service_place_name="";
     LinearLayout pages;
     int TABFLAG=1;
+    String idsup="";
     public static int ItemPageNum=4;
     ArrayList<String> citiyname=new ArrayList<>();
+    public static  ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
+
     public static Boolean updateServ=true;
     public static Boolean updateoffr=true;
 
-    TextView pagenum;
+    TextView pagenum,sortUsed;
     LinearLayout pageNext,pagePrev;
+
 
     //-------- for check if get services------
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -98,12 +104,27 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         // 1 city name, 2 price, 3 rate service ,4 rate provider, 5 distance , 6 saloon or pro name, 7 service place
         myLocationbtn=view.findViewById(R.id.my_location);
         distancebtn=view.findViewById(R.id.distance);
+        sortUsed=view.findViewById(R.id.sort_used);
         pagenum=view.findViewById(R.id.pagenum);
         pageNext=view.findViewById(R.id.pageNext);
         pagePrev=view.findViewById(R.id.pagePrev);
         pagenum.setText("Page"+TabOne.pagenum);
+        sort=view.findViewById(R.id.sort);
         BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
 //        Log.d("doback",BeautyMainPage.FRAGMENT_NAME);
+
+        //--------------init supInfoList---------------
+        supInfoList.clear();
+        supInfoList.add(new SupInfoClass("Provider Name","",""));
+
+
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSortDialog();
+
+            }
+        });
 
 
         myLocationbtn.setText(PlaceServiceFragment.mylocationId);
@@ -174,8 +195,11 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
             if (i == 5) {
                 if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
+
                     distancebtn.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
+                    distancebtn.setText("<="+PlaceServiceFragment.maxValDistance);
+
+//  distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
                 }
 
             }
@@ -222,17 +246,21 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onClick(View v) {
                         rangeDistanceDialog.dismiss();
-                        distancebtn.setText(R.string.distance+":"+Min.getText().toString()+"-" + Max.getText().toString());
+
+                        PlaceServiceFragment.maxValDistance=tvMax.getText().toString();
+                        distancebtn.setText("<="+PlaceServiceFragment.maxValDistance);
+
+//                        distancebtn.setText(R.string.distance+":"+Min.getText().toString()+"-" + Max.getText().toString());
                         APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                         ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtn.getText().toString()));
 
                         if (TABFLAG==1){
                             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-                            APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+//                            APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
                         }else {
                             APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
-                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+//                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                         }
 
 
@@ -298,6 +326,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 if(ServicesAdapter.comparenum>=2) {
+                    ServicesAdapter.comparenum=0;
                     Log.d("Compare", ServicesAdapter.comparenum+"");
                     fragment = new CompareFragment();
                     fm = getActivity().getFragmentManager();
@@ -335,14 +364,44 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     //-------------- range price filter--------------------
                     price = dialog.findViewById(R.id.price);
+                    Button clean = dialog.findViewById(R.id.clean);
+                    clean.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                    PlaceServiceFragment.priceOffer="";
+                                    PlaceServiceFragment.rateOffer="";
+                                    PlaceServiceFragment.supRate="";
+                                  PlaceServiceFragment.priceServiceValue="";
+                            ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, "price"));
+                            ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, "Service Rate"));
+                            ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, "Provider Rate"));
+                            ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, "Provider Name"));
+
+
+
+
+                            try {
+                                        price.setChecked(false);
+//                                        distance.setChecked(false);
+                                        rateService.setChecked(false);
+                                        rateProvider.setChecked(false);
+//                                        servicePlace.setChecked(false);
+                                        nameSalonOrProvider.setChecked(false);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                        }
+                    });
+
+
+
                     if (TABFLAG==2){
                         price.setEnabled(false);
                     }
                     price.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-
                                 if (price.isChecked()) {
                                 final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
                                 rangePriceDialog.setContentView(R.layout.price_range_dialog);
@@ -384,6 +443,10 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                         ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, price.getText().toString()));
 
+                                        PlaceServiceFragment.maxprice=tvMax.getText().toString();
+                                        PlaceServiceFragment.minprice=tvMin.getText().toString();
+
+
                                     }
                                 });
 
@@ -394,6 +457,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         price.setText(getResources().getText(R.string.Price));
                                         APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", "", "");
                                         ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price.getText().toString()));
+
                                     }
                                 });
 
@@ -411,7 +475,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     });
 
-                    //------------------- rate service filte------------------
+                    //------------------- rate service filte-------------
                     rateService = dialog.findViewById(R.id.rate_service);
                 if (TABFLAG==2){
                     rateService.setEnabled(false);
@@ -433,8 +497,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         rateService.setText(getResources().getText(R.string.Service_Eval)+"" + (int) ratingBar.getRating());
                                         APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
-
-
+                                        PlaceServiceFragment.rateOffer=",{\"num\":5,\"value1\":"+ratingBar.getRating()+",\"value2\":"+ratingBar.getRating()+"}";
                                     }
                                 });
 
@@ -445,6 +508,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         rateService.setChecked(false);
                                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
                                         rateServiceDialog.dismiss();
+                                        PlaceServiceFragment.rateOffer="";
                                     }
                                 });
                                 rateServiceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -457,6 +521,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
 
                                         APICall.filterSortAlgorithm("5", "", "");
+                                        PlaceServiceFragment.rateOffer="";
+
 
                                     }
                                 });
@@ -466,7 +532,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                 rateService.setText(getResources().getText(R.string.Service_Eval));
                                 APICall.filterSortAlgorithm("5", "", "");
                                 ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
-
+                                    PlaceServiceFragment.rateOffer="";
 
                             }
                         }
@@ -492,6 +558,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         rateProvider.setText(getResources().getText(R.string.Provider_Eval)+"" + (int) ratingBar.getRating());
                                         APICall.filterSortAlgorithm("28", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                                         ServiceFragment.serviceFilters.set(4, new ServiceFilter(true, rateProvider.getText().toString()));
+                                        PlaceServiceFragment.supRate=",{\"num\":28,\"value1\":"+ratingBar.getRating()+",\"value2\":"+ratingBar.getRating()+"}";
                                     }
                                 });
 
@@ -501,6 +568,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     public void onClick(View v) {
                                         rateProvider.setChecked(false);
                                         rateProviderDialog.cancel();
+                                        PlaceServiceFragment.supRate="";
                                     }
                                 });
                                 rateProviderDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -519,7 +587,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                 rateProvider.setText(getResources().getText(R.string.Provider_Eval)+"");
                                 APICall.filterSortAlgorithm("28", "", "");
                                 ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, rateProvider.getText().toString()));
-
+                                      PlaceServiceFragment.supRate="";
                             }
                         }
                     });
@@ -609,10 +677,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //                        TabOne.browseService();
 
                             if (TABFLAG==1) {
+                                TabOne.arrayList.clear();
+                                TabOne.servicesAdapter.notifyDataSetChanged();
                                 APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                                 updateServ=false;
                                 updateoffr=true;
                             }else if (TABFLAG==2){
+                                TabTwo.arrayList.clear();
+                                TabTwo.offersAdapterTab.notifyDataSetChanged();
                                 APICall.automatedBrowseOffers("8", "1", BeautyMainPage.context);
                                 updateServ=true;
                                 updateoffr=false;
@@ -626,30 +698,57 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     });
 
                     nameSalonOrProvider=dialog.findViewById(R.id.salon_name_provider);
-                    nameSalonOrProvider.setOnClickListener(new View.OnClickListener() {
+                nameSalonOrProvider.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (nameSalonOrProvider.isChecked()) {
                                 final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
                                 namesalonDialog.setContentView(R.layout.name_saloon_or_provider);
                                 namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    final EditText name=namesalonDialog.findViewById(R.id.name);
-                                Button search = namesalonDialog.findViewById(R.id.search);
+                                    final Spinner name=namesalonDialog.findViewById(R.id.name);
+                                    ArrayList<String> namesList=new ArrayList<>();
+                                    for (int i=0;i<supInfoList.size();i++){
+                                        namesList.add(supInfoList.get(i).getName()+","+supInfoList.get(i).getAddress());
+                                    }
+                                    ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,
+                                            android.R.layout.simple_spinner_item, namesList);
+                                    name.setAdapter(adapter);
+
+                                    Button search = namesalonDialog.findViewById(R.id.search);
+                                name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        if (position!=0){
+                                            idsup=supInfoList.get(position).getId();
+                                        }else {
+                                            idsup="";
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
+
+
                                 search.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        if (!name.getText().toString().isEmpty()){
+                                        if (!name.getSelectedItem().toString().isEmpty()){
                                             namesalonDialog.dismiss();
-                                            nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name)+":" +name.getText().toString());
-                                            APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
+                                            nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name)+":" +name.getSelectedItem().toString());
+                                            APICall.filterSortAlgorithm("3","\""+name.getSelectedItem().toString()+"\"" , null);
                                             ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, nameSalonOrProvider.getText().toString()));
 
+                                             bdb_name="\"SupplierId\":"+idsup+",";
                                         }else {
                                             namesalonDialog.cancel();
                                             nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                             APICall.filterSortAlgorithm("3", "", "");
                                             ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
 
+                                            bdb_name="";
                                         }
 
 
@@ -664,7 +763,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                         nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                         APICall.filterSortAlgorithm("3", "", "");
                                         ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
-
+                                        idsup="";
                                     }
                                 });
                                 namesalonDialog.show();
@@ -674,6 +773,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                 nameSalonOrProvider.setText(getResources().getText(R.string.salon_provider_name));
                                 APICall.filterSortAlgorithm("3", "", "");
                                 ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, nameSalonOrProvider.getText().toString()));
+                                idsup="";
 
                             }
                             }
@@ -1427,5 +1527,275 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
+    }
+
+    CheckBox nearest,highRate,priceLH,priceHL,common,compatible;
+    public static String sortby="";
+    static String value="",num="";
+    static int checked=0;
+    public void showSortDialog(){
+        final Dialog dialog = new Dialog(BeautyMainPage.context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.sort_dialog_layout);
+        nearest=dialog.findViewById(R.id.near);
+        highRate=dialog.findViewById(R.id.highRate);
+        priceLH=dialog.findViewById(R.id.price);
+        priceHL=dialog.findViewById(R.id.price2);
+        common=dialog.findViewById(R.id.common);
+        compatible=dialog.findViewById(R.id.compatible);
+
+        sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+        switch (checked){
+            case 1:
+                nearest.setChecked(true);
+                break;
+            case 2:
+                highRate.setChecked(true);
+                break;
+            case 3:
+                priceLH.setChecked(true);
+                break;
+            case 4:
+                priceHL.setChecked(true);
+                break;
+            case 5:
+                common.setChecked(true);
+                break;
+            case 6:
+                compatible.setChecked(true);
+                break;
+            default:
+                 sortby="";
+                 break;
+
+
+        }
+
+        nearest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nearest.isChecked()){
+                    checked=1;
+                    sortUsed.setText(nearest.getText().toString());
+                    highRate.setChecked(false);
+                    priceLH.setChecked(false);
+                    priceHL.setChecked(false);
+                    common.setChecked(false);
+                    compatible.setChecked(false);
+                    num="23";
+                    value="asc";
+                    sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }else {
+                    sortby="";
+                    checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }
+                Log.e("Sortby",sortby);
+            }
+        });
+
+
+        highRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (highRate.isChecked()){
+                    checked=2;
+                    sortUsed.setText(highRate.getText().toString());
+                    nearest.setChecked(false);
+                    priceLH.setChecked(false);
+                    priceHL.setChecked(false);
+                    common.setChecked(false);
+                    compatible.setChecked(false);
+                    num="22";
+                value="desc";
+                sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                    }
+                }else {
+                sortby="";
+                checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                    }
+                }
+                Log.e("Sortby",sortby);
+
+            }
+        });
+
+
+        priceLH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (priceLH.isChecked()){
+                    sortUsed.setText(priceLH.getText().toString());
+                    checked=3;
+                    highRate.setChecked(false);
+                    nearest.setChecked(false);
+                    priceHL.setChecked(false);
+                    common.setChecked(false);
+                    compatible.setChecked(false);
+                    num="19";
+                    value="asc";
+                    sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                    }
+                }else {
+                    sortby="";
+                    checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                    }
+                }
+                Log.e("Sortby",sortby);
+
+            }
+        });
+
+
+        priceHL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (priceHL.isChecked()){
+                    checked=4;
+                    sortUsed.setText(priceHL.getText().toString());
+                    highRate.setChecked(false);
+                    priceLH.setChecked(false);
+                    nearest.setChecked(false);
+                    common.setChecked(false);
+                    compatible.setChecked(false);
+                    num="19";
+                    value="desc";
+                    sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }else {
+                    sortby="";
+                    checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }
+                Log.e("Sortby",sortby);
+            }
+        });
+
+
+
+        common.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (common.isChecked()){
+                    checked=5;
+                    sortUsed.setText(common.getText().toString());
+                    highRate.setChecked(false);
+                    priceLH.setChecked(false);
+                    priceHL.setChecked(false);
+                    nearest.setChecked(false);
+                    compatible.setChecked(false);
+                    num="20";
+                    value="desc";
+                    sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }else {
+                    sortby="";
+                    checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }
+                Log.e("Sortby",sortby);
+            }
+        });
+
+
+
+        compatible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (compatible.isChecked()){
+                    checked=6;
+                    sortUsed.setText(compatible.getText().toString());
+                    highRate.setChecked(false);
+                    priceLH.setChecked(false);
+                    priceHL.setChecked(false);
+                    common.setChecked(false);
+                    nearest.setChecked(false);
+                    num="21";
+                    value="desc";
+                    sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+                    }
+                }else {
+                    sortby="";
+                    checked=0;
+                    sortUsed.setText("");
+                    dialog.cancel();
+                    if (TABFLAG==1) {
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                    }else if (TABFLAG==2){
+                        APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
+
+                    }
+                }
+                Log.e("Sortby",sortby);
+            }
+        });
+
+dialog.show();
+
     }
 }

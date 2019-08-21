@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.Fragments.AddReservation;
 import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
@@ -234,6 +235,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     private ViewGroup infoWindow;
     private RatingBar service_rate;
     private TextView infoTitle,infoPrice,infoldPrice;
+    String bdb_ser_sup_id,bdb_booking_period;
 //    private TextView infoSnippet;
     private ImageButton infoButton;
     private OnInfoWindowElemTouchListener infoButtonListener;
@@ -269,8 +271,13 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                 // Here we can perform some action triggered after clicking the button
 //                Toast.makeText(BeautyMainPage.context, "تم حج", Toast.LENGTH_SHORT).show();
 
-                Intent i=new Intent(BeautyMainPage.context, AddReservation.class);
-                startActivity(i);
+                ServicesAdapter.ListOfDates(Integer.parseInt(bdb_booking_period));
+                Intent intent=new Intent(BeautyMainPage.context, IndividualBooking.class);
+                intent.putExtra("Provider Name",infoTitle.getText().toString());
+                intent.putExtra("bdb_ser_sup_id",bdb_ser_sup_id);
+                intent.putExtra("bdb_booking_period",bdb_booking_period);
+                intent.putExtra("Price", infoPrice.getText().toString());
+                startActivity(intent);
             }
         };
         infoButton.setOnTouchListener(infoButtonListener);
@@ -308,7 +315,9 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                                 && marker.getPosition().latitude == Double.parseDouble(TabOne.arrayList.get(i).getLatitude())) {
                             infoTitle.setText(TabOne.arrayList.get(i).getBdb_sup_name());
                             infoPrice.setText(TabOne.arrayList.get(i).getPriceByFilter());
-                            infoldPrice.setText("");
+                            bdb_ser_sup_id=TabOne.arrayList.get(i).getBdb_ser_sup_id();
+                            bdb_booking_period=TabOne.arrayList.get(i).getBdb_booking_period();
+                                    infoldPrice.setText("");
                             service_rate.setVisibility(View.VISIBLE);
                             service_rate.setEnabled(false);
                             service_rate.setRating(Float.parseFloat(TabOne.arrayList.get(i).getBdb_sup_rating()));

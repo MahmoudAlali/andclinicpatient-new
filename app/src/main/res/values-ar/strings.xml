@@ -124,6 +124,7 @@
     <string name="delete">حذف</string>
     <!--compare-->
     <string name="ServiceNamecom">اسم الخدمة:</string>
+    <string name="suppliereNamecom">Supplier Name:</string>
     <string name="ProviderNamecom">اسم المزودة:</string>
     <string name="Rating">التقييم:</string>
     <string name="ServicePlacecom">مكان الخدمة:</string>
@@ -232,7 +233,7 @@
 
     <string name="Individual_booking">حجز فردي</string>
     <string name="Group_Booking">حجز جماعي</string>
-    <string name="Compare">مقارنة</string>
+    <string name="Compare2">مقارنة</string>
     <string name="Distance_Range">مجال البعد</string>
     <string name="Reserve">حجز</string>
     <string name="distance">البعد</string>

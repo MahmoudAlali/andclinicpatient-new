@@ -43,18 +43,30 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent">
             <ImageButton
+                android:id="@+id/sort"
                 android:src="@drawable/ic_descending_arrangement"
                 android:layout_width="@dimen/standard_40"
                 android:elevation="5dp"
                 android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/sort_used"
+                android:layout_width="match_parent"
+                android:elevation="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+           </LinearLayout>
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
-<LinearLayout
-    android:layout_width="@dimen/standard_175"
-    android:layout_height="match_parent"></LinearLayout>
-            <!--<Spinner-->
+            <LinearLayout
+                android:layout_width="@dimen/standard_75"
+                android:layout_height="match_parent"></LinearLayout>
+                        <!--<Spinner-->
                 <!--android:id="@+id/citiesSpinner"-->
                 <!--android:layout_width="170dp"-->
                 <!--android:layout_height="match_parent"-->
@@ -62,22 +74,30 @@
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
-            <ImageButton
-                android:id="@+id/compare"
-                android:background="@drawable/ic_compare_arrows_black_24dp"
-                android:layout_width="@dimen/standard_30"
-                android:elevation="5dp"
-                android:layout_height="@dimen/standard_30" />
-            <LinearLayout
-                android:layout_width="10dp"
-                android:layout_height="match_parent"></LinearLayout>
-            <ImageButton
-                android:id="@+id/gridlist"
-                android:src="@drawable/ic_view_list_black_24dp"
-                android:layout_width="@dimen/standard_30"
-                android:elevation="5dp"
-                android:layout_height="@dimen/standard_30" />
 
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+    <ImageButton
+        android:id="@+id/compare"
+        android:background="@drawable/ic_compare_arrows_black_24dp"
+        android:layout_width="@dimen/standard_30"
+        android:elevation="5dp"
+        android:layout_height="@dimen/standard_30" />
+    <LinearLayout
+        android:layout_width="10dp"
+        android:layout_height="match_parent"></LinearLayout>
+    <ImageButton
+        android:id="@+id/gridlist"
+        android:src="@drawable/ic_view_list_black_24dp"
+        android:layout_width="@dimen/standard_30"
+        android:elevation="5dp"
+        android:layout_height="@dimen/standard_30" />
+</LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

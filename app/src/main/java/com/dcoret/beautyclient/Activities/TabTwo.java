@@ -38,7 +38,9 @@ public class TabTwo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_two, container, false);
-
+        recyclerView = view.findViewById(R.id.offers_recycleview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
+        offersAdapterTab=new OffersAdapterTab(BeautyMainPage.context, arrayList);
 
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -54,11 +56,11 @@ public class TabTwo extends Fragment {
         });
 
         if (ServicesTabsFragment.updateoffr) {
+            TabTwo.arrayList.clear();
+            offersAdapterTab.notifyDataSetChanged();
             APICall.automatedBrowseOffers("8", "1", BeautyMainPage.context);
         }
-        recyclerView = view.findViewById(R.id.offers_recycleview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
-        offersAdapterTab=new OffersAdapterTab(BeautyMainPage.context, arrayList);
+
         recyclerView.setAdapter(offersAdapterTab);
 
         return view;
@@ -66,6 +68,10 @@ public class TabTwo extends Fragment {
 
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
-        offersAdapterTab.notifyDataSetChanged();
+      try {
+          offersAdapterTab.notifyDataSetChanged();
+      }catch (Exception e){
+          e.printStackTrace();
+      }
     }
 }

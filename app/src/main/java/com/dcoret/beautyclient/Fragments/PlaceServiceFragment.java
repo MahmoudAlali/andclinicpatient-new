@@ -58,13 +58,15 @@ public class PlaceServiceFragment extends Fragment {
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
     Button ok, priceService, rateService;
-    Spinner  placeSpinner;
+    public static Spinner  placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
-    public static String mylocationId="";
-    Button distance,mylocationbtn;
+    public static String maxValDistance,mylocationId="";
+    Button distance,mylocationbtn,offerPrice;
     static  boolean fregmentIsFirstOpen=false;
+    public static String distanceOffer="",locOfferlat="",locOfferlong="",priceOffer="",rateOffer="",supRate="";
+    public static String priceServiceValue="",minprice="",maxprice="";
 
 
 
@@ -171,10 +173,13 @@ public class PlaceServiceFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     rangeDistanceDialog.dismiss();
+                                     maxValDistance=tvMax.getText().toString();
                                     distance.setText("Distance: " + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
-
+//                               ------------For Offer Filter-------------------------------
+                                distanceOffer=",{\"num\":2,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+                                    Log.e("DistanceOffer",distanceOffer);
                                 }
                             });
 
@@ -182,7 +187,6 @@ public class PlaceServiceFragment extends Fragment {
                             rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
-//                                    distance.setChecked(false);
                                     distance.setText("Distance");
                                     APICall.filterSortAlgorithm("2", "", "");
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
@@ -244,10 +248,10 @@ public class PlaceServiceFragment extends Fragment {
             }
         });
 
-        if (fregmentIsFirstOpen==false){
+//        if (fregmentIsFirstOpen==false){
             APICall.getdetailsUser(BeautyMainPage.context);
-            fregmentIsFirstOpen=true;
-        }
+//            fregmentIsFirstOpen=true;
+//        }
 
 
 
@@ -295,6 +299,9 @@ public class PlaceServiceFragment extends Fragment {
                                     lng=location.getLongitude();
                                     Log.e("LATLANG",lat+":"+lng);
                                     APICall.setlocation(lat,lng);
+//                                    locOfferlat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
+//                                    locOfferlong="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
+
                                 }
                                 @Override
                                 public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -305,6 +312,7 @@ public class PlaceServiceFragment extends Fragment {
                                 @Override
                                 public void onProviderDisabled(String provider) {
                                 }
+
                             });
                         }else if (item.getTitle().equals(getResources().getString(R.string.new_location))){
                             fragment = new MapFragment();
@@ -323,6 +331,8 @@ public class PlaceServiceFragment extends Fragment {
                                     lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
                                     Log.e("LATLANG",lat+":"+lng);
                                     APICall.setlocation(lat,lng);
+                                    locOfferlat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
+                                    locOfferlong=",{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                 }
                             }
                             mylocationId=item.getTitle().toString();
@@ -419,6 +429,12 @@ public class PlaceServiceFragment extends Fragment {
                                     priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
+//                                    priceOffer=",{\"num\":32,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+
+                                    minprice=tvMin.getText().toString();
+                                    maxprice=tvMax.getText().toString();
+
+//                                  priceServiceValue=",{\"num\":"+placeId+",\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
 
                                 }
                             });
@@ -431,6 +447,7 @@ public class PlaceServiceFragment extends Fragment {
 //                                    Log.e("Cancel","ok");
                                     APICall.filterSortAlgorithm(placeId+"", "", "");
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, priceService.getText().toString()));
+                                    priceOffer="";
                                 }
                             });
 
@@ -456,7 +473,7 @@ public class PlaceServiceFragment extends Fragment {
                         rateService.setText("Service Evaluation: " + (int) ratingBar.getRating());
                         APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
-
+                        rateOffer=",{\"num\":5,\"value1\":"+ratingBar.getRating()+",\"value2\":"+ratingBar.getRating()+"}";
 
                     }
                 });
@@ -468,6 +485,7 @@ public class PlaceServiceFragment extends Fragment {
 //                        rateService.setChecked(false);
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
                         rateServiceDialog.dismiss();
+                        rateOffer="";
                     }
                 });
                 rateServiceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -480,6 +498,7 @@ public class PlaceServiceFragment extends Fragment {
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
                         Log.e("Cancel","ok");
                         APICall.filterSortAlgorithm("5", "", "");
+                        rateOffer="";
 
                     }
                 });
@@ -487,6 +506,73 @@ public class PlaceServiceFragment extends Fragment {
             }
         });
 
+
+        offerPrice=view.findViewById(R.id.offerPrice);
+        offerPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //-------------- range price filter--------------------
+                final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
+                rangePriceDialog.setContentView(R.layout.price_range_dialog);
+                rangePriceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                // get seekbar from view
+                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangePriceDialog.findViewById(R.id.rangeSeekbar5);
+
+                // get min and max text view
+                final TextView tvMin = (TextView) rangePriceDialog.findViewById(R.id.textMin1);
+                final TextView tvMax = (TextView) rangePriceDialog.findViewById(R.id.textMax1);
+                final EditText Min = rangePriceDialog.findViewById(R.id.minval);
+                final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
+                Button search = rangePriceDialog.findViewById(R.id.search);
+                // set listener
+                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+                    @Override
+                    public void valueChanged(Number minValue, Number maxValue) {
+                        tvMin.setText(String.valueOf(minValue));
+                        Min.setText(String.valueOf(minValue));
+                        Max.setText(String.valueOf(maxValue));
+                        tvMax.setText(String.valueOf(maxValue));
+                    }
+                });
+
+                // set final value listener
+                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+                    @Override
+                    public void finalValue(Number minValue, Number maxValue) {
+                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+                    }
+                });
+
+                search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rangePriceDialog.dismiss();
+                        offerPrice.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
+//                        APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
+//                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
+                        priceOffer=",{\"num\":32,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+
+
+                    }
+                });
+
+                rangePriceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+//                                    price.setChecked(false);
+                        offerPrice.setText(R.string.ServicePrice);
+//                                    Log.e("Cancel","ok");
+//                        APICall.filterSortAlgorithm(placeId+"", "", "");
+//                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, priceService.getText().toString()));
+                        priceOffer="";
+                    }
+                });
+
+                rangePriceDialog.show();
+
+            }
+        });
         return view;
     }
 

@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_40"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/standard_75"
+                    android:layout_marginTop="@dimen/standard_20"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shadow_button_add_site"
                     android:elevation="5dp"
@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_40"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/standard_75"
+                    android:layout_marginTop="@dimen/standard_20"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shadow_button_add_site"
                     android:elevation="5dp"
@@ -120,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_50"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/standard_75"
+                    android:layout_marginTop="@dimen/standard_20"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shadow_place"
                     android:elevation="5dp"
@@ -139,39 +139,40 @@
 
                         ></Spinner>
                 </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/standard_40"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="@dimen/standard_75"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/shadow_price_btn"
-    android:elevation="5dp"
-    android:gravity="center">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:src="@drawable/icons8_average_2_64" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_40"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/standard_20"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shadow_price_btn"
+                    android:elevation="5dp"
+                    android:gravity="center">
 
-    <Button
-        android:id="@+id/service_price"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:elevation="5dp"
-        android:gravity="center"
-        android:text="@string/servicePrice"
-        android:textAlignment="center"></Button>
-</LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/icons8_average_2_64" />
+
+                    <Button
+                        android:id="@+id/service_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:elevation="5dp"
+                        android:gravity="center"
+                        android:text="@string/servicePrice"
+                        android:textAlignment="center"></Button>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_marginBottom="@dimen/standard_20"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/standard_40"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/standard_75"
+                    android:layout_marginTop="@dimen/standard_20"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shadow_plcae_rate"
                     android:elevation="5dp"

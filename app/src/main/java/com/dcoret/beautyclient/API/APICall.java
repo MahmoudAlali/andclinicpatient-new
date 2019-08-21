@@ -57,6 +57,7 @@ import com.dcoret.beautyclient.DataClass.LocationTitles;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
 import com.dcoret.beautyclient.DataClass.ServiceItems;
+import com.dcoret.beautyclient.DataClass.SupInfoClass;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
@@ -72,6 +73,7 @@ import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
+import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -2389,6 +2391,7 @@ public class APICall {
 
         //------------- automated Browse ----------------------
         public  static  String  automatedBrowse(final  String url, final String lang, final String itemPerPage, final String pageNum, final Context context){
+            Log.e("PlaceId",PlaceServiceFragment.placeId+"");
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             pd=new ProgressDialog(context);
             pd.show();
@@ -2400,13 +2403,40 @@ public class APICall {
                     "]" +
                     "}";
 
+
+            if (PlaceServiceFragment.placeId==0){
+                PlaceServiceFragment.priceServiceValue="";
+            }else {
+                PlaceServiceFragment.priceServiceValue=",{\"num\":"+PlaceServiceFragment.placeId+",\"value1\":"+PlaceServiceFragment.minprice+",\"value2\":"+PlaceServiceFragment.maxprice+"}";
+            }
+
+            try {
+                if (!ServicesTabsFragment.price.isChecked()) {
+                    PlaceServiceFragment.priceServiceValue = "";
+                }
+                if (!ServicesTabsFragment.nameSalonOrProvider.isChecked()){
+                    ServicesTabsFragment.bdb_name="";
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             String jsonPostData="{\"lang\":\"en\"," +
                     "\"ItemPerPage\":20," +
                     "\"PageNum\":\""+pageNum+"\"," +
+                    ServicesTabsFragment.bdb_name+"\n"+
                     "\"Filter\":[" +
-                    getCityId()+
-                    getFilterList()+  // need to try catch
-                    "\t\t\t]\n" +
+//                    getCityId()+
+//                    getFilterList()+  // need to try catch
+                    PlaceServiceFragment.locOfferlat+"\n"+
+                    PlaceServiceFragment.locOfferlong+"\n"+
+                    PlaceServiceFragment.distanceOffer+"\n"+
+                    PlaceServiceFragment.priceServiceValue+"\n"+
+                    PlaceServiceFragment.rateOffer+"\n"+
+                    PlaceServiceFragment.supRate+"\n"+
+                    "]\n" +
+                    ServicesTabsFragment.sortby+
+
 //                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
                     "}";
 
@@ -2524,6 +2554,7 @@ public class APICall {
 
                             }else {
                             JSONArray sersup=data.getJSONArray("sersup");
+                            JSONArray supInfo=data.getJSONArray("supplier info");
                             Log.e("SizeSERSUP",sersup.length()+"");
                             TabOne.arrayList.clear();
 
@@ -2572,6 +2603,22 @@ public class APICall {
 
 
                             }
+
+                            for (int i=0;i<supInfo.length();i++){
+                                JSONObject info=supInfo.getJSONObject(i);
+                                String name=info.getString("name");
+                                String id=info.getString("id");
+                                String address=info.getString("address");
+
+                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
+
+                            }
+
+
+
+
+
+
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -2589,18 +2636,20 @@ public class APICall {
                                     @Override
                                     public void run() {
                                         TabOne.refreshRV();
-                                        Toast.makeText(BeautyMainPage.context,"There is no Provider with your search filter",Toast.LENGTH_LONG).show();
+                                        showSweetDialog(context,"Alert","There is no Provider with your search filter");
+//                                        Toast.makeText(BeautyMainPage.context,"There is no Provider with your search filter",Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
                         }
-                    }catch (JSONException je){
-//                        there is no suppliered services with your search filters
+                    }catch (final JSONException je){
+                        //there is no suppliered services with your search filters
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                                       @Override
                                       public void run() {
                                           TabOne.arrayList.clear();
                                           TabOne.refreshRV();
+                                          showSweetDialog(context,"Alert!",je.getMessage());
                                       }
                                   });
 
@@ -2613,29 +2662,34 @@ public class APICall {
             return mMessage;
         }
         public  static  String  automatedBrowseOffers( final String itemPerPage, final String pageNum, final Context context){
-        TabTwo.arrayList.clear();
+
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         pd=new ProgressDialog(context);
         pd.show();
         OkHttpClient client = new OkHttpClient();
-        String temp="{\"lang\":\"en\",\"ItemPerPage\":10,\"PageNum\":1,\"SupplierId\":38,\"Filter\":[\n" +
-                "\t{\"num\":7,\"value1\":1} ,  \n" +
-                "\t{\"num\":36,\"value1\":40} ,  \n" +
-                "\t{\"num\":34,\"value1\":21.1236547} , \n" +
-                "\t{\"num\":35,\"value1\":39.1236547}  ,\n" +
-                "\t{\"num\":2,\"value2\":1000}\n" +
-                "\t]\n" +
-                "}";
+//        String temp="{\"lang\":\"en\",\"ItemPerPage\":10,\"PageNum\":1,\"SupplierId\":38,\"Filter\":[\n" +
+//                "\t{\"num\":7,\"value1\":1} ,  \n" +
+//                "\t{\"num\":36,\"value1\":40} ,  \n" +
+//                "\t{\"num\":34,\"value1\":21.1236547} , \n" +
+//                "\t{\"num\":35,\"value1\":39.1236547}  ,\n" +
+//                "\t{\"num\":2,\"value2\":1000}\n" +
+//                "\t]\n" +
+//                "}";
 
         String jsonPostData="{\"lang\":\"en\"," +
                 "\"ItemPerPage\":20," +
                 "\"PageNum\":\""+pageNum+"\"," +
                 "\"Filter\":[" +
                 "{\"num\":7,\"value1\":1}," +
-                getCityId()+
-                getFilterList()+  // need to try catch
+//                getCityId()+
+                PlaceServiceFragment.locOfferlat+
+                PlaceServiceFragment.locOfferlong+
+                PlaceServiceFragment.distanceOffer+
+                PlaceServiceFragment.priceOffer+
+                PlaceServiceFragment.rateOffer+
+//                getFilterList()+  // need to try catch
                 "\t\t\t]\n" +
-//                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
+                ServicesTabsFragment.sortby+
                 "}";
 
 
@@ -2720,7 +2774,11 @@ public class APICall {
 //                    Log.d("token",gettoken(context));
                 Log.e("TAG123", mMessage);
                 pd.dismiss();
-                TabTwo.pullToRefresh.setRefreshing(false);
+              try {
+                  TabTwo.pullToRefresh.setRefreshing(false);
+              }catch (Exception e){
+                  e.printStackTrace();
+              }
 
                 try{
                     JSONObject jsonObject=new JSONObject(mMessage);
@@ -3268,15 +3326,17 @@ public class APICall {
         //---------------- filter and sort model --------------------
         static String city;
         static double latt,lang;
-        public static  void setCityId(int id){
-            city= "" +
-//                    "{\"num\":6,\"value1\":"+id+",\"value2\":0},"+
-                    "\t{\"num\":34,\"value1\":36.47792,\"value2\":0},\n" +
-                    "\t{\"num\":35,\"value1\":36.23389,\"value2\":0}";
+        public static  void setCityId(){
+//            city= "" +
+////                    "{\"num\":6,\"value1\":"+id+",\"value2\":0},"+
+//                    "\t{\"num\":34,\"value1\":36.47792,\"value2\":0},\n" +
+//                    "\t{\"num\":35,\"value1\":36.23389,\"value2\":0}";
+            city=PlaceServiceFragment.locOfferlat+
+                    PlaceServiceFragment.locOfferlong;
         }
 
         public static String getCityId(){
-            setCityId(1);
+            setCityId();
             return city;
         }
 
@@ -3310,6 +3370,10 @@ public class APICall {
             }
         return filter;
         }
+
+
+
+
         static  void initFilterList(){
              if (ServiceFragment.filterList.size()==0)
              for (int i=0;i<=35;i++){
@@ -3341,6 +3405,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd = new ProgressDialog(context);
+                        pd.show();
                     }
                 });
 
@@ -3362,7 +3427,7 @@ public class APICall {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         mMessage = e.getMessage().toString();
-                        Log.w("failure Response", mMessage);
+                        Log.e("failure Response", mMessage);
                         pd.dismiss();
 
 
