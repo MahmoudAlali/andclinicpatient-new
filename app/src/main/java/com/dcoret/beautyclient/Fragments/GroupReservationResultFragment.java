@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,14 +38,8 @@ public class GroupReservationResultFragment extends Fragment {
         public static ExpandableListView listView;
     public static CustomExpandableListAdapter listAdapter;
     public static GroupReservationsAdapter adapter;
+    public static SwipeRefreshLayout pullToRefresh;
 
-
-
-    RecyclerView recyclerView;
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees1=new ArrayList<>();
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees2=new ArrayList<>();
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees3=new ArrayList<>();
-    ArrayList<ReservationClients> reservationClients=new ArrayList<>();
 
 
     String items[]={"1","2","3","4","5"};
@@ -57,9 +52,17 @@ public class GroupReservationResultFragment extends Fragment {
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
 
 
+        listView=view.findViewById(R.id.list_view);
+        pullToRefresh=view.findViewById(R.id.pullToRefresh);
         APICall.searchGroupBooking(BeautyMainPage.context);
 
-                listView=view.findViewById(R.id.list_view);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                APICall.searchGroupBooking(BeautyMainPage.context);
+
+            }
+        });
 
         return view;
     }

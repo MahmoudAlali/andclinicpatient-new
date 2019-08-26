@@ -5551,7 +5551,7 @@ public class APICall {
             @Override
             public void run() {
                 pd=new ProgressDialog(context);
-//                ReservationFragment.pullToRefresh.setRefreshing(true);
+                GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
                 pd.show();
             }
         });
@@ -5591,6 +5591,8 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
+                        GroupReservationResultFragment.pullToRefresh.setRefreshing(false);
+
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
@@ -5641,10 +5643,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
-
-//                        searchBookingDataSTRS.clear();
-//
-// ReservationFragment.pullToRefresh.setRefreshing(false);
+                        GroupReservationResultFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
 
@@ -5987,7 +5986,7 @@ public class APICall {
             @Override
             public void run() {
                 pd=new ProgressDialog(context);
-//                ReservationFragment.pullToRefresh.setRefreshing(true);
+                GroupReservationOtherResultFragment.pullToRefresh.setRefreshing(true);
                 pd.show();
             }
         });
@@ -6026,6 +6025,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
+                        GroupReservationOtherResultFragment.pullToRefresh.setRefreshing(false);
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
@@ -6076,10 +6076,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
-
-//                        searchBookingDataSTRS.clear();
-//
-// ReservationFragment.pullToRefresh.setRefreshing(false);
+                        GroupReservationOtherResultFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
 
@@ -7147,7 +7144,7 @@ public class APICall {
             @Override
             public void run() {
                 pd=new ProgressDialog(context);
-//                ReservationFragment.pullToRefresh.setRefreshing(true);
+                MultiBookingIndividualResult.pullToRefresh.setRefreshing(true);
                 pd.show();
             }
         });
@@ -7186,6 +7183,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
+                        MultiBookingIndividualResult.pullToRefresh.setRefreshing(false);
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
@@ -7236,10 +7234,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
-
-//                        searchBookingDataSTRS.clear();
-//
-// ReservationFragment.pullToRefresh.setRefreshing(false);
+                        MultiBookingIndividualResult.pullToRefresh.setRefreshing(false);
                     }
                 });
 
@@ -7574,7 +7569,33 @@ public class APICall {
     }
 
 
-
+    public static boolean checkNumber(String text,Context context){
+            Boolean check;
+            String prefix=text.substring(0,2);
+    //        String prefix=text.substring(0,1);
+        if (prefix.matches("05")) {
+            if (text.matches(".*[A-Z].*")||text.matches(".*[a-z].*")){
+                check = false;
+                APICall.showSweetDialog(context,"ALert!","You Can't insert characters with Phone Number");
+            }else{
+                if(text.matches(".*[0-9].*") && text.length()==10){
+                    check = true;
+                }else {
+                    APICall.showSweetDialog(context,"ALert!","The Number Greater than 10 Numbers");
+                    check=false;
+                }
+            }
+        }else {
+            APICall.showSweetDialog(context,"ALert!","The Prefix Not 05");
+            check=false;
+        }
+        Log.e("Prefix",prefix);
+        Log.e("Prefix",text.matches(".*[A-Z].*")+"");
+        Log.e("Prefixnum",text.matches(".*[A-Z].*")+"");
+        Log.e("Prefix",prefix);
+        Log.e("CheckNumber",check+"");
+            return check;
+    }
 
 
 

@@ -382,9 +382,8 @@
 
     <string-array name="age_range">
         <item>Age Range</item>
-        <item>5-15</item>
-        <item>16-25</item>
-        <item>26-35</item>
+        <item>طفل</item>
+        <item>بالغ</item>
     </string-array>
 
     <string-array name="client_status">

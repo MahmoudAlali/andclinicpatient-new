@@ -14,6 +14,10 @@ public class LayoutList {
         this.avlTime = avlTime;
     }
 
+    public LayoutList(RadioButton empName) {
+        this.empName = empName;
+
+    }
     public RadioButton getEmpName() {
         return empName;
     }

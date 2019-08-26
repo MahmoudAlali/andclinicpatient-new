@@ -109,9 +109,12 @@ public class IndividualBooking extends AppCompatActivity {
         alltimesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                layoutLists.clear();
+                Log.e("LSSIZE",layoutLists.size()+"");
                 if (position==0){
 
                 }else if (position==1){
+
                     Log.e("TimeSpinner",alltimesSpinner.getSelectedItem().toString());
                     APICall.searchBooking("15",dateSelected,context);
 
@@ -181,7 +184,7 @@ public class IndividualBooking extends AppCompatActivity {
 //                       }catch (Exception e){
 //                           e.printStackTrace();
 //                       }
-                            APICall.getServiceTime(bdb_id,  emp_name,emp_id,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
+                            APICall.getServiceTime(bdb_id,emp_name,emp_id,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
 //                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
@@ -217,7 +220,8 @@ public class IndividualBooking extends AppCompatActivity {
 
                         if (alltimesSpinner.getSelectedItemPosition()!=0 || alltimesSpinner.getSelectedItemPosition()!=1) {
                             starttime = alltimesSpinner.getSelectedItem().toString();
-//                        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
+                            emp_name = layoutLists.get(idforemp).getEmpName().getText().toString();
+// SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-DD");
 //                        Date startdt=null;
 //                       try {
 //                           startdt =sdf.parse(startdate);
@@ -225,6 +229,8 @@ public class IndividualBooking extends AppCompatActivity {
 //                           e.printStackTrace();
 //                       }
                             APICall.getServiceTime(bdb_id, emp_name,emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
+                            Log.e("EMPNAME",emp_name);
+
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
 
@@ -248,7 +254,7 @@ public class IndividualBooking extends AppCompatActivity {
         final RadioButton emp_name =  layout2.findViewById(R.id.emp_name);
         emp_name.setText(name);
 
-//        layoutLists.add(new LayoutList(emp_name,avliable_time));
+        layoutLists.add(new LayoutList(emp_name));
 
         if (avaliablity.equals("0")){
             emp_name.setEnabled(false);
@@ -270,19 +276,38 @@ public class IndividualBooking extends AppCompatActivity {
         emp_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("SizeLS",layoutLists.size()+"");
+
                 for (int i = 0; i < layoutLists.size(); i++) {
 //                    Log.e("empName",emp_name.getText()+"");
 //                    Log.e("empNameList",layoutLists.get(i).getEmpName().getText()+"");
                     if (!emp_name.getText().toString().equals(layoutLists.get(i).getEmpName().getText())) {
-                        layoutLists.get(i).getEmpName().setChecked(false);
-                        emp_id=empid.get(i).toString();
-                        starttime=alltimesSpinner.getSelectedItem().toString();
 
+                        layoutLists.get(i).getEmpName().setChecked(false);
+                       try {
+                           emp_id=empid.get(i).toString();
+                       }catch (Exception e){
+                           e.printStackTrace();
+                       }
+                        starttime=alltimesSpinner.getSelectedItem().toString();
+                        Log.e("EMPID",emp_id);
                     }else {
                         idforemp=i;
                     }
 
                 }
+
+//
+//                    if (!emp_name.getText().toString().equals(layoutLists.get(i).getEmpName().getText())) {
+//                        layoutLists.get(i).getEmpName().setChecked(false);
+//                        emp_id=empid.get(i).toString();
+//                        starttime=alltimesSpinner.getSelectedItem().toString();
+//
+//                    }else {
+//                        idforemp=i;
+//                    }
+
+
             }
         });
     }
@@ -339,12 +364,15 @@ public class IndividualBooking extends AppCompatActivity {
         emp_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("SizeLS",layoutLists.size()+"");
                 for (int i = 0; i < layoutLists.size(); i++) {
 //                    Log.e("empName",emp_name.getText()+"");
 //                    Log.e("empNameList",layoutLists.get(i).getEmpName().getText()+"");
                     if (!emp_name.getText().toString().equals(layoutLists.get(i).getEmpName().getText())) {
                         layoutLists.get(i).getEmpName().setChecked(false);
                         emp_id=empid.get(i).toString();
+                        Log.e("EMPID",emp_id);
+//                        Log.e("startTime",starttime);
                     }else {
                         idforemp=i;
                     }

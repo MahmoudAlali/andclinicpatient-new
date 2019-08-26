@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ public class GroupReservationOtherResultFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
 
     public static ExpandableListView listView;
+    public static SwipeRefreshLayout pullToRefresh;
     public static CustomExpandableListAdapter listAdapter;
 
     public static GroupReservationsAdapter adapter;
@@ -37,8 +39,17 @@ public class GroupReservationOtherResultFragment extends Fragment {
 
         BeautyMainPage.FRAGMENT_NAME="GroupReservationOtherResultFragment";
 
-        APICall.searchGroupBookingOther(BeautyMainPage.context);
         listView=view.findViewById(R.id.list_view);
+        pullToRefresh=view.findViewById(R.id.pullToRefresh);
+        APICall.searchGroupBookingOther(BeautyMainPage.context);
+
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                APICall.searchGroupBookingOther(BeautyMainPage.context);
+            }
+        });
+
         return view;
     }
 }

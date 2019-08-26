@@ -263,13 +263,13 @@ public class PlaceServiceFragment extends Fragment {
         mylocationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-                mylocation.clear();
-                mylocation.add(getResources().getString(R.string.MyLocation));
-                mylocation.add(getResources().getString(R.string.current_location));
+                    PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+                    mylocation.clear();
+                    mylocation.add(getResources().getString(R.string.MyLocation));
+                    mylocation.add(getResources().getString(R.string.current_location));
                 for (int i = 0; i < AccountFragment.locationTitles.size(); i++)
                     mylocation.add(AccountFragment.locationTitles.get(i).getBdb_my_descr());
-                mylocation.add(getResources().getString(R.string.new_location));
+                    mylocation.add(getResources().getString(R.string.new_location));
                 for (int i=0;i<mylocation.size();i++) {
                     popupMenu.getMenu().add(mylocation.get(i));
                 }
@@ -299,8 +299,9 @@ public class PlaceServiceFragment extends Fragment {
                                     lng=location.getLongitude();
                                     Log.e("LATLANG",lat+":"+lng);
                                     APICall.setlocation(lat,lng);
-//                                    locOfferlat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
-//                                    locOfferlong="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
+                                    locOfferlat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
+                                    locOfferlong="," +
+                                            "{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
 
                                 }
                                 @Override

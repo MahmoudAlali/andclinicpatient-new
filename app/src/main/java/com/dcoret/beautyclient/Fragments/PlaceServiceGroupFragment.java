@@ -514,6 +514,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                 dialog.setContentView(R.layout.active_date_dialog);
                 Button search=dialog.findViewById(R.id.search);
                 final DatePicker datePicker=dialog.findViewById(R.id.date);
+                datePicker.setMinDate(System.currentTimeMillis() - 1000);
                 search.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

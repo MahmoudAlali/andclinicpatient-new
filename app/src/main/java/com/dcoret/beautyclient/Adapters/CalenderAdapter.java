@@ -16,6 +16,8 @@ import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataClass.DateClass;
 import com.dcoret.beautyclient.R;
 
+import org.bouncycastle.asn1.x509.Holder;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +28,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Boolean grid=false;
     String items[];
     DataOffer[] offers;
-    static  LinearLayout postionSelected;
+    static  LinearLayout postionSelected,tmpSelected;
 
     ArrayList<DateClass> dateClasses;
     public CalenderAdapter(Context context, ArrayList<DateClass> dateClasses){
@@ -49,26 +51,36 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return item;
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         ((Item)holder).dayOfMonth.setText(dateClasses.get(position).getDayOfMonth()+"");
         ((Item)holder).dayOfMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IndividualBooking.idforemp=-1;
-                IndividualBooking.alltimesSpinner.setSelection(0);
-
-                postionSelected=((Item)holder).calLayout;
-                try{
-                    postionSelected.setBackgroundResource(R.drawable.border_gray);
+                try {
+                    tmpSelected.setBackgroundResource(R.drawable.border_gray);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                IndividualBooking.startdate= ((Item)holder).dayOfMonth.getText().toString();
+                IndividualBooking.layoutLists.clear();
+                IndividualBooking.idforemp=-1;
+                IndividualBooking.alltimesSpinner.setSelection(0);
 
+
+                tmpSelected=((Item)holder).calLayout;
+                postionSelected=((Item)holder).calLayout;
+
+//                try{
+//                    postionSelected.setBackgroundResource(R.drawable.border_gray);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+                IndividualBooking.startdate= ((Item)holder).dayOfMonth.getText().toString();
                 ((Item)holder).calLayout.setBackgroundResource(R.drawable.border_selected);
-                Log.e("bdb_id",IndividualBooking.bdb_id);
-                Log.e("bdb_id",((Item)holder).dayOfMonth.getText().toString());
+//                Log.e("bdb_id",IndividualBooking.bdb_id);
+//                Log.e("bdb_id",((Item)holder).dayOfMonth.getText().toString());
                 IndividualBooking.showEmp.removeAllViews();
                 IndividualBooking.dateSelected=((Item)holder).dayOfMonth.getText().toString();
                 APICall.searchBooking("15",((Item)holder).dayOfMonth.getText().toString(),context);
@@ -95,6 +107,8 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //
 //            }
     }
+
+
 
     @Override
     public int getItemCount() {

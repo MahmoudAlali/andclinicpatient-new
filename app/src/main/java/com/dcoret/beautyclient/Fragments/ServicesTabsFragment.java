@@ -372,6 +372,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     PlaceServiceFragment.rateOffer="";
                                     PlaceServiceFragment.supRate="";
                                   PlaceServiceFragment.priceServiceValue="";
+
+                            //------------------------------------edit names
                             ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, "price"));
                             ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, "Service Rate"));
                             ServiceFragment.serviceFilters.set(4, new ServiceFilter(false, "Provider Rate"));

@@ -394,41 +394,52 @@ public class GroupReservationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int alert=0;
-                for (int i=0;i<clientsViewData.size();i++){
-                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty()||clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
-                        || clientsViewData.get(i).getAdd_service().getSelectedItemPosition()==0)
-                    {
-                      alert=1;
+
+                for (int i=0;i<clientsViewData.size();i++) {
+                    if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
+                      alert=2;
+                        break;
                     }
                 }
 
-                if (alert==1){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Complete All Data..");
-                }else {
+                for (int i=0;i<clientsViewData.size();i++) {
+                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
-                    if (add_me.getText().toString().equals("Add Me")) {
-                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add yourself to complete Process");
-                    }else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size()==1){
-                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add another client with you");
+                        if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+                                || clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
+                            alert = 1;
+                        }
+                    }
+
+                    if (alert == 1) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Complete All Data..");
+                    }else if(alert==2){
+
                     }else {
-                    // =------------is hair service go to anthor fragment----------
-                    if (ishairService.size() > 0) {
-                        fragment = new HairSpecificationsFragment();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
-                    } else {
-                        fragment = new GroupReservationResultFragment();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
+
+                        if (add_me.getText().toString().equals("Add Me")) {
+                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add yourself to complete Process");
+                        } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
+                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add another client with you");
+                        } else {
+                            // =------------is hair service go to anthor fragment----------
+                            if (ishairService.size() > 0) {
+                                fragment = new HairSpecificationsFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commit();
+                            } else {
+                                fragment = new GroupReservationResultFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commit();
+                            }
+                        }
                     }
-                    }
-                }
-            //----- call group filter for booking -------------
-            APICall.GroupFilterBooking();
+                    //----- call group filter for booking -------------
+                    APICall.GroupFilterBooking();
 
             }
         });
