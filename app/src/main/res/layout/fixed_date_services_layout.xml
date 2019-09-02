@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_white"
+    android:elevation="5dp"
+    android:layout_marginTop="5dp"
+    android:paddingTop="10dp">
+    <TextView
+        android:id="@+id/service_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/pf_5dp_space"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@color/prime"
+        android:textColor="#fff"
+        android:text="Service Name"
+        android:textSize="18dp" />
+    <LinearLayout
+        android:layoutDirection="ltr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pf_5dp_space"
+        android:layout_marginBottom="@dimen/pf_10dp_space"
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="wrap_content"
+            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/prime"
+        android:text="Employee Name :"
+        />
+    <TextView
+        android:id="@+id/employee_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Test"
+        android:textColor="@color/prime"
+        android:textSize="18dp" />
+        <Space
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layoutDirection="ltr"
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/pf_5dp_space"
+        android:layout_marginBottom="@dimen/pf_10dp_space"
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/prime"
+            android:text="Service Time :"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="13:00"
+            android:textColor="@color/prime"
+            android:textSize="18dp" />
+        <Space
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
+

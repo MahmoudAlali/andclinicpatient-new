@@ -1,10 +1,15 @@
 package com.dcoret.beautyclient.Adapters;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +18,10 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.DataClass.DataOffer;
 import com.dcoret.beautyclient.DataExample.OffersData;
+import com.dcoret.beautyclient.Fragments.FixedDateOffersFragment;
+import com.dcoret.beautyclient.Fragments.GroupOfferFragment;
+import com.dcoret.beautyclient.Fragments.MultiDateOfferFragment;
+import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
 
 import org.json.JSONArray;
@@ -31,6 +40,9 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     String items[];
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
+    Fragment fragment;
+    FragmentManager fm;
+    FragmentTransaction fragmentTransaction;
 
     public OffersAdapterTab(Context context, String items[]){
         this.context=context;
@@ -108,7 +120,46 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             }
         });
+        ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
+                ArrayList list=new ArrayList();
+                list.add("Fixed Date Offer");
+                list.add("Group Offer");
+                list.add("Multi Date Offer");
+                for(int i=0;i<list.size();i++){
+                    popup.getMenu().add((CharSequence) list.get(i));
+                }
 
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getTitle().equals("Fixed Date Offer")){
+                            fragment = new FixedDateOffersFragment();
+                            fm = ((AppCompatActivity)context).getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, fragment);
+                            fragmentTransaction.commit();
+                        }else if (item.getTitle().equals("Group Offer")){
+                            fragment = new GroupOfferFragment();
+                            fm = ((AppCompatActivity)context).getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, fragment);
+                            fragmentTransaction.commit();
+                        }else if (item.getTitle().equals("Multi Date Offer")){
+                            fragment = new MultiDateOfferFragment();
+                            fm = ((AppCompatActivity)context).getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, fragment);
+                            fragmentTransaction.commit();
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+            }
+        });
     }
 
     @Override
@@ -124,7 +175,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     public static class Item extends RecyclerView.ViewHolder {
 
         TextView pro_name,new_price,old_price,discount,num_of_times,offer_end;
-        ImageView info;
+        ImageView info,add_offer;
         public Item(View itemView) {
             super(itemView);
             pro_name = itemView.findViewById(R.id.pro_name);
@@ -134,6 +185,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             num_of_times = itemView.findViewById(R.id.num_of_times);
             info = itemView.findViewById(R.id.info);
             offer_end = itemView.findViewById(R.id.offer_end);
+            add_offer = itemView.findViewById(R.id.add_offer);
 
         }
     }

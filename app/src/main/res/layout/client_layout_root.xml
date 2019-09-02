@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/client_name"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_30"
+            android:text="client Name"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="#000"
+            />
+        <Spinner
+            android:id="@+id/clientlist"
+            android:background="@color/colorAccent"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standard_30"></Spinner>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

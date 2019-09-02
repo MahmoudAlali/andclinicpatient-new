@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
+import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapterSearchGroupBooking2;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.DataClass.ReservationClients;
 import com.dcoret.beautyclient.DataClass.ReservationClientsEmployee;
@@ -37,6 +38,7 @@ public class GroupReservationResultFragment extends Fragment {
 
         public static ExpandableListView listView;
     public static CustomExpandableListAdapter listAdapter;
+    public static CustomExpandableListAdapterSearchGroupBooking2 listAdapter2;
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
 
@@ -54,7 +56,7 @@ public class GroupReservationResultFragment extends Fragment {
 
         listView=view.findViewById(R.id.list_view);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
-        APICall.searchGroupBooking(BeautyMainPage.context);
+        APICall.searchGroupBooking2(BeautyMainPage.context);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

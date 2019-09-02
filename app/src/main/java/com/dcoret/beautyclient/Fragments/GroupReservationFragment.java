@@ -44,7 +44,7 @@ import java.util.ArrayList;
 
 public class GroupReservationFragment extends Fragment {
 
-    Button add_client, add_me,choose_occision;
+    Button add_client, add_me,choose_occision,relations;
     LinearLayout clients,bookme;
     static int items=0;
     static int viewcount=0;
@@ -77,6 +77,7 @@ public class GroupReservationFragment extends Fragment {
 
         //---------- find views------------------
         add_client=view.findViewById(R.id.add_client);
+        relations=view.findViewById(R.id.relations);
         add_me=view.findViewById(R.id.add_me);
         choose_occision=view.findViewById(R.id.choose_occision);
         clients=view.findViewById(R.id.clients);
@@ -385,7 +386,38 @@ public class GroupReservationFragment extends Fragment {
 
 
 
+        relations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int alert=0;
+                Log.e("ClientSizeF",clientsViewData.size()+"");
+                for (int i=0;i<clientsViewData.size();i++) {
+//                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
+                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+                            || clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
+                        alert = 1;
+                    }
+                }
+                if (alert == 1) {
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Complete All Data..");
+                } else {
+
+                    if (add_me.getText().toString().equals("Add Me")) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add yourself to complete Process");
+                    } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add another client with you");
+                    }else {
+
+                        fragment = new ClientRelationsFragment();
+                        fm = getFragmentManager();
+                        fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment, fragment);
+                        fragmentTransaction.commit();
+                    }
+                }
+            }
+        });
 
 
         //------------------click next btn----------------------
@@ -396,6 +428,7 @@ public class GroupReservationFragment extends Fragment {
                 int alert=0;
 
                 for (int i=0;i<clientsViewData.size();i++) {
+                    if (clientsViewData.get(i).getPhone_number().getText().toString().length()!=0)
                     if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
                       alert=2;
                         break;
@@ -403,7 +436,7 @@ public class GroupReservationFragment extends Fragment {
                 }
 
                 for (int i=0;i<clientsViewData.size();i++) {
-                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
+//                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
                         if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
                                 || clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
