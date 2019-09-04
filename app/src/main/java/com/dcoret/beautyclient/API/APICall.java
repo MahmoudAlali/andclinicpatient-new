@@ -2943,7 +2943,7 @@ public class APICall {
             });
 
         }
-     static String namelocality;
+        static String namelocality;
         private static void addtitle(final String title, final LatLng latLng , final Marker marker, final int flag, final Context context) {
 
             try {
@@ -3025,8 +3025,7 @@ public class APICall {
         dialog.show();
 
     }
-
-    public  static  void NotAvlBookingDialog(final Context context, String texttitle, String textmessage){
+        public  static  void NotAvlBookingDialog(final Context context, String texttitle, String textmessage){
 
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
