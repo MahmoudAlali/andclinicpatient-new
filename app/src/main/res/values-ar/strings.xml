@@ -248,9 +248,40 @@
     <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
     <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
-
-
-
+    <string name="cancel">cancel</string>
+    <string name="OK">ok</string>
+    <string name="select_date">select date</string>
+    <string name="Phone_Number">phone  number</string>
+    <string name="client_name">client name</string>
+    <string name="services_dates">select dates</string>
+    <string name="group_book_done">تم حجز العرض بنجاح</string>
+    <string name="salon">صالون</string>
+    <string name="home">منزل الزبونة</string>
+    <string name="hall">صالة</string>
+    <string name="hotel">فندق</string>
+    <string name="single_booking">حجز فردي</string>
+    <string name="multi_booking">حجز متعدد</string>
+    <string name="ryal">ريال</string>
+    <string name="Accept">قبول</string>
+    <string name="Refusal">رفض</string>
+    <string name="Edit_time">تعديل الوقت</string>
+    <string name="Reservations_received">الحجوزات الواردة</string>
+    <string name="Acceptable_reservations">الحجوزات المقبولة</string>
+    <string name="Bookings_paid_DEPOSIT">الحجوزات مدفوعة العربون</string>
+    <string name="cancel_req">طلب إلغاء</string>
+    <string name="nobooking">لا يوجد حجوزات</string>
+    <string name="nobookingyet">لا يوجد حجوزات بعد</string>
+    <string name="Service_Place">مكان الخدمة</string>
+    <string name="time">الوقت</string>
+    <string name="end_time">وقت النهاية</string>
+    <string name="booked_at">حُجزت بتاريخ</string>
+    <string name="multi_booking_others">حجز جماعي للغير</string>
+    <string name="offer_single_booking">عرض : حجز فردي </string>
+    <string name="offer_single_multi_booking">حجز فردي متعدد</string>
+    <string name="offer_multi_booking">عرض: متعدد</string>
+    <string name="all_res">جميع حجوزاتي</string>
+    <string name="all_res_offer"> حجوزاتي داخل عرض</string>
+    <string name="export_invoice">اصدار فاتورة</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>

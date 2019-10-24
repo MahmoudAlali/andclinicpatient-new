@@ -196,6 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:src="@drawable/icons8_average_2_64" />
+
                     <Button
                         android:id="@+id/offerPrice"
                         android:layout_width="wrap_content"
@@ -203,10 +204,10 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
                         android:foregroundGravity="center"
                         android:gravity="center"
                         android:text="@string/OfferPrice"
-                        android:background="@android:color/transparent"
                         android:textAlignment="center"></Button>
                 </LinearLayout>
                       </LinearLayout>

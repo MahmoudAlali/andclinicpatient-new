@@ -371,8 +371,6 @@
     </string-array>
 
 
-
-
     <string-array name="add_service">
         <item>Add Service</item>
         <item>Hair Cut</item>
@@ -393,11 +391,46 @@
     </string-array>
 
 
-
     <string name="title_activity_google_maps">Map</string>
     <string name="title_activity_manage_accounts">ManageAccounts</string>
     <string name="title_activity_bride">Bride</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_google_map">Map</string>
+    <string name="cancel">cancel</string>
+    <string name="OK">ok</string>
+    <string name="choose_offer_date">choose offer date</string>
+    <string name="next">next</string>
+    <string name="select_date">select date</string>
+    <string name="Phone_Number">phone  number</string>
+    <string name="client_name">client name</string>
+    <string name="services_dates">select dates</string>
+    <string name="group_book_done">Success Booked Offer</string>
+    <string name="salon">Salon</string>
+    <string name="home">Client Home</string>
+    <string name="hall">Hall</string>
+    <string name="hotel">Hotel</string>
+    <string name="single_booking">Single Booking</string>
+    <string name="multi_booking">Group Booking</string>
+    <string name="ryal">R</string>
+    <string name="Accept">accept</string>
+    <string name="Refusal">refuse</string>
+    <string name="Edit_time">edit time</string>
+    <string name="Reservations_received">Reservations received</string>
+    <string name="Acceptable_reservations">Acceptable reservations</string>
+    <string name="Bookings_paid_DEPOSIT">Reservation paid </string>
+    <string name="cancel_req">cancel request</string>
+    <string name="nobooking">No Booking</string>
+    <string name="nobookingyet">There is no booking yet</string>
+    <string name="Service_Place">service place</string>
+    <string name="time">time</string>
+    <string name="end_time">end time</string>
+    <string name="booked_at">booked at</string>
+    <string name="multi_booking_others">Mumulti booking for others</string>
+    <string name="offer_single_booking">offer: single booking</string>
+    <string name="offer_single_multi_booking">حجز فردي متعدد</string>
+    <string name="offer_multi_booking">offer: multi booking</string>
+    <string name="all_res">all reservation</string>
+    <string name="all_res_offer">all offer reservation</string>
+    <string name="export_invoice">export invoice</string>
 </resources>

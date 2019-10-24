@@ -85,7 +85,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                Log.e("bdb_id",((Item)holder).dayOfMonth.getText().toString());
                 IndividualBooking.showEmp.removeAllViews();
                 IndividualBooking.dateSelected=((Item)holder).dayOfMonth.getText().toString();
-                APICall.searchBooking("15",((Item)holder).dayOfMonth.getText().toString(),context);
+                APICall.searchBooking(ServicesAdapter.ser_sup_id,((Item)holder).dayOfMonth.getText().toString(),context);
             }
         });
         ((Item)holder).dayOfWeek.setText(dateClasses.get(position).getDayOfWeek());

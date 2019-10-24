@@ -73,7 +73,7 @@ public class ReservationFragment extends Fragment {
         });
 
         bookingAutomatedBrowseData.clear();
-        APICall.bookingAutomatedBrowse("en","10","1",filter,sort,BeautyMainPage.context);
+        APICall.bookingAutomatedBrowse("en","20","1",filter,sort,BeautyMainPage.context);
 
 
 
@@ -164,9 +164,9 @@ public class ReservationFragment extends Fragment {
                             APICall.bookingFilter("1","3","");
                             APICall.bookingAutomatedBrowse("en","10","1",filter,sort,BeautyMainPage.context);
                         }else if (id==R.id.five){
-                            //---------cancel---------
                             bookingAutomatedBrowseData_cancel.clear();
                             recyclerView_cancel.setVisibility(View.VISIBLE);
+                            //---------cancel---------
                             filter=APICall.bookingFilter("1","4","0");
                             APICall.bookingAutomatedBrowse("en","10","1",filter,sort,BeautyMainPage.context);
 //                            filter=APICall.bookingFilter("1","5","0");

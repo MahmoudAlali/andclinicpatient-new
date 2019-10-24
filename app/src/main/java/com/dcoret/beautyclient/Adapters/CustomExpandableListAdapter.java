@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
@@ -100,9 +101,25 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
+                            try {
+                                if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
+                                    APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
-                        }
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
+                                    APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
+                                    Log.e("INDBooking","ok");
+                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
+
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
+                                    APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
+
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                            }
                     });
                 }
             });

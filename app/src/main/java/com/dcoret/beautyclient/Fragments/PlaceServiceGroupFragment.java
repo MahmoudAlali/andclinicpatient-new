@@ -428,8 +428,8 @@ public class PlaceServiceGroupFragment extends Fragment {
                                     rangePriceDialog.dismiss();
 
                                    //-----------------
-                                   maxPrice= Max.getText().toString();
-                                   minPrice= Min.getText().toString();
+                                       maxPrice= Max.getText().toString();
+                                       minPrice= Min.getText().toString();
                                     priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm(PlaceServiceGroupFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));

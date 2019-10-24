@@ -32,7 +32,7 @@ public class ServiceFragment extends Fragment {
     public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
     public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
 
-    public static int bdb_ser_id;
+    public static String bdb_ser_id="360";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
@@ -59,7 +59,7 @@ public class ServiceFragment extends Fragment {
             public void onClick(View v) {
 //                serviceFilters.set(33, new ServiceFilter(false, rateService.getText().toString()));
                 Log.e("BDB_SER_ID","1");
-                APICall.filterSortAlgorithm("33", "1", "0");
+                APICall.filterSortAlgorithm("33", "7", "0");
                 fragment = new PlaceServiceFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

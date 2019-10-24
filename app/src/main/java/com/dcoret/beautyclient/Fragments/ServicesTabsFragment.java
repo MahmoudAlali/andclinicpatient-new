@@ -66,7 +66,7 @@ import java.util.Date;
 
 public class ServicesTabsFragment extends Fragment implements View.OnClickListener {
 
-    public static CheckBox price,distance,rateService,rateProvider,servicePlace,nameSalonOrProvider,discountVal,activeDate;
+    public static CheckBox price,price_offer,distance,rateService,rateProvider,servicePlace,nameSalonOrProvider,discountVal,activeDate;
     Fragment fragment;
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
@@ -83,6 +83,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     LinearLayout pages;
     int TABFLAG=1;
     String idsup="";
+    public static String p_offer="",priceOffer="";
     public static int ItemPageNum=4;
     ArrayList<String> citiyname=new ArrayList<>();
     public static  ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
@@ -108,6 +109,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         pagenum=view.findViewById(R.id.pagenum);
         pageNext=view.findViewById(R.id.pageNext);
         pagePrev=view.findViewById(R.id.pagePrev);
+        price_offer=view.findViewById(R.id.price_offer);
         pagenum.setText("Page"+TabOne.pagenum);
         sort=view.findViewById(R.id.sort);
         BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
@@ -364,6 +366,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     //-------------- range price filter--------------------
                     price = dialog.findViewById(R.id.price);
+                price_offer = dialog.findViewById(R.id.price_offer);
                     Button clean = dialog.findViewById(R.id.clean);
                     clean.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -400,6 +403,33 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     if (TABFLAG==2){
                         price.setEnabled(false);
+                        price.setVisibility(View.GONE);
+
+                        price_offer.setEnabled(true);
+                        price_offer.setVisibility(View.VISIBLE);
+
+
+
+                        if (!p_offer.equals("")){
+                            price_offer.setText(p_offer);
+                            price_offer.setChecked(true);
+
+                        }
+
+
+
+
+
+                    }else {
+                        price.setEnabled(true);
+                        price.setVisibility(View.VISIBLE);
+
+                        price_offer.setEnabled(false);
+                        price_offer.setVisibility(View.INVISIBLE);
+
+
+
+
                     }
                     price.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -477,7 +507,90 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
                     });
 
-                    //------------------- rate service filte-------------
+
+                price_offer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (price_offer.isChecked()) {
+                            final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
+                            rangePriceDialog.setContentView(R.layout.price_range_dialog);
+                            rangePriceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                            // get seekbar from view
+                            final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangePriceDialog.findViewById(R.id.rangeSeekbar5);
+
+                            // get min and max text view
+                            final TextView tvMin = (TextView) rangePriceDialog.findViewById(R.id.textMin1);
+                            final TextView tvMax = (TextView) rangePriceDialog.findViewById(R.id.textMax1);
+                            final EditText Min = rangePriceDialog.findViewById(R.id.minval);
+                            final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
+                            Button search = rangePriceDialog.findViewById(R.id.search);
+                            // set listener
+                            rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+                                @Override
+                                public void valueChanged(Number minValue, Number maxValue) {
+                                    tvMin.setText(String.valueOf(minValue));
+                                    Min.setText(String.valueOf(minValue));
+                                    Max.setText(String.valueOf(maxValue));
+                                    tvMax.setText(String.valueOf(maxValue));
+                                }
+                            });
+
+                            // set final value listener
+                            rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
+                                @Override
+                                public void finalValue(Number minValue, Number maxValue) {
+                                    Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
+                                }
+                            });
+
+                            search.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    rangePriceDialog.dismiss();
+                                    price_offer.setText(getResources().getText(R.string.Price) + Min.getText().toString() + "-" + Max.getText().toString());
+//                                    APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
+//                                    ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, price.getText().toString()));
+                                    PlaceServiceFragment.priceOffer=",{\"num\":"+PlaceServiceFragment.placeId+",\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+//                                    PlaceServiceFragment.maxprice=tvMax.getText().toString();
+//                                    PlaceServiceFragment.minprice=tvMin.getText().toString();
+                                    p_offer=price_offer.getText().toString();
+
+
+
+                                }
+                            });
+
+                            rangePriceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    price_offer.setChecked(false);
+                                    price_offer.setText(getResources().getText(R.string.Price));
+//                                    APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", "", "");
+//                                    ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price_offer.getText().toString()));
+                                     p_offer="سعر العرض";
+                                    PlaceServiceFragment.priceOffer="";
+                                }
+                            });
+
+                            rangePriceDialog.show();
+
+
+                        } else {
+                            price_offer.setText(getResources().getText(R.string.Price));
+//                            APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", "", "");
+//                            ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, price_offer.getText().toString()));
+                            p_offer="سعر العرض";
+                            PlaceServiceFragment.priceOffer="";
+
+                        }
+                    }
+
+
+                });
+
+
+                //------------------- rate service filte-------------
                     rateService = dialog.findViewById(R.id.rate_service);
                 if (TABFLAG==2){
                     rateService.setEnabled(false);
@@ -709,9 +822,11 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                 namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                     final Spinner name=namesalonDialog.findViewById(R.id.name);
                                     ArrayList<String> namesList=new ArrayList<>();
-                                    for (int i=0;i<supInfoList.size();i++){
-                                        namesList.add(supInfoList.get(i).getName()+","+supInfoList.get(i).getAddress());
-                                    }
+
+                                       for (int i = 0; i < supInfoList.size(); i++) {
+                                           namesList.add(supInfoList.get(i).getName() + "," + supInfoList.get(i).getAddress());
+                                       }
+
                                     ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,
                                             android.R.layout.simple_spinner_item, namesList);
                                     name.setAdapter(adapter);
@@ -721,7 +836,9 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         if (position!=0){
-                                            idsup=supInfoList.get(position).getId();
+
+                                                idsup = supInfoList.get(position).getId();
+
                                         }else {
                                             idsup="";
                                         }

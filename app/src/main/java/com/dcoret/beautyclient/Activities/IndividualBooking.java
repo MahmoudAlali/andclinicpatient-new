@@ -48,7 +48,7 @@ public class IndividualBooking extends AppCompatActivity {
     public static HashMap<String,List<String>> listHashMap=new HashMap<>();
     //------------ for spinner array-------------------
 //    public static ArrayList<String> freeTimes=new ArrayList<>();
-    public static ArrayList empid=new ArrayList();
+    public static ArrayList<String> empid=new ArrayList();
     public static ArrayList<LayoutList> layoutLists=new ArrayList<>();
     public static int idforemp;
     public static String dateSelected;
@@ -116,7 +116,7 @@ public class IndividualBooking extends AppCompatActivity {
                 }else if (position==1){
 
                     Log.e("TimeSpinner",alltimesSpinner.getSelectedItem().toString());
-                    APICall.searchBooking("15",dateSelected,context);
+                    APICall.searchBooking(ServicesAdapter.ser_sup_id,dateSelected,context);
 
                 }else{
                     idforemp=-1;
@@ -184,7 +184,9 @@ public class IndividualBooking extends AppCompatActivity {
 //                       }catch (Exception e){
 //                           e.printStackTrace();
 //                       }
-                            APICall.getServiceTime(bdb_id,emp_name,emp_id,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
+                            Log.e("EMPID1",emp_id);
+                            Log.e("EMPID1",emp_name);
+                            APICall.getServiceTime(bdb_id,emp_name,ServicesAdapter.empid23,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
 //                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
@@ -228,8 +230,8 @@ public class IndividualBooking extends AppCompatActivity {
 //                       }catch (Exception e){
 //                           e.printStackTrace();
 //                       }
-                            APICall.getServiceTime(bdb_id, emp_name,emp_id, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
                             Log.e("EMPNAME",emp_name);
+                            APICall.getServiceTime(bdb_id, emp_name,ServicesAdapter.empid23, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
 
                         } else {
                             APICall.showSweetDialog(context,"","Please, Select an Time..");
@@ -290,7 +292,7 @@ public class IndividualBooking extends AppCompatActivity {
                            e.printStackTrace();
                        }
                         starttime=alltimesSpinner.getSelectedItem().toString();
-                        Log.e("EMPID",emp_id);
+                        Log.e("EMPIDnmnm",emp_id);
                     }else {
                         idforemp=i;
                     }

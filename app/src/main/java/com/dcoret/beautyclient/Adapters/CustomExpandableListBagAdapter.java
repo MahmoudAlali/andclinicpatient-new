@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.DataClass.GetAllCart;
 import com.dcoret.beautyclient.DataClass.GetAllCartServices;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
@@ -104,8 +105,11 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void run() {
 
-                                APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),true,groupPosition,context);
-
+                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4) {
+                                APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
+                            }else {
+                                APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_id(),true,groupPosition,context);
+                            }
 //                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
                         Toast.makeText(context,"book Reserved",Toast.LENGTH_SHORT).show();
                         }

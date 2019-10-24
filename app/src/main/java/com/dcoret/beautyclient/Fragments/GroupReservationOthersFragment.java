@@ -263,19 +263,19 @@ public class GroupReservationOthersFragment extends Fragment {
 
                     // =------------is hair service go to anthor fragment----------
 
-                    if (ishairService.size() > 0) {
-                        fragment = new HairSpecificationsFragment();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
-                    } else {
+//                    if (ishairService.size() > 0) {
+//                        fragment = new HairSpecificationsFragment();
+//                        fm = getFragmentManager();
+//                        fragmentTransaction = fm.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment, fragment);
+//                        fragmentTransaction.commit();
+//                    } else {
                         fragment = new GroupReservationOtherResultFragment();
                         fm = getFragmentManager();
                         fragmentTransaction = fm.beginTransaction();
                         fragmentTransaction.replace(R.id.fragment, fragment);
                         fragmentTransaction.commit();
-                    }
+//                    }
                     }
                 }
 

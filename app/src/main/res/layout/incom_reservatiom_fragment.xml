@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbarm"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/end_gray"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:theme="?attr/actionBarTheme"-->
+    <!--app:logo="@string/Backicon"-->
+    <!--app:popupTheme="@style/AppTheme"-->
+    <!--app:theme="@style/ToolbarColoredBackArrow"-->
+    <!--app:titleTextColor="#fff" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:background="@color/end_gray"-->
+    <!--android:layout_height="?attr/actionBarSize">-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<TextView-->
+    <!--android:id="@+id/incom_reservation"-->
+    <!--android:layout_weight="1"-->
+    <!--android:textSize="18dp"-->
+    <!--android:gravity="center"-->
+    <!--android:textColor="#000"-->
+    <!--android:text="الحجوزات الواردة"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+    <!--<TextView-->
+    <!--android:textColor="#000"-->
+
+    <!--android:id="@+id/accept_reservation"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="الحجوزات المقبولة"-->
+    <!--android:textSize="18dp" />-->
+    <!--<TextView-->
+    <!--android:textColor="#000"-->
+
+    <!--android:id="@+id/deposited_reservation"-->
+    <!--android:layout_weight="1"-->
+    <!--android:textSize="18dp"-->
+    <!--android:gravity="center"-->
+    <!--android:text="الحجوزات مدفوعة العربون"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/incom_ree"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/myprofile"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:onClick="myprofile"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="بروفايلي"-->
+    <!--android:textStyle="bold" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView32"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:onClick="pauseAccount"-->
+    <!--android:text="ايقاف حسابي"-->
+    <!--android:textStyle="bold" />-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView31"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="حذف حسابي" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+
+    <!--android:layout_weight="1"-->
+
+    <!--android:orientation="horizontal"-->
+    <!--android:weightSum="3">-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

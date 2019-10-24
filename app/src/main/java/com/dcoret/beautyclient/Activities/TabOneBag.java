@@ -58,7 +58,15 @@ public class TabOneBag extends Fragment {
 //        recyclerView.setAdapter(bagReservationAdapter);
         listView=view.findViewById(R.id.listview);
 
-//        APICall.searchGroupBookingBag(BeautyMainPage.context);
+        pullToRefresh=view.findViewById(R.id.pullToRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getCarts.clear();
+                APICall.getAllCart(BeautyMainPage.context);
+            }
+        });
+        //        APICall.searchGroupBookingBag(BeautyMainPage.context);
 
 //        APICall.getAllCart(BeautyMainPage.context);
         TabOneBag.listAdapter=new CustomExpandableListBagAdapter(BeautyMainPage.context,APICall.salonBooking,APICall.grBookingListMap);

@@ -61,6 +61,7 @@ public class GroupReservationFragment extends Fragment {
 
     //------------ save view client--------
     public static ArrayList<ClientsViewData> clientsViewData=new ArrayList<>();
+    public static ArrayList<ClientsViewData> clientsViewData1=new ArrayList<>();
     public static ArrayList<Integer> ishairService=new ArrayList();
 
 
@@ -218,6 +219,7 @@ public class GroupReservationFragment extends Fragment {
 
 
                 clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
+                clientsViewData1.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
 
                //------------------ delete click btn----------------
                 delete.setOnClickListener(new View.OnClickListener() {
@@ -405,6 +407,7 @@ public class GroupReservationFragment extends Fragment {
 
                     if (add_me.getText().toString().equals("Add Me")) {
                         APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add yourself to complete Process");
+
                     } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
                         APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add another client with you");
                     }else {

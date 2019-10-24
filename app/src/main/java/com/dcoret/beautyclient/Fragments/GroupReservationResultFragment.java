@@ -56,12 +56,13 @@ public class GroupReservationResultFragment extends Fragment {
 
         listView=view.findViewById(R.id.list_view);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
-        APICall.searchGroupBooking2(BeautyMainPage.context);
+        APICall.searchGroupBooking(BeautyMainPage.context);
+
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBooking(BeautyMainPage.context);
+                APICall.searchGroupBooking2(BeautyMainPage.context);
 
             }
         });

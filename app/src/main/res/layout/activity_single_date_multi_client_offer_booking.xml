@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/end_gray"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:logo="@string/Backicon"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="#fff" />
+
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:background="@drawable/shadow_blue_c5"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/add_date"
+                    android:background="@android:color/transparent"
+                    android:text="@string/select_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"/>
+                <android.support.v4.widget.Space
+                    android:layout_width="10dp"
+                    android:layout_height="@dimen/high_edit_text" />
+                <ImageView
+                    android:layout_width="@dimen/high_edit_text"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:src="@drawable/res_4"
+                    />
+            </LinearLayout>
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:orientation="vertical"
+            android:id="@+id/recycleview"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/standard_40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+    <Button
+        android:layout_gravity="bottom"
+        android:id="@+id/next"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shadow_button_accent"
+        android:text="@string/next"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -49,12 +49,12 @@ public class BagReservationFragment extends Fragment {
             @Override
             public void onRefresh() {
                 getCarts.clear();
-                APICall.getCart(BeautyMainPage.context);
+//                APICall.getCart(BeautyMainPage.context,pullToRefresh);
             }
         });
         if (isFirstOpen){
             getCarts.clear();
-            APICall.getCart(BeautyMainPage.context);
+//            APICall.getCart(BeautyMainPage.context,pullToRefresh);
             isFirstOpen=false;
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

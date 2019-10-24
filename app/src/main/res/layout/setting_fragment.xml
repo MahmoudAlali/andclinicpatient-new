@@ -53,17 +53,17 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/shadow_rate"
                 android:layout_height="@dimen/standard_155" />
-            <EditText
-                android:layout_marginTop="@dimen/standard_20"
-                android:id="@+id/token"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:hint="Token"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_155" />
+            <!--<EditText-->
+                <!--android:layout_marginTop="@dimen/standard_20"-->
+                <!--android:id="@+id/token"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="16dp"-->
+                <!--android:gravity="center"-->
+                <!--android:hint="Token"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/standard_155" />-->
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>

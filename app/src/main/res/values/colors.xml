@@ -14,4 +14,6 @@
     <color name="green">#2ECC71</color>
     <color name="gray">#EEEEFC</color>
     <color name="end_gray">#D6DBDE</color>
+    <color name="accent_v3">#ECD5DF</color>
+
 </resources>

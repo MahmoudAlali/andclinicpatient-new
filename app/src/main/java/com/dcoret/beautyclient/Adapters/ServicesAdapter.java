@@ -45,6 +45,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public static String bdb_hotel2="";
     public static String bdb_ser_hall2="";
     public static String bdb_ser_home2="";
+    public static String empid="";
+    public static String empid23="";
     TextView canceltime,canceldate,okdate,oktime;
 
     Context context;
@@ -53,7 +55,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public  static ArrayList<DateClass> dateClasses=new ArrayList<>() ;
     public static String srName1,srName2,srName3,spname1,spname2,spname3,ev1,ev2,ev3,place1,place2,place3,address1,address2,price1,price2,price3;
     public static String bdb_ser_home,bdb_ser_hall,bdb_ser_salon,bdb_hotel;
-    public static String bdb_ser_home1,bdb_ser_hall1,bdb_ser_salon1,bdb_hotel1;
+    public static String bdb_ser_home1,bdb_ser_hall1,bdb_ser_salon1,bdb_hotel1,ser_sup_id;
 //    public static String bdb_ser_home2,bdb_ser_hall2,bdb_ser_salon2,bdb_hotel2;
     int postion1,postion2;
 
@@ -211,7 +213,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
+                        Log.e("SERSUPID",ser_sup_id);
                         ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
                         Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
                         //                        intent.putExtra("Service Name","")

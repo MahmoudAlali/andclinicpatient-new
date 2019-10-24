@@ -2,6 +2,8 @@ package com.dcoret.beautyclient.DataClass;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 public class DataOffer {
 //
 //    "bdb_pack_code": 1,
@@ -27,21 +29,61 @@ public class DataOffer {
 
 
 
-    String
-            bdb_pack_code
-            ,bdb_sup_name
-            ,totalRating_to_Sup
-            ,service_count
-            ,is_fav_sup
-            ,bdb_offer_end
-            ,Num_of_times
-            ,distance
-            ,longitude
-            ,latitude,oldPrice,newPrice,discount;
+//    String
+//            bdb_pack_code
+//            ,bdb_sup_name
+//            ,totalRating_to_Sup
+//            ,service_count
+//            ,is_fav_sup
+//            ,bdb_offer_start
+//            ,bdb_offer_end
+//            ,Num_of_times
+//            ,distance
+//            ,longitude
+//            ,latitude,oldPrice,newPrice,discount,bdb_offer_type;
     JSONArray pack_data;
 
+    String bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,Num_of_times,oldPrice,newPrice,discount,bdb_offer_status,bdb_offer_type
+                        ,longitude
+            ,latitude,distance
+            ;
+    ArrayList<SupIdClass> sersup_ids;
 
-    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String distance, String longitude, String latitude, String oldPrice, String newPrice, String discount) {
+
+//    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String distance, String longitude, String latitude, String oldPrice, String newPrice, String discount) {
+//        this.bdb_pack_code = bdb_pack_code;
+//        this.bdb_sup_name = bdb_sup_name;
+//        this.totalRating_to_Sup = totalRating_to_Sup;
+//        this.service_count = service_count;
+//        this.is_fav_sup = is_fav_sup;
+//        this.bdb_offer_end = bdb_offer_end;
+//        Num_of_times = num_of_times;
+//        this.distance = distance;
+//        this.longitude = longitude;
+//        this.latitude = latitude;
+//        this.oldPrice = oldPrice;
+//        this.newPrice = newPrice;
+//        this.discount = discount;
+//    }
+//
+//    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String distance, String longitude, String latitude, String oldPrice, String newPrice, String discount, JSONArray pack_data) {
+//        this.bdb_pack_code = bdb_pack_code;
+//        this.bdb_sup_name = bdb_sup_name;
+//        this.totalRating_to_Sup = totalRating_to_Sup;
+//        this.service_count = service_count;
+//        this.is_fav_sup = is_fav_sup;
+//        this.bdb_offer_end = bdb_offer_end;
+//        Num_of_times = num_of_times;
+//        this.distance = distance;
+//        this.longitude = longitude;
+//        this.latitude = latitude;
+//        this.oldPrice = oldPrice;
+//        this.newPrice = newPrice;
+//        this.discount = discount;
+//        this.pack_data = pack_data;
+//    }
+
+    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String distance, String longitude, String latitude, String oldPrice, String newPrice, String discount, String bdb_offer_type) {
         this.bdb_pack_code = bdb_pack_code;
         this.bdb_sup_name = bdb_sup_name;
         this.totalRating_to_Sup = totalRating_to_Sup;
@@ -55,23 +97,37 @@ public class DataOffer {
         this.oldPrice = oldPrice;
         this.newPrice = newPrice;
         this.discount = discount;
+        this.bdb_offer_type = bdb_offer_type;
+//        this.pack_data = pack_data;
     }
 
-    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String distance, String longitude, String latitude, String oldPrice, String newPrice, String discount, JSONArray pack_data) {
+    public DataOffer( String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, String longitude, String latitude, String distance, ArrayList<SupIdClass> sersup_ids) {
+        this.pack_data = pack_data;
         this.bdb_pack_code = bdb_pack_code;
         this.bdb_sup_name = bdb_sup_name;
         this.totalRating_to_Sup = totalRating_to_Sup;
         this.service_count = service_count;
         this.is_fav_sup = is_fav_sup;
+        this.bdb_offer_start = bdb_offer_start;
         this.bdb_offer_end = bdb_offer_end;
         Num_of_times = num_of_times;
-        this.distance = distance;
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.oldPrice = oldPrice;
         this.newPrice = newPrice;
         this.discount = discount;
-        this.pack_data = pack_data;
+        this.bdb_offer_status = bdb_offer_status;
+        this.bdb_offer_type = bdb_offer_type;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.distance = distance;
+        this.sersup_ids = sersup_ids;
+    }
+
+    public String getBdb_offer_type() {
+        return bdb_offer_type;
+    }
+
+    public void setBdb_offer_type(String bdb_offer_type) {
+        this.bdb_offer_type = bdb_offer_type;
     }
 
     public String getDiscount() {
@@ -102,7 +158,47 @@ public class DataOffer {
         this.longitude = longitude;
         this.latitude = latitude;
     }
+    public DataOffer(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, ArrayList<SupIdClass> sersup_ids) {
+        this.bdb_pack_code = bdb_pack_code;
+        this.bdb_sup_name = bdb_sup_name;
+        this.totalRating_to_Sup = totalRating_to_Sup;
+        this.service_count = service_count;
+        this.is_fav_sup = is_fav_sup;
+        this.bdb_offer_start = bdb_offer_start;
+        this.bdb_offer_end = bdb_offer_end;
+        this.Num_of_times = num_of_times;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.discount = discount;
+        this.bdb_offer_status = bdb_offer_status;
+        this.bdb_offer_type = bdb_offer_type;
+        this.sersup_ids = sersup_ids;
+    }
 
+
+    public String getBdb_offer_start() {
+        return bdb_offer_start;
+    }
+
+    public void setBdb_offer_start(String bdb_offer_start) {
+        this.bdb_offer_start = bdb_offer_start;
+    }
+
+    public String getBdb_offer_status() {
+        return bdb_offer_status;
+    }
+
+    public void setBdb_offer_status(String bdb_offer_status) {
+        this.bdb_offer_status = bdb_offer_status;
+    }
+
+    public ArrayList<SupIdClass> getSersup_ids() {
+        return sersup_ids;
+    }
+
+    public void setSersup_ids(ArrayList<SupIdClass> sersup_ids) {
+        this.sersup_ids = sersup_ids;
+    }
 
     public String getOldPrice() {
         return oldPrice;
@@ -199,4 +295,52 @@ public class DataOffer {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
+
+
+
+    public static class SupIdClass{
+        String bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_ser_id;
+
+
+        public SupIdClass(String bdb_ser_sup_id, String bdb_name, String bdb_ser_id) {
+            this.bdb_ser_sup_id = bdb_ser_sup_id;
+            this.bdb_name = bdb_name;
+//            this.bdb_name_ar = bdb_name_ar;
+            this.bdb_ser_id = bdb_ser_id;
+        }
+
+        public String getBdb_ser_sup_id() {
+            return bdb_ser_sup_id;
+        }
+
+        public void setBdb_ser_sup_id(String bdb_ser_sup_id) {
+            this.bdb_ser_sup_id = bdb_ser_sup_id;
+        }
+
+        public String getBdb_name() {
+            return bdb_name;
+        }
+
+        public void setBdb_name(String bdb_name) {
+            this.bdb_name = bdb_name;
+        }
+
+        public String getBdb_name_ar() {
+            return bdb_name_ar;
+        }
+
+        public void setBdb_name_ar(String bdb_name_ar) {
+            this.bdb_name_ar = bdb_name_ar;
+        }
+
+        public String getBdb_ser_id() {
+            return bdb_ser_id;
+        }
+
+        public void setBdb_ser_id(String bdb_ser_id) {
+            this.bdb_ser_id = bdb_ser_id;
+        }
+    }
+
+
 }

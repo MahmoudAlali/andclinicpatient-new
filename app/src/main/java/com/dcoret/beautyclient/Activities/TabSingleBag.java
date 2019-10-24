@@ -58,7 +58,7 @@ public class TabSingleBag extends Fragment {
             @Override
             public void onRefresh() {
                 getCarts.clear();
-//                APICall.getCart(BeautyMainPage.context);
+                APICall.getAllCart(BeautyMainPage.context);
             }
         });
         if (isFirstOpen){

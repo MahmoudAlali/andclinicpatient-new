@@ -38,7 +38,9 @@ import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
@@ -49,8 +51,7 @@ import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.Fragments.SettingFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.test.Main2Activity;
-
-
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 //------------------ main page---------------
@@ -59,6 +60,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
     //---------static variables for permissions----------
     public static int ACCESS_FINE_LOCATION=90;
+    public static Fragment currentFragment;
     private int READ_EXTERNAL_STORAGE=93;
 
     //--------------------- for call some of APIs for the first time ofopen app ---------------------
@@ -86,6 +88,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.services_tabs_layout);
 
 
+        FirebaseMessaging.getInstance().subscribeToTopic("Beauty");
+
+
         //------- test notificatoin-----------
         //        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
         //------------------------- permissions check------------------
@@ -100,6 +105,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         context=this;
+        Log.e("TOKEN", APICall.gettoken(context));
+
         navigation=findViewById(R.id.navigation);
         mDrawerLayout=findViewById(R.id.drawer);
         layout=findViewById(R.id.fragment);
@@ -311,6 +318,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
+                fragment = new GroupReservationOthersFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }else if (FRAGMENT_NAME.equals("DELETEACCOUNT")){
                 fragment = new AccountFragment();
                 fm = getFragmentManager();
@@ -434,7 +447,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             return true;
                         case R.id.reservations:
                             FRAGMENT_NAME="";
-                            fragment = new ReservationFragment();
+                            fragment = new MyReservationFragment();
+//                            fragment = new ReservationFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, fragment);

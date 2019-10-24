@@ -43,7 +43,7 @@ public class SettingFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
     SharedPreferences.Editor editor;
-    EditText token;
+//    EditText token;
     public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
     public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
 
@@ -58,9 +58,9 @@ public class SettingFragment extends Fragment {
         toolbar= view.findViewById(R.id.toolbar);
         arabic= view.findViewById(R.id.arabic);
         english= view.findViewById(R.id.english);
-        token= view.findViewById(R.id.token);
-        String tokentxt=((AppCompatActivity)BeautyMainPage.context).getSharedPreferences("REG_ID",Context.MODE_PRIVATE).getString("token_client",null);
-        token.setText(tokentxt);
+//        token= view.findViewById(R.id.token);
+//        String tokentxt=((AppCompatActivity)BeautyMainPage.context).getSharedPreferences("REG_ID",Context.MODE_PRIVATE).getString("token_client",null);
+//        token.setText(tokentxt);
         editor =((AppCompatActivity)BeautyMainPage.context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
 
         arabic.setOnClickListener(new View.OnClickListener() {

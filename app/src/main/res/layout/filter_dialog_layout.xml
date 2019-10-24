@@ -26,7 +26,16 @@
             android:textColor="#000"
             android:layout_marginBottom="5dp"
        />
-
+        <CheckBox
+            android:id="@+id/price_offer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="سعر العرض"
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:textColor="#000"
+            android:layout_marginBottom="5dp"
+            />
 
 
         <CheckBox

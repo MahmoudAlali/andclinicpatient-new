@@ -127,6 +127,7 @@ public class SearchBookingDataSTR {
                 bdb_ser_salon,
                 bdb_ser_hall,
                 bdb_hotel;
+        String date;
 
 
         public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String sup_id, String ser_sup_id, String from, String to) {
@@ -178,6 +179,38 @@ public class SearchBookingDataSTR {
             this.bdb_ser_salon = bdb_ser_salon;
             this.bdb_ser_hall = bdb_ser_hall;
             this.bdb_hotel = bdb_hotel;
+        }
+
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date) {
+            this.ser_id = ser_id;
+            this.ser_name = ser_name;
+            this.ser_name_ar = ser_name_ar;
+            this.emp_id = emp_id;
+            this.emp_name = emp_name;
+            this.sup_id = sup_id;
+            this.ser_sup_id = ser_sup_id;
+            this.from = from;
+            this.to = to;
+            this.bdb_ser_home_price = bdb_ser_home_price;
+            this.bdb_ser_hall_price = bdb_ser_hall_price;
+            this.bdb_hotel_price = bdb_hotel_price;
+            this.bdb_ser_salon_price = bdb_ser_salon_price;
+            this.bdb_ser_home = bdb_ser_home;
+            this.bdb_ser_salon = bdb_ser_salon;
+            this.bdb_ser_hall = bdb_ser_hall;
+            this.bdb_hotel = bdb_hotel;
+            this.date = date;
+        }
+
+
+
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
         }
 
         public String getEmp_name() {
