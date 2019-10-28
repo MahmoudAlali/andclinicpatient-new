@@ -282,6 +282,14 @@
     <string name="all_res">جميع حجوزاتي</string>
     <string name="all_res_offer"> حجوزاتي داخل عرض</string>
     <string name="export_invoice">اصدار فاتورة</string>
+    <string name="client_name1">اسم الزبونة</string>
+    <string name="service_exec_date">تاريخ تنفيذ الخدمة</string>
+    <string name="offer_type_select">اختاري نوع العرض</string>
+    <string name="service_reservation_date">تاريخ حجز الخدمة</string>
+    <string name="Service_Name">اسم الخدمة</string>
+    <string name="book_type">نوع الحجز</string>
+    <string name="employee_name">اسم الموظفة</string>
+    <string name="service_date">تاريخ الخدمة</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>

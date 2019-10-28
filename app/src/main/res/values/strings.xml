@@ -295,6 +295,19 @@
         <item>الموظفة 3</item>
     </string-array>
 
+
+    <string-array name="offer_type">
+        <item> نوع الحجز</item>
+        <item>حجز فردي</item>
+        <item>حجز جماعي للغير</item>
+        <item>حجز جماعي</item>
+        <item>حجز فردي متعدد الخدمات</item>
+        <item>عرض :حجز فردي</item>
+        <item>عرض :حجز متعدد الخدمات</item>
+        <item>عرض :حجز جماعي</item>
+
+
+    </string-array>
     <string-array name="service_place">
         <item>Place Service</item>
         <item>Salon</item>
@@ -433,4 +446,12 @@
     <string name="all_res">all reservation</string>
     <string name="all_res_offer">all offer reservation</string>
     <string name="export_invoice">export invoice</string>
+    <string name="client_name1">client name</string>
+    <string name="service_exec_date">date execute service</string>
+    <string name="offer_type_select">select offer type</string>
+    <string name="service_reservation_date">service reservation date</string>
+    <string name="Service_Name">service name</string>
+    <string name="book_type">book type</string>
+    <string name="employee_name">employee name</string>
+    <string name="service_date">service date</string>
 </resources>

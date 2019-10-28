@@ -32,19 +32,29 @@
             android:textSize="15dp" />
 
 
-        <DatePicker
 
-            android:id="@+id/date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow_edit_text"
-            android:gravity="center"
-            android:hint="code" />
+        <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
+            android:id="@+id/calendar"
+            android:layoutDirection="ltr"
+            android:textDirection="ltr"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.archit.calendardaterangepicker.customviews.DateRangeCalendarView>
+
+
+        <!--<DatePicker-->
+            <!--android:id="@+id/date_picker"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:background="@drawable/shadow_edit_text"-->
+            <!--android:gravity="center"-->
+            <!--android:hint="code" />-->
 
         <LinearLayout
             android:layout_width="match_parent"

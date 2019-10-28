@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+
+import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
@@ -34,10 +36,11 @@ import com.dcoret.beautyclient.R;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 //import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
-public class MyReservationFragment extends Fragment {
+public class MyReservationFragment extends Fragment  {
 
     public static Fragment fragment;
     public static FragmentManager fm;
@@ -55,11 +58,18 @@ public class MyReservationFragment extends Fragment {
     public static String serviceNamefilter="",empnamefilter="";
     public static Button filter;
     public static Dialog dialog;
-    public static CheckBox service_name,emp_name,service_date,service_reservation_date,book_type;
+    public static CheckBox service_name,service_exec_date,emp_name,service_date,service_reservation_date,book_type;
     public static boolean filtercheck=false;
     public static ArrayList<String> filterNames=new ArrayList<>();
     public static ArrayList<Integer> filterPostions=new ArrayList<>();
-//    public static FloatingTextButton floatingTextButton;
+    public static String groupbooking="";
+
+    public static String service_date_txt="",tab="1";
+
+
+    int syear,smonth,sday,eyear,emonth,eday;
+
+    //    public static FloatingTextButton floatingTextButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,199 +112,273 @@ public class MyReservationFragment extends Fragment {
 
 
 
-//        filterbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                 dialog=new Dialog(BeautyMainPage.context);
-//                dialog.setContentView(R.layout.filter_dialog_layout);
-//                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//                  service_name=dialog.findViewById(R.id.service_name);
-//                  emp_name=dialog.findViewById(R.id.emp_name);
-//                  service_date=dialog.findViewById(R.id.service_date);
-//                  service_reservation_date=dialog.findViewById(R.id.service_r_date);
-//                  book_type=dialog.findViewById(R.id.book_type);
-//
-//                try {
-//                    if (APICall.empNames.isEmpty()) {
-//                        APICall.empNames.add("Select Employee");
-//                        APICall.getEmpSalonS(BeautyMainPage.context);
-//                    }
-//                    if (APICall.servicesList.isEmpty()) {
-//                        APICall.servicesList.add("Select Service");
-////                        APICall.pd.dismiss();
-////                        APICall.getService("2", ProviderMainPage.context);
-//                    }
-//
-//                    Log.e("FNAMESSIZE", filterNames.size() + "");
-//                    for (int k = 0; k < filterNames.size(); k++) {
-//                        Log.e("FilterNames", filterNames.get(k));
-//                        Log.e("FilterNames", k + "");
-//                    }
-//                    if (!filterNames.get(0).equals("")) {
-//                        service_name.setChecked(true);
-//                        service_name.setText(serviceName);
-//                    }
-//                    if (!empname.equals("")) {
-//                        emp_name.setChecked(true);
-//                        emp_name.setText(empname);
-//                    }
-//
-//                    if (!startdate.equals("")) {
-//                        service_date.setChecked(true);
-//                        service_date.setText(filterNames.get(1));
-//                    }
-//                    if (!start_r_date.equals("")) {
-//                        service_reservation_date.setChecked(true);
-//                        service_reservation_date.setText(start_r_date);
-//                    }
-//                    if (!bookingType.equals("")) {
-//                        book_type.setChecked(true);
-//                        book_type.setText(bookingType);
-//                    }
-//
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-////                 }
-//
-//                  Button clear=dialog.findViewById(R.id.clear);
-//                  clear.setOnClickListener(new View.OnClickListener() {
-//                      @Override
-//                      public void onClick(View v) {
-//                          serviceId="";
-//                          employee_id="";
-//                          service_name.setChecked(false);
-//                          emp_name.setChecked(false);
-//                          for (int i=0;i<filterNames.size();i++){
-//                          filterNames.set(i,"");
-//                          filterPostions.set(i,-1);
-//                          }
-//
-//                      }
-//                  });
-//
-//
-//                  service_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked){
-//                            final Dialog name=new Dialog(ProviderMainPage.context);
-//                            name.setContentView(R.layout.emp_name_layout);
-//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//                            TextView typename=name.findViewById(R.id.type_name);
+
+
+        filterbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog=new Dialog(BeautyMainPage.context);
+                dialog.setContentView(R.layout.filter_dialog_layout_v2);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                service_name=dialog.findViewById(R.id.service_name);
+                emp_name=dialog.findViewById(R.id.emp_name);
+                service_exec_date=dialog.findViewById(R.id.service_exec_date);
+                  service_reservation_date=dialog.findViewById(R.id.service_date);
+                book_type=dialog.findViewById(R.id.book_type);
+
+                try {
+                    if (APICall.empNames.isEmpty()) {
+                        APICall.empNames.add("Select Employee");
+                        APICall.getEmpSalonS(BeautyMainPage.context);
+                    }
+                    if (APICall.servicesList.isEmpty()) {
+                        APICall.servicesList.add("Select Service");
+                        APICall.pd.dismiss();
+                        APICall.getService("2", BeautyMainPage.context);
+                    }
+
+                    Log.e("FNAMESSIZE", filterNames.size() + "");
+                    for (int k = 0; k < filterNames.size(); k++) {
+                        Log.e("FilterNames", filterNames.get(k));
+                        Log.e("FilterNames", k + "");
+                    }
+                    if (!filterNames.get(0).equals("")) {
+                        service_name.setChecked(true);
+                        service_name.setText(serviceName);
+                    }
+                    if (!empname.equals("")) {
+                        emp_name.setChecked(true);
+                        emp_name.setText(empname);
+                    }
+
+                    if (!startdate.equals("")) {
+                        service_reservation_date.setChecked(true);
+                        service_reservation_date.setText(startdate);
+                    }
+                    if (!service_date_txt.equals("")) {
+                        service_exec_date.setChecked(true);
+                        service_exec_date.setText(service_date_txt);
+                    }
+                    if (!groupbooking.equals("")) {
+                        book_type.setChecked(true);
+                        book_type.setText(bookingType);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+//                 }
+
+                Button clear=dialog.findViewById(R.id.clear);
+                clear.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        serviceId="";
+                        employee_id="";
+                        service_name.setChecked(false);
+                        emp_name.setChecked(false);
+                        for (int i=0;i<filterNames.size();i++){
+                            filterNames.set(i,"");
+                            filterPostions.set(i,-1);
+                        }
+
+                    }
+                });
+
+
+                service_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            final Dialog name=new Dialog(BeautyMainPage.context);
+                            name.setContentView(R.layout.emp_name_layout);
+                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                            TextView typename=name.findViewById(R.id.type_name);
+                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+                            Button ok=name.findViewById(R.id.ok);
+
+                            typename.setText(service_name.getText());
+                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.servicesList);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            nameEdTXT.setAdapter(adapter);
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (nameEdTXT.getSelectedItemPosition()!=0){
+                                        name.dismiss();
+                                        serviceName = nameEdTXT.getSelectedItem().toString();
+                                        service_name.setText(serviceName);
+                                        serviceId=APICall.servicesArrayList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_ser_id();
+                                        Log.e("SERVID",serviceId);
+                                        filterNames.set(0,serviceName);
+                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
+
+                                    }
+                                }
+                            });
+
+                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+//                                    service_name.setText("اسم الخدمة");
+//                                    service_name.setChecked(false);
+//                                    serviceName="";
+//                                    filterNames.set(0,"");
+//                                    filterPostions.set(0,-1);
+                                }
+                            });
+                            name.show();
+                        }else {
+                            serviceId="";
+                            service_name.setText(getResources().getString(R.string.Service_Name));
+                            serviceName="";
+                            service_name.setChecked(false);
+                            filterNames.set(1,"");
+                            filterPostions.set(1,-1);
+                        }
+                    }
+                });
+                service_reservation_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            final Dialog name=new Dialog(BeautyMainPage.context);
+                            name.setContentView(R.layout.select_date);
+                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
 //                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-//                            Button ok=name.findViewById(R.id.ok);
-//
-//                            typename.setText(service_name.getText());
-//                            ArrayAdapter adapter=new ArrayAdapter(ProviderMainPage.context,android.R.layout.simple_spinner_item, API.servicesList);
-//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            nameEdTXT.setAdapter(adapter);
-//
-//                            ok.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    if (nameEdTXT.getSelectedItemPosition()!=0){
-//                                        name.dismiss();
-//                                       serviceName = nameEdTXT.getSelectedItem().toString();
-//                                       service_name.setText(serviceName);
-//                                       serviceId=API.servicesArrayList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_ser_id();
+                            TextView ok=name.findViewById(R.id.confirm);
+                            TextView cancel=name.findViewById(R.id.cancel);
+
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//                                    if (.getSelectedItemPosition()!=0){
+                                    name.dismiss();
+                                    int month=datePicker.getMonth()+1;
+                                    startdate = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
+                                    service_reservation_date.setText(startdate);
+//                                        serviceId=API.servicesArrayList.get();
 //                                        Log.e("SERVID",serviceId);
-//                                        filterNames.set(0,serviceName);
+
+//                                    service_date_txt=service_reservation_date.getText()+":"+startdate;
+//                                    filterNames.set(2,startdate);
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-//
-//                                    }
-//                                }
-//                            });
-//
-//                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-////                                    service_name.setText("اسم الخدمة");
-////                                    service_name.setChecked(false);
-////                                    serviceName="";
-////                                    filterNames.set(0,"");
-////                                    filterPostions.set(0,-1);
-//                                }
-//                            });
-//                            name.show();
-//                        }else {
+
+
+                                }
+                            });
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+
+                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+//                                    service_name.setText("اسم الخدمة");
+//                                    service_name.setChecked(false);
+//                                    serviceName="";
+//                                    filterNames.set(0,"");
+//                                    filterPostions.set(0,-1);
+                                }
+                            });
+                            name.show();
+                        }else {
 //                            serviceId="";
-//                            service_name.setText(getResources().getString(R.string.Service_Name));
+                            startdate="";
+                            Log.e("startdate","000");
+                            service_reservation_date.setText(getResources().getString(R.string.service_reservation_date));
 //                            serviceName="";
-//                            service_name.setChecked(false);
-//                            filterNames.set(1,"");
-//                            filterPostions.set(1,-1);
-//                        }
-//                    }
-//                });
-//                service_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked){
-//                            final Dialog name=new Dialog(ProviderMainPage.context);
-//                            name.setContentView(R.layout.select_date);
-//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                            service_date_txt="";
+                            service_reservation_date.setChecked(false);
+                            filterNames.set(2,"");
+                            filterPostions.set(2,-1);
+                        }
+                    }
+                });
+
+                service_exec_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            final Dialog name=new Dialog(BeautyMainPage.context);
+                            name.setContentView(R.layout.select_date_range);
+                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 //                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
-////                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-//                            TextView ok=name.findViewById(R.id.ok);
-//                            TextView cancel=name.findViewById(R.id.cancel);
-//
-//
-//                            ok.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-////                                    if (.getSelectedItemPosition()!=0){
-//                                        name.dismiss();
-//                                        startdate = datePicker.getDayOfMonth()+"-"+datePicker.getMonth()+"-"+datePicker.getYear();
-//                                        service_date.setText(startdate);
-////                                        serviceId=API.servicesArrayList.get();
-////                                        Log.e("SERVID",serviceId);
-//
-//
-//                                        filterNames.set(2,startdate);
-////                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-//
-//
-//                                }
-//                            });
-//                            cancel.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//
-//
-//                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-////                                    service_name.setText("اسم الخدمة");
-////                                    service_name.setChecked(false);
-////                                    serviceName="";
-////                                    filterNames.set(0,"");
-////                                    filterPostions.set(0,-1);
-//                                }
-//                            });
-//                            name.show();
-//                        }else {
+                            final DateRangeCalendarView calendar=name.findViewById(R.id.calendar);
+//                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+                            TextView ok=name.findViewById(R.id.confirm);
+                            TextView cancel=name.findViewById(R.id.cancel);
+                            Calendar startSelectionDate = Calendar.getInstance();
+                            startSelectionDate.add(Calendar.MONTH, -1);
+                            Calendar endSelectionDate = (Calendar) startSelectionDate.clone();
+                            endSelectionDate.add(Calendar.DATE, 40);
+
+                            calendar.setSelectedDateRange(startSelectionDate, endSelectionDate);
+
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//                                    if (.getSelectedItemPosition()!=0){
+                                    name.dismiss();
+//                                    int month=datePicker.getMonth()+1;
+
+//                                    service_date_txt = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
+//                                        serviceId=API.servicesArrayList.get();
+//                                        Log.e("SERVID",serviceId);
+
+//                                    service_date_txt=service_date_txt;
+//                                    filterNames.set(2,startdate);
+//                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
+                                    service_exec_date.setText(service_exec_date.getText()+service_date_txt);
+                                }
+                            });
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+
+                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+//                                    service_name.setText("اسم الخدمة");
+//                                    service_name.setChecked(false);
+//                                    serviceName="";
+//                                    filterNames.set(0,"");
+//                                    filterPostions.set(0,-1);
+                                }
+                            });
+                            name.show();
+
+                        }else {
 //                            serviceId="";
-//                            service_name.setText(getResources().getString(R.string.service_date));
+                            service_exec_date.setText(getResources().getString(R.string.service_exec_date));
 //                            serviceName="";
-//                            service_name.setChecked(false);
+                            service_date_txt="";
+                            service_exec_date.setChecked(false);
 //                            filterNames.set(2,"");
-//                            filterPostions.set(2,-1);
-//                        }
-//                    }
-//                });
-//
-//
-//
-//
+                            filterPostions.set(2,-1);
+                        }
+                    }
+                });
+
+
+
 //                service_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override
 //                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //                        if (isChecked){
-//                            final Dialog name=new Dialog(ProviderMainPage.context);
+//                            final Dialog name=new Dialog(BeautyMainPage.context);
 //                            name.setContentView(R.layout.select_date);
 //                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 //                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
@@ -307,10 +391,11 @@ public class MyReservationFragment extends Fragment {
 //                                public void onClick(View v) {
 ////                                    if (.getSelectedItemPosition()!=0){
 //                                    name.dismiss();
-//                                    startdate = datePicker.getDayOfMonth()+"-"+datePicker.getMonth()+"-"+datePicker.getYear();
+//                                    int m=datePicker.getMonth()+1;
+//                                    startdate = datePicker.getYear()+"-"+m+"-"+datePicker.getDayOfMonth();
 //                                    service_date.setText(startdate);
 ////                                        serviceId=API.servicesArrayList.get();
-//                                        Log.e("service_date",startdate+"");
+//                                    Log.e("service_date",startdate+"");
 //
 //
 //                                    filterNames.set(2,startdate);
@@ -347,8 +432,8 @@ public class MyReservationFragment extends Fragment {
 //                    }
 //                });
 //
-//
-//
+
+
 //                service_reservation_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override
 //                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -405,131 +490,172 @@ public class MyReservationFragment extends Fragment {
 //                        }
 //                    }
 //                });
-//
-//
-//
-//
-//                emp_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked){
-//                            final Dialog name=new Dialog(ProviderMainPage.context);
-//                            name.setContentView(R.layout.emp_name_layout);
-//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//                            TextView typename=name.findViewById(R.id.type_name);
-//                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-//                            Button ok=name.findViewById(R.id.ok);
-//
-//                            typename.setText(emp_name.getText());
-////                            nameEdTXT.setText("");
-//                            ArrayAdapter adapter=new ArrayAdapter(ProviderMainPage.context,android.R.layout.simple_spinner_item, API.empNames);
-//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            nameEdTXT.setAdapter(adapter);
-//
-//
-//                            ok.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    if (nameEdTXT.getSelectedItemPosition()!=0){
-//                                        name.dismiss();
-//                                        empname = nameEdTXT.getSelectedItem().toString();
-//                                        emp_name.setText(empname);
-//                                        employee_id=API.employeeSalonList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_id();
-//                                        Log.e("EMPID",employee_id);
-//                                        filterNames.set(1,empname);
-//                                        filterPostions.set(1,nameEdTXT.getSelectedItemPosition());
-//
-//                                    }
-//                                }
-//                            });
-//
-//                        name.show();
-//                        }else {
-//                            employee_id="";
-//                            emp_name.setText(R.string.employee_name);
-//                            empname="";
-//                            emp_name.setChecked(false);
-//                            filterNames.set(1,"");
-//                            filterPostions.set(1,-1);
-//
-//                        }
-//
-//                    }
-//
-//                });
-//
-//
-//
-//
-//                book_type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if (isChecked){
-//
-//
-//                        }else {
-//                            bookingType="";
-//                            emp_name.setText(R.string.book_type);
-//                            emp_name.setChecked(false);
-//                            filterNames.set(4,"");
-//                            filterPostions.set(4,-1);
-//
-//                        }
-//
-//                    }
-//
-//                });
-//
-//
-//
-//
-//
-//                 filter=dialog.findViewById(R.id.filter);
-//                filter.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                        filtercheck=true;
-//
-//                        dialog.cancel();
-//                        if (API.layout==R.layout.incom_reservation_layout) {
-//                            fragment = new IncomReservationFragment();
-//                            fm = getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-//                            fragmentTransaction.commit();
-//                            tabselected(incom_reservation, accept_reservation, deposited_reservation,false);
-//                        }else if (API.layout==R.layout.accept_reservation_layout_v2){
-//                            fragment = new AcceptReservationFragment();
-//                            fm = getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-//                            fragmentTransaction.commit();
-//                            tabselected(accept_reservation,incom_reservation,  deposited_reservation,false);
-//                        }else {
-//                            fragment = new DepositReservationFragment();
-//                            fm = getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-//                            fragmentTransaction.commit();
-//                            tabselected(deposited_reservation,accept_reservation,incom_reservation,false);
-//                        }
-//                        API.bookingAutomatedBrowse("en","10",MyReservationFragment.serviceId,"1",API.filter,API.sort,ProviderMainPage.context,API.layout);
-//
-//                   }
-//                });
-//
-//                dialog.show();
-//
-//            }
-//
-//
-//        });
+
+
+
+
+                emp_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            final Dialog name=new Dialog(BeautyMainPage.context);
+                            name.setContentView(R.layout.emp_name_layout);
+                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                            TextView typename=name.findViewById(R.id.type_name);
+                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+                            Button ok=name.findViewById(R.id.ok);
+
+                            typename.setText(emp_name.getText());
+//                            nameEdTXT.setText("");
+                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.empNames);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            nameEdTXT.setAdapter(adapter);
+
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (nameEdTXT.getSelectedItemPosition()!=0){
+                                        name.dismiss();
+                                        empname = nameEdTXT.getSelectedItem().toString();
+                                        emp_name.setText(empname);
+                                        employee_id=APICall.employeeSalonList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_id();
+                                        Log.e("EMPID",employee_id);
+                                        filterNames.set(1,empname);
+                                        filterPostions.set(1,nameEdTXT.getSelectedItemPosition());
+
+                                    }
+                                }
+                            });
+
+                            name.show();
+                        }else {
+                            employee_id="";
+                            emp_name.setText(R.string.employee_name);
+                            empname="";
+                            emp_name.setChecked(false);
+                            filterNames.set(1,"");
+                            filterPostions.set(1,-1);
+
+                        }
+
+                    }
+
+                });
+
+
+
+
+                book_type.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+
+                            final Dialog dialog=new Dialog(BeautyMainPage.context);
+                            dialog.setContentView(R.layout.select_offer_type_dialog_v2);
+
+                            final Spinner offer_type=dialog.findViewById(R.id.code);
+                            ArrayAdapter adapter=ArrayAdapter.createFromResource(BeautyMainPage.context
+                                    ,R.array.offer_type
+                                    ,android.R.layout.simple_spinner_item);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                            offer_type.setAdapter(adapter);
+                            TextView ok=dialog.findViewById(R.id.confirm);
+
+                            ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (offer_type.getSelectedItemPosition()==1){
+                                        dialog.cancel();
+                                        groupbooking="0";
+                                    }else if (offer_type.getSelectedItemPosition()==2){
+                                        dialog.cancel();
+                                        groupbooking="2";
+                                    }else if (offer_type.getSelectedItemPosition()==3){
+                                        dialog.cancel();
+                                        groupbooking="1";
+                                    }else if (offer_type.getSelectedItemPosition()==4){
+                                        dialog.cancel();
+                                        groupbooking="3";
+                                    }else if (offer_type.getSelectedItemPosition()==5){
+                                        dialog.cancel();
+                                        groupbooking="4";
+                                    }else if (offer_type.getSelectedItemPosition()==6){
+                                        dialog.cancel();
+                                        groupbooking="5";
+                                    }else if (offer_type.getSelectedItemPosition()==7){
+                                        dialog.cancel();
+                                        groupbooking="6";
+                                    }
+                                    if (offer_type.getSelectedItemPosition()!=0){
+
+                                        book_type.setText("نوع العرض: "+offer_type.getSelectedItem().toString());
+                                        bookingType=book_type.getText().toString();
+                                    }
+                                }
+                            });
+
+                            dialog.show();
+
+
+                        }else {
+//                            book_type.setText("نوع العرض");
+                            bookingType="";
+                            groupbooking="";
+                            emp_name.setText(R.string.book_type);
+                            emp_name.setChecked(false);
+                            filterNames.set(4,"");
+                            filterPostions.set(4,-1);
+
+                        }
+
+                    }
+
+                });
+
+
+
+
+
+                filter=dialog.findViewById(R.id.filter);
+                filter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        filtercheck=true;
+                        dialog.cancel();
+                        if (APICall.layout==R.layout.incom_reservation_layout) {
+                            fragment = new IncomReservationFragment();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commit();
+                            tabselected(incom_reservation, accept_reservation,false);
+                        }else if (APICall.layout==R.layout.accept_reservation_layout_v2){
+                            fragment = new AcceptReservationFragment();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commit();
+                            tabselected(accept_reservation,incom_reservation,false);
+                        }
+                        APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+
+                    }
+                });
+
+                dialog.show();
+
+            }
+
+
+        });
 
         incom_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                tab="1";
                 fragment = new IncomReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -544,6 +670,7 @@ public class MyReservationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tabselected(accept_reservation,incom_reservation,true);
+                tab="2";
                 fragment = new AcceptReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

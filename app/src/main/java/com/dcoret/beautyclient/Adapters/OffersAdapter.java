@@ -23,7 +23,7 @@ import com.dcoret.beautyclient.DataClass.ServiceItem;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.Fragments.ShoppingCartFragment;
 import com.dcoret.beautyclient.R;
-import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
+//import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

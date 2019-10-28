@@ -108,7 +108,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                             if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4) {
                                 APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
                             }else {
-                                APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_id(),true,groupPosition,context);
+                                APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);
                             }
 //                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
                         Toast.makeText(context,"book Reserved",Toast.LENGTH_SHORT).show();

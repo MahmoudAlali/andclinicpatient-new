@@ -59,7 +59,7 @@ import com.dcoret.beautyclient.DataClass.Cities;
 import com.dcoret.beautyclient.DataClass.ServiceFilter;
 import com.dcoret.beautyclient.DataClass.SupInfoClass;
 import com.dcoret.beautyclient.R;
-import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
+//import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
 import java.util.ArrayList;
 import java.util.Date;

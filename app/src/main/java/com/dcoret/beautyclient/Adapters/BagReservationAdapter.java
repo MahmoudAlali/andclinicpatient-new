@@ -74,7 +74,7 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         ((Item)holder).reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.moveCartToBooking(getAllCarts.get(position).getBdb_id(),false,position,BeautyMainPage.context);
+                APICall.moveCartToBooking(getAllCarts.get(position).getBdb_pack_booking(),getAllCarts.get(position).getBdb_is_group_booking(),position,BeautyMainPage.context);
             }
         });
         ((Item)holder).delete.setOnClickListener(new View.OnClickListener() {

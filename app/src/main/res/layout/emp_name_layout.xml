@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/shadow_gray_dialog"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/type_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:textColor="#000"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            />
+
+
+
+        <!--<CheckBox-->
+        <!--android:id="@+id/rate_service"-->
+
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="تقييم الخدمة"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/standard_20"-->
+        <!--android:textColor="#000"-->
+        <!--android:layout_marginBottom="5dp"-->
+
+        <!--/>-->
+        <Spinner
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_edit_text"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:hint="Name"
+            android:textColor="#000"
+            android:layout_marginBottom="15dp"
+
+            />
+        <!--<CheckBox-->
+        <!--android:id="@+id/far"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="البعد"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/standard_20"-->
+        <!--android:textColor="#000"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--/>-->
+        <!--<CheckBox-->
+        <!--android:id="@+id/salon_name_provider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="الصالون او اسم المزودة"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="@dimen/standard_20"-->
+        <!--android:textColor="#000"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--/>-->
+
+        <!--<CheckBox-->
+        <!--android:id="@+id/service_place"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="مكان الخدمة"-->
+        <!--android:textColor="#000"-->
+        <!--android:textSize="@dimen/standard_20" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+            <!--<Button-->
+            <!--android:id="@+id/filter"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/high_button"-->
+            <!--android:background="@drawable/shadow_button_blue"-->
+            <!--android:textSize="@dimen/standard_20"-->
+            <!--android:text="فلترة"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:textColor="#FFF"/>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/graylight"
+                />
+            <Button
+                android:id="@+id/ok"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:background="@android:color/transparent"
+                android:text="@string/ok"
+                android:textColor="@color/blue"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -164,9 +164,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).bookType.setText("عرض عروس متعدد الخدمات");
                 Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
                 ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+//                }
 
             }else if (offtypetmp.equals("9")) {
                 Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");

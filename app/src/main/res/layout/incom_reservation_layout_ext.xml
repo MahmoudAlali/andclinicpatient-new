@@ -19,7 +19,7 @@
                 android:id="@+id/book_details"
                 android:layout_width="@dimen/standard_50"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_info_black_24dp"
+                android:src="@drawable/res_info"
                 />
             <TextView
                 android:layout_weight="1"
@@ -95,7 +95,7 @@
             android:gravity="center"
             />
         <android.support.v4.widget.Space
-            android:layout_width="10dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent" />
         <TextView
             android:background="@color/prime"
@@ -109,7 +109,7 @@
             android:gravity="center"
             />
         <android.support.v4.widget.Space
-            android:layout_width="10dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent" />
         <TextView
             android:background="@color/prime"
@@ -141,7 +141,7 @@
             android:gravity="center"
             />
         <android.support.v4.widget.Space
-            android:layout_width="10dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent" />
         <!--<TextView-->
             <!--android:background="@color/prime"-->
@@ -162,7 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/export_invoice"
-            android:textColor="@color/white"
+            android:textColor="#fff"
             android:textSize="20dp"
             android:gravity="center"
             />
