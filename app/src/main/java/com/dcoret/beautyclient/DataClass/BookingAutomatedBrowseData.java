@@ -9,7 +9,9 @@ public class BookingAutomatedBrowseData {
             ,supplier_name
             ,employee_name
             ,service_en_name
-            ,service_ar_name;
+            ,service_ar_name
+            ,client_name
+            ,booking_price;
 
     String totalItem;
 
@@ -25,6 +27,51 @@ public class BookingAutomatedBrowseData {
         this.service_en_name = service_en_name;
         this.service_ar_name = service_ar_name;
         this.totalItem = totalItem;
+    }
+
+    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String totalItem) {
+        this.bdb_id = bdb_id;
+        this.bdb_price = bdb_price;
+        this.bdb_status = bdb_status;
+        this.bdb_start_date = bdb_start_date;
+        this.bdb_start_time = bdb_start_time;
+        this.supplier_name = supplier_name;
+        this.employee_name = employee_name;
+        this.service_en_name = service_en_name;
+        this.service_ar_name = service_ar_name;
+        this.client_name = client_name;
+        this.totalItem = totalItem;
+    }
+
+    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem) {
+        this.bdb_id = bdb_id;
+        this.bdb_price = bdb_price;
+        this.bdb_status = bdb_status;
+        this.bdb_start_date = bdb_start_date;
+        this.bdb_start_time = bdb_start_time;
+        this.supplier_name = supplier_name;
+        this.employee_name = employee_name;
+        this.service_en_name = service_en_name;
+        this.service_ar_name = service_ar_name;
+        this.client_name = client_name;
+        this.booking_price = booking_price;
+        this.totalItem = totalItem;
+    }
+
+    public String getBooking_price() {
+        return booking_price;
+    }
+
+    public void setBooking_price(String booking_price) {
+        this.booking_price = booking_price;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 
     public String getBdb_id() {

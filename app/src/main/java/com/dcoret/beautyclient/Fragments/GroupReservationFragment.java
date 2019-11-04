@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -65,16 +66,18 @@ public class GroupReservationFragment extends Fragment {
     public static ArrayList<Integer> ishairService=new ArrayList();
 
 
+    public static  String is_group_booking="";
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    boolean bridecheck=false;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.activity_group_reservation_frag, container, false);
 
 
-        BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
+//        BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
 
         //---------- find views------------------
         add_client=view.findViewById(R.id.add_client);
@@ -86,9 +89,18 @@ public class GroupReservationFragment extends Fragment {
         //----------------------------------------
         servicesList.clear();
         serviceNameList.clear();
-        serviceNameList.add("Choose Service");
+        String choose_service=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.choose_service);
+        serviceNameList.add(choose_service);
 
-        APICall.getServices("1",BeautyMainPage.context);
+        if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")) {
+            is_group_booking="1";
+            APICall.getServices("0", BeautyMainPage.context);
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE")){
+            is_group_booking="11";
+
+            APICall.getServices("2", BeautyMainPage.context);
+
+        }
         choose_occision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +199,7 @@ public class GroupReservationFragment extends Fragment {
                              }
                          });
 
+
                          adding_name_service.addView(view1);
 
                          servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString(),vc));
@@ -249,7 +262,7 @@ public class GroupReservationFragment extends Fragment {
         add_me.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (add_me.getText().equals("Add Me")){
+                if (add_me.getText().equals(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me))){
                     add_me.setText("Remove Me");
                     items++;
                     //items++;
@@ -340,6 +353,9 @@ public class GroupReservationFragment extends Fragment {
 
                                 }
                             });
+                            if (servicesList.get(position-1).getBdb_is_bride_service().equals("1") && BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE")) {
+                                bridecheck=true;
+                            }
                             servicesForClientGroups.add(new ServicesIDS(servicesList.get(position - 1).getBdb_ser_id(), add_service.getSelectedItem().toString(),vc));
 
 
@@ -374,7 +390,7 @@ public class GroupReservationFragment extends Fragment {
                     for (int i=0;i<clientsViewData.size();i++){
                         if (clientsViewData.get(i).getId().equals(myid)){
                             clientsViewData.remove(i);
-                            add_me.setText("Add Me");
+                            add_me.setText(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me));
                         }
                     }
 //                        clientsViewData.remove(ic-1);
@@ -402,14 +418,15 @@ public class GroupReservationFragment extends Fragment {
                     }
                 }
                 if (alert == 1) {
-                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Complete All Data..");
+                    String s=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.complete_all_data);
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), s);
                 } else {
 
-                    if (add_me.getText().toString().equals("Add Me")) {
-                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add yourself to complete Process");
+                    if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
 
                     } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
-                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add another client with you");
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
                     }else {
 
                         fragment = new ClientRelationsFragment();
@@ -430,6 +447,10 @@ public class GroupReservationFragment extends Fragment {
             public void onClick(View v) {
                 int alert=0;
 
+                if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE") && bridecheck==false){
+                alert=3;
+                }
+
                 for (int i=0;i<clientsViewData.size();i++) {
                     if (clientsViewData.get(i).getPhone_number().getText().toString().length()!=0)
                     if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
@@ -448,15 +469,18 @@ public class GroupReservationFragment extends Fragment {
                     }
 
                     if (alert == 1) {
-                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Complete All Data..");
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.complete_all_data));
                     }else if(alert==2){
+
+                    }else if (alert==3){
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.ser_have_one_bride_ser));
 
                     }else {
 
-                        if (add_me.getText().toString().equals("Add Me")) {
-                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add yourself to complete Process");
+                        if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
+                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
                         } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
-                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Add another client with you");
+                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
                         } else {
                             // =------------is hair service go to anthor fragment----------
                             if (ishairService.size() > 0) {

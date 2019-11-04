@@ -33,15 +33,28 @@
 
 
 
-        <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
+        <!--<com.archit.calendardaterangepicker.customviews.DateRangeCalendarView-->
+            <!--android:id="@+id/calendar"-->
+            <!--android:layoutDirection="ltr"-->
+            <!--android:textDirection="ltr"-->
+
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</com.archit.calendardaterangepicker.customviews.DateRangeCalendarView>-->
+        <com.savvi.rangedatepicker.CalendarPickerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/calendar"
-            android:layoutDirection="ltr"
-            android:textDirection="ltr"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </com.archit.calendardaterangepicker.customviews.DateRangeCalendarView>
-
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:clipToPadding="false"
+            app:tsquare_dividerColor="@android:color/transparent"
+            app:tsquare_headerTextColor="@color/pf_red"
+            />
 
         <!--<DatePicker-->
             <!--android:id="@+id/date_picker"-->

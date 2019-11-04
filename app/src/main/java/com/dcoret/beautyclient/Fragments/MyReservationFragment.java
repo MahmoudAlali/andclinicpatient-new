@@ -6,9 +6,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -33,10 +36,16 @@ import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.R;
+import com.savvi.rangedatepicker.CalendarPickerView;
 
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 //import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
@@ -67,7 +76,8 @@ public class MyReservationFragment extends Fragment  {
     public static String service_date_txt="",tab="1";
 
 
-    int syear,smonth,sday,eyear,emonth,eday;
+    public static int syear,smonth,sday,eyear,emonth,eday;
+    public static int sryear,srmonth,srday,eryear,ermonth,erday;
 
     //    public static FloatingTextButton floatingTextButton;
     @Nullable
@@ -134,7 +144,7 @@ public class MyReservationFragment extends Fragment  {
                     if (APICall.servicesList.isEmpty()) {
                         APICall.servicesList.add("Select Service");
                         APICall.pd.dismiss();
-                        APICall.getService("2", BeautyMainPage.context);
+//                        APICall.getService("2", BeautyMainPage.context);
                     }
 
                     Log.e("FNAMESSIZE", filterNames.size() + "");
@@ -152,12 +162,12 @@ public class MyReservationFragment extends Fragment  {
                     }
 
                     if (!startdate.equals("")) {
-                        service_reservation_date.setChecked(true);
-                        service_reservation_date.setText(startdate);
+                        service_exec_date.setChecked(true);
+                        service_exec_date.setText(startdate);
                     }
                     if (!service_date_txt.equals("")) {
-                        service_exec_date.setChecked(true);
-                        service_exec_date.setText(service_date_txt);
+                        service_reservation_date.setChecked(true);
+                        service_reservation_date.setText(service_date_txt);
                     }
                     if (!groupbooking.equals("")) {
                         book_type.setChecked(true);
@@ -243,31 +253,94 @@ public class MyReservationFragment extends Fragment  {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked){
+//                            final Dialog name=new Dialog(BeautyMainPage.context);
+//                            name.setContentView(R.layout.select_date);
+//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
+////                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+//                            TextView ok=name.findViewById(R.id.confirm);
+//                            TextView cancel=name.findViewById(R.id.cancel);
+//
+//
+//                            ok.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+////                                    if (.getSelectedItemPosition()!=0){
+//                                    name.dismiss();
+//                                    int month=datePicker.getMonth()+1;
+//                                    startdate = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
+//                                    service_reservation_date.setText(startdate);
+////                                        serviceId=API.servicesArrayList.get();
+////                                        Log.e("SERVID",serviceId);
+//
+////                                    service_date_txt=service_reservation_date.getText()+":"+startdate;
+////                                    filterNames.set(2,startdate);
+////                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
+
+
+
                             final Dialog name=new Dialog(BeautyMainPage.context);
-                            name.setContentView(R.layout.select_date);
+                            name.setContentView(R.layout.select_date_range);
                             name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
+//                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
+                            final CalendarPickerView calendar=name.findViewById(R.id.calendar);
 //                            final Spinner nameEdTXT=name.findViewById(R.id.name);
                             TextView ok=name.findViewById(R.id.confirm);
                             TextView cancel=name.findViewById(R.id.cancel);
+                            Calendar pastYear = Calendar.getInstance();
+                            pastYear.add(Calendar.MONTH, -2);
+                            Calendar nextYear = Calendar.getInstance();
+                            nextYear.add(Calendar.DATE,1);
+                            calendar.init(pastYear.getTime(), nextYear.getTime()) //
+                                    .inMode(CalendarPickerView.SelectionMode.RANGE)
+                                    .withSelectedDate(new Date());
+                            calendar.setTypeface(Typeface.SANS_SERIF);
 
 
                             ok.setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onClick(View v) {
 //                                    if (.getSelectedItemPosition()!=0){
                                     name.dismiss();
-                                    int month=datePicker.getMonth()+1;
-                                    startdate = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
-                                    service_reservation_date.setText(startdate);
+//                                    int month=datePicker.getMonth()+1;
+
+//                                    service_date_txt = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
 //                                        serviceId=API.servicesArrayList.get();
 //                                        Log.e("SERVID",serviceId);
 
-//                                    service_date_txt=service_reservation_date.getText()+":"+startdate;
 //                                    filterNames.set(2,startdate);
+                                    Date date1=null,date2=null;
+                                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                                    try {
+
+                                        date1=sdf.parse(calendar.getSelectedDates().get(0).toString());
+                                        date2=sdf.parse(calendar.getSelectedDates().get(calendar.getSelectedDates().size()-1).toString());
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    LocalDate sDate=null,eDate=null;
+                                    try {
+                                        sDate=date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                        eDate=date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+
+                                    srmonth=sDate.getMonthValue();
+                                    srday=sDate.getDayOfMonth();
+
+                                    ermonth=eDate.getMonthValue();
+                                    erday=eDate.getDayOfMonth();
+
+//                                    Log.e("dates",calendar.getSelectedDates()+"");
+                                    Log.e("Start",srday+"-"+srmonth);
+                                    Log.e("Start",erday+"-"+ermonth);
+                                    service_date_txt=srday+"-"+srmonth+" to "+erday+"-"+ermonth;
+
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-
-
+                                    service_reservation_date.setText(getResources().getString(R.string.service_reservation_date)+":"+service_date_txt);
                                 }
                             });
                             cancel.setOnClickListener(new View.OnClickListener() {
@@ -291,7 +364,7 @@ public class MyReservationFragment extends Fragment  {
                             name.show();
                         }else {
 //                            serviceId="";
-                            startdate="";
+                            service_date_txt="";
                             Log.e("startdate","000");
                             service_reservation_date.setText(getResources().getString(R.string.service_reservation_date));
 //                            serviceName="";
@@ -311,19 +384,22 @@ public class MyReservationFragment extends Fragment  {
                             name.setContentView(R.layout.select_date_range);
                             name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 //                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
-                            final DateRangeCalendarView calendar=name.findViewById(R.id.calendar);
+                            final CalendarPickerView calendar=name.findViewById(R.id.calendar);
 //                            final Spinner nameEdTXT=name.findViewById(R.id.name);
                             TextView ok=name.findViewById(R.id.confirm);
                             TextView cancel=name.findViewById(R.id.cancel);
-                            Calendar startSelectionDate = Calendar.getInstance();
-                            startSelectionDate.add(Calendar.MONTH, -1);
-                            Calendar endSelectionDate = (Calendar) startSelectionDate.clone();
-                            endSelectionDate.add(Calendar.DATE, 40);
-
-                            calendar.setSelectedDateRange(startSelectionDate, endSelectionDate);
+                            Calendar pastYear = Calendar.getInstance();
+                            pastYear.add(Calendar.MONTH, -2);
+                            Calendar nextYear = Calendar.getInstance();
+                            nextYear.add(Calendar.DATE,1);
+                            calendar.init(pastYear.getTime(), nextYear.getTime()) //
+                                    .inMode(CalendarPickerView.SelectionMode.RANGE)
+                                    .withSelectedDate(new Date());
+                            calendar.setTypeface(Typeface.SANS_SERIF);
 
 
                             ok.setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onClick(View v) {
 //                                    if (.getSelectedItemPosition()!=0){
@@ -334,10 +410,38 @@ public class MyReservationFragment extends Fragment  {
 //                                        serviceId=API.servicesArrayList.get();
 //                                        Log.e("SERVID",serviceId);
 
-//                                    service_date_txt=service_date_txt;
 //                                    filterNames.set(2,startdate);
+                                    Date date1=null,date2=null;
+                                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+                                    try {
+
+                                         date1=sdf.parse(calendar.getSelectedDates().get(0).toString());
+                                         date2=sdf.parse(calendar.getSelectedDates().get(calendar.getSelectedDates().size()-1).toString());
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    LocalDate sDate=null,eDate=null;
+                                    try {
+                                        sDate=date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                        eDate=date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+
+                                    smonth=sDate.getMonthValue();
+                                    sday=sDate.getDayOfMonth();
+
+                                    emonth=eDate.getMonthValue();
+                                    eday=eDate.getDayOfMonth();
+
+//                                    Log.e("dates",calendar.getSelectedDates()+"");
+                                    Log.e("Start",sday+"-"+smonth);
+                                    Log.e("Start",eday+"-"+emonth);
+                                    startdate=sday+"-"+smonth+" to "+eday+"-"+emonth;
+
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-                                    service_exec_date.setText(service_exec_date.getText()+service_date_txt);
+                                    service_exec_date.setText(getResources().getString(R.string.service_exec_date)+":"+startdate);
                                 }
                             });
                             cancel.setOnClickListener(new View.OnClickListener() {
@@ -364,7 +468,7 @@ public class MyReservationFragment extends Fragment  {
 //                            serviceId="";
                             service_exec_date.setText(getResources().getString(R.string.service_exec_date));
 //                            serviceName="";
-                            service_date_txt="";
+                            startdate="";
                             service_exec_date.setChecked(false);
 //                            filterNames.set(2,"");
                             filterPostions.set(2,-1);

@@ -6,20 +6,30 @@ public class ReservationModel {
     String bookingType;
     String totalPrice;
     String startTime;
-    String place;
+    String place,client_name,booking_price;
     ArrayList<BookingAutomatedBrowseData> data;
 
-    public ReservationModel(String bookingType, String totalPrice, String startTime, String place, ArrayList<BookingAutomatedBrowseData> data) {
+    public ReservationModel(String bookingType, String totalPrice, String startTime, String place,String client_name, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
         this.place = place;
         this.data = data;
+        this.client_name = client_name;
+        this.booking_price = booking_price;
     }
 
     public ReservationModel(String bookingType, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.data = data;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 
     public String getTotalPrice() {

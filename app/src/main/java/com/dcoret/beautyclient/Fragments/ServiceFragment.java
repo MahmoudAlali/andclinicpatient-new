@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,8 +24,9 @@ import java.util.ArrayList;
 
 public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
-    LinearLayout bride_service,multiple_individual_booking,service_hair,group_res,group_res_another;
+    LinearLayout bride_bride,ind_normal_service,multiple_individual_booking_bride,group_res_another_bride,group_res_bride,multiple_individual_booking,group_res,group_res_another;
     Fragment fragment;
+    CoordinatorLayout service_hair;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
@@ -45,8 +47,13 @@ public class ServiceFragment extends Fragment {
         Log.e("service_filter",serviceFilters.size()+"");
 
         toolbar= view.findViewById(R.id.toolbar);
+        bride_bride= view.findViewById(R.id.bride_bride);
+        ind_normal_service= view.findViewById(R.id.bride);
+
         group_res= view.findViewById(R.id.group_res);
+        group_res_bride= view.findViewById(R.id.group_res_bride);
         group_res_another=view.findViewById(R.id.group_res_another);
+        group_res_another_bride=view.findViewById(R.id.group_res_another_bride);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,13 +61,39 @@ public class ServiceFragment extends Fragment {
             }
         });
         //--------------- service hair cut btn---------------
-        service_hair.setOnClickListener(new View.OnClickListener() {
+//        service_hair.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                serviceFilters.set(33, new ServiceFilter(false, rateService.getText().toString()));
+//                Log.e("BDB_SER_ID","1");
+//                APICall.filterSortAlgorithm("33", "7", "0");
+//                fragment = new PlaceServiceFragment();
+//                fm = getActivity().getFragmentManager();
+//                fragmentTransaction = fm.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment, fragment);
+//                fragmentTransaction.commit();
+//            }
+//        });
+
+        //----------------------------------- individual normal service
+        ind_normal_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                serviceFilters.set(33, new ServiceFilter(false, rateService.getText().toString()));
                 Log.e("BDB_SER_ID","1");
-                APICall.filterSortAlgorithm("33", "7", "0");
-                fragment = new PlaceServiceFragment();
+//                APICall.filterSortAlgorithm("33", "7", "0");
+                fragment = new ListServicesFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        bride_bride.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("BDB_SER_ID","1");
+                fragment = new ListServicesBrideFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -68,11 +101,17 @@ public class ServiceFragment extends Fragment {
             }
         });
 
+
+
+
+
+
         //--------------- group reservation btn------------
         group_res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.filterSortAlgorithm("33", "1", "0");
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
                 fragment = new PlaceServiceGroupFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -81,11 +120,38 @@ public class ServiceFragment extends Fragment {
             }
         });
 
+        group_res_bride.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENTBRIDE";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new PlaceServiceGroupFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+
         //---------------  reservation for others-----------
         group_res_another.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.filterSortAlgorithm("33", "1", "0");
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENTOTHER";
+                fragment = new PlaceServiceGroupOthersFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        group_res_another_bride.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENTBRIDEOTHER";
                 fragment = new PlaceServiceGroupOthersFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -95,10 +161,25 @@ public class ServiceFragment extends Fragment {
         });
         //-------------Multiple individual booking
         multiple_individual_booking=view.findViewById(R.id.individual_res_multi);
+        multiple_individual_booking_bride=view.findViewById(R.id.individual_res_multi_bride);
         multiple_individual_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.filterSortAlgorithm("33", "1", "0");
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                BeautyMainPage.FRAGMENT_NAME = "multiple_individual_booking";
+                fragment = new PlaceServiceMultipleBookingFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+        multiple_individual_booking_bride.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "multiple_individual_booking_bride";
+//                APICall.filterSortAlgorithm("33", "1", "0");
                 fragment = new PlaceServiceMultipleBookingFragment();
                 fm = getActivity().getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

@@ -66,11 +66,12 @@ public class TabOneBag extends Fragment {
                 APICall.getAllCart(BeautyMainPage.context);
             }
         });
-        //        APICall.searchGroupBookingBag(BeautyMainPage.context);
 
+//        APICall.searchGroupBookingBag(BeautyMainPage.context);
 //        APICall.getAllCart(BeautyMainPage.context);
+
         TabOneBag.listAdapter=new CustomExpandableListBagAdapter(BeautyMainPage.context,APICall.salonBooking,APICall.grBookingListMap);
-//                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
+//       GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
         TabOneBag.listView.setAdapter(TabOneBag.listAdapter);
         TabOneBag.listAdapter.notifyDataSetChanged();
         return view;

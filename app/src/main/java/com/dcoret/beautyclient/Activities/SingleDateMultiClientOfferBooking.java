@@ -116,7 +116,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
                 String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
                 if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
-                    APICall.showSweetDialog(context, "", "Please enter Date");
+                    APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );
                 } else {
                     String postdata = "{\n" +
                             "\"date\":\"" + add_date.getText().toString() + "\"," +
@@ -129,9 +129,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
                     for (int i = 0; i < offerClientsModels.size(); i++) {
                         if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0) {
-                            APICall.showSweetDialog(context, "", "Please enter client name");
+                            APICall.showSweetDialog(context, getResources().getString(R.string.alert), getResources().getString(R.string.enter_client_name));
                         } else if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString().length() == 0) {
-                            APICall.showSweetDialog(context, "", "Please enter phone number");
+                            APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.enter_phone_num) );
                         } else {
                             String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
                             String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();

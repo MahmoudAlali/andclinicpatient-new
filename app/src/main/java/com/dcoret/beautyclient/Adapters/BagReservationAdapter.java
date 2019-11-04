@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,13 +69,15 @@ public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }.start();
 
         ((Item)holder).mDate.setText(getAllCarts.get(position).getBdb_start_date());
+        Log.e("GrpBooking",getAllCarts.get(position).getBdb_id()+getAllCarts.get(position).getBdb_is_group_booking()+getAllCarts.get(position).getBdb_service_name_ar());
 
         ((Item)holder).mTime.setText(getAllCarts.get(position).getBdb_start_time());
         ((Item)holder).provider_name.setText(getAllCarts.get(position).getSupplier_name());
         ((Item)holder).reserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.moveCartToBooking(getAllCarts.get(position).getBdb_pack_booking(),getAllCarts.get(position).getBdb_is_group_booking(),position,BeautyMainPage.context);
+
+                APICall.moveCartToBooking(getAllCarts.get(position).getBdb_id(),getAllCarts.get(position).getBdb_is_group_booking(),position,BeautyMainPage.context);
             }
         });
         ((Item)holder).delete.setOnClickListener(new View.OnClickListener() {

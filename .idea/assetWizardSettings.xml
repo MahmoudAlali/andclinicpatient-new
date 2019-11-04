@@ -162,8 +162,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_keyboard_arrow_down_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\HP\Desktop\flower.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_add_res" />
+                            <entry key="sourceFile" value="C:\Users\HP\Desktop\add.svg" />
                           </map>
                         </option>
                       </PersistentState>

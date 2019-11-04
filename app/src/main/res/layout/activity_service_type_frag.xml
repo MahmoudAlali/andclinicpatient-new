@@ -19,19 +19,69 @@
     app:titleMarginStart="@dimen/standard_175"
     app:titleTextColor="@color/end_gray" />
 
-
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_gravity="center"
         android:orientation="vertical" >
+
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_60"
+                android:background="@drawable/shadow_service_type_icon_v2"
+
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="@dimen/pf_10dp_space"
+                android:layout_marginLeft="@dimen/pf_10dp_space"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icons8_bride_48"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/bride_res"
+                        android:textColor="#000"
+
+                        />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </android.support.design.widget.CoordinatorLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="4"
             android:layout_marginLeft="@dimen/pf_15_txt_size"
             android:layout_marginRight="@dimen/pf_15_txt_size"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -39,25 +89,29 @@
                 android:layout_weight="1"
                 android:elevation="16dp"
                 android:padding="5dp">
+
                 <LinearLayout
-                    android:id="@+id/group_res"
-                    android:layout_gravity="center"
+                    android:id="@+id/group_res_another_bride"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/icons8_join_48"/>
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/ic_add_res" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/groupReservation"
                         android:gravity="center"
-                        android:textColor="#000"
-                        />
+                        android:text="@string/group_Reservation_another"
+                        android:textColor="#000" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -65,25 +119,180 @@
                 android:layout_weight="1"
                 android:elevation="16dp"
                 android:padding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/group_res_bride"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/icons8_join_48" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/groupReservation"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/individual_res_multi_bride"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/icons8_join_48" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Multi Reservation"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/bride_bride"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_res" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/bride"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="@dimen/standard_30"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginRight="@dimen/pf_10dp_space"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:background="#000"
+            />
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/service_hair"
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/standard_60"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="@dimen/pf_10dp_space"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shadow_blue_c5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/icons8_bride_48" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/normal_res"
+                    android:textColor="#000"
+
+                    />
+
+            </LinearLayout>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/pf_15_txt_size"
+            android:layout_marginRight="@dimen/pf_15_txt_size"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+
                 <LinearLayout
                     android:id="@+id/group_res_another"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/icons8_join_48"/>
+                        android:layout_height="80dp"
+                        android:src="@drawable/ic_add_res" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/group_Reservation_another"
                         android:gravity="center"
-                        android:textColor="#000"
-                        />
+                        android:text="@string/group_Reservation_another"
+                        android:textColor="#000" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -91,25 +300,60 @@
                 android:layout_weight="1"
                 android:elevation="16dp"
                 android:padding="5dp">
+
+                <LinearLayout
+                    android:id="@+id/group_res"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/icons8_join_48" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/groupReservation"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:elevation="16dp"
+                android:padding="5dp">
+
                 <LinearLayout
                     android:id="@+id/individual_res_multi"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/icons8_join_48"/>
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/icons8_join_48" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Multi Reservation"
                         android:gravity="center"
-                        android:textColor="#000"
-                        />
+                        android:text="Multi Reservation"
+                        android:textColor="#000" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -117,245 +361,34 @@
                 android:layout_weight="1"
                 android:elevation="16dp"
                 android:padding="5dp">
+
                 <LinearLayout
                     android:id="@+id/bride"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/icons8_bride_48"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/bride"
-                        android:gravity="center"
-                        android:textColor="#000"
-                        />
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="3"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="horizontal">
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:elevation="16dp"
-            android:layout_margin="5dp">
-
-    <LinearLayout
-        android:id="@+id/service_hair"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shadow_service_type_icon"
-        android:weightSum="4"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_dryer"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Hairdressing"
-            android:gravity="center"
-            android:textColor="#000"
-             />
-             </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
-
-                >
-
-                <LinearLayout
                     android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shadow_service_type_icon"
-
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_haircut"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Haircut"
-                        android:gravity="center"
-                        android:textColor="#000"
+                        android:layout_height="80dp"
 
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
-
-                >
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shadow_service_type_icon"
-
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_makeup"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/makeup"
-                        android:gravity="center"
-                        android:textColor="#000"
-
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="3"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
-
-                >
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shadow_service_type_icon"
-
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_manicure"/>
+                        android:src="@drawable/ic_add_res" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/Manicure"
-                        android:textColor="#000"
-                        />
+                        android:text="@string/Individual_booking"
+                        android:textColor="#000" />
                 </LinearLayout>
-
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
 
-                >
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shadow_service_type_icon"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_skincare"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Skincare"
-                        android:gravity="center"
-                        android:textColor="#000"
-
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:elevation="16dp"
-                android:layout_margin="5dp"
-
-                >
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shadow_service_type_icon"
-
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_pigment"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hairpigment"
-                        android:gravity="center"
-                        android:textColor="#000"
-
-                        />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
         </LinearLayout>
 
 
     </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +55,9 @@ public class DeleteAccountFragment extends Fragment  {
                     APICall.deleteAccount("http://clientapp.dcoret.com/api/auth/user/deleteAccount",reason,msg,BeautyMainPage.context);
 
                 }else {
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Select one reason");
+                    String s=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.please_select_one_reason);
+
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),s);
                 }
 
             }

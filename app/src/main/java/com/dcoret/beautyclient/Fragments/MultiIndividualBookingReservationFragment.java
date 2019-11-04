@@ -1,5 +1,6 @@
 package com.dcoret.beautyclient.Fragments;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -10,11 +11,13 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,16 +28,19 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataClass.ClientsViewData;
+import com.dcoret.beautyclient.DataClass.IDNameService;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
 import com.dcoret.beautyclient.DataClass.ServiceItems;
 import com.dcoret.beautyclient.DataClass.ServicesIDS;
 import com.dcoret.beautyclient.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MultiIndividualBookingReservationFragment extends Fragment {
 
-    Button add_client, add_me,choose_occision;
+    public static Button add_client, add_me,choose_date,choose_occision;
     LinearLayout clients,bookme;
     static int items=0;
     static int viewcount=0;
@@ -54,36 +60,79 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
     public static ArrayList<Integer> ishairService=new ArrayList();
 
 
+    public static String is_group_booking="";
+
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    static ArrayList<TextView> dates=new ArrayList<>();
+
+    boolean bridecheck=false;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.activity_multi_ind_booking_reservation_frag, container, false);
 
 
-        BeautyMainPage.FRAGMENT_NAME="MultiIndividualBookingReservationFragment";
+//        BeautyMainPage.FRAGMENT_NAME="MultiIndividualBookingReservationFragment";
 
         //---------- find views------------------
 //        add_client=view.findViewById(R.id.add_client);
 //        add_me=view.findViewById(R.id.add_me);
         choose_occision=view.findViewById(R.id.choose_occision);
+        choose_date=view.findViewById(R.id.date_select);
         clients=view.findViewById(R.id.clients);
         bookme=view.findViewById(R.id.bookme);
         //----------------------------------------
         servicesList.clear();
         serviceNameList.clear();
-        serviceNameList.add("Choose Service");
+        String choose=getResources().getString(R.string.choose_service);
+        serviceNameList.add(choose);
 
-        APICall.getServicesForMulti("1",BeautyMainPage.context);
-        choose_occision.setOnClickListener(new View.OnClickListener() {
+        Log.e("FrgmenNAme",BeautyMainPage.FRAGMENT_NAME);
+        if (BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking_bride")) {
+            APICall.getServicesForMulti("2", BeautyMainPage.context);
+            is_group_booking="13";
+//            APICall.getServices("1", BeautyMainPage.context);
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking")){
+//            APICall.getServices("0", BeautyMainPage.context);
+            APICall.getServicesForMulti("0", BeautyMainPage.context);
+            is_group_booking="3";
+
+        }
+
+        choose_occision.setText("choose reservation type");
+            choose_occision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-                popupMenu.getMenu().add("Wedding");
-                popupMenu.getMenu().add("Normal");
+
+                final String one=getResources().getString(R.string.one_date_ser);
+                String dif=getResources().getString(R.string.dif_date_ser);
+
+
+                final PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+                popupMenu.getMenu().add(one);
+                popupMenu.getMenu().add(dif);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        choose_occision.setText(item.getTitle());
+                        if (item.getTitle().equals(one)){
+                            choose_date.setVisibility(View.VISIBLE);
+                        }else {
+                            choose_date.setVisibility(View.GONE);
+                        }
+
+                        return false;
+                    }
+                });
+
                 popupMenu.show();
+
+
+
             }
         });
         items=0;
@@ -118,6 +167,59 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                 final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
+
+
+
+                //--------------------------------------
+        choose_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                dialog.setContentView(R.layout.select_date);
+                TextView ok = dialog.findViewById(R.id.confirm);
+                TextView cancel = dialog.findViewById(R.id.cancel);
+                final DatePicker datePicker = dialog.findViewById(R.id.date_picker);
+                datePicker.setMinDate(System.currentTimeMillis());
+
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+//                                            Date date=sdf.parse(APICall.dofs.get(position).getBdb_offer_end());
+
+//                                            datePicker.setMaxDate(date.getTime());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        int month = datePicker.getMonth() + 1;
+                        choose_date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
+
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+//                        ((Item)holder).select_time.setText(datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
+
+
+
+
+
+
                 //------------------ adapter for add services----------------------
                 adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
 
@@ -150,14 +252,95 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if (position != 0) {
+
+                        //------------------------- check bride service at least one service -----------------
+
+
+
+
+                        if (position != 0)
+                            if (choose_occision.getText().toString().equals("choose reservation type") ){
+                                APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.choose_type_res));
+                            } else {
+                            //---------- check if service is there
+                            boolean addlayoutchek=true;
+                        for (int i=0;i<servicesForClientGroups.size();i++){
+                            if ((servicesForClientGroups.get(i).getName().equals(add_service.getSelectedItem().toString()))){
+                                addlayoutchek=false;
+                                APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.ser_added_before));
+                                break;
+                            }
+                        }
+
+
+
+                           if (addlayoutchek){
                             viewcount++;
                             final String vc;
-                            vc="view"+viewcount;
-                            final View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
-                            TextView textView = view1.findViewById(R.id.service_name);
+                            vc = "view" + viewcount;
+                            final View view1;
+                            Boolean multicheck;
+                            if (choose_occision.getText().toString().equals(getResources().getString(R.string.choose_date_for_your_services))) {
+                                view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
+                                multicheck = false;
+                            } else {
+                                view1 = inflater.inflate(R.layout.adding_name_service_layout_dates, adding_name_service, false);
+                                multicheck = true;
+                            }
 
+                            TextView textView = view1.findViewById(R.id.service_name);
                             textView.setText(add_service.getSelectedItem().toString());
+                            final LinearLayout selectdate = view1.findViewById(R.id.select_date);
+                            final TextView select_time = view1.findViewById(R.id.select_time);
+
+                            if (multicheck) {
+                                selectdate.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                        dialog.setContentView(R.layout.select_date);
+                                        TextView ok = dialog.findViewById(R.id.confirm);
+                                        TextView cancel = dialog.findViewById(R.id.cancel);
+                                        final DatePicker datePicker = dialog.findViewById(R.id.date_picker);
+                                        datePicker.setMinDate(System.currentTimeMillis());
+
+                                        try {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+//                                            Date date=sdf.parse(APICall.dofs.get(position).getBdb_offer_end());
+
+//                                            datePicker.setMaxDate(date.getTime());
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        ok.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.cancel();
+                                                int month = datePicker.getMonth() + 1;
+
+                                                select_time.setText(datePicker.getYear() + "-" + month + "-" + datePicker.getDayOfMonth());
+//                                                dates.add(select_time);
+                                            }
+                                        });
+
+                                        cancel.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.cancel();
+//                        ((Item)holder).select_time.setText(datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
+                                            }
+                                        });
+
+                                        dialog.show();
+                                    }
+                                });
+
+                            }
+
+
                             adding_name_service.addView(view1);
 
                             ImageView delete = view1.findViewById(R.id.delete);
@@ -165,25 +348,34 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     adding_name_service.removeView(view1);
-                                    for (int i=0;i<servicesForClientGroups.size();i++){
-                                        if (servicesForClientGroups.get(i).getViewnum().equals(vc)){
+                                    for (int i = 0; i < servicesForClientGroups.size(); i++) {
+                                        if (servicesForClientGroups.get(i).getViewnum().equals(vc)) {
                                             try {
                                                 servicesForClientGroups.remove(i);
-                                            }catch (Exception ee)
-                                            {
+                                            } catch (Exception ee) {
                                                 ee.printStackTrace();
                                             }
                                         }
                                     }
 //
 //                                 servicesForClientGroups.remove(vc-1);
-                                    Log.e("servicesForClientGroups",servicesForClientGroups.size()+"");
+                                    Log.e("servicesForClientGroups", servicesForClientGroups.size() + "");
 
                                 }
                             });
-                            servicesForClientGroups.add(new ServicesIDS(servicesList.get(position - 1).getBdb_ser_id(), add_service.getSelectedItem().toString(),vc));
+                            Log.e("brideservice",servicesList.get(position-1).getBdb_is_bride_service());
 
+                               if (servicesList.get(position-1).getBdb_is_bride_service().equals("1") && BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking_bride")) {
+                                   bridecheck=true;
+                               }
 
+                            if (multicheck) {
+                                servicesForClientGroups.add(new ServicesIDS(servicesList.get(position - 1).getBdb_ser_id(),  add_service.getSelectedItem().toString(),select_time, vc));
+                            }else {
+                                servicesForClientGroups.add(new ServicesIDS(servicesList.get(position - 1).getBdb_ser_id(), add_service.getSelectedItem().toString(), vc));
+
+                            }
+                        }
                         }
 //                     if (position!=0){
 //                         postions.add(position-1);
@@ -222,20 +414,57 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int alert=0;
-                for (int i=0;i<clientsViewData.size();i++){
-                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty()||clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
-                        || clientsViewData.get(i).getAdd_service().getSelectedItemPosition()==0)
-                    {
-                      alert=1;
-                    }
-                }
 
-                if (alert==1){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Complete All Data..");
+                Log.e("fname",BeautyMainPage.FRAGMENT_NAME);
+                Log.e("check",bridecheck+"");
+                if (servicesForClientGroups.size()<=1){
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.select_two_ser_atleast));
+
+                }else if (BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking_bride") && bridecheck==false){
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.ser_have_one_bride_ser));
                 }else {
 
-                    // =------------is hair service go to anthor fragment----------
+
+                    clientf = "";
+                    int alert = 0;
+//                for (int i=0;i<clientsViewData.size();i++){
+//                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty()||clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+//                        || clientsViewData.get(i).getAdd_service().getSelectedItemPosition()==0    )
+//                    {
+//
+//
+
+
+//                      alert=1;
+//                    }
+//                }
+
+                    for (int i = 0; i < clientsViewData.size(); i++) {
+//                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty()||clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+//                        || clientsViewData.get(i).getAdd_service().getSelectedItemPosition()==0    )
+//                    {
+                        if (choose_date.getVisibility() == View.GONE) {
+//                        for (int j = 0; j < clientsViewData.get(i).getServicesSelected().size(); j++) {
+//                            clientsViewData.get(i).getServicesSelected().get(j).getDate().equals("Date");
+//                            alert = 1;
+//                            break;
+//                        }
+                        }
+//}
+//                      alert=1;
+//                    }
+                    }
+
+
+                    if (alert == 1) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.complete_all_data));
+
+//                    choose date for your services
+                    } else if (choose_date.getText().toString().equals(getResources().getString(R.string.choose_date_for_your_services)) && choose_date.getVisibility() == View.VISIBLE) {
+                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.choose_date_for_your_services));
+                    } else {
+
+                        // =------------is hair service go to anthor fragment----------
 //                    if (ishairService.size() > 0) {
 //                        fragment = new HairSpecificationsFragment();
 //                        fm = getFragmentManager();
@@ -243,6 +472,55 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 //                        fragmentTransaction.replace(R.id.fragment, fragment);
 //                        fragmentTransaction.commit();
 //                    } else {
+                        SharedPreferences sh = BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+
+
+                        String username = sh.getString("bdb_name", "");
+                        String phone = sh.getString("bdb_mobile", "");
+
+                        if (choose_date.getVisibility() == View.VISIBLE) {
+                            String date = choose_date.getText().toString();
+
+                            clientf = " \"clients\": [\n" +
+                                    "\t\t{\"client_name\": \"" + username + "\",\"client_phone\": \"" + phone + "\",\"is_current_user\": 1,\"date\": \"" + date + "\",\"services\": [ ";
+                            String services = "";
+                            for (int i = 0; i < servicesForClientGroups.size(); i++) {
+
+                                if (i == 0) {
+                                    services = "{\"ser_id\": " + servicesForClientGroups.get(i).getId() + ",\"ser_time\": 60 }";
+                                } else {
+                                    services = services + ",{\"ser_id\": " + servicesForClientGroups.get(i).getId() + ",\"ser_time\": 60 }";
+                                }
+
+                            }
+
+                            clientf = clientf + services + "]}\n]}";
+                        } else {
+                            clientf = " \"clients\": [\n";
+                            for (int i = 0; i < servicesForClientGroups.size(); i++) {
+
+                                if (i == 0) {
+                                    clientf = clientf + "\t\t{\"client_name\": \"" + username + "\",\"client_phone\": \"" + phone + "\",\"is_current_user\": 1,\"date\": \"" + servicesForClientGroups.get(i).getDate().getText().toString() + "\",\"services\": [ ";
+                                    String services = "";
+//                        for (int i = 0; i < servicesForClientGroups.size(); i++) {
+
+
+                                    clientf += "{\"ser_id\": " + servicesForClientGroups.get(i).getId() + ",\"ser_time\": 60 }]\n}";
+
+                                } else {
+
+                                    clientf = clientf + "\t\t,{\"client_name\": \"" + username + "\",\"client_phone\": \"" + phone + "\",\"is_current_user\": 1,\"date\": \"" + servicesForClientGroups.get(i).getDate().getText().toString() + "\",\"services\": [ ";
+                                    String services = "";
+//                        for (int i = 0; i < servicesForClientGroups.size(); i++) {
+
+                                    clientf += "{\"ser_id\": " + servicesForClientGroups.get(i).getId() + ",\"ser_time\": 60 }]\n}";
+                                }
+
+                            }
+                            clientf = clientf + "]}";
+                        }
+
+
                         fragment = new MultiBookingIndividualResult();
                         fm = getFragmentManager();
                         fragmentTransaction = fm.beginTransaction();
@@ -250,12 +528,125 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                         fragmentTransaction.commit();
 //                    }
 
-                }
-            //----- call group filter for booking -------------
-            APICall.GroupFilterBookingMulti();
+                    }
+                    //----- call group filter for booking -------------
+                    String filter = APICall.GroupFilterBookingMulti();
+                    Log.e("filter", filter);
+//                    clientf=filter+clientf;
+                    Log.e("clientf", clientf);
 
+                }
             }
         });
         return view;
     }
+
+
+    public static String clientf="";
+
+
+//    static String sortdates(ArrayList<TextView> dates,String cname,String phone,int postion){
+//        ArrayList<ArrayList<IDNameService>> arrayList=new ArrayList<>();
+//        ArrayList<Integer> index=new ArrayList<>();
+//
+//        for (int i=0;i<dates.size();i++){
+//            String ser_sup_id=clientsViewData.get(postion).getServicesSelected().get(i).getId();
+//
+//            if (i==0){
+//                ArrayList<IDNameService> list=new ArrayList();
+//                list.add(new IDNameService(ser_sup_id,dates.get(i).getText().toString()));
+//                arrayList.add(list);
+//                index.add(i);
+//            }else {
+//                Boolean check=false;
+//                for (int k=0;k<arrayList.size();k++){
+//                    for (int j=0;j<arrayList.get(k).size();j++) {
+//                        if (dates.get(i).getText().toString().equals(arrayList.get(k).get(j).getName())) {
+////                            ArrayList list = new ArrayList();
+//                            arrayList.get(k).add(new IDNameService(ser_sup_id,dates.get(i).getText().toString()));
+////                            .add(dates.get(i).getText().toString());
+////                            arrayList.add(list);
+//                            index.add(i);
+//                            check = true;
+//                            break;
+//                        }
+//
+//                    }
+//                }
+//
+//                if (!check){
+//                    ArrayList<IDNameService> list=new ArrayList();
+//                    list.add(new IDNameService(ser_sup_id,dates.get(i).getText().toString()));
+//                    arrayList.add(list);
+//                    index.add(i);
+//                }
+//
+//
+//            }
+//        }
+//
+//
+//
+//
+//        String services="";
+//
+//
+//
+////        String cname="c1";
+////        String phone_num="0500500011";
+//
+//
+//
+//
+//        for (int k=0;k<arrayList.size();k++) {
+//            String tmp="\t\t   {\"date\":\""+arrayList.get(k).get(0).getName()+"\",\n" +
+//                    "\t\t   \"client_name\": \""+cname+"\",\n" +
+//                    "\t\t   \"client_phone\": \""+phone+"\",\n" +
+//                    "\t\t   \"is_current_user\":1 ,\n" +
+//                    "\t\t   \"services\": [\n" ;
+//            if (k==0) {
+//                services = services + tmp;
+//            }
+//
+////            else {
+////                services=services+",[";
+////            }
+//            else {
+//                services = services + ","+tmp;
+//            }
+//            for (int j = 0; j < arrayList.get(k).size(); j++) {
+//
+//                Log.e("date"+k+""+j,arrayList.get(k).get(j).getName());
+//
+//
+//                if (j==0) {
+//                    services =services+ " \t\t\t{\n" +
+//                            "    \t\t\t\t\"bdb_ser_sup_id\": "+arrayList.get(k).get(j).getId()+",\n" +
+//                            "    \t\t\t\t\"ser_time\": 60\n" +
+//                            "    \t\t\t\t\n" +
+//                            "      }";
+//                }else {
+//                    services =services+ " ,\t\t\t{\n" +
+//                            "    \t\t\t\t\"bdb_ser_sup_id\": "+arrayList.get(k).get(j).getId()+",\n" +
+//                            "    \t\t\t\t\"ser_time\": 60\n" +
+//                            "    \t\t\t\t\n" +
+//                            "      }";
+//                }
+//
+////                if (j==arrayList.get(k).size()-1){
+////                    services=services+"]";
+////                }
+//            }
+//
+//            services=services+"\n ]}";
+//
+//        }
+//
+////        services=services+"}";
+//        Log.e("ServicesDate",services);
+//        clientf=" \"clients\": [\n"+services+"]";
+//        return services;
+//    }
+
+
 }

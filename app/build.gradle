@@ -81,6 +81,7 @@ dependencies {
     // bubble info for map
     implementation 'com.appolica:interactive-info-window:v1.0.6'
     implementation 'com.archit.calendar:awesome-calendar:1.1.5'
+    implementation 'com.savvi.datepicker:rangepicker:1.2.0'
 
 
     //-- date picker

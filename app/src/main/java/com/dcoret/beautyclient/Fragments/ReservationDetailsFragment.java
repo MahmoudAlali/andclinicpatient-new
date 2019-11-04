@@ -18,7 +18,7 @@ import com.dcoret.beautyclient.R;
 
 public class ReservationDetailsFragment extends Fragment {
     View view;
-    public static TextView empname,booktype,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+    public static TextView empname,booktype,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
     public static LinearLayout myroot;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class ReservationDetailsFragment extends Fragment {
         book_at=view.findViewById(R.id.book_at);
         booktype=view.findViewById(R.id.book_type);
         service_name=view.findViewById(R.id.rname);
+        salonName=view.findViewById(R.id.salon_name);
 
 
         APICall.browseOneBooking(ReservationsAdapter2.book_id,BeautyMainPage.context);
@@ -103,18 +104,21 @@ public class ReservationDetailsFragment extends Fragment {
     }
 
 
-    public static void addLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bookat,String empName ){
+    public static void addLayout(final LinearLayout myroot,String details,String reservationName,String priceVal,String startTimeVal,String end_time,String bookat,String empName ){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
-        TextView rname,emp_name,price,starttime,book_at;
+        TextView endtime,rname,emp_name,price,starttime,client_details,book_at;
         price=layout2.findViewById(R.id.price);
+        client_details=layout2.findViewById(R.id.client_details);
         rname=layout2.findViewById(R.id.rname);
         starttime=layout2.findViewById(R.id.time);
+        endtime=layout2.findViewById(R.id.end_time);
         book_at=layout2.findViewById(R.id.book_at);
         emp_name=layout2.findViewById(R.id.emp_name);
 
         rname.setText(reservationName);
-//        rname.setText(reservationName);
+        client_details.setText(details);
+        endtime.setText(end_time);
         emp_name.setText(empName);
         price.setText(priceVal);
         starttime.setText(startTimeVal);
@@ -145,20 +149,21 @@ public class ReservationDetailsFragment extends Fragment {
         });
 //
     }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bookat,String empName ){
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String endtime,String bookat,String empName ){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
-        TextView rname,emp_name,price,starttime,book_at;
+        TextView end_time,rname,emp_name,price,starttime,book_at;
         price=layout2.findViewById(R.id.price);
         rname=layout2.findViewById(R.id.rname);
+        end_time=layout2.findViewById(R.id.end_time);
         starttime=layout2.findViewById(R.id.time);
         book_at=layout2.findViewById(R.id.book_at);
         emp_name=layout2.findViewById(R.id.emp_name);
 
         rname.setText(reservationName);
-//        rname.setText(reservationName);
+        end_time.setText(endtime);
         emp_name.setText(empName);
-        price.setText(priceVal);
+        price.setText(priceVal+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
         starttime.setText(startTimeVal);
         book_at.setText(bookat);
 

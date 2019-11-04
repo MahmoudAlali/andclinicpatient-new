@@ -148,7 +148,7 @@ public class IndividualBooking extends AppCompatActivity {
             public void onClick(View v) {
                 if (layouttype == 1){
                     if (idforemp==-1) {
-                        APICall.showSweetDialog(context,"","Please, Select an Employee!");
+                        APICall.showSweetDialog(context,getResources().getString(R.string.alert),getResources().getString(R.string.select_an_emp));
 
 //                        Toast.makeText(IndividualBooking.this, "", Toast.LENGTH_SHORT).show();
                     } else {
@@ -188,13 +188,13 @@ public class IndividualBooking extends AppCompatActivity {
                             Log.e("EMPID1",emp_name);
                             APICall.getServiceTime(bdb_id,emp_name,ServicesAdapter.empid23,txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate , starttime,IndividualBooking.this);
                         } else {
-                            APICall.showSweetDialog(context,"","Please, Select an Time..");
+                            APICall.showSweetDialog(context,getResources().getString(R.string.alert),getResources().getString(R.string.select_an_time));
 //                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
                         }
                     }
             }else {
                     if (idforemp==-1) {
-                        APICall.showSweetDialog(context,"","Please, Select an Employee!");
+                        APICall.showSweetDialog(context,getResources().getString(R.string.alert),getResources().getString(R.string.select_an_emp));
 
 //                        Toast.makeText(IndividualBooking.this, "", Toast.LENGTH_SHORT).show();
                     } else {
@@ -234,7 +234,7 @@ public class IndividualBooking extends AppCompatActivity {
                             APICall.getServiceTime(bdb_id, emp_name,ServicesAdapter.empid23, txtPrice, bdb_ser_salon, bdb_ser_home, bdb_ser_hall, bdb_ser_hotel, startdate + "", starttime, IndividualBooking.this);
 
                         } else {
-                            APICall.showSweetDialog(context,"","Please, Select an Time..");
+                            APICall.showSweetDialog(context,getResources().getString(R.string.alert),getResources().getString(R.string.select_an_time));
 
 //                            Toast.makeText(IndividualBooking.this, "Please, Select an Time!", Toast.LENGTH_SHORT).show();
                         }

@@ -1,7 +1,10 @@
 package com.dcoret.beautyclient.DataClass;
 
+import android.widget.TextView;
+
 public class ServicesIDS {
     String id,name,viewnum;
+    TextView date;
 
     public ServicesIDS(String id, String name) {
         this.id = id;
@@ -12,6 +15,17 @@ public class ServicesIDS {
         this.id = id;
         this.name = name;
         this.viewnum = viewnum;
+        this.date = date;
+    }
+    public ServicesIDS(String id, String name, TextView date, String viewnum) {
+        this.id = id;
+        this.name = name;
+        this.viewnum = viewnum;
+        this.date = date;
+    }
+
+    public TextView getDate() {
+        return date;
     }
 
     public String getViewnum() {

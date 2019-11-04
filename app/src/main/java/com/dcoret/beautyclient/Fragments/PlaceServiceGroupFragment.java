@@ -74,7 +74,7 @@ public class PlaceServiceGroupFragment extends Fragment {
 
 
         //---------------------init my location spinner-----------
-        BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
+//        BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
 
         placeSpinner = view.findViewById(R.id.service_place);
         mylocationbtn = view.findViewById(R.id.my_location);
@@ -368,20 +368,29 @@ public class PlaceServiceGroupFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
                 } else if (priceService.getText().toString().equals(getResources().getText(R.string.servicePrice))){
 //                    Log.e("Price Service","ok");
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please set range value for service price");
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.set_range_price));
 
                 } else if (date.getText().toString().equals(getResources().getString(R.string.date))){
 //                    Log.e("Price Service","ok");
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"you have to choose a date to proceed");
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.choose_date));
 
                 }else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
+
+//                    if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")) {
+//                        BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
+//                    }else  if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE")) {
+//                        BeautyMainPage.FRAGMENT_NAME="GroupReservationBrideFragment";
+//                    }
+                    APICall.dateforgroupbooking=date.getText().toString();
+
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
-                    fragment = new GroupReservationFragment();
-                    fm = getActivity().getFragmentManager();
-                    fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, fragment);
-                    fragmentTransaction.commit();
+                        fragment = new GroupReservationFragment();
+                        fm = getActivity().getFragmentManager();
+                        fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment, fragment);
+                        fragmentTransaction.commit();
+
                 }
             }
         });

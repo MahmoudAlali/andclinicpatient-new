@@ -17,6 +17,7 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
+import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
@@ -96,7 +97,13 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            APICall.addGroupItem(   APICall.getClientsInfoforIndividual(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
+                            Log.e("choose",MultiIndividualBookingReservationFragment.choose_occision.getText().toString());
+                            if (!MultiIndividualBookingReservationFragment.choose_occision.getText().toString().equals("different dates for services")) {
+                                APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+                            }else {
+                                APICall.addGroupItemMultDates(APICall.getClientsInfoforIndividualMultiDates(salons, stringArrayListHashMap, groupPosition,MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+
+                            }
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                         }
                     });

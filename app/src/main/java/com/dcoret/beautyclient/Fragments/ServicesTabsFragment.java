@@ -274,10 +274,10 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             }
         });
 
-        if (updateServ) {
+//        if (updateServ) {
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
-            updateServ=false;
-        }
+//            updateServ=false;
+//        }
 //        APICall.automatedBrowse()
         pageNext.setOnClickListener(new View.OnClickListener() {
             @Override

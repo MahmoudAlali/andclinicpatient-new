@@ -128,7 +128,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.ApplicationPolicyAlert);
             privacy_policy.setChecked(true);
         } else if (!IsSelectedLocation){
-            APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),"You can't Register Without Location!" );
+            APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.cant_reg_without_loc) );
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()

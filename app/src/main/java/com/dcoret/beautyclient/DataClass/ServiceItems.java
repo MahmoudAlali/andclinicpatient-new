@@ -7,22 +7,26 @@ public class ServiceItems {
             ,bdb_descr
             ,bdb_type
             ,bdb_is_fixed_price
+            ,bdb_is_bride_service
             ,images;
 
 
 
-    public ServiceItems(String bdb_ser_id, String bdb_name, String bdb_name_ar, String bdb_descr, String bdb_type, String bdb_is_fixed_price, String images) {
+    public ServiceItems(String bdb_ser_id, String bdb_name, String bdb_name_ar, String bdb_descr, String bdb_type, String bdb_is_fixed_price,String bdb_is_bride_service, String images) {
         this.bdb_ser_id = bdb_ser_id;
         this.bdb_name = bdb_name;
         this.bdb_name_ar = bdb_name_ar;
         this.bdb_descr = bdb_descr;
         this.bdb_type = bdb_type;
         this.bdb_is_fixed_price = bdb_is_fixed_price;
+        this.bdb_is_bride_service = bdb_is_bride_service;
         this.images = images;
     }
 
 
-
+    public String getBdb_is_bride_service() {
+        return bdb_is_bride_service;
+    }
 
     public String getBdb_ser_id() {
         return bdb_ser_id;

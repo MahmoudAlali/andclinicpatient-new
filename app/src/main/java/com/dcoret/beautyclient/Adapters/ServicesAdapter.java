@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -149,7 +150,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         if (((Item) holder).service_compare.isChecked()){
                         if (comparenum==3){
                             ((Item) holder).service_compare.setChecked(false);
-                            APICall.showSweetDialog(context,"Alert!","Can't compare more than Three services..");
+
+                            APICall.showSweetDialog(context, ((AppCompatActivity)context).getResources().getString(R.string.alert),
+                                    ((AppCompatActivity)context).getResources().getString(R.string.cant_compare_more_than_three_ser));
 //                            Toast.makeText(context,"Can't compare more than two services..",Toast.LENGTH_SHORT).show();
                         }else {
                             if (comparenum == 0) {

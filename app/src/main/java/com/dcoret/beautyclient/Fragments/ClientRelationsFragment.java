@@ -108,7 +108,8 @@ public class ClientRelationsFragment extends Fragment {
                             }
 
                             if (alert == 1) {
-                                APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), "Please Complete All Data..");
+                                String m=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.complete_all_data);
+                                APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), m);
                             }else if(alert==2){
 
                             }else {

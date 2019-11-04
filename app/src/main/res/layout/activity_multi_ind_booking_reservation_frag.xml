@@ -44,6 +44,14 @@
                 android:text="Choose Occasion"
 
                 />
+            <Button
+                android:visibility="gone"
+                android:id="@+id/date_select"
+                android:layout_marginBottom="@dimen/pf_10dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:background="@drawable/shadow_accent_c5"
+                android:text="@string/choose_date_for_your_services"/>
 <LinearLayout
     android:orientation="horizontal"
     android:weightSum="2"

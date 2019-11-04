@@ -21,6 +21,9 @@ import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
+import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.R;
@@ -103,13 +106,13 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                         public void run() {
                             try {
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
-                                    APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
+                                    APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), BeautyMainPage.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                                    APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
+                                    APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), BeautyMainPage.context);
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
                                     Log.e("INDBooking","ok");
-                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition), BeautyMainPage.context);
+                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
 
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
                                     APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);

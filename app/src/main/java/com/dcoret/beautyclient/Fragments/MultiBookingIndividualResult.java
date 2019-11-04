@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,28 +37,38 @@ public class MultiBookingIndividualResult extends Fragment {
 
 
     RecyclerView recyclerView;
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees1=new ArrayList<>();
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees2=new ArrayList<>();
-    ArrayList<ReservationClientsEmployee> reservationClientsEmployees3=new ArrayList<>();
-    ArrayList<ReservationClients> reservationClients=new ArrayList<>();
+    String url="";
 
-
-    String items[]={"1","2","3","4","5"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_group_reservation_result_frag, container, false);
 
+        if (MultiIndividualBookingReservationFragment.choose_occision.getText().toString().equals("different dates for services")){
+            url="http://clientapp.dcoret.com/api/booking/searchGroupBooking3_13";
+        }else {
+            url="http://clientapp.dcoret.com/api/booking/searchGroupBooking";
+        }
 
-        BeautyMainPage.FRAGMENT_NAME="MultiBookingIndividualResult";
+
+//        BeautyMainPage.FRAGMENT_NAME="MultiBookingIndiv
+//
+
+// idualResult";
+
+
+
+            Log.e("dateURLS",url);
+            Log.e("FNAME",BeautyMainPage.FRAGMENT_NAME);
+
         listView=view.findViewById(R.id.list_view);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
-        APICall.searchGroupBookingMulti(BeautyMainPage.context);
+        APICall.searchGroupBookingMulti(url,BeautyMainPage.context);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBookingMulti(BeautyMainPage.context);
+                APICall.searchGroupBookingMulti(url,BeautyMainPage.context);
 
             }
         });

@@ -98,6 +98,9 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                     .findViewById(R.id.listTitle);
             TextView book =  convertView
                     .findViewById(R.id.book);
+
+            Log.e("is_group_booking11",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking());
+
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,7 +108,8 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void run() {
 
-                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4) {
+                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4 &&
+                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<10 ) {
                                 APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
                             }else {
                                 APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);
@@ -171,7 +175,9 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                             }
                         }
                     }else {
-                        APICall.showSweetDialog(context,"ALERT!","You can't Remove The last Item Of Services..");
+                        String t=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.alert);
+                        String m=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.cant_remove_last_item);
+                        APICall.showSweetDialog(context,t,m);
                     }
                 }
             });

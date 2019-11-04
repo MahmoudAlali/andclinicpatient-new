@@ -44,6 +44,7 @@ public class GroupReservationOthersFragment extends Fragment {
     public static ArrayList<ServiceItems> servicesList=new ArrayList<>();
     public static ArrayList<String> serviceNameList=new ArrayList<>();
     public static ArrayAdapter adapter;
+    boolean bridecheck=false;
 
 
 
@@ -60,6 +61,7 @@ public class GroupReservationOthersFragment extends Fragment {
     public static ArrayList<Integer> ishairService=new ArrayList();
 //    public static ArrayList<Integer> postions=new ArrayList();
 
+    public static String is_group_booking="";
 
     Fragment fragment;
     FragmentManager fm;
@@ -69,7 +71,7 @@ public class GroupReservationOthersFragment extends Fragment {
         final View view= inflater.inflate(R.layout.activity_group_reservation_others_frag, container, false);
 
 
-        BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
+//        BeautyMainPage.FRAGMENT_NAME="GroupReservationFragment";
 
         add_client=view.findViewById(R.id.add_client);
 //        add_me=view.findViewById(R.id.add_me);
@@ -80,8 +82,16 @@ public class GroupReservationOthersFragment extends Fragment {
         servicesList.clear();
         serviceNameList.clear();
         serviceNameList.add("Choose Service");
+        Log.e("FragmentName",BeautyMainPage.FRAGMENT_NAME );
 
-        APICall.getServices("1",BeautyMainPage.context);
+        if (BeautyMainPage.FRAGMENT_NAME .equals("PLACESERVICEFRAGMENTBRIDEOTHER")) {
+            APICall.getServices("2", BeautyMainPage.context);
+            is_group_booking="12";
+        }else if (BeautyMainPage.FRAGMENT_NAME .equals("PLACESERVICEFRAGMENTOTHER")) {
+            APICall.getServices("0", BeautyMainPage.context);
+            is_group_booking="2";
+
+        }
         choose_occision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,6 +184,10 @@ public class GroupReservationOthersFragment extends Fragment {
 
                          adding_name_service.addView(view1);
 
+                         if (servicesList.get(position-1).getBdb_is_bride_service().equals("1") && BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDEOTHER")) {
+                             bridecheck=true;
+                         }
+                         Log.e("brideCheck",bridecheck+"");
 
                          servicesForClientGroups.add(new ServicesIDS(servicesList.get(position-1).getBdb_ser_id(),add_service.getSelectedItem().toString(),vc));
 
@@ -244,6 +258,12 @@ public class GroupReservationOthersFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int alert=0;
+
+
+                if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDEOTHER") && bridecheck==false){
+                    alert=3;
+                }
+
                 for (int i=0;i<clientsViewData.size();i++){
                     if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty()||clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
                         || clientsViewData.get(i).getAdd_service().getSelectedItemPosition()==0)
@@ -253,11 +273,14 @@ public class GroupReservationOthersFragment extends Fragment {
                 }
 
                 if (alert==1){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Complete All Data..");
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.complete_all_data));
+                }else if (alert==3){
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.ser_have_one_bride_ser));
+
                 }else {
 
                     if ( clientsViewData.size()==1){
-                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),"Please Add one client at least");
+                        APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.add_one_client));
 
                     }else {
 
