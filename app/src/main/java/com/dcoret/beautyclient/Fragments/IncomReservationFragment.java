@@ -65,16 +65,16 @@ public class IncomReservationFragment extends Fragment {
 //                        reservationsAdapter.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
                         }else if (id==R.id.two){
                             APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
                         }else if (id==R.id.three){
                             APICall.sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
                         }else if (id==R.id.four){
                             APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
                         }
                         return true;
                     }
@@ -91,7 +91,7 @@ public class IncomReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse1("en", "10", MyReservationFragment.serviceId, "1", "", "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", "", "", BeautyMainPage.context, APICall.layout);
         }else {
             MyReservationFragment.filtercheck=false;
         }

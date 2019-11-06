@@ -466,8 +466,8 @@
     <string name="multi_service_bride_offer">multi-service bride offer</string>
     <string name="group_offer_bride">bride group offer</string>
     <string name="Single_bride_reservation">Single bride reservation</string>
-    <string name="bride_group_offer">bride group offer</string>
-    <string name="bride_group_offer_other">bride group offer for others</string>
+    <string name="bride_group_offer">bride group booking</string>
+    <string name="bride_group_offer_other">bride group booking for others</string>
     <string name="ind_res">Individual reservation</string>
     <string name="Single_individual_booking">Single individual</string>
     <string name="group_booking">Group booking</string>
@@ -505,4 +505,5 @@
     <string name="Please_enter_Date">Please enter Date</string>
     <string name="enter_client_name">Please enter client name</string>
     <string name="enter_phone_num">please, enter phone number</string>
+    <string name="no_offer">There are no special offers, please try again later</string>
 </resources>

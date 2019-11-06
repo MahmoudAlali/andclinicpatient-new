@@ -341,6 +341,7 @@
     <string name="Please_enter_Date">يرجى إدخال التاريخ</string>
     <string name="enter_client_name">يرجى إدخال اسم الزبونة</string>
     <string name="enter_phone_num">please, enter phone number</string>
+    <string name="no_offer">لا يوجد عروض مميزة، يرجى المحاولة لاحقاً</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>

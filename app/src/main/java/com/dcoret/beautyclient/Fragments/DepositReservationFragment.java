@@ -77,18 +77,18 @@ public class DepositReservationFragment extends Fragment {
                         if (id==R.id.one){
                             //---------wait confirm by provider
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse("en","10","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
+                            APICall.bookingAutomatedBrowse1("en","100","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
                         }else if (id==R.id.two){
                             //------- wait for execute--------
                             APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse("en","10","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
+                            APICall.bookingAutomatedBrowse1("en","100","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
                         }else if (id==R.id.three){
                             //----------- wait for paid----
                             sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse("en","10","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
+                            APICall.bookingAutomatedBrowse1("en","100","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
                         }else if (id==R.id.four){
                             APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse("en","10","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
+                            APICall.bookingAutomatedBrowse1("en","100","","1",APICall.filter,APICall.sort,BeautyMainPage.context,layout);
                         }
                         return true;
                     }
@@ -101,7 +101,7 @@ public class DepositReservationFragment extends Fragment {
 //        APICall.bookingAutomatedBrowse("en","10","","1",APICall.filter,"",BeautyMainPage.context,R.layout.deposit_reservation_layout);
 //        service_select.setAdapter(MyReservationFragment.reservationsAdapter);
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse("en", "10", MyReservationFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout);
         }else {
             MyReservationFragment.filtercheck=false;
         }

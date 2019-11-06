@@ -743,7 +743,7 @@ public class MyReservationFragment extends Fragment  {
                             fragmentTransaction.commit();
                             tabselected(accept_reservation,incom_reservation,false);
                         }
-                        APICall.bookingAutomatedBrowse1("en","10",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
 
                     }
                 });

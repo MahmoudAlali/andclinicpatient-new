@@ -83,8 +83,11 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
             Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
-            ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getClient_name());
+            ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
             String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
+
+
+
             if (offtypetmp.equals("0")) {
                 String s=((AppCompatActivity)context).getResources().getString(R.string.ind_res);
                 ((Item) holder).bookType.setText(s);
