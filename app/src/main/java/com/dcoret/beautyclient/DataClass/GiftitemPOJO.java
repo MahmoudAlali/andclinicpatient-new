@@ -1,9 +1,6 @@
 package com.dcoret.beautyclient.DataClass;
 
 public class GiftitemPOJO {
-
-
-
         public String getItem_name() {
             return item_name;
         }

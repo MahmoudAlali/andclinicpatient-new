@@ -35,13 +35,13 @@
             android:background="@drawable/shadow_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/high_edit_text"
-            android:hint="ابحثي عن عنوان او منطقة"
+            android:hint="@string/search_region"
             android:gravity="center"
             />
         <Button
             android:id="@+id/search_map_btn"
             android:textColor="#fff"
-            android:text="بحث"
+            android:text="@string/search"
 
             android:layout_marginRight="5dp"
             android:layout_weight="3"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
                 android:background="@drawable/shadow_button_blue"
-                android:text="اضافة موقع"
+                android:text="@string/addlocation"
                 />
         </LinearLayout>
 

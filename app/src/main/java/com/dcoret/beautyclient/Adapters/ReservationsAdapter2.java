@@ -1,12 +1,10 @@
 package com.dcoret.beautyclient.Adapters;
 
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -85,6 +83,20 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
             ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
             String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
+
+
+
+
+            String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
+
+            if (inner.equals("0")){
+                ((Item)holder).inner_res.setImageResource(R.drawable.ic_arrow_upward_black_24dp);
+            }else {
+                ((Item)holder).inner_res.setImageResource(R.drawable.ic_arrow_downward_black_24dp);
+            }
+
+
+
 
 
 
@@ -237,7 +249,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
 
 
-            ((Item)holder).date.setText(bookingAutomatedBrowseData.get(position).getStartTime());
+            ((Item)holder).date.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getStartTime()));
             if (bookingAutomatedBrowseData.get(position).getPlace().equals("0")) {
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
             }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("1")){
@@ -281,7 +293,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                ((Item)holder).bookType.setText(context.getResources().getText(R.string.multi_booking));
 //            }
 
-            ((Item)holder).totalPrice.setText(bookingAutomatedBrowseData.get(position).getTotalPrice()+context.getResources().getString(R.string.ryal));
+            ((Item)holder).totalPrice.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getTotalPrice())+context.getResources().getString(R.string.ryal));
 
 
         }catch (Exception e){
@@ -447,7 +459,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         MyClickListener listener;
 
         TextView bookType,client_name, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
-        ImageView book_Details;
+        ImageView book_Details,inner_res;
 
         LinearLayout myroot;
         public Item(View itemView, MyClickListener listener) {
@@ -456,6 +468,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             myroot=itemView.findViewById(R.id.myroot);
 
             totalPrice=itemView.findViewById(R.id.total_price);
+            inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);

@@ -81,7 +81,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         //------------------- titles--------------------------
-        String listTitle =  (String) getGroup(groupPosition)+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" R ";
+        String listTitle =  (String) getGroup(groupPosition)+" : "+APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price())+"  "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
             Log.e("LISTTITLE",listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
@@ -207,11 +207,11 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
 
                    }
 
-                    service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+" R ");
+                    service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+APICall.convertToArabic(priceService)+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
 
                     employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getEmp_name());
 //                    day.setText(PlaceServiceGroupFragment.dateFilter);
-                    time.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom());
+                    time.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom()));
                     service_layout.addView(layout2);
                 }
 

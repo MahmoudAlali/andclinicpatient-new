@@ -65,8 +65,10 @@
                 android:textColor="@color/pf_red"
                 android:layout_height="@dimen/high_edit_text" />
             <ImageView
+                android:id="@+id/inner_res"
                 android:layout_width="@dimen/high_edit_text"
                 android:layout_height="match_parent"
+
                 />
 
         </LinearLayout>

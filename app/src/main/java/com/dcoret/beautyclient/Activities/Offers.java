@@ -71,8 +71,9 @@ public class Offers extends AppCompatActivity {
         recyclerView=findViewById(R.id.offers_recycleview);
         recyclerView.setHasFixedSize(true);
         bestOffer=new OffersAdapter(this,bestOfferItems);
-        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager);
+//        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         recyclerView.setAdapter(bestOffer);
         //------------------------ call API bestOffers and get items-----------------
 //        APICall.bestOffer(Offers.this);

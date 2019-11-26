@@ -96,19 +96,19 @@
 
                 />
 
-            <Button
-                android:id="@+id/register"
-                android:layout_width="300dp"
-                android:layout_height="@dimen/high_button"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:textColor="@color/endblue"
-                android:text="@string/enterasaguset"
-                android:background="@drawable/shadow_button"
-                android:textAllCaps="false"
-                android:elevation="5dp"
+            <!--<Button-->
+                <!--android:id="@+id/register"-->
+                <!--android:layout_width="300dp"-->
+                <!--android:layout_height="@dimen/high_button"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:textColor="@color/endblue"-->
+                <!--android:text="@string/enterasaguset"-->
+                <!--android:background="@drawable/shadow_button"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:elevation="5dp"-->
 
-                />
+                <!--/>-->
 
             <Button
                 android:id="@+id/new_user"

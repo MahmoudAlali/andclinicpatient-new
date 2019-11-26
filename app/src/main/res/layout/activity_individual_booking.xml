@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:text="busy"
+                            android:text="@string/busy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             />
@@ -141,7 +141,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="allowed" />
+                            android:text="@string/allowed" />
                         <Space
                             android:layout_width="15dp"
                             android:layout_height="wrap_content" />
@@ -157,7 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
-                            android:text="on Vacation"
+                            android:text="@string/on_Vacation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             />

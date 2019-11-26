@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:textColor="@color/pf_red"
         android:gravity="center"
-        android:text="You can resume deleted items by refreshing the page"/>
+        android:text="@string/you_cane_resume_deleted"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_marginBottom="@dimen/standard_50"
         android:layout_marginTop="@dimen/standard_20"
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
@@ -33,6 +34,49 @@
             android:layout_height="match_parent"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/res_all"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:text="@string/Reserve_all"
+
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:background="@drawable/shadow_button_accent_lite"
+            android:layout_height="@dimen/high_edit_text" />
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/delete_all"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:text="@string/delete_all"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:background="@drawable/shadow_button_accent_lite"
+            android:layout_height="@dimen/high_edit_text" />
+
+
+    </LinearLayout>
+    <!--<Button-->
+        <!--android:id="@+id/res_all"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:text="@string/Reserve_all"-->
+        <!--android:layout_marginBottom="3dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginLeft="@dimen/pf_10dp_space"-->
+        <!--android:background="@drawable/shadow_button_accent_lite"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -88,7 +88,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         //------------------- titles--------------------------
-        String listTitle =  (String) getGroup(groupPosition)+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" R ";
+        String listTitle =  (String) getGroup(groupPosition)+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
             Log.e("LISTTITLE",listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
@@ -162,7 +162,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 salon_name = convertView.findViewById(R.id.salon_name);
                 service_layout = convertView.findViewById(R.id.service_layout);
                 client_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name());
-                salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name());
+                salon_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name()));
 
 //                stringArrayListHashMap.clear();
 
@@ -224,11 +224,11 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
                    }
 
-                    service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+" R ");
+                    service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService)+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
 
                     employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getEmp_name());
 //                    day.setText(PlaceServiceGroupFragment.dateFilter);
-                    time.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom());
+                    time.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom()));
                     service_layout.addView(layout2);
                 }
 

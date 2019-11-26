@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import com.dcoret.beautyclient.API.APICall;
@@ -44,6 +45,7 @@ public class TabSingleBag extends Fragment {
     public static CustomExpandableListBagAdapter listAdapter;
     public static BagReservationAdapter adapter;
     static  boolean isFirstOpen=true;
+    Button res_all;
 
 
     @Nullable
@@ -53,6 +55,7 @@ public class TabSingleBag extends Fragment {
         view = inflater.inflate(R.layout.tab_single_bag, container, false);
 
         recyclerView=view.findViewById(R.id.review);
+        res_all=view.findViewById(R.id.res_all);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -72,6 +75,30 @@ public class TabSingleBag extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
         bagReservationAdapter=new BagReservationAdapter(getActivity().getApplicationContext(),APICall.singleBookingList);
         recyclerView.setAdapter(bagReservationAdapter);
+
+
+
+        //------------------- new for test //----------------- reserve all single reservations
+        res_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i=0;i<APICall.singleBookingList.size();i++) {
+                    APICall.moveAllCartToBooking( APICall.singleBookingList.get(i).getBdb_id(), APICall.singleBookingList.get(i).getBdb_is_group_booking(),i,BeautyMainPage.context);
+                }
+            }
+        });
+
+        Button delete_all=view.findViewById(R.id.delete_all);
+        delete_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //  --------- delete offer and reserve group booking
+                for (int i=0;i<APICall.singleBookingList.size();i++) {
+                    APICall.deletallFromCart( APICall.singleBookingList.get(i).getBdb_id(),i,BeautyMainPage.context);
+                }
+            }
+        });
+
 
 //        APICall.searchGroupBookingBag(BeautyMainPage.context);
 //        APICall.getAllCart(BeautyMainPage.context);

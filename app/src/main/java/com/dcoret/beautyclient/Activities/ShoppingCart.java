@@ -66,9 +66,12 @@ public class ShoppingCart extends AppCompatActivity {
     private File pdfFile;
     ImageView imgdownload;
 //    ConnectionClass connectionClass;
-    ArrayList<GiftitemPOJO> MyList1;
-    static GiftitemPOJO giftitemPOJO;
     public static Context context;
+
+
+
+    static GiftitemPOJO giftitemPOJO;
+    ArrayList<GiftitemPOJO> MyList1;
     GiftitemPOJO name;
     GiftitemPOJO prices;
     GiftitemPOJO url;

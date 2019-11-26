@@ -23,6 +23,7 @@
         android:id="@+id/review"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/high_edit_text"
 
         ></android.support.v7.widget.RecyclerView>
 
@@ -34,6 +35,39 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/res_all"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:text="@string/Reserve_all"
+
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:background="@drawable/shadow_button_accent_lite"
+            android:layout_height="@dimen/high_edit_text" />
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/delete_all"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:text="@string/delete_all"
+
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:background="@drawable/shadow_button_accent_lite"
+            android:layout_height="@dimen/high_edit_text" />
+
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
 

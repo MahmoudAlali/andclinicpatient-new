@@ -118,11 +118,11 @@ public class ReservationDetailsFragment extends Fragment {
 
         rname.setText(reservationName);
         client_details.setText(details);
-        endtime.setText(end_time);
+        endtime.setText(APICall.convertToArabic(end_time));
         emp_name.setText(empName);
-        price.setText(priceVal);
-        starttime.setText(startTimeVal);
-        book_at.setText(bookat);
+        price.setText(APICall.convertToArabic(priceVal));
+        starttime.setText(APICall.convertToArabic(startTimeVal));
+        book_at.setText(APICall.convertToArabic(bookat));
 
 //
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -161,11 +161,11 @@ public class ReservationDetailsFragment extends Fragment {
         emp_name=layout2.findViewById(R.id.emp_name);
 
         rname.setText(reservationName);
-        end_time.setText(endtime);
-        emp_name.setText(empName);
-        price.setText(priceVal+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
-        starttime.setText(startTimeVal);
-        book_at.setText(bookat);
+        end_time.setText(APICall.convertToArabic(endtime));
+        emp_name.setText(APICall.convertToArabic(empName));
+        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+        starttime.setText(APICall.convertToArabic(startTimeVal));
+        book_at.setText(APICall.convertToArabic(bookat));
 
 //
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {

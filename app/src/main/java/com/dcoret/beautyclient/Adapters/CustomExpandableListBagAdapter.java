@@ -115,7 +115,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                                 APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);
                             }
 //                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
-                        Toast.makeText(context,"book Reserved",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context,"book Reserved"+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_id(),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -147,7 +147,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
         final LinearLayout service_layout = convertView.findViewById(R.id.service_layout);
 
         cName.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(0).getBdb_user_name());
-        salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(0).getBdb_user_phone());
+        salon_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(0).getBdb_user_phone()));
 
         service_layout.removeAllViews();
         for (int i=0;i<stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size();i++){
@@ -157,30 +157,30 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
 //                    TextView day = layout2.findViewById(R.id.day);
             TextView time = layout2.findViewById(R.id.time);
             service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(i).getBdb_service_name_en()
-                                +" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(i).getBdb_price()+" R ");
+                                +" : "+APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(i).getBdb_price())+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
             employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(i).getBdb_emp_name());
-            time.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(0).getBdb_start_time());
+            time.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(0).getBdb_start_time()));
 
-            Button delete=layout2.findViewById(R.id.delete);
+//            Button delete=layout2.findViewById(R.id.delete);
             final String serviceName=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(i).getBdb_service_name_en();
-            delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size()>1) {
-                        service_layout.removeView(layout2);
-                        for (int j = 0; j < stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size(); j++) {
-                            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(j).getBdb_service_name_en().equals(serviceName)) {
-                                stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().remove(j);
-                                Log.e("RemoveOkS:", stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size() + "");
-                            }
-                        }
-                    }else {
-                        String t=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.alert);
-                        String m=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.cant_remove_last_item);
-                        APICall.showSweetDialog(context,t,m);
-                    }
-                }
-            });
+//            delete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size()>1) {
+//                        service_layout.removeView(layout2);
+//                        for (int j = 0; j < stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size(); j++) {
+//                            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().get(j).getBdb_service_name_en().equals(serviceName)) {
+//                                stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().remove(j);
+//                                Log.e("RemoveOkS:", stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getGetAllCarts().size() + "");
+//                            }
+//                        }
+//                    }else {
+//                        String t=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.alert);
+//                        String m=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.cant_remove_last_item);
+//                        APICall.showSweetDialog(context,t,m);
+//                    }
+//                }
+//            });
 
             service_layout.addView(layout2);
         }

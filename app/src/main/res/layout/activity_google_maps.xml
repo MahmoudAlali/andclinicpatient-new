@@ -54,7 +54,7 @@
                 android:id="@+id/offer_sw"
                 android:layout_width="150dp"
                 android:layout_height="@dimen/high_button"
-                android:text="Offers"
+                android:text="@string/Offers"
                 android:background="@drawable/shadow_service_tab"
                 android:gravity="center"
                 />
@@ -62,7 +62,7 @@
                 android:id="@+id/service_Sw"
                 android:layout_width="150dp"
                 android:layout_height="@dimen/high_button"
-                android:text="Services"
+                android:text="@string/service"
                 android:gravity="center"
                 />
 

@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -106,6 +107,10 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         context=this;
         Log.e("TOKEN", APICall.gettoken(context));
+
+        SharedPreferences editor = getSharedPreferences("REG_ID", MODE_PRIVATE);
+
+        Log.e("Tokenc",editor.getString("token_client",""));
 
         navigation=findViewById(R.id.navigation);
         mDrawerLayout=findViewById(R.id.drawer);

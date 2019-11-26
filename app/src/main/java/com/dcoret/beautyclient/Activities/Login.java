@@ -46,7 +46,9 @@ public class Login extends AppCompatActivity {
 
     EditText username, password;
     Button login,new_user;
-    TextView forgetpass, register;
+    TextView forgetpass
+//            register
+                    ;
     static double latit;
     static double longit;
    public static boolean logout=false;
@@ -79,7 +81,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
         forgetpass = findViewById(R.id.forgetpass);
-        register = findViewById(R.id.register);
+//        register = findViewById(R.id.register);
         new_user = findViewById(R.id.new_user);
         linearLayout=findViewById(R.id.layout_login );
 

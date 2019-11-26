@@ -206,7 +206,8 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
                             IsSelectedLocation=true;
                         }catch (Exception e){
                             e.printStackTrace();
-                            Toast.makeText(Register.context,"There is an erorr,Please Try Again",Toast.LENGTH_SHORT).show();
+                            String text=getResources().getString(R.string.err);
+                            Toast.makeText(Register.context,"",Toast.LENGTH_SHORT).show();
                         d.cancel();
                         }
                         }

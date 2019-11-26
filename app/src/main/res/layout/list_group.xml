@@ -23,7 +23,7 @@
         android:textColor="@android:color/black"
         android:src="@drawable/ic_add_black_24dp"
         android:gravity="center"
-        android:text="Reserve"
+        android:text="@string/Reserve"
 android:padding="7dp"
         />
 </LinearLayout>

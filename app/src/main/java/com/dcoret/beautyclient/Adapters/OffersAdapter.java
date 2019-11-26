@@ -15,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Activities.Offers;
 import com.dcoret.beautyclient.DataClass.BestOfferItem;
@@ -96,21 +97,27 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //---------------------for prices decimal format-----------------
         try {
-            float old_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getOld_price()) ));
-            float new_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getNew_price()) ));
-            float tot_dis = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) ));
+            DecimalFormat integer=new DecimalFormat("#");
+            DecimalFormat doub=new DecimalFormat("#.##");
+//            float old_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getOld_price()) ));
+//            float new_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getNew_price()) ));
+//            float tot_dis = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) ));
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
-            ((Item) holder).old_price.setText(old_prc + "");
-            ((Item) holder).new_price.setText(new_prc + "");
-            ((Item) holder).total_dis.setText(nFormatePercent(tot_dis) + "% on " + bestOfferItems.get(position).getService_count() + " services");
+            ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
+            ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
+            String on= ((AppCompatActivity)context).getResources().getString(R.string.on);
+            String sevices= ((AppCompatActivity)context).getResources().getString(R.string.ser);
+            ((Item) holder).total_dis.setText(APICall.convertToArabic(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "+on + bestOfferItems.get(position).getService_count() + " "+sevices));
             ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     JSONArray jsonArray = bestOfferItems.get(position).getSersup_ids();
+
+//                    APICall.arabicToDecimal()
 //               StringBuilder infoItem=new StringBuilder();
                     try {
                         PopupMenu popup = new PopupMenu(context, ((Item) holder).info);

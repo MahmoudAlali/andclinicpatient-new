@@ -280,7 +280,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                             vc = "view" + viewcount;
                             final View view1;
                             Boolean multicheck;
-                            if (choose_occision.getText().toString().equals(getResources().getString(R.string.choose_date_for_your_services))) {
+                            if (choose_occision.getText().toString().equals(getResources().getString(R.string.one_date_ser))) {
                                 view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
                                 multicheck = false;
                             } else {

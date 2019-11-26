@@ -149,7 +149,7 @@
     <!--Map Fragment-->
     <string name="searchaddressandregion">ابحثي عن عنوان او منطقة</string>
     <string name="search">بحث</string>
-    <string name="addlocation">إضافة</string>
+    <string name="addlocation">إضافة موقع</string>
     <string name="deletelocation">حذف موقع</string>
     <string name="editlocation">تعديل موقع</string>
     <string name="finishedediting">انتهيت من التعديل</string>
@@ -342,6 +342,22 @@
     <string name="enter_client_name">يرجى إدخال اسم الزبونة</string>
     <string name="enter_phone_num">please, enter phone number</string>
     <string name="no_offer">لا يوجد عروض مميزة، يرجى المحاولة لاحقاً</string>
+    <string name="allowed">مسموح</string>
+    <string name="busy">مشغول</string>
+    <string name="on_Vacation">في عطلة</string>
+    <string name="search_region">ابحثي عن عنوان او منطقة</string>
+    <string name="clients_names_change">يمكن ان تتغير أسماء العملاء وفقًا لأسماء حساباتهم</string>
+    <string name="err">يوجد خطأ ، يرجى المحاولة مرة أخرى</string>
+    <string name="you_cane_resume_deleted">يمكنك استئناف العناصر المحذوفة عن طريق تحديث الصفحة</string>
+    <string name="this_time_not_avl">هذه الوقت غير متاحة لأن عميلًا آخر حجزها.</string>
+    <string name="do_you_want_add_loc">هل تريد اضافة هذا الموقع؟</string>
+    <string name="do_you_want_add_loc2">هل تريد تعديل هذا الموقع؟</string>
+    <string name="Reserve_all">حجز الكل</string>
+    <string name="ser">من الخدمات</string>
+    <string name="Multi_Reservation">حجز متعدد</string>
+    <string name="emp_name">اسم الموظفة:</string>
+    <string name="Servicr_Time">وقت الخدمة:</string>
+    <string name="delete_all">حذف الكل</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>

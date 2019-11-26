@@ -174,7 +174,8 @@ public class PlaceServiceFragment extends Fragment {
                                 public void onClick(View v) {
                                     rangeDistanceDialog.dismiss();
                                      maxValDistance=tvMax.getText().toString();
-                                    distance.setText("Distance: " + Min.getText().toString() + "-" + Max.getText().toString());
+                                     String s=getResources().getString(R.string.distance);
+                                    distance.setText(s+":" +APICall.convertToArabic( Min.getText().toString() + "-" + Max.getText().toString()));
                                     APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 //                               ------------For Offer Filter-------------------------------
@@ -187,7 +188,7 @@ public class PlaceServiceFragment extends Fragment {
                             rangeDistanceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
-                                    distance.setText("Distance");
+                                    distance.setText(R.string.distance);
                                     APICall.filterSortAlgorithm("2", "", "");
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
 

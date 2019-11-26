@@ -441,7 +441,7 @@
     <string name="booked_at">booked at</string>
     <string name="multi_booking_others">Mumulti booking for others</string>
     <string name="offer_single_booking">offer: single booking</string>
-    <string name="offer_single_multi_booking">حجز فردي متعدد</string>
+    <string name="offer_single_multi_booking">individual multi reservation</string>
     <string name="offer_multi_booking">offer: multi booking</string>
     <string name="all_res">all reservation</string>
     <string name="all_res_offer">all offer reservation</string>
@@ -506,4 +506,20 @@
     <string name="enter_client_name">Please enter client name</string>
     <string name="enter_phone_num">please, enter phone number</string>
     <string name="no_offer">There are no special offers, please try again later</string>
+    <string name="allowed">allowed</string>
+    <string name="busy">busy</string>
+    <string name="on_Vacation">on Vacation</string>
+    <string name="search_region">Look for an address or region</string>
+    <string name="clients_names_change">Customer names can change according to their account names</string>
+    <string name="err">There is an erorr,Please Try Again</string>
+    <string name="you_cane_resume_deleted">You can resume deleted items by refreshing the page</string>
+    <string name="this_time_not_avl">This time is not available because another customer has booked it.</string>
+    <string name="do_you_want_add_loc">Do You want to Add This Location ?</string>
+    <string name="do_you_want_add_loc2">Do You want to edit This Location with?</string>
+    <string name="Reserve_all">Reserve all</string>
+    <string name="ser">services</string>
+    <string name="Multi_Reservation">multi booking</string>
+    <string name="emp_name">Employee Name :</string>
+    <string name="Servicr_Time">Servicr Time :</string>
+    <string name="delete_all">delete all</string>
 </resources>

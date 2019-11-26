@@ -7,9 +7,10 @@ public class ReservationModel {
     String totalPrice;
     String startTime;
     String place,client_name,booking_price;
+    String bdb_inner_booking;
     ArrayList<BookingAutomatedBrowseData> data;
 
-    public ReservationModel(String bookingType, String totalPrice, String startTime, String place,String client_name, ArrayList<BookingAutomatedBrowseData> data) {
+    public ReservationModel(String bookingType, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -17,11 +18,16 @@ public class ReservationModel {
         this.data = data;
         this.client_name = client_name;
         this.booking_price = booking_price;
+        this.bdb_inner_booking=bdb_inner_booking;
     }
 
-    public ReservationModel(String bookingType, ArrayList<BookingAutomatedBrowseData> data) {
-        this.bookingType = bookingType;
-        this.data = data;
+
+    public String getBooking_price() {
+        return booking_price;
+    }
+
+    public String getBdb_inner_booking() {
+        return bdb_inner_booking;
     }
 
     public String getClient_name() {

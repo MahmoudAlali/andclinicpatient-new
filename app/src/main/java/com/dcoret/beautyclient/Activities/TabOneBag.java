@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 
@@ -47,6 +48,7 @@ public class TabOneBag extends Fragment {
     public static CustomExpandableListBagAdapter listAdapter;
     public static GroupReservationsAdapter adapter;
 
+    Button res_all;
     @Nullable
     @Override
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -57,6 +59,7 @@ public class TabOneBag extends Fragment {
 //        bagReservationAdapter=new BagReservationAdapter(getActivity().getApplicationContext(),getCarts);
 //        recyclerView.setAdapter(bagReservationAdapter);
         listView=view.findViewById(R.id.listview);
+        res_all=view.findViewById(R.id.res_all);
 
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -74,6 +77,47 @@ public class TabOneBag extends Fragment {
 //       GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
         TabOneBag.listView.setAdapter(TabOneBag.listAdapter);
         TabOneBag.listAdapter.notifyDataSetChanged();
+
+
+
+        //------------------- new for test //----------------- reserve all single reservations
+        res_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                  --------- reserve offer and reserve group booking-------------
+                for (int i=0;i<APICall.salonBooking.size();i++) {
+                    if (Integer.parseInt(APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4 &&
+                            Integer.parseInt(APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<10 ) {
+                        APICall.moveAllofferCartToBooking(APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), i, BeautyMainPage.context);
+                    }else {
+                        APICall.moveAllCartToBooking(APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),i,BeautyMainPage.context);
+                    }
+
+//                    APICall.moveCartToBooking( APICall.singleBookingList.get(i).getBdb_id(), APICall.singleBookingList.get(i).getBdb_is_group_booking(),i,BeautyMainPage.context);
+                }
+            }
+        });
+
+        Button delete_all=view.findViewById(R.id.delete_all);
+
+
+
+        delete_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //  --------- delete offer and reserve group booking
+                for (int i=0;i<APICall.salonBooking.size();i++) {
+//                    APICall.moveCartToBooking(APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),i,BeautyMainPage.context);
+//                    APICall.moveAllCartToBooking( APICall.singleBookingList.get(i).getBdb_id(), APICall.singleBookingList.get(i).getBdb_is_group_booking(),i,BeautyMainPage.context);
+
+                  for (int k=0;k<APICall.grBookingListMap.get(APICall.salonBooking.get(i)).size();k++)
+                    for (int j=0;j<APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(0).getGetAllCarts().size();j++)
+                    APICall.deletallFromCartMulti( APICall.grBookingListMap.get(APICall.salonBooking.get(i)).get(k).getGetAllCarts().get(j).getBdb_id(),i,BeautyMainPage.context);
+                }
+            }
+        });
+
+
         return view;
     }
 }
