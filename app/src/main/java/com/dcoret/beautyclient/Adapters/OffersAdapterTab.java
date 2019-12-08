@@ -130,6 +130,23 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             }
         });
+        if (offers.get(position).getBdb_is_old_on().equals("0")){
+            ((Item)holder).age.setText(R.string.child);
+        }else if (offers.get(position).getBdb_is_old_on().equals("1")){
+            ((Item)holder).age.setText(R.string.Adult);
+        }else if (offers.get(position).getBdb_is_old_on().equals("2")){
+            ((Item)holder).age.setText("لا فرق");
+        }
+
+        if (offers.get(position).getBdb_offer_place().equals("0")){
+            ((Item)holder).place.setText(R.string.salon);
+        }else if (offers.get(position).getBdb_offer_place().equals("1")){
+            ((Item)holder).place.setText(R.string.home);
+        }else if (offers.get(position).getBdb_offer_place().equals("2")){
+            ((Item)holder).place.setText(R.string.hall);
+        }else if (offers.get(position).getBdb_offer_place().equals("3")){
+            ((Item)holder).place.setText(R.string.hotel);
+        }
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +177,17 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                     intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
                     ((AppCompatActivity)context).startActivity(intent);
                 }
+
+
+
+
+
+
+
+
+
+
+
 //            }
 //        });
 //                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
@@ -213,11 +241,13 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView pro_name,new_price,old_price,discount,offer_type,num_of_times,offer_end;
+        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end;
         ImageView info,add_offer;
         public Item(View itemView) {
             super(itemView);
             pro_name = itemView.findViewById(R.id.pro_name);
+            age = itemView.findViewById(R.id.age);
+            place = itemView.findViewById(R.id.place);
             new_price = itemView.findViewById(R.id.new_price);
             old_price = itemView.findViewById(R.id.old_price);
             discount = itemView.findViewById(R.id.discountVal);

@@ -1,5 +1,6 @@
 package com.dcoret.beautyclient.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -72,6 +73,8 @@ public class MyReservationFragment extends Fragment  {
     public static ArrayList<String> filterNames=new ArrayList<>();
     public static ArrayList<Integer> filterPostions=new ArrayList<>();
     public static String groupbooking="";
+    ArrayList<String> servicesList=new ArrayList<>();
+    public static boolean [] checkitems;
 
     public static String service_date_txt="",tab="1";
 
@@ -136,6 +139,10 @@ public class MyReservationFragment extends Fragment  {
                   service_reservation_date=dialog.findViewById(R.id.service_date);
                 book_type=dialog.findViewById(R.id.book_type);
 
+
+                //--------------------- get services---------------------------
+                APICall.getServicesForFilter("1",BeautyMainPage.context);
+
                 try {
                     if (APICall.empNames.isEmpty()) {
                         APICall.empNames.add("Select Employee");
@@ -199,46 +206,120 @@ public class MyReservationFragment extends Fragment  {
                 service_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+
+
+
+
+
                         if (isChecked){
-                            final Dialog name=new Dialog(BeautyMainPage.context);
-                            name.setContentView(R.layout.emp_name_layout);
-                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                            TextView typename=name.findViewById(R.id.type_name);
-                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-                            Button ok=name.findViewById(R.id.ok);
+//                            servicesList.add("اختاري خدمة");
+                            if (servicesList.size()==0)
+                            for (int i=0;i<APICall.serviceForFilter.size();i++){
+                                servicesList.add(APICall.serviceForFilter.get(i).getBdb_name_ar());
+                            }
 
-                            typename.setText(service_name.getText());
-                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.servicesList);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            nameEdTXT.setAdapter(adapter);
 
-                            ok.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+                            final ArrayList<Integer> mUserItems=new ArrayList<>();
+                            CharSequence[] listser=new CharSequence[servicesList.size()];
+                            listser=servicesList.toArray(listser);
+                            AlertDialog.Builder builder=new AlertDialog.Builder(BeautyMainPage.context);
+                            builder.setTitle("Services");
+                            builder.setMultiChoiceItems(listser, checkitems, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
-                                public void onClick(View v) {
-                                    if (nameEdTXT.getSelectedItemPosition()!=0){
-                                        name.dismiss();
-                                        serviceName = nameEdTXT.getSelectedItem().toString();
-                                        service_name.setText(serviceName);
-                                        serviceId=APICall.servicesArrayList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_ser_id();
-                                        Log.e("SERVID",serviceId);
-                                        filterNames.set(0,serviceName);
-                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
+                                public void onClick(DialogInterface dialog, int position, boolean isChecked) {
 
+                                    if (isChecked){
+                                        if(!mUserItems.contains(position)){
+                                            mUserItems.add(position);
+                                        }else {
+                                            mUserItems.remove(position);
+                                        }
                                     }
                                 }
                             });
 
-                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onCancel(DialogInterface dialog) {
-//                                    service_name.setText("اسم الخدمة");
-//                                    service_name.setChecked(false);
-//                                    serviceName="";
-//                                    filterNames.set(0,"");
-//                                    filterPostions.set(0,-1);
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String service="اسم الخدمة:";
+                                    for (int i=0;i<mUserItems.size();i++) {
+                                        Log.e("ser" + i, mUserItems.get(i) + "");
+                                        service=service+"-"+servicesList.get(mUserItems.get(i));
+//                                        if(ProviderMainPage.FRAGMENT_NAME.equals("ServiceReportActivity")){
+                                            if(i==0) {
+                                                serviceId = APICall.serviceForFilter.get(mUserItems.get(i)).getBdb_ser_id();
+                                            }else {
+                                                serviceId =serviceId+","+APICall.serviceForFilter.get(mUserItems.get(i)).getBdb_ser_id();
+                                            }
+//                                        }
+
+//                                        serviceInsideOfferList.add(servicesList.get(mUserItems.get(i)));
+
+                                    }
+
+
+                                    serviceName=service;
+                                    service_name.setText(service);
+                                    Log.e("SERVID",serviceId);
+                                    filterNames.set(0,serviceName);
+//                                    filterPostions.set(0,;
                                 }
                             });
-                            name.show();
+
+                            builder.show();
+
+
+
+
+
+
+//
+//
+//                                final Dialog name=new Dialog(BeautyMainPage.context);
+//                            name.setContentView(R.layout.emp_name_layout);
+//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                            TextView typename=name.findViewById(R.id.type_name);
+//                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+//                            Button ok=name.findViewById(R.id.ok);
+//
+//                            typename.setText(service_name.getText());
+//                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.servicesList);
+//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                            nameEdTXT.setAdapter(adapter);
+//
+//                            ok.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    if (nameEdTXT.getSelectedItemPosition()!=0){
+//                                        name.dismiss();
+//                                        serviceName = nameEdTXT.getSelectedItem().toString();
+//                                        service_name.setText(serviceName);
+//                                        serviceId=APICall.servicesArrayList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_ser_id();
+//                                        Log.e("SERVID",serviceId);
+//                                        filterNames.set(0,serviceName);
+//                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
+//
+//                                    }
+//                                }
+//                            });
+//
+//                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//                                @Override
+//                                public void onCancel(DialogInterface dialog) {
+////                                    service_name.setText("اسم الخدمة");
+////                                    service_name.setChecked(false);
+////                                    serviceName="";
+////                                    filterNames.set(0,"");
+////                                    filterPostions.set(0,-1);
+//                                }
+//                            });
+//                            name.show();
                         }else {
                             serviceId="";
                             service_name.setText(getResources().getString(R.string.Service_Name));
@@ -276,9 +357,6 @@ public class MyReservationFragment extends Fragment  {
 ////                                    service_date_txt=service_reservation_date.getText()+":"+startdate;
 ////                                    filterNames.set(2,startdate);
 ////                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-
-
-
                             final Dialog name=new Dialog(BeautyMainPage.context);
                             name.setContentView(R.layout.select_date_range);
                             name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -475,9 +553,6 @@ public class MyReservationFragment extends Fragment  {
                         }
                     }
                 });
-
-
-
 //                service_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override
 //                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -594,10 +669,6 @@ public class MyReservationFragment extends Fragment  {
 //                        }
 //                    }
 //                });
-
-
-
-
                 emp_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -704,11 +775,11 @@ public class MyReservationFragment extends Fragment  {
 
 
                         }else {
-//                            book_type.setText("نوع العرض");
+                            book_type.setText(R.string.book_type);
                             bookingType="";
                             groupbooking="";
-                            emp_name.setText(R.string.book_type);
-                            emp_name.setChecked(false);
+//                            emp_name.setText(R.string.book_type);
+//                            emp_name.setChecked(false);
                             filterNames.set(4,"");
                             filterPostions.set(4,-1);
 

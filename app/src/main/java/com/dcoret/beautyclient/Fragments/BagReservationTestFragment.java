@@ -19,6 +19,7 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.Activities.TabOneBag;
+import com.dcoret.beautyclient.Activities.TabOthersBag;
 import com.dcoret.beautyclient.Activities.TabSingleBag;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
 import com.dcoret.beautyclient.DataClass.AddToCart;
@@ -112,6 +113,11 @@ public class BagReservationTestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tabselected(otherResevation,individualReservation,groupReservation);
+                fragment = new TabOthersBag();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.frag, fragment);
+                fragmentTransaction.commit();
             }
         });
         //--------------------------------------------------------

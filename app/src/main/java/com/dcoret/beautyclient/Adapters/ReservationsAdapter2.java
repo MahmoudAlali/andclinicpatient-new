@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataClass.ReservationModel;
 import com.dcoret.beautyclient.Fragments.ReservationDetailsFragment;
@@ -271,11 +273,16 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         postionBook=position;
 
 
-                        fragment = new ReservationDetailsFragment();
-                        fm = ((AppCompatActivity) context).getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
+                        Intent intent=new Intent(context, ReservatoinDetailsActivity.class);
+                        ((AppCompatActivity)context).startActivity(intent);
+
+
+
+//                        fragment = new ReservationDetailsFragment();
+//                        fm = ((AppCompatActivity) context).getFragmentManager();
+//                        fragmentTransaction = fm.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment, fragment);
+//                        fragmentTransaction.commit();
                     } catch (Exception e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                     }

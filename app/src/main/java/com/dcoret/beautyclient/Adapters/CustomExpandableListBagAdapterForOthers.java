@@ -2,7 +2,6 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,27 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.OfferBookingResult;
-import com.dcoret.beautyclient.DataClass.GetAllCart;
 import com.dcoret.beautyclient.DataClass.GetAllCartServices;
-import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
-import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
+public class CustomExpandableListBagAdapterForOthers extends BaseExpandableListAdapter {
     private Context context;
     ArrayList<String> salons;
     Map<String,ArrayList<GetAllCartServices>> stringArrayListHashMap;
@@ -42,7 +32,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
 //    }
 
 
-    public CustomExpandableListBagAdapter(Context context, ArrayList<String> salons, Map<String, ArrayList<GetAllCartServices>> stringArrayListHashMap) {
+    public CustomExpandableListBagAdapterForOthers(Context context, ArrayList<String> salons, Map<String, ArrayList<GetAllCartServices>> stringArrayListHashMap) {
         this.context = context;
         this.salons = salons;
         this.stringArrayListHashMap = stringArrayListHashMap;
@@ -88,14 +78,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
 
         //------------------- titles--------------------------
 //        String listTitle =  (String) getGroup(groupPosition);
-        String listTitle="";
-        try {
-
-             listTitle = stringArrayListHashMap.
-                    get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getSupplier_name();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        String listTitle = stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getSupplier_name();
 //            Log.e("LISTTITLE",listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
@@ -106,7 +89,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
             TextView book =  convertView
                     .findViewById(R.id.book);
 
-//            Log.e("is_group_booking11",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking());
+            Log.e("is_group_booking11",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking());
 
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,12 +98,8 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void run() {
 
-                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4 &&
-                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<10
-//                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())==1 &&
-//                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())==11 &&
-//                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())==13
-                            ) {
+                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4&&
+                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<=9) {
                                 APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
                             }else {
                                 APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);

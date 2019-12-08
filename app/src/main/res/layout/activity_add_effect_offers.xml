@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@string/Backicon"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="@dimen/standard_40"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/service_effect"
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:textStyle="bold"/>
+
+
+
+
+
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--<LinearLayout-->
+        <!--android:background="@drawable/shadow_button_accent_lite_v7"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/effect_type"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+
+
+        <!--<Spinner-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:background="@drawable/shadow_button_accent_lite_v7"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/effect_type"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+
+
+        <!--<Spinner-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<TextView-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/Service_Name"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/red"-->
+        <!--android:textSize="@dimen/standard_20"-->
+        <!--android:textStyle="bold"/>-->
+        <!--<LinearLayout-->
+        <!--android:background="@drawable/shadow_button_accent_lite_v7"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/effect_type"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+
+
+        <!--<Spinner-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:background="@drawable/shadow_button_accent_lite_v7"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<TextView-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/effect_type"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/blue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+
+
+        <!--<Spinner-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/high_edit_text" />-->
+
+        <!--</LinearLayout>-->
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shadow_button_accent_lite"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/next"
+        android:layout_height="@dimen/high_edit_text"
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>

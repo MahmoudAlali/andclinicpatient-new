@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dcoret.beautyclient">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,10 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.ReservatoinDetailsActivity"></activity>
+        <activity android:name=".Activities.AddEffectOffersActivity" />
+
         <receiver
             android:name=".Service.CancelNotifyBroadcast"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".Activities.OfferBookingResult" />
         <activity android:name=".Activities.SingleDateMultiClientOfferBooking" />

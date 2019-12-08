@@ -77,7 +77,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     TextView myLocationbtn,distancebtn;
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
-    public static  String bdb_name="";
+    public static  String bdb_name="",ServiceId="";
     Toolbar toolbar;
     String service_place_name="";
     LinearLayout pages;
@@ -119,6 +119,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         supInfoList.clear();
         supInfoList.add(new SupInfoClass("Provider Name","",""));
 
+
+        ServiceId="\"ServiceId\":["+APICall.idSerForOffer+"],";
 
         sort.setOnClickListener(new View.OnClickListener() {
             @Override

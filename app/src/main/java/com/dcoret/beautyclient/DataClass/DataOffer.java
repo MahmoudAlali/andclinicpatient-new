@@ -46,6 +46,8 @@ public class DataOffer {
     String bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,Num_of_times,oldPrice,newPrice,discount,bdb_offer_status,bdb_offer_type
                         ,longitude
             ,latitude,distance
+
+    ,bdb_is_effects_on,bdb_is_journey_on,bdb_is_old_on,bdb_offer_place;
             ;
     ArrayList<SupIdClass> sersup_ids;
 
@@ -101,7 +103,8 @@ public class DataOffer {
 //        this.pack_data = pack_data;
     }
 
-    public DataOffer( String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, String longitude, String latitude, String distance, ArrayList<SupIdClass> sersup_ids) {
+    public DataOffer( String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, String longitude, String latitude, String distance,
+                      String bdb_is_journey_on,String bdb_is_old_on,String bdb_offer_place,String bdb_is_effects_on, ArrayList<SupIdClass> sersup_ids) {
         this.pack_data = pack_data;
         this.bdb_pack_code = bdb_pack_code;
         this.bdb_sup_name = bdb_sup_name;
@@ -120,6 +123,43 @@ public class DataOffer {
         this.latitude = latitude;
         this.distance = distance;
         this.sersup_ids = sersup_ids;
+        this.bdb_is_journey_on = bdb_is_journey_on;
+        this.bdb_is_old_on = bdb_is_old_on;
+        this.bdb_offer_place = bdb_offer_place;
+        this.bdb_is_effects_on= bdb_is_effects_on;
+    }
+
+
+    public String getBdb_is_effects_on() {
+        return bdb_is_effects_on;
+    }
+
+    public void setBdb_is_effects_on(String bdb_is_effects_on) {
+        this.bdb_is_effects_on = bdb_is_effects_on;
+    }
+
+    public String getBdb_is_journey_on() {
+        return bdb_is_journey_on;
+    }
+
+    public void setBdb_is_journey_on(String bdb_is_journey_on) {
+        this.bdb_is_journey_on = bdb_is_journey_on;
+    }
+
+    public String getBdb_is_old_on() {
+        return bdb_is_old_on;
+    }
+
+    public void setBdb_is_old_on(String bdb_is_old_on) {
+        this.bdb_is_old_on = bdb_is_old_on;
+    }
+
+    public String getBdb_offer_place() {
+        return bdb_offer_place;
+    }
+
+    public void setBdb_offer_place(String bdb_offer_place) {
+        this.bdb_offer_place = bdb_offer_place;
     }
 
     public String getBdb_offer_type() {

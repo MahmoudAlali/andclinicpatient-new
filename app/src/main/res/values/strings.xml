@@ -522,4 +522,22 @@
     <string name="emp_name">Employee Name :</string>
     <string name="Servicr_Time">Servicr Time :</string>
     <string name="delete_all">delete all</string>
+    <string name="start_at">start at</string>
+    <string name="valid_until">valid until</string>
+    <string name="normal_offer">Normal offer</string>
+    <string name="bride_offer">bride offer</string>
+    <string name="Number_of_services_on_offer">number of service</string>
+    <string name="discount_percentage">discount</string>
+    <string name="offer_place">offer place</string>
+    <string name="month_in_offer">month in offer</string>
+    <string name="offer_end">offer end</string>
+    <string name="prc">price</string>
+    <string name="offer_type">offer type</string>
+    <string name="end_date_offer_select">end date offer select</string>
+    <string name="client_info">client info</string>
+    <string name="Mobile_n">mobile number</string>
+    <string name="child">طفلة</string>
+    <string name="Adult">بالغة</string>
+    <string name="service_dates">service\'s dates</string>
+    <string name="service_effect">service effects</string>
 </resources>

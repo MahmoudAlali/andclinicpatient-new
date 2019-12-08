@@ -113,6 +113,7 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((Item)holder).item_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                APICall.idSerForOffer=itemArrayList.get(position).getBdb_ser_id();
                 APICall.filterSortAlgorithm("33", itemArrayList.get(position).getBdb_ser_id(), "0");
                 bdb_ser_id=itemArrayList.get(position).getBdb_ser_id();
                 Log.e("SER_ID", itemArrayList.get(position).getBdb_ser_id());

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="journey_time">
+    <item>  زمن المشوار  </item>
+    <item>00:15</item>
+    <item>00:30</item>
+    <item>00:45</item>
+    <item>01:00</item>
+    <item>01:15</item>
+    <item>01:30</item>
+    <item>01:45</item>
+    <item>02:00</item>
+    <item>02:15</item>
+    <item>02:30</item>
+    <item>02:45</item>
+    <item>03:00</item>
+    <item>03:15</item>
+    <item>03:30</item>
+    <item>03:45</item>
+    <item>>04:00</item>
+    </string-array>
+</resources>

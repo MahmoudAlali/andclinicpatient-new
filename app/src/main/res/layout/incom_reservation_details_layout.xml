@@ -26,6 +26,129 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vfirst"
+                    android:layout_width="match_parent"
+                    android:background="@color/pf_red"
+                    android:layout_height="7dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    />
+                <RadioButton
+                    android:id="@+id/rfirst"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:button="@drawable/radiobutton_selector"
+                    android:drawablePadding="20dp"
+                    android:paddingLeft="10dip"
+                    android:text="تم الطلب"
+                    android:textColor="@drawable/radiobutton_color_selector" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vsecond"
+                    android:layout_width="match_parent"
+                    android:background="@color/pf_red"
+                    android:layout_height="7dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    />
+                <RadioButton
+                    android:id="@+id/rsecond"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:button="@drawable/radiobutton_selector"
+                    android:drawablePadding="20dp"
+                    android:paddingLeft="10dip"
+                    android:text="تم التأكيد"
+                    android:textColor="@drawable/radiobutton_color_selector" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vthird"
+                    android:layout_width="match_parent"
+                    android:background="@color/pf_red"
+                    android:layout_height="7dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    />
+                <RadioButton
+                    android:id="@+id/rthird"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:button="@drawable/radiobutton_selector"
+                    android:drawablePadding="20dp"
+                    android:paddingLeft="10dip"
+                    android:text="تم دفع العربون"
+                    android:textColor="@drawable/radiobutton_color_selector" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/vforth"
+                    android:layout_width="match_parent"
+                    android:background="@color/pf_red"
+                    android:layout_height="7dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    />
+                <RadioButton
+                    android:id="@+id/rforth"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:button="@drawable/radiobutton_selector"
+                    android:drawablePadding="20dp"
+                    android:paddingLeft="10dip"
+                    android:text="تم التنفيذ"
+                    android:textColor="@drawable/radiobutton_color_selector" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -234,6 +357,7 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/ok"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
