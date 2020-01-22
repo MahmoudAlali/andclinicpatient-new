@@ -6,12 +6,14 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -34,12 +36,15 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
+import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
+import com.dcoret.beautyclient.Fragments.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
@@ -62,6 +67,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     //---------static variables for permissions----------
     public static int ACCESS_FINE_LOCATION=90;
     public static Fragment currentFragment;
+    public static String is_bride_service;
     private int READ_EXTERNAL_STORAGE=93;
 
     //--------------------- for call some of APIs for the first time ofopen app ---------------------
@@ -154,6 +160,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         navigationView.setNavigationItemSelectedListener(this);
 
         //---------------get cities in background-----------------
+
+
+
+
+
         //        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
 
         cutdownBagReservation();
@@ -224,7 +235,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }
     }
 
-
     /*
     * ACCOUNTFRAGMENT
     * MAPFRAGMENT
@@ -271,6 +281,37 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("ListServicesFragment")){
+                fragment = new ServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+
+
+ //        PLACESERVICEFRAGMENT
+//                PLACESERVICEFRAGMENTBRIDE
+//        PLACESERVICEFRAGMENTOTHER
+//                PLACESERVICEFRAGMENTOTHER
+//        PLACESERVICEFRAGMENTBRIDEOTHER
+//                multiple_individual_booking
+//        multiple_individual_booking_bride
+
+            }else if (
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT") ||
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE") ||
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTOTHER") ||
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTOTHER") ||
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDEOTHER") ||
+                    FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTOTHER") ||
+                    FRAGMENT_NAME.equals("multiple_individual_booking") ||
+                    FRAGMENT_NAME.equals("multiple_individual_booking_bride")
+            ){
+                fragment = new ServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }else if (FRAGMENT_NAME.equals("MultiIndividualBookingReservationFragment")){
                 fragment = new PlaceServiceMultipleBookingFragment();
                 fm = getFragmentManager();
@@ -284,13 +325,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
             }else if (FRAGMENT_NAME.equals("ACCOUNTFRAGMENT")){
-            FRAGMENT_NAME="";
-            fragment = new ServiceFragment();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commit();
                 FRAGMENT_NAME="";
+                fragment = new ServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+                    navigation.setSelectedItemId(R.id.services);
 //
         }else if (FRAGMENT_NAME.equals("MAPFRAGMENTSPINNER")){
                 fragment = new PlaceServiceFragment();
@@ -335,8 +376,18 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
-            }else if (FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")){
+            }else if (FRAGMENT_NAME.equals("ListServicesBrideFragment")){
                 fragment = new ServiceFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }else if (FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")){
+                if (is_bride_service.equals("1")){
+                    fragment = new ListServicesBrideFragment();
+                }else {
+                    fragment = new ListServicesFragment();
+                }
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
@@ -387,33 +438,21 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             Intent intent=new Intent(getApplicationContext(),Compartion.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
-         } else if (id == R.id.help) {
-            Intent intent=new Intent(getApplicationContext(), Main2Activity.class);
-            startActivity(intent);
         } else if (id == R.id.nav_share) {
+
             Intent intent=new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
             String sharesub="Beauty";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
             intent.putExtra(Intent.EXTRA_TEXT,R.string.shareAppMessage);
             startActivity(Intent.createChooser(intent,"Share using"));
-        } else if (id == R.id.favorites) {
 
+
+        } else if (id == R.id.support) {
+            Intent intent=new Intent(getApplicationContext(), SupportActivity.class);
+            startActivity(intent);
         } else if (id == R.id.rate_app) {
-            final Dialog dialog=new Dialog(this);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.setContentView(R.layout.rating_dialog);
-            final RatingBar ratingBar=dialog.findViewById(R.id.ratingBar);
-            TextView ok=dialog.findViewById(R.id.ok);
-            ok.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                @Override
-                public void onClick(View v) {
-                    dialog.cancel();
-                    APICall.rateApp(ratingBar.getRating()+"","http://clientapp.dcoret.com/api/rating/rateApp",BeautyMainPage.context);
-                }
-            });
-            dialog.show();
+         launchMarket();
         }else if (id == R.id.signout) {
             new AlertDialog.Builder(context)
                     .setTitle(R.string.sigin_out)
@@ -488,4 +527,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                     return false;
                 }
             };
+
+    private void launchMarket() {
+        Uri uri = Uri.parse("market://details?id=" + "com.ubnt.umobile");
+        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(myAppLinkToMarket);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+        }
+    }
 }

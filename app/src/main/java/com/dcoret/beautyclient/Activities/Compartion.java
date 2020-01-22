@@ -1,8 +1,10 @@
 package com.dcoret.beautyclient.Activities;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.R;
 
@@ -63,26 +66,17 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        }else if (id == R.id.compare) {
+       if (id == R.id.compare) {
 
             Intent intent=new Intent(getApplicationContext(),Compartion.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.help) {
-//            Intent intent=new Intent(getApplicationContext(),Help.class);
-//            startActivity(intent);
         } else if (id == R.id.nav_share) {
             Intent intent=new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            String sharebody="تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store";
+            String sharebody="تطبيق beauty لخدمات التجميل و التصميم حمله الآن من play Store";
             String sharesub="Beauty";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
             intent.putExtra(Intent.EXTRA_TEXT,sharebody);
@@ -93,14 +87,26 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
 //            startActivity(intent);
 
         } else if (id == R.id.rate_app) {
-            Dialog dialog=new Dialog(this);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.setContentView(R.layout.rating_dialog);
-            dialog.show();
+//            Dialog dialog=new Dialog(this);
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//            dialog.setContentView(R.layout.rating_dialog);
+//            dialog.show();
+            launchMarket();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private void launchMarket() {
+        Uri uri = Uri.parse("market://details?id=" + "com.ubnt.umobile");
+        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(myAppLinkToMarket);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+        }
     }
 }

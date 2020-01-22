@@ -19,6 +19,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -110,10 +111,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonArray;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -126,6 +130,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -153,12 +158,27 @@ public class APICall {
     public APICall() {
     }
     private static final OkHttpClient client = new OkHttpClient();
-    public static ProgressDialog pd;
+    public static KProgressHUD pd;
     static String error = "";
     static   String ln= SplashScreen.ln;
 
 
     //-------------------------------------------
+
+
+    public static void showDialog(Context context){
+        int color = ((AppCompatActivity)context).getResources().getColor(android.R.color.transparent);
+        int color50percent = ColorUtils.setAlphaComponent(color, 50);
+
+        pd = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                            .setLabel("Please wait")
+                .setCancellable(true)
+                .setBackgroundColor(color50percent)
+                .setMaxProgress(100)
+                .show();
+    }
+
     public static String gettoken(Context context){
         String shared_token=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("token",null);
     return shared_token;
@@ -171,6 +191,8 @@ public class APICall {
             final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Loading...");
             progressDialog.show();
+
+
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
                 @Override
@@ -229,11 +251,10 @@ public class APICall {
         static String mMessage="";
 
     public  static  String  new_user( final String phone,final String gender ,final String password, final String confirm_password, final String loc_long
-            , final String loc_lat, final String description,final String my_description,  final  String url, final Context context){
+            , final String loc_lat, final String description,final String my_description,String loc_details,String loc_detailsAr,final  String url, final Context context){
         if (validationPassword(password)){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
             //        String url = "http://clientapp.dcoret.com/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -251,11 +272,21 @@ public class APICall {
                 postdata.put("bdb_fb_token", fb_token);
                 postdata.put("bdb_server_key", server_key);
                 postdata.put("bdb_sys_type", "0");
+
+
+
+                JSONArray array=new JSONArray();
+                Log.e("Address",loc_details);
+                Log.e("AddressAr",loc_detailsAr);
+                array.put(new JSONObject(loc_details));
+                array.put(new JSONObject(loc_detailsAr));
+                postdata.put("address_details",array);
 //                postdata.put("bdb_city", "1");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+            Log.e("POSTDATE",postdata.toString());
 
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
@@ -374,164 +405,166 @@ public class APICall {
 
     }
 
-    public  static  String  new_user( final String mobile1 ,final String password, final String confirm_password, final String loc_long
-            , final String loc_lat, final String description,final String my_description,String email, String bdb_owner_name,String bdb_nation_num , final  String url, final Context context){
-        if (validationPassword(password)){
-            MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
-            //        String url = "http://clientapp.dcoret.com/api/service/Service";
-            OkHttpClient client = new OkHttpClient();
-            JSONObject postdata = new JSONObject();
-            try {
-                String fb_token= FirebaseInstanceId.getInstance().getToken();
-                String server_key="AAAA6gZ1CO8:APA91bHEg19SqKpRdvifPk3-o-nWwDm350IZaNjqX0yy0eHkRUnv1hSBHN6zaQZR0ZvoINJUNX1zbRMDto0W4ePuFwckOOBabMECCscYuwyisY4YEGHhCr10kjEVPoifc9IOz_x7dP0q";
-                postdata.put("owner_name",bdb_owner_name );
-                postdata.put("bdb_mobile1", mobile1);
-                postdata.put("bdb_nation_num", bdb_nation_num);
-                postdata.put("email",email);
-                postdata.put("password", password);
-                postdata.put("c_password", confirm_password);
-                postdata.put("bdb_loc_long", loc_long);
-                postdata.put("bdb_loc_lat", loc_lat);
-                postdata.put("bdb_descr",description );
-                postdata.put("bdb_my_descr", my_description);
-                postdata.put("bdb_fb_token", fb_token);
-                postdata.put("bdb_server_key", server_key);
-                postdata.put("bdb_sys_type", "0");
-//                postdata.put("bdb_city", "1");
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
-            Log.e("NewUserLog",postdata.toString());
-
-            okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .addHeader("Content-Type","multipart/form-data")
-                    .addHeader("Accept","application/json")
-                    .build();
-
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    mMessage = e.getMessage().toString();
-                    Log.w("failure Response", mMessage);
-                    pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final Dialog dialog = new Dialog(context);
-                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                                TextView confirm = dialog.findViewById(R.id.confirm);
-//                                TextView message = dialog.findViewById(R.id.message);
-//                                TextView title = dialog.findViewById(R.id.title);
-//                                title.setText(R.string.Null);
-//                                message.setText(R.string.check_internet_con);
-//                                confirm.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//                                        dialog.cancel();
+
+//    public  static  String  new_user( final String mobile1 ,final String password, final String confirm_password, final String loc_long
+//            , final String loc_lat, final String description,final String my_description,String email, String bdb_owner_name,String bdb_nation_num , final  String url, final Context context){
+//        if (validationPassword(password)){
+//            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+//            showDialog(context);
+////            pd.show();
+//            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+//            OkHttpClient client = new OkHttpClient();
+//            JSONObject postdata = new JSONObject();
+//            try {
+//                String fb_token= FirebaseInstanceId.getInstance().getToken();
+//                String server_key="AAAA6gZ1CO8:APA91bHEg19SqKpRdvifPk3-o-nWwDm350IZaNjqX0yy0eHkRUnv1hSBHN6zaQZR0ZvoINJUNX1zbRMDto0W4ePuFwckOOBabMECCscYuwyisY4YEGHhCr10kjEVPoifc9IOz_x7dP0q";
+//                postdata.put("owner_name",bdb_owner_name );
+//                postdata.put("bdb_mobile1", mobile1);
+//                postdata.put("bdb_nation_num", bdb_nation_num);
+//                postdata.put("email",email);
+//                postdata.put("password", password);
+//                postdata.put("c_password", confirm_password);
+//                postdata.put("bdb_loc_long", loc_long);
+//                postdata.put("bdb_loc_lat", loc_lat);
+//                postdata.put("bdb_descr",description );
+//                postdata.put("bdb_my_descr", my_description);
+//                postdata.put("bdb_fb_token", fb_token);
+//                postdata.put("bdb_server_key", server_key);
+//                postdata.put("bdb_sys_type", "0");
+////                postdata.put("bdb_city", "1");
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
 //
-//                                    }
-//                                });
-                                dialog.show();
-
-                            }
-                        });
-
-
-                    }else {
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
-
-                            }
-                        });
-                    }
-
-                }
-
-                @Override
-                public void onResponse(Call call, okhttp3.Response response) throws IOException {
-                    mMessage = response.body().string();
-                    Log.e("TAG", mMessage);
-                    pd.dismiss();
-                    SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
-                    try {
-                        final JSONObject userresponse=new JSONObject(mMessage);
-                        String success=userresponse.getString("success");
-                        Log.e("data",userresponse.toString());
-                        if(success.equals("true")){
-                            JSONObject data=userresponse.getJSONObject("data");
-                            String ac_num=userresponse.getString("activation number :");
-                            Log.d("number",ac_num);
-                            APICall.name=name;
-                            APICall.token_temp=data.getString("token");
-                            showSweetDialog(context,R.string.ExuseMeAlert,R.string.EnterVerificationCode,true);
-                        }else if(success.equals("false")) {
-                            JSONObject err= userresponse.getJSONObject("message");
-//                            JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
-//                            String error=bdb_mobile.getString(0);
-//                            if(error.equals("bdb_mobile is already exists and not activated")){
-//                                activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
-//                                        phone,
-//                                        context);
-                            showSweetDialog(context,context.getResources().getString(R.string.ExuseMeAlert),err.toString());
-//                            }else if (error.equals("The bdb mobile format is invalid.")){
-//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
-//                            for email address
-//                            }else if (error.equals("The bdb mobile format is invalid.")){
-//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
-//                            }else if(error.equals("bdb_mobile is already exists and activated")) {
-//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.MobTakenAlert,false);
+//            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+//            Log.e("NewUserLog",postdata.toString());
+//
+//            okhttp3.Request request = new okhttp3.Request.Builder()
+//                    .url(url)
+//                    .post(body)
+//                    .addHeader("Content-Type","multipart/form-data")
+//                    .addHeader("Accept","application/json")
+//                    .build();
+//
+//            client.newCall(request).enqueue(new Callback() {
+//                @Override
+//                public void onFailure(Call call, IOException e) {
+//                    mMessage = e.getMessage().toString();
+//                    Log.w("failure Response", mMessage);
+//                    pd.dismiss();
+//
+//
+//                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+////                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+//                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                final Dialog dialog = new Dialog(context);
+//                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+//                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+////                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+////                                TextView confirm = dialog.findViewById(R.id.confirm);
+////                                TextView message = dialog.findViewById(R.id.message);
+////                                TextView title = dialog.findViewById(R.id.title);
+////                                title.setText(R.string.Null);
+////                                message.setText(R.string.check_internet_con);
+////                                confirm.setOnClickListener(new View.OnClickListener() {
+////                                    @Override
+////                                    public void onClick(View v) {
+////                                        dialog.cancel();
+////
+////                                    }
+////                                });
+//                                dialog.show();
+//
 //                            }
-                        }
-                    }catch (final JSONException je){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                String t=((AppCompatActivity)context).getResources().getString(R.string.wrong);
-                                showSweetDialog(context,t,je.getMessage().toString() );
-
-                            }
-                        });
-
-                    }
-
-                }
-
-            });
-        }else {
-            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidPassword,false);
-
-                }
-            });
-        }
-        return mMessage;
-
-    }
+//                        });
+//
+//
+//                    }else {
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        });
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+//                    mMessage = response.body().string();
+//                    Log.e("TAG", mMessage);
+//                    pd.dismiss();
+//                    SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+//                    try {
+//                        final JSONObject userresponse=new JSONObject(mMessage);
+//                        String success=userresponse.getString("success");
+//                        Log.e("data",userresponse.toString());
+//                        if(success.equals("true")){
+//                            JSONObject data=userresponse.getJSONObject("data");
+//                            String ac_num=userresponse.getString("activation number :");
+//                            Log.d("number",ac_num);
+//                            APICall.name=name;
+//                            APICall.token_temp=data.getString("token");
+//                            showSweetDialog(context,R.string.ExuseMeAlert,R.string.EnterVerificationCode,true);
+//                        }else if(success.equals("false")) {
+//                            JSONObject err= userresponse.getJSONObject("message");
+////                            JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
+////                            String error=bdb_mobile.getString(0);
+////                            if(error.equals("bdb_mobile is already exists and not activated")){
+////                                activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
+////                                        phone,
+////                                        context);
+//                            showSweetDialog(context,context.getResources().getString(R.string.ExuseMeAlert),err.toString());
+////                            }else if (error.equals("The bdb mobile format is invalid.")){
+////                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+////                            for email address
+////                            }else if (error.equals("The bdb mobile format is invalid.")){
+////                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+////                            }else if(error.equals("bdb_mobile is already exists and activated")) {
+////                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.MobTakenAlert,false);
+////                            }
+//                        }
+//                    }catch (final JSONException je){
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                String t=((AppCompatActivity)context).getResources().getString(R.string.wrong);
+//                                showSweetDialog(context,t,je.getMessage().toString() );
+//
+//                            }
+//                        });
+//
+//                    }
+//
+//                }
+//
+//            });
+//        }else {
+//            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidPassword,false);
+//
+//                }
+//            });
+//        }
+//        return mMessage;
+//
+//    }
 
 
     //   ------------------ rating the app =-------------------------
     public  static  void  rateApp(final String bdb_rate,final  String url,final Context context){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+        showDialog(context);
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -639,9 +672,10 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
+//                pd.show();
                 Offers.pullToRefresh.setRefreshing(true);
-                pd.show();
+
             }
         });
 
@@ -791,8 +825,8 @@ public class APICall {
                 String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
                 MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-                        pd = new ProgressDialog(context);
-                        pd.show();
+                        showDialog(context);
+//                        pd.show();
 
 
                 //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
@@ -946,8 +980,8 @@ public class APICall {
             String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-//            pd = new ProgressDialog(context);
-//            pd.show();
+//            showDialog(context);
+////            pd.show();
 
 
             //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
@@ -1089,8 +1123,8 @@ public class APICall {
             String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-//            pd = new ProgressDialog(context);
-//            pd.show();
+//            showDialog(context);
+////            pd.show();
 
 
             //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
@@ -1216,8 +1250,8 @@ public class APICall {
 //            String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-//            pd = new ProgressDialog(context);
-//            pd.show();
+//            showDialog(context);
+////            pd.show();
 
 
             //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
@@ -1333,8 +1367,7 @@ public class APICall {
         static   String name,token_temp;
         public  static  void   activeAccount(final  String url, final String token, final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+        showDialog(context);
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -1516,8 +1549,7 @@ public class APICall {
         static JSONObject data;
         public  static  void  login(final String name,String  pass,final  String url,final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+        showDialog(context);
 
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -1659,8 +1691,8 @@ public class APICall {
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-                            pd=new ProgressDialog(context);
-                            pd.show();
+                            showDialog(context);
+//                            pd.show();
 
                             OkHttpClient client = new OkHttpClient();
                             JSONObject postdata = new JSONObject();
@@ -1767,23 +1799,53 @@ public class APICall {
                     .show();
     }
         // ----------------------tested-------------
-        public  static  void  addAddress(final  String url, final String bdb_loc_long, final String bdb_loc_lat, final String bdb_descr, final String my_description, final Context context){
+        public  static  void  addAddress(final  String url, final String bdb_loc_long, final String bdb_loc_lat, final String bdb_descr, final String my_description
+                ,String lang,String admin,String locality,String bdb_is_origin,String sublocality,String thorourhfare,
+                                         String langAR,String adminAr,String localityAr,String bdb_is_originAr,String sublocalityAr,String thorourhfareAr,
+                                         final Context context){
                 MediaType MEDIA_TYPE = MediaType.parse("application/json");
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
 
                 OkHttpClient client = new OkHttpClient();
                 JSONObject postdata = new JSONObject();
-                try {
-                    postdata.put("bdb_loc_long", bdb_loc_long);
-                    postdata.put("bdb_loc_lat", bdb_loc_lat);
-                    postdata.put("bdb_descr", bdb_descr);
-                    postdata.put("bdb_my_descr", my_description);
-                }catch (JSONException je){
-                    je.printStackTrace();
-                }
+//                try {
+//                    postdata.put("bdb_loc_long", bdb_loc_long);
+//                    postdata.put("bdb_loc_lat", bdb_loc_lat);
+//                    postdata.put("bdb_descr", bdb_descr);
+//                    postdata.put("bdb_my_descr", my_description);
+//                }catch (JSONException je){
+//                    je.printStackTrace();
+//                }
 
-                RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        String postreq="\t{\t\n"+
+                    "\t\"bdb_loc_long\":\""+bdb_loc_long+"\",\n" +
+                    "\t\"bdb_loc_lat\":\""+bdb_loc_lat+"\",\n" +
+                    "\t\"bdb_descr\":\""+bdb_descr+"\",\n" +
+                    "\t\"bdb_my_descr\":\""+my_description+"\",\n" +
+                    "\t\"bdb_is_origin\":\""+bdb_is_origin+"\",\n" +
+                    "\t \"address_details\":[" +
+                    "{" +
+                    "\"lang\":\""+lang+"\"," +
+                    "\"admin\":\""+admin+"\"," +
+                    "\"locality\":\""+locality+"\"," +
+                    "\"sub_locality\":\""+sublocality+"\"," +
+                    "\"thoroughfare\":\""+thorourhfare+"\"" +
+                    "}," +
+                    "{" +
+                    "\"lang\":\""+langAR+"\"," +
+                    "\"admin\":\""+adminAr+"\"," +
+                    "\"locality\":\""+localityAr+"\"," +
+                    "\"sub_locality\":\""+sublocalityAr+"\"," +
+                    "\"thoroughfare\":\""+thorourhfareAr+"\"" +
+                    "}" +
+
+                    "]" +
+                    "}";
+
+            Log.e("LocationPost",postreq.toString());
+
+                RequestBody body = RequestBody.create(MEDIA_TYPE, postreq);
 
                 okhttp3.Request request = new okhttp3.Request.Builder()
                         .url(url)
@@ -1848,6 +1910,12 @@ public class APICall {
                                 AccountFragment.locationTitles.add(new LocationTitles(id,new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long))
                                         ,my_description,"","","",bdb_descr));
                                 pd.dismiss();
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context,"Success add addrss",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }      else {
 
                             }
@@ -1864,8 +1932,7 @@ public class APICall {
         //-------------------------------------
         public  static  String  deleteAddress(final  String url, String bdb_id, final int id_location_titles, final Marker marker, final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -1984,28 +2051,64 @@ public class APICall {
 
         }
         //---------------------------
-        public  static  String  updateaddress(final  String url, final String bdb_loc_long, final String bdb_loc_lat, final String bdb_address_id, String bdb_descr, final String bdb_my_descr, final Context context){
+        public  static  String  updateaddress(final  String url,String bdb_address_id,final String bdb_loc_long, final String bdb_loc_lat, final String bdb_descr, final String my_description
+                ,String lang,String admin,String locality,String bdb_is_origin,String sublocality,String thorourhfare,
+                                              String langAR,String adminAr,String localityAr,String bdb_is_originAr,String sublocalityAr,String thorourhfareAr,
+                                              final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    pd=new ProgressDialog(context);
+                    showDialog(context);
                 }
             });
 
             OkHttpClient client = new OkHttpClient();
-            JSONObject postdata = new JSONObject();
-            try {
-                postdata.put("bdb_address_id", bdb_address_id);
-                postdata.put("bdb_loc_long", bdb_loc_long);
-                postdata.put("bdb_loc_lat", bdb_loc_lat);
-                postdata.put("bdb_descr", bdb_descr);
-                postdata.put("bdb_my_descr", bdb_my_descr);
-            }catch (JSONException je){
-                je.printStackTrace();
+
+            if(admin.equals("")){
+                admin="null";
             }
 
-            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+            if(adminAr.equals("")){
+                adminAr="null";
+            }
+
+//            if(adminAr.equals("")){
+//                adminAr="null";
+//            }
+//            if(adminAr.equals("")){
+//                adminAr="null";
+//            }
+
+            JSONObject postdata = new JSONObject();
+            String postreq="\t{\t\n"+
+                    "\t\"bdb_loc_long\":\""+bdb_loc_long+"\",\n" +
+                    "\t\"bdb_address_id\":\""+bdb_address_id+"\",\n" +
+                    "\t\"bdb_loc_lat\":\""+bdb_loc_lat+"\",\n" +
+                    "\t\"bdb_descr\":\""+bdb_descr+"\",\n" +
+                    "\t\"bdb_my_descr\":\""+my_description+"\",\n" +
+                    "\t\"bdb_is_origin\":\""+bdb_is_origin+"\",\n" +
+                    "\t \"address_details\":[" +
+                    "{" +
+                    "\"lang\":\""+lang+"\"," +
+                    "\"admin\":\""+admin+"\"," +
+                    "\"locality\":\""+locality+"\"," +
+                    "\"sub_locality\":\""+sublocality+"\"," +
+                    "\"thoroughfare\":\""+thorourhfare+"\"" +
+                    "}," +
+                    "{" +
+                    "\"lang\":\""+langAR+"\"," +
+                    "\"admin\":\""+adminAr+"\"," +
+                    "\"locality\":\""+localityAr+"\"," +
+                    "\"sub_locality\":\""+sublocalityAr+"\"," +
+                    "\"thoroughfare\":\""+thorourhfareAr+"\"" +
+                    "}" +
+                    "]" +
+                    "}";
+
+            Log.e("POSTRequest",postreq);
+
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postreq.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
@@ -2061,6 +2164,8 @@ public class APICall {
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     mMessage = response.body().string();
                     Log.e("TAG", mMessage);
+                    pd.dismiss();
+
                     try {
                         JSONObject jsonObject = new JSONObject(mMessage);
                         String success = jsonObject.getString("success");
@@ -2073,12 +2178,17 @@ public class APICall {
                                 }
                             });
                         } else {
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "Success Update address", Toast.LENGTH_LONG).show();
+                                                                }
+                            });
                             getdetailsUser(context);
                         }
                     } catch (JSONException je) {
                         je.printStackTrace();
                     }
-                    pd.dismiss();
                 }
             });
 
@@ -2092,8 +2202,8 @@ public class APICall {
                 @Override
                 public void run() {
                     final MediaType MEDIA_TYPE = MediaType.parse("application/json");
-                    pd = new ProgressDialog(context);
-                    pd.show();
+                    showDialog(context);
+//                    pd.show();
                     Log.e("tt", "update_user");
 //             String url = "http://clientapp.dcoret.com/api/service/Service";
                     OkHttpClient client = new OkHttpClient();
@@ -2302,8 +2412,7 @@ public class APICall {
         public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email, final Context context) {
 
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
 
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -2412,8 +2521,7 @@ public class APICall {
         //------------------ استعراض معلومات خدمة معينة---------------------
         public  static  String  details_user(final  String url,final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
 
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -2470,8 +2578,8 @@ public class APICall {
                     if (number.getText().toString().isEmpty()) {
                     } else {
                         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-                        pd = new ProgressDialog(context);
-                        pd.show();
+                        showDialog(context);
+//                        pd.show();
                         OkHttpClient client = new OkHttpClient();
                         JSONObject postdata = new JSONObject();
                         try {
@@ -2568,8 +2676,7 @@ public class APICall {
         //---------------------------------------------
         public  static  String  logout(final  String url,final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
 
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -2644,8 +2751,7 @@ public class APICall {
         //------------------ add to fav----------
         public  static  String  addfav(final  String url,String bdb_type,String bdb_item_id,final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+        showDialog(context);
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -2770,8 +2876,8 @@ public class APICall {
         //---------------- unfav-------------
         public  static  String  unfav(final  String url,String bdb_type,String bdb_item_id,final Context context){
     MediaType MEDIA_TYPE = MediaType.parse("application/json");
-    pd=new ProgressDialog(context);
-    pd.show();
+    showDialog(context);
+//    pd.show();
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
     OkHttpClient client = new OkHttpClient();
     JSONObject postdata = new JSONObject();
@@ -2862,8 +2968,7 @@ public class APICall {
             }
             Log.e("PlaceId",PlaceServiceFragment.placeId+"");
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
             ServicesTabsFragment.supInfoList.clear();
             OkHttpClient client = new OkHttpClient();
             String temp="{\"lang\":\""+ln+"\",\"ItemPerPage\":8,\"PageNum\":\""+pageNum+"\",\"Filter\":[" +
@@ -2996,7 +3101,7 @@ public class APICall {
                         @Override
                         public void run() {
                             pd.dismiss();
-                            pd.cancel();
+                            pd.dismiss();
                             TabOne.pullToRefresh.setRefreshing(false);
                         }
                     });
@@ -3144,8 +3249,7 @@ public class APICall {
             offerSupplier.clear();
             ServicesTabsFragment.supInfoList.clear();
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
             OkHttpClient client = new OkHttpClient();
 //        String temp="{\"lang\":\"en\",\"ItemPerPage\":10,\"PageNum\":1,\"SupplierId\":38,\"Filter\":[\n" +
 //                "\t{\"num\":7,\"value1\":1} ,  \n" +
@@ -3384,8 +3488,8 @@ public class APICall {
 //            offerSupplier.clear();
 //            ServicesTabsFragment.supInfoList.clear();
 //            MediaType MEDIA_TYPE = MediaType.parse("application/json");
-//            pd=new ProgressDialog(context);
-//            pd.show();
+//            showDialog(context);
+////            pd.show();
 //            OkHttpClient client = new OkHttpClient();
 ////        String temp="{\"lang\":\"en\",\"ItemPerPage\":10,\"PageNum\":1,\"SupplierId\":38,\"Filter\":[\n" +
 ////                "\t{\"num\":7,\"value1\":1} ,  \n" +
@@ -3619,7 +3723,39 @@ public class APICall {
 
     //-----------------------dialogs-----------------------------------
         static Dialog dialog;
-        public static void titlemapdialog(final Context context, final String texttitle, final String textmessage, final LatLng latLng, final GoogleMap mMap, final Marker marker, final int flag) {
+//        public static void titlemapdialog(final Context context, final String texttitle, final String textmessage, final LatLng latLng, final GoogleMap mMap, final Marker marker, final int flag) {
+//            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if (flag==2 || flag==0){
+//                        dialog = new Dialog(context);
+//                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                        dialog.setContentView(R.layout.map_title_layout);
+//                        TextView message = dialog.findViewById(R.id.message);
+//                        final TextView title = dialog.findViewById(R.id.title);
+//                        title.setText(texttitle);
+//                        final EditText code = dialog.findViewById(R.id.code);
+//                        TextView confirm = dialog.findViewById(R.id.confirm);
+//                        message.setText(textmessage);
+//                        confirm.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.cancel();
+//                                addtitle( code.getText().toString(),latLng,"",marker,flag,context);
+//                            }
+//
+//
+//                        });
+//                        dialog.show();
+//                       }else {
+//                        marker.showInfoWindow();
+//                    }
+//                }
+//
+//            });
+//
+//        }
+        public static void titlemapdialog(final Context context, final int texttitle, final int textmessage, final LatLng latLng, final GoogleMap mMap, final Marker marker, final int flag, final String add_id) {
             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -3637,7 +3773,7 @@ public class APICall {
                             @Override
                             public void onClick(View v) {
                                 dialog.cancel();
-                                addtitle( code.getText().toString(),latLng,marker,flag,context);
+                                addtitle( code.getText().toString(),latLng,add_id,marker,flag,context);
                             }
 
 
@@ -3651,61 +3787,74 @@ public class APICall {
             });
 
         }
-        public static void titlemapdialog(final Context context, final int texttitle, final int textmessage, final LatLng latLng, final GoogleMap mMap, final Marker marker, final int flag) {
-            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (flag==2 || flag==0){
-                        dialog = new Dialog(context);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                        dialog.setContentView(R.layout.map_title_layout);
-                        TextView message = dialog.findViewById(R.id.message);
-                        final TextView title = dialog.findViewById(R.id.title);
-                        title.setText(texttitle);
-                        final EditText code = dialog.findViewById(R.id.code);
-                        TextView confirm = dialog.findViewById(R.id.confirm);
-                        message.setText(textmessage);
-                        confirm.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.cancel();
-                                addtitle( code.getText().toString(),latLng,marker,flag,context);
-                            }
-
-
-                        });
-                        dialog.show();
-                       }else {
-                        marker.showInfoWindow();
-                    }
-                }
-
-            });
-
-        }
-        static String namelocality;
-        private static void addtitle(final String title, final LatLng latLng , final Marker marker, final int flag, final Context context) {
+//        static String namelocality;
+    static String  namelocality,namelocalityAr;
+    static String  bdb_desc,bdb_descAr;
+    static String subLocality="",adminArea="",thorourhfare="";
+    static String subLocalityAr="",adminAreaAr="",thorourhfareAr="";
+        private static void addtitle(final String title, final LatLng latLng,final String add_id , final Marker marker, final int flag, final Context context) {
 
             try {
                 marker.setTitle(title);
 
-                Geocoder geocoder=new Geocoder(context);
+                Locale locale= new Locale("en");
+                Locale localeAr= new Locale("ar");
+                Geocoder geocoder=new Geocoder(context,locale);
+                Geocoder geocoderAr=new Geocoder(context,localeAr);
                 List<Address> location=geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
-                namelocality=location.get(0).getAdminArea();
+                List<Address> locationAr=geocoderAr.getFromLocation(latLng.latitude,latLng.longitude,1);
+
+                namelocality=location.get(0).getLocality();
+                subLocality=location.get(0).getSubLocality();
+//            String desc=location.get(0).describeContents();
+                adminArea=location.get(0).getAdminArea();
+                bdb_desc=location.get(0).getAddressLine(0);
+                thorourhfare=location.get(0).getThoroughfare();
                 Log.e("Location_name",location.get(0).toString());
                 Log.e("Location_name",namelocality);
+
+                namelocalityAr=locationAr.get(0).getLocality();
+                subLocalityAr=locationAr.get(0).getSubLocality();
+//            String desc=locationAr.get(0).describeContents();
+                adminAreaAr=locationAr.get(0).getAdminArea();
+                thorourhfareAr=locationAr.get(0).getThoroughfare();
+                bdb_descAr=locationAr.get(0).getAddressLine(0);
+                Log.e("Location_name",locationAr.get(0).toString());
+                Log.e("Location_name",namelocality);
+
                 final Dialog d=new Dialog(context);
-                d.setContentView(R.layout.sweet_dialog_layout);
+                d.setContentView(R.layout.sweet_dialog_layout_v1);
                 TextView ok=d.findViewById(R.id.confirm);
                 TextView message=d.findViewById(R.id.message);
                 d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 TextView et_title=d.findViewById(R.id.title);
 
                 StringBuilder locatioinInfo=new StringBuilder();
-                locatioinInfo.append("Country Name: "+location.get(0).getCountryName()+"\n");
-                locatioinInfo.append("City Name: "+location.get(0).getAdminArea()+"\n");
-                locatioinInfo.append("Area: "+location.get(0).getSubAdminArea()+"\n");
-                locatioinInfo.append("Street: "+location.get(0).getFeatureName()+"\n");
+                Log.e("Language1",APICall.ln);
+                Log.e("LanguageAR",ln.contains("ar")+"");
+
+                if (ln.contains("en")) {
+                    bdb_desc=bdb_desc;
+                    locatioinInfo.append("Country Name: " + location.get(0).getCountryName() + "\n");
+                    locatioinInfo.append("City Name: " + location.get(0).getAdminArea() + "\n");
+                    locatioinInfo.append("Area: " + location.get(0).getSubAdminArea() + "\n");
+                    locatioinInfo.append("Street: " + location.get(0).getFeatureName() + "\n");
+                }else {
+                    bdb_desc=bdb_descAr;
+                    Log.e("اسم البلد:",locationAr.get(0).getLocale()+" , "+locationAr.get(0).getCountryName() );
+                    locatioinInfo.append("اسم البلد: " + locationAr.get(0).getCountryName() + "\n");
+                    locatioinInfo.append("اسم المدينة: " + locationAr.get(0).getAdminArea() + "\n");
+                    locatioinInfo.append("    لمنطقة: " + locationAr.get(0).getSubAdminArea() + "\n");
+                    locatioinInfo.append("الشارع: " + locationAr.get(0).getAddressLine(0) + "\n");
+//                locatioinInfo.append("Street: " + locationAr.get(0).getAddressLine(1) + "\n");
+
+                }
+                message.setText(locatioinInfo.toString());
+                if (flag==0) {
+                    et_title.setText("Do You want to Add This Location ?");
+                }else {
+                    et_title.setText("Do You want to edit This Location with?");
+                }
                 message.setText(locatioinInfo.toString());
                 if (flag==0) {
                     String s=((AppCompatActivity)context).getResources().getString(R.string.do_you_want_add_loc);
@@ -3719,13 +3868,35 @@ public class APICall {
                     public void onClick(View v) {
                         d.cancel();
                         if (flag==0) {
-                            addAddress("http://clientapp.dcoret.com/api/auth/user/addAddress", latLng.longitude + ""
-                                    , latLng.latitude + "", namelocality, title, context);
+//                            addAddress("http://clientapp.dcoret.com/api/auth/user/addAddressv1", latLng.longitude + ""
+//                                    , latLng.latitude + "", namelocality, title, context);
+                            addAddress("http://clientapp.dcoret.com/api/auth/user/addAddress_v1", latLng.longitude + ""
+                                    , latLng.latitude + "", bdb_desc+"", title+"",
+                                    "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+                                    "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+                                    context);
                         }else {
-                            SharedPreferences preferences=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
+//                            SharedPreferences preferences=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
 //                           String data=preferences.getString("addressUser",null);
-                            getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
-                                    preferences.getString("bdb_email",null), preferences.getString("bdb_mobile",null),namelocality,title,latLng,BeautyMainPage.context);
+//                            getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
+//                                    preferences.getString("bdb_email",null), preferences.getString("bdb_mobile",null),namelocality,title,latLng,BeautyMainPage.context);
+//
+//
+
+                            APICall.updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                                                                , latLng.latitude + "", namelocality+"", marker.getTitle()+"",
+                                                                "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+                                                                "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+                                                                BeautyMainPage.context);
+
+//                            updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress",latLng.longitude+""
+//                                    ,latLng.latitude+"",add_id,namelocality,titleInfo,context);
+//                            updateaddress("http://clientapp.dcoret.com/api/auth/supplier/updateAddress_v1", add_id,latLng.longitude + ""
+//                                    , latLng.latitude + "", namelocality+"", title+"",
+//                                    "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+//                                    "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+//                                    context);
+
                         }
                     }
                 });
@@ -4158,8 +4329,8 @@ public class APICall {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pd = new ProgressDialog(context);
-                        pd.show();
+                        showDialog(context);
+//                        pd.show();
                     }
                 });
 
@@ -4301,13 +4472,13 @@ public class APICall {
                 Log.d("MessageResponse", mMessage);
             }
 
-         static void getdetailsUser(final  String url, final String  e_bdb_name, final String e_bdb_email, final String e_bdb_mobile, final String namelocality, final String titleInfo, final LatLng latLng, final Context context){
+         public static void getdetailsUser(final String url, final String e_bdb_name, final String e_bdb_email, final String e_bdb_mobile, final String namelocality, final String titleInfo, final LatLng latLng, final Context context){
         final SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
         SharedPreferences sh=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
             String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd = new ProgressDialog(context);
-            pd.show();
+            showDialog(context);
+//            pd.show();
             //        String url = "http://clientapp.dcoret.com/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -4405,8 +4576,8 @@ public class APICall {
                             editor.apply();
                             editor.commit();
                             try {
-                                Log.e("BDB_title_INFO",titleInfo);
-                                Log.e("BDB_title_INFO",namelocality);
+//                                Log.e("BDB_title_INFO",titleInfo);
+//                                Log.e("BDB_title_INFO",namelocality);
 
 //                                JSONObject jsonObject1 = new JSONObject(data);
                                 JSONArray addressUser=jsonObject.getJSONArray("address");
@@ -4419,8 +4590,11 @@ public class APICall {
                                         String add_id= adr.getString("bdb_id");
                                         Log.e("BDB_title_INFO",titleInfo);
                                         pd.dismiss();
-                                        updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress",latLng.longitude+""
-                                                ,latLng.latitude+"",add_id,namelocality,titleInfo,context);
+                                        updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                                                , latLng.latitude + "", namelocality+"", titleInfo+"",
+                                                "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+                                                "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+                                                context);
                                         break;
                                     }
                                 }
@@ -4432,7 +4606,152 @@ public class APICall {
 
                         }
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
+                    pd.dismiss();
+
+                }
+
+            });
+
+            Log.d("MessageResponse", mMessage);
+        }
+         public static void getdetailsUser(final String url,  final String namelocality, final String titleInfo, final LatLng latLng, final LatLng oldLatlng, final Context context){
+        final SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+        SharedPreferences sh=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
+            String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+            showDialog(context);
+//            pd.show();
+            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            OkHttpClient client = new OkHttpClient();
+            JSONObject postdata = new JSONObject();
+
+            RequestBody body = RequestBody.create(MEDIA_TYPE, "");
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("X-Requested-With", "XMLHttpRequest")
+                    .header("Authorization", "Bearer " + token)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage().toString();
+                    Log.w("failure Response", mMessage);
+                    pd.dismiss();
+
+
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                final TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
+                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
+                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
+                                        refresh.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                refreshDialog.cancel();
+                                                getdetailsUser(url,namelocality,titleInfo,latLng,oldLatlng,context);
+                                            }
+                                        });
+                                        refreshDialog.show();
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+                    }
+
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    pd.dismiss();
+                    Log.e("TAG", mMessage);
+                    try {
+                        JSONObject jsonObject = new JSONObject(mMessage);
+                        String success = jsonObject.getString("success");
+                        if (success.equals("true")) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            String bdb_name = data.getString("bdb_name");
+//                            e_bdb_name.setText(bdb_name);
+                            String bdb_email = data.getString("bdb_email");
+//                            e_bdb_email.setText(bdb_email);
+                            String bdb_mobile = data.getString("bdb_mobile");
+//                                JSONArray addressUser=jsonObject.getJSONArray("address");
+//                            e_bdb_mobile.setText(bdb_mobile);
+                            editor.putString("bdb_name", bdb_name);
+                            editor.putString("bdb_email", bdb_email);
+                            editor.putString("bdb_mobile", bdb_mobile);
+                            editor.putString("addressUser", mMessage+"");
+                            editor.apply();
+                            editor.commit();
+                            try {
+//                                Log.e("BDB_title_INFO",titleInfo);
+//                                Log.e("BDB_title_INFO",namelocality);
+
+//                                JSONObject jsonObject1 = new JSONObject(data);
+                                JSONArray addressUser=jsonObject.getJSONArray("address");
+                                Double lat,lang;
+                                for (int i=0;i<addressUser.length();i++){
+                                    JSONObject adr=addressUser.getJSONObject(i);
+                                    lat=adr.getDouble("bdb_loc_lat");
+                                    lang=adr.getDouble("bdb_loc_long");
+                                    if (oldLatlng.latitude==lat && oldLatlng.longitude==lang){
+                                        String add_id= adr.getString("bdb_id");
+                                        Log.e("BDB_title_INFO",titleInfo);
+                                        pd.dismiss();
+                                        updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                                                , latLng.latitude + "", namelocality+"", titleInfo+"",
+                                                "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+                                                "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+                                                context);
+                                        break;
+                                    }
+                                }
+                            }catch (JSONException je){
+                                je.printStackTrace();
+                            }
+
+
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
                     pd.dismiss();
@@ -4455,8 +4774,7 @@ public class APICall {
 
 
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-            pd=new ProgressDialog(context);
-            pd.show();
+           showDialog(context);
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -4624,8 +4942,7 @@ public class APICall {
         bdb_start_date=  "2019-07-15";
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
-        pd.show();
+        showDialog(context);
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -4779,9 +5096,9 @@ public class APICall {
         public  static  void  getCart(final Context context){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        pd=new ProgressDialog(context);
+        showDialog(context);
         BagReservationFragment.pullToRefresh.setRefreshing(true);
-        pd.show();
+//        pd.show();
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -4921,9 +5238,9 @@ public class APICall {
          public  static  void  getCart(final Context context,Boolean refresh){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-//        pd=new ProgressDialog(context);
+//        showDialog(context);
 //        BagReservationFragment.pullToRefresh.setRefreshing(false);
-//        pd.show();
+////        pd.show();
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -5065,9 +5382,9 @@ public class APICall {
         //--------------get service time then addcart---------------
         public  static  void  getServiceTime(final String bdb_ser_sup_id,final String bdb_emp_name, final String bdb_employee_id, final String bdb_price, final String bdb_ser_salon, final String bdb_ser_home, final String bdb_ser_hall, final String bdb_ser_hotel, final String bdb_start_date, final String bdb_start_time, final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
-    //        pd=new ProgressDialog(context);
+    //        showDialog(context);
     //        BagReservationFragment.pullToRefresh.setRefreshing(true);
-    //        pd.show();
+//    //        pd.show();
     //        String url = "http://clientapp.dcoret.com/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
@@ -5171,8 +5488,8 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
             }
         });
 
@@ -5310,8 +5627,8 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
             }
         });
 
@@ -5451,8 +5768,8 @@ public class APICall {
 //        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
-//                pd=new ProgressDialog(context);
-//                pd.show();
+//                showDialog(context);
+////                pd.show();
 //            }
 //        });
 
@@ -5595,8 +5912,8 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
             }
         });
 
@@ -5730,8 +6047,8 @@ public class APICall {
 //        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
-//                pd=new ProgressDialog(context);
-//                pd.show();
+//                showDialog(context);
+////                pd.show();
 //            }
 //        });
 
@@ -5868,9 +6185,9 @@ public class APICall {
             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    pd=new ProgressDialog(context);
+                    showDialog(context);
                     BagReservationFragment.pullToRefresh.setRefreshing(true);
-                    pd.show();
+//                    pd.show();
                 }
             });
 
@@ -5999,9 +6316,9 @@ public class APICall {
 //            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //                @Override
 //                public void run() {
-//                    pd=new ProgressDialog(context);
+//                    showDialog(context);
 //                    BagReservationFragment.pullToRefresh.setRefreshing(true);
-//                    pd.show();
+////                    pd.show();
 //                }
 //            });
 
@@ -6133,9 +6450,9 @@ public class APICall {
 //            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //                @Override
 //                public void run() {
-//                    pd=new ProgressDialog(context);
+//                    showDialog(context);
 //                    BagReservationFragment.pullToRefresh.setRefreshing(true);
-//                    pd.show();
+////                    pd.show();
 //                }
 //            });
 
@@ -6303,9 +6620,9 @@ public class APICall {
 //                MyReservationFragment.reservationsAdapter=new ReservationsAdapter(context,MyReservationFragment.bookingAutomatedBrowseData,layout);
                 MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(context,reservationModels,0);
 
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                Reservations.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -6604,9 +6921,9 @@ public class APICall {
 //                MyReservationFragment.reservationsAdapter=new ReservationsAdapter(context,MyReservationFragment.bookingAutomatedBrowseData,layout);
                 MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(context,reservationModels,0);
 
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                Reservations.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -6989,9 +7306,9 @@ public class APICall {
 //                MyReservationFragment.reservationsAdapter=new ReservationsAdapter(context,MyReservationFragment.bookingAutomatedBrowseData,layout);
                 MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(context,reservationModels,0);
 
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                Reservations.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -7278,9 +7595,9 @@ public class APICall {
             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    pd=new ProgressDialog(context);
+                    showDialog(context);
                     ReservationFragment.pullToRefresh.setRefreshing(true);
-                    pd.show();
+//                    pd.show();
                 }
             });
 
@@ -7610,9 +7927,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -7768,9 +8085,9 @@ public class APICall {
 //        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
-//                pd=new ProgressDialog(context);
+//                showDialog(context);
 ////                ReservationFragment.pullToRefresh.setRefreshing(true);
-//                pd.show();
+////                pd.show();
 //            }
 //        });
 
@@ -7927,9 +8244,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -8205,9 +8522,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
                 GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -8427,9 +8744,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -8646,9 +8963,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
                 GroupReservationOtherResultFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -9910,9 +10227,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -10044,9 +10361,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -10311,9 +10628,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -10702,9 +11019,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                MultiBookingIndividualResult.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -11183,9 +11500,9 @@ public class APICall {
 //        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
-//                pd=new ProgressDialog(context);
+//                showDialog(context);
 //                GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
-//                pd.show();
+////                pd.show();
 //            }
 //        });
 //
@@ -11427,9 +11744,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
                 GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -11657,8 +11974,8 @@ public class APICall {
 
 //                if (oftype.equals("1") || oftype.equals("4"))
 //                {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
 //                    swipeRefreshLayout.setRefreshing(true);
 
 //                }
@@ -11847,8 +12164,8 @@ public class APICall {
 
 //                if (oftype.equals("1") || oftype.equals("4"))
 //                {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
 //                    swipeRefreshLayout.setRefreshing(true);
 
 //                }
@@ -12034,9 +12351,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -12271,9 +12588,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -12794,9 +13111,9 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
+                showDialog(context);
 //                ReservationFragment.pullToRefresh.setRefreshing(true);
-                pd.show();
+//                pd.show();
             }
         });
 
@@ -12950,8 +13267,8 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                pd=new ProgressDialog(context);
-                pd.show();
+                showDialog(context);
+//                pd.show();
             }
         });
 
@@ -13034,7 +13351,7 @@ public class APICall {
                             @Override
                             public void run() {
                                 pd.dismiss();
-                                pd.cancel();
+                                pd.dismiss();
                             }
                         });
                         JSONArray array=j.getJSONArray("data");
@@ -13090,8 +13407,8 @@ public class APICall {
             @Override
             public void run() {
                 try {
-                    pd = new ProgressDialog(context);
-                    pd.show();
+                    showDialog(context);
+//                    pd.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -13399,8 +13716,8 @@ public class APICall {
             @Override
             public void run() {
                 try {
-                    pd = new ProgressDialog(context);
-                    pd.show();
+                    showDialog(context);
+//                    pd.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -13635,8 +13952,8 @@ public class APICall {
             public void run() {
                 try {
 
-                    pd = new ProgressDialog(context);
-                    pd.show();
+                    showDialog(context);
+//                    pd.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -13799,8 +14116,8 @@ public class APICall {
             public void run() {
                 try {
 
-                    pd = new ProgressDialog(context);
-                    pd.show();
+                    showDialog(context);
+//                    pd.show();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

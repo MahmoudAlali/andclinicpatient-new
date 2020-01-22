@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MapFiltering extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -35,7 +36,8 @@ public class MapFiltering extends AppCompatActivity implements OnMapReadyCallbac
     Button ok;
     GoogleMap mMap;
     Boolean select_loc=false;
-    Geocoder geocoder=new Geocoder(this);
+    Geocoder geocoder=new Geocoder(this,new Locale("en"));
+    Geocoder geocoderAr=new Geocoder(this,new Locale("ar"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,15 +97,24 @@ public class MapFiltering extends AppCompatActivity implements OnMapReadyCallbac
                         Register.my_description=addr_title.getText().toString();
                         try {
                             List<Address> addresses=geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                            Register.description=addresses.get(0).getAdminArea();
+                            List<Address> addressesAr=geocoderAr.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                            Register.description=addresses.get(0).getAddressLine(0);
                             mMap.addMarker(new MarkerOptions()
-                                            .title(Register.my_description)
-                                            .position(latLng)
+                                    .title(Register.my_description)
+                                    .position(latLng)
                             );
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
                             Register.lat=latLng.latitude;
                             Register.lang=latLng.longitude;
+                            Register.admin=addresses.get(0).getAdminArea();
+                            Register.adminAr=addressesAr.get(0).getAdminArea();
+                            Register.locality=addresses.get(0).getLocality();
+                            Register.localityAr=addressesAr.get(0).getLocality();
+                            Register.sublocality=addresses.get(0).getSubLocality();
+                            Register.sublocalityAr=addressesAr.get(0).getSubLocality();
+                            Register.thoroughfare=addresses.get(0).getThoroughfare();
+                            Register.thoroughfareAr=addressesAr.get(0).getThoroughfare();
                             select_loc=true;
 
                             d.cancel();

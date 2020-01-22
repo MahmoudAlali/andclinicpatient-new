@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/end_gray"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:logo="@string/Backicon"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="#fff" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_call_black_24dp"
+            />
+
+        <TextView
+            android:textSize="@dimen/standard_20"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:text="Talk to Visage support now"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v4.widget.Space
+                android:layout_width="30dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:textColor="@color/blue"
+                android:text="call me"
+                android:layout_width="160dp"
+                android:elevation="5dp"
+                android:translationZ="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shadow_gray_dialog"
+                android:layout_height="@dimen/standard_50" />
+
+
+            <TextView
+                android:textSize="@dimen/standard_20"
+                android:textColor="#000"
+                android:text="wait time:10 min"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_chat"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="chat with Visage now"
+            android:textColor="#000"
+            android:textSize="@dimen/standard_20"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_50"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shadow_gray_dialog"
+                android:text="internal chat"
+                android:elevation="5dp"
+                android:translationZ="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/blue" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_whatsapp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="chat with Visage now"
+            android:textColor="#000"
+            android:textSize="@dimen/standard_20"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <Button
+                android:elevation="5dp"
+                android:translationZ="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/whatsapp_support"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_50"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shadow_gray_dialog"
+                android:text="whatsapp chat"
+                android:textColor="@color/blue" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -73,7 +73,7 @@ public class PlaceServiceGroupOthersFragment extends Fragment {
 
 
         //---------------------init my location spinner-----------
-//        BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
+//        BeautyMainPage.FRAGMENT_NAME = "PlaceServiceGroupOthersFragment";
 
         placeSpinner = view.findViewById(R.id.service_place);
         mylocationbtn = view.findViewById(R.id.my_location);

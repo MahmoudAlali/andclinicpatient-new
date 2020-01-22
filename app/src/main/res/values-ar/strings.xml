@@ -375,6 +375,7 @@
     <string name="Adult">adult</string>
     <string name="service_dates">service\'s dates</string>
     <string name="service_effect">service effects</string>
+    <string name="support">الدعم</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>

@@ -62,6 +62,13 @@ public class DeleteAccountFragment extends Fragment  {
 
             }
         });
+        Toolbar toolbar=view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
+            }
+        });
 
         return view;
     }

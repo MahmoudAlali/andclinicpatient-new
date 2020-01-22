@@ -1,20 +1,29 @@
 package com.dcoret.beautyclient.Fragments;
 
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -35,6 +44,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -42,6 +52,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 //    public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
@@ -55,8 +66,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     Button add_loc,del_loc,edit_loc;
    public static GoogleMap mMap;
     int i;
+    LatLng tmpLatlang;
+    String add_id;
      ArrayList<String> listItems=new ArrayList<String>();
-
+    static String  namelocality="null",namelocalityAr="null";
+    static String  bdb_desc="null",bdb_descAr="null";
+    static String subLocality="null",adminArea="null",thorourhfare="null";
+    static String subLocalityAr="null",adminAreaAr="null",thorourhfareAr="null";
     Spinner location_titles;
     Button my_location_btn;
     static int del_Flag=0;
@@ -80,6 +96,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         edit_loc = view.findViewById(R.id.edit_loc);
         del_loc = view.findViewById(R.id.del_loc);
         my_loc_layout = view.findViewById(R.id.my_loc_layout);
+
+
+        Toolbar toolbar=view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
+            }
+        });
+
+
 
         my_loc_layout.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -156,11 +183,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     del_loc.setEnabled(false);
                     flag_add_delete_location = 2;
                     mMap.clear();
-                    APICall.getdetailsUser(BeautyMainPage.context);
+//                    APICall.getdetailsUser(BeautyMainPage.context);
                     edit_loc.setText(R.string.finishedediting);
                     APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.clicksitestoedit);
                     Log.e("edit", flag_add_delete_location + "");
                 }else {
+                    mMap.clear();
                     edit_Flag=0;
                     flag_add_delete_location = 0;
                     edit_loc.setText(R.string.editlocation);
@@ -175,7 +203,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         add_loc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
+                    APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location,"");
                  Log.d("Remove", "false");
             }
         });
@@ -281,7 +309,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
-                public boolean onMarkerClick(Marker marker) {
+                public boolean onMarkerClick(final Marker marker) {
                     if (flag_add_delete_location == 1) {
                         Log.e("flag", flag_add_delete_location + "");
                         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -321,13 +349,104 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             }
                         });
                     } else if (flag_add_delete_location==2){
-                        LatLng latLngtmp=null;
+                         LatLng latLngtmp=null;
+
+
+
                         for ( i = 0; i < AccountFragment.locationTitles.size(); i++) {
-                            if (marker.getTitle().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())) {
-                                         latLngtmp=AccountFragment.locationTitles.get(i).getLatLng();
-                                        AccountFragment.locationTitles.remove(i);
-                                                Log.e("LatLang",latLngtmp.latitude+","+latLngtmp.longitude);
-                                APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLngtmp, mMap, marker,flag_add_delete_location);
+                                        if (marker.getTitle().equals(AccountFragment.locationTitles.get(i).getBdb_my_descr())) {
+                                            latLngtmp=AccountFragment.locationTitles.get(i).getLatLng();
+                                            tmpLatlang=AccountFragment.locationTitles.get(i).getLatLng();
+                                            add_id=AccountFragment.locationTitles.get(i).getId();
+                                            AccountFragment.locationTitles.remove(i);
+                                            Log.e("LatLang",latLngtmp.latitude+","+latLngtmp.longitude);
+
+                                            AlertDialog.Builder builder=new AlertDialog.Builder(BeautyMainPage.context);
+                                            builder.setTitle("Edit");
+                                            builder.setMessage("Do you want to edit location");
+                                            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Toast.makeText(BeautyMainPage.context,"please select another location",Toast.LENGTH_LONG).show();
+                                                    mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                                        @Override
+                                                        public void onMapClick(LatLng latLng) {
+//                                                    Log.e("flag", flag_add_delete_location + "");
+////                                                    latLngtmp = latLng;
+//                                                    // Creating a marker
+//                                                    MarkerOptions markerOptions = new MarkerOptions();
+//                                                    // Setting the position for the marker
+//                                                    markerOptions.position(latLng);
+//                                                    // Setting the title for the marker.
+//                                                    // This will be displayed on taping the marker
+//                                                    markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+//                                                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+//                                                    // Clears the previously touched position
+//                                                   Marker m1= mMap.addMarker(markerOptions);
+
+                                                            animateMarker(marker,latLng,false);
+                                                            // Animating to the touched position
+//                                                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                                                            // Placing a marker on the touched position
+//                                                    marker = mMap.addMarker(markerOptions);
+//                                                    APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLng, mMap, marker,flag_add_delete_location,"");
+
+                                                            try {
+                                                                Locale locale = new Locale("en");
+                                                                Locale localeAr = new Locale("ar");
+                                                                Geocoder geocoder = new Geocoder(BeautyMainPage.context, locale);
+                                                                Geocoder geocoderAr = new Geocoder(BeautyMainPage.context, localeAr);
+                                                                List<Address> location = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                                                                List<Address> locationAr = geocoderAr.getFromLocation(latLng.latitude, latLng.longitude, 1);
+
+                                                                namelocality = location.get(0).getLocality()+"";
+                                                                subLocality = location.get(0).getSubLocality()+"";
+//                                                       String desc=location.get(0).describeContents();
+                                                                adminArea = location.get(0).getAdminArea()+"";
+                                                                bdb_desc = location.get(0).getAddressLine(0)+"";
+                                                                thorourhfare = location.get(0).getThoroughfare()+"";
+//                                                        Log.e("Location_name", location.get(0).toString());
+//                                                        Log.e("Location_name", namelocality);
+
+                                                                namelocalityAr = locationAr.get(0).getLocality()+"";
+                                                                subLocalityAr = locationAr.get(0).getSubLocality()+"";
+//                                                      String desc=locationAr.get(0).describeContents();
+                                                                adminAreaAr = locationAr.get(0).getAdminArea()+"";
+                                                                thorourhfareAr = locationAr.get(0).getThoroughfare()+"";
+                                                                bdb_descAr = locationAr.get(0).getAddressLine(0)+"";
+//                                                        Log.e("Location_name", locationAr.get(0).toString());
+//                                                        Log.e("Location_name", namelocality);
+
+                                                                APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, latLng, mMap, marker,flag_add_delete_location,add_id);
+
+//                                                        SharedPreferences preferences=((AppCompatActivity)BeautyMainPage.context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
+//                                                                APICall.getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser"
+//                                                                        ,namelocality,marker.getTitle(),latLng,tmpLatlang,BeautyMainPage.context);
+//                                                        APICall.updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+//                                                                , latLng.latitude + "", namelocality+"", marker.getTitle()+"",
+//                                                                "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
+//                                                                "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
+//                                                                BeautyMainPage.context);
+
+                                                            }catch (Exception e){
+                                                                e.printStackTrace();
+                                                            }
+
+                                                        }
+                                                    });
+                                                }
+                                });
+
+                                final LatLng finalLatLngtmp = latLngtmp;
+                                builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        APICall.titlemapdialog(BeautyMainPage.context, R.string.ExuseMeAlert, R.string.putnamesite, finalLatLngtmp, mMap, marker,flag_add_delete_location,"");
+
+                                    }
+                                });
+                                builder.show();
+
                             }
                         }
                     }else {
@@ -356,4 +475,45 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return null;
         }
     }
+
+
+    public void animateMarker(final Marker marker, final LatLng toPosition,
+                              final boolean hideMarker) {
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = mMap.getProjection();
+        Point startPoint = proj.toScreenLocation(marker.getPosition());
+        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
+        final long duration = 500;
+
+        final Interpolator interpolator = new LinearInterpolator();
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+                double lng = t * toPosition.longitude + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * toPosition.latitude + (1 - t)
+                        * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+
+                if (t < 1.0) {
+                    // Post again 16ms later.
+                    handler.postDelayed(this, 16);
+                } else {
+                    if (hideMarker) {
+                        marker.setVisible(false);
+                    } else {
+                        marker.setVisible(true);
+                    }
+                }
+            }
+        });
+
+
+    }
+
 }

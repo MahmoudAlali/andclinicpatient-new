@@ -53,7 +53,7 @@ import java.util.List;
 
 public class Register extends AppCompatActivity implements OnMapReadyCallback {
 
-    Spinner cities_spinner;
+//    Spinner cities_spinner;
     EditText name, phone, email, password, confirm_password;
     CheckBox privacy_policy;
     public static Context context;
@@ -110,10 +110,10 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         });
 
 
-        cities_spinner = findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        cities_spinner.setAdapter(adapter);
+//        cities_spinner = findViewById(R.id.gender_spinner);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item);
+//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//        cities_spinner.setAdapter(adapter);
     }
 
     //--- when confirm register and click ok-----
@@ -132,7 +132,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
-            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,"http://clientapp.dcoret.com/api/auth/user/register/new_user",Register.this);
+            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"","http://clientapp.dcoret.com/api/auth/user/register/new_user_v1",Register.this);
         }
     }
 
@@ -256,5 +256,37 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
                     ,Manifest.permission.ACCESS_NETWORK_STATE
             },ACCESS_FINE_LOCATION);
         }
+    }
+    public static String admin="",adminAr="",locality="",localityAr="",sublocality="",sublocalityAr="",thoroughfare="",thoroughfareAr="";
+
+    public static String getFilterLocationDetails(){
+
+
+        String filetr=
+                "{" +
+                        "\"lang\":\"en\"," +
+                        "\"admin\":\""+admin+"\"," +
+                        "\"locality\":\""+locality+"\"," +
+                        "\"sub_locality\":\""+sublocality+"\"," +
+                        "\"thoroughfare\":\""+thoroughfare+"\"" +
+                        "}" ;
+
+        return filetr;
+
+    }
+    public static String getFilterLocationDetailsAr(){
+
+
+        String filetr=
+                "{" +
+                        "\"lang\":\"ar\"," +
+                        "\"admin\":\""+adminAr+"\"," +
+                        "\"locality\":\""+localityAr+"\"," +
+                        "\"sub_locality\":\""+sublocalityAr+"\"," +
+                        "\"thoroughfare\":\""+thoroughfareAr+"\"" +
+                        "}" ;
+
+        return filetr;
+
     }
 }

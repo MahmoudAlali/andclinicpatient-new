@@ -323,7 +323,7 @@ public class MyReservationFragment extends Fragment  {
                         }else {
                             serviceId="";
                             service_name.setText(getResources().getString(R.string.Service_Name));
-                            serviceName="";
+                            serviceName="" ;
                             service_name.setChecked(false);
                             filterNames.set(1,"");
                             filterPostions.set(1,-1);

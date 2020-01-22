@@ -83,6 +83,7 @@ dependencies {
     implementation 'com.archit.calendar:awesome-calendar:1.1.5'
     implementation 'com.savvi.datepicker:rangepicker:1.2.0'
 
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
     //-- date picker
     //    com.github.mownier.sambag:1.0.1
 }

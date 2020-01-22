@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ReservatoinDetailsActivity"></activity>
+        <activity android:name=".Activities.support.SupportActivity"></activity>
+        <activity android:name=".Activities.ReservatoinDetailsActivity" />
         <activity android:name=".Activities.AddEffectOffersActivity" />
 
         <receiver

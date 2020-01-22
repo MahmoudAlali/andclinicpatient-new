@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:id="@+id/item_click"
+    android:background="@drawable/shadow_blue_c5"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:layout_width="@dimen/pf_100_txt_size"
+        android:layout_height="@dimen/pf_100_txt_size"
+        android:id="@+id/img_company"
+        android:src="@drawable/icon"
+        android:layout_centerHorizontal="true"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_content"
+        android:layout_below="@+id/img_company"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/service_name"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_networth"
+            android:layout_below="@+id/service_name"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:layout_centerHorizontal="true"/>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -24,8 +24,10 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/high_edit_text"
+        android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
+        android:inputType="text"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
@@ -48,10 +50,12 @@
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="@dimen/high_edit_text"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:inputType="phone"
         android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
@@ -60,24 +64,26 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="@dimen/high_edit_text"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
+        android:inputType="textEmailAddress"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/shadow_edit_text"
         android:ems="10"
         android:hint="@string/EmailAddressTextField" />
 
-    <Spinner
-        android:id="@+id/gender_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/standard_30"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/shadow_button_spinner"></Spinner>
+    <!--<Spinner-->
+        <!--android:id="@+id/gender_spinner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/standard_30"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:background="@drawable/shadow_button_spinner"></Spinner>-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="10dp"

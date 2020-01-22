@@ -46,7 +46,7 @@ public class ServiceFragment extends Fragment {
         }
         Log.e("service_filter",serviceFilters.size()+"");
 
-        toolbar= view.findViewById(R.id.toolbar);
+        toolbar= view.findViewById(R.id.toolbarm);
         bride_bride= view.findViewById(R.id.bride_bride);
         ind_normal_service= view.findViewById(R.id.bride);
 
@@ -60,6 +60,19 @@ public class ServiceFragment extends Fragment {
                 BeautyMainPage.navigationView.setForegroundGravity(Gravity.END);
             }
         });
+
+
+        Toolbar toolbar;
+        toolbar=view.findViewById(R.id.toolbarm);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // If the navigation drawer is not open then open it, if its already open then close it.
+                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
+                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
+            }
+        });
+
         //--------------- service hair cut btn---------------
 //        service_hair.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -102,8 +115,9 @@ public class ServiceFragment extends Fragment {
         });
 
 
+//        toolbar.se
 
-
+//        Toolbar toolbar=view.findViewById(R.id.toolbar);
 
 
         //--------------- group reservation btn------------
@@ -147,6 +161,7 @@ public class ServiceFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
         group_res_another_bride.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,14 +204,14 @@ public class ServiceFragment extends Fragment {
         });
 
         //------------------ toolbar icon btn ------------
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // If the navigation drawer is not open then open it, if its already open then close it.
-                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
-                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
-            }
-        });
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // If the navigation drawer is not open then open it, if its already open then close it.
+//                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
+//                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
+//            }
+//        });
         return view;
     }
 }
