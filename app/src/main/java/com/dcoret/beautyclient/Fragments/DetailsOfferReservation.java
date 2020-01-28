@@ -4,24 +4,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Adapters.CalenderAdapter;
 import com.dcoret.beautyclient.Adapters.DetailsOfferAdapter;
-import com.dcoret.beautyclient.DataClass.DaitelsOfferReservationClass;
-import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
-import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.DaitelsOfferReservationClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.dcoret.beautyclient.DataExample;
 
-import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.DataClass.DataService;
+import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.DataModel.DataService;
 
 import java.util.ArrayList;
 

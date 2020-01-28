@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,13 +47,15 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         context = this;
         sharedPreferences=getSharedPreferences("LOGIN",MODE_PRIVATE);
-         ln=sharedPreferences.getString("lang","en");
+         APICall.ln=sharedPreferences.getString("lang","en");
+         Log.e("LanguageApp",APICall.ln);
+         ln=APICall.ln;
 
         Resources res = getResources();
         // Change locale settings in the app.
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
-        conf.setLocale(new Locale(ln.toLowerCase())); // API 17+ only.
+        conf.setLocale(new Locale(APICall.ln.toLowerCase())); // API 17+ only.
         // Use conf.locale = new Locale(...) if targeting lower versions
         res.updateConfiguration(conf, dm);
 
@@ -67,7 +70,6 @@ public class SplashScreen extends AppCompatActivity {
                     SharedPreferences prefs = getSharedPreferences("LOGIN", MODE_PRIVATE);
 
                     name = prefs.getString("name", null);
-                    pass = prefs.getString("pass", null);
 //                    Log.d("name",name);
                     if (!name.isEmpty()) {
 //                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();

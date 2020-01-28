@@ -376,6 +376,8 @@
     <string name="service_dates">service\'s dates</string>
     <string name="service_effect">service effects</string>
     <string name="support">الدعم</string>
+    <string name="effect">مؤثراتي</string>
+    <string name="update">تحديث المؤثرات</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>
@@ -409,5 +411,19 @@
         <item>صالة</item>
         <item>فندق</item>
 
+    </string-array>
+
+
+
+    <string-array name="service_type">
+        <item>نوع الخدمة</item>
+        <item>تاريخ ثابت</item>
+        <item>تواريخ متعددة</item>
+    </string-array>
+
+    <string-array name="age_range">
+        <item>العمر</item>
+        <item> &gt;13 </item>
+        <item> >13 </item>
     </string-array>
 </resources>

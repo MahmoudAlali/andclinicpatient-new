@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 
 public class CompareFragment extends Fragment  {

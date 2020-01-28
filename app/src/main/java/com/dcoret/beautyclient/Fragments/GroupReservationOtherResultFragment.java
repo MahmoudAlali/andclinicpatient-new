@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,7 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
-import com.dcoret.beautyclient.DataClass.ReservationClients;
-import com.dcoret.beautyclient.DataClass.ReservationClientsEmployee;
 import com.dcoret.beautyclient.R;
-
-import java.util.ArrayList;
 
 public class GroupReservationOtherResultFragment extends Fragment {
 

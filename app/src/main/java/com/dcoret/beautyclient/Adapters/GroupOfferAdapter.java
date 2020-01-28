@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.DataClass.GroupOfferClass;
+import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.DateClass;
+import com.dcoret.beautyclient.DataModel.GroupOfferClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

@@ -6,7 +6,6 @@ import android.app.Fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,6 +37,7 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

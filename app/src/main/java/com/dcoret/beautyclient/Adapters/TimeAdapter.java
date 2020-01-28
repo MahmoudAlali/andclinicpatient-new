@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.DataClass.TimeClass;
+import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.DataModel.TimeClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

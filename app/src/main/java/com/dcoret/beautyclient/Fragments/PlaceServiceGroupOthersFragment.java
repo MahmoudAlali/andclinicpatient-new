@@ -37,7 +37,7 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListen
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.ServiceFilter;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

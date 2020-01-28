@@ -3,7 +3,6 @@ package com.dcoret.beautyclient.Adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.IndividualBooking;
-import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.DataClass.DateClass;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
+import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.R;
 
-import org.bouncycastle.asn1.x509.Holder;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 
 public class CalenderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;

@@ -2,30 +2,16 @@ package com.dcoret.beautyclient.Activities;
 
 
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.dcoret.beautyclient.Adapters.ServicesAdapter;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.DataModel.DataService;
+import com.dcoret.beautyclient.DataModel.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

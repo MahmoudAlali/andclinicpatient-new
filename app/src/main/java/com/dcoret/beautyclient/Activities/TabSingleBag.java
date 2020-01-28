@@ -19,10 +19,9 @@ import android.widget.ExpandableListView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListBagAdapter;
-import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.GetCart;
+import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.GetCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

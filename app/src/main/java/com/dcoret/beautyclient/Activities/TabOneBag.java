@@ -8,24 +8,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
-import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListBagAdapter;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.GetCart;
-import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
+import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.GetCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

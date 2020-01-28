@@ -15,7 +15,7 @@ import android.widget.Button;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.GroupOfferAdapter;
-import com.dcoret.beautyclient.DataClass.GroupOfferClass;
+import com.dcoret.beautyclient.DataModel.GroupOfferClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

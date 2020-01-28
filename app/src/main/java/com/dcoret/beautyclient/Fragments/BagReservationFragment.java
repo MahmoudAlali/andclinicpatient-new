@@ -12,16 +12,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
-import com.dcoret.beautyclient.DataClass.AddToCart;
-import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.GetCart;
+import com.dcoret.beautyclient.DataModel.AddToCart;
+import com.dcoret.beautyclient.DataModel.DataReservation;
+import com.dcoret.beautyclient.DataModel.GetCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

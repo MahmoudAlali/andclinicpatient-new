@@ -18,10 +18,9 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.LocationTitles;
+import com.dcoret.beautyclient.DataModel.LocationTitles;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 
 import java.util.ArrayList;
 

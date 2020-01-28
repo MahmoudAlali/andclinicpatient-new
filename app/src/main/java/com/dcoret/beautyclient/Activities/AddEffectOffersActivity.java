@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 
 import com.dcoret.beautyclient.Adapters.EffectsOfferAdapter;
-import com.dcoret.beautyclient.DataClass.AddEffectsIndModel;
+import com.dcoret.beautyclient.DataModel.AddEffectsIndModel;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

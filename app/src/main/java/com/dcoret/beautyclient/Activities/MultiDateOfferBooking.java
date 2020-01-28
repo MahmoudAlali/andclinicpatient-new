@@ -15,7 +15,8 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
-import com.dcoret.beautyclient.DataClass.IDNameService;
+import com.dcoret.beautyclient.DataModel.IDNameService;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         next=findViewById(R.id.next);
 
 
-        for (int i=0;i< TabTwo.arrayList.get(postion).getSersup_ids().size();i++){
+        for (int i = 0; i< TabTwo.arrayList.get(postion).getSersup_ids().size(); i++){
             strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());
         }
 

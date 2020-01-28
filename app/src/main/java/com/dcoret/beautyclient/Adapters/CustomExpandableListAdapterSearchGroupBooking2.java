@@ -2,7 +2,6 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,15 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
-import com.dcoret.beautyclient.DataClass.SearchGroupBooking2;
-import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.DataModel.SearchBookingDataSTR;
+import com.dcoret.beautyclient.DataModel.SearchGroupBooking2;
+import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
-import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.FilterAndSortModel;
+import com.dcoret.beautyclient.DataModel.ServiceFilter;
+import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

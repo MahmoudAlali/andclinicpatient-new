@@ -11,21 +11,12 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.DataModel.DataService;
+import com.dcoret.beautyclient.DataModel.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class show me the items of the services in recycle view \n

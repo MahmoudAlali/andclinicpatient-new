@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,18 +17,18 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
-import com.dcoret.beautyclient.DataClass.SearchBookingDataSTR;
-import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.DataModel.SearchBookingDataSTR;
+import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
-import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +97,13 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     .findViewById(R.id.listTitle);
             TextView book =  convertView
                     .findViewById(R.id.book);
+
+            if ( BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity"))
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
+                listTitleTextView.setBackgroundResource(R.color.primev1);
+            }
+
+
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -107,6 +113,9 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                             try {
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
                                     APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), BeautyMainPage.context);
+//                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
+                                    APICall.addGroupItem(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, PlaceServiceFragment.date.getText().toString()), BookingIndvidualActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
                                     APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), BeautyMainPage.context);
@@ -224,7 +233,15 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
                    }
 
-                    service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService)+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
+
+
+
+                   if (APICall.ln.equals("ar")){
+                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar()+" : "+priceService+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal)));
+                   }else {
+                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal)));
+                   }
+
 
                     employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getEmp_name());
 //                    day.setText(PlaceServiceGroupFragment.dateFilter);

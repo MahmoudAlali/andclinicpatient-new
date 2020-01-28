@@ -24,18 +24,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 
-import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
-import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
 

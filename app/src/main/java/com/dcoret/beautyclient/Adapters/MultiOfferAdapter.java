@@ -2,22 +2,16 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.DataClass.GroupOfferClass;
-import com.dcoret.beautyclient.DataClass.MultiDateOfferClass;
+import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.MultiDateOfferClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

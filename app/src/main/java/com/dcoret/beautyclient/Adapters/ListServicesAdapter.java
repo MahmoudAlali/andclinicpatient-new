@@ -5,36 +5,23 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.IndividualBooking;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.DataClass.ListServiceModel;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
-import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.DataModel.DateClass;
+import com.dcoret.beautyclient.DataModel.ListServiceModel;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 
 /**
  * This class show me the items of the services in recycle view \n

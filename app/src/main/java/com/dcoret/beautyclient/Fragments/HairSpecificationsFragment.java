@@ -4,10 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.CustomListAdapter;
-import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
-import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.CustomListAdapter;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultFragment;
 import com.dcoret.beautyclient.R;
-
-import java.util.ArrayList;
 
 public class HairSpecificationsFragment extends Fragment {
 
@@ -62,7 +55,7 @@ public class HairSpecificationsFragment extends Fragment {
             R.drawable.ic_keyboard_arrow_down_black_24dp,
             R.drawable.pic1,
             R.drawable.pic2,
-            R.drawable.pic3,
+//            R.drawable.pic3,
             R.drawable.pic4
     };
 
@@ -76,7 +69,7 @@ public class HairSpecificationsFragment extends Fragment {
         hair_items=view.findViewById(R.id.hair_layout);
         next=view.findViewById(R.id.next);
 
-        for (int i=0;i<GroupReservationFragment.ishairService.size();i++) {
+        for (int i = 0; i< GroupReservationFragment.ishairService.size(); i++) {
             View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.hair_layout, hair_items, false);
 
             Spinner hair_lngth = layout2.findViewById(R.id.Hair_length);

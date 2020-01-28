@@ -3,8 +3,6 @@ package com.dcoret.beautyclient.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
@@ -24,10 +22,10 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.ClientsViewData;
-import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.DataClass.ServiceItems;
-import com.dcoret.beautyclient.DataClass.ServicesIDS;
+import com.dcoret.beautyclient.DataModel.ClientsViewData;
+import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
+import com.dcoret.beautyclient.DataModel.ServiceItems;
+import com.dcoret.beautyclient.DataModel.ServicesIDS;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -214,13 +212,13 @@ public class GroupReservationOthersFragment extends Fragment {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 age_range.setAdapter(adapter_age_range);
 
-                Spinner client_status=layout2.findViewById(R.id.client_status);
-                ArrayAdapter adapter_client_status=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.client_status,android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client_status.setAdapter(adapter_client_status);
+//                Spinner client_status=layout2.findViewById(R.id.client_status);
+//                ArrayAdapter adapter_client_status=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.client_status,android.R.layout.simple_spinner_item);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                client_status.setAdapter(adapter_client_status);
 
 
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,client_status,servicesForClientGroups,"0",ic));
+                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic));
 
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override

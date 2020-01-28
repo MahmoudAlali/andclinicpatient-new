@@ -3,13 +3,11 @@ package com.dcoret.beautyclient.Adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -18,8 +16,8 @@ import android.widget.TextView;
 
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.DataClass.OfferClientsModel;
-import com.dcoret.beautyclient.DataClass.SelectDateOfferModel;
+import com.dcoret.beautyclient.DataModel.OfferClientsModel;
+import com.dcoret.beautyclient.DataModel.SelectDateOfferModel;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

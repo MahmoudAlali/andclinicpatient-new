@@ -14,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsInsideOfferAdapter;
-import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
-import com.dcoret.beautyclient.DataClass.DataReservation;
+import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.DataReservation;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.github.clans.fab.FloatingActionMenu;

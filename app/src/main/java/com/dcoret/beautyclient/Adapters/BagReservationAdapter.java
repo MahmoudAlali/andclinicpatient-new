@@ -1,9 +1,6 @@
 package com.dcoret.beautyclient.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,19 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.ReservationDetails;
-import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.GetAllCart;
-import com.dcoret.beautyclient.DataClass.GetCart;
+import com.dcoret.beautyclient.DataModel.GetAllCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class BagReservationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

@@ -5,27 +5,23 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.API.LayoutList;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.ClientsRelationsViewClass;
-import com.dcoret.beautyclient.DataClass.FilterAndSortModel;
-import com.dcoret.beautyclient.DataClass.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.ClientsRelationsViewClass;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -49,7 +45,7 @@ public class ClientRelationsFragment extends Fragment {
                     myroot=view.findViewById(R.id.myroot);
                     done=view.findViewById(R.id.done);
                     ArrayList<String> arrayList=new ArrayList<>();
-                    Log.e("clientSize",GroupReservationFragment.clientsViewData.size()+"");
+                    Log.e("clientSize", GroupReservationFragment.clientsViewData.size()+"");
                     for (int j=0;j<GroupReservationFragment.clientsViewData.size();j++){
                         arrayList.add(GroupReservationFragment.clientsViewData.get(j).getClient_name().getText().toString());
                     }

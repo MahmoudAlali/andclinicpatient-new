@@ -26,9 +26,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.Adapters.ShopCartAdapter;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.GiftitemPOJO;
-import com.dcoret.beautyclient.PayFort.FortRequest;
+import com.dcoret.beautyclient.DataModel.DataService;
+import com.dcoret.beautyclient.DataModel.GiftitemPOJO;
 import com.dcoret.beautyclient.R;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -40,9 +39,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.payfort.fort.android.sdk.base.FortSdk;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
-import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 import com.paytabs.paytabs_sdk.payment.ui.activities.PayTabActivity;
 import com.paytabs.paytabs_sdk.utils.PaymentParams;
 

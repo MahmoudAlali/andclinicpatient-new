@@ -3,30 +3,22 @@ package com.dcoret.beautyclient.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Paint;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
-import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.TabTwo;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class SelectDateOfferAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;

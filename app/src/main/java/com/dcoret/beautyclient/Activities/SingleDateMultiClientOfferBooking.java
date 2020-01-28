@@ -17,7 +17,8 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.OfferBookingMultiClientsAdapter;
-import com.dcoret.beautyclient.DataClass.OfferClientsModel;
+import com.dcoret.beautyclient.DataModel.OfferClientsModel;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;

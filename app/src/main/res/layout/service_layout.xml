@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/pf_5dp_space"
         android:layout_weight="1"
         android:textStyle="bold"
-        android:text="Service Name"
+        android:text=""
         android:textSize="18dp" />
     <LinearLayout
         android:layout_width="match_parent"

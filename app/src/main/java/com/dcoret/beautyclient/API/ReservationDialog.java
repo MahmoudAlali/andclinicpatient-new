@@ -2,20 +2,15 @@ package com.dcoret.beautyclient.API;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.Activities.MyReservations;
-import com.dcoret.beautyclient.Activities.Offers;
-import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.DataClass.DataReservation;
+import com.dcoret.beautyclient.DataModel.DataReservation;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.Service.PushNotifications;

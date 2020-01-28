@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.DataClass.GetAllCartServices;
+import com.dcoret.beautyclient.DataModel.GetAllCartServices;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

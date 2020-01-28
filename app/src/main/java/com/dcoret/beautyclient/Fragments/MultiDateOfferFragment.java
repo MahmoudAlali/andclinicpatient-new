@@ -15,12 +15,7 @@ import android.widget.Button;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.CalenderMultiSelectAdapter;
-import com.dcoret.beautyclient.Adapters.CalenderSelectAdapter;
-import com.dcoret.beautyclient.Adapters.GroupOfferAdapter;
-import com.dcoret.beautyclient.Adapters.MultiOfferAdapter;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.DataClass.GroupOfferClass;
-import com.dcoret.beautyclient.DataClass.MultiDateOfferClass;
+import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

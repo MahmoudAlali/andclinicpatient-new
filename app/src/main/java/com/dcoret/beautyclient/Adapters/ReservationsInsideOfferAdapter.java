@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.ReservationDetails;
-import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.DataService;
+import com.dcoret.beautyclient.DataModel.DataReservation;
+import com.dcoret.beautyclient.DataModel.DataService;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

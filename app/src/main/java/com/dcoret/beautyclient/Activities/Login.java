@@ -69,11 +69,11 @@ public class Login extends AppCompatActivity {
             name = prefs.getString("name", null);
             pass = prefs.getString("pass", null);
             try {
-                if (name.equals("admin") && pass.equals("admin")) {
-                    Intent intent = new Intent(this, BeautyMainPage.class);
-                    finish();
-                    startActivity(intent);
-                }
+//                if (name.equals("admin") && pass.equals("admin")) {
+//                    Intent intent = new Intent(this, BeautyMainPage.class);
+//                    finish();
+//                    startActivity(intent);
+//                }
             }catch (NullPointerException e){
             }
         }

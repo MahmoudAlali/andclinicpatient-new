@@ -21,12 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 

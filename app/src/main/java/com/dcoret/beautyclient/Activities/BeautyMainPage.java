@@ -2,7 +2,6 @@ package com.dcoret.beautyclient.Activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,36 +25,32 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
-import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.FavoriteFragment;
-import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
-import com.dcoret.beautyclient.Fragments.ListServicesFragment;
-import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.MyEffects.MyEffectsActivity;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.Fragments.ReservationFragment;
 import com.dcoret.beautyclient.Fragments.ServiceFragment;
-import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ServicesTabsFragment;
 import com.dcoret.beautyclient.Fragments.SettingFragment;
 import com.dcoret.beautyclient.R;
-import com.dcoret.beautyclient.test.Main2Activity;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
@@ -69,6 +63,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static Fragment currentFragment;
     public static String is_bride_service;
     private int READ_EXTERNAL_STORAGE=93;
+    public static String client_name="";
+    public static String client_number="";
 
     //--------------------- for call some of APIs for the first time ofopen app ---------------------
     public static Boolean isFirstOpen=true;
@@ -111,10 +107,25 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }
 
 
+
         context=this;
-        Log.e("TOKEN", APICall.gettoken(context));
+        Log.e("tokeen", "token is:"+APICall.gettoken(context));
 
         SharedPreferences editor = getSharedPreferences("REG_ID", MODE_PRIVATE);
+
+
+        SharedPreferences settings = getSharedPreferences("LOGIN", MODE_PRIVATE);
+        if (settings.getString("client_name","").equals("")
+                || settings.getString("client_number","").equals(""))
+        {
+            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser",context);
+
+        }else {
+            client_name=settings.getString("client_name","");
+            client_number=settings.getString("client_number","");
+        }
+
+
 
         Log.e("Tokenc",editor.getString("token_client",""));
 
@@ -132,22 +143,22 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         Intent intent=getIntent();
-        try {
-            String tabselected = intent.getStringExtra("tabselected");
-//            Log.e("tabddddd",tabselected);
-            if (tabselected.equals("bag")) {
-//                navigation=findViewById(R.id.navigation);
-                navigation.setSelectedItemId(R.id.service_bag);
-                fragment = new BagReservationTestFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commit();
-
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            String tabselected = intent.getStringExtra("tabselected");
+////            Log.e("tabddddd",tabselected);
+//            if (tabselected.equals("bag")) {
+////                navigation=findViewById(R.id.navigation);
+//                navigation.setSelectedItemId(R.id.service_bag);
+//                fragment = new BagReservationTestFragment();
+//                fm = getFragmentManager();
+//                fragmentTransaction = fm.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment, fragment);
+//                fragmentTransaction.commit();
+//
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -451,6 +462,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         } else if (id == R.id.support) {
             Intent intent=new Intent(getApplicationContext(), SupportActivity.class);
             startActivity(intent);
+        }else if (id == R.id.effcts) {
+            Intent intent=new Intent(getApplicationContext(), MyEffectsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.rate_app) {
          launchMarket();
         }else if (id == R.id.signout) {
@@ -498,14 +512,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             fragmentTransaction.replace(R.id.fragment, fragment);
                             fragmentTransaction.commit();
                             return true;
-                        case R.id.service_bag:
-                            FRAGMENT_NAME="";
-                            fragment = new BagReservationTestFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                            fragmentTransaction.commit();
-                            return true;
+//                        case R.id.service_bag:
+//                            FRAGMENT_NAME="";
+//                            fragment = new BagReservationTestFragment();
+//                            fm = getFragmentManager();
+//                            fragmentTransaction = fm.beginTransaction();
+//                            fragmentTransaction.replace(R.id.fragment, fragment);
+//                            fragmentTransaction.commit();
+//                            return true;
                         case R.id.favorites:
                             FRAGMENT_NAME="";
                            fragment = new FavoriteFragment();

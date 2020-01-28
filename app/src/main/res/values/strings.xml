@@ -391,10 +391,16 @@
         <item>Makeup</item>
     </string-array>
 
+    <string-array name="service_type">
+        <item>Service type</item>
+        <item>fixed date</item>
+        <item>multi date</item>
+    </string-array>
+
     <string-array name="age_range">
         <item>Age Range</item>
-        <item>طفل</item>
-        <item>بالغ</item>
+        <item> &gt;13 </item>
+        <item> >13 </item>
     </string-array>
 
     <string-array name="client_status">
@@ -541,4 +547,6 @@
     <string name="service_dates">service\'s dates</string>
     <string name="service_effect">service effects</string>
     <string name="support">support</string>
+    <string name="effect">my effects</string>
+    <string name="update">update effects</string>
 </resources>

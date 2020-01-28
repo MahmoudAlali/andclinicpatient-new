@@ -25,6 +25,10 @@
                 android:icon="@drawable/ic_settings_black_24dp"
                 android:title="@string/setting" />
             <item
+                android:id="@+id/effcts"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/effect" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/share_app" />

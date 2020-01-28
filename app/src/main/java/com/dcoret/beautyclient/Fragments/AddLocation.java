@@ -18,7 +18,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.DataModel.Location_Beauty;
 import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

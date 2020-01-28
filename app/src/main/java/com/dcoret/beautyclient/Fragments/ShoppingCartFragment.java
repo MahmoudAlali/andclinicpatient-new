@@ -26,8 +26,8 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.Payment;
 import com.dcoret.beautyclient.Adapters.ShopCartAdapter;
-import com.dcoret.beautyclient.DataClass.DataService;
-import com.dcoret.beautyclient.DataClass.GiftitemPOJO;
+import com.dcoret.beautyclient.DataModel.DataService;
+import com.dcoret.beautyclient.DataModel.GiftitemPOJO;
 import com.dcoret.beautyclient.R;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;

@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabThree;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
 public class MyReservations extends AppCompatActivity {

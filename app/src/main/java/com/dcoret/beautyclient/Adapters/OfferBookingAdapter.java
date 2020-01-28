@@ -1,7 +1,6 @@
 package com.dcoret.beautyclient.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +18,8 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 //import com.dcoret.beautyclient.Activities.AddOffersInside.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.AddOffersInside.SingleDateOfferBooking;
-import com.dcoret.beautyclient.Activities.MultiDateOfferBooking;
-import com.dcoret.beautyclient.DataClass.OfferModel;
+import com.dcoret.beautyclient.DataModel.OfferModel;
 import com.dcoret.beautyclient.R;
-import com.paytabs.paytabs_sdk.http.APIClient;
 
 import java.util.ArrayList;
 

@@ -8,26 +8,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.IndividualBooking;
-import com.dcoret.beautyclient.DataClass.DateClass;
-import com.dcoret.beautyclient.Fragments.AddReservation;
-import com.dcoret.beautyclient.DataClass.BrowseServiceItem;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
-import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
+import com.dcoret.beautyclient.DataModel.DateClass;
+import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;
@@ -219,11 +215,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
                         Log.e("SERSUPID",ser_sup_id);
                         ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
-                        Intent intent = new Intent(BeautyMainPage.context, IndividualBooking.class);
+                        Intent intent = new Intent(BeautyMainPage.context, BookingIndvidualActivity.class);
                         //                        intent.putExtra("Service Name","")
-                        intent.putExtra("Provider Name",itemArrayList.get(position).getBdb_sup_name());
-                        intent.putExtra("bdb_ser_sup_id",itemArrayList.get(position).getBdb_ser_sup_id());
-                        intent.putExtra("Price", itemArrayList.get(position).getPriceByFilter());
+                        TabOne.bdb_sup_id=itemArrayList.get(position).getSup_id();
+                        TabOne.ser_id=itemArrayList.get(position).getSer_id();
+                        TabOne.ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
+                        TabOne.ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
+                        TabOne.bdb_time=itemArrayList.get(position).getBdb_time();
+                        TabOne.bdb_is_bride=itemArrayList.get(position).getBdb_isbride_ser();
+//
                         context.startActivity(intent);
 
 

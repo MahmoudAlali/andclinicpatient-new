@@ -13,11 +13,7 @@ import android.view.ViewGroup;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.FavouriteAdapter;
-import com.dcoret.beautyclient.DataClass.DataOffer;
-import com.dcoret.beautyclient.DataClass.DataService;
 import com.dcoret.beautyclient.R;
-
-import java.util.ArrayList;
 
 public class FavoriteFragment extends Fragment {
     static   String[] items={"Service1","Service2","Service3","Service4","Service5","Service6","Service7","Service8","Service9","Service10"};

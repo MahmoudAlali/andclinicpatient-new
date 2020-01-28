@@ -11,30 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.MultiDateOfferBooking;
 import com.dcoret.beautyclient.Activities.SingleDateMultiClientOfferBooking;
 import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
-import com.dcoret.beautyclient.Activities.TabTwo;
-import com.dcoret.beautyclient.DataClass.DataOffer;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
+import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.DataExample.OffersData;
-import com.dcoret.beautyclient.Fragments.FixedDateOffersFragment;
-import com.dcoret.beautyclient.Fragments.GroupOfferFragment;
-import com.dcoret.beautyclient.Fragments.MultiDateOfferFragment;
-import com.dcoret.beautyclient.Fragments.ServiceFragment;
 import com.dcoret.beautyclient.R;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

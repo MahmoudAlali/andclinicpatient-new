@@ -1,15 +1,10 @@
 package com.dcoret.beautyclient.Adapters;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,21 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.ReservationDetails;
-import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
-import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.ReservationClients;
-import com.dcoret.beautyclient.DataClass.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.EditReservationFragment;
-import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
-import com.dcoret.beautyclient.Fragments.InvoioceFragment;
-import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.DataReservation;
+import com.dcoret.beautyclient.DataModel.ReservationClients;
+import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class GroupReservationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

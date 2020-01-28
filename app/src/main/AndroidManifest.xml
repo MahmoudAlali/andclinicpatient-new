@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dcoret.beautyclient">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<!--    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED" />-->
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -23,7 +25,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.support.SupportActivity"></activity>
+        <receiver android:name=".Service.PackegeRemovedBR">
+            <intent-filter>
+<!--                <action android:name="android.intent.action.PACKAGE_REMOVED"/>-->
+                <action android:name="android.intent.action.BROADCAST_PACKAGE_REMOVED"/>
+<!--                <data android:scheme="package" />-->
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".Fragments.MyEffects.MyEffectsActivity" />
+        <activity android:name=".Fragments.IndividualBooking.BookingIndvidualActivity" />
+        <activity android:name=".Activities.support.SupportActivity" />
         <activity android:name=".Activities.ReservatoinDetailsActivity" />
         <activity android:name=".Activities.AddEffectOffersActivity" />
 
@@ -36,7 +48,7 @@
         <activity android:name=".Activities.SingleDateMultiClientOfferBooking" />
         <activity android:name=".Activities.SingleDateOfferBooking" />
         <activity android:name=".Activities.MultiDateOfferBooking" />
-        <activity android:name=".Activities.IndividualBooking" />
+        <activity android:name=".Fragments.IndividualBooking.IndividualBooking" />
         <activity
             android:name=".test.Main2Activity"
             android:label="@string/title_activity_main2"

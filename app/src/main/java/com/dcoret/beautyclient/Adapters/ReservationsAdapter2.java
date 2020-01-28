@@ -21,9 +21,8 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.ReservatoinDetailsActivity;
-import com.dcoret.beautyclient.DataClass.BookingAutomatedBrowseData;
-import com.dcoret.beautyclient.DataClass.ReservationModel;
-import com.dcoret.beautyclient.Fragments.ReservationDetailsFragment;
+import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.ReservationModel;
 import com.dcoret.beautyclient.R;
 
 

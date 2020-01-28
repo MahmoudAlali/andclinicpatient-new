@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -17,14 +16,13 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.Activities.TabOneBag;
 import com.dcoret.beautyclient.Activities.TabOthersBag;
 import com.dcoret.beautyclient.Activities.TabSingleBag;
 import com.dcoret.beautyclient.Adapters.BagReservationAdapter;
-import com.dcoret.beautyclient.DataClass.AddToCart;
-import com.dcoret.beautyclient.DataClass.DataReservation;
-import com.dcoret.beautyclient.DataClass.GetCart;
+import com.dcoret.beautyclient.DataModel.AddToCart;
+import com.dcoret.beautyclient.DataModel.DataReservation;
+import com.dcoret.beautyclient.DataModel.GetCart;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

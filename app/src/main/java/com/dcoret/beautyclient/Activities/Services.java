@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.dcoret.beautyclient.Adapters.ServicesAdapter1;
-import com.dcoret.beautyclient.DataClass.Location_Beauty;
+import com.dcoret.beautyclient.DataModel.Location_Beauty;
 import com.dcoret.beautyclient.R;
 
 public class Services extends AppCompatActivity {
