@@ -131,18 +131,7 @@ public class BookingIndvidualActivity extends AppCompatActivity {
                 "                }\n" +
                 "            ],\n" +
                 "            \"effect\": [\n" +
-//                "                {\n" +
-//                "                    \"effect_id\": 3,\n" +
-//                "                    \"effect_value\": 1\n" +
-//                "                },\n" +
-//                "                {\n" +
-//                "                    \"effect_id\": 4,\n" +
-//                "                    \"effect_value\": 1\n" +
-//                "                },\n" +
-//                "                {\n" +
-//                "                    \"effect_id\": 1,\n" +
-//                "                    \"effect_value\": 2\n" +
-//                "                }\n" +
+                MyIndEffectsActivity.effectFilter+
                 "            ]\n" +
                 "        }\n" +
                 "    ]\n" +

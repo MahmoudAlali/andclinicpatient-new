@@ -22,6 +22,7 @@ import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActiv
 import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
 import com.dcoret.beautyclient.DataModel.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.MyIndEffectsActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
 import com.dcoret.beautyclient.R;
@@ -215,7 +216,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
                         Log.e("SERSUPID",ser_sup_id);
                         ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
-                        Intent intent = new Intent(BeautyMainPage.context, BookingIndvidualActivity.class);
+                        Intent intent = new Intent(BeautyMainPage.context, MyIndEffectsActivity.class);
                         //                        intent.putExtra("Service Name","")
                         TabOne.bdb_sup_id=itemArrayList.get(position).getSup_id();
                         TabOne.ser_id=itemArrayList.get(position).getSer_id();

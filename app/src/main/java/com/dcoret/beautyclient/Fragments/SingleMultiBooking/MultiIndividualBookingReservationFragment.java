@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
@@ -59,17 +60,22 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
     public static String is_group_booking="";
 
-    Fragment fragment;
-    FragmentManager fm;
-    FragmentTransaction fragmentTransaction;
-    static ArrayList<TextView> dates=new ArrayList<>();
+//    Fragment fragment;
+//    FragmentManager fm;
+//    FragmentTransaction fragmentTransaction;
+//    static ArrayList<TextView> dates=new ArrayList<>();
 
     boolean bridecheck=false;
+    public static ArrayList<ServicesIDS> servicesForClientGroups = new ArrayList<>();
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view= inflater.inflate(R.layout.activity_multi_ind_booking_reservation_frag, container, false);
 
+
+        //----------- init----
+        servicesForClientGroups.clear();
 
 //        BeautyMainPage.FRAGMENT_NAME="MultiIndividualBookingReservationFragment";
 
@@ -118,9 +124,6 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
             }
         });
-
-
-
 //        choose_occision.setText("choose reservation type");
 //            choose_occision.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -183,9 +186,6 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                 final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
-
-
-
                 //--------------------------------------
         choose_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,12 +230,6 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
                 //------------------ adapter for add services----------------------
                 adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
 
@@ -264,16 +258,11 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
 
-                final ArrayList<ServicesIDS> servicesForClientGroups = new ArrayList<>();
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                         //------------------------- check bride service at least one service -----------------
-
-
-
-
                         if (position != 0)
                             if (choose_occision.getSelectedItemPosition()==0 ){
                                 APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.choose_type_res));
@@ -393,7 +382,12 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                             }
                         }
                         }
-//                     if (position!=0){
+
+                        if (position!=0) {
+                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getId());
+                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getName());
+                        }
+                        //                     if (position!=0){
 //                         postions.add(position-1);
 //                     }
                         if (position != 0 && servicesList.get(position - 1).getBdb_is_fixed_price().equals("1")) {
@@ -416,14 +410,6 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
                 clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
                 bookme.addView(layout2);
-
-
-
-
-
-
-
-
 
         //------------------click next btn----------------------
         next=view.findViewById(R.id.next);
@@ -539,32 +525,26 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                             }
                             clientf = clientf + "]}";
                         }
-
-
-                        fragment = new MultiBookingIndividualResult();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
+//                        fragment = new MultiBookingIndividualResult();
+//                        fm = getFragmentManager();
+//                        fragmentTransaction = fm.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment, fragment);
+//                        fragmentTransaction.commit();
+                        Intent intent=new Intent(BeautyMainPage.context, MySingleMultiEffectActivity.class);
+                        startActivity(intent);
 //                    }
-
                     }
                     //----- call group filter for booking -------------
                     String filter = APICall.GroupFilterBookingMulti();
                     Log.e("filter", filter);
 //                    clientf=filter+clientf;
                     Log.e("clientf", clientf);
-
                 }
             }
         });
         return view;
     }
-
-
     public static String clientf="";
-
-
 //    static String sortdates(ArrayList<TextView> dates,String cname,String phone,int postion){
 //        ArrayList<ArrayList<IDNameService>> arrayList=new ArrayList<>();
 //        ArrayList<Integer> index=new ArrayList<>();
@@ -667,6 +647,4 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 //        clientf=" \"clients\": [\n"+services+"]";
 //        return services;
 //    }
-
-
 }

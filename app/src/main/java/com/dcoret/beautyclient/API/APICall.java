@@ -34,7 +34,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
+import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
+import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
+import com.dcoret.beautyclient.Fragments.GroupBooking.MyGroupEffectActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
 import com.dcoret.beautyclient.Activities.Login;
@@ -83,6 +87,7 @@ import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResult;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
@@ -653,6 +658,7 @@ public class APICall {
 
     //------------- get client effects---------------
     public static ArrayList<ClientEffectModel> clientEffectModels=new ArrayList<>();
+    public static ArrayList<ClientEffectRequestModel> clientEffectRequestModels=new ArrayList<>();
     public  static  void  getEffectsClient(final Context context, final EffectAdapter effectAdapter){
         clientEffectModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -768,6 +774,421 @@ public class APICall {
 
                             }
                         });
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  getMyEffectsClient(final Context context,String filter ,final EffectAdapter effectAdapter){
+        clientEffectModels.clear();
+        clientEffectRequestModels.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+        Log.e("FilterRequest",filter);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+                        JSONObject data = j.getJSONObject("data");
+                        JSONArray request_effect = data.getJSONArray("request_effect");
+                        String client_name;
+                        for (int n = 0; n < request_effect.length(); n++){
+                            JSONObject o = request_effect.getJSONObject(n);
+                            JSONArray client_effect = o.getJSONArray("client_effect");
+                            client_name = o.getString("client_name");
+
+                            String category_id, category_name_ar, category_name_en;
+                            ArrayList<ClientEffectModel> effectsModelArrayList= new ArrayList<>();
+                            for (int i = 0; i < client_effect.length(); i++) {
+                                JSONObject ob = client_effect.getJSONObject(i);
+
+                                category_id = ob.getString("category_id");
+                                category_name_ar = ob.getString("category_name_ar");
+                                category_name_en = ob.getString("category_name_en");
+                                JSONArray effect = ob.getJSONArray("effect");
+                                ArrayList<ClientEffectModel.Effects> effectsModel = new ArrayList<>();
+                                String bdb_effect_id, bdb_client_id, bdb_effect_name_ar, bdb_effect_name_en, bdb_value, bdb_effect_client_id;
+                                for (int k = 0; k < effect.length(); k++) {
+                                    JSONObject oob = effect.getJSONObject(k);
+                                    bdb_effect_id = oob.getString("bdb_effect_id");
+//                                    bdb_client_id = oob.getString("bdb_client_id");
+                                    bdb_effect_name_ar = oob.getString("bdb_effect_name_ar");
+                                    bdb_effect_name_en = oob.getString("bdb_effect_name_en");
+                                    bdb_value = oob.getString("value");
+                                    bdb_effect_client_id = oob.getString("bdb_effect_client_id");
+                                    effectsModel.add(new ClientEffectModel.Effects(bdb_effect_id, "", bdb_effect_name_ar, bdb_effect_name_en, bdb_value, bdb_effect_client_id));
+                                }
+                                clientEffectModels.add(new ClientEffectModel(category_id, category_name_en + "", category_name_ar + "", effectsModel));
+                                effectsModelArrayList.add(new ClientEffectModel(category_id, category_name_en + "", category_name_ar + "", effectsModel));
+
+                            }
+                            clientEffectRequestModels.add(new ClientEffectRequestModel(client_name,effectsModelArrayList));
+
+                    }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                effectAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                    }
+
+
+
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(context,R.string.rate_toast,Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        });
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  getMyEffectsClientGroup(final Context context,String filter ,final GroupEffectAdapter effectAdapter){
+        clientEffectModels.clear();
+        clientEffectRequestModels.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+        Log.e("FilterRequest",filter);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+                        JSONObject data = j.getJSONObject("data");
+                        JSONArray request_effect = data.getJSONArray("request_effect");
+                        String client_name;
+                        for (int n = 0; n < request_effect.length(); n++){
+                            JSONObject o = request_effect.getJSONObject(n);
+                            JSONArray client_effect = o.getJSONArray("client_effect");
+                            client_name = o.getString("client_name");
+
+                            String category_id, category_name_ar, category_name_en;
+                            ArrayList<ClientEffectModel> effectsModelArrayList= new ArrayList<>();
+                            for (int i = 0; i < client_effect.length(); i++) {
+                                JSONObject ob = client_effect.getJSONObject(i);
+
+                                category_id = ob.getString("category_id");
+                                category_name_ar = ob.getString("category_name_ar");
+                                category_name_en = ob.getString("category_name_en");
+                                JSONArray effect = ob.getJSONArray("effect");
+                                ArrayList<ClientEffectModel.Effects> effectsModel = new ArrayList<>();
+                                String bdb_effect_id, bdb_client_id, bdb_effect_name_ar, bdb_effect_name_en, bdb_value, bdb_effect_client_id;
+                                for (int k = 0; k < effect.length(); k++) {
+                                    JSONObject oob = effect.getJSONObject(k);
+                                    bdb_effect_id = oob.getString("bdb_effect_id");
+//                                    bdb_client_id = oob.getString("bdb_client_id");
+                                    bdb_effect_name_ar = oob.getString("bdb_effect_name_ar");
+                                    bdb_effect_name_en = oob.getString("bdb_effect_name_en");
+                                    bdb_value = oob.getString("value");
+                                    bdb_effect_client_id = oob.getString("bdb_effect_client_id");
+                                    effectsModel.add(new ClientEffectModel.Effects(bdb_effect_id, "", bdb_effect_name_ar, bdb_effect_name_en, bdb_value, bdb_effect_client_id));
+                                }
+                                clientEffectModels.add(new ClientEffectModel(category_id, category_name_en + "", category_name_ar + "", effectsModel));
+                                effectsModelArrayList.add(new ClientEffectModel(category_id, category_name_en + "", category_name_ar + "", effectsModel));
+
+                            }
+                            clientEffectRequestModels.add(new ClientEffectRequestModel(client_name,effectsModelArrayList));
+
+                    }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                effectAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+                    }
+
+
+
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(context,R.string.rate_toast,Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        });
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  updateEffectsClient(final Context context, String effectFilter){
+        clientEffectModels.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+//        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, effectFilter);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/effect/updateEffect")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+//                        JSONObject data=j.getJSONObject("data");
+//                        JSONArray user_effect=data.getJSONArray("user_effect");
+//                       String category_id,category_name_ar,category_name_en;
+//                        for (int i=0;i<user_effect.length();i++){
+//                            JSONObject ob=user_effect.getJSONObject(i);
+//                            category_id=ob.getString("category_id");
+//                            category_name_ar=ob.getString("category_name_ar");
+//                            category_name_en=ob.getString("category_name_en");
+//                            JSONArray effect=ob.getJSONArray("effect");
+//                            ArrayList<ClientEffectModel.Effects> effectsModel=new ArrayList<>();
+//                            String bdb_effect_id,bdb_client_id,bdb_effect_name_ar,bdb_effect_name_en,bdb_value,bdb_effect_client_id;
+//                            for (int k=0;k<effect.length();k++){
+//                                JSONObject oob=effect.getJSONObject(k);
+//                                bdb_effect_id=oob.getString("bdb_effect_id");
+//                                bdb_client_id=oob.getString("bdb_client_id");
+//                                bdb_effect_name_ar=oob.getString("bdb_effect_name_ar");
+//                                bdb_effect_name_en=oob.getString("bdb_effect_name_en");
+//                                bdb_value=oob.getString("bdb_value");
+//                                bdb_effect_client_id=oob.getString("bdb_effect_client_id");
+//                                effectsModel.add(new ClientEffectModel.Effects(bdb_effect_id,bdb_client_id,bdb_effect_name_ar,bdb_effect_name_en,bdb_value,bdb_effect_client_id));
+//                            }
+//                            clientEffectModels.add(new ClientEffectModel(category_id,category_name_en+"",category_name_ar+"",effectsModel));
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context,"تم تحديث مؤثراتك",Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+                        }
+
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                effectAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+
+
+
+
+
+
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -4120,7 +4541,7 @@ public class APICall {
                 try {
 //                    searchGroupBooking(context);
                 }catch (Exception e){
-                    searchGroupBookingMulti("http://clientapp.dcoret.com/api/service/automatedBrowse",context);
+//                    searchGroupBookingMulti("http://clientapp.dcoret.com/api/service/automatedBrowse",context);
                 }
             }
         });
@@ -8687,7 +9108,7 @@ public class APICall {
                     "\t],\n" +
                     getDate() +
                     "\t\t\"clients\":["+
-                    getClients();
+                    MyGroupEffectActivity.getClients();
 
             Log.e("Filter",filter);
             return filter;
@@ -8706,7 +9127,7 @@ public class APICall {
             @Override
             public void run() {
                 showDialog(context);
-                GroupReservationResultFragment.pullToRefresh.setRefreshing(true);
+                GroupReservationResultActivity.pullToRefresh.setRefreshing(true);
 //                pd.show();
             }
         });
@@ -8748,7 +9169,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
-                        GroupReservationResultFragment.pullToRefresh.setRefreshing(false);
+                        GroupReservationResultActivity.pullToRefresh.setRefreshing(false);
 
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
@@ -8800,7 +9221,7 @@ public class APICall {
                     @Override
                     public void run() {
                         pd.dismiss();
-                        GroupReservationResultFragment.pullToRefresh.setRefreshing(false);
+                        GroupReservationResultActivity.pullToRefresh.setRefreshing(false);
                     }
                 });
 
@@ -11920,7 +12341,7 @@ public class APICall {
         return filter;
     }
 
-    public  static  void  searchGroupBookingMulti( String url,final Context context){
+    public  static  void  searchGroupBookingMulti( String url,String filter,final Context context){
         salons.clear();
         stringArrayListMap.clear();
 
@@ -11939,18 +12360,17 @@ public class APICall {
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
-        String filter=GroupFilterBookingMulti();
-        String ff=" {\"Filter\":\t[\n" +
-                "    \t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
-                "    \t{\"num\":35,\"value1\":39.2147311,\"value2\":0},{\"num\":1,\"value1\":0,\"value2\":1000},{\"num\":8,\"value1\":1,\"value2\":0}\t],\n" +
-                "    \"date\":\"2019-7-1\",\t\t\"clients\":[\t{\"client_name\":\"basma\",\"client_phone\":\"0500112233\",\"is_current_user\":1,\"services\":[\n" +
-                "    {\"ser_id\":2,\"ser_time\":60}\n" +
-                "    ,{\"ser_id\":1,\"ser_time\":60}\n" +
-                "    ]},\t{\"client_name\":\"c1\",\"client_phone\":\"11221\",\"is_current_user\":0,\"services\":[\n" +
-                "    {\"ser_id\":2,\"ser_time\":60}\n" +
-                "    ]}]}";
+//        String filter=GroupFilterBookingMulti();
 
-        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+       String filter1="{\"Filter\":\t[\n" +
+                getlatlngMulti()+
+                getPriceMulti()+
+//                    getPricePlace()+
+                "\t],\n" +
+                getDateMulti() +
+               filter;
+        Log.e("FilterReq",filter1);
+        RequestBody body = RequestBody.create(MEDIA_TYPE, filter1);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
 //                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking")
@@ -12126,10 +12546,10 @@ public class APICall {
                             public void run() {
 
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                                MultiBookingIndividualResult.listAdapter=new CustomExpandableListAdapterForMultiInd(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                MultiBookingIndividualResultActivity.listAdapter=new CustomExpandableListAdapterForMultiInd(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
-                                MultiBookingIndividualResult.listView.setAdapter(MultiBookingIndividualResult.listAdapter);
-                                MultiBookingIndividualResult.listAdapter.notifyDataSetChanged();
+                                MultiBookingIndividualResultActivity.listView.setAdapter(MultiBookingIndividualResultActivity.listAdapter);
+                                MultiBookingIndividualResultActivity.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 

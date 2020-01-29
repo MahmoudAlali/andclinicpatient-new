@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -475,19 +476,22 @@ public class GroupReservationFragment extends Fragment {
                             APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
                         } else {
                             // =------------is hair service go to anthor fragment----------
-                            if (ishairService.size() > 0) {
-                                fragment = new HairSpecificationsFragment();
-                                fm = getFragmentManager();
-                                fragmentTransaction = fm.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment, fragment);
-                                fragmentTransaction.commit();
-                            } else {
-                                fragment = new GroupReservationResultFragment();
-                                fm = getFragmentManager();
-                                fragmentTransaction = fm.beginTransaction();
-                                fragmentTransaction.replace(R.id.fragment, fragment);
-                                fragmentTransaction.commit();
-                            }
+//                            if (ishairService.size() > 0) {
+//                                fragment = new HairSpecificationsFragment();
+//                                fm = getFragmentManager();
+//                                fragmentTransaction = fm.beginTransaction();
+//                                fragmentTransaction.replace(R.id.fragment, fragment);
+//                                fragmentTransaction.commit();
+//                            } else {
+//                                fragment = new GroupReservationResultFragment();
+//                                fm = getFragmentManager();
+//                                fragmentTransaction = fm.beginTransaction();
+//                                fragmentTransaction.replace(R.id.fragment, fragment);
+//                                fragmentTransaction.commit();
+//                            }
+                            Intent intent=new Intent(BeautyMainPage.context,MyGroupEffectActivity.class);
+                            startActivity(intent);
+
                         }
                     }
                     //----- call group filter for booking -------------

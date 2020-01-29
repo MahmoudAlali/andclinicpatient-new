@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dcoret.beautyclient">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -14,7 +13,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<!--    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED" />-->
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -25,11 +23,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Fragments.GroupBooking.GroupReservationResultActivity"></activity>
+        <activity android:name=".Fragments.GroupBooking.MyGroupEffectActivity" />
+        <activity android:name=".Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity" />
+        <activity android:name=".Fragments.SingleMultiBooking.MySingleMultiEffectActivity" />
+        <activity android:name=".Fragments.IndividualBooking.MyIndEffectsActivity" />
+
         <receiver android:name=".Service.PackegeRemovedBR">
             <intent-filter>
-<!--                <action android:name="android.intent.action.PACKAGE_REMOVED"/>-->
-                <action android:name="android.intent.action.BROADCAST_PACKAGE_REMOVED"/>
-<!--                <data android:scheme="package" />-->
+
+                <!-- <action android:name="android.intent.action.PACKAGE_REMOVED"/> -->
+                <action android:name="android.intent.action.BROADCAST_PACKAGE_REMOVED" />
+                <!-- <data android:scheme="package" /> -->
             </intent-filter>
         </receiver>
 

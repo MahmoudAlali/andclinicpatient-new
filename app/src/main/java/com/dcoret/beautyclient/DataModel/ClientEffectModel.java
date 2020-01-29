@@ -107,4 +107,5 @@ public class ClientEffectModel {
             this.bdb_effect_client_id = bdb_effect_client_id;
         }
     }
+
 }
