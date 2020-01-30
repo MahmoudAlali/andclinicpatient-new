@@ -20,7 +20,7 @@ import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.DataModel.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
-import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;

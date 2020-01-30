@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Fragments.GroupBooking;
+package com.dcoret.beautyclient.Fragments.OtherGroupBooking;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,15 +12,15 @@ import android.widget.Button;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
-public class MyGroupEffectActivity extends AppCompatActivity {
+public class MyOtherEffectActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GroupEffectAdapter effectAdapter;
     Button update;
@@ -40,28 +40,6 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(effectAdapter);
 
-        String filter= "  { \"clients\": [\n" +
-                "           {\n" +
-                "            \"client_name\": \""+ BeautyMainPage.client_name+"\",\n" +
-                "            \"client_phone\": \""+BeautyMainPage.client_number+"\",\n" +
-                "            \"is_current_user\": 1,\n" +
-                "            \"services\": [\n" +
-                "                {\n" ;
-
-
-        for (int i = 0; i< MultiIndividualBookingReservationFragment.servicesForClientGroups.size(); i++){
-            if (i==0){
-                filter+="\"ser_id\": "+ MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"\n" ;
-            }else {
-                filter+=",\"ser_id\": "+ MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"\n" ;
-            }
-        }
-
-        filter+=    "                }\n" +
-                "            ]\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}\n";
         Log.e("Effectfilter",getEffectClients());
 
 
@@ -77,7 +55,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
                 getEffects();
 //                Log.e("Effectfilter",f);
 
-                Intent intent=new Intent(context, GroupReservationResultActivity.class);
+                Intent intent=new Intent(context,GroupReservationOtherResultActivity.class);
 //                intent.putExtra("filter",getfilter(f));
                 startActivity(intent);
             }
@@ -90,39 +68,39 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         String clients = "{\"clients\":[";
         try {
 
-            for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++) {
+            for (int i = 0; i< GroupReservationOthersFragment.clientsViewData.size(); i++) {
                 if (i == 0) {
                     clients += "\t{\"client_name\":\"" +
-                            GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+
-                            GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+
-                            GroupReservationFragment.clientsViewData.get(i).getIs_current_user()+
-//                            ",\"date\": \""+PlaceServiceGroupFragment.dateFilter+"\""+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()+
+//                            ",\"date\": \""+PlaceServiceGroupOthersFragment.dateFilter+"\""+
 //                            ",\"rel\":\"0\",\"is_adult\":1 "+
 //                            ClientRelationsFragment.relations.get(i)
 //                            +
                             ",\"services\":[\n";
                 } else {
-//                    clients = clients + "\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
-                    clients = clients+"\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationFragment.clientsViewData.get(i).getIs_current_user()
+//                    clients = clients + "\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
+                    clients = clients+"\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()
 //                            +",\"rel\":\"0\",\"is_adult\":1"+
-//                            ",\"date\": \""+PlaceServiceGroupFragment.dateFilter+"\""
+//                            ",\"date\": \""+PlaceServiceGroupOthersFragment.dateFilter+"\""
                             +",\"services\":[\n";
 
                 }
-                Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                Log.e("SIZE",""+GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size());
 
-                for (int j = 0; j < GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size(); j++) {
-//                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                for (int j = 0; j < GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size(); j++) {
+//                        Log.e("SIZE",""+GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size());
                     if (j == 0) {
-                        clients = clients + "{\"ser_id\":" +GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId() +"}\n";
+                        clients = clients + "{\"ser_id\":" +GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId() +"}\n";
                     } else {
-                        clients = clients + ",{\"ser_id\":" + GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId()+ "}\n";
+                        clients = clients + ",{\"ser_id\":" + GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId()+ "}\n";
                     }
-                    Log.e("Ser_Id",GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId());
+                    Log.e("Ser_Id",GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId());
                 }
-                if (GroupReservationFragment.clientsViewData.size()==1){
+                if (GroupReservationOthersFragment.clientsViewData.size()==1){
                     clients=clients+"]}";
-                }else if (i==GroupReservationFragment.clientsViewData.size()-1){
+                }else if (i==GroupReservationOthersFragment.clientsViewData.size()-1){
                     clients=clients+"]}";
 
                 }else {
@@ -185,35 +163,35 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         String clients = null;
         try {
 
-            for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++) {
+            for (int i=0;i<GroupReservationOthersFragment.clientsViewData.size();i++) {
                 if (i == 0) {
                     clients = "\t{\"client_name\":\"" +
-                            GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+
-                            GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+
-                            GroupReservationFragment.clientsViewData.get(i).getIs_current_user()+
-                            ",\"date\": \""+PlaceServiceGroupFragment.dateFilter+"\""+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+
+                            GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()+
+                            ",\"date\": \""+ PlaceServiceGroupOthersFragment.dateFilter+"\""+
                             ",\"rel\":\"0\",\"is_adult\":1 "+
 //                            ClientRelationsFragment.relations.get(i)
 //                            +
                             ",\"services\":[\n";
                 } else {
-//                    clients = clients + "\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
-                    clients = clients+"\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationFragment.clientsViewData.get(i).getIs_current_user()
+//                    clients = clients + "\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
+                    clients = clients+"\t{\"client_name\":\"" + GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"client_phone\":\""+GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText()+"\",\"is_current_user\":"+GroupReservationOthersFragment.clientsViewData.get(i).getIs_current_user()
                             +",\"rel\":\"0\",\"is_adult\":1"+
-                            ",\"date\": \""+PlaceServiceGroupFragment.dateFilter+"\""
+                            ",\"date\": \""+PlaceServiceGroupOthersFragment.dateFilter+"\""
                             +",\"services\":[\n";
 
                 }
-                Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                Log.e("SIZE",""+GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size());
 
-                for (int j = 0; j < GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size(); j++) {
-//                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+                for (int j = 0; j < GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size(); j++) {
+//                        Log.e("SIZE",""+GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().size());
                     if (j == 0) {
-                        clients = clients + "{\"ser_id\":" +GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId() + ",\"ser_time\":60}\n";
+                        clients = clients + "{\"ser_id\":" +GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId() + ",\"ser_time\":60}\n";
                     } else {
-                        clients = clients + ",{\"ser_id\":" + GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId()+ ",\"ser_time\":60}\n";
+                        clients = clients + ",{\"ser_id\":" + GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId()+ ",\"ser_time\":60}\n";
                     }
-                    Log.e("Ser_Id",GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId());
+                    Log.e("Ser_Id",GroupReservationOthersFragment.clientsViewData.get(i).getServicesSelected().get(j).getId());
                 }
                 String eff="";
                 try {
@@ -221,10 +199,10 @@ public class MyGroupEffectActivity extends AppCompatActivity {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                if (GroupReservationFragment.clientsViewData.size()==1){
+                if (GroupReservationOthersFragment.clientsViewData.size()==1){
 
                     clients=clients+"],\"effect\":["+eff+"]}";
-                }else if (i==GroupReservationFragment.clientsViewData.size()-1){
+                }else if (i==GroupReservationOthersFragment.clientsViewData.size()-1){
                     clients=clients+"],\"effect\":["+eff+"]}";
 
                 }else {
@@ -241,6 +219,5 @@ public class MyGroupEffectActivity extends AppCompatActivity {
 //            Log.e("clients",clients);
         return clients;
     }
-
 
 }

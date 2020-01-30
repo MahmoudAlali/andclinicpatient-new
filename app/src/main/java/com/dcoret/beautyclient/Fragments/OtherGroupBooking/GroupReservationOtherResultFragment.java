@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Fragments;
+package com.dcoret.beautyclient.Fragments.OtherGroupBooking;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -36,12 +36,12 @@ public class GroupReservationOtherResultFragment extends Fragment {
 
         listView=view.findViewById(R.id.list_view);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
-        APICall.searchGroupBookingOther(BeautyMainPage.context);
+//        APICall.searchGroupBookingOther(BeautyMainPage.context);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBookingOther(BeautyMainPage.context);
+//                APICall.searchGroupBookingOther(BeautyMainPage.context);
             }
         });
 

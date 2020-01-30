@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragments.GroupBooking.GroupReservationResultActivity"></activity>
+        <activity android:name=".Fragments.OtherGroupBooking.GroupReservationOtherResultActivity"></activity>
+        <activity android:name=".Fragments.OtherGroupBooking.MyOtherEffectActivity" />
+        <activity android:name=".Fragments.GroupBooking.GroupReservationResultActivity" />
         <activity android:name=".Fragments.GroupBooking.MyGroupEffectActivity" />
         <activity android:name=".Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity" />
         <activity android:name=".Fragments.SingleMultiBooking.MySingleMultiEffectActivity" />

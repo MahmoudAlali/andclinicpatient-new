@@ -1,8 +1,9 @@
-package com.dcoret.beautyclient.Fragments;
+package com.dcoret.beautyclient.Fragments.OtherGroupBooking;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
@@ -291,11 +292,13 @@ public class GroupReservationOthersFragment extends Fragment {
 //                        fragmentTransaction.replace(R.id.fragment, fragment);
 //                        fragmentTransaction.commit();
 //                    } else {
-                        fragment = new GroupReservationOtherResultFragment();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
+//                        fragment = new GroupReservationOtherResultFragment();
+//                        fm = getFragmentManager();
+//                        fragmentTransaction = fm.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment, fragment);
+//                        fragmentTransaction.commit();
+                        Intent intent=new Intent(BeautyMainPage.context,MyOtherEffectActivity.class);
+                        startActivity(intent);
 //                    }
                     }
                 }
