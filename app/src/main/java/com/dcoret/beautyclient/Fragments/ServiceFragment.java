@@ -19,6 +19,7 @@ import com.dcoret.beautyclient.DataModel.FilterAndSortModel;
 import com.dcoret.beautyclient.DataModel.ServiceFilter;
 import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 

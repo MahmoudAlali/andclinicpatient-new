@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.dcoret.beautyclient.API.APICall;
@@ -18,6 +21,7 @@ public class MyEffectsActivity extends AppCompatActivity {
     Spinner select_cat,add_effect;
     RecyclerView recyclerView;
     EffectAdapter effectAdapter;
+    Button update;
 
     Context context;
     @Override
@@ -27,36 +31,53 @@ public class MyEffectsActivity extends AppCompatActivity {
         context=this;
 
 //        select_cat=findViewById(R.id.select_cat);
-//        add_effect=findViewById(R.id.add_effect);
+        update=findViewById(R.id.update);
         recyclerView=findViewById(R.id.recycleview);
 
 
-        effectAdapter=new EffectAdapter(BeautyMainPage.context, APICall.clientEffectModels);
+        effectAdapter=new EffectAdapter(BeautyMainPage.context, APICall.clientEffectModels,false);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(effectAdapter);
 
         APICall.getEffectsClient(context,effectAdapter);
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                APICall.updateEffectsClient(context, getEffectFilter());
+            }
+        });
+
+
     }
 
     public static String getEffectFilter(){
-        String filter="\"client_effects\":[";
+        String filter="{\"client_effects\":[";
 
         for (int i=0;i<APICall.clientEffectModels.size();i++){
-           if (i==0) {
-               filter = "{" +
-                       "\"bdb_effect_id\": 1,\n" +
-                       "                        \"bdb_client_id\": 264,\n" +
-
-                       "                        \"bdb_value\": -1,\n" +
-                       "                        \"bdb_effect_client_id\": -1"+
-                       "                        }";
-           }else {
-
-           }
+        for (int j=0;j<APICall.clientEffectModels.get(i).getEffects().size();j++) {
+            if (filter.equals("{\"client_effects\":[")) {
+                filter += "{" +
+                        "\"bdb_effect_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_id()+",\n" +
+                        "                        \"bdb_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_client_id()+",\n" +
+                        "                        \"bdb_value\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_value()+",\n" +
+                        "                        \"bdb_effect_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_client_id()+"" +
+                        "                        }";
+            } else {
+                filter += "\n,{" +
+                        "\"bdb_effect_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_id()+",\n" +
+                        "                        \"bdb_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_client_id()+",\n" +
+                        "                        \"bdb_value\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_value()+",\n" +
+                        "                        \"bdb_effect_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_client_id()+"" +
+                        "                        }";
+            }
+        }
         }
 
-        filter=filter+"]";
+        filter=filter+"]}";
+        Log.e("EffectFilter",filter);
         return filter;
     }
 

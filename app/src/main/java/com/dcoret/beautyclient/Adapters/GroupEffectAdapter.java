@@ -15,32 +15,30 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.DataOffer;
-import com.dcoret.beautyclient.DataModel.DateClass;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
-public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;
     Boolean grid=false;
     String items[];
     DataOffer[] offers;
-    ArrayList<ClientEffectModel> clientEffectModels;
+//    ArrayList<ClientEffectModel> clientEffectModels;
     ArrayList<ClientEffectRequestModel> clientEffectRequestModels;
     static  LinearLayout postionSelected,tmpSelected;
     Boolean isreq;
 
 
-    public EffectAdapter(Context context, ArrayList<ClientEffectModel> clientEffectModels,Boolean isreq){
+    public GroupEffectAdapter(Context context, ArrayList<ClientEffectModel> clientEffectModels, Boolean isreq){
         this.context=context;
         this.isreq=isreq;
-        this.clientEffectModels=clientEffectModels;
+//        this.clientEffectModels=clientEffectModels;
     }
- public EffectAdapter(Context context, ArrayList<ClientEffectRequestModel> clientEffectRequestModels){
+ public GroupEffectAdapter(Context context, ArrayList<ClientEffectRequestModel> clientEffectRequestModels){
         this.context=context;
         this.isreq=isreq;
-        this.clientEffectModels=clientEffectModels;
+        this.clientEffectRequestModels=clientEffectRequestModels;
     }
 
 
@@ -49,15 +47,11 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
-
-
-
             LayoutInflater inflater = LayoutInflater.from(context);
             View row;
 //        effects_layout
-            row = inflater.inflate(R.layout.effects_layout_main, parent, false);
-            EffectAdapter.Item item = new EffectAdapter.Item(row);
+            row = inflater.inflate(R.layout.effects_layout_main_v1, parent, false);
+            GroupEffectAdapter.Item item = new GroupEffectAdapter.Item(row);
 
         return item;
     }
@@ -68,17 +62,18 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //        if (isreq){
 //            ((Item)holder).client_name.setVisibility(View.VISIBLE);
+//            ((Item)holder).client_name.setText(clientEffectRequestModels.get(position).getClient_name());
 //        }else {
-//            ((Item)holder).client_name.setVisibility(View.GONE);
+            ((Item)holder).client_name.setVisibility(View.GONE);
 //        }
 
-        if (APICall.ln.equals("ar")){
-            ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name_ar());
-        }else
-        ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name());
+//        if (APICall.ln.equals("ar")){
+//            ((Item)holder).cat_name.setText(clientEffectRequestModels.get(position).getCat_name_ar());
+//        }else
+//        ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name());
 
-        for (int i=0;i<clientEffectModels.get(position).getEffects().size();i++){
-            addlayout(((Item)holder).myroot,clientEffectModels.get(position).getEffects().get(i));
+        for (int i=0;i<clientEffectRequestModels.get(position).getClientEffectModels().size();i++){
+            addMainlayout(((Item)holder).myroot,clientEffectRequestModels.get(position).getClientEffectModels().get(i),clientEffectRequestModels.get(position).getClient_name());
         }
     }
 
@@ -87,7 +82,7 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         try {
-            return clientEffectModels.size();
+            return clientEffectRequestModels.size();
         }catch (Exception e){
             e.getMessage();
             return 0;
@@ -108,6 +103,30 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public static void addMainlayout(final LinearLayout myroot, final ClientEffectModel clientEffectModel,String cname){
+        //------- add degrees
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.effects_layout_main, myroot, false);
+        TextView cat_name;
+        LinearLayout myroot1;
+        cat_name=layout2.findViewById(R.id.cat_name);
+        myroot1=layout2.findViewById(R.id.myroot);
+        cat_name.setText(cname+":"+clientEffectModel.getCat_name());
+
+        for (int i=0;i<clientEffectModel.getEffects().size();i++){
+            addlayout(myroot1,clientEffectModel.getEffects().get(i));
+        }
+
+
+
+
+        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+    }
     public static void addlayout(final LinearLayout myroot, final ClientEffectModel.Effects effects){
         //------- add degrees
         final View layout2;
