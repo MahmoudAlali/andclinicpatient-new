@@ -26,6 +26,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -80,6 +81,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    public Menu menu;
 //  ------------ not used------------
 //  public static ArrayList<Cities> cities=new ArrayList();
 
@@ -132,7 +134,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         navigation=findViewById(R.id.navigation);
         mDrawerLayout=findViewById(R.id.drawer);
         layout=findViewById(R.id.fragment);
-
+        menu = navigation.getMenu();
+        menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
+        menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
+        menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
+        menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+        navigation.setItemIconTintList(null);
         //------------------- show Service Fragment -------------
         navigation.setSelectedItemId(R.id.services);
         fragment = new ServiceFragment();
@@ -493,8 +500,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
+                    menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
+                    menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
+                    menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+
                     switch (item.getItemId()) {
                         case R.id.services:
+                            menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
                             fragment = new ServiceFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
@@ -504,6 +517,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             fragmentTransaction.commit();
                             return true;
                         case R.id.reservations:
+                            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
                             FRAGMENT_NAME="";
                             fragment = new MyReservationFragment();
 //                            fragment = new ReservationFragment();
@@ -522,7 +536,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 //                            return true;
                         case R.id.favorites:
                             FRAGMENT_NAME="";
-                           fragment = new FavoriteFragment();
+                            menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_selected);
+
+                            fragment = new FavoriteFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, fragment);
@@ -530,6 +546,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             return true;
                         case R.id.notification:
                             FRAGMENT_NAME="";
+                            menu.findItem(R.id.notification).setIcon(R.drawable.notifications_selected);
                             fragment = new NotificationFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
