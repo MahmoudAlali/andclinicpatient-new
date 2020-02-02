@@ -35,15 +35,15 @@
             android:layout_marginBottom="@dimen/pf_5dp_space"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/choose_occision"
-                android:layout_marginBottom="@dimen/pf_10dp_space"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_edit_text"
-                android:background="@drawable/shadow_button"
-                android:text="Choose Occasion"
+<!--            <Button-->
+<!--                android:id="@+id/choose_occision"-->
+<!--                android:layout_marginBottom="@dimen/pf_10dp_space"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/high_edit_text"-->
+<!--                android:background="@drawable/shadow_button"-->
+<!--                android:text="Choose Occasion"-->
 
-                />
+<!--                />-->
 <LinearLayout
     android:orientation="horizontal"
     android:weightSum="2"

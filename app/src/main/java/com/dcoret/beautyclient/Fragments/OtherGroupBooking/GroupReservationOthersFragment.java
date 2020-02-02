@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class GroupReservationOthersFragment extends Fragment {
 //    LinearLayout services_tabs;
-    Button add_client,choose_occision;
+    Button add_client;
     LinearLayout clients,bookme;
     static int items=0;
     static int viewcount=0;
@@ -74,7 +74,7 @@ public class GroupReservationOthersFragment extends Fragment {
 
         add_client=view.findViewById(R.id.add_client);
 //        add_me=view.findViewById(R.id.add_me);
-        choose_occision=view.findViewById(R.id.choose_occision);
+//        choose_occision=view.findViewById(R.id.choose_occision);
         clients=view.findViewById(R.id.clients);
         bookme=view.findViewById(R.id.bookme);
 
@@ -91,15 +91,15 @@ public class GroupReservationOthersFragment extends Fragment {
             is_group_booking="2";
 
         }
-        choose_occision.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-                popupMenu.getMenu().add("Wedding");
-                popupMenu.getMenu().add("Normal");
-                popupMenu.show();
-            }
-        });
+//        choose_occision.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+//                popupMenu.getMenu().add("Wedding");
+//                popupMenu.getMenu().add("Normal");
+//                popupMenu.show();
+//            }
+//        });
         items=0;
         viewcount=0;
         ishairService.clear();
@@ -120,30 +120,7 @@ public class GroupReservationOthersFragment extends Fragment {
                 final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
 //                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
 
-                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
-
-                    public View getView(int position, View convertView,ViewGroup parent) {
-
-                        View v = super.getView(position, convertView, parent);
-
-                        ((TextView) v).setTextSize(16);
-//                        ((TextView) v).setGravity(Gravity.CENTER);
-                        ((TextView) v).setGravity(Gravity.RIGHT);
-
-                        return v;
-
-                    }
-
-                    public View getDropDownView(int position, View convertView,ViewGroup parent) {
-
-                        View v = super.getDropDownView(position, convertView,parent);
-
-                        ((TextView) v).setGravity(Gravity.RIGHT);
-                        return v;
-
-                    }
-
-                };
+                adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1 ,serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
 
@@ -209,8 +186,8 @@ public class GroupReservationOthersFragment extends Fragment {
                     }
                 });
                 Spinner age_range=layout2.findViewById(R.id.age_range);
-                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,R.layout.simple_spinner_dropdown_item_v1 );
+                adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 age_range.setAdapter(adapter_age_range);
 
 //                Spinner client_status=layout2.findViewById(R.id.client_status);

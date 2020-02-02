@@ -21,7 +21,7 @@ public class MultiBookingIndividualResultActivity extends AppCompatActivity {
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
     RecyclerView recyclerView;
-    String url="";
+    String url="",urlAlt="";
 
     Context context;
     @Override
@@ -35,15 +35,19 @@ public class MultiBookingIndividualResultActivity extends AppCompatActivity {
         if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2){
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
                 url="http://clientapp.dcoret.com/api/booking/searchGroupBooking3_13Inside";
+                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
             }else {
                 url="http://clientapp.dcoret.com/api/booking/searchGroupBooking3_13Outside";
+                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
 
             }
         }else {
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
                 url = "http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
+                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
             }else {
                 url = "http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
+                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
 
             }
         }
@@ -58,12 +62,12 @@ public class MultiBookingIndividualResultActivity extends AppCompatActivity {
 
         listView=findViewById(R.id.list_view);
         pullToRefresh=findViewById(R.id.pullToRefresh);
-        APICall.searchGroupBookingMulti(url,filter,context);
+        APICall.searchGroupBookingMulti(url,urlAlt,filter,context);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBookingMulti(url,filter,context);
+                APICall.searchGroupBookingMulti(url,urlAlt,filter,context);
             }
         });
 

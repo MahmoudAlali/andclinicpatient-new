@@ -12,11 +12,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -196,7 +199,7 @@ public class PlaceServiceGroupOthersFragment extends Fragment {
         });
 
 
-        final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, android.R.layout.simple_spinner_item);
+        final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, R.layout.simple_spinner_dropdown_item_v1);
 
         adapter.setDropDownViewResource(R.layout.spinner_center_item);
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -260,9 +263,10 @@ public class PlaceServiceGroupOthersFragment extends Fragment {
         }
         mylocationbtn.setText(mylocationId);
         mylocationbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v, Gravity.CENTER);
                 mylocation.clear();
                 mylocation.add(getResources().getString(R.string.MyLocation));
                 mylocation.add(getResources().getString(R.string.current_location));
@@ -516,6 +520,8 @@ public class PlaceServiceGroupOthersFragment extends Fragment {
             public void onClick(View v) {
                 final Dialog dialog=new Dialog(BeautyMainPage.context);
                 dialog.setContentView(R.layout.active_date_dialog);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
                 Button search=dialog.findViewById(R.id.search);
                 final DatePicker datePicker=dialog.findViewById(R.id.date);
                 datePicker.setMinDate(System.currentTimeMillis() - 1000);

@@ -52,7 +52,7 @@ public class GroupReservationResultFragment extends Fragment {
         listView=view.findViewById(R.id.list_view);
         pullToRefresh=view.findViewById(R.id.pullToRefresh);
         Log.e("URL",url);
-        APICall.searchGroupBooking(url,isIn,BeautyMainPage.context);
+//        APICall.searchGroupBooking(url,,isIn,BeautyMainPage.context);
 
 
         final Boolean finalIsIn = isIn;

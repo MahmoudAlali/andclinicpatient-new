@@ -20,19 +20,22 @@ public class GroupReservationResultActivity extends AppCompatActivity {
     public static CustomExpandableListAdapterSearchGroupBooking2 listAdapter2;
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
+    String url="",urlOut;Boolean isIn = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_reservation_result_frag);
 
-        String url="";Boolean isIn = null;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
 
         if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==1){
             url="http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
+            urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
             isIn=true;
         }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()>1){
             url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
+            urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
             isIn=false;
         }
 
@@ -41,14 +44,16 @@ public class GroupReservationResultActivity extends AppCompatActivity {
         listView=findViewById(R.id.list_view);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         Log.e("URL",url);
-        APICall.searchGroupBooking(url,isIn,BeautyMainPage.context);
+        APICall.searchGroupBooking(url,urlOut,isIn,BeautyMainPage.context);
 
 
         final Boolean finalIsIn = isIn;
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBooking2(BeautyMainPage.context, finalIsIn);
+                APICall.searchGroupBooking(url,urlOut,isIn,BeautyMainPage.context);
+
+//                APICall.searchGroupBooking2(BeautyMainPage.context, finalIsIn);
             }
         });
     }

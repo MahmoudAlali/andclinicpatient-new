@@ -398,9 +398,9 @@
     </string-array>
 
     <string-array name="age_range">
-        <item>Age Range</item>
-        <item> &gt;13 </item>
-        <item> >13 </item>
+        <item>age range</item>
+        <item>Youngest of 13 </item>
+        <item>over 13 </item>
     </string-array>
 
     <string-array name="client_status">

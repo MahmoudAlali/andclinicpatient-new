@@ -236,6 +236,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
 
 
+                   if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num().equals("2"))
                    if (APICall.ln.equals("ar")){
                        service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar()+" : "+priceService+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal)));
                    }else {
