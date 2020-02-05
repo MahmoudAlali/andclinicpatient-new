@@ -97,10 +97,10 @@ public class GroupReservationFragment extends Fragment {
         choose_occision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-                popupMenu.getMenu().add("Wedding");
-                popupMenu.getMenu().add("Normal");
-                popupMenu.show();
+//                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+//                popupMenu.getMenu().add("Wedding");
+//                popupMenu.getMenu().add("Normal");
+//                popupMenu.show();
             }
         });
         items=0;
@@ -128,30 +128,7 @@ public class GroupReservationFragment extends Fragment {
 
 
                 //----------- adapter add services----------
-                adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item,serviceNameList){
-
-                    public View getView(int position, View convertView,ViewGroup parent) {
-
-                        View v = super.getView(position, convertView, parent);
-
-                        ((TextView) v).setTextSize(16);
-//                        ((TextView) v).setGravity(Gravity.CENTER);
-                        ((TextView) v).setGravity(Gravity.RIGHT);
-
-                        return v;
-
-                    }
-
-                    public View getDropDownView(int position, View convertView,ViewGroup parent) {
-
-                        View v = super.getDropDownView(position, convertView,parent);
-
-                        ((TextView) v).setGravity(Gravity.RIGHT);
-                        return v;
-
-                    }
-
-                };
+                adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
                 //--------------------------------------------
@@ -213,8 +190,9 @@ public class GroupReservationFragment extends Fragment {
 
                 //------------------ adapter for spinner age_range------
                 Spinner age_range=layout2.findViewById(R.id.age_range);
-                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter adapter_age_range = ArrayAdapter.createFromResource
+                        (BeautyMainPage.context, R.array.age_range, R.layout.simple_spinner_dropdown_item_v1);
+                adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 age_range.setAdapter(adapter_age_range);
 
                 //------------------ adapter for spinner client status---------
@@ -284,30 +262,7 @@ public class GroupReservationFragment extends Fragment {
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
                 //------------------ adapter for add services----------------------
-                adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
-
-                    public View getView(int position, View convertView, ViewGroup parent) {
-
-                        View v = super.getView(position, convertView, parent);
-
-                        ((TextView) v).setTextSize(16);
-//                        ((TextView) v).setGravity(Gravity.CENTER);
-                        ((TextView) v).setGravity(Gravity.CENTER);
-
-                        return v;
-
-                    }
-
-                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-
-                        View v = super.getDropDownView(position, convertView, parent);
-
-                        ((TextView) v).setGravity(Gravity.CENTER);
-                        return v;
-
-                    }
-
-                };
+                adapter = new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1 , serviceNameList) ;
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
 

@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Activities;
+package com.dcoret.beautyclient.Activities.SingleOffer;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,8 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.ShowServicesAdapter;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
@@ -31,11 +34,12 @@ public class SingleDateOfferBooking extends AppCompatActivity {
 
     //    DatePicker datePicker;
     Button next;
-    TextView showDate;
+    static TextView showDate;
     CoordinatorLayout selectdate;
     public static ShowServicesAdapter offerAdapter;
     Context context;
     RecyclerView recyclerView;
+   static String place_num="",price_num="";
     public static ArrayList<String> services=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +107,25 @@ public class SingleDateOfferBooking extends AppCompatActivity {
 
         APICall.browseOneOfferv2(TabTwo.arrayList.get(postion).getBdb_pack_code(),offerClientsModels,offerAdapter,context);
 
+        switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+            case 1:
+                place_num="9";
+                price_num="32";
+                break;
+            case 2:
+                place_num="8";
+                price_num="1";
+                break;
+            case 3:
+                place_num="10";
+                price_num="30";
+                break;
+            case 4:
+                place_num="11";
+                price_num="31";
+                break;
+
+        }
 
 
 
@@ -113,34 +136,75 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             public void onClick(View v) {
                 String bdb_pack_code=TabTwo.arrayList.get(postion).getBdb_pack_code();
                 String date=showDate.getText().toString();
-                String cname="c1";
-                String cphone="0500600700";
+                String cname= BeautyMainPage.client_name;
+                String cphone=BeautyMainPage.client_number;
                 String offerType=otype;
+                String offerplace="";
 //                    ArrayList<String> arrayList =new ArrayList<>();
                 String services="";
-                String bdb_ser_sup_id="";
-                for (int i=0;i<TabTwo.arrayList.get(postion).getSersup_ids().size();i++){
-                    bdb_ser_sup_id=TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+                String bdb_ser_sup_id="",bdb_time="";
+                for (int i=0;i<offerClientsModels.get(0).getServiceDetails().size();i++){
+                    bdb_ser_sup_id=offerClientsModels.get(0).getServiceDetails().get(i).getBdb_ser_sup_id();
+                    bdb_time=offerClientsModels.get(0).getServiceDetails().get(i).getBdb_time();
                     if (i==0){
-                        services="\t\t{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": 60 }\n";
+                        services="\t\t{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": "+bdb_time+" }\n";
                     }else {
-                        services=services+"\t\t,{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": 60 }\n";
+                        services=services+"\t\t,{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": "+bdb_time+" }\n";
                     }
                 }
-                String postdata="{\"bdb_pack_code\":"+bdb_pack_code+",\"date\":\""+date+"\",\"clients\": [        \n" +
+
+                String postdata=
+                        "{\n" +
+                                "    \"Filter\": [\n" +
+                                "        {\n" +
+                                "            \"num\": 34,\n" +
+                                "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                                "            \"value2\": 0\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": 35,\n" +
+                                "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                                "            \"value2\": 0\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": "+place_num+",\n" +
+                                "            \"value1\": 1,\n" +
+                                "            \"value2\": 0\n" +
+                                "        }\n" +
+                                "    ],\n" +
+
+                        "\"bdb_pack_code\":"+bdb_pack_code+",\"date\":\""+date+"\",\"clients\": [        \n" +
                         "\t{\"client_name\": \""+cname+"\",\"client_phone\": \""+cphone+"\",\"is_current_user\": 0,\n" +
+                        "\"is_adult\":1\n" +",\"date\":\""+date+"\",\n"+
                         "\t\"services\": [\n" +
                         services+
-                        "\t\t]        \n" +
+                        "\t\t],\"effect\":[]\n" +
                         "\t}\n" +
                         "\t],\"offer_type\":"+offerType+"\n" +
                         "}";
                 Log.e("postdata",postdata);
+                offerplace=offerClientsModels.get(0).getBdb_offer_place();
+                if (TabTwo.arrayList.get(postion).getBdb_is_effects_on().equals("1")) {
 
-                Intent intent=new Intent(context,OfferBookingResult.class);
-                intent.putExtra("filter",postdata);
-                intent.putExtra("offertype",offerType);
-                startActivity(intent);
+                    Intent intent = new Intent(context, SingleOfferEffect.class);
+                    intent.putExtra("filter", postdata);
+                    intent.putExtra("offertype", offerType);
+                    intent.putExtra("position", postion);
+                    intent.putExtra("place", offerplace);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, OfferBookingResult.class);
+                    intent.putExtra("filter", postdata);
+                    intent.putExtra("offertype", offerType);
+                    intent.putExtra("position", postion);
+                    intent.putExtra("place", offerplace);
+                    startActivity(intent);
+                }
             }
 
 

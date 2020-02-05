@@ -23,7 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragments.OtherGroupBooking.GroupReservationOtherResultActivity"></activity>
+        <activity android:name=".Activities.GroupOffer.MultiClientOfferEffect"></activity>
+        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferEffect" />
+        <activity android:name=".Activities.SingleOffer.SingleOfferEffect" />
+        <activity android:name=".Fragments.OtherGroupBooking.GroupReservationOtherResultActivity" />
         <activity android:name=".Fragments.OtherGroupBooking.MyOtherEffectActivity" />
         <activity android:name=".Fragments.GroupBooking.GroupReservationResultActivity" />
         <activity android:name=".Fragments.GroupBooking.MyGroupEffectActivity" />
@@ -58,9 +61,9 @@
             android:exported="true" />
 
         <activity android:name=".Activities.OfferBookingResult" />
-        <activity android:name=".Activities.SingleDateMultiClientOfferBooking" />
-        <activity android:name=".Activities.SingleDateOfferBooking" />
-        <activity android:name=".Activities.MultiDateOfferBooking" />
+        <activity android:name=".Activities.GroupOffer.SingleDateMultiClientOfferBooking" />
+        <activity android:name=".Activities.SingleOffer.SingleDateOfferBooking" />
+        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferBooking" />
         <activity android:name=".Fragments.IndividualBooking.IndividualBooking" />
         <activity
             android:name=".test.Main2Activity"

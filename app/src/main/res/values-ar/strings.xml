@@ -250,9 +250,9 @@
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
     <string name="cancel">cancel</string>
     <string name="OK">ok</string>
-    <string name="select_date">select date</string>
-    <string name="Phone_Number">phone  number</string>
-    <string name="client_name">client name</string>
+    <string name="select_date">اختاري تاريخ</string>
+    <string name="Phone_Number">رقم الجوال</string>
+    <string name="client_name">اسم الزبونة</string>
     <string name="services_dates">select dates</string>
     <string name="group_book_done">تم حجز العرض بنجاح</string>
     <string name="salon">صالون</string>
@@ -378,6 +378,7 @@
     <string name="support">الدعم</string>
     <string name="effect">مؤثراتي</string>
     <string name="update">تحديث المؤثرات</string>
+    <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في ايجاد حلول مثيلة</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>
@@ -423,8 +424,8 @@
 
     <string-array name="age_range">
         <item>العمر</item>
-        <item> &gt;13 </item>
-        <item> >13 </item>
+        <item>اصغر من 13</item>
+        <item>اكبر من 13</item>
     </string-array>
 
 

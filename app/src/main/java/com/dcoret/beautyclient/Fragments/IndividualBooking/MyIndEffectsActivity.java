@@ -63,6 +63,7 @@ public class MyIndEffectsActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getEffectFilter();
 
                 Intent intent=new Intent(context,BookingIndvidualActivity.class);
                 startActivity(intent);

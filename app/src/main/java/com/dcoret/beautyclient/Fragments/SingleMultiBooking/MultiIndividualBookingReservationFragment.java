@@ -104,8 +104,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
         }
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
-                R.array.service_type, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.service_type, R.layout.simple_spinner_dropdown_item_v1 );
+        adapter.setDropDownViewResource(R.layout.spinner_center_item);
         choose_occision.setAdapter(adapter);
 
 
@@ -231,30 +231,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         });
 
                 //------------------ adapter for add services----------------------
-                adapter = new ArrayAdapter(BeautyMainPage.context, android.R.layout.simple_spinner_item, serviceNameList) {
-
-                    public View getView(int position, View convertView, ViewGroup parent) {
-
-                        View v = super.getView(position, convertView, parent);
-
-                        ((TextView) v).setTextSize(16);
-//                        ((TextView) v).setGravity(Gravity.CENTER);
-                        ((TextView) v).setGravity(Gravity.CENTER);
-
-                        return v;
-
-                    }
-
-                    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-
-                        View v = super.getDropDownView(position, convertView, parent);
-
-                        ((TextView) v).setGravity(Gravity.CENTER);
-                        return v;
-
-                    }
-
-                };
+                adapter = new ArrayAdapter(BeautyMainPage.context, R.layout.simple_spinner_dropdown_item_v1, serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setAdapter(adapter);
 
@@ -263,10 +240,10 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                         //------------------------- check bride service at least one service -----------------
-                        if (position != 0)
-                            if (choose_occision.getSelectedItemPosition()==0 ){
-                                APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.choose_type_res));
-                            } else {
+                        if (position != 0){
+//                            if (choose_occision.getSelectedItemPosition()==0 ){
+//                                APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.choose_type_res));
+//                            } else {
                             //---------- check if service is there
                             boolean addlayoutchek=true;
                         for (int i=0;i<servicesForClientGroups.size();i++){

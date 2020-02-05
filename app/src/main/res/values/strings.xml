@@ -398,9 +398,9 @@
     </string-array>
 
     <string-array name="age_range">
-        <item>Age Range</item>
-        <item> &gt;13 </item>
-        <item> >13 </item>
+        <item>age range</item>
+        <item>Younger than 13 </item>
+        <item>over 13 </item>
     </string-array>
 
     <string-array name="client_status">
@@ -526,7 +526,7 @@
     <string name="ser">services</string>
     <string name="Multi_Reservation">multi booking</string>
     <string name="emp_name">Employee Name :</string>
-    <string name="Servicr_Time">Servicr Time :</string>
+    <string name="Servicr_Time">Service Time :</string>
     <string name="delete_all">delete all</string>
     <string name="start_at">start at</string>
     <string name="valid_until">valid until</string>
@@ -549,6 +549,7 @@
     <string name="support">support</string>
     <string name="effect">my effects</string>
     <string name="update">update effects</string>
+    <string name="there_is_no_sol">There is no similar solution. Do you want to find similar solutions?</string>
 
 
     <string name="supportWelcoming">welcome to vizage support, how can we help you?</string>

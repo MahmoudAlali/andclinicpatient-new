@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Activities;
+package com.dcoret.beautyclient.Activities.MultiDateOffer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
 import com.dcoret.beautyclient.DataModel.IDNameService;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
@@ -25,10 +28,13 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
     ArrayList<String> strings=new ArrayList<>();
     RecyclerView recyclerView;
-    SelectDateOfferAdapter selectDateOfferAdapter;
+    static SelectDateOfferAdapter selectDateOfferAdapter;
     Context context;
     Button next;
     EditText phone_number,client_name;
+    String place_num="",price_num="";
+    static String place="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +52,13 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
 
         for (int i = 0; i< TabTwo.arrayList.get(postion).getSersup_ids().size(); i++){
-            strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());
+            if (APICall.ln.equals("en")) {
+                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());
+            }else {
+                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name_ar());
+            }
         }
-
+        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
         recyclerView=findViewById(R.id.recycleview);
 
         selectDateOfferAdapter=new SelectDateOfferAdapter(context,strings);
@@ -56,7 +66,25 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         recyclerView.setAdapter(selectDateOfferAdapter);
         APICall.detailsUser3(context);
 
+        switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+            case 1:
+                place_num="9";
+                price_num="32";
+                break;
+            case 2:
+                place_num="8";
+                price_num="1";
+                break;
+            case 3:
+                place_num="10";
+                price_num="30";
+                break;
+            case 4:
+                place_num="11";
+                price_num="31";
+                break;
 
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,10 +93,35 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
                  SharedPreferences editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
 
-                 String name=editor.getString("bdb_name",null);
-                 String mobile=editor.getString("bdb_mobile",null);
+                 String name= BeautyMainPage.client_name;
+                 String mobile=BeautyMainPage.client_number;
                 String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
-                    String postdata = "{\n" +
+
+                    String postdata =
+                            "{\n" +
+                                    "    \"Filter\": [\n" +
+                                    "        {\n" +
+                                    "            \"num\": 34,\n" +
+                                    "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                                    "            \"value2\": 0\n" +
+                                    "        },\n" +
+                                    "        {\n" +
+                                    "            \"num\": 35,\n" +
+                                    "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                                    "            \"value2\": 0\n" +
+                                    "        },\n" +
+                                    "        {\n" +
+                                    "            \"num\": "+ price_num+",\n" +
+                                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                    "        },\n" +
+                                    "        {\n" +
+                                    "            \"num\": "+place_num+",\n" +
+                                    "            \"value1\": 1,\n" +
+                                    "            \"value2\": 0\n" +
+                                    "        }\n" +
+                                    "    ],\n" +
+                                    "\n" +
                             "\t\"bdb_pack_code\":" + bdb_pack_code + ",\n" +
                             "\t\"clients\": [  ";
 //                    String cname = client_name.getText().toString();
@@ -83,79 +136,22 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                     Log.e("POSTDATA", postdata);
 
 
-//                    String client="";
-//                    ArrayList<ArrayList<String>> arrayLists=new ArrayList<>();
-//                    HashMap<String,ArrayList<String>> listHashMap=new HashMap<>();
-//                    Log.e("selectDateOff.size()",selectDateOfferAdapter.dates.size()+"");
-//                    for (int i=0;i<selectDateOfferAdapter.dates.size();i++) {
-////                        View view = recyclerView.getLayoutManager().findViewByPosition(1);
-//                        String bdb_ser_sup_id = API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
-////                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
-//                        if (i==0){
-//                            ArrayList list=new ArrayList();
-//                            list.add(bdb_ser_sup_id);
-//                            listHashMap.put(selectDateOfferAdapter.dates.get(i).getText().toString(),list);
-//                        }else {
-//                            for (int j=0;j<listHashMap.size();j++){
-////                                if (listHashMap.)
-//                            }
-////
-//                            }
-//                        }
 
-//                        for (int i=0;i<arrayLists.size();i++){
-//                            for (int j=0;j<arrayLists.get(i).size();j++){
-//                                Log.e(i+j+"",arrayLists.get(i).get(j));
-//                            }
-//                        }
-
-
-//                        if (i == 0 && selectDateOfferAdapter.dates.get(i).getText().toString().length() != 0){
-//
-//                            client = "{\n" +
-//                                    "\t\t\"date\":\"" + selectDateOfferAdapter.dates.get(i).getText().toString() + "\",\n" +
-//                                    "\t\t\"client_name\": \"" + cname + "\",\n" +
-//                                    "\t\t\"client_phone\": \"" + phone + "\",\n" +
-//                                    "\t\t\"is_current_user\": 1,\n" +
-//                                    "\t\t\"services\": [\n" +
-//                                    "\t\t\t{\n" +
-//                                    "\t\t\t\t\"bdb_ser_sup_id\": " + bdb_ser_sup_id + ",\n" +
-//                                    "\t\t\t\t\"ser_time\": 60,\n" +
-//                                    "           }      \n" +
-//
-//                                    "\t\t   ]\n" +
-//                                    "\t\t   }";
-//                        }else if ( selectDateOfferAdapter.dates.get(i).getText().toString().length() != 0){
-//
-//                            client =client+ ",{\n" +
-//                                    "\t\t\"date\":\"" + selectDateOfferAdapter.dates.get(i).getText().toString() + "\",\n" +
-//                                    "\t\t\"client_name\": \"" + cname + "\",\n" +
-//                                    "\t\t\"client_phone\": \"" + phone + "\",\n" +
-//                                    "\t\t\"is_current_user\": 1,\n" +
-//                                    "\t\t\"services\": [\n" +
-//                                    "\t\t\t{\n" +
-//                                    "\t\t\t\t\"bdb_ser_sup_id\": " + bdb_ser_sup_id + ",\n" +
-//                                    "\t\t\t\t\"ser_time\": 60,\n" +
-//                                    "           }      \n" +
-//                                    "\t\t   ]\n" +
-//                                    "\t\t   }";
-//                        }
-
-//                    }
-
-//            postdata=postdata+client+"],\"offer_type\":"+offertype+"\n" +
-//                    "\t\t   }\n" +
-//                    "\t\t";
-
-
-//                    Log.e("PostData",postdata);
-
-                    Intent intent = new Intent(context, OfferBookingResult.class);
-
+                if (TabTwo.arrayList.get(postion).getBdb_is_effects_on().equals("1")) {
+                    Intent intent = new Intent(context, MultiDateOfferEffect.class);
                     intent.putExtra("filter", postdata);
                     intent.putExtra("offertype", offertype);
+                    intent.putExtra("place", place);
+                    intent.putExtra("position", postion);
                     startActivity(intent);
-
+                }else {
+                    Intent intent = new Intent(context, OfferBookingResult.class);
+                    intent.putExtra("filter", postdata);
+                    intent.putExtra("offertype", offertype);
+                    intent.putExtra("place", place);
+                    intent.putExtra("position", postion);
+                    startActivity(intent);
+                }
 
 
             }
@@ -223,6 +219,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                     "\t\t   \"client_name\": \""+cname+"\",\n" +
                     "\t\t   \"client_phone\": \""+phone+"\",\n" +
                     "\t\t   \"is_current_user\":1 ,\n" +
+                    "\t\t   \"is_adult\":1 ,\n" +
                     "\t\t   \"services\": [\n" ;
             if (k==0) {
                 services = services + tmp;
@@ -258,7 +255,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //                }
             }
 
-            services=services+"\n ]}";
+            services=services+"\n ],\"effect\":[]}";
 
         }
         Log.e("ServicesDate",services);

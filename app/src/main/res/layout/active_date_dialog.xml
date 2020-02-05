@@ -6,7 +6,7 @@
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/shadow_gray_dialog"
+    android:background="@drawable/shadow_gray_lite_dialog"
    android:padding="10dp">
 
 
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/standard_20"
             android:gravity="center"
-            android:text="Active Date"
+            android:text="@string/date"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
 

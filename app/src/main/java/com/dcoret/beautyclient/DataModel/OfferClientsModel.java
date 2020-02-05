@@ -4,11 +4,26 @@ import java.util.ArrayList;
 
 public class OfferClientsModel {
     String bdb_pack_code;
+    String bdb_offer_place;
     ArrayList<ServiceDetails> serviceDetails;
 
     public OfferClientsModel(String bdb_pack_code, ArrayList<ServiceDetails> serviceDetails) {
         this.bdb_pack_code = bdb_pack_code;
         this.serviceDetails = serviceDetails;
+    }
+
+    public OfferClientsModel(String bdb_pack_code, String bdb_offer_place, ArrayList<ServiceDetails> serviceDetails) {
+        this.bdb_pack_code = bdb_pack_code;
+        this.bdb_offer_place = bdb_offer_place;
+        this.serviceDetails = serviceDetails;
+    }
+
+    public String getBdb_offer_place() {
+        return bdb_offer_place;
+    }
+
+    public void setBdb_offer_place(String bdb_offer_place) {
+        this.bdb_offer_place = bdb_offer_place;
     }
 
     public String getBdb_pack_code() {

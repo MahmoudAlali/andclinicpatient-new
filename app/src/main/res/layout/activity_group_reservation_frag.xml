@@ -53,9 +53,8 @@
                     android:layout_marginBottom="@dimen/pf_10dp_space"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
-                    android:background="@drawable/shadow_button"
-                    android:text="Choose Occasion"
-
+                    android:clickable="false"
+                    android:background="@android:color/transparent"
                     />
 
 
