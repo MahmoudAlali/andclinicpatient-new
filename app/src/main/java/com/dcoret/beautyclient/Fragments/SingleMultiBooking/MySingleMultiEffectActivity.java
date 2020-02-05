@@ -39,10 +39,14 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(effectAdapter);
 
-        String filter= "  { \"clients\": [\n" +
+        String filter= " \"multi_salon_client\": \""+"0"+"\",\n" +
+                "       \"multi_salon_clients_rel\": \""+"0"+"\",\n"  +
+                "       { \"clients\": [\n" +
                 "           {\n" +
                 "            \"client_name\": \""+ BeautyMainPage.client_name+"\",\n" +
                 "            \"client_phone\": \""+BeautyMainPage.client_number+"\",\n" +
+                "            \"rel\": \""+"0"+"\",\n" +
+                "            \"multi_salon_client\": \"1\",\n" +
                 "            \"is_current_user\": 1,\n" +
                 "            \"services\": [\n" +
                 "                {\n" ;

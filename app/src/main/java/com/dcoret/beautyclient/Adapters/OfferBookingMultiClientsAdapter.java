@@ -87,7 +87,9 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
             }
         });
 
+
         selectDateOfferModels.add(new SelectDateOfferModel(((Item)holder).name,((Item)holder).phone_number,position));
+
         for (int i=0;i<strings.get(position).getServiceDetails().size();i++){
             addLayout2(strings.get(position).getServiceDetails().get(i).getBdb_name_ar(),context,((Item)holder).show_services);
         }

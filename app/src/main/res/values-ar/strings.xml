@@ -378,6 +378,7 @@
     <string name="support">الدعم</string>
     <string name="effect">مؤثراتي</string>
     <string name="update">تحديث المؤثرات</string>
+    <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في ايجاد حلول مثيلة</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>
