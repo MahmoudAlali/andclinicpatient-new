@@ -549,4 +549,24 @@
     <string name="support">support</string>
     <string name="effect">my effects</string>
     <string name="update">update effects</string>
+
+
+    <string name="supportWelcoming">welcome to vizage support, how can we help you?</string>
+
+
+    Support Activity
+    <string name="enterReasonMsg">Please enter a valid reason to call you</string>
+    <string name="weWillCall">customer support will call you within 10 minutes</string>
+    <string name="empty"></string>
+    <string name="talkToSupport">Talk to Vizage support now</string>
+    <string name="teamWorkingTime">Support team is available from 8:30 AM to 9:30 PM </string>
+    <string name="callMe">call me</string>
+    <string name="waitingTime">wait time:10 min</string>
+    <string name="chatWithSupport">chat with Vizage now</string>
+    <string name="internalChat">internal chat</string>
+    <string name="whatsappChat">whatsapp chat</string>
+    <string name="noOperator">Customer services are busy now, please try again later</string>
+    <string name="terminatingChat">are you sure ? internal chat will be terminated forever</string>
+    <string name="exit">Exit</string>
+
 </resources>

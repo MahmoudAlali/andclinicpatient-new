@@ -139,6 +139,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
         menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
         navigation.setItemIconTintList(null);
+        navigation.setItemIconTintList(null);
         //------------------- show Service Fragment -------------
         navigation.setSelectedItemId(R.id.services);
         fragment = new ServiceFragment();

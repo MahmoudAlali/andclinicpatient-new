@@ -2,6 +2,7 @@ package com.dcoret.beautyclient.Service;
 
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,17 +13,21 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.support.InternalChatActivity;
 import com.dcoret.beautyclient.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.List;
 import java.util.Random;
 
 public class MyFirebaseInstanceService extends FirebaseMessagingService {
-    String TAG="Firebase_tag";
+    String TAG="Firebase_tag",title,body,clickAction,pairs;
     public static int RANDOM_N_ID;
 
 
@@ -35,30 +40,77 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
 //        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.e(TAG, "From: " + remoteMessage.getData());
-
-        String title, key_1 = "",key_2="",body,notify_type= "";
+        if (remoteMessage.getData().size() > 0) {
+            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+        }
+        String key_1 = "",key_2="",notify_type= "";
         try{
             title=remoteMessage.getData().get("title");
             body=remoteMessage.getData().get("body");
-            notify_type=remoteMessage.getData().get("notify_type");
-            key_1=remoteMessage.getData().get("key_1");
-            key_2=remoteMessage.getData().get("action2");
+            //type=remoteMessage.getData().get("click_action");
+            clickAction=remoteMessage.getData().get("click_action");
+            pairs=remoteMessage.getData().get("pairs");
         }catch (Exception e){
             e.printStackTrace();
-            title="xxx";
-            body="xxxx";
+
         }
 
-
-        try{
-                    Log.e("notify_type",notify_type);
-                    Log.e("key_1",key_1);
-                    Log.e("key_2",key_2);
-
-        }catch (Exception e){
-            e.printStackTrace();
+        if(clickAction.equals("1"))
+        {
+            new NotificationsBeauty().showNotificationnormal(this,title,body);
         }
+        if(clickAction.equals("2"))
+        {
+            Log.e("Notif", "click action is 2");
 
+            new NotificationsBeauty().AnalizeNotificationCode(this,title,body,pairs);
+        }
+        if(clickAction.equals("4"))
+        {
+            Log.e("Notif", "click action is 4");
+
+            new NotificationsBeauty().showURLNotification(this,title,body,pairs);
+        }
+/*
+        if(action1!=null){
+            new NotificationsBeauty().showNotification(this,title,body);
+
+        }
+*/
+        else if (clickAction.equals("5"))
+        {
+            Log.e("Notif","ClickAction is 5");
+            ActivityManager am = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
+            final Context context = this;
+            // Get info from the currently active task
+            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks( 1 );
+            String activityName = taskInfo.get( 0 ).topActivity.getClassName();
+            String time="";
+            try{
+                time=remoteMessage.getData().get("time");
+
+            }catch (Exception e){
+                e.printStackTrace();
+
+            }
+            final String time2 =time;
+            if(activityName.equals( InternalChatActivity.class.getName() ))
+            {
+                // Execute that special method from ActivityListView
+                ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context,body,Toast.LENGTH_LONG).show();
+                        InternalChatActivity.NewMsg(context,body,false,time2);
+
+                    }                });
+            }
+            else
+            {
+                // Show the notification
+                //new NotificationsBeauty().showChatNotification(this,title,body);
+            }
+        }
 //        Log.e("click_action",click_action);
             showNotification(this,title,body,notify_type,key_1,key_2);
     }

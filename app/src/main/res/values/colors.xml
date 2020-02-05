@@ -16,5 +16,12 @@
     <color name="gray">#EEEEFC</color>
     <color name="end_gray">#D6DBDE</color>
     <color name="accent_v3">#ECD5DF</color>
+    <color name="bl">#AFD0E1</color>
+    <color name="pi">#FDE2F1</color>
+    <color name="gr">#E9E9E9</color>
+
+    <color name="primeliet">#B399E4</color>
+    <color name="transLightPink">#36941751</color>
+    <color name="grey">#636263</color>
 
 </resources>
