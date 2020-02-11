@@ -77,8 +77,8 @@ public class OfferBookingResult extends AppCompatActivity {
                 Log.e("URL",url);
                 if (offertype.equals("2") ||offertype.equals("5"))
                 {
-//                    APICall.searchGroupOfferBooking(context,url,filter);
-                    APICall.searchGroupOfferBooking25(context,url,filter);
+//                    APICall.searchGroupOfferBooking25(context,url,filter);
+                    APICall.searchGroupOfferBooking(context,url,filter);
                 }else {
                     APICall.searchGroupOfferBooking(context,url, filter);
                 }

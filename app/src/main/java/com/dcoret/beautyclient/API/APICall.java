@@ -14473,6 +14473,9 @@ public class APICall {
                                         String bdb_ser_salon = data1.getString("bdb_ser_salon");
                                         String bdb_ser_hall = data1.getString("bdb_ser_salon");
                                         String bdb_hotel = data1.getString("bdb_hotel");
+                                        String reason = data1.getString("reason");
+                                        String offer_ser_sup_id = data1.getString("offer_ser_sup_id");
+                                        String is_adult = data1.getString("is_adult");
                                         String date="";
                                         try {
                                             date = data1.getString("date");
@@ -14483,7 +14486,7 @@ public class APICall {
 
 
 //                                    solutionsArrayList.add(new SerchGroupBookingData.Solutions(ser_id, emp_id, sup_id, ser_sup_id, from, to, old_from, old_to, new_from, new_to, client_name, ser_name, ser_name_ar,is_current_user));
-                                        solutionsArr.add(new SearchBookingDataSTR.Solution(ser_id, ser_name, ser_name_ar, emp_id, emp_name, sup_id, ser_sup_id, from, to, bdb_ser_home_price, bdb_ser_hall_price, bdb_hotel_price, bdb_ser_salon_price, bdb_ser_home, bdb_ser_salon, bdb_ser_hall, bdb_hotel, date, bdb_part_num, ""));
+                                        solutionsArr.add(new SearchBookingDataSTR.Solution(ser_id, ser_name, ser_name_ar, emp_id, emp_name, sup_id, ser_sup_id, from, to, bdb_ser_home_price, bdb_ser_hall_price, bdb_hotel_price, bdb_ser_salon_price, bdb_ser_home, bdb_ser_salon, bdb_ser_hall, bdb_hotel, date, bdb_part_num, reason,offer_ser_sup_id,is_adult));
                                     }
 
 
@@ -14854,6 +14857,8 @@ public class APICall {
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
                             String part_num = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getPart_num();
+                            String offer_ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
+                            String adult = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getIs_adult();
 
                             String price = "";
                             String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
@@ -14879,7 +14884,7 @@ public class APICall {
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
                             }
-                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"offer_ser_sup_id\":" + offer_ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":"+adult+"\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                        Log.e("clientsFilter", serRow);
 
                         } else {
@@ -14891,6 +14896,8 @@ public class APICall {
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
                             String part_num = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getPart_num();
+                            String offer_ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
+                            String adult = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getIs_adult();
 
                             String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
                             String price = "";
@@ -14916,7 +14923,9 @@ public class APICall {
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
                             }
-                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"offer_ser_sup_id\":" + offer_ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":"+adult+"\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+
+//                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                        Log.e("clientsFilter", serRow);
                         }
 
@@ -14951,6 +14960,8 @@ public class APICall {
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
                             String part_num = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getPart_num();
+                            String offer_ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
+                            String adult = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getIs_adult();
 
                             String price = "";
                             String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
@@ -14976,7 +14987,10 @@ public class APICall {
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
                             }
-                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":25\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+
+//                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":25\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"offer_ser_sup_id\":" + offer_ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":"+adult+"\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+
 //                            Log.e("clientsFilter", serRow);
 
                         } else {
@@ -14988,6 +15002,8 @@ public class APICall {
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
                             String part_num = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getPart_num();
+                            String offer_ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
+                            String adult = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getIs_adult();
 
                             String price = "";
                             String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
@@ -15013,7 +15029,9 @@ public class APICall {
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
                             }
-                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"offer_ser_sup_id\":" + offer_ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":"+adult+"\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
+
+//                            serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                            Log.e("clientsFilter", serRow);
                         }
 
