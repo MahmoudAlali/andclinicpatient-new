@@ -11921,6 +11921,9 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
+        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+
+
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
                 .post(body)
@@ -12056,6 +12059,7 @@ public class APICall {
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
+        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems3_13");
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url("http://clientapp.dcoret.com/api/booking/addGroupItems3_13")
@@ -12147,7 +12151,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                String alert=((AppCompatActivity)context).getResources().getString(R.string.alert);
+
                                 String message=((AppCompatActivity)context).getResources().getString(R.string.this_time_not_avl);
                                 APICall.NotAvlBookingDialog(context,message,message);
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();

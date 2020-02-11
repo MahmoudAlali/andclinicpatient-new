@@ -329,7 +329,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
             }else if (FRAGMENT_NAME.equals("MultiIndividualBookingReservationFragment")){
                 fragment = new PlaceServiceMultipleBookingFragment();
                 fm = getFragmentManager();

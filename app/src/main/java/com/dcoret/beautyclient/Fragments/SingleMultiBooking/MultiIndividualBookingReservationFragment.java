@@ -181,8 +181,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
 
                 //--------- find views --------------------
-                EditText client_name = layout2.findViewById(R.id.client_name);
-                EditText phone_number = layout2.findViewById(R.id.phone_num);
+                TextView client_name = layout2.findViewById(R.id.client_name);
+                TextView phone_number = layout2.findViewById(R.id.phone_num);
                 final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
@@ -250,12 +250,16 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                             if ((servicesForClientGroups.get(i).getName().equals(add_service.getSelectedItem().toString()))){
                                 addlayoutchek=false;
                                 APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.alert),getResources().getString(R.string.ser_added_before));
+                               add_service.setSelection(0);
                                 break;
                             }
                         }
 
 
-
+                        if (choose_occision.getSelectedItemPosition()==0){
+                            APICall.showSweetDialog(BeautyMainPage.context,"","please add type service first");
+                            add_service.setSelection(0);
+                        }else
                            if (addlayoutchek){
                             viewcount++;
                             final String vc;
@@ -274,6 +278,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                             textView.setText(add_service.getSelectedItem().toString());
                             final LinearLayout selectdate = view1.findViewById(R.id.select_date);
                             final TextView select_time = view1.findViewById(R.id.select_time);
+
 
                             if (multicheck) {
                                 selectdate.setOnClickListener(new View.OnClickListener() {
@@ -360,10 +365,10 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                         }
                         }
 
-                        if (position!=0) {
-                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getId());
-                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getName());
-                        }
+//                        if (position!=0) {
+//                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getId());
+//                            Log.e("servicesForClientGroups", "sfcg" + servicesForClientGroups.get(servicesForClientGroups.size() - 1).getName());
+//                        }
                         //                     if (position!=0){
 //                         postions.add(position-1);
 //                     }

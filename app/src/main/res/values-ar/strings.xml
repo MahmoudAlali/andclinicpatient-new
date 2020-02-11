@@ -329,7 +329,7 @@
     <string name="select_an_emp">من فضلك ، اختاري موظفة!</string>
     <string name="select_an_time">من فضلك،اختاري الوقت ..</string>
     <string name="choose_type_res">يرجى اختيار نوع الحجز أولا</string>
-    <string name="ser_added_before">هذه الخدمة مضمافة من قبل</string>
+    <string name="ser_added_before">هذه الخدمة مضافة من قبل</string>
     <string name="select_two_ser_atleast">يرجى اختيار خدمتين على الاقل للمتابعة</string>
     <string name="choose_date_for_your_services">اختر تاريخ خدماتك</string>
     <string name="one_date_ser">تاريخ واحد للخدمات</string>
