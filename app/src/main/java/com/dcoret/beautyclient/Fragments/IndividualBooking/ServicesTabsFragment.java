@@ -72,7 +72,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     public static ImageButton filter,compare,sort,gridlist;
     public static Boolean gridlistcheck=false;
     static boolean Isservice=false;
-    TextView myLocationbtn,distancebtn;
+    LinearLayout myLocationbtn,distancebtn;
+    TextView myLocationbtnTxt,distancebtnTxt;
     LinearLayout layout_bar;
     static ServicesAdapter servicesAdapter;
     public static  String bdb_name="",ServiceId="";
@@ -110,6 +111,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         price_offer=view.findViewById(R.id.price_offer);
         pagenum.setText("Page"+TabOne.pagenum);
         sort=view.findViewById(R.id.sort);
+        myLocationbtnTxt=view.findViewById(R.id.myLocationbtnTxt);
+        distancebtnTxt=view.findViewById(R.id.distancebtnTxt);
         BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
 //        Log.d("doback",BeautyMainPage.FRAGMENT_NAME);
 
@@ -129,7 +132,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         });
 
 
-        myLocationbtn.setText(PlaceServiceFragment.mylocationId);
+        myLocationbtnTxt.setText(PlaceServiceFragment.mylocationId);
         myLocationbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,8 +201,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             if (i == 5) {
                 if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
 
-                    distancebtn.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-                    distancebtn.setText("<="+PlaceServiceFragment.maxValDistance);
+                    distancebtnTxt.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+                    distancebtnTxt.setText("<="+PlaceServiceFragment.maxValDistance);
 
 //  distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
                 }
@@ -250,11 +253,11 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                         rangeDistanceDialog.dismiss();
 
                         PlaceServiceFragment.maxValDistance=tvMax.getText().toString();
-                        distancebtn.setText("<="+PlaceServiceFragment.maxValDistance);
+                        distancebtnTxt.setText("<="+PlaceServiceFragment.maxValDistance);
 
 //                        distancebtn.setText(R.string.distance+":"+Min.getText().toString()+"-" + Max.getText().toString());
                         APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
-                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtn.getText().toString()));
+                        ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtnTxt.getText().toString()));
 
                         if (TABFLAG==1){
                             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
@@ -1558,10 +1561,13 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
     void tabselected(TextView t1,TextView t2,TextView t3){
         t1.setTextSize(20);
+        t1.setBackgroundResource(R.drawable.selected_tab_shape);
         t1.setTextColor(Color.MAGENTA);
         t2.setTextSize(18);
+        t2.setBackgroundResource(R.drawable.unselected_tab_shape);
         t2.setTextColor(Color.BLACK);
         t3.setTextSize(18);
+        t3.setBackgroundResource(R.drawable.unselected_tab_shape);
         t3.setTextColor(Color.BLACK);
 
     }

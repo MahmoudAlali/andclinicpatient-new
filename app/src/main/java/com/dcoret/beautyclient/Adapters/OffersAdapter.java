@@ -1,7 +1,9 @@
 package com.dcoret.beautyclient.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -26,7 +29,9 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     Context context;
@@ -37,6 +42,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<ServiceItem> serviceItems;
     ArrayList<BestOfferItem> bestOfferItems;
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
+    public static HashMap<String,Bitmap> logoImages = new HashMap<>();
+    int []backgrounds ={R.drawable.blue_offer_background,R.drawable.pink_offer_background,R.drawable.prpl_offer_background,R.drawable.page_offer_background,R.drawable.brown_offer_background};
     public OffersAdapter(Context context, String items[]){
         this.context=context;
         this.items=items;
@@ -99,13 +106,35 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+            ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
+            /*if(OffersAdapter.logoImages.containsKey(bestOfferItems.get(position).getProvider_logo_id()))
+            {
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                       // logoImg.setImageBitmap(OffersAdapter.logoImages.get(LogoId));
+                    }
+                });
+            }
+            else*/
+            APICall.getSalonLogo(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
+
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
-            ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
-            ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
-            String on= ((AppCompatActivity)context).getResources().getString(R.string.on);
-            String sevices= ((AppCompatActivity)context).getResources().getString(R.string.ser);
-            ((Item) holder).total_dis.setText(APICall.convertToArabic(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "+on + bestOfferItems.get(position).getService_count() + " "+sevices));
-            ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+          //  ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
+            //((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
+            String on= context.getResources().getString(R.string.on);
+            String sevices= context.getResources().getString(R.string.ser);
+            String oneService= context.getResources().getString(R.string.oneService);
+            if(bestOfferItems.get(position).getService_count().equals("1"))
+                ((Item) holder).onServices.setText(oneService );
+            else
+                ((Item) holder).onServices.setText(on+" " +bestOfferItems.get(position).getService_count()+ " "+sevices );
+            if(context.getResources().getString(R.string.locale).equals("ar"))
+                ((Item) holder).total_dis.setText(APICall.convertToArabic(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "));
+            else
+                ((Item) holder).total_dis.setText(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% ");
+
+          //  ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -117,7 +146,14 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         PopupMenu popup = new PopupMenu(context, ((Item) holder).info);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String bdb_name_ar = jsonObject.getString("bdb_name_ar");
+                            String bdb_name_ar;
+                            if(context.getResources().getString(R.string.locale).equals("ar"))
+                            {
+                                bdb_name_ar = jsonObject.getString("bdb_name_ar");
+                            }
+                            else
+                                bdb_name_ar = jsonObject.getString("bdb_name");
+
                             popup.getMenu().add(bdb_name_ar);
 //                       if (i==jsonArray.length()-1){
 //                           infoItem.append(bdb_name_ar);
@@ -185,8 +221,9 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return st;
     }
     public static class Item extends RecyclerView.ViewHolder {
-        TextView textView,pack_code,rating,price,pro_name,reserv_offer,ser_count,total_dis,new_price,old_price;
-        ImageView info;
+        TextView textView,pack_code,rating,price,pro_name,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,percentDiscount;
+        ImageView info,logoImg;
+        LinearLayout itemBackground;
         public Item(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.rname);
@@ -195,11 +232,15 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             reserv_offer = itemView.findViewById(R.id.reserv_offer);
             rating = itemView.findViewById(R.id.rank);
             price = itemView.findViewById(R.id.price);
+            onServices = itemView.findViewById(R.id.onServices);
+            price = itemView.findViewById(R.id.price);
 //            ser_count = itemView.findViewById(R.id.ser_count);
 //            pack_code = itemView.findViewById(R.id.packCode);
-            total_dis = itemView.findViewById(R.id.total_dis);
-            new_price = itemView.findViewById(R.id.new_price);
-            old_price = itemView.findViewById(R.id.old_price);
+            total_dis = itemView.findViewById(R.id.disAmount);
+            logoImg = itemView.findViewById(R.id.logoImg);
+            itemBackground = itemView.findViewById(R.id.itemBackground);
+            //new_price = itemView.findViewById(R.id.new_price);
+           // old_price = itemView.findViewById(R.id.old_price);
         }
     }
 }

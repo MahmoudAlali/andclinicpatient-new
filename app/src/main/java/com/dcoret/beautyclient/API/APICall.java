@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -24,6 +26,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +41,7 @@ import com.dcoret.beautyclient.Activities.support.InternalChatActivity;
 import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
@@ -1311,12 +1315,13 @@ public class APICall {
                            String pack_code=pkg.getString("pack_code");
                            String service_count=pkg.getString("service count");
                            String provider_name=pkg.getString("provider name");
+                           String provider_logo_id=pkg.getString("provider_logo_id");
                            String old_price=pkg.getString("old_price");
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,service_count,provider_name,old_price,new_price,total_discount,sersup_ids));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -16622,6 +16627,7 @@ public class APICall {
         try {
             postdata.put("bdb_id","1");
             postdata.put("bdb_body",msg);
+            postdata.put("fb_token",FirebaseInstanceId.getInstance().getToken());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -16797,7 +16803,108 @@ public class APICall {
 
         });
     }
+    public static void getSalonLogo(final Context context, String LogoId, final ImageView logoImg)
+    {
+        if(!LogoId.equals("null"))
+        {
 
+            {
+                MediaType MEDIA_TYPE = MediaType.parse("application/json");
+                // showDialog(context);
+
+
+                OkHttpClient client = new OkHttpClient();
+                JSONObject postdata = new JSONObject();
+
+                {
+                    try
+                    {
+                        postdata.put("bdb_id",LogoId);
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.getStackTrace();
+                    }
+                    RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+                    okhttp3.Request request = new okhttp3.Request.Builder()
+                            .url("http://clientapp.dcoret.com/api/get/image")
+                            .post(body)
+                            .addHeader("Content-Type","application/json")
+                            .header("Authorization", "Bearer " + gettoken(context))
+
+//                .addHeader("X-Requested-With","XMLHttpRequest")
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            mMessage = e.getMessage();
+                            //pd1.dismiss();
+
+                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        final Dialog dialog = new Dialog(context);
+                                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                        TextView confirm = dialog.findViewById(R.id.confirm);
+                                        TextView message = dialog.findViewById(R.id.message);
+                                        TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+                                        confirm.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                        dialog.show();
+
+                                    }
+                                });
+                            }else {
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                            Bitmap bitmap = null;
+                            final Bitmap bit ;
+                            try {
+                                bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                                Log.e("logo",bitmap.toString());
+                            } catch (Exception e)
+                            {
+                                // TODO Auto-generated catch block
+                                Log.e("ERRLOGO",e.getMessage());
+                                e.printStackTrace();
+                            }
+                            bit =bitmap;
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    logoImg.setImageBitmap(bit);
+                                   // OffersAdapter.logoImages.put(LogoId,bit);
+                                }
+                            });
+                        }
+
+                    });
+
+                }
+            }
+        }
+    }
 }
 
 

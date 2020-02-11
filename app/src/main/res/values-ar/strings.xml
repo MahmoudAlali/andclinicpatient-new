@@ -183,7 +183,7 @@
     <string name="BeautyOffers"> عروض التجميل</string>
     <string name="FashionDesignOffers">عروض تصميم الازياء</string>
     <string name="OFFonBeautyService">خصم 30% على خدمة التجميل</string>
-    <string name="FeaturedBeautyShows">ابرز عروض التجميل</string>
+    <string name="FeaturedBeautyShows">أبرز العروض</string>
     <string name="familiyBeauty">تم انضمامك لعائلة .... بنجاح,يمكنك الآن التمتع بالخدمات الرائعة</string>
 
 
@@ -226,7 +226,7 @@
     <string name="PreviousPage"> الصفحة السابقة</string>
     <string name="num_of_times">عدد مرات حجز العرض:</string>
     <string name="end_offer">هذا العرض ساري حتى:</string>
-    <string name="on">تخفيض على</string>
+    <string name="on">على</string>
     <string name="onservice">من الخدمات</string>
 
 
@@ -362,7 +362,7 @@
     <string name="normal_offer">Normal offer</string>
     <string name="bride_offer">bride offer</string>
     <string name="Number_of_services_on_offer">number of service</string>
-    <string name="discount_percentage">discount</string>
+    <string name="discount_percentage">تخفيض</string>
     <string name="offer_place">offer place</string>
     <string name="month_in_offer">month in offer</string>
     <string name="offer_end">offer end</string>
@@ -447,6 +447,9 @@
     <string name="noOperator">يرجى المحاولة بعد قليل، الجميع في الدعم مشغولون حالياً</string>
     <string name="terminatingChat">هل أنتِ متأكدة ؟ سيتم إغلاق المحادثة نهائياً </string>
     <string name="exit">خروج</string>
+    <string name="oneService">على خدمة واحدة</string>
+    <string name="locale">ar</string>
+
 
 
 </resources>

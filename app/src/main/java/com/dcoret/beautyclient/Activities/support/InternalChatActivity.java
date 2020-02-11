@@ -131,7 +131,7 @@ public class InternalChatActivity extends AppCompatActivity {
                             notificationBody.put("chat_id", ChatID);
                             notificationBody.put("content_available", true);
                             notificationBody.put("action", "5");
-                            notificationBody.put("author", "1");
+                            notificationBody.put("author", "2");
                             notificationBody.put("sender_id", ProviderId);
                             notificationBody.put("sender_id", ProviderId);
                             notification.put("to", Token);
