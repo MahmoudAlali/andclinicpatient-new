@@ -99,7 +99,7 @@
     <string name="Delete_account">Delete My Account</string>
     <!-- Nav Bottom-->
     <string name="service">Services</string>
-    <string name="onservice">Services</string>
+    <string name="onservice">Service</string>
     <string name="reservations">Reservations</string>
     <string name="bag_reservation">Bag Reservations</string>
     <string name="favorites">Favorites</string>
@@ -205,7 +205,7 @@
     <string name="FashionDesignOffers">Fashion Design Offers</string>
     <string name="OFFonBeautyService">30% OFF on beauty service</string>
     <string name="FashionDesignServices">Fashion Design Services</string>
-    <string name="FeaturedBeautyShows">Featured Beauty Shows</string>
+    <string name="FeaturedBeautyShows">Best offers</string>
 
 
     <string name="familiyBeauty">You have successfully joined the family. Now you can enjoy great services</string>
@@ -244,7 +244,7 @@
     <string name="send">send</string>
 
 
-    <string name="services">Services</string>
+    <string name="services">services</string>
     <string name="Offers">Offers</string>
     <string name="Map">Map</string>
 
@@ -399,7 +399,7 @@
 
     <string-array name="age_range">
         <item>age range</item>
-        <item>Youngest of 13 </item>
+        <item>Younger than 13 </item>
         <item>over 13 </item>
     </string-array>
 
@@ -550,4 +550,26 @@
     <string name="effect">my effects</string>
     <string name="update">update effects</string>
     <string name="there_is_no_sol">There is no similar solution. Do you want to find similar solutions?</string>
+
+
+    <string name="supportWelcoming">welcome to vizage support, how can we help you?</string>
+
+
+    Support Activity
+    <string name="enterReasonMsg">Please enter a valid reason to call you</string>
+    <string name="weWillCall">customer support will call you within 10 minutes</string>
+    <string name="empty"></string>
+    <string name="talkToSupport">Talk to Vizage support now</string>
+    <string name="teamWorkingTime">Support team is available from 8:30 AM to 9:30 PM </string>
+    <string name="callMe">call me</string>
+    <string name="waitingTime">wait time:10 min</string>
+    <string name="chatWithSupport">chat with Vizage now</string>
+    <string name="internalChat">internal chat</string>
+    <string name="whatsappChat">whatsapp chat</string>
+    <string name="noOperator">Customer services are busy now, please try again later</string>
+    <string name="terminatingChat">are you sure ? internal chat will be terminated forever</string>
+    <string name="exit">Exit</string>
+    <string name="oneService">on one service</string>
+    <string name="locale">en</string>
+
 </resources>

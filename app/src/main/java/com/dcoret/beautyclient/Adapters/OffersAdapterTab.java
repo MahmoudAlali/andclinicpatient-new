@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.dcoret.beautyclient.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
@@ -74,10 +75,12 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         DecimalFormat df = new DecimalFormat("0.0");
+        DecimalFormat doub=new DecimalFormat("#.##");
+
         float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
         float discountval=Float.parseFloat(Double.parseDouble(offers.get(position).getDiscount())+"");
-        old_prc = Float.parseFloat(df.format(old_prc));
-        discountval = Float.parseFloat(df.format(discountval));
+     //   old_prc = Float.parseFloat(df.format(old_prc));
+     //   discountval = Float.parseFloat(df.format(discountval));
         ((Item)holder).pro_name.setText(offers.get(position).getBdb_sup_name());
         ((Item)holder).new_price.setText(offers.get(position).getNewPrice());
         ((Item)holder).num_of_times.setText(context.getResources().getText(R.string.num_of_times)+offers.get(position).getNum_of_times());
@@ -100,7 +103,19 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((Item) holder).offer_type.setText("عرض جماعي");
         }
 //        ((Item)holder).offer_type.setText(offers.get(position).getBdb_offer_type());
-        ((Item)holder).discount.setText(discountval+"% "+context.getResources().getString(R.string.on)+" "+offers.get(position).getService_count()+" "+context.getResources().getString(R.string.onservice));
+        String on= context.getResources().getString(R.string.on);
+        String sevices= context.getResources().getString(R.string.ser);
+        String oneService= context.getResources().getString(R.string.oneService);
+        if(offers.get(position).getService_count().equals("1"))
+            ((Item) holder).onServices.setText(oneService );
+        else
+            ((Item) holder).onServices.setText(on+" " +offers.get(position).getService_count()+ " "+sevices );
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+            ((Item) holder).total_dis.setText(APICall.convertToArabic(doub.format(Double.parseDouble(offers.get(position).getDiscount() ))+ "% "));
+        else
+            ((Item) holder).total_dis.setText(doub.format(Double.parseDouble(offers.get(position).getDiscount() ))+ "% ");
+
+      //  ((Item)holder).discount.setText(discountval+"% "+context.getResources().getString(R.string.on)+" "+offers.get(position).getService_count()+" "+context.getResources().getString(R.string.onservice));
         ((Item)holder).old_price.setPaintFlags(((Item)holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         ((Item)holder).info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,7 +247,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end;
+        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices;
         ImageView info,add_offer;
         public Item(View itemView) {
             super(itemView);
@@ -247,6 +262,8 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             offer_end = itemView.findViewById(R.id.offer_end);
             add_offer = itemView.findViewById(R.id.add_offer);
             offer_type = itemView.findViewById(R.id.offer_type);
+            total_dis = itemView.findViewById(R.id.disAmount);
+            onServices = itemView.findViewById(R.id.onServices);
 
         }
     }

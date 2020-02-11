@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="165dp"
-   android:background="@drawable/shadow_offers_layout"
+   android:background="@drawable/ser_details_shape"
     android:layout_margin="5dp"
     >
 

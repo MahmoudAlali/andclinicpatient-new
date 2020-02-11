@@ -2,122 +2,213 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:layout_margin="5dp"
-    android:background="@drawable/shadow_offers_layout">
+    android:layout_marginTop="5dp"    >
     <LinearLayout
+        android:id="@+id/itemBackground"
+        android:layout_marginLeft="@dimen/standard_30"
+        android:layout_marginRight="@dimen/standard_30"
+        android:background="@drawable/pink_offer_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:layout_height="140dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
         <LinearLayout
-            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            >
-            <ImageView
-                android:layout_width="130dp"
-                android:layout_height="50dp"
-                android:layout_weight="2"
-                android:src="@drawable/ic_sale"/>
-            <LinearLayout
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/old_price"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="old price"
-                    android:textStyle="bold"
-                    android:textColor="#000"
-                    android:textSize="@dimen/standard_20"
-
-                    android:gravity="center"/>
-                <TextView
-                    android:id="@+id/new_price"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="new price"
-                    android:textStyle="bold"
-                    android:textColor="#17202A"
-                    android:textSize="@dimen/standard_20"
-                    android:gravity="center"/>
-                <ImageView
-                    android:layout_margin="5dp"
-                    android:id="@+id/add"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_add_black_24dp"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_20"
-                    android:gravity="center"/>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1"
-                android:weightSum="8"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/total_dis"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="discount"
-                    android:textSize="@dimen/standard_20"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textColor="#000"
-                    />
-
-                <ImageView
-                    android:layout_margin="8dp"
-                    android:id="@+id/info"
-                    android:layout_weight="7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_info"
-                    />
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-
-            <LinearLayout
+            android:weightSum="3"
+            >
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:layoutDirection="ltr"
+                android:paddingLeft="10dp">
+                <LinearLayout
+                    android:layout_width="@dimen/standard_80"
+                    android:layout_height="@dimen/standard_80"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logo"
+                        android:id="@+id/logoImg"
+                        android:layout_weight="2"
+                        android:scaleType="centerInside"
+                        >
+                    </ImageView>
+                </LinearLayout>
+
 
                 <TextView
-                    android:id="@+id/pro_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Name Provider"
+                    android:text="Salon Name"
+                    android:id="@+id/pro_name"
+                    android:layout_weight="1"
                     android:textSize="@dimen/standard_20"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="#000"
                     />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/discount_icon"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="@dimen/standard_20"
+                    android:layout_marginRight="@dimen/standard_20" />
+                <!--<LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/old_price"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="old price"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:textSize="@dimen/standard_20"
+
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/new_price"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="new price"
+                        android:textStyle="bold"
+                        android:textColor="#17202A"
+                        android:textSize="@dimen/standard_20"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_margin="5dp"
+                        android:id="@+id/add"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_add_black_24dp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/standard_20"
+                        android:gravity="center"/>
+
+
+                </LinearLayout>-->
+
+            </android.support.design.widget.CoordinatorLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:paddingStart="35dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/standard_30">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="18sp"
+                    android:text="@string/discount_percentage"
+                    android:layout_marginRight="10dp" />
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/dis_shape"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/disAmount"
+
+                        android:text="50%"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        />
+                </android.support.design.widget.CoordinatorLayout>
+                <TextView
+                    android:id="@+id/onServices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:text="@string/oneService"
+                    android:layout_marginRight="10dp" />
+               <!-- <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/total_dis"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="discount"
+                        android:textSize="@dimen/standard_20"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        />
+
+                    <ImageView
+                        android:layout_margin="8dp"
+                        android:id="@+id/info"
+                        android:layout_weight="7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_info"
+                        />
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/pro_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Name Provider"
+                        android:textSize="@dimen/standard_20"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        />
+                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/standard_30"
+        android:layout_marginRight="@dimen/standard_30"
+        android:id="@+id/info"/>
 
 
 

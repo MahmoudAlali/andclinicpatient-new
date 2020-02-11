@@ -33,7 +33,13 @@
         <activity android:name=".Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity" />
         <activity android:name=".Fragments.SingleMultiBooking.MySingleMultiEffectActivity" />
         <activity android:name=".Fragments.IndividualBooking.MyIndEffectsActivity" />
-
+        <activity
+            android:name=".Activities.support.InternalChatActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Activities.support.SupportActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity="" />
         <receiver android:name=".Service.PackegeRemovedBR">
             <intent-filter>
 

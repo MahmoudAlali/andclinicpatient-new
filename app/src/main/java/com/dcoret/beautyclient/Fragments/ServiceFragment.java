@@ -29,7 +29,6 @@ public class ServiceFragment extends Fragment {
 //    LinearLayout services_tabs;
     LinearLayout bride_bride,ind_normal_service,multiple_individual_booking_bride,group_res_another_bride,group_res_bride,multiple_individual_booking,group_res,group_res_another;
     Fragment fragment;
-    CoordinatorLayout service_hair;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
@@ -41,7 +40,6 @@ public class ServiceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
-        service_hair=view.findViewById(R.id.service_hair);
 
         //--------- init service filter list ------------
         for (int i=1;i<=35;i++){
@@ -51,7 +49,7 @@ public class ServiceFragment extends Fragment {
 
         toolbar= view.findViewById(R.id.toolbarm);
         bride_bride= view.findViewById(R.id.bride_bride);
-        ind_normal_service= view.findViewById(R.id.bride);
+        ind_normal_service= view.findViewById(R.id.individual);
 
         group_res= view.findViewById(R.id.group_res);
         group_res_bride= view.findViewById(R.id.group_res_bride);

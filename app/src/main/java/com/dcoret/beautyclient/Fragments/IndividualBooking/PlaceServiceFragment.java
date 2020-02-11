@@ -73,7 +73,7 @@ public class PlaceServiceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_place_service_frag, container, false);
-        service_hair = view.findViewById(R.id.service_hair);
+        //service_hair = view.findViewById(R.id.service_hair);
 
 
 

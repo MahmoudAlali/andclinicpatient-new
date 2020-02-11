@@ -33,10 +33,11 @@
                 android:layout_gravity="bottom"
                 tools:ignore="BottomAppBar"
                 android:background="@color/end_gray"
-                app:itemIconTint="@drawable/bottom_nav_selector"
-                app:itemTextColor="@drawable/bottom_nav_selector"
                 app:menu="@menu/service_nav_tabs_menu"
-                ></android.support.design.widget.BottomNavigationView>
+
+                >
+
+            </android.support.design.widget.BottomNavigationView>
 
         </LinearLayout>
     </LinearLayout>
