@@ -84,6 +84,21 @@ public class ClientsViewData {
         this.client_old = client_old;
     }
 
+    public TextView getCname() {
+        return cname;
+    }
+
+    public void setCname(TextView cname) {
+        this.cname = cname;
+    }
+
+    public TextView getPnumber() {
+        return pnumber;
+    }
+
+    public void setPnumber(TextView pnumber) {
+        this.pnumber = pnumber;
+    }
 
     public String getClient_old() {
         return client_old;

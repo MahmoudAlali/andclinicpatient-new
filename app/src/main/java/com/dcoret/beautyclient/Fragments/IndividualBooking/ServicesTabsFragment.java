@@ -333,12 +333,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 if(ServicesAdapter.comparenum>=2) {
                     ServicesAdapter.comparenum=0;
                     Log.d("Compare", ServicesAdapter.comparenum+"");
-                    fragment = new CompareFragment();
-                    fm = getActivity().getFragmentManager();
-                    fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, fragment);
-                    fragmentTransaction.commit();
+//                    fragment = new CompareFragment();
+//                    fm = getActivity().getFragmentManager();
+//                    fragmentTransaction = fm.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment, fragment);
+//                    fragmentTransaction.commit();
 
+                    Intent intent=new Intent(BeautyMainPage.context,CompareServiceActivity.class);
+                    startActivity(intent);
                 }else {
                     Toast.makeText(BeautyMainPage.context,"Compare 2 items or more",Toast.LENGTH_LONG).show();
 

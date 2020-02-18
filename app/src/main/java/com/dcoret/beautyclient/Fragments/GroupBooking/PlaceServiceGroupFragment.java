@@ -536,8 +536,8 @@ public class PlaceServiceGroupFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         int month=datePicker.getMonth()+1;
-                        date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-                        dateFilter=datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
+                        date.setText(datePicker.getYear()+"-"+(month)+"-"+datePicker.getDayOfMonth());
+                        dateFilter=datePicker.getYear()+"-"+(month)+"-"+datePicker.getDayOfMonth();
                         ServiceFragment.date=dateFilter;
                     }
                 });

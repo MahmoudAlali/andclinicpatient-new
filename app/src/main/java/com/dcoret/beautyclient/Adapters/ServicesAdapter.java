@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.DataModel.CompareModel;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
 import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
@@ -145,30 +146,32 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     @Override
                     public void onClick(View v) {
                         if (((Item) holder).service_compare.isChecked()){
-                        if (comparenum==3){
+                        if (TabOne.compareModels.size()==3){
                             ((Item) holder).service_compare.setChecked(false);
 
                             APICall.showSweetDialog(context, ((AppCompatActivity)context).getResources().getString(R.string.alert),
                                     ((AppCompatActivity)context).getResources().getString(R.string.cant_compare_more_than_three_ser));
 //                            Toast.makeText(context,"Can't compare more than two services..",Toast.LENGTH_SHORT).show();
                         }else {
-                            if (comparenum == 0) {
-                                comparenum = 1;
+                            if (TabOne.compareModels.size() == 0) {
+//                                TabOne.compareModels.size() = 1;
                                 srName1 = ((Item) holder).service_name.getText().toString();
                                 spname1 = ((Item) holder).pro_name.getText().toString();
-                                ev1 = itemArrayList.get(position).getTotalRating() + "Stars";
+                                ev1 = itemArrayList.get(position).getTotalRating() + "*";
                                 price1 = ((Item) holder).service_price.getText().toString();
-
                                 bdb_ser_home = itemArrayList.get(position).getBdb_ser_home();
                                 bdb_ser_salon = itemArrayList.get(position).getBdb_ser_salon();
                                 bdb_ser_hall = itemArrayList.get(position).getBdb_ser_hall();
                                 bdb_hotel = itemArrayList.get(position).getBdb_hotel();
+                                place1 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+
+                                TabOne.compareModels.add(new CompareModel(srName1,spname1,ev1,price1,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel,place1));
+
 
                                 Log.e("plc1", bdb_ser_home + "," + bdb_ser_salon + "," + bdb_ser_hall + "," + bdb_hotel);
-                                place1 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
 //                                postion1=position;
-                            } else if (comparenum == 1) {
-                                comparenum = 2;
+                            } else if (TabOne.compareModels.size() == 1) {
+//                                comparenum = 2;
                                 srName2 = ((Item) holder).service_name.getText().toString();
                                 spname2 = ((Item) holder).pro_name.getText().toString();
                                 ev2 = itemArrayList.get(position).getTotalRating() + "Stars";
@@ -178,13 +181,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 bdb_ser_salon1 = itemArrayList.get(position).getBdb_ser_salon();
                                 bdb_ser_hall1 = itemArrayList.get(position).getBdb_ser_hall();
                                 bdb_hotel1 = itemArrayList.get(position).getBdb_hotel();
+                                TabOne.compareModels.add(new CompareModel(srName2,spname2,ev2,price2,bdb_ser_home1,bdb_ser_salon1,bdb_ser_hall1,bdb_hotel1,place2));
+
 //                                postion2=position;
                                 Log.e("plc2", bdb_ser_home1 + "," + bdb_ser_salon1 + "," + bdb_ser_hall1 + "," + bdb_hotel1);
-                            } else if (comparenum == 2) {
-                                comparenum=3;
+                            } else if (TabOne.compareModels.size() == 2) {
+//                                comparenum=3;
                                 srName3= ((Item) holder).service_name.getText().toString();
                                 spname3= ((Item) holder).pro_name.getText().toString();
-                                ev3= itemArrayList.get(position).getTotalRating()+"Stars";
+                                ev3= itemArrayList.get(position).getTotalRating()+"*";
                                 price3=((Item) holder).service_price.getText().toString();
                                 place3= PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
                                 bdb_ser_home2=itemArrayList.get(position).getBdb_ser_home();
@@ -192,13 +197,20 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                 bdb_ser_hall2=itemArrayList.get(position).getBdb_ser_hall();
                                 bdb_hotel2=itemArrayList.get(position).getBdb_hotel();
 //                                postion2=position;
+                                TabOne.compareModels.add(new CompareModel(srName3,spname3,ev3,price3,bdb_ser_home2,bdb_ser_salon2,bdb_ser_hall2,bdb_hotel2,place3));
+
                                 Log.e("plc3",bdb_ser_home2+","+bdb_ser_salon2+","+bdb_ser_hall2+","+bdb_hotel2);
 
                             }
                         }
                     }else {
-                            comparenum--;
+                            for (int i=0;i<TabOne.compareModels.size();i++){
+                                if (TabOne.compareModels.get(i).getSpname().equals(((Item) holder).pro_name.getText().toString())){
+                                    TabOne.compareModels.remove(i);
+                                }
+                            }
                         }
+                    Log.e("COMPARE_SIZE",TabOne.compareModels.size()+"");
                     }
                 });
 

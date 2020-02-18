@@ -38,42 +38,42 @@ public class ReservatoinDetailsActivity extends AppCompatActivity {
         service_name=findViewById(R.id.rname);
         salonName=findViewById(R.id.salon_name);
 
-        v1=findViewById(R.id.vfirst);
-        v2=findViewById(R.id.vsecond);
-        v3=findViewById(R.id.vthird);
-        v4=findViewById(R.id.vforth);
+//        v1=findViewById(R.id.vfirst);
+//        v2=findViewById(R.id.vsecond);
+//        v3=findViewById(R.id.vthird);
+//        v4=findViewById(R.id.vforth);
+//
+//        r1=findViewById(R.id.rfirst);
+//        r2=findViewById(R.id.rsecond);
+//        r3=findViewById(R.id.rthird);
+//        r4=findViewById(R.id.rforth);
 
-        r1=findViewById(R.id.rfirst);
-        r2=findViewById(R.id.rsecond);
-        r3=findViewById(R.id.rthird);
-        r4=findViewById(R.id.rforth);
 
-
-        r1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                v1.setBackgroundResource(R.color.green);
-            }
-        });
-
-        r2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                v2.setBackgroundResource(R.color.green);
-            }
-        });
-        r3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                v3.setBackgroundResource(R.color.green);
-            }
-        });
-        r4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                v4.setBackgroundResource(R.color.green);
-            }
-        });
+//        r1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                v1.setBackgroundResource(R.color.green);
+//            }
+//        });
+//
+//        r2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                v2.setBackgroundResource(R.color.green);
+//            }
+//        });
+//        r3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                v3.setBackgroundResource(R.color.green);
+//            }
+//        });
+//        r4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                v4.setBackgroundResource(R.color.green);
+//            }
+//        });
         APICall.browseOneBooking(ReservationsAdapter2.book_id,context);
 
 
