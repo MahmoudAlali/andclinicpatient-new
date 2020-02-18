@@ -56,15 +56,14 @@ public class PlaceServiceMultipleBookingFragment extends Fragment {
     Toolbar toolbar;
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
-    Button ok, priceService, rateService;
+    Button ok;
     public static Spinner  placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
     public static String mylocationId="";
-    Button distance,mylocationbtn;
+    TextView distance,mylocationbtn,date, priceService, rateService;
     static  boolean fregmentIsFirstOpen=false;
-    Button date;
     public static  String dateFilter="";
     public static String maxPrice,minPrice;
 

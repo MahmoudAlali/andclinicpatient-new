@@ -56,17 +56,18 @@ public class PlaceServiceFragment extends Fragment {
     Toolbar toolbar;
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
-    Button ok, priceService, rateService;
+    Button ok;
     public static Spinner  placeSpinner;
     public static int citiyitemSelected;
     public static int placeId = 0;
     ArrayAdapter locatioAdapter;
     public static String maxValDistance,mylocationId="";
-    Button distance,mylocationbtn,offerPrice;
+    TextView distance,mylocationbtn,offerPrice, priceService, rateService;
     static  boolean fregmentIsFirstOpen=false;
     public static String distanceOffer="",locOfferlat="",locOfferlong="",priceOffer="",rateOffer="",supRate="";
     public static String priceServiceValue="",minprice="",maxprice="";
     public static TextView date;
+    public static String offerPlace="";
 
 
 
@@ -262,15 +263,19 @@ public class PlaceServiceFragment extends Fragment {
                     switch (position) {
                         case 1:
                             placeId = 32;
+                            offerPlace="0";
                             break;
                         case 2:
                             placeId = 1;
+                            offerPlace="1";
                             break;
                         case 3:
                             placeId = 30;
+                            offerPlace="2";
                             break;
                         case 4:
                             placeId = 31;
+                            offerPlace="3";
                             break;
                     }
 
@@ -590,7 +595,7 @@ public class PlaceServiceFragment extends Fragment {
                         offerPrice.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
 //                        APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
 //                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
-                        priceOffer=",{\"num\":32,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+                        priceOffer=",{\"num\":39,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
 
 
                     }

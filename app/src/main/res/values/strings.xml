@@ -571,5 +571,16 @@
     <string name="exit">Exit</string>
     <string name="oneService">on one service</string>
     <string name="locale">en</string>
+    <string name="hair">Hair</string>
+    <string name="spa">Spa</string>
+    <string name="massage">Massage</string>
+    <string name="nails">Nails</string>
+    <string name="skin">Skin</string>
+    <string name="body">Body</string>
+    <string name="eyebrows">Eyebrows</string>
+    <string name="makeup2">Make up</string>
+    <string name="providersFav">Providers</string>
+    <string name="servicesFav">Services</string>
+    <string name="Notifications">Notifications</string>
 
 </resources>

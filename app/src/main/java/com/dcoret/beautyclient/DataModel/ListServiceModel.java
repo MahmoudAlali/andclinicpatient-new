@@ -10,10 +10,12 @@ String  bdb_ser_id,
         bdb_is_fixed_time,
         bdb_is_hair_service,
         bdb_is_bride_service,
-        images;
+        images,
+        is_fav,
+        new_fav;
 
 
-    public ListServiceModel(String bdb_ser_id, String bdb_name, String bdb_name_ar, String bdb_descr, String bdb_type, String bdb_is_fixed_price, String bdb_is_fixed_time, String bdb_is_hair_service, String bdb_is_bride_service, String images) {
+    public ListServiceModel(String bdb_ser_id, String bdb_name, String bdb_name_ar, String bdb_descr, String bdb_type, String bdb_is_fixed_price, String bdb_is_fixed_time, String bdb_is_hair_service, String bdb_is_bride_service, String images,String is_fav) {
         this.bdb_ser_id = bdb_ser_id;
         this.bdb_name = bdb_name;
         this.bdb_name_ar = bdb_name_ar;
@@ -24,6 +26,8 @@ String  bdb_ser_id,
         this.bdb_is_hair_service = bdb_is_hair_service;
         this.bdb_is_bride_service = bdb_is_bride_service;
         this.images = images;
+        this.is_fav=is_fav;
+        new_fav=is_fav;
     }
 
     public String getBdb_ser_id() {
@@ -64,5 +68,21 @@ String  bdb_ser_id,
 
     public String getImages() {
         return images;
+    }
+
+    public String getIs_fav() {
+        return is_fav;
+    }
+
+    public void setIs_fav(String is_fav) {
+        this.is_fav = is_fav;
+    }
+
+    public String getNew_fav() {
+        return new_fav;
+    }
+
+    public void setNew_fav(String new_fav) {
+        this.new_fav = new_fav;
     }
 }

@@ -41,9 +41,13 @@ import com.dcoret.beautyclient.Activities.support.InternalChatActivity;
 import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
+import com.dcoret.beautyclient.Adapters.NotificationsAdapter;
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
+import com.dcoret.beautyclient.Adapters.OffersAdapterTab;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
+import com.dcoret.beautyclient.DataModel.FavoriteModel;
+import com.dcoret.beautyclient.DataModel.NotificationModel;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
 import com.dcoret.beautyclient.Fragments.GroupBooking.MyGroupEffectActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
@@ -87,6 +91,8 @@ import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
 import com.dcoret.beautyclient.Fragments.ClientRelationsFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.MyFavorites.ProvidersFavoriteFragment;
+import com.dcoret.beautyclient.Fragments.MyFavorites.ServicesFavoriteFragment;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOtherResultActivity;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultFragment;
@@ -135,8 +141,10 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import retrofit2.http.GET;
 
 public class APICall {
 
@@ -1215,7 +1223,7 @@ public class APICall {
 
 
     //   ------------------ Best Offer-------------------------
-    public  static  void  bestOffer(final Context context){
+    public  static  void  bestOffer(final Context context,String lat,String lon){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -1231,12 +1239,20 @@ public class APICall {
 //        String url = "http://clientapp.dcoret.com/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("lat",lat);
+            postdata.put("long",lon);
+        }
+        catch (Exception e){}
+
+        Log.e("ApiLoc",postdata.toString());
+
 
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/bestOffer")
+                .url("http://clientapp.dcoret.com/api/service/offer/bestOffer_v1")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -1319,9 +1335,10 @@ public class APICall {
                            String old_price=pkg.getString("old_price");
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
+                           String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -1909,6 +1926,166 @@ public class APICall {
 
             Log.d("MessageResponse", mMessage);
         }
+        public  static  void  detailsUser4(final Context context){
+        final SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+//        SharedPreferences sh=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
+//        try{
+//            sh.getString("bdb_name",null).equals("");
+//        }catch (NullPointerException npe){
+//            editor.putString("bdb_name","");
+//            editor.commit();
+//        }
+//            Log.e("isfirstopen",BeautyMainPage.isFirstOpen+"");
+//            e_bdb_name.setText(sh.getString("bdb_name",null));
+//            e_bdb_email.setText(sh.getString("bdb_email",null));
+//            e_bdb_mobile.setText(sh.getString("bdb_mobile",null));
+
+//            BeautyMainPage.isFirstOpen=false;
+//            String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
+            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showDialog(context);
+//                pd.show();
+
+                }
+            });
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+//            showDialog(context);
+////            pd.show();
+
+
+        //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, "");
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                .post(body)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .addHeader("X-Requested-With", "XMLHttpRequest")
+                .header("Authorization", "Bearer " + gettoken(context))
+                //                .header("Content-Type", "application/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
+                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
+                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
+                                    refresh.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            refreshDialog.cancel();
+//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
+                                            detailsUser3(context);
+                                        }
+                                    });
+                                    refreshDialog.show();
+                                }
+                            });
+                            dialog.show();
+                        }
+                    });
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                try {
+                    JSONObject jsonObject = new JSONObject(mMessage);
+                    String success = jsonObject.getString("success");
+                    if (success.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String bdb_name = data.getString("bdb_name");
+                        String bdb_email = data.getString("bdb_email");
+//                            e_bdb_email.setText(bdb_email);
+                        String bdb_mobile = data.getString("bdb_mobile");
+
+//                            name.setText(bdb_name);
+//                            mobile.setText(bdb_mobile);
+                        editor.putString("bdb_name", bdb_name);
+//                            editor.putString("bdb_email", bdb_email);
+//                            editor.putString("bdb_name", bdb_name);
+                        editor.putString("bdb_mobile", bdb_mobile);
+//                            editor.putString("addressUser", mMessage + "");
+//                            editor.apply();
+//                            editor.commit();
+                        JSONArray addressUser=jsonObject.getJSONArray("address");
+                        for (int i=0;i<addressUser.length();i++){
+                            JSONObject address=addressUser.getJSONObject(i);
+
+                            String bdb_loc_lat=address.getString("bdb_loc_lat");
+
+                            String bdb_loc_long=address.getString("bdb_loc_long");
+                            String bdb_is_origin=address.getString("bdb_is_origin");
+                            if(bdb_is_origin.equals("1"))
+                            {
+                                Offers.Lat=bdb_loc_lat;
+                                Offers.Long=bdb_loc_long;
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        pd.dismiss();
+                                    }
+                                });
+                                APICall.bestOffer(context,bdb_loc_lat,bdb_loc_lat);
+
+                                break;
+                            }
+
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+//                    pd.dismiss();
+            }
+
+        });
+
+        Log.d("MessageResponse", mMessage);
+    }
 
 
 
@@ -4018,12 +4195,12 @@ public class APICall {
                                         String bdb_ser_id=object.getString("bdb_ser_id");
                                         supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
                                     }
+                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
+                                    {
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
+                                        TabTwo.arrayList.add(dof);
 
-
-                                    DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                    TabTwo.arrayList.add(dof);
-
-
+                                    }
                                     for (int j=0;j<supInfo.length();j++){
                                         JSONObject info=supInfo.getJSONObject(j);
                                         String name=info.getString("name");
@@ -12055,7 +12232,7 @@ public class APICall {
 
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
-        Log.e("ITEMREQ",body.toString());
+        Log.e("ITEMREQ",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url("http://clientapp.dcoret.com/api/booking/addGroupItems3_13")
@@ -12151,7 +12328,7 @@ public class APICall {
                                 String message=((AppCompatActivity)context).getResources().getString(R.string.this_time_not_avl);
                                 APICall.NotAvlBookingDialog(context,message,message);
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-                                ((AppCompatActivity) context).onBackPressed();
+                              //  ((AppCompatActivity) context).onBackPressed();
 
                             }
                         });
@@ -14297,6 +14474,8 @@ public class APICall {
     public  static  void  searchGroupOfferBooking( final Context context,String url,String filter){
         salons.clear();
         stringArrayListMap.clear();
+        Log.e("srchGrpOfferBookingF",filter);
+        Log.e("srchGrpOfferBookingU",url);
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -14405,6 +14584,7 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("Token", gettoken(context));
+                Log.e("srchGrpOfferBookingR",mMessage);
                 Log.e("TAG", mMessage);
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
@@ -14876,16 +15056,20 @@ public class APICall {
                                 bdb_ser_home = "1";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_home_price();
+
                             } else if (OfferBookingResult.place.equals("2")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "0";
                                 bdb_ser_hall = "1";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_hall_price();
                             } else if (OfferBookingResult.place.equals("3")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_hotel_price();
                             }
                             serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                        Log.e("clientsFilter", serRow);
@@ -14913,16 +15097,19 @@ public class APICall {
                                 bdb_ser_home = "1";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_home_price();
                             } else if (OfferBookingResult.place.equals("2")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "0";
                                 bdb_ser_hall = "1";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_hall_price();
                             } else if (OfferBookingResult.place.equals("3")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_hotel_price();
                             }
                             serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                        Log.e("clientsFilter", serRow);
@@ -14973,16 +15160,19 @@ public class APICall {
                                 bdb_ser_home = "1";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_home_price();
                             } else if (OfferBookingResult.place.equals("2")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "0";
                                 bdb_ser_hall = "1";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_hall_price();
                             } else if (OfferBookingResult.place.equals("3")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_hotel_price();
                             }
                             serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":25\n   ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                            Log.e("clientsFilter", serRow);
@@ -15010,16 +15200,19 @@ public class APICall {
                                 bdb_ser_home = "1";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_home_price();
                             } else if (OfferBookingResult.place.equals("2")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "0";
                                 bdb_ser_hall = "1";
                                 bdb_ser_hotel = "0";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_ser_hall_price();
                             } else if (OfferBookingResult.place.equals("3")) {
                                 bdb_ser_salon = "0";
                                 bdb_ser_home = "";
                                 bdb_ser_hall = "0";
                                 bdb_ser_hotel = "1";
+                                price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_hotel_price();
                             }
                             serRow = serRow + ",{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1\n ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\"}";
 //                            Log.e("clientsFilter", serRow);
@@ -15909,6 +16102,7 @@ public class APICall {
     }
 
     public static ArrayList<ListServiceModel> itemArrayList=new ArrayList<>();
+    public static ArrayList<FavoriteModel> favItemsArrayList=new ArrayList<>();
     public  static  void  getBasicService( final Context context){
 
         itemArrayList.clear();
@@ -16038,6 +16232,7 @@ public class APICall {
                             String bdb_is_fixed_time = data.getString("bdb_is_fixed_time");
                             String bdb_is_fixed_price = data.getString("bdb_is_fixed_price");
                             String bdb_is_hair_service = data.getString("bdb_is_hair_service");
+                            String is_fav = data.getString("is_fav");
                             String image = data.getString("images");
 
 
@@ -16045,7 +16240,126 @@ public class APICall {
                             Log.e("bdb_is_bride_service",bdb_is_bride_service);
                             if (bdb_is_bride_service.equals("0"))
                             itemArrayList.add(new ListServiceModel(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,bdb_is_fixed_time,
-                                    bdb_is_hair_service,bdb_is_bride_service,image));
+                                    bdb_is_hair_service,bdb_is_bride_service,image,is_fav));
+
+                        }
+
+
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                /*try {
+                                    ListServicesFragment.servicesAdapter.notifyDataSetChanged();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }*/
+                                ListServicesFragment.SetServicesView(itemArrayList);
+                            }
+                        });
+
+
+
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  getFavorites(final Context context, final String type){
+
+        favItemsArrayList.clear();
+
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    showDialog(context);
+//                    pd.show();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        OkHttpClient client = new OkHttpClient();
+        Log.e("TOKEN",gettoken(context));
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/retFav")
+                .get()
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+//                Log.e("Token", gettoken(context));
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
+
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+
+                        JSONArray jsonArray=jsonrespone.getJSONArray("data");
+                        for (int i=0;i<jsonArray.length();i++) {
+                            JSONObject data = jsonArray.getJSONObject(i);
+                            String bdb_fav_id = data.getString("bdb_fav_id");
+                            String bdb_item_id = data.getString("bdb_item_id");
+                            String bdb_name = data.getString("bdb_name");
+                            String bdb_type = data.getString("bdb_type");
+                            String bdb_name_ar = data.getString("bdb_name_ar");
+                            String bdb_cat_id = data.getString("bdb_cat_id");
+                            String bdb_logo_id = data.getString("bdb_logo_id");
+                            if(bdb_type.equals(type))
+                                favItemsArrayList.add(new FavoriteModel(bdb_fav_id,bdb_name,bdb_name_ar,bdb_type,bdb_item_id,bdb_cat_id,bdb_logo_id));
 
                         }
 
@@ -16055,9 +16369,13 @@ public class APICall {
                             @Override
                             public void run() {
                                 try {
-                                    ListServicesFragment.servicesAdapter.notifyDataSetChanged();
-                                }catch (Exception e){
-                                    e.printStackTrace();
+                                    ServicesFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
+                                    ProvidersFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
+
+
+                                }
+                                catch (Exception e)
+                                {
                                 }
                             }
                         });
@@ -16203,13 +16521,14 @@ public class APICall {
                             String bdb_is_fixed_price = data.getString("bdb_is_fixed_price");
                             String bdb_is_hair_service = data.getString("bdb_is_hair_service");
                             String image = data.getString("images");
+                            String is_fav = data.getString("is_fav");
 
 
 //                            Log.e("bdb_is_bride",bdb_is_bride);
                             Log.e("bdb_is_bride_service",bdb_is_bride_service);
                             if (bdb_is_bride_service.equals("1"))
                                 itemArrayList.add(new ListServiceModel(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,bdb_is_fixed_time,
-                                    bdb_is_hair_service,bdb_is_bride_service,image));
+                                    bdb_is_hair_service,bdb_is_bride_service,image,is_fav));
 
                         }
 
@@ -16218,11 +16537,13 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                try {
+                                /*try {
                                     ListServicesBrideFragment.servicesAdapter.notifyDataSetChanged();
                                 }catch (Exception e){
                                     e.printStackTrace();
-                                }
+                                }*/
+                                ListServicesBrideFragment.SetServicesView(itemArrayList);
+
                             }
                         });
 
@@ -16905,6 +17226,282 @@ public class APICall {
             }
         }
     }
+
+    public static void SetNotificationRead(final Context cont ,String id){
+//        showDialog(context);
+        ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(cont);
+            }
+        });
+        Log.e("NotifID",id);
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("notification_id",id);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/notification/UpdateNotification")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("GetNotifications ERRR", mMessage);
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Notifications", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("NotifErr",e.getMessage());
+
+                }
+            }
+
+        });
+    }
+    public static ArrayList<NotificationModel> notificationModelArrayList=new ArrayList<>();
+    public static void GetUnreadNotifications(final Context cont ,final NotificationsAdapter adapter){
+        notificationModelArrayList.clear();
+        adapter.notifyDataSetChanged();
+//        showDialog(context);
+        ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(cont);
+            }
+        });
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/notification/getUnReadNotifications")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("GetNotifications ERRR", mMessage);
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Notifications", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+                        // JSONObject data=jsonrespone.getJSONObject("data");
+                        JSONArray da=jsonrespone.getJSONArray("data");
+                        for(int i =0;i<da.length();i++)
+                        {
+                            JSONObject data=da.getJSONObject(i);
+                            String notif_id = data.getString("bdb_id");
+                            String notif_type = data.getString("bdb_type");
+                            String notif_code = data.getString("bdb_code");
+                            String notif_date = data.getString("bdb_created_at");
+                            String notif_title = data.getString("bdb_title");
+                            String notif_body = data.getString("bdb_body");
+                            NotificationModel temp = new NotificationModel(notif_id,notif_title,notif_body,notif_type,notif_code,notif_date);
+                            JSONArray pairs=data.getJSONArray("pairs");
+
+                            for (int j=0;j<pairs.length();j++)
+                            {
+                                JSONObject jarray = pairs.getJSONObject(j);
+
+                                String key = jarray.getString("bdb_key");
+                                String value = jarray.getString("bdb_value");
+                                temp.AddToPairs(key,value);
+                            }
+                            notificationModelArrayList.add(temp);
+                            Log.e("NotifAdd",temp.getNotificationBody());
+
+                        }
+
+
+
+
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("NotifErr",e.getMessage());
+
+                }
+                ((AppCompatActivity)cont).runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+
+                    }});
+
+
+
+
+            }
+
+        });
+    }
+
+    public static void sendFavorites(final  Context cont,JSONArray items)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("items",items);
+
+        }
+        catch (Exception e){}
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/addFav")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("Favorites ERRR", mMessage);
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Favorites", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+
+                }
+            }
+
+        });
+
+    }
+
+    public static void sendUnFavorites(final  Context cont,String item_id,String bdb_type)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("bdb_item_id",item_id);
+            postdata .put("bdb_type",bdb_type);
+
+        }
+        catch (Exception e){}
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/unFav")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("Favorites ERRR", mMessage);
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Favorites", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+
+                }
+            }
+
+        });
+
+    }
+
 }
 
 

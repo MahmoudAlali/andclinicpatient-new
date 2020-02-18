@@ -9,7 +9,7 @@ public class BestOfferItem {
 //            "provider name": "صالون5",
 //            "sersup_ids"
 
-        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id;
+        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type;
         JSONArray sersup_ids;
 
     public BestOfferItem(String pack_code, String service_count, String provider_name, JSONArray sersup_ids) {
@@ -29,7 +29,7 @@ public class BestOfferItem {
         this.total_discount = total_discount;
     }
 
-    public BestOfferItem( String pack_code, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id) {
+    public BestOfferItem( String pack_code, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type) {
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -38,6 +38,7 @@ public class BestOfferItem {
         this.total_discount = total_discount;
         this.sersup_ids=sersup_ids;
         this.provider_logo_id=provider_logo_id;
+        this.offer_type=offer_type;
     }
 
     public String getOld_price() {
@@ -106,5 +107,9 @@ public class BestOfferItem {
 
     public String getProvider_logo_id() {
         return provider_logo_id;
+    }
+
+    public String getOffer_type() {
+        return offer_type;
     }
 }

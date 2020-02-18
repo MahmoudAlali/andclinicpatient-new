@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.DataModel.ListServiceModel;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 
@@ -36,6 +38,25 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    private static int categoryIndex;
+    int [] servicsImgsBasic ={ R.drawable.hair_basic,
+            R.drawable.makeup_basic,
+            R.drawable.massage_basic,
+            R.drawable.spa_basic,
+            R.drawable.nails_basic,
+            R.drawable.body_basic,
+            R.drawable.skin_basic,
+            R.drawable.eyebrows_basic
+    };
+    int [] servicsImgs ={ R.drawable.hair,
+            R.drawable.makeup2,
+            R.drawable.massage,
+            R.drawable.spa,
+            R.drawable.nails_basic,
+            R.drawable.body,
+            R.drawable.skin,
+            R.drawable.eyebrows
+    };
 
     Context context;
     public static boolean list;
@@ -97,7 +118,11 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      */
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        if(context.getResources().getString(R.string.locale).equals("ar"))
         ((Item)holder).service_name.setText(itemArrayList.get(position).getBdb_name_ar());
+        else
+            ((Item)holder).service_name.setText(itemArrayList.get(position).getBdb_name());
+
         ((Item)holder).item_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,8 +138,19 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             }
         });
+        if(itemArrayList.get(position).getBdb_is_hair_service().equals(categoryIndex+"")) {
+            ((Item) holder).serviceImg.setImageResource(servicsImgs[categoryIndex]);
 
-            }
+        }
+        else {
+
+            categoryIndex = Integer.parseInt(itemArrayList.get(position).getBdb_is_hair_service());
+
+            ((Item)holder).serviceImg.setImageResource(servicsImgs[categoryIndex]);
+
+        }
+
+    }
 
     @Override
     public int getItemCount() {
@@ -129,6 +165,7 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView  service_name;
 
         RelativeLayout item_click;
+        ImageView serviceImg;
 
         /**
          * @param itemView
@@ -138,9 +175,9 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             service_name=itemView.findViewById(R.id.service_name);
             item_click=itemView.findViewById(R.id.item_click);
+            serviceImg=itemView.findViewById(R.id.img_company);
 
 
         }
     }
-
 }
