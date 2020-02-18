@@ -12,10 +12,10 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapterSearchGroupBooking2;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.R;
 
-public class GroupReservationResultActivity extends AppCompatActivity {
-
+public class AlterGroupReservationResultActivity extends AppCompatActivity {
     public static ExpandableListView listView;
     public static CustomExpandableListAdapter listAdapter;
     public static CustomExpandableListAdapterSearchGroupBooking2 listAdapter2;
@@ -47,14 +47,16 @@ public class GroupReservationResultActivity extends AppCompatActivity {
         listView=findViewById(R.id.list_view);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         Log.e("URL",url);
-        APICall.searchGroupBooking(url,urlOut,isIn,context);
+        APICall.searchGroupBookingAlt(urlOut,isIn,context);
 
 
-        final Boolean finalIsIn = isIn;
+
+
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBooking(url,urlOut,isIn,context);
+                APICall.searchGroupBookingAlt(urlOut,isIn,context);
+
 
 //                APICall.searchGroupBooking2(BeautyMainPage.context, finalIsIn);
             }

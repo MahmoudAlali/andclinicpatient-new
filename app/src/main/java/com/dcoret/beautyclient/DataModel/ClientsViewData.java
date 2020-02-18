@@ -2,6 +2,7 @@ package com.dcoret.beautyclient.DataModel;
 
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,19 @@ public class ClientsViewData {
         this.id = id;
     }
 
+    TextView cname,pnumber;
+
+    public ClientsViewData(TextView client_name, TextView phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList<ServicesIDS> servicesSelected, String is_current_user, String id) {
+        this.cname = client_name;
+        this.pnumber= phone_number;
+        this.add_service = add_service;
+        this.age_range = age_range;
+        this.client_status = client_status;
+        this.servicesSelected = servicesSelected;
+        this.is_current_user = is_current_user;
+        this.id = id;
+    }
+
     public ClientsViewData(EditText client_name, EditText phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList<ServicesIDS> servicesSelected, String is_current_user, String id, String client_old) {
         this.client_name = client_name;
         this.phone_number = phone_number;
@@ -70,6 +84,21 @@ public class ClientsViewData {
         this.client_old = client_old;
     }
 
+    public TextView getCname() {
+        return cname;
+    }
+
+    public void setCname(TextView cname) {
+        this.cname = cname;
+    }
+
+    public TextView getPnumber() {
+        return pnumber;
+    }
+
+    public void setPnumber(TextView pnumber) {
+        this.pnumber = pnumber;
+    }
 
     public String getClient_old() {
         return client_old;

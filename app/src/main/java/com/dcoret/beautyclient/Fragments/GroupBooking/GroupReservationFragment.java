@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class GroupReservationFragment extends Fragment {
 
-    Button add_client, add_me,choose_occision,relations;
+    Button add_client;
     LinearLayout clients,bookme;
     static int items=0;
     static int viewcount=0;
@@ -74,9 +74,9 @@ public class GroupReservationFragment extends Fragment {
 
         //---------- find views------------------
         add_client=view.findViewById(R.id.add_client);
-        relations=view.findViewById(R.id.relations);
-        add_me=view.findViewById(R.id.add_me);
-        choose_occision=view.findViewById(R.id.choose_occision);
+//        relations=view.findViewById(R.id.relations);
+//        add_me=view.findViewById(R.id.add_me);
+//        choose_occision=view.findViewById(R.id.choose_occision);
         clients=view.findViewById(R.id.clients);
         bookme=view.findViewById(R.id.bookme);
         //----------------------------------------
@@ -94,15 +94,15 @@ public class GroupReservationFragment extends Fragment {
             APICall.getServices("2", BeautyMainPage.context);
 
         }
-        choose_occision.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
-//                popupMenu.getMenu().add("Wedding");
-//                popupMenu.getMenu().add("Normal");
-//                popupMenu.show();
-            }
-        });
+//        choose_occision.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v);
+////                popupMenu.getMenu().add("Wedding");
+////                popupMenu.getMenu().add("Normal");
+////                popupMenu.show();
+//            }
+//        });
         items=0;
         viewcount=0;
         ishairService.clear();
@@ -230,11 +230,11 @@ public class GroupReservationFragment extends Fragment {
 
 
         //---------------- add me click btn-------------------
-        add_me.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (add_me.getText().equals(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me))){
-                    add_me.setText("Remove Me");
+//        add_me.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (add_me.getText().equals(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me))){
+//                    add_me.setText("Remove Me");
                     items++;
                     //items++;
                 final String ic;
@@ -326,66 +326,67 @@ public class GroupReservationFragment extends Fragment {
                 });
 
 
-                client_name.setText(sh.getString("bdb_name", ""));
-                phone_number.setText(sh.getString("bdb_mobile", ""));
+                client_name.setText(BeautyMainPage.client_name);
+                phone_number.setText(BeautyMainPage.client_number);
 
                 clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
                 bookme.addView(layout2);
-            }else {
-
-                    //----------------- remove add me -----------------
-                    bookme.removeView(mylayout);
-                    for (int i=0;i<clientsViewData.size();i++){
-                        if (clientsViewData.get(i).getId().equals(myid)){
-                            clientsViewData.remove(i);
-                            add_me.setText(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me));
-                        }
-                    }
-//                        clientsViewData.remove(ic-1);
-//                    Log.e("clientsViewData",clientsViewData.size()+"");
-//                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
-                }
-            }
-        });
-
-
+//            }else {
+//
+//                    //----------------- remove add me -----------------
+//                    bookme.removeView(mylayout);
+//                    for (int i=0;i<clientsViewData.size();i++){
+//                        if (clientsViewData.get(i).getId().equals(myid)){
+//                            clientsViewData.remove(i);
+//                            add_me.setText(((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.Add_Me));
+//                        }
+//                    }
+////                        clientsViewData.remove(ic-1);
+////                    Log.e("clientsViewData",clientsViewData.size()+"");
+////                    Log.e("clientsViewData","ic:"+clientsViewData.size()+"");
+//                }
+//            }
+//        });
 
 
 
-        relations.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int alert=0;
-                Log.e("ClientSizeF",clientsViewData.size()+"");
-                for (int i=0;i<clientsViewData.size();i++) {
-//                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
-                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
-                            || clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
-                        alert = 1;
-                    }
-                }
-                if (alert == 1) {
-                    String s=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.complete_all_data);
-                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), s);
-                } else {
 
-                    if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
-                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
-
-                    } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
-                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
-                    }else {
-
-                        fragment = new ClientRelationsFragment();
-                        fm = getFragmentManager();
-                        fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commit();
-                    }
-                }
-            }
-        });
+//        relations.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int alert=0;
+//                Log.e("ClientSizeF",clientsViewData.size()+"");
+//                for (int i=0;i<clientsViewData.size();i++) {
+////                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
+//
+//                    if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+//                            || clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
+//                        alert = 1;
+//                    }
+//                }
+//                if (alert == 1) {
+//                    String s=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.complete_all_data);
+//                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), s);
+//                }
+//                else {
+//
+//                    if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
+//                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
+//
+//                    } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
+//                        APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
+//                    }else {
+//
+//                        fragment = new ClientRelationsFragment();
+//                        fm = getFragmentManager();
+//                        fragmentTransaction = fm.beginTransaction();
+//                        fragmentTransaction.replace(R.id.fragment, fragment);
+//                        fragmentTransaction.commit();
+//                    }
+//                }
+//            }
+//        });
 
 
         //------------------click next btn----------------------
@@ -425,11 +426,13 @@ public class GroupReservationFragment extends Fragment {
 
                     }else {
 
-                        if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
-                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
-                        } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
-                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
-                        } else {
+//                        if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
+//                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
+//                        } else if (add_me.getText().toString().equals("Remove Me") && clientsViewData.size() == 1) {
+//                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
+//                        }
+//                        else
+                            {
                             // =------------is hair service go to anthor fragment----------
 //                            if (ishairService.size() > 0) {
 //                                fragment = new HairSpecificationsFragment();

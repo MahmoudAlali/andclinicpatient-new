@@ -14,7 +14,7 @@ import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapterForMultiInd;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.R;
 
-public class MultiBookingIndividualResultActivity extends AppCompatActivity {
+    public class MultiBookingIndividualResultActivity extends AppCompatActivity {
 
     public static ExpandableListView listView;
     public static CustomExpandableListAdapterForMultiInd listAdapter;
@@ -23,7 +23,7 @@ public class MultiBookingIndividualResultActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String url="",urlAlt="";
 
-    Context context;
+    public  static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -532,7 +532,7 @@ public class PlaceServiceGroupOthersFragment extends Fragment {
                         dialog.dismiss();
                         int month=datePicker.getMonth()+1;
                         date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-                        dateFilter=datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth();
+                        dateFilter=datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDayOfMonth();
                         ServiceFragment.date=dateFilter;
                     }
                 });

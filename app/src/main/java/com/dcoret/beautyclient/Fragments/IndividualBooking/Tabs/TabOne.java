@@ -19,6 +19,7 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
+import com.dcoret.beautyclient.DataModel.CompareModel;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.ServicesTabsFragment;
 import com.dcoret.beautyclient.R;
 
@@ -31,6 +32,7 @@ public class TabOne extends Fragment {
     public static RecyclerView recyclerView;
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
     public static  ServicesAdapter servicesAdapter;
+    public static ArrayList<CompareModel> compareModels=new ArrayList<>();
 
     public static SwipeRefreshLayout pullToRefresh;
     public static String ser_sup_id="";
@@ -46,6 +48,8 @@ public class TabOne extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
 
+
+        compareModels.clear();
         view= inflater.inflate(R.layout.tab_one,container,false);
         filter =view.findViewById(R.id.filter);
          pullToRefresh = view.findViewById(R.id.pullToRefresh);

@@ -23,7 +23,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.GroupOffer.MultiClientOfferEffect"></activity>
+        <activity android:name=".Fragments.OtherGroupBooking.AlterGroupOtherReservationResult"></activity>
+        <activity android:name=".Fragments.OtherGroupBooking.OtherRelationActivity" />
+        <activity android:name=".Fragments.IndividualBooking.CompareServiceActivity" />
+        <activity android:name=".Fragments.GroupBooking.AlterGroupReservationResultActivity" />
+        <activity android:name=".Fragments.GroupBooking.GroupRelationActivity" />
+        <activity android:name=".Activities.GroupOffer.MultiClientOfferEffect" />
         <activity android:name=".Activities.MultiDateOffer.MultiDateOfferEffect" />
         <activity android:name=".Activities.SingleOffer.SingleOfferEffect" />
         <activity android:name=".Fragments.OtherGroupBooking.GroupReservationOtherResultActivity" />
@@ -40,6 +45,7 @@
             android:parentActivityName=".Activities.support.SupportActivity"
             android:screenOrientation="portrait"
             android:taskAffinity="" />
+
         <receiver android:name=".Service.PackegeRemovedBR">
             <intent-filter>
 

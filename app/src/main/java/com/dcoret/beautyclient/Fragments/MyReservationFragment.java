@@ -113,7 +113,7 @@ public class MyReservationFragment extends Fragment  {
             }
         });
 
-        fragment = new IncomReservationFragment();
+        fragment = new AllReservationFragment();
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.tabs_fragment, fragment);
@@ -798,14 +798,14 @@ public class MyReservationFragment extends Fragment  {
                         filtercheck=true;
                         dialog.cancel();
                         if (APICall.layout==R.layout.incom_reservation_layout) {
-                            fragment = new IncomReservationFragment();
+                            fragment = new AllReservationFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
                             fragmentTransaction.commit();
                             tabselected(incom_reservation, accept_reservation,false);
                         }else if (APICall.layout==R.layout.accept_reservation_layout_v2){
-                            fragment = new AcceptReservationFragment();
+                            fragment = new OfferReservationFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
@@ -829,7 +829,7 @@ public class MyReservationFragment extends Fragment  {
             public void onClick(View v) {
 
                 tab="1";
-                fragment = new IncomReservationFragment();
+                fragment = new AllReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);
@@ -844,7 +844,7 @@ public class MyReservationFragment extends Fragment  {
             public void onClick(View v) {
                 tabselected(accept_reservation,incom_reservation,true);
                 tab="2";
-                fragment = new AcceptReservationFragment();
+                fragment = new OfferReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);

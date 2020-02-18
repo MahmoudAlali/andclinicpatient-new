@@ -20,10 +20,13 @@ import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.DataModel.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOtherResultActivity;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.R;
@@ -87,7 +90,8 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         //------------------- titles--------------------------
-        String listTitle =  (String) getGroup(groupPosition)+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
+        String listTitle =  (String) getGroup(groupPosition);
+//                +" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
             Log.e("LISTTITLE",listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
@@ -118,10 +122,10 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                     APICall.addGroupItem(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, PlaceServiceFragment.date.getText().toString()), BookingIndvidualActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                                    APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), BeautyMainPage.context);
+                                    APICall.addGroupItem(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
                                     Log.e("INDBooking","ok");
-                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), MultiBookingIndividualResultActivity.context);
 
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
                                     APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
@@ -215,6 +219,17 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                            }else if (OfferBookingResult.place.equals("2")) {
                                priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
                            }else if (OfferBookingResult.place.equals("3")) {
+                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+
+                           }
+                       }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
+                           if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
+                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
+                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
+                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==4) {
                                priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
 
                            }

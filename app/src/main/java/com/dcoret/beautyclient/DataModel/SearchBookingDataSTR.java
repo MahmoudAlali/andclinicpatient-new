@@ -194,6 +194,55 @@ public class SearchBookingDataSTR {
             this.part_num= bdb_part_num;
         }
 
+      String reason,offer_ser_sup_id,is_adult;
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String reason,String offer_ser_sup_id,String is_adult) {
+            this.ser_id = ser_id;
+            this.ser_name = ser_name;
+            this.ser_name_ar = ser_name_ar;
+            this.emp_id = emp_id;
+            this.emp_name = emp_name;
+            this.sup_id = sup_id;
+            this.ser_sup_id = ser_sup_id;
+            this.from = from;
+            this.to = to;
+            this.bdb_ser_home_price = bdb_ser_home_price;
+            this.bdb_ser_hall_price = bdb_ser_hall_price;
+            this.bdb_hotel_price = bdb_hotel_price;
+            this.bdb_ser_salon_price = bdb_ser_salon_price;
+            this.bdb_ser_home = bdb_ser_home;
+            this.bdb_ser_salon = bdb_ser_salon;
+            this.bdb_ser_hall = bdb_ser_hall;
+            this.bdb_hotel = bdb_hotel;
+            this.date = date;
+            this.part_num= bdb_part_num;
+            this.reason= reason;
+            this.offer_ser_sup_id= offer_ser_sup_id;
+            this.is_adult= is_adult;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public void setReason(String reason) {
+            this.reason = reason;
+        }
+
+        public String getOffer_ser_sup_id() {
+            return offer_ser_sup_id;
+        }
+
+        public void setOffer_ser_sup_id(String offer_ser_sup_id) {
+            this.offer_ser_sup_id = offer_ser_sup_id;
+        }
+
+        public String getIs_adult() {
+            return is_adult;
+        }
+
+        public void setIs_adult(String is_adult) {
+            this.is_adult = is_adult;
+        }
 
         public String getPart_num() {
             return part_num;

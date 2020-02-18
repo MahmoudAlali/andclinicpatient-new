@@ -23,7 +23,8 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.R;
 
 
-public class AcceptReservationFragment extends Fragment {
+
+public class OfferReservationFragment extends Fragment {
 
     Fragment fragment;
     FragmentManager fm;

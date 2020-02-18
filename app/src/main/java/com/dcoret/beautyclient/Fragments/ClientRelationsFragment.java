@@ -34,7 +34,7 @@ public class ClientRelationsFragment extends Fragment {
 
     LinearLayout myroot;
     Button done;
-    public static  String multi_salon_clients_rel="0";
+    public static  String multi_salon_clients_rel="1";
     public static  String multi_salon_client="1";
     public static ArrayList<String> relations=new ArrayList<>();
     public static ArrayList<ClientsRelationsViewClass> clientRelationView=new ArrayList();

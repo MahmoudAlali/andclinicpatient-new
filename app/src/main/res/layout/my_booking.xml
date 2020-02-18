@@ -19,50 +19,44 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:text="My Booking"
-                android:gravity="center"
-                android:textSize="@dimen/standard_20"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:text="My Booking"
-                android:visibility="gone"
-                android:gravity="center"
-                android:textSize="@dimen/standard_20"/>
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/high_button"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@color/colorAccent"-->
+<!--                android:text="My Booking"-->
+<!--                android:gravity="center"-->
+<!--                android:textSize="@dimen/standard_20"/>-->
             <EditText
+                android:editable="false"
+                android:clickable="false"
                 android:id="@+id/client_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/colorAccent"
                 android:text="My Booking"
-                android:visibility="gone"
+                android:background="@color/gray"
                 android:gravity="center"
                 android:textSize="@dimen/standard_20"/>
             <EditText
+                android:clickable="false"
+                android:editable="false"
                 android:id="@+id/phone_num"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:visibility="gone"
                 android:text="My Booking"
+                android:background="@color/gray"
                 android:gravity="center"
                 android:textSize="@dimen/standard_20"/>
             <LinearLayout
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:background="@color/gray"
+                android:background="@drawable/shadow_button_blue_lite"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="7dp"
-                android:layout_height="@dimen/standard_30">
+                android:layout_height="35dp">
 
                 <Spinner
                     android:id="@+id/add_service"

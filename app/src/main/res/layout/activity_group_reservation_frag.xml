@@ -38,24 +38,24 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/relations"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:text="Re"
-                    android:background="@drawable/shadow_button_add_site"
-                    />
+<!--                <Button-->
+<!--                    android:id="@+id/relations"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/high_edit_text"-->
+<!--                    android:text="Re"-->
+<!--                    android:background="@drawable/shadow_button_add_site"-->
+<!--                    />-->
                 <Space
                     android:layout_width="@dimen/pf_5dp_space"
                     android:layout_height="match_parent" />
-                <Button
-                    android:id="@+id/choose_occision"
-                    android:layout_marginBottom="@dimen/pf_10dp_space"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:clickable="false"
-                    android:background="@android:color/transparent"
-                    />
+<!--                <Button-->
+<!--                    android:id="@+id/choose_occision"-->
+<!--                    android:layout_marginBottom="@dimen/pf_10dp_space"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/high_edit_text"-->
+<!--                    android:clickable="false"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    />-->
 
 
 
@@ -67,23 +67,23 @@
     android:weightSum="2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <Button
-        android:layout_weight="1"
-        android:id="@+id/add_me"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/high_edit_text"
-        android:background="@drawable/shadow_button_add_site"
-        android:text="@string/Add_Me" />
-  <Space
-      android:layout_width="@dimen/pf_10dp_space"
-      android:layout_height="match_parent"></Space>
+<!--    <Button-->
+<!--        android:layout_weight="1"-->
+<!--        android:id="@+id/add_me"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/high_edit_text"-->
+<!--        android:background="@drawable/shadow_button_add_site"-->
+<!--        android:text="@string/Add_Me" />-->
+<!--  <Space-->
+<!--      android:layout_width="@dimen/pf_10dp_space"-->
+<!--      android:layout_height="match_parent"></Space>-->
 
     <Button
         android:layout_weight="1"
         android:id="@+id/add_client"
         android:layout_width="match_parent"
         android:layout_height="@dimen/high_edit_text"
-        android:background="@drawable/shadow_button_add_site"
+        android:background="@drawable/shadow_button_accent_lite_v2"
         android:text="@string/Add_New_Client" />
 
 </LinearLayout>
