@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/services"
+        android:id="@+id/main"
         android:icon="@drawable/services_grey"
+        android:title="@string/main"
+
+        />
+    <item
+        android:id="@+id/services"
+        android:icon="@drawable/main_grey"
         android:title="@string/service"
 
         />

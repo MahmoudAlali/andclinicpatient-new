@@ -86,6 +86,7 @@
     <string name="Delete_account">حذف حسابي</string>
     <!-- Nav Bottom-->
     <string name="service">الخدمات</string>
+    <string name="main">الرئيسية</string>
     <string name="reservations">حجوزاتي</string>
     <string name="bag_reservation">حقيبة الخدمات</string>
     <string name="favorites">المفضلة</string>
@@ -461,5 +462,15 @@
     <string name="makeup2">مكياج</string>
     <string name="Notifications">الإشعارات</string>
 
+    <string name="current_points">الرصيد الحالي </string>
+    <string name="used_points">المستخدمة </string>
+    <string name="exp_points">منتهية الصلاحية </string>
+    <string name="Exp_inmonth_points">منتهية الصلاحية خلال شهر </string>
+
+    <string name="points_details_btn">سجل نقاطي</string>
+    <string name="points_btn">نقاطي</string>
+    <string name="points_desc">الوصف</string>
+    <string name="points_date">التاريخ</string>
+    <string name="points_updown">النقاط</string>
 
 </resources>

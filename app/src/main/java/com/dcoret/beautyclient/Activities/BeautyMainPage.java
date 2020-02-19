@@ -41,6 +41,7 @@ import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOther
 import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.MyEffects.MyEffectsActivity;
+import com.dcoret.beautyclient.Fragments.Points.PointsMainFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.NotificationFragment;
@@ -135,15 +136,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         mDrawerLayout=findViewById(R.id.drawer);
         layout=findViewById(R.id.fragment);
         menu = navigation.getMenu();
-        menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
+        menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
         menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
         menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
         menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
-        navigation.setItemIconTintList(null);
+        menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
         navigation.setItemIconTintList(null);
         //------------------- show Service Fragment -------------
-        navigation.setSelectedItemId(R.id.services);
-        fragment = new ServiceFragment();
+        navigation.setSelectedItemId(R.id.main);
+        fragment = new Offers();
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragment);
@@ -470,12 +471,20 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
                             fragmentTransaction.commitAllowingStateLoss();
 
+
         }else if (id == R.id.setting) {
             fragment = new SettingFragment();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
                             fragmentTransaction.commitAllowingStateLoss();
+
+        }else if (id == R.id.points) {
+            fragment = new PointsMainFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
 
         }else if (id == R.id.compare) {
             Intent intent=new Intent(getApplicationContext(),Compartion.class);
@@ -529,6 +538,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                     menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
                     menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
                     menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+                    menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
 
                     switch (item.getItemId()) {
                         case R.id.services:
@@ -581,6 +591,16 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, fragment);
                                             fragmentTransaction.commitAllowingStateLoss();
+
+                            return true;
+                        case R.id.main:
+                            FRAGMENT_NAME="";
+                            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+                            fragment = new Offers();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
 
                             return true;
                     }

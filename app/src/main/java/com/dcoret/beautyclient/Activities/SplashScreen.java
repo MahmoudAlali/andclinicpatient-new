@@ -74,7 +74,7 @@ public class SplashScreen extends AppCompatActivity {
                     if (!name.isEmpty()) {
 //                    Toast.makeText(getApplicationContext(),"main",Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(context, Offers.class);
+                        Intent intent = new Intent(context, BeautyMainPage.class);
                         finish();
                         startActivity(intent);
                     } else {

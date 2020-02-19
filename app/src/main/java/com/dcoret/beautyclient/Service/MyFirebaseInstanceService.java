@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.support.InternalChatActivity;
 import com.dcoret.beautyclient.R;
@@ -219,6 +220,8 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         //----------------------------- Reg in DATABASE AFTER---
 
         //------------------ Reg In SharedPreference------------
+        APICall.updateFBToken(BeautyMainPage.context, token, token);
+
         SharedPreferences.Editor editor = getSharedPreferences("REG_ID", MODE_PRIVATE).edit();
         editor.putString("token_client",token);
         editor.apply();

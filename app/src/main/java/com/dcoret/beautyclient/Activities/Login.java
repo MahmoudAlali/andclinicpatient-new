@@ -35,6 +35,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.R;
+import com.google.firebase.FirebaseApp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,6 +98,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void login(View view) {
+        FirebaseApp.initializeApp(this);
+
         if (username.getText().toString().isEmpty()){
             APICall.showSweetDialog(Login.this,R.string.nice,R.string.EntermobnumberAlert);
         }else if (password.getText().toString().isEmpty()){
