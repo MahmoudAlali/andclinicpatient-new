@@ -19,7 +19,7 @@
 
 
     <string name="signin">SignIn</string>
-    <string name="forgetmypas">For get my password</string>
+    <string name="forgetmypas">Forgot my password</string>
     <string name="enterasaguset">Enter as a guest</string>
     <string name="usernamehint">Enter your Mobile Number</string>
     <string name="passwordhint">Password</string>
@@ -98,6 +98,7 @@
     <string name="save">Save</string>
     <string name="Delete_account">Delete My Account</string>
     <!-- Nav Bottom-->
+    <string name="main">Main</string>
     <string name="service">Services</string>
     <string name="onservice">Service</string>
     <string name="reservations">Reservations</string>
@@ -583,4 +584,13 @@
     <string name="servicesFav">Services</string>
     <string name="Notifications">Notifications</string>
 
+    <string name="current_points">Current Points </string>
+    <string name="used_points">Used Points </string>
+    <string name="exp_points">Expired points</string>
+    <string name="Exp_inmonth_points">Expired in month</string>
+    <string name="points_details_btn">Points details</string>
+    <string name="points_btn">My points</string>
+    <string name="points_desc">Description</string>
+    <string name="points_date">Date</string>
+    <string name="points_updown">Points</string>
 </resources>

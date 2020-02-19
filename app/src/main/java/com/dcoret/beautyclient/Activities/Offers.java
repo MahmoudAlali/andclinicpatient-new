@@ -2,6 +2,7 @@ package com.dcoret.beautyclient.Activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +22,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
@@ -31,8 +34,8 @@ import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
 
-public class Offers extends AppCompatActivity implements LocationListener {
-    public static Context context;
+public class Offers extends Fragment implements LocationListener {
+   // public static Context context;
     RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
     public static   ArrayList<BestOfferItem> bestOfferItems=new ArrayList<>();
@@ -47,27 +50,26 @@ public class Offers extends AppCompatActivity implements LocationListener {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.offers_layout);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view= inflater.inflate(R.layout.offers_layout, container, false);
 
-        context=this;
+        //context=this;
         //----------------init recycle view ----------------------------
 //        if (bestOfferItems.size()>0){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
         } else {
             requestLocationPermission();
         }
-        LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager service = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = service
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enabled) {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);
         Location location = locationManager.getLastKnownLocation(provider);
@@ -83,54 +85,55 @@ public class Offers extends AppCompatActivity implements LocationListener {
 // Better solution would be to display a dialog and suggesting to
 // go to the settings
 
-        pullToRefresh = findViewById(R.id.pullToRefresh);
+        pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 bestOfferItems.clear();
-                APICall.bestOffer(Offers.this,Lat,Long);
+                APICall.bestOffer(BeautyMainPage.context,Lat,Long);
             }
         });
         if (isFirstOpen){
             bestOfferItems.clear();
            // APICall.detailsUser4(context);
-            APICall.bestOffer(Offers.this,Lat,Long);
+            APICall.bestOffer(BeautyMainPage.context,Lat,Long);
             isFirstOpen=false;
         }
 
 //        }
-        recyclerView=findViewById(R.id.offers_recycleview);
+        recyclerView=view.findViewById(R.id.offers_recycleview);
         recyclerView.setHasFixedSize(true);
-        bestOffer=new OffersAdapter(this,bestOfferItems);
+        bestOffer=new OffersAdapter(BeautyMainPage.context,bestOfferItems);
 //        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
 
         recyclerView.setAdapter(bestOffer);
         //------------------------ call API bestOffers and get items-----------------
 //        APICall.bestOffer(Offers.this);
 
         //-------------------------------call BagReservation after 5 minutes
+        return view;
     }
     //-------------------- go to main page -----------------------
-    public void servicesBeauty(View view) {
+    /*public void servicesBeauty(View view) {
         Intent in=new Intent(this,BeautyMainPage.class);
         startActivity(in);
         finish();
 
-    }
+    }*/
     public void requestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)
                 &&
-                ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+                ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)
         ){
 
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(BeautyMainPage.context)
                     .setTitle("Permission Needed")
                     .setMessage("This Permission Needed because of This and That")
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(Offers.this,new String[]{
+                            ActivityCompat.requestPermissions(getActivity(),new String[]{
                                     Manifest.permission.ACCESS_FINE_LOCATION
                                     , Manifest.permission.ACCESS_COARSE_LOCATION
                             },ACCESS_FINE_LOCATION);
@@ -143,7 +146,7 @@ public class Offers extends AppCompatActivity implements LocationListener {
                         }
                     }).create().show();
         }else {
-            ActivityCompat.requestPermissions(this,new String[]{
+            ActivityCompat.requestPermissions(getActivity(),new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION
                     ,Manifest.permission.ACCESS_COARSE_LOCATION
                     ,Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -158,7 +161,7 @@ public class Offers extends AppCompatActivity implements LocationListener {
 
     }
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         try {
             locationManager.requestLocationUpdates(provider, 400, 1,this);
@@ -167,7 +170,7 @@ public class Offers extends AppCompatActivity implements LocationListener {
         catch (SecurityException e){}
     }
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         locationManager.removeUpdates(this);
     }
@@ -191,13 +194,13 @@ public class Offers extends AppCompatActivity implements LocationListener {
 
     @Override
     public void onProviderEnabled(String provider) {
-        Toast.makeText(this, "Enabled new provider " + provider,
+        Toast.makeText(BeautyMainPage.context, "Enabled new provider " + provider,
                 Toast.LENGTH_SHORT).show();
 
     }
     @Override
     public void onProviderDisabled(String provider) {
-        Toast.makeText(this, "Disabled provider " + provider,
+        Toast.makeText(BeautyMainPage.context, "Disabled provider " + provider,
                 Toast.LENGTH_SHORT).show();
     }
 

@@ -44,10 +44,12 @@ import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.Adapters.NotificationsAdapter;
 import com.dcoret.beautyclient.Adapters.OffersAdapter;
 import com.dcoret.beautyclient.Adapters.OffersAdapterTab;
+import com.dcoret.beautyclient.Adapters.PointAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.FavoriteModel;
 import com.dcoret.beautyclient.DataModel.NotificationModel;
+import com.dcoret.beautyclient.DataModel.PointModel;
 import com.dcoret.beautyclient.Fragments.GroupBooking.AlterGroupReservationResultActivity;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupRelationActivity;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
@@ -104,6 +106,7 @@ import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.MapFragment;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.MyOtherEffectActivity;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.OtherRelationActivity;
+import com.dcoret.beautyclient.Fragments.Points.PointsFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
@@ -2179,7 +2182,7 @@ public class APICall {
                                 editor.apply();
                                 editor.commit();
 
-                                Intent i=new Intent(context,Offers.class);
+                                Intent i=new Intent(context,BeautyMainPage.class);
                                 ((AppCompatActivity) context).finish();
                                 context.startActivity(i);
                             }
@@ -2352,13 +2355,14 @@ public class APICall {
                      Log.e("message",message);
                     if (success.equals("true")){
                         data=res.getJSONObject("data");
-                        Intent i=new Intent(context,BeautyMainPage.class);
-                        context.startActivity(i);
-                        ((AppCompatActivity)context).finish();
+                        //Intent i=new Intent(context,BeautyMainPage.class);
+                       // context.startActivity(i);
+                       // ((AppCompatActivity)context).finish();
                         String token=data.getString("bdb_token");
                         SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
                         editor.putString("name","ok");
                         editor.putString("token",token);
+                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
                         editor.commit();
                         editor.apply();
                     }else {
@@ -3445,19 +3449,27 @@ public class APICall {
 
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
+            try {
+                postdata.put("bdb_fb_token",FirebaseInstanceId.getInstance().getToken());
+            }
+            catch (Exception e)
+            {
+
+            }
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .addHeader("X-Requested-With","XMLHttpRequest")
+                    .header("Authorization","Bearer "+gettoken(context))
                     .build();
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     mMessage = e.getMessage();
-                    Log.w("failure Response", mMessage);
+                    Log.e("failure Response", mMessage);
                     pd.dismiss();
 
                     if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
@@ -17859,7 +17871,246 @@ public class APICall {
         });
 
     }
+    public static ArrayList<PointModel> pointList=new ArrayList<>();
+    public static void GetPointsLog(final Context cont ,final PointAdapter adapter){
+        pointList.clear();
+        adapter.notifyDataSetChanged();
+//        showDialog(context);
+        ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(cont);
+            }
+        });
 
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/supplier/pointsLog")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("GetPointsLog ERRR", mMessage);
+
+//                pd.dismiss();
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("GetPointsLog response", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+                        // JSONObject data=jsonrespone.getJSONObject("data");
+                        JSONArray da=jsonrespone.getJSONArray("data");
+                        for (int i=0;i<da.length();i++) {
+                            JSONObject jarray = da.getJSONObject(i);
+
+                            String pointDate = jarray.getString("bdb_operation_date");
+                            String pointDesc = jarray.getString("bdb_description");
+                            String pointCount = jarray.getString("bdb_points");
+                            String operationType = jarray.getString("bdb_operation_type");
+
+
+                            PointModel p = new PointModel(pointCount, pointDate, pointDesc, operationType);
+                            pointList.add(p);
+                            //   TabTwo.arrayList.add(dof);
+                        }
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                ((AppCompatActivity)cont).runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+
+                    }});
+
+
+
+
+            }
+
+        });
+    }
+    public  static  void  GetPointsDetails(final Context cont){
+
+
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/supplier/pointsDetails")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+
+                }else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(cont, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("GetPoints response", mMessage);
+                ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        try {
+
+                            pd.dismiss();
+//                            swipeRefreshLayout.setRefreshing(false);
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        String terminated_points="";
+                        String current_points="";
+                        String termin_in_month="";
+                        String used_points="";
+                        try {
+                            JSONObject jsonrespone = new JSONObject(mMessage);
+                            String success=jsonrespone.getString("success");
+                            if (success.equals("true")){
+                                // JSONObject data=jsonrespone.getJSONObject("data");
+                                JSONArray da=jsonrespone.getJSONArray("data");
+
+                                JSONObject data = da.getJSONObject(0);
+                                // String booking_type=data.getString("booking_type");
+                                terminated_points=data.getString("terminated_points");
+                                current_points=data.getString("current_points");
+                                termin_in_month=data.getString("terminated_points_in_month");
+                                used_points=data.getString("used_points");
+
+
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        PointsFragment.setData(used_points,terminated_points,termin_in_month,current_points);
+
+
+                    }
+
+                });
+
+
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public static void updateFBToken(final Context context, String newToken,final String userToken)
+    {
+//        showDialog(context);
+        Log.e("NewToken","updating FB token");
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_fb_token",newToken);
+            postdata.put("bdb_sys_type","0");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        Log.e("UserToken",userToken.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/updateFirebaseToken")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+userToken)
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("deletePayment ERRR", mMessage);
+                //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("updateFBToken", mMessage);
+                ((AppCompatActivity) context).finish();
+                SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                editor.putString("name", "ok");
+                editor.putString("token", userToken);
+                editor.commit();
+                editor.apply();
+                Intent i = new Intent(context, BeautyMainPage.class);
+                context.startActivity(i);
+            }
+
+        });
+    }
 }
 
 

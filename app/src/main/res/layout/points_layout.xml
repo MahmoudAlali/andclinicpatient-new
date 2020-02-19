@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbarm"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/end_gray"-->
+    <!--android:minHeight="?attr/actionBarSize"-->
+    <!--android:theme="?attr/actionBarTheme"-->
+    <!--app:logo="@string/Backicon"-->
+    <!--app:popupTheme="@style/AppTheme"-->
+    <!--app:theme="@style/ToolbarColoredBackArrow"-->
+    <!--app:titleTextColor="#fff" />-->
+
+    <!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_marginTop="?attr/actionBarSize"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<LinearLayout-->
+    <!--android:orientation="horizontal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/high_edit_text">-->
+    <!--<TextView-->
+    <!--android:background="@drawable/border_edit_text"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/high_edit_text"-->
+    <!--android:text="Records"-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="18dp"-->
+    <!--android:textColor="#000"-->
+    <!--/>-->
+
+    <!--<Space-->
+    <!--android:layout_width="10dp"-->
+    <!--android:layout_height="match_parent" />-->
+    <!--<TextView-->
+    <!--android:background="@drawable/border_edit_text"-->
+    <!--android:layout_weight="1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/high_edit_text"-->
+    <!--android:text="Graph"-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="18dp"-->
+    <!--android:textColor="#000"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--&lt;!&ndash;<com.github.mikephil.charting.charts.PieChart&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/chart"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_margin="20dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</com.github.mikephil.charting.charts.PieChart>&ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+
+
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/high_edit_text"-->
+    <!--android:textSize="18dp"-->
+    <!--android:textColor="@color/red"-->
+    <!--android:textStyle="bold"-->
+    <!--android:elevation="5dp"-->
+    <!--android:paddingBottom="5dp"-->
+    <!--android:shadowColor="#000"-->
+    <!--android:text="@string/point"-->
+    <!--android:gravity="center"-->
+    <!--/>-->
+
+    <!--<android.support.v4.widget.Space-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="5dp" />-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/high_edit_text"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:src="@drawable/ic_stars"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/circle_shape"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/points_count_icon"
+                    android:layout_gravity="center|right"
+                    />
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:id="@+id/current_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/current_points"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v4.widget.Space
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:layout_width="@dimen/high_edit_text"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:src="@drawable/ic_stars"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/circle_shape1"
+                android:layout_marginRight="50dp"
+
+                >
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/used_points_icon"
+                    android:layout_gravity="center|right"
+                    />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/used_points"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/used_points"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/circle_shape2"
+                android:layout_marginRight="50dp"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/expired_points_icon"
+                    android:layout_gravity="center|right"
+                    />
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/ended_points"
+
+                    android:layout_gravity="center"
+                    android:text="@string/exp_points"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/circle_shape3">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|right"
+                    android:src="@drawable/expires_in_icon"
+                    />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/expired_points"
+                    android:text="@string/Exp_inmonth_points"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+
+
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/myprofile"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:onClick="myprofile"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="بروفايلي"-->
+    <!--android:textStyle="bold" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView32"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:onClick="pauseAccount"-->
+    <!--android:text="ايقاف حسابي"-->
+    <!--android:textStyle="bold" />-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView31"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="حذف حسابي" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+
+    <!--android:layout_weight="1"-->
+
+    <!--android:orientation="horizontal"-->
+    <!--android:weightSum="3">-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+    <!--</LinearLayout>-->
