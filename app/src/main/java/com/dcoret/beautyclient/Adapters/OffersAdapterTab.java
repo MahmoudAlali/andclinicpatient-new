@@ -66,7 +66,6 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             LayoutInflater inflater = LayoutInflater.from(context);
             View row;
              row = inflater.inflate(R.layout.offers_layout_tab_last, parent, false);
-
             OffersAdapterTab.Item item = new OffersAdapterTab.Item(row);
 
         return item;

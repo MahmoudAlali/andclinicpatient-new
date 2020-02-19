@@ -25,10 +25,9 @@ import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
 import com.dcoret.beautyclient.R;
 
-
 import java.util.ArrayList;
 
-public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ReservationsAdapter3 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     Context context;
@@ -44,11 +43,11 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public static FragmentTransaction fragmentTransaction;
     public static String book_id="0";
     public static int postionBook;
-    public ReservationsAdapter2(Context context, String items[]){
+    public ReservationsAdapter3(Context context, String items[]){
         this.context=context;
         this.items=items;
     }
-    public ReservationsAdapter2(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData, int layout){
+    public ReservationsAdapter3(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData, int layout){
         this.context=context;
         this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
         this.layout=layout;

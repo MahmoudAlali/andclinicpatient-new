@@ -60,6 +60,8 @@ public class TabOne extends Fragment {
             @Override
             public void onRefresh() {
                 arrayList.clear();
+                compareModels.clear();
+
                 servicesAdapter.notifyDataSetChanged();
                     //---------------------call API for Services and get items-------------
                     APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
@@ -67,6 +69,12 @@ public class TabOne extends Fragment {
         });
 
         if (ServicesTabsFragment.updateServ){
+            compareModels.clear();
+            try{
+                APICall.pd.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
             ServicesTabsFragment.updateServ=false;
             ServicesTabsFragment.updateoffr=true;

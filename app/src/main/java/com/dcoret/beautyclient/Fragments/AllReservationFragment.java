@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,9 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
+import com.dcoret.beautyclient.Adapters.ServicesAdapter;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
 import com.dcoret.beautyclient.R;
 
 
@@ -32,6 +36,7 @@ public class AllReservationFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
     RecyclerView service_select;
     ImageView sortbtn;
+    public static ReservationsAdapter2 reservationsAdapter2;
     String filter,sort;
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
 
@@ -43,45 +48,16 @@ public class AllReservationFragment extends Fragment {
         service_select=view.findViewById(R.id.incom_ree);
         sortbtn=MyReservationFragment.view.findViewById(R.id.sort);
         service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
+//        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
+
+//        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
+
+//        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout=R.layout.incom_reservation_layout;
         APICall.filter=APICall.bookingFilter("1","8","0");
 
 
-
-        sortbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu_sort, popup.getMenu());
-
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int id=item.getItemId();
-//                        bookingAutomatedBrowseData.clear();
-//                        reservationsAdapter.notifyDataSetChanged();
-                        if (id==R.id.one){
-                            APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
-                        }else if (id==R.id.two){
-                            APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
-                        }else if (id==R.id.three){
-                            APICall.sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
-                        }else if (id==R.id.four){
-                            APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1",APICall.filter,APICall.sort,BeautyMainPage.context,APICall.layout);
-                        }
-                        return true;
-                    }
-                });
-                popup.show(); //showing popup menu
-            }
-        });
 
 
 

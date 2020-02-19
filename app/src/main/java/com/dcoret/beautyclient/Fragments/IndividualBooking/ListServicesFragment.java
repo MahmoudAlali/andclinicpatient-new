@@ -39,6 +39,7 @@ public class ListServicesFragment extends Fragment {
     public  static ListServicesAdapter servicesAdapter;
     public static GridLayoutManager manager;
     static LinearLayout root;
+    public static String serviceName="";
     public static String bdb_ser_id="";
     private static int categoryIndex=0;
     static Fragment fragment;
@@ -161,6 +162,7 @@ public class ListServicesFragment extends Fragment {
                                 APICall.idSerForOffer=itemArrayList.get(k).getBdb_ser_id();
                                 APICall.filterSortAlgorithm("33", itemArrayList.get(k).getBdb_ser_id(), "0");
                                 bdb_ser_id=itemArrayList.get(k).getBdb_ser_id();
+                                serviceName=service_name.getText().toString();
                                 Log.e("SER_ID", itemArrayList.get(k).getBdb_ser_id());
                                 fragment = new PlaceServiceFragment();
                                 fm =((AppCompatActivity)BeautyMainPage.context).getFragmentManager();

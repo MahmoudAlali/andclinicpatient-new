@@ -330,8 +330,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         compare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ServicesAdapter.comparenum>=2) {
-                    ServicesAdapter.comparenum=0;
+                if(TabOne.compareModels.size()>=2) {
                     Log.d("Compare", ServicesAdapter.comparenum+"");
 //                    fragment = new CompareFragment();
 //                    fm = getActivity().getFragmentManager();
@@ -1575,6 +1574,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     }
 
     public static void gridlist(){
+        TabOne.compareModels.clear();
         if (!gridlistcheck){
             ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                 @Override

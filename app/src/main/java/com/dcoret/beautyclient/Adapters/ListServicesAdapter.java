@@ -126,10 +126,12 @@ public class ListServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((Item)holder).item_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("SER_ID","SER_ID::"+ itemArrayList.get(position).getBdb_ser_id());
+                Log.e("ClickedClicked","Clicked::");
                 APICall.idSerForOffer=itemArrayList.get(position).getBdb_ser_id();
                 APICall.filterSortAlgorithm("33", itemArrayList.get(position).getBdb_ser_id(), "0");
                 bdb_ser_id=itemArrayList.get(position).getBdb_ser_id();
-                Log.e("SER_ID", itemArrayList.get(position).getBdb_ser_id());
+                ListServicesFragment.serviceName=((Item) holder).service_name.getText().toString();
                 fragment = new PlaceServiceFragment();
                 fm =((AppCompatActivity)context).getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

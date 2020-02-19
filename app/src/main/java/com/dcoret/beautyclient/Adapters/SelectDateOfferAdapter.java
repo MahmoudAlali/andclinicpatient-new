@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.dcoret.beautyclient.DataModel.OfferClientsModel;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
 
@@ -25,6 +26,7 @@ public class SelectDateOfferAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     String items[];
     ArrayList<String> strings;
     Boolean layout;
+    ArrayList<OfferClientsModel.ServiceDetails> serviceDetails;
     //    public static ArrayList<SelectDateOfferModel> selectDateOfferModels=new ArrayList<>();
     public static ArrayList<TextView> dates=new ArrayList<>();
     public SelectDateOfferAdapter(Context context, String items[]){
@@ -32,9 +34,13 @@ public class SelectDateOfferAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.items=items;
     }
 
-    public SelectDateOfferAdapter(Context context, ArrayList<String> strings){
+//    public SelectDateOfferAdapter(Context context, ArrayList<String> strings){
+//        this.context=context;
+//        this.strings=strings;
+//    }
+ public SelectDateOfferAdapter(Context context, ArrayList<OfferClientsModel.ServiceDetails> serviceDetails){
         this.context=context;
-        this.strings=strings;
+        this.serviceDetails=serviceDetails;
     }
 
     public SelectDateOfferAdapter(Context context, String items[], Boolean layout){
@@ -98,13 +104,16 @@ public class SelectDateOfferAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
         });
 
-        ((Item)holder).name.setText(strings.get(position));
+        if (context.getResources().getString(R.string.locale).equals("ar")) {
+            ((Item) holder).name.setText(serviceDetails.get(position).getBdb_name_ar());
+        }else
+            ((Item)holder).name.setText(serviceDetails.get(position).getBdb_ser_name_en());
         dates.add(((Item)holder).select_time);
     }
 
     @Override
     public int getItemCount() {
-        return strings.size();
+        return serviceDetails.size();
     }
 
 

@@ -18,6 +18,7 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
 import com.dcoret.beautyclient.DataModel.IDNameService;
+import com.dcoret.beautyclient.DataModel.OfferClientsModel;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.R;
@@ -26,9 +27,10 @@ import java.util.ArrayList;
 
 public class MultiDateOfferBooking extends AppCompatActivity {
 
-    ArrayList<String> strings=new ArrayList<>();
+    public static ArrayList<String> strings=new ArrayList<>();
+    public static ArrayList<OfferClientsModel.ServiceDetails> serviceDetails=new ArrayList<>();
     RecyclerView recyclerView;
-    static SelectDateOfferAdapter selectDateOfferAdapter;
+    public static SelectDateOfferAdapter selectDateOfferAdapter;
     Context context;
     Button next;
     EditText phone_number,client_name;
@@ -43,27 +45,32 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         final int postion=getIntent().getIntExtra("postion",0);
         final String offertype=getIntent().getStringExtra("offertype");
         context=this;
+        serviceDetails.clear();
         selectDateOfferAdapter.dates.clear();
 
 //        int postion=getIntent().getIntExtra("postion",0);
 //        client_name=findViewById(R.id.client_name);
 //        phone_number=findViewById(R.id.phone_number);
         next=findViewById(R.id.next);
+        String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
 
 
-        for (int i = 0; i< TabTwo.arrayList.get(postion).getSersup_ids().size(); i++){
-            if (APICall.ln.equals("en")) {
-                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());
-            }else {
-                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name_ar());
-            }
-        }
+        Log.e("PackCode",bdb_pack_id);
+//        for (int i = 0; i< TabTwo.arrayList.get(postion).getSersup_ids().size(); i++){
+//            if (APICall.ln.equals("en")) {
+//                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());
+//            }else {
+//                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name_ar());
+//            }
+//        }
         place=TabTwo.arrayList.get(postion).getBdb_offer_place();
         recyclerView=findViewById(R.id.recycleview);
 
-        selectDateOfferAdapter=new SelectDateOfferAdapter(context,strings);
+        selectDateOfferAdapter=new SelectDateOfferAdapter(context,serviceDetails);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(selectDateOfferAdapter);
+        APICall.browseOneMultiOffer(bdb_pack_id, context);
+
         APICall.detailsUser3(context);
 
         switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
