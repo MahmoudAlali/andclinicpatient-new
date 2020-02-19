@@ -141,7 +141,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         }else if (offers.get(position).getBdb_is_old_on().equals("1")){
             ((Item)holder).age.setText(R.string.Adult);
         }else if (offers.get(position).getBdb_is_old_on().equals("2")){
-            ((Item)holder).age.setText("لا فرق");
+            ((Item)holder).age.setText("جميع الأعمار");
         }
 
         if (offers.get(position).getBdb_offer_place().equals("0")){
@@ -156,11 +156,6 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
-
                 if (offers.get(position).getBdb_offer_type().equals("2")
                         || offers.get(position).getBdb_offer_type().equals("5")){
 
@@ -183,17 +178,6 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                     intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
                     ((AppCompatActivity)context).startActivity(intent);
                 }
-
-
-
-
-
-
-
-
-
-
-
 //            }
 //        });
 //                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);

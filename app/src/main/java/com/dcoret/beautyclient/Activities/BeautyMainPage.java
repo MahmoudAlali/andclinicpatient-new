@@ -34,8 +34,9 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
-import com.dcoret.beautyclient.Fragments.FavoriteFragment;
+import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
@@ -313,6 +314,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction.replace(R.id.fragment, fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
 
+                APICall.sendFavorites(context,ListServicesFragment.getFavorites(APICall.itemArrayList));
 
 
  //        PLACESERVICEFRAGMENT
@@ -418,6 +420,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 fragmentTransaction.replace(R.id.fragment, fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
 
+                APICall.sendFavorites(context,ListServicesFragment.getFavorites(APICall.itemArrayList));
             }else if (FRAGMENT_NAME.equals("PLACESERVICEFRAGMENT")){
                 if (is_bride_service.equals("1")){
                     fragment = new ListServicesBrideFragment();
@@ -573,7 +576,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                         case R.id.notification:
                             FRAGMENT_NAME="";
                             menu.findItem(R.id.notification).setIcon(R.drawable.notifications_selected);
-                            fragment = new NotificationFragment();
+                            fragment = new NotificationsFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, fragment);

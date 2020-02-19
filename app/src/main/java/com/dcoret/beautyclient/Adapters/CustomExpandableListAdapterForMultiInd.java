@@ -119,7 +119,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
             listTitleTextView.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
-            return null;
+            return convertView;
 
         }
 

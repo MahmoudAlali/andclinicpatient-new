@@ -228,6 +228,8 @@
     <string name="end_offer">هذا العرض ساري حتى:</string>
     <string name="on">على</string>
     <string name="onservice">من الخدمات</string>
+    <string name="providersFav">المزودات</string>
+    <string name="servicesFav">الخدمات</string>
 
 
 
@@ -449,7 +451,15 @@
     <string name="exit">خروج</string>
     <string name="oneService">على خدمة واحدة</string>
     <string name="locale">ar</string>
-
+    <string name="hair">الشعر</string>
+    <string name="spa">سبا</string>
+    <string name="massage">مساج</string>
+    <string name="nails">الأظافر</string>
+    <string name="skin">البشرة</string>
+    <string name="body">الجسم</string>
+    <string name="eyebrows">الحواجب</string>
+    <string name="makeup2">مكياج</string>
+    <string name="Notifications">الإشعارات</string>
 
 
 </resources>

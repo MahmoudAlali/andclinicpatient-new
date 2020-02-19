@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    >
+
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_gravity="top"
+    android:background="@color/end_gray"
+    app:navigationIcon="@string/Backicon"
+    app:popupTheme="@style/AppTheme"
+    app:theme="@style/ToolbarColoredBackArrow"
+    app:title=""
+    app:titleMarginStart="@dimen/standard_175"
+    app:titleTextColor="@color/end_gray" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@drawable/background"
+            android:layout_marginBottom="@dimen/standard_80"
+            android:orientation="vertical">
+
+            <!--<android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:weightSum="7">
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="end"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_location_shape"
+                    android:layoutDirection="ltr"
+                    >
+                    <TextView
+                        android:id="@+id/my_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:src="@drawable/filter_my_location_icon" />
+                </LinearLayout>
+<!--
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/filter_location_shape"
+                    android:layout_marginTop="30dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="@dimen/pf_10dp_space"
+                    android:layout_marginLeft="@dimen/pf_10dp_space"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/my_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:gravity="right|center"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/bride_res"
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:src="@drawable/filter_my_location_icon" />
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+-->
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_distance_shape"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="@string/distance"
+                        android:gravity="center"
+                        android:textAlignment="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_distance_icon"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_date_shape"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="@string/date"
+                        android:gravity="center"
+                        android:textAlignment="center"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_date_icon"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_ser_place_shape"
+                    android:gravity="end">
+
+                    <Spinner
+                        android:id="@+id/service_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="@string/date"
+                        android:gravity="center"
+                        android:textAlignment="center"
+
+                        >
+
+                    </Spinner>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_ser_place_icon"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_price_shape"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/service_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="@string/servicePrice"
+                        android:gravity="center"
+                        android:textAlignment="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_price_icon" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_rate_shape"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/service_rate"
+                        android:text="@string/ServiceRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:textAlignment="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_rate_icon" />
+
+                </LinearLayout>
+
+               <!-- <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/pf_5dp_space"
+                    android:background="#000"
+                    android:layout_marginLeft="@dimen/pf_10dp_space"
+                    android:layout_marginRight="@dimen/pf_10dp_space"
+                    />-->
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/filter_price_shape"
+                    android:gravity="end">
+                    <TextView
+                        android:id="@+id/offerPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@android:color/transparent"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="@string/OfferPrice"
+                        android:textAlignment="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/filter_offer_price_icon" />
+
+
+                </LinearLayout>
+                      </LinearLayout>
+<!--
+            </android.support.v4.widget.NestedScrollView>
+-->
+
+        </LinearLayout>
+
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/search"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/filter_search_shape"/>
+
+</android.support.design.widget.CoordinatorLayout>

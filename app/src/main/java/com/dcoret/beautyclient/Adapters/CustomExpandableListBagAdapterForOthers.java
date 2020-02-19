@@ -115,7 +115,7 @@ public class CustomExpandableListBagAdapterForOthers extends BaseExpandableListA
             listTitleTextView.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
-            return null;
+            return convertView;
 
         }
 

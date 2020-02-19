@@ -79,6 +79,7 @@ public class SplashScreen extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         Intent intent = new Intent(context, Login.class);
+                        //Intent intent = new Intent(context, Offers.class);
                         finish();
                         startActivity(intent);
                     }
@@ -88,6 +89,7 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d("name","null");
                     Intent intent = new Intent(context, Login.class);
+                   // Intent intent = new Intent(context, Offers.class);
                     finish();
                     startActivity(intent);
                 }
