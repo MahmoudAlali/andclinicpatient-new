@@ -33,6 +33,7 @@ public class ServiceFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
     Toolbar toolbar;
     public  static String date="";
+
     public static ArrayList<FilterAndSortModel> filterList=new ArrayList<>();
     public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
 
