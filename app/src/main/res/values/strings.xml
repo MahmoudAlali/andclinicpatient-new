@@ -438,7 +438,7 @@
     <string name="Edit_time">edit time</string>
     <string name="Reservations_received">Reservations received</string>
     <string name="Acceptable_reservations">Acceptable reservations</string>
-    <string name="Bookings_paid_DEPOSIT">Reservation paid </string>
+    <string name="Bookings_paid_DEPOSIT">paid</string>
     <string name="cancel_req">cancel request</string>
     <string name="nobooking">No Booking</string>
     <string name="nobookingyet">There is no booking yet</string>
@@ -593,4 +593,11 @@
     <string name="points_desc">Description</string>
     <string name="points_date">Date</string>
     <string name="points_updown">Points</string>
+    <string name="enter_reason">Enter a reason</string>
+    <string name="please_enter_reson">please enter the reason</string>
+    <string name="autoJrCost">The cost of the journey will be added totally automatically</string>
+    <string name="Executed">Execute</string>
+    <string name="Executed_res">Executed</string>
+    <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
+    <string name="accepted">accepted</string>
 </resources>

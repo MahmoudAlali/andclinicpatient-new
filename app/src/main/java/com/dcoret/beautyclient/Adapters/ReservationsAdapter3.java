@@ -479,8 +479,8 @@ public class ReservationsAdapter3 extends RecyclerView.Adapter<RecyclerView.View
             booking_place=itemView.findViewById(R.id.booking_place);
             book_Details=itemView.findViewById(R.id.book_details);
             refuse=itemView.findViewById(R.id.refuse);
-            accept=itemView.findViewById(R.id.accept);
-            time=itemView.findViewById(R.id.edit_time);
+//            accept=itemView.findViewById(R.id.accept);
+            time=itemView.findViewById(R.id.time);
             this.listener = listener;
         }
 

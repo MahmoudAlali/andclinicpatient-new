@@ -48,7 +48,7 @@ public class TabOne extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
 
-
+        pagenum=1;
         compareModels.clear();
         view= inflater.inflate(R.layout.tab_one,container,false);
         filter =view.findViewById(R.id.filter);
@@ -94,6 +94,7 @@ public class TabOne extends Fragment {
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
         servicesAdapter.notifyDataSetChanged();
+//        recyclerView.invalidate();
     }
 
 

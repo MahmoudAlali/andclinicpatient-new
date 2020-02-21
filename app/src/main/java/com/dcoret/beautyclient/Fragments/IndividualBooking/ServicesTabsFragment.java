@@ -75,7 +75,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     LinearLayout myLocationbtn,distancebtn;
     TextView myLocationbtnTxt,distancebtnTxt;
     LinearLayout layout_bar;
-    static ServicesAdapter servicesAdapter;
+    public static ServicesAdapter servicesAdapter;
     public static  String bdb_name="",ServiceId="";
     Toolbar toolbar;
     String service_place_name="";
@@ -258,6 +258,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //                        distancebtn.setText(R.string.distance+":"+Min.getText().toString()+"-" + Max.getText().toString());
                         APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                         ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distancebtnTxt.getText().toString()));
+                        PlaceServiceFragment.distanceOffer=",{\"num\":2,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
 
                         if (TABFLAG==1){
                             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
@@ -282,17 +283,40 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //            updateServ=false;
 //        }
 //        APICall.automatedBrowse()
+
         pageNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum+1)+"", BeautyMainPage.context);
+                TabOne.pagenum += 1;
+                if (TABFLAG==1) {
+                    Log.e("serviceCheck",TabOne.pagenum+"");
+                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
+                }else if (TABFLAG==2){
+                    TabTwo.refreshRV();
+                    Log.e("OfferCheck",TabOne.pagenum+"");
+                    APICall.automatedBrowseOffers("8", TabOne.pagenum+"", BeautyMainPage.context);
 
+                }
             }
         });
         pagePrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum-1)+"", BeautyMainPage.context);
+                if (TabOne.pagenum-1!=0) {
+                    TabOne.pagenum -= 1;
+                    if (TABFLAG==1) {
+                        Log.e("serviceCheck",TabOne.pagenum+"");
+                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
+                }else if (TABFLAG==2){
+                        Log.e("OfferCheck",TabOne.pagenum+"");
+                        TabTwo.refreshRV();
+                        APICall.automatedBrowseOffers("8",TabOne.pagenum+"", BeautyMainPage.context);
+
+                }
+                }else {
+//                    APICall.showSweetDialog(BeautyMainPage.context,"","");
+                }
+
 
             }
         });
@@ -1515,6 +1539,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             public void onClick(View v) {
                 pages.setVisibility(View.VISIBLE);
                 TABFLAG=1;
+
                 gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
                 tabselected(servicetab,offertab,maptab);
                  fragment = new TabOne();

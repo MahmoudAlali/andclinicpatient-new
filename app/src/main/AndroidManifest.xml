@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragments.OtherGroupBooking.AlterGroupOtherReservationResult"></activity>
+        <activity android:name=".Fragments.MyReservation.ExecuteBookActivity"></activity>
+        <activity android:name=".Fragments.MyReservation.RatingBookActivity" />
+        <activity android:name=".Fragments.OtherGroupBooking.AlterGroupOtherReservationResult" />
         <activity android:name=".Fragments.OtherGroupBooking.OtherRelationActivity" />
         <activity android:name=".Fragments.IndividualBooking.CompareServiceActivity" />
         <activity android:name=".Fragments.GroupBooking.AlterGroupReservationResultActivity" />

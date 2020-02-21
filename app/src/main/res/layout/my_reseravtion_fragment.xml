@@ -59,9 +59,11 @@
         android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
+        android:background="@color/gray"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Space
@@ -71,27 +73,36 @@
                 android:id="@+id/incom_reservation"
                 android:layout_weight="1"
                 android:textSize="12dp"
-                android:background="@drawable/shadow_accent_c5"
                 android:gravity="center"
                 android:textColor="#000"
-                android:text="@string/all_res"
+                android:text="@string/accepted"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text" />
             <Space
                 android:layout_width="@dimen/pf_10dp_space"
                 android:layout_height="match_parent"></Space>
+            <TextView
+                android:id="@+id/deposit_reservation"
+                android:layout_weight="1"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:text="@string/Bookings_paid_DEPOSIT"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></Space>
             <TextView
                 android:textColor="#000"
-
-                android:background="@drawable/shadow_blue_c5"
                 android:id="@+id/accept_reservation"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"
                 android:layout_weight="1"
                 android:gravity="center"
 
-                android:text="@string/all_res_offer"
+                android:text="@string/Executed_res"
                 android:textSize="12dp" />
             <Space
                 android:layout_width="@dimen/pf_10dp_space"
@@ -107,8 +118,7 @@
                 <!--android:layout_height="match_parent" />-->
         </LinearLayout>
         <View
-            android:layout_marginLeft="@dimen/pf_10dp_space"
-            android:layout_marginRight="@dimen/pf_10dp_space"
+
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="3dp"

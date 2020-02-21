@@ -175,7 +175,7 @@
     <string name="Delay">تأجيل</string>
     <string name="Edit">تعديل</string>
     <string name="Createinvoice">اصدار فاتورة</string>
-    <string name="Evaluation">تقييم</string>
+    <string name="Evaluation">تقييم التطبيق</string>
 
 
     <!--offers-->
@@ -270,7 +270,7 @@
     <string name="Edit_time">تعديل الوقت</string>
     <string name="Reservations_received">الحجوزات الواردة</string>
     <string name="Acceptable_reservations">الحجوزات المقبولة</string>
-    <string name="Bookings_paid_DEPOSIT">الحجوزات مدفوعة العربون</string>
+    <string name="Bookings_paid_DEPOSIT">مدفوعة العربون</string>
     <string name="cancel_req">طلب إلغاء</string>
     <string name="nobooking">لا يوجد حجوزات</string>
     <string name="nobookingyet">لا يوجد حجوزات بعد</string>
@@ -472,5 +472,12 @@
     <string name="points_desc">الوصف</string>
     <string name="points_date">التاريخ</string>
     <string name="points_updown">النقاط</string>
+    <string name="enter_reason">يرجى ادخال السبب</string>
+    <string name="please_enter_reson">please enter the reason</string>
+    <string name="autoJrCost">ستتم إضافة تكلفة المشوار بشكل كامل أوتوماتيكيا</string>
+    <string name="Executed">إتمام التنفيذ</string>
+    <string name="Executed_res">المنفذة</string>
+    <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
+    <string name="accepted">مقبولة مبدئيا</string>
 
 </resources>

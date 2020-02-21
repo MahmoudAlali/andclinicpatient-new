@@ -43,14 +43,13 @@ import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.Adapters.NotificationsAdapter;
-import com.dcoret.beautyclient.Adapters.OffersAdapter;
-import com.dcoret.beautyclient.Adapters.OffersAdapterTab;
 import com.dcoret.beautyclient.Adapters.PointAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.FavoriteModel;
 import com.dcoret.beautyclient.DataModel.NotificationModel;
 import com.dcoret.beautyclient.DataModel.PointModel;
+import com.dcoret.beautyclient.Fragments.MyReservation.AcceptedReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.AlterGroupReservationResultActivity;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupRelationActivity;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
@@ -68,7 +67,6 @@ import com.dcoret.beautyclient.Activities.TabSingleBag;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapterForMultiInd;
-import com.dcoret.beautyclient.Adapters.ListServicesAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.Adapters.ShowServicesAdapter;
@@ -94,10 +92,11 @@ import com.dcoret.beautyclient.DataModel.SupInfoClass;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationFragment;
 import com.dcoret.beautyclient.Fragments.BagReservationTestFragment;
-import com.dcoret.beautyclient.Fragments.ClientRelationsFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyFavorites.ProvidersFavoriteFragment;
 import com.dcoret.beautyclient.Fragments.MyFavorites.ServicesFavoriteFragment;
+import com.dcoret.beautyclient.Fragments.MyReservation.ExecuteBookActivity;
+import com.dcoret.beautyclient.Fragments.MyReservation.ExecutedReservationFragment;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.AlterGroupOtherReservationResult;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOtherResultActivity;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.GroupReservationOthersFragment;
@@ -110,7 +109,7 @@ import com.dcoret.beautyclient.Fragments.OtherGroupBooking.OtherRelationActivity
 import com.dcoret.beautyclient.Fragments.Points.PointsFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
 import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
-import com.dcoret.beautyclient.Fragments.MyReservationFragment;
+import com.dcoret.beautyclient.Fragments.MyReservation.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
 import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
@@ -141,6 +140,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -149,10 +149,8 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import retrofit2.http.GET;
 
 public class APICall {
 
@@ -3736,11 +3734,19 @@ public class APICall {
 }
 
         //------------- automated Browse ----------------------
-        public  static  String  automatedBrowse(final  String url, final String lang, final String itemPerPage, final String pageNum, final Context context){
+
+    static Boolean gridchecked;
+    public  static  String  automatedBrowse(final  String url, final String lang, final String itemPerPage, final String pageNum, final Context context){
+            if (ServicesTabsFragment.gridlistcheck) {
+                ServicesTabsFragment.gridlist();
+            gridchecked=true;
+            }else {
+                gridchecked=false;
+            }
 
             TabOne.arrayList.clear();
             try {
-                TabOne.servicesAdapter.notifyDataSetChanged();
+                TabOne.refreshRV();
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -3961,7 +3967,10 @@ public class APICall {
                                                                             longitude,
                                                                             latitude,
                                                                             is_fav_sup,
-                                                                            bdb_booking_period,ser_id,bdb_sup_id,bdb_time+"",bdb_is_bride_service);
+                                                                            bdb_booking_period,
+                                                                            ser_id,bdb_sup_id,
+                                                                            bdb_time+"",
+                                                                            bdb_is_bride_service);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 TabOne.arrayList.add(bsi);
@@ -3986,6 +3995,10 @@ public class APICall {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (gridchecked) {
+                                        ServicesTabsFragment.gridlist();
+                                        gridchecked=false;
+                                        }
                                     TabOne.refreshRV();
                                     Log.e("ARRAYLIST",TabOne.arrayList.size()+"");
 //                                    TabOne.recyclerView.invalidate();
@@ -4032,6 +4045,9 @@ public class APICall {
        public static ArrayList<String> offerSupplier=new ArrayList<>();
         public  static  String  automatedBrowseOffers( final String itemPerPage, final String pageNum, final Context context){
             offerSupplier.clear();
+
+            TabTwo.offersAdapterTab.notifyDataSetChanged();
+
             ServicesTabsFragment.supInfoList.clear();
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
@@ -7931,7 +7947,7 @@ public class APICall {
                         srdate+
                         btype+
 
-                        "]"+
+                        ""+
                         //                    "\t,\"Filter\":{\"num\":1,\"value1\":\""\"}\n" +
                         "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
                         "}";
@@ -8088,7 +8104,7 @@ public class APICall {
                                     e.printStackTrace();
                                 }
                                 JSONArray booking = jObject.getJSONArray("booking");
-
+                                String bdb_status="";
                                 ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData1=new ArrayList<>();
                                 for (int g = 0; g < booking.length(); g++) {
 
@@ -8099,7 +8115,7 @@ public class APICall {
                                     String bdb_client_old = jsonObject.getString("bdb_client_old");
                                     String bdb_id = jsonObject.getString("bdb_id");
                                     String bdb_price = jsonObject.getString("bdb_price");
-                                    String bdb_status = jsonObject.getString("bdb_status");
+                                     bdb_status = jsonObject.getString("bdb_status");
                                      bdb_start_date = jsonObject.getString("bdb_start_date");
                                     String bdb_start_time = jsonObject.getString("bdb_start_time");
                                     String supplier_name = jsonObject.getString("supplier_name");
@@ -8122,8 +8138,8 @@ public class APICall {
                                     }
 
 
-                                    MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, supplier_name, employee_name, service_en_name, service_ar_name,client_name,booking_price, totalItem));
-                                    bookingAutomatedBrowseData1.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, supplier_name, employee_name, service_en_name, service_ar_name,client_name,booking_price, totalItem));
+                                        MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem));
+                                        bookingAutomatedBrowseData1.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem));
 
                                 }
                                 //-----------------------------------------------------
@@ -8155,7 +8171,8 @@ public class APICall {
 //                                            if (MyReservationFragment.service_date_txt.equals("") || MyReservationFragment.service_date_txt.equals(bdb_start_date))
 
                                             if (execDateCheck && bookatCehck)
-                                                reservationModels.add(new ReservationModel(booking_type, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
+                                                    reservationModels.add(new ReservationModel(booking_type, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                     }
@@ -8165,6 +8182,7 @@ public class APICall {
 //                                        if (MyReservationFragment.startdate.equals("") || MyReservationFragment.startdate.equals(bdb_booked_at)){
 //                                            if (MyReservationFragment.service_date_txt.equals("") || MyReservationFragment.service_date_txt.equals(bdb_start_dates))
                                         if (execDateCheck && bookatCehck)
+                                            if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                 reservationModels.add(new ReservationModel(booking_type, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
@@ -8175,7 +8193,8 @@ public class APICall {
                                             booking_type.equals("7") || booking_type.equals("8") || booking_type.equals("9")){
                                         if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                             if (execDateCheck && bookatCehck)
-                                                reservationModels.add(new ReservationModel(booking_type, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
+                                                    reservationModels.add(new ReservationModel(booking_type, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                                 Log.e("BookTypeAdded", "Group");
 //                                            }
                                         }
@@ -18328,6 +18347,666 @@ public class APICall {
 
         });
     }
+
+
+    public  static  void  bookingProcessing(String bdb_id,int  bdb_new_status,String is_provider_actor ,final Context context){
+
+        MyReservationFragment.bookingAutomatedBrowseData.clear();
+//       MyReservationFragment.reservationsAdapter.notifyDataSetChanged();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+            }
+        });
+
+        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_id",bdb_id);
+            postdata.put("bdb_new_status",bdb_new_status+"");
+//            postdata.put("is_provider_actor ",is_provider_actor +"");
+
+        }catch (JSONException je){
+            je.printStackTrace();
+        }
+
+        Log.e("BookingProcessing",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/BookingProcessing")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    final String message=j.getString("message");
+                    if (success.equals("true")){
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run(){
+//                                showSweetDialog(context,"Done",message,false);
+//                                API.bookingAutomatedBrowse("en","20","","1",filter,sort,context,layout);
+                                if (MyReservationFragment.tab.equals("1")) {
+
+                                    fragment = new AcceptedReservationFragment();
+                                    fm = ((AppCompatActivity)context).getFragmentManager();
+                                    fragmentTransaction = fm.beginTransaction();
+                                    fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                                    fragmentTransaction.commit();
+//                                    MyReservationFragment.tabselected(MyReservationFragment.incom_reservation, MyReservationFragment.accept_reservation, MyReservationFragment.deposited_reservation, false);
+                                }else  if (MyReservationFragment.tab.equals("2")){
+
+                                    fragment = new ExecutedReservationFragment();
+                                    fm = ((AppCompatActivity)context).getFragmentManager();
+                                    fragmentTransaction = fm.beginTransaction();
+                                    fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                                    fragmentTransaction.commit();
+
+//                                    MyReservationFragment.fragment = new DepositReservationFragment();
+//                                    MyReservationFragment.fm = ((AppCompatActivity)context).getFragmentManager();
+//                                    MyReservationFragment.fragmentTransaction = fm.beginTransaction();
+//                                    MyReservationFragment.fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+//                                    MyReservationFragment.fragmentTransaction.commit();
+//                                    MyReservationFragment.tabselected(MyReservationFragment.accept_reservation,MyReservationFragment.incom_reservation,  MyReservationFragment.deposited_reservation, false);
+
+//                                }else if (MyReservationFragment.tab.equals("3")){
+//                                    fragment = new DepositReservationFragment();
+//                                    fm = ((AppCompatActivity)context).getFragmentManager();
+//                                    fragmentTransaction = fm.beginTransaction();
+//                                    fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+//                                    fragmentTransaction.commit();
+                                }
+                            }
+                        });
+                    }
+                }catch (final JSONException je){
+                    je.printStackTrace();
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  cancelPaidBooking(String bdb_id,String reason,final Context context){
+
+        MyReservationFragment.bookingAutomatedBrowseData.clear();
+//       MyReservationFragment.reservationsAdapter.notifyDataSetChanged();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                pd=new ProgressDialog(context);
+//                Reservations.pullToRefresh.setRefreshing(true);
+//                pd.show();
+                showDialog(context);
+            }
+        });
+
+        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_id",bdb_id);
+            postdata.put("bdb_reason",reason);
+
+        }catch (JSONException je){
+            je.printStackTrace();
+        }
+
+        Log.e("BookingProcessing",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://providerapp.dcoret.com/api/booking/cancelPaidBooking")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    final String message=j.getString("message");
+                    if (success.equals("true")){
+
+//                        MyReservationFragment.
+                        fragment = new AcceptedReservationFragment();
+//                        MyReservationFragment.
+                        fm = ((AppCompatActivity)context).getFragmentManager();
+//                        MyReservationFragment.
+                        fragmentTransaction = fm.beginTransaction();
+//                        MyReservationFragment.
+                        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+//                        MyReservationFragment.
+                        fragmentTransaction.commit();
+
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run(){
+//                                ((AppCompatActivity)context).onBackPressed();
+////                                showSweetDialog(context,"Done",message,false);
+////                                API.bookingAutomatedBrowse("en","20","1",filter,sort,context,layout);
+//                            }
+//                        });
+                    }
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
+    public static void setExecuted(final Context context, JSONArray bookings) {
+//        showDialog(context);
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bookings",bookings);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        Log.e("PostData ",postdata.toString());
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/ConfirmExecution")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("deletePayment ERRR", mMessage);
+
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Tag", mMessage);
+
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable()
+                        {
+                            @Override
+                            public void run() {
+                                ((AppCompatActivity)context).onBackPressed();
+                                MyReservationFragment.updateDeposit();
+
+                            }});
+
+
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("ExecErr",e.getMessage());
+                }
+            }
+
+        });
+    }
+
+    public  static  void  browseOneExecutedBooking(String book_id,final Context context){
+        servicesArrayList.clear();
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    showDialog(context);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("book_id",book_id);
+            Log.e("BookID",book_id);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        Log.e("BookID",postdata.toString());
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/booking/browse")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        swipeRefreshLayout.setRefreshing(false);
+
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+//                            TextView confirm = dialog.findViewById(R.id.confirm);
+//                            TextView message = dialog.findViewById(R.id.message);
+//                            TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+//                            confirm.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    dialog.cancel();
+//
+//                                }
+//                            });
+//                            dialog.show();
+//
+//                        }
+//                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+//                Log.e("Token", gettoken(context));
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            pd.dismiss();
+//                            swipeRefreshLayout.setRefreshing(false);
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
+
+                Calendar calendar=Calendar.getInstance();
+                Calendar calendar1=Calendar.getInstance();
+                String date=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE);
+                calendar.add(Calendar.MINUTE,10);
+                String time=calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE)+":"+"00";
+                Log.e("DATECHECKER",date);
+                Log.e("TIMECHECKER",time);
+
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    if (success.equals("true")){
+                        final JSONObject data=jsonrespone.getJSONObject("data");
+                        final JSONArray booking=data.getJSONArray("booking");
+                        final String booking_type=data.getString("booking_type");
+                        String journey_cost=data.getString("journey_cost");
+                        final String journey_count=data.getString("journey_count");
+                        final String booking_price=data.getString("booking_price");
+
+
+
+//
+                        if (booking_type.equals("0") || booking_type.equals("10") ){
+                            Log.e("bookType","Single");
+
+                            for (int i=0;i<booking.length();i++) {
+                                JSONObject object1 = booking.getJSONObject(i);
+                                JSONArray bookings = object1.getJSONArray("bookings");
+
+
+                                for (int j=0;j<bookings.length();j++){
+                                    JSONObject object = bookings.getJSONObject(i);
+
+                                    String bdb_price = "";
+                                    try {
+                                        bdb_price = object.getString("bdb_price");
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    String bdb_id = object.getString("bdb_id"),
+                                            bdb_start_date = object.getString("bdb_start_date"),
+                                            bdb_start_time = object.getString("bdb_start_time"),
+                                            bdb_end_time = object.getString("bdb_end_time"),
+                                            bdb_booked_at = object.getString("bdb_booked_at");
+                                    String bdb_emp_name = object.getString("bdb_emp_name");
+                                    String bdb_name = object.getString("bdb_name"),
+                                            bdb_name_ar = object.getString("bdb_name_ar");
+                                    String bdb_status = object.getString("bdb_status");
+//                                String service_en_name = object.getString("bdb_name");
+//                                String service_ar_name = object.getString("bdb_name_ar");
+                                    String client_name = object.getString("bdb_user_name");
+                                    String bdb_paid_deposit = object.getString("bdb_paid_deposit");
+                                    // ReservationDetailsActivity.client_name.setText(client_name);
+
+                                    //ReservationDetailsActivity.time.setText(convertToArabic(bdb_start_date));
+                                    try {
+                                        if (ReservationsAdapter2.isPast(bdb_start_date, bdb_end_time) && ((!bdb_status.equals("3")) && (!bdb_status.equals("4")))) {
+                                            if (!booking.getJSONObject(i).getString("name").equals("booking_wast_time")) {
+                                                Log.e("TrueOrFals::", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
+
+                                                ExecuteBookActivity.AddLayout(bdb_id, client_name, bdb_name, bdb_name_ar, bdb_price, bdb_paid_deposit);
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        Log.e("isPastERR", e.getMessage());
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            Log.e("bookType","Multi");
+                            String names="";
+                            for (int i=0;i<booking.length();i++){
+                                JSONObject object1=booking.getJSONObject(i);
+                                JSONArray bookings;
+                                try {
+                                    bookings = object1.getJSONArray("bookings");
+                                }catch (Exception e){
+                                    bookings=data.getJSONArray("booking");
+                                    e.printStackTrace();
+                                }
+                                String name=object1.getString("name");
+                                if (!name.equals("booking_wast_time")) {
+                                    names+=name;
+                                    //  ReservationDetailsActivity.client_name.setText(names);
+                                }
+
+//                                String phone = object1.getString("phone");
+                                String  bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
+
+
+
+                                Log.e("Bookings",bookings.toString());
+                                String client_name="";
+                                for (int j=0;j<bookings.length();j++){
+                                    JSONObject object=bookings.getJSONObject(j);
+                                    Log.e("objectBookings",object.toString());
+//                                    if (!name.equals("booking_wast_time")) {
+                                    if (j==0)
+                                        client_name = object.getString("bdb_user_name");
+//                                    }
+
+                                    String  bdb_price = object.getString("bdb_price"),
+                                            bdb_id = object.getString("bdb_id"),
+                                            bdb_start_date = object.getString("bdb_start_date"),
+                                            bdb_start_time = object.getString("bdb_start_time"),
+                                            bdb_end_time = object.getString("bdb_end_time"),
+                                            bdb_booked_at = object.getString("bdb_booked_at");
+                                    String bdb_emp_name = object.getString("bdb_emp_name");
+                                    String bdb_name = object.getString("bdb_name"),
+                                            bdb_name_ar = object.getString("bdb_name_ar"),
+                                            bdb_status = object.getString("bdb_status");
+                                    String bdb_paid_deposit=object.getString("bdb_paid_deposit");
+
+                                    try {
+                                        if(ReservationsAdapter2.isPast(bdb_start_date,bdb_end_time) && ((!bdb_status.equals("3")) && (!bdb_status.equals("4")))) {
+                                            if (!booking.getJSONObject(i).getString("name").equals("booking_wast_time") ) {
+//                                            SimpleDateFormat sdf=new SimpleDateFormat("YY-MM-DD");
+//                                            Date date1=null;
+//                                            try{
+//                                                date1=sdf.parse(bdb_start_date);
+//                                            }catch (Exception e){
+//                                                e.printStackTrace();
+//                                            }
+//                                            calendar.setTime(date1);
+//                                            Log.e("calendar1",calendar1.getTime()+"");
+//                                            Log.e("calendar",calendar.getTime()+"");
+
+//                                            if (calendar1.getTime().compareTo(calendar.getTime())<=0) {
+//                                                SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+//                                                Date dbook=null;
+//                                                Date dnow=null;
+//                                                try {
+//                                                    dbook = dateFormat.parse(bdb_end_time);
+//                                                }catch (Exception e){
+//                                                    e.printStackTrace();
+//                                                }
+//
+//                                                try {
+//                                                    dnow = dateFormat.parse(time);
+//                                                }catch (Exception e){
+//                                                    e.printStackTrace();
+//                                                }
+//                                                Log.e("dbook",dbook+"");
+//                                                Log.e("dnow",dnow+"");
+
+//                                                if (dnow.compareTo(dbook)<=0) {
+                                                ExecuteBookActivity.AddLayout(bdb_id, client_name, bdb_name, bdb_name_ar, bdb_price, bdb_paid_deposit);
+                                                Log.e("TrueOrFals::", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
+//                                                }
+//                                            }
+                                            }
+                                        }
+
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        e.printStackTrace();
+                                        Log.e("isPastERR",e.getMessage());
+                                    }
+                                    // ReservationDetailsActivity.time.setText(convertToArabic(bdb_start_date));
+                                }
+                            }
+                        }
+                    }
+                }catch (JSONException e){
+                    showSweetDialog(context,"",context.getResources().getString(R.string.error));
+                    e.printStackTrace();
+                }
+
+
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
 }
 
 
