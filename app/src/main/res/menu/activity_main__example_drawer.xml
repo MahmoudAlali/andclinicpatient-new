@@ -11,10 +11,7 @@
                 android:id="@+id/manageaccount"
                 android:icon="@drawable/ic_favorite_black_24dp"
                 android:title="@string/manage_account" />
-            <item
-            android:id="@+id/rate_app"
-            android:icon="@drawable/ic_medal"
-            android:title="@string/rate_app" />
+
             <item
                 android:id="@+id/points"
                 android:icon="@drawable/ic_compare"
@@ -39,6 +36,10 @@
                 android:id="@+id/support"
                 android:icon="@drawable/ic_help_black_24dp"
                 android:title="@string/support" />
+            <item
+                android:id="@+id/rate_app"
+                android:icon="@drawable/ic_medal"
+                android:title="@string/rate_app" />
             <item
             android:id="@+id/callsalon"
             android:icon="@drawable/ic_icons8_about"

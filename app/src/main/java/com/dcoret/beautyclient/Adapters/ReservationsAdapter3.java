@@ -1,7 +1,6 @@
 package com.dcoret.beautyclient.Adapters;
 
 
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,25 +22,12 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
-import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
-import com.dcoret.beautyclient.Fragments.MyReservation.ExecuteBookActivity;
 import com.dcoret.beautyclient.R;
 
-
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Locale;
 
-public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ReservationsAdapter3 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     Context context;
@@ -54,16 +39,15 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     //    ArrayList<DataReservation> reservations;
     int layout;
     public static Fragment fragment;
-    public static Boolean isOffer;
     public static FragmentManager fm;
     public static FragmentTransaction fragmentTransaction;
     public static String book_id="0";
     public static int postionBook;
-    public ReservationsAdapter2(Context context, String items[]){
+    public ReservationsAdapter3(Context context, String items[]){
         this.context=context;
         this.items=items;
     }
-    public ReservationsAdapter2(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData, int layout){
+    public ReservationsAdapter3(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData, int layout){
         this.context=context;
         this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
         this.layout=layout;
@@ -101,8 +85,6 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
 
-            //--- testing-----
-//            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
 
 
             String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
@@ -115,83 +97,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
 
 
-            boolean allExecuted=false;
 
-//                if (position<3)
 
-            ArrayList<DateTimeModel> dateTimeModels=getBookTimeToCheck(bookingAutomatedBrowseData.get(position));
-            for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++) {
-
-                Log.e("CONFIRMEXEC"+position, bookingAutomatedBrowseData.get(position).getClient_name()+bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name() + "::" + isPast(bookingAutomatedBrowseData.get(position).getData().get(i)));
-//                    Log.e("Multi");
-                if (bookingAutomatedBrowseData.get(position).getBookingType().equals("3") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("5") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("8") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("13") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("21") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("24")){
-                    Log.e("Multi","Ok");
-                    Log.e("MultiSize",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                    if ((i!=0 && i!=bookingAutomatedBrowseData.get(position).getData().size()-1)
-                            && bookingAutomatedBrowseData.get(position).getData().size()>2){
-
-                        if (dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i-1).getDate())
-                                && !dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i+1).getDate())){
-
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
-                                allExecuted = true;
-
-                        }else if (!dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i-1).getDate())) {
-
-//                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i-1)))
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i-1).getPosition())))
-                                allExecuted = true;
-                        }else if (!dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i+1).getDate())
-                                && i+1==dateTimeModels.size()) {
-
-//                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
-//                                        allExecuted = true;
-
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i+1).getPosition())))
-                                allExecuted = true;
-                        }
-                    }
-                    if (bookingAutomatedBrowseData.get(position).getData().size()==2){
-                        Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
-                        if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
-                            allExecuted = true;
-                    }
-
-                }else
-                    Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
-
-                if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
-                    allExecuted = true;
-            }
-//                }
-            if(allExecuted && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
-                ((Item) holder).time.setText(R.string.Executed);
-                ((Item) holder).time.setVisibility(View.VISIBLE);
-            }
-            else
-                ((Item)holder).time.setVisibility(View.GONE);
-
-            ((Item)holder).time.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String type=bookingAutomatedBrowseData.get(position).getBookingType();
-                    if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12"))
-                        isOffer=true;
-                    book_id=bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id();
-                    Intent intent=new Intent(context, ExecuteBookActivity.class);
-                    context.startActivity(intent);
-
-                }
-            });
 
             if (offtypetmp.equals("0")) {
                 String s=((AppCompatActivity)context).getResources().getString(R.string.ind_res);
@@ -200,6 +107,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item)holder).myroot.removeAllViews();
                 for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
                     Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+
                     addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name(),position,i);
                 }
 
@@ -337,58 +245,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 }
 
             }
-            if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                ((Item) holder).refuse.setText(R.string.cancel_req);
-            }else {
-                ((Item) holder).refuse.setText(R.string.cancel);
-            }
 
-
-            ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (bookingAutomatedBrowseData.get(position).getBookingType().equals("7")) {
-                        if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                            //-------cancelpaid api--------
-//                            /api/booking/BookingProcessing
-                            Log.e("Outer",bookingAutomatedBrowseData.get(position).getBdb_inner_booking());
-                            Dialog dialog1=new Dialog(context);
-                            dialog1.setContentView(R.layout.map_title_layout);
-                            final EditText reason=dialog1.findViewById(R.id.code);
-                            TextView ok=dialog1.findViewById(R.id.confirm);
-                            TextView message=dialog1.findViewById(R.id.message);
-                            message.setText(R.string.enter_reason);
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    if (reason.getText().toString().length()==0){
-                                        Toast.makeText(context,R.string.enter_reason,Toast.LENGTH_LONG).show();
-                                    }else {
-                                        //----------------- cancel paid----------
-                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),reason.getText().toString(),context);
-                                    }
-                                    }
-                            });
-                        } else {
-
-                            //------------- cancel paid ----------
-                            APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
-
-//                            /api/booking/cancelPaidBooking
-                        }
-                    }else if (bookingAutomatedBrowseData.get(position).getBookingType().equals("2") ||
-                    bookingAutomatedBrowseData.get(position).getBookingType().equals("8")) {
-                        //---------- book proccessing --------- to 0
-//                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
-
-                    }else {
-                        //---------- Other cases
-//                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
-                    }
-                }
-            });
 
 
 
@@ -644,166 +501,5 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public interface MyClickListener {
         void resrve(int p);
         void more(int p);
-    }
-    public static boolean isPast(BookingAutomatedBrowseData reservation) throws ParseException {
-        boolean result = false;
-        if (reservation.getBdb_status().equals("7")) {
-            NumberFormat formatter = new DecimalFormat("00");
-            Calendar calendar = Calendar.getInstance();
-            Log.e("calender", calendar.getTime().toString());
-            DateFormat timeFormate = new SimpleDateFormat("HH:mm:ss");
-            DateFormat dayFormate = new SimpleDateFormat("yyyy-MM-dd");
-            DateFormat dayFormate1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            int hour24hrs = calendar.get(Calendar.HOUR_OF_DAY);
-            int minutes = calendar.get(Calendar.MINUTE);
-            String timeNow = calendar.get(Calendar.HOUR_OF_DAY) + ":" + minutes+":"+"00";
-            String NowTimeStr = (hour24hrs + 3) % 24 + ":" + minutes + ":" + "00";
-//            String =String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)+"");
-            Log.e("calMonth",calendar.get(Calendar.DAY_OF_MONTH)+"");
-            String dom = formatter.format(calendar.get(Calendar.DAY_OF_MONTH));
-            String NowDayStr = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" +dom ;
-            String ReserDateStr = reservation.getBdb_start_date();
-            String ReserTimeStr = reservation.getBdb_start_time();
-//                    getBdb_end_time();
-            Log.e("ReserDateStr", ReserDateStr);
-            Log.e("ReserTimeStr", ReserTimeStr);
-            Log.e("NowDayStr", NowDayStr);
-            Date ReserDate = dayFormate.parse(ReserDateStr);
-            Date ReserTime = timeFormate.parse(ReserTimeStr);
-            Date NowDate = dayFormate.parse(NowDayStr);
-            Date NowTime = timeFormate.parse(NowTimeStr);
-            if (ReserTime.getMinutes() + 10 >= 60) {
-                ReserTime.setMinutes(00);
-                ReserTime.setHours(ReserTime.getHours() + 1);
-            } else
-                ReserTime.setMinutes(ReserTime.getMinutes() + 10);
-            ReserTimeStr = ReserTime.getHours()+":"+ReserTime.getMinutes()+":00";
-//            if ((hour24hrs + 3) > 24) {
-//                calendar.add(Calendar.DATE, 1);
-//                NowDayStr = calendar.get(Calendar.DATE) + "";
-////                NowDate = dayFormate1.parse(NowDayStr);
-//            }
-            Log.e("BDB_ID",reservation.getBdb_id());
-            NowDate = dayFormate1.parse(NowDayStr+" "+timeNow);
-            ReserDate = dayFormate1.parse(ReserDateStr+" "+ReserTimeStr);
-            Log.e("TIMENOW",reservation.getBdb_id()+" "+NowDate.toString()+" "+timeNow);
-            Log.e("ReserDateStr", ReserDateStr);
-            Log.e("ReserTimeStr", ReserTimeStr);
-            Log.e("COMPARENOW", NowDate.toString());
-            Log.e("COMPARERESE", ReserDate.toString());
-
-            Log.e("NowDate", NowDate.toString());
-            Log.e("ReserDate", ReserDate.toString());
-
-
-            if (NowDate.compareTo(ReserDate) > 0) {
-                result = true;
-            } else if (NowDate.compareTo(ReserDate) == 0) {
-                if (NowTime.compareTo(ReserTime) > 0) {
-                    result = true;
-                }
-            }
-        }
-        return result;
-    }
-    public static boolean isPast(String startDate,String EndTime) throws ParseException {
-        boolean result = false;
-        Calendar calendar = Calendar.getInstance();
-        DateFormat timeFormate = new SimpleDateFormat("HH:mm:ss");
-        DateFormat dayFormate =new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat dayFormate1 =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.UK);
-        int hour24hrs = calendar.get(Calendar.HOUR_OF_DAY);
-        int minutes = calendar.get(Calendar.MINUTE);
-        String NowTimeStr = (hour24hrs+3)%24 + ":" + minutes+":"+"00";
-        String timeNow = calendar.get(Calendar.HOUR_OF_DAY) + ":" + minutes+":"+"00";
-        String NowDayStr = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DATE);
-        String ReserDateStr =  startDate;
-        String ReserTimeStr = EndTime;
-        Date ReserTime = timeFormate.parse(ReserTimeStr);
-        Date NowDate = dayFormate.parse(NowDayStr);
-        Date NowTime = timeFormate.parse(NowTimeStr);
-        if(ReserTime.getMinutes()+10>=60)
-        {
-            ReserTime.setMinutes(00);
-            ReserTime.setHours(ReserTime.getHours()+1);
-        }
-        else
-            ReserTime.setMinutes(ReserTime.getMinutes()+10);
-
-        ReserTimeStr = ReserTime.getHours()+":"+ReserTime.getMinutes()+":00";
-
-//        if((hour24hrs+3) > 24)
-//        {
-//            calendar.add(Calendar.DATE,1);
-//            NowDayStr = calendar.get(Calendar.DATE)+"";
-////            String time=calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE)+":"+"00";
-//            NowDate = dayFormate1.parse(NowDayStr+" "+timeNow);
-//            Log.e("COMPARENOW",NowDate.toString()+" "+timeNow);
-//
-//        }
-        NowDate = dayFormate1.parse(NowDayStr+" "+timeNow);
-        Date ReserDate=dayFormate1.parse(ReserDateStr+" "+ReserTimeStr);
-
-        Log.e("TIMENOW",NowDate.toString()+" "+timeNow);
-
-
-        Log.e("ReserDateStr",ReserDateStr);
-        Log.e("ReserTimeStr",ReserTimeStr);
-        Log.e("NowTimeStr",NowTimeStr);
-        Log.e("COMPARENOW",NowDate.toString());
-        Log.e("COMPARERESE",ReserDate.toString());
-
-        if( NowDate.compareTo(ReserDate)>0)
-        {
-            result=true;
-        }
-        else if(NowDate.compareTo(ReserDate)==0)
-        {
-            if( NowTime.compareTo(ReserTime)>0)
-            {
-                result=true;
-            }
-        }
-        return result;
-    }
-    public static ArrayList<DateTimeModel> getBookTimeToCheck(ReservationModel reservationList){
-//        BookingAutomatedBrowseData reservation = null;
-        ArrayList<DateTimeModel> dateTimeModels=new ArrayList<>();
-        for (int i=0;i<reservationList.getData().size();i++){
-            dateTimeModels.add(new DateTimeModel(reservationList.getData().get(i).getBdb_start_date(),reservationList.getData().get(i).getBdb_start_time()
-//                    getBdb_end_time()
-                    ,i));
-        }
-
-
-
-        Collections.sort(dateTimeModels, new Comparator<DateTimeModel>() {
-
-            @Override
-            public int compare(DateTimeModel o1, DateTimeModel o2) {
-                try {
-                    return new SimpleDateFormat("YY:MM:DD").parse(o1.getDate()).compareTo(new SimpleDateFormat("YY:MM:DD").parse(o2.getDate()));
-                } catch (ParseException e) {
-                    return 0;
-                }
-            }
-        });
-        Collections.sort(dateTimeModels, new Comparator<DateTimeModel>() {
-
-            @Override
-            public int compare(DateTimeModel o1, DateTimeModel o2) {
-                try {
-                    return new SimpleDateFormat("HH:mm:ss").parse(o1.getTime()).compareTo(new SimpleDateFormat("HH:mm:ss").parse(o2.getTime()));
-                } catch (ParseException e) {
-                    return 0;
-                }
-            }
-        });
-        for (int i=0;i<dateTimeModels.size();i++){
-            Log.e("DateModel"+i,dateTimeModels.get(i).getDate()+" "+dateTimeModels.get(i).getTime());
-        }
-//        System.out.println();
-
-        return  dateTimeModels;
     }
 }

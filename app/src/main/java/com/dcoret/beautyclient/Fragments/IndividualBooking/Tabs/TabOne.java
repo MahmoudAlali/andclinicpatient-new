@@ -48,7 +48,7 @@ public class TabOne extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
 
-
+        pagenum=1;
         compareModels.clear();
         view= inflater.inflate(R.layout.tab_one,container,false);
         filter =view.findViewById(R.id.filter);
@@ -60,6 +60,8 @@ public class TabOne extends Fragment {
             @Override
             public void onRefresh() {
                 arrayList.clear();
+                compareModels.clear();
+
                 servicesAdapter.notifyDataSetChanged();
                     //---------------------call API for Services and get items-------------
                     APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
@@ -67,6 +69,12 @@ public class TabOne extends Fragment {
         });
 
         if (ServicesTabsFragment.updateServ){
+            compareModels.clear();
+            try{
+                APICall.pd.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", pagenum+"", BeautyMainPage.context);
             ServicesTabsFragment.updateServ=false;
             ServicesTabsFragment.updateoffr=true;
@@ -86,6 +94,7 @@ public class TabOne extends Fragment {
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
         servicesAdapter.notifyDataSetChanged();
+//        recyclerView.invalidate();
     }
 
 

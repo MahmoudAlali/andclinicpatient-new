@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -32,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * This class show me the items of the services in recycle view \n
@@ -39,7 +41,7 @@ import java.util.Calendar;
  * @see RecyclerView.Adapter
  * @author Mahmoud Alali
  */
-public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHolder> {
     public static String bdb_ser_salon2="";
     public static String bdb_hotel2="";
     public static String bdb_ser_hall2="";
@@ -118,12 +120,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(context.getApplicationContext());
         View row;
         row = inflater.inflate(layout, parent, false);
-        ServicesAdapter.Item item=new ServicesAdapter.Item(row);
-        return item;
+        View convertview = inflater.inflate(layout, parent, false);
+//        ServicesAdapter.Item item=new ServicesAdapter.Item(row);
+        ListHolder holder = new ListHolder(convertview);
+        return holder;
     }
 
     String date;
@@ -134,95 +138,108 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ListHolder holder, final int position) {
         try {
-
-                ((Item) holder).service_name.setText(itemArrayList.get(position).getBdb_sup_name());
-                ((Item) holder).pro_name.setText(itemArrayList.get(position).getBdb_sup_name());
+                ( holder).service_name.setText(itemArrayList.get(position).getBdb_sup_name());
+                (holder).pro_name.setText(itemArrayList.get(position).getBdb_sup_name());
 //                if (position==postion1 || position==postion2){
 //                    ((Item) holder).service_compare.setChecked(true);
 //                }
-                ((Item) holder).service_compare.setOnClickListener(new View.OnClickListener() {
+            //check check box is already checked or not because recyclerview use recycling method to reuse view
+
+            Log.e("ISCHECKED:"+holder.getLayoutPosition(),isChecked.containsKey(position)+"");
+            if (isChecked.containsKey(holder.getLayoutPosition())) {
+                holder.service_compare.setChecked(isChecked.get(position));
+
+            } else {
+                ( holder).service_compare.setChecked(false);
+            }
+            ( holder).service_compare.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (((Item) holder).service_compare.isChecked()){
-                        if (TabOne.compareModels.size()==3){
-                            ((Item) holder).service_compare.setChecked(false);
+                        Log.e("LayoutPostion",holder.getLayoutPosition()+"");
 
-                            APICall.showSweetDialog(context, ((AppCompatActivity)context).getResources().getString(R.string.alert),
-                                    ((AppCompatActivity)context).getResources().getString(R.string.cant_compare_more_than_three_ser));
+                        if (( holder).service_compare.isChecked()){
+                            if (TabOne.compareModels.size()==3){
+                                ( holder).service_compare.setChecked(false);
+
+                                APICall.showSweetDialog(context, ((AppCompatActivity)context).getResources().getString(R.string.alert),
+                                        ((AppCompatActivity)context).getResources().getString(R.string.cant_compare_more_than_three_ser));
 //                            Toast.makeText(context,"Can't compare more than two services..",Toast.LENGTH_SHORT).show();
-                        }else {
-                            if (TabOne.compareModels.size() == 0) {
+                            }else {
+                                if (TabOne.compareModels.size() == 0) {
 //                                TabOne.compareModels.size() = 1;
-                                srName1 = ((Item) holder).service_name.getText().toString();
-                                spname1 = ((Item) holder).pro_name.getText().toString();
-                                ev1 = itemArrayList.get(position).getTotalRating() + "*";
-                                price1 = ((Item) holder).service_price.getText().toString();
-                                bdb_ser_home = itemArrayList.get(position).getBdb_ser_home();
-                                bdb_ser_salon = itemArrayList.get(position).getBdb_ser_salon();
-                                bdb_ser_hall = itemArrayList.get(position).getBdb_ser_hall();
-                                bdb_hotel = itemArrayList.get(position).getBdb_hotel();
-                                place1 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+                                    srName1 = ( holder).service_name.getText().toString();
+                                    spname1 = ( holder).pro_name.getText().toString();
+                                    ev1 = itemArrayList.get(position).getTotalRating() + "*";
+                                    price1 = ( holder).service_price.getText().toString();
+                                    bdb_ser_home = itemArrayList.get(position).getBdb_ser_home();
+                                    bdb_ser_salon = itemArrayList.get(position).getBdb_ser_salon();
+                                    bdb_ser_hall = itemArrayList.get(position).getBdb_ser_hall();
+                                    bdb_hotel = itemArrayList.get(position).getBdb_hotel();
+                                    place1 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
 
-                                TabOne.compareModels.add(new CompareModel(srName1,spname1,ev1,price1,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel,place1));
+                                    TabOne.compareModels.add(new CompareModel(srName1,spname1,ev1,price1,bdb_ser_home,bdb_ser_salon,bdb_ser_hall,bdb_hotel,place1));
 
 
-                                Log.e("plc1", bdb_ser_home + "," + bdb_ser_salon + "," + bdb_ser_hall + "," + bdb_hotel);
+                                    Log.e("plc1", bdb_ser_home + "," + bdb_ser_salon + "," + bdb_ser_hall + "," + bdb_hotel);
 //                                postion1=position;
-                            } else if (TabOne.compareModels.size() == 1) {
+                                } else if (TabOne.compareModels.size() == 1) {
 //                                comparenum = 2;
-                                srName2 = ((Item) holder).service_name.getText().toString();
-                                spname2 = ((Item) holder).pro_name.getText().toString();
-                                ev2 = itemArrayList.get(position).getTotalRating() + "Stars";
-                                price2 = ((Item) holder).service_price.getText().toString();
-                                place2 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
-                                bdb_ser_home1 = itemArrayList.get(position).getBdb_ser_home();
-                                bdb_ser_salon1 = itemArrayList.get(position).getBdb_ser_salon();
-                                bdb_ser_hall1 = itemArrayList.get(position).getBdb_ser_hall();
-                                bdb_hotel1 = itemArrayList.get(position).getBdb_hotel();
-                                TabOne.compareModels.add(new CompareModel(srName2,spname2,ev2,price2,bdb_ser_home1,bdb_ser_salon1,bdb_ser_hall1,bdb_hotel1,place2));
+                                    srName2 = ( holder).service_name.getText().toString();
+                                    spname2 = ( holder).pro_name.getText().toString();
+                                    ev2 = itemArrayList.get(position).getTotalRating() + "*";
+                                    price2 = ( holder).service_price.getText().toString();
+                                    place2 = PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+                                    bdb_ser_home1 = itemArrayList.get(position).getBdb_ser_home();
+                                    bdb_ser_salon1 = itemArrayList.get(position).getBdb_ser_salon();
+                                    bdb_ser_hall1 = itemArrayList.get(position).getBdb_ser_hall();
+                                    bdb_hotel1 = itemArrayList.get(position).getBdb_hotel();
+                                    TabOne.compareModels.add(new CompareModel(srName2,spname2,ev2,price2,bdb_ser_home1,bdb_ser_salon1,bdb_ser_hall1,bdb_hotel1,place2));
 
 //                                postion2=position;
-                                Log.e("plc2", bdb_ser_home1 + "," + bdb_ser_salon1 + "," + bdb_ser_hall1 + "," + bdb_hotel1);
-                            } else if (TabOne.compareModels.size() == 2) {
+                                    Log.e("plc2", bdb_ser_home1 + "," + bdb_ser_salon1 + "," + bdb_ser_hall1 + "," + bdb_hotel1);
+                                } else if (TabOne.compareModels.size() == 2) {
 //                                comparenum=3;
-                                srName3= ((Item) holder).service_name.getText().toString();
-                                spname3= ((Item) holder).pro_name.getText().toString();
-                                ev3= itemArrayList.get(position).getTotalRating()+"*";
-                                price3=((Item) holder).service_price.getText().toString();
-                                place3= PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
-                                bdb_ser_home2=itemArrayList.get(position).getBdb_ser_home();
-                                bdb_ser_salon2=itemArrayList.get(position).getBdb_ser_salon();
-                                bdb_ser_hall2=itemArrayList.get(position).getBdb_ser_hall();
-                                bdb_hotel2=itemArrayList.get(position).getBdb_hotel();
+                                    srName3= ( holder).service_name.getText().toString();
+                                    spname3= ( holder).pro_name.getText().toString();
+                                    ev3= itemArrayList.get(position).getTotalRating()+"*";
+                                    price3=( holder).service_price.getText().toString();
+                                    place3= PlaceServiceFragment.placeSpinner.getSelectedItem().toString();
+                                    bdb_ser_home2=itemArrayList.get(position).getBdb_ser_home();
+                                    bdb_ser_salon2=itemArrayList.get(position).getBdb_ser_salon();
+                                    bdb_ser_hall2=itemArrayList.get(position).getBdb_ser_hall();
+                                    bdb_hotel2=itemArrayList.get(position).getBdb_hotel();
 //                                postion2=position;
-                                TabOne.compareModels.add(new CompareModel(srName3,spname3,ev3,price3,bdb_ser_home2,bdb_ser_salon2,bdb_ser_hall2,bdb_hotel2,place3));
+                                    TabOne.compareModels.add(new CompareModel(srName3,spname3,ev3,price3,bdb_ser_home2,bdb_ser_salon2,bdb_ser_hall2,bdb_hotel2,place3));
 
-                                Log.e("plc3",bdb_ser_home2+","+bdb_ser_salon2+","+bdb_ser_hall2+","+bdb_hotel2);
+                                    Log.e("plc3",bdb_ser_home2+","+bdb_ser_salon2+","+bdb_ser_hall2+","+bdb_hotel2);
 
+                                }
                             }
-                        }
-                    }else {
+                        }else {
                             for (int i=0;i<TabOne.compareModels.size();i++){
-                                if (TabOne.compareModels.get(i).getSpname().equals(((Item) holder).pro_name.getText().toString())){
+                                Log.e("SPNAMECModel",TabOne.compareModels.get(i).getSpname());
+                                Log.e("SPNAMERe",( holder).pro_name.getText().toString());
+                                if (TabOne.compareModels.get(i).getSpname().equals(( holder).pro_name.getText().toString())){
                                     TabOne.compareModels.remove(i);
                                 }
                             }
                         }
+
                     Log.e("COMPARE_SIZE",TabOne.compareModels.size()+"");
                     }
                 });
 
-                ((Item) holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
+                ( holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
                try {
-                   ((Item) holder).service_rate.setEnabled(false);
-                   ((Item) holder).service_rate.setRating(Float.parseFloat(itemArrayList.get(position).getTotalRating()));
+                   ( holder).service_rate.setEnabled(false);
+                   ( holder).service_rate.setRating(Float.parseFloat(itemArrayList.get(position).getTotalRating()));
                }catch (Exception ee){
                    ee.printStackTrace();
                }
 
-                ((Item) holder).service_add.setOnClickListener(new View.OnClickListener() {
+                ( holder).service_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
@@ -250,6 +267,41 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
             }
+    private HashMap<Integer, Boolean> isChecked = new HashMap<>();
+    public class ListHolder extends RecyclerView.ViewHolder {
+//        CheckBox cb_product;
+        TextView  service_name,service_price;
+        TextView pro_name;
+        RatingBar service_rate;
+        ImageView service_add,service_fav;
+        CheckBox service_compare;
+        LinearLayout service_details;
+        public ListHolder(View itemView) {
+            super(itemView);
+            service_compare = (CheckBox) itemView.findViewById(R.id.service_compare);
+            service_name=itemView.findViewById(R.id.service_name);
+            service_price=itemView.findViewById(R.id.service_price);
+            service_add=itemView.findViewById(R.id.service_add);
+            service_rate=itemView.findViewById(R.id.service_rate);
+            pro_name=itemView.findViewById(R.id.provider_name);
+//            more_btn=itemView.findViewById(R.id.more_btn);
+            service_compare=itemView.findViewById(R.id.service_compare);
+//            service_details=itemView.findViewById(R.id.service_details);
+            service_fav=itemView.findViewById(R.id.service_fav);
+
+            service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                    //save checked data in hash map on check change
+                    isChecked.put(getAdapterPosition(), b);
+
+                }
+            });
+
+        }
+
+    }
 
     @Override
     public int getItemCount() {

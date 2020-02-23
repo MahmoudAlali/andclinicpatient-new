@@ -37,7 +37,7 @@ public class TabTwo extends Fragment {
         recyclerView = view.findViewById(R.id.offers_recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
         offersAdapterTab=new OffersAdapterTab(BeautyMainPage.context, arrayList);
-
+        TabOne.pagenum=1;
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

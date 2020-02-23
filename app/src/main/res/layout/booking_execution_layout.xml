@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/exec_back"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_icon"
+            android:layout_weight="3"
+            />
+        <TextView
+            android:id="@+id/employee_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/employee_name"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            />
+        <android.support.v4.widget.Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <CheckBox
+            android:id="@+id/isExecuted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.4"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:scaleY="1.4"
+            android:text="" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_service"
+            android:layout_weight="3"
+            />
+
+        <TextView
+            android:id="@+id/service_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:text="@string/Service_Name"
+            />
+        <android.support.v4.widget.Space
+            android:layout_width="35dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:src="@drawable/reser_money_icon"/>
+        <EditText
+            android:id="@+id/moneyTxt"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_edit_text_v6"
+            android:gravity="center" />
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="21dp"
+            android:text="@string/ryal"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

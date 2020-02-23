@@ -33,6 +33,7 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataModel.Location_Beauty;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.MyIndEffectsActivity;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.test.MapWrapperLayout;
 import com.dcoret.beautyclient.test.OnInfoWindowElemTouchListener;
@@ -240,7 +241,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
     private OnInfoWindowElemTouchListener infoButtonListener;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onMapReady(GoogleMap mMap) {
+    public void onMapReady(final GoogleMap mMap) {
         googleMap = mMap;
 
         //------------------------ info title ---------------------
@@ -270,12 +271,39 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
                 // Here we can perform some action triggered after clicking the button
 //                Toast.makeText(BeautyMainPage.context, "تم حج", Toast.LENGTH_SHORT).show();
 
+//                ServicesAdapter.ListOfDates(Integer.parseInt(bdb_booking_period));
+//                Intent intent=new Intent(BeautyMainPage.context, IndividualBooking.class);
+//                intent.putExtra("Provider Name",infoTitle.getText().toString());
+//                intent.putExtra("bdb_ser_sup_id",bdb_ser_sup_id);
+//                intent.putExtra("bdb_booking_period",bdb_booking_period);
+//                intent.putExtra("Price", infoPrice.getText().toString());
+//                startActivity(intent);
+
+
+//                ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
+                Log.e("SERSUPID",bdb_ser_sup_id);
                 ServicesAdapter.ListOfDates(Integer.parseInt(bdb_booking_period));
-                Intent intent=new Intent(BeautyMainPage.context, IndividualBooking.class);
-                intent.putExtra("Provider Name",infoTitle.getText().toString());
-                intent.putExtra("bdb_ser_sup_id",bdb_ser_sup_id);
-                intent.putExtra("bdb_booking_period",bdb_booking_period);
-                intent.putExtra("Price", infoPrice.getText().toString());
+
+//                ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
+                Intent intent = new Intent(BeautyMainPage.context, MyIndEffectsActivity.class);
+                //                        intent.putExtra("Service Name","")
+             int position=0;
+                for (int i = 0; i< TabOne.arrayList.size(); i++) {
+                    Log.e("infoTitle",infoTitle.getText().toString());
+                    Log.e("TabOneArray",TabOne.arrayList.get(i).getBdb_sup_name());
+                    if (infoTitle.getText().toString().equals(TabOne.arrayList.get(i).getBdb_sup_name())) {
+                        Log.e("POSTIONARRAYINMAP",i+"");
+                        position=i;
+                        break;
+                    }
+                }
+                    TabOne.bdb_sup_id=TabOne.arrayList.get(position).getSup_id();
+                TabOne.ser_id=TabOne.arrayList.get(position).getSer_id();
+                TabOne.ser_sup_id=TabOne.arrayList.get(position).getBdb_ser_sup_id();
+                TabOne.ser_sup_id=TabOne.arrayList.get(position).getBdb_ser_sup_id();
+                TabOne.bdb_time=TabOne.arrayList.get(position).getBdb_time();
+                TabOne.bdb_is_bride=TabOne.arrayList.get(position).getBdb_isbride_ser();
+//
                 startActivity(intent);
             }
         };
