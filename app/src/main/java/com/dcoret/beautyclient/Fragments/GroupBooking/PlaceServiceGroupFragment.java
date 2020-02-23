@@ -146,7 +146,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                             rangeSeekbar.setMaxValue(10000);
                             // get min and max text view
                             TextView title = rangeDistanceDialog.findViewById(R.id.title);
-                            title.setText("Distance Range");
+                            title.setText(R.string.distanceRange);
                             final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
                             final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
                             final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
@@ -175,7 +175,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     rangeDistanceDialog.dismiss();
-                                    distance.setText("Distance: " + Min.getText().toString() + "-" + Max.getText().toString());
+                                    distance.setText(BeautyMainPage.context.getResources().getString(R.string.distance)+": " + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 
@@ -187,7 +187,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
 //                                    distance.setChecked(false);
-                                    distance.setText("Distance");
+                                    distance.setText(R.string.distance);
                                     APICall.filterSortAlgorithm("2", "", "");
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
 
@@ -445,7 +445,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                                    //-----------------
                                        maxPrice= Max.getText().toString();
                                        minPrice= Min.getText().toString();
-                                    priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
+                                    priceService.setText(BeautyMainPage.context.getResources().getString(R.string.price)+": "+ Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm(PlaceServiceGroupFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
 
@@ -482,7 +482,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rateServiceDialog.dismiss();
-                        rateService.setText("Service Evaluation: " + (int) ratingBar.getRating());
+                        rateService.setText(BeautyMainPage.context.getResources().getString(R.string.srvcEvaluation)+": " + (int) ratingBar.getRating());
                         APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
 
@@ -505,7 +505,7 @@ public class PlaceServiceGroupFragment extends Fragment {
                     @Override
                     public void onCancel(DialogInterface dialog) {
 //                        rateService.setChecked(false);
-                        rateService.setText("Service Evaluation");
+                        rateService.setText(R.string.srvcEvaluation);
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
                         Log.e("Cancel","ok");
                         APICall.filterSortAlgorithm("5", "", "");

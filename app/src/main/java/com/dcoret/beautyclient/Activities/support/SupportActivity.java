@@ -16,6 +16,11 @@ import com.dcoret.beautyclient.Dialog.Dialogs;
 import com.dcoret.beautyclient.Dialog.MyRunnable;
 import com.dcoret.beautyclient.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class SupportActivity extends AppCompatActivity {
 
 
@@ -24,20 +29,26 @@ public class SupportActivity extends AppCompatActivity {
     public static String providerName,providerID,providerMail,providerMobile,providerSalonName;
 
     Dialogs getReasonDialog;
+    Date openningTime,closingTime,now;
 
     static Dialogs confirmationDialog;
     static Context context;
+    public Calendar calendarOpenning,calendarClosing,calendarNow;
+    int nowHour,nowMinuts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
         APICall.getProviderId(this);
-
+        calendarNow = Calendar.getInstance();
+        nowHour=calendarNow.get(Calendar.HOUR_OF_DAY);
+        nowMinuts=calendarNow.get(Calendar.MINUTE);
         context=this;
 
         whatsAppSupport=findViewById(R.id.whatsapp_support);
         internalChatBtn=findViewById(R.id.internalChatBtn);
         callMeBtn=findViewById(R.id.callMeBtn);
+
 
         //----------- back btn process------
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -51,29 +62,53 @@ public class SupportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-
-                if (providerSalonName!=null && !providerSalonName.equals(""))
-                    APICall.sendWhatsappEvent(context,providerID,providerSalonName,providerMobile);
+                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                {
+                    if (providerSalonName!=null && !providerSalonName.equals(""))
+                        APICall.sendWhatsappEvent(context,providerID,providerSalonName,providerMobile);
+                    else
+                        APICall.sendWhatsappEvent(context,providerID,providerName,providerMobile);
+                }
                 else
-                    APICall.sendWhatsappEvent(context,providerID,providerName,providerMobile);
+                {
+                    showOutOfTime();
+                }
+
+
 
             }
         });
         internalChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), InternalChatActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra("providerId",providerID);
-                startActivity(intent);
+                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                {
+                    Intent intent = new Intent(getApplicationContext(), InternalChatActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("providerId",providerID);
+                    startActivity(intent);
+                }
+                else
+                {
+                    showOutOfTime();
+                }
+
             }
         });
 
         callMeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn);
-                getReasonDialog.show();
+                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                {
+                    getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn);
+                    getReasonDialog.show();
+                }
+                else
+                {
+                    showOutOfTime();
+                }
+
             }
         });
 
@@ -113,6 +148,11 @@ public class SupportActivity extends AppCompatActivity {
     public static void showUnavailableSupport()
     {
         Dialogs dialogs=new Dialogs(context,R.string.noOperator);
+        dialogs.show();
+    }
+    public static void showOutOfTime()
+    {
+        Dialogs dialogs=new Dialogs(context,R.string.teamWorkingTime);
         dialogs.show();
     }
 

@@ -76,8 +76,11 @@
 
             <Spinner
                 android:id="@+id/age_range"
-                android:layout_width="225dp"
-                android:layout_height="match_parent"></Spinner>
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="match_parent">
+
+            </Spinner>
         </LinearLayout>
         <LinearLayout
             android:layout_gravity="center"
@@ -89,9 +92,11 @@
 
             <Spinner
                 android:id="@+id/add_service"
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"></Spinner>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center">
+
+            </Spinner>
         </LinearLayout>
         </LinearLayout>
 

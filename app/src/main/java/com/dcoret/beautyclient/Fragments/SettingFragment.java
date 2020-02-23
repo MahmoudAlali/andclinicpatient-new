@@ -71,7 +71,7 @@ public class SettingFragment extends Fragment {
                 res.updateConfiguration(conf, dm);
                 editor.putString("lang","ar");
                 editor.commit();
-                Intent intent=new Intent(BeautyMainPage.context, Offers.class);startActivity(intent);
+                Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                 ((AppCompatActivity)BeautyMainPage.context).finish();
             }
         });
@@ -88,7 +88,7 @@ public class SettingFragment extends Fragment {
                 res.updateConfiguration(conf, dm);
                 editor.putString("lang","en");
                 editor.commit();
-                Intent intent=new Intent(BeautyMainPage.context, Offers.class);startActivity(intent);
+                Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                 ((AppCompatActivity)BeautyMainPage.context).finish();
             }
         });

@@ -206,7 +206,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
 
                    }
                    if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num().equals("2"))
-                   if (APICall.ln.equals("ar")){
+                   if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){
                        service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar()+" : "+APICall.convertToArabic(priceService)+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
                    }else {
                        service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+APICall.convertToArabic(priceService)+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));

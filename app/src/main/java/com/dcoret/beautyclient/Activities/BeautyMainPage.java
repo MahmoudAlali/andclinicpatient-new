@@ -497,7 +497,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             String sharesub="Beauty";
             intent.putExtra(Intent.EXTRA_SUBJECT,sharesub);
             intent.putExtra(Intent.EXTRA_TEXT,R.string.shareAppMessage);
-            startActivity(Intent.createChooser(intent,"Share using"));
+            startActivity(Intent.createChooser(intent,context.getResources().getString(R.string.share)));
 
 
         } else if (id == R.id.support) {

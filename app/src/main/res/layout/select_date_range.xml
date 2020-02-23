@@ -28,7 +28,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="Select Date"
+            android:text="@string/date"
             android:textSize="15dp" />
 
 

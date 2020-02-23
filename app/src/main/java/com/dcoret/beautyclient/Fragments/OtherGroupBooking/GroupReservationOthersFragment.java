@@ -80,7 +80,7 @@ public class GroupReservationOthersFragment extends Fragment {
 
         servicesList.clear();
         serviceNameList.clear();
-        serviceNameList.add("Choose Service");
+        serviceNameList.add(BeautyMainPage.context.getResources().getString(R.string.choose_service));
         Log.e("FragmentName",BeautyMainPage.FRAGMENT_NAME );
 
         if (BeautyMainPage.FRAGMENT_NAME .equals("PLACESERVICEFRAGMENTBRIDEOTHER")) {

@@ -14,9 +14,9 @@
         android:id="@+id/notification"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@drawable/notufication_border"
+        android:background="@drawable/notification_shape"
         android:weightSum="6"
-        android:layout_height="match_parent">
+        android:layout_height="150dp">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                 android:id="@+id/notif_title"
                 android:layout_width="match_parent"
                 android:text="Title"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:textSize="14dp"
                 android:textColor="@color/red"

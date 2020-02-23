@@ -237,7 +237,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="@string/normal_res"
                 android:textColor="#000"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold"
 
                 />

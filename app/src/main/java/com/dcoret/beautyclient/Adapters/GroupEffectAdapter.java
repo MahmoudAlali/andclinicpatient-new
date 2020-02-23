@@ -111,7 +111,11 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         LinearLayout myroot1;
         cat_name=layout2.findViewById(R.id.cat_name);
         myroot1=layout2.findViewById(R.id.myroot);
-        cat_name.setText(cname+":"+clientEffectModel.getCat_name());
+        if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
+            cat_name.setText(cname+" : "+clientEffectModel.getCat_name_ar());
+        else
+            cat_name.setText(cname+" : "+clientEffectModel.getCat_name());
+
 
         for (int i=0;i<clientEffectModel.getEffects().size();i++){
             addlayout(myroot1,clientEffectModel.getEffects().get(i));
@@ -234,7 +238,7 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         });
 
         effect_name=layout2.findViewById(R.id.effect_name);
-        if (APICall.ln.equals("ar")) {
+        if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")) {
             effect_name.setText(effects.getBdb_effect_name_ar());
         }else {
             effect_name.setText(effects.getBdb_effect_name_en());

@@ -16,12 +16,15 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +49,22 @@ public class Offers extends Fragment implements LocationListener {
     public static int ACCESS_FINE_LOCATION = 90;
     private LocationManager locationManager;
     private String provider;
+    Toolbar toolbar;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.offers_layout, container, false);
-
+        toolbar= view.findViewById(R.id.toolbarm);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // If the navigation drawer is not open then open it, if its already open then close it.
+                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
+                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
+            }
+        });
         //context=this;
         //----------------init recycle view ----------------------------
 //        if (bestOfferItems.size()>0){

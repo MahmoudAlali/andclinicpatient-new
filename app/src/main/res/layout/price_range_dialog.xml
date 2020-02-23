@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/standard_30"
             android:gravity="center"
-            android:text="Price Range"
+            android:text="@string/priceRange"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
 

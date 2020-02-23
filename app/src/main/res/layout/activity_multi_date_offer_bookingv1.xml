@@ -153,7 +153,7 @@
             android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/high_edit_text"
-            android:text="age"
+            android:text="@string/age"
             />
         <LinearLayout
             android:orientation="horizontal"
@@ -168,7 +168,7 @@
                 android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"
-                android:text="مكان الخدمة:"
+                android:text="@string/Service_Place"
                 />
             <TextView
                 android:layout_weight="1"
@@ -179,7 +179,7 @@
                 android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"
-                android:text="age"
+                android:text="@string/age"
                 />
 
         </LinearLayout>

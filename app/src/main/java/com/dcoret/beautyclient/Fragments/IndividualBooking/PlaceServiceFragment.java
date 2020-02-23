@@ -181,7 +181,7 @@ public class PlaceServiceFragment extends Fragment {
                             rangeSeekbar.setMaxValue(10000);
                             // get min and max text view
                             TextView title = rangeDistanceDialog.findViewById(R.id.title);
-                            title.setText("Distance Range");
+                            title.setText(R.string.distance);
                             final TextView tvMin = rangeDistanceDialog.findViewById(R.id.textMin1);
                             final TextView tvMax = rangeDistanceDialog.findViewById(R.id.textMax1);
                             final EditText Min = rangeDistanceDialog.findViewById(R.id.minval);
@@ -212,7 +212,7 @@ public class PlaceServiceFragment extends Fragment {
                                     rangeDistanceDialog.dismiss();
                                      maxValDistance=tvMax.getText().toString();
                                      String s=getResources().getString(R.string.distance);
-                                    distance.setText(s+":" +APICall.convertToArabic( Min.getText().toString() + "-" + Max.getText().toString()));
+                                    distance.setText(s+": " +APICall.convertToArabic( Min.getText().toString() + "-" + Max.getText().toString()));
                                     APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 //                               ------------For Offer Filter-------------------------------
@@ -470,7 +470,7 @@ public class PlaceServiceFragment extends Fragment {
                                 @Override
                                 public void onClick(View v) {
                                     rangePriceDialog.dismiss();
-                                    priceService.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
+                                    priceService.setText(BeautyMainPage.context.getResources().getString(R.string.price)+": " + Min.getText().toString() + "-" + Max.getText().toString());
                                     APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
                                     ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
 //                                    priceOffer=",{\"num\":32,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
@@ -514,7 +514,7 @@ public class PlaceServiceFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rateServiceDialog.dismiss();
-                        rateService.setText("Service Evaluation: " + (int) ratingBar.getRating());
+                        rateService.setText(BeautyMainPage.context.getResources().getString(R.string.srvcEvaluation)+": " + (int) ratingBar.getRating());
                         APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
                         rateOffer=",{\"num\":5,\"value1\":"+ratingBar.getRating()+",\"value2\":"+ratingBar.getRating()+"}";
@@ -538,7 +538,7 @@ public class PlaceServiceFragment extends Fragment {
                     @Override
                     public void onCancel(DialogInterface dialog) {
 //                        rateService.setChecked(false);
-                        rateService.setText("Service Evaluation");
+                        rateService.setText(R.string.srvcEvaluation);
                         ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
                         Log.e("Cancel","ok");
                         APICall.filterSortAlgorithm("5", "", "");
@@ -592,7 +592,7 @@ public class PlaceServiceFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rangePriceDialog.dismiss();
-                        offerPrice.setText("Price:" + Min.getText().toString() + "-" + Max.getText().toString());
+                        offerPrice.setText(BeautyMainPage.context.getResources().getString(R.string.price)+": " + Min.getText().toString() + "-" + Max.getText().toString());
 //                        APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
 //                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
                         priceOffer=",{\"num\":39,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";

@@ -13,7 +13,7 @@
         android:background="@color/end_gray"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@string/Backicon"
+        app:navigationIcon="@drawable/ic_menu_wihte_24dp"
         app:title="@string/Notifications"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"

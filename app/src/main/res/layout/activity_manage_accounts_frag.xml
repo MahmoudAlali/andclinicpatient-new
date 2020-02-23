@@ -245,6 +245,7 @@
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
+                android:textAllCaps="false"
                 android:background="@drawable/shadow_pink"
                 android:text="@string/add_delete_location"
                 android:textColor="#000" />
@@ -255,6 +256,7 @@
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
+                android:textAllCaps="false"
                 android:background="@drawable/shadow_brown"
                 android:text="@string/Delete_account"
                 android:textColor="#000" />
