@@ -87,6 +87,8 @@ public class PlaceServiceFragment extends Fragment {
         rateService = view.findViewById(R.id.service_rate);
         distance = view.findViewById(R.id.distance);
         ok = view.findViewById(R.id.ok);
+        if (BeautyMainPage.client_name.equals(""))
+            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser",BeautyMainPage.context);
 
 
 

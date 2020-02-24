@@ -479,5 +479,20 @@
     <string name="Executed_res">المنفذة</string>
     <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
     <string name="accepted">مقبولة مبدئيا</string>
+    <string name="employee_evaluation">تقييم الموظفات</string>
+    <string name="evaluate">تقييم</string>
+    <string name="clients_count_gr_2">عدد الزبونات يجب ان يكون زبونتين على الاقل</string>
+    <string name="reser_id">رقم الحجز</string>
+    <string name="journey_time">وقت الرحلة</string>
+    <string name="journey_cost">كلفة الرحلة</string>
+    <string name="actual_price">السعر الفعلي</string>
+    <string name="main_price">السعر الاساسي</string>
+    <string name="minute">دقيقة</string>
+    <string name="price">السعر</string>
+    <string name="reason_">السبب</string>
+    <string name="lost_time">الوقت الضائع</string>
+    <string name="journey_lost_time">journey lost time</string>
+    <string name="rel_ser_lost_time">relation</string>
+    <string name="wait_emp_lost_time">wait employee</string>
 
 </resources>

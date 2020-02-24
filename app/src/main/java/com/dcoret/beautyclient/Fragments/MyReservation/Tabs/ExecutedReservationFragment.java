@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Fragments.MyReservation;
+package com.dcoret.beautyclient.Fragments.MyReservation.Tabs;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -46,6 +46,8 @@ public class ExecutedReservationFragment extends Fragment {
         View view = inflater.inflate(R.layout.incom_reservatiom_fragment, container, false);
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
+        MyReservationFragment.tab="3";
+        MyReservationFragment.groupbooking="";
 
         service_select=view.findViewById(R.id.incom_ree);
         sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
@@ -57,7 +59,7 @@ public class ExecutedReservationFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout=R.layout.incom_reservation_layout;
-        APICall.filter=APICall.bookingFilter("1","8","0");
+        APICall.filter=filter=APICall.bookingFilter("1","3","0");
 
 
 
@@ -69,7 +71,7 @@ public class ExecutedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", "", "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout);
         }else {
             MyReservationFragment.filtercheck=false;
         }

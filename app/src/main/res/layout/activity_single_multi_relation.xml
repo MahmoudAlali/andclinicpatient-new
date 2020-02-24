@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SingleMultiBooking.SingleMultiRelationActivity"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@string/Backicon"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title=""
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/end_gray" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/black"
+            android:layout_marginBottom="5dp"/>
+        <CheckBox
+            android:id="@+id/multi_salon_rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/accent_v3"
+            android:layout_marginBottom="5dp"
+            android:text="تنفيذ الحجز للعملاء المرتبطين في صالون واحد"
+            />
+        <CheckBox
+            android:id="@+id/multi_salon_client"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/accent_v3"
+            android:layout_marginBottom="5dp"
+            android:text="تنفيذ الخدمات داخل الحجز للعميلة في صالون واحد"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/black"
+            android:layout_marginBottom="@dimen/pf_10_txt_size"
+            />
+        <Button
+            android:id="@+id/done"
+            android:onClick="doneclick"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_button"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shadow_button_add_site"
+            android:text="Done"
+            />
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

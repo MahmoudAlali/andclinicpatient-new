@@ -1,6 +1,7 @@
 package com.dcoret.beautyclient.Fragments.MyReservation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -47,6 +48,8 @@ public class ExecuteBookActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent=new Intent(context,RateSerEmpActivity.class);
+//                startActivity(intent);
                 JSONArray p=getBookings();
                 APICall.setExecuted(context,p);
 

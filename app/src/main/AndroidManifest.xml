@@ -23,7 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragments.MyReservation.ExecuteBookActivity"></activity>
+        <activity android:name=".Fragments.SingleMultiBooking.SingleMultiAltResultActivity"></activity>
+        <activity android:name=".Fragments.SingleMultiBooking.SingleMultiRelationActivity" />
+        <activity android:name=".Fragments.MyReservation.RateSerEmpActivity" />
+        <activity android:name=".Fragments.MyReservation.ExecuteBookActivity" />
         <activity android:name=".Fragments.MyReservation.RatingBookActivity" />
         <activity android:name=".Fragments.OtherGroupBooking.AlterGroupOtherReservationResult" />
         <activity android:name=".Fragments.OtherGroupBooking.OtherRelationActivity" />
@@ -60,7 +63,7 @@
         <activity android:name=".Fragments.MyEffects.MyEffectsActivity" />
         <activity android:name=".Fragments.IndividualBooking.BookingIndvidualActivity" />
         <activity android:name=".Activities.support.SupportActivity" />
-        <activity android:name=".Activities.ReservatoinDetailsActivity" />
+        <activity android:name=".Fragments.MyReservation.ReservatoinDetailsActivity" />
         <activity android:name=".Activities.AddEffectOffersActivity" />
 
         <receiver

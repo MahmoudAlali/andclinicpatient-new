@@ -28,6 +28,7 @@ import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
 import com.dcoret.beautyclient.DataModel.ServiceItems;
 import com.dcoret.beautyclient.DataModel.ServicesIDS;
 import com.dcoret.beautyclient.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 
@@ -116,12 +117,13 @@ public class GroupReservationOthersFragment extends Fragment {
                 ImageView delete=layout2.findViewById(R.id.delete);
                 EditText client_name=layout2.findViewById(R.id.client_name);
                 EditText phone_number=layout2.findViewById(R.id.phone_number);
-                final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
+                final SearchableSpinner add_service=layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
 //                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
 
                 adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1 ,serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                add_service.setTitle(getResources().getString(R.string.services));
                 add_service.setAdapter(adapter);
 
                 final ArrayList<ServicesIDS> servicesForClientGroups=new ArrayList<>();

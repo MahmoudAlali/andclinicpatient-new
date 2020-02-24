@@ -58,11 +58,12 @@
                 android:layout_marginBottom="7dp"
                 android:layout_height="35dp">
 
-                <Spinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/add_service"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"></Spinner>
+                    android:textAlignment="center"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
             </LinearLayout>
         </LinearLayout>
         <!--<ImageView-->

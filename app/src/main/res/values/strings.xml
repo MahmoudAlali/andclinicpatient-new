@@ -600,4 +600,19 @@
     <string name="Executed_res">Executed</string>
     <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
     <string name="accepted">accepted</string>
+    <string name="employee_evaluation">Employees Evaluation</string>
+    <string name="evaluate">evaluate</string>
+    <string name="clients_count_gr_2">The number of clients must be at least two</string>
+    <string name="reser_id">ID</string>
+    <string name="journey_time">Journey time</string>
+    <string name="journey_cost">Journey cost</string>
+    <string name="actual_price">actual price</string>
+    <string name="main_price">main price</string>
+    <string name="minute">minute</string>
+    <string name="price">price</string>
+    <string name="reason_">reason</string>
+    <string name="lost_time">lost time</string>
+    <string name="journey_lost_time">journey lost time</string>
+    <string name="rel_ser_lost_time">relation</string>
+    <string name="wait_emp_lost_time">wait employee</string>
 </resources>

@@ -28,12 +28,7 @@ import com.dcoret.beautyclient.R;
 import java.util.ArrayList;
 
 public class GroupRelationActivity extends AppCompatActivity {
-    Fragment fragment;
-    FragmentManager fm;
-    FragmentTransaction fragmentTransaction;
-    Toolbar toolbar;
-
-    LinearLayout myroot;
+     LinearLayout myroot;
     Button done;
     Context context;
     CheckBox multi_salon_client_check,multi_salon_client_rel_check;

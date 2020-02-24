@@ -22,11 +22,12 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Activities.ReservatoinDetailsActivity;
+import com.dcoret.beautyclient.Fragments.MyReservation.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
 import com.dcoret.beautyclient.Fragments.MyReservation.ExecuteBookActivity;
+import com.dcoret.beautyclient.Fragments.MyReservation.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
 
@@ -42,6 +43,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
+import hyogeun.github.com.colorratingbarlib.ColorRatingBar;
+
 public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
@@ -54,7 +57,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     //    ArrayList<DataReservation> reservations;
     int layout;
     public static Fragment fragment;
-    public static Boolean isOffer;
+    public static Boolean isOffer=false;
     public static FragmentManager fm;
     public static FragmentTransaction fragmentTransaction;
     public static String book_id="0";
@@ -104,8 +107,55 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
 
+            if (MyReservationFragment.tab.equals("1")){
+                if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
+                    ((Item) holder).status.setText("مقبولة");
+                }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
+                    ((Item) holder).status.setText("بإنتظار التأكيد");
+                }
+            }else{
+                ((Item) holder).status.setVisibility(View.GONE);
+            }
 
-            String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
+            if (!MyReservationFragment.tab.equals("3")){
+                ((Item) holder).rating.setVisibility(View.GONE);
+            }else {
+                try {
+                    float rate=Float.parseFloat(bookingAutomatedBrowseData.get(position).getData().get(0).getProvider_rating());
+                    ((Item) holder).rating.setRating(rate);
+
+                }catch (Exception e){
+                    ((Item) holder).rating.setRating(0f);
+                }
+
+            }
+
+
+            if (MyReservationFragment.tab.equals("3")){
+                ((Item) holder).refuse.setVisibility(View.GONE);
+                ((Item) holder).delay.setVisibility(View.GONE);
+                ((Item) holder).time.setVisibility(View.GONE);
+                ((Item) holder).status.setVisibility(View.VISIBLE);
+
+                String st=getBookStatus(bookingAutomatedBrowseData.get(position),((Item)holder), ((Item) holder).status);
+                if (st.equals("3")){
+                    ((Item) holder).status.setText("منفذ بشكل كامل");
+
+                }else if (st.equals("4")){
+                    ((Item) holder).status.setText("ملغي");
+
+                }else if (st.equals("5")){
+                    ((Item) holder).status.setText("لم يتم دفع العربون");
+
+                }else if (st.equals("34")){
+                    ((Item) holder).status.setText("منفذ بشكل جزئي");
+
+                }
+
+            }
+
+
+                String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
 
             if (inner.equals("0")){
                 ((Item)holder).inner_res.setImageResource(R.drawable.ic_arrow_upward_black_24dp);
@@ -449,6 +499,40 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    private String getBookStatus(ReservationModel reservationModel, Item holder, TextView status) {
+        String st="";
+        for (int i=0;i<reservationModel.getData().size();i++){
+            if (reservationModel.getData().get(i).getBdb_status().equals("5")){
+
+
+
+                st="5";
+                break;
+            }else  {
+                if (reservationModel.getData().size()==1){
+                    if (reservationModel.getData().get(i).getBdb_status().equals("3")) {
+                        st="3";
+                    }else  if (reservationModel.getData().get(i).getBdb_status().equals("4")){
+                        st="4";
+                    }
+                }else if (i!=0){
+                    if (reservationModel.getData().get(i).getBdb_status().equals("3")
+                    || reservationModel.getData().get(i).getBdb_status().equals("4")){
+                        if (!reservationModel.getData().get(i).getBdb_status().equals(reservationModel.getData().get(i-1).getBdb_status())){
+                            st="34";
+                            break;
+                        }else {
+                            if (reservationModel.getData().get(i).getBdb_status().equals(reservationModel.getData().get(i-1).getBdb_status())) {
+                                st=reservationModel.getData().get(i).getBdb_status();
+                            }
+                            }
+                    }
+                }
+            }
+        }
+        return st;
+    }
+
     @Override
     public int getItemCount() {
         Log.e("bookingAutomatedcheck",bookingAutomatedBrowseData.size()+"");
@@ -606,14 +690,18 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
         MyClickListener listener;
 
-        TextView bookType,client_name, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
+        TextView bookType,client_name,status,delay, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
         ImageView book_Details,inner_res;
+        ColorRatingBar rating;
 
         LinearLayout myroot;
         public Item(View itemView, MyClickListener listener) {
             super(itemView);
             bookType=itemView.findViewById(R.id.booktype);
             myroot=itemView.findViewById(R.id.myroot);
+            status=itemView.findViewById(R.id.status);
+            delay=itemView.findViewById(R.id.delay);
+            rating=itemView.findViewById(R.id.rating);
 
             totalPrice=itemView.findViewById(R.id.total_price);
             inner_res=itemView.findViewById(R.id.inner_res);
@@ -663,7 +751,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             String dom = formatter.format(calendar.get(Calendar.DAY_OF_MONTH));
             String NowDayStr = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" +dom ;
             String ReserDateStr = reservation.getBdb_start_date();
-            String ReserTimeStr = reservation.getBdb_start_time();
+            String ReserTimeStr = reservation.getBdb_end_time();
 //                    getBdb_end_time();
             Log.e("ReserDateStr", ReserDateStr);
             Log.e("ReserTimeStr", ReserTimeStr);

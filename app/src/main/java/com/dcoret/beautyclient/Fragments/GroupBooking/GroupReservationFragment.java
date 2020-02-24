@@ -2,6 +2,7 @@ package com.dcoret.beautyclient.Fragments.GroupBooking;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -120,7 +121,7 @@ public class GroupReservationFragment extends Fragment {
                 ImageView delete=layout2.findViewById(R.id.delete);
                 EditText client_name=layout2.findViewById(R.id.client_name);
                 EditText phone_number=layout2.findViewById(R.id.phone_number);
-                final AppCompatSpinner add_service=layout2.findViewById(R.id.add_service);
+                final SearchableSpinner add_service=layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service=layout2.findViewById(R.id.adding_service_layout);
                 //------------------------------------------------
 //                 adapter=new CustomListAdapterWithoutImage(getActivity(), serviceNameList);
@@ -130,6 +131,7 @@ public class GroupReservationFragment extends Fragment {
                 //----------- adapter add services----------
                 adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                add_service.setTitle(getResources().getString(R.string.services));
                 add_service.setAdapter(adapter);
                 //--------------------------------------------
 
@@ -258,12 +260,13 @@ public class GroupReservationFragment extends Fragment {
                 //--------- find views --------------------
                 EditText client_name = layout2.findViewById(R.id.client_name);
                 EditText phone_number = layout2.findViewById(R.id.phone_num);
-                final AppCompatSpinner add_service = layout2.findViewById(R.id.add_service);
+                final SearchableSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
                 //------------------ adapter for add services----------------------
                 adapter = new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1 , serviceNameList) ;
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                add_service.setTitle(getResources().getString(R.string.services));
                 add_service.setAdapter(adapter);
 
                 final ArrayList<ServicesIDS> servicesForClientGroups = new ArrayList<>();
@@ -394,21 +397,26 @@ public class GroupReservationFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int alert=0;
 
-                if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE") && bridecheck==false){
-                alert=3;
-                }
+                if (clientsViewData.size()<2){
+                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.clients_count_gr_2));
 
-                for (int i=0;i<clientsViewData.size();i++) {
-                    if (clientsViewData.get(i).getPhone_number().getText().toString().length()!=0)
-                    if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
-                      alert=2;
-                        break;
+                }else {
+                    int alert = 0;
+
+                    if (BeautyMainPage.FRAGMENT_NAME.equals("PLACESERVICEFRAGMENTBRIDE") && bridecheck == false) {
+                        alert = 3;
                     }
-                }
 
-                for (int i=0;i<clientsViewData.size();i++) {
+                    for (int i = 0; i < clientsViewData.size(); i++) {
+                        if (clientsViewData.get(i).getPhone_number().getText().toString().length() != 0)
+                            if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
+                                alert = 2;
+                                break;
+                            }
+                    }
+
+                    for (int i = 0; i < clientsViewData.size(); i++) {
 //                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
                         if (clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
@@ -419,12 +427,12 @@ public class GroupReservationFragment extends Fragment {
 
                     if (alert == 1) {
                         APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.complete_all_data));
-                    }else if(alert==2){
+                    } else if (alert == 2) {
 
-                    }else if (alert==3){
+                    } else if (alert == 3) {
                         APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.ser_have_one_bride_ser));
 
-                    }else {
+                    } else {
 
 //                        if (add_me.getText().toString().equals(getResources().getString(R.string.Add_Me))) {
 //                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_yourself));
@@ -432,7 +440,7 @@ public class GroupReservationFragment extends Fragment {
 //                            APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.add_another_client));
 //                        }
 //                        else
-                            {
+                        {
                             // =------------is hair service go to anthor fragment----------
 //                            if (ishairService.size() > 0) {
 //                                fragment = new HairSpecificationsFragment();
@@ -447,14 +455,14 @@ public class GroupReservationFragment extends Fragment {
 //                                fragmentTransaction.replace(R.id.fragment, fragment);
 //                                fragmentTransaction.commit();
 //                            }
-                            Intent intent=new Intent(BeautyMainPage.context,MyGroupEffectActivity.class);
+                            Intent intent = new Intent(BeautyMainPage.context, MyGroupEffectActivity.class);
                             startActivity(intent);
 
                         }
                     }
                     //----- call group filter for booking -------------
                     APICall.GroupFilterBooking();
-
+                }
             }
         });
         return view;

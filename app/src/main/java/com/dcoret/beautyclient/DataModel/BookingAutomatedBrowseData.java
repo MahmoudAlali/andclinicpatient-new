@@ -11,7 +11,8 @@ public class BookingAutomatedBrowseData {
             ,service_en_name
             ,service_ar_name
             ,client_name
-            ,booking_price;
+            ,booking_price
+    ,provider_rating;
 
     String totalItem;
 
@@ -56,6 +57,40 @@ public class BookingAutomatedBrowseData {
         this.client_name = client_name;
         this.booking_price = booking_price;
         this.totalItem = totalItem;
+    }
+
+    String bdb_end_time;
+    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time,String bdb_end_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem,String provider_rating) {
+        this.bdb_id = bdb_id;
+        this.bdb_price = bdb_price;
+        this.bdb_status = bdb_status;
+        this.bdb_start_date = bdb_start_date;
+        this.bdb_start_time = bdb_start_time;
+        this.supplier_name = supplier_name;
+        this.employee_name = employee_name;
+        this.service_en_name = service_en_name;
+        this.service_ar_name = service_ar_name;
+        this.client_name = client_name;
+        this.booking_price = booking_price;
+        this.totalItem = totalItem;
+        this.bdb_end_time = bdb_end_time;
+        this.provider_rating= provider_rating;
+    }
+
+    public String getProvider_rating() {
+        return provider_rating;
+    }
+
+    public void setProvider_rating(String provider_rating) {
+        this.provider_rating = provider_rating;
+    }
+
+    public String getBdb_end_time() {
+        return bdb_end_time;
+    }
+
+    public void setBdb_end_time(String bdb_end_time) {
+        this.bdb_end_time = bdb_end_time;
     }
 
     public String getBooking_price() {

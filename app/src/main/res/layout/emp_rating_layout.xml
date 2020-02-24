@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pf_100_txt_size"
+        android:background="@drawable/offer_reser_count_shape"
+        android:layout_margin="@dimen/pf_10_txt_size">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/service_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Service_Name"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/standard_20"
+            android:textColor="@color/red"
+            />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/employee_name"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/Service_Name"
+                android:gravity="center"
+                />
+            <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleY="0.5"
+                android:scaleX="0.5"
+                android:id="@+id/rating"
+                android:numStars="5"
+                app:progress_color="#FFD700"
+                app:empty_color="@color/gray"
+                android:layout_gravity="end"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

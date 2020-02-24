@@ -1,4 +1,4 @@
-package com.dcoret.beautyclient.Fragments.MyReservation;
+package com.dcoret.beautyclient.Fragments.MyReservation.Tabs;
 
 
 import android.app.Fragment;
@@ -34,7 +34,7 @@ public class DepositReservationFragment extends Fragment {
     FragmentTransaction fragmentTransaction;
     Spinner category;
     RecyclerView service_select;
-    ReservationsAdapter2 reservationsAdapter2;
+    public static ReservationsAdapter2 reservationsAdapter2;
 
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
 
@@ -48,6 +48,8 @@ public class DepositReservationFragment extends Fragment {
         View view = inflater.inflate(R.layout.incom_reservatiom_fragment, container, false);
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
+        MyReservationFragment.tab="2";
+        MyReservationFragment.groupbooking="";
 
 
         service_select=view.findViewById(R.id.incom_ree);
@@ -60,7 +62,7 @@ public class DepositReservationFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout=R.layout.incom_reservation_layout;
-        APICall.filter=APICall.bookingFilter("1","8","0");
+        APICall.filter=filter=APICall.bookingFilter("1","7","0");
 
 
 
@@ -72,7 +74,7 @@ public class DepositReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", "", "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout);
         }else {
             MyReservationFragment.filtercheck=false;
         }
