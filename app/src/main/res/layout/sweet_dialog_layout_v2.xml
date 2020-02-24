@@ -37,6 +37,8 @@
                 android:layout_marginTop="@dimen/standard_20"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
                 android:gravity="center"
                 android:text="Message"
                 android:textSize="15dp" />

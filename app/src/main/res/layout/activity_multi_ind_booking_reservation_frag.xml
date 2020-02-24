@@ -43,7 +43,7 @@
 
             <Spinner
                 android:id="@+id/choose_occision"
-                android:layout_width="225dp"
+                android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_height="@dimen/high_edit_text"
                 />
@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text"
                 android:background="@drawable/shadow_accent_c5"
+                android:textAllCaps="false"
                 android:text="@string/choose_date_for_your_services"/>
 
         </LinearLayout>
@@ -101,13 +102,17 @@
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  ></LinearLayout>
+                  >
+
+              </LinearLayout>
               <LinearLayout
                   android:id="@+id/clients"
                   android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  ></LinearLayout>
+                  >
+
+              </LinearLayout>
           </LinearLayout>
 
       </android.support.v4.widget.NestedScrollView>
@@ -123,7 +128,7 @@
         android:layout_marginLeft="@dimen/pf_10dp_space"
         android:layout_marginRight="@dimen/pf_10dp_space"
         android:background="@drawable/shadow_button_add_site"
-        android:text="Next"
+        android:text="@string/next"
         android:id="@+id/next"
         />
 </android.support.design.widget.CoordinatorLayout>

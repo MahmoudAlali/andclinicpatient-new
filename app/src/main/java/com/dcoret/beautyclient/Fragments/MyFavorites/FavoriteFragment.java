@@ -38,11 +38,13 @@ public class FavoriteFragment extends Fragment {
         providersFav = view.findViewById(R.id.providersFav);
 
 
-        Toolbar toolbar=view.findViewById(R.id.toolbar);
+        toolbar=view.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                ((AppCompatActivity) BeautyMainPage.context).onBackPressed();
+            public void onClick(View v) {
+                // If the navigation drawer is not open then open it, if its already open then close it.
+                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
+                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
 

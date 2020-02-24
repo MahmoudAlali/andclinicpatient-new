@@ -200,7 +200,6 @@
                         android:background="@android:color/transparent"
                         android:textStyle="bold"
                         android:textSize="20sp"
-                        android:text="@string/date"
                         android:gravity="center"
                         android:textAlignment="center"
 

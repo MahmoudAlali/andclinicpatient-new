@@ -247,12 +247,12 @@
     <string name="salon_provider_name">اسم المزودة او الصالون</string>
     <string name="Price">السعر</string>
     <string name="current_location">الموقع الحالي</string>
-    <string name="new_location">موقع جديد</string>
+    <string name="new_location">موقع آخر</string>
     <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
     <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
-    <string name="cancel">cancel</string>
-    <string name="OK">ok</string>
+    <string name="cancel">إلغاء</string>
+    <string name="OK">موافق</string>
     <string name="select_date">اختاري تاريخ</string>
     <string name="Phone_Number">رقم الجوال</string>
     <string name="client_name">اسم الزبونة</string>
@@ -334,7 +334,7 @@
     <string name="choose_type_res">يرجى اختيار نوع الحجز أولا</string>
     <string name="ser_added_before">هذه الخدمة مضافة من قبل</string>
     <string name="select_two_ser_atleast">يرجى اختيار خدمتين على الاقل للمتابعة</string>
-    <string name="choose_date_for_your_services">اختر تاريخ خدماتك</string>
+    <string name="choose_date_for_your_services">اختاري تاريخ خدماتك</string>
     <string name="one_date_ser">تاريخ واحد للخدمات</string>
     <string name="dif_date_ser">تواريخ مختلفة للخدمات</string>
     <string name="set_range_price">يرجى تحديد قيمة المجال لسعر الخدمة</string>
@@ -361,23 +361,23 @@
     <string name="emp_name">اسم الموظفة:</string>
     <string name="Servicr_Time">وقت الخدمة:</string>
     <string name="delete_all">حذف الكل</string>
-    <string name="valid_until">valid until</string>
-    <string name="normal_offer">Normal offer</string>
-    <string name="bride_offer">bride offer</string>
-    <string name="Number_of_services_on_offer">number of service</string>
+    <string name="valid_until">صالح حتى</string>
+    <string name="normal_offer">عرض عادي</string>
+    <string name="bride_offer">عرض عروس</string>
+    <string name="Number_of_services_on_offer">عدد الخدمات</string>
     <string name="discount_percentage">تخفيض</string>
-    <string name="offer_place">offer place</string>
+    <string name="offer_place">مكان تقديم العرض</string>
     <string name="month_in_offer">month in offer</string>
     <string name="offer_end">offer end</string>
     <string name="prc">السعر</string>
-    <string name="offer_type">offer type</string>
-    <string name="end_date_offer_select">end date offer select</string>
-    <string name="client_info">client info</string>
-    <string name="Mobile_n">mobile number</string>
-    <string name="child">child</string>
-    <string name="Adult">adult</string>
+    <string name="offer_type">نوع العرض</string>
+    <string name="end_date_offer_select">اختاري تاريخ نهاية العرض</string>
+    <string name="client_info">معلومات العميلة</string>
+    <string name="Mobile_n">رقم الهاتف</string>
+    <string name="child">طفلة</string>
+    <string name="Adult">بالغة</string>
     <string name="service_dates">service\'s dates</string>
-    <string name="service_effect">service effects</string>
+    <string name="service_effect">مؤثرات الخدمة</string>
     <string name="support">الدعم</string>
     <string name="effect">مؤثراتي</string>
     <string name="update">تحديث المؤثرات</string>
@@ -420,7 +420,7 @@
 
 
     <string-array name="service_type">
-        <item>نوع الخدمة</item>
+        <item>نوع الحجز</item>
         <item>تاريخ ثابت</item>
         <item>تواريخ متعددة</item>
     </string-array>
@@ -441,7 +441,7 @@
     <string name="weWillCall">خدمة العملاء سوف تتصل بك خلال 10 دقائق</string>
     <string name="empty"></string>
     <string name="talkToSupport">التحدث مع خدمة عملاء Vizage</string>
-    <string name="teamWorkingTime">فريق الدعم متاح من 8:30 صباحا حتى 9:30 مساءاً</string>
+    <string name="teamWorkingTime">فريق الدعم متاح من 9 صباحا حتى 8:30 مساءاً</string>
     <string name="callMe">اتصل بي</string>
     <string name="waitingTime">وقت الانتظار :10 دقائق</string>
     <string name="chatWithSupport">الدردشة مع خدمة عملاء Vizage</string>
@@ -494,5 +494,20 @@
     <string name="journey_lost_time">journey lost time</string>
     <string name="rel_ser_lost_time">relation</string>
     <string name="wait_emp_lost_time">wait employee</string>
+
+    <string name="choose_offer_date">اختاري تاريخ العرض</string>
+    <string name="next">التالي</string>
+    <string name="searchLoc">ادخلي عنوان أو منطقة</string>
+    <string name="age">العمر</string>
+    <string name="discountPrcnt">نسبة الحسم</string>
+    <string name="ClientDetails">تفاصيل العميلة</string>
+    <string name="priceRange">مجال السعر</string>
+    <string name="srvcEvaluation">تقييم الخدمة</string>
+    <string name="distanceRange">مجال البعد</string>
+    <string name="price">السعر</string>
+    <string name="group">عرض جماعي</string>
+    <string name="indiv">عرض فردي</string>
+    <string name="share">مشاركة</string>
+    <string name="plsSelectBookingType">الرجاء اختيار نوع الحجز</string>
 
 </resources>

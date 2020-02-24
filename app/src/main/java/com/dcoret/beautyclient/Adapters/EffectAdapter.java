@@ -72,7 +72,7 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //            ((Item)holder).client_name.setVisibility(View.GONE);
 //        }
 
-        if (APICall.ln.equals("ar")){
+        if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){
             ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name_ar());
         }else
         ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name());
@@ -215,7 +215,7 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
 
         effect_name=layout2.findViewById(R.id.effect_name);
-        if (APICall.ln.equals("ar")) {
+        if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){
             effect_name.setText(effects.getBdb_effect_name_ar());
         }else {
             effect_name.setText(effects.getBdb_effect_name_en());

@@ -9416,7 +9416,7 @@ public class APICall {
                             if(bdb_is_bride.equals("2")){
                                 GroupReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price,bdb_is_bride_service, images));
                                 GroupReservationOthersFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price, bdb_is_bride_service,images));
-                              if (ln.equals("ar")){
+                              if (context.getResources().getString(R.string.locale).equals("ar")){
                                   GroupReservationFragment.serviceNameList.add(bdb_name_ar);
                                   GroupReservationOthersFragment.serviceNameList.add(bdb_name_ar);
                               }else {
@@ -9429,7 +9429,7 @@ public class APICall {
                                 GroupReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price,bdb_is_bride_service, images));
                                 GroupReservationOthersFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price, bdb_is_bride_service,images));
 
-                                if (ln.equals("ar")){
+                                if (context.getResources().getString(R.string.locale).equals("ar")){
                                     GroupReservationFragment.serviceNameList.add(bdb_name_ar);
                                     GroupReservationOthersFragment.serviceNameList.add(bdb_name_ar);
                                 }else {
@@ -9745,7 +9745,7 @@ public class APICall {
                             if(is_bride.equals("2")){
                                 MultiIndividualBookingReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price,bdb_is_fixed_price, images));
 //                            MultiIndividualBookingReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,images));
-                                if (ln.equals("ar")){
+                                if (context.getResources().getString(R.string.locale).equals("ar")){
                                     MultiIndividualBookingReservationFragment.serviceNameList.add(bdb_name_ar);
                                 }else {
                                     MultiIndividualBookingReservationFragment.serviceNameList.add(bdb_name);
@@ -9755,7 +9755,7 @@ public class APICall {
                             if (is_bride.equals(bdb_is_bride_service)) {
                                 MultiIndividualBookingReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id, bdb_name, bdb_name_ar, bdb_descr, bdb_type, bdb_is_fixed_price,bdb_is_fixed_price, images));
 //                            MultiIndividualBookingReservationFragment.servicesList.add(new ServiceItems(bdb_ser_id,bdb_name,bdb_name_ar,bdb_descr,bdb_type,bdb_is_fixed_price,images));
-                               if (ln.equals("ar")){
+                                if (context.getResources().getString(R.string.locale).equals("ar")){
                                     MultiIndividualBookingReservationFragment.serviceNameList.add(bdb_name_ar);
                                }else {
                                     MultiIndividualBookingReservationFragment.serviceNameList.add(bdb_name);

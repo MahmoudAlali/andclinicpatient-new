@@ -16,6 +16,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.BestOfferItem;
 import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.DataModel.ServiceItem;
@@ -44,6 +45,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
     public static HashMap<String,Bitmap> logoImages = new HashMap<>();
     int []backgrounds ={R.drawable.blue_offer_background,R.drawable.pink_offer_background,R.drawable.prpl_offer_background,R.drawable.page_offer_background,R.drawable.brown_offer_background};
+    int []backgroundsAr ={R.drawable.blue_offer_background_ar,R.drawable.pink_offer_background_ar,R.drawable.prpl_offer_background_ar,R.drawable.page_offer_background_ar,R.drawable.brown_offer_background_ar};
     int []offerBackGrounds ={R.drawable.blue_offer_type,R.drawable.pink_offer_type,R.drawable.prpl_offer_type,R.drawable.page_offer_type,R.drawable.brown_offer_type};
     public OffersAdapter(Context context, String items[]){
         this.context=context;
@@ -107,7 +109,11 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
-            ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
+            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+                    ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
+            else
+                ((Item) holder).itemBackground.setBackgroundResource(backgroundsAr[position%5]);
+
             ((Item) holder).offer_type.setBackgroundResource(offerBackGrounds[position%5]);
             /*if(OffersAdapter.logoImages.containsKey(bestOfferItems.get(position).getProvider_logo_id()))
             {
@@ -122,11 +128,11 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             APICall.getSalonLogo(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
             if (bestOfferItems.get(position).getOffer_type().equals("1") ||bestOfferItems.get(position).getOffer_type().equals("4")) {
-                ((Item) holder).offer_type.setText("عرض فردي");
+                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
             }else if (bestOfferItems.get(position).getOffer_type().equals("2") ||bestOfferItems.get(position).getOffer_type().equals("5")) {
-                ((Item) holder).offer_type.setText("عرض فردي");
+                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
             }else if (bestOfferItems.get(position).getOffer_type().equals("3") ||bestOfferItems.get(position).getOffer_type().equals("6")) {
-                ((Item) holder).offer_type.setText("عرض جماعي");
+                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.group));
             }
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
             ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));

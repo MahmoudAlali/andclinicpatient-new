@@ -259,7 +259,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
 
                         if (choose_occision.getSelectedItemPosition()==0){
-                            APICall.showSweetDialog(BeautyMainPage.context,"","please add type service first");
+                            APICall.showSweetDialog(BeautyMainPage.context,"",BeautyMainPage.context.getResources().getString(R.string.plsSelectBookingType));
                             add_service.setSelection(0);
                         }else
                            if (addlayoutchek){

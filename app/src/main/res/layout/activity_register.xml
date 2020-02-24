@@ -30,7 +30,7 @@
         android:inputType="text"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/enter_pass_edittxt"
+        android:background="@drawable/username"
         android:ems="10"
         android:hint="@string/UserNameTextField" />
 
@@ -56,8 +56,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="phone"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/enter_pass_edittxt"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/username"
         android:ems="10"
         android:hint="@string/MobileNumberTextField" />
 
@@ -70,8 +70,8 @@
         android:layout_marginLeft="10dp"
         android:inputType="textEmailAddress"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/enter_pass_edittxt"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/username"
         android:ems="10"
         android:hint="@string/EmailAddressTextField" />
 
@@ -95,7 +95,7 @@
         android:layout_marginRight="10dp"
         android:inputType="textPassword"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/enter_pass_edittxt"
+        android:background="@drawable/password"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/PasswordTextField" />
@@ -109,7 +109,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/enter_pass_edittxt"
+        android:background="@drawable/password"
         android:ems="10"
         android:inputType="textPassword"
         android:gravity="center"
@@ -131,7 +131,8 @@
                 android:layout_height="match_parent"></LinearLayout>
             <Button
                 android:id="@+id/cur_location"
-                android:text="Current Location"
+                android:text="@string/current_location"
+                android:textAllCaps="false"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
@@ -141,7 +142,8 @@
                 android:layout_height="match_parent"></LinearLayout>
             <Button
                 android:id="@+id/anthor_location"
-                android:text="Another Location"
+                android:text="@string/new_location"
+                android:textAllCaps="false"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"

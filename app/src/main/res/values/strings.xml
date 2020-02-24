@@ -93,10 +93,10 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">confirm password</string>
-    <string name="add_delete_location">Add and Delete Location</string>
+    <string name="add_delete_location">Add and delete location</string>
     <string name="Registered_Addresses">Registered Addresses</string>
     <string name="save">Save</string>
-    <string name="Delete_account">Delete My Account</string>
+    <string name="Delete_account">Delete my account</string>
     <!-- Nav Bottom-->
     <string name="main">Main</string>
     <string name="service">Services</string>
@@ -172,9 +172,9 @@
     <!--Map Fragment-->
     <string name="searchaddressandregion">Search for an address or region</string>
     <string name="search">Search</string>
-    <string name="addlocation">Add Location</string>
-    <string name="deletelocation">Delete Location</string>
-    <string name="editlocation">Edit Location</string>
+    <string name="addlocation">Add location</string>
+    <string name="deletelocation">Delete location</string>
+    <string name="editlocation">Edit location</string>
     <string name="finishedediting">finished editing</string>
     <string name="clicksitestoedit">Please click on the selected sites to edit</string>
     <string name="Sitesmodified">Sites modified</string>
@@ -269,8 +269,8 @@
     <string name="Price">price</string>
     <string name="Distance_Range">Distance Range</string>
 
-    <string name="current_location">Current Location</string>
-    <string name="new_location">New Location</string>
+    <string name="current_location">Current location</string>
+    <string name="new_location">Another location</string>
     <string name="Reserve">Reserve</string>
     <string name="location_proceed">you have to choose a location to proceed</string>
     <string name="place_proceed">you have to choose a service place to proceed</string>
@@ -393,7 +393,7 @@
     </string-array>
 
     <string-array name="service_type">
-        <item>Service type</item>
+        <item>reservation type</item>
         <item>fixed date</item>
         <item>multi date</item>
     </string-array>
@@ -491,7 +491,7 @@
     <string name="select_loc_on_map">Please Selecte Location on map</string>
     <string name="please_select_one_reason">Please Select one reason</string>
     <string name="Add_Me">Add Me</string>
-    <string name="Add_New_Client">Add New Client</string>
+    <string name="Add_New_Client">Add new client</string>
     <string name="choose_service">choose service</string>
     <string name="ser_have_one_bride_ser">Services Must have at least one bride service</string>
     <string name="add_yourself">Please Add yourself to complete Process</string>
@@ -543,8 +543,8 @@
     <string name="end_date_offer_select">end date offer select</string>
     <string name="client_info">client info</string>
     <string name="Mobile_n">mobile number</string>
-    <string name="child">طفلة</string>
-    <string name="Adult">بالغة</string>
+    <string name="child">Child</string>
+    <string name="Adult">Adult</string>
     <string name="service_dates">service\'s dates</string>
     <string name="service_effect">service effects</string>
     <string name="support">support</string>
@@ -561,7 +561,7 @@
     <string name="weWillCall">customer support will call you within 10 minutes</string>
     <string name="empty"></string>
     <string name="talkToSupport">Talk to Vizage support now</string>
-    <string name="teamWorkingTime">Support team is available from 8:30 AM to 9:30 PM </string>
+    <string name="teamWorkingTime">Support team is available from 9 AM to 8:30 PM </string>
     <string name="callMe">call me</string>
     <string name="waitingTime">wait time:10 min</string>
     <string name="chatWithSupport">chat with Vizage now</string>
@@ -593,6 +593,21 @@
     <string name="points_desc">Description</string>
     <string name="points_date">Date</string>
     <string name="points_updown">Points</string>
+
+
+    <string name="searchLoc">enter your location or region</string>
+    <string name="age">age</string>
+    <string name="discountPrcnt">Discount Percent</string>
+    <string name="ClientDetails">Client details</string>
+    <string name="priceRange">Price range</string>
+    <string name="price">Price</string>
+    <string name="srvcEvaluation">Service evaluation </string>
+    <string name="distanceRange">Distance range</string>
+    <string name="group">group offer</string>
+    <string name="indiv">individual</string>
+    <string name="share">Share</string>
+    <string name="plsSelectBookingType">please select reservation type first</string>
+
     <string name="enter_reason">Enter a reason</string>
     <string name="please_enter_reson">please enter the reason</string>
     <string name="autoJrCost">The cost of the journey will be added totally automatically</string>

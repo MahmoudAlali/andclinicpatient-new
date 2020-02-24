@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/pf_10dp_space"
             android:gravity="center"
-            android:text="Clients names may be changed accoding to thier account names"
+            android:text="@string/clients_names_change"
             android:textColor="@color/colorAccentend"/>
 
         <!--<android.support.v7.widget.RecyclerView-->
