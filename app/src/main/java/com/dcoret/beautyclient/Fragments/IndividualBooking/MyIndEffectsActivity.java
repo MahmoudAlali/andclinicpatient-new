@@ -21,7 +21,7 @@ public class MyIndEffectsActivity extends AppCompatActivity {
     EffectAdapter effectAdapter;
     Button update;
 
-    Context context;
+    public static Context context;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

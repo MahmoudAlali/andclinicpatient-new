@@ -23,7 +23,7 @@ public class GroupReservationResultActivity extends AppCompatActivity {
     public static SwipeRefreshLayout pullToRefresh;
     String url="",urlOut;Boolean isIn = null;
 
-    Context context;
+    public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

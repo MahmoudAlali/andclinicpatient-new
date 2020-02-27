@@ -137,18 +137,18 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).time.setVisibility(View.GONE);
                 ((Item) holder).status.setVisibility(View.VISIBLE);
 
-                String st=getBookStatus(bookingAutomatedBrowseData.get(position),((Item)holder), ((Item) holder).status);
-                if (st.equals("3")){
-                    ((Item) holder).status.setText("منفذ بشكل كامل");
+                String st=bookingAutomatedBrowseData.get(position).getBdb_is_executed();
+                if (st.equals("1")){
+                    ((Item) holder).status.setText("لم يتم التنفيذ بشكل كامل");
 
                 }else if (st.equals("4")){
-                    ((Item) holder).status.setText("ملغي");
+                    ((Item) holder).status.setText("ملغي(بعد دفع العربون)");
 
                 }else if (st.equals("5")){
-                    ((Item) holder).status.setText("لم يتم دفع العربون");
+                    ((Item) holder).status.setText("ملغي (لم يتم دفع العربون)");
 
-                }else if (st.equals("34")){
-                    ((Item) holder).status.setText("منفذ بشكل جزئي");
+                }else if (st.equals("7")){
+                    ((Item) holder).status.setText("منفذ بشكل كامل");
 
                 }
 
@@ -397,7 +397,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (bookingAutomatedBrowseData.get(position).getBookingType().equals("7")) {
+                    if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {
                         if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
                             //-------cancelpaid api--------
 //                            /api/booking/BookingProcessing
@@ -426,16 +426,17 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
 //                            /api/booking/cancelPaidBooking
                         }
-                    }else if (bookingAutomatedBrowseData.get(position).getBookingType().equals("2") ||
-                    bookingAutomatedBrowseData.get(position).getBookingType().equals("8")) {
+                    }
+                    else if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("2") ||
+                            bookingAutomatedBrowseData.get(position).getData().get(0).equals("8")) {
                         //---------- book proccessing --------- to 0
 //                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
+                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
 
                     }else {
                         //---------- Other cases
 //                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
+                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
                     }
                 }
             });
@@ -499,39 +500,6 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private String getBookStatus(ReservationModel reservationModel, Item holder, TextView status) {
-        String st="";
-        for (int i=0;i<reservationModel.getData().size();i++){
-            if (reservationModel.getData().get(i).getBdb_status().equals("5")){
-
-
-
-                st="5";
-                break;
-            }else  {
-                if (reservationModel.getData().size()==1){
-                    if (reservationModel.getData().get(i).getBdb_status().equals("3")) {
-                        st="3";
-                    }else  if (reservationModel.getData().get(i).getBdb_status().equals("4")){
-                        st="4";
-                    }
-                }else if (i!=0){
-                    if (reservationModel.getData().get(i).getBdb_status().equals("3")
-                    || reservationModel.getData().get(i).getBdb_status().equals("4")){
-                        if (!reservationModel.getData().get(i).getBdb_status().equals(reservationModel.getData().get(i-1).getBdb_status())){
-                            st="34";
-                            break;
-                        }else {
-                            if (reservationModel.getData().get(i).getBdb_status().equals(reservationModel.getData().get(i-1).getBdb_status())) {
-                                st=reservationModel.getData().get(i).getBdb_status();
-                            }
-                            }
-                    }
-                }
-            }
-        }
-        return st;
-    }
 
     @Override
     public int getItemCount() {

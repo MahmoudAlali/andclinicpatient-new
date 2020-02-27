@@ -182,8 +182,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
 
                 //--------- find views --------------------
-                TextView client_name = layout2.findViewById(R.id.client_name);
-                TextView phone_number = layout2.findViewById(R.id.phone_num);
+                EditText client_name = layout2.findViewById(R.id.client_name);
+                EditText phone_number = layout2.findViewById(R.id.phone_num);
                 final SearchableSpinner add_service = layout2.findViewById(R.id.add_service);
                 final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 

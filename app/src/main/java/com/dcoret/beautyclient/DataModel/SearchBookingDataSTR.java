@@ -45,6 +45,35 @@ public class SearchBookingDataSTR {
         this.solutions = solutions;
     }
 
+    String is_booked;
+    public SearchBookingDataSTR(String salon_id, String salon_name, String total_price, String client_response, String client_name, String is_current_user, String client_id, ArrayList<Solution> solutions,String is_booked) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.total_price = total_price;
+        this.client_response = client_response;
+        this.client_name = client_name;
+        this.is_current_user = is_current_user;
+        this.client_id = client_id;
+        this.solutions = solutions;
+        this.is_booked=is_booked;
+    }
+
+
+    public SearchBookingDataSTR(String salon_id, String salon_name, ArrayList<Solution> solutions) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.solutions = solutions;
+    }
+
+
+    public String getIs_booked() {
+        return is_booked;
+    }
+
+    public void setIs_booked(String is_booked) {
+        this.is_booked = is_booked;
+    }
+
     public String getTotal_price() {
         return total_price;
     }
@@ -129,6 +158,7 @@ public class SearchBookingDataSTR {
                 bdb_hotel;
         String date,part_num;
 
+        String salon_name;
 
 
 
@@ -194,6 +224,37 @@ public class SearchBookingDataSTR {
             this.part_num= bdb_part_num;
         }
 
+        String client_name,phone;
+        String client_id,is_current_user;
+        boolean isbooked;
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String salon_name,String client_name, String client_id,String  is_current_user,String phone,boolean isbooked) {
+            this.ser_id = ser_id;
+            this.ser_name = ser_name;
+            this.ser_name_ar = ser_name_ar;
+            this.emp_id = emp_id;
+            this.emp_name = emp_name;
+            this.sup_id = sup_id;
+            this.ser_sup_id = ser_sup_id;
+            this.from = from;
+            this.to = to;
+            this.bdb_ser_home_price = bdb_ser_home_price;
+            this.bdb_ser_hall_price = bdb_ser_hall_price;
+            this.bdb_hotel_price = bdb_hotel_price;
+            this.bdb_ser_salon_price = bdb_ser_salon_price;
+            this.bdb_ser_home = bdb_ser_home;
+            this.bdb_ser_salon = bdb_ser_salon;
+            this.bdb_ser_hall = bdb_ser_hall;
+            this.bdb_hotel = bdb_hotel;
+            this.date = date;
+            this.part_num= bdb_part_num;
+            this.salon_name= salon_name;
+            this.client_name= client_name;
+            this.isbooked= isbooked;
+            this.phone= phone;
+            this.is_current_user= is_current_user;
+            this.client_id= client_id;
+        }
+
       String reason,offer_ser_sup_id,is_adult;
         public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String reason,String offer_ser_sup_id,String is_adult) {
             this.ser_id = ser_id;
@@ -218,6 +279,54 @@ public class SearchBookingDataSTR {
             this.reason= reason;
             this.offer_ser_sup_id= offer_ser_sup_id;
             this.is_adult= is_adult;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getClient_id() {
+            return client_id;
+        }
+
+        public void setClient_id(String client_id) {
+            this.client_id = client_id;
+        }
+
+        public String getIs_current_user() {
+            return is_current_user;
+        }
+
+        public void setIs_current_user(String is_current_user) {
+            this.is_current_user = is_current_user;
+        }
+
+        public boolean isIsbooked() {
+            return isbooked;
+        }
+
+        public void setIsbooked(boolean isbooked) {
+            this.isbooked = isbooked;
+        }
+
+        public String getSalon_name() {
+            return salon_name;
+        }
+
+        public String getClient_name() {
+            return client_name;
+        }
+
+        public void setClient_name(String client_name) {
+            this.client_name = client_name;
+        }
+
+        public void setSalon_name(String salon_name) {
+            this.salon_name = salon_name;
         }
 
         public String getReason() {

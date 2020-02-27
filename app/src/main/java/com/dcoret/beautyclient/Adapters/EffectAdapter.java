@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
@@ -20,8 +24,9 @@ import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder>{
     Context context;
     Boolean grid=false;
     String items[];
@@ -47,7 +52,7 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
 
@@ -58,30 +63,45 @@ public class EffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //        effects_layout
             row = inflater.inflate(R.layout.effects_layout_main, parent, false);
             EffectAdapter.Item item = new EffectAdapter.Item(row);
+        View convertview = inflater.inflate(R.layout.effects_layout_main, parent, false);
 
-        return item;
+        ListHolder holder = new ListHolder(convertview);
+        return holder;
     }
 
 
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ListHolder holder, final int position) {
 //        if (isreq){
-//            ((Item)holder).client_name.setVisibility(View.VISIBLE);
+//            (holder).client_name.setVisibility(View.VISIBLE);
 //        }else {
-//            ((Item)holder).client_name.setVisibility(View.GONE);
+//            (holder).client_name.setVisibility(View.GONE);
 //        }
 
         if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){
-            ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name_ar());
+            (holder).cat_name.setText(clientEffectModels.get(position).getCat_name_ar());
         }else
-        ((Item)holder).cat_name.setText(clientEffectModels.get(position).getCat_name());
+        (holder).cat_name.setText(clientEffectModels.get(position).getCat_name());
 
         for (int i=0;i<clientEffectModels.get(position).getEffects().size();i++){
-            addlayout(((Item)holder).myroot,clientEffectModels.get(position).getEffects().get(i));
+            addlayout((holder).myroot,clientEffectModels.get(position).getEffects().get(i));
         }
     }
+    private HashMap<Integer, Boolean> isChecked = new HashMap<>();
+    public class ListHolder extends RecyclerView.ViewHolder {
+        //        CheckBox cb_product;
+        TextView cat_name,client_name;
+        LinearLayout myroot;
+        public ListHolder(View itemView) {
+            super(itemView);
+            cat_name = itemView.findViewById(R.id.cat_name);
+            client_name = itemView.findViewById(R.id.client_name);
+            myroot = itemView.findViewById(R.id.myroot);
 
+        }
+
+    }
 
 
     @Override

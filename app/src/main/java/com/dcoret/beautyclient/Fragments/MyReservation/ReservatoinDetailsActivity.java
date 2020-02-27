@@ -315,7 +315,7 @@ public class ReservatoinDetailsActivity extends AppCompatActivity {
     }
     public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String Id,String isExec,String ac_price){
         final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
         TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,id;
         LinearLayout ac_price_lay;
 

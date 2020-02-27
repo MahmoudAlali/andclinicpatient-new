@@ -28,9 +28,10 @@ import com.dcoret.beautyclient.R;
 import java.util.ArrayList;
 
 public class GroupRelationActivity extends AppCompatActivity {
-     LinearLayout myroot;
+    public static Context context;
+    LinearLayout myroot;
     Button done;
-    Context context;
+
     CheckBox multi_salon_client_check,multi_salon_client_rel_check;
     public static  String multi_salon_clients_rel="1";
     public static  String multi_salon_client="1";
