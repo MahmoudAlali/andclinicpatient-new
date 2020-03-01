@@ -3,7 +3,6 @@ package com.dcoret.beautyclient.Fragments.MyEffects;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +15,7 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
-import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
 import com.dcoret.beautyclient.R;
 
 public class MyEffectsActivity extends AppCompatActivity {

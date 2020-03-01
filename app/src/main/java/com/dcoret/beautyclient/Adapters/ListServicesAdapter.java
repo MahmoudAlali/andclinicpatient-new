@@ -19,8 +19,8 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.DataModel.ListServiceModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

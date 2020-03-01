@@ -22,12 +22,12 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Fragments.MyReservation.ReservatoinDetailsActivity;
+import com.dcoret.beautyclient.Fragments.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
-import com.dcoret.beautyclient.Fragments.MyReservation.ExecuteBookActivity;
-import com.dcoret.beautyclient.Fragments.MyReservation.MyReservationFragment;
+import com.dcoret.beautyclient.Fragments.ExecuteBookActivity;
+import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
 
@@ -427,13 +427,13 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                            /api/booking/cancelPaidBooking
                         }
                     }
-                    else if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("2") ||
+                    else if (
                             bookingAutomatedBrowseData.get(position).getData().get(0).equals("8")) {
                         //---------- book proccessing --------- to 0
 //                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
+                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),6,"0",context);
 
-                    }else {
+                    }else if(bookingAutomatedBrowseData.get(position).getData().get(0).equals("2")){
                         //---------- Other cases
 //                        /api/booking/BookingProcessing
                         APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);

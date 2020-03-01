@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
+import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;

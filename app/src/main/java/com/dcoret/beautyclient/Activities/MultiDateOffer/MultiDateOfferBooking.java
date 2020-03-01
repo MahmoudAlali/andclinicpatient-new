@@ -19,8 +19,8 @@ import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
 import com.dcoret.beautyclient.DataModel.IDNameService;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

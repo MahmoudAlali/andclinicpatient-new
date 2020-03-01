@@ -14,13 +14,11 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
-import com.dcoret.beautyclient.Activities.SingleOffer.SingleDateOfferBooking;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.DataModel.IDNameService;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiBookingIndividualResultActivity;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Activities.TabTwo;
+import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

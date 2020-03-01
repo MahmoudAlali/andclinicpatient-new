@@ -1,8 +1,5 @@
 package com.dcoret.beautyclient.DataModel;
 
-import com.dcoret.beautyclient.Adapters.ServicesAdapter;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-
 public class CompareModel {
    String  srName ,
     spname,

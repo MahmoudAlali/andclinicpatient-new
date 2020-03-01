@@ -14,12 +14,8 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
-import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
-import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultActivity;
-import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

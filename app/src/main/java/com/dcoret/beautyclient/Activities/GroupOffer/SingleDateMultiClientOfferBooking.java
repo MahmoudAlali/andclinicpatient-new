@@ -16,12 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.OfferBookingMultiClientsAdapter;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;
