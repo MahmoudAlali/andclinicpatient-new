@@ -1,6 +1,6 @@
 package com.dcoret.beautyclient.DataModel;
 
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 
 public class BrowseServiceItem {
 

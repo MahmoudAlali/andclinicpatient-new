@@ -22,7 +22,7 @@ import com.dcoret.beautyclient.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.dcoret.beautyclient.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
 import com.dcoret.beautyclient.Activities.SingleOffer.SingleDateOfferBooking;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabTwo;
+import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.DataExample.OffersData;
 import com.dcoret.beautyclient.R;

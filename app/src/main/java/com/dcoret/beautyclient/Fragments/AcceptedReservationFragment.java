@@ -17,10 +17,12 @@ import android.widget.ImageView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
+import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
 
 public class AcceptedReservationFragment extends Fragment {
+
 
     Fragment fragment;
     FragmentManager fm;

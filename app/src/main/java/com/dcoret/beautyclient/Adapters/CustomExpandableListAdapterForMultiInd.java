@@ -17,8 +17,8 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.SearchBookingDataSTR;
 import com.dcoret.beautyclient.DataModel.SerchGroupBookingData;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.MultiIndividualBookingReservationFragment;
-import com.dcoret.beautyclient.Fragments.SingleMultiBooking.PlaceServiceMultipleBookingFragment;
+import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

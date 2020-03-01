@@ -20,8 +20,6 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.ClientsRelationsViewClass;
-import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
-import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

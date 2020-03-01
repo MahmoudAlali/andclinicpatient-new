@@ -7,20 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.DataOffer;
-import com.dcoret.beautyclient.DataModel.DateClass;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.IndividualBooking;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;

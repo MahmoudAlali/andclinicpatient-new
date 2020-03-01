@@ -20,13 +20,12 @@ import android.widget.TextView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.CompareModel;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.BookingIndvidualActivity;
 import com.dcoret.beautyclient.DataModel.DateClass;
 import com.dcoret.beautyclient.DataModel.BrowseServiceItem;
 import com.dcoret.beautyclient.DataModel.Location_Beauty;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.MyIndEffectsActivity;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
-import com.dcoret.beautyclient.Fragments.IndividualBooking.Tabs.TabOne;
+import com.dcoret.beautyclient.Fragments.MyIndEffectsActivity;
+import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
+import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.R;
 
 import java.text.SimpleDateFormat;

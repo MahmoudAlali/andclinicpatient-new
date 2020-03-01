@@ -19,6 +19,7 @@ import com.dcoret.beautyclient.API.APICall;
 //import com.dcoret.beautyclient..APICallCall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
+import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
 
