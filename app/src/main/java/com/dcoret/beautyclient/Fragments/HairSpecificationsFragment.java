@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.CustomListAdapter;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationFragment;
+import com.dcoret.beautyclient.Fragments.GroupBooking.GroupReservationResultFragment;
 import com.dcoret.beautyclient.R;
 
 public class HairSpecificationsFragment extends Fragment {

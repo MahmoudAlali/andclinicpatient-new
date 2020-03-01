@@ -20,6 +20,7 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ListServicesAdapter;
 import com.dcoret.beautyclient.DataModel.ListServiceModel;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.PlaceServiceFragment;
 import com.dcoret.beautyclient.R;
 
 import org.json.JSONArray;

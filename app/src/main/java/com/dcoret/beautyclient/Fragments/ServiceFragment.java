@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +17,10 @@ import android.widget.LinearLayout;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.FilterAndSortModel;
 import com.dcoret.beautyclient.DataModel.ServiceFilter;
+import com.dcoret.beautyclient.Fragments.GroupBooking.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.IndividualBooking.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.OtherGroupBooking.PlaceServiceGroupOthersFragment;
+import com.dcoret.beautyclient.Fragments.SingleMultiBooking.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
