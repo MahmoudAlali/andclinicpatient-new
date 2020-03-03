@@ -33,10 +33,10 @@
                     android:id="@+id/num_of_times"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     android:textColor="@color/primedark"
-                    android:text="عدد مرات حجز العرض 10"
+                    android:text="@string/num_of_times"
                     android:gravity="center"
 
                     />
@@ -47,21 +47,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_margin="7dp"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/heart_shape"
-                />
-            <ImageView
-                android:id="@+id/add_offer"
-                android:layout_margin="7dp"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/plus_shape"
-                />
+                <ImageView
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/heart_shape"
+                    />
+                <ImageView
+                    android:id="@+id/add_offer"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/plus_shape"
+                    />
             </LinearLayout>
 
         </LinearLayout>

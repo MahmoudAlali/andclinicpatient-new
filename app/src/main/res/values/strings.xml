@@ -250,8 +250,8 @@
     <string name="Map">Map</string>
 
     <string name="page">Page</string>
-    <string name="NextPage">Next Page</string>
-    <string name="PreviousPage">Previous Page</string>
+    <string name="NextPage">Next</string>
+    <string name="PreviousPage">Previous</string>
     <string name="num_of_times">Number of offer Reservation:</string>
     <string name="end_offer">This offer is valid until:</string>
     <string name="on">on</string>
@@ -294,6 +294,68 @@
         <item>الموظفة 1</item>
         <item>الموظفة 2</item>
         <item>الموظفة 3</item>
+    </string-array>
+    <string name="ind_offer">individual offer</string>
+    <string name="plsLogin">please login to continue booking</string>
+    <string name="plsActivLoc">your device location is not activated, please turn it on to get the best near offers</string>
+    <string name="salonName">Salon name</string>
+    <string name="re_active">re-activate</string>
+    <string name="loginFailed">login failed, please try again later.</string>
+    <string name="relBetweenClients">Relation between Clients</string>
+    <string name="locationName">Please enter location name</string>
+    <string name="relatedClientsOneSalon">execute reservation for related clients in the same salon</string>
+    <string name="sameClientSameSalon">execute all services of the reservation in the same salon</string>
+    <string name="errActivation">you can not request activation code more than 3 times a day</string>
+    <string name="allAges">all ages</string>
+    <string name="guestAccount">guest user</string>
+
+    <string-array name="language">
+        <item>English</item>
+        <item>English</item>
+        <item>العربية</item>
+    </string-array>
+
+    <string-array name="e1">
+        <item>very short</item>
+        <item>short</item>
+        <item>medium</item>
+        <item>long</item>
+        <item>very long</item>
+    </string-array>
+    <string-array name="e2">
+        <item>very straight</item>
+        <item>straight</item>
+        <item>medium</item>
+        <item>curly</item>
+        <item>very curly</item>
+    </string-array>
+    <string-array name="e3">
+        <item>very d</item>
+        <item>d</item>
+        <item>medium</item>
+        <item>d</item>
+        <item>very d</item>
+    </string-array>
+    <string-array name="e4">
+        <item>very t</item>
+        <item>t</item>
+        <item>medium</item>
+        <item>t</item>
+        <item>very t</item>
+    </string-array>
+    <string-array name="e5">
+        <item>never</item>
+        <item>one time</item>
+        <item>two times</item>
+        <item>three times</item>
+        <item>four or more</item>
+    </string-array>
+    <string-array name="e6">
+        <item>very light</item>
+        <item>light</item>
+        <item>medium</item>
+        <item>dark</item>
+        <item>very dark</item>
     </string-array>
 
 
@@ -631,4 +693,7 @@
     <string name="rel_ser_lost_time">relation</string>
     <string name="wait_emp_lost_time">wait employee</string>
     <string name="deposit">deposit</string>
+    <string name="language">language:</string>
+    <string name="sign_out">Sign out</string>
+
 </resources>

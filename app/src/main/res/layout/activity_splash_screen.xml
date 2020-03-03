@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
     tools:context=".Activities.SplashScreen">
-
-    <ImageView
+    <pl.droidsonroids.gif.GifTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splashscreen"
-
+        android:background="@drawable/splash"
         />
+
 
 
 

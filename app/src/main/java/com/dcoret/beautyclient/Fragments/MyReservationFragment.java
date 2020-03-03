@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -129,6 +130,95 @@ public class MyReservationFragment extends Fragment  {
         tabselected(incom_reservation,deposit_reservation,accept_reservation,false);
 
 
+        //region CHECK_NOTIFICATIONS
+        Bundle bundle = this.getArguments();
+        String book_id="";
+        if (bundle != null) {
+            if(bundle.getString("book_id")!=null)
+                book_id = bundle.getString("book_id");
+        }
+
+        if(!book_id.equals(""))
+        {
+
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("book_id", book_id);
+            tab="3";
+            tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+            fragment = new DepositReservationFragment();
+            fragment.setArguments(bundle2);
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commit();
+        }
+
+        String tab_id="";
+        if (bundle != null) {
+            if(bundle.getString("tab_id")!=null)
+
+                tab_id = bundle.getString("tab_id");
+        }
+
+        if(!tab_id.equals(""))
+        {
+            if(tab_id.equals("10"))
+            {
+                tabselected(incom_reservation,deposit_reservation,accept_reservation,true);
+                fragment = new AcceptedReservationFragment();
+            }
+            else if(tab_id.equals("3"))
+            {
+                tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+                fragment = new DepositReservationFragment();
+            }
+            else if(tab_id.equals("7"))
+            {
+                tabselected(accept_reservation,deposit_reservation,incom_reservation,true);
+                fragment = new ExecutedReservationFragment();
+            }
+
+
+
+            //  Bundle bundle2 = new Bundle();
+            //  bundle2.putString("book_id", book_id);
+
+            // fragment.setArguments(bundle2);
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commit();
+        }
+        String execute_book_id="";
+        if (bundle != null) {
+            if(bundle.getString("execute_book_id")!=null)
+                execute_book_id = bundle.getString("execute_book_id");
+        }
+        String type="";
+        if (bundle != null) {
+            if(bundle.getString("type")!=null)
+                type = bundle.getString("type");
+        }
+
+        if(!execute_book_id.equals(""))
+        {
+
+            Intent intent=new Intent(BeautyMainPage.context, ExecuteBookActivity.class);
+            intent.putExtra("execute_book_id", book_id);
+            if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12"))
+                intent.putExtra("isOffer", true);
+            else
+                intent.putExtra("isOffer", false);
+
+            BeautyMainPage.context.startActivity(intent);
+        }
+
+
+        //endregion
+
+
+
+        //region FilterBtn
 
 
 
@@ -755,6 +845,7 @@ public class MyReservationFragment extends Fragment  {
 
         });
 
+        //endregion
         incom_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

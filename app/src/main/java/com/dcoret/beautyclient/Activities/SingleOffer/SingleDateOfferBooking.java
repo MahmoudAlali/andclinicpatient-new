@@ -40,6 +40,10 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     Context context;
     RecyclerView recyclerView;
    static String place_num="",price_num="";
+    public static String end_date;
+    String bdb_pack_id;
+    String is_effects_on;
+
     public static ArrayList<String> services=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,25 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         showDate=findViewById(R.id.date);
         next=findViewById(R.id.next);
 
+        end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
+        bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+        is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        if(!notification.equals(""))
+
+        {
+            bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+            is_effects_on = getIntent().getStringExtra("is_effects_on");
+            end_date = getIntent().getStringExtra("offer_end");
+        }
+
+        //endregion
 
         recyclerView=findViewById(R.id.recycleview);
         selectdate.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +96,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-                    Date date=sdf.parse(TabTwo.arrayList.get(postion).getBdb_offer_end());
+                    Date date=sdf.parse(end_date);
 
                     datePicker.setMaxDate(date.getTime());
 
@@ -105,7 +128,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(offerAdapter);
 
-        APICall.browseOneOfferv2(TabTwo.arrayList.get(postion).getBdb_pack_code(),offerClientsModels,offerAdapter,context);
+        APICall.browseOneOfferv2(bdb_pack_id,offerClientsModels,offerAdapter,context);
 
         switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
             case 1:
@@ -134,7 +157,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String bdb_pack_code=TabTwo.arrayList.get(postion).getBdb_pack_code();
+                String bdb_pack_code=bdb_pack_id;
                 String date=showDate.getText().toString();
                 String cname= BeautyMainPage.client_name;
                 String cphone=BeautyMainPage.client_number;
@@ -189,19 +212,20 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                         "}";
                 Log.e("postdata",postdata);
                 offerplace=offerClientsModels.get(0).getBdb_offer_place();
-                if (TabTwo.arrayList.get(postion).getBdb_is_effects_on().equals("1")) {
+                if (is_effects_on.equals("1")) {
 
                     Intent intent = new Intent(context, SingleOfferEffect.class);
                     intent.putExtra("filter", postdata);
                     intent.putExtra("offertype", offerType);
                     intent.putExtra("position", postion);
+                    intent.putExtra("bdb_pack_id",bdb_pack_id);
+                    intent.putExtra("notification","true");
                     intent.putExtra("place", offerplace);
                     startActivity(intent);
                 }else {
                     Intent intent = new Intent(context, OfferBookingResult.class);
                     intent.putExtra("filter", postdata);
                     intent.putExtra("offertype", offerType);
-                    intent.putExtra("position", postion);
                     intent.putExtra("place", offerplace);
                     startActivity(intent);
                 }

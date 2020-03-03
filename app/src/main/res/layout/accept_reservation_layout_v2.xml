@@ -6,7 +6,6 @@
     android:background="@color/accent_v3"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_marginBottom="5dp"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
 
         <TextView
             android:id="@+id/rname"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -24,42 +23,42 @@
             android:layout_marginTop="5dp"
             />
         <!--<LinearLayout-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:weightSum="2"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;android:visibility="gone"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:id="@+id/accept"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:text="@string/Accept"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textColor="#000"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;/>&ndash;&gt;-->
-            <!--<TextView-->
-                <!--android:id="@+id/refuse"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@string/cancel"-->
-                <!--android:textColor="@color/pf_red"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/edit_time"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@string/Edit_time"-->
-                <!--android:textColor="@color/endblue"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:weightSum="2"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:visibility="gone"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/accept"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:text="@string/Accept"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textColor="#000"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:textSize="20dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;/>&ndash;&gt;-->
+        <!--<TextView-->
+        <!--android:id="@+id/refuse"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/cancel"-->
+        <!--android:textColor="@color/pf_red"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/edit_time"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/Edit_time"-->
+        <!--android:textColor="@color/endblue"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
 
         <!--</LinearLayout>-->
 

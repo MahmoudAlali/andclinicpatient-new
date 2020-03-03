@@ -125,22 +125,27 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2")){
-                                    Toast.makeText(context,"this solution is disabled",Toast.LENGTH_LONG).show();
-                                }else
+                            if(APICall.isGuest(context).equals("0")) {
+                                try {
+                                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2")) {
+                                        Toast.makeText(context, "this solution is disabled", Toast.LENGTH_LONG).show();
+                                    } else
 //                                    if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).)
-                                if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
-                                    Log.e("FilterAlt",APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ));
-                                    APICall.addGroupItem(APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), AlterGroupReservationResultActivity.context);
+                                        if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
+                                            Log.e("FilterAlt", APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition, GroupReservationFragment.is_group_booking, APICall.dateforgroupbooking));
+                                            APICall.addGroupItem(APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition, GroupReservationFragment.is_group_booking, APICall.dateforgroupbooking), AlterGroupReservationResultActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
-                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                                    APICall.addGroupItemOther(APICall.getClientsInfoOtherAlt(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
+                                        } else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")) {
+                                            APICall.addGroupItemOther(APICall.getClientsInfoOtherAlt(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking, APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
+                                        }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                            }catch (Exception e){
-                                e.printStackTrace();
-                                Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                             }
+                            else
+                                APICall.showNeedToSignInDialog(context);
+
                             }
                     });
                 }

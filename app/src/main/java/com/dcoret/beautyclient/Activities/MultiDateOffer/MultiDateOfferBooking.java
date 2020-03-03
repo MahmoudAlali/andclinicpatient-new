@@ -17,11 +17,13 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
+import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.DataModel.IDNameService;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.Service.NotificationsBeauty;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,9 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     EditText phone_number,client_name;
     String place_num="",price_num="";
     static String place="";
-
+    static ArrayList<DataOffer.SupIdClass> supIdClasses;
+    String bdb_pack_id;
+    String is_effects_on;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,30 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //        client_name=findViewById(R.id.client_name);
 //        phone_number=findViewById(R.id.phone_number);
         next=findViewById(R.id.next);
-        String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+
+
+        bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+        is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
+        supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        if(!notification.equals(""))
+
+        {
+            bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+            is_effects_on = getIntent().getStringExtra("is_effects_on");
+            place= NotificationsBeauty.offer_place;
+            supIdClasses = NotificationsBeauty.supIdClasses;
+        }
+
+        //endregion
 
 
         Log.e("PackCode",bdb_pack_id);
@@ -102,7 +129,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
                  String name= BeautyMainPage.client_name;
                  String mobile=BeautyMainPage.client_number;
-                String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                String bdb_pack_code = bdb_pack_id;
 
                     String postdata =
                             "{\n" +
@@ -135,7 +162,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //                    String phone = phone_number.getText().toString();
 
 
-                    String services = sortdates(selectDateOfferAdapter.dates,name,mobile, postion);
+                String services = sortdates(selectDateOfferAdapter.dates,name,mobile);
 
                     postdata = postdata + services + "],\"offer_type\":" + offertype + "}";
 
@@ -144,11 +171,13 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
 
 
-                if (TabTwo.arrayList.get(postion).getBdb_is_effects_on().equals("1")) {
+                if (is_effects_on.equals("1")) {
                     Intent intent = new Intent(context, MultiDateOfferEffect.class);
                     intent.putExtra("filter", postdata);
                     intent.putExtra("offertype", offertype);
                     intent.putExtra("place", place);
+                    intent.putExtra("bdb_pack_id",bdb_pack_id);
+                    intent.putExtra("notification","true");
                     intent.putExtra("position", postion);
                     startActivity(intent);
                 }else {
@@ -156,7 +185,6 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                     intent.putExtra("filter", postdata);
                     intent.putExtra("offertype", offertype);
                     intent.putExtra("place", place);
-                    intent.putExtra("position", postion);
                     startActivity(intent);
                 }
 
@@ -171,12 +199,12 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
     }
 
-    static String sortdates(ArrayList<TextView> dates,String cname,String phone, int postion){
+    static String sortdates(ArrayList<TextView> dates,String cname,String phone){
         ArrayList<ArrayList<IDNameService>> arrayList=new ArrayList<>();
         ArrayList<Integer> index=new ArrayList<>();
 
         for (int i=0;i<dates.size();i++){
-            String ser_sup_id=TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+            String ser_sup_id=supIdClasses.get(i).getBdb_ser_sup_id();
 
             if (i==0){
                 ArrayList<IDNameService> list=new ArrayList();

@@ -98,12 +98,19 @@ public class CustomExpandableListBagAdapterForOthers extends BaseExpandableListA
                         @Override
                         public void run() {
 
-                            if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4&&
-                                    Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<=9) {
-                                APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
-                            }else {
-                                APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);
+                            if(APICall.isGuest(context).equals("0"))
+
+                            {
+                                if (Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())>=4&&
+                                        Integer.parseInt(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking())<=9) {
+                                    APICall.moveofferCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(), stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(), groupPosition, context);
+                                }else {
+                                    APICall.moveCartToBooking(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_pack_booking(),stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking(),groupPosition,context);
+                                }
                             }
+                            else
+                                APICall.showNeedToSignInDialog(context);
+
 //                            APICall.addGroupItem(   APICall.getClientsInfo(salons,stringArrayListHashMap,groupPosition),BeautyMainPage.context);
 //                        Toast.makeText(context,"book Reserved"+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_id(),Toast.LENGTH_SHORT).show();
                         }

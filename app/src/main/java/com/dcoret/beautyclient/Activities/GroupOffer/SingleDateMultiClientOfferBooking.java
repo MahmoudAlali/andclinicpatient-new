@@ -40,7 +40,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
     Context context;
     Button next;
     public static String place="";
-
+    public static String end_date;
+    String bdb_pack_id;
+    String is_effects_on;
 
     public static ArrayList<OfferClientsModel> offerClientsModels = new ArrayList<>();
 
@@ -60,7 +62,27 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         final int postion = getIntent().getIntExtra("postion", 0);
 
 
-        String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+        end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
+        bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+        is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+        // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        if(!notification.equals(""))
+
+        {
+            bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+            is_effects_on = getIntent().getStringExtra("is_effects_on");
+            end_date = getIntent().getStringExtra("offer_end");
+        }
+
+        //endregion
 
 
         recyclerView = findViewById(R.id.recycleview);
@@ -82,7 +104,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-                    Date date = sdf.parse(TabTwo.arrayList.get(postion).getBdb_offer_end());
+                    Date date = sdf.parse(end_date);
 
                     datePicker.setMaxDate(date.getTime());
 
@@ -142,7 +164,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
                 }
 
-                String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                String bdb_pack_code = bdb_pack_id;
                 if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
                     APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );
                 } else {
@@ -224,18 +246,19 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
 
                     Log.e("PostData", postdata);
-                    if (TabTwo.arrayList.get(postion).getBdb_is_effects_on().equals("1")) {
+                    if (is_effects_on.equals("1")) {
                         Intent intent = new Intent(context, MultiClientOfferEffect.class);
                         intent.putExtra("filter", postdata);
                         intent.putExtra("place", place);
                         intent.putExtra("position", postion);
+                        intent.putExtra("bdb_pack_id",bdb_pack_id);
+                        intent.putExtra("notification","true");
                         intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
                         startActivity(intent);
                     }else {
                         Intent intent = new Intent(context, OfferBookingResult.class);
                         intent.putExtra("filter", postdata);
                         intent.putExtra("place", place);
-                        intent.putExtra("position", postion);
                         intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
                         startActivity(intent);
                     }

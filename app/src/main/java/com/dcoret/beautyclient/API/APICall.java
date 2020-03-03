@@ -128,6 +128,7 @@ import com.dcoret.beautyclient.Fragments.ServicesTabsFragment;
 import com.dcoret.beautyclient.Fragments.SingleMultiAltResultActivity;
 import com.dcoret.beautyclient.Fragments.SingleMultiRelationActivity;
 import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.Service.NotificationsBeauty;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -160,6 +161,7 @@ import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import com.dcoret.beautyclient.Service.NotificationsBeauty;
 
 public class APICall {
 
@@ -203,6 +205,10 @@ public class APICall {
     public static String gettoken(Context context){
         String shared_token=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("token",null);
     return shared_token;
+    }
+    public static String isGuest(Context context){
+        String isGuest=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("isGuest",null);
+        return isGuest;
     }
         //---استعراض خدمات المزودين لخدمة معينة-----------------------------done
         static  String json;
@@ -1697,6 +1703,7 @@ public class APICall {
             if(!BeautyMainPage.isFirstOpen){
                 e_bdb_name.setText(sh.getString("bdb_name",null));
                 e_bdb_email.setText(sh.getString("bdb_email",null));
+                AccountFragment.oldEmail=sh.getString("bdb_email",null);
                 e_bdb_mobile.setText(convertToArabic(sh.getString("bdb_mobile",null)));
 
             }else {
@@ -1704,7 +1711,7 @@ public class APICall {
                 String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
                 MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
-                        showDialog(context);
+                showDialog(context);
 //                        pd.show();
 
 
@@ -1720,7 +1727,7 @@ public class APICall {
                         .addHeader("Content-Type", "application/x-www-form-urlencoded")
                         .addHeader("X-Requested-With", "XMLHttpRequest")
                         .header("Authorization", "Bearer " + token)
-    //                .header("Content-Type", "application/json")
+                        //                .header("Content-Type", "application/json")
                         .build();
 
                 client.newCall(request).enqueue(new Callback() {
@@ -1758,7 +1765,7 @@ public class APICall {
                                                 public void onClick(View v) {
                                                     refreshDialog.cancel();
 //                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                            detailsUser(url,e_bdb_name,e_bdb_email,e_bdb_mobile,context);
+                                                    detailsUser(url,e_bdb_name,e_bdb_email,e_bdb_mobile,context);
                                                 }
                                             });
                                             refreshDialog.show();
@@ -1813,21 +1820,21 @@ public class APICall {
 
                                 JSONArray addressUser=jsonObject.getJSONArray("address");
                                 for (int i=0;i<addressUser.length();i++){
-                                JSONObject address=addressUser.getJSONObject(i);
-                                String bdb_id=address.getString("bdb_id");
-                                String bdb_user_id=address.getString("bdb_user_id");
-                                String bdb_city_id=address.getString("bdb_city_id");
-                                String bdb_loc_lat=address.getString("bdb_loc_lat");
-                                String bdb_sup_id=address.getString("bdb_sup_id");
-                                String bdb_descr=address.getString("bdb_descr");
-                                String bdb_loc_long=address.getString("bdb_loc_long");
-                                String bdb_is_deleted=address.getString("bdb_is_deleted");
-                                String bdb_my_descr=address.getString("bdb_my_descr");
-                                LatLng ltlng=new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long));
-                                AccountFragment.locationTitles.add(new LocationTitles(bdb_id,ltlng,bdb_my_descr,bdb_user_id,bdb_city_id,bdb_sup_id,bdb_descr));
+                                    JSONObject address=addressUser.getJSONObject(i);
+                                    String bdb_id=address.getString("bdb_id");
+                                    String bdb_user_id=address.getString("bdb_user_id");
+                                    String bdb_city_id=address.getString("bdb_city_id");
+                                    String bdb_loc_lat=address.getString("bdb_loc_lat");
+                                    String bdb_sup_id=address.getString("bdb_sup_id");
+                                    String bdb_descr=address.getString("bdb_descr");
+                                    String bdb_loc_long=address.getString("bdb_loc_long");
+                                    String bdb_is_deleted=address.getString("bdb_is_deleted");
+                                    String bdb_my_descr=address.getString("bdb_my_descr");
+                                    LatLng ltlng=new LatLng(Double.parseDouble(bdb_loc_lat),Double.parseDouble(bdb_loc_long));
+                                    AccountFragment.locationTitles.add(new LocationTitles(bdb_id,ltlng,bdb_my_descr,bdb_user_id,bdb_city_id,bdb_sup_id,bdb_descr));
 
-                                Log.e("LTAccFrag", AccountFragment.locationTitles.get(i).getId()+" : "+AccountFragment.locationTitles.get(i).getBdb_my_descr());
-                            }
+                                    Log.e("LTAccFrag", AccountFragment.locationTitles.get(i).getId()+" : "+AccountFragment.locationTitles.get(i).getBdb_my_descr());
+                                }
                             }
                         } catch (JSONException e) {
 
@@ -1840,7 +1847,7 @@ public class APICall {
                 Log.d("MessageResponse", mMessage);
             }
 
-    }
+        }
         public  static  void  detailsUser1(final  String url,  final Context context){
         final SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
 //        SharedPreferences sh=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
@@ -2404,7 +2411,7 @@ public class APICall {
 
     //---------------------- active account-------------------
         static   String name,token_temp;
-        public  static  void   activeAccount(final  String url, final String token, final Context context){
+    public  static  void   activeAccount(final  String url, final String token, final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
         OkHttpClient client = new OkHttpClient();
@@ -2481,15 +2488,17 @@ public class APICall {
                                 Toast.makeText(context, R.string.familiyBeauty, Toast.LENGTH_LONG).show();
                                 SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
 //                               if (!name.isEmpty()) {
+                                String t= gettoken(context);
+                                switchAccount(context,FirebaseInstanceId.getInstance().getToken(),t);
                                 editor.putString("name", "ok");
                                 editor.putString("token", token_temp);
+                                editor.putString("isGuest", "0");
                                 Log.e("Tokensaved",token_temp);
                                 editor.apply();
                                 editor.commit();
-
                                 Intent i=new Intent(context,BeautyMainPage.class);
-                                ((AppCompatActivity) context).finish();
                                 context.startActivity(i);
+                                ((AppCompatActivity) context).finish();
                             }
                         });
                     }else {
@@ -2501,19 +2510,18 @@ public class APICall {
                 Log.e("TAG", mMessage);
 
                 pd.dismiss();
-                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                /*((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(context,mMessage,Toast.LENGTH_LONG).show();
                     }
-                });
+                });*/
             }
         });
         Log.d("MessageResponse",mMessage);
     }
-        public  static  void   activateAgain(final  String url, final String number, final Context context){
+    public  static  void   activateAgain(final  String url, final String number, final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -2574,9 +2582,17 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("Activation_Code",mMessage);
+                pd.dismiss();
                 try{
-                   JSONObject jsonObject=new JSONObject(mMessage);
-                    APICall.token_temp=jsonObject.getString("bdb_token");
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success = jsonObject.getString("success");
+                    if(success.equals("true"))
+                    {
+                        APICall.token_temp=jsonObject.getString("bdb_token");
+                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
+                    }
+                    else
+                        showSweetDialog(context,context.getResources().getString(R.string.errActivation),false);
                 }catch (JSONException je){
                     je.printStackTrace();
                 }
@@ -2584,9 +2600,9 @@ public class APICall {
         });
 
     }
-        //------------------------------ login----------------------
+    //------------------------------ login----------------------
         static JSONObject data;
-        public  static  void  login(final String name,String  pass,final  String url,final Context context){
+    public  static  void  login(final String name, final String  pass, final  String url, final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
 
@@ -2601,6 +2617,7 @@ public class APICall {
         }
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        Log.e("request", postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(url)
@@ -2652,57 +2669,53 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("TAG", mMessage);
-                pd.dismiss();
                 try {
                     JSONObject res=new JSONObject(mMessage);
                     String success=res.getString("success");
-                     final String message=res.getString("message");
-                     Log.e("message",message);
+                    final String message=res.getString("message");
+                    Log.e("message",message);
                     if (success.equals("true")){
                         data=res.getJSONObject("data");
                         //Intent i=new Intent(context,BeautyMainPage.class);
-                       // context.startActivity(i);
-                       // ((AppCompatActivity)context).finish();
+                        // context.startActivity(i);
+                        // ((AppCompatActivity)context).finish();
                         String token=data.getString("bdb_token");
-                        SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+                        /*SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
                         editor.putString("name","ok");
-                        editor.putString("token",token);
+                        editor.putString("isGuest","0");
+                        editor.putString("token",token);*/
+                        Log.e("updateFBToken","login");
                         updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
-                        editor.commit();
-                        editor.apply();
+                       /* editor.commit();
+                        editor.apply();*/
                     }else {
 //                        Log.e("messaged",message);
                         if (success.equals("false")) {
-                            if (message.equals("This user is not active") || message.equals("This user is already exist but not active")) {
-                                activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
-                                        name,
-                                        context);
-                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.numberNotActivatedAlert,  true);
+                            if (message.equals("This user is not active")) {
+                                final String password=res.getString("password");
+                                if(password.equals("true"))
+
+                                    activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
+                                            name,
+                                            context);
+                                else
+                                {
+                                    pd.dismiss();
+                                    showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
+                                }
+                                //showSweetDialog(context, R.string.ExuseMeAlert, R.string.numberNotActivatedAlert,  true);
 
                             } else if (message.equals("invalid  password")) {
-                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(context, R.string.WrongPass, Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
+                                pd.dismiss();
+                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
                             } else if (message.equals("invalid mobile number")) {
-                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(context, R.string.MobNoIncorrectAlert, Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
+                                pd.dismiss();
+                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.MobNoIncorrectAlert,  false);
 
                             }else if (message.equals("{\"bdb_mobile\":[\"bdb mobile is not valid\"]}")){
-                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(context, R.string.WrongMobNumberAlert, Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                pd.dismiss();
+
+                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongMobNumberAlert,  false);
                             }
                         }
                     }
@@ -3256,7 +3269,7 @@ public class APICall {
                             .post(body)
                             .addHeader("Content-Type", "application/json")
                             .addHeader("X-Requested-With", "XMLHttpRequest")
-                                .header("Authorization", "Bearer " + gettoken(context))
+                            .header("Authorization", "Bearer " + gettoken(context))
                             .build();
 
                     client.newCall(request).enqueue(new Callback() {
@@ -3332,7 +3345,7 @@ public class APICall {
                                             JSONObject postdata = new JSONObject();
                                             try {
                                                 postdata.put("bdb_name", bdb_name);
-                                                if (!context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("bdb_email", null).equals(bdb_email)) {
+                                                if (!AccountFragment.oldEmail.equals(bdb_email)) {
                                                     postdata.put("bdb_email", bdb_email);
                                                 }
                                                 postdata.put("password", password);
@@ -3449,78 +3462,91 @@ public class APICall {
                 }
             });
         }
-        public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email, final Context context) {
+    public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email, final Context context) {
 
-            MediaType MEDIA_TYPE = MediaType.parse("application/json");
-           showDialog(context);
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
 
-            OkHttpClient client = new OkHttpClient();
-            JSONObject postdata = new JSONObject();
-            try {
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
             postdata.put("bdb_name", bdb_name);
-            postdata.put("bdb_email", bdb_email);
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+            if (!AccountFragment.oldEmail.equals(bdb_email))
+                postdata.put("bdb_email", bdb_email);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
-            okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url(url)
-                    .put(body)
-                    .addHeader("Content-Type","application/json")
-                    .header("Authorization", "Bearer "+gettoken(context))
-                    .build();
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(url)
+                .put(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    mMessage = e.getMessage().toString();
-                    Log.w("failure Response", mMessage);
-                    pd.dismiss();
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
-                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                                TextView confirm = dialog.findViewById(R.id.confirm);
-                                TextView message = dialog.findViewById(R.id.message);
-                                TextView title = dialog.findViewById(R.id.title);
-                                title.setText(R.string.Null);
-                                message.setText(R.string.check_internet_con);
-                                confirm.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog.cancel();
-                                    }
-                                });
-                                dialog.show();
-                            }
-                        });
-                    }else {
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                }
+                            });
+                            dialog.show();
+                        }
+                    });
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
+            }
 
-                @Override
-                public void onResponse(Call call, okhttp3.Response response) throws IOException {
-                    mMessage = response.body().string();
-                    Log.e("TAG", mMessage);
-                    pd.dismiss();
-                    SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                pd.dismiss();
+                SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
 
-                    try {
-                        final JSONObject j=new JSONObject(mMessage);
-                        String success=j.getString("success");
-                        if (success.equals("true")) {
+                try {
+                    final JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String msg=j.getString("message");
+                    if (success.equals("true")) {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
+                            }
+                        });
+                        editor.putString("bdb_name", bdb_name);
+                        editor.putString("bdb_email", bdb_email);
+                    } else {
+                        if(msg.contains("The bdb email has already been taken."))
+                        {
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -3529,7 +3555,8 @@ public class APICall {
                             });
                             editor.putString("bdb_name", bdb_name);
                             editor.putString("bdb_email", bdb_email);
-                        } else {
+                        }
+                        else
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -3542,23 +3569,23 @@ public class APICall {
                                 }
                             });
 
-                            editor.putString("bdb_name", null);
-                            editor.putString("bdb_email", null);
-                        }
-                    } catch (JSONException je) {
-                            je.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
+                        editor.putString("bdb_name", null);
+                        editor.putString("bdb_email", null);
                     }
-                    editor.commit();
-                    pd.dismiss();
-                }
-            });
+                } catch (JSONException je) {
+                    je.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-            Log.d("MessageResponse",mMessage);
-        }
-        //------------------ استعراض معلومات خدمة معينة---------------------
+                }
+                editor.commit();
+                pd.dismiss();
+            }
+        });
+
+        Log.d("MessageResponse",mMessage);
+    }
+    //------------------ استعراض معلومات خدمة معينة---------------------
         public  static  String  details_user(final  String url,final Context context){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
@@ -4249,8 +4276,8 @@ public class APICall {
                                         longitude=jarray.getString("longitude"),
                                         latitude=jarray.getString("latitude"),
                                         is_fav_sup=jarray.getString("is_fav_sup"),
-                                bdb_booking_period=jarray.getString("bdb_booking_period");
-
+                                        bdb_logo_id=jarray.getString("bdb_logo_id"),
+                                        bdb_booking_period=jarray.getString("bdb_booking_period");
                                 JSONObject services=jarray.getJSONObject("services");
                                 String ser_id=services.getString("bdb_ser_id");
                                 String bdb_is_bride_service=services.getString("bdb_is_bride_service");
@@ -4277,7 +4304,7 @@ public class APICall {
                                                                             bdb_booking_period,
                                                                             ser_id,bdb_sup_id,
                                                                             bdb_time+"",
-                                                                            bdb_is_bride_service);
+                                        bdb_is_bride_service,bdb_logo_id);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 TabOne.arrayList.add(bsi);
@@ -8095,6 +8122,8 @@ public class APICall {
                                 String bdb_is_executed = jObject.getString("bdb_is_executed");
                                 String provider_rating = jObject.getString("provider_rating");
                                 String is_action_on = jObject.getString("is_action_on");
+                                String bdb_logo_id = jObject.getString("bdb_logo_id");
+                                String bookedByMe = jObject.getString("bookedByMe");
                                 String bdb_booked_at="",bdb_start_dates="",bdb_start_date="";
                                 try {
                                     bdb_start_dates = jObject.getString("bdb_start_dates");
@@ -8187,7 +8216,7 @@ public class APICall {
 
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                    reservationModels.add(new ReservationModel(booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -8199,7 +8228,7 @@ public class APICall {
 //                                            if (MyReservationFragment.service_date_txt.equals("") || MyReservationFragment.service_date_txt.equals(bdb_start_dates))
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                    reservationModels.add(new ReservationModel(booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -8210,7 +8239,7 @@ public class APICall {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
                                             if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                reservationModels.add(new ReservationModel(booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -8218,7 +8247,7 @@ public class APICall {
                                 }else {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
-                                            reservationModels.add(new ReservationModel(booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                            reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -8510,7 +8539,8 @@ public class APICall {
 
                                 String bdb_inner_booking=jObject.getString("bdb_inner_booking");
                                 String bdb_is_executed=jObject.getString("bdb_is_executed");
-
+                                String bdb_logo_id = jObject.getString("bdb_logo_id");
+                                String bookedByMe = jObject.getString("bookedByMe");
 
                                 objectbrowseBoooking.add(jObject+"" +
                                         "");
@@ -8569,7 +8599,7 @@ public class APICall {
 //                                }else
                                     if (booking_type.equals("4") ||booking_type.equals("5") ||booking_type.equals("6")
                                     ||booking_type.equals("7") ||booking_type.equals("8") ||booking_type.equals("9")){
-                                    reservationModels.add(new ReservationModel(booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
+                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking, bookingAutomatedBrowseData1));
                                     Log.e("BookTypeAdded","Group");
                                 }
                             }
@@ -19243,6 +19273,148 @@ public class APICall {
 
         });
     }
+    public  static  void   browseOneMultiOfferNotification(String bdb_pack_code, final Context context, final String titlen,final String bodyn,final JSONArray pairsn,final String coden){
+
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        /*((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+//                if (oftype.equals("1") || oftype.equals("4"))
+//                {
+                showDialog(context);
+//                pd.show();
+//                    swipeRefreshLayout.setRefreshing(true);
+
+//                }
+            }
+        });*/
+        OkHttpClient client = new OkHttpClient();
+        JSONObject jsonPostData=new JSONObject();
+        try {
+            jsonPostData.put("bdb_pack_code",bdb_pack_code);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        Log.e("JSONPOST",jsonPostData.toString());
+        final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/service/offer/browse")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+//                .addHeader("Accept","application/json")
+//                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+                // pd.dismiss();
+//                swipeRefreshLayout.setRefreshing(false);
+//                TabTwo.pullToRefresh.setRefreshing(false);
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        }
+                    });
+
+                }else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                DataOffer.SupIdClass result2;
+
+//                    Log.d("token",gettoken(context));
+                Log.e("TAG123", mMessage);
+               /* ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        if (oftype.equals("3") ||oftype.equals("4")) {
+                        pd.dismiss();
+//                            swipeRefreshLayout.setRefreshing(false);
+
+//                        }
+                    }
+                });
+*/
+
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success=jsonObject.getString("success");
+                    Log.e("success",success);
+                    String message;
+                    try {
+                        message=jsonObject.getString("message");
+                    }catch (JSONException je){
+                        message=jsonObject.getString("error");
+                    }
+                    if (success.equals("true")){
+                        JSONObject data=jsonObject.getJSONObject("data");
+
+                        JSONArray groups=data.getJSONArray("groups");
+                        String bdb_pack_code=data.getString("bdb_pack_code");
+                        String bdb_offer_place=data.getString("bdb_offer_place");
+
+                        for (int i=0;i<groups.length();i++){
+                            JSONArray arrayobject=groups.getJSONArray(i);
+                            Log.e("Groups",arrayobject.toString());
+                            for (int j=0;j<arrayobject.length();j++){
+                                JSONObject object=arrayobject.getJSONObject(j);
+                                String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
+                                String bdb_ser_id=object.getString("bdb_ser_id");
+                                String bdb_name_ar="";
+                                try {
+                                    bdb_name_ar=object.getString("bdb_name_ar");
+                                }catch (Exception e){
+                                    bdb_name_ar=object.getString("bdb_ser_name_ar");
+                                }
+                                String bdb_ser_name_en=object.getString("bdb_ser_name_en");
+                                if(context.getResources().getString(R.string.locale).equals("ar"))
+                                    NotificationsBeauty.supIdClasses.add( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name_ar,bdb_ser_id));
+                                else
+                                    NotificationsBeauty.supIdClasses.add ( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,bdb_ser_id));
+                                NotificationsBeauty.offer_place=bdb_offer_place;
+                                NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
+
+
+                            }
+
+
+                        }
+
+                    }
+                }catch (JSONException je){
+                    je.printStackTrace();
+//                        there is no suppliered services with your search filters
+
+                }
+            }
+        });
+
+
+
+    }
 
     public static void sendFavorites(final  Context cont,JSONArray items)
     {
@@ -19297,7 +19469,70 @@ public class APICall {
         });
 
     }
+    public static void sendFavorites(final  Context cont,String item_id,String bdb_type)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject item = new JSONObject();
+        try {
+            item .put("bdb_item_id",item_id);
+            item .put("bdb_type",bdb_type);
 
+        }
+        catch (Exception e){}
+
+        JSONArray items = new JSONArray();
+        items.put(item);
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("items",items);
+
+        }
+        catch (Exception e){}
+        Log.e("favorite",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/addFav")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("Favorites ERRR", mMessage);
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Favorites", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+
+                }
+            }
+
+        });
+
+    }
     public static void sendUnFavorites(final  Context cont,String item_id,String bdb_type)
     {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -19573,27 +19808,219 @@ public class APICall {
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
                 Log.e("deletePayment ERRR", mMessage);
-                //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+                pd.dismiss();
+                showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
             }
 
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("updateFBToken", mMessage);
-                ((AppCompatActivity) context).finish();
-                SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
-                editor.putString("name", "ok");
-                editor.putString("token", userToken);
-                editor.commit();
-                editor.apply();
+                try {
+                    final JSONObject userresponse=new JSONObject(mMessage);
+                    String success=userresponse.getString("success");
+                    if(success.equals("true")){
+                        String t= gettoken(context);
+                        switchAccount(context,FirebaseInstanceId.getInstance().getToken(),t);
+                        SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        editor.putString("name", "ok");
+                        editor.putString("isGuest","0");
+                        editor.putString("token", userToken);
+                        editor.commit();
+                        editor.apply();
+                        pd.dismiss();
+                        Intent i = new Intent(context, BeautyMainPage.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(i);
+                        ((AppCompatActivity) context).finish();
+                    }else if(success.equals("false")) {
+
+
+                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.loginFailed,false);
+                    }
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+                }
+
+
+            }
+
+        });
+    }
+    public static void showSweetDialog(final Context context, final String textmessage, final Boolean iscode) {
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                {
+                    final Dialog dialog = new Dialog(context);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.sweet_dialog_layout_v2);
+                    TextView message = dialog.findViewById(R.id.message);
+//                    TextView title = dialog.findViewById(R.id.title);
+                    TextView confirm = dialog.findViewById(R.id.confirm);
+                    //                      TextView resend_code = dialog.findViewById(R.id.resend_code);
+//                    title.setText(texttitle);
+                    message.setText(textmessage);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+                    dialog.show();
+                }
+            }
+        });
+
+    }
+    public static void getGuestToken(final Context context, String fbToken)
+    {
+//        showDialog(context);
+        Log.e("NewToken","getting guest token");
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
+
+        try {
+            postdata.put("bdb_fb_token",fbToken);
+            postdata.put("bdb_server_key",server_key);
+            postdata.put("bdb_sys_type","0");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com/api/auth/user/getGuestToken")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("guestToken ERRR", mMessage);
                 Intent i = new Intent(context, BeautyMainPage.class);
                 context.startActivity(i);
+                //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                try {
+                    final JSONObject userresponse=new JSONObject(mMessage);
+                    String success=userresponse.getString("success");
+                    String msg=userresponse.getString("message");
+                    if(success.equals("true")){
+                        ((AppCompatActivity) context).finish();
+                        JSONObject data=userresponse.getJSONObject("data");
+                        APICall.token_temp=data.getString("token");
+                        SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        editor.putString("name", "ok");
+                        editor.putString("isGuest", "1");
+                        editor.putString("token", token_temp);
+                        editor.commit();
+                        editor.apply();
+                        Intent i = new Intent(context, BeautyMainPage.class);
+                        context.startActivity(i);
+                    }else if(success.equals("false")) {
+                        Intent i = new Intent(context, Login.class);
+                        context.startActivity(i);
+                    }
+                }catch (final JSONException je){
+                    Intent i = new Intent(context, BeautyMainPage.class);
+                    context.startActivity(i);
+
+                }
+
+                Log.e("guestToken", mMessage);
+
             }
 
         });
     }
 
+    public static void switchAccount(final Context context, String fbToken,String guestToken)
+    {
+//        showDialog(context);
+        Log.e("NewToken","getting guest token");
 
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
+
+        try {
+            postdata.put("bdb_fb_token",fbToken);
+            postdata.put("bdb_token",guestToken);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://clientapp.dcoret.com//api/auth/user/switchAccount")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")
+                .header("Authorization", "Bearer "+guestToken)
+
+                //    .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("guestToken ERRR", mMessage);
+                Intent i = new Intent(context, BeautyMainPage.class);
+                context.startActivity(i);
+                ((AppCompatActivity) context).finish();
+
+                //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("switch", mMessage);
+                ((AppCompatActivity) context).finish();
+
+                /*try {
+                    final JSONObject userresponse=new JSONObject(mMessage);
+                    String success=userresponse.getString("success");
+                    String msg=userresponse.getString("message");
+
+
+                }catch (final JSONException je){
+                    Log.e("switch ERRR", mMessage);
+                }*/
+
+
+            }
+
+        });
+    }
     public  static  void  bookingProcessing(String bdb_id,int  bdb_new_status,String is_provider_actor ,final Context context){
 
         MyReservationFragment.bookingAutomatedBrowseData.clear();
@@ -20258,7 +20685,7 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  browseOneBooking(String book_id,final Context context){
+    public  static  void  browseOneBooking(String book_id,final Context context,final ImageView logoImg){
         servicesArrayList.clear();
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
@@ -20379,7 +20806,10 @@ public class APICall {
                         final String journey_count=data.getString("journey_count");
                         final String booking_price=data.getString("booking_price");
                         String bdb_sup_final_price="";
-
+                        String salon_name=data.getString("salon_name");
+                        String logo_id=data.getString("bdb_logo_id");
+                        getSalonLogo(BeautyMainPage.context,logo_id,logoImg);
+                        ReservatoinDetailsActivity.salonName.setText(salon_name);
                         try {
                             bdb_sup_final_price = data.getString("sup_booking_price");
                         }catch (Exception e){
@@ -20474,6 +20904,7 @@ public class APICall {
                         }
                         if (!bdb_sup_final_price.equals("0")) {
                             ReservatoinDetailsActivity.ac_total_price.setText(convertToArabic(bdb_sup_final_price) + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal));
+                            ReservatoinDetailsActivity.ac_total_price.setVisibility(View.VISIBLE);
                             Log.e("bdb_sup_price",bdb_sup_final_price);
 
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -20678,7 +21109,36 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
+    public static void showNeedToSignInDialog(final Context context)
+    {
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.sweet_dialog_layout_v4);
+        TextView message = dialog.findViewById(R.id.message);
+        TextView title = dialog.findViewById(R.id.title);
+        TextView confirm = dialog.findViewById(R.id.confirm);
+        confirm.setText(R.string.signin);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        //                TextView resend_code = dialog.findViewById(R.id.resend_code);
+        title.setText(R.string.ExuseMeAlert);
+        message.setText(R.string.plsLogin);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent i = new Intent(context,Login.class);
+                context.startActivity(i);
+                dialog.cancel();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+    }
 
 }
 

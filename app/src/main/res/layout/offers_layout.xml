@@ -30,60 +30,60 @@
         android:paddingBottom="10dp"
         android:layout_marginLeft="10dp">
 
-<!--
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="@dimen/standard_40"
-            android:orientation="horizontal"
-            >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:onClick="servicesBeauty"
-                android:layout_weight="1"
-                android:background="@drawable/app_services_btn"
-                android:gravity="center">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/BeautyServices"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-           &lt;!&ndash; <LinearLayout
-                android:layout_width="10dp"
-                android:layout_height="match_parent"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shadow_fashion_tab"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="@dimen/standard_40"
+        <!--
+                <LinearLayout
+                    android:layout_width="150dp"
                     android:layout_height="@dimen/standard_40"
-                    android:background="@drawable/ic_bride" />
+                    android:orientation="horizontal"
+                    >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/FashionDesignServices"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>&ndash;&gt;
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:onClick="servicesBeauty"
+                        android:layout_weight="1"
+                        android:background="@drawable/app_services_btn"
+                        android:gravity="center">
 
-        </LinearLayout>
--->
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/BeautyServices"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                   &lt;!&ndash; <LinearLayout
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"></LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shadow_fashion_tab"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="@dimen/standard_40"
+                            android:layout_height="@dimen/standard_40"
+                            android:background="@drawable/ic_bride" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/FashionDesignServices"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>&ndash;&gt;
+
+                </LinearLayout>
+        -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,7 +98,6 @@
                 android:text="@string/FeaturedBeautyShows"
                 android:gravity="center"
                 android:textColor="@android:color/holo_red_dark"
-                android:background="@drawable/best_offers_shape"
                 android:textStyle="bold"
                 android:textSize="22sp"
                 />
@@ -117,13 +116,13 @@
                 android:id="@+id/pullToRefresh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/offers_recycleview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp">
-            </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/offers_recycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+                </android.support.v7.widget.RecyclerView>
             </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
 
@@ -143,4 +142,4 @@
 
 
 
-    </LinearLayout>
+</LinearLayout>

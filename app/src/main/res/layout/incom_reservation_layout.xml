@@ -6,7 +6,6 @@
     android:background="@color/gr"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -14,7 +13,8 @@
 
         <TextView
             android:id="@+id/rname"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -24,41 +24,41 @@
             android:layout_marginTop="5dp"
             />
         <!--<LinearLayout-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:weightSum="3"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--<TextView-->
-                <!--android:id="@+id/accept"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@string/Accept"-->
-                <!--android:textColor="#000"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/refuse"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@string/Refusal"-->
-                <!--android:textColor="@color/pf_red"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:id="@+id/edit_time"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@string/Edit_time"-->
-                <!--android:textColor="@color/endblue"-->
-                <!--android:textSize="20dp"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:weightSum="3"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+        <!--android:id="@+id/accept"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/Accept"-->
+        <!--android:textColor="#000"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/refuse"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/Refusal"-->
+        <!--android:textColor="@color/pf_red"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/edit_time"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/Edit_time"-->
+        <!--android:textColor="@color/endblue"-->
+        <!--android:textSize="20dp"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
 
         <!--</LinearLayout>-->
 

@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -9,12 +10,12 @@
         <menu>
             <item
                 android:id="@+id/manageaccount"
-                android:icon="@drawable/ic_favorite_black_24dp"
+                android:icon="@drawable/side_account_icon"
                 android:title="@string/manage_account" />
 
             <item
                 android:id="@+id/points"
-                android:icon="@drawable/ic_compare"
+                android:icon="@drawable/side_points_icon"
                 android:title="@string/points" />
 
             <item
@@ -23,60 +24,40 @@
                 android:title="@string/setting" />
             <item
                 android:id="@+id/effcts"
-                android:icon="@drawable/ic_settings_black_24dp"
+                android:icon="@drawable/side_effects_icon"
                 android:title="@string/effect" />
+
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/side_share_icone"
                 android:title="@string/share_app" />
 
 
 
             <item
                 android:id="@+id/support"
-                android:icon="@drawable/ic_help_black_24dp"
+                android:icon="@drawable/side_support_icon"
                 android:title="@string/support" />
-            <item
-                android:id="@+id/rate_app"
-                android:icon="@drawable/ic_medal"
-                android:title="@string/rate_app" />
-            <item
+            <!-- <item
+                 android:id="@+id/rate_app"
+                 android:icon="@drawable/side_rate_icon"
+                 android:title="@string/rate_app" />-->
+            <!--<item
             android:id="@+id/callsalon"
             android:icon="@drawable/ic_icons8_about"
-            android:title="@string/call_salon" />
+            android:title="@string/call_salon" />-->
 
             <item
                 android:id="@+id/signout"
-                android:icon="@drawable/ic_logout"
-                android:title="@string/sigin_out" />
+                android:icon="@drawable/side_signout_icon"
+                android:title="@string/sign_out" />
+            <item
+                android:id="@+id/signin"
+                android:icon="@drawable/side_sign_in"
+                android:title="@string/signin" />
 
 
         </menu>
     </item>
-    <!--<item android:title=""-->
-
-        <!--&gt;-->
-        <!--<menu >-->
-
-            <!--<item-->
-                <!--android:id="@+id/facebook"-->
-                <!--android:icon="@drawable/ic_logout"-->
-                <!--app:showAsAction="always"-->
-                <!--android:title=" تسجيل الخروج" />-->
-            <!--<item-->
-                <!--android:id="@+id/twitter"-->
-                <!--android:icon="@drawable/ic_logout"-->
-                <!--app:showAsAction="always"-->
-                <!--android:title=" تسجيل الخروج" />-->
-            <!--<item-->
-                <!--android:id="@+id/instgram"-->
-                <!--app:showAsAction="always"-->
-                <!--android:icon="@drawable/ic_logout"-->
-                <!--android:title=" تسجيل الخروج" />-->
-
-
-        <!--</menu>-->
-
-    <!--</item>-->
 
 </menu>

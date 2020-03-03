@@ -96,13 +96,20 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("choose",MultiIndividualBookingReservationFragment.choose_occision.getSelectedItem().toString());
-                            if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2) {
-                                APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
-                            }else {
-                                APICall.addGroupItemMultDates(APICall.getClientsInfoforIndividualMultiDates(salons, stringArrayListHashMap, groupPosition,MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+                            if(APICall.isGuest(context).equals("0"))
 
+                            {
+                                Log.e("choose",MultiIndividualBookingReservationFragment.choose_occision.getSelectedItem().toString());
+                                if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2) {
+                                    APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+                                }else {
+                                    APICall.addGroupItemMultDates(APICall.getClientsInfoforIndividualMultiDates(salons, stringArrayListHashMap, groupPosition,MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
+
+                                }
                             }
+                            else
+                                APICall.showNeedToSignInDialog(context);
+
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                         }
                     });

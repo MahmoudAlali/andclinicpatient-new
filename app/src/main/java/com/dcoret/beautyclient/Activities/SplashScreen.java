@@ -47,9 +47,9 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         context = this;
         sharedPreferences=getSharedPreferences("LOGIN",MODE_PRIVATE);
-         APICall.ln=sharedPreferences.getString("lang","en");
-         Log.e("LanguageApp",APICall.ln);
-         ln=APICall.ln;
+        APICall.ln=sharedPreferences.getString("lang","en");
+        Log.e("LanguageApp",APICall.ln);
+        ln=APICall.ln;
 
         Resources res = getResources();
         // Change locale settings in the app.
@@ -58,6 +58,31 @@ public class SplashScreen extends AppCompatActivity {
         conf.setLocale(new Locale(APICall.ln.toLowerCase())); // API 17+ only.
         // Use conf.locale = new Locale(...) if targeting lower versions
         res.updateConfiguration(conf, dm);
+        final String TAG = "FireBase";
+        try {
+            FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                return;
+                            }
+
+                            // Get new Instance ID token
+                            token = task.getResult().getToken();
+
+                            // Log and toast
+//                        String msg = getString(1, token);
+                            Log.d(TAG, token);
+//                            Toast.makeText(SplashScreen.this, token, Toast.LENGTH_SHORT).show();
+                            System.out.println(token);
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -78,20 +103,23 @@ public class SplashScreen extends AppCompatActivity {
                         finish();
                         startActivity(intent);
                     } else {
-                        Intent intent = new Intent(context, Login.class);
+                        APICall.getGuestToken(context,FirebaseInstanceId.getInstance().getToken());
+                       /* Intent intent = new Intent(context, Login.class);
                         //Intent intent = new Intent(context, Offers.class);
                         finish();
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
                     Log.d("name","null");
+                    APICall.getGuestToken(context,FirebaseInstanceId.getInstance().getToken());
+                   /* Log.d("name","null");
                     Intent intent = new Intent(context, Login.class);
                    // Intent intent = new Intent(context, Offers.class);
                     finish();
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
             }
         };
@@ -101,34 +129,9 @@ public class SplashScreen extends AppCompatActivity {
 //        sendRequest();
 
 
-        final String TAG = "FireBase";
-        try {
-            FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-            FirebaseInstanceId.getInstance().getInstanceId()
-                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (!task.isSuccessful()) {
-                                Log.w(TAG, "getInstanceId failed", task.getException());
-                                return;
-                            }
-
-                            // Get new Instance ID token
-                           token = task.getResult().getToken();
-
-                            // Log and toast
-//                        String msg = getString(1, token);
-                            Log.d(TAG, token);
-//                            Toast.makeText(SplashScreen.this, token, Toast.LENGTH_SHORT).show();
-                            System.out.println(token);
-                        }
-                    });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
-//    String token="cuFy-L6jZrU:APA91bGfYvXg99FhxscZUQVarBLyRhSA28y3EfaV1LUzL8FKQf0s9eM9SHkSYYzP3LuzVzD2ngUDfdrIb1wJBufqzm3LmLTJVtNcF5edrrECwx-nrDtNsfr5nuhjzplMGJJTglek2M0V";
+    //    String token="cuFy-L6jZrU:APA91bGfYvXg99FhxscZUQVarBLyRhSA28y3EfaV1LUzL8FKQf0s9eM9SHkSYYzP3LuzVzD2ngUDfdrIb1wJBufqzm3LmLTJVtNcF5edrrECwx-nrDtNsfr5nuhjzplMGJJTglek2M0V";
     static String token;
     String api_key_header_value = "Key=AAAA6gZ1CO8:APA91bHEg19SqKpRdvifPk3-o-nWwDm350IZaNjqX0yy0eHkRUnv1hSBHN6zaQZR0ZvoINJUNX1zbRMDto0W4ePuFwckOOBabMECCscYuwyisY4YEGHhCr10kjEVPoifc9IOz_x7dP0q";
 

@@ -95,11 +95,11 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         ((Item)holder).offer_end.setText(context.getResources().getText(R.string.end_offer)+newDateString);
         if (offers.get(position).getBdb_offer_type().equals("1") ||offers.get(position).getBdb_offer_type().equals("4")) {
-            ((Item) holder).offer_type.setText("عرض فردي (نفس اليوم)");
+            ((Item) holder).offer_type.setText(R.string.ind_offer);
         }else if (offers.get(position).getBdb_offer_type().equals("2") ||offers.get(position).getBdb_offer_type().equals("5")) {
-            ((Item) holder).offer_type.setText("عرض فردي (متعدد )");
+            ((Item) holder).offer_type.setText(R.string.ind_offer);
         }else if (offers.get(position).getBdb_offer_type().equals("3") ||offers.get(position).getBdb_offer_type().equals("6")) {
-            ((Item) holder).offer_type.setText("عرض جماعي");
+            ((Item) holder).offer_type.setText(R.string.group_offer);
         }
 //        ((Item)holder).offer_type.setText(offers.get(position).getBdb_offer_type());
         String on= context.getResources().getString(R.string.on);
@@ -140,7 +140,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         }else if (offers.get(position).getBdb_is_old_on().equals("1")){
             ((Item)holder).age.setText(R.string.Adult);
         }else if (offers.get(position).getBdb_is_old_on().equals("2")){
-            ((Item)holder).age.setText("جميع الأعمار");
+            ((Item)holder).age.setText(R.string.allAges);
         }
 
         if (offers.get(position).getBdb_offer_place().equals("0")){

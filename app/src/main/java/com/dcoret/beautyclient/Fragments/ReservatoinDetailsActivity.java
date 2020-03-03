@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +23,14 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-    public static TextView empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+public static TextView id,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
     public static LinearLayout myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static  Context context;
+    public static String logoId;
+    ImageView logoImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,38 @@ public class ReservatoinDetailsActivity extends AppCompatActivity {
         booktype=findViewById(R.id.book_type);
         service_name=findViewById(R.id.rname);
         salonName=findViewById(R.id.salon_name);
+        logoId="";
+        logoImg=findViewById(R.id.logoImg);
+        id=findViewById(R.id.id);
+
+        //region Check_Notification
+        String book_id="";
+        try
+        {
+            Log.e("Notif", "Reserv Details is trying to get bookid");
+            book_id=getIntent().getStringExtra("book_id");
+        }
+        catch (Exception e)
+        {
+            Log.e("NotifErr",e.getMessage());
+        }
+
+        if(book_id!=null)
+        {
+            APICall.browseOneBooking(book_id,context,logoImg);
+            id.setText(book_id);
+            //APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
+
+        }
+        else
+        {
+            APICall.browseOneBooking(ReservationsAdapter2.book_id,context,logoImg);
+            id.setText(ReservationsAdapter2.book_id);
+            // APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
+        }
+
+        //endregion
+
 
 //        v1=findViewById(R.id.vfirst);
 //        v2=findViewById(R.id.vsecond);
@@ -81,7 +117,7 @@ public class ReservatoinDetailsActivity extends AppCompatActivity {
 //                v4.setBackgroundResource(R.color.green);
 //            }
 //        });
-        APICall.browseOneBooking(ReservationsAdapter2.book_id,context);
+       // APICall.browseOneBooking(ReservationsAdapter2.book_id,context);
 
 
 
