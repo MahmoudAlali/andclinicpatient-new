@@ -9999,6 +9999,7 @@ public class APICall {
 //                    "    ,{\"ser_id\":2,\"ser_time\":60}\n" +
 //                    "    ]}]}";
 
+
         Log.e("UrlAlt",urlAlt);
         Log.e("GroupFilter",filter);
 
