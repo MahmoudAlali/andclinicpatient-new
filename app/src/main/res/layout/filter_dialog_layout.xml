@@ -15,7 +15,26 @@
         android:layout_gravity="top"
         android:orientation="vertical">
 
-
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/ser_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:textColor="#000"
+            android:layout_marginBottom="5dp"
+            />
+        <Spinner
+            android:id="@+id/place_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:textSize="@dimen/standard_20"
+            android:textColor="#000"
+            android:layout_marginBottom="5dp"
+            />
         <CheckBox
             android:id="@+id/price"
             android:layout_width="match_parent"

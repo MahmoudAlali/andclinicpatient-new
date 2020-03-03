@@ -28,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,8 +54,10 @@ import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.Activities.TabThree;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.DataModel.ServiceFilter;
+import com.dcoret.beautyclient.DataModel.ServiceItems;
 import com.dcoret.beautyclient.DataModel.SupInfoClass;
 import com.dcoret.beautyclient.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 //import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
 import java.util.ArrayList;
@@ -63,6 +66,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
     public static CheckBox price,price_offer,distance,rateService,rateProvider,servicePlace,nameSalonOrProvider,discountVal,activeDate;
     Fragment fragment;
+    public static SearchableSpinner ser_name;
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     public static TextView servicetab,offertab,maptab;
@@ -89,6 +93,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
     TextView pagenum,sortUsed;
     LinearLayout pageNext,pagePrev;
+    public static ArrayList<ServiceItems> servicesList=new ArrayList<>();
+    public static ArrayList<String> serviceNameList=new ArrayList<>();
 
 
     //-------- for check if get services------
@@ -384,12 +390,76 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //                }else
 //                if (TABFLAG == 1) {
 
+
+
+
+
                     final Dialog dialog = new Dialog(BeautyMainPage.context);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
                     dialog.setContentView(R.layout.filter_dialog_layout);
+                    //----------place service--------------
+                Spinner place_service=dialog.findViewById(R.id.place_service);
+                ArrayAdapter adapter1=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.service_place,R.layout.simple_spinner_dropdown_item_v1);
+                adapter1.setDropDownViewResource(R.layout.spinner_center_item);
+                place_service.setSelection(0);
+                place_service.setAdapter(adapter1);
+                place_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                       if (position!=0){
+                           if (position==1) {
+                               PlaceServiceFragment.place_service = ",{\"num\":9,\"value1\":1}";
+                           }else if (position==2){
+                               PlaceServiceFragment.place_service = ",{\"num\":8,\"value1\":1}";
 
-                    //-------------- range price filter--------------------
+                           }else if (position==3){
+                               PlaceServiceFragment.place_service = ",{\"num\":10,\"value1\":1}";
+
+                           }else if (position==4){
+                               PlaceServiceFragment.place_service = ",{\"num\":11,\"value1\":1}";
+
+                           }
+                       }
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                //---------- service names---------------
+                ser_name = dialog.findViewById(R.id.ser_name);
+//                ArrayList<String> serviceNameList=new ArrayList<>();
+               ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,serviceNameList);
+                adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                ser_name.setTitle(getResources().getString(R.string.Service_Name));
+                ser_name.setSelection(0);
+                ser_name.setAdapter(adapter);
+                APICall.getServicesForFilter("0",adapter,serviceNameList,BeautyMainPage.context);
+
+                ser_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                        if (position!=0) {
+                            APICall.filterSortAlgorithm("33", servicesList.get(position - 1).getBdb_ser_id(), "0");
+                            Log.e("NameList-1",servicesList.get(position - 1).getBdb_name_ar());
+                            ListServicesFragment.bdb_ser_id=servicesList.get(position - 1).getBdb_ser_id();
+                            APICall.idSerForOffer=servicesList.get(position - 1).getBdb_ser_id();
+                            ServiceId="\"ServiceId\":["+APICall.idSerForOffer+"],";
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                //-------------- range price filter--------------------
                     price = dialog.findViewById(R.id.price);
                 price_offer = dialog.findViewById(R.id.price_offer);
                     Button clean = dialog.findViewById(R.id.clean);

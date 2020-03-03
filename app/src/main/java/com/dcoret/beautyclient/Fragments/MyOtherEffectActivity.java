@@ -46,7 +46,7 @@ public class MyOtherEffectActivity extends AppCompatActivity {
         Log.e("Effectfilter",getEffectClients());
 
 
-        APICall.getMyEffectsClientGroup(context,getEffectClients(),effectAdapter);
+        APICall.getMyEffectsClientOther(context,getEffectClients(),effectAdapter);
 
 
 //        Log.e("servicesForClientGroups","sfcg"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(MultiIndividualBookingReservationFragment.servicesForClientGroups.size()-1).getId());
@@ -222,7 +222,7 @@ public class MyOtherEffectActivity extends AppCompatActivity {
 //            Log.e("clients",clients);
         return clients;
     }
-    public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel){
+    public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel,int position){
         //------- add degrees
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.effects_layout_main, myroot, false);
@@ -232,23 +232,35 @@ public class MyOtherEffectActivity extends AppCompatActivity {
         cat_name=layout2.findViewById(R.id.cat_name);
         myroot2=layout2.findViewById(R.id.myroot);
 
-        if (context.getResources().getString(R.string.locale).equals("ar")){
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name_ar());
-        }else
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name());
+        try {
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                cat_name.setText(clientEffectModel.getClient_name() + ": " + clientEffectModel.getClientEffectModels().get(position).getCat_name_ar());
+            } else
+                cat_name.setText(clientEffectModel.getClient_name() + ": " + clientEffectModel.getClientEffectModels().get(position).getCat_name());
+        }catch (Exception e){
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                cat_name.setText(clientEffectModel.getClient_name() );
+            } else
+                cat_name.setText(clientEffectModel.getClient_name() );
 
+            e.printStackTrace();
+        }
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myroot.addView(layout2);
             }
         });
-        Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
-        for (int i=0;i<clientEffectModel.getClientEffectModels().get(0).getEffects().size();i++) {
-            Log.e("Effects_name",clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());
-            addlayout(myroot2, clientEffectModel.getClientEffectModels().get(0).getEffects().get(i));
-        }
+       try {
+//           Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(position).getCat_name());
+           for (int i = 0; i < clientEffectModel.getClientEffectModels().get(position).getEffects().size(); i++) {
+               Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(position).getEffects().get(i).getBdb_effect_name_ar());
+               addlayout(myroot2, clientEffectModel.getClientEffectModels().get(position).getEffects().get(i));
+           }
 
+       }catch (Exception e){
+           e.printStackTrace();
+       }
 
     }
     public static void addlayout(final LinearLayout myroot, final ClientEffectModel.Effects effects){

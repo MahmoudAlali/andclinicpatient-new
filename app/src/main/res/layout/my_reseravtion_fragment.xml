@@ -125,176 +125,24 @@
             android:background="#000"
             />
     </LinearLayout>
-
+    <TextView
+        android:layout_marginTop="103dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:text="للإلغاء يرجى الضغط على زر الإلغاء"/>
     <LinearLayout
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="122dp"
         android:orientation="vertical"
         android:id="@+id/tabs_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="115dp">-->
 
-        <!--</android.support.design.widget.FloatingActionButton>-->
+    </LinearLayout>
 
 
 
-        <!--<com.github.clans.fab.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="@dimen/standard_80"-->
-        <!--android:layout_height="@dimen/standard_80"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:src="@drawable/fab_add"-->
-        <!--app:fab_colorNormal="#DA4336"-->
-        <!--app:fab_colorPressed="#E75043"-->
-        <!--app:fab_colorRipple="#99FFFFFF"-->
-        <!--app:fab_showShadow="true"-->
-        <!--app:fab_shadowColor="#66000000"-->
-        <!--app:fab_shadowRadius="4dp"-->
-        <!--app:fab_shadowXOffset="1dp"-->
-        <!--app:fab_shadowYOffset="3dp"-->
-        <!--app:fab_size="normal"-->
-        <!--app:fab_showAnimation="@anim/fab_scale_up"-->
-        <!--app:fab_hideAnimation="@anim/fab_scale_down"-->
-        <!--app:fab_label=""-->
-        <!--app:fab_progress_color="#FF009688"-->
-        <!--app:fab_progress_backgroundColor="#4D000000"-->
-        <!--app:fab_progress_indeterminate="false"-->
-        <!--app:fab_progress_max="100"-->
-        <!--app:fab_progress="0"-->
-        <!--app:fab_progress_showBackground="true"-->
-        <!--/>-->
-
-    </FrameLayout>
-
-
-    <!--<ru.dimorinny.floatingtextbutton.FloatingTextButton-->
-        <!--android:id="@+id/action_button"-->
-        <!--android:layout_marginTop="115dp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--android:layout_gravity="end"-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--app:floating_background_color="@color/Accent"-->
-        <!--app:floating_title="0"-->
-        <!--app:floating_title_color="@android:color/white"></ru.dimorinny.floatingtextbutton.FloatingTextButton>-->
-
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/myprofile"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-    <!--android:onClick="myprofile"-->
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:text="بروفايلي"-->
-    <!--android:textStyle="bold" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView32"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:onClick="pauseAccount"-->
-    <!--android:text="ايقاف حسابي"-->
-    <!--android:textStyle="bold" />-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView31"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:text="حذف حسابي" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-
-    <!--android:layout_weight="1"-->
-
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="3">-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-    <!--</LinearLayout>-->
 </android.support.design.widget.CoordinatorLayout>

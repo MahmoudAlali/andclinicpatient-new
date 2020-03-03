@@ -411,7 +411,7 @@
     <string-array name="service_place">
         <item>مكان الخدمة</item>
         <item>صالون</item>
-        <item>بيت</item>
+        <item>منزل العميلة</item>
         <item>صالة</item>
         <item>فندق</item>
 
@@ -509,5 +509,6 @@
     <string name="indiv">عرض فردي</string>
     <string name="share">مشاركة</string>
     <string name="plsSelectBookingType">الرجاء اختيار نوع الحجز</string>
+    <string name="deposit">دفع العربون</string>
 
 </resources>

@@ -61,7 +61,7 @@ public class PlaceServiceFragment extends Fragment {
     public static String maxValDistance,mylocationId="";
     TextView distance,mylocationbtn,offerPrice, priceService, rateService;
     static  boolean fregmentIsFirstOpen=false;
-    public static String distanceOffer="",locOfferlat="",locOfferlong="",priceOffer="",rateOffer="",supRate="";
+    public static String distanceOffer="",locOfferlat="",locOfferlong="",place_service="",priceOffer="",rateOffer="",supRate="";
     public static String priceServiceValue="",minprice="",maxprice="";
     public static TextView date;
     public static String offerPlace="";
@@ -276,6 +276,20 @@ public class PlaceServiceFragment extends Fragment {
                             placeId = 31;
                             offerPlace="3";
                             break;
+                    }
+                    if (position!=0){
+                        if (position==1) {
+                            PlaceServiceFragment.place_service = ",{\"num\":9,\"value1\":1}";
+                        }else if (position==2){
+                            PlaceServiceFragment.place_service = ",{\"num\":8,\"value1\":1}";
+
+                        }else if (position==3){
+                            PlaceServiceFragment.place_service = ",{\"num\":10,\"value1\":1}";
+
+                        }else if (position==4){
+                            PlaceServiceFragment.place_service = ",{\"num\":11,\"value1\":1}";
+
+                        }
                     }
 
                 }

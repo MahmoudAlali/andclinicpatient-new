@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,7 +59,7 @@ public class GroupRelationActivity extends AppCompatActivity {
 //                            }
 //                        }
             addLayout(GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString(),
-                    arrayList, BeautyMainPage.context,myroot);
+                    arrayList, BeautyMainPage.context,myroot,i);
 
         }
 
@@ -102,8 +103,16 @@ public class GroupRelationActivity extends AppCompatActivity {
                         relations.add("0");
                     }
 
-                }
 
+
+                }
+                Boolean check=true;
+
+                for (int i=0;i<clientRelationView.size();i++){
+                    if (clientRelationView.get(i).getClient_list().getSelectedItemPosition()==0){
+                        check=false;
+                    }
+                }
 
                 int alert=0;
 
@@ -148,10 +157,14 @@ public class GroupRelationActivity extends AppCompatActivity {
 //                    }
                     if (multi_salon_clients_rel.equals("0")) {
 
-                        APICall.showSweetDialog(context,"","PLease select the relations between clients");
+                        APICall.showSweetDialog(context,"","Please select the relations between clients");
                     }else {
-                        Intent intent = new Intent(context, AlterGroupReservationResultActivity.class);
-                        startActivity(intent);
+                        if (check) {
+                            Intent intent = new Intent(context, AlterGroupReservationResultActivity.class);
+                            startActivity(intent);
+                        }else {
+                            APICall.showSweetDialog(context,"","Select Relation Between Clients");
+                        }
                     }
                 }
                 //----- call group filter for booking -------------
@@ -161,10 +174,10 @@ public class GroupRelationActivity extends AppCompatActivity {
         });
 
     }
-    public static void addLayout(String client, ArrayList<String> namelist, Context context, LinearLayout myroot) {
+    public static void addLayout(String client, ArrayList<String> namelist, Context context, LinearLayout myroot, final int pos) {
         final View layout2;
         layout2 = LayoutInflater.from(context).inflate(R.layout.client_layout_root, myroot, false);
-        TextView client_name =  layout2.findViewById(R.id.client_name);
+        final TextView client_name =  layout2.findViewById(R.id.client_name);
         Spinner clientlist = layout2.findViewById(R.id.clientlist);
         ArrayList<String> arrayList=new ArrayList<>();
         client_name.setText(client);
@@ -185,7 +198,33 @@ public class GroupRelationActivity extends AppCompatActivity {
 //                adapter.remove(adapter.getItem(i));
 //            }
 //        }
+
+
+
         clientlist.setAdapter(adapter);
+        clientlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position!=0){
+                    int cposition = 0;
+                    for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++){
+                        if (GroupReservationFragment.clientsViewData.get(i).equals(client_name.getText().toString())){
+                            cposition=i;
+                        }
+                    }
+                    try {
+                        GroupReservationFragment.clientsViewData.get(pos).setRel(GroupReservationFragment.clientsViewData.get(cposition).getPhone_number().getText().toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         clientRelationView.add(new ClientsRelationsViewClass(client_name,clientlist));
         myroot.addView(layout2);
     }

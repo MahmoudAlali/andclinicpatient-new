@@ -466,7 +466,7 @@
     <string name="group_res_other">group reservation for others</string>
     <string name="multi_cu_booking">Multi-customer booking</string>
     <string name="single_offer_same">Single offer (same day)</string>
-    <string name="single_offer_multi">Multiple individual view</string>
+    <string name="single_offer_multi">Multiple individual offer</string>
     <string name="group_offer">group offer</string>
     <string name="individual_bride_offer">individual bride offer</string>
     <string name="Multiple_booking_bride">Multiple booking (bride)</string>
@@ -630,4 +630,5 @@
     <string name="journey_lost_time">journey lost time</string>
     <string name="rel_ser_lost_time">relation</string>
     <string name="wait_emp_lost_time">wait employee</string>
+    <string name="deposit">deposit</string>
 </resources>

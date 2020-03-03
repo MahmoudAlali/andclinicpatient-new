@@ -22,14 +22,14 @@ import android.widget.Toast;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Fragments.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
+import com.dcoret.beautyclient.Fragments.AcceptedReservationFragment;
 import com.dcoret.beautyclient.Fragments.ExecuteBookActivity;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
+import com.dcoret.beautyclient.Fragments.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.R;
-
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -66,7 +66,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         this.context=context;
         this.items=items;
     }
-    public ReservationsAdapter2(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData, int layout){
+    public ReservationsAdapter2(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData){
         this.context=context;
         this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
         this.layout=layout;
@@ -78,19 +78,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
         LayoutInflater inflater= LayoutInflater.from(context);
         View row=inflater.inflate(R.layout.incom_reservation_layout_ext,parent,false);
-        Item item=new Item(row, new MyClickListener() {
-            @Override
-            public void resrve(int p) {
-                Toast.makeText(context,"ok", Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            public void more(int p) {
-                Toast.makeText(context,"ok", Toast.LENGTH_LONG).show();
-
-            }
-        });
+        Item item=new Item(row);
         return item;
 
 
@@ -106,13 +94,16 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
-
+            if (MyReservationFragment.tab.equals("2")){
+                ((Item) holder).delay.setText(R.string.deposit);
+            }
             if (MyReservationFragment.tab.equals("1")){
                 if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
                     ((Item) holder).status.setText("مقبولة");
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
                     ((Item) holder).status.setText("بإنتظار التأكيد");
                 }
+                ((Item) holder).delay.setVisibility(View.GONE);
             }else{
                 ((Item) holder).status.setVisibility(View.GONE);
             }
@@ -135,24 +126,37 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).refuse.setVisibility(View.GONE);
                 ((Item) holder).delay.setVisibility(View.GONE);
                 ((Item) holder).time.setVisibility(View.GONE);
+//                ((Item) holder).time.setVisibility(View.GONE);
                 ((Item) holder).status.setVisibility(View.VISIBLE);
 
                 String st=bookingAutomatedBrowseData.get(position).getBdb_is_executed();
                 if (st.equals("1")){
                     ((Item) holder).status.setText("لم يتم التنفيذ بشكل كامل");
-
+                    ((Item) holder).rating.setVisibility(View.VISIBLE);
                 }else if (st.equals("4")){
                     ((Item) holder).status.setText("ملغي(بعد دفع العربون)");
-
+                    ((Item) holder).rating.setVisibility(View.GONE);
                 }else if (st.equals("5")){
                     ((Item) holder).status.setText("ملغي (لم يتم دفع العربون)");
-
+                    ((Item) holder).rating.setVisibility(View.GONE);
                 }else if (st.equals("7")){
                     ((Item) holder).status.setText("منفذ بشكل كامل");
-
+                    ((Item) holder).rating.setVisibility(View.VISIBLE);
                 }
 
             }
+
+            ((Item) holder).delay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("true")){
+
+                    }else {
+                        APICall.showSweetDialog(context,"","لا يمكن دفع عربون هذا الحجز إلا من قبل العميلة صاحبة الحجز");
+
+                    }
+                }
+            });
 
 
                 String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
@@ -225,6 +229,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                }
             if(allExecuted && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
                 ((Item) holder).time.setText(R.string.Executed);
+                if (!MyReservationFragment.tab.equals("3"))
                 ((Item) holder).time.setVisibility(View.VISIBLE);
             }
             else
@@ -397,6 +402,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("true")
+                        ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("1")){
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {
                         if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
                             //-------cancelpaid api--------
@@ -412,7 +419,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                 @Override
                                 public void onClick(View view) {
                                     if (reason.getText().toString().length()==0){
-                                        Toast.makeText(context,R.string.enter_reason,Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context, R.string.enter_reason,Toast.LENGTH_LONG).show();
                                     }else {
                                         //----------------- cancel paid----------
                                 APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),reason.getText().toString(),context);
@@ -433,10 +440,14 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                        /api/booking/BookingProcessing
                         APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
 
-                    }else {
+                    }
+                    else {
                         //---------- Other cases
 //                        /api/booking/BookingProcessing
                         APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
+                    }
+                }else {
+                        APICall.showSweetDialog(context,"","لا يمكن إلغاء هذا الحجز إلا من قبل العميلة صاحبة الحجز");
                     }
                 }
             });
@@ -504,6 +515,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public int getItemCount() {
         Log.e("bookingAutomatedcheck",bookingAutomatedBrowseData.size()+"");
+
         return bookingAutomatedBrowseData.size();
     }
 
@@ -527,7 +539,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         emp_name.setText(serviceName);
 
 
-        if (APICall.layout==R.layout.incom_reservation_layout){
+        if (APICall.layout== R.layout.incom_reservation_layout){
 
 //            accept.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -559,7 +571,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
 
 
-        if (APICall.layout==R.layout.accept_reservation_layout_v2) {
+        if (APICall.layout== R.layout.accept_reservation_layout_v2) {
 
 //            refuse.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -592,7 +604,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //            });
         }
 
-        if (APICall.layout==R.layout.incom_reservation_layout) {
+        if (APICall.layout== R.layout.incom_reservation_layout) {
 
 //            refuse.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -646,7 +658,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //            }
 //        });
 //
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myroot.addView(layout2);
@@ -655,15 +667,15 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //
     }
 
-    public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
-        MyClickListener listener;
+    public class Item extends RecyclerView.ViewHolder {
+//        MyClickListener listener;
 
         TextView bookType,client_name,status,delay, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
         ImageView book_Details,inner_res;
         ColorRatingBar rating;
 
         LinearLayout myroot;
-        public Item(View itemView, MyClickListener listener) {
+        public Item(View itemView) {
             super(itemView);
             bookType=itemView.findViewById(R.id.booktype);
             myroot=itemView.findViewById(R.id.myroot);
@@ -680,27 +692,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             refuse=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);
             time=itemView.findViewById(R.id.time);
-            this.listener = listener;
+
         }
 
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-//                case R.id.reserv_btn:
-//                    listener.resrve(this.getLayoutPosition());
-//                    break;
-////                case R.id.more_btn:
-////                    listener.more(this.getLayoutPosition());
-////                    break;
-//                default:
-//                    break;
-            }
-        }
+
     }
-    public interface MyClickListener {
-        void resrve(int p);
-        void more(int p);
-    }
+
     public static boolean isPast(BookingAutomatedBrowseData reservation) throws ParseException {
         boolean result = false;
         if (reservation.getBdb_status().equals("7")) {

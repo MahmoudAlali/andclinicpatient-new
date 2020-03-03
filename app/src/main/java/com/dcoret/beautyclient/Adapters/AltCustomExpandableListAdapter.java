@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -108,10 +109,15 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
             if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
                 listTitleTextView.setBackgroundResource(R.color.primev1);
             }
-            if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2") ||
-                    stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("1") ){
+            Log.e("ISBooked",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked());
+            if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2") ){
                 book.setClickable(false);
                 book.setVisibility(View.GONE);
+            }
+
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("0")){
+                book.setClickable(true);
+                book.setVisibility(View.VISIBLE);
             }
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,7 +126,7 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
                         @Override
                         public void run() {
                             try {
-                                if (!book.isClickable()){
+                                if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2")){
                                     Toast.makeText(context,"this solution is disabled",Toast.LENGTH_LONG).show();
                                 }else
 //                                    if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).)
@@ -128,18 +134,8 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
                                     Log.e("FilterAlt",APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ));
                                     APICall.addGroupItem(APICall.getClientsInfoAlt(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), AlterGroupReservationResultActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
-                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
-                                    APICall.addGroupItemInd(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, PlaceServiceFragment.date.getText().toString()), BookingIndvidualActivity.context);
-//                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                 }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                                    APICall.addGroupItemOther(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
-                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
-                                    Log.e("INDBooking","ok");
-                                    APICall.addGroupItemMulti(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), MultiBookingIndividualResultActivity.context);
-
-                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
-                                    APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
-
+                                    APICall.addGroupItemOther(APICall.getClientsInfoOtherAlt(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
                                 }
                             }catch (Exception e){
                                 e.printStackTrace();
@@ -213,7 +209,7 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
                     TextView employee_name = layout2.findViewById(R.id.employee_name);
                     final TextView salon_name = layout2.findViewById(R.id.salon_name);
                     TextView client_name1 = layout2.findViewById(R.id.client_name);
-                    final ImageView book_ser = layout2.findViewById(R.id.book_ser);
+                    final CheckBox book_ser = layout2.findViewById(R.id.book_ser);
                     TextView time = layout2.findViewById(R.id.time);
 
 
@@ -227,96 +223,154 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
                         book_ser.setVisibility(View.GONE);
                     }
                     final int finalI = i;
+                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).isIsbooked()) {
+                    book_ser.setChecked(true);
+                    }
+
+//                    book_ser.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_booked().equals("2")){
+//                                Toast.makeText(context, "this solutios is disabled", Toast.LENGTH_LONG).show();
+//
+//                            }else {
+////                                Toast.makeText(context, "book", Toast.LENGTH_LONG).show();
+//                                stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).setIs_booked("1");
+//
+//
+//                                for (int kk=0;kk<salons.size();kk++){
+//                                    for (int ii=0;ii<stringArrayListHashMap.get(salons.get(kk)).size();ii++){
+//                                        if (stringArrayListHashMap.get(salons.get(kk)).get(ii).getIs_booked().equals("0")){
+//                                            stringArrayListHashMap.get(salons.get(kk)).get(ii).setIs_booked("2");
+//                                        }
+//                                    }
+//                                }
+//
+//                                //------------ filter request----------------
+//                                String clients="",serRow="";
+//                                String clientId=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getClient_id();
+//                                String isCurrentUser=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getIs_current_user();
+//                                String bdb_is_group_booking="1";
+//                                if (isCurrentUser.equals("0")){
+//                                    bdb_is_group_booking="2";
+//                                }
+//                                String date="";
+//                                if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment"))
+//                                    date=APICall.dateforgroupbooking;
+//                                clients="{\"date\":\""+date+"\",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
+//
+//                                String clientName = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getClient_name();
+//                                String clientPhone = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getPhone();
+//                                String emp_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getEmp_id();
+//                                String emp_name = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getEmp_name();
+//                                String sup_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getSup_id();
+//                                String ser_sup_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getSer_sup_id();
+//                                String from = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getFrom();
+//                                String to = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getTo();
+//                                String bdb_part_num = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getPart_num();
+//
+//
+//
+//                                String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
+//                                String price = "";
+//                                if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
+//                                    bdb_ser_salon = "1";
+//                                    bdb_ser_home = "0";
+//                                    bdb_ser_hall = "0";
+//                                    bdb_ser_hotel = "0";
+//                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_salon_price();
+//                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
+//                                    bdb_ser_salon = "0";
+//                                    bdb_ser_home = "1";
+//                                    bdb_ser_hall = "0";
+//                                    bdb_ser_hotel = "0";
+//                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_home_price();
+//                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
+//                                    bdb_ser_salon = "0";
+//                                    bdb_ser_home = "0";
+//                                    bdb_ser_hall = "1";
+//                                    bdb_ser_hotel = "0";
+//                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_hall_price();
+//                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
+//                                    bdb_ser_salon = "0";
+//                                    bdb_ser_home = "";
+//                                    bdb_ser_hall = "0";
+//                                    bdb_ser_hotel = "1";
+//                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_hotel_price();
+//                                }
+//
+//                                    clients += "{\"client_name\":\"" + clientName + "\",\"client_phone\":\"" + clientPhone + "\",\"client_id\":" + clientId + ",\"is_current_user\":" + isCurrentUser + ",\"bookings\":[";
+//
+//
+//                                serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1,\"bdb_part_num\":"+bdb_part_num+"}";
+//                                serRow=serRow+"]}";
+//
+//                                clients+=serRow;
+//
+//                                clients=clients+"]}";
+//
+//                                Log.e("FilterForOne",clients);
+//
+//                                APICall.addGroupItemAltOne(clients,book_ser, AlterGroupReservationResultActivity.context);
+//
+//                            }
+//
+//
+//
+//                        }
+//                    });
+//
+                    final int finalI1 = i;
                     book_ser.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_booked().equals("2")){
+                        if (book_ser.isChecked()) {
+                            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getIs_booked().equals("2")) {
                                 Toast.makeText(context, "this solutios is disabled", Toast.LENGTH_LONG).show();
+                                book_ser.setChecked(false);
 
-                            }else {
+                            }
+                            else {
 //                                Toast.makeText(context, "book", Toast.LENGTH_LONG).show();
                                 stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).setIs_booked("1");
+                                stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI1).setIsbooked(true);
 
 
-                                for (int kk=0;kk<salons.size();kk++){
-                                    for (int ii=0;ii<stringArrayListHashMap.get(salons.get(kk)).size();ii++){
-                                        if (stringArrayListHashMap.get(salons.get(kk)).get(ii).getIs_booked().equals("0")){
+                                for (int kk = 0; kk < salons.size(); kk++) {
+                                    for (int ii = 0; ii < stringArrayListHashMap.get(salons.get(kk)).size(); ii++) {
+                                        if (stringArrayListHashMap.get(salons.get(kk)).get(ii).getIs_booked().equals("0")) {
                                             stringArrayListHashMap.get(salons.get(kk)).get(ii).setIs_booked("2");
                                         }
                                     }
                                 }
-
-                                //------------ filter request----------------
-                                String clients="",serRow="";
-                                String clientId=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getClient_id();
-                                String isCurrentUser=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getIs_current_user();
-                                String bdb_is_group_booking="1";
-                                if (isCurrentUser.equals("0")){
-                                    bdb_is_group_booking="2";
+                            }
+                        }else {
+                            stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI1).setIsbooked(false);
+                            boolean check=false;
+                            for (int i=0;i<stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().size();i++){
+                                if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).isIsbooked()){
+                                    check=true;
+                                }else {
+                                    check=false;
+                                    break;
                                 }
-                                String date="";
-                                if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment"))
-                                    date=APICall.dateforgroupbooking;
-                                clients="{\"date\":\""+date+"\",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
-
-                                String clientName = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getClient_name();
-                                String clientPhone = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getPhone();
-                                String emp_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getEmp_id();
-                                String emp_name = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getEmp_name();
-                                String sup_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getSup_id();
-                                String ser_sup_id = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getSer_sup_id();
-                                String from = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getFrom();
-                                String to = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getTo();
-                                String bdb_part_num = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getPart_num();
-
-
-
-                                String bdb_ser_salon = null, bdb_ser_home = "", bdb_ser_hotel = "", bdb_ser_hall = "";
-                                String price = "";
-                                if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
-                                    bdb_ser_salon = "1";
-                                    bdb_ser_home = "0";
-                                    bdb_ser_hall = "0";
-                                    bdb_ser_hotel = "0";
-                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_salon_price();
-                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
-                                    bdb_ser_salon = "0";
-                                    bdb_ser_home = "1";
-                                    bdb_ser_hall = "0";
-                                    bdb_ser_hotel = "0";
-                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_home_price();
-                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
-                                    bdb_ser_salon = "0";
-                                    bdb_ser_home = "0";
-                                    bdb_ser_hall = "1";
-                                    bdb_ser_hotel = "0";
-                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_ser_hall_price();
-                                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
-                                    bdb_ser_salon = "0";
-                                    bdb_ser_home = "";
-                                    bdb_ser_hall = "0";
-                                    bdb_ser_hotel = "1";
-                                    price=stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(finalI).getBdb_hotel_price();
+                            }
+                            Log.e("IsChecked",check+"");
+                            if (check){
+//                                Log.e("SalonSize",salons.size()+"");
+//                                Log.e("ChildSize",stringArrayListHashMap.get(salons.get(kk)).size()+"");
+//                                stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).setIs_booked("0");
+                                for (int kk = 0; kk < salons.size(); kk++) {
+                                    for (int ii = 0; ii < stringArrayListHashMap.get(salons.get(kk)).size(); ii++) {
+//                                        if (stringArrayListHashMap.get(salons.get(kk)).get(ii).getIs_booked().equals("2")) {
+                                            stringArrayListHashMap.get(salons.get(kk)).get(ii).setIs_booked("0");
+//                                        }
+                                    }
+                                    Log.e("CheckSETISBOOKED", stringArrayListHashMap.get(salons.get(kk)).get(0).getIs_booked());
                                 }
-
-                                    clients += "{\"client_name\":\"" + clientName + "\",\"client_phone\":\"" + clientPhone + "\",\"client_id\":" + clientId + ",\"is_current_user\":" + isCurrentUser + ",\"bookings\":[";
-
-
-                                serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1,\"bdb_part_num\":"+bdb_part_num+"}";
-                                serRow=serRow+"]}";
-
-                                clients+=serRow;
-
-                                clients=clients+"]}";
-
-                                Log.e("FilterForOne",clients);
-
-                                APICall.addGroupItemAltOne(clients,book_ser, AlterGroupReservationResultActivity.context);
-
                             }
 
-
-
+                        }
                         }
                     });
                    try {

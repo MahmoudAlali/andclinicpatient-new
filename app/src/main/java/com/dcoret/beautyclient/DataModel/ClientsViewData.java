@@ -10,7 +10,7 @@ public class ClientsViewData {
     EditText client_name,phone_number;
     Spinner add_service,age_range,client_status;
     ArrayList<ServicesIDS> servicesSelected;
-    String is_current_user,id, client_old;
+    String is_current_user,id, client_old,rel;
 
 
     public ClientsViewData(EditText client_name, Spinner add_service, Spinner age_range, Spinner client_status) {
@@ -59,6 +59,18 @@ public class ClientsViewData {
         this.id = id;
     }
 
+    public ClientsViewData(EditText client_name, EditText phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList<ServicesIDS> servicesSelected, String is_current_user, String id,String rel,String nul) {
+        this.client_name = client_name;
+        this.phone_number = phone_number;
+        this.add_service = add_service;
+        this.age_range = age_range;
+        this.client_status = client_status;
+        this.servicesSelected = servicesSelected;
+        this.is_current_user = is_current_user;
+        this.rel = rel;
+        this.id = id;
+    }
+
     TextView cname,pnumber;
 
     public ClientsViewData(TextView client_name, TextView phone_number, Spinner add_service, Spinner age_range, Spinner client_status, ArrayList<ServicesIDS> servicesSelected, String is_current_user, String id) {
@@ -82,6 +94,14 @@ public class ClientsViewData {
         this.is_current_user = is_current_user;
         this.id = id;
         this.client_old = client_old;
+    }
+
+    public String getRel() {
+        return rel;
+    }
+
+    public void setRel(String rel) {
+        this.rel = rel;
     }
 
     public TextView getCname() {

@@ -23,7 +23,7 @@
             android:text=""
             android:textColor="@color/red"
             android:textSize="18dp" />
-        <ImageView
+        <CheckBox
             android:id="@+id/book_ser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -156,7 +156,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
     }
     static ArrayList<String> effectsArr=new ArrayList<>();
 
-    public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel){
+    public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel,int position){
         //------- add degrees
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.effects_layout_main, myroot, false);
@@ -166,21 +166,36 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         cat_name=layout2.findViewById(R.id.cat_name);
         myroot2=layout2.findViewById(R.id.myroot);
 
-        if (context.getResources().getString(R.string.locale).equals("ar")){
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name_ar());
-        }else
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name());
+        try {
 
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                cat_name.setText(clientEffectModel.getClient_name() + ":"+clientEffectModel.getClientEffectModels().get(position).getCat_name());
+            } else
+                cat_name.setText(clientEffectModel.getClient_name() + ": " + clientEffectModel.getClientEffectModels().get(position).getCat_name());
+
+            Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(position).getCat_name());
+
+        }catch (Exception e){
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                cat_name.setText(clientEffectModel.getClient_name() );
+            } else
+                cat_name.setText(clientEffectModel.getClient_name() );
+
+            e.printStackTrace();
+        }
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myroot.addView(layout2);
             }
         });
-        Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
-        for (int i=0;i<clientEffectModel.getClientEffectModels().get(0).getEffects().size();i++) {
-            Log.e("Effects_name",clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());
-            addlayout(myroot2, clientEffectModel.getClientEffectModels().get(0).getEffects().get(i));
+        try {
+            for (int i = 0; i < clientEffectModel.getClientEffectModels().get(position).getEffects().size(); i++) {
+                Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(position).getEffects().get(i).getBdb_effect_name_ar());
+                addlayout(myroot2, clientEffectModel.getClientEffectModels().get(position).getEffects().get(i));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 
@@ -313,6 +328,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
 
 
     ArrayList<String> getEffects(){
+        Log.e("SizeClientReq","Size:"+APICall.clientEffectRequestModels.size());
         for (int i=0;i< APICall.clientEffectRequestModels.size();i++){
             String ef="";
             for (int j=0;j<APICall.clientEffectRequestModels.get(i).getClientEffectModels().size();j++){
@@ -335,6 +351,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
             effectsArr.add(ef);
 
         }
+        Log.e("effArrSize","Size:"+effectsArr.size());
 
 
         return effectsArr;
@@ -375,6 +392,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
                     Log.e("Ser_Id",GroupReservationFragment.clientsViewData.get(i).getServicesSelected().get(j).getId());
                 }
                 String eff="";
+                Log.e("index-i"+i,"index-i"+i);
                 try {
                     eff=effectsArr.get(i);
                 }catch (Exception e){

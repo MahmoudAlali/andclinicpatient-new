@@ -20,6 +20,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.SupportActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -32,15 +33,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
-import com.dcoret.beautyclient.Activities.support.SupportActivity;
+//import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
-import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
+//import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
-import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
+//import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesFragment;
 import com.dcoret.beautyclient.Fragments.MyEffects.MyEffectsActivity;
+import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
+import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
 import com.dcoret.beautyclient.Fragments.Points.PointsMainFragment;
 import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
@@ -96,6 +99,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         FirebaseMessaging.getInstance().subscribeToTopic("Beauty");
 
 
+
         //------- test notificatoin-----------
         //        PushNotifications.sendnotification_client(BeautyMainPage.this,"","Hello","Hi","","");
         //------------------------- permissions check------------------
@@ -112,6 +116,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         context=this;
         Log.e("tokeen", "token is:"+APICall.gettoken(context));
+        Log.e("LastUpdate", "This");
 
         SharedPreferences editor = getSharedPreferences("REG_ID", MODE_PRIVATE);
 

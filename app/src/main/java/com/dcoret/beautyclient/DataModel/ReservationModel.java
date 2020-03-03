@@ -9,6 +9,7 @@ public class ReservationModel {
     String place,client_name,booking_price;
     String bdb_inner_booking;
     String bdb_is_executed;
+
     ArrayList<BookingAutomatedBrowseData> data;
 
     public ReservationModel(String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, ArrayList<BookingAutomatedBrowseData> data) {
@@ -22,6 +23,8 @@ public class ReservationModel {
         this.bdb_inner_booking=bdb_inner_booking;
         this.bdb_is_executed=bdb_is_executed;
     }
+
+
 
     public void setBooking_price(String booking_price) {
         this.booking_price = booking_price;

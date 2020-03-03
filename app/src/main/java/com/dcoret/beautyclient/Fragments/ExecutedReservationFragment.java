@@ -16,12 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
-//import com.dcoret.beautyclient..APICallCall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
-import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
+//import com.dcoret.beautyclient..APICallCall;
 
 
 public class ExecutedReservationFragment extends Fragment {
@@ -30,7 +29,7 @@ public class ExecutedReservationFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     Spinner category;
-    RecyclerView service_select;
+    public static RecyclerView service_select;
     ReservationsAdapter2 reservationsAdapter2;
 
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
@@ -38,6 +37,7 @@ public class ExecutedReservationFragment extends Fragment {
     ImageView sortbtn;
     int layout;
     TextView incom_reservation,accept_reservation,deposited_reservation;
+    public String tmp="3";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,8 +56,8 @@ public class ExecutedReservationFragment extends Fragment {
 
 //        service_select.setAdapter(reservationsAdapter2);
 
-        APICall.layout=R.layout.incom_reservation_layout;
-        APICall.filter=filter=APICall.bookingFilter("1","3","0");
+        APICall.layout= R.layout.incom_reservation_layout;
+        APICall.filter=filter= APICall.bookingFilter("1","3","0");
 
 
 
@@ -69,11 +69,11 @@ public class ExecutedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;
         }
-        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+//        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
         return view;
     }
 

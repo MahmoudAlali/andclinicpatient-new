@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
-import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.R;
 
 
@@ -27,12 +26,13 @@ public class AcceptedReservationFragment extends Fragment {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    RecyclerView service_select;
+    public static RecyclerView service_select;
     ImageView sortbtn;
     public static ReservationsAdapter2 reservationsAdapter2;
     String filter,sort;
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
 
+    public static String tmp="1";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,8 +49,8 @@ public class AcceptedReservationFragment extends Fragment {
 
 //        service_select.setAdapter(reservationsAdapter2);
 
-        APICall.layout=R.layout.incom_reservation_layout;
-        APICall.filter=filter=APICall.bookingFilter("1","10","0");
+        APICall.layout= R.layout.incom_reservation_layout;
+        APICall.filter=filter= APICall.bookingFilter("1","10","0");
 
 
 
@@ -62,11 +62,11 @@ public class AcceptedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
-            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout);
+            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;
         }
-        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+//        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
         return view;
     }
 

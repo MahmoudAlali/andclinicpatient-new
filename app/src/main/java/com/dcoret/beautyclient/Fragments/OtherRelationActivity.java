@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -43,22 +44,22 @@ public class OtherRelationActivity extends AppCompatActivity {
         multi_salon_client_rel_check=findViewById(R.id.multi_salon_rel);
         context=this;
         ArrayList<String> arrayList=new ArrayList<>();
-        Log.e("clientSize", GroupReservationFragment.clientsViewData.size()+"");
-        for (int j=0;j<GroupReservationFragment.clientsViewData.size();j++){
-            arrayList.add(GroupReservationFragment.clientsViewData.get(j).getClient_name().getText().toString());
+        Log.e("clientSize", GroupReservationOthersFragment.clientsViewData.size()+"");
+        for (int j=0;j<GroupReservationOthersFragment.clientsViewData.size();j++){
+            arrayList.add(GroupReservationOthersFragment.clientsViewData.get(j).getClient_name().getText().toString());
         }
-        for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++){
+        for (int i=0;i<GroupReservationOthersFragment.clientsViewData.size();i++){
             Log.e("clientSize",i+"");
 //                        ArrayList<String> arrayList1=new ArrayList<>();
-//                        for (int j=0;j<GroupReservationFragment.clientsViewData.size();j++) {
-//                            if (GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString().
-//                                    equals(GroupReservationFragment.clientsViewData.get(j).getClient_name().getText().toString())) {
+//                        for (int j=0;j<GroupReservationOthersFragment.clientsViewData.size();j++) {
+//                            if (GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString().
+//                                    equals(GroupReservationOthersFragment.clientsViewData.get(j).getClient_name().getText().toString())) {
 ////                                arrayList1 = new ArrayList<>();
-//                                arrayList1.add(GroupReservationFragment.clientsViewData.get(j).getClient_name().getText().toString());
+//                                arrayList1.add(GroupReservationOthersFragment.clientsViewData.get(j).getClient_name().getText().toString());
 //                            }
 //                        }
-            addLayout(GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString(),
-                    arrayList, BeautyMainPage.context,myroot);
+            addLayout(GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString(),
+                    arrayList, BeautyMainPage.context,myroot,i);
 
         }
 
@@ -104,22 +105,28 @@ public class OtherRelationActivity extends AppCompatActivity {
 
                 }
 
+                Boolean check=true;
 
+                for (int i=0;i<clientRelationView.size();i++){
+                    if (clientRelationView.get(i).getClient_list().getSelectedItemPosition()==0){
+                        check=false;
+                    }
+                }
                 int alert=0;
 
-                for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++) {
-                    if (GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText().toString().length()!=0)
-                        if (!APICall.checkNumber(GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
+                for (int i=0;i<GroupReservationOthersFragment.clientsViewData.size();i++) {
+                    if (GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText().toString().length()!=0)
+                        if (!APICall.checkNumber(GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
                             alert=2;
                             break;
                         }
                 }
 
-                for (int i=0;i<GroupReservationFragment.clientsViewData.size();i++) {
+                for (int i=0;i<GroupReservationOthersFragment.clientsViewData.size();i++) {
 //                    Log.e("ClientName", clientsViewData.get(i).getClient_name().getText().toString());
 
-                    if (GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || GroupReservationFragment.clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
-                            || GroupReservationFragment.clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
+                    if (GroupReservationOthersFragment.clientsViewData.get(i).getClient_name().getText().toString().isEmpty() || GroupReservationOthersFragment.clientsViewData.get(i).getPhone_number().getText().toString().isEmpty()
+                            || GroupReservationOthersFragment.clientsViewData.get(i).getAdd_service().getSelectedItemPosition() == 0) {
                         alert = 1;
                     }
                 }
@@ -133,7 +140,7 @@ public class OtherRelationActivity extends AppCompatActivity {
 
 
                     // =------------is hair service go to anthor fragment----------
-//                    if (GroupReservationFragment.ishairService.size() > 0) {
+//                    if (GroupReservationOthersFragment.ishairService.size() > 0) {
 //                        fragment = new HairSpecificationsFragment();
 //                        fm = getFragmentManager();
 //                        fragmentTransaction = fm.beginTransaction();
@@ -150,8 +157,12 @@ public class OtherRelationActivity extends AppCompatActivity {
 
                         APICall.showSweetDialog(context,"","PLease select the relations between clients");
                     }else {
-                        Intent intent = new Intent(context, AlterGroupOtherReservationResult.class);
-                        startActivity(intent);
+                        if (check) {
+                            Intent intent = new Intent(context, AlterGroupOtherReservationResult.class);
+                            startActivity(intent);
+                        }else {
+                                APICall.showSweetDialog(context,"","Select Relation Between Clients");
+                            }
                     }
                 }
                 //----- call group filter for booking -------------
@@ -161,10 +172,10 @@ public class OtherRelationActivity extends AppCompatActivity {
         });
 
     }
-    public static void addLayout(String client, ArrayList<String> namelist, Context context, LinearLayout myroot) {
+    public static void addLayout(String client, ArrayList<String> namelist, Context context, LinearLayout myroot,final int pos) {
         final View layout2;
         layout2 = LayoutInflater.from(context).inflate(R.layout.client_layout_root, myroot, false);
-        TextView client_name =  layout2.findViewById(R.id.client_name);
+        final TextView client_name =  layout2.findViewById(R.id.client_name);
         Spinner clientlist = layout2.findViewById(R.id.clientlist);
         ArrayList<String> arrayList=new ArrayList<>();
         client_name.setText(client);
@@ -186,6 +197,29 @@ public class OtherRelationActivity extends AppCompatActivity {
 //            }
 //        }
         clientlist.setAdapter(adapter);
+        clientlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position!=0){
+                    int cposition = 0;
+                    for (int i=0;i<GroupReservationOthersFragment.clientsViewData.size();i++){
+                        if (GroupReservationOthersFragment.clientsViewData.get(i).equals(client_name.getText().toString())){
+                            cposition=i;
+                        }
+                    }
+                    try {
+                        GroupReservationOthersFragment.clientsViewData.get(pos).setRel(GroupReservationOthersFragment.clientsViewData.get(cposition).getPhone_number().getText().toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         clientRelationView.add(new ClientsRelationsViewClass(client_name,clientlist));
         myroot.addView(layout2);
     }

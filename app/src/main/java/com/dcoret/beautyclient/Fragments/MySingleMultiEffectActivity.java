@@ -79,11 +79,12 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEffects();
-//                Log.e("Effectfilter",f);
+               String f= getEffects();
+                Log.e("Effectfilter",f);
 
                 Intent intent = new Intent(context, MultiBookingIndividualResultActivity.class);
-//                intent.putExtra("filter",getfilter(f));
+                intent.putExtra("filter",getfilter(f));
+                Log.e("Allfilter",getfilter(f));
                 startActivity(intent);
             }
         });
@@ -149,10 +150,24 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
     public static String getfilter(String eff_filter) {
         String clientf = "";
 //        SharedPreferences sh = BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-
-
         String username = BeautyMainPage.client_name;
         String phone = BeautyMainPage.client_number;
+
+        clientf="\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[\t{\"client_name\":\""+BeautyMainPage.client_name+"\",\"client_phone\":\""+BeautyMainPage.client_number+"\",\"is_current_user\":1,\"date\": \""+PlaceServiceMultipleBookingFragment.dateFilter+"\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n" ;
+        for (int i=0;i<MultiIndividualBookingReservationFragment.servicesForClientGroups.size();i++){
+            if (i==0){
+                clientf += "{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;
+            }else {
+                clientf += ",{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;
+            }
+        }
+
+               clientf +="],\"effect\":["+eff_filter+"] " +
+                       " \t}\n" +
+                       "    ]\n" +
+                       "\t\n" +
+                       "}";
+
 
 
         return clientf;
@@ -169,11 +184,14 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         cat_name=layout2.findViewById(R.id.cat_name);
         myroot2=layout2.findViewById(R.id.myroot);
 
-        if (context.getResources().getString(R.string.locale).equals("ar")){
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name_ar());
-        }else
-            cat_name.setText(clientEffectModel.getClient_name()+": "+clientEffectModel.getClientEffectModels().get(0).getCat_name());
-
+        try {
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                cat_name.setText(clientEffectModel.getClientEffectModels().get(0).getCat_name_ar());
+            } else
+                cat_name.setText(clientEffectModel.getClientEffectModels().get(0).getCat_name());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -181,11 +199,14 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
             }
         });
         Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
-        for (int i=0;i<clientEffectModel.getClientEffectModels().get(0).getEffects().size();i++) {
-            Log.e("Effects_name",clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());
-            addlayout(myroot2, clientEffectModel.getClientEffectModels().get(0).getEffects().get(i));
-        }
-
+       try {
+           for (int i = 0; i < clientEffectModel.getClientEffectModels().get(0).getEffects().size(); i++) {
+               Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());
+               addlayout(myroot2, clientEffectModel.getClientEffectModels().get(0).getEffects().get(i));
+           }
+       }catch (Exception e){
+           e.printStackTrace();
+       }
 
     }
     public static void addlayout(final LinearLayout myroot, final ClientEffectModel.Effects effects){
@@ -314,9 +335,10 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         });
     }
 
-    ArrayList<String> getEffects() {
+    String getEffects() {
+        String ef = "";
+
         for (int i = 0; i < APICall.clientEffectRequestModels.size(); i++) {
-            String ef = "";
             for (int j = 0; j < APICall.clientEffectRequestModels.get(i).getClientEffectModels().size(); j++) {
                 for (int k = 0; k < APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(j).getEffects().size(); k++) {
                     if (ef.equals("")) {
@@ -332,14 +354,12 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
 
 
             }
-            Log.e("clientEffectRe.size", APICall.clientEffectRequestModels.get(i).getClientEffectModels().size() + "");
-            Log.e("getClient_name", APICall.clientEffectRequestModels.get(i).getClient_name() + "");
-            effectsArr.add(ef);
+
 
         }
 
 
-        return effectsArr;
+        return ef;
     }
 
 }

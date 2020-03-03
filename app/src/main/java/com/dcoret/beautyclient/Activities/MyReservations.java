@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+//import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.API.ReservationDialog;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
 import com.dcoret.beautyclient.R;

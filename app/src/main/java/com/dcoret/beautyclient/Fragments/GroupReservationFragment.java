@@ -199,8 +199,8 @@ public class GroupReservationFragment extends Fragment {
 //                client_status.setAdapter(adapter_client_status);
 
 
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic));
-                clientsViewData1.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic));
+                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic,"0",""));
+                clientsViewData1.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic,"0",""));
 
                //------------------ delete click btn----------------
                 delete.setOnClickListener(new View.OnClickListener() {
@@ -327,7 +327,7 @@ public class GroupReservationFragment extends Fragment {
                 client_name.setText(BeautyMainPage.client_name);
                 phone_number.setText(BeautyMainPage.client_number);
 
-                clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid));
+                clientsViewData.add(new ClientsViewData(client_name, phone_number, add_service, null, null, servicesForClientGroups, "1",myid,"0",""));
                 bookme.addView(layout2);
 //            }else {
 //

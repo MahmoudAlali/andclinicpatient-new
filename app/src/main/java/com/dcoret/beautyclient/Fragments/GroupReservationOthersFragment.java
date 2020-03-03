@@ -195,7 +195,7 @@ public class GroupReservationOthersFragment extends Fragment {
 //                client_status.setAdapter(adapter_client_status);
 
 
-                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic));
+                clientsViewData.add(new ClientsViewData(client_name,phone_number,add_service,age_range,null,servicesForClientGroups,"0",ic,"0",""));
 
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override

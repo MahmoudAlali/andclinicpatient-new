@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Adapters.OffersAdapterTab;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
@@ -54,6 +55,7 @@ public class MyReservationFragment extends Fragment  {
 
     public static Fragment fragment;
     public static FragmentManager fm;
+
     public static FragmentTransaction fragmentTransaction;
     Spinner category;
    public static TextView incom_reservation,accept_reservation,deposit_reservation;
@@ -61,6 +63,7 @@ public class MyReservationFragment extends Fragment  {
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
     public static ReservationsAdapter reservationsAdapter;
     public static ReservationsAdapter2 reservationsAdapter2;
+
     public static View view;
     public static String serviceId="",employee_id="";
     ImageView filterbtn;
@@ -81,6 +84,8 @@ public class MyReservationFragment extends Fragment  {
 
     public static int syear,smonth,sday,eyear,emonth,eday;
     public static int sryear,srmonth,srday,eryear,ermonth,erday;
+
+    public  static String tmp="0";
 
     //    public static FloatingTextButton floatingTextButton;
     @Nullable
@@ -738,7 +743,7 @@ public class MyReservationFragment extends Fragment  {
                             fragmentTransaction.commit();
                             tabselected(accept_reservation,deposit_reservation,incom_reservation,false);
                         }
-                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
 
                     }
                 });
@@ -807,17 +812,17 @@ public class MyReservationFragment extends Fragment  {
                         reservationsAdapter2.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
 
                         }else if (id==R.id.two){
                             APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
                         }else if (id==R.id.three){
                             APICall.sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
                         }else if (id==R.id.four){
                             APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout);
+                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
                         }
                         Log.e("Sort1",APICall.sort);
                         Log.e("filter1",APICall.filter);

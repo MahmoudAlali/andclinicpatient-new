@@ -3,13 +3,23 @@ package com.dcoret.beautyclient.DataModel;
 import java.util.ArrayList;
 
 public class ClientEffectModel {
-    String cat_id,cat_name,cat_name_ar;
+    String cat_id,cat_name,cat_name_ar,client_name;
     ArrayList<Effects> effects;
 
     public ClientEffectModel(String cat_id, String cat_name, String cat_name_ar, ArrayList<Effects> effects) {
 
         this.cat_id = cat_id;
         this.cat_name = cat_name;
+
+        this.cat_name_ar = cat_name_ar;
+        this.effects = effects;
+    }
+    public ClientEffectModel(String cat_id, String cat_name, String cat_name_ar,String client_name, ArrayList<Effects> effects) {
+
+        this.cat_id = cat_id;
+        this.cat_name = cat_name;
+        this.client_name= client_name;
+
         this.cat_name_ar = cat_name_ar;
         this.effects = effects;
     }
