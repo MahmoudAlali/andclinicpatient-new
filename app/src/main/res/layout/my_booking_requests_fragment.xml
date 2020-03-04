@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/end_gray"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_menu_wihte_24dp"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:titleTextColor="#fff" >
+        <LinearLayout
+
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/sort"
+                android:src="@drawable/ic_descending_arrangement_blue"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/filter"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_filter_list_black_blue_24dp"
+                />
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/gray"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Space
+                android:layout_width="@dimen/pf_10dp_space"
+                android:layout_height="match_parent"></Space>
+
+            <TextView
+                android:id="@+id/oldRequests"
+                android:layout_weight="1"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:text="@string/oldRequests"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></Space>
+            <TextView
+                android:textColor="#000"
+                android:id="@+id/newRequests"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_weight="1"
+                android:gravity="center"
+
+                android:text="@string/newRequests"
+                android:textSize="12dp" />
+            <Space
+                android:layout_width="@dimen/pf_10dp_space"
+                android:layout_height="match_parent"></Space>
+            <!--<TextView-->
+            <!--android:textColor="#000"-->
+            <!--android:id="@+id/deposited_reservation"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="12dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/Bookings_paid_DEPOSIT"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+        </LinearLayout>
+        <View
+
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#535353"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="103dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:text="للإلغاء يرجى الضغط على زر الإلغاء"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/tabs_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

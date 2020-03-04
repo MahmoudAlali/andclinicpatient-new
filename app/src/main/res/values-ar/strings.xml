@@ -202,6 +202,7 @@
     <string name="OfferPrice">سعر العرض</string>
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
+    <string name="providerRate">تقييم المزودة</string>
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
 
 
@@ -380,6 +381,7 @@
     <string name="service_effect">مؤثرات الخدمة</string>
     <string name="support">الدعم</string>
     <string name="effect">مؤثراتي</string>
+    <string name="bookingRequests">طلبات الحجز</string>
     <string name="update">تحديث المؤثرات</string>
     <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في ايجاد حلول مثيلة</string>
 
@@ -530,7 +532,14 @@
         <item>English</item>
         <item>العربية</item>
     </string-array>
-
+    <string-array name="requestType">
+        <item>نوع الطلب</item>
+        <item>عرض</item>
+        <item>عادي</item>
+    </string-array>
     <string name="language">اللغة:</string>
-
+    <string name="requestType">نوع الطلب</string>
+    <string name="providerName">اسم المزودة</string>
+    <string name="oldRequests">طلبات سابقة</string>
+    <string name="newRequests">طلبات تتم معالجتها</string>
 </resources>

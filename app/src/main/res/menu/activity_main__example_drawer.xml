@@ -19,6 +19,7 @@
                 android:title="@string/points" />
 
             <item
+                android:visible="false"
                 android:id="@+id/setting"
                 android:icon="@drawable/ic_settings_black_24dp"
                 android:title="@string/setting" />
@@ -26,6 +27,10 @@
                 android:id="@+id/effcts"
                 android:icon="@drawable/side_effects_icon"
                 android:title="@string/effect" />
+            <item
+                android:id="@+id/requests"
+                android:icon="@drawable/ic_add_res"
+                android:title="@string/bookingRequests" />
 
             <item
                 android:id="@+id/nav_share"
