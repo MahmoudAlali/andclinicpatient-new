@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Fragments.MyReservation.CancelReservationActivity"></activity>
+        <activity android:name=".Activities.SettingActivity"></activity>
+        <activity android:name=".Fragments.MyReservation.CancelReservationActivity" />
         <activity android:name=".Fragments.SingleMultiAltResultActivity" />
         <activity android:name=".Fragments.SingleMultiRelationActivity" />
         <activity android:name=".Fragments.RateSerEmpActivity" />

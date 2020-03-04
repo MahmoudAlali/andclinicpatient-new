@@ -10,6 +10,7 @@ import android.widget.ExpandableListView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Adapters.AltCustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.CustomExpandableListAdapter;
 import com.dcoret.beautyclient.Adapters.GroupReservationsAdapter;
 import com.dcoret.beautyclient.R;
@@ -17,7 +18,7 @@ import com.dcoret.beautyclient.R;
 public class SingleMultiAltResultActivity extends AppCompatActivity {
 
     public static ExpandableListView listView;
-    public static CustomExpandableListAdapter listAdapter;
+    public static AltCustomExpandableListAdapter listAdapter;
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
     RecyclerView recyclerView;
@@ -67,11 +68,11 @@ public class SingleMultiAltResultActivity extends AppCompatActivity {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                String filter="\"multi_salon_client\": \"0\",  \n" +
-//                        "\t\"multi_salon_clients_rel\": \"0\",\n" +
-//                        "         \"clients\": [\n" +
-//                        "        \t\t{\"client_name\": \"user264\",\"client_phone\": \"0500500501\",\"is_current_user\": 1,\"is_adult\":1,\"rel\":\"0\",\"date\": \"2020-2-25\",\"services\": [ {\"ser_id\": 3,\"ser_time\": 60 },{\"ser_id\": 1,\"ser_time\": 60 }],\"effect\":[]}\n" +
-//                        "        ]}";
+                String filter="\"multi_salon_client\": \"0\",  \n" +
+                        "\t\"multi_salon_clients_rel\": \"0\",\n" +
+                        "         \"clients\": [\n" +
+                        "        \t\t{\"client_name\": \"user264\",\"client_phone\": \"0500500501\",\"is_current_user\": 1,\"is_adult\":1,\"rel\":\"0\",\"date\": \"2020-2-25\",\"services\": [ {\"ser_id\": 3,\"ser_time\": 60 },{\"ser_id\": 1,\"ser_time\": 60 }],\"effect\":[]}\n" +
+                        "        ]}";
                 APICall.searchGroupBookingMultiAlt(urlAlt,filter,context);
             }
         });

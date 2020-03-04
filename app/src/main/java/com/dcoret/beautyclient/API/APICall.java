@@ -208,7 +208,9 @@ public class APICall {
     return shared_token;
     }
     public static String isGuest(Context context){
-        String isGuest=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("isGuest",null);
+        String isGuest="";
+            isGuest = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("isGuest","0");
+
         return isGuest;
     }
         //---استعراض خدمات المزودين لخدمة معينة-----------------------------done
@@ -14990,7 +14992,7 @@ public class APICall {
 
 
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                                SingleMultiAltResultActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
+                                SingleMultiAltResultActivity.listAdapter=new AltCustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultActivity.listAdapter.notifyDataSetChanged();
                                 SingleMultiAltResultActivity.listView.setAdapter(SingleMultiAltResultActivity.listAdapter);
                                 SingleMultiAltResultActivity.listAdapter.notifyDataSetChanged();
