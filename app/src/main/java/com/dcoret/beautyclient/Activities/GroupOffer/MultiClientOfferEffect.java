@@ -15,9 +15,11 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.Adapters.OfferBookingMultiClientsAdapter;
+import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.Service.NotificationsBeauty;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,8 @@ public class MultiClientOfferEffect extends AppCompatActivity {
     Button update;
     static Context context;
     static int position;
+    public static String bdb_pack_code;
+    static ArrayList<DataOffer.SupIdClass> supIdClasses;
     String filter,place;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,27 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         context=this;
 
         position=getIntent().getIntExtra("position",0);
+        supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+        bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        if(!notification.equals(""))
+
+        {
+            bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+            supIdClasses = NotificationsBeauty.supIdClasses;
+        }
+
+        //endregion
+
+
+
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);
         recyclerView=findViewById(R.id.recycleview);
@@ -52,11 +77,11 @@ public class MultiClientOfferEffect extends AppCompatActivity {
                 "                \n" ;
 
 
-        for (int i = 0; i< TabTwo.arrayList.get(position).getSersup_ids().size(); i++){
+        for (int i = 0; i< supIdClasses.size(); i++){
             if (i==0){
-                filter+="{\"ser_id\": "+ TabTwo.arrayList.get(position).getSersup_ids().get(i).getBdb_ser_id()+"}\n" ;
+                filter+="{\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"}\n" ;
             }else {
-                filter+=",{\"ser_id\": "+ TabTwo.arrayList.get(position).getSersup_ids().get(i).getBdb_ser_id()+"}\n" ;
+                filter+=",{\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"}\n" ;
             }
         }
 
@@ -123,9 +148,9 @@ public class MultiClientOfferEffect extends AppCompatActivity {
                 for (int j = 0; j<SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().size() ; j++) {
 //                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
                     String ser_id="";
-                    for (int k=0;k<TabTwo.arrayList.get(position).getSersup_ids().size();k++){
-                        if (SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id().equals(TabTwo.arrayList.get(position).getSersup_ids().get(k).getBdb_ser_sup_id())){
-                            ser_id= TabTwo.arrayList.get(position).getSersup_ids().get(k).getBdb_ser_id();
+                    for (int k=0;k<supIdClasses.size();k++){
+                        if (SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id().equals(supIdClasses.get(k).getBdb_ser_sup_id())){
+                            ser_id= supIdClasses.get(k).getBdb_ser_id();
                         }
                     }
                     if (j == 0) {
@@ -217,7 +242,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
         }
 
-        String bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+       // String bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
             String postdata =
                     "{\n" +
                             "    \"Filter\": [\n" +

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,8 @@ public class ExecuteBookActivity extends AppCompatActivity {
     static Context context;
     public static LinearLayout.LayoutParams lp ;
     static Map<String, String> map = new HashMap<>();
-
+    static boolean isOffer;
+    String bookID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,33 @@ public class ExecuteBookActivity extends AppCompatActivity {
             }
         });
         myroot=findViewById(R.id.rootLayout);
-        APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
+        //region Check_Notification
+        String execute_book_id="";
+        try
+        {
+            Log.e("Notif", "Reserv Details is trying to get bookid");
+            execute_book_id=getIntent().getStringExtra("execute_book_id");
+        }
+        catch (Exception e)
+        {
+            Log.e("NotifErr",e.getMessage());
+        }
+
+        if(execute_book_id!=null)
+        {
+            APICall.browseOneExecutedBooking(execute_book_id,this);
+            isOffer=getIntent().getBooleanExtra("isOffer",false);
+
+        }
+        else
+        {
+            APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
+            isOffer=ReservationsAdapter2.isOffer;
+        }
+
+        //endregion
+
+     //   APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
     }
 
     public static void AddLayout(final String Id,String customerName,String serviceName,String serNameAr,String money,String deposit)
@@ -71,7 +99,7 @@ public class ExecuteBookActivity extends AppCompatActivity {
         ServiceName=layout2.findViewById(R.id.service_name);
         moneyTxt=layout2.findViewById(R.id.moneyTxt);
         clientName.setText(customerName);
-        if (ReservationsAdapter2.isOffer)
+        if (isOffer)
             moneyTxt.setActivated(false);
         if(context.getResources().getString(R.string.locale).equals("en"))
             ServiceName.setText(serviceName);

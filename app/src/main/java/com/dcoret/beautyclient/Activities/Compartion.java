@@ -86,12 +86,12 @@ public class Compartion extends AppCompatActivity   implements NavigationView.On
 //            Intent intent=new Intent(getApplicationContext(),Favorites.class);
 //            startActivity(intent);
 
-        } else if (id == R.id.rate_app) {
+ //       } else if (id == R.id.rate_app) {
 //            Dialog dialog=new Dialog(this);
 //            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 //            dialog.setContentView(R.layout.rating_dialog);
 //            dialog.show();
-            launchMarket();
+   //         launchMarket();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

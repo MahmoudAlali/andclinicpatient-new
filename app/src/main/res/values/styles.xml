@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name= "android:fontFamily" > @font/aljazeera_arabic_font </item>
         <!-- Change the spinner style-->
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
         <item name="android:spinnerDropDownItemStyle">@style/spinnerDropDownItemStyle</item>
@@ -63,5 +64,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
     </style>
-
+    <style name="NavigationTheme" parent="AppTheme">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

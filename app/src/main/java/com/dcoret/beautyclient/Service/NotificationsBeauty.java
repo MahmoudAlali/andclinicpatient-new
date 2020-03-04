@@ -17,17 +17,28 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
+import com.dcoret.beautyclient.Activities.MultiDateOffer.MultiDateOfferBooking;
+import com.dcoret.beautyclient.Activities.SingleOffer.SingleDateOfferBooking;
 import com.dcoret.beautyclient.Activities.support.InternalChatActivity;
+import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class NotificationsBeauty {
 
+
+    //public static DataOffer.SupIdClass tempOffer;
+    public static ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
+    public static String offer_place;
 
     String action_intent;
     public static int RANDOM_N_ID;
@@ -55,9 +66,9 @@ public class NotificationsBeauty {
 //        Intent i=new Intent(context,ProviderMainPage.class);
         Intent i=null;
         try {
-             i = launchIntent(context);
+            i = launchIntent(context);
         }catch (Exception e){
-             i=new Intent(context, BeautyMainPage.class);
+            i=new Intent(context, BeautyMainPage.class);
         }
         intent.putExtra("yourpackage.notifyId", notification_id_channel);
         intent.putExtra("fragment_notify", title);
@@ -67,8 +78,8 @@ public class NotificationsBeauty {
         intent.putExtra("N_ID",RANDOM_N_ID);
 
         PendingIntent pIntent;
-            context.startService(intent1);
-            context.startService(intent);
+        context.startService(intent1);
+        context.startService(intent);
         intent1.putExtra("accept","cancel");
         intent1.setAction("cancel");
 
@@ -160,7 +171,7 @@ public class NotificationsBeauty {
                 .setAutoCancel(true)
                 .setContentIntent(pIntent)
                 .setContentInfo("INFO")
-      ;
+        ;
 
 
 
@@ -231,7 +242,7 @@ public class NotificationsBeauty {
         notificationManager2.notify(RANDOM_N_ID, builder2.build());
     }
 
-    public void showBookingDetailsNotification(Context context, String title, String body, JSONArray pairs, String code)
+    public static void showBookingDetailsNotification(Context context, String title, String body, JSONArray pairs, String code)
     {
 
         Intent resultIntent = new Intent(context, BeautyMainPage.class);
@@ -262,34 +273,6 @@ public class NotificationsBeauty {
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-
-       /* Intent notifyIntent = new Intent(context, InternalChatActivity.class);
-        notifyIntent.putExtra("notify_title", title);
-        notifyIntent.putExtra("notify_msg", body);*/
-
-// Set the Activity to start in a new, empty task
-        /*notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
-// Create the PendingIntent
-        /*PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                context, 1, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
-        );
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, notification_id_channel);
-        builder.setContentIntent(notifyPendingIntent);
-        builder.setAutoCancel(true)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                .setContentTitle(title)
-                .setContentText(body)
-
-                .setAutoCancel(true)
-                .setContentInfo("INFO")
-        ;*/
-        /*NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(RANDOM_N_ID, builder.build());
-*/
         NotificationCompat.Builder builder2 = new NotificationCompat.Builder(context, notification_id_channel);
         builder2.setContentIntent(resultPendingIntent);
         builder2.setAutoCancel(true)
@@ -312,6 +295,54 @@ public class NotificationsBeauty {
             ((NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(notificationChannel);
         }
         notificationManager2.notify(RANDOM_N_ID, builder2.build());
+    }
+    public void showOfferDetailsNotification(Context context,  String title, String body, JSONArray pairs, String code)
+    {
+        String bdb_offer_type="";
+        for (int i=0;i<pairs.length();i++)
+        {
+            Log.e("Notif","i :"+i);
+            try{
+                JSONObject object = pairs.getJSONObject(i);
+                bdb_offer_type = object.getString("bdb_offer_type");
+                break;
+            }
+            catch (Exception e)
+            {
+                Log.e("NotifErr",i+" : "+e.getMessage());
+
+            }
+        }
+        String packCode="";
+        for (int i=0;i<pairs.length();i++)
+        {
+            Log.e("Notif","i :"+i);
+            try{
+                JSONObject object = pairs.getJSONObject(i);
+                packCode = object.getString("bdb_pack_id");
+                break;
+            }
+            catch (Exception e)
+            {
+                Log.e("NotifErr",i+" : "+e.getMessage());
+
+            }
+        }
+
+
+
+        if (bdb_offer_type.equals("2")
+                || bdb_offer_type.equals("5")){
+            APICall.browseOneMultiOfferNotification(packCode,context,title,body,pairs,code);
+
+        }else if (bdb_offer_type.equals("1")
+                || bdb_offer_type.equals("4")){
+
+        }else if (bdb_offer_type.equals("3")
+                || bdb_offer_type.equals("6")){
+
+
+        }
     }
 
 
@@ -374,6 +405,11 @@ public class NotificationsBeauty {
         {
             showBookingDetailsNotification(context,title,body,j,code);
         }
+        else if(code.equals("16")||code.equals("18"))
+        {
+            showOfferDetailsNotification(context,title,body,j,code);
+        }
+
 
     }
 
@@ -404,7 +440,7 @@ public class NotificationsBeauty {
         {
             Log.e("NotifErr",e.getMessage());
         }
-       // Uri uri = Uri.parse("market://details?id=" + "com.ubnt.umobile");
+        // Uri uri = Uri.parse("market://details?id=" + "com.ubnt.umobile");
         Uri uri = Uri.parse(URLstr);
         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
        /* Intent notifyIntent = new Intent(context, InternalChatActivity.class);

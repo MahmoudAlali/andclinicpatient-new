@@ -510,5 +510,27 @@
     <string name="share">مشاركة</string>
     <string name="plsSelectBookingType">الرجاء اختيار نوع الحجز</string>
     <string name="deposit">دفع العربون</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="ind_offer">عرض فردي</string>
+    <string name="plsLogin">يرجى تسجيل الدخول لمتابعة الحجز</string>
+    <string name="plsActivLoc">خدمة المواقع غير مفعلة، يُرجى تشغيلها للحصول على أبرز العروض القريبة من موقعك الحالي</string>
+    <string name="salonName">اسم الصالون</string>
+    <string name="re_active">إعادة تنشيط</string>
+    <string name="loginFailed">حصل خطأ في تسجيل الدخول، الرجاء المحاولة لاحقاً</string>
+    <string name="relBetweenClients">العلاقة بين العميلات</string>
+    <string name="relatedClientsOneSalon">تنفيذ الحجز للعملاء المرتبطين في صالون واحد</string>
+    <string name="sameClientSameSalon">تنفيذ الخدمات داخل الحجز للعميلة في صالون واحد</string>
+    <string name="locationName">الرجاء إدخال اسم للموقع</string>
+    <string name="errActivation">لا يمكنك طلب رمز إعادة التفعيل أكثر من 3 مرات في اليوم الواحد</string>
+    <string name="allAges">جميع الأعمار</string>
+    <string name="guestAccount">حساب زائرة</string>
+
+    <string-array name="language">
+        <item>العربية</item>
+        <item>English</item>
+        <item>العربية</item>
+    </string-array>
+
+    <string name="language">اللغة:</string>
 
 </resources>

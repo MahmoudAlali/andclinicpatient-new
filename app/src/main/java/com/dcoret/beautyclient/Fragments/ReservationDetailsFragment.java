@@ -37,7 +37,7 @@ public class ReservationDetailsFragment extends Fragment {
         salonName=view.findViewById(R.id.salon_name);
 
 
-        APICall.browseOneBooking(ReservationsAdapter2.book_id,BeautyMainPage.context);
+     //   APICall.browseOneBooking(ReservationsAdapter2.book_id,BeautyMainPage.context);
 
 
 

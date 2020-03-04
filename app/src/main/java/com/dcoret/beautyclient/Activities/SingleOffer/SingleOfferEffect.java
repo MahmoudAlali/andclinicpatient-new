@@ -14,9 +14,11 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
+import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
+import com.dcoret.beautyclient.Service.NotificationsBeauty;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,9 @@ public class SingleOfferEffect extends AppCompatActivity {
     Context context;
     static  int position=0;
     String postdata,offerType,offerplace;
+    public static String bdb_pack_code;
+    static ArrayList<DataOffer.SupIdClass> supIdClasses;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,25 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
          position=getIntent().getIntExtra("position",0);
+        supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+        bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        if(!notification.equals(""))
+
+        {
+            bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+            supIdClasses = NotificationsBeauty.supIdClasses;
+        }
+
+        //endregion
+
         effectAdapter=new GroupEffectAdapter(BeautyMainPage.context, APICall.clientEffectRequestModels);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
@@ -59,11 +83,11 @@ public class SingleOfferEffect extends AppCompatActivity {
                 "                {\n" ;
 
 
-        for (int i = 0; i< TabTwo.arrayList.get(position).getSersup_ids().size(); i++){
+        for (int i = 0; i< supIdClasses.size(); i++){
             if (i==0){
-                filter+="\"ser_id\": "+ TabTwo.arrayList.get(position).getSersup_ids().get(i).getBdb_ser_id()+"\n" ;
+                filter+="\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"\n" ;
             }else {
-                filter+=",\"ser_id\": "+ TabTwo.arrayList.get(position).getSersup_ids().get(i).getBdb_ser_id()+"\n" ;
+                filter+=",\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"\n" ;
             }
         }
 
@@ -92,7 +116,6 @@ public class SingleOfferEffect extends AppCompatActivity {
                 Intent intent=new Intent(context, OfferBookingResult.class);
                 intent.putExtra("filter",getFilter(effectFilter));
                 intent.putExtra("offertype",offerType);
-                intent.putExtra("position",position);
                 intent.putExtra("place",offerplace);
 //                intent.putExtra("filter",getfilter(f));
                 startActivity(intent);
@@ -118,17 +141,17 @@ public class SingleOfferEffect extends AppCompatActivity {
                             ",\"services\":[\n";
 
 //
-                Log.e("SIZE",""+TabTwo.arrayList.get(position).getSersup_ids().size());
+            Log.e("SIZE",""+supIdClasses.size());
 
-                for (int j = 0; j < TabTwo.arrayList.get(position).getSersup_ids().size(); j++) {
+            for (int j = 0; j < supIdClasses.size(); j++) {
 //                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
-                    if (j == 0) {
-                        clients = clients + "{\"ser_id\":" +TabTwo.arrayList.get(position).getSersup_ids().get(j).getBdb_ser_id() +"}\n";
-                    } else {
-                        clients = clients + ",{\"ser_id\":" + TabTwo.arrayList.get(position).getSersup_ids().get(j).getBdb_ser_id()+ "}\n";
-                    }
-                    Log.e("Ser_Id",TabTwo.arrayList.get(position).getSersup_ids().get(j).getBdb_ser_id());
+                if (j == 0) {
+                    clients = clients + "{\"ser_id\":" +supIdClasses.get(j).getBdb_ser_id() +"}\n";
+                } else {
+                    clients = clients + ",{\"ser_id\":" + supIdClasses.get(j).getBdb_ser_id()+ "}\n";
                 }
+                Log.e("Ser_Id",supIdClasses.get(j).getBdb_ser_id());
+            }
 
 
         }catch (Exception e){
@@ -196,7 +219,7 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
     public String getFilter(String effect){
-        String bdb_pack_code=TabTwo.arrayList.get(position).getBdb_pack_code();
+       // String bdb_pack_code=TabTwo.arrayList.get(position).getBdb_pack_code();
         String date=SingleDateOfferBooking.showDate.getText().toString();
         String cname= BeautyMainPage.client_name;
         String cphone=BeautyMainPage.client_number;

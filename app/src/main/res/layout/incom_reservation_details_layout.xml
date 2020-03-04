@@ -27,207 +27,246 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layoutDirection="rtl"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content">-->
-        <!--            <LinearLayout-->
-        <!--                android:orientation="vertical"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content">-->
-        <!--            <TextView-->
-        <!--                android:id="@+id/vfirst"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:background="@color/red"-->
-        <!--                android:layout_height="7dp"-->
-        <!--                android:layout_marginLeft="5dp"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginBottom="5dp"-->
-        <!--                />-->
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/rfirst"-->
-        <!--                android:gravity="center"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginBottom="10dp"-->
-        <!--                android:button="@drawable/radiobutton_selector"-->
-        <!--                android:drawablePadding="20dp"-->
-        <!--                android:paddingLeft="10dip"-->
-        <!--                android:text="تم الطلب"-->
-        <!--                android:textColor="@drawable/radiobutton_color_selector" />-->
-        <!--            </LinearLayout>-->
-
-        <!--            <LinearLayout-->
-        <!--                android:orientation="vertical"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content">-->
-        <!--                <TextView-->
-        <!--                    android:id="@+id/vsecond"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:background="@color/red"-->
-        <!--                    android:layout_height="7dp"-->
-        <!--                    android:layout_marginLeft="5dp"-->
-        <!--                    android:layout_marginRight="5dp"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginBottom="5dp"-->
-        <!--                    />-->
-        <!--                <RadioButton-->
-        <!--                    android:id="@+id/rsecond"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:layout_weight="1"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginBottom="10dp"-->
-        <!--                    android:button="@drawable/radiobutton_selector"-->
-        <!--                    android:drawablePadding="20dp"-->
-        <!--                    android:paddingLeft="10dip"-->
-        <!--                    android:text="تم التأكيد"-->
-        <!--                    android:textColor="@drawable/radiobutton_color_selector" />-->
-        <!--            </LinearLayout>-->
-
-        <!--            <LinearLayout-->
-        <!--                android:orientation="vertical"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content">-->
-        <!--                <TextView-->
-        <!--                    android:id="@+id/vthird"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:background="@color/red"-->
-        <!--                    android:layout_height="7dp"-->
-        <!--                    android:layout_marginLeft="5dp"-->
-        <!--                    android:layout_marginRight="5dp"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginBottom="5dp"-->
-        <!--                    />-->
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/rthird"-->
-        <!--                android:gravity="center"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_marginBottom="10dp"-->
-        <!--                android:button="@drawable/radiobutton_selector"-->
-        <!--                android:drawablePadding="20dp"-->
-        <!--                android:paddingLeft="10dip"-->
-        <!--                android:text="تم دفع العربون"-->
-        <!--                android:textColor="@drawable/radiobutton_color_selector" />-->
-
-        <!--            </LinearLayout>-->
-        <!--            <LinearLayout-->
-        <!--                android:orientation="vertical"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content">-->
-        <!--                <TextView-->
-        <!--                    android:id="@+id/vforth"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:background="@color/red"-->
-        <!--                    android:layout_height="7dp"-->
-        <!--                    android:layout_marginLeft="5dp"-->
-        <!--                    android:layout_marginRight="5dp"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginBottom="5dp"-->
-        <!--                    />-->
-        <!--            <RadioButton-->
-        <!--                android:id="@+id/rforth"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:gravity="center"-->
-        <!--                android:layout_marginBottom="10dp"-->
-        <!--                android:button="@drawable/radiobutton_selector"-->
-        <!--                android:drawablePadding="20dp"-->
-        <!--                android:paddingLeft="10dip"-->
-        <!--                android:text="تم التنفيذ"-->
-        <!--                android:textColor="@drawable/radiobutton_color_selector" />-->
-
-        <!--            </LinearLayout>-->
-
-        <!--        </LinearLayout>-->
-
-
         <LinearLayout
             android:orientation="vertical"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <!-- <LinearLayout
+                 android:orientation="horizontal"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <TextView
+                     android:id="@+id/book_type"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1"
+                     android:gravity="center"
+                     android:text="Booking Type"
+                     android:textSize="18dp"
+                     android:textStyle="bold" />
+                 &lt;!&ndash;                <TextView&ndash;&gt;
+                 &lt;!&ndash;                    android:id="@+id/date"&ndash;&gt;
+                 &lt;!&ndash;                    android:textColor="@color/red"&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_height="@dimen/high_edit_text"&ndash;&gt;
+                 &lt;!&ndash;                    android:text="Date"&ndash;&gt;
+                 &lt;!&ndash;                    android:gravity="center"&ndash;&gt;
+                 &lt;!&ndash;                    android:textSize="18dp"&ndash;&gt;
+                 &lt;!&ndash;                    android:textStyle="bold"&ndash;&gt;
+                 &lt;!&ndash;                    />&ndash;&gt;
+             </LinearLayout>
+             <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:id="@+id/name"
+                     android:visibility="gone"
+                     android:textColor="@color/red"
+                     android:layout_weight="1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/high_edit_text"
+                     android:text="Name"
+                     android:gravity="center"
+                     android:textSize="18dp"
+                     android:textStyle="bold"
+                     />
+                 <TextView
+                     android:id="@+id/total_price"
+                     android:layout_weight="1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/high_edit_text"
+                     android:text=""
+                     android:gravity="center"
+                     android:textSize="18dp"
+                     android:textStyle="bold"
+                     />
+                 <TextView
+                     android:id="@+id/ac_total_price"
+                     android:layout_weight="1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/high_edit_text"
+                     android:text=""
+                     android:gravity="center"
+                     android:textSize="18dp"
+                     android:textStyle="bold"
+                     />
+                 &lt;!&ndash;                <TextView&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+                 &lt;!&ndash;                    android:layout_height="@dimen/high_edit_text"&ndash;&gt;
+                 &lt;!&ndash;                    android:text="كلفةالمشوار+السعرالكلي"&ndash;&gt;
+                 &lt;!&ndash;                    android:gravity="center"&ndash;&gt;
+                 &lt;!&ndash;                    android:textSize="14dp"&ndash;&gt;
+                 &lt;!&ndash;                    android:textStyle="bold"&ndash;&gt;
+                 &lt;!&ndash;                    />&ndash;&gt;
+             </LinearLayout>
+             <LinearLayout
+                 android:orientation="horizontal"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:layout_weight="1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/high_edit_text"
+                     android:text="@string/Service_Place"
+                     android:gravity="center"
+                     android:textSize="18dp"
+                     android:textStyle="bold"
+                     />
+                 <ImageView
+                     android:layout_width="@dimen/standard_40"
+                     android:layout_height="35dp"
+                     android:src="@drawable/service_place_icon"
+                     />
+                 <TextView
+                     android:id="@+id/place"
+                     android:layout_weight="1"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/high_edit_text"
+                     android:text="Value"
+                     android:gravity="center"
+                     android:textSize="18dp"
+                     android:textStyle="bold"
+                     />
+             </LinearLayout>-->
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:weightSum="3"
                 android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/book_type"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="3"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/book_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Booking Type"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/name"
+                        android:textColor="@color/pf_red"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Name"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/salonName"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Booking Type"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-                <!--                <TextView-->
-                <!--                    android:id="@+id/date"-->
-                <!--                    android:textColor="@color/red"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="@dimen/high_edit_text"-->
-                <!--                    android:text="Date"-->
-                <!--                    android:gravity="center"-->
-                <!--                    android:textSize="18dp"-->
-                <!--                    android:textStyle="bold"-->
-                <!--                    />-->
+                    android:weightSum="4"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        >
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/myCardView"
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            app:cardCornerRadius="50dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            >
+                            <ImageView
+                                android:id="@+id/logoImg"
+                                android:src="@drawable/logo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                />
+                        </android.support.v7.widget.CardView>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/date"
+                        android:textColor="@color/pf_red"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text="Date"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/total_price"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text="TotalPrice"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/salon_name"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text="Value"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+
+
+                </LinearLayout>
+
             </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/ac_total_price"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/name"
-                    android:visibility="gone"
-                    android:textColor="@color/red"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:text="Name"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/total_price"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:text=""
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/ac_total_price"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:text=""
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    />
-                <!--                <TextView-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="@dimen/high_edit_text"-->
-                <!--                    android:text="كلفةالمشوار+السعرالكلي"-->
-                <!--                    android:gravity="center"-->
-                <!--                    android:textSize="14dp"-->
-                <!--                    android:textStyle="bold"-->
-                <!--                    />-->
-            </LinearLayout>
+                android:layout_height="@dimen/high_edit_text"
+                android:text=""
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -235,7 +274,7 @@
                 <TextView
                     android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
+                    android:layout_height="match_parent"
                     android:text="@string/Service_Place"
                     android:gravity="center"
                     android:textSize="18dp"
@@ -270,7 +309,11 @@
                     android:textSize="18dp"
                     android:textStyle="bold"
                     />
-
+                <ImageView
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="35dp"
+                    android:src="@drawable/reser_count_icon"
+                    />
                 <TextView
                     android:id="@+id/id"
                     android:layout_weight="1"
@@ -283,20 +326,13 @@
                     />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/prime"
-                android:layout_marginBottom="@dimen/standard_30"
-                ></LinearLayout>
-
 
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -317,7 +353,7 @@
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="35dp">
+                android:layout_marginBottom="30dp">
 
                 <LinearLayout
                     android:id="@+id/myroot"

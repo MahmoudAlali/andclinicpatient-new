@@ -13,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -38,7 +39,7 @@ import com.dcoret.beautyclient.R;
 import java.util.ArrayList;
 
 public class Offers extends Fragment implements LocationListener {
-   // public static Context context;
+    // public static Context context;
     RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
     public static   ArrayList<BestOfferItem> bestOfferItems=new ArrayList<>();
@@ -65,50 +66,133 @@ public class Offers extends Fragment implements LocationListener {
                 else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
+        pullToRefresh = view.findViewById(R.id.pullToRefresh);
+
         //context=this;
         //----------------init recycle view ----------------------------
 //        if (bestOfferItems.size()>0){
-        if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-        } else {
-            requestLocationPermission();
-        }
         LocationManager service = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = service
                 .isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!enabled) {
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
+            APICall.showSweetDialog(getActivity(),getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.plsActivLoc));
+           /* Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);*/
         }
-        locationManager = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        Location location = locationManager.getLastKnownLocation(provider);
-        if (location != null) {
-            System.out.println("Provider " + provider + " has been selected.");
-            onLocationChanged(location);
+      /*  if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
         } else {
-            Log.e("LOCATION","Location not available");
-            //latituteField.setText("Location not available");
-           // longitudeField.setText("Location not available");
+            requestLocationPermission();
+        }*/
+        else
+        {
+            locationManager = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria, false);
+            try
+            {
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null) {
+                    System.out.println("Provider " + provider + " has been selected.");
+                    onLocationChanged(location);
+
+                } else {
+                    Log.e("LOCATION","Location not available");
+                    //latituteField.setText("Location not available");
+                    // longitudeField.setText("Location not available");
+                }
+                bestOfferItems.clear();
+                APICall.bestOffer(BeautyMainPage.context,Lat,Long);
+            }
+            catch (SecurityException e)
+            {
+                Log.e("LOCATION","11111111");
+
+                if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    requestLocationPermission();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.e("LOCATION","222222");
+                Log.e("LOCATION",e.getMessage());
+
+            }
         }
+
 // check if enabled and if not send user to the GSP settings
 // Better solution would be to display a dialog and suggesting to
 // go to the settings
 
-        pullToRefresh = view.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                bestOfferItems.clear();
-                APICall.bestOffer(BeautyMainPage.context,Lat,Long);
+                LocationManager service = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
+                boolean enabled = service
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+                if (!enabled) {
+                    APICall.showSweetDialog(getActivity(),getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.plsActivLoc));
+                    pullToRefresh.setRefreshing(false);
+           /* Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);*/
+                }
+      /*  if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            requestLocationPermission();
+        }*/
+                else
+                {
+                    locationManager = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
+                    Criteria criteria = new Criteria();
+                    provider = locationManager.getBestProvider(criteria, false);
+                    try
+                    {
+                        Location location = locationManager.getLastKnownLocation(provider);
+                        if (location != null) {
+                            System.out.println("Provider " + provider + " has been selected.");
+                            onLocationChanged(location);
+
+                        } else {
+                            Log.e("LOCATION","Location not available");
+                            pullToRefresh.setRefreshing(false);
+
+                            //latituteField.setText("Location not available");
+                            // longitudeField.setText("Location not available");
+                        }
+                        bestOfferItems.clear();
+                        // APICall.detailsUser4(context);
+                        APICall.bestOffer(BeautyMainPage.context,Lat,Long);
+
+                    }
+                    catch (SecurityException e)
+                    {
+                        pullToRefresh.setRefreshing(false);
+
+                        if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                        } else {
+                            requestLocationPermission();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }
+              /*  bestOfferItems.clear();
+                APICall.bestOffer(BeautyMainPage.context,Lat,Long);*/
             }
         });
         if (isFirstOpen){
-            bestOfferItems.clear();
-           // APICall.detailsUser4(context);
-            APICall.bestOffer(BeautyMainPage.context,Lat,Long);
+
             isFirstOpen=false;
         }
 
@@ -176,7 +260,7 @@ public class Offers extends Fragment implements LocationListener {
     public void onResume() {
         super.onResume();
         try {
-            locationManager.requestLocationUpdates(provider, 400, 1,this);
+            // locationManager.requestLocationUpdates(provider, 400, 1,this);
 
         }
         catch (SecurityException e){}
@@ -184,7 +268,7 @@ public class Offers extends Fragment implements LocationListener {
     @Override
     public void onPause() {
         super.onPause();
-        locationManager.removeUpdates(this);
+        // locationManager.removeUpdates(this);
     }
     @Override
     public void onLocationChanged(Location location) {
@@ -214,6 +298,16 @@ public class Offers extends Fragment implements LocationListener {
     public void onProviderDisabled(String provider) {
         Toast.makeText(BeautyMainPage.context, "Disabled provider " + provider,
                 Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==ACCESS_FINE_LOCATION){
+            if (grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getActivity(),"Permission Granted",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(getActivity(),"Permission Denied",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

@@ -4,11 +4,13 @@ package com.dcoret.beautyclient.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +64,27 @@ public class DepositReservationFragment extends Fragment {
         APICall.layout= R.layout.incom_reservation_layout;
         APICall.filter=filter= APICall.bookingFilter("1","7","0");
 
+        //region CHECK_NOTIFICATIONS
+        Bundle bundle = this.getArguments();
+        String book_id="";
+        if (bundle != null) {
+            book_id = bundle.getString("book_id");
+            Log.e("NotifDepoif",book_id);
+
+        }
+
+        if(!book_id.equals(""))
+        {
+            bundle.putString("book_id", book_id);
+            Log.e("NotifDepo",book_id);
+            //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
+            Log.e("BookID",book_id);
+            Intent intent=new Intent(BeautyMainPage.context, ReservatoinDetailsActivity.class);
+            startActivity(intent);
+        }
+
+
+        //endregion
 
 
 

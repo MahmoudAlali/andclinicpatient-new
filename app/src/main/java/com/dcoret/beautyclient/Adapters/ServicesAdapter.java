@@ -28,6 +28,9 @@ import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabOne;
 import com.dcoret.beautyclient.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,6 +156,33 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             } else {
                 ( holder).service_compare.setChecked(false);
             }
+            APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogoId(),(holder).logo);
+
+            if(itemArrayList.get(position).getIs_fav_sup().equals("0"))
+                (holder).service_fav.setImageResource(R.drawable.un_favorite);
+            else
+                (holder).service_fav.setImageResource(R.drawable.favorite);
+
+
+            (holder).service_fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(itemArrayList.get(position).getNewFav().equals("0"))
+                    {
+                        itemArrayList.get(position).setNewFav("1");
+                        (holder).service_fav.setImageResource(R.drawable.favorite);
+                        APICall.sendFavorites(BeautyMainPage.context,itemArrayList.get(position).getSup_id(),"1");
+
+                    }
+                    else {
+                        itemArrayList.get(position).setNewFav("0");
+                        APICall.sendUnFavorites(BeautyMainPage.context,itemArrayList.get(position).getSup_id(),"1");
+                        (holder).service_fav.setImageResource(R.drawable.un_favorite);
+                    }
+
+
+                }
+            });
             ( holder).service_compare.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -272,7 +302,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         TextView  service_name,service_price;
         TextView pro_name;
         RatingBar service_rate;
-        ImageView service_add,service_fav;
+        ImageView service_add,service_fav,logo;
         CheckBox service_compare;
         LinearLayout service_details;
         public ListHolder(View itemView) {
@@ -297,6 +327,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 
                 }
             });
+            logo=itemView.findViewById(R.id.logoImg);
 
         }
 
@@ -315,7 +346,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         TextView  service_name,service_price;
         TextView pro_name;
         RatingBar service_rate;
-        ImageView service_add,service_fav;
+        ImageView service_add,service_fav,logo;
         CheckBox service_compare;
         LinearLayout service_details;
 
@@ -334,6 +365,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             service_compare=itemView.findViewById(R.id.service_compare);
 //            service_details=itemView.findViewById(R.id.service_details);
             service_fav=itemView.findViewById(R.id.service_fav);
+            logo=itemView.findViewById(R.id.logoImg);
 
         }
     }
@@ -403,5 +435,24 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         Log.e("EDFR", Arrays.toString(days));
         return dateClasses;
     }
-
+    public static JSONArray getFavorites(final ArrayList<BrowseServiceItem> itemArrayList)
+    {
+        // String favoriteStr="\" items \" :[";
+        JSONArray favoriteStr =new JSONArray();
+        JSONObject temp;
+        for(int i=0;i<itemArrayList.size();i++)
+        {
+            if(!itemArrayList.get(i).getNewFav().equals(itemArrayList.get(i).getIs_fav_sup()))
+            {
+                temp=new JSONObject();
+                try {
+                    temp.put("bdb_item_id",itemArrayList.get(i).getSup_id());
+                    temp.put("bdb_type","0");
+                    favoriteStr.put(temp);
+                }
+                catch (Exception e){}
+            }
+        }
+        return favoriteStr;
+    }
 }

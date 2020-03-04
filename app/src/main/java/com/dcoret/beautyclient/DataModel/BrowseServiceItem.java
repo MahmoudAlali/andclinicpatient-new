@@ -21,11 +21,12 @@ public class BrowseServiceItem {
                     distance,
                     longitude,
                     latitude,
-                    is_fav_sup,
+                 is_fav_sup,newFav,
                     bdb_booking_period,
                     ser_id,
                     sup_id,
-                    bdb_time,
+                 logoId,
+    bdb_time,
                 bdb_isbride_ser;
 
 
@@ -81,7 +82,7 @@ public class BrowseServiceItem {
     }
 
     public BrowseServiceItem(String bdb_ser_sup_id, String bdb_sup_name, String bdb_sup_rating, String bdb_emp_rating, String totalRating, String bdb_ser_home, String bdb_ser_hall, String bdb_ser_salon, String bdb_hotel, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_ser_salon_price, String bdb_hotel_price, String distance, String longitude, String latitude,
-                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser) {
+                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser,String bdb_logo_id) {
         this.bdb_ser_sup_id = bdb_ser_sup_id;
         this.bdb_sup_name = bdb_sup_name;
         this.bdb_sup_rating = bdb_sup_rating;
@@ -104,6 +105,8 @@ public class BrowseServiceItem {
         this.sup_id= sup_id;
         this.bdb_time= bdb_time;
         this.bdb_isbride_ser= bdb_isbride_ser;
+        this.logoId= bdb_logo_id;
+        this.newFav=is_fav_sup;
     }
 
     public String getBdb_isbride_ser() {
@@ -296,5 +299,15 @@ public class BrowseServiceItem {
         return price;
     }
 
+    public String getLogoId() {
+        return logoId;
+    }
 
+    public String getNewFav() {
+        return newFav;
+    }
+
+    public void setNewFav(String newFav) {
+        this.newFav = newFav;
+    }
 }

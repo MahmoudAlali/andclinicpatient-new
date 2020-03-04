@@ -22,10 +22,10 @@ public class PointsSecondFragment extends Fragment {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-     float ydata[]={25f,20f,30f,15f};
-     String xdata[]={"current","spend","out","30day out"};
-     RecyclerView recyclerView;
-     PointAdapter pointAdapter;
+    float ydata[]={25f,20f,30f,15f};
+    String xdata[]={"current","spend","out","30day out"};
+    RecyclerView recyclerView;
+    PointAdapter pointAdapter;
 
     @Nullable
     @Override
@@ -36,6 +36,7 @@ public class PointsSecondFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
         pointAdapter=new PointAdapter(BeautyMainPage.context, APICall.pointList);
         recyclerView.setAdapter(pointAdapter);
+        BeautyMainPage.FRAGMENT_NAME="PointsFragment";
 
         pointAdapter.notifyDataSetChanged();
         APICall.GetPointsLog(BeautyMainPage.context,pointAdapter);

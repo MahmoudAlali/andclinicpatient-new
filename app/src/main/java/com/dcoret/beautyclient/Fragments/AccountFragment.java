@@ -3,17 +3,25 @@ package com.dcoret.beautyclient.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
@@ -23,6 +31,7 @@ import com.dcoret.beautyclient.R;
 import com.google.android.gms.maps.MapView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class AccountFragment extends Fragment  {
@@ -36,7 +45,9 @@ public class AccountFragment extends Fragment  {
     EditText e_bdb_mobile,e_bdb_name,e_bdb_email,e_pass,e_c_pass,old_pass;
     Button save,deleteaccount;
     TextView edit;
-
+    Spinner language;
+    SharedPreferences.Editor editor;
+    public static String oldEmail="";
 
 
     public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();
@@ -57,6 +68,7 @@ public class AccountFragment extends Fragment  {
         save=view.findViewById(R.id.save);
         edit=view.findViewById(R.id.edit);
         deleteaccount=view.findViewById(R.id.deleteaccount);
+        language = view.findViewById(R.id.language);
 
 
         old_pass.setEnabled(false);
@@ -119,16 +131,62 @@ public class AccountFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 if (edit_flag){
-                if (e_pass.getText().toString().equals(e_c_pass.getText().toString())){
-                    APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),e_pass.getText().toString(),old_pass.getText().toString(),BeautyMainPage.context);
-                }else {
-                    APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.PsswordIncorrectAlert);
-                }
+                    if (e_pass.getText().toString().equals(e_c_pass.getText().toString())){
+                        APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),e_pass.getText().toString(),old_pass.getText().toString(),BeautyMainPage.context);
+                    }else {
+                        APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.PsswordIncorrectAlert);
+                    }
                 }else {
                     APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),BeautyMainPage.context);
 
                 }
+                Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
+                ((AppCompatActivity)BeautyMainPage.context).finish();
 
+            }
+        });
+        final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.language, R.layout.simple_spinner_dropdown_item_v1);
+        adapter.setDropDownViewResource(R.layout.spinner_center_item);
+        language.setAdapter(adapter);
+        editor =((AppCompatActivity)BeautyMainPage.context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+
+        language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 2) {
+                    Resources res = getResources();
+                    // Change locale settings in the app.
+                    DisplayMetrics dm = res.getDisplayMetrics();
+                    android.content.res.Configuration conf = res.getConfiguration();
+                    conf.setLocale(new Locale("ar".toLowerCase())); // API 17+ only.
+                    // Use conf.locale = new Locale(...) if targeting lower versions
+                    res.updateConfiguration(conf, dm);
+                    editor.putString("lang","ar");
+                    editor.commit();
+
+                   /* Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
+                    ((AppCompatActivity)BeautyMainPage.context).finish();*/
+
+                }
+                else if(position == 1)
+                {
+                    Resources res = getResources();
+                    // Change locale settings in the app.
+                    DisplayMetrics dm = res.getDisplayMetrics();
+                    android.content.res.Configuration conf = res.getConfiguration();
+                    conf.setLocale(new Locale("en".toLowerCase())); // API 17+ only.
+                    // Use conf.locale = new Locale(...) if targeting lower versions
+                    res.updateConfiguration(conf, dm);
+                    editor.putString("lang","en");
+                    editor.commit();
+                   /* Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
+                    ((AppCompatActivity)BeautyMainPage.context).finish();*/
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });

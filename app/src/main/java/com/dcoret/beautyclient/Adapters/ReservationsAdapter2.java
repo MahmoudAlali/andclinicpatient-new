@@ -61,7 +61,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public static Boolean isOffer=false;
     public static FragmentManager fm;
     public static FragmentTransaction fragmentTransaction;
-    public static String book_id="0";
+    public static String book_id="0",logoId;
     public static int postionBook;
     public ReservationsAdapter2(Context context, String items[]){
         this.context=context;
@@ -160,12 +160,17 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             });
 
 
-                String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
+            String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
+            String byMe=bookingAutomatedBrowseData.get(position).getBooked_by_me();
 
-            if (inner.equals("0")){
-                ((Item)holder).inner_res.setImageResource(R.drawable.ic_arrow_upward_black_24dp);
+            if (inner.equals("1")){
+                ((Item)holder).inner_res.setImageResource(R.drawable.inner_booking);
             }else {
-                ((Item)holder).inner_res.setImageResource(R.drawable.ic_arrow_downward_black_24dp);
+                if(byMe.equals("false"))
+                    ((Item)holder).inner_res.setImageResource(R.drawable.other_client_booking);
+                else
+                    ((Item)holder).inner_res.setImageResource(R.drawable.client_booking);
+
             }
 
 
@@ -495,12 +500,16 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
 
             }
+            APICall.getSalonLogo(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((Item)holder).logoImg);
+
             ((Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         book_id=bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id();
                         Log.e("BookID",book_id);
+                        logoId=bookingAutomatedBrowseData.get(position).getLogoId();
+
                         postionBook=position;
 
 
@@ -699,7 +708,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //        MyClickListener listener;
 
         TextView bookType,client_name,status,delay, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
-        ImageView book_Details,inner_res;
+        ImageView book_Details,inner_res,logoImg;
         ColorRatingBar rating;
 
         LinearLayout myroot;
@@ -720,6 +729,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             refuse=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);
             time=itemView.findViewById(R.id.time);
+            logoImg=itemView.findViewById(R.id.logoImg);
 
         }
 

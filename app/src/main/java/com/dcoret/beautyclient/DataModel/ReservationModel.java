@@ -9,10 +9,11 @@ public class ReservationModel {
     String place,client_name,booking_price;
     String bdb_inner_booking;
     String bdb_is_executed;
-
+    String logoId;
+    String booked_by_me;
     ArrayList<BookingAutomatedBrowseData> data;
 
-    public ReservationModel(String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, ArrayList<BookingAutomatedBrowseData> data) {
+    public ReservationModel(String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -22,6 +23,8 @@ public class ReservationModel {
         this.booking_price = booking_price;
         this.bdb_inner_booking=bdb_inner_booking;
         this.bdb_is_executed=bdb_is_executed;
+        this.logoId=logoId;
+        this.booked_by_me=booked_by_me;
     }
 
 
@@ -96,5 +99,13 @@ public class ReservationModel {
 
     public void setData(ArrayList<BookingAutomatedBrowseData> data) {
         this.data = data;
+    }
+
+    public String getLogoId() {
+        return logoId;
+    }
+
+    public String getBooked_by_me() {
+        return booked_by_me;
     }
 }

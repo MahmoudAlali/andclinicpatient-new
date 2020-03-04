@@ -28,5 +28,6 @@
     <color name="red">#BB2F5D</color>
     <color name="lightBordeaux">#C4941751</color>
     <color name="white">#fff</color>
+    <color name="transGrey">#B3636263</color>
 
 </resources>
