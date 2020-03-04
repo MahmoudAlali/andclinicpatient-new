@@ -25,7 +25,7 @@ public class MyIndEffectsActivity extends AppCompatActivity {
     @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_effects);
+        setContentView(R.layout.activity_my_effects_v1);
         context=this;
 
 //        select_cat=findViewById(R.id.select_cat);
