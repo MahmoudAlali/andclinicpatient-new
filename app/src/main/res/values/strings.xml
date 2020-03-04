@@ -227,10 +227,11 @@
     <string name="select_city_alert">Please Select an City</string>
 
     <!--service place frag-->
-    <string name="PlaceService">Service Place</string>
-    <string name="ServicePrice">Service Price</string>
-    <string name="ServiceRate">Service Rate</string>
-    <string name="OfferPrice">Offer Price</string>
+    <string name="PlaceService">Service place</string>
+    <string name="ServicePrice">Service price</string>
+    <string name="ServiceRate">Service rate</string>
+    <string name="providerRate">Provider rate</string>
+    <string name="OfferPrice">Offer price</string>
 
     <!--Delete Account-->
     <string name="ServiceCovering">I did not get services covering my area / city</string>
@@ -611,6 +612,7 @@
     <string name="service_effect">service effects</string>
     <string name="support">support</string>
     <string name="effect">my effects</string>
+    <string name="bookingRequests">booking requests</string>
     <string name="update">update effects</string>
     <string name="there_is_no_sol">There is no similar solution. Do you want to find similar solutions?</string>
 
@@ -695,5 +697,18 @@
     <string name="deposit">deposit</string>
     <string name="language">language:</string>
     <string name="sign_out">Sign out</string>
+    <string name="requestType">request type</string>
+    <string name="providerName">provider name</string>
+    <string name="oldRequests">old requests</string>
+    <string name="newRequests">new requests</string>
+    <string name="rejectedByProvider">rejected by the provider</string>
+    <string name="canceledByClient">canceled by the client</string>
+    <string name="canceledBySystem">canceled by the system</string>
+    <string name="approved">approved request</string>
+    <string-array name="requestType">
+        <item>request type</item>
+        <item>Offer</item>
+        <item>Normal</item>
+    </string-array>
 
 </resources>

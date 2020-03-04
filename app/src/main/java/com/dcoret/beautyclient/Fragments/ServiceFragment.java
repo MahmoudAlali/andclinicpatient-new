@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
@@ -33,6 +34,7 @@ public class ServiceFragment extends Fragment {
     public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
 
     public static String bdb_ser_id="360";
+    Button freeBooking;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
@@ -46,6 +48,7 @@ public class ServiceFragment extends Fragment {
         toolbar= view.findViewById(R.id.toolbarm);
         bride_bride= view.findViewById(R.id.bride_bride);
         ind_normal_service= view.findViewById(R.id.individual);
+        freeBooking = view.findViewById(R.id.freeBooking);
 
         group_res= view.findViewById(R.id.group_res);
         group_res_bride= view.findViewById(R.id.group_res_bride);
@@ -209,6 +212,18 @@ public class ServiceFragment extends Fragment {
 //                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
 //            }
 //        });
-        return view;
+
+        freeBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new freeBookingFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });        return view;
     }
 }

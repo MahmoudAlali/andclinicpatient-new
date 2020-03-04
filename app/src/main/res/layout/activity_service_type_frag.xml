@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@drawable/background">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarm"
@@ -17,53 +18,45 @@
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="#fff"/>
-
-<android.support.v4.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_gravity="center"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:background="@drawable/background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_30"
         android:layout_gravity="center"
         android:orientation="vertical" >
 
 
-            <LinearLayout
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_width="248dp"
-                android:layout_height="68dp"
-                android:background="@drawable/blue_white"
-                android:layout_marginTop="30dp"
-                android:layoutDirection="ltr"
-                android:layout_marginRight="@dimen/pf_10dp_space"
-                android:layout_marginLeft="@dimen/pf_10dp_space"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:gravity="right|center"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/bride_res"
-                    android:textColor="#000"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_width="248dp"
+            android:layout_height="68dp"
+            android:background="@drawable/blue_white"
+            android:layout_marginTop="30dp"
+            android:layoutDirection="ltr"
+            android:layout_marginRight="@dimen/pf_10dp_space"
+            android:layout_marginLeft="@dimen/pf_10dp_space"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="right|center"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:text="@string/bride_res"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold"
 
-                    />
+                />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:src="@drawable/bride_icon" />
-
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:src="@drawable/bride_icon" />
 
 
 
@@ -72,7 +65,9 @@
 
 
 
-            </LinearLayout>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -392,6 +387,32 @@
 
 
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/standard_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/freeBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_services_btn"
+            android:text="Kefak"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+<!--
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="@drawable/background">
+</android.support.v4.widget.NestedScrollView>
+-->
+
+</LinearLayout>
