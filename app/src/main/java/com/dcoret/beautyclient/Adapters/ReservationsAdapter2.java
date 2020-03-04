@@ -27,6 +27,7 @@ import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
 import com.dcoret.beautyclient.Fragments.AcceptedReservationFragment;
 import com.dcoret.beautyclient.Fragments.ExecuteBookActivity;
+import com.dcoret.beautyclient.Fragments.MyReservation.CancelReservationActivity;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.R;
@@ -199,15 +200,19 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                 && !dateTimeModels.get(i).getDate()
                                 .equals(dateTimeModels.get(i+1).getDate())){
 
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
+                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition()))) {
                                 allExecuted = true;
+                                ((Item) holder).time.setVisibility(View.VISIBLE);
+                            }
 
                         }else if (!dateTimeModels.get(i).getDate()
                                 .equals(dateTimeModels.get(i-1).getDate())) {
 
 //                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i-1)))
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i-1).getPosition())))
+                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i-1).getPosition()))) {
                                 allExecuted = true;
+                                ((Item) holder).time.setVisibility(View.VISIBLE);
+                            }
                         }else if (!dateTimeModels.get(i).getDate()
                                 .equals(dateTimeModels.get(i+1).getDate())
                                 && i+1==dateTimeModels.size()) {
@@ -215,22 +220,30 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
 //                                        allExecuted = true;
 
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i+1).getPosition())))
+                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i+1).getPosition()))) {
                                 allExecuted = true;
+                                ((Item) holder).time.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                     if (bookingAutomatedBrowseData.get(position).getData().size()==2){
                         Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
-                        if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
+                        if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i))) {
                             allExecuted = true;
+                            ((Item) holder).time.setVisibility(View.VISIBLE);
+
+                        }
                     }
 
                 }else
                     Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
 
-                if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
+                if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition()))) {
                     allExecuted = true;
-            }
+                    ((Item) holder).time.setVisibility(View.VISIBLE);
+
+                }
+                }
 //                }
             if(allExecuted && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
                 ((Item) holder).time.setText(R.string.Executed);
@@ -407,50 +420,65 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("true")
                         ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("1")){
-                    if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {
-                        if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                            //-------cancelpaid api--------
-//                            /api/booking/BookingProcessing
-                            Log.e("Outer",bookingAutomatedBrowseData.get(position).getBdb_inner_booking());
-                            Dialog dialog1=new Dialog(context);
-                            dialog1.setContentView(R.layout.map_title_layout);
-                            final EditText reason=dialog1.findViewById(R.id.code);
-                            TextView ok=dialog1.findViewById(R.id.confirm);
-                            TextView message=dialog1.findViewById(R.id.message);
-                            message.setText(R.string.enter_reason);
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    if (reason.getText().toString().length()==0){
-                                        Toast.makeText(context, R.string.enter_reason,Toast.LENGTH_LONG).show();
-                                    }else {
-                                        //----------------- cancel paid----------
-                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),reason.getText().toString(),context);
-                                    }
-                                    }
-                            });
-                        } else {
 
-                            //------------- cancel paid ----------
-                            APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),4,"0",context);
+                        if (bookingAutomatedBrowseData.get(position).getData().size()>1){
+                            //------- cancel activity reservation-----------------
+                            book_id=bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id();
+                            Log.e("BookIDCancel",book_id);
+                            postionBook=position;
+
+                            Intent intent=new Intent(context, CancelReservationActivity.class);
+                            context.startActivity(intent);
+
+
+                        }else {
+
+                            if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {
+                                if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
+                                    //-------cancelpaid api--------
+//                            /api/booking/BookingProcessing
+                                    Log.e("Outer", bookingAutomatedBrowseData.get(position).getBdb_inner_booking());
+                                    Dialog dialog1 = new Dialog(context);
+                                    dialog1.setContentView(R.layout.map_title_layout);
+                                    final EditText reason = dialog1.findViewById(R.id.code);
+                                    TextView ok = dialog1.findViewById(R.id.confirm);
+                                    TextView message = dialog1.findViewById(R.id.message);
+                                    message.setText(R.string.enter_reason);
+                                    ok.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            if (reason.getText().toString().length() == 0) {
+                                                Toast.makeText(context, R.string.enter_reason, Toast.LENGTH_LONG).show();
+                                            } else {
+                                                //----------------- cancel paid----------
+                                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), reason.getText().toString(), context);
+                                            }
+                                        }
+                                    });
+                                } else {
+
+                                    //------------- cancel paid ----------
+                                    APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 4, "0", context);
 
 //                            /api/booking/cancelPaidBooking
-                        }
-                    }
-                    else if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("2") ||
-                            bookingAutomatedBrowseData.get(position).getData().get(0).equals("8")) {
-                        //---------- book proccessing --------- to 0
+                                }
+                            }
+                            else if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("2") ||
+                                    bookingAutomatedBrowseData.get(position).getData().get(0).equals("8")) {
+                                //---------- book proccessing --------- to 0
 //                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
+                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 5, "0", context);
 
-                    }
-                    else {
-                        //---------- Other cases
+                            }
+                            else {
+                                //---------- Other cases
 //                        /api/booking/BookingProcessing
-                        APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(),5,"0",context);
-                    }
+                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 5, "0", context);
+                            }
+                        }
                 }else {
                         APICall.showSweetDialog(context,"","لا يمكن إلغاء هذا الحجز إلا من قبل العميلة صاحبة الحجز");
                     }

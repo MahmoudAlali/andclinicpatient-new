@@ -70,7 +70,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
     android.app.FragmentManager fm;
     FragmentTransaction fragmentTransaction;
     public static TextView servicetab,offertab,maptab;
-    public static ImageButton filter,compare,sort,gridlist;
+    public static ImageButton filter,compare,sort;
     public static Boolean gridlistcheck=false;
     static boolean Isservice=false;
     LinearLayout myLocationbtn,distancebtn;
@@ -332,7 +332,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //        citiesSpinner =view.findViewById(R.id.citiesSpinner);
         filter =view.findViewById(R.id.filter);
         compare =view.findViewById(R.id.compare);
-        gridlist =view.findViewById(R.id.gridlist);
+//        gridlist =view.findViewById(R.id.gridlist);
         layout_bar =view.findViewById(R.id.layout_bar);
         servicetab=view.findViewById(R.id.servicetabclick);
         offertab=view.findViewById(R.id.offertabclick);
@@ -346,12 +346,12 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         toolbar.setNavigationOnClickListener(this);
 
         //-------------------- Grid List---------------
-        gridlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gridlist();
-            }
-        });
+//        gridlist.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                gridlist();
+//            }
+//        });
 
         //-------------------- compare services----------
         compare.setOnClickListener(new View.OnClickListener() {
@@ -1593,7 +1593,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 });
 
 
-        gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
+//        gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
         tabselected(servicetab,offertab,maptab);
          fragment = new TabOne();
         fm = getFragmentManager();
@@ -1607,7 +1607,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 pages.setVisibility(View.VISIBLE);
                 TABFLAG=1;
 
-                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
+//                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
                 tabselected(servicetab,offertab,maptab);
                  fragment = new TabOne();
                 fm = getFragmentManager();
@@ -1621,7 +1621,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             public void onClick(View v) {
                 tabselected(offertab,servicetab,maptab);
                 TABFLAG=2;
-                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
+//                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
                 pages.setVisibility(View.VISIBLE);
                 fragment = new TabTwo();
                 fm = getFragmentManager();
@@ -1635,7 +1635,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
             public void onClick(View v) {
                 tabselected(maptab,servicetab,offertab);
                 TABFLAG=3;
-                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
+//                gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
                 fragment = new TabThree();
 //                fragment = new MapFragment();
                 fm = getFragmentManager();
@@ -1665,33 +1665,33 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
     }
 
-    public static void gridlist(){
-        TabOne.compareModels.clear();
-        if (!gridlistcheck){
-            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    servicesAdapter=new ServicesAdapter(BeautyMainPage.context,TabOne.arrayList,R.layout.service_layout_adapter_grid_last);
-                    LinearLayoutManager manager = new GridLayoutManager(BeautyMainPage.context,2);
-                    TabOne.recyclerView.setLayoutManager(manager);
-                    TabOne.recyclerView.setAdapter(servicesAdapter);
-                    servicesAdapter.notifyDataSetChanged();
-                    gridlistcheck=true;
-                    gridlist.setImageResource(R.drawable.ic_grid_on_black_24dp);
-                }
-            });
-        }else {
-            servicesAdapter=new ServicesAdapter(BeautyMainPage.context,  TabOne.arrayList,R.layout.service_layout_adapter_last);
-            LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
-            TabOne.recyclerView.setLayoutManager(manager);
-            TabOne.recyclerView.setAdapter(servicesAdapter);
-            gridlistcheck=false;
-            gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
-
-        }
-
-
-    }
+//    public static void gridlist(){
+//        TabOne.compareModels.clear();
+//        if (!gridlistcheck){
+//            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    servicesAdapter=new ServicesAdapter(BeautyMainPage.context,TabOne.arrayList,R.layout.service_layout_adapter_grid_last);
+//                    LinearLayoutManager manager = new GridLayoutManager(BeautyMainPage.context,2);
+//                    TabOne.recyclerView.setLayoutManager(manager);
+//                    TabOne.recyclerView.setAdapter(servicesAdapter);
+//                    servicesAdapter.notifyDataSetChanged();
+//                    gridlistcheck=true;
+//                    gridlist.setImageResource(R.drawable.ic_grid_on_black_24dp);
+//                }
+//            });
+//        }else {
+//            servicesAdapter=new ServicesAdapter(BeautyMainPage.context,  TabOne.arrayList,R.layout.service_layout_adapter_last);
+//            LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
+//            TabOne.recyclerView.setLayoutManager(manager);
+//            TabOne.recyclerView.setAdapter(servicesAdapter);
+//            gridlistcheck=false;
+//            gridlist.setImageResource(R.drawable.ic_view_list_black_24dp);
+//
+//        }
+//
+//
+//    }
 
     //------------ not used---------------
     public static Menu menu;
@@ -1731,13 +1731,14 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         }else if(id==R.id.notify){
             Intent intent=new Intent(BeautyMainPage.context,Notification.class);
             startActivity(intent);
-        }else if(id==R.id.gridlist){
-//            TabOne.gridlistitems();
-            if (ServicesAdapter.list)
-            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_grid_on_black_24dp));
-            else
-            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_view_list_black_24dp));
         }
+//        else if(id==R.id.gridlist){
+////            TabOne.gridlistitems();
+//            if (ServicesAdapter.list)
+//            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_grid_on_black_24dp));
+//            else
+//            menu.getItem(0).setIcon(getResources().getDrawable(R.drawable.ic_view_list_black_24dp));
+//        }
 
 
         return super.onOptionsItemSelected(item);

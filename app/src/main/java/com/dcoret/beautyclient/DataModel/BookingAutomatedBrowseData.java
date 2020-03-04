@@ -12,9 +12,9 @@ public class BookingAutomatedBrowseData {
             ,service_ar_name
             ,client_name
             ,booking_price
-    ,provider_rating,is_action_on;
-
-    String totalItem;
+            ,provider_rating
+            ,is_action_on
+            ,totalItem;
 
 
     public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String totalItem) {
