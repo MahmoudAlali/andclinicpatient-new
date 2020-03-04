@@ -1,3 +1,4 @@
+/*
 package com.dcoret.beautyclient.Adapters;
 
 import android.app.Dialog;
@@ -22,9 +23,11 @@ import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.BookingRequestDataModel;
 import com.dcoret.beautyclient.DataModel.DateTimeModel;
 import com.dcoret.beautyclient.DataModel.ReservationModel;
 import com.dcoret.beautyclient.Fragments.ExecuteBookActivity;
+import com.dcoret.beautyclient.Fragments.MyBookingRequestsFragment;
 import com.dcoret.beautyclient.Fragments.MyReservationFragment;
 import com.dcoret.beautyclient.Fragments.ReservatoinDetailsActivity;
 import com.dcoret.beautyclient.R;
@@ -51,7 +54,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     RecyclerView.ViewHolder holder;
     //    ArrayList <DataService> services;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData1;
-    public static ArrayList<ReservationModel> bookingAutomatedBrowseData;
+    public static ArrayList<BookingRequestDataModel> bookingRequestData;
     //    ArrayList<DataReservation> reservations;
     int layout;
     public static Fragment fragment;
@@ -64,9 +67,9 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         this.context=context;
         this.items=items;
     }
-    public BookingRequestsAdapter(Context context, ArrayList<ReservationModel> bookingAutomatedBrowseData){
+    public BookingRequestsAdapter(Context context, ArrayList<BookingRequestDataModel> bookingRequestData){
         this.context=context;
-        this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
+        this.bookingRequestData=bookingRequestData;
         this.layout=layout;
     }
 
@@ -75,7 +78,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater= LayoutInflater.from(context);
-        View row=inflater.inflate(R.layout.incom_reservation_layout_ext,parent,false);
+        View row=inflater.inflate(R.layout.booking_request_item_layout,parent,false);
         Item item=new Item(row);
         return item;
 
@@ -85,324 +88,37 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
-            Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
-            ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
-            String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
+           // Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
+            ((Item)holder).client_name.setText(bookingRequestData.get(position).getBdb_sup_name());
+           // String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
 
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
-            if (MyReservationFragment.tab.equals("2")){
-                ((Item) holder).delay.setText(R.string.deposit);
-            }
-            if (MyReservationFragment.tab.equals("1")){
-                if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
-                    ((Item) holder).status.setText("مقبولة");
-                }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
-                    ((ReservationsAdapter2.Item) holder).status.setText("بإنتظار التأكيد");
-                }
-                ((ReservationsAdapter2.Item) holder).delay.setVisibility(View.GONE);
-            }else{
-                ((ReservationsAdapter2.Item) holder).status.setVisibility(View.GONE);
+            if (MyBookingRequestsFragment.tab.equals("2")){
+                ((Item) holder).cancel.setVisibility(View.GONE);
             }
 
-            if (!MyReservationFragment.tab.equals("3")){
-                ((ReservationsAdapter2.Item) holder).rating.setVisibility(View.GONE);
-            }else {
-                try {
-                    float rate=Float.parseFloat(bookingAutomatedBrowseData.get(position).getData().get(0).getProvider_rating());
-                    ((ReservationsAdapter2.Item) holder).rating.setRating(rate);
-
-                }catch (Exception e){
-                    ((ReservationsAdapter2.Item) holder).rating.setRating(0f);
+            // >>>>>>>>>>>>> status
+            if (MyReservationFragment.tab.equals("2"))
+            {
+                if (bookingRequestData.get(position).getBdb_status().equals("1")){
+                    ((Item) holder).status.setText(R.string.approved);
+                }else  if (bookingRequestData.get(position).getBdb_status().equals("2")){
+                    ((Item) holder).status.setText(R.string.rejectedByProvider);
+                }else  if (bookingRequestData.get(position).getBdb_status().equals("3")){
+                    ((Item) holder).status.setText(R.string.canceledByClient);
+                }else  if (bookingRequestData.get(position).getBdb_status().equals("4")){
+                    ((Item) holder).status.setText(R.string.canceledBySystem);
                 }
-
+            }
+            else {
+                ((Item) holder).status.setVisibility(View.GONE);
             }
 
 
-            if (MyReservationFragment.tab.equals("3")){
-                ((ReservationsAdapter2.Item) holder).refuse.setVisibility(View.GONE);
-                ((ReservationsAdapter2.Item) holder).delay.setVisibility(View.GONE);
-                ((ReservationsAdapter2.Item) holder).time.setVisibility(View.GONE);
-//                ((Item) holder).time.setVisibility(View.GONE);
-                ((ReservationsAdapter2.Item) holder).status.setVisibility(View.VISIBLE);
-
-                String st=bookingAutomatedBrowseData.get(position).getBdb_is_executed();
-                if (st.equals("1")){
-                    ((ReservationsAdapter2.Item) holder).status.setText("لم يتم التنفيذ بشكل كامل");
-                    ((ReservationsAdapter2.Item) holder).rating.setVisibility(View.VISIBLE);
-                }else if (st.equals("4")){
-                    ((ReservationsAdapter2.Item) holder).status.setText("ملغي(بعد دفع العربون)");
-                    ((ReservationsAdapter2.Item) holder).rating.setVisibility(View.GONE);
-                }else if (st.equals("5")){
-                    ((ReservationsAdapter2.Item) holder).status.setText("ملغي (لم يتم دفع العربون)");
-                    ((ReservationsAdapter2.Item) holder).rating.setVisibility(View.GONE);
-                }else if (st.equals("7")){
-                    ((ReservationsAdapter2.Item) holder).status.setText("منفذ بشكل كامل");
-                    ((ReservationsAdapter2.Item) holder).rating.setVisibility(View.VISIBLE);
-                }
-
-            }
-
-            ((ReservationsAdapter2.Item) holder).delay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("true")){
-
-                    }else {
-                        APICall.showSweetDialog(context,"","لا يمكن دفع عربون هذا الحجز إلا من قبل العميلة صاحبة الحجز");
-
-                    }
-                }
-            });
-
-
-            String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
-            String byMe=bookingAutomatedBrowseData.get(position).getBooked_by_me();
-
-            if (inner.equals("1")){
-                ((ReservationsAdapter2.Item)holder).inner_res.setImageResource(R.drawable.inner_booking);
-            }else {
-                if(byMe.equals("false"))
-                    ((ReservationsAdapter2.Item)holder).inner_res.setImageResource(R.drawable.other_client_booking);
-                else
-                    ((ReservationsAdapter2.Item)holder).inner_res.setImageResource(R.drawable.client_booking);
-
-            }
-
-
-
-            boolean allExecuted=false;
-
-//                if (position<3)
-
-            ArrayList<DateTimeModel> dateTimeModels=getBookTimeToCheck(bookingAutomatedBrowseData.get(position));
-            for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++) {
-
-                Log.e("CONFIRMEXEC"+position, bookingAutomatedBrowseData.get(position).getClient_name()+bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name() + "::" + isPast(bookingAutomatedBrowseData.get(position).getData().get(i)));
-//                    Log.e("Multi");
-                if (bookingAutomatedBrowseData.get(position).getBookingType().equals("3") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("5") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("8") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("13") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("21") ||
-                        bookingAutomatedBrowseData.get(position).getBookingType().equals("24")){
-                    Log.e("Multi","Ok");
-                    Log.e("MultiSize",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                    if ((i!=0 && i!=bookingAutomatedBrowseData.get(position).getData().size()-1)
-                            && bookingAutomatedBrowseData.get(position).getData().size()>2){
-
-                        if (dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i-1).getDate())
-                                && !dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i+1).getDate())){
-
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
-                                allExecuted = true;
-
-                        }else if (!dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i-1).getDate())) {
-
-//                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i-1)))
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i-1).getPosition())))
-                                allExecuted = true;
-                        }else if (!dateTimeModels.get(i).getDate()
-                                .equals(dateTimeModels.get(i+1).getDate())
-                                && i+1==dateTimeModels.size()) {
-
-//                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
-//                                        allExecuted = true;
-
-                            if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i+1).getPosition())))
-                                allExecuted = true;
-                        }
-                    }
-                    if (bookingAutomatedBrowseData.get(position).getData().size()==2){
-                        Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
-                        if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i)))
-                            allExecuted = true;
-                    }
-
-                }else
-                    Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
-
-                if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition())))
-                    allExecuted = true;
-            }
-//                }
-            if(allExecuted && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
-                ((ReservationsAdapter2.Item) holder).time.setText(R.string.Executed);
-                if (!MyReservationFragment.tab.equals("3"))
-                    ((ReservationsAdapter2.Item) holder).time.setVisibility(View.VISIBLE);
-            }
-            else
-                ((ReservationsAdapter2.Item)holder).time.setVisibility(View.GONE);
-
-            ((ReservationsAdapter2.Item)holder).time.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String type=bookingAutomatedBrowseData.get(position).getBookingType();
-                    if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12"))
-                        isOffer=true;
-                    book_id=bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id();
-                    Intent intent=new Intent(context, ExecuteBookActivity.class);
-                    context.startActivity(intent);
-
-                }
-            });
-
-            if (offtypetmp.equals("0")) {
-                String s=((AppCompatActivity)context).getResources().getString(R.string.ind_res);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("1")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_booking);
-
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("2")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_res_other);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("3")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.multi_cu_booking);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("4")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.single_offer_same);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("5")) {
-//                Log.e("uuu","uuuu");
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.single_offer_multi);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("6")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_offer);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("7")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.individual_bride_offer);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("8")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.multi_service_bride_offer);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("9")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_offer_bride);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("10")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.Single_bride_reservation);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("11")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.bride_group_offer);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("12")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.bride_group_offer_other);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }else if (offtypetmp.equals("13")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.Multiple_booking_bride);
-                ((ReservationsAdapter2.Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((ReservationsAdapter2.Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    addLayout(((ReservationsAdapter2.Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                }
-
-            }
-            if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                ((ReservationsAdapter2.Item) holder).refuse.setText(R.string.cancel_req);
-            }else {
-                ((ReservationsAdapter2.Item) holder).refuse.setText(R.string.cancel);
-            }
-
-
-            ((ReservationsAdapter2.Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
+            // >>>>>>>>>>>>> cancel Button
+            ((Item) holder).cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on().equals("true")
@@ -457,25 +173,30 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-            ((ReservationsAdapter2.Item)holder).date.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getStartTime()));
-            if (bookingAutomatedBrowseData.get(position).getPlace().equals("0")) {
-                ((ReservationsAdapter2.Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("1")){
-                ((ReservationsAdapter2.Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
+            // >>>>>>>>>>>>> date
+            ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getClients().get(0).getBdb_start_date()));
 
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("2")){
-                ((ReservationsAdapter2.Item) holder).booking_place.setText(context.getResources().getString(R.string.hall));
 
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("3")){
-                ((ReservationsAdapter2.Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
+            // >>>>>>>>>>>>> order booking place
+            if (bookingRequestData.get(position).getBdb_booking_place().equals("0")) {
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
+            }else if (bookingRequestData.get(position).getBdb_booking_place().equals("1")){
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
+
+            }else if (bookingRequestData.get(position).getBdb_booking_place().equals("2")){
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hall));
+
+            }else if (bookingRequestData.get(position).getBdb_booking_place().equals("3")){
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
 
             }
-            APICall.getSalonLogo(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((ReservationsAdapter2.Item)holder).logoImg);
+           // APICall.getSalonLogo(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((ReservationsAdapter2.Item)holder).logoImg);
 
             ((ReservationsAdapter2.Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    try {
+                   */
+/* try {
                         book_id=bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id();
                         Log.e("BookID",book_id);
                         logoId=bookingAutomatedBrowseData.get(position).getLogoId();
@@ -495,7 +216,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //                        fragmentTransaction.commit();
                     } catch (Exception e) {
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                    }*//*
+
                 }
             });
 
@@ -677,9 +399,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,client_name,status,delay, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
+        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel;
         ImageView book_Details,inner_res,logoImg;
-        ColorRatingBar rating;
 
         LinearLayout myroot;
         public Item(View itemView) {
@@ -687,8 +408,6 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             bookType=itemView.findViewById(R.id.booktype);
             myroot=itemView.findViewById(R.id.myroot);
             status=itemView.findViewById(R.id.status);
-            delay=itemView.findViewById(R.id.delay);
-            rating=itemView.findViewById(R.id.rating);
 
             totalPrice=itemView.findViewById(R.id.total_price);
             inner_res=itemView.findViewById(R.id.inner_res);
@@ -696,9 +415,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);
             book_Details=itemView.findViewById(R.id.book_details);
-            refuse=itemView.findViewById(R.id.refuse);
+            cancel=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);
-            time=itemView.findViewById(R.id.time);
             logoImg=itemView.findViewById(R.id.logoImg);
 
         }
@@ -869,3 +587,4 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 }
 
+*/

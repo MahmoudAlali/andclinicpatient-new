@@ -701,6 +701,10 @@
     <string name="providerName">provider name</string>
     <string name="oldRequests">old requests</string>
     <string name="newRequests">new requests</string>
+    <string name="rejectedByProvider">rejected by the provider</string>
+    <string name="canceledByClient">canceled by the client</string>
+    <string name="canceledBySystem">canceled by the system</string>
+    <string name="approved">approved request</string>
     <string-array name="requestType">
         <item>request type</item>
         <item>Offer</item>

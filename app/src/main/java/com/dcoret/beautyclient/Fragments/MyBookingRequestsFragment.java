@@ -33,7 +33,8 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
-import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
+import com.dcoret.beautyclient.Activities.NewBookingRequestsFragment;
+//import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
@@ -58,7 +59,7 @@ public class MyBookingRequestsFragment extends Fragment {
     //           deposited_reservation;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
     public static ReservationsAdapter reservationsAdapter;
-    public static BookingRequestsAdapter bookingRequestsAdapter;
+    //public static BookingRequestsAdapter bookingRequestsAdapter;
 
     public static View view;
     public static String serviceId="",employee_id="";
@@ -114,12 +115,12 @@ public class MyBookingRequestsFragment extends Fragment {
             }
         });
 
-        fragment = new AcceptedReservationFragment();
+        fragment = new NewBookingRequestsFragment();
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.tabs_fragment, fragment);
         fragmentTransaction.commit();
-       // tabselected(deposit_reservation,accept_reservation,false);
+        tabselected(newRequests,oldRequests,false);
 
 
       /*  //region CHECK_NOTIFICATIONS
@@ -210,7 +211,8 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
 
-      /*  //region FilterBtn
+/*
+        //region FilterBtn
 
 
 
@@ -721,32 +723,34 @@ public class MyBookingRequestsFragment extends Fragment {
 
         });
 
-        //endregion*/
-
-       /* accept_reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tabselected(accept_reservation,deposit_reservation,true);
-                tab="2";
-                fragment = new ExecutedReservationFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commit();
-            }
-        });
-        deposit_reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tabselected(deposit_reservation,accept_reservation,true);
-                fragment = new DepositReservationFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commit();
-            }
-        });
+        //endregion
 */
+
+        oldRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tabselected(oldRequests,newRequests,true);
+                tab="2";
+                fragment = new OldBookingRequestsFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        newRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tabselected(newRequests,oldRequests,true);
+                tab="1";
+                fragment = new NewBookingRequestsFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
         ImageView sortbtn=MyReservationFragment.view.findViewById(R.id.sort);
 
         sortbtn.setOnClickListener(new View.OnClickListener() {
@@ -762,7 +766,7 @@ public class MyBookingRequestsFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         int id=item.getItemId();
                         APICall.reservationModels.clear();
-                        bookingRequestsAdapter.notifyDataSetChanged();
+                      //  bookingRequestsAdapter.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
                             APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
@@ -812,11 +816,11 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
     }
-    public static void updateDeposit(){
+   /* public static void updateDeposit(){
         fragment = new AcceptedReservationFragment();
         fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.tabs_fragment, fragment);
         fragmentTransaction.commitAllowingStateLoss();
-    }
+    }*/
 }

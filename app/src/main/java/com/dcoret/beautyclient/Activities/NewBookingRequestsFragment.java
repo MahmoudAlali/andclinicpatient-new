@@ -1,4 +1,6 @@
 package com.dcoret.beautyclient.Activities;
 
-public class NewBookingRequestsFragment {
+import android.app.Fragment;
+
+public class NewBookingRequestsFragment extends Fragment {
 }

@@ -220,7 +220,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         //----------------------------- Reg in DATABASE AFTER---
 
         //------------------ Reg In SharedPreference------------
-        APICall.updateFBToken(BeautyMainPage.context, token, token);
+       // APICall.updateFBToken(BeautyMainPage.context, token, token);
 
         SharedPreferences.Editor editor = getSharedPreferences("REG_ID", MODE_PRIVATE).edit();
         editor.putString("token_client",token);
