@@ -3851,6 +3851,10 @@ public class APICall {
                     editor.commit();
                     Intent intent=new Intent(context, Login.class);
                     Login.logout=true;
+                    SharedPreferences preferences=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
+                    preferences.edit().clear();
+                    preferences.edit().commit();
+                    preferences.edit().apply();
                     ((AppCompatActivity) context).finish();
                     context.startActivity(intent);
                 }
@@ -20324,13 +20328,14 @@ public class APICall {
         //        Log.d("MessageResponse",mMessage);
     }
 
-    public static void setExecuted(final Context context, JSONArray bookings) {
+    public static void setExecuted(final Context context, JSONArray bookings,String name_booking) {
 //        showDialog(context);
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
+            postdata.put("bdb_name_booking",name_booking);
             postdata.put("bookings",bookings);
         }catch (Exception e){
             e.printStackTrace();
@@ -20356,8 +20361,6 @@ public class APICall {
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
                 Log.e("deletePayment ERRR", mMessage);
-
-
             }
 
             @Override
@@ -20516,13 +20519,13 @@ public class APICall {
                     if (success.equals("true")){
                         final JSONObject data=jsonrespone.getJSONObject("data");
                         final JSONArray booking=data.getJSONArray("booking");
+                         String bdb_name_booking="";
+                        bdb_name_booking=data.getString("bdb_name_booking");
                         final String booking_type=data.getString("booking_type");
                         String journey_cost=data.getString("journey_cost");
                         final String journey_count=data.getString("journey_count");
                         final String booking_price=data.getString("booking_price");
-
-
-
+                        ExecuteBookActivity.bookID=bdb_name_booking;
 //
                         if (booking_type.equals("0") || booking_type.equals("10") ){
                             Log.e("bookType","Single");
@@ -20560,7 +20563,7 @@ public class APICall {
 
                                     //ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
                                     try {
-                                        Log.e("TrueOrFals::1", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
+//                                        Log.e("TrueOrFals::1", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
                                         Log.e("TrueOrFals::2", ReservationsAdapter2.isPast(bdb_start_date, bdb_end_time) +"");
 
                                         if (ReservationsAdapter2.isPast(bdb_start_date, bdb_end_time) && ((!bdb_status.equals("3")) && (!bdb_status.equals("4")))) {
@@ -20623,7 +20626,7 @@ public class APICall {
                                     String bdb_paid_deposit=object.getString("bdb_paid_deposit");
 
                                     try {
-                                        Log.e("TrueOrFals::1", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
+//                                        Log.e("TrueOrFals::1", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
                                         Log.e("TrueOrFals::2", ReservationsAdapter2.isPast(bdb_start_date, bdb_end_time) +"");
 
                                         if(ReservationsAdapter2.isPast(bdb_start_date,bdb_end_time) && ((!bdb_status.equals("3")) && (!bdb_status.equals("4")))) {
@@ -20677,7 +20680,13 @@ public class APICall {
                         }
                     }
                 }catch (JSONException e){
-                    showSweetDialog(context,"",context.getResources().getString(R.string.error));
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.error));
+
+                        }
+                    });
                     e.printStackTrace();
                 }
 

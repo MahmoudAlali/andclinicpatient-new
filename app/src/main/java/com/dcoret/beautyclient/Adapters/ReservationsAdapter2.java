@@ -96,11 +96,14 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
             if (MyReservationFragment.tab.equals("2")){
-                ((Item) holder).delay.setText(R.string.deposit);
+//                ((Item) holder).delay.setText(R.string.deposit);
+                ((Item) holder).delay.setVisibility(View.GONE);
             }
             if (MyReservationFragment.tab.equals("1")){
                 if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
                     ((Item) holder).status.setText("مقبولة");
+                    ((Item) holder).delay.setVisibility(View.VISIBLE);
+                    ((Item) holder).delay.setText(R.string.deposit);
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
                     ((Item) holder).status.setText("بإنتظار التأكيد");
                 }
@@ -202,7 +205,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                             if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition()))) {
                                 allExecuted = true;
-                                ((Item) holder).time.setVisibility(View.VISIBLE);
+//                                ((Item) holder).time.setVisibility(View.VISIBLE);
                             }
 
                         }else if (!dateTimeModels.get(i).getDate()
@@ -211,7 +214,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                                    if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i-1)))
                             if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i-1).getPosition()))) {
                                 allExecuted = true;
-                                ((Item) holder).time.setVisibility(View.VISIBLE);
+//                                ((Item) holder).time.setVisibility(View.VISIBLE);
                             }
                         }else if (!dateTimeModels.get(i).getDate()
                                 .equals(dateTimeModels.get(i+1).getDate())
@@ -222,7 +225,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                             if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i+1).getPosition()))) {
                                 allExecuted = true;
-                                ((Item) holder).time.setVisibility(View.VISIBLE);
+//                                ((Item) holder).time.setVisibility(View.VISIBLE);
                             }
                         }
                     }
@@ -230,7 +233,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         Log.e("967"+bookingAutomatedBrowseData.get(position).getClient_name()+i,isPast(bookingAutomatedBrowseData.get(position).getData().get(i))+"");
                         if (isPast(bookingAutomatedBrowseData.get(position).getData().get(i))) {
                             allExecuted = true;
-                            ((Item) holder).time.setVisibility(View.VISIBLE);
+//                            ((Item) holder).time.setVisibility(View.VISIBLE);
 
                         }
                     }
@@ -240,8 +243,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                 if (isPast(bookingAutomatedBrowseData.get(position).getData().get(dateTimeModels.get(i).getPosition()))) {
                     allExecuted = true;
-                    ((Item) holder).time.setVisibility(View.VISIBLE);
-
+//                    ((Item) holder).time.setVisibility(View.VISIBLE);
+//
                 }
                 }
 //                }
