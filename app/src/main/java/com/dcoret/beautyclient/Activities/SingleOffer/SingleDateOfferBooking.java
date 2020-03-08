@@ -70,15 +70,18 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             notification=getIntent().getStringExtra("notification");
 
         }
-        catch (Exception e){}
-        if(!notification.equals(""))
-
-        {
-            bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
-            is_effects_on = getIntent().getStringExtra("is_effects_on");
-            end_date = getIntent().getStringExtra("offer_end");
+        catch (Exception e){
+            notification="";
         }
-
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                end_date = getIntent().getStringExtra("offer_end");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //endregion
 
         recyclerView=findViewById(R.id.recycleview);

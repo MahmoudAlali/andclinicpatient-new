@@ -13,7 +13,9 @@ public class BookingAutomatedBrowseData {
             ,client_name
             ,booking_price
             ,provider_rating
-            ,is_action_on
+            ,is_action_on_inside
+            ,is_rating_on_inside
+            ,bdb_confirm_exec_user
             ,totalItem;
 
 
@@ -48,7 +50,7 @@ public class BookingAutomatedBrowseData {
         this.bdb_end_time = bdb_end_time;
         this.provider_rating= provider_rating;
     }
-    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time,String bdb_end_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem,String provider_rating,String is_action_on) {
+    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time,String bdb_end_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem,String provider_rating,String is_action_on_inside,String is_rating_on_inside,String bdb_confirm_exec_user) {
         this.bdb_id = bdb_id;
         this.bdb_price = bdb_price;
         this.bdb_status = bdb_status;
@@ -63,15 +65,33 @@ public class BookingAutomatedBrowseData {
         this.totalItem = totalItem;
         this.bdb_end_time = bdb_end_time;
         this.provider_rating= provider_rating;
-        this.is_action_on= is_action_on;
+        this.is_action_on_inside= is_action_on_inside;
+        this.is_rating_on_inside= is_rating_on_inside;
+        this.bdb_confirm_exec_user= bdb_confirm_exec_user;
     }
 
-    public String getIs_action_on() {
-        return is_action_on;
+    public String getBdb_confirm_exec_user() {
+        return bdb_confirm_exec_user;
     }
 
-    public void setIs_action_on(String is_action_on) {
-        this.is_action_on = is_action_on;
+    public void setBdb_confirm_exec_user(String bdb_confirm_exec_user) {
+        this.bdb_confirm_exec_user = bdb_confirm_exec_user;
+    }
+
+    public String getIs_action_on_inside() {
+        return is_action_on_inside;
+    }
+
+    public void setIs_action_on_inside(String is_action_on_inside) {
+        this.is_action_on_inside = is_action_on_inside;
+    }
+
+    public String getIs_rating_on_inside() {
+        return is_rating_on_inside;
+    }
+
+    public void setIs_rating_on_inside(String is_rating_on_inside) {
+        this.is_rating_on_inside = is_rating_on_inside;
     }
 
     public String getProvider_rating() {

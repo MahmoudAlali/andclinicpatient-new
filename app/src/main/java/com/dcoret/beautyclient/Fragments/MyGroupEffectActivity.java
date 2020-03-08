@@ -176,10 +176,10 @@ public class MyGroupEffectActivity extends AppCompatActivity {
             Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(position).getCat_name());
 
         }catch (Exception e){
-            if (context.getResources().getString(R.string.locale).equals("ar")) {
-                cat_name.setText(clientEffectModel.getClient_name() );
-            } else
-                cat_name.setText(clientEffectModel.getClient_name() );
+
+                cat_name.setText(clientEffectModel.getClient_name());
+//            } else
+//                cat_name.setText(clientEffectModel.getClient_name() );
 
             e.printStackTrace();
         }

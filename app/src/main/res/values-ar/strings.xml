@@ -95,7 +95,7 @@
     <string name="rate_toast">تقيمك لنا يسهم في تطورنا ، شكرا لك</string>
     <!-- nav drawer-->
     <string name="manage_account">إدارة حسابي</string>
-    <string name="rate_app">تقييم التطبيق</string>
+    <string name="rate">تقييم</string>
     <string name="points">نقاطي</string>
     <string name="setting">الضبط</string>
     <string name="share_app">مشاركة التطبيق</string>

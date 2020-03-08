@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.R;
 
@@ -27,6 +28,10 @@ public class RateSerEmpActivity extends AppCompatActivity {
        int l= R.layout.emp_rating_layout;
        context=this;
        myroot=findViewById(R.id.myroot);
+
+
+//        ReservationsAdapter2.book_id;
+        APICall.browseOneRaingBooking(ReservationsAdapter2.book_id,context);
 
        addLayout("Hala","تسريحة");
        addLayout("Rana","قص شعر");
