@@ -16,7 +16,7 @@ public class BookingRequestClientDataModel {
     private ArrayList<ClientServiceDataModel> services = new ArrayList<>();
 
     public BookingRequestClientDataModel (String bdb_start_date, String bdb_end_date, String bdb_client_old,
-                                          String bdb_is_current_user, String bdb_client_name, String bdb_client_phone)
+                                          String bdb_is_current_user, String bdb_client_name, String bdb_client_phone,ArrayList<ClientServiceDataModel> services)
     {
         this.bdb_start_date = bdb_start_date;
         this.bdb_end_date = bdb_end_date;
@@ -24,6 +24,7 @@ public class BookingRequestClientDataModel {
         this.bdb_is_current_user = bdb_is_current_user;
         this.bdb_client_name = bdb_client_name;
         this.bdb_client_phone = bdb_client_phone;
+        this.services = services;
     }
 
     public ArrayList<ClientServiceDataModel> getClients() {

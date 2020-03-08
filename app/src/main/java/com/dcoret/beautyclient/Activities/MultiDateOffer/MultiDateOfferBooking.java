@@ -20,6 +20,7 @@ import com.dcoret.beautyclient.Adapters.SelectDateOfferAdapter;
 import com.dcoret.beautyclient.DataModel.DataOffer;
 import com.dcoret.beautyclient.DataModel.IDNameService;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
+import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
@@ -57,11 +58,20 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //        phone_number=findViewById(R.id.phone_number);
         next=findViewById(R.id.next);
 
-
-        bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-        is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
-        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
-        supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+            is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+            place=OffersForRequest.arrayList.get(postion).getBdb_offer_place();
+            supIdClasses =OffersForRequest.arrayList.get(postion).getSersup_ids();
+        }
+        else
+        {
+            bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+            is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+            place=TabTwo.arrayList.get(postion).getBdb_offer_place();
+            supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+        }
 
         //region CHECK_NOTIFICATION
         String notification = "";

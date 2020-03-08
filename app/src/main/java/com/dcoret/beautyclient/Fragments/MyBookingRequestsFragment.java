@@ -35,9 +35,11 @@ import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.NewBookingRequestsFragment;
 //import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
+import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter;
 import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
+import com.dcoret.beautyclient.DataModel.BookingRequestDataModel;
 import com.dcoret.beautyclient.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
 
@@ -58,8 +60,9 @@ public class MyBookingRequestsFragment extends Fragment {
     public static TextView oldRequests,newRequests;
     //           deposited_reservation;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
-    public static ReservationsAdapter reservationsAdapter;
-    //public static BookingRequestsAdapter bookingRequestsAdapter;
+    public static ArrayList<BookingRequestDataModel> bookingRequestsArraylist=new ArrayList<>();
+
+    public static BookingRequestsAdapter bookingRequestsAdapter;
 
     public static View view;
     public static String serviceId="",employee_id="";
@@ -118,7 +121,7 @@ public class MyBookingRequestsFragment extends Fragment {
         fragment = new NewBookingRequestsFragment();
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+        fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
         fragmentTransaction.commit();
         tabselected(newRequests,oldRequests,false);
 
@@ -221,7 +224,7 @@ public class MyBookingRequestsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog=new Dialog(BeautyMainPage.context);
-                dialog.setContentView(R.layout.filter_dialog_layout_v2);
+                dialog.setContentView(R.layout.filter_dialog_layout_v3);
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 service_name=dialog.findViewById(R.id.service_name);
                 emp_name=dialog.findViewById(R.id.emp_name);
@@ -231,7 +234,7 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
                 //--------------------- get services---------------------------
-                APICall.getServicesForFilter("1",BeautyMainPage.context);
+                APICall.getServicesForFilter("2",BeautyMainPage.context);
 
                 try {
                     if (APICall.empNames.isEmpty()) {
@@ -734,7 +737,7 @@ public class MyBookingRequestsFragment extends Fragment {
                 fragment = new OldBookingRequestsFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
                 fragmentTransaction.commit();
             }
         });
@@ -746,14 +749,14 @@ public class MyBookingRequestsFragment extends Fragment {
                 fragment = new NewBookingRequestsFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
                 fragmentTransaction.commit();
             }
         });
 
-        ImageView sortbtn=MyReservationFragment.view.findViewById(R.id.sort);
+     //   ImageView sortbtn=MyReservationFragment.view.findViewById(R.id.sort);
 
-        sortbtn.setOnClickListener(new View.OnClickListener() {
+        /*sortbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
@@ -791,7 +794,7 @@ public class MyBookingRequestsFragment extends Fragment {
         });
 
 
-
+*/
         return view;
     }
     public static void tabselected(TextView t1, TextView t2, Boolean check){

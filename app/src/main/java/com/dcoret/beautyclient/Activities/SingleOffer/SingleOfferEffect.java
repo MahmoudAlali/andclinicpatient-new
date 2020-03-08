@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
@@ -33,6 +35,7 @@ public class SingleOfferEffect extends AppCompatActivity {
     String postdata,offerType,offerplace;
     public static String bdb_pack_code;
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
+    public  static LinearLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,10 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);
-        recyclerView=findViewById(R.id.recycleview);
+
+        root=findViewById(R.id.root);
+
+       /* recyclerView=findViewById(R.id.recycleview);*/
        postdata= getIntent().getStringExtra("filter");
         offerType=getIntent().getStringExtra("offertype");
         offerplace=getIntent().getStringExtra("place");
@@ -50,29 +56,43 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
          position=getIntent().getIntExtra("position",0);
-        supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
-        bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
 
-        //region CHECK_NOTIFICATION
-        String notification = "";
-        try {
-            notification=getIntent().getStringExtra("notification");
-
-        }
-        catch (Exception e){}
-        if(!notification.equals(""))
-
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
-            bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
-            supIdClasses = NotificationsBeauty.supIdClasses;
+            supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
+        }
+        else
+        {
+            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
         }
 
-        //endregion
+        if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            //region CHECK_NOTIFICATION
+            String notification = "";
+            try {
+                notification=getIntent().getStringExtra("notification");
+
+            }
+            catch (Exception e){}
+            if(!notification.equals(""))
+
+            {
+                bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+                supIdClasses = NotificationsBeauty.supIdClasses;
+            }
+
+            //endregion
+
+        }
+
 
         effectAdapter=new GroupEffectAdapter(BeautyMainPage.context, APICall.clientEffectRequestModels);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(effectAdapter);
+      /*  recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(effectAdapter);*/
 
         String filter= "  { \"clients\": [\n" +
                 "           {\n" +

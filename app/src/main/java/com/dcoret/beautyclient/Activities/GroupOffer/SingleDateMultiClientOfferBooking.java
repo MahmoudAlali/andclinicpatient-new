@@ -16,9 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
 import com.dcoret.beautyclient.Adapters.OfferBookingMultiClientsAdapter;
 import com.dcoret.beautyclient.DataModel.OfferClientsModel;
+import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.R;
@@ -62,11 +64,21 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         final int postion = getIntent().getIntExtra("postion", 0);
 
 
-        end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
-        bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-        is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
+            bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+            is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+        }
+        else {
+            end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
+            bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+            is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+        }
+
         // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
 
+/*
         //region CHECK_NOTIFICATION
         String notification = "";
         try {
@@ -83,6 +95,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         }
 
         //endregion
+*/
 
 
         recyclerView = findViewById(R.id.recycleview);
