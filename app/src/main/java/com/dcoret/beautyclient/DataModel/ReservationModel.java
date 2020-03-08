@@ -5,15 +5,18 @@ import java.util.ArrayList;
 public class ReservationModel {
     String bookingType;
     String totalPrice;
+    String bdb_name_booking;
     String startTime;
     String place,client_name,booking_price;
     String bdb_inner_booking;
     String bdb_is_executed;
     String logoId;
     String booked_by_me;
+    String is_action_on;
+    String is_rating_on;
     ArrayList<BookingAutomatedBrowseData> data;
 
-    public ReservationModel(String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, ArrayList<BookingAutomatedBrowseData> data) {
+    public ReservationModel(String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -25,9 +28,42 @@ public class ReservationModel {
         this.bdb_is_executed=bdb_is_executed;
         this.logoId=logoId;
         this.booked_by_me=booked_by_me;
+        this.is_action_on=is_action_on;
+        this.is_rating_on=is_rating_on;
+        this.bdb_name_booking=bdb_name_booking;
     }
 
+    public String getBdb_name_booking() {
+        return bdb_name_booking;
+    }
 
+    public void setBdb_name_booking(String bdb_name_booking) {
+        this.bdb_name_booking = bdb_name_booking;
+    }
+
+    public void setLogoId(String logoId) {
+        this.logoId = logoId;
+    }
+
+    public void setBooked_by_me(String booked_by_me) {
+        this.booked_by_me = booked_by_me;
+    }
+
+    public String getIs_action_on() {
+        return is_action_on;
+    }
+
+    public void setIs_action_on(String is_action_on) {
+        this.is_action_on = is_action_on;
+    }
+
+    public String getIs_rating_on() {
+        return is_rating_on;
+    }
+
+    public void setIs_rating_on(String is_rating_on) {
+        this.is_rating_on = is_rating_on;
+    }
 
     public void setBooking_price(String booking_price) {
         this.booking_price = booking_price;

@@ -111,6 +111,7 @@
     <!-- nav drawer-->
     <string name="manage_account">Manage Account</string>
     <string name="rate_app">Rate Application</string>
+    <string name="rate">Rate</string>
     <string name="points">My Points</string>
     <string name="setting">Setting</string>
     <string name="share_app">Share Application</string>

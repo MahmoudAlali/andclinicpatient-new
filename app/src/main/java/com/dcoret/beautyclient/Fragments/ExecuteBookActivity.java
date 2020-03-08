@@ -35,8 +35,7 @@ public class ExecuteBookActivity extends AppCompatActivity {
     public static LinearLayout.LayoutParams lp ;
     static Map<String, String> map = new HashMap<>();
     static boolean isOffer;
-    String bookID;
-
+    public static String bookID="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +52,8 @@ public class ExecuteBookActivity extends AppCompatActivity {
 //                Intent intent=new Intent(context,RateSerEmpActivity.class);
 //                startActivity(intent);
                 JSONArray p=getBookings();
-                APICall.setExecuted(context,p);
+
+                APICall.setExecuted(context,p,bookID);
 
 
             }
@@ -151,8 +151,7 @@ public class ExecuteBookActivity extends AppCompatActivity {
 
     }
 
-    private JSONArray getBookings()
-    {
+    private JSONArray getBookings() {
         JSONArray result = new JSONArray();
         JSONObject temp;
 

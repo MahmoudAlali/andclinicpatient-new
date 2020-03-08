@@ -20,7 +20,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.SupportActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -34,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.dcoret.beautyclient.API.APICall;
 //import com.dcoret.beautyclient.Activities.support.SupportActivity;
+import com.dcoret.beautyclient.Activities.support.SupportActivity;
 import com.dcoret.beautyclient.Fragments.AccountFragment;
 //import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
@@ -802,8 +802,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         }else if (id == R.id.setting) {
-             /*Intent intent=new Intent(this, PayTestActivity.class);
-            startActivity(intent);*/
+             Intent intent=new Intent(this, SettingActivity.class);
+            startActivity(intent);
 
         }else if (id == R.id.points) {
             fragment = new PointsMainFragment();
