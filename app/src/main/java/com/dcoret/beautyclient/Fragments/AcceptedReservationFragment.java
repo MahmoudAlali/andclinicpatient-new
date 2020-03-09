@@ -30,7 +30,7 @@ public class AcceptedReservationFragment extends Fragment {
     ImageView sortbtn;
     public static ReservationsAdapter2 reservationsAdapter2;
     String filter,sort;
-    static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
+
 
     public static String tmp="1";
     @Nullable

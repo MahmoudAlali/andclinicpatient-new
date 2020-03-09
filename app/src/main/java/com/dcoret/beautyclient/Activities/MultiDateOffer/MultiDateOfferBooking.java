@@ -70,15 +70,16 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
         }
         catch (Exception e){}
-        if(!notification.equals(""))
-
-        {
-            bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
-            is_effects_on = getIntent().getStringExtra("is_effects_on");
-            place= NotificationsBeauty.offer_place;
-            supIdClasses = NotificationsBeauty.supIdClasses;
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                place = NotificationsBeauty.offer_place;
+                supIdClasses = NotificationsBeauty.supIdClasses;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
         //endregion
 
 

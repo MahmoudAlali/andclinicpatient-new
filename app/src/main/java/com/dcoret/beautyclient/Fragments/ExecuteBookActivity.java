@@ -49,11 +49,11 @@ public class ExecuteBookActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(context,RateSerEmpActivity.class);
-//                startActivity(intent);
+                Intent intent=new Intent(context,RateSerEmpActivity.class);
+                startActivity(intent);
                 JSONArray p=getBookings();
 
-                APICall.setExecuted(context,p,bookID);
+//                APICall.setExecuted(context,p,bookID);
 
 
             }

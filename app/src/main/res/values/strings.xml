@@ -519,8 +519,9 @@
     <string name="export_invoice">export invoice</string>
     <string name="client_name1">client name</string>
     <string name="service_exec_date">date execute service</string>
+    <string name="booking_exec_date">date execute Booking</string>
     <string name="offer_type_select">select offer type</string>
-    <string name="service_reservation_date">service reservation date</string>
+    <string name="reservation_date">reservation date</string>
     <string name="Service_Name">service name</string>
     <string name="book_type">book type</string>
     <string name="employee_name">employee name</string>
@@ -706,6 +707,8 @@
     <string name="canceledByClient">canceled by the client</string>
     <string name="canceledBySystem">canceled by the system</string>
     <string name="approved">approved request</string>
+    <string name="suppliere_name">supplier name</string>
+    <string name="suppliere_name_salon">supplier and salon name</string>
     <string-array name="requestType">
         <item>request type</item>
         <item>Offer</item>

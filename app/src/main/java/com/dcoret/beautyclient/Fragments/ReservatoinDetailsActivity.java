@@ -54,6 +54,7 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
 
         //region Check_Notification
         String book_id="";
+
         try
         {
             Log.e("Notif", "Reserv Details is trying to get bookid");
@@ -66,6 +67,7 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
 
         if(book_id!=null)
         {
+
             APICall.browseOneBooking(book_id,context,logoImg);
             id.setText(book_id);
             //APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
