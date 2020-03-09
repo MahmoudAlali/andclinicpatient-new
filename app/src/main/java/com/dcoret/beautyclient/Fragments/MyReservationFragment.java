@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,6 +41,7 @@ import com.dcoret.beautyclient.Adapters.ReservationsAdapter2;
 import com.dcoret.beautyclient.DataModel.BookingAutomatedBrowseData;
 import com.dcoret.beautyclient.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 
 import java.text.SimpleDateFormat;
@@ -58,7 +60,7 @@ public class MyReservationFragment extends Fragment  {
     public static FragmentManager fm;
 
     public static FragmentTransaction fragmentTransaction;
-    Spinner category;
+
    public static TextView incom_reservation,accept_reservation,deposit_reservation;
 //           deposited_reservation;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
@@ -66,13 +68,14 @@ public class MyReservationFragment extends Fragment  {
     public static ReservationsAdapter2 reservationsAdapter2;
 
     public static View view;
-    public static String serviceId="",employee_id="";
+    public static String serviceId="",employee_id="",supllierName="";
     ImageView filterbtn;
     public static String serviceName="",empname="",startdate="",start_r_date="",bookingType="";
     public static String serviceNamefilter="",empnamefilter="";
     public static Button filter;
     public static Dialog dialog;
     public static CheckBox service_name,service_exec_date,emp_name,service_date,service_reservation_date,book_type;
+    public static SearchableSpinner cSupplierSpinner;
     public static boolean filtercheck=false;
     public static ArrayList<String> filterNames=new ArrayList<>();
     public static ArrayList<Integer> filterPostions=new ArrayList<>();
@@ -87,6 +90,7 @@ public class MyReservationFragment extends Fragment  {
     public static int sryear,srmonth,srday,eryear,ermonth,erday;
 
     public  static String tmp="0";
+    public static TextView note_cancel;
 
     //    public static FloatingTextButton floatingTextButton;
     @Nullable
@@ -103,8 +107,11 @@ public class MyReservationFragment extends Fragment  {
              }
          }
 
+         supllierName="";
+
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         incom_reservation=view.findViewById(R.id.incom_reservation);
+        note_cancel=view.findViewById(R.id.note_cancel);
 //        floatingTextButton=view.findViewById(R.id.action_button);
         accept_reservation=view.findViewById(R.id.accept_reservation);
         deposit_reservation=view.findViewById(R.id.deposit_reservation);
@@ -234,7 +241,42 @@ public class MyReservationFragment extends Fragment  {
                 service_exec_date=dialog.findViewById(R.id.service_exec_date);
                   service_reservation_date=dialog.findViewById(R.id.service_date);
                 book_type=dialog.findViewById(R.id.book_type);
+                cSupplierSpinner=dialog.findViewById(R.id.cSupplierSpinner);
 
+                //---------------------get Current supplier------------------
+
+
+                ArrayAdapter  adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1
+                        ,APICall.cSupString);
+                cSupplierSpinner.setTitle(BeautyMainPage.context.getResources().getString(R.string.suppliere_name));
+                cSupplierSpinner.setAdapter(adapter);
+
+                if (APICall.cSupplierModels.size()==0) {
+                    APICall.cSupString.add(BeautyMainPage.context.getResources().getString(R.string.suppliere_name));
+                    APICall.getCurrentSup(BeautyMainPage.context, adapter);
+                }
+                  cSupplierSpinner.setSelection(0);
+                try {
+                    adapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                cSupplierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                       if (position!=0) {
+                           supllierName = APICall.cSupString.get(position);
+                           Log.e("SuppLierName", "is:" + supllierName);
+                       }else {
+                           supllierName ="";
+                       }
+                       }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
 
                 //--------------------- get services---------------------------
                 APICall.getServicesForFilter("1",BeautyMainPage.context);
@@ -437,7 +479,7 @@ public class MyReservationFragment extends Fragment  {
                                     service_date_txt=srday+"-"+srmonth+" to "+erday+"-"+ermonth;
 
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-                                    service_reservation_date.setText(getResources().getString(R.string.service_reservation_date)+":"+service_date_txt);
+                                    service_reservation_date.setText(getResources().getString(R.string.reservation_date)+":"+service_date_txt);
                                 }
                             });
                             cancel.setOnClickListener(new View.OnClickListener() {
@@ -463,7 +505,7 @@ public class MyReservationFragment extends Fragment  {
 //                            serviceId="";
                             service_date_txt="";
                             Log.e("startdate","000");
-                            service_reservation_date.setText(getResources().getString(R.string.service_reservation_date));
+                            service_reservation_date.setText(getResources().getString(R.string.reservation_date));
 //                            serviceName="";
 //                            service_date_txt="";
                             service_reservation_date.setChecked(false);
@@ -688,54 +730,55 @@ public class MyReservationFragment extends Fragment  {
 //                        }
 //                    }
 //                });
-                emp_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            final Dialog name=new Dialog(BeautyMainPage.context);
-                            name.setContentView(R.layout.emp_name_layout);
-                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                            TextView typename=name.findViewById(R.id.type_name);
-                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-                            Button ok=name.findViewById(R.id.ok);
-
-                            typename.setText(emp_name.getText());
-//                            nameEdTXT.setText("");
-                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.empNames);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            nameEdTXT.setAdapter(adapter);
-
-
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (nameEdTXT.getSelectedItemPosition()!=0){
-                                        name.dismiss();
-                                        empname = nameEdTXT.getSelectedItem().toString();
-                                        emp_name.setText(empname);
-                                        employee_id=APICall.employeeSalonList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_id();
-                                        Log.e("EMPID",employee_id);
-                                        filterNames.set(1,empname);
-                                        filterPostions.set(1,nameEdTXT.getSelectedItemPosition());
-
-                                    }
-                                }
-                            });
-
-                            name.show();
-                        }else {
-                            employee_id="";
-                            emp_name.setText(R.string.employee_name);
-                            empname="";
-                            emp_name.setChecked(false);
-                            filterNames.set(1,"");
-                            filterPostions.set(1,-1);
-
-                        }
-
-                    }
-
-                });
+//                emp_name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                        if (isChecked){
+//                            final Dialog name=new Dialog(BeautyMainPage.context);
+//                            name.setContentView(R.layout.emp_name_layout);
+//                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                            TextView typename=name.findViewById(R.id.type_name);
+//                            final Spinner nameEdTXT=name.findViewById(R.id.name);
+//                            Button ok=name.findViewById(R.id.ok);
+//
+//                            typename.setText(emp_name.getText());
+////                            nameEdTXT.setText("");
+//                            ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,android.R.layout.simple_spinner_item, APICall.empNames);
+//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                            nameEdTXT.setAdapter(adapter);
+//
+//
+//                            ok.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    if (nameEdTXT.getSelectedItemPosition()!=0){
+//                                        name.dismiss();
+//                                        empname = nameEdTXT.getSelectedItem().toString();
+//                                        emp_name.setText(empname);
+//                                        employee_id=APICall.employeeSalonList.get(nameEdTXT.getSelectedItemPosition()-1).getBdb_id();
+//                                        Log.e("EMPID",employee_id);
+//                                        filterNames.set(1,empname);
+//                                        filterPostions.set(1,nameEdTXT.getSelectedItemPosition());
+//
+//                                    }
+//                                }
+//                            });
+//
+//                            name.show();
+//                        }
+//                        else {
+//                            employee_id="";
+//                            emp_name.setText(R.string.employee_name);
+//                            empname="";
+//                            emp_name.setChecked(false);
+//                            filterNames.set(1,"");
+//                            filterPostions.set(1,-1);
+//
+//                        }
+//
+//                    }
+//
+//                });
 
 
 
@@ -864,6 +907,7 @@ public class MyReservationFragment extends Fragment  {
         accept_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                note_cancel.setVisibility(View.GONE);
                 tabselected(accept_reservation,incom_reservation,deposit_reservation,true);
                 tab="2";
                 fragment = new ExecutedReservationFragment();
@@ -877,6 +921,7 @@ public class MyReservationFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+                note_cancel.setVisibility(View.GONE);
                 fragment = new DepositReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -952,10 +997,14 @@ public class MyReservationFragment extends Fragment  {
 
     }
     public static void updateDeposit(){
-        fragment = new AcceptedReservationFragment();
-        fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-        fragmentTransaction.commitAllowingStateLoss();
+        if (tab.equals("1")) {
+            fragment = new AcceptedReservationFragment();
+            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+        }else if (tab.equals("2")){
+
+        }
     }
 }

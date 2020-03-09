@@ -21,14 +21,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="@string/service_exec_date"
+            android:text="@string/booking_exec_date"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
         <CheckBox
             android:id="@+id/service_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/service_reservation_date"
+            android:text="@string/reservation_date"
             android:gravity="center"
             android:textSize="@dimen/standard_20"
             android:textColor="#000"
@@ -82,17 +82,29 @@
             android:text="@string/book_type"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
-        <CheckBox
-            android:id="@+id/emp_name"
+
+<!--        <CheckBox-->
+<!--            android:id="@+id/emp_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/suppliere_name_salon"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="@dimen/standard_20"-->
+
+<!--            />-->
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/cSupplierSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/employee_name"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:textSize="@dimen/standard_20"
-            android:textColor="#000"
-            android:layout_marginBottom="15dp"
 
-            />
+            android:layout_gravity="center"
+            android:textColor="#000"
+
+            android:textSize="@dimen/standard_20" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

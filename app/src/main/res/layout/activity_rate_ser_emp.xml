@@ -27,11 +27,13 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
               <TextView
+                  android:id="@+id/sup_name"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/salon_provider_name"
                   />
               <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+                 android:id="@+id/sup_rating"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:scaleY="0.5"
@@ -70,6 +72,7 @@
       </LinearLayout>
   </android.support.v4.widget.NestedScrollView>
     <Button
+        android:id="@+id/eval"
         android:layout_gravity="bottom|center"
         android:layout_width="200dp"
         android:layout_marginBottom="10dp"

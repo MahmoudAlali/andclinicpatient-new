@@ -273,7 +273,7 @@
     <string name="Edit_time">تعديل الوقت</string>
     <string name="Reservations_received">الحجوزات الواردة</string>
     <string name="Acceptable_reservations">الحجوزات المقبولة</string>
-    <string name="Bookings_paid_DEPOSIT">مدفوعة العربون</string>
+    <string name="Bookings_paid_DEPOSIT">انتظار التنفيذ والتقييم</string>
     <string name="cancel_req">طلب إلغاء</string>
     <string name="nobooking">لا يوجد حجوزات</string>
     <string name="nobookingyet">لا يوجد حجوزات بعد</string>
@@ -290,8 +290,9 @@
     <string name="export_invoice">اصدار فاتورة</string>
     <string name="client_name1">اسم الزبونة</string>
     <string name="service_exec_date">تاريخ تنفيذ الخدمة</string>
+    <string name="booking_exec_date">تاريخ تنفيذ الحجز</string>
     <string name="offer_type_select">اختاري نوع العرض</string>
-    <string name="service_reservation_date">تاريخ حجز الخدمة</string>
+    <string name="reservation_date">تاريخ الحجز</string>
     <string name="Service_Name">اسم الخدمة</string>
     <string name="book_type">نوع الحجز</string>
     <string name="employee_name">اسم الموظفة</string>
@@ -485,9 +486,9 @@
     <string name="please_enter_reson">please enter the reason</string>
     <string name="autoJrCost">ستتم إضافة تكلفة المشوار بشكل كامل أوتوماتيكيا</string>
     <string name="Executed">إتمام التنفيذ</string>
-    <string name="Executed_res">المنفذة</string>
+    <string name="Executed_res">السابقة</string>
     <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
-    <string name="accepted">مقبولة مبدئيا</string>
+    <string name="accepted">محجوزة مبدئيا</string>
     <string name="employee_evaluation">تقييم الموظفات</string>
     <string name="evaluate">تقييم</string>
     <string name="clients_count_gr_2">عدد الزبونات يجب ان يكون زبونتين على الاقل</string>
@@ -553,6 +554,8 @@
     <string name="canceledByClient">أُلغي من قبل العميلة</string>
     <string name="canceledBySystem">أُلغي من قبل النظام</string>
     <string name="approved">تمت الموافقة عليه</string>
+    <string name="suppliere_name">اسم المزودة</string>
+    <string name="suppliere_name_salon">اسم الصالون و المزودة</string>
     <string name="cancelRequestAlert">إلغاء طلب الحجز ؟</string>
     <string name="noRequests">لا يوجد لديكِ طلبات للحجز</string>
     <string name="add_new_client">إضافة عميلة جديدة</string>

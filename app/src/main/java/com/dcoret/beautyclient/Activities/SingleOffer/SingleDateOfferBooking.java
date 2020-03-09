@@ -85,7 +85,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
 
         }
         catch (Exception e){
-            notification="";
+
         }
         try {
             if (!notification.equals("")) {

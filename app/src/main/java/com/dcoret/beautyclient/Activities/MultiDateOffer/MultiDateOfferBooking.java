@@ -84,16 +84,15 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         }
         catch (Exception e){}
         try {
-
             if (!notification.equals("")) {
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 place = NotificationsBeauty.offer_place;
                 supIdClasses = NotificationsBeauty.supIdClasses;
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        catch (Exception e){}
-
         //endregion
 
 
@@ -105,6 +104,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name_ar());
 //            }
 //        }
+        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
         recyclerView=findViewById(R.id.recycleview);
 
         selectDateOfferAdapter=new SelectDateOfferAdapter(context,serviceDetails);
