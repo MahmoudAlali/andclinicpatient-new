@@ -399,7 +399,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/app_services_btn"
-            android:text="Kefak"
+            android:text="Add request"
             android:gravity="center"
             android:layout_gravity="center"/>
 

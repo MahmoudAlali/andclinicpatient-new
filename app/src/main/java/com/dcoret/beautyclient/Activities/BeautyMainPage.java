@@ -134,10 +134,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         SharedPreferences settings = getSharedPreferences("LOGIN", MODE_PRIVATE);
         if (settings.getString("client_name","").equals("")
-                || settings.getString("client_number","").equals(""))
+                || settings.getString("client_number","").equals("")) {
+            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser", context);
+        }else if(settings.getString("client_name","").equals("Guest"))
         {
-            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser",context);
-
+            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser", context);
         }else {
             client_name=settings.getString("client_name","");
             client_number=settings.getString("client_number","");

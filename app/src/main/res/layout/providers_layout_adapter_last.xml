@@ -36,18 +36,34 @@
                     android:layout_marginStart="10dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp">
-                    <RatingBar
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:layout_weight="1"
-                        android:id="@+id/service_rate"
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:layout_marginEnd="7dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:rating="1"
-                        android:numStars="1" />
+                        android:layout_marginRight="7dp">
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_stars"
+
+                            />
+                        <!--<RatingBar
+                            android:scaleX="0.5"
+                            android:scaleY="0.5"
+                            android:id="@+id/service_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:rating="1"
+                            android:clickable="false"
+                            android:numStars="1" />-->
+
+                    </LinearLayout>
                     <TextView
-                        android:gravity="center"
+                        android:gravity="start|center"
                         android:id="@+id/provider_rate"
                         android:layout_width="match_parent"
                         android:layout_weight="1"

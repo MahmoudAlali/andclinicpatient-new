@@ -487,10 +487,10 @@ public class freeBookingFragment extends Fragment {
                 rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
                     @Override
                     public void valueChanged(Number minValue, Number maxValue) {
-                        tvMin.setText(String.valueOf(minValue));
+                        tvMin.setText(String.valueOf(minValue)+" "+getString(R.string.KM));
                         Min.setText(String.valueOf(minValue));
                         Max.setText(String.valueOf(maxValue));
-                        tvMax.setText(String.valueOf(maxValue));
+                        tvMax.setText(String.valueOf(maxValue)+" "+getString(R.string.KM));
                     }
                 });
 
@@ -506,13 +506,13 @@ public class freeBookingFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         rangeDistanceDialog.dismiss();
-                        maxValDistance=tvMax.getText().toString();
+                        maxValDistance=Max.getText().toString();
                         String s=getResources().getString(R.string.distance);
                         distance.setText(s+": " +APICall.convertToArabic( Min.getText().toString() + "-" + Max.getText().toString()));
                         //APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                         //ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 //                               ------------For Offer Filter-------------------------------
-                        filterDistance=",{\"num\":2,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+                        filterDistance=",{\"num\":2,\"value1\":"+Min.getText()+",\"value2\":"+Max.getText()+"}";
                         Log.e("DistanceOffer",distanceOffer);
                     }
                 });
@@ -554,15 +554,17 @@ public class freeBookingFragment extends Fragment {
                 final TextView tvMax = (TextView) rangePriceDialog.findViewById(R.id.textMax1);
                 final EditText Min = rangePriceDialog.findViewById(R.id.minval);
                 final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
+                /*Max.setEnabled(false);
+                Min.setEnabled(false);*/
                 Button search = rangePriceDialog.findViewById(R.id.search);
                 // set listener
                 rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
                     @Override
                     public void valueChanged(Number minValue, Number maxValue) {
-                        tvMin.setText(String.valueOf(minValue));
+                        tvMin.setText(String.valueOf(minValue)+" "+getString(R.string.ryal));
                         Min.setText(String.valueOf(minValue));
                         Max.setText(String.valueOf(maxValue));
-                        tvMax.setText(String.valueOf(maxValue));
+                        tvMax.setText(String.valueOf(maxValue)+" "+getString(R.string.ryal));
                     }
                 });
 
@@ -581,7 +583,7 @@ public class freeBookingFragment extends Fragment {
                         offerPrice.setText(BeautyMainPage.context.getResources().getString(R.string.price)+": " + Min.getText().toString() + "-" + Max.getText().toString());
 //                        APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
 //                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
-                        filterOfferPrice=",{\"num\":39,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
+                        filterOfferPrice=",{\"num\":39,\"value1\":"+Min.getText()+",\"value2\":"+Max.getText()+"}";
 
 
                     }

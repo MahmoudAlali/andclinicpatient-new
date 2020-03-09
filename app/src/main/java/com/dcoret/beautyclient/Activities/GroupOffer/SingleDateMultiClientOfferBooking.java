@@ -23,7 +23,11 @@ import com.dcoret.beautyclient.DataModel.OfferClientsModel;
 import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
+import com.dcoret.beautyclient.Fragments.freeBookingFragment;
 import com.dcoret.beautyclient.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,7 +82,6 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
         // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
 
-/*
         //region CHECK_NOTIFICATION
         String notification = "";
         try {
@@ -98,7 +101,6 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
             e.printStackTrace();
         }
         //endregion
-*/
 
 
         recyclerView = findViewById(R.id.recycleview);
@@ -141,7 +143,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        add_date.setText("Select Date");
+                        add_date.setText(R.string.select_date);
                     }
                 });
 
@@ -153,135 +155,221 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
         APICall.browseOneOffer(bdb_pack_id, context);
 
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    String bdb_pack_code = bdb_pack_id;
+                    if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
+                        APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );
+                    } else {
 
-                 String place_num="",price_num="";
+                        JSONArray clients =new JSONArray();
 
-                switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-                    case 1:
-                        place_num="9";
-                        price_num="32";
-                        break;
-                    case 2:
-                        place_num="8";
-                        price_num="1";
-                        break;
-                    case 3:
-                        place_num="10";
-                        price_num="30";
-                        break;
-                    case 4:
-                        place_num="11";
-                        price_num="31";
-                        break;
 
-                }
+                        for (int i = 0; i < offerClientsModels.size(); i++) {
+                            JSONObject clientJ = new JSONObject();
 
-                String bdb_pack_code = bdb_pack_id;
-                if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
-                    APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );
-                } else {
-                    String postdata = "\n" +
-                            "{\n" +
-                            "    \"Filter\": [\n" +
-                            "        {\n" +
-                            "            \"num\": 34,\n" +
-                            "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
-                            "            \"value2\": 0\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"num\": 35,\n" +
-                            "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
-                            "            \"value2\": 0\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"num\": "+ price_num+",\n" +
-                            "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                            "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                            "        },\n" +
-                            "        {\n" +
-                            "            \"num\": "+place_num+",\n" +
-                            "            \"value1\": 1,\n" +
-                            "            \"value2\": 0\n" +
-                            "        }\n" +
-                            "    ],\n" +
-                            "\"date\":\"" + add_date.getText().toString() + "\"," +
-                            "\t\"bdb_pack_code\":" + bdb_pack_code + ",\n" +
-                            "\t\"clients\": [ \n ";
-//                offerClientsModels
-                    Log.e("offerClientsModels", offerClientsModels.size() + "");
-                    Log.e("selectDateOfferModels", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
-                    String client = "";
-
-                    for (int i = 0; i < offerClientsModels.size(); i++) {
-                        if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0) {
-                            APICall.showSweetDialog(context, getResources().getString(R.string.alert), getResources().getString(R.string.enter_client_name));
-                        } else if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString().length() == 0) {
-                            APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.enter_phone_num) );
-                        } else {
-                            String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
-                            String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();
-                            if (i == 0) {
-                                client = client + "{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
-                                String services = "";
-                                for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
-                                    if (j == 0) {
-                                        services = "{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
-                                    } else {
-                                        services += ",{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
-                                    }
-                                }
-                                client = client + services + "],\"effect\":[]}";
-                                Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                            if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0) {
+                                APICall.showSweetDialog(context, getResources().getString(R.string.alert), getResources().getString(R.string.enter_client_name));
+                            } else if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString().length() == 0) {
+                                APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.enter_phone_num) );
                             } else {
-                                client = client + ",{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
-                                String services = "";
-                                for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
-                                    if (j == 0) {
-                                        services = "{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
-                                    } else {
-                                        services += "\n,{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                                String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
+                                String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();
+                                try {
+                                    clientJ.put("client_name",cname);
+                                    clientJ.put("client_phone",phone);
+                                    clientJ.put("start_date",APICall.arabicToDecimal(add_date.getText().toString()));
+                                    if(phone.equals(BeautyMainPage.client_number))
+                                        clientJ.put("is_current_user","1");
+                                    else
+                                        clientJ.put("is_current_user","0");
+
+                                    clientJ.put("old","1");
+
+                                    JSONArray services=new JSONArray() ;
+                                    JSONObject effects=new JSONObject("") ;
+                                    clientJ.put("effect",effects);
+
+                                    for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                                        JSONObject servic = new JSONObject();
+                                        servic.put("bdb_ser_sup_id",offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id());
+                                        services.put(servic);
+
                                     }
+                                    clientJ.put("services",services);
+                                    clients.put(clientJ);
+
+
+
                                 }
-                                client = client + services + "],\"effect\":[]}";
-                                Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
-                            }
+                                catch (Exception e)
+                                { Log.e("ERR",e.getMessage());}
+
+
 //                        View view = recyclerView.getLayoutManager().findViewByPosition(1);
 //                            String bdb_ser_sup_id = API.dofs.get(i).getSersup_ids().get(i).getBdb_ser_sup_id();
 //                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
 
 
+                            }
                         }
+                        if (is_effects_on.equals("1")) {
+                            Intent intent = new Intent(context, MultiClientOfferEffect.class);
+                            intent.putExtra("filter", "");
+                            intent.putExtra("place", place);
+                            intent.putExtra("position", postion);
+                            intent.putExtra("bdb_pack_id",bdb_pack_id);
+                            intent.putExtra("notification","true");
+                            intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
+                            startActivity(intent);
+                        }else {
+                            APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",clients,context);
+
+                            /*Intent intent = new Intent(context, OfferBookingResult.class);
+                            intent.putExtra("filter", postdata);
+                            intent.putExtra("place", place);
+                            intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
+                            startActivity(intent);*/
+                        }
+
                     }
-                    postdata = postdata + client + "],\"offer_type\":" + getIntent().getStringExtra("offertype") + "\n" +
-                            "\t\t   }\n" +
-                            "\t\t";
-
-
-                    Log.e("PostData", postdata);
-                    if (is_effects_on.equals("1")) {
-                        Intent intent = new Intent(context, MultiClientOfferEffect.class);
-                        intent.putExtra("filter", postdata);
-                        intent.putExtra("place", place);
-                        intent.putExtra("position", postion);
-                        intent.putExtra("bdb_pack_id",bdb_pack_id);
-                        intent.putExtra("notification","true");
-                        intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
-                        startActivity(intent);
-                    }else {
-                        Intent intent = new Intent(context, OfferBookingResult.class);
-                        intent.putExtra("filter", postdata);
-                        intent.putExtra("place", place);
-                        intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
-                        startActivity(intent);
-                    }
-
                 }
-            }
-        });
+            });
+        }
+        else {
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String place_num="",price_num="";
+
+                    switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+                        case 1:
+                            place_num="9";
+                            price_num="32";
+                            break;
+                        case 2:
+                            place_num="8";
+                            price_num="1";
+                            break;
+                        case 3:
+                            place_num="10";
+                            price_num="30";
+                            break;
+                        case 4:
+                            place_num="11";
+                            price_num="31";
+                            break;
+
+                    }
+
+                    String bdb_pack_code = bdb_pack_id;
+                    if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
+                        APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );
+                    } else {
+                        String postdata = "\n" +
+                                "{\n" +
+                                "    \"Filter\": [\n" +
+                                "        {\n" +
+                                "            \"num\": 34,\n" +
+                                "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                                "            \"value2\": 0\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": 35,\n" +
+                                "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                                "            \"value2\": 0\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": "+ price_num+",\n" +
+                                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"num\": "+place_num+",\n" +
+                                "            \"value1\": 1,\n" +
+                                "            \"value2\": 0\n" +
+                                "        }\n" +
+                                "    ],\n" +
+                                "\"date\":\"" + add_date.getText().toString() + "\"," +
+                                "\t\"bdb_pack_code\":" + bdb_pack_code + ",\n" +
+                                "\t\"clients\": [ \n ";
+//                offerClientsModels
+                        Log.e("offerClientsModels", offerClientsModels.size() + "");
+                        Log.e("selectDateOfferModels", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                        String client = "";
+
+                        for (int i = 0; i < offerClientsModels.size(); i++) {
+                            if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0) {
+                                APICall.showSweetDialog(context, getResources().getString(R.string.alert), getResources().getString(R.string.enter_client_name));
+                            } else if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString().length() == 0) {
+                                APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.enter_phone_num) );
+                            } else {
+                                String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
+                                String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();
+                                if (i == 0) {
+                                    client = client + "{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
+                                    String services = "";
+                                    for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                                        if (j == 0) {
+                                            services = "{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                                        } else {
+                                            services += ",{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                                        }
+                                    }
+                                    client = client + services + "],\"effect\":[]}";
+                                    Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                                } else {
+                                    client = client + ",{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
+                                    String services = "";
+                                    for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                                        if (j == 0) {
+                                            services = "{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                                        } else {
+                                            services += "\n,{ \"bdb_ser_sup_id\": " + offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                                        }
+                                    }
+                                    client = client + services + "],\"effect\":[]}";
+                                    Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                                }
+//                        View view = recyclerView.getLayoutManager().findViewByPosition(1);
+//                            String bdb_ser_sup_id = API.dofs.get(i).getSersup_ids().get(i).getBdb_ser_sup_id();
+//                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+
+
+                            }
+                        }
+                        postdata = postdata + client + "],\"offer_type\":" + getIntent().getStringExtra("offertype") + "\n" +
+                                "\t\t   }\n" +
+                                "\t\t";
+
+
+                        Log.e("PostData", postdata);
+                        if (is_effects_on.equals("1")) {
+                            Intent intent = new Intent(context, MultiClientOfferEffect.class);
+                            intent.putExtra("filter", postdata);
+                            intent.putExtra("place", place);
+                            intent.putExtra("position", postion);
+                            intent.putExtra("bdb_pack_id",bdb_pack_id);
+                            intent.putExtra("notification","true");
+                            intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(context, OfferBookingResult.class);
+                            intent.putExtra("filter", postdata);
+                            intent.putExtra("place", place);
+                            intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
+                            startActivity(intent);
+                        }
+
+                    }
+                }
+            });
+        }
     }
 }
 

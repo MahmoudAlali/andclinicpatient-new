@@ -375,6 +375,15 @@
 
 
     </string-array>
+    <string-array name="request_type">
+        <item>request type</item>
+        <item>individual request</item>
+        <item>group request</item>
+        <item>offer :individual request</item>
+        <item>offer :group request</item>
+
+
+    </string-array>
     <string-array name="service_place">
         <item>Place Service</item>
         <item>Salon</item>
@@ -513,6 +522,8 @@
     <string name="time">time</string>
     <string name="end_time">end time</string>
     <string name="booked_at">booked at</string>
+    <string name="ordered_at">request date :</string>
+    <string name="ordered_type">request type :</string>
     <string name="multi_booking_others">Mumulti booking for others</string>
     <string name="offer_single_booking">offer: single booking</string>
     <string name="offer_single_multi_booking">individual multi reservation</string>
@@ -665,6 +676,7 @@
 
     <string name="searchLoc">enter your location or region</string>
     <string name="age">age</string>
+    <string name="age2">age :</string>
     <string name="discountPrcnt">Discount Percent</string>
     <string name="ClientDetails">Client details</string>
     <string name="priceRange">Price range</string>
@@ -722,5 +734,25 @@
     <string name="select_date_of_booking">please select date of booking</string>
     <string name="add_atleast_one_client">Please Add one client at least</string>
     <string name="estimated_cost">estimated cost :</string>
+    <string name="forKids">for children</string>
+    <string name="forAdults">for adults</string>
+    <string name="indivRequest">individual request</string>
+    <string name="indivMultiRequest">individual request</string>
+    <string name="groupRequest">group request</string>
+    <string name="indivRequestOffer">individual offer</string>
+    <string name="indivMultiRequestOffer">individual offer</string>
+    <string name="groupRequestOffer">group offer</string>
+
+    <string name="requestAdded">your request has been sent.</string>
+    <string name="KM">Km</string>
+    <string name="select_service">select service</string>
+    <string name="requestDateFilter">request date</string>
+    <string name="requestSalonFilter">Salon name</string>
+    <string name="requestTypeFilter">request type</string>
+    <string name="filter">filter</string>
+    <string name="removeFilter">remove all filters</string>
+    <string name="select_request_type">select request type</string>
+    <string name="type">type :</string>
+    <string name="suppliers">Suppliers</string>
 
 </resources>

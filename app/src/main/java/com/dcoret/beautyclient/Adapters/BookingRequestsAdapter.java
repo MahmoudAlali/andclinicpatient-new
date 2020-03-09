@@ -155,9 +155,11 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             // >>>>>>>>>>>>> date
             ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getClients().get(0).getBdb_start_date()));
 
+            //>>>>>>>>> price // is group booking is now used for price
+        String price = APICall.convertToArabic(bookingRequestData.get(position).getBdb_is_group_booking());
+        price+= " "+BeautyMainPage.context.getResources().getString(R.string.ryal);
 
-           //>>>>>>>>> price // is group booking is now used for price
-            ((Item)holder).totalPrice.setText(APICall.convertToArabic(bookingRequestData.get(position).getBdb_is_group_booking()));
+        ((Item)holder).totalPrice.setText(price);
 
 
             // >>>>>>>>>>>>> order booking place

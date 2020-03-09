@@ -21,10 +21,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="@string/service_exec_date"
+            android:text="@string/requestDateFilter"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
-        <CheckBox
+       <!-- <CheckBox
             android:id="@+id/service_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textSize="@dimen/standard_20"
             android:textColor="#000"
             android:layout_marginBottom="5dp"
-            />1
+            />1-->
         <!--<CheckBox-->
         <!--android:id="@+id/service_r_date"-->
         <!--android:layout_width="match_parent"-->
@@ -48,7 +48,7 @@
             android:id="@+id/service_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Service_Name"
+            android:text="@string/requestSalonFilter"
             android:gravity="center"
             android:textSize="@dimen/standard_20"
             android:textColor="#000"
@@ -79,10 +79,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="@string/book_type"
+            android:text="@string/requestTypeFilter"
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
-        <CheckBox
+        <!--<CheckBox
             android:id="@+id/emp_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,29 +92,33 @@
             android:textColor="#000"
             android:layout_marginBottom="15dp"
 
-            />
+            />-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="vertical">
             <Button
+                android:layout_marginTop="15dp"
                 android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
                 android:background="@drawable/shadow_button_blue"
                 android:textSize="@dimen/standard_20"
-                android:text="فلترة"
+                android:textAllCaps="false"
+                android:text="@string/filter"
                 android:layout_marginBottom="10dp"
                 android:textColor="#FFF"/>
             <Button
+
                 android:id="@+id/clear"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
                 android:background="@drawable/shadow_button_spinner"
                 android:textSize="@dimen/standard_20"
-                android:text="ازالة جميع عناصر الفلترة"
+                android:textAllCaps="false"
+                android:text="@string/removeFilter"
                 android:textColor="#FFF"/>
 
         </LinearLayout>
