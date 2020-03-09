@@ -277,6 +277,8 @@
     <string name="location_proceed">you have to choose a location to proceed</string>
     <string name="place_proceed">you have to choose a service place to proceed</string>
     <string name="distance_proceed">you have to choose a distance to proceed</string>
+    <string name="type_proceed">you have to choose request type to proceed</string>
+    <string name="offerPrice_proceed">you have to choose offer price to proceed</string>
 
 
     <string-array name="gender">
@@ -505,6 +507,7 @@
     <string name="Bookings_paid_DEPOSIT">paid</string>
     <string name="cancel_req">cancel request</string>
     <string name="nobooking">No Booking</string>
+    <string name="noRequests">you don\'t have any booking requests</string>
     <string name="nobookingyet">There is no booking yet</string>
     <string name="Service_Place">service place</string>
     <string name="time">time</string>
@@ -709,10 +712,18 @@
     <string name="approved">approved request</string>
     <string name="suppliere_name">supplier name</string>
     <string name="suppliere_name_salon">supplier and salon name</string>
+    <string name="cancelRequestAlert">cancel booking request ?</string>
     <string-array name="requestType">
         <item>request type</item>
         <item>Offer</item>
         <item>Normal</item>
     </string-array>
+    <string name="add_new_client">Add new client</string>
+    <string name="enter_c_name">Please enter client name</string>
+    <string name="enter_age_range">please enter client age</string>
+    <string name="add_atleast_one_service">Please add at least one service for your offer</string>
+    <string name="select_date_of_booking">please select date of booking</string>
+    <string name="add_atleast_one_client">Please Add one client at least</string>
+    <string name="estimated_cost">estimated cost :</string>
 
 </resources>

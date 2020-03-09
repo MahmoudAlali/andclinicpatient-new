@@ -41,6 +41,7 @@ import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.GroupReservationOthersFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesBrideFragment;
 import com.dcoret.beautyclient.Fragments.ListServicesFragment;
+import com.dcoret.beautyclient.Fragments.MyBookingRequestsFragment;
 import com.dcoret.beautyclient.Fragments.MyEffects.MyEffectsActivity;
 import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
 import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
@@ -174,6 +175,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.manageaccount).setVisible(false);
             sideMenu.findItem(R.id.points).setVisible(false);
             sideMenu.findItem(R.id.effcts).setVisible(false);
+            sideMenu.findItem(R.id.requests).setVisible(false);
         }
         else if(APICall.isGuest(context).equals("0"))
         {
@@ -830,6 +832,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }else if (id == R.id.effcts) {
             Intent intent=new Intent(getApplicationContext(), MyEffectsActivity.class);
             startActivity(intent);
+        }else if (id == R.id.requests) {
+            fragment = new MyBookingRequestsFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
        /* } else if (id == R.id.rate_app) {
          launchMarket();*/
         }else if (id == R.id.signout) {

@@ -252,6 +252,8 @@
     <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
     <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
+    <string name="type_proceed">يجب عليك اختيار نوع الطلب لإكمال العملية</string>
+    <string name="offerPrice_proceed">يجب عليك اختيار سعر العرض لإكمال العملية</string>
     <string name="cancel">إلغاء</string>
     <string name="OK">موافق</string>
     <string name="select_date">اختاري تاريخ</string>
@@ -434,6 +436,11 @@
         <item>اكبر من 13</item>
     </string-array>
 
+    <string name="enter_c_name">من فضلكِ ادخلي اسم العميلة</string>
+    <string name="enter_age_range">من فضلكِ ادخلي عمر العميلة</string>
+    <string name="add_atleast_one_service">من فضلكِ ادخلي خدمة واحدة على الاقل</string>
+    <string name="select_date_of_booking">من فضلكِ ادخلي تاريخ الحجز</string>
+    <string name="add_atleast_one_client">يرجى إضافة عميلة واحدة على الأقل</string>
 
 
     <string name="supportWelcoming">مرحباً بكِ في خدمة العملاء Vizage. كيف يمكننا مساعدتكِ ؟</string>
@@ -549,4 +556,9 @@
     <string name="approved">تمت الموافقة عليه</string>
     <string name="suppliere_name">اسم المزودة</string>
     <string name="suppliere_name_salon">اسم الصالون و المزودة</string>
+    <string name="cancelRequestAlert">إلغاء طلب الحجز ؟</string>
+    <string name="noRequests">لا يوجد لديكِ طلبات للحجز</string>
+    <string name="add_new_client">إضافة عميلة جديدة</string>
+    <string name="estimated_cost">السعر المقدّر :</string>
+
 </resources>

@@ -20,6 +20,7 @@ import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.GroupReservationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
@@ -59,19 +60,33 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
          position=getIntent().getIntExtra("position",0);
-        supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
-        bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
 
-        Log.e("SupClassesSize","Size1:"+supIdClasses.size()+"");
-        //region CHECK_NOTIFICATION
-        String notification = "";
-        try {
-            notification=getIntent().getStringExtra("notification");
-
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
         }
-        catch (Exception e){}
-        if(!notification.equals(""))
+        else
+        {
+            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+        }
 
+        if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            //region CHECK_NOTIFICATION
+            String notification = "";
+            try {
+                notification=getIntent().getStringExtra("notification");
+
+            }
+            catch (Exception e){}
+            if(!notification.equals(""))
+
+            {
+                bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+                supIdClasses = NotificationsBeauty.supIdClasses;
+            }
         {
             bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
 //            supIdClasses = NotificationsBeauty.supIdClasses;
@@ -79,7 +94,10 @@ public class SingleOfferEffect extends AppCompatActivity {
 
         }
 
-        //endregion
+            //endregion
+
+        }
+
 
         effectAdapter=new GroupEffectAdapter(BeautyMainPage.context, APICall.clientEffectRequestModels);
 //        LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);

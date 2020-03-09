@@ -17,7 +17,8 @@ public class BookingRequestDataModel {
             bdb_reject_reason,
             bdb_created_at,
             bdb_sup_id,
-            bdb_sup_name,
+            supplier_name,
+            logo_id,
             bdb_client_id;
 
     ArrayList <BookingRequestClientDataModel> clients = new ArrayList<>();
@@ -25,7 +26,8 @@ public class BookingRequestDataModel {
     public BookingRequestDataModel(String bdb_id, String bdb_booking_place, String bdb_location_id, String bdb_journey_time,
                                    String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,
                                    String bdb_name_booking, String bdb_reject_reason, String bdb_created_at,
-                                   String bdb_sup_id,String bdb_sup_name,  String bdb_client_id)
+                                   String bdb_sup_id,String supplier_name,String logo_id,  String bdb_client_id,
+                                   ArrayList <BookingRequestClientDataModel> clients)
     {
         this.bdb_id=bdb_id;
         this.bdb_booking_place=bdb_booking_place;
@@ -39,8 +41,10 @@ public class BookingRequestDataModel {
         this.bdb_reject_reason=bdb_reject_reason;
         this.bdb_created_at=bdb_created_at;
         this.bdb_sup_id=bdb_sup_id;
-        this.bdb_sup_name=bdb_sup_name;
+        this.supplier_name=supplier_name;
+        this.logo_id=logo_id;
         this.bdb_client_id=bdb_client_id;
+        this.clients=clients;
     }
 
     public String getBdb_id() {
@@ -111,7 +115,11 @@ public class BookingRequestDataModel {
         return clients;
     }
 
-    public String getBdb_sup_name() {
-        return bdb_sup_name;
+    public String getLogo_id() {
+        return logo_id;
+    }
+
+    public String getSupplier_name() {
+        return supplier_name;
     }
 }
