@@ -1,5 +1,6 @@
 package com.dcoret.beautyclient.DataModel;
 
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 
@@ -7,16 +8,26 @@ public class SelectDateOfferModel {
 
     EditText cname,phone_number;
     int postion;
+    CheckBox checkme;
 
     public SelectDateOfferModel(EditText cname, EditText phone_number) {
         this.cname = cname;
         this.phone_number = phone_number;
     }
 
-    public SelectDateOfferModel(EditText cname, EditText phone_number, int postion) {
+    public SelectDateOfferModel(EditText cname, EditText phone_number,CheckBox checkme, int postion) {
         this.cname = cname;
         this.phone_number = phone_number;
         this.postion = postion;
+        this.checkme= checkme;
+    }
+
+    public CheckBox getCheckme() {
+        return checkme;
+    }
+
+    public void setCheckme(CheckBox checkme) {
+        this.checkme = checkme;
     }
 
     public int getPostion() {

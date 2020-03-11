@@ -29,6 +29,7 @@ import com.dcoret.beautyclient.R;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_reservation_result_frag);
         context=this;
+        Log.e("FNAMEMBI",BeautyMainPage.FRAGMENT_NAME);
 
         final String filter=getIntent().getStringExtra("filter");
 

@@ -169,11 +169,11 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         try {
 
             if (context.getResources().getString(R.string.locale).equals("ar")) {
-                cat_name.setText(clientEffectModel.getClient_name() + ":"+clientEffectModel.getClientEffectModels().get(position).getCat_name());
+                cat_name.setText(clientEffectModel.getClient_name() + ":"+clientEffectModel.getClientEffectModels().get(0).getCat_name());
             } else
-                cat_name.setText(clientEffectModel.getClient_name() + ": " + clientEffectModel.getClientEffectModels().get(position).getCat_name());
+                cat_name.setText(clientEffectModel.getClient_name() + ": " + clientEffectModel.getClientEffectModels().get(0).getCat_name());
 
-            Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(position).getCat_name());
+            Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
 
         }catch (Exception e){
 
@@ -190,9 +190,9 @@ public class MyGroupEffectActivity extends AppCompatActivity {
             }
         });
         try {
-            for (int i = 0; i < clientEffectModel.getClientEffectModels().get(position).getEffects().size(); i++) {
-                Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(position).getEffects().get(i).getBdb_effect_name_ar());
-                addlayout(myroot2, clientEffectModel.getClientEffectModels().get(position).getEffects().get(i));
+            for (int i = 0; i < clientEffectModel.getClientEffectModels().get(0).getEffects().size(); i++) {
+                Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());
+                addlayout(myroot2, clientEffectModel.getClientEffectModels().get(0).getEffects().get(i));
             }
         }catch (Exception e){
             e.printStackTrace();

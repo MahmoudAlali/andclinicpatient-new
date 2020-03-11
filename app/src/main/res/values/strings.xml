@@ -759,6 +759,8 @@
     <string name="select_supplier">select supplier</string>
     <string name="type">type :</string>
     <string name="suppliers">Suppliers</string>
+    <string name="lost_time_emp">employee lost time</string>
+    <string name="journey_time_emp">journey time for employee</string>
     <string name="requestRelatedBooking">Reservation attached to the request</string>
     <string name="createRequest">create request</string>
     <string name="errorAddingRequest">sorry, try again later </string>

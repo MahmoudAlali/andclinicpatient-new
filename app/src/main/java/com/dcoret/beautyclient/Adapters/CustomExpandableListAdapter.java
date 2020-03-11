@@ -30,6 +30,7 @@ import com.dcoret.beautyclient.Fragments.PlaceServiceGroupOthersFragment;
 import com.dcoret.beautyclient.Fragments.MultiBookingIndividualResultActivity;
 import com.dcoret.beautyclient.Fragments.MultiIndividualBookingReservationFragment;
 import com.dcoret.beautyclient.Fragments.PlaceServiceGroupFragment;
+import com.dcoret.beautyclient.Fragments.PlaceServiceMultipleBookingFragment;
 import com.dcoret.beautyclient.R;
 
 import java.util.ArrayList;
@@ -123,20 +124,15 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                         APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), GroupReservationResultActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
-                                        Log.e("Booking","BookingIndvidualActivity");
                                         APICall.addGroupItemInd(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, PlaceServiceFragment.date.getText().toString()), BookingIndvidualActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                                        Log.e("Booking","GroupReservationOtherResultFragment");
                                         APICall.addGroupItemOther(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
-                                    }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
-                                        Log.e("Booking","MultiBookingIndividualResult");
-
+                                    }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult") || BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking") ){
                                         Log.e("INDBooking","ok");
                                         APICall.addGroupItemMulti(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), MultiBookingIndividualResultActivity.context);
 
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
-                                        Log.e("Booking","OfferBookingResult");
                                         APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
 
                                     }
@@ -187,9 +183,20 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 client_name = convertView.findViewById(R.id.client_name);
                 salon_name = convertView.findViewById(R.id.salon_name);
                 service_layout = convertView.findViewById(R.id.service_layout);
-                client_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name());
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name().equals("booking_wast_time")) {
+                client_name.setText(context.getResources().getString(R.string.lost_time_emp));
+                salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name());
 
-                salon_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name()));
+                salon_name.setVisibility(View.GONE);
+//                    salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name());
+            }else {
+                client_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name());
+                salon_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name());
+            }
+
+//                client_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name());
+//
+//                salon_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSalon_name()));
 
 //                stringArrayListHashMap.clear();
 
@@ -212,59 +219,138 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
                 service_layout.removeAllViews();
                 for (int i = 0; i < stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().size(); i++) {
-                    View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.service_layout, service_layout, false);
+                    int layout=0;
+                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getClient_name().equals("booking_wast_time")){
+                        layout=R.layout.service_layout_lost;
+                    }
+                    else {
+                        layout=R.layout.service_layout;
+                    }
+                    View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(layout, service_layout, false);
                     TextView service_name = layout2.findViewById(R.id.service_name);
                     TextView employee_name = layout2.findViewById(R.id.employee_name);
 //                    TextView day = layout2.findViewById(R.id.day);
                     TextView time = layout2.findViewById(R.id.time);
+                    TextView reason = layout2.findViewById(R.id.reason);
 
 //                    APICall.getSupName(employee_name,stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSup_id(), BeautyMainPage.context);
-                  String priceService="";
-
-                   try {
-                       if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
-                           priceService=OfferBookingResult.place;
 
 
-                           if (OfferBookingResult.place.equals("0")) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
-                           }else if (OfferBookingResult.place.equals("1")) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
-                           }else if (OfferBookingResult.place.equals("2")) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
-                           }else if (OfferBookingResult.place.equals("3")) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+                    String partnum="";
+                    String priceService = "";
+                    String date = "";
 
-                           }
-                       }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
-                           if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
-                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
-                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
-                           }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==4) {
-                               priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+                    if (layout==R.layout.service_layout_lost){
 
-                           }
-                       }else
-                       if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==1) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==2) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==3) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
-                       }else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition()==4) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+                        if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getReason().equals("0")) {
+                            reason.setText(R.string.journey_lost_time);
+                        }else if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getReason().equals("1")) {
+                            reason.setText(R.string.rel_ser_lost_time);
+                        }else if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getReason().equals("2")) {
+                            reason.setText(R.string.wait_emp_lost_time);
+                        }
+                    }else {
+                        try {
+                            partnum = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            try
+                            {
+                                if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate().equals("")) {
+                                    date = APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate());
+                                }
+                                else {
+                                    try {
+                                        if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
+                                            date = APICall.convertToArabic(PlaceServiceGroupFragment.dateFilter);
+                                        } else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
+                                            date = APICall.convertToArabic(PlaceServiceGroupFragment.dateFilter);
+                                        } else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity") || BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")) {
+                                            date = APICall.convertToArabic(PlaceServiceFragment.date.getText().toString());
+                                        } else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")) {
+                                            date = APICall.convertToArabic(PlaceServiceGroupOthersFragment.dateFilter);
+                                        } else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult") || BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking")) {
+                                            date = APICall.convertToArabic(PlaceServiceMultipleBookingFragment.dateFilter);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        Log.e("ErrCustomAdapter", "ERR");
 
-                       }
-                   }catch (Exception e){
-                       e.printStackTrace();
+                                    }
+
+                                }
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                                try {
+                                    if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
+                                        date = APICall.convertToArabic(PlaceServiceGroupFragment.dateFilter);
+                                    } else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
+                                        date = APICall.convertToArabic(PlaceServiceGroupFragment.dateFilter);
+                                    } else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity") || BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")) {
+                                        date = APICall.convertToArabic(PlaceServiceFragment.date.getText().toString());
+                                    } else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")) {
+                                        date = APICall.convertToArabic(PlaceServiceGroupOthersFragment.dateFilter);
+                                    } else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult") || BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking")) {
+                                        date = APICall.convertToArabic(PlaceServiceMultipleBookingFragment.dateFilter);
+                                    }
+                                } catch (Exception ee) {
+                                    e.printStackTrace();
+                                    Log.e("ErrCustomAdapter", "ERR");
+
+                                }
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+
+                        try {
+                            if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")) {
+                                priceService = OfferBookingResult.place;
+
+
+                                if (OfferBookingResult.place.equals("0")) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+                                } else if (OfferBookingResult.place.equals("1")) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                                } else if (OfferBookingResult.place.equals("2")) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+                                } else if (OfferBookingResult.place.equals("3")) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+
+                                }
+                            } else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")) {
+                                if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+                                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+                                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+
+                                }
+                            } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+                            } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                            } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+                            } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
 //                       if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1) {
 //                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
 //
 //                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
-                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                            priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
 //
 //                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
 //                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
@@ -275,21 +361,30 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 //                       }
 
 
-                   }
+                        }
 
+                    }
+                    if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num().equals("2")){
+//                   if (APICall.ln.equals("ar")){
+//                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar()+" : "+priceService+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal))+"-"+context.getResources().getString(R.string.date)+": "+
+//                               APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate()));
+//                   }else {
+//                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+"-"+((AppCompatActivity)context).getResources().getString(R.string.ryal))+" "+context.getResources().getString(R.string.date)+": "+
+//                               APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate()));
+//                   }
+                        if (partnum.equals("1")) {
+                            if (APICall.ln.equals("ar")) {
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                            } else
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                        } else if (partnum.equals("0")) {
+                            if (APICall.ln.equals("ar")) {
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
 
-
-
-                   if (!stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num().equals("2"))
-                   if (APICall.ln.equals("ar")){
-                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar()+" : "+priceService+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal))+"-"+context.getResources().getString(R.string.date)+": "+
-                               APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate()));
-                   }else {
-                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+"-"+((AppCompatActivity)context).getResources().getString(R.string.ryal))+" "+context.getResources().getString(R.string.date)+": "+
-                               APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate()));
-                   }
-
-
+                            } else
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                        }
+                }
                     employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getEmp_name());
 //                    day.setText(PlaceServiceGroupFragment.dateFilter);
                     time.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getFrom())

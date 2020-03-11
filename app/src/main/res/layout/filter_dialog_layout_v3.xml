@@ -28,7 +28,7 @@
             android:id="@+id/service_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/service_reservation_date"
+            android:text="@string/reservation_date"
             android:gravity="center"
             android:textSize="@dimen/standard_20"
             android:textColor="#000"

@@ -74,10 +74,6 @@ public class SingleOfferEffect extends AppCompatActivity {
             supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
             bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
             Log.e("free",supIdClasses.size()+"");
-            for (int i = 0; i< supIdClasses.size(); i++){
-                Log.e("free "+i,supIdClasses.get(i).getBdb_name()+"");
-
-            }
         }
         else
         {
@@ -173,7 +169,6 @@ public class SingleOfferEffect extends AppCompatActivity {
                 public void onClick(View v) {
                     getEffectFilter();
                     Log.e("effects",effectFilter);
-                    Log.e("FFFFFFFFFFFFFFFFFf","EFFFFF"+effectFilter);
 //                getEffects();
 //                Log.e("Effectfilter",f);
 

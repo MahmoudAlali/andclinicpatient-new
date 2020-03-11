@@ -194,77 +194,77 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
 
     }
 
-    public static void addLayout(final LinearLayout myroot,String details,String reservationName,String priceVal,String startTimeVal,String end_time,String bookat,String empName ){
-        final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
-        TextView endtime,rname,emp_name,price,starttime,client_details,book_at;
-        price=layout2.findViewById(R.id.price);
-        client_details=layout2.findViewById(R.id.client_details);
-        rname=layout2.findViewById(R.id.rname);
-        starttime=layout2.findViewById(R.id.time);
-        endtime=layout2.findViewById(R.id.end_time);
-        book_at=layout2.findViewById(R.id.book_at);
-        emp_name=layout2.findViewById(R.id.emp_name);
-
-        rname.setText(reservationName);
-        client_details.setText(details);
-        endtime.setText(APICall.convertToArabic(end_time));
-        emp_name.setText(empName);
-        price.setText(APICall.convertToArabic(priceVal));
-        starttime.setText(APICall.convertToArabic(startTimeVal));
-        book_at.setText(APICall.convertToArabic(bookat));
-
+//    public static void addLayout(final LinearLayout myroot,String details,String reservationName,String priceVal,String startTimeVal,String end_time,String bookat,String empName ){
+//        final View layout2;
+//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
+//        TextView endtime,rname,emp_name,price,starttime,client_details,book_at;
+//        price=layout2.findViewById(R.id.price);
+//        client_details=layout2.findViewById(R.id.client_details);
+//        rname=layout2.findViewById(R.id.rname);
+//        starttime=layout2.findViewById(R.id.time);
+//        endtime=layout2.findViewById(R.id.end_time);
+//        book_at=layout2.findViewById(R.id.book_at);
+//        emp_name=layout2.findViewById(R.id.emp_name);
 //
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
+//        rname.setText(reservationName);
+//        client_details.setText(details);
+//        endtime.setText(APICall.convertToArabic(end_time));
+//        emp_name.setText(empName);
+//        price.setText(APICall.convertToArabic(priceVal));
+//        starttime.setText(APICall.convertToArabic(startTimeVal));
+//        book_at.setText(APICall.convertToArabic(bookat));
 //
-    }
-    public static void addHeaderLayout(final LinearLayout myroot,String client_name,String client_old ){
-        final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
-        TextView client_details;
-        client_details=layout2.findViewById(R.id.client_details);
-        client_details.setText(client_name+","+client_old);
-
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
+////
+//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                myroot.addView(layout2);
+//            }
+//        });
+////
+//    }
+//    public static void addHeaderLayout(final LinearLayout myroot,String client_name,String client_old ){
+//        final View layout2;
+//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
+//        TextView client_details;
+//        client_details=layout2.findViewById(R.id.client_details);
+//        client_details.setText(client_name+","+client_old);
 //
-    }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String endtime,String bookat,String empName ){
-        final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
-        TextView end_time,rname,emp_name,price,starttime,book_at;
-        price=layout2.findViewById(R.id.price);
-        rname=layout2.findViewById(R.id.rname);
-        end_time=layout2.findViewById(R.id.end_time);
-        starttime=layout2.findViewById(R.id.time);
-        book_at=layout2.findViewById(R.id.book_at);
-        emp_name=layout2.findViewById(R.id.emp_name);
-
-        rname.setText(reservationName);
-        end_time.setText(APICall.convertToArabic(endtime));
-        emp_name.setText(APICall.convertToArabic(empName));
-        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
-        starttime.setText(APICall.convertToArabic(startTimeVal));
-        book_at.setText(APICall.convertToArabic(bookat));
-
+//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                myroot.addView(layout2);
+//            }
+//        });
+////
+//    }
+//    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String endtime,String bookat,String empName ){
+//        final View layout2;
+//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
+//        TextView end_time,rname,emp_name,price,starttime,book_at;
+//        price=layout2.findViewById(R.id.price);
+//        rname=layout2.findViewById(R.id.rname);
+//        end_time=layout2.findViewById(R.id.end_time);
+//        starttime=layout2.findViewById(R.id.time);
+//        book_at=layout2.findViewById(R.id.book_at);
+//        emp_name=layout2.findViewById(R.id.emp_name);
 //
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
+//        rname.setText(reservationName);
+//        end_time.setText(APICall.convertToArabic(endtime));
+//        emp_name.setText(APICall.convertToArabic(empName));
+//        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+//        starttime.setText(APICall.convertToArabic(startTimeVal));
+//        book_at.setText(APICall.convertToArabic(bookat));
 //
-    }
+////
+//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                myroot.addView(layout2);
+//            }
+//        });
+////
+//    }
     public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
@@ -296,10 +296,15 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
             isExecuted.setImageResource(R.drawable.ic_checked);
         else             isExecuted.setImageResource(R.drawable.ic_cancel);
 
+        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
 
-        price_j_cost.setText(j_cost+" "+context.getResources().getString(R.string.ryal));
-        journey_time.setText(j_time+" "+context.getResources().getString(R.string.minute));
-
+        if (!place.getText().toString().equals(R.string.salon)) {
+         layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+         layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+            price_j_cost.setText(j_cost + " " + context.getResources().getString(R.string.ryal));
+            journey_time.setText(j_time + " " + context.getResources().getString(R.string.minute));
+        }
         rname.setText(reservationName);
 //        rname.setText(reservationName);
         emp_name.setText(empName);
@@ -308,7 +313,7 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         starttime.setText(APICall.convertToArabic(startTimeVal));
         book_at.setText(APICall.convertToArabic(bookat));
 
-//
+
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -337,7 +342,7 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
 
         String priceRes=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.price);
         if (client_name.equals("booking_wast_time")){
-//            client_details.setText(R.string.lost_time_emp);
+            client_details.setText(R.string.journey_time_emp);
         }else
             client_details.setText(client_name+", "+priceRes+APICall.convertToArabic(ptmp+"")+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
 
@@ -349,10 +354,10 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         });
 //
     }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String Id,String isExec,String ac_price){
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String isExec,String ac_price,String jcost,String jtime){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
-        TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,id;
+        TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,j_time,id;
         LinearLayout ac_price_lay;
 
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
@@ -361,6 +366,8 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         end_time=layout2.findViewById(R.id.end_time);
         actual_price=layout2.findViewById(R.id.actual_price);
         ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
+        j_cost=layout2.findViewById(R.id.price_j_cost);
+        j_time=layout2.findViewById(R.id.journey_time);
 
         if (ac_price.equals("0")){
             ac_price_lay.setVisibility(View.GONE);
@@ -374,6 +381,8 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
             isExecuted.setImageResource(R.drawable.ic_checked);
         else             isExecuted.setImageResource(R.drawable.ic_cancel);
 
+
+
 //        j_cost=layout2.findViewById(R.id.price_j_cost);
 
 //        j_cost.setText(jCost);
@@ -384,7 +393,15 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
         starttime.setText(APICall.convertToArabic(startTimeVal));
         book_at.setText(APICall.convertToArabic(bookat));
+        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
 
+        if (!place.getText().toString().equals(R.string.salon)) {
+            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
+            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
+        }
 //
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
@@ -394,10 +411,10 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         });
 //
     }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String Id,String isExec,String ac_price,String jtime){
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String Id,String isExec,String ac_price,String jtime,String jcost){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
-        TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,id;
+        TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,j_time,id;
         LinearLayout ac_price_lay;
 
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
@@ -406,7 +423,8 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         end_time=layout2.findViewById(R.id.end_time);
         actual_price=layout2.findViewById(R.id.actual_price);
         ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
-
+        j_cost=layout2.findViewById(R.id.price_j_cost);
+        j_time=layout2.findViewById(R.id.journey_time);
         if (ac_price.equals("0")){
             ac_price_lay.setVisibility(View.GONE);
         }else {
@@ -430,7 +448,16 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         starttime.setText(APICall.convertToArabic(startTimeVal));
         book_at.setText(APICall.convertToArabic(bookat));
 
-//
+
+        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
+
+        if (!place.getText().toString().equals(R.string.salon)) {
+            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
+            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
+        }
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -446,14 +473,15 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         starttime=layout2.findViewById(R.id.time);
         emp_name=layout2.findViewById(R.id.emp_name);
         reason=layout2.findViewById(R.id.reason);
+        reason.setText(R.string.journey_lost_time);
 
-        if (reasontxt.equals("0")) {
-            reason.setText(R.string.journey_lost_time);
-        }else if (reasontxt.equals("1")) {
-            reason.setText(R.string.rel_ser_lost_time);
-        }else if (reasontxt.equals("2")) {
-            reason.setText(R.string.wait_emp_lost_time);
-        }
+//        if (reasontxt.equals("0")) {
+//            reason.setText(R.string.journey_lost_time);
+//        }else if (reasontxt.equals("1")) {
+//            reason.setText(R.string.rel_ser_lost_time);
+//        }else if (reasontxt.equals("2")) {
+//            reason.setText(R.string.wait_emp_lost_time);
+//        }
         emp_name.setText(empName);
         starttime.setText(APICall.convertToArabic(startTimeVal+" ~ "+bdb_end_time));
 
