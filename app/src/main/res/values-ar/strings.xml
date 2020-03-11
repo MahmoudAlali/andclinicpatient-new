@@ -501,7 +501,7 @@
 
     <string name="reason_">السبب</string>
     <string name="lost_time">الوقت الضائع</string>
-    <string name="journey_lost_time">journey lost time</string>
+    <string name="journey_lost_time">الوقت الضائع للرحلة</string>
     <string name="rel_ser_lost_time">relation</string>
     <string name="wait_emp_lost_time">wait employee</string>
 
@@ -560,5 +560,7 @@
     <string name="noRequests">لا يوجد لديكِ طلبات للحجز</string>
     <string name="add_new_client">إضافة عميلة جديدة</string>
     <string name="estimated_cost">السعر المقدّر :</string>
+    <string name="lost_time_emp">الوقت الضائع للموظفات</string>
+    <string name="journey_time_emp">وقت المشوار للموظفات</string>
 
 </resources>

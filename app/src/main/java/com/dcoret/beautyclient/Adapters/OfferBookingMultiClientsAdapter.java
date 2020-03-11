@@ -60,9 +60,9 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
-        if (position==0){
+
             ((Item)holder).checkme.setVisibility(View.VISIBLE);
-        }
+
 
 
 
@@ -72,12 +72,21 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
                 if (isChecked){
 //                    String name = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("bdb_name", null);
 //                    String mobile = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("bdb_mobile", null);
+
+
+                    for (int i=0;i<selectDateOfferModels.size();i++){
+                        selectDateOfferModels.get(i).getCheckme().setChecked(false);
+                            selectDateOfferModels.get(i).getPhone_number().setText("");
+                            selectDateOfferModels.get(i).getCname().setText("");
+                            selectDateOfferModels.get(i).getPhone_number().setEnabled(true);
+                            selectDateOfferModels.get(i).getCname().setEnabled(true);
+
+                    }
+                    ((Item) holder).in_grp_offer.setChecked(true);
                     ((Item)holder).name.setEnabled(false);
                     ((Item)holder).phone_number.setEnabled(false);
 //                    ((Item)holder).phone_number.setText(mobile);
                     APICall.detailsUser2(context,((Item)holder).name,((Item)holder).phone_number);
-
-
                 }else {
                     ((Item)holder).name.setEnabled(true);
                     ((Item)holder).phone_number.setEnabled(true);
@@ -88,7 +97,7 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
         });
 
 
-        selectDateOfferModels.add(new SelectDateOfferModel(((Item)holder).name,((Item)holder).phone_number,position));
+        selectDateOfferModels.add(new SelectDateOfferModel(((Item)holder).name,((Item)holder).phone_number,((Item) holder).in_grp_offer,position));
 
         for (int i=0;i<strings.get(position).getServiceDetails().size();i++){
             addLayout2(strings.get(position).getServiceDetails().get(i).getBdb_name_ar(),context,((Item)holder).show_services);
@@ -140,7 +149,7 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
             phone_number=itemView.findViewById(R.id.phone_number);
             show_services=itemView.findViewById(R.id.show_service);
             checkme=itemView.findViewById(R.id.checkme);
-            checkme=itemView.findViewById(R.id.checkme);
+
             in_grp_offer=itemView.findViewById(R.id.in_grp_offer);
 
 

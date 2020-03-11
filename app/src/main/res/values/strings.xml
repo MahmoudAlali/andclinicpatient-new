@@ -725,5 +725,7 @@
     <string name="select_date_of_booking">please select date of booking</string>
     <string name="add_atleast_one_client">Please Add one client at least</string>
     <string name="estimated_cost">estimated cost :</string>
+    <string name="lost_time_emp">employee lost time</string>
+    <string name="journey_time_emp">journey time for employee</string>
 
 </resources>

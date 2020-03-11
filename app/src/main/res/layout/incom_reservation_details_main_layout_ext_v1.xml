@@ -232,6 +232,7 @@
 
             <!--            </LinearLayout>-->
             <LinearLayout
+                android:id="@+id/jtime_lay"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -247,6 +248,11 @@
                 <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="40dp"-->
                 <!--                    android:src="@drawable/reser_money_icon"/>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/standard_30"
+                    android:src="@drawable/start_at_icon"/>
+
                 <TextView
                     android:id="@+id/journey_time"
                     android:layout_width="match_parent"
@@ -257,6 +263,38 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/jcost_lay"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--                <ImageView-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="40dp"-->
+                <!--                    android:src="@drawable/reser_money_icon"/>-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/journey_cost" />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:src="@drawable/reser_money_icon"/>
+
+                <TextView
+                    android:id="@+id/price_j_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

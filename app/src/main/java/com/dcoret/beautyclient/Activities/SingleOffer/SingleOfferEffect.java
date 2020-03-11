@@ -90,6 +90,8 @@ public class SingleOfferEffect extends AppCompatActivity {
         {
             bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
 //            supIdClasses = NotificationsBeauty.supIdClasses;
+            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+
             Log.e("SupClassesSize","Size2:"+supIdClasses.size()+"");
 
         }

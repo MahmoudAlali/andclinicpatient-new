@@ -6,7 +6,7 @@ public class SearchBookingDataSTR {
     String salon_id,salon_name,total_price,client_response,client_name,is_current_user,client_id;
     ArrayList<Solution> solutions;
 
-
+    String journeyCost;
     public SearchBookingDataSTR(String salon_id, String salon_name, String client_response, String client_name, ArrayList<Solution> solutions) {
         this.salon_id = salon_id;
         this.salon_name = salon_name;
@@ -43,6 +43,18 @@ public class SearchBookingDataSTR {
         this.is_current_user = is_current_user;
         this.client_id = client_id;
         this.solutions = solutions;
+        this.journeyCost = journeyCost;
+    }
+    public SearchBookingDataSTR(String salon_id, String salon_name, String total_price,String journeyCost, String client_response, String client_name, String is_current_user, String client_id, ArrayList<Solution> solutions) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.total_price = total_price;
+        this.client_response = client_response;
+        this.client_name = client_name;
+        this.is_current_user = is_current_user;
+        this.client_id = client_id;
+        this.solutions = solutions;
+        this.journeyCost = journeyCost;
     }
 
     String is_booked;
@@ -65,6 +77,13 @@ public class SearchBookingDataSTR {
         this.solutions = solutions;
     }
 
+    public String getJourneyCost() {
+        return journeyCost;
+    }
+
+    public void setJourneyCost(String journeyCost) {
+        this.journeyCost = journeyCost;
+    }
 
     public String getIs_booked() {
         return is_booked;
@@ -181,7 +200,7 @@ public class SearchBookingDataSTR {
             this.bdb_ser_hall = bdb_ser_hall;
             this.bdb_hotel = bdb_hotel;
         }
-        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel,String part_num,String nul) {
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel,String part_num,String reason) {
             this.ser_id = ser_id;
             this.ser_name = ser_name;
             this.ser_name_ar = ser_name_ar;
@@ -200,6 +219,7 @@ public class SearchBookingDataSTR {
             this.bdb_ser_hall = bdb_ser_hall;
             this.bdb_hotel = bdb_hotel;
             this.part_num= part_num;
+            this.reason= reason;
         }
 
         public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String nul) {
@@ -227,7 +247,7 @@ public class SearchBookingDataSTR {
         String client_name,phone;
         String client_id,is_current_user;
         boolean isbooked;
-        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String salon_name,String client_name, String client_id,String  is_current_user,String phone,boolean isbooked) {
+        public Solution(String ser_id, String ser_name, String ser_name_ar, String emp_id, String emp_name, String sup_id, String ser_sup_id, String from, String to, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_hotel_price, String bdb_ser_salon_price, String bdb_ser_home, String bdb_ser_salon, String bdb_ser_hall, String bdb_hotel, String date,String bdb_part_num,String salon_name,String client_name, String client_id,String  is_current_user,String phone,String reason,boolean isbooked) {
             this.ser_id = ser_id;
             this.ser_name = ser_name;
             this.ser_name_ar = ser_name_ar;
@@ -253,6 +273,7 @@ public class SearchBookingDataSTR {
             this.phone= phone;
             this.is_current_user= is_current_user;
             this.client_id= client_id;
+            this.reason= reason;
         }
 
       String reason,offer_ser_sup_id,is_adult;

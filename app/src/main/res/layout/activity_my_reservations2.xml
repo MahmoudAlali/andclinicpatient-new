@@ -93,6 +93,7 @@
                     android:layout_width="10dp"
                     android:layout_height="match_parent"></LinearLayout>
                 <ImageButton
+                    android:visibility="gone"
                     android:id="@+id/gridlist"
                     android:src="@drawable/ic_view_list_black_24dp"
                     android:layout_width="@dimen/standard_30"

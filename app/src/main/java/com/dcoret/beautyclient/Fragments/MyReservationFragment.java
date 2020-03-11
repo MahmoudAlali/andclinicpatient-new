@@ -1004,7 +1004,17 @@ public class MyReservationFragment extends Fragment  {
             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }else if (tab.equals("2")){
-
+            fragment = new ExecutedReservationFragment ();
+            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+        }else if (tab.equals("3")){
+            fragment = new DepositReservationFragment ();
+            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
         }
     }
 }

@@ -109,7 +109,12 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
             if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
                 listTitleTextView.setBackgroundResource(R.color.primev1);
             }
-            Log.e("ISBooked",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked());
+
+            try {
+                Log.e("ISBooked",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2") ){
                 book.setClickable(false);
                 book.setVisibility(View.GONE);
