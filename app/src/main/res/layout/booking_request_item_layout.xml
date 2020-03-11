@@ -17,17 +17,18 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/bl"
+        android:background="@color/requestItemBack"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:background="@color/bl"
+            android:background="@color/requestItemBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/book_details"
                 android:layout_width="@dimen/standard_50"
+                android:padding="3dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/res_info"
                 />
@@ -75,7 +76,7 @@
                     >
                     <ImageView
                         android:id="@+id/logoImg"
-                        android:src="@drawable/logo"
+                        android:src="@drawable/clientlogo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -99,9 +100,10 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
 
+                        android:text="Salon name"
                         android:gravity="center"
                         android:textSize="20dp"
-                        android:textColor="#000"
+                        android:textColor="#a5587a"
                         android:layout_height="@dimen/high_edit_text" />
                     <TextView
                         android:layout_weight="1"
@@ -110,7 +112,8 @@
                         android:text="Price"
                         android:gravity="center"
                         android:textSize="20dp"
-                        android:textColor="@color/pf_red"
+                        android:textStyle="bold"
+                        android:textColor="#d83269"
                         android:layout_height="@dimen/high_edit_text" />
 
 
@@ -127,13 +130,18 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text="Place"
                         android:layout_weight="1"
+                        android:textColor="@android:color/black"
                         android:gravity="center"
                         android:textSize="20dp"
                         />
 
-                    <ImageView
-                        android:id="@+id/inner_res"
+                    <TextView
+                        android:id="@+id/order_num"
                         android:layout_weight="1"
+                        android:textColor="#9a7084"
+                        android:text="@string/order_id"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 
@@ -191,13 +199,13 @@
             android:layout_width="5dp"
             android:layout_height="match_parent" />-->
         <TextView
-            android:background="@color/pi"
+            android:background="#E4C8FB"
             android:id="@+id/refuse"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/cancel"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="20dp"
             android:gravity="center"
             />

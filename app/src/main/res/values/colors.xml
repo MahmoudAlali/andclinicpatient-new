@@ -18,6 +18,7 @@
     <color name="end_gray">#D6DBDE</color>
     <color name="accent_v3">#ECD5DF</color>
     <color name="bl">#AFD0E1</color>
+    <color name="requestItemBack">#FDFDFE</color>
     <color name="pi">#FDE2F1</color>
     <color name="gr">#E9E9E9</color>
 
@@ -29,5 +30,6 @@
     <color name="lightBordeaux">#C4941751</color>
     <color name="white">#fff</color>
     <color name="transGrey">#B3636263</color>
+
 
 </resources>

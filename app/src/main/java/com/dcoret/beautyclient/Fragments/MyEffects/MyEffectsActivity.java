@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.API.Constants;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Adapters.EffectAdapter;
 import com.dcoret.beautyclient.Adapters.ServicesAdapter;
@@ -29,29 +30,6 @@ public class MyEffectsActivity extends AppCompatActivity {
     public static LinearLayout root;
 
     static Context context;
-    static int [][] effectsImgs =
-            {
-                    {R.drawable.e1_1,R.drawable.e1_2,R.drawable.e1_3,R.drawable.e1_4,R.drawable.e1_5},
-                    {R.drawable.e1_1,R.drawable.e1_2,R.drawable.e1_3,R.drawable.e1_4,R.drawable.e1_5},
-                    {R.drawable.e2_1,R.drawable.e2_2,R.drawable.e2_3,R.drawable.e2_4,R.drawable.e2_5},
-                    {R.drawable.e3_1,R.drawable.e3_2,R.drawable.e3_3,R.drawable.e3_4,R.drawable.e3_5},
-                    {R.drawable.e4_1,R.drawable.e4_2,R.drawable.e4_3,R.drawable.e4_4,R.drawable.e4_5},
-                    {R.drawable.e5_1,R.drawable.e5_2,R.drawable.e5_3,R.drawable.e5_4,R.drawable.e5_5},
-                    {R.drawable.e6_1,R.drawable.e6_2,R.drawable.e6_3,R.drawable.e6_4,R.drawable.e6_5},
-                    {R.drawable.e18_1,R.drawable.e18_2,R.drawable.e18_3,R.drawable.e18_4,R.drawable.e18_5},
-                    {R.drawable.e8_1,R.drawable.e8_2,R.drawable.e8_3,R.drawable.e8_4,R.drawable.e8_5},
-                    {R.drawable.e8_1,R.drawable.e8_2,R.drawable.e8_3,R.drawable.e8_4,R.drawable.e8_5},
-                    {R.drawable.e8_1,R.drawable.e8_2,R.drawable.e8_3,R.drawable.e8_4,R.drawable.e8_5},
-                    {R.drawable.e11_1,R.drawable.e11_2,R.drawable.e11_3,R.drawable.e11_4,R.drawable.e11_5},
-                    {R.drawable.e12_1,R.drawable.e12_2,R.drawable.e12_3,R.drawable.e12_4,R.drawable.e12_5},
-                    {R.drawable.e13_1,R.drawable.e13_2,R.drawable.e13_3,R.drawable.e13_4,R.drawable.e13_5},
-                    {R.drawable.e14_1,R.drawable.e14_2,R.drawable.e14_3,R.drawable.e14_4,R.drawable.e14_5},
-                    {R.drawable.e15_1,R.drawable.e15_2,R.drawable.e15_3,R.drawable.e15_4,R.drawable.e15_5},
-                    {R.drawable.e8_1,R.drawable.e8_2,R.drawable.e8_3,R.drawable.e8_4,R.drawable.e8_5},
-                    {R.drawable.e17_1,R.drawable.e17_2,R.drawable.e17_3,R.drawable.e17_4,R.drawable.e17_5},
-                    {R.drawable.e18_1,R.drawable.e18_2,R.drawable.e18_3,R.drawable.e18_4,R.drawable.e18_5},
-                    {R.drawable.e8_1,R.drawable.e8_2,R.drawable.e8_3,R.drawable.e8_4,R.drawable.e8_5},
-            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,11 +115,28 @@ public class MyEffectsActivity extends AppCompatActivity {
 
         int id =Integer.parseInt(effects.getBdb_effect_id());
         {
-            one.setImageResource(effectsImgs[id][0]);
-            two.setImageResource(effectsImgs[id][1]);
-            three.setImageResource(effectsImgs[id][2]);
-            four.setImageResource(effectsImgs[id][3]);
-            five.setImageResource(effectsImgs[id][4]);
+            one.setImageResource(Constants.effectsImgs[id][0]);
+            two.setImageResource(Constants.effectsImgs[id][1]);
+            three.setImageResource(Constants.effectsImgs[id][2]);
+            four.setImageResource(Constants.effectsImgs[id][3]);
+            five.setImageResource(Constants.effectsImgs[id][4]);
+            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+            {
+                txtOne.setText(Constants.effectStoredStringArayEn[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayEn[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayEn[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayEn[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayEn[id][4]);
+            }
+            else
+            {
+                txtOne.setText(Constants.effectStoredStringArayAr[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayAr[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayAr[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayAr[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayAr[id][4]);
+            }
+
         }
 
 

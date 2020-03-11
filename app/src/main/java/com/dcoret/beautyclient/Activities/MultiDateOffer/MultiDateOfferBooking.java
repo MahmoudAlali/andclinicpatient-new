@@ -104,7 +104,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name_ar());
 //            }
 //        }
-        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
+//        place=TabTwo.arrayList.get(postion).getBdb_offer_place();
         recyclerView=findViewById(R.id.recycleview);
 
         selectDateOfferAdapter=new SelectDateOfferAdapter(context,serviceDetails);
@@ -163,6 +163,8 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
+            next.setText(R.string.createRequest);
+
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

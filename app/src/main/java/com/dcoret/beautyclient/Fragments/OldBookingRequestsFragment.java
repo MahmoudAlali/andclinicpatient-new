@@ -19,8 +19,11 @@ import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
+import com.dcoret.beautyclient.Activities.BookingRequestDetailsActivity;
 import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
 import com.dcoret.beautyclient.R;
+
+import java.util.ArrayList;
 
 public class OldBookingRequestsFragment extends Fragment {
     Fragment fragment;
@@ -36,6 +39,8 @@ public class OldBookingRequestsFragment extends Fragment {
     String filter,sort;
     ImageView sortbtn;
     int layout;
+    ArrayList<String> filters=new ArrayList<>();
+
     public String tmp="2";
     @Nullable
     @Override
@@ -44,7 +49,9 @@ public class OldBookingRequestsFragment extends Fragment {
 
         BeautyMainPage.FRAGMENT_NAME="oldBookingRequestsFragment";
         MyBookingRequestsFragment.tab="2";
+/*
         MyBookingRequestsFragment.groupbooking="";
+*/
 
 
         service_select=view.findViewById(R.id.incom_ree);
@@ -57,24 +64,35 @@ public class OldBookingRequestsFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
        // APICall.layout= R.layout.incom_reservation_layout;
-        APICall.filter=filter= APICall.bookingFilter("1","8","0");
+        APICall.filter=filter= APICall.Filter("1","8","0");
 
+        filters.clear();
+        filters.add(APICall.filter);
+        if(!MyBookingRequestsFragment.dateFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.dateFilter);
+        if(!MyBookingRequestsFragment.typeFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.typeFilter);
+        if(!MyBookingRequestsFragment.salonFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.salonFilter);
+
+        APICall.filter=APICall.Filter(filters);
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
-        String book_id="";
+        String order_id="";
         if (bundle != null) {
-            book_id = bundle.getString("book_id");
-            Log.e("NotifDepoif",book_id);
+            order_id = bundle.getString("order_id");
+            Log.e("NotifDepoif",order_id);
 
         }
 
-        if(!book_id.equals(""))
+        if(!order_id.equals(""))
         {
-            bundle.putString("book_id", book_id);
-            Log.e("NotifDepo",book_id);
+            /*bundle.putString("order_id", order_id);
+            Log.e("NotifDepo",order_id);
             //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
-            Log.e("BookID",book_id);
-            Intent intent=new Intent(BeautyMainPage.context, BookingRequestsAdapter.class);
+            Log.e("order_id",order_id);*/
+            Intent intent=new Intent(BeautyMainPage.context, BookingRequestDetailsActivity.class);
+            intent.putExtra("order_id",order_id);
             startActivity(intent);
         }
 

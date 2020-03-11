@@ -54,4 +54,8 @@ public class BookingRequestClientDataModel {
     public String getBdb_start_date() {
         return bdb_start_date;
     }
+
+    public ArrayList<ClientServiceDataModel> getServices() {
+        return services;
+    }
 }

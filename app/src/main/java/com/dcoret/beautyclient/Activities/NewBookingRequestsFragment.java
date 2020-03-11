@@ -18,6 +18,8 @@ import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
 import com.dcoret.beautyclient.Fragments.MyBookingRequestsFragment;
 import com.dcoret.beautyclient.R;
 
+import java.util.ArrayList;
+
 public class NewBookingRequestsFragment extends Fragment {
 
     Fragment fragment;
@@ -27,6 +29,7 @@ public class NewBookingRequestsFragment extends Fragment {
     public static BookingRequestsAdapter bookingRequestsAdapter;
     String filter,sort;
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
+    ArrayList<String> filters=new ArrayList<>();
 
     public static String tmp="1";
     @Nullable
@@ -38,7 +41,9 @@ public class NewBookingRequestsFragment extends Fragment {
         sortbtn= MyBookingRequestsFragment.view.findViewById(R.id.sort);
         service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
         MyBookingRequestsFragment.tab="1";
+/*
         MyBookingRequestsFragment.groupbooking="";
+*/
 //        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
 
 //        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
@@ -46,11 +51,18 @@ public class NewBookingRequestsFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
       //  APICall.layout= R.layout.incom_reservation_layout;
-        APICall.filter=filter= APICall.bookingFilter("1","9","0");
+        APICall.filter=filter= APICall.Filter("1","9","0");
+        filters.clear();
 
+        filters.add(APICall.filter);
+        if(!MyBookingRequestsFragment.dateFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.dateFilter);
+        if(!MyBookingRequestsFragment.typeFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.typeFilter);
+        if(!MyBookingRequestsFragment.salonFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.salonFilter);
 
-
-
+        APICall.filter=APICall.Filter(filters);
 
 
         //---------cancel---------

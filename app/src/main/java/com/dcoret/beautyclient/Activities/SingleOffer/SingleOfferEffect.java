@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.API.Constants;
 import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 import com.dcoret.beautyclient.Activities.OfferBookingResult;
@@ -81,6 +83,7 @@ public class SingleOfferEffect extends AppCompatActivity {
 
         }
 
+/*
             //region CHECK_NOTIFICATION
             String notification = "";
             try {
@@ -93,12 +96,15 @@ public class SingleOfferEffect extends AppCompatActivity {
 
             {
                 bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+                Log.e("notif ",supIdClasses.get(0).getBdb_name()+"");
                 supIdClasses = NotificationsBeauty.supIdClasses;
+
             }
         }
         catch (Exception e){}
 
             //endregion
+*/
 
        /* Log.e("SERVICES",supIdClasses.get(0).getBdb_ser_id());
         Log.e("SERVICEcS",supIdClasses.size()+"");
@@ -118,12 +124,14 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
         for (int i = 0; i< supIdClasses.size(); i++){
+
             if (i==0){
-                filter+="\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"\n" ;
+                filter+="\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id() ;
             }else {
-                filter+=",\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id()+"\n" ;
+                filter+=",\"ser_id\": "+ supIdClasses.get(i).getBdb_ser_id() ;
             }
         }
+
 
         filter+=    "                }\n" +
                 "            ]\n" +
@@ -141,11 +149,15 @@ public class SingleOfferEffect extends AppCompatActivity {
         update.setText(R.string.next);
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
+            update.setText(R.string.createRequest);
+
             update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getEffectFilter();
-//                    APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",getClientsJ(effectFilter),context);
+                    Log.e("effects",effectFilter);
+
+                    APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",getClientsJ(effectFilter),context);
 
                 }
             });
@@ -300,15 +312,50 @@ public class SingleOfferEffect extends AppCompatActivity {
         //------- add degrees
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.effects_layout, myroot, false);
-        TextView effect_name;
-        final LinearLayout dzero,done,dtwo,dthree,dfour,dfive;
+        TextView effect_name,txtOne,txtTwo,txtThree,txtFour,txtFive;
+        ImageView one,two,three,four,five;        final LinearLayout dzero,done,dtwo,dthree,dfour,dfive;
         dzero=layout2.findViewById(R.id.dzereo);
         done=layout2.findViewById(R.id.d_one);
         dtwo=layout2.findViewById(R.id.dtwo);
         dthree=layout2.findViewById(R.id.dthree);
         dfour=layout2.findViewById(R.id.dfour);
         dfive=layout2.findViewById(R.id.dfive);
+        one=layout2.findViewById(R.id.one);
+        two=layout2.findViewById(R.id.two);
+        three=layout2.findViewById(R.id.three);
+        four=layout2.findViewById(R.id.four);
+        five=layout2.findViewById(R.id.five);
+        txtOne=layout2.findViewById(R.id.textOne);
+        txtTwo=layout2.findViewById(R.id.textTwo);
+        txtThree=layout2.findViewById(R.id.textThree);
+        txtFour=layout2.findViewById(R.id.textFour);
+        txtFive=layout2.findViewById(R.id.textFive);
 
+        int id =Integer.parseInt(effects.getBdb_effect_id());
+        {
+            one.setImageResource(Constants.effectsImgs[id][0]);
+            two.setImageResource(Constants.effectsImgs[id][1]);
+            three.setImageResource(Constants.effectsImgs[id][2]);
+            four.setImageResource(Constants.effectsImgs[id][3]);
+            five.setImageResource(Constants.effectsImgs[id][4]);
+            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+            {
+                txtOne.setText(Constants.effectStoredStringArayEn[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayEn[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayEn[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayEn[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayEn[id][4]);
+            }
+            else
+            {
+                txtOne.setText(Constants.effectStoredStringArayAr[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayAr[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayAr[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayAr[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayAr[id][4]);
+            }
+
+        }
 
         if (effects.getBdb_value().equals("0")){
             dzero.setBackgroundResource(R.color.colorAccent);
@@ -496,23 +543,42 @@ public class SingleOfferEffect extends AppCompatActivity {
     public static JSONArray getClientsJ(String effectFilter){
         JSONArray clients =new JSONArray();
             JSONObject clientJ = new JSONObject();
+        Log.e("effectFilter",effectFilter);
+        String ef ="["+effectFilter+"]";
 
             {
                 String cname= BeautyMainPage.client_name;
                 String cphone=BeautyMainPage.client_number;
                 try {
                     clientJ.put("client_name",cname);
+                    Log.e("ERR1","1");
                     clientJ.put("client_phone",cphone);
-                    clientJ.put("start_date",APICall.arabicToDecimal(SingleDateOfferBooking.showDate.getText().toString()));
-                    clientJ.put("is_current_user","1");
-                    clientJ.put("old","1");
-                    JSONArray services=new JSONArray() ;
-                    JSONObject effects=new JSONObject(effectFilter) ;
-                    clientJ.put("effect",effects);
+                    Log.e("ERR2","1");
 
-                    for (int j = 0; j < SingleDateMultiClientOfferBooking.offerClientsModels.get(0).getServiceDetails().size(); j++) {
+                    clientJ.put("start_date",APICall.arabicToDecimal(SingleDateOfferBooking.showDate.getText().toString()));
+                    Log.e("ERR3","1");
+
+                    clientJ.put("is_current_user","1");
+                    Log.e("ERR4","1");
+
+                    clientJ.put("old","1");
+                    Log.e("ERR5","1");
+
+                    JSONArray services=new JSONArray() ;
+                    JSONArray effects=new JSONArray(ef) ;
+                    Log.e("ERR6","1");
+
+                    clientJ.put("effect",effects);
+                    Log.e("ERR7","1");
+
+
+                    for (int j = 0; j < SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().size(); j++) {
                         JSONObject servic = new JSONObject();
-                        servic.put("bdb_ser_sup_id",SingleDateMultiClientOfferBooking.offerClientsModels.get(0).getServiceDetails().get(j).getBdb_ser_sup_id());
+                        Log.e("ERR8 "+j,"1");
+
+                        servic.put("bdb_ser_sup_id",SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().get(j).getBdb_ser_sup_id());
+                        Log.e("ERR9 "+j,"1");
+
                         services.put(servic);
 
                     }

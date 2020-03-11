@@ -700,6 +700,7 @@
     <string name="evaluate">evaluate</string>
     <string name="clients_count_gr_2">The number of clients must be at least two</string>
     <string name="reser_id">ID</string>
+    <string name="order_id">order number :</string>
     <string name="journey_time">Journey time</string>
     <string name="journey_cost">Journey cost</string>
     <string name="actual_price">actual price</string>
@@ -737,8 +738,8 @@
     <string name="select_date_of_booking">please select date of booking</string>
     <string name="add_atleast_one_client">Please Add one client at least</string>
     <string name="estimated_cost">estimated cost :</string>
-    <string name="forKids">for children</string>
-    <string name="forAdults">for adults</string>
+    <string name="forKids"> child</string>
+    <string name="forAdults"> adult</string>
     <string name="indivRequest">individual request</string>
     <string name="indivMultiRequest">individual request</string>
     <string name="groupRequest">group request</string>
@@ -755,9 +756,13 @@
     <string name="filter">filter</string>
     <string name="removeFilter">remove all filters</string>
     <string name="select_request_type">select request type</string>
+    <string name="select_supplier">select supplier</string>
     <string name="type">type :</string>
     <string name="suppliers">Suppliers</string>
     <string name="lost_time_emp">employee lost time</string>
     <string name="journey_time_emp">journey time for employee</string>
+    <string name="requestRelatedBooking">Reservation attached to the request</string>
+    <string name="createRequest">create request</string>
+    <string name="errorAddingRequest">sorry, try again later </string>
 
 </resources>

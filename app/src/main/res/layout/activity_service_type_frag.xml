@@ -27,11 +27,11 @@
 
         <LinearLayout
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_width="248dp"
             android:layout_height="68dp"
             android:background="@drawable/blue_white"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layoutDirection="ltr"
             android:layout_marginRight="@dimen/pf_10dp_space"
             android:layout_marginLeft="@dimen/pf_10dp_space"
@@ -213,12 +213,12 @@
 
         <LinearLayout
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_width="248dp"
             android:layout_height="68dp"
             android:background="@drawable/pink_white"
             android:layoutDirection="ltr"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="@dimen/pf_10dp_space"
             android:layout_marginLeft="@dimen/pf_10dp_space"
             android:orientation="horizontal">
@@ -396,10 +396,9 @@
         >
         <Button
             android:id="@+id/freeBooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/app_services_btn"
-            android:text="Add request"
+            android:layout_width="60dp"
+            android:layout_height="@dimen/standard_60"
+            android:background="@drawable/add_request"
             android:gravity="center"
             android:layout_gravity="center"/>
 

@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dcoret.beautyclient.API.APICall;
+import com.dcoret.beautyclient.API.Constants;
 import com.dcoret.beautyclient.Adapters.GroupEffectAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
@@ -212,7 +214,8 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
         //------- add degrees
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.effects_layout, myroot, false);
-        TextView effect_name;
+        TextView effect_name,txtOne,txtTwo,txtThree,txtFour,txtFive;
+        ImageView one,two,three,four,five;
         final LinearLayout dzero,done,dtwo,dthree,dfour,dfive;
         dzero=layout2.findViewById(R.id.dzereo);
         done=layout2.findViewById(R.id.d_one);
@@ -220,7 +223,42 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
         dthree=layout2.findViewById(R.id.dthree);
         dfour=layout2.findViewById(R.id.dfour);
         dfive=layout2.findViewById(R.id.dfive);
+        one=layout2.findViewById(R.id.one);
+        two=layout2.findViewById(R.id.two);
+        three=layout2.findViewById(R.id.three);
+        four=layout2.findViewById(R.id.four);
+        five=layout2.findViewById(R.id.five);
+        txtOne=layout2.findViewById(R.id.textOne);
+        txtTwo=layout2.findViewById(R.id.textTwo);
+        txtThree=layout2.findViewById(R.id.textThree);
+        txtFour=layout2.findViewById(R.id.textFour);
+        txtFive=layout2.findViewById(R.id.textFive);
 
+        int id =Integer.parseInt(effects.getBdb_effect_id());
+        {
+            one.setImageResource(Constants.effectsImgs[id][0]);
+            two.setImageResource(Constants.effectsImgs[id][1]);
+            three.setImageResource(Constants.effectsImgs[id][2]);
+            four.setImageResource(Constants.effectsImgs[id][3]);
+            five.setImageResource(Constants.effectsImgs[id][4]);
+            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+            {
+                txtOne.setText(Constants.effectStoredStringArayEn[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayEn[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayEn[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayEn[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayEn[id][4]);
+            }
+            else
+            {
+                txtOne.setText(Constants.effectStoredStringArayAr[id][0]);
+                txtTwo.setText(Constants.effectStoredStringArayAr[id][1]);
+                txtThree.setText(Constants.effectStoredStringArayAr[id][2]);
+                txtFour.setText(Constants.effectStoredStringArayAr[id][3]);
+                txtFive.setText(Constants.effectStoredStringArayAr[id][4]);
+            }
+
+        }
 
         if (effects.getBdb_value().equals("0")){
             dzero.setBackgroundResource(R.color.colorAccent);

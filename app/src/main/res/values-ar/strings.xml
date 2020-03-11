@@ -566,8 +566,8 @@
     <string name="ordered_at">تاريخ الطلب :</string>
     <string name="ordered_type">نوع الطلب :</string>
     <string name="age2">العمر :</string>
-    <string name="forKids">للأطفال</string>
-    <string name="forAdults">للبالغين</string>
+    <string name="forKids">طفلة</string>
+    <string name="forAdults">بالغة</string>
     <string name="indivRequest">طلب فردي</string>
     <string name="indivMultiRequest">طلب فردي</string>
     <string name="groupRequest">طلب جماعي</string>
@@ -594,5 +594,10 @@
     </string-array>
     <string name="type">النوع :</string>
     <string name="suppliers">المزودات</string>
+    <string name="select_supplier">اختاري مزودة</string>
+    <string name="requestRelatedBooking">الحجز المرتبط بالطلب</string>
+    <string name="order_id">رقم الطلب:</string>
+    <string name="createRequest">إنشاء طلب</string>
+    <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
 
 </resources>

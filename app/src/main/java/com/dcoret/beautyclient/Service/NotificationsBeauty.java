@@ -281,7 +281,6 @@ public class NotificationsBeauty {
                 .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .setContentTitle(title)
                 .setContentText(body)
-
                 .setAutoCancel(true)
                 .setContentInfo("INFO")
         ;
@@ -296,6 +295,7 @@ public class NotificationsBeauty {
         }
         notificationManager2.notify(RANDOM_N_ID, builder2.build());
     }
+
     public void showOfferDetailsNotification(Context context,  String title, String body, JSONArray pairs, String code)
     {
         String bdb_offer_type="";
@@ -401,7 +401,11 @@ public class NotificationsBeauty {
         Log.e("NotifCode",code);
         Log.e("Notif", " pairs :"+notificationPairs);
 
-        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("21")||code.equals("38"))
+        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("21")||code.equals("38")
+                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")
+                ||code.equals("2")||code.equals("3")||code.equals("15")||code.equals("19")
+                ||code.equals("20")||code.equals("22")||code.equals("25")||code.equals("32")
+        )
         {
             showBookingDetailsNotification(context,title,body,j,code);
         }

@@ -118,11 +118,13 @@ public class RequestProvidersFragment extends Fragment {
         {
             Log.e("Pages","true"+totalCount);
             nextPage.setClickable(true);
+            nextPage.setVisibility(View.VISIBLE);
         }
         else
         {
             Log.e("Pages","false"+totalCount);
             nextPage.setClickable(false);
+
 
         }
 

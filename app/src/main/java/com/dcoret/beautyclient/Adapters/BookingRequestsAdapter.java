@@ -96,7 +96,13 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
             if (MyBookingRequestsFragment.tab.equals("2")){
-                ((Item) holder).cancel.setVisibility(View.GONE);
+                if (bookingRequestData.get(position).getBdb_status().equals("1")){
+
+                    ((Item) holder).cancel.setText(R.string.requestRelatedBooking);
+                }
+                else
+                    ((Item) holder).cancel.setVisibility(View.GONE);
+
             }
 
             // >>>>>>>>>>>>> status
@@ -111,55 +117,89 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 }else  if (bookingRequestData.get(position).getBdb_status().equals("4")){
                     ((Item) holder).status.setText(R.string.canceledBySystem);
                 }
+
+
             }
             else {
                 ((Item) holder).status.setVisibility(View.GONE);
             }
 
+            //>>>>>>>> add all services layouts
+        for ( int i=0;i<bookingRequestData.get(position).getClients().size();i++)
+        {
+            for ( int j=0;j<bookingRequestData.get(position).getClients().get(i).getServices().size();j++)
+            {
+                if(context.getResources().getString(R.string.locale).equals("en"))
+                    addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name());
+                else
+                    addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name_ar());
+
+            }
+
+
+        }
 
             // >>>>>>>>>>>>> cancel Button
             ((Item) holder).cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                                Log.e("Outer","بب");
-                                final Dialog dialog1=new Dialog(context);
-                                dialog1.setContentView(R.layout.sweet_dialog_layout_v4);
-                                TextView confirm=dialog1.findViewById(R.id.confirm);
-                                TextView cancel=dialog1.findViewById(R.id.cancel);
-                                TextView message=dialog1.findViewById(R.id.message);
-                                message.setText(R.string.cancelRequestAlert);
-                                confirm.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
+                    if (MyBookingRequestsFragment.tab.equals("2"))
+                    {
+                        Intent i = new Intent(context,BeautyMainPage.class);
+                        Log.e("NAMEBOOKING",bookingRequestData.get(position).getBdb_name_booking());
+                        i.putExtra("goToReservation",bookingRequestData.get(position).getBdb_name_booking());
+                        context.startActivity(i);
+                        ((AppCompatActivity) context).finish();
+                    }
+                    else
+                    {
+                        Log.e("Outer","بب");
+                        final Dialog dialog1=new Dialog(context);
+                        dialog1.setContentView(R.layout.sweet_dialog_layout_v4);
+                        TextView confirm=dialog1.findViewById(R.id.confirm);
+                        TextView cancel=dialog1.findViewById(R.id.cancel);
+                        TextView message=dialog1.findViewById(R.id.message);
+                        message.setText(R.string.cancelRequestAlert);
+                        confirm.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-                                            //----------------- cancel paid----------
-                                        dialog1.dismiss();
-                                            APICall.cancelBookingRequest(bookingRequestData.get(position).getBdb_id(),context);
+                                //----------------- cancel paid----------
+                                dialog1.dismiss();
+                                APICall.cancelBookingRequest(bookingRequestData.get(position).getBdb_id(),context);
 
-                                    }
-                                });
-                                cancel.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog1.dismiss();
-                                    }
-                                });
-                                dialog1.show();
+                            }
+                        });
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog1.dismiss();
+                            }
+                        });
+                        dialog1.show();
+                    }
+
                             }
 
             });
 
 
 
+
             // >>>>>>>>>>>>> date
             ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getClients().get(0).getBdb_start_date()));
 
-            //>>>>>>>>> price // is group booking is now used for price
-        String price = APICall.convertToArabic(bookingRequestData.get(position).getBdb_is_group_booking());
+            //>>>>>>>>> price
+        String price = APICall.convertToArabic(bookingRequestData.get(position).getCost());
         price+= " "+BeautyMainPage.context.getResources().getString(R.string.ryal);
 
         ((Item)holder).totalPrice.setText(price);
+
+
+        //>>>>>>> ID
+        String id =BeautyMainPage.context.getResources().getString(R.string.order_id)+ bookingRequestData.get(position).getBdb_id();
+        ((Item)holder).ID.setText(id);
 
 
             // >>>>>>>>>>>>> order booking place
@@ -176,7 +216,26 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             }
 
-            // >>>>>>>>>>>>> provider logo
+
+            // >>>>>>>> Request type
+        if(bookingRequestData.get(position).getBdb_is_group_booking().equals("20"))
+            ((Item) holder).bookType.setText(R.string.indivRequest);
+        else if(bookingRequestData.get(position).getBdb_is_group_booking().equals("21"))
+            ((Item) holder).bookType.setText(R.string.indivMultiRequest);
+        else if(bookingRequestData.get(position).getBdb_is_group_booking().equals("22"))
+            ((Item) holder).bookType.setText(R.string.groupRequest);
+        else if(bookingRequestData.get(position).getBdb_is_group_booking().equals("23"))
+            ((Item) holder).bookType.setText(R.string.indivRequestOffer);
+        else if(bookingRequestData.get(position).getBdb_is_group_booking().equals("24"))
+            ((Item) holder).bookType.setText(R.string.indivMultiRequestOffer);
+        else if(bookingRequestData.get(position).getBdb_is_group_booking().equals("25"))
+            ((Item) holder).bookType.setText(R.string.groupRequestOffer);
+
+
+
+
+
+        // >>>>>>>>>>>>> provider logo
             APICall.getSalonLogo(BeautyMainPage.context,bookingRequestData.get(position).getLogo_id(),((Item)holder).logoImg);
 
 
@@ -214,13 +273,62 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         return bookingRequestData.size();
     }
+    public static void addLayout(final LinearLayout myroot, String serviceName)
+    {
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout_request, myroot, false);
+        TextView emp_name,book_details,re_cancel;
+        TextView accept=null,refuse,edit_time;
+
+//        R.layout.accept_reservation_layout_v2;
+
+        emp_name=layout2.findViewById(R.id.rname);
+//        if (APICall.layout==R.layout.incom_reservation_layout) {
+//            accept = layout2.findViewById(R.id.accept);
+//        }
+//        refuse=layout2.findViewById(R.id.refuse);
+//        re_cancel=layout2.findViewById(R.id.cancel);
+        edit_time=layout2.findViewById(R.id.edit_time);
+//        book_details=layout2.findViewById(R.id.book_Details);
+        emp_name.setText(serviceName);
+
+       /* if (i!=bookingAutomatedBrowseData.get(postion).getData().size()-1) {
+//            if (APICall.layout==R.layout.incom_reservation_layout) {
+//                accept.setVisibility(View.GONE);
+//            }
+//            refuse.setVisibility(View.GONE);
+//            edit_time.setVisibility(View.GONE);
+        }*/
+//        book_details.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+
+//            }
+//        });
+
+//        ImageView delete=layout2.findViewById(R.id.delete);
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                myroot.removeView(layout2);
+//            }
+//        });
+//
+        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+//
+    }
 
 
 
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel;
+        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID;
         ImageView book_Details,inner_res,logoImg;
 
         LinearLayout myroot;
@@ -239,6 +347,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             cancel=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);
             logoImg=itemView.findViewById(R.id.logoImg);
+            ID=itemView.findViewById(R.id.order_num);
 
         }
 
