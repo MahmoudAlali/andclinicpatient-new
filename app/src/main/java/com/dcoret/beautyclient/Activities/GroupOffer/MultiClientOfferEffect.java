@@ -21,10 +21,15 @@ import com.dcoret.beautyclient.Adapters.OfferBookingMultiClientsAdapter;
 import com.dcoret.beautyclient.DataModel.ClientEffectModel;
 import com.dcoret.beautyclient.DataModel.ClientEffectRequestModel;
 import com.dcoret.beautyclient.DataModel.DataOffer;
+import com.dcoret.beautyclient.Fragments.OffersForRequest;
 import com.dcoret.beautyclient.Fragments.PlaceServiceFragment;
 import com.dcoret.beautyclient.Activities.TabTwo;
+import com.dcoret.beautyclient.Fragments.freeBookingFragment;
 import com.dcoret.beautyclient.R;
 import com.dcoret.beautyclient.Service.NotificationsBeauty;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -45,8 +50,17 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         context=this;
 
         position=getIntent().getIntExtra("position",0);
-        supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
-        bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
+        }
+        else
+        {
+            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+            bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+        }
+
 
         //region CHECK_NOTIFICATION
         String notification = "";
@@ -55,12 +69,16 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
         }
         catch (Exception e){}
-        if(!notification.equals(""))
+        try {
+            if(!notification.equals(""))
 
-        {
-            bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
+            {
+                bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
 //            supIdClasses = NotificationsBeauty.supIdClasses;
+            }
         }
+        catch (Exception e){}
+
 
         //endregion
 
@@ -106,21 +124,37 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 //        Log.e("servicesForClientGroups","sfcg"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(MultiIndividualBookingReservationFragment.servicesForClientGroups.size()-1).getId());
 //        Log.e("servicesForClientGroups","sfcg"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(MultiIndividualBookingReservationFragment.servicesForClientGroups.size()-1).getName());
         update.setText(R.string.next);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getEffects();
-                Log.e("Effectfilter",getClients(effectsArr));
 
-                Intent intent=new Intent(context, OfferBookingResult.class);
-                intent.putExtra("filter",getClients(effectsArr));
+        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+        {
+            update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getEffects();
+                    APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",getClientsJ(effectsArr),context);
+
+                }
+            });
+        }
+        else
+        {
+            update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getEffects();
+                    Log.e("Effectfilter",getClients(effectsArr));
+
+                    Intent intent=new Intent(context, OfferBookingResult.class);
+                    intent.putExtra("filter",getClients(effectsArr));
 //                intent.putExtra("filter", postdata);
-                intent.putExtra("place", getIntent().getStringExtra("place"));
-                intent.putExtra("position", position);
-                intent.putExtra("offertype",getIntent().getStringExtra("offertype")  );
-                startActivity(intent);
-            }
-        });
+                    intent.putExtra("place", getIntent().getStringExtra("place"));
+                    intent.putExtra("position", position);
+                    intent.putExtra("offertype",getIntent().getStringExtra("offertype")  );
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 
 
@@ -323,6 +357,55 @@ public class MultiClientOfferEffect extends AppCompatActivity {
                     "\t\t   }\n" +
                     "\t\t";
         return postdata;
+    }
+    public static JSONArray getClientsJ(ArrayList<String> effectsArr){
+        JSONArray clients =new JSONArray();
+        for (int i = 0; i < SingleDateMultiClientOfferBooking.offerClientsModels.size(); i++) {
+            JSONObject clientJ = new JSONObject();
+
+            {
+                String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
+                String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();
+                try {
+                    clientJ.put("client_name",cname);
+                    clientJ.put("client_phone",phone);
+                    clientJ.put("start_date",APICall.arabicToDecimal(SingleDateMultiClientOfferBooking.add_date.getText().toString()));
+                    if(phone.equals(BeautyMainPage.client_number))
+                        clientJ.put("is_current_user","1");
+                    else
+                        clientJ.put("is_current_user","0");
+
+                    clientJ.put("old","1");
+
+                    JSONArray services=new JSONArray() ;
+                    JSONObject effects=new JSONObject(effectsArr.get(i)) ;
+                    clientJ.put("effect",effects);
+
+                    for (int j = 0; j < SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                        JSONObject servic = new JSONObject();
+                        servic.put("bdb_ser_sup_id",SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id());
+                        services.put(servic);
+
+                    }
+                    clientJ.put("services",services);
+                    clients.put(clientJ);
+
+
+
+                }
+                catch (Exception e)
+                { Log.e("ERR",e.getMessage());}
+
+
+//                        View view = recyclerView.getLayoutManager().findViewByPosition(1);
+//                            String bdb_ser_sup_id = API.dofs.get(i).getSersup_ids().get(i).getBdb_ser_sup_id();
+//                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+
+
+            }
+        }
+
+        return clients;
     }
     public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel, int position){
         //------- add degrees

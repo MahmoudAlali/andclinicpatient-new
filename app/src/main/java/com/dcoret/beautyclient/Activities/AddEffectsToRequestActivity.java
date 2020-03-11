@@ -87,7 +87,7 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getEffects();
                 Log.e("Effectfilter",getEffects().toString());
-                APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id,freeBookingFragment.Place,CreateRequestActivity.is_group_booking,getClients(1),BeautyMainPage.context);
+                APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id,freeBookingFragment.Place,"",CreateRequestActivity.is_group_booking,getClients(1),context);
                 //Intent intent=new Intent(context, GroupReservationResultActivity.class);
 //                intent.putExtra("filter",getfilter(f));
              //   startActivity(intent);
@@ -437,6 +437,7 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
 
                 client.put("client_name",CreateRequestActivity.clientsArrayList.get(i).getClientName().getText().toString());
                 client.put("client_phone",CreateRequestActivity.clientsArrayList.get(i).getPhoneNumber().getText().toString());
+                client.put("start_date",CreateRequestActivity.add_date.getText());
                 client.put("is_current_user","1");
                 client.put("old",(CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1));
                 JSONArray services=new JSONArray() ;

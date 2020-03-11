@@ -106,17 +106,20 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
 
 
     }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String catigoryVal,String cost)
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String catigoryVal,String cost,String requestedOn)
     {
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.request_details_main_layout_ext_v1, myroot, false);
         TextView rname;
         TextView VCost;
+        TextView requestedOnView;
 
         ImageView categoryImg=layout2.findViewById(R.id.categoryImg);
         rname=layout2.findViewById(R.id.rname);
+        requestedOnView=layout2.findViewById(R.id.book_at);
         VCost=layout2.findViewById(R.id.cost);
         VCost.setText(cost);
+        requestedOnView.setText(requestedOn);
         rname.setText(reservationName);
         int index =Integer.parseInt(catigoryVal);
         categoryImg.setImageResource(categoryImages[index]);

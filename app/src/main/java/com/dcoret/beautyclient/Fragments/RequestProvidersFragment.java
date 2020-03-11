@@ -8,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,10 @@ public class RequestProvidersFragment extends Fragment {
     public static RequestProvidersAdapter providersAdapter;
     public static RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
-    private int pageNum=1;
-    LinearLayout previousPage,nextPage;
-    TextView pageNumView;
+    public static int pageNum=1;
+    public static int PagesCount;
+    public static LinearLayout previousPage,nextPage;
+    public static TextView pageNumView;
     @Nullable
     @Override
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -53,17 +55,28 @@ public class RequestProvidersFragment extends Fragment {
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("Pages","false");
                 pageNum++;
-                pullToRefresh.setRefreshing(true);
+                providerItems.clear();
+
+                providersAdapter.notifyDataSetChanged();
+                //---------------------call API for Services and get items-------------
+                APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
+
             }
         });
-        nextPage.setOnClickListener(new View.OnClickListener() {
+        previousPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(pageNum>1)
                 {pageNum--;
                     pageNumView.setText(getResources().getString(R.string.page)+": "+pageNum);
-                pullToRefresh.setRefreshing(true);}
+                    providerItems.clear();
+
+                    providersAdapter.notifyDataSetChanged();
+                    //---------------------call API for Services and get items-------------
+                    APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
+                }
             }
         });
         pageNumView.setText(getResources().getString(R.string.page)+": "+pageNum);
@@ -97,6 +110,32 @@ public class RequestProvidersFragment extends Fragment {
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
         providersAdapter.notifyDataSetChanged();
+//        recyclerView.invalidate();
+    }
+    public static void rechekPages(int totalCount){
+
+        if((pageNum*10)<totalCount)
+        {
+            Log.e("Pages","true"+totalCount);
+            nextPage.setClickable(true);
+        }
+        else
+        {
+            Log.e("Pages","false"+totalCount);
+            nextPage.setClickable(false);
+
+        }
+
+
+        if(pageNum==1)
+        {
+            Log.e("PagesPre","false"+totalCount);
+            previousPage.setActivated(false);
+        }
+
+        pageNumView.setText(BeautyMainPage.context.getResources().getString(R.string.page)+": "+pageNum);
+
+
 //        recyclerView.invalidate();
     }
 }

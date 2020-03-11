@@ -29,7 +29,7 @@
                 android:title="@string/effect" />
             <item
                 android:id="@+id/requests"
-                android:icon="@drawable/ic_add_res"
+                android:icon="@drawable/side_requests_icon"
                 android:title="@string/bookingRequests" />
 
             <item

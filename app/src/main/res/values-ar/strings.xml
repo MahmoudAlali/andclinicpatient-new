@@ -562,5 +562,37 @@
     <string name="estimated_cost">السعر المقدّر :</string>
     <string name="lost_time_emp">الوقت الضائع للموظفات</string>
     <string name="journey_time_emp">وقت المشوار للموظفات</string>
+    <string name="estimated_cost">الكلفة التقديرية :</string>
+    <string name="ordered_at">تاريخ الطلب :</string>
+    <string name="ordered_type">نوع الطلب :</string>
+    <string name="age2">العمر :</string>
+    <string name="forKids">للأطفال</string>
+    <string name="forAdults">للبالغين</string>
+    <string name="indivRequest">طلب فردي</string>
+    <string name="indivMultiRequest">طلب فردي</string>
+    <string name="groupRequest">طلب جماعي</string>
+    <string name="indivRequestOffer">عرض فردي</string>
+    <string name="indivMultiRequestOffer">عرض فردي</string>
+    <string name="groupRequestOffer">عرض جماعي</string>
+    <string name="requestAdded">تم إرسال طلب الحجز.</string>
+    <string name="KM">كم</string>
+    <string name="select_service">اختاري خدمة</string>
+    <string name="requestDateFilter">تاريخ الطلب</string>
+    <string name="requestSalonFilter">اسم الصالون</string>
+    <string name="requestTypeFilter">نوع الطلب</string>
+    <string name="filter">فلترة</string>
+    <string name="removeFilter">إزالة جميع عناصر الفلترة</string>
+    <string name="select_request_type">اختاري نوع الطلب</string>
+    <string-array name="request_type">
+        <item> نوع الطلب</item>
+        <item>طلب فردي</item>
+        <item>طلب جماعي</item>
+        <item>طلب عرض فردي</item>
+        <item>طلب عرض جماعي</item>
+
+
+    </string-array>
+    <string name="type">النوع :</string>
+    <string name="suppliers">المزودات</string>
 
 </resources>

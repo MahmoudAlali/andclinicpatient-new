@@ -10,6 +10,10 @@ public class SupInfoClass {
         this.id = id;
         this.address = address;
     }
+    public SupInfoClass(String name, String id) {
+        this.name = name;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
