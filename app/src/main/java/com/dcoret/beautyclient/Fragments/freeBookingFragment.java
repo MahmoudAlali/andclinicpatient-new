@@ -43,6 +43,7 @@ import com.dcoret.beautyclient.Activities.BeautyMainPage;
 import com.dcoret.beautyclient.Activities.TabTwo;
 import com.dcoret.beautyclient.DataModel.ServiceFilter;
 import com.dcoret.beautyclient.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 
@@ -67,12 +68,16 @@ public class freeBookingFragment extends Fragment {
     //public static TextView date;
     public static String offerPlace="";
     public static String Place="";
+    public static ArrayAdapter adapter;
+    public static String salonName="";
+    public static String Name="";
+    ArrayList<String> servicesList=new ArrayList<>();
 
     public static String filterSupplierName="",filterDistance="",filterType="",filterProviderRate="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="";
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_free_booking_filters, container, false);
         //service_hair = view.findViewById(R.id.service_hair);
 
@@ -89,6 +94,7 @@ public class freeBookingFragment extends Fragment {
         distance = view.findViewById(R.id.distance);
         ok = view.findViewById(R.id.ok);
         APICall.getdetailsUser(BeautyMainPage.context);
+        APICall.getAllSuppliers(BeautyMainPage.context);
 
         toolbar= view.findViewById(R.id.toolbar);
 
@@ -159,11 +165,73 @@ public class freeBookingFragment extends Fragment {
         providerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (servicesList.size()==0)
+                    for (int i=0;i<APICall.allSuppliers.size();i++){
+                        servicesList.add(APICall.allSuppliers.get(i).getName());
+                    }
+
                 final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
                 namesalonDialog.setContentView(R.layout.provider_name_layout);
                 namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 //final Spinner name=namesalonDialog.findViewById(R.id.name);
                 final EditText name=namesalonDialog.findViewById(R.id.name);
+                final SearchableSpinner add_service=namesalonDialog.findViewById(R.id.add_service);
+                adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,servicesList);
+                adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                add_service.setTitle(getResources().getString(R.string.suppliers));
+                add_service.setAdapter(adapter);
+                // set listener
+                add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
+
+                        Name=APICall.allSuppliers.get(position).getName();
+                       /* if (position!=0) {
+                           // final View view1 = inflater.inflate(R.layout.adding_name_service_layout, adding_name_service, false);
+                           // TextView textView = view1.findViewById(R.id.service_name);
+                           // textView.setText(add_service.getSelectedItem().toString());
+                         //   ImageView delete = view1.findViewById(R.id.delete);
+                        *//*    delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    adding_name_service.removeView(view1);
+                                    for (int i=0;i<servicesForClientGroups.size();i++){
+                                        if (servicesForClientGroups.get(i).getViewnum().equals(vc)){
+                                            try {
+                                                servicesForClientGroups.remove(i);
+                                            }catch (Exception ee)
+                                            {
+                                                ee.printStackTrace();
+                                            }
+                                        }
+                                    }
+//
+//                                 servicesForClientGroups.remove(vc-1);
+                                    Log.e("servicesForClientGroups",servicesForClientGroups.size()+"");
+
+                                }
+                            });
+
+
+                            adding_name_service.addView(view1);*//*
+
+                        }
+                        if (position!=0 && servicesList.get(position-1).getBdb_is_fixed_price().equals("1")){
+                            ishairService.add(items-1);
+                            Log.e("PostionID",position+"");
+                            Log.e("PostionID",servicesList.get(position-1).getBdb_name()+"");
+                            Log.e("PostionID",servicesList.get(position-1).getBdb_is_fixed_price()+"");
+                        }*/
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                        salonName="";
+                    }
+                });
+
                 //ArrayList<String> namesList=new ArrayList<>();
 
                /* for (int i = 0; i < supInfoList.size(); i++) {
@@ -200,9 +268,9 @@ public class freeBookingFragment extends Fragment {
                         // if (!name.getSelectedItem().toString().isEmpty()){
                         if (!name.getText().equals("")){
                             namesalonDialog.dismiss();
-                            providerName.setText(getResources().getText(R.string.providerName)+":" +name.getText().toString());
-                            filterSupplierName= "\"supplier_name\":" +"\""+ name.getText().toString()+"\",";
-
+                            providerName.setText( Name);
+                           // filterSupplierName= "\"supplier_name\":" +"\""+ name.getText().toString()+"\",";
+                            filterSupplierName=salonName;
                             // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
                            // ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, providerName.getText().toString()));
 
@@ -226,7 +294,8 @@ public class freeBookingFragment extends Fragment {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         // nameSalonOrProvider.setChecked(false);
-                        providerName.setText(getResources().getText(R.string.salon_provider_name));
+                        providerName.setText(getResources().getText(R.string.providerName));
+                        filterSupplierName="";
                         APICall.filterSortAlgorithm("3", "", "");
                         ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, providerName.getText().toString()));
                         // idsup="";

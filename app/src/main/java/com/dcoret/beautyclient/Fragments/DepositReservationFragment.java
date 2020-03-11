@@ -80,6 +80,7 @@ public class DepositReservationFragment extends Fragment {
             //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
             Log.e("BookID",book_id);
             Intent intent=new Intent(BeautyMainPage.context, ReservatoinDetailsActivity.class);
+            intent.putExtra("book_id",book_id);
             startActivity(intent);
         }
 

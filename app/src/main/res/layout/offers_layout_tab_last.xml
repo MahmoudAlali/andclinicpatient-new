@@ -11,58 +11,67 @@
         android:weightSum="3">
         <LinearLayout
 
-            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:gravity="end"
             android:background="@drawable/offer_reser_count_shape"
             >
+
+            <TextView
+                android:layout_marginStart="@dimen/standard_60"
+                android:id="@+id/num_of_times"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:text="@string/num_of_times"
+                android:gravity="center"
+
+                android:layout_marginLeft="@dimen/standard_60" />
+            <ImageView
+                android:id="@+id/add_offer"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/plus_shape"
+                />
+
+<!--
             <LinearLayout
                 android:layout_weight="1"
                 android:weightSum="3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
+              &lt;!&ndash;  <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_call_black_24dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="20dp"
-                    />
-                <TextView
-                    android:id="@+id/num_of_times"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primedark"
-                    android:text="@string/num_of_times"
-                    android:gravity="center"
+                    />&ndash;&gt;
 
-                    />
             </LinearLayout>
+-->
+<!--
             <LinearLayout
                 android:layout_weight="2"
                 android:weightSum="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                &lt;!&ndash;<ImageView
                     android:layout_margin="7dp"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/heart_shape"
-                    />
-                <ImageView
-                    android:id="@+id/add_offer"
-                    android:layout_margin="7dp"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/plus_shape"
-                    />
+                    />&ndash;&gt;
+
             </LinearLayout>
+-->
 
         </LinearLayout>
 
@@ -76,39 +85,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:paddingTop="@dimen/standard_20"
                 android:background="@drawable/offer_shape2"
                 >
-                <android.support.design.widget.CoordinatorLayout
+                <TextView
+                    android:id="@+id/offer_type"
                     android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
-                    <!--<ImageView
-                        android:id="@+id/info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_info"
-                        android:layout_margin="10dp"
-                        android:layout_gravity="center_vertical"
-                        />-->
-                    <TextView
-                        android:id="@+id/offer_end"
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16dp"
-                        android:textColor="@color/colorAccentend"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="center"/>
-
-
-
-
-                </android.support.design.widget.CoordinatorLayout>
+                    android:layout_height="wrap_content"
+                    android:text="offer type"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="#01A009"
+                    android:gravity="center"/>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
@@ -129,11 +120,46 @@
                         android:text=""
                         />
                 </LinearLayout>
+
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+                    <!--<ImageView
+                        android:id="@+id/info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_info"
+                        android:layout_margin="10dp"
+                        android:layout_gravity="center_vertical"
+                        />-->
+                    <TextView
+                        android:id="@+id/offer_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="16dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorAccentend"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_marginStart="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/sale"
+                        android:layout_marginLeft="30dp" />
+
+
+
+
+                </android.support.design.widget.CoordinatorLayout>
                 <LinearLayout
                     android:orientation="horizontal"
                     android:weightSum="2"
                     android:layout_width="match_parent"
                     android:paddingStart="35dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/standard_30">
                     <TextView
@@ -142,16 +168,16 @@
                         android:textStyle="bold"
                         android:layout_gravity="center"
                         android:layout_marginEnd="10dp"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="16sp"
                         android:text="@string/discount_percentage"
                         android:layout_marginRight="10dp" />
                     <android.support.design.widget.CoordinatorLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="@dimen/standard_50"
-                            android:src="@drawable/dis_shape"/>
+                        <!--<ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            />-->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -171,9 +197,15 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="16sp"
                         android:text="@string/oneService"
                         android:layout_marginRight="10dp" />
+                    <ImageView
+                        android:id="@+id/info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_info"
+                        />
                     <!-- <LinearLayout
                          android:orientation="horizontal"
                          android:layout_weight="1"
@@ -231,15 +263,6 @@
                     android:textSize="16dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>-->
-                <TextView
-                    android:id="@+id/offer_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="offer type"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"/>
                 <LinearLayout
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -249,21 +272,19 @@
                     <TextView
                         android:id="@+id/old_price"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="40 R"
-                        android:textColor="@color/primedark"
+                        android:textColor="@android:color/black"
                         android:textSize="16dp"
-                        android:layout_marginBottom="10dp"
                         android:gravity="center"/>
                     <View
-                        android:layout_width="@dimen/standard_20"
+                        android:layout_width="@dimen/standard_30"
                         android:layout_height="match_parent"></View>
 
                     <TextView
                         android:id="@+id/new_price"
                         android:layout_width="match_parent"
-                        android:layout_height="17dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="40 R"
                         android:textColor="@color/primedark"
@@ -275,18 +296,20 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingBottom="15dp"
                     >
-                    <RatingBar
+                   <!-- <RatingBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleY="0.5"
                         android:scaleX="0.5"
-                        android:numStars="5"/>
+                        android:numStars="5"/>-->
                     <TextView
                         android:id="@+id/pro_name"
                         android:text="Provider name"
                         android:textColor="@color/prime"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </LinearLayout>
@@ -294,8 +317,8 @@
 
         </LinearLayout>
     </LinearLayout>
-    <ImageView
+<!--    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/info"/>
+        android:id="@+id/info"/>-->
 </android.support.design.widget.CoordinatorLayout>

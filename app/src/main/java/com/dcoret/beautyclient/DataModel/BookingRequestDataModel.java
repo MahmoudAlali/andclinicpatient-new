@@ -19,12 +19,13 @@ public class BookingRequestDataModel {
             bdb_sup_id,
             supplier_name,
             logo_id,
+            cost,
             bdb_client_id;
 
     ArrayList <BookingRequestClientDataModel> clients = new ArrayList<>();
 
     public BookingRequestDataModel(String bdb_id, String bdb_booking_place, String bdb_location_id, String bdb_journey_time,
-                                   String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,
+                                   String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,String cost,
                                    String bdb_name_booking, String bdb_reject_reason, String bdb_created_at,
                                    String bdb_sup_id,String supplier_name,String logo_id,  String bdb_client_id,
                                    ArrayList <BookingRequestClientDataModel> clients)
@@ -38,6 +39,7 @@ public class BookingRequestDataModel {
         this.bdb_pack_code=bdb_pack_code;
         this.bdb_is_group_booking=bdb_is_group_booking;
         this.bdb_name_booking=bdb_name_booking;
+        this.cost=cost;
         this.bdb_reject_reason=bdb_reject_reason;
         this.bdb_created_at=bdb_created_at;
         this.bdb_sup_id=bdb_sup_id;
@@ -121,5 +123,9 @@ public class BookingRequestDataModel {
 
     public String getSupplier_name() {
         return supplier_name;
+    }
+
+    public String getCost() {
+        return cost;
     }
 }

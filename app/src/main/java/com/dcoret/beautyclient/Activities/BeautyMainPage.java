@@ -245,7 +245,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Log.e("NotifCode",code);
         Log.e("Notif", " pairs :"+notificationPairs);
 
-        if(code.equals("2")||code.equals("3")||code.equals("25"))
+        if(code.equals("2")||code.equals("3")||code.equals("25")||code.equals("49")||code.equals("50")||code.equals("46"))
         {
             String book_id="";
             for (int i=0;i<j.length();i++)
@@ -504,6 +504,92 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
+        }
+        if(code.equals("45"))
+        {
+            String order_id="";
+            for (int i=0;i<j.length();i++)
+            {
+                Log.e("Notif","i :"+i);
+                try{
+                    JSONObject object = j.getJSONObject(i);
+                    order_id = object.getString("bdb_id");
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Log.e("NotifErr",i+" : "+e.getMessage());
+
+                }
+            }
+
+            Bundle bundle = new Bundle();
+            bundle.putString("order_id", order_id);
+            FRAGMENT_NAME="";
+            fragment = new MyBookingRequestsFragment();
+            fragment.setArguments(bundle);
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+        }
+
+        //endregion
+
+        //region CHECK_REQUEST
+        boolean goToRequests;
+        try
+        {
+            Log.e("Notif", "goToRequests");
+
+            goToRequests=getIntent().getBooleanExtra("goToRequests",false);
+            if (goToRequests==true)
+            {
+                fragment = new MyBookingRequestsFragment();
+                //fragment.setArguments(bundle);
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("goToRequests",e.getMessage());
+        }
+
+        //endregion
+        //region CHECK_REQ_TO_RESERVATION
+        String goToReservation;
+        try
+        {
+            Log.e("Notif", "goToReservation");
+
+            goToReservation=getIntent().getStringExtra("goToReservation");
+            if (!goToReservation.equals(""))
+            {
+                Bundle bundle = new Bundle();
+                bundle.putString("book_id", goToReservation);
+                menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
+                menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
+                menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+                menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
+                menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
+                navigation.setSelectedItemId(R.id.reservations);
+                FRAGMENT_NAME="";
+                fragment = new MyReservationFragment();
+                fragment.setArguments(bundle);
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("goToReservation",e.getMessage());
         }
 
         //endregion

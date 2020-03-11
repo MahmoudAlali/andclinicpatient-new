@@ -63,6 +63,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         if(clickAction.equals("2"))
         {
             Log.e("Notif", "click action is 2");
+            Log.e("pairs", pairs+"fddddddddddd");
 
             new NotificationsBeauty().AnalizeNotificationCode(this,title,body,pairs);
         }

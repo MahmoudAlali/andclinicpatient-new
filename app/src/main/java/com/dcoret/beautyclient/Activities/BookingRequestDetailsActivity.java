@@ -96,13 +96,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         APICall.browseOneBookingRequest(book_id,context,logoImg);
         id.setText(book_id);
 
-        Button ok=findViewById(R.id.ok);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+
 
 
     }
@@ -118,7 +112,8 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         rname=layout2.findViewById(R.id.rname);
         requestedOnView=layout2.findViewById(R.id.book_at);
         VCost=layout2.findViewById(R.id.cost);
-        VCost.setText(cost);
+        String c =cost+context.getResources().getString(R.string.ryal);
+        VCost.setText(c);
         requestedOnView.setText(requestedOn);
         rname.setText(reservationName);
         int index =Integer.parseInt(catigoryVal);
