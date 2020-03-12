@@ -32,13 +32,13 @@ public class GroupReservationOtherResultActivity extends AppCompatActivity {
 
 
         if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1){
-            url="http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
-            urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+            url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
+            urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
 
 
         }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()>1){
-            url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-            urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+            url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+            urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
         }
 
 

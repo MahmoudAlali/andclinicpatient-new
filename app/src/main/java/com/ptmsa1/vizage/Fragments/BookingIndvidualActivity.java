@@ -58,26 +58,26 @@ public class BookingIndvidualActivity extends AppCompatActivity {
             case 1:
                 place_num="9";
                 price_num="32";
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
-                urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
+                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
                 break;
             case 2:
                 place_num="8";
                 price_num="1";
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-                urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
                 break;
             case 3:
                 place_num="10";
                 price_num="30";
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-                urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
                 break;
             case 4:
                 place_num="11";
                 price_num="31";
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-                urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
                 break;
 
         }

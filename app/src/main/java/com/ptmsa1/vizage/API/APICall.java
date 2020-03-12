@@ -192,6 +192,7 @@ public class APICall {
     public static String offertypeAll;
     public static String dateforgroupbooking="";
     public static ArrayList<OfferModel> dofs=new ArrayList<>();
+    public static  String API_PREFIX_NAME="http://clientapp.dcoret.com";
 
 //    public static Dialog pd;
 
@@ -301,7 +302,7 @@ public class APICall {
         if (validationPassword(password)){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
-            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -411,7 +412,7 @@ public class APICall {
                             JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
                             String error=bdb_mobile.getString(0);
                             if(error.equals("bdb_mobile is already exists and not activated")){
-                                activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
+                                activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
                                         phone,
                                         context);
                                 showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
@@ -460,7 +461,7 @@ public class APICall {
 //            MediaType MEDIA_TYPE = MediaType.parse("application/json");
 //            showDialog(context);
 ////            pd.show();
-//            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+//            //        String url = API_PREFIX_NAME+"/api/service/Service";
 //            OkHttpClient client = new OkHttpClient();
 //            JSONObject postdata = new JSONObject();
 //            try {
@@ -564,7 +565,7 @@ public class APICall {
 ////                            JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
 ////                            String error=bdb_mobile.getString(0);
 ////                            if(error.equals("bdb_mobile is already exists and not activated")){
-////                                activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
+////                                activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
 ////                                        phone,
 ////                                        context);
 //                            showSweetDialog(context,context.getResources().getString(R.string.ExuseMeAlert),err.toString());
@@ -612,7 +613,7 @@ public class APICall {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -718,7 +719,7 @@ public class APICall {
         clientEffectModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -726,7 +727,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getClientEffect")
+                .url(API_PREFIX_NAME+"/api/effect/getClientEffect")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -851,7 +852,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -860,7 +861,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -993,7 +994,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1002,7 +1003,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1142,7 +1143,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1151,7 +1152,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1291,7 +1292,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1300,7 +1301,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1440,7 +1441,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1449,7 +1450,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1589,7 +1590,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1598,7 +1599,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1735,7 +1736,7 @@ public class APICall {
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1744,7 +1745,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1877,7 +1878,7 @@ public class APICall {
         clientEffectModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -1885,7 +1886,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, effectFilter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/updateEffect")
+                .url(API_PREFIX_NAME+"/api/effect/updateEffect")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -2020,7 +2021,7 @@ public class APICall {
             }
         });
 
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -2036,7 +2037,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/bestOffer_v1")
+                .url(API_PREFIX_NAME+"/api/service/offer/bestOffer_v1")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -2181,7 +2182,7 @@ public class APICall {
 //                        pd.show();
 
 
-                //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+                //-----------String url = API_PREFIX_NAME+"/api/service/Service";
                 OkHttpClient client = new OkHttpClient();
                 JSONObject postdata = new JSONObject();
 
@@ -2336,7 +2337,7 @@ public class APICall {
 ////            pd.show();
 
 
-            //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+            //-----------String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
 
@@ -2479,14 +2480,14 @@ public class APICall {
 ////            pd.show();
 
 
-            //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+            //-----------String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
 
             RequestBody body = RequestBody.create(MEDIA_TYPE, "");
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                    .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
                     .post(body)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addHeader("X-Requested-With", "XMLHttpRequest")
@@ -2606,14 +2607,14 @@ public class APICall {
 ////            pd.show();
 
 
-            //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+            //-----------String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
 
             RequestBody body = RequestBody.create(MEDIA_TYPE, "");
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                    .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
                     .post(body)
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addHeader("X-Requested-With", "XMLHttpRequest")
@@ -2741,14 +2742,14 @@ public class APICall {
 ////            pd.show();
 
 
-        //-----------String url = "http://clientapp.dcoret.com/api/service/Service";
+        //-----------String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, "");
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
                 .post(body)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("X-Requested-With", "XMLHttpRequest")
@@ -3161,7 +3162,7 @@ public class APICall {
                                 final String password=res.getString("password");
                                 if(password.equals("true"))
 
-                                    activateAgain("http://clientapp.dcoret.com/api/auth/user/register/ActivateAgain",
+                                    activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
                                             name,
                                             context);
                                 else
@@ -3724,14 +3725,14 @@ public class APICall {
                     showDialog(context);
 //                    pd.show();
                     Log.e("tt", "update_user");
-//             String url = "http://clientapp.dcoret.com/api/service/Service";
+//             String url = API_PREFIX_NAME+"/api/service/Service";
                     OkHttpClient client = new OkHttpClient();
                     JSONObject postdata = new JSONObject();
 
                     RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
                     okhttp3.Request request = new okhttp3.Request.Builder()
-                            .url("http://clientapp.dcoret.com/api/auth/user/getPassword")
+                            .url(API_PREFIX_NAME+"/api/auth/user/getPassword")
                             .post(body)
                             .addHeader("Content-Type", "application/json")
                             .addHeader("X-Requested-With", "XMLHttpRequest")
@@ -3928,7 +3929,7 @@ public class APICall {
                 }
             });
         }
-    public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email, final Context context) {
+        public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email, final Context context) {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
@@ -4331,7 +4332,7 @@ public class APICall {
         public  static  String  addfav(final  String url,String bdb_type,String bdb_item_id,final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -4457,7 +4458,7 @@ public class APICall {
     MediaType MEDIA_TYPE = MediaType.parse("application/json");
     showDialog(context);
 //    pd.show();
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
     OkHttpClient client = new OkHttpClient();
     JSONObject postdata = new JSONObject();
     try {
@@ -4890,7 +4891,7 @@ public class APICall {
         Log.e("OfferPost",jsonPostData);
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/automatedBrowse")
+                .url(API_PREFIX_NAME+"/api/service/offer/automatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -5130,7 +5131,7 @@ public class APICall {
 //        Log.e("OfferPost",jsonPostData);
 //        final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
 //        okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/service/offer/automatedBrowse")
+//                .url(API_PREFIX_NAME+"/api/service/offer/automatedBrowse")
 //                .post(body)
 //                .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -5477,9 +5478,9 @@ public class APICall {
                     public void onClick(View v) {
                         d.cancel();
                         if (flag==0) {
-//                            addAddress("http://clientapp.dcoret.com/api/auth/user/addAddressv1", latLng.longitude + ""
+//                            addAddress(API_PREFIX_NAME+"/api/auth/user/addAddressv1", latLng.longitude + ""
 //                                    , latLng.latitude + "", namelocality, title, context);
-                            addAddress("http://clientapp.dcoret.com/api/auth/user/addAddress_v1", latLng.longitude + ""
+                            addAddress(API_PREFIX_NAME+"/api/auth/user/addAddress_v1", latLng.longitude + ""
                                     , latLng.latitude + "", bdb_desc+"", title+"",
                                     "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
                                     "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
@@ -5487,20 +5488,20 @@ public class APICall {
                         }else {
 //                            SharedPreferences preferences=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
 //                           String data=preferences.getString("addressUser",null);
-//                            getdetailsUser("http://clientapp.dcoret.com/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
+//                            getdetailsUser(API_PREFIX_NAME+"/api/auth/user/detailsUser",preferences.getString("bdb_name",null),
 //                                    preferences.getString("bdb_email",null), preferences.getString("bdb_mobile",null),namelocality,title,latLng,BeautyMainPage.context);
 //
 //
 
-                            APICall.updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                            APICall.updateaddress(API_PREFIX_NAME+"/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
                                                                 , latLng.latitude + "", namelocality+"", marker.getTitle()+"",
                                                                 "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
                                                                 "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
                                                                 BeautyMainPage.context);
 
-//                            updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress",latLng.longitude+""
+//                            updateaddress(API_PREFIX_NAME+"/api/auth/user/updateAddress",latLng.longitude+""
 //                                    ,latLng.latitude+"",add_id,namelocality,titleInfo,context);
-//                            updateaddress("http://clientapp.dcoret.com/api/auth/supplier/updateAddress_v1", add_id,latLng.longitude + ""
+//                            updateaddress(API_PREFIX_NAME+"/api/auth/supplier/updateAddress_v1", add_id,latLng.longitude + ""
 //                                    , latLng.latitude + "", namelocality+"", title+"",
 //                                    "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
 //                                    "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
@@ -5588,7 +5589,7 @@ public class APICall {
                 try {
 //                    searchGroupBooking(context);
                 }catch (Exception e){
-//                    searchGroupBookingMulti("http://clientapp.dcoret.com/api/service/automatedBrowse",context);
+//                    searchGroupBookingMulti(API_PREFIX_NAME+"/api/service/automatedBrowse",context);
                 }
             }
         });
@@ -5633,7 +5634,7 @@ public class APICall {
                         public void onClick(View v) {
                             dialog.cancel();
                             //----------toast for congratulations---------
-                            activeAccount("http://clientapp.dcoret.com/api/auth/user/register/activate",
+                            activeAccount(API_PREFIX_NAME+"/api/auth/user/register/activate",
                                     code.getText().toString(),
                                     context);
                         }
@@ -5680,7 +5681,7 @@ public class APICall {
                         public void onClick(View v) {
                             dialog.cancel();
                             //----------toast for congratulations---------
-                            activeAccount("http://clientapp.dcoret.com/api/auth/user/register/activate",
+                            activeAccount(API_PREFIX_NAME+"/api/auth/user/register/activate",
                                     code.getText().toString(),
                                     context);
                         }
@@ -5728,7 +5729,7 @@ public class APICall {
 
                             dialog.cancel();
                             //----------toast for congratulations---------
-                            activeAccount("http://clientapp.dcoret.com/api/auth/user/register/activate",
+                            activeAccount(API_PREFIX_NAME+"/api/auth/user/register/activate",
                                     code.getText().toString(),
                                     context);
                         }
@@ -6126,7 +6127,7 @@ public class APICall {
                 RequestBody body = RequestBody.create(MEDIA_TYPE, "");
 
                 okhttp3.Request request = new okhttp3.Request.Builder()
-                        .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                        .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
                         .post(body)
                         .addHeader("Content-Type", "application/x-www-form-urlencoded")
                         .addHeader("X-Requested-With", "XMLHttpRequest")
@@ -6265,7 +6266,7 @@ public class APICall {
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             showDialog(context);
 //            pd.show();
-            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
 
@@ -6376,7 +6377,7 @@ public class APICall {
                                         String add_id= adr.getString("bdb_id");
                                         Log.e("BDB_title_INFO",titleInfo);
                                         pd.dismiss();
-                                        updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                                        updateaddress(API_PREFIX_NAME+"/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
                                                 , latLng.latitude + "", namelocality+"", titleInfo+"",
                                                 "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
                                                 "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
@@ -6410,7 +6411,7 @@ public class APICall {
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
             showDialog(context);
 //            pd.show();
-            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
 
@@ -6521,7 +6522,7 @@ public class APICall {
                                         String add_id= adr.getString("bdb_id");
                                         Log.e("BDB_title_INFO",titleInfo);
                                         pd.dismiss();
-                                        updateaddress("http://clientapp.dcoret.com/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
+                                        updateaddress(API_PREFIX_NAME+"/api/auth/user/updateAddress_v1", add_id,latLng.longitude + ""
                                                 , latLng.latitude + "", namelocality+"", titleInfo+"",
                                                 "en",adminArea,namelocality+"","1",subLocality,thorourhfare,
                                                 "ar",adminAreaAr,namelocalityAr+"","1",subLocalityAr,thorourhfareAr,
@@ -6561,7 +6562,7 @@ public class APICall {
 
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -6580,7 +6581,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/booking/searchBooking")
+                    .url(API_PREFIX_NAME+"/api/booking/searchBooking")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -6728,7 +6729,7 @@ public class APICall {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -6745,7 +6746,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/searchBooking")
+                .url(API_PREFIX_NAME+"/api/booking/searchBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -6884,7 +6885,7 @@ public class APICall {
         showDialog(context);
         BagReservationFragment.pullToRefresh.setRefreshing(true);
 //        pd.show();
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -6892,7 +6893,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/getCart")
+                .url(API_PREFIX_NAME+"/api/booking/getCart")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7026,7 +7027,7 @@ public class APICall {
 //        showDialog(context);
 //        BagReservationFragment.pullToRefresh.setRefreshing(false);
 ////        pd.show();
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -7034,7 +7035,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/getCart")
+                .url(API_PREFIX_NAME+"/api/booking/getCart")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7170,7 +7171,7 @@ public class APICall {
     //        showDialog(context);
     //        BagReservationFragment.pullToRefresh.setRefreshing(true);
 //    //        pd.show();
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try{
@@ -7181,7 +7182,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/service/index")
+                    .url(API_PREFIX_NAME+"/api/service/index")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -7278,7 +7279,7 @@ public class APICall {
             }
         });
 
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -7304,7 +7305,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, post);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addToCart")
+                .url(API_PREFIX_NAME+"/api/booking/addToCart")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7422,7 +7423,7 @@ public class APICall {
             }
         });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -7436,7 +7437,7 @@ public class APICall {
         Log.e("postData",datap);
         RequestBody body = RequestBody.create(MEDIA_TYPE, datap);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/moveCartToBooking")
+                .url(API_PREFIX_NAME+"/api/booking/moveCartToBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7563,7 +7564,7 @@ public class APICall {
 //            }
 //        });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -7577,7 +7578,7 @@ public class APICall {
         Log.e("postData",datap);
         RequestBody body = RequestBody.create(MEDIA_TYPE, datap);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/moveCartToBooking")
+                .url(API_PREFIX_NAME+"/api/booking/moveCartToBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7707,7 +7708,7 @@ public class APICall {
             }
         });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -7721,7 +7722,7 @@ public class APICall {
         Log.e("postData",datap);
         RequestBody body = RequestBody.create(MEDIA_TYPE, datap);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/moveOfferToBooking")
+                .url(API_PREFIX_NAME+"/api/booking/moveOfferToBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7842,7 +7843,7 @@ public class APICall {
 //            }
 //        });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -7856,7 +7857,7 @@ public class APICall {
         Log.e("postData",datap);
         RequestBody body = RequestBody.create(MEDIA_TYPE, datap);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/moveOfferToBooking")
+                .url(API_PREFIX_NAME+"/api/booking/moveOfferToBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -7981,7 +7982,7 @@ public class APICall {
                 }
             });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -7994,7 +7995,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/booking/deleteFromCart")
+                    .url(API_PREFIX_NAME+"/api/booking/deleteFromCart")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -8112,7 +8113,7 @@ public class APICall {
 //                }
 //            });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -8125,7 +8126,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/booking/deleteFromCart")
+                    .url(API_PREFIX_NAME+"/api/booking/deleteFromCart")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -8246,7 +8247,7 @@ public class APICall {
 //                }
 //            });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             try {
@@ -8259,7 +8260,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/booking/deleteFromCart")
+                    .url(API_PREFIX_NAME+"/api/booking/deleteFromCart")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -8417,7 +8418,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         //        {	"lang":"en",
@@ -8518,7 +8519,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/bookingAutomatedBrowse")
+                .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -8878,7 +8879,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         //        {	"lang":"en",
@@ -8966,7 +8967,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/bookingAutomatedBrowse")
+                .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -9172,7 +9173,7 @@ public class APICall {
                 }
             });
 
-    //        String url = "http://clientapp.dcoret.com/api/service/Service";
+    //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             //        {	"lang":"en",
@@ -9211,7 +9212,7 @@ public class APICall {
             RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
             okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url("http://clientapp.dcoret.com/api/booking/bookingAutomatedBrowse")
+                    .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
                     .post(body)
                     .addHeader("Content-Type","application/json")
                     .header("Authorization", "Bearer "+gettoken(context))
@@ -9337,7 +9338,7 @@ public class APICall {
 
 
 
-            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            //        String url = API_PREFIX_NAME+"/api/service/Service";
             OkHttpClient client = new OkHttpClient();
             JSONObject postdata = new JSONObject();
             //        {	"lang":"en",
@@ -9376,7 +9377,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/bookingAutomatedBrowse")
+                .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -9504,7 +9505,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try{
@@ -9516,7 +9517,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -9674,7 +9675,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try{
@@ -9686,7 +9687,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -9846,7 +9847,7 @@ public class APICall {
 //            }
 //        });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try{
@@ -9858,7 +9859,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -10005,7 +10006,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try{
@@ -10017,7 +10018,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -10292,7 +10293,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -10551,7 +10552,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -10817,7 +10818,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -11069,7 +11070,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -11330,7 +11331,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -11582,7 +11583,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -11599,7 +11600,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, ff);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking")
+                .url(API_PREFIX_NAME+"/api/booking/searchGroupBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -11807,7 +11808,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -12044,7 +12045,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/get/getSupplierAttrById")
+                .url(API_PREFIX_NAME+"/api/get/getSupplierAttrById")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -13635,7 +13636,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -13644,11 +13645,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -13781,7 +13782,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -13790,11 +13791,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -13930,7 +13931,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -13939,11 +13940,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -14079,7 +14080,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -14088,11 +14089,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -14225,7 +14226,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -14234,11 +14235,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -14365,7 +14366,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -14374,11 +14375,11 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
 
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems");
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -14505,7 +14506,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -14513,10 +14514,10 @@ public class APICall {
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
         Log.e("ITEMREQ",body.toString());
-        Log.e("URL","http://clientapp.dcoret.com/api/booking/addGroupItems3_13");
+        Log.e("URL",API_PREFIX_NAME+"/api/booking/addGroupItems3_13");
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addGroupItems3_13")
+                .url(API_PREFIX_NAME+"/api/booking/addGroupItems3_13")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -14781,7 +14782,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/newGetCart")
+                .url(API_PREFIX_NAME+"/api/booking/newGetCart")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -15166,7 +15167,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -15183,7 +15184,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter1);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking")
+//                .url(API_PREFIX_NAME+"/api/booking/searchGroupBooking")
                 .url(url)
                 .post(body)
                 .addHeader("Content-Type","application/json")
@@ -15433,7 +15434,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -15450,7 +15451,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter1);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking")
+//                .url(API_PREFIX_NAME+"/api/booking/searchGroupBooking")
                 .url(url)
                 .post(body)
                 .addHeader("Content-Type","application/json")
@@ -15911,7 +15912,7 @@ public class APICall {
 //            }
 //        });
 //
-//        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        //        String url = API_PREFIX_NAME+"/api/service/Service";
 //        OkHttpClient client = new OkHttpClient();
 //        JSONObject postdata = new JSONObject();
 //
@@ -15929,7 +15930,7 @@ public class APICall {
 //        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
 //
 //        okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/booking/searchGroupBooking2")
+//                .url(API_PREFIX_NAME+"/api/booking/searchGroupBooking2")
 //                .post(body)
 //                .addHeader("Content-Type","application/json")
 //                .header("Authorization", "Bearer "+gettoken(context))
@@ -16147,7 +16148,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -16165,9 +16166,9 @@ public class APICall {
 
         String url="";
         if(isIn){
-           url= "http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+           url= API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
         }else {
-            url= "http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+            url= API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
 
         }
 
@@ -16406,7 +16407,7 @@ public class APICall {
         Log.e("JSONPOST",jsonPostData.toString());
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/browse")
+                .url(API_PREFIX_NAME+"/api/service/offer/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -16595,10 +16596,10 @@ public class APICall {
 
 
         Log.e("JSONPOST",jsonPostData.toString());
-        Log.e("URL","http://clientapp.dcoret.com/api/service/offer/browse");
+        Log.e("URL",API_PREFIX_NAME+"/api/service/offer/browse");
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/browse")
+                .url(API_PREFIX_NAME+"/api/service/offer/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -16788,7 +16789,7 @@ public class APICall {
         Log.e("JSONPOST",jsonPostData.toString());
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/browse")
+                .url(API_PREFIX_NAME+"/api/service/offer/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -16968,7 +16969,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
 //        JSONObject postdata = new JSONObject();
 
@@ -17231,7 +17232,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
 //        JSONObject postdata = new JSONObject();
 
@@ -17797,7 +17798,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -17807,7 +17808,7 @@ public class APICall {
         Log.e("ITEMREQ",body.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/addOfferToCart")
+                .url(API_PREFIX_NAME+"/api/booking/addOfferToCart")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -18111,7 +18112,7 @@ public class APICall {
 //        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 //
 //        okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/booking/browse")
+//                .url(API_PREFIX_NAME+"/api/booking/browse")
 ////                .url("")
 //                .post(body)
 //                .addHeader("Content-Type","application/json")
@@ -18425,8 +18426,8 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url("http://clientapp.dcoret.com/api/booking/browse")
-                .url("http://clientapp.dcoret.com/api/booking/bookingAutomatedBrowse")
+//                .url(API_PREFIX_NAME+"/api/booking/browse")
+                .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -18663,7 +18664,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -18818,7 +18819,7 @@ public class APICall {
         OkHttpClient client = new OkHttpClient();
         Log.e("TOKEN",gettoken(context));
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/retFav")
+                .url(API_PREFIX_NAME+"/api/auth/user/retFav")
                 .get()
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -18952,7 +18953,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/Service")
+                .url(API_PREFIX_NAME+"/api/service/Service")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -19127,7 +19128,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/detailsUser")
+                .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -19244,7 +19245,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/communication/sendSupportEvent\n")
+                .url(API_PREFIX_NAME+"/api/communication/sendSupportEvent\n")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -19365,7 +19366,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/communication/sendWhatsAppEvent\n")
+                .url(API_PREFIX_NAME+"/api/communication/sendWhatsAppEvent\n")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -19484,7 +19485,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/communication/sendChatEvent")
+                .url(API_PREFIX_NAME+"/api/communication/sendChatEvent")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -19610,7 +19611,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/communication/closeChat")
+                .url(API_PREFIX_NAME+"/api/communication/closeChat")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -19676,7 +19677,7 @@ public class APICall {
                     RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
                     okhttp3.Request request = new okhttp3.Request.Builder()
-                            .url("http://clientapp.dcoret.com/api/get/image")
+                            .url(API_PREFIX_NAME+"/api/get/image")
                             .post(body)
                             .addHeader("Content-Type","application/json")
                             .header("Authorization", "Bearer " + gettoken(context))
@@ -19775,7 +19776,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/notification/UpdateNotification")
+                .url(API_PREFIX_NAME+"/api/notification/UpdateNotification")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -19835,7 +19836,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/notification/getUnReadNotifications")
+                .url(API_PREFIX_NAME+"/api/notification/getUnReadNotifications")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -19947,7 +19948,7 @@ public class APICall {
         Log.e("JSONPOST",jsonPostData.toString());
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/browse")
+                .url(API_PREFIX_NAME+"/api/service/offer/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
 //                .addHeader("Accept","application/json")
@@ -20074,7 +20075,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/addFav")
+                .url(API_PREFIX_NAME+"/api/auth/user/addFav")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -20138,7 +20139,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/addFav")
+                .url(API_PREFIX_NAME+"/api/auth/user/addFav")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -20192,7 +20193,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/unFav")
+                .url(API_PREFIX_NAME+"/api/auth/user/unFav")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -20250,7 +20251,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/supplier/pointsLog")
+                .url(API_PREFIX_NAME+"/api/auth/supplier/pointsLog")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -20329,7 +20330,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/supplier/pointsDetails")
+                .url(API_PREFIX_NAME+"/api/auth/supplier/pointsDetails")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -20440,7 +20441,7 @@ public class APICall {
         Log.e("NewToken",postdata.toString());
         Log.e("UserToken",userToken.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/updateFirebaseToken")
+                .url(API_PREFIX_NAME+"/api/auth/user/updateFirebaseToken")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+userToken)
@@ -20550,7 +20551,7 @@ public class APICall {
 
         Log.e("NewToken",postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/auth/user/getGuestToken")
+                .url(API_PREFIX_NAME+"/api/auth/user/getGuestToken")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
@@ -20625,7 +20626,7 @@ public class APICall {
 
         Log.e("NewToken",postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com//api/auth/user/switchAccount")
+                .url(API_PREFIX_NAME+"//api/auth/user/switchAccount")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -20680,7 +20681,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -20696,7 +20697,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/BookingProcessing")
+                .url(API_PREFIX_NAME+"/api/booking/BookingProcessing")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -20841,7 +20842,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -20850,7 +20851,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/supplier/getCurrentSupplier")
+                .url(API_PREFIX_NAME+"/api/supplier/getCurrentSupplier")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -20970,7 +20971,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -21117,7 +21118,7 @@ public class APICall {
 
         Log.e("NewToken",postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/ConfirmExecution_v1")
+                .url(API_PREFIX_NAME+"/api/booking/ConfirmExecution_v1")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -21188,7 +21189,7 @@ public class APICall {
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/rating/rateBooking")
+                .url(API_PREFIX_NAME+"/api/rating/rateBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -21267,7 +21268,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/browse")
+                .url(API_PREFIX_NAME+"/api/booking/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -21568,7 +21569,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/browse")
+                .url(API_PREFIX_NAME+"/api/booking/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -22009,7 +22010,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/browse")
+                .url(API_PREFIX_NAME+"/api/booking/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -22351,7 +22352,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/browse")
+                .url(API_PREFIX_NAME+"/api/booking/browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -22771,7 +22772,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/booking/cancelPerClient")
+                .url(API_PREFIX_NAME+"/api/booking/cancelPerClient")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -22928,7 +22929,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
@@ -22942,7 +22943,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/order/cancelOrder")
+                .url(API_PREFIX_NAME+"/api/order/cancelOrder")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -23087,7 +23088,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/order/Browse")
+                .url(API_PREFIX_NAME+"/api/order/Browse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -23348,7 +23349,7 @@ public class APICall {
             }
         });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         //        {	"lang":"en",
@@ -23449,7 +23450,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/order/AutomatedBrowse")
+                .url(API_PREFIX_NAME+"/api/order/AutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -23689,7 +23690,7 @@ public class APICall {
         Log.e("RequestsPost",jsonPostData);
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/order/searchSuppliers")
+                .url(API_PREFIX_NAME+"/api/order/searchSuppliers")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -23918,7 +23919,7 @@ Log.e("ERRR",e.getMessage());
         Log.e("RequestsPost",postdata.toString());
         final RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/order/addOrder")
+                .url(API_PREFIX_NAME+"/api/order/addOrder")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -24062,7 +24063,7 @@ Log.e("ERRR",e.getMessage());
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/supplierService")
+                .url(API_PREFIX_NAME+"/api/service/supplierService")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -24183,7 +24184,7 @@ Log.e("ERRR",e.getMessage());
         clientEffectRequestModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
-//        String url = "http://clientapp.dcoret.com/api/service/Service";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
@@ -24192,7 +24193,7 @@ Log.e("ERRR",e.getMessage());
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -24394,7 +24395,7 @@ Log.e("ERRR",e.getMessage());
         Log.e("OfferPost",jsonPostData);
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/service/offer/automatedBrowse")
+                .url(API_PREFIX_NAME+"/api/service/offer/automatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -24672,14 +24673,14 @@ Log.e("ERRR",e.getMessage());
 //            }
 //        });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/supplier/getAllSuppliers")
+                .url(API_PREFIX_NAME+"/api/supplier/getAllSuppliers")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -24798,14 +24799,14 @@ Log.e("ERRR",e.getMessage());
 //            }
 //        });
 
-        //        String url = "http://clientapp.dcoret.com/api/service/Service";
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://clientapp.dcoret.com/api/supplier/getOrderedSuppliers")
+                .url(API_PREFIX_NAME+"/api/supplier/getOrderedSuppliers")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))

@@ -324,7 +324,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     for ( i = 0; i < AccountFragment.locationTitles.size(); i++) {
                                         if (marker.getPosition().equals(AccountFragment.locationTitles.get(i).getLatLng())) {
 
-                                            APICall.deleteAddress("http://clientapp.dcoret.com/api/auth/user/deleteAddress",AccountFragment.locationTitles.get(i).getId(),i,marker,BeautyMainPage.context);
+                                            APICall.deleteAddress(APICall.API_PREFIX_NAME+"/api/auth/user/deleteAddress",AccountFragment.locationTitles.get(i).getId(),i,marker,BeautyMainPage.context);
                                         }
                                         }
                                     mMap.clear();

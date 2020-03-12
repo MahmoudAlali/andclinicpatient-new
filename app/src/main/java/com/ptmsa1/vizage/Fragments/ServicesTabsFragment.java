@@ -261,7 +261,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                         PlaceServiceFragment.distanceOffer=",{\"num\":2,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
 
                         if (TABFLAG==1){
-                            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                            APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
 //                            APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
                         }else {
@@ -279,7 +279,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
         });
 
 //        if (updateServ) {
-            APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+            APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
 //            updateServ=false;
 //        }
 //        APICall.automatedBrowse()
@@ -290,7 +290,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 TabOne.pagenum += 1;
                 if (TABFLAG==1) {
                     Log.e("serviceCheck",TabOne.pagenum+"");
-                    APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
+                    APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
                 }else if (TABFLAG==2){
                     TabTwo.refreshRV();
                     Log.e("OfferCheck",TabOne.pagenum+"");
@@ -306,7 +306,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     TabOne.pagenum -= 1;
                     if (TABFLAG==1) {
                         Log.e("serviceCheck",TabOne.pagenum+"");
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", (TabOne.pagenum) + "", BeautyMainPage.context);
                 }else if (TABFLAG==2){
                         Log.e("OfferCheck",TabOne.pagenum+"");
                         TabTwo.refreshRV();
@@ -886,7 +886,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                             if (TABFLAG==1) {
                                 TabOne.arrayList.clear();
                                 TabOne.servicesAdapter.notifyDataSetChanged();
-                                APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                                APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                                 updateServ=false;
                                 updateoffr=true;
                             }else if (TABFLAG==2){
@@ -1804,7 +1804,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1814,7 +1814,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1840,7 +1840,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
@@ -1851,7 +1851,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
@@ -1879,7 +1879,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
@@ -1890,7 +1890,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 
@@ -1918,7 +1918,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1928,7 +1928,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1955,7 +1955,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1965,7 +1965,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -1992,7 +1992,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortby=",\"sort\":{\"num\":"+num+",\"by\":\""+value+"\"}";
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
                     }
@@ -2002,7 +2002,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     sortUsed.setText("");
                     dialog.cancel();
                     if (TABFLAG==1) {
-                        APICall.automatedBrowse("http://clientapp.dcoret.com/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
+                        APICall.automatedBrowse(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "4", "1", BeautyMainPage.context);
                     }else if (TABFLAG==2){
                         APICall.automatedBrowseOffers("8","1",BeautyMainPage.context);
 

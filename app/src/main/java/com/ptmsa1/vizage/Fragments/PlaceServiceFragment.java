@@ -85,7 +85,7 @@ public class PlaceServiceFragment extends Fragment {
         distance = view.findViewById(R.id.distance);
         ok = view.findViewById(R.id.ok);
         if (BeautyMainPage.client_name.equals(""))
-            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser",BeautyMainPage.context);
+            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser",BeautyMainPage.context);
 
 
 

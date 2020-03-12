@@ -132,12 +132,12 @@ public class AccountFragment extends Fragment  {
             public void onClick(View v) {
                 if (edit_flag){
                     if (e_pass.getText().toString().equals(e_c_pass.getText().toString())){
-                        APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),e_pass.getText().toString(),old_pass.getText().toString(),BeautyMainPage.context);
+                        APICall.update_user(APICall.API_PREFIX_NAME+"/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),e_pass.getText().toString(),old_pass.getText().toString(),BeautyMainPage.context);
                     }else {
                         APICall.showSweetDialog(BeautyMainPage.context,R.string.ExuseMeAlert,R.string.PsswordIncorrectAlert);
                     }
                 }else {
-                    APICall.update_user("http://clientapp.dcoret.com/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),BeautyMainPage.context);
+                    APICall.update_user(APICall.API_PREFIX_NAME+"/api/auth/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),BeautyMainPage.context);
 
                 }
                 Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);

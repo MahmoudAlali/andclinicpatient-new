@@ -141,10 +141,10 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         SharedPreferences settings = getSharedPreferences("LOGIN", MODE_PRIVATE);
         if (settings.getString("client_name","").equals("")
                 || settings.getString("client_number","").equals("")) {
-            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser", context);
+            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
         }else if(settings.getString("client_name","").equals("Guest"))
         {
-            APICall.details_user("http://clientapp.dcoret.com/api/auth/user/detailsUser", context);
+            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
         }else {
             client_name=settings.getString("client_name","");
             client_number=settings.getString("client_number","");
@@ -939,7 +939,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                     .setMessage(R.string.Signout)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            APICall.logout("http://clientapp.dcoret.com/api/auth/user/logout",BeautyMainPage.context);
+                            APICall.logout(APICall.API_PREFIX_NAME+"/api/auth/user/logout",BeautyMainPage.context);
                         }
                     })
                     // A null listener allows the button to dismiss the dialog and take no further action.

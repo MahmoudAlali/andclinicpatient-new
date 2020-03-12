@@ -125,7 +125,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
-            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"","http://clientapp.dcoret.com/api/auth/user/register/new_user_v1",Register.this);
+            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/auth/user/register/new_user_v1",Register.this);
         }
     }
 

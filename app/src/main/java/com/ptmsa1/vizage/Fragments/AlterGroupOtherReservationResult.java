@@ -34,12 +34,12 @@ public class AlterGroupOtherReservationResult extends AppCompatActivity {
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
 
         if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1){
-            url="http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
-            urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+            url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
+            urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
             isIn=true;
         }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()>1){
-            url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-            urlOut="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+            url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+            urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
             isIn=false;
         }
 
