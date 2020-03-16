@@ -297,7 +297,7 @@ public class APICall {
         //    ------------------- register new user in beauty client app----------------
         static String mMessage="";
 
-    public  static  String  new_user( final String phone,final String gender ,final String password, final String confirm_password, final String loc_long
+    public  static  String  new_user( final String phone,String bdb_email,final String gender ,final String password, final String confirm_password, final String loc_long
             , final String loc_lat, final String description,final String my_description,String loc_details,String loc_detailsAr,final  String url, final Context context){
         if (validationPassword(password)){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -312,6 +312,7 @@ public class APICall {
                 postdata.put("bdb_gender", gender);
                 postdata.put("password", password);
                 postdata.put("c_password", confirm_password);
+                postdata.put("bdb_email", bdb_email);
                 postdata.put("bdb_loc_long", loc_long);
                 postdata.put("bdb_loc_lat", loc_lat);
                 postdata.put("bdb_descr",description );
@@ -322,12 +323,20 @@ public class APICall {
 
 
 
-                JSONArray array=new JSONArray();
-                Log.e("Address",loc_details);
-                Log.e("AddressAr",loc_detailsAr);
-                array.put(new JSONObject(loc_details));
-                array.put(new JSONObject(loc_detailsAr));
-                postdata.put("address_details",array);
+
+//                if (locality)
+                try {
+                    if (!loc_details.equals("")) {
+                        JSONArray array = new JSONArray();
+                        Log.e("Address", loc_details);
+                        Log.e("AddressAr", loc_detailsAr);
+                        array.put(new JSONObject(loc_details));
+                        array.put(new JSONObject(loc_detailsAr));
+                        postdata.put("address_details", array);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 //                postdata.put("bdb_city", "1");
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
@@ -2014,8 +2023,7 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                showDialog(context);
-//                pd.show();
+//                showDialog(context);
                 Offers.pullToRefresh.setRefreshing(true);
 
             }
@@ -2053,6 +2061,7 @@ public class APICall {
                     @Override
                     public void run() {
                         Offers.pullToRefresh.setRefreshing(false);
+                        pd.dismiss();
                         pd.dismiss();
                     }
                 });
@@ -2130,6 +2139,7 @@ public class APICall {
                             @Override
                             public void run() {
                                 Offers.bestOffer.notifyDataSetChanged();
+
                             }
                         });
 
@@ -4076,6 +4086,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            pd.dismiss();
                             Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
 
                         }
@@ -4084,14 +4095,21 @@ public class APICall {
 
 
 
-                    pd.dismiss();
+
                 }
 
                 @Override
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     String mMessage = response.body().string();
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pd.dismiss();
+
+
+                        }
+                    });
                     Log.e("TAG", mMessage);
-                    pd.dismiss();
 
                     try {
                         JSONObject object=new JSONObject(mMessage);
@@ -4854,8 +4872,11 @@ public class APICall {
         public  static  String  automatedBrowseOffers( final String itemPerPage, final String pageNum, final Context context){
             offerSupplier.clear();
 
-            TabTwo.offersAdapterTab.notifyDataSetChanged();
-
+            try {
+                TabTwo.offersAdapterTab.notifyDataSetChanged();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             ServicesTabsFragment.supInfoList.clear();
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
@@ -6116,7 +6137,7 @@ public class APICall {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showDialog(context);
+//                        showDialog(context);
 //                        pd.show();
                     }
                 });
@@ -6140,7 +6161,7 @@ public class APICall {
                     public void onFailure(Call call, IOException e) {
                         mMessage = e.getMessage().toString();
                         Log.e("failure Response", mMessage);
-                        pd.dismiss();
+//                        pd.dismiss();
 
 
                         if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
@@ -6197,7 +6218,7 @@ public class APICall {
                     public void onResponse(Call call, okhttp3.Response response) throws IOException {
                         SharedPreferences.Editor editor=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
                         mMessage = response.body().string();
-                        pd.dismiss();
+//                        pd.dismiss();
                         Log.e("TAG", mMessage);
                         try {
                             JSONObject jsonObject = new JSONObject(mMessage);
@@ -6250,7 +6271,7 @@ public class APICall {
 
                         }
 
-                        pd.dismiss();
+//                        pd.dismiss();
 
                     }
 
@@ -13739,6 +13760,10 @@ public class APICall {
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
+
+
+
+
                             }
                         });
                     }else {
@@ -17542,7 +17567,7 @@ public class APICall {
                             String emp_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_id();
                             String emp_name = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_name();
                             String sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSup_id();
-                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSer_sup_id();
+                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
                             String from = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getFrom();
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
@@ -17581,11 +17606,12 @@ public class APICall {
                             serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"offer_ser_sup_id\":" + offer_ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":"+adult+"\n    ,\"date\": \""+date+"\" ,\"bdb_part_num\": \""+part_num+"\",\"reason\":"+reason+"}";
 //                        Log.e("clientsFilter", serRow);
 
-                        } else {
+                        }
+                        else {
                             String emp_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_id();
                             String emp_name = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_name();
                             String sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSup_id();
-                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSer_sup_id();
+                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
                             String from = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getFrom();
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
@@ -17652,7 +17678,7 @@ public class APICall {
                             String emp_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_id();
                             String emp_name = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_name();
                             String sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSup_id();
-                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSer_sup_id();
+                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
                             String from = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getFrom();
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();
@@ -17698,7 +17724,7 @@ public class APICall {
                             String emp_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_id();
                             String emp_name = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getEmp_name();
                             String sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSup_id();
-                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getSer_sup_id();
+                            String ser_sup_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getOffer_ser_sup_id();
                             String from = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getFrom();
                             String to = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getTo();
                             String date = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getDate();

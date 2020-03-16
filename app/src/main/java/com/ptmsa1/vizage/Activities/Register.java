@@ -124,7 +124,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.cant_reg_without_loc) );
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
-            APICall.new_user(phone.getText().toString(),"1",password.getText().toString()
+            APICall.new_user(phone.getText().toString(),email.getText().toString(),"1",password.getText().toString()
             ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/auth/user/register/new_user_v1",Register.this);
         }
     }
@@ -253,32 +253,35 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     public static String admin="",adminAr="",locality="",localityAr="",sublocality="",sublocalityAr="",thoroughfare="",thoroughfareAr="";
 
     public static String getFilterLocationDetails(){
-
-
-        String filetr=
-                "{" +
-                        "\"lang\":\"en\"," +
-                        "\"admin\":\""+admin+"\"," +
-                        "\"locality\":\""+locality+"\"," +
-                        "\"sub_locality\":\""+sublocality+"\"," +
-                        "\"thoroughfare\":\""+thoroughfare+"\"" +
-                        "}" ;
-
+        String filetr="";
+        if (locality.equals("") || sublocality.equals("")) {
+        }else {
+             filetr =
+                    "{" +
+                            "\"lang\":\"en\"," +
+                            "\"admin\":\"" + admin + "\"," +
+                            "\"locality\":\"" + locality + "\"," +
+                            "\"sub_locality\":\"" + sublocality + "\"," +
+                            "\"thoroughfare\":\"" + thoroughfare + "\"" +
+                            "}";
+        }
         return filetr;
 
     }
     public static String getFilterLocationDetailsAr(){
 
-
-        String filetr=
-                "{" +
-                        "\"lang\":\"ar\"," +
-                        "\"admin\":\""+adminAr+"\"," +
-                        "\"locality\":\""+localityAr+"\"," +
-                        "\"sub_locality\":\""+sublocalityAr+"\"," +
-                        "\"thoroughfare\":\""+thoroughfareAr+"\"" +
-                        "}" ;
-
+        String filetr="";
+        if (locality.equals("") || sublocality.equals("")) {
+        }else {
+             filetr =
+                    "{" +
+                            "\"lang\":\"ar\"," +
+                            "\"admin\":\"" + adminAr + "\"," +
+                            "\"locality\":\"" + localityAr + "\"," +
+                            "\"sub_locality\":\"" + sublocalityAr + "\"," +
+                            "\"thoroughfare\":\"" + thoroughfareAr + "\"" +
+                            "}";
+        }
         return filetr;
 
     }

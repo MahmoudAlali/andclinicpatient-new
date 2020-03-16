@@ -102,6 +102,8 @@ public class Offers extends Fragment implements LocationListener {
                 }
                 bestOfferItems.clear();
                 APICall.bestOffer(BeautyMainPage.context,Lat,Long);
+//                Offers.pullToRefresh.setRefreshing(false);
+                APICall.pd.setAutoDismiss(true);
             }
             catch (SecurityException e)
             {

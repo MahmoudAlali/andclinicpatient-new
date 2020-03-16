@@ -19,7 +19,7 @@
                 android:title="@string/points" />
 
             <item
-                android:visible="false"
+                android:visible="true"
                 android:id="@+id/setting"
                 android:icon="@drawable/ic_settings_black_24dp"
                 android:title="@string/setting" />
