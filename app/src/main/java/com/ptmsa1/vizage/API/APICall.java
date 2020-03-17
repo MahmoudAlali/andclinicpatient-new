@@ -17181,6 +17181,7 @@ public class APICall {
                                         String offer_ser_sup_id = data1.getString("offer_ser_sup_id");
                                         String is_adult = data1.getString("is_adult");
                                         String date="";
+
                                         try {
                                             date = data1.getString("date");
                                         }catch (Exception e){
