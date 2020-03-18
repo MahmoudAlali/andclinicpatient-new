@@ -191,8 +191,8 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                                     clientJ.put("old","1");
 
                                     JSONArray services=new JSONArray() ;
-                                    JSONObject effects=new JSONObject("") ;
-                                    clientJ.put("effect",effects);
+//                                    JSONObject effects=new JSONObject("") ;
+//                                    clientJ.put("effect",effects);
 
                                     for (int j = 0; j < offerClientsModels.get(i).getServiceDetails().size(); j++) {
                                         JSONObject servic = new JSONObject();

@@ -394,13 +394,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         >
+
         <Button
             android:id="@+id/freeBooking"
             android:layout_width="60dp"
             android:layout_height="@dimen/standard_60"
+            android:layout_gravity="center"
             android:background="@drawable/add_request"
-            android:gravity="center"
-            android:layout_gravity="center"/>
+            android:gravity="center" />
 
     </LinearLayout>
 <!--

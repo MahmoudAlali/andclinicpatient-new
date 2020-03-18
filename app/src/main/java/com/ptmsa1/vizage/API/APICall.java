@@ -2061,8 +2061,8 @@ public class APICall {
                     @Override
                     public void run() {
                         Offers.pullToRefresh.setRefreshing(false);
-                        pd.dismiss();
-                        pd.dismiss();
+//                        pd.dismiss();
+//                        pd.dismiss();
                     }
                 });
 
@@ -2110,7 +2110,7 @@ public class APICall {
                     @Override
                     public void run() {
                         Offers.pullToRefresh.setRefreshing(false);
-                        pd.dismiss();
+//                        pd.dismiss();
                     }
                 });
 
