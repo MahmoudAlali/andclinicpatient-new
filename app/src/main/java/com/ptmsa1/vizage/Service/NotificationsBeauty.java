@@ -399,7 +399,7 @@ public class NotificationsBeauty {
         Log.e("Notif", " pairs :"+notificationPairs);
 
         if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("21")||code.equals("38")
-                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")
+                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")||code.equals("40")
                 ||code.equals("2")||code.equals("3")||code.equals("15")||code.equals("19")
                 ||code.equals("20")||code.equals("22")||code.equals("25")||code.equals("32")
         )

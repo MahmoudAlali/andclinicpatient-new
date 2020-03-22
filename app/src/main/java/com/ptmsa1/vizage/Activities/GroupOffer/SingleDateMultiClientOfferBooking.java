@@ -75,9 +75,16 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
         }
         else {
-            end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
-            bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+            try {
+                end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
+                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+            }
+            catch (Exception e)
+            {
+                Log.e("eRR",e.getMessage());
+            }
+
         }
 
         // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();

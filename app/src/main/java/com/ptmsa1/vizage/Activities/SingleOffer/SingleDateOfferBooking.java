@@ -44,7 +44,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     public static ShowServicesAdapter offerAdapter;
     Context context;
     RecyclerView recyclerView;
-   static String place_num="",price_num="";
+   public static String place_num="",price_num="";
     public static String end_date;
     String bdb_pack_id;
     String is_effects_on;
@@ -74,9 +74,13 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
         }
         else {
-            end_date = TabTwo.arrayList.get(postion).getBdb_offer_end();
-            bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+            try {
+                end_date = TabTwo.arrayList.get(postion).getBdb_offer_end();
+                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+            }
+            catch (Exception e){};
+
         }
         //region CHECK_NOTIFICATION
         String notification = "";
@@ -151,6 +155,9 @@ public class SingleDateOfferBooking extends AppCompatActivity {
 
         if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
+            try {
+
+
             switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
                 case 1:
                     place_num="9";
@@ -169,7 +176,8 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                     price_num="31";
                     break;
 
-            }
+            }}
+            catch (Exception e){Log.e("err",e.getMessage());}
 
         }
         else

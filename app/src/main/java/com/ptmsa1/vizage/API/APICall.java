@@ -44,6 +44,7 @@ import com.ptmsa1.vizage.Activities.CreateRequestActivity;
 import com.ptmsa1.vizage.Activities.GroupOffer.MultiClientOfferEffect;
 import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptmsa1.vizage.Activities.NewBookingRequestsFragment;
+import com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptmsa1.vizage.Activities.SingleOffer.SingleOfferEffect;
 import com.ptmsa1.vizage.Activities.support.InternalChatActivity;
 import com.ptmsa1.vizage.Activities.support.SupportActivity;
@@ -16543,6 +16544,25 @@ public class APICall {
                         JSONArray groups=data.getJSONArray("groups");
                         String bdb_pack_code=data.getString("bdb_pack_code");
                         String bdb_offer_place=data.getString("bdb_offer_place");
+                        switch (bdb_offer_place){
+                            case "0":
+                                SingleDateOfferBooking.place_num="9";
+                                SingleDateOfferBooking.price_num="32";
+                                break;
+                            case "1":
+                                SingleDateOfferBooking.place_num="8";
+                                SingleDateOfferBooking.price_num="1";
+                                break;
+                            case "2":
+                                SingleDateOfferBooking.place_num="10";
+                                SingleDateOfferBooking.price_num="30";
+                                break;
+                            case "3":
+                                SingleDateOfferBooking.place_num="11";
+                                SingleDateOfferBooking.price_num="31";
+                                break;
+
+                        }
                         ArrayList<OfferClientsModel.ServiceDetails> serviceDetails;
 
                         for (int i=0;i<groups.length();i++){
@@ -16925,6 +16945,25 @@ public class APICall {
                         JSONArray groups=data.getJSONArray("groups");
                         String bdb_pack_code=data.getString("bdb_pack_code");
                         String bdb_offer_place=data.getString("bdb_offer_place");
+                        switch (bdb_offer_place){
+                            case "0":
+                                MultiDateOfferBooking.place_num="9";
+                                MultiDateOfferBooking.price_num="32";
+                                break;
+                            case "1":
+                                MultiDateOfferBooking.place_num="8";
+                                MultiDateOfferBooking.price_num="1";
+                                break;
+                            case "2":
+                                MultiDateOfferBooking.place_num="10";
+                                MultiDateOfferBooking.price_num="30";
+                                break;
+                            case "3":
+                                MultiDateOfferBooking.place_num="11";
+                                MultiDateOfferBooking.price_num="31";
+                                break;
+
+                        }
                         SingleDateMultiClientOfferBooking.place=bdb_offer_place;
                         ArrayList<OfferClientsModel.ServiceDetails> serviceDetails;
 

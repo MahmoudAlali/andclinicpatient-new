@@ -307,7 +307,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
         }*/
 
-        else if(code.equals("22")||code.equals("32"))
+        else if(code.equals("22")||code.equals("32")||code.equals("40"))
         {
             String tab_id="";
             for (int i=0;i<j.length();i++)
@@ -410,20 +410,20 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Intent intent2=new Intent(context, MultiDateOfferBooking.class);
                 intent2.putExtra("bdb_pack_id",bdb_pack_id);
                 intent2.putExtra("notification","true");
-                intent2.putExtra("is_effect_on",is_effect_on);
+                intent2.putExtra("is_effects_on",is_effect_on);
                 intent2.putExtra("offer_end",offer_end);
                 intent2.putExtra("offertype",bdb_offer_type);
-                ((AppCompatActivity)context).startActivity(intent);
+                ((AppCompatActivity)context).startActivity(intent2);
 
             }else if (bdb_offer_type.equals("1")
                     || bdb_offer_type.equals("4")){
                 Intent  intent3=new Intent(context, SingleDateOfferBooking.class);
                 intent3.putExtra("bdb_pack_id",bdb_pack_id);
                 intent3.putExtra("notification","true");
-                intent3.putExtra("is_effect_on",is_effect_on);
+                intent3.putExtra("is_effects_on",is_effect_on);
                 intent3.putExtra("offer_end",offer_end);
                 intent3.putExtra("offertype",bdb_offer_type);
-                ((AppCompatActivity)context).startActivity(intent);
+                ((AppCompatActivity)context).startActivity(intent3);
             }else if (bdb_offer_type.equals("3")
                     || bdb_offer_type.equals("6")){
 
@@ -431,31 +431,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 intent4.putExtra("bdb_pack_id",bdb_pack_id);
                 intent4.putExtra("notification","true");
                 intent4.putExtra("notification","true");
-                intent4.putExtra("is_effect_on",is_effect_on);
+                intent4.putExtra("is_effects_on",is_effect_on);
                 intent4.putExtra("offer_end",offer_end);
                 intent4.putExtra("offertype",bdb_offer_type);
-                ((AppCompatActivity)context).startActivity(intent);
+                ((AppCompatActivity)context).startActivity(intent4);
             }
-        }
-        else if(code.equals("22")||code.equals("32"))
-        {
-            String filter="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    filter = object.getString("filter");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-
-
         }
         else if(code.equals("15"))
         {
@@ -537,12 +517,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }
 
         else {
+            Log.e("ELSSSSe","go to else");
             navigation.setSelectedItemId(R.id.main);
-            fragment = new Offers();
+           /* fragment = new Offers();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
+            fragmentTransaction.commitAllowingStateLoss();*/
 
         }
         //endregion
