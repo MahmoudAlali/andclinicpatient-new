@@ -228,8 +228,8 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                             clientJ.put("old","1");
 
                             JSONArray services=new JSONArray() ;
-                            JSONObject effects=new JSONObject("") ;
-                            clientJ.put("effect",effects);
+//                            JSONObject effects=new JSONObject("") ;
+//                            clientJ.put("effect",effects);
 
                             for (int j = 0; j < offerClientsModels.get(0).getServiceDetails().size(); j++) {
                                 JSONObject servic = new JSONObject();
@@ -244,7 +244,9 @@ public class SingleDateOfferBooking extends AppCompatActivity {
 
                         }
                         catch (Exception e)
-                        { Log.e("ERR",e.getMessage());}
+                        {
+                            e.printStackTrace();
+                            Log.e("ERR",e.getMessage());}
                         offerplace=offerClientsModels.get(0).getBdb_offer_place();
                         if (is_effects_on.equals("1")) {
 
@@ -257,7 +259,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                             intent.putExtra("place", offerplace);
                             startActivity(intent);
                         }else {
-                            APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",clients,context);
+                            APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"23",clients,context);
                         /*Intent intent = new Intent(context, OfferBookingResult.class);
                         intent.putExtra("filter", postdata);
                         intent.putExtra("offertype", offerType);
