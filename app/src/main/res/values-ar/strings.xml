@@ -599,5 +599,6 @@
     <string name="order_id">رقم الطلب:</string>
     <string name="createRequest">إنشاء طلب</string>
     <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
-
+    <string name="service_date_sort_up">تاريخ تنفيذ الخدمة (الأقدم-الأحدث)</string>
+    <string name="service_date_sort_down">تاريخ تنفيذ الخدمة (الأحدث-الأقدم)</string>
 </resources>

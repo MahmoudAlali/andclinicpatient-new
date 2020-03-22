@@ -19,89 +19,98 @@
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="#fff"/>
+    <!--    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/standard_20"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp">
+
+            &lt;!&ndash;
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="@dimen/standard_40"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:onClick="servicesBeauty"
+                            android:layout_weight="1"
+                            android:background="@drawable/app_services_btn"
+                            android:gravity="center">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/BeautyServices"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                       &lt;!&ndash; <LinearLayout
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"></LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shadow_fashion_tab"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="@dimen/standard_40"
+                                android:layout_height="@dimen/standard_40"
+                                android:background="@drawable/ic_bride" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/FashionDesignServices"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>&ndash;&gt;
+
+                    </LinearLayout>
+            &ndash;&gt;
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/offer_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/FeaturedBeautyShows"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>-->
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_height="170dp"
         android:gravity="center"
-        android:layout_marginTop="@dimen/standard_20"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="10dp">
+        android:background="@drawable/offers_header"
+>
 
-        <!--
-                <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="@dimen/standard_40"
-                    android:orientation="horizontal"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:onClick="servicesBeauty"
-                        android:layout_weight="1"
-                        android:background="@drawable/app_services_btn"
-                        android:gravity="center">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/BeautyServices"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                   &lt;!&ndash; <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"></LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shadow_fashion_tab"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="@dimen/standard_40"
-                            android:layout_height="@dimen/standard_40"
-                            android:background="@drawable/ic_bride" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/FashionDesignServices"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>&ndash;&gt;
-
-                </LinearLayout>
-        -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/offer_text"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/FeaturedBeautyShows"
-                android:gravity="center"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                />
-        </LinearLayout>
     </LinearLayout>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

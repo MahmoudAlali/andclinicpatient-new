@@ -316,7 +316,7 @@ public class NotificationsBeauty {
             Log.e("Notif","i :"+i);
             try{
                 JSONObject object = pairs.getJSONObject(i);
-                packCode = object.getString("bdb_pack_id");
+                packCode = object.getString("bdb_pack_code");
                 break;
             }
             catch (Exception e)
@@ -328,18 +328,18 @@ public class NotificationsBeauty {
 
 
 
-        if (bdb_offer_type.equals("2")
-                || bdb_offer_type.equals("5")){
+       /* if (bdb_offer_type.equals("2")
+                || bdb_offer_type.equals("5")){*/
             APICall.browseOneMultiOfferNotification(packCode,context,title,body,pairs,code);
 
-        }else if (bdb_offer_type.equals("1")
+        /*}else if (bdb_offer_type.equals("1")
                 || bdb_offer_type.equals("4")){
 
         }else if (bdb_offer_type.equals("3")
                 || bdb_offer_type.equals("6")){
 
 
-        }
+        }*/
     }
 
 

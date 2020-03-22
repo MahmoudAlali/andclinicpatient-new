@@ -194,13 +194,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }
 
         //------------------- show Service Fragment -------------
-        navigation.setSelectedItemId(R.id.main);
-        fragment = new Offers();
-        fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, fragment);
-                        fragmentTransaction.commitAllowingStateLoss();
-
 
 
         Intent intent=getIntent();
@@ -262,7 +255,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    book_id = object.getString("book_id");
+                    book_id = object.getString("bdb_name_booking");
                     break;
                 }
                 catch (Exception e)
@@ -288,7 +281,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
-        if(code.equals("20"))
+        else if(code.equals("20"))
         {
             //Bundle bundle = new Bundle();
             fragment = new PointsMainFragment();
@@ -314,7 +307,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
         }*/
 
-        if(code.equals("22")||code.equals("32"))
+        else if(code.equals("22")||code.equals("32"))
         {
             String tab_id="";
             for (int i=0;i<j.length();i++)
@@ -347,7 +340,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
-        if(code.equals("16")||code.equals("18"))
+        else if(code.equals("16")||code.equals("18"))
         {
             String bdb_offer_type="";
             for (int i=0;i<j.length();i++)
@@ -370,7 +363,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    bdb_pack_id = object.getString("bdb_pack_id");
+                    bdb_pack_id = object.getString("bdb_pack_code");
                     break;
                 }
                 catch (Exception e)
@@ -386,7 +379,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    is_effect_on = object.getString("is_effect_on");
+                    is_effect_on = object.getString("is_effects_on");
                     break;
                 }
                 catch (Exception e)
@@ -401,7 +394,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    offer_end = object.getString("offer_end");
+                    offer_end = object.getString("bdb_offer_end");
                     break;
                 }
                 catch (Exception e)
@@ -444,7 +437,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 ((AppCompatActivity)context).startActivity(intent);
             }
         }
-        if(code.equals("22")||code.equals("32"))
+        else if(code.equals("22")||code.equals("32"))
         {
             String filter="";
             for (int i=0;i<j.length();i++)
@@ -464,7 +457,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         }
-        if(code.equals("15"))
+        else if(code.equals("15"))
         {
             String book_id="";
             for (int i=0;i<j.length();i++)
@@ -472,7 +465,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    book_id = object.getString("book_id");
+                    book_id = object.getString("bdb_name_booking");
                     break;
                 }
                 catch (Exception e)
@@ -514,7 +507,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
-        if(code.equals("45"))
+        else if(code.equals("45"))
         {
             String order_id="";
             for (int i=0;i<j.length();i++)
@@ -543,6 +536,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
         }
 
+        else {
+            navigation.setSelectedItemId(R.id.main);
+            fragment = new Offers();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+
+        }
         //endregion
 
         //region CHECK_REQUEST
@@ -602,6 +604,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }
 
         //endregion
+
 
 
 

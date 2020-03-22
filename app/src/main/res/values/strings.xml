@@ -149,7 +149,7 @@
     <string name="suppliereNamecom">Supplier Name:</string>
     <string name="ProviderNamecom">Provider Name:</string>
     <string name="Rating">Rating:</string>
-    <string name="ServicePlacecom">Service Place:</string>
+    <string name="ServicePlacecom">service place:</string>
     <string name="SaloonLocation">Saloon Location:</string>
 
     <!--Edit reservation-->
@@ -764,5 +764,7 @@
     <string name="requestRelatedBooking">Reservation attached to the request</string>
     <string name="createRequest">create request</string>
     <string name="errorAddingRequest">sorry, try again later </string>
+    <string name="service_date_sort_up">service execution date (nearest-oldest)</string>
+    <string name="service_date_sort_down">service execution date (oldest-nearest)</string>
 
 </resources>

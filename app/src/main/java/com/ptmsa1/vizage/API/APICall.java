@@ -221,7 +221,7 @@ public class APICall {
     }
 
     public static String gettoken(Context context){
-        String shared_token=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("token",null);
+        String shared_token=(context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).getString("token",null);
     return shared_token;
     }
     public static String isGuest(Context context){
@@ -2023,7 +2023,7 @@ public class APICall {
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                showDialog(context);
+                showDialog(context);
                 Offers.pullToRefresh.setRefreshing(true);
 
             }
@@ -5568,7 +5568,12 @@ public class APICall {
                 dialog.cancel();
             }
         });
-        dialog.show();
+        try {
+            dialog.show();
+        }
+        catch (Exception e){
+            Log.e("err",e.getMessage());
+        }
 
     }
         public  static  void showSweetDialog(Context context,String textmessage){
@@ -19972,6 +19977,7 @@ public class APICall {
 
 
         Log.e("JSONPOST",jsonPostData.toString());
+        Log.e("code",coden);
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(API_PREFIX_NAME+"/api/service/offer/browse")
@@ -20054,7 +20060,6 @@ public class APICall {
                             for (int j=0;j<arrayobject.length();j++){
                                 JSONObject object=arrayobject.getJSONObject(j);
                                 String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
-                                String bdb_ser_id=object.getString("bdb_ser_id");
                                 String bdb_name_ar="";
                                 try {
                                     bdb_name_ar=object.getString("bdb_name_ar");
@@ -20063,10 +20068,15 @@ public class APICall {
                                 }
                                 String bdb_ser_name_en=object.getString("bdb_ser_name_en");
                                 if(context.getResources().getString(R.string.locale).equals("ar"))
-                                    NotificationsBeauty.supIdClasses.add( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name_ar,bdb_ser_id));
+                                    NotificationsBeauty.supIdClasses.add( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name_ar,""));
                                 else
-                                    NotificationsBeauty.supIdClasses.add ( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,bdb_ser_id));
+                                    NotificationsBeauty.supIdClasses.add ( new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,""));
                                 NotificationsBeauty.offer_place=bdb_offer_place;
+                                Log.e("CALLING",coden);
+                                Log.e("CALLING",titlen);
+                                Log.e("CALLING",bodyn);
+                                Log.e("CALLING",pairsn.toString());
+
                                 NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
 
 
