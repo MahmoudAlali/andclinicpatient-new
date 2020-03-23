@@ -1,6 +1,8 @@
 package com.ptmsa1.vizage.Fragments.MyReservation;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
@@ -33,12 +37,15 @@ public class CancelReservationActivity extends AppCompatActivity {
     static Context context;
     public static ArrayList<Integer> ids=new ArrayList<>();
     public static ArrayList<CancelPerClientModel> cancelPerClientModels=new ArrayList<>();
+    public static int count=0;
+    static int c=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.incom_reservation_details_layout);
 
-
+        count=0;
+        c=0;
         context=this;
         client_name=findViewById(R.id.name);
         myroot=findViewById(R.id.myroot);
@@ -64,6 +71,9 @@ public class CancelReservationActivity extends AppCompatActivity {
                 for (int i=0;i<cancelPerClientModels.size();i++){
                     Log.e("idsss"+i,"id"+cancelPerClientModels.get(i).getId());
                     Log.e("checksss"+i,"check"+cancelPerClientModels.get(i).getCheck());
+                    if (cancelPerClientModels.get(i).getCheck().isChecked()){
+                        c++;
+                    }
                 }
 //                if (checkAllTrue){
 //                    if (ReservationsAdapter2.bookingAutomatedBrowseData.get(ReservationsAdapter2.postionBook).getData().get(0).equals("7")) {
@@ -112,6 +122,54 @@ public class CancelReservationActivity extends AppCompatActivity {
 //                else
                     {
 
+                        Log.e("countCancel","is"+c);
+                        Log.e("countCancel1","is"+count);
+                        if (c==count){
+
+
+                                    if (ReservationsAdapter2.reservationModel.getData().get(0).equals("7")) {
+                                        if (ReservationsAdapter2.reservationModel.getBdb_inner_booking().equals("1")) {
+                                            //-------cancelpaid api--------
+//                            /api/booking/BookingProcessing
+                                            Log.e("Outer", ReservationsAdapter2.reservationModel.getBdb_inner_booking());
+                                            Dialog dialog1 = new Dialog(context);
+                                            dialog1.setContentView(R.layout.map_title_layout);
+                                            final EditText reason = dialog1.findViewById(R.id.code);
+                                            TextView ok = dialog1.findViewById(R.id.confirm);
+                                            TextView message = dialog1.findViewById(R.id.message);
+                                            message.setText(R.string.enter_reason);
+                                            ok.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    if (reason.getText().toString().length() == 0) {
+                                                        Toast.makeText(context, R.string.enter_reason, Toast.LENGTH_LONG).show();
+                                                    } else {
+                                                        //----------------- cancel paid----------
+                                                        APICall.cancelPaidBooking(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), reason.getText().toString(), context);
+                                                    }
+                                                }
+                                            });
+                                        } else {
+
+                                            //------------- cancel paid ----------
+                                            APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 4, "0", context);
+
+//                            /api/booking/cancelPaidBooking
+                                        }
+                                    } else if (ReservationsAdapter2.reservationModel.getData().get(0).equals("2") ||
+                                            ReservationsAdapter2.reservationModel.getData().get(0).equals("8")) {
+                                        //---------- book proccessing --------- to 0
+//                        /api/booking/BookingProcessing
+                                        APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 5, "0", context);
+
+                                    } else {
+                                        //---------- Other cases
+//                        /api/booking/BookingProcessing
+                                        APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 5, "0", context);
+                                    }
+
+
+                        }else
                     APICall.cancelPerClient(getfilterCancel(cancelPerClientModels),context);
                 }
 //                Toast.makeText(context,"Reservation deleted",Toast.LENGTH_LONG).show();
@@ -126,98 +184,9 @@ public class CancelReservationActivity extends AppCompatActivity {
 
 
 
-    public static void addLayout(final LinearLayout myroot,String details,String reservationName,String priceVal,String startTimeVal,String end_time,String bookat,String empName ){
+      public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time){
         final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext_v1, myroot, false);
-        TextView endtime,rname,emp_name,price,starttime,client_details,book_at;
-        price=layout2.findViewById(R.id.price);
-        client_details=layout2.findViewById(R.id.client_details);
-        rname=layout2.findViewById(R.id.rname);
-        starttime=layout2.findViewById(R.id.time);
-        endtime=layout2.findViewById(R.id.end_time);
-        book_at=layout2.findViewById(R.id.book_at);
-        emp_name=layout2.findViewById(R.id.emp_name);
 
-
-        rname.setText(reservationName);
-        client_details.setText(details);
-        endtime.setText(APICall.convertToArabic(end_time));
-        emp_name.setText(empName);
-        price.setText(APICall.convertToArabic(priceVal));
-        starttime.setText(APICall.convertToArabic(startTimeVal));
-        book_at.setText(APICall.convertToArabic(bookat));
-
-//
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
-//
-    }
-    public static void addHeaderLayout(final LinearLayout myroot, String client_name, String client_old , final int position){
-        final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext_v1, myroot, false);
-        TextView client_details;
-        client_details=layout2.findViewById(R.id.client_details);
-        client_details.setText(client_name+","+client_old);
-        final CheckBox select;
-        select=layout2.findViewById(R.id.checkbox);
-
-        select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (select.isChecked()){
-                    ids.add(position);
-                }else {
-                    for (int i=0;i<ids.size();i++){
-                        if (ids.get(i)==position){
-                            ids.remove(i);
-                            break;
-                        }
-                    }
-                }
-            }
-        });
-
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
-//
-    }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String endtime,String bookat,String empName ){
-        final View layout2;
-        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
-        TextView end_time,rname,emp_name,price,starttime,book_at;
-        price=layout2.findViewById(R.id.price);
-        rname=layout2.findViewById(R.id.rname);
-        end_time=layout2.findViewById(R.id.end_time);
-        starttime=layout2.findViewById(R.id.time);
-        book_at=layout2.findViewById(R.id.book_at);
-        emp_name=layout2.findViewById(R.id.emp_name);
-
-        rname.setText(reservationName);
-        end_time.setText(APICall.convertToArabic(endtime));
-        emp_name.setText(APICall.convertToArabic(empName));
-        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
-        starttime.setText(APICall.convertToArabic(startTimeVal));
-        book_at.setText(APICall.convertToArabic(bookat));
-
-//
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                myroot.addView(layout2);
-            }
-        });
-//
-    }
-    public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time){
-        final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext_v1, myroot, false);
         TextView rname,emp_name,client_details,price,end_time,starttime,book_at,actual_price,price_j_cost,journey_time;
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
@@ -335,6 +304,7 @@ public class CancelReservationActivity extends AppCompatActivity {
     }
     public static void addHeaderLayout(final LinearLayout myroot, String client_name, String client_old , JSONArray bookings,String booking_type){
         final View layout2;
+
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext_v1, myroot, false);
         TextView client_details;
         CheckBox check;
