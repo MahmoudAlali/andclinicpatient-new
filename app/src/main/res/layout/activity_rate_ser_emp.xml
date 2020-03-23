@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent"
     tools:context=".Fragments.RateSerEmpActivity">
   <android.support.v4.widget.NestedScrollView
@@ -17,39 +18,57 @@
               android:layout_margin="@dimen/pf_10_txt_size"
               android:layout_width="match_parent"
               android:layout_height="@dimen/standard_50"
-              android:background="@drawable/offer_shape"
+              android:background="@color/transLightPink"
               android:text="@string/Provider_Eval"
               android:textSize="@dimen/standard_20"
+              android:textColor="@color/lightBordeaux"
               android:textStyle="bold"
               android:gravity="center" />
           <LinearLayout
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-              <TextView
-                  android:id="@+id/sup_name"
+              <LinearLayout
+                  android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/salon_provider_name"
-                  />
-              <hyogeun.github.com.colorratingbarlib.ColorRatingBar
-                 android:id="@+id/sup_rating"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:scaleY="0.5"
-                  android:scaleX="0.5"
-                  android:numStars="5"
-                  app:progress_color="#FFD700"
-                  app:empty_color="@color/gray"
-                  android:layout_gravity="end"
-                  />
-              <TextView
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:weightSum="2">
+                  <TextView
+                      android:layout_weight="1"
+                      android:id="@+id/sup_name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_gravity="center"
+                      android:lines="1"
+                      android:gravity="center"
+                      android:textStyle="bold"
+
+                      android:textSize="18sp"
+                      android:text="@string/salon_provider_name"
+                      />
+                  <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+                      android:id="@+id/sup_rating"
+                      android:layout_weight="1"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:scaleY="0.5"
+                      android:scaleX="0.5"
+                      android:numStars="5"
+                      app:progress_color="#FFD700"
+                      app:empty_color="@color/gray"
+                      android:layout_gravity="end"
+                      />
+              </LinearLayout>
+
+
+              <EditText
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/standard_40"
-                  android:background="@drawable/offer_shape"
-
-                  android:text="reason"
+                  android:background="@drawable/border_edit_text"
+                  android:textColor="@color/lightBordeaux"
+                  android:hint="@string/reason_"
                   android:textSize="@dimen/standard_20"
                   android:textStyle="bold"
                   android:gravity="center" />
@@ -57,8 +76,8 @@
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
                   android:layout_height="@dimen/standard_50"
-                  android:background="@drawable/offer_shape"
-
+                  android:background="@color/transLightPink"
+                  android:textColor="@color/lightBordeaux"
                   android:text="@string/employee_evaluation"
                   android:textSize="@dimen/standard_20"
                   android:textStyle="bold"
@@ -77,6 +96,6 @@
         android:layout_width="200dp"
         android:layout_marginBottom="10dp"
         android:text="@string/evaluate"
-        android:background="@drawable/offer_shape"
+        android:background="@drawable/evaluate"
         android:layout_height="@dimen/standard_40"/>
 </android.support.design.widget.CoordinatorLayout>

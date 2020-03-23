@@ -766,5 +766,7 @@
     <string name="errorAddingRequest">sorry, try again later </string>
     <string name="service_date_sort_up">service execution date (nearest-oldest)</string>
     <string name="service_date_sort_down">service execution date (oldest-nearest)</string>
+    <string name="accepted_res">accepted</string>
+    <string name="waiting_res">waiting for acceptance</string>
 
 </resources>

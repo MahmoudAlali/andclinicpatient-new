@@ -22175,13 +22175,20 @@ public class APICall {
                         final String booking_type=data.getString("booking_type");
                         String journey_cost=data.getString("journey_cost");
                         RateSerEmpActivity.salon_id =data.getString("salon_id");
-                        String salon_name=data.getString("salon_name");
+                        final String salon_name=data.getString("salon_name");
                         final String journey_count=data.getString("journey_count");
                         final String booking_price=data.getString("booking_price");
                         String bdb_sup_final_price="";
 
 
-                        RateSerEmpActivity.sup_name.setText(salon_name);
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RateSerEmpActivity.sup_name.setText(salon_name);
+
+                            }
+
+                        });
                         String logo_id=data.getString("bdb_logo_id");
                         try {
                             bdb_sup_final_price = data.getString("sup_booking_price");

@@ -5,7 +5,7 @@
     <string name="usernamehint">رقم هاتفك</string>
     <string name="open">فتح</string>
     <string name="close">اغلاق</string>
-    <string name="forgetmypas">نسيتي كلمة السر الخاصة بك</string>
+    <string name="forgetmypas">نسيتي كلمة المرور الخاصة بك</string>
     <string name="enterasaguset">ادخلي كمستخدم ضيف</string>
     <string name="passwordhint">كلمة المرور</string>
     <string name="signupText">انشاء حساب</string>
@@ -15,7 +15,7 @@
     <string name="WrongPass">كلمة المرور خاطئة</string>
     <string name="WrongMobNumberAlert">من فضلك ادخلي رقم جوال صحيح</string>
     <string name="EntermobnumberAlert">من فضلك ادخلي رقم الجوال</string>
-    <string name="EnterPassAlert">من فضلك ادخلي كلمة السر</string>
+    <string name="EnterPassAlert">من فضلك ادخلي كلمة المرور</string>
     <string name="EnterActivationCodeAlert">يرجى إدخال رمز التفعيل</string>
     <string name="InvalidFormatNum">صيغة هذا الرقم خاطئة, الرجاء المحاولة مرة اخرى</string>
     <string name="ActivationCodeMustBeFourDigistAlert">\"يجب أن يكون رمز التفعيل أربعة أرقام</string>
@@ -36,8 +36,8 @@
     <string name="UserNameTextField">اسم المستخدم(اختياري)</string>
     <string name="MobileNumberTextField">رقم الهاتف</string>
     <string name="EmailAddressTextField">البريد الالكتروني (اختياري)</string>
-    <string name="PasswordTextField">كلمة السر</string>
-    <string name="ConfirmPasswordTextField">تأكيد كلمة السر</string>
+    <string name="PasswordTextField">كلمة المرور</string>
+    <string name="ConfirmPasswordTextField">تأكيد كلمة المرور</string>
     <string name="CityButtonTitle">اسم المدينة</string>
     <string name="AccessYourLocationCheckBox">\"السماح ل)( بالوصول لموقع ك أثناء اإلستخدام\"</string>
     <string name="PolicyCheckBox">الموافقة على سياسة التطبيق وبيان الخصوصية</string>
@@ -45,9 +45,9 @@
     <string name="buttnPicturePosition">1</string>
     <string name="NavigationBackButton">الخلف</string>
     <string name="ConfirmAlert">موافق</string>
-    <string name="PasswordNotMatchAlert">كلمة السر غير متطابقة</string>
+    <string name="PasswordNotMatchAlert">كلمة المرور غير متطابقة</string>
     <string name="ExuseMeAlert">عفواً</string>
-    <string name="EnterMobAndPass">ادخلي رقم الجوال و كلمة السر</string>
+    <string name="EnterMobAndPass">ادخلي رقم الجوال و كلمة المرور</string>
     <string name="ApplicationPolicyAlert">جب اوال الموافقة على سياسة التطبيق</string>
     <string name="MobEmailTakenAlert">رقم الجوال وعنوان البريد اإللكتروني مأخوذان بالفعل ، يرجى تجربة آخر</string>
     <string name="MobTakenAlert">رقم الجوال مأخوذ بالفعل ، يرجى تجربة آخر</string>
@@ -56,7 +56,7 @@
     <string name="InvalidPassword">يجب أن يكون طول كلمة المرور 6 ، ويجب أن تحتوي كلمة المرور على حرف كبير واحد ورقم واحد على األقل وحرف واحد
 صغير على الأقل
 </string>
-    <string name="SendNewPass">تم إرسال كلمة السر الجديدة إلى هاتفك, الرجاء التحقق</string>
+    <string name="SendNewPass">تم إرسال كلمة المرور الجديدة إلى هاتفك, الرجاء التحقق</string>
     <string name="numberNotActivatedAlert">هذا الرقم مسجل مسبقاً, يرجى تفعيله بإدخال رمز التحقق</string>
     <string name="CantFindNum">لم نستطع ايجاد حساب لهذا الرقم, يرجى التأكد</string>
 
@@ -258,11 +258,11 @@
     <string name="OK">موافق</string>
     <string name="select_date">اختاري تاريخ</string>
     <string name="Phone_Number">رقم الجوال</string>
-    <string name="client_name">اسم الزبونة</string>
-    <string name="services_dates">select dates</string>
+    <string name="client_name">اسم العميلة</string>
+    <string name="services_dates">اختاري التاريخ</string>
     <string name="group_book_done">تم حجز العرض بنجاح</string>
     <string name="salon">صالون</string>
-    <string name="home">منزل الزبونة</string>
+    <string name="home">منزل العميلة</string>
     <string name="hall">صالة</string>
     <string name="hotel">فندق</string>
     <string name="single_booking">حجز فردي</string>
@@ -288,7 +288,7 @@
     <string name="all_res">جميع حجوزاتي</string>
     <string name="all_res_offer"> حجوزاتي داخل عرض</string>
     <string name="export_invoice">اصدار فاتورة</string>
-    <string name="client_name1">اسم الزبونة</string>
+    <string name="client_name1">اسم العميلة</string>
     <string name="service_exec_date">تاريخ تنفيذ الخدمة</string>
     <string name="booking_exec_date">تاريخ تنفيذ الحجز</string>
     <string name="offer_type_select">اختاري نوع العرض</string>
@@ -327,7 +327,7 @@
     <string name="select_loc_on_map">الرجاء اختيار موقع على الخريطة</string>
     <string name="please_select_one_reason">الرجاء اختيار موقع على الخريطة</string>
     <string name="Add_Me">اضفني</string>
-    <string name="Add_New_Client">اضافة زبونة جديدة</string>
+    <string name="Add_New_Client">اضافة عميلة جديدة</string>
     <string name="choose_service">اختاري خدمة</string>
     <string name="ser_have_one_bride_ser">يجب أن يكون لدى الخدمات خدمة عروس واحدة على الأقل</string>
     <string name="add_yourself">الرجاء إضافة نفسك لإكمال العملية</string>
@@ -346,7 +346,7 @@
     <string name="cant_reg_without_loc">لا يمكنك التسجيل بدون الموقع!</string>
     <string name="cant_compare_more_than_three_ser">لا يمكن مقارنة أكثر من ثلاث خدمات ..</string>
     <string name="Please_enter_Date">يرجى إدخال التاريخ</string>
-    <string name="enter_client_name">يرجى إدخال اسم الزبونة</string>
+    <string name="enter_client_name">يرجى إدخال اسم العميلة</string>
     <string name="enter_phone_num">please, enter phone number</string>
     <string name="no_offer">لا يوجد عروض مميزة، يرجى المحاولة لاحقاً</string>
     <string name="allowed">مسموح</string>
@@ -491,7 +491,7 @@
     <string name="accepted">محجوزة مبدئيا</string>
     <string name="employee_evaluation">تقييم الموظفات</string>
     <string name="evaluate">تقييم</string>
-    <string name="clients_count_gr_2">عدد الزبونات يجب ان يكون زبونتين على الاقل</string>
+    <string name="clients_count_gr_2">عدد العميلات يجب ان يكون عميلتين على الاقل</string>
     <string name="reser_id">رقم الحجز</string>
     <string name="journey_time">وقت الرحلة</string>
     <string name="journey_cost">كلفة الرحلة</string>
@@ -601,4 +601,6 @@
     <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
     <string name="service_date_sort_up">تاريخ تنفيذ الخدمة (الأقدم-الأحدث)</string>
     <string name="service_date_sort_down">تاريخ تنفيذ الخدمة (الأحدث-الأقدم)</string>
+    <string name="accepted_res">مقبولة</string>
+    <string name="waiting_res">بانتظار التأكيد</string>
 </resources>

@@ -102,11 +102,11 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             if (MyReservationFragment.tab.equals("1")){
 
                 if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
-                    ((Item) holder).status.setText("مقبولة");
+                    ((Item) holder).status.setText(R.string.accepted_res);
                     ((Item) holder).delay.setVisibility(View.VISIBLE);
                     ((Item) holder).delay.setText(R.string.deposit);
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
-                    ((Item) holder).status.setText("بإنتظار التأكيد");
+                    ((Item) holder).status.setText(R.string.waiting_res);
                 }
 //                ((Item) holder).delay.setVisibility(View.GONE);
             }else{
