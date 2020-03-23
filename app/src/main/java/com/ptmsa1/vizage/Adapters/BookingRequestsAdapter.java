@@ -180,7 +180,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
         //>>>>>>> ID
-        String id =BeautyMainPage.context.getResources().getString(R.string.order_id)+ bookingRequestData.get(position).getBdb_id();
+        String id = bookingRequestData.get(position).getBdb_id();
         ((Item)holder).ID.setText(id);
 
 

@@ -12,10 +12,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -94,12 +97,12 @@ public class MyBookingRequestsFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
                 // If the navigation drawer is not open then open it, if its already open then close it.
                 if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
                 else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
-
         fragment = new NewBookingRequestsFragment();
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
@@ -603,15 +606,15 @@ public class MyBookingRequestsFragment extends Fragment {
             }
         });
 
-     //   ImageView sortbtn=MyReservationFragment.view.findViewById(R.id.sort);
+        ImageView sortbtn=MyBookingRequestsFragment.view.findViewById(R.id.sort);
 
-        /*sortbtn.setOnClickListener(new View.OnClickListener() {
+        sortbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
-                        .inflate(R.menu.popup_menu_sort, popup.getMenu());
+                        .inflate(R.menu.popup_menu_sort2, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -621,17 +624,11 @@ public class MyBookingRequestsFragment extends Fragment {
                       //  bookingRequestsAdapter.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout,tmp);
 
-                        }else if (id==R.id.two){
-                            APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
-                        }else if (id==R.id.three){
-                            APICall.sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
-                        }else if (id==R.id.four){
-                            APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                        }else if (id==R.id.two) {
+                            APICall.sort = APICall.bookingSort("1", "desc");
+                            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout, tmp);
                         }
                         Log.e("Sort1",APICall.sort);
                         Log.e("filter1",APICall.filter);
@@ -643,7 +640,6 @@ public class MyBookingRequestsFragment extends Fragment {
         });
 
 
-*/
         return view;
     }
     public static void tabselected(TextView t1, TextView t2, Boolean check){

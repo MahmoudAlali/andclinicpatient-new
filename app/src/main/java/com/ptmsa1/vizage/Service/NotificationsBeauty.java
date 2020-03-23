@@ -316,7 +316,7 @@ public class NotificationsBeauty {
             Log.e("Notif","i :"+i);
             try{
                 JSONObject object = pairs.getJSONObject(i);
-                packCode = object.getString("bdb_pack_id");
+                packCode = object.getString("bdb_pack_code");
                 break;
             }
             catch (Exception e)
@@ -328,18 +328,18 @@ public class NotificationsBeauty {
 
 
 
-        if (bdb_offer_type.equals("2")
-                || bdb_offer_type.equals("5")){
+       /* if (bdb_offer_type.equals("2")
+                || bdb_offer_type.equals("5")){*/
             APICall.browseOneMultiOfferNotification(packCode,context,title,body,pairs,code);
 
-        }else if (bdb_offer_type.equals("1")
+        /*}else if (bdb_offer_type.equals("1")
                 || bdb_offer_type.equals("4")){
 
         }else if (bdb_offer_type.equals("3")
                 || bdb_offer_type.equals("6")){
 
 
-        }
+        }*/
     }
 
 
@@ -399,9 +399,9 @@ public class NotificationsBeauty {
         Log.e("Notif", " pairs :"+notificationPairs);
 
         if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("21")||code.equals("38")
-                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")
+                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")||code.equals("40")
                 ||code.equals("2")||code.equals("3")||code.equals("15")||code.equals("19")
-                ||code.equals("20")||code.equals("22")||code.equals("25")||code.equals("32")
+                ||code.equals("20")||code.equals("22")||code.equals("25")||code.equals("32")||code.equals("52")
         )
         {
             showBookingDetailsNotification(context,title,body,j,code);

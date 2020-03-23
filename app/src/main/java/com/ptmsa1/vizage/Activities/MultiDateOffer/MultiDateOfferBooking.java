@@ -38,7 +38,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     Context context;
     Button next;
     EditText phone_number,client_name;
-    String place_num="",price_num="";
+    public static String place_num="",price_num="";
     static String place="";
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
     String bdb_pack_id;
@@ -68,10 +68,17 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         }
         else
         {
-            bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
-            place=TabTwo.arrayList.get(postion).getBdb_offer_place();
-            supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+            try {
+                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+                place=TabTwo.arrayList.get(postion).getBdb_offer_place();
+                supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+            }
+            catch (Exception e)
+            {
+                Log.e("eRR",e.getMessage());
+            }
+
         }
 
         //region CHECK_NOTIFICATION
@@ -137,25 +144,31 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         }
         else
         {
-            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-                case 1:
-                    place_num="9";
-                    price_num="32";
-                    break;
-                case 2:
-                    place_num="8";
-                    price_num="1";
-                    break;
-                case 3:
-                    place_num="10";
-                    price_num="30";
-                    break;
-                case 4:
-                    place_num="11";
-                    price_num="31";
-                    break;
+            try {
+                switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+                    case 1:
+                        place_num="9";
+                        price_num="32";
+                        break;
+                    case 2:
+                        place_num="8";
+                        price_num="1";
+                        break;
+                    case 3:
+                        place_num="10";
+                        price_num="30";
+                        break;
+                    case 4:
+                        place_num="11";
+                        price_num="31";
+                        break;
 
+                }
             }
+           catch (Exception e)
+           {
+
+           }
         }
 
 

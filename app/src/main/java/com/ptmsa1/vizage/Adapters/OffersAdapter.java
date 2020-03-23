@@ -38,6 +38,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
     ArrayList<ServiceItem> serviceItems;
+    static int counter =0;
     ArrayList<BestOfferItem> bestOfferItems;
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
     public static HashMap<String,Bitmap> logoImages = new HashMap<>();
@@ -85,11 +86,14 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        object=APICall.browseclass(Offers.context);
 
-        if(grid==false) {
-             row = inflater.inflate(R.layout.offers_layout_last, parent, false);
+       /* if(counter%2==0) {
+             row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
         }else {
-             row = inflater.inflate(R.layout.offers_layout_last, parent, false);
-        }
+             row = inflater.inflate(R.layout.right_offer_new_layout, parent, false);
+        }*/
+        row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
+
+        counter++;
             OffersAdapter.Item item = new OffersAdapter.Item(row);
         return item;
     }
@@ -106,12 +110,12 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
-            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+           /* if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
                     ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
             else
                 ((Item) holder).itemBackground.setBackgroundResource(backgroundsAr[position%5]);
-
-            ((Item) holder).offer_type.setBackgroundResource(offerBackGrounds[position%5]);
+*/
+       //     ((Item) holder).offer_type.setBackgroundResource(offerBackGrounds[position%5]);
             /*if(OffersAdapter.logoImages.containsKey(bestOfferItems.get(position).getProvider_logo_id()))
             {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
