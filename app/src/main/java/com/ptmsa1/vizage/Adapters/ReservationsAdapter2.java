@@ -341,6 +341,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                }
 
             }
+
             else if (offtypetmp.equals("2")) {
                 Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
                 String s=((AppCompatActivity)context).getResources().getString(R.string.group_res_other);
