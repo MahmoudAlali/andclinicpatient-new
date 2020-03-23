@@ -86,11 +86,13 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        object=APICall.browseclass(Offers.context);
 
-        if(counter%2==0) {
+       /* if(counter%2==0) {
              row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
         }else {
              row = inflater.inflate(R.layout.right_offer_new_layout, parent, false);
-        }
+        }*/
+        row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
+
         counter++;
             OffersAdapter.Item item = new OffersAdapter.Item(row);
         return item;
@@ -126,16 +128,16 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             else*/
             APICall.getSalonLogo(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
-         /*   if (bestOfferItems.get(position).getOffer_type().equals("1") ||bestOfferItems.get(position).getOffer_type().equals("4")) {
+            if (bestOfferItems.get(position).getOffer_type().equals("1") ||bestOfferItems.get(position).getOffer_type().equals("4")) {
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
             }else if (bestOfferItems.get(position).getOffer_type().equals("2") ||bestOfferItems.get(position).getOffer_type().equals("5")) {
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
             }else if (bestOfferItems.get(position).getOffer_type().equals("3") ||bestOfferItems.get(position).getOffer_type().equals("6")) {
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.group));
-            }*/
+            }
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
-           // ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
-          //  ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
+            ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
+            ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
             String on= context.getResources().getString(R.string.on);
             String sevices= context.getResources().getString(R.string.ser);
             String oneService= context.getResources().getString(R.string.oneService);
@@ -148,8 +150,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             else
                 ((Item) holder).total_dis.setText(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% ");
 
-           // ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-          /*  ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
+            ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     JSONArray jsonArray = bestOfferItems.get(position).getSersup_ids();
@@ -187,7 +189,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                        .targetView(((Item)holder).info) //View to point out
 //                        .show(); //Display the ShowCase
                 }
-            });*/
+            });
 
         }catch (Exception e){
             e.printStackTrace();

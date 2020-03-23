@@ -307,7 +307,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
         }*/
 
-        else if(code.equals("22")||code.equals("32")||code.equals("40"))
+        else if(code.equals("22")||code.equals("32")||code.equals("40")||code.equals("52"))
         {
             String tab_id="";
             for (int i=0;i<j.length();i++)
