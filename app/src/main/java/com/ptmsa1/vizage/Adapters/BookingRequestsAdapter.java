@@ -106,6 +106,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
 
             //>>>>>>>> add all services layouts
+        ((Item)holder).myroot.removeAllViews();
         for ( int i=0;i<bookingRequestData.get(position).getClients().size();i++)
         {
             for ( int j=0;j<bookingRequestData.get(position).getClients().get(i).getServices().size();j++)

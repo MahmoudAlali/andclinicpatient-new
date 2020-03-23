@@ -21246,7 +21246,14 @@ public class APICall {
         });
     }
     public static void rateBooking(final Context context, JSONArray bookings) {
-//        showDialog(context);
+
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+            }
+        });
+         //
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         OkHttpClient client = new OkHttpClient();
@@ -21277,6 +21284,13 @@ public class APICall {
             @Override
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+                    }
+                });
                 Log.e("deletePayment ERRR", mMessage);
             }
 
@@ -21284,7 +21298,13 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("Tag", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
 
+                    }
+                });
                 try {
                     JSONObject jsonrespone = new JSONObject(mMessage);
                     String success=jsonrespone.getString("success");
@@ -21296,6 +21316,13 @@ public class APICall {
 //                                ((AppCompatActivity)context).onBackPressed();
 //                                MyReservationFragment.updateDeposit();
                                 Toast.makeText(context,"Rate Booking Done",Toast.LENGTH_LONG).show();
+                                ((AppCompatActivity)ExecuteBookActivity.context).finish();
+                                ((AppCompatActivity) context).onBackPressed();
+                                fragment = new DepositReservationFragment();
+                                fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
 
                             }});
 
@@ -21477,6 +21504,7 @@ public class APICall {
 //                                String service_ar_name = object.getString("bdb_name_ar");
                                     String client_name = object.getString("bdb_user_name");
                                     String bdb_paid_deposit = object.getString("bdb_paid_deposit");
+                                    String is_rating_on = object.getString("is_rating_on");
                                     // ReservatoinDetailsActivity.client_name.setText(client_name);
 
                                     //ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
@@ -21488,6 +21516,7 @@ public class APICall {
                                             if (!booking.getJSONObject(i).getString("name").equals("booking_wast_time")) {
                                                 Log.e("TrueOrFals::", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
 
+//                                                if (is_rating_on.equals("true") ||is_rating_on.equals("1"))
                                                 ExecuteBookActivity.AddLayout(bdb_id, client_name, bdb_name, bdb_name_ar, bdb_price, bdb_paid_deposit);
                                             }
                                         }
@@ -21542,6 +21571,7 @@ public class APICall {
                                             bdb_name_ar = object.getString("bdb_name_ar"),
                                             bdb_status = object.getString("bdb_status");
                                     String bdb_paid_deposit=object.getString("bdb_paid_deposit");
+                                    String is_rating_on = object.getString("is_rating_on");
 
                                     try {
 //                                        Log.e("TrueOrFals::1", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
@@ -21579,6 +21609,7 @@ public class APICall {
 //                                                Log.e("dnow",dnow+"");
 
 //                                                if (dnow.compareTo(dbook)<=0) {
+//                                                if (is_rating_on.equals("true") ||is_rating_on.equals("1"))
                                                 ExecuteBookActivity.AddLayout(bdb_id, client_name, bdb_name, bdb_name_ar, bdb_price, bdb_paid_deposit);
                                                 Log.e("TrueOrFals::", ((!bdb_status.equals("3")) && (!bdb_status.equals("4"))) + "");
 //                                                }
@@ -21981,7 +22012,7 @@ public class APICall {
                                             bdb_start_date = object.getString("bdb_start_date"),
                                             bdb_start_time = object.getString("bdb_start_time"),
                                             bdb_end_time = object.getString("bdb_end_time"),
-                                            bdb_is_executed = object.getString("bdb_confirm_exec_sup"),
+                                            bdb_is_executed = object.getString("bdb_confirm_exec_user"),
                                             journey_time = object.getString("bdb_journey_time"),
                                             bdb_booked_at = object.getString("bdb_booked_at");
                                     String bdb_emp_name = object.getString("bdb_emp_name");
@@ -22237,7 +22268,8 @@ public class APICall {
                                             journey_time = object1.getString("bdb_journey_time"),
                                             bdb_booked_at = object1.getString("bdb_booked_at");
                                     final String bdb_emp_name = object1.getString("bdb_emp_name");
-                                    final String bdb_name = object1.getString("bdb_name"),
+                                    final String bdb_name = object1.getString("bdb_name");
+                                    final String is_rating_on = object1.getString("is_rating_on"),
                                             bdb_name_ar = object1.getString("bdb_name_ar");
 
                                     final String client_name = object1.getString("bdb_user_name");
@@ -22266,14 +22298,14 @@ public class APICall {
 //                                                ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
 //                                                        bdb_name_ar, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
-
+                                                if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
                                                 RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
 
                                             }else{
 //                                                ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
 //                                                        bdb_name, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
-
+                                                if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
                                                 RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name);
 
                                             }
@@ -22340,6 +22372,7 @@ public class APICall {
                                             journey_time = object.getString("bdb_journey_time"),
                                             bdb_booked_at = object.getString("bdb_booked_at");
                                     String bdb_emp_name = object.getString("bdb_emp_name");
+                                    String is_rating_on = object.getString("is_rating_on");
                                     String bdb_name = object.getString("bdb_name"),
                                             bdb_name_ar = object.getString("bdb_name_ar");
 
@@ -22366,7 +22399,8 @@ public class APICall {
                                         if (booking_type.equals("20") || booking_type.equals("21") ||
                                                 booking_type.equals("22") || booking_type.equals("23")
                                                 || booking_type.equals("25") || booking_type.equals("24")) {
-                                            if (context.getResources().getString(R.string.locale).equals("ar"))
+                                            if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
+                                                if (context.getResources().getString(R.string.locale).equals("ar"))
                                                 RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
 
                                             else
@@ -22374,7 +22408,8 @@ public class APICall {
 
                                         }
                                         else {
-                                            if (context.getResources().getString(R.string.locale).equals("ar"))
+                                            if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
+                                                if (context.getResources().getString(R.string.locale).equals("ar"))
                                                 RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
                                             else
                                                 RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name);
@@ -22657,6 +22692,7 @@ public class APICall {
                         Log.e("FRAGMENT_NAME",BeautyMainPage.FRAGMENT_NAME);
                         if (booking_type.equals("0") || booking_type.equals("10") ){
                             Log.e("bookType","Single");
+
                             for (int i=0;i<booking.length();i++) {
                                 JSONObject object = booking.getJSONObject(i);
 
@@ -22708,9 +22744,12 @@ public class APICall {
 
                                 }
                             }
-                        }else{
+                        }
+                        else{
                             Log.e("bookType","Multi");
                             String names="";
+//                            CancelReservationActivity.count=booking.length();
+                            Log.e("Bookingis","is"+booking.toString());
                             for (int i=0;i<booking.length();i++){
                                 JSONObject object1=booking.getJSONObject(i);
                                 JSONArray bookings;
@@ -22739,9 +22778,12 @@ public class APICall {
                                 if (name.equals("booking_wast_time")){
                                     if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
                                         CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"",bookings,booking_type);
-                                }else
-                                    CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"age:"+bdb_client_old,bookings,booking_type);
-                                Log.e("Bookings",bookings.toString());
+                                }else {
+                                    CancelReservationActivity.count+=1;
+                                    CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot, name, "age:" + bdb_client_old, bookings, booking_type);
+
+                                    Log.e("Bookings", bookings.toString());
+                                }
                                 String client_name="";
 //                                for (int j=0;j<bookings.length();j++){
 //                                    JSONObject object=bookings.getJSONObject(j);
@@ -24476,6 +24518,7 @@ Log.e("ERRR",e.getMessage());
 
 
         Log.e("OfferPost",jsonPostData);
+        Log.e("URL",API_PREFIX_NAME+"/api/service/offer/automatedBrowse");
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(API_PREFIX_NAME+"/api/service/offer/automatedBrowse")

@@ -435,7 +435,8 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         emp_name=layout2.findViewById(R.id.emp_name);
         if(isExec.equals("1"))
             isExecuted.setImageResource(R.drawable.ic_checked);
-        else             isExecuted.setImageResource(R.drawable.ic_cancel);
+        else
+            isExecuted.setImageResource(R.drawable.ic_cancel);
 
         j_cost=layout2.findViewById(R.id.journey_time);
 

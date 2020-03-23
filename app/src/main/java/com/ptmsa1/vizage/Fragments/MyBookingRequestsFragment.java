@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,6 +98,9 @@ public class MyBookingRequestsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
+                // If the navigation drawer is not open then open it, if its already open then close it.
+                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
+                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
         fragment = new NewBookingRequestsFragment();

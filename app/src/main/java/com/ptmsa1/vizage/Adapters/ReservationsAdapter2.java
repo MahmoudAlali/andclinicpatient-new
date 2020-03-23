@@ -63,6 +63,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public static FragmentTransaction fragmentTransaction;
     public static String book_id="0",is_action_on="",logoId;
     public static int postionBook;
+    public static ReservationModel reservationModel;
     public ReservationsAdapter2(Context context, String items[]){
         this.context=context;
         this.items=items;
@@ -103,8 +104,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                 if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
                     ((Item) holder).status.setText(R.string.accepted_res);
-                    ((Item) holder).delay.setVisibility(View.VISIBLE);
-                    ((Item) holder).delay.setText(R.string.deposit);
+                    if (bookingAutomatedBrowseData.get(position).getIs_action_on().equals("1")
+                            || bookingAutomatedBrowseData.get(position).getIs_action_on().equals("true")) {
+                        ((Item) holder).delay.setVisibility(View.VISIBLE);
+                        ((Item) holder).delay.setText(R.string.deposit);
+                    }
+
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
                     ((Item) holder).status.setText(R.string.waiting_res);
                 }
@@ -481,7 +486,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                reservationModel=bookingAutomatedBrowseData.get(position);
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")
                         ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("1")){
 

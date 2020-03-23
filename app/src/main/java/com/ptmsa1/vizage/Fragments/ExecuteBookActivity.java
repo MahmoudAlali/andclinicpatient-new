@@ -29,9 +29,10 @@ import java.util.Map;
 public class ExecuteBookActivity extends AppCompatActivity {
 
 
+
     static LinearLayout myroot;
     Button okBtn;
-    static Context context;
+    public static Context context;
     public static LinearLayout.LayoutParams lp ;
     static Map<String, String> map = new HashMap<>();
     static boolean isOffer;
@@ -49,11 +50,10 @@ public class ExecuteBookActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,RateSerEmpActivity.class);
-                startActivity(intent);
+
                 JSONArray p=getBookings();
 
-//                APICall.setExecuted(context,p,bookID);
+                APICall.setExecuted(context,p,bookID);
 
 
             }
