@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CancelReservationActivity extends AppCompatActivity {
-    public static TextView empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+    public static TextView empname,booktype,id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
     public static LinearLayout myroot;
     static Boolean checkAllTrue=true;
 
@@ -42,7 +42,7 @@ public class CancelReservationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.incom_reservation_details_layout);
+        setContentView(R.layout.cancel_reservation_details_layout);
 
         count=0;
         c=0;
@@ -55,6 +55,7 @@ public class CancelReservationActivity extends AppCompatActivity {
         place=findViewById(R.id.place);
         book_at=findViewById(R.id.book_at);
         booktype=findViewById(R.id.book_type);
+        id=findViewById(R.id.id);
         service_name=findViewById(R.id.rname);
         salonName=findViewById(R.id.salon_name);
 

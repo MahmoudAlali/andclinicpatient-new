@@ -33,6 +33,30 @@ public class ReservationModel {
         this.bdb_name_booking=bdb_name_booking;
     }
 
+
+    String is_per_client;
+    public ReservationModel(String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client, ArrayList<BookingAutomatedBrowseData> data) {
+        this.bookingType = bookingType;
+        this.totalPrice = totalPrice;
+        this.startTime = startTime;
+        this.place = place;
+        this.data = data;
+        this.client_name = client_name;
+        this.booking_price = booking_price;
+        this.bdb_inner_booking=bdb_inner_booking;
+        this.bdb_is_executed=bdb_is_executed;
+        this.logoId=logoId;
+        this.booked_by_me=booked_by_me;
+        this.is_action_on=is_action_on;
+        this.is_rating_on=is_rating_on;
+        this.bdb_name_booking=bdb_name_booking;
+        this.is_per_client=is_per_client;
+    }
+
+    public String getIs_per_client() {
+        return is_per_client;
+    }
+
     public String getBdb_name_booking() {
         return bdb_name_booking;
     }

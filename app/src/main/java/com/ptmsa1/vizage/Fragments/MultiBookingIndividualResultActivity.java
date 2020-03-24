@@ -35,20 +35,20 @@ import com.ptmsa1.vizage.R;
 
         if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2){
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBooking3_13Inside";
-                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBooking3_13Inside";
+                urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
             }else {
-                url="http://clientapp.dcoret.com/api/booking/searchGroupBooking3_13Outside";
-                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBooking3_13Outside";
+                urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
 
             }
         }else {
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
-                url = "http://clientapp.dcoret.com/api/booking/searchGroupBookingInside";
-                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeInside";
+                url = APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
+                urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
             }else {
-                url = "http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
-                urlAlt="http://clientapp.dcoret.com/api/booking/searchGroupBookingAlternativeOutside";
+                url = APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
+                urlAlt=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
 
             }
         }

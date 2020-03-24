@@ -768,5 +768,7 @@
     <string name="service_date_sort_down">service execution date (oldest-nearest)</string>
     <string name="accepted_res">accepted</string>
     <string name="waiting_res">waiting for acceptance</string>
+    <string name="success_book_item">success book service</string>
+    <string name="success_book_items">success book services</string>
 
 </resources>

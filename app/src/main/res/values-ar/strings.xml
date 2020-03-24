@@ -603,4 +603,6 @@
     <string name="service_date_sort_down">تاريخ تنفيذ الخدمة (الأحدث-الأقدم)</string>
     <string name="accepted_res">مقبولة</string>
     <string name="waiting_res">بانتظار التأكيد</string>
+    <string name="success_book_item">تم حجز الخدمة بنجاح</string>
+    <string name="success_book_items">تم حجز مجموعة الخدمات بنجاح</string>
 </resources>

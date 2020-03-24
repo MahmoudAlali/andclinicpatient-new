@@ -110,15 +110,23 @@ AltCustomExpandableListAdapter extends BaseExpandableListAdapter {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            if ( stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2") ){
-                book.setClickable(false);
-                book.setVisibility(View.GONE);
-            }
+           try {
+               if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("2")) {
+                   book.setClickable(false);
+                   book.setVisibility(View.GONE);
+               }
+           }catch (Exception e){
+               e.printStackTrace();
+           }
 
-            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("0")){
-                book.setClickable(true);
-                book.setVisibility(View.VISIBLE);
-            }
+           try {
+               if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getIs_booked().equals("0")) {
+                   book.setClickable(true);
+                   book.setVisibility(View.VISIBLE);
+               }
+           }catch (Exception e){
+               e.printStackTrace();
+           }
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
