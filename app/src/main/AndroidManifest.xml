@@ -25,41 +25,41 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <activity android:name="com.ptmsa1.vizage.Activities.SettingActivity"></activity>
-        <activity android:name="com.ptmsa1.vizage.Fragments.MyReservation.CancelReservationActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.SingleMultiAltResultActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.SingleMultiRelationActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.RateSerEmpActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.ExecuteBookActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.RatingBookActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.AlterGroupOtherReservationResult" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.OtherRelationActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.CompareServiceActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.AlterGroupReservationResultActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.GroupRelationActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.GroupOffer.MultiClientOfferEffect" />
-        <activity android:name="com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferEffect" />
-        <activity android:name="com.ptmsa1.vizage.Activities.SingleOffer.SingleOfferEffect" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.GroupReservationOtherResultActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.MyOtherEffectActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.GroupReservationResultActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.MyGroupEffectActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.MultiBookingIndividualResultActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.MySingleMultiEffectActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.BookingRequestDetailsActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.CreateRequestActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.AddEffectsToRequestActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.MyIndEffectsActivity" />
+        <activity android:name=".Activities.ProviderSerAndOfferPKG.MainProviderActivity"></activity>
+        <activity android:name=".Activities.SettingActivity" />
+        <activity android:name=".Fragments.MyReservation.CancelReservationActivity" />
+        <activity android:name=".Fragments.SingleMultiAltResultActivity" />
+        <activity android:name=".Fragments.SingleMultiRelationActivity" />
+        <activity android:name=".Fragments.RateSerEmpActivity" />
+        <activity android:name=".Fragments.ExecuteBookActivity" />
+        <activity android:name=".Fragments.RatingBookActivity" />
+        <activity android:name=".Fragments.AlterGroupOtherReservationResult" />
+        <activity android:name=".Fragments.OtherRelationActivity" />
+        <activity android:name=".Fragments.CompareServiceActivity" />
+        <activity android:name=".Fragments.AlterGroupReservationResultActivity" />
+        <activity android:name=".Fragments.GroupRelationActivity" />
+        <activity android:name=".Activities.GroupOffer.MultiClientOfferEffect" />
+        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferEffect" />
+        <activity android:name=".Activities.SingleOffer.SingleOfferEffect" />
+        <activity android:name=".Fragments.GroupReservationOtherResultActivity" />
+        <activity android:name=".Fragments.MyOtherEffectActivity" />
+        <activity android:name=".Fragments.GroupReservationResultActivity" />
+        <activity android:name=".Fragments.MyGroupEffectActivity" />
+        <activity android:name=".Fragments.MultiBookingIndividualResultActivity" />
+        <activity android:name=".Fragments.MySingleMultiEffectActivity" />
+        <activity android:name=".Activities.BookingRequestDetailsActivity" />
+        <activity android:name=".Activities.CreateRequestActivity" />
+        <activity android:name=".Activities.AddEffectsToRequestActivity" />
+        <activity android:name=".Fragments.MyIndEffectsActivity" />
         <activity
-            android:name="com.ptmsa1.vizage.Activities.support.InternalChatActivity"
+            android:name=".Activities.support.InternalChatActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:parentActivityName="com.ptmsa1.vizage.Activities.support.SupportActivity"
+            android:parentActivityName=".Activities.support.SupportActivity"
             android:screenOrientation="portrait"
             android:taskAffinity="" />
 
-        <receiver android:name="com.ptmsa1.vizage.Service.PackegeRemovedBR">
+        <receiver android:name=".Service.PackegeRemovedBR">
             <intent-filter>
 
                 <!-- <action android:name="android.intent.action.PACKAGE_REMOVED"/> -->
@@ -68,27 +68,27 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.BookingIndvidualActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.support.SupportActivity" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.ReservatoinDetailsActivity" />
-        <activity android:name="com.ptmsa1.vizage.Activities.AddEffectOffersActivity" />
+        <activity android:name=".Fragments.MyEffects.MyEffectsActivity" />
+        <activity android:name=".Fragments.BookingIndvidualActivity" />
+        <activity android:name=".Activities.support.SupportActivity" />
+        <activity android:name=".Fragments.ReservatoinDetailsActivity" />
+        <activity android:name=".Activities.AddEffectOffersActivity" />
 
         <receiver
-            android:name="com.ptmsa1.vizage.Service.CancelNotifyBroadcast"
+            android:name=".Service.CancelNotifyBroadcast"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.ptmsa1.vizage.Activities.OfferBookingResult" />
-        <activity android:name="com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking" />
-        <activity android:name="com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking" />
-        <activity android:name="com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.IndividualBooking" />
+        <activity android:name=".Activities.OfferBookingResult" />
+        <activity android:name=".Activities.GroupOffer.SingleDateMultiClientOfferBooking" />
+        <activity android:name=".Activities.SingleOffer.SingleDateOfferBooking" />
+        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferBooking" />
+        <activity android:name=".Fragments.IndividualBooking" />
         <activity
-            android:name="com.ptmsa1.vizage.test.Main2Activity"
+            android:name=".test.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.EditReservation" />
+        <activity android:name=".Fragments.EditReservation" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -102,32 +102,32 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.ptmsa1.vizage.Fragments.GoogleMapBeauty"
+            android:name=".Fragments.GoogleMapBeauty"
             android:label="@string/title_activity_google_map" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.AddLocation" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.ReservationTime" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.ResevationDate" />
-        <activity android:name="com.ptmsa1.vizage.Fragments.AddReservation" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Payment" />
+        <activity android:name=".Fragments.AddLocation" />
+        <activity android:name=".Fragments.ReservationTime" />
+        <activity android:name=".Fragments.ResevationDate" />
+        <activity android:name=".Fragments.AddReservation" />
+        <activity android:name=".Activities.Payment" />
 
-        <service android:name="com.ptmsa1.vizage.Service.MyFirebaseInstanceService">
+        <service android:name=".Service.MyFirebaseInstanceService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <receiver
-            android:name="com.ptmsa1.vizage.Activities.SMSReceiver"
+            android:name=".Activities.SMSReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.ptmsa1.vizage.Activities.Setting" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Login" />
-        <activity android:name="com.ptmsa1.vizage.Activities.MapFiltering" />
-        <activity android:name="com.ptmsa1.vizage.Activities.SelectServiceForOffer" />
+        <activity android:name=".Activities.Setting" />
+        <activity android:name=".Activities.Login" />
+        <activity android:name=".Activities.MapFiltering" />
+        <activity android:name=".Activities.SelectServiceForOffer" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -139,29 +139,29 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name="com.ptmsa1.vizage.Activities.Compartion" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Search" />
-        <activity android:name="com.ptmsa1.vizage.Activities.ShoppingCart" />
-        <activity android:name="com.ptmsa1.vizage.Activities.SearchInterface" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Notification" />
-        <activity android:name="com.ptmsa1.vizage.Activities.ReservationDetails" />
-        <activity android:name="com.ptmsa1.vizage.Activities.ServiceDetails" />
-        <activity android:name="com.ptmsa1.vizage.Activities.ServiceType" />
-        <activity android:name="com.ptmsa1.vizage.Activities.SplashScreen">
+        <activity android:name=".Activities.Compartion" />
+        <activity android:name=".Activities.Search" />
+        <activity android:name=".Activities.ShoppingCart" />
+        <activity android:name=".Activities.SearchInterface" />
+        <activity android:name=".Activities.Notification" />
+        <activity android:name=".Activities.ReservationDetails" />
+        <activity android:name=".Activities.ServiceDetails" />
+        <activity android:name=".Activities.ServiceType" />
+        <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ptmsa1.vizage.Activities.Register" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Services" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Offers" />
-        <activity android:name="com.ptmsa1.vizage.Activities.FavoritesList" />
-        <activity android:name="com.ptmsa1.vizage.Activities.Point" />
-        <activity android:name="com.ptmsa1.vizage.Activities.BeautyMainPage" />
+        <activity android:name=".Activities.Register" />
+        <activity android:name=".Activities.Services" />
+        <activity android:name=".Activities.Offers" />
+        <activity android:name=".Activities.FavoritesList" />
+        <activity android:name=".Activities.Point" />
+        <activity android:name=".Activities.BeautyMainPage" />
         <activity
-            android:name="com.ptmsa1.vizage.Activities.MyReservations"
+            android:name=".Activities.MyReservations"
             android:label="@string/title_activity_my_reservations"
             android:theme="@style/AppTheme.NoActionBar" />
 

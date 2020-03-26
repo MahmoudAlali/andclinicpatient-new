@@ -47,13 +47,10 @@ public class RateSerEmpActivity extends AppCompatActivity {
 
         APICall.browseOneRatingBooking(ReservationsAdapter2.book_id,context);
 
-//       addLayout("Hala","تسريحة");
-//       addLayout("Rana","قص شعر");
-
         eval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                arrayList.add(new SupRatingModel("supplier",sup_rating,arrayList.get(0).getBdb_book_id()));
+                arrayList.add(new SupRatingModel("supplier",sup_rating,ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id()));
                 APICall.rateBooking(context,getrating(arrayList));
             }
         });
@@ -64,14 +61,11 @@ public class RateSerEmpActivity extends AppCompatActivity {
         layout2 = LayoutInflater.from(context).inflate(R.layout.emp_rating_layout, myroot, false);
         TextView employee_name,ser_name;
         ColorRatingBar rating;
-
         employee_name=layout2.findViewById(R.id.employee_name);
         ser_name=layout2.findViewById(R.id.service_name);
         rating=layout2.findViewById(R.id.rating);
-
         employee_name.setText(emp_name);
         ser_name.setText(serviceName);
-
 
         arrayList.add(new SupRatingModel("employee",rating,book_id));
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -89,7 +83,6 @@ public class RateSerEmpActivity extends AppCompatActivity {
         for (int i=0;i<arrayList.size();i++){
             JSONObject object=new JSONObject();
             try{
-
                 object.put("bdb_type",arrayList.get(i).getBdb_type());
                 object.put("bdb_value",arrayList.get(i).getBdb_value().getRating()+"");
                 object.put("bdb_book_id",arrayList.get(i).getBdb_book_id());

@@ -60,6 +60,8 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
+    public static int placePos;
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -155,6 +157,19 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (offers.get(position).getBdb_offer_place().equals("0")){
+                    placePos=1;
+                }else if (offers.get(position).getBdb_offer_place().equals("1")){
+                    placePos=2;
+                }else if (offers.get(position).getBdb_offer_place().equals("2")){
+                    placePos=3;
+                }else if (offers.get(position).getBdb_offer_place().equals("3")){
+                    placePos=4;
+                }
+
+
+
                 if (offers.get(position).getBdb_offer_type().equals("2")
                         || offers.get(position).getBdb_offer_type().equals("5")){
 

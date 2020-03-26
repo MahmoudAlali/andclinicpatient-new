@@ -1,10 +1,12 @@
 package com.ptmsa1.vizage.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.DataModel.BestOfferItem;
 import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataModel.ServiceItem;
@@ -110,6 +113,17 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+            ((Item) holder).pro_name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("PIDDDD","is"+bestOfferItems.get(position).getProvider_id());
+                    Log.e("Position","is"+position);
+                    Intent intent=new Intent(context, MainProviderActivity.class);
+                    intent.putExtra("provider_id",bestOfferItems.get(position).getProvider_id());
+                    context.startActivity(intent);
+                }
+            });
+
            /* if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
                     ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
             else
@@ -251,7 +265,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             onServices = itemView.findViewById(R.id.onServices);
             price = itemView.findViewById(R.id.price);
 //            ser_count = itemView.findViewById(R.id.ser_count);
-//            pack_code = itemView.findViewById(R.id.packCode);
+//            pro_name = itemView.findViewById(R.id.pro_name);
             total_dis = itemView.findViewById(R.id.disAmount);
             logoImg = itemView.findViewById(R.id.logoImg);
             itemBackground = itemView.findViewById(R.id.itemBackground);

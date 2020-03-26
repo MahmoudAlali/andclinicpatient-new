@@ -434,7 +434,8 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 ser_name.setAdapter(adapter);
                 ser_name.setTitle(getResources().getString(R.string.Service_Name));
 
-                APICall.getServicesForFilter("0",adapter,serviceNameList,ser_name,BeautyMainPage.context);
+
+                APICall.getServicesForFilter(APICall.isBride,adapter,serviceNameList,ser_name,BeautyMainPage.context);
 
                 ser_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
