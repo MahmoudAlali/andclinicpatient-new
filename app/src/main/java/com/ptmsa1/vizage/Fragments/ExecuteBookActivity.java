@@ -63,7 +63,7 @@ public class ExecuteBookActivity extends AppCompatActivity {
         String execute_book_id="";
         try
         {
-            Log.e("Notif", "Reserv Details is trying to get bookid");
+            Log.e("Notif", "Execute Activity is trying to get bookid");
             execute_book_id=getIntent().getStringExtra("execute_book_id");
         }
         catch (Exception e)

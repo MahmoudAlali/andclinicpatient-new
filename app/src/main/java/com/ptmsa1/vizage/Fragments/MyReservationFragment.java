@@ -110,7 +110,7 @@ public class MyReservationFragment extends Fragment  {
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         incom_reservation=view.findViewById(R.id.incom_reservation);
-        note_cancel=view.findViewById(R.id.note_cancel);
+        //note_cancel=view.findViewById(R.id.note_cancel);
 //        floatingTextButton=view.findViewById(R.id.action_button);
         accept_reservation=view.findViewById(R.id.accept_reservation);
         deposit_reservation=view.findViewById(R.id.deposit_reservation);
@@ -208,6 +208,7 @@ public class MyReservationFragment extends Fragment  {
 
         if(!execute_book_id.equals(""))
         {
+            Log.e("execute_book_id", "is:" + execute_book_id);
 
             Intent intent=new Intent(BeautyMainPage.context, ExecuteBookActivity.class);
             intent.putExtra("execute_book_id", book_id);
@@ -906,7 +907,6 @@ public class MyReservationFragment extends Fragment  {
         accept_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                note_cancel.setVisibility(View.GONE);
                 tabselected(accept_reservation,incom_reservation,deposit_reservation,true);
                 tab="2";
                 fragment = new ExecutedReservationFragment();
@@ -920,7 +920,6 @@ public class MyReservationFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
-                note_cancel.setVisibility(View.GONE);
                 fragment = new DepositReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

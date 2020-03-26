@@ -30,14 +30,15 @@
               android:layout_height="wrap_content">
               <LinearLayout
                   android:layout_margin="@dimen/pf_10_txt_size"
-                  android:layout_width="match_parent"
+                  android:layout_width="350dp"
+                  android:layout_gravity="center"
                   android:layout_height="match_parent"
                   android:orientation="horizontal"
-                  android:weightSum="2">
+                  >
                   <TextView
                       android:layout_weight="1"
                       android:id="@+id/sup_name"
-                      android:layout_width="wrap_content"
+                      android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_gravity="center"
                       android:lines="1"
@@ -49,7 +50,6 @@
                       />
                   <hyogeun.github.com.colorratingbarlib.ColorRatingBar
                       android:id="@+id/sup_rating"
-                      android:layout_weight="1"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:scaleY="0.5"

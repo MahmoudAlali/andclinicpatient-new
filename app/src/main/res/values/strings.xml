@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BeautyClient</string>
+    <string name="app_name">Vizage</string>
     <string name="title_activity_my_reservations" translatable="false">MyReservations</string>
     <string name="title_activity_main2" translatable="false">Main2Activity</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
@@ -362,19 +362,17 @@
         <item>very dark</item>
     </string-array>
 
-
     <string-array name="offer_type">
-        <item> نوع الحجز</item>
-        <item>حجز فردي</item>
-        <item>حجز جماعي للغير</item>
-        <item>حجز جماعي</item>
-        <item>حجز فردي متعدد الخدمات</item>
-        <item>عرض :حجز فردي</item>
-        <item>عرض :حجز متعدد الخدمات</item>
-        <item>عرض :حجز جماعي</item>
-
-
+        <item>booking type</item>
+        <item>individual booking</item>
+        <item>group booking for others</item>
+        <item>group booking</item>
+        <item>multi-services individual booking</item>
+        <item>offer: individual</item>
+        <item>offer: multi-services individual</item>
+        <item>offer: group booking</item>
     </string-array>
+
     <string-array name="request_type">
         <item>request type</item>
         <item>individual request</item>
@@ -764,11 +762,15 @@
     <string name="requestRelatedBooking">Reservation attached to the request</string>
     <string name="createRequest">create request</string>
     <string name="errorAddingRequest">sorry, try again later </string>
-    <string name="service_date_sort_up">service execution date (nearest-oldest)</string>
-    <string name="service_date_sort_down">service execution date (oldest-nearest)</string>
+    <string name="service_date_sort_up">service execution date (descending)</string>
+    <string name="service_date_sort_down">service execution date (ascending)</string>
     <string name="accepted_res">accepted</string>
     <string name="waiting_res">waiting for acceptance</string>
     <string name="success_book_item">success book service</string>
     <string name="success_book_items">success book services</string>
+    <string name="start_asc">start date (ascending)</string>
+    <string name="booking_asc">booking date (ascending)</string>
+    <string name="booking_desc">booking date (descending)</string>
+    <string name="start_desc">start date (descending)</string>
 
 </resources>
