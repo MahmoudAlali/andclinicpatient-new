@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="3dp"
-        android:background="@drawable/shadow_fashon_layout"
+        android:background="@drawable/shadow_fashon_layout2"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="@dimen/standard_50"
                 android:layout_height="@dimen/standard_50"
-                android:src="@drawable/ic_flower" />
+                android:src="@drawable/reser_insect_icon" />
 
 
             <TextView
@@ -41,7 +41,7 @@
             <ImageView
                 android:layout_width="@dimen/standard_50"
                 android:layout_height="@dimen/standard_50"
-                android:src="@drawable/ic_flower" />
+                android:src="@drawable/reser_insect_icon" />
 
             <Space
                 android:layout_width="@dimen/pf_10dp_space"

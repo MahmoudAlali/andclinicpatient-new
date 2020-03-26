@@ -225,6 +225,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
          navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        navigation.setSelectedItemId(R.id.main);
+
         //---------------get cities in background-----------------
 
 
@@ -460,7 +462,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    type = object.getString("type");
+                    type = object.getString("booking_type");
                     break;
                 }
                 catch (Exception e)
@@ -471,6 +473,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             }
 
             Bundle bundle = new Bundle();
+            Log.e("execute_book_id", "is:" + book_id);
+
             bundle.putString("execute_book_id", book_id);
             bundle.putString("type", type);
             menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
@@ -518,7 +522,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         else {
             Log.e("ELSSSSe","go to else");
-            navigation.setSelectedItemId(R.id.main);
            /* fragment = new Offers();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();

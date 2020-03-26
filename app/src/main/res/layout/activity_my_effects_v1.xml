@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".Fragments.MyEffects.MyEffectsActivity">
 
 
     <android.support.v7.widget.RecyclerView
         android:layout_weight="1"
         android:id="@+id/recycleview"
+        android:layout_marginBottom="@dimen/standard_40"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 <!--    <android.support.v4.widget.NestedScrollView-->

@@ -22271,6 +22271,7 @@ public class APICall {
                                     final String bdb_name = object1.getString("bdb_name");
                                     final String is_rating_on = object1.getString("is_rating_on"),
                                             bdb_name_ar = object1.getString("bdb_name_ar");
+                                    final String category_id = object.getString("bdb_is_hair_service");
 
                                     final String client_name = object1.getString("bdb_user_name");
 
@@ -22299,14 +22300,14 @@ public class APICall {
 //                                                        bdb_name_ar, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
                                                 if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar,category_id);
 
                                             }else{
 //                                                ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
 //                                                        bdb_name, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
                                                 if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name,category_id);
 
                                             }
                                         }
@@ -22373,6 +22374,7 @@ public class APICall {
                                             bdb_booked_at = object.getString("bdb_booked_at");
                                     String bdb_emp_name = object.getString("bdb_emp_name");
                                     String is_rating_on = object.getString("is_rating_on");
+                                    String category_id = object.getString("bdb_is_hair_service");
                                     String bdb_name = object.getString("bdb_name"),
                                             bdb_name_ar = object.getString("bdb_name_ar");
 
@@ -22401,18 +22403,21 @@ public class APICall {
                                                 || booking_type.equals("25") || booking_type.equals("24")) {
                                             if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
                                                 if (context.getResources().getString(R.string.locale).equals("ar"))
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar,category_id);
 
                                             else
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name,category_id);
 
                                         }
                                         else {
                                             if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
+                                            {
                                                 if (context.getResources().getString(R.string.locale).equals("ar"))
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar);
-                                            else
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name);
+                                                    RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar,category_id);
+                                                else
+                                                    RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name,category_id);
+                                            }
+
                                         }
                                     }
 

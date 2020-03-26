@@ -29,7 +29,11 @@
     <color name="red">#BB2F5D</color>
     <color name="lightBordeaux">#C4941751</color>
     <color name="white">#fff</color>
+    <color name="logo_back">#3A183C</color>
     <color name="transGrey">#B3636263</color>
+    <color name="list_group">#8C83D2</color>
+    <color name="list_group_selected">#D0A8F1</color>
+    <color name="list_group_details">#E2E4F1</color>
 
 
 </resources>

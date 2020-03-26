@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,7 +29,15 @@ public class RateSerEmpActivity extends AppCompatActivity {
     public static TextView sup_name;
     public static ColorRatingBar sup_rating;
     public static String salon_id;
-
+    public static int [] servicsImgsBasic ={ R.drawable.hair_basic,
+            R.drawable.makeup_basic,
+            R.drawable.massage_basic,
+            R.drawable.spa_basic,
+            R.drawable.nails_basic,
+            R.drawable.body_basic,
+            R.drawable.skin_basic,
+            R.drawable.eyebrows_basic
+    };
     Button eval;
     public  static ArrayList<SupRatingModel> arrayList=new ArrayList<>();
     @Override
@@ -58,19 +67,22 @@ public class RateSerEmpActivity extends AppCompatActivity {
             }
         });
     }
-    public static void addLayout(String book_id,String emp_name,String serviceName)
+    public static void addLayout(String book_id,String emp_name,String serviceName,String cat_id)
     {
         final View layout2;
         layout2 = LayoutInflater.from(context).inflate(R.layout.emp_rating_layout, myroot, false);
         TextView employee_name,ser_name;
+        ImageView logoImg ;
         ColorRatingBar rating;
 
         employee_name=layout2.findViewById(R.id.employee_name);
         ser_name=layout2.findViewById(R.id.service_name);
         rating=layout2.findViewById(R.id.rating);
+        logoImg=layout2.findViewById(R.id.logoImg);
 
         employee_name.setText(emp_name);
         ser_name.setText(serviceName);
+        logoImg.setImageResource(servicsImgsBasic[Integer.parseInt(cat_id)]);
 
 
         arrayList.add(new SupRatingModel("employee",rating,book_id));

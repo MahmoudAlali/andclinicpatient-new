@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     >
 
@@ -125,15 +126,7 @@
             android:background="#000"
             />
     </LinearLayout>
-    <TextView
-        android:id="@+id/note_cancel"
-        android:layout_marginTop="103dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@android:color/transparent"
-        android:textColor="@color/red"
-        android:text="للإلغاء يرجى الضغط على زر الإلغاء"/>
+
     <LinearLayout
         android:layout_marginTop="122dp"
         android:orientation="vertical"
