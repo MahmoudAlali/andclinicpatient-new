@@ -91,7 +91,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         try {
             Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
             ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
-            String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
+            final String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
 
             //--- testing-----
@@ -108,10 +108,15 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                             || bookingAutomatedBrowseData.get(position).getIs_action_on().equals("true")) {
                         ((Item) holder).delay.setVisibility(View.VISIBLE);
                         ((Item) holder).delay.setText(R.string.deposit);
+                    }else {
+                        ((Item) holder).delay.setVisibility(View.GONE);
+
                     }
 
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
                     ((Item) holder).status.setText(R.string.waiting_res);
+                    ((Item) holder).delay.setVisibility(View.GONE);
+
                 }
 //                ((Item) holder).delay.setVisibility(View.GONE);
             }else{
@@ -345,6 +350,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                }
 
             }
+
             else if (offtypetmp.equals("2")) {
                 Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
                 String s=((AppCompatActivity)context).getResources().getString(R.string.group_res_other);
@@ -519,8 +525,14 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 reservationModel=bookingAutomatedBrowseData.get(position);
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")
                         ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("1")){
+//
+                        if ((!offtypetmp.equals("3") &&!offtypetmp.equals("1") && !offtypetmp.equals("10")  && !offtypetmp.equals("13")
+                            && !offtypetmp.equals("4") && !offtypetmp.equals("5") && !offtypetmp.equals("7") && !offtypetmp.equals("8"))
+                        && (bookingAutomatedBrowseData.get(position).getData().size()>1) &&
+                                bookingAutomatedBrowseData.get(position).getIs_per_client().equals("1")
+                        ){
 
-                        if (bookingAutomatedBrowseData.get(position).getData().size()>1){
+                        {
                             //------- cancel activity reservation-----------------
                             book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
                             Log.e("BookIDCancel",book_id);
@@ -530,6 +542,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                             context.startActivity(intent);
 
 
+                        }
                         }else {
 
                             if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {

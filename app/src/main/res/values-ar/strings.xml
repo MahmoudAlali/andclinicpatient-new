@@ -603,6 +603,8 @@
     <string name="service_date_sort_down">تاريخ تنفيذ الخدمة (تصاعدياَ)</string>
     <string name="accepted_res">مقبولة</string>
     <string name="waiting_res">بانتظار التأكيد</string>
+    <string name="success_book_item">تم حجز الخدمة بنجاح</string>
+    <string name="success_book_items">تم حجز مجموعة الخدمات بنجاح</string>
     <string name="start_asc">حسب تاريخ البدء (تصاعدياَ)</string>
     <string name="booking_asc">حسب تاريخ الحجز (تصاعدياَ)</string>
     <string name="booking_desc">حسب تاريخ الحجز (تنازلياً)</string>

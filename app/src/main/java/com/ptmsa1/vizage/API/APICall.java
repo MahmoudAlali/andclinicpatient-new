@@ -155,6 +155,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -362,7 +363,8 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
@@ -389,11 +391,12 @@ public class APICall {
                         });
 
 
-                    }else {
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                               showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -652,12 +655,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -670,6 +674,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -677,15 +682,18 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
+
 
             }
 
@@ -751,12 +759,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -769,6 +778,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -776,11 +786,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -883,12 +895,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -901,6 +914,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -908,11 +922,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1025,12 +1041,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1043,6 +1060,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1050,11 +1068,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1174,12 +1194,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1192,6 +1213,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1199,11 +1221,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1323,12 +1347,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1341,6 +1366,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1348,11 +1374,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1472,12 +1500,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1490,6 +1519,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1497,11 +1527,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1621,12 +1653,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1639,6 +1672,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1646,11 +1680,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1767,12 +1803,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1785,6 +1822,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1792,11 +1830,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -1910,12 +1950,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -1928,6 +1969,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -1935,11 +1977,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -2067,13 +2111,13 @@ public class APICall {
                     }
                 });
 
-
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2086,21 +2130,25 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
+
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -2178,13 +2226,15 @@ public class APICall {
                 editor.commit();
             }
 //            Log.e("isfirstopen",BeautyMainPage.isFirstOpen+"");
-            if(!BeautyMainPage.isFirstOpen){
-                e_bdb_name.setText(sh.getString("bdb_name",null));
-                e_bdb_email.setText(sh.getString("bdb_email",null));
-                AccountFragment.oldEmail=sh.getString("bdb_email",null);
-                e_bdb_mobile.setText(convertToArabic(sh.getString("bdb_mobile",null)));
+//            if(!BeautyMainPage.isFirstOpen){
+//                e_bdb_name.setText(sh.getString("bdb_name",null));
+//                e_bdb_email.setText(sh.getString("bdb_email",null));
+//                AccountFragment.oldEmail=sh.getString("bdb_email",null);
+//                e_bdb_mobile.setText(convertToArabic(sh.getString("bdb_mobile",null)));
+//
+//            }
 
-            }else {
+             {
                 BeautyMainPage.isFirstOpen=false;
                 String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
                 MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -2216,11 +2266,13 @@ public class APICall {
                         pd.dismiss();
 
 
-                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                            ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                        {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                    final Dialog dialog = new Dialog(context);
                                     dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                     dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2233,30 +2285,22 @@ public class APICall {
                                         @Override
                                         public void onClick(View v) {
                                             dialog.cancel();
-                                            final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                            refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                            refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                            refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                            Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                            refresh.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    refreshDialog.cancel();
-//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                                    detailsUser(url,e_bdb_name,e_bdb_email,e_bdb_mobile,context);
-                                                }
-                                            });
-                                            refreshDialog.show();
+
                                         }
                                     });
                                     dialog.show();
+
                                 }
                             });
-                        }else {
+
+
+                        }
+                        else {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                                 }
                             });
                         }
@@ -2371,11 +2415,13 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2388,30 +2434,22 @@ public class APICall {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
-                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                        refresh.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                refreshDialog.cancel();
-//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                                detailsUser1(url,context);
-                                            }
-                                        });
-                                        refreshDialog.show();
+
                                     }
                                 });
                                 dialog.show();
+
                             }
                         });
-                    }else {
+
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -2514,11 +2552,13 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2531,30 +2571,22 @@ public class APICall {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
-                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                        refresh.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                refreshDialog.cancel();
-//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                                detailsUser2(context,name,mobile);
-                                            }
-                                        });
-                                        refreshDialog.show();
+
                                     }
                                 });
                                 dialog.show();
+
                             }
                         });
-                    }else {
+
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -2641,11 +2673,13 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2658,30 +2692,22 @@ public class APICall {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
-                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                        refresh.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                refreshDialog.cancel();
-//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                                detailsUser3(context);
-                                            }
-                                        });
-                                        refreshDialog.show();
+
                                     }
                                 });
                                 dialog.show();
+
                             }
                         });
-                    }else {
+
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -2776,11 +2802,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2793,30 +2821,22 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
-                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                    refresh.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            refreshDialog.cancel();
-//                                                    new_user(email,name,phone,password,confirm_password,loc_long,loc_lat,city,gender,url,context);
-                                            detailsUser3(context);
-                                        }
-                                    });
-                                    refreshDialog.show();
+
                                 }
                             });
                             dialog.show();
+
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -2917,11 +2937,13 @@ public class APICall {
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -2934,18 +2956,22 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
+
                         }
                     });
 
 
-                }else {
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -3024,11 +3050,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3041,16 +3069,22 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
+
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -3110,7 +3144,9 @@ public class APICall {
                 mMessage = e.getMessage();
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -3127,17 +3163,22 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
 
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -3253,11 +3294,13 @@ public class APICall {
                                     pd.dismiss();
 
 
-                                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                                final Dialog dialog = new Dialog(context);
                                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3270,21 +3313,25 @@ public class APICall {
                                                     @Override
                                                     public void onClick(View v) {
                                                         dialog.cancel();
+
                                                     }
                                                 });
                                                 dialog.show();
+
                                             }
                                         });
-                                    }else {
+
+
+                                    }
+                                    else {
                                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                                             }
                                         });
                                     }
-
                                 }
                                 @Override
                                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
@@ -3394,11 +3441,13 @@ public class APICall {
                         pd.dismiss();
 
 
-                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                            ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                        {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                    final Dialog dialog = new Dialog(context);
                                     dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                     dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3411,17 +3460,21 @@ public class APICall {
                                         @Override
                                         public void onClick(View v) {
                                             dialog.cancel();
+
                                         }
                                     });
                                     dialog.show();
+
                                 }
                             });
 
-                        }else {
+
+                        }
+                        else {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                                 }
                             });
@@ -3489,12 +3542,13 @@ public class APICall {
                     Log.w("failure Response", mMessage);
                     pd.dismiss();
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3516,11 +3570,12 @@ public class APICall {
                         });
 
 
-                    }else {
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -3656,12 +3711,13 @@ public class APICall {
                     Log.w("failure Response", mMessage);
                     pd.dismiss();
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3678,13 +3734,18 @@ public class APICall {
                                     }
                                 });
                                 dialog.show();
+
                             }
                         });
-                    }else {
+
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -3757,11 +3818,13 @@ public class APICall {
                             Log.w("failure Response", mMessage);
                             pd.dismiss();
 
-                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                                ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                            {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                        final Dialog dialog = new Dialog(context);
                                         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                         dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3778,15 +3841,18 @@ public class APICall {
                                             }
                                         });
                                         dialog.show();
+
                                     }
                                 });
 
 
-                            }else {
+                            }
+                            else {
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                                     }
                                 });
                             }
@@ -3848,15 +3914,47 @@ public class APICall {
                                                 public void onFailure(Call call, IOException e) {
                                                     mMessage = e.getMessage();
                                                     Log.w("failure Response", mMessage);
-                                                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
 
-                                                        }
-                                                    });
 
                                                     pd.dismiss();
+                                                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                                                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                                                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                final Dialog dialog = new Dialog(context);
+                                                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                                                TextView message = dialog.findViewById(R.id.message);
+                                                                TextView title = dialog.findViewById(R.id.title);
+                                                                title.setText(R.string.Null);
+                                                                message.setText(R.string.check_internet_con);
+                                                                confirm.setOnClickListener(new View.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(View v) {
+                                                                        dialog.cancel();
+
+                                                                    }
+                                                                });
+                                                                dialog.show();
+
+                                                            }
+                                                        });
+
+
+                                                    }
+                                                    else {
+                                                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                                                            }
+                                                        });
+                                                    }
                                                 }
 
                                                 @Override
@@ -3970,11 +4068,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -3987,16 +4087,22 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
+
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -4084,15 +4190,44 @@ public class APICall {
                 public void onFailure(Call call, IOException e) {
                     mMessage = e.getMessage();
                     Log.w("failure Response", mMessage);
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            pd.dismiss();
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
 
-                        }
-                    });
+                                    }
+                                });
+                                dialog.show();
 
+                            }
+                        });
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
 
 
 
@@ -4191,7 +4326,9 @@ public class APICall {
                                 d.dismiss();
                                 pd.dismiss();
 
-                                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")) {
+                                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -4208,17 +4345,22 @@ public class APICall {
                                                 @Override
                                                 public void onClick(View v) {
                                                     dialog.cancel();
+
                                                 }
                                             });
                                             dialog.show();
 
                                         }
                                     });
-                                } else {
-                                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+
+
+                                }
+                                else {
+                                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                                         }
                                     });
                                 }
@@ -4290,11 +4432,13 @@ public class APICall {
                     Log.e("failure Response", mMessage);
                     pd.dismiss();
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -4307,17 +4451,22 @@ public class APICall {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
+
                                     }
                                 });
                                 dialog.show();
 
                             }
                         });
-                    }else {
+
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -4378,12 +4527,13 @@ public class APICall {
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -4396,6 +4546,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -4404,11 +4555,12 @@ public class APICall {
                     });
 
 
-                }else {
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -4505,12 +4657,13 @@ public class APICall {
             Log.w("failure Response", mMessage);
             pd.dismiss();
 
-            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+            {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        final Dialog dialog = new Dialog(BeautyMainPage.context);
+                        final Dialog dialog = new Dialog(context);
                         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -4523,6 +4676,7 @@ public class APICall {
                             @Override
                             public void onClick(View v) {
                                 dialog.cancel();
+
                             }
                         });
                         dialog.show();
@@ -4531,11 +4685,12 @@ public class APICall {
                 });
 
 
-            }else {
+            }
+            else {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                     }
                 });
@@ -4646,19 +4801,20 @@ public class APICall {
                     pd.dismiss();
                     TabOne.pullToRefresh.setRefreshing(false);
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                                final TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
                                 TextView message = dialog.findViewById(R.id.message);
                                 TextView title = dialog.findViewById(R.id.title);
-                                title.setText(R.string.ExuseMeAlert);
+                                title.setText(R.string.Null);
                                 message.setText(R.string.check_internet_con);
                                 confirm.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -4667,35 +4823,19 @@ public class APICall {
 
                                     }
                                 });
-                                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                    @Override
-                                    public void onCancel(DialogInterface dialog) {
-                                                Log.e("refreshDialog","ok");
-                                                final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                                refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                                refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                                refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                                Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                                refresh.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        automatedBrowse(url,lang,itemPerPage,pageNum,context);
-                                                        refreshDialog.cancel();
-                                                    }
-                                                });
-                                                refreshDialog.show();
-                                    }
-                                });
                                 dialog.show();
 
                             }
                         });
 
-                    }else {
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                             }
                         });
                     }
@@ -4928,20 +5068,20 @@ public class APICall {
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
                 TabTwo.pullToRefresh.setRefreshing(false);
-
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            final TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.ExuseMeAlert);
+                            title.setText(R.string.Null);
                             message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -4950,36 +5090,19 @@ public class APICall {
 
                                 }
                             });
-                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-//
-                                    Log.e("refreshDialog","ok");
-                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                    refresh.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            automatedBrowseOffers(itemPerPage,pageNum,context);
-                                            refreshDialog.cancel();
-                                        }
-                                    });
-                                    refreshDialog.show();
-                                }
-                            });
                             dialog.show();
 
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -6170,17 +6293,19 @@ public class APICall {
 //                        pd.dismiss();
 
 
-                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                            ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                        {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                    final Dialog dialog = new Dialog(context);
                                     dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                     dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                                     TextView confirm = dialog.findViewById(R.id.confirm);
                                     TextView message = dialog.findViewById(R.id.message);
-                                    final TextView title = dialog.findViewById(R.id.title);
+                                    TextView title = dialog.findViewById(R.id.title);
                                     title.setText(R.string.Null);
                                     message.setText(R.string.check_internet_con);
                                     confirm.setOnClickListener(new View.OnClickListener() {
@@ -6188,19 +6313,6 @@ public class APICall {
                                         public void onClick(View v) {
                                             dialog.cancel();
 
-                                            final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                            refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                            refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                            refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                            Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                            refresh.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    refreshDialog.cancel();
-                                                    getdetailsUser(context);
-                                                }
-                                            });
-                                            refreshDialog.show();
                                         }
                                     });
                                     dialog.show();
@@ -6208,11 +6320,13 @@ public class APICall {
                                 }
                             });
 
-                        }else {
+
+                        }
+                        else {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                                 }
                             });
@@ -6314,18 +6428,19 @@ public class APICall {
                     Log.w("failure Response", mMessage);
                     pd.dismiss();
 
-
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                                 TextView confirm = dialog.findViewById(R.id.confirm);
                                 TextView message = dialog.findViewById(R.id.message);
-                                final TextView title = dialog.findViewById(R.id.title);
+                                TextView title = dialog.findViewById(R.id.title);
                                 title.setText(R.string.Null);
                                 message.setText(R.string.check_internet_con);
                                 confirm.setOnClickListener(new View.OnClickListener() {
@@ -6333,19 +6448,6 @@ public class APICall {
                                     public void onClick(View v) {
                                         dialog.cancel();
 
-                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                        refresh.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                refreshDialog.cancel();
-                                                getdetailsUser(url,e_bdb_name,e_bdb_email,e_bdb_mobile,namelocality,titleInfo,latLng,context);
-                                            }
-                                        });
-                                        refreshDialog.show();
                                     }
                                 });
                                 dialog.show();
@@ -6354,11 +6456,12 @@ public class APICall {
                         });
 
 
-                    }else {
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -6460,17 +6563,19 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                                 TextView confirm = dialog.findViewById(R.id.confirm);
                                 TextView message = dialog.findViewById(R.id.message);
-                                final TextView title = dialog.findViewById(R.id.title);
+                                TextView title = dialog.findViewById(R.id.title);
                                 title.setText(R.string.Null);
                                 message.setText(R.string.check_internet_con);
                                 confirm.setOnClickListener(new View.OnClickListener() {
@@ -6478,19 +6583,6 @@ public class APICall {
                                     public void onClick(View v) {
                                         dialog.cancel();
 
-                                        final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                        refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                        refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                        Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                        refresh.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                refreshDialog.cancel();
-                                                getdetailsUser(url,namelocality,titleInfo,latLng,oldLatlng,context);
-                                            }
-                                        });
-                                        refreshDialog.show();
                                     }
                                 });
                                 dialog.show();
@@ -6499,16 +6591,16 @@ public class APICall {
                         });
 
 
-                    }else {
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
                     }
-
                 }
 
                 @Override
@@ -6622,12 +6714,13 @@ public class APICall {
                     pd.dismiss();
 
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -6640,6 +6733,7 @@ public class APICall {
                                     @Override
                                     public void onClick(View v) {
                                         dialog.cancel();
+
                                     }
                                 });
                                 dialog.show();
@@ -6647,11 +6741,13 @@ public class APICall {
                             }
                         });
 
-                    }else {
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -6788,12 +6884,13 @@ public class APICall {
                 pd.dismiss();
 
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -6806,6 +6903,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -6813,11 +6911,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -6939,12 +7039,13 @@ public class APICall {
                         BagReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -6965,11 +7066,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7081,12 +7184,13 @@ public class APICall {
 //                        BagReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7107,11 +7211,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7222,12 +7328,13 @@ public class APICall {
                     mMessage = e.getMessage().toString();
                     Log.w("failure Response", mMessage);
     //                pd.dismiss();
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7248,11 +7355,13 @@ public class APICall {
                             }
                         });
 
-                    }else {
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -7345,12 +7454,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7363,6 +7473,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -7370,11 +7481,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7477,12 +7590,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7495,6 +7609,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -7502,11 +7617,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7618,12 +7735,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
 //                pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7636,6 +7754,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -7643,11 +7762,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7762,12 +7883,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7780,6 +7902,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -7787,11 +7910,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -7897,12 +8022,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
 //                pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -7915,6 +8041,7 @@ public class APICall {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -7922,11 +8049,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -8042,12 +8171,13 @@ public class APICall {
                         }
                     });
 
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -8068,11 +8198,13 @@ public class APICall {
                             }
                         });
 
-                    }else {
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -8165,14 +8297,44 @@ public class APICall {
                 public void onFailure(Call call, IOException e) {
                     mMessage = e.getMessage().toString();
                     Log.w("failure Response", mMessage);
-//                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            pd.dismiss();
-//                            BagReservationFragment.pullToRefresh.setRefreshing(false);
-//                        }
-//                    });
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
 
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
                     if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
     //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                         ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -8299,13 +8461,44 @@ public class APICall {
                 public void onFailure(Call call, IOException e) {
                     mMessage = e.getMessage().toString();
                     Log.w("failure Response", mMessage);
-//                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            pd.dismiss();
-//                            BagReservationFragment.pullToRefresh.setRefreshing(false);
-//                        }
-//                    });
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
 
                     if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
     //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
@@ -8565,8 +8758,9 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -8591,11 +8785,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -8651,6 +8847,7 @@ public class APICall {
                                 String provider_rating = jObject.getString("provider_rating");
                                 String is_action_on = jObject.getString("is_action_on");
                                 String is_rating_on = jObject.getString("is_rating_on");
+                                String is_per_client = jObject.getString("is_per_client");
                                 String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_logo_id = jObject.getString("bdb_logo_id");
                                 String bookedByMe = jObject.getString("bookedByMe");
@@ -8763,7 +8960,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                     if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -8776,7 +8973,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                         if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -8788,7 +8985,7 @@ public class APICall {
                                         if (execDateCheck && bookatCehck)
                                             if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                 if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -8797,7 +8994,7 @@ public class APICall {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
                                             if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -9013,20 +9210,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -9039,11 +9237,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -9258,12 +9458,13 @@ public class APICall {
                             ReservationFragment.pullToRefresh.setRefreshing(false);
                         }
                     });
-                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final Dialog dialog = new Dialog(BeautyMainPage.context);
+                                final Dialog dialog = new Dialog(context);
                                 dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                                 dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -9284,11 +9485,13 @@ public class APICall {
                             }
                         });
 
-                    }else {
+
+                    }
+                    else {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                             }
                         });
@@ -9417,12 +9620,13 @@ public class APICall {
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -9443,16 +9647,17 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -9563,12 +9768,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -9589,11 +9795,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -9690,7 +9898,7 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  getServicesForFilter(final String bdb_is_bride, ArrayAdapter adapter,ArrayList<String> list, final Context context){
+    public  static  void  getServicesForFilter(final String bdb_is_bride, final ArrayAdapter adapter, ArrayList<String> list, final SearchableSpinner searchableSpinner, final Context context){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -9733,12 +9941,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -9759,11 +9968,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -9790,6 +10001,7 @@ public class APICall {
                     String success=j.getString("success");
                     if (success.equals("true"))
                     {
+                        ServicesTabsFragment.serviceNameList.add(context.getResources().getString(R.string.Service_Name));
                         JSONArray data=j.getJSONArray("data");
                         for (int i=0;i<data.length();i++){
                             JSONObject jsonObject=data.getJSONObject(i);
@@ -9837,6 +10049,9 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                adapter.notifyDataSetChanged();
+                                searchableSpinner.setTitle(context.getResources().getString(R.string.Service_Name));
+
 //                                ReservationFragment.reservationsAdapter.notifyDataSetChanged();
 //                                String tmp_filter=APICall.bookingFilter("1","4","0");
 //                                ServicesTabsFragment.adapter.notifyDataSetChanged();
@@ -9905,12 +10120,13 @@ public class APICall {
 ////                        ReservationFragment.pullToRefresh.setRefreshing(false);
 //                    }
 //                });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -9931,11 +10147,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -10064,12 +10282,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -10090,11 +10309,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -10362,12 +10583,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -10388,11 +10610,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -10542,7 +10766,7 @@ public class APICall {
                             @Override
                             public void run() {
                                 showSweetDialogAltGroupSearching(context,urlAlt,isIn);
-                                Toast.makeText(context,message+"123",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(context,message+"123",Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -10587,25 +10811,6 @@ public class APICall {
 //            String filter=AlterGroupReservationResultActivity.filter;
 
 
-//            String ff="{\"Filter\":\t[\n" +
-//                    "    \t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
-//                    "    \t{\"num\":35,\"value1\":39.2147311,\"value2\":0},{\"num\":1,\"value1\":0,\"value2\":1000},{\"num\":8,\"value1\":1,\"value2\":0}\t],\n" +
-//                    "    \"date\":\"2019-7-4\",\t\t\"clients\":[\t{\"client_name\":\"null\",\"client_phone\":\"0500500500\",\"is_current_user\":1,\"services\":[\n" +
-//                    "    {\"ser_id\":2,\"ser_time\":60}\n" +
-//                    "    ]},\t{\"client_name\":\"c1\",\"client_phone\":\"1\",\"is_current_user\":0,\"services\":[\n" +
-//                    "    {\"ser_id\":1,\"ser_time\":60}\n" +
-//                    "    ,{\"ser_id\":2,\"ser_time\":60}\n" +
-//                    "    ]}]}";
-
-
-
-
-
-
-
-
-
-
         Log.e("UrlAlt",urlAlt);
         Log.e("GroupFilter",filter);
 
@@ -10634,12 +10839,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -10660,11 +10866,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -10850,7 +11058,8 @@ public class APICall {
         JSONObject postdata = new JSONObject();
 
             String filter=GroupFilterBookingforOther();
-//            String filter=AlterGroupOtherReservationResult.filter;
+//                    String filter=AlterGroupOtherReservationResult.filter;
+
 //            String ff="{\"Filter\":\t[\n" +
 //                    "    \t{\"num\":34,\"value1\":21.529023,\"value2\":0},\n" +
 //                    "    \t{\"num\":35,\"value1\":39.2147311,\"value2\":0},{\"num\":1,\"value1\":0,\"value2\":1000},{\"num\":8,\"value1\":1,\"value2\":0}\t],\n" +
@@ -10889,12 +11098,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -10915,11 +11125,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -11112,7 +11324,8 @@ public class APICall {
 //                    "    ,{\"ser_id\":2,\"ser_time\":60}\n" +
 //                    "    ]}]}";
 
-        Log.e("GroupFilter",filter);
+        Log.e("FILTER",filter);
+        Log.e("URL",url);
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
 
@@ -11139,12 +11352,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -11165,11 +11379,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -11400,12 +11616,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -11426,11 +11643,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -11646,12 +11865,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -11672,11 +11892,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -11864,12 +12086,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -11890,11 +12113,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -12091,12 +12316,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -12117,16 +12343,17 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -12308,7 +12535,8 @@ public class APICall {
                 Log.e("clientsFilter",clients);
 
 
-            }else {
+            }
+                else {
                     String clientName = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getClient_name();
                     String clientPhone = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSalon_name();
                     String clientId = stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getClient_id();
@@ -12357,7 +12585,7 @@ public class APICall {
                                 bdb_ser_hotel = "1";
                                 price=stringArrayListHashMap.get(salons.get(bkPostion)).get(i).getSolutions().get(j).getBdb_hotel_price();
                             }
-                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1,\"bdb_part_num\":"+bdb_part_num+"},\"reason\":"+reason+"}";
+                            serRow = "{\"emp_id\":" + emp_id + ",\"emp_name\":\""+emp_name+"\",\"sup_id\":" + sup_id + ",\"ser_sup_id\":" + ser_sup_id + ",\"from\":\"" + from + "\",\"to\":\"" + to + "\",\"bdb_ser_salon\":" + bdb_ser_salon + ",\"bdb_ser_home\":" + bdb_ser_home + ",\"bdb_ser_hotel\":" + bdb_ser_hotel + ",\"bdb_ser_hall\":" + bdb_ser_hall + ",\"price\":"+price+",\"bdb_client_old\":1,\"bdb_part_num\":"+bdb_part_num+",\"reason\":"+reason+"}";
 //                            Log.e("clientsFilter", serRow);
 
                         } else {
@@ -13695,12 +13923,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -13721,11 +13950,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -13758,7 +13989,7 @@ public class APICall {
 //                                APICall.showSweetDialogOnBookingDone(context);
                                 Log.e("addGroupItem","AddGroupDone");
                                 ((AppCompatActivity) MyGroupEffectActivity.context).finish();
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,context.getResources().getString(R.string.success_book_items),Toast.LENGTH_LONG).show();
                                 ((AppCompatActivity) context).onBackPressed();
 
                                 fragment = new ServiceFragment();
@@ -13845,12 +14076,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -13871,11 +14103,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -13994,12 +14228,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14020,16 +14255,17 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -14143,12 +14379,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14169,11 +14406,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -14206,7 +14445,8 @@ public class APICall {
 //                                APICall.showSweetDialogOnBookingDone(context);
                                 Log.e("addGroupItem","AddGroupDone");
                                 ((AppCompatActivity) MyOtherEffectActivity.context).finish();
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,context.getResources().getString(R.string.success_book_items),Toast.LENGTH_LONG).show();
+
                                 ((AppCompatActivity) context).onBackPressed();
 //                                ((AppCompatActivity) context).onBackPressed();
                                 fragment = new ServiceFragment();
@@ -14289,12 +14529,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14315,11 +14556,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -14352,7 +14595,8 @@ public class APICall {
 //                                APICall.showSweetDialogOnBookingDone(context);
                                 Log.e("addGroupItem","AddGroupDone");
                                 ((AppCompatActivity) MySingleMultiEffectActivity.context).finish();
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,context.getResources().getString(R.string.success_book_items),Toast.LENGTH_LONG).show();
+
                                 ((AppCompatActivity) context).onBackPressed();
                             }
                         });
@@ -14429,12 +14673,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14455,11 +14700,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -14492,7 +14739,7 @@ public class APICall {
 //                                APICall.showSweetDialogOnBookingDone(context);
                                 Log.e("addGroupItem","AddGroupDone");
                                 ((AppCompatActivity) MyIndEffectsActivity.context).finish();
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,context.getResources().getString(R.string.success_book_item),Toast.LENGTH_LONG).show();
                                 ((AppCompatActivity) context).onBackPressed();
                             }
                         });
@@ -14567,12 +14814,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14593,11 +14841,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -14838,12 +15088,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -14864,11 +15115,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -15236,12 +15489,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -15262,11 +15516,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -15478,6 +15734,8 @@ public class APICall {
                 "\t],\n" +
                 getDateMulti() +
                filter;
+
+
         Log.e("FilterReq",filter1);
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter1);
 
@@ -15503,12 +15761,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -15529,11 +15788,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -15634,7 +15895,7 @@ public class APICall {
                             }
                             salons.add("الحل المقترح:"+(l+1)+ " ("+total_price+context.getResources().getString(R.string.ryal)+")");
 
-                            searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,"","","","","",solutionsArr));
+                            searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,"","","","",solutionsArr,"0"));
                             Log.e("salon"+l,salons.get(l));
                             stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
@@ -16228,12 +16489,13 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -16254,11 +16516,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -16455,7 +16719,8 @@ public class APICall {
 //                swipeRefreshLayout.setRefreshing(false);
 //                TabTwo.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
@@ -16463,49 +16728,32 @@ public class APICall {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            final TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.ExuseMeAlert);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-////
-//                                    Log.e("refreshDialog","ok");
-//                                    final Dialog refreshDialog = new Dialog(ProviderMainPage.context);
-//                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-//                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-//                                    refresh.setOnClickListener(new View.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(View v) {
-//                                            automatedBrowseOffers(itemPerPage,pageNum,context);
-//                                            refreshDialog.cancel();
-//                                        }
-//                                    });
-//                                    refreshDialog.show();
-//                                }
-//                            });
-//                            dialog.show();
-//
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -16666,7 +16914,8 @@ public class APICall {
 //                swipeRefreshLayout.setRefreshing(false);
 //                TabTwo.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
@@ -16674,49 +16923,32 @@ public class APICall {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            final TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.ExuseMeAlert);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-////
-//                                    Log.e("refreshDialog","ok");
-//                                    final Dialog refreshDialog = new Dialog(ProviderMainPage.context);
-//                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-//                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-//                                    refresh.setOnClickListener(new View.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(View v) {
-//                                            automatedBrowseOffers(itemPerPage,pageNum,context);
-//                                            refreshDialog.cancel();
-//                                        }
-//                                    });
-//                                    refreshDialog.show();
-//                                }
-//                            });
-//                            dialog.show();
-//
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -16856,7 +17088,8 @@ public class APICall {
 //                swipeRefreshLayout.setRefreshing(false);
 //                TabTwo.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
@@ -16864,49 +17097,32 @@ public class APICall {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            final TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.ExuseMeAlert);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                                @Override
-//                                public void onCancel(DialogInterface dialog) {
-////
-//                                    Log.e("refreshDialog","ok");
-//                                    final Dialog refreshDialog = new Dialog(ProviderMainPage.context);
-//                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-//                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-//                                    refresh.setOnClickListener(new View.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(View v) {
-//                                            automatedBrowseOffers(itemPerPage,pageNum,context);
-//                                            refreshDialog.cancel();
-//                                        }
-//                                    });
-//                                    refreshDialog.show();
-//                                }
-//                            });
-//                            dialog.show();
-//
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -17093,20 +17309,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -17119,11 +17336,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -17357,20 +17576,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -17383,11 +17603,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -17898,20 +18120,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -17924,11 +18147,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -18055,35 +18280,41 @@ public class APICall {
                     }
                 });
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//                                }
-//                            });
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
                             dialog.show();
+
                         }
                     });
 
 
-                }else {
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -18519,37 +18750,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -18755,37 +18989,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -18908,18 +19145,44 @@ public class APICall {
 
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -19044,37 +19307,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -19214,34 +19480,41 @@ public class APICall {
 
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
 
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -19332,34 +19605,41 @@ public class APICall {
 
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
 
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -19453,34 +19733,41 @@ public class APICall {
 
                 pd.dismiss();
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
 
                         }
                     });
-                }else {
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -19575,20 +19862,21 @@ public class APICall {
 ////                        ReservationFragment.pullToRefresh.setRefreshing(false);
 //                    }
 //                });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -19601,11 +19889,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -19695,7 +19985,44 @@ public class APICall {
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
                 Log.e("GetNotifications ERRR", mMessage);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
 
             }
 
@@ -19762,34 +20089,41 @@ public class APICall {
                             mMessage = e.getMessage();
                             //pd1.dismiss();
 
-                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                            {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                                 ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         final Dialog dialog = new Dialog(context);
                                         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                        dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                                         TextView confirm = dialog.findViewById(R.id.confirm);
                                         TextView message = dialog.findViewById(R.id.message);
                                         TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                                        title.setText(R.string.Null);
+                                        message.setText(R.string.check_internet_con);
                                         confirm.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 dialog.cancel();
+
                                             }
                                         });
                                         dialog.show();
 
                                     }
                                 });
-                            }else {
+
+
+                            }
+                            else {
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                                     }
                                 });
                             }
@@ -19862,7 +20196,44 @@ public class APICall {
                 Log.e("GetNotifications ERRR", mMessage);
 
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -19922,7 +20293,44 @@ public class APICall {
                 Log.e("GetNotifications ERRR", mMessage);
 
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+//                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+//
+//                        }
+//                    });
+                }
             }
 
             @Override
@@ -20037,7 +20445,8 @@ public class APICall {
 //                swipeRefreshLayout.setRefreshing(false);
 //                TabTwo.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
@@ -20045,16 +20454,28 @@ public class APICall {
                             final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
                         }
                     });
 
-                }else {
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
-                        }
-                    });
+
+                }
+                else {
+
                 }
             }
 
@@ -20166,7 +20587,44 @@ public class APICall {
                 Log.e("Favorites ERRR", mMessage);
 
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -20230,7 +20688,44 @@ public class APICall {
                 Log.e("Favorites ERRR", mMessage);
 
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -20284,7 +20779,44 @@ public class APICall {
                 Log.e("Favorites ERRR", mMessage);
 
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -20343,7 +20875,44 @@ public class APICall {
 
 //                pd.dismiss();
                 pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
@@ -20425,18 +20994,44 @@ public class APICall {
 
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(cont, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -20792,20 +21387,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -20818,11 +21414,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -20946,20 +21544,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -20972,11 +21571,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -21081,20 +21682,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -21107,11 +21709,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -21175,7 +21779,15 @@ public class APICall {
     }
 
     public static void setExecuted(final Context context, JSONArray bookings,String name_booking) {
-//        showDialog(context);
+//
+//
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+
+            }
+        });
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         OkHttpClient client = new OkHttpClient();
@@ -21206,13 +21818,64 @@ public class APICall {
             @Override
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+                    }
+                });
+
                 Log.e("deletePayment ERRR", mMessage);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
             }
 
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("Tag", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+                    }
+                });
 
                 try {
                     JSONObject jsonrespone = new JSONObject(mMessage);
@@ -21392,37 +22055,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -21697,43 +22363,44 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -21964,103 +22631,127 @@ public class APICall {
 
                                 }
                             }
-                        }else{
+                        }
+                        else{
                             Log.e("bookType","Multi");
                             String names="";
                             for (int i=0;i<booking.length();i++){
-                                JSONObject object1=booking.getJSONObject(i);
-                                JSONArray bookings;
+                                JSONObject object1;
+
                                 try {
-                                    bookings = object1.getJSONArray("bookings");
-                                }catch (Exception e){
-                                    bookings=data.getJSONArray("booking");
-                                    e.printStackTrace();
-                                }
-                                String name="";
-                                try {
-                                    name= object1.getString("name");
-                                }catch (Exception e){
-                                    name= object1.getString("bdb_user_name");
-                                }
-                                if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
-                                    names+=name+",";
-                                    ReservatoinDetailsActivity.client_name.setText(names);
-                                }
+                                    object1 = booking.getJSONObject(i);
+                                    JSONArray bookings;
+                                    try {
+                                        bookings = object1.getJSONArray("bookings");
+                                    } catch (Exception e) {
+                                        bookings = data.getJSONArray("booking");
+                                        e.printStackTrace();
+                                    }
+                                    String name = "";
+                                    try {
+                                        name = object1.getString("name");
+                                    } catch (Exception e) {
+                                        name = object1.getString("bdb_user_name");
+                                    }
+                                    if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
+                                        names += name + ",";
+                                        ReservatoinDetailsActivity.client_name.setText(names);
+                                    }
 
 //                                String phone = object1.getString("phone");
-                                String  bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
+                                    String bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
 
 
+                                    if (name.equals("booking_wast_time")) {
 
-                                if (name.equals("booking_wast_time")){
-
-                                        ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot,name,"",bookings);
-                                }else
-                                    ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot,name,"age:"+bdb_client_old,bookings);
-                                Log.e("Bookings",bookings.toString());
-                                String client_name="";
-                                for (int j=0;j<bookings.length();j++){
-                                    JSONObject object=bookings.getJSONObject(j);
-                                    Log.e("objectBookings",object.toString());
+                                        ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot, name, "", bookings);
+                                    } else
+                                        ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot, name, "age:" + bdb_client_old, bookings);
+                                    Log.e("Bookings", bookings.toString());
+                                    String client_name = "";
+                                    for (int j = 0; j < bookings.length(); j++) {
+                                        JSONObject object = bookings.getJSONObject(j);
+                                        Log.e("objectBookings", object.toString());
 //                                    if (!name.equals("booking_wast_time")) {
-                                    if (j==0)
-                                        client_name = object.getString("bdb_user_name");
+                                        if (j == 0)
+                                            client_name = object.getString("bdb_user_name");
 //                                    }
 
-                                    String  bdb_price = object.getString("bdb_price"),
-                                            bdb_id = object.getString("bdb_id"),
-                                            bdb_start_date = object.getString("bdb_start_date"),
-                                            bdb_start_time = object.getString("bdb_start_time"),
-                                            bdb_end_time = object.getString("bdb_end_time"),
-                                            bdb_is_executed = object.getString("bdb_confirm_exec_user"),
-                                            journey_time = object.getString("bdb_journey_time"),
-                                            bdb_booked_at = object.getString("bdb_booked_at");
-                                    String bdb_emp_name = object.getString("bdb_emp_name");
-                                    String bdb_name = object.getString("bdb_name"),
-                                            bdb_name_ar = object.getString("bdb_name_ar");
+                                        String bdb_price = object.getString("bdb_price"),
+                                                bdb_id = object.getString("bdb_id"),
+                                                bdb_start_date = object.getString("bdb_start_date"),
+                                                bdb_start_time = object.getString("bdb_start_time"),
+                                                bdb_end_time = object.getString("bdb_end_time"),
+                                                bdb_is_executed = object.getString("bdb_confirm_exec_user"),
+                                                journey_time = object.getString("bdb_journey_time"),
+                                                bdb_booked_at = object.getString("bdb_booked_at");
+                                        String bdb_emp_name = object.getString("bdb_emp_name");
+                                        String bdb_name = object.getString("bdb_name"),
+                                                bdb_name_ar = object.getString("bdb_name_ar");
 
 //                                    ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
 
-                                    String ac_price="";
-                                    try {
-                                        ac_price = object.getString("bdb_sup_final_price");
-                                    }catch (Exception e){
+                                        String ac_price = "";
+                                        try {
+                                            ac_price = object.getString("bdb_sup_final_price");
+                                        } catch (Exception e) {
 
-                                    }
+                                        }
 
 
-                                    if (name.equals("booking_wast_time") ){
-                                        if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
-                                            try {
-                                                String reason = object.getString("reason");
-                                                ReservatoinDetailsActivity.addMainLayoutLost(ReservatoinDetailsActivity.myroot,bdb_start_time,bdb_end_time,bdb_emp_name,reason);
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-                                    }else
-                                        {
-                                        if (booking_type.equals("20") || booking_type.equals("21") ||
-                                                booking_type.equals("22") || booking_type.equals("23")
-                                                || booking_type.equals("25") ||booking_type.equals("24")){
-                                            if(context.getResources().getString(R.string.locale).equals("ar"))
+                                        if (name.equals("booking_wast_time")) {
+                                            if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
+                                                try {
+                                                    String reason = object.getString("reason");
+                                                    ReservatoinDetailsActivity.addMainLayoutLost(ReservatoinDetailsActivity.myroot, bdb_start_time, bdb_end_time, bdb_emp_name, reason);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                        } else {
+                                            if (booking_type.equals("20") || booking_type.equals("21") ||
+                                                    booking_type.equals("22") || booking_type.equals("23")
+                                                    || booking_type.equals("25") || booking_type.equals("24")) {
+                                                if (context.getResources().getString(R.string.locale).equals("ar"))
+                                                    ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
+                                                            bdb_name_ar, bdb_price, bdb_start_date + ", " + bdb_start_time
+                                                            , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
+                                                else
+                                                    ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
+                                                            bdb_name, bdb_price, bdb_start_date + ", " + bdb_start_time
+                                                            , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
+
+                                            } else if (context.getResources().getString(R.string.locale).equals("ar"))
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                         bdb_name_ar, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price,journey_time,journey_cost);
+                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
                                             else
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                         bdb_name, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price,journey_time,journey_cost);
-
-                                        }else
-                                        if(context.getResources().getString(R.string.locale).equals("ar"))
-                                            ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
-                                                    bdb_name_ar, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                    , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price,journey_cost,journey_time);
-                                        else
-                                            ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
-                                                    bdb_name, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                    , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price,journey_cost,journey_time);
+                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
+                                        }
                                     }
+
+                                }catch (Exception e){
+                                     JSONArray array= booking.getJSONArray(i);
+                                     name=array.getJSONObject(0).getString("name");
+                                     JSONArray bookings=array.getJSONObject(0).getJSONArray("bookings");
+                                    ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot, name, "", bookings);
+
+                                    for (int k=0;k<bookings.length();k++) {
+                                    JSONObject object=bookings.getJSONObject(k);
+                                       String bdb_start_time=object.getString("bdb_start_time");
+                                       String bdb_end_time=object.getString("bdb_end_time");
+                                       String bdb_emp_name=object.getString("bdb_emp_name");
+                                       if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
+                                           try {
+                                               String reason = object.getString("reason");
+                                               ReservatoinDetailsActivity.addMainLayoutLost(ReservatoinDetailsActivity.myroot, bdb_start_time, bdb_end_time, bdb_emp_name, reason);
+                                           } catch (Exception ed) {
+                                               ed.printStackTrace();
+                                           }
+                                   }
+                                }
+
 
 
                                 }
@@ -22068,7 +22759,7 @@ public class APICall {
 
                             }
                         }
-                    }
+
                 }catch (JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
@@ -22138,38 +22829,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -22496,43 +23189,44 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -22565,6 +23259,10 @@ public class APICall {
                         String journey_cost=data.getString("journey_cost");
                         final String journey_count=data.getString("journey_count");
                         final String booking_price=data.getString("booking_price");
+                        final String salon_name=data.getString("salon_name");
+                        final String bdb_name_booking=data.getString("bdb_name_booking");
+                        CancelReservationActivity.salonName.setText(salon_name);
+                        CancelReservationActivity.id.setText(bdb_name_booking);
                         String bdb_sup_final_price="";
 
                         try {
@@ -22590,7 +23288,7 @@ public class APICall {
 //                            ReservationDetailsFragment.time.setText(date);
                                     }else if (booking_type.equals("1")) {
                                         String date=data.getString("bdb_start_date");
-//                                        CancelReservationActivity.time.setText(convertToArabic(date));
+                                        CancelReservationActivity.time.setText(convertToArabic(date));
                                         CancelReservationActivity.booktype.setText(context.getResources().getString(R.string.multi_booking));
                                         String cname=booking.getJSONObject(0).getString("name");
                                         if (!cname.equals("booking_wast_time")){
@@ -22695,101 +23393,69 @@ public class APICall {
                             CancelReservationActivity.place.setText(R.string.hotel);
                         }
                         Log.e("FRAGMENT_NAME",BeautyMainPage.FRAGMENT_NAME);
-                        if (booking_type.equals("0") || booking_type.equals("10") ){
-                            Log.e("bookType","Single");
 
-                            for (int i=0;i<booking.length();i++) {
-                                JSONObject object = booking.getJSONObject(i);
-
-                                JSONArray bookings = object.getJSONArray("bookings");
-                                for(int k=0;k<bookings.length();k++){
-                                    JSONObject object1 = bookings.getJSONObject(k);
-
-                                    final String bdb_id = object1.getString("bdb_id"),
-                                            bdb_start_date = object1.getString("bdb_start_date"),
-                                            bdb_start_time = object1.getString("bdb_start_time"),
-                                            bdb_is_executed = object1.getString("bdb_confirm_exec_sup"),
-                                            bdb_end_time = object1.getString("bdb_end_time"),
-                                            journey_time = object1.getString("bdb_journey_time"),
-                                            bdb_booked_at = object1.getString("bdb_booked_at");
-                                    final String bdb_emp_name = object1.getString("bdb_emp_name");
-                                    final String bdb_name = object1.getString("bdb_name"),
-                                            bdb_name_ar = object1.getString("bdb_name_ar");
-
-                                    String client_name = object1.getString("bdb_user_name");
-
-                                    String ac_price = "", bdb_price = "";
-                                    try {
-                                        ac_price = object1.getString("bdb_sup_final_price");
-                                    } catch (Exception e) {
-                                    }
-                                    try {
-                                        bdb_price = object1.getString("bdb_price");
-//                                    ac_price=object.getString("bdb_sup_final_price");
-                                    } catch (Exception e) {
-                                    }
-                                    CancelReservationActivity.client_name.setText(client_name);
-//                                CancelReservationActivity.time.setText(convertToArabic(bdb_start_date));
-                                    final String finalBdb_price = bdb_price;
-                                    final String finalAc_price = ac_price;
-                                    final String finalJourney_cost = journey_cost;
-                                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if(context.getResources().getString(R.string.locale).equals("ar"))
-                                                CancelReservationActivity.addLayout(CancelReservationActivity.myroot,
-                                                        bdb_name_ar, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
-                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
-                                            else
-                                                CancelReservationActivity.addLayout(CancelReservationActivity.myroot,
-                                                        bdb_name, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
-                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
-                                        }
-                                    });
-
-                                }
-                            }
-                        }
-                        else{
+                        {
                             Log.e("bookType","Multi");
                             String names="";
 //                            CancelReservationActivity.count=booking.length();
                             Log.e("Bookingis","is"+booking.toString());
                             for (int i=0;i<booking.length();i++){
-                                JSONObject object1=booking.getJSONObject(i);
-                                JSONArray bookings;
+                                JSONObject object1 = null;
                                 try {
-                                    bookings = object1.getJSONArray("bookings");
-                                }catch (Exception e){
-                                    bookings=data.getJSONArray("booking");
-                                    e.printStackTrace();
-                                }
-                                String name="";
-                                try {
-                                    name= object1.getString("name");
-                                }catch (Exception e){
-                                    name= object1.getString("bdb_user_name");
-                                }
-                                if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
-                                    names+=name+",";
-                                    CancelReservationActivity.client_name.setText(names);
-                                }
+                                    object1 = booking.getJSONObject(i);
+
+                                    JSONArray bookings;
+                                    try {
+                                        bookings = object1.getJSONArray("bookings");
+                                    }catch (Exception e){
+                                        bookings=data.getJSONArray("booking");
+                                        e.printStackTrace();
+                                    }
+                                    String name="";
+                                    try {
+                                        name= object1.getString("name");
+                                    }catch (Exception e){
+                                        name= object1.getString("bdb_user_name");
+                                    }
+                                    if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
+                                        names+=name+",";
+                                        CancelReservationActivity.client_name.setText(names);
+                                    }
 
 //                                String phone = object1.getString("phone");
-                                String  bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
+                                    String  bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
 
 
 
-                                if (name.equals("booking_wast_time")){
-                                    if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
-                                        CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"",bookings,booking_type);
-                                }else {
-                                    CancelReservationActivity.count+=1;
-                                    CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot, name, "age:" + bdb_client_old, bookings, booking_type);
+                                    if (name.equals("booking_wast_time")){
+                                        if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
+                                            CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"",bookings,booking_type);
+                                    }else {
+                                        CancelReservationActivity.count+=1;
+                                        CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot, name, "age:" + bdb_client_old, bookings, booking_type);
 
-                                    Log.e("Bookings", bookings.toString());
+                                        Log.e("Bookings", bookings.toString());
+                                    }
+                                    String client_name="";
+
+
+                                }catch (Exception e){
+                                   JSONArray array=booking.getJSONArray(i);
+//                                   JSONArray bookings=array.getJSONObject(0).getJSONArray("bookings");
+//                                    name=array.getJSONObject(0).getString("name");
+
+//                                       if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
+//                                       CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"",bookings,booking_type);
+
+
+
+
+
+
+
+
                                 }
-                                String client_name="";
+
 //                                for (int j=0;j<bookings.length();j++){
 //                                    JSONObject object=bookings.getJSONObject(j);
 //                                    Log.e("objectBookings",object.toString());
@@ -22923,38 +23589,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -23092,20 +23760,21 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
                             TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -23118,11 +23787,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -23239,38 +23910,40 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -23599,8 +24272,9 @@ public class APICall {
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
                     ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -23625,11 +24299,13 @@ public class APICall {
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -23836,19 +24512,20 @@ public class APICall {
                 pd.dismiss();
                 TabOne.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            final TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.ExuseMeAlert);
+                            title.setText(R.string.Null);
                             message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -23857,35 +24534,19 @@ public class APICall {
 
                                 }
                             });
-                           /* dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    Log.e("refreshDialog","ok");
-                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                    refresh.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            automatedBrowse(url,lang,itemPerPage,pageNum,context);
-                                            refreshDialog.cancel();
-                                        }
-                                    });
-                                    refreshDialog.show();
-                                }
-                            });*/
                             dialog.show();
 
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -24065,19 +24726,20 @@ Log.e("ERRR",e.getMessage());
                 pd.dismiss();
              //   TabOne.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            final TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.ExuseMeAlert);
+                            title.setText(R.string.Null);
                             message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -24086,35 +24748,19 @@ Log.e("ERRR",e.getMessage());
 
                                 }
                             });
-                           /* dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    Log.e("refreshDialog","ok");
-                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                    refresh.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            automatedBrowse(url,lang,itemPerPage,pageNum,context);
-                                            refreshDialog.cancel();
-                                        }
-                                    });
-                                    refreshDialog.show();
-                                }
-                            });*/
                             dialog.show();
 
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -24212,42 +24858,44 @@ Log.e("ERRR",e.getMessage());
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-//                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            final Dialog dialog = new Dialog(BeautyMainPage.context);
-//                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-//                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-//                            TextView confirm = dialog.findViewById(R.id.confirm);
-//                            TextView message = dialog.findViewById(R.id.message);
-//                            TextView title = dialog.findViewById(R.id.title);
-//                            title.setText(R.string.Null);
-//                            message.setText(R.string.check_internet_con);
-//                            confirm.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.cancel();
-//
-//                                }
-//                            });
-//                            dialog.show();
-//
-//                        }
-//                    });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
 
-                }else {
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -24335,12 +24983,13 @@ Log.e("ERRR",e.getMessage());
                 mMessage = e.getMessage().toString();
                 Log.w("failure Response", mMessage);
                 pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -24353,6 +25002,7 @@ Log.e("ERRR",e.getMessage());
                                 @Override
                                 public void onClick(View v) {
                                     dialog.cancel();
+
                                 }
                             });
                             dialog.show();
@@ -24360,11 +25010,13 @@ Log.e("ERRR",e.getMessage());
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -24542,19 +25194,20 @@ Log.e("ERRR",e.getMessage());
                 pd.dismiss();
               //  TabTwo.pullToRefresh.setRefreshing(false);
 
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            final TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
                             TextView message = dialog.findViewById(R.id.message);
                             TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.ExuseMeAlert);
+                            title.setText(R.string.Null);
                             message.setText(R.string.check_internet_con);
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -24563,36 +25216,19 @@ Log.e("ERRR",e.getMessage());
 
                                 }
                             });
-                            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-//
-                                    Log.e("refreshDialog","ok");
-                                    final Dialog refreshDialog = new Dialog(BeautyMainPage.context);
-                                    refreshDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                                    refreshDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                                    refreshDialog.setContentView(R.layout.refresh_btn_dialog);
-                                    Button refresh=refreshDialog.findViewById(R.id.refresh);
-                                    refresh.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            automatedBrowseOffers(itemPerPage,pageNum,context);
-                                            refreshDialog.cancel();
-                                        }
-                                    });
-                                    refreshDialog.show();
-                                }
-                            });
                             dialog.show();
 
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
                         }
                     });
                 }
@@ -24830,12 +25466,13 @@ Log.e("ERRR",e.getMessage());
 ////                        ReservationFragment.pullToRefresh.setRefreshing(false);
 //                    }
 //                });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -24856,11 +25493,13 @@ Log.e("ERRR",e.getMessage());
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });
@@ -24956,12 +25595,13 @@ Log.e("ERRR",e.getMessage());
 ////                        ReservationFragment.pullToRefresh.setRefreshing(false);
 //                    }
 //                });
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")){
-                    //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            final Dialog dialog = new Dialog(BeautyMainPage.context);
+                            final Dialog dialog = new Dialog(context);
                             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
@@ -24982,11 +25622,13 @@ Log.e("ERRR",e.getMessage());
                         }
                     });
 
-                }else {
+
+                }
+                else {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context, mMessage, Toast.LENGTH_LONG).show();
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
 
                         }
                     });

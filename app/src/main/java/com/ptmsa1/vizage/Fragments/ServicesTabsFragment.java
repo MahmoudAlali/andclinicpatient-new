@@ -431,10 +431,10 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //                ArrayList<String> serviceNameList=new ArrayList<>();
                ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
-                ser_name.setTitle(getResources().getString(R.string.Service_Name));
-                ser_name.setSelection(0);
                 ser_name.setAdapter(adapter);
-                APICall.getServicesForFilter("0",adapter,serviceNameList,BeautyMainPage.context);
+                ser_name.setTitle(getResources().getString(R.string.Service_Name));
+
+                APICall.getServicesForFilter("0",adapter,serviceNameList,ser_name,BeautyMainPage.context);
 
                 ser_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
