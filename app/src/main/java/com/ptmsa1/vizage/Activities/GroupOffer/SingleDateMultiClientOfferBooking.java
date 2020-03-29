@@ -19,6 +19,7 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.OfferBookingMultiClientsAdapter;
+import com.ptmsa1.vizage.Adapters.OffersAdapterTab;
 import com.ptmsa1.vizage.DataModel.OfferClientsModel;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
@@ -254,26 +255,29 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
                     String place_num="",price_num="";
 
-                    switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-                        case 1:
-                            place_num="9";
-                            price_num="32";
-                            break;
-                        case 2:
-                            place_num="8";
-                            price_num="1";
-                            break;
-                        case 3:
-                            place_num="10";
-                            price_num="30";
-                            break;
-                        case 4:
-                            place_num="11";
-                            price_num="31";
-                            break;
+                    try {
+                        switch (OffersAdapterTab.placePos) {
+                            case 1:
+                                place_num = "9";
+                                price_num = "32";
+                                break;
+                            case 2:
+                                place_num = "8";
+                                price_num = "1";
+                                break;
+                            case 3:
+                                place_num = "10";
+                                price_num = "30";
+                                break;
+                            case 4:
+                                place_num = "11";
+                                price_num = "31";
+                                break;
 
+                        }
+                    }catch (Exception e){
+                     e.printStackTrace();
                     }
-
                     String bdb_pack_code = bdb_pack_id;
                     if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
                         APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.Please_enter_Date) );

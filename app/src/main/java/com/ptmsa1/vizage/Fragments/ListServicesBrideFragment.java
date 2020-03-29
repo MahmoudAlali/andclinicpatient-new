@@ -84,6 +84,7 @@ public class ListServicesBrideFragment extends Fragment {
         recyclerView.setAdapter(servicesAdapter);
 
 
+        APICall.isBride="1";
         APICall.getBasicServicebride(BeautyMainPage.context);
 
         toolbar=view.findViewById(R.id.toolbar);

@@ -40,6 +40,23 @@ public class BestOfferItem {
         this.provider_logo_id=provider_logo_id;
         this.offer_type=offer_type;
     }
+    String provider_id;
+    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type) {
+        this.pack_code = pack_code;
+        this.service_count = service_count;
+        this.provider_name = provider_name;
+        this.old_price = old_price;
+        this.new_price = new_price;
+        this.total_discount = total_discount;
+        this.sersup_ids=sersup_ids;
+        this.provider_logo_id=provider_logo_id;
+        this.offer_type=offer_type;
+        this.provider_id=provider_id;
+    }
+
+    public String getProvider_id() {
+        return provider_id;
+    }
 
     public String getOld_price() {
         return old_price;

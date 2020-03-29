@@ -301,6 +301,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item)holder).time.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    reservationModel=bookingAutomatedBrowseData.get(position);
                     String type=bookingAutomatedBrowseData.get(position).getBookingType();
                     if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12")){
                         isOffer=true;

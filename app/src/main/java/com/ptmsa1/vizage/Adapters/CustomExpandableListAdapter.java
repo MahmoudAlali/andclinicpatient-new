@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
+import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.DataModel.SearchBookingDataSTR;
 import com.ptmsa1.vizage.DataModel.SerchGroupBookingData;
 import com.ptmsa1.vizage.Fragments.GroupReservationFragment;
@@ -124,7 +125,16 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                         APICall.addGroupItem(APICall.getClientsInfo(salons, stringArrayListHashMap, groupPosition,GroupReservationFragment.is_group_booking,APICall.dateforgroupbooking ), GroupReservationResultActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")) {
-                                        APICall.addGroupItemInd(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, PlaceServiceFragment.date.getText().toString()), BookingIndvidualActivity.context);
+                                        String date="";
+                                        int place;
+                                        try{
+                                            date=PlaceServiceFragment.date.getText().toString();
+                                            place=PlaceServiceFragment.placeSpinner.getSelectedItemPosition();
+                                        }catch (Exception e){
+                                            date= MainProviderActivity.date.getText().toString();
+                                            place=ServicesProviderAdapter.placePos;
+                                        }
+                                        APICall.addGroupItemInd(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, date,place), BookingIndvidualActivity.context);
 //                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
                                         APICall.addGroupItemOther(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);

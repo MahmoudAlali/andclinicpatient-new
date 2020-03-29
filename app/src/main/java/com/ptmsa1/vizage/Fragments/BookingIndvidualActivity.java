@@ -10,9 +10,11 @@ import android.widget.ExpandableListView;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapter;
 import com.ptmsa1.vizage.Adapters.GroupReservationsAdapter;
 import com.ptmsa1.vizage.Activities.TabOne;
+import com.ptmsa1.vizage.Adapters.ServicesProviderAdapter;
 import com.ptmsa1.vizage.R;
 
 public class BookingIndvidualActivity extends AppCompatActivity {
@@ -54,37 +56,74 @@ public class BookingIndvidualActivity extends AppCompatActivity {
         pullToRefresh=findViewById(R.id.pullToRefresh);
         String place_num="";
         String price_num="";
-        switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-            case 1:
-                place_num="9";
-                price_num="32";
-                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
-                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";
-                break;
-            case 2:
-                place_num="8";
-                price_num="1";
-                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
-                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
-                break;
-            case 3:
-                place_num="10";
-                price_num="30";
-                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
-                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
-                break;
-            case 4:
-                place_num="11";
-                price_num="31";
-                url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingOutside";
-                urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeOutside";
-                break;
+        try {
+            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()) {
+                case 1:
+                    place_num = "9";
+                    price_num = "32";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingInside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeInside";
+                    break;
+                case 2:
+                    place_num = "8";
+                    price_num = "1";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+                case 3:
+                    place_num = "10";
+                    price_num = "30";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+                case 4:
+                    place_num = "11";
+                    price_num = "31";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+
+            }
+        }catch (Exception e){
+            switch (ServicesProviderAdapter.placePos) {
+                case 1:
+                    place_num = "9";
+                    price_num = "32";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingInside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeInside";
+                    break;
+                case 2:
+                    place_num = "8";
+                    price_num = "1";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+                case 3:
+                    place_num = "10";
+                    price_num = "30";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+                case 4:
+                    place_num = "11";
+                    price_num = "31";
+                    url = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingOutside";
+                    urlOut = APICall.API_PREFIX_NAME + "/api/booking/searchGroupBookingAlternativeOutside";
+                    break;
+
+            }
+
 
         }
 
-
 //        SharedPreferences preferences=BeautyMainPage.context.getSharedPreferences("LOGIN",)
 
+        String date="";
+        try{
+            date=PlaceServiceFragment.date.getText().toString();
+        }catch (Exception e){
+            date= MainProviderActivity.date.getText().toString();
+        }
 
         final String filter="{\n" +
                 "    \"Filter\": [\n" +
@@ -112,7 +151,7 @@ public class BookingIndvidualActivity extends AppCompatActivity {
 //                "    \"bdb_pack_code\": 141,\n" +
                 "    \"multi_salon_client\": 1,\n" +
                 "    \"multi_salon_clients_rel\": 1,\n" +
-                "            \"date\": \""+PlaceServiceFragment.date.getText().toString()+"\",\n" +
+                "            \"date\": \""+date+"\",\n" +
                 "    \"sup_id\" : "+TabOne.bdb_sup_id +",\n" +
                 "    \"clients\": [\n" +
                 "        {\n" +
@@ -120,7 +159,7 @@ public class BookingIndvidualActivity extends AppCompatActivity {
                 "            \"client_phone\": \""+BeautyMainPage.client_number+"\",\n" +
                 "            \"is_current_user\": 1,\n" +
                 "            \"rel\": \"0\",\n" +
-                "            \"date\": \""+PlaceServiceFragment.date.getText().toString()+"\",\n" +
+                "            \"date\": \""+date+"\",\n" +
                 "            \"is_adult\": true,\n" +
                 "            \"services\": [\n" +
                 "                {\n" +

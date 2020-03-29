@@ -76,6 +76,7 @@ public class PlaceServiceFragment extends Fragment {
 
 
         //---------------------init my location spinner-----------
+        APICall.isBride="0";
         BeautyMainPage.FRAGMENT_NAME = "PLACESERVICEFRAGMENT";
 
         placeSpinner = view.findViewById(R.id.service_place);
