@@ -639,13 +639,13 @@
     <string name="weWillCall">customer support will call you within 10 minutes</string>
     <string name="empty"></string>
     <string name="talkToSupport">Talk to Vizage support now</string>
-    <string name="teamWorkingTime">Support team is available from 9 AM to 8:30 PM </string>
+    <string name="teamWorkingTime">Support team is available from 9 AM to 9:30 PM </string>
     <string name="callMe">call me</string>
     <string name="waitingTime">wait time:10 min</string>
     <string name="chatWithSupport">chat with Vizage now</string>
     <string name="internalChat">internal chat</string>
     <string name="whatsappChat">whatsapp chat</string>
-    <string name="noOperator">Customer services are busy now, please try again later</string>
+    <string name="noOperator">Customer services are busy supporting other clients, please try again later</string>
     <string name="terminatingChat">are you sure ? internal chat will be terminated forever</string>
     <string name="exit">Exit</string>
     <string name="oneService">on one service</string>
@@ -772,5 +772,8 @@
     <string name="booking_asc">booking date (ascending)</string>
     <string name="booking_desc">booking date (descending)</string>
     <string name="start_desc">start date (descending)</string>
+
+    <string name="out_of_support_time">Please contact support team through application website out of working times</string>
+    <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
 
 </resources>

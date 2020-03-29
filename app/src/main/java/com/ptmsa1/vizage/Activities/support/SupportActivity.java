@@ -31,7 +31,7 @@ public class SupportActivity extends AppCompatActivity {
 
     static Dialogs confirmationDialog;
     static Context context;
-    public Calendar calendarOpenning,calendarClosing,calendarNow;
+    public Calendar calendarNow;
     int nowHour,nowMinuts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class SupportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                if(nowHour >=9 &&nowHour<21 || nowHour==21 && nowMinuts<30)
                 {
                     if (providerSalonName!=null && !providerSalonName.equals(""))
                         APICall.sendWhatsappEvent(context,providerID,providerSalonName,providerMobile);
@@ -79,7 +79,7 @@ public class SupportActivity extends AppCompatActivity {
         internalChatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                if(nowHour >=9 &&nowHour<21 || nowHour==21 && nowMinuts<30)
                 {
                     Intent intent = new Intent(getApplicationContext(), InternalChatActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -97,7 +97,7 @@ public class SupportActivity extends AppCompatActivity {
         callMeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nowHour >=9 &&nowHour<20 || nowHour==20 && nowMinuts<30)
+                if(nowHour >=9 &&nowHour<21 || nowHour==21 && nowMinuts<30)
                 {
                     getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn);
                     getReasonDialog.show();
@@ -150,7 +150,7 @@ public class SupportActivity extends AppCompatActivity {
     }
     public static void showOutOfTime()
     {
-        Dialogs dialogs=new Dialogs(context, R.string.teamWorkingTime);
+        Dialogs dialogs=new Dialogs(context, R.string.out_of_support_time,R.string.out_of_support_time_link);
         dialogs.show();
     }
 

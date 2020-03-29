@@ -451,13 +451,13 @@
     <string name="weWillCall">خدمة العملاء سوف تتصل بك خلال 10 دقائق</string>
     <string name="empty"></string>
     <string name="talkToSupport">التحدث مع خدمة عملاء Vizage</string>
-    <string name="teamWorkingTime">فريق الدعم متاح من 9 صباحا حتى 8:30 مساءاً</string>
+    <string name="teamWorkingTime">فريق الدعم متاح من 9 صباحا حتى 9:30 مساءاً</string>
     <string name="callMe">اتصل بي</string>
     <string name="waitingTime">وقت الانتظار :10 دقائق</string>
     <string name="chatWithSupport">الدردشة مع خدمة عملاء Vizage</string>
     <string name="internalChat">دردشة داخلية</string>
     <string name="whatsappChat">دردشة WhatsApp</string>
-    <string name="noOperator">يرجى المحاولة بعد قليل، الجميع في الدعم مشغولون حالياً</string>
+    <string name="noOperator">فريق الدعم مشغول بخدمة عميلات أخريات، يرجى طلب الدعم بعد قليل</string>
     <string name="terminatingChat">هل أنتِ متأكدة ؟ سيتم إغلاق المحادثة نهائياً </string>
     <string name="exit">خروج</string>
     <string name="oneService">على خدمة واحدة</string>
@@ -622,6 +622,8 @@
 
 
     </string-array>
+    <string name="out_of_support_time">نرجو التواصل مع فريق الدعم من خلال موقع التطبيق خارج أوقات الدوام </string>
+    <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
 
 
 </resources>
