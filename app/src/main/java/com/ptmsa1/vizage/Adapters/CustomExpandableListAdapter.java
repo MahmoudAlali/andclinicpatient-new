@@ -107,7 +107,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
             if ( BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity"))
             if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
-                listTitleTextView.setBackgroundResource(R.color.list_group_selected);
+                listTitleTextView.setBackgroundResource(R.drawable.shadow_edit_text3);
             }
 
 

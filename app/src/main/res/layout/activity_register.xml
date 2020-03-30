@@ -18,7 +18,23 @@
         <!--app:theme="@style/ToolbarColoredBackArrow"-->
             <!--app:titleTextColor="#fff"-->
         <!--&gt;</android.support.v7.widget.Toolbar>-->
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:paddingBottom="5dp"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/transparent"
+        android:text="⭑"
+        android:gravity="bottom"
+        android:layout_gravity="bottom"
+        android:textSize="30dp"
+        />
     <EditText
         android:layout_marginTop="@dimen/standard_20"
         android:id="@+id/name"
@@ -34,6 +50,8 @@
         android:ems="10"
         android:hint="@string/UserNameTextField" />
 
+</LinearLayout>
+
     <!--<EditText-->
         <!--android:id="@+id/editText5"-->
         <!--android:layout_width="match_parent"-->
@@ -46,7 +64,23 @@
         <!--android:ems="10"-->
         <!--android:hint="رقم الهوية" />-->
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="⭑"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textSize="30dp"
+            />
     <EditText
         android:id="@+id/phone"
         android:layout_width="300dp"
@@ -56,11 +90,27 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="phone"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/username"
         android:ems="10"
         android:hint="@string/MobileNumberTextField" />
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="@dimen/standard_20"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/transparent"
+            android:text="⭑"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textSize="30dp"
+            />
     <EditText
         android:id="@+id/email"
         android:layout_width="300dp"
@@ -70,11 +120,10 @@
         android:layout_marginLeft="10dp"
         android:inputType="textEmailAddress"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/username"
         android:ems="10"
         android:hint="@string/EmailAddressTextField" />
-
+    </LinearLayout>
     <!--<Spinner-->
         <!--android:id="@+id/gender_spinner"-->
         <!--android:layout_width="match_parent"-->
@@ -85,7 +134,23 @@
         <!--android:layout_marginBottom="15dp"-->
         <!--android:background="@drawable/shadow_button_spinner"></Spinner>-->
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="⭑"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textSize="30dp"
+            />
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
@@ -94,13 +159,28 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="textPassword"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/password"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/PasswordTextField" />
-
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="⭑"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textSize="30dp"
+            />
     <EditText
         android:id="@+id/confirm_password"
         android:layout_width="300dp"
@@ -108,13 +188,12 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
         android:background="@drawable/password"
         android:ems="10"
         android:inputType="textPassword"
         android:gravity="center"
         android:hint="@string/ConfirmPasswordTextField" />
-
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

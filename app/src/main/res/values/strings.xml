@@ -128,7 +128,7 @@
     <string name="Backicon">@drawable/ic_keyboard_arrow_left_black_24dp</string>
 
     <!--Service fragment-->
-    <string name="bride">bride</string>
+    <string name="bride">bride booking service/offer</string>
     <string name="groupReservation">Group Reservation</string>
     <string name="group_Reservation_another">Reservation for others</string>
     <string name="Hairdressing">Hairdressing</string>
@@ -259,7 +259,7 @@
     <string name="on">on</string>
 
 
-    <string name="Individual_booking">Individual booking</string>
+    <string name="Individual_booking">Individual booking service/offer</string>
     <string name="Group_Booking">Group Booking</string>
     <string name="Compare2">Compare</string>
     <string name="distance">Distance</string>
@@ -277,7 +277,7 @@
     <string name="location_proceed">you have to choose a location to proceed</string>
     <string name="place_proceed">you have to choose a service place to proceed</string>
     <string name="distance_proceed">you have to choose a distance to proceed</string>
-    <string name="type_proceed">you have to choose request type to proceed</string>
+    <string name="type_proceed">you have to choose order type to proceed</string>
     <string name="offerPrice_proceed">you have to choose offer price to proceed</string>
 
 
@@ -374,11 +374,11 @@
     </string-array>
 
     <string-array name="request_type">
-        <item>request type</item>
-        <item>individual request</item>
-        <item>group request</item>
-        <item>offer :individual request</item>
-        <item>offer :group request</item>
+        <item>order type</item>
+        <item>individual order</item>
+        <item>group order</item>
+        <item>offer :individual order</item>
+        <item>offer :group order</item>
 
 
     </string-array>
@@ -512,16 +512,16 @@
     <string name="Reservations_received">Reservations received</string>
     <string name="Acceptable_reservations">Acceptable reservations</string>
     <string name="Bookings_paid_DEPOSIT">paid</string>
-    <string name="cancel_req">cancel request</string>
+    <string name="cancel_req">cancel order</string>
     <string name="nobooking">No Booking</string>
-    <string name="noRequests">you don\'t have any booking requests</string>
+    <string name="noRequests">you don\'t have any booking orders</string>
     <string name="nobookingyet">There is no booking yet</string>
     <string name="Service_Place">service place</string>
     <string name="time">time</string>
     <string name="end_time">end time</string>
     <string name="booked_at">booked at</string>
-    <string name="ordered_at">request date :</string>
-    <string name="ordered_type">request type :</string>
+    <string name="ordered_at">order date :</string>
+    <string name="ordered_type">order type :</string>
     <string name="multi_booking_others">Mumulti booking for others</string>
     <string name="offer_single_booking">offer: single booking</string>
     <string name="offer_single_multi_booking">individual multi reservation</string>
@@ -626,7 +626,7 @@
     <string name="service_effect">service effects</string>
     <string name="support">support</string>
     <string name="effect">my effects</string>
-    <string name="bookingRequests">booking requests</string>
+    <string name="bookingRequests">booking orders</string>
     <string name="update">update effects</string>
     <string name="there_is_no_sol">There is no similar solution. Do you want to find similar solutions?</string>
 
@@ -639,13 +639,13 @@
     <string name="weWillCall">customer support will call you within 10 minutes</string>
     <string name="empty"></string>
     <string name="talkToSupport">Talk to Vizage support now</string>
-    <string name="teamWorkingTime">Support team is available from 9 AM to 8:30 PM </string>
+    <string name="teamWorkingTime">Support team is available from 9 AM to 9:30 PM </string>
     <string name="callMe">call me</string>
     <string name="waitingTime">wait time:10 min</string>
     <string name="chatWithSupport">chat with Vizage now</string>
     <string name="internalChat">internal chat</string>
     <string name="whatsappChat">whatsapp chat</string>
-    <string name="noOperator">Customer services are busy now, please try again later</string>
+    <string name="noOperator">Customer services are busy supporting other clients, please try again later</string>
     <string name="terminatingChat">are you sure ? internal chat will be terminated forever</string>
     <string name="exit">Exit</string>
     <string name="oneService">on one service</string>
@@ -713,19 +713,19 @@
     <string name="deposit">deposit</string>
     <string name="language">language:</string>
     <string name="sign_out">Sign out</string>
-    <string name="requestType">request type</string>
+    <string name="requestType">order type</string>
     <string name="providerName">provider name</string>
-    <string name="oldRequests">old requests</string>
-    <string name="newRequests">new requests</string>
+    <string name="oldRequests">old orders</string>
+    <string name="newRequests">new orders</string>
     <string name="rejectedByProvider">rejected by the provider</string>
     <string name="canceledByClient">canceled by the client</string>
     <string name="canceledBySystem">canceled by the system</string>
-    <string name="approved">approved request</string>
+    <string name="approved">approved order</string>
     <string name="suppliere_name">supplier name</string>
     <string name="suppliere_name_salon">supplier and salon name</string>
-    <string name="cancelRequestAlert">cancel booking request ?</string>
+    <string name="cancelRequestAlert">cancel booking order ?</string>
     <string-array name="requestType">
-        <item>request type</item>
+        <item>order type</item>
         <item>Offer</item>
         <item>Normal</item>
     </string-array>
@@ -738,29 +738,29 @@
     <string name="estimated_cost">estimated cost :</string>
     <string name="forKids"> child</string>
     <string name="forAdults"> adult</string>
-    <string name="indivRequest">individual request</string>
-    <string name="indivMultiRequest">individual request</string>
-    <string name="groupRequest">group request</string>
+    <string name="indivRequest">individual order</string>
+    <string name="indivMultiRequest">individual order</string>
+    <string name="groupRequest">group order</string>
     <string name="indivRequestOffer">individual offer</string>
     <string name="indivMultiRequestOffer">individual offer</string>
     <string name="groupRequestOffer">group offer</string>
 
-    <string name="requestAdded">your request has been sent.</string>
+    <string name="requestAdded">your order has been sent.</string>
     <string name="KM">Km</string>
     <string name="select_service">select service</string>
-    <string name="requestDateFilter">request date</string>
+    <string name="requestDateFilter">order date</string>
     <string name="requestSalonFilter">Salon name</string>
-    <string name="requestTypeFilter">request type</string>
+    <string name="requestTypeFilter">order type</string>
     <string name="filter">filter</string>
     <string name="removeFilter">remove all filters</string>
-    <string name="select_request_type">select request type</string>
+    <string name="select_request_type">select order type</string>
     <string name="select_supplier">select supplier</string>
     <string name="type">type :</string>
     <string name="suppliers">Suppliers</string>
     <string name="lost_time_emp">employee lost time</string>
     <string name="journey_time_emp">journey time for employee</string>
-    <string name="requestRelatedBooking">Reservation attached to the request</string>
-    <string name="createRequest">create request</string>
+    <string name="requestRelatedBooking">Reservation attached to the order</string>
+    <string name="createRequest">Create order</string>
     <string name="errorAddingRequest">sorry, try again later </string>
     <string name="service_date_sort_up">service execution date (descending)</string>
     <string name="service_date_sort_down">service execution date (ascending)</string>
@@ -772,5 +772,8 @@
     <string name="booking_asc">booking date (ascending)</string>
     <string name="booking_desc">booking date (descending)</string>
     <string name="start_desc">start date (descending)</string>
+
+    <string name="out_of_support_time">Please contact support team through application website out of working times</string>
+    <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
 
 </resources>
