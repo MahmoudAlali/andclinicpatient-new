@@ -106,7 +106,7 @@
     <string name="refresh">تحديث</string>
 
     <!--Service fragment-->
-    <string name="bride">العروسة</string>
+    <string name="bride">حجز عروس  خدمة/عرض</string>
     <string name="groupReservation">حجز جماعي</string>
     <string name="group_Reservation_another">حجز للغير</string>
     <string name="Hairdressing">تصفيف شعر</string>
@@ -235,7 +235,7 @@
 
 
 
-    <string name="Individual_booking">حجز فردي</string>
+    <string name="Individual_booking">حجز فردي  خدمة/عرض</string>
     <string name="Group_Booking">حجز جماعي</string>
     <string name="Compare2">مقارنة</string>
     <string name="Distance_Range">مجال البعد</string>
