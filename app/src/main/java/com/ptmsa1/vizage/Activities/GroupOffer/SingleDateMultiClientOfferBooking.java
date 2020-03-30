@@ -19,6 +19,7 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.OfferBookingMultiClientsAdapter;
+import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.Adapters.OffersAdapterTab;
 import com.ptmsa1.vizage.DataModel.OfferClientsModel;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
@@ -51,6 +53,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
     String bdb_pack_id;
     String is_effects_on;
 
+    int booking_period;
     public static ArrayList<OfferClientsModel> offerClientsModels = new ArrayList<>();
 
     @Override
@@ -74,6 +77,11 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
             end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
             bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+            end_date = OffersAdapter.bestOItem.getEnd_date();
+            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            is_effects_on=APICall.bdb_is_effects_on;
         }
         else {
             try {
@@ -125,7 +133,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                 TextView cancel = dialog.findViewById(R.id.cancel);
                 final DatePicker datePicker = dialog.findViewById(R.id.date_picker);
                 datePicker.setMinDate(System.currentTimeMillis());
-
+                Calendar calendar=Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_MONTH,booking_period);
+                datePicker.setMaxDate(calendar.getTimeInMillis());
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));

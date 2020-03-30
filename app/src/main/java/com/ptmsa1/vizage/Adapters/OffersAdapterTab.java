@@ -135,6 +135,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                     e.printStackTrace();
                 }
 
+
             }
         });
         if (offers.get(position).getBdb_is_old_on().equals("0")){
@@ -157,6 +158,9 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
 
                 if (offers.get(position).getBdb_offer_place().equals("0")){
                     placePos=1;

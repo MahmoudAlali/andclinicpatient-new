@@ -22,10 +22,12 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.DataModel.ClientServiceDataModel;
 import com.ptmsa1.vizage.DataModel.ClientsViewData;
 import com.ptmsa1.vizage.DataModel.GroupBookingModel;
+import com.ptmsa1.vizage.Fragments.RequestProvidersFragment;
 import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
 
@@ -74,6 +76,10 @@ public class CreateRequestActivity extends AppCompatActivity {
                 TextView cancel=dialog.findViewById(R.id.cancel);
                 final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
                 datePicker.setMinDate(System.currentTimeMillis());
+
+                Calendar calendar=Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_MONTH,Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
+
 
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override

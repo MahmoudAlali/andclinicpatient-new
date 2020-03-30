@@ -788,7 +788,11 @@ public class freeBookingFragment extends Fragment {
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
                     if(typeSpinner.getSelectedItemPosition()==2)
                         fragment = new RequestProvidersFragment();
+
+
                     else
+
+
                         fragment= new OffersForRequest();
                     fm = getActivity().getFragmentManager();
                     fragmentTransaction = fm.beginTransaction();

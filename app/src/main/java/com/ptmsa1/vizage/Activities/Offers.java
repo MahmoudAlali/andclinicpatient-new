@@ -48,6 +48,7 @@ public class Offers extends Fragment implements LocationListener {
     private LocationManager locationManager;
     private String provider;
     Toolbar toolbar;
+    public static  int bdb_booking_period;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -55,6 +56,8 @@ public class Offers extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.offers_layout, container, false);
         toolbar= view.findViewById(R.id.toolbarm);
+        BeautyMainPage.FRAGMENT_NAME="Offers";
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

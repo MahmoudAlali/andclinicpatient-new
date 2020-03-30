@@ -42,6 +42,8 @@ import com.ptmsa1.vizage.R;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainProviderActivity extends AppCompatActivity {
 
@@ -197,6 +199,10 @@ public class MainProviderActivity extends AppCompatActivity {
                 Button search=dialog.findViewById(R.id.search);
                 final DatePicker datePicker=dialog.findViewById(R.id.date);
                 datePicker.setMinDate(System.currentTimeMillis() - 1000);
+                Calendar calendar=Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_MONTH,Offers.bdb_booking_period);
+                datePicker.setMaxDate(calendar.getTimeInMillis());
+
 
                 search.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -247,17 +253,24 @@ public class MainProviderActivity extends AppCompatActivity {
         offer_sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                service_Sw.setBackgroundResource(android.R.color.transparent);
-                offer_sw .setBackgroundResource(R.drawable.shadow_service_tab);
-                arrayList.clear();
-                servicesProviderAdapter.notifyDataSetChanged();
-                LinearLayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
-                recycleview.setLayoutManager(manager);
-                offersAdapterTab=new OffersAdapterTab(context, list);
-                recycleview.setAdapter(offersAdapterTab);
+                if (!date.getText().toString().equals(context.getResources().getString(R.string.date)) &&
+                        !my_location.getText().toString().equals(context.getResources().getString(R.string.MyLocation))
+                ) {
+                    service_Sw.setBackgroundResource(android.R.color.transparent);
+                    offer_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+                    arrayList.clear();
+                    servicesProviderAdapter.notifyDataSetChanged();
+                    LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                    recycleview.setLayoutManager(manager);
+                    offersAdapterTab = new OffersAdapterTab(context, list);
+                    recycleview.setAdapter(offersAdapterTab);
+                    String date1 = "  ,{\"num\":13,\"value1\":\"" + date.getText().toString() + "\"}\n" +
+                            "     ,{\"num\":44,\"value1\":\"" + date.getText().toString() + "\"}";
 
-                APICall.automatedBrowseProviderOffers("8","1",context);
-
+                    APICall.automatedBrowseProviderOffers("8", "1", date1, context);
+                }else {
+                    APICall.showSweetDialog(context,"","plese select date and location before browse offers");
+                }
 
             }
         });
