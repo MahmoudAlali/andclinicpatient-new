@@ -345,7 +345,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 
         TextView  service_name,service_price;
         TextView pro_name;
-        RatingBar service_rate;
+        TextView service_rate;
         ImageView service_add,service_fav,logo;
         CheckBox service_compare;
         LinearLayout service_details;

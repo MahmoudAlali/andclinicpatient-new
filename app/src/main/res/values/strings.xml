@@ -128,7 +128,7 @@
     <string name="Backicon">@drawable/ic_keyboard_arrow_left_black_24dp</string>
 
     <!--Service fragment-->
-    <string name="bride">bride booking service/offer</string>
+    <string name="bride">bride services and offers</string>
     <string name="groupReservation">Group Reservation</string>
     <string name="group_Reservation_another">Reservation for others</string>
     <string name="Hairdressing">Hairdressing</string>
@@ -259,7 +259,7 @@
     <string name="on">on</string>
 
 
-    <string name="Individual_booking">Individual booking service/offer</string>
+    <string name="Individual_booking">services and offers</string>
     <string name="Group_Booking">Group Booking</string>
     <string name="Compare2">Compare</string>
     <string name="distance">Distance</string>

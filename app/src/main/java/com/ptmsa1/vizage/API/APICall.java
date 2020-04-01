@@ -2332,6 +2332,10 @@ public class APICall {
                                 final String bdb_email = data.getString("bdb_email");
                                 final String bdb_mobile = data.getString("bdb_mobile");
 
+                                //to check if changed when update info
+                                AccountFragment.oldEmail=bdb_email;
+                                AccountFragment.oldName=bdb_name;
+
 
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
@@ -4057,92 +4061,92 @@ public class APICall {
 
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
+        int indx=0;
         try {
-            postdata.put("bdb_name", bdb_name);
+            if (!AccountFragment.oldName.equals(bdb_name))
+            {
+                postdata.put("bdb_name", bdb_name);
+                indx++;
+            }
             if (!AccountFragment.oldEmail.equals(bdb_email))
+            {
                 postdata.put("bdb_email", bdb_email);
+                indx++;
+            }
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        Log.e("POSTDATA",postdata.toString());
+        if(indx!=0)
+        {
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
-        okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(url)
-                .put(body)
-                .addHeader("Content-Type","application/json")
-                .header("Authorization", "Bearer "+gettoken(context))
-                .build();
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .put(body)
+                    .addHeader("Content-Type","application/json")
+                    .header("Authorization", "Bearer "+gettoken(context))
+                    .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                mMessage = e.getMessage().toString();
-                Log.w("failure Response", mMessage);
-                pd.dismiss();
-                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
-                {
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage().toString();
+                    Log.w("failure Response", mMessage);
+                    pd.dismiss();
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
 //                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
-                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final Dialog dialog = new Dialog(context);
-                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
-                            TextView confirm = dialog.findViewById(R.id.confirm);
-                            TextView message = dialog.findViewById(R.id.message);
-                            TextView title = dialog.findViewById(R.id.title);
-                            title.setText(R.string.Null);
-                            message.setText(R.string.check_internet_con);
-                            confirm.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.cancel();
-
-                                }
-                            });
-                            dialog.show();
-
-                        }
-                    });
-
-
-                }
-                else {
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onResponse(Call call, okhttp3.Response response) throws IOException {
-                mMessage = response.body().string();
-                Log.e("TAG", mMessage);
-                pd.dismiss();
-                SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
-
-                try {
-                    final JSONObject j=new JSONObject(mMessage);
-                    String success=j.getString("success");
-                    String msg=j.getString("message");
-                    if (success.equals("true")) {
                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                    }
+                                });
+                                dialog.show();
+
                             }
                         });
-                        editor.putString("bdb_name", bdb_name);
-                        editor.putString("bdb_email", bdb_email);
-                    } else {
-                        if(msg.contains("The bdb email has already been taken."))
-                        {
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    Log.e("TAG", mMessage);
+                    pd.dismiss();
+                    SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+
+                    try {
+                        final JSONObject j=new JSONObject(mMessage);
+                        String success=j.getString("success");
+                        String msg=j.getString("message");
+                        if (success.equals("true")) {
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -4151,33 +4155,50 @@ public class APICall {
                             });
                             editor.putString("bdb_name", bdb_name);
                             editor.putString("bdb_email", bdb_email);
-                        }
-                        else
-                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        APICall.showSweetDialog(BeautyMainPage.context,"", "Error: " + j.getString("message"));
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                        } else {
+                            if(msg.contains("The bdb email has already been taken."))
+                            {
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
                                     }
-                                }
-                            });
+                                });
+                                editor.putString("bdb_name", bdb_name);
+                                editor.putString("bdb_email", bdb_email);
+                            }
+                            else
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            APICall.showSweetDialog(BeautyMainPage.context,"", "Error: " + j.getString("message"));
 
-                        editor.putString("bdb_name", null);
-                        editor.putString("bdb_email", null);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                            editor.putString("bdb_name", null);
+                            editor.putString("bdb_email", null);
+                        }
+                    } catch (JSONException je) {
+                        je.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
                     }
-                } catch (JSONException je) {
-                    je.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-
+                    editor.commit();
+                    pd.dismiss();
                 }
-                editor.commit();
-                pd.dismiss();
-            }
-        });
+            });
+
+        }
+        else
+        {
+            pd.dismiss();
+        }
 
         Log.d("MessageResponse",mMessage);
     }
