@@ -28,6 +28,7 @@
                 android:src="@drawable/offer_info_new"
                 android:id="@+id/info"/>
             <ImageView
+
                 android:layout_weight="1"
                 android:layout_width="30dp"
                 android:layout_height="@dimen/standard_50"

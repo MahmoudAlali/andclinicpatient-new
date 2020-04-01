@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
+import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.Adapters.ShowServicesAdapter;
 import com.ptmsa1.vizage.DataModel.OfferClientsModel;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SingleDateOfferBooking extends AppCompatActivity {
@@ -48,7 +50,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     public static String end_date;
     String bdb_pack_id;
     String is_effects_on;
-
+    int booking_period;
     public static ArrayList<String> services=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +69,25 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         showDate.setText(R.string.select_date);
         next=findViewById(R.id.next);
 
+        Boolean check=true;
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
+
             end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
             bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+            end_date = OffersAdapter.bestOItem.getEnd_date();
+            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+             booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            is_effects_on=APICall.bdb_is_effects_on;
         }
         else {
             try {
+                check=false;
+                showDate.setText(PlaceServiceFragment.date.getText().toString());
                 end_date = TabTwo.arrayList.get(postion).getBdb_offer_end();
                 bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
                 is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
@@ -112,6 +125,9 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                 TextView cancel=dialog.findViewById(R.id.cancel);
                 final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
                 datePicker.setMinDate(System.currentTimeMillis());
+                Calendar calendar=Calendar.getInstance();
+                calendar.add(Calendar.DAY_OF_MONTH,booking_period);
+                datePicker.setMaxDate(calendar.getTimeInMillis());
 
                 try {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

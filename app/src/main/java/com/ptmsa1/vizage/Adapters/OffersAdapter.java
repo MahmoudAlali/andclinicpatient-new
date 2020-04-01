@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,11 @@ import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
+import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
+import com.ptmsa1.vizage.Activities.Offers;
 import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
+import com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptmsa1.vizage.DataModel.BestOfferItem;
 import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataModel.ServiceItem;
@@ -41,6 +46,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<DataOffer> offers=new ArrayList<>();
     String name;
     ArrayList<ServiceItem> serviceItems;
+    public static BestOfferItem bestOItem;
     static int counter =0;
     ArrayList<BestOfferItem> bestOfferItems;
     ArrayList<String> OFFER_RESERVATION_TYPE=new ArrayList<>();
@@ -116,11 +122,88 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((Item) holder).pro_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    try {
+                        Offers.bdb_booking_period = Integer.parseInt(bestOfferItems.get(position).getBdb_booking_period());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     Log.e("PIDDDD","is"+bestOfferItems.get(position).getProvider_id());
                     Log.e("Position","is"+position);
                     Intent intent=new Intent(context, MainProviderActivity.class);
                     intent.putExtra("provider_id",bestOfferItems.get(position).getProvider_id());
                     context.startActivity(intent);
+                }
+            });
+
+
+
+            ((Item)holder).add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    bestOItem=bestOfferItems.get(position);
+
+
+                    if (bestOfferItems.get(position).getOffer_type().equals("2")
+                            || bestOfferItems.get(position).getOffer_type().equals("5")){
+
+                        Intent intent=new Intent(context, MultiDateOfferBooking.class);
+                        intent.putExtra("pkg",position);
+                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
+                        ((AppCompatActivity)context).startActivity(intent);
+
+                    }else if (bestOfferItems.get(position).getOffer_type().equals("1")
+                            || bestOfferItems.get(position).getOffer_type().equals("4")){
+                        Intent  intent=new Intent(context, SingleDateOfferBooking.class);
+                        intent.putExtra("postion",position);
+                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
+                        ((AppCompatActivity)context).startActivity(intent);
+                    }else if (bestOfferItems.get(position).getOffer_type().equals("3")
+                            || bestOfferItems.get(position).getOffer_type().equals("6")){
+
+                        Intent  intent=new Intent(context, SingleDateMultiClientOfferBooking.class);
+                        intent.putExtra("postion",position);
+                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
+                        ((AppCompatActivity)context).startActivity(intent);
+                    }
+//            }
+//        });
+//                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
+//                ArrayList list=new ArrayList();
+//                list.add("Fixed Date Offer");
+//                list.add("Group Offer");
+//                list.add("Multi Date Offer");
+//                for(int i=0;i<list.size();i++){
+//                    popup.getMenu().add((CharSequence) list.get(i));
+//                }
+//
+//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        if (item.getTitle().equals("Fixed Date Offer")){
+//                            fragment = new FixedDateOffersFragment();
+//                            fm = ((AppCompatActivity)context).getFragmentManager();
+//                            fragmentTransaction = fm.beginTransaction();
+//                            fragmentTransaction.replace(R.id.fragment, fragment);
+//                            fragmentTransaction.commit();
+//                        }else if (item.getTitle().equals("Group Offer")){
+//                            fragment = new GroupOfferFragment();
+//                            fm = ((AppCompatActivity)context).getFragmentManager();
+//                            fragmentTransaction = fm.beginTransaction();
+//                            fragmentTransaction.replace(R.id.fragment, fragment);
+//                            fragmentTransaction.commit();
+//                        }else if (item.getTitle().equals("Multi Date Offer")){
+//                            fragment = new MultiDateOfferFragment();
+//                            fm = ((AppCompatActivity)context).getFragmentManager();
+//                            fragmentTransaction = fm.beginTransaction();
+//                            fragmentTransaction.replace(R.id.fragment, fragment);
+//                            fragmentTransaction.commit();
+//                        }
+//                        return false;
+//                    }
+//                });
+//                popup.show();
                 }
             });
 
@@ -252,7 +335,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
     public static class Item extends RecyclerView.ViewHolder {
         TextView textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,percentDiscount;
-        ImageView info,logoImg;
+        ImageView info,logoImg,add;
         LinearLayout itemBackground;
         public Item(View itemView) {
             super(itemView);
@@ -267,6 +350,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            ser_count = itemView.findViewById(R.id.ser_count);
 //            pro_name = itemView.findViewById(R.id.pro_name);
             total_dis = itemView.findViewById(R.id.disAmount);
+            add = itemView.findViewById(R.id.add);
             logoImg = itemView.findViewById(R.id.logoImg);
             itemBackground = itemView.findViewById(R.id.itemBackground);
             new_price = itemView.findViewById(R.id.new_price);

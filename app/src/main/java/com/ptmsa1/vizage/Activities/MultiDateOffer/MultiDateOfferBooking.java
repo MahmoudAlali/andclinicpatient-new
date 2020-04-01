@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
+import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.Adapters.SelectDateOfferAdapter;
 import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataModel.IDNameService;
@@ -44,6 +45,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     String bdb_pack_id;
     String is_effects_on;
 
+    int booking_period;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,15 +61,19 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //        phone_number=findViewById(R.id.phone_number);
         next=findViewById(R.id.next);
 
+
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
+
             bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
             place=OffersForRequest.arrayList.get(postion).getBdb_offer_place();
             supIdClasses =OffersForRequest.arrayList.get(postion).getSersup_ids();
         }
-        else
+        else if (BeautyMainPage.FRAGMENT_NAME.equals("SERVICETABFRAGMENT"))
         {
+
+
             try {
                 bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
                 is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
@@ -76,9 +82,15 @@ public class MultiDateOfferBooking extends AppCompatActivity {
             }
             catch (Exception e)
             {
+                e.printStackTrace();
                 Log.e("eRR",e.getMessage());
             }
 
+        }else {
+//            end_date = OffersAdapter.bestOItem.getEnd_date();
+            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            is_effects_on=APICall.bdb_is_effects_on;
         }
 
         //region CHECK_NOTIFICATION

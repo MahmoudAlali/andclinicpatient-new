@@ -17,6 +17,7 @@ import com.ptmsa1.vizage.Activities.CreateRequestActivity;
 import com.ptmsa1.vizage.DataModel.DateClass;
 import com.ptmsa1.vizage.DataModel.Location_Beauty;
 import com.ptmsa1.vizage.DataModel.RequestProviderItem;
+import com.ptmsa1.vizage.Fragments.RequestProvidersFragment;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -130,6 +131,8 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
         public void onClick(View v) {
             Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
             i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
+
+            RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
             BeautyMainPage.context.startActivity(i);
 
         }

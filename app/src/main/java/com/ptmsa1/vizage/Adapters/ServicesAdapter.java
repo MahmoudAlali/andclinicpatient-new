@@ -273,7 +273,11 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
                     public void onClick(View v) {
                         ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
                         Log.e("SERSUPID",ser_sup_id);
-                        ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
+//                        try {
+//                            ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                        }
                         Intent intent = new Intent(BeautyMainPage.context, MyIndEffectsActivity.class);
                         //                        intent.putExtra("Service Name","")
                         TabOne.bdb_sup_id=itemArrayList.get(position).getSup_id();
@@ -370,7 +374,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         }
     }
 
-    public static ArrayList<DateClass> ListOfDates(int priod){
+    public static ArrayList<DateClass>  ListOfDates(int priod){
         Calendar now = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         Log.e("Today is ","");

@@ -280,7 +280,12 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
 //                ser_sup_id=itemArrayList.get(position).getBdb_ser_sup_id();
                 Log.e("SERSUPID",bdb_ser_sup_id);
-                ServicesAdapter.ListOfDates(Integer.parseInt(bdb_booking_period));
+//                try {
+//                    ServicesAdapter.ListOfDates(Integer.parseInt(bdb_booking_period));
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+
 
 //                ListOfDates(Integer.parseInt(itemArrayList.get(position).getBdb_booking_period()));
                 Intent intent = new Intent(BeautyMainPage.context, MyIndEffectsActivity.class);

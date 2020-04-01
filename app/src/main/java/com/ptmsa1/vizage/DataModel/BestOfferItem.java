@@ -53,6 +53,58 @@ public class BestOfferItem {
         this.offer_type=offer_type;
         this.provider_id=provider_id;
     }
+    String bdb_booking_period,start_date,end_date;
+    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date) {
+        this.pack_code = pack_code;
+        this.service_count = service_count;
+        this.provider_name = provider_name;
+        this.old_price = old_price;
+        this.new_price = new_price;
+        this.total_discount = total_discount;
+        this.sersup_ids=sersup_ids;
+        this.provider_logo_id=provider_logo_id;
+        this.offer_type=offer_type;
+        this.provider_id=provider_id;
+        this.bdb_booking_period=bdb_booking_period;
+        this.start_date=start_date;
+        this.end_date=end_date;
+    }
+
+    public void setProvider_logo_id(String provider_logo_id) {
+        this.provider_logo_id = provider_logo_id;
+    }
+
+    public void setOffer_type(String offer_type) {
+        this.offer_type = offer_type;
+    }
+
+    public void setProvider_id(String provider_id) {
+        this.provider_id = provider_id;
+    }
+
+    public void setBdb_booking_period(String bdb_booking_period) {
+        this.bdb_booking_period = bdb_booking_period;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
+    public String getBdb_booking_period() {
+        return bdb_booking_period;
+    }
 
     public String getProvider_id() {
         return provider_id;

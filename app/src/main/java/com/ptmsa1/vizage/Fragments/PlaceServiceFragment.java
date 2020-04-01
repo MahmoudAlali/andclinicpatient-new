@@ -65,6 +65,7 @@ public class PlaceServiceFragment extends Fragment {
     public static String priceServiceValue="",minprice="",maxprice="";
     public static TextView date;
     public static String offerPlace="";
+    public static String dateFilter="",dateFilterOffer="";
 
 
 
@@ -433,6 +434,11 @@ public class PlaceServiceFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
                 } else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
+                    dateFilter =  ",{\"num\":44,\"value1\":\"" + date.getText().toString() + "\"}";
+
+                    dateFilterOffer = "  ,{\"num\":13,\"value1\":\"" + date.getText().toString() + "\"}\n" +
+                            "     ,{\"num\":44,\"value1\":\"" + date.getText().toString() + "\"}";
+
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
                     fragment = new ServicesTabsFragment();
                     fm = getActivity().getFragmentManager();

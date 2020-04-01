@@ -27,12 +27,15 @@ public class BookingIndvidualActivity extends AppCompatActivity {
     public static String bdb_is_groupbooking="";
 
     public static Context context;
+    public static int multi_salon_client=0;
+    public static String filterAlt="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_reservation_result_frag);
-
-
+        multi_salon_client=0;
+        filterAlt="";
         if (TabOne.bdb_is_bride.equals("0")){
             bdb_is_groupbooking="0";
         }else {
@@ -149,7 +152,61 @@ public class BookingIndvidualActivity extends AppCompatActivity {
                 "        }\n" +
                 "    ],\n" +
 //                "    \"bdb_pack_code\": 141,\n" +
-                "    \"multi_salon_client\": 1,\n" +
+                "    \"multi_salon_client\": "+0+",\n" +
+                "    \"multi_salon_clients_rel\": 0,\n" +
+                "            \"date\": \""+date+"\",\n" +
+                "    \"sup_id\" : "+TabOne.bdb_sup_id +",\n" +
+                "    \"clients\": [\n" +
+                "        {\n" +
+                "            \"client_name\": \""+BeautyMainPage.client_name+"\",\n" +
+                "            \"client_phone\": \""+BeautyMainPage.client_number+"\",\n" +
+                "            \"is_current_user\": 1,\n" +
+                "            \"rel\": \"0\",\n" +
+                "            \"date\": \""+date+"\",\n" +
+                "            \"is_adult\": true,\n" +
+                "            \"services\": [\n" +
+                "                {\n" +
+                "                    \"ser_id\": "+TabOne.ser_id+",\n" +
+                "                    \"bdb_ser_sup_id\" : "+TabOne.ser_sup_id+",\n" +
+                "                    \"ser_time\" : "+TabOne.bdb_time+"\n" +
+                "                }\n" +
+                "            ],\n" +
+                "            \"effect\": [\n" +
+                MyIndEffectsActivity.effectFilter+
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}\n";
+
+
+
+
+
+         filterAlt="{\n" +
+                "    \"Filter\": [\n" +
+                "        {\n" +
+                "            \"num\": 34,\n" +
+                "            \"value1\": "+PlaceServiceFragment.lat+",\n" +
+                "            \"value2\": 0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"num\": 35,\n" +
+                "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                "            \"value2\": 0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"num\": "+price_num+",\n" +
+                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"num\": "+place_num+",\n" +
+                "            \"value1\": 1,\n" +
+                "            \"value2\": 0\n" +
+                "        }\n" +
+                "    ],\n" +
+//                "    \"bdb_pack_code\": 141,\n" +
+                "    \"multi_salon_client\": "+1+",\n" +
                 "    \"multi_salon_clients_rel\": 1,\n" +
                 "            \"date\": \""+date+"\",\n" +
                 "    \"sup_id\" : "+TabOne.bdb_sup_id +",\n" +
