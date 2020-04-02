@@ -493,6 +493,7 @@
     <string name="evaluate">تقييم</string>
     <string name="clients_count_gr_2">عدد العميلات يجب ان يكون عميلتين على الاقل</string>
     <string name="reser_id">رقم الحجز</string>
+    <string name="ref_number">الرقم المرجعي</string>
     <string name="journey_time">وقت الرحلة</string>
     <string name="journey_cost">كلفة الرحلة</string>
     <string name="actual_price">السعر الفعلي</string>

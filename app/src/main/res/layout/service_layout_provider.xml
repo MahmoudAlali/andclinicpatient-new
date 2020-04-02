@@ -4,8 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:layout_margin="5dp"
-    android:background="@drawable/offer_shape3">
+    android:layout_marginBottom="7dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:background="@drawable/pro_offer_back">
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -24,7 +27,8 @@
                 android:layout_height="match_parent"
                 android:text="#1"
                 android:gravity="center"
-                android:textSize="25dp"
+                android:textSize="18dp"
+                android:textColor="@color/lightBordeaux"
                 android:textStyle="bold"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -42,7 +46,7 @@
                 android:layout_gravity="center"
                 android:text="20% OFF on your first tailored design"
                 android:textStyle="bold"
-                android:textSize="@dimen/standard_20"
+                android:textSize="18dp"
 
                 android:gravity="bottom|center"/>
         </LinearLayout>
@@ -50,16 +54,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_gravity="top"
             android:layout_weight="1"
+            android:layout_marginBottom="10dp"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/add"
-                android:layout_width="@dimen/standard_40"
+                android:layout_width="27dp"
                 android:layout_height="@dimen/standard_40"
-                android:gravity="bottom|center"
-                android:src="@drawable/fab_add"
+                android:gravity="top|center"
+                android:src="@drawable/add_offer_new"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

@@ -698,6 +698,7 @@
     <string name="evaluate">evaluate</string>
     <string name="clients_count_gr_2">The number of clients must be at least two</string>
     <string name="reser_id">ID</string>
+    <string name="ref_number">reference ID</string>
     <string name="order_id">order number :</string>
     <string name="journey_time">Journey time</string>
     <string name="journey_cost">Journey cost</string>

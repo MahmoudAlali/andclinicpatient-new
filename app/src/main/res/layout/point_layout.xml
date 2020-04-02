@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/standard_20"
-    android:layout_marginBottom="@dimen/standard_20"
-    android:layout_height="@dimen/high_edit_text"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="50dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:weightSum="2"
+    android:gravity="center"
+    android:background="@drawable/offer_shape2"
     android:orientation="horizontal"
     >
 

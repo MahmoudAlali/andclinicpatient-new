@@ -21700,7 +21700,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/auth/supplier/pointsLog")
+                .url(API_PREFIX_NAME+"/api/auth/user/pointsLog")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))
@@ -21816,7 +21816,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/auth/supplier/pointsDetails")
+                .url(API_PREFIX_NAME+"/api/auth/user/pointsDetails")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(cont))

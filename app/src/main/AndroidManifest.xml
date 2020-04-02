@@ -51,6 +51,7 @@
         <activity android:name=".Activities.CreateRequestActivity" />
         <activity android:name=".Activities.AddEffectsToRequestActivity" />
         <activity android:name=".Fragments.MyIndEffectsActivity" />
+        <activity android:name=".PayFort.PayTestActivity" />
         <activity
             android:name=".Activities.support.InternalChatActivity"
             android:excludeFromRecents="true"
