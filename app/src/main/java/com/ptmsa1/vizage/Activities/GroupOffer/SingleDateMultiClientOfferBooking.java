@@ -112,6 +112,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 end_date = getIntent().getStringExtra("offer_end");
+                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -77,7 +77,14 @@
         android:layout_gravity="center"
         android:src="@drawable/makeup_basic"
         />
-
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/image2"
+        android:layout_width="@dimen/standard_60"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/makeup_basic"
+        />
     <android.support.v4.widget.SlidingPaneLayout
         android:layout_width="@dimen/pf_10dp_space"
         android:layout_height="match_parent"/>

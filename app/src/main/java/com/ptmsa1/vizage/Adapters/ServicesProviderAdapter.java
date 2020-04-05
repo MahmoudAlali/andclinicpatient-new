@@ -44,7 +44,15 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
     Context context;
     ArrayList<DataService> dataServices;
     ArrayList<BrowseServiceItem> itemArrayList;
-
+    int [] servicsImgsBasic ={ R.drawable.hair_basic,
+            R.drawable.makeup_basic,
+            R.drawable.massage_basic,
+            R.drawable.spa_basic,
+            R.drawable.nails_basic,
+            R.drawable.body_basic,
+            R.drawable.skin_basic,
+            R.drawable.eyebrows_basic
+    };
     /**
      * @param context
 
@@ -121,6 +129,10 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
         }else {
             places.add(context.getResources().getString(R.string.hotel)+": 0");
         }
+        ((Item)holder).image.setImageResource(servicsImgsBasic[Integer.parseInt(itemArrayList.get(position).getCatId())]);
+
+        APICall.getSalonLogo(context,itemArrayList.get(position).getImage_1(),((Item) holder).image);
+        APICall.getSalonLogo(context,itemArrayList.get(position).getImage_2(),((Item) holder).image2);
 
 
         ArrayAdapter adapter=new ArrayAdapter(context,R.layout.simple_spinner_item_layout_v1,places);
@@ -270,7 +282,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         TextView name;
         Spinner place;
-        ImageView add,image;
+        ImageView add,image,image2;
 
         /**
          * @param itemView
@@ -282,6 +294,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
             place=itemView.findViewById(R.id.place);
             add=itemView.findViewById(R.id.add);
             image=itemView.findViewById(R.id.image);
+            image2=itemView.findViewById(R.id.image2);
         }
     }
 }

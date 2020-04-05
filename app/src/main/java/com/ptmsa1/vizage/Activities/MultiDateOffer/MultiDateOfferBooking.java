@@ -106,6 +106,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 place = NotificationsBeauty.offer_place;
                 supIdClasses = NotificationsBeauty.supIdClasses;
+                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
             }
         }catch (Exception e){
             e.printStackTrace();

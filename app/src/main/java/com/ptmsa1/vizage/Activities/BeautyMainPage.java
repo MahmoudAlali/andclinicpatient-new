@@ -407,6 +407,22 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 }
             }
 
+            String booking_period="";
+            for (int i=0;i<j.length();i++)
+            {
+                Log.e("Notif","i :"+i);
+                try{
+                    JSONObject object = j.getJSONObject(i);
+                    booking_period = object.getString("booking_period");
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Log.e("NotifErr",i+" : "+e.getMessage());
+
+                }
+            }
+
             if (bdb_offer_type.equals("2")
                     || bdb_offer_type.equals("5")){
 
@@ -416,6 +432,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 intent2.putExtra("is_effects_on",is_effect_on);
                 intent2.putExtra("offer_end",offer_end);
                 intent2.putExtra("offertype",bdb_offer_type);
+                intent2.putExtra("booking_period",booking_period);
                 ((AppCompatActivity)context).startActivity(intent2);
 
             }else if (bdb_offer_type.equals("1")
@@ -426,6 +443,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 intent3.putExtra("is_effects_on",is_effect_on);
                 intent3.putExtra("offer_end",offer_end);
                 intent3.putExtra("offertype",bdb_offer_type);
+                intent3.putExtra("booking_period",booking_period);
                 ((AppCompatActivity)context).startActivity(intent3);
             }else if (bdb_offer_type.equals("3")
                     || bdb_offer_type.equals("6")){
@@ -437,6 +455,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 intent4.putExtra("is_effects_on",is_effect_on);
                 intent4.putExtra("offer_end",offer_end);
                 intent4.putExtra("offertype",bdb_offer_type);
+                intent4.putExtra("booking_period",booking_period);
                 ((AppCompatActivity)context).startActivity(intent4);
             }
         }

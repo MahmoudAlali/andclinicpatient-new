@@ -25,7 +25,7 @@ public class BrowseServiceItem {
                     bdb_booking_period,
                     ser_id,
                     sup_id,
-                 logoId,
+                 logoId,image_1,image_2,catId,
     bdb_time,
                 bdb_isbride_ser;
 
@@ -110,7 +110,7 @@ public class BrowseServiceItem {
     }
     String bdb_name_ar,bdb_name;
     public BrowseServiceItem(String bdb_ser_sup_id, String bdb_sup_name, String bdb_sup_rating, String bdb_emp_rating, String totalRating, String bdb_ser_home, String bdb_ser_hall, String bdb_ser_salon, String bdb_hotel, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_ser_salon_price, String bdb_hotel_price, String distance, String longitude, String latitude,
-                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser,String bdb_logo_id,String bdb_name_ar,String bdb_name) {
+                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser,String bdb_logo_id,String bdb_name_ar,String bdb_name,String image_1,String image_2,String catId) {
         this.bdb_ser_sup_id = bdb_ser_sup_id;
         this.bdb_sup_name = bdb_sup_name;
         this.bdb_sup_rating = bdb_sup_rating;
@@ -137,6 +137,9 @@ public class BrowseServiceItem {
         this.newFav=is_fav_sup;
         this.bdb_name_ar=bdb_name_ar;
         this.bdb_name=bdb_name;
+        this.image_1=image_1;
+        this.image_2=image_2;
+        this.catId=catId;
     }
 
     public String getBdb_name() {
@@ -347,5 +350,17 @@ public class BrowseServiceItem {
 
     public void setNewFav(String newFav) {
         this.newFav = newFav;
+    }
+
+    public String getImage_1() {
+        return image_1;
+    }
+
+    public String getImage_2() {
+        return image_2;
+    }
+
+    public String getCatId() {
+        return catId;
     }
 }
