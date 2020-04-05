@@ -67,11 +67,11 @@ public class freeBookingFragment extends Fragment {
     public static String offerPlace="";
     public static String Place="";
     public static ArrayAdapter adapter;
-    public static String salonName="";
+    public static String salonName="",salonId="";
     public static String Name="";
     ArrayList<String> servicesList=new ArrayList<>();
 
-    public static String filterSupplierName="",filterDistance="",filterType="",filterProviderRate="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="";
+    public static String filterSupplierName="",filterSupplierId="",filterDistance="",filterType="",filterProviderRate="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="";
 
 
     @Override
@@ -184,6 +184,7 @@ public class freeBookingFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
+                        salonId="\"SupplierId\":" +"\""+ APICall.allSuppliers.get(position).getId()+"\",";
 
                         Name=APICall.allSuppliers.get(position).getName();
                        /* if (position!=0) {
@@ -269,6 +270,7 @@ public class freeBookingFragment extends Fragment {
                             providerName.setText( Name);
                            // filterSupplierName= "\"supplier_name\":" +"\""+ name.getText().toString()+"\",";
                             filterSupplierName=salonName;
+                            filterSupplierId=salonId;
                             // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
                            // ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, providerName.getText().toString()));
 

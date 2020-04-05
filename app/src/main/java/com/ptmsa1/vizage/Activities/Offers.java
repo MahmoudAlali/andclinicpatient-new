@@ -43,7 +43,7 @@ public class Offers extends Fragment implements LocationListener {
     public static OffersAdapter bestOffer;
     public static  String name="offers";
     static Boolean isFirstOpen=true;
-    public static String Lat="",Long="";
+    public static String Lat="32",Long="35";
     public static int ACCESS_FINE_LOCATION = 90;
     private LocationManager locationManager;
     private String provider;
@@ -96,7 +96,10 @@ public class Offers extends Fragment implements LocationListener {
                 Location location = locationManager.getLastKnownLocation(provider);
                 if (location != null) {
                     System.out.println("Provider " + provider + " has been selected.");
+                    Long= location.getLongitude()+"";
+                    Lat=location.getLatitude()+"";
                     onLocationChanged(location);
+
 
                 } else {
                     Log.e("LOCATION","Location not available");

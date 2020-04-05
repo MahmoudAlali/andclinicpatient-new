@@ -43,7 +43,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     static String place="";
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
     String bdb_pack_id;
-    String is_effects_on;
+    String is_effects_on,end_date;
 
     int booking_period;
     @Override
@@ -61,6 +61,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //        phone_number=findViewById(R.id.phone_number);
         next=findViewById(R.id.next);
 
+        boolean check=true;
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
@@ -86,6 +87,18 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                 Log.e("eRR",e.getMessage());
             }
 
+        }else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
+            check=false;
+            int postion1=getIntent().getIntExtra("postion",0);
+            Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
+            Log.e("TabTwo.arrayList.",postion1+"is");
+            Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
+            bdb_pack_id =TabTwo.arrayList.get(postion1).getBdb_pack_code();
+            APICall.PERIOD_FOR_SER_OFR =Integer.parseInt(TabTwo.arrayList.get(postion1).getBdb_booking_period());
+            end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+            is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+            supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
+            place=TabTwo.arrayList.get(postion).getBdb_offer_place();
         }else {
 //            end_date = OffersAdapter.bestOItem.getEnd_date();
             bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
@@ -113,7 +126,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         //endregion
 
 
-        Log.e("PackCode",bdb_pack_id);
+
 //        for (int i = 0; i< TabTwo.arrayList.get(postion).getSersup_ids().size(); i++){
 //            if (APICall.ln.equals("en")) {
 //                strings.add(TabTwo.arrayList.get(postion).getSersup_ids().get(i).getBdb_name());

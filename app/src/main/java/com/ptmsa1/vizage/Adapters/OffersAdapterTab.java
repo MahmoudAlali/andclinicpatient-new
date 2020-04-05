@@ -99,7 +99,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (offers.get(position).getBdb_offer_type().equals("1") ||offers.get(position).getBdb_offer_type().equals("4")) {
             ((Item) holder).offer_type.setText(R.string.ind_offer);
         }else if (offers.get(position).getBdb_offer_type().equals("2") ||offers.get(position).getBdb_offer_type().equals("5")) {
-            ((Item) holder).offer_type.setText(R.string.ind_offer);
+            ((Item) holder).offer_type.setText(R.string.single_offer_multi);
         }else if (offers.get(position).getBdb_offer_type().equals("3") ||offers.get(position).getBdb_offer_type().equals("6")) {
             ((Item) holder).offer_type.setText(R.string.group_offer);
         }
