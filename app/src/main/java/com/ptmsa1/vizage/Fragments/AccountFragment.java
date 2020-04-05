@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment  {
     TextView edit;
     Spinner language;
     SharedPreferences.Editor editor;
-    public static String oldEmail="";
+    public static String oldEmail="",oldName="";
 
 
     public  static ArrayList<LocationTitles> locationTitles=new ArrayList<>();

@@ -106,7 +106,7 @@
     <string name="refresh">تحديث</string>
 
     <!--Service fragment-->
-    <string name="bride">حجز عروس  خدمة/عرض</string>
+    <string name="bride">خدمات وعروض عروس</string>
     <string name="groupReservation">حجز جماعي</string>
     <string name="group_Reservation_another">حجز للغير</string>
     <string name="Hairdressing">تصفيف شعر</string>
@@ -235,7 +235,7 @@
 
 
 
-    <string name="Individual_booking">حجز فردي  خدمة/عرض</string>
+    <string name="Individual_booking">خدمات وعروض</string>
     <string name="Group_Booking">حجز جماعي</string>
     <string name="Compare2">مقارنة</string>
     <string name="Distance_Range">مجال البعد</string>
@@ -493,6 +493,7 @@
     <string name="evaluate">تقييم</string>
     <string name="clients_count_gr_2">عدد العميلات يجب ان يكون عميلتين على الاقل</string>
     <string name="reser_id">رقم الحجز</string>
+    <string name="ref_number">الرقم المرجعي</string>
     <string name="journey_time">وقت الرحلة</string>
     <string name="journey_cost">كلفة الرحلة</string>
     <string name="actual_price">السعر الفعلي</string>

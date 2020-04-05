@@ -56,6 +56,7 @@ import com.ptmsa1.vizage.Fragments.PlaceServiceMultipleBookingFragment;
 import com.ptmsa1.vizage.Fragments.ReservationFragment;
 import com.ptmsa1.vizage.Fragments.ServiceFragment;
 import com.ptmsa1.vizage.Fragments.ServicesTabsFragment;
+import com.ptmsa1.vizage.PayFort.PayTestActivity;
 import com.ptmsa1.vizage.R;
 import com.google.firebase.messaging.FirebaseMessaging;
 import android.widget.TextView;
@@ -885,7 +886,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         }else if (id == R.id.setting) {
-             Intent intent=new Intent(this, SettingActivity.class);
+            Intent intent=new Intent(this, PayTestActivity.class);
             startActivity(intent);
 
         }else if (id == R.id.points) {
