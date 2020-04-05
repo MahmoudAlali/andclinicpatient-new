@@ -23,6 +23,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.MyReservations;
 import com.ptmsa1.vizage.Activities.Offers;
 import com.ptmsa1.vizage.Activities.TabOne;
@@ -72,6 +73,7 @@ public class MainProviderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_provider);
+        BeautyMainPage.FRAGMENT_NAME="MainProviderActivity";
 
         context=this;
 
@@ -210,7 +212,7 @@ public class MainProviderActivity extends AppCompatActivity {
                         dialog.dismiss();
                         int month=datePicker.getMonth()+1;
                         date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-
+                        APICall.DATE_FOR_SER_OFR=date.getText().toString();
 //                        dateFilter=date.getText().toString();
 //                        ServiceFragment.date=dateFilter;
                     }

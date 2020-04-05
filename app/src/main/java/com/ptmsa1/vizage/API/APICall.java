@@ -186,6 +186,7 @@ import okhttp3.RequestBody;
 public class APICall {
 
 
+    public static  int PERIOD_FOR_SER_OFR  ;
     public static String bdb_is_effects_on="0";
     public static int layout;
     public static String idSerForOffer;
@@ -198,6 +199,9 @@ public class APICall {
     public static ArrayList<OfferModel> dofs=new ArrayList<>();
     public static  String API_PREFIX_NAME="http://clientapp.dcoret.com";
     public static String isBride;
+
+    public static String DATE_FOR_SER_OFR="";
+
 
 //    public static Dialog pd;
 
@@ -5487,6 +5491,7 @@ public class APICall {
                                             bdb_is_old_on=jarray.getString("bdb_is_old_on"),
                                             bdb_offer_place=jarray.getString("bdb_offer_place"),
                                             bdb_is_journey_on=jarray.getString("bdb_is_journey_on"),
+                                            bdb_booking_period=jarray.getString("bdb_booking_period"),
                                             bdb_is_effects_on=jarray.getString("bdb_is_effects_on"),
                                             discount=jarray.getString("discount"),
                                             distance=jarray.getString("distance"),
@@ -5505,7 +5510,7 @@ public class APICall {
                                     }
                                     if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
                                     {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
                                         TabTwo.arrayList.add(dof);
 
                                     }
@@ -5726,6 +5731,7 @@ public class APICall {
                                             discount=jarray.getString("discount"),
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
+                                            bdb_booking_period=jarray.getString("bdb_booking_period"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             latitude=jarray.getString("latitude");
 
@@ -5740,7 +5746,7 @@ public class APICall {
                                     }
 //                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
 //                                    {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
                                         MainProviderActivity.list.add(dof);
 
 //                                    }
@@ -6262,6 +6268,7 @@ public class APICall {
             dialog.show();
         }
         catch (Exception e){
+            e.printStackTrace();
             Log.e("err",e.getMessage());
         }
 
@@ -17685,7 +17692,11 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                offerAdapter.notifyDataSetChanged();
+                                try {
+                                    offerAdapter.notifyDataSetChanged();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                             }
                         });
                     }
@@ -23279,10 +23290,15 @@ public class APICall {
                         final String journey_count=data.getString("journey_count");
                         final String booking_price=data.getString("booking_price");
                         String bdb_sup_final_price="";
-                        String salon_name=data.getString("salon_name");
+                        final String salon_name=data.getString("salon_name");
                         String logo_id=data.getString("bdb_logo_id");
-                        getSalonLogo(BeautyMainPage.context,logo_id,logoImg);
-                        ReservatoinDetailsActivity.salonName.setText(salon_name);
+                        getSalonLogo(context,logo_id,logoImg);
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ReservatoinDetailsActivity.salonName.setText(salon_name);
+                            }
+                        });
                         try {
                             bdb_sup_final_price = data.getString("sup_booking_price");
                         }catch (Exception e){
@@ -25965,7 +25981,7 @@ Log.e("ERRR",e.getMessage());
     }
     public  static  String  automatedBrowseOffersForRequests( final String itemPerPage, final String pageNum, final Context context){
         offerSupplier.clear();
-
+        OffersForRequest.arrayList.clear();
         OffersForRequest.offersAdapterTab.notifyDataSetChanged();
 
         ServicesTabsFragment.supInfoList.clear();
@@ -26001,7 +26017,7 @@ Log.e("ERRR",e.getMessage());
         String jsonPostData="{\"lang\":\"en\"," +
                 "\"ItemPerPage\":10," +
                 "\"PageNum\":\""+pageNum+"\"," +
-                freeBookingFragment.filterSupplierName+"\n"+
+                freeBookingFragment.filterSupplierId+"\n"+
                 "\"Filter\":[" +
 //                    getCityId()+
                 //               "{\"num\":33,\"value1\":"+ ListServicesFragment.bdb_ser_id +",\"value2\":0},"+
@@ -26121,7 +26137,6 @@ Log.e("ERRR",e.getMessage());
                                 JSONArray supInfo=data.getJSONArray("supplier info");
 
                                 Log.e("SizeOffers",offersArray.length()+"");
-                                OffersForRequest.arrayList.clear();
 
                                 for (int i=0;i<offersArray.length();i++)
                                 {
@@ -26145,6 +26160,7 @@ Log.e("ERRR",e.getMessage());
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
+                                            bdb_booking_period=jarray.getString("bdb_booking_period"),
                                             latitude=jarray.getString("latitude");
 
                                     JSONArray pack_data=jarray.getJSONArray("pack_data");
@@ -26164,7 +26180,7 @@ Log.e("ERRR",e.getMessage());
                                     if(!bdb_offer_type.equals("2")&&!bdb_offer_type.equals("5"))
                                     {
 //                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses));
+                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses));
                                     }
 
 

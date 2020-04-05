@@ -9,6 +9,7 @@ public class RequestProviderItem {
         this.sup_name=sup_name;
         this.logo_id=logo_id;
         this.rating=rating;
+        this.bdb_booking_period=bdb_booking_period;
     }
 
     public String getBdb_booking_period() {

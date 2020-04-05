@@ -148,7 +148,7 @@ public class PlaceServiceFragment extends Fragment {
                         dialog.dismiss();
                         int month=datePicker.getMonth()+1;
                         date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-
+                        APICall.DATE_FOR_SER_OFR=date.getText().toString();
 //                        dateFilter=date.getText().toString();
 //                        ServiceFragment.date=dateFilter;
                     }

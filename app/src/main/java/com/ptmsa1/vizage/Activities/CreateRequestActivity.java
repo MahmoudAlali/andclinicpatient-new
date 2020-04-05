@@ -77,9 +77,14 @@ public class CreateRequestActivity extends AppCompatActivity {
                 final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
                 datePicker.setMinDate(System.currentTimeMillis());
 
-                Calendar calendar=Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_MONTH,Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
-
+//                RequestProvidersFragment.bdb_booking_period)
+                try {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DAY_OF_MONTH, Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
+                    datePicker.setMaxDate(calendar.getTimeInMillis());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override

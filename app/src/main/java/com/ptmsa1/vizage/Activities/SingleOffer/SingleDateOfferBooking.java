@@ -49,6 +49,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
    public static String place_num="",price_num="";
     public static String end_date;
     String bdb_pack_id;
+    String bdb_pack_id1;
     String is_effects_on;
     int booking_period;
     public static ArrayList<String> services=new ArrayList<>();
@@ -68,29 +69,64 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         showDate=findViewById(R.id.date);
         showDate.setText(R.string.select_date);
         next=findViewById(R.id.next);
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){
+
+        }
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id1 = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                end_date = getIntent().getStringExtra("offer_end");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 
         Boolean check=true;
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
 
             end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
-            bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+            bdb_pack_id1 = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
-            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            booking_period =Integer.parseInt(OffersForRequest.arrayList.get(postion).getBdb_booking_period());
 
         }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
             end_date = OffersAdapter.bestOItem.getEnd_date();
-            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+            bdb_pack_id1 = OffersAdapter.bestOItem.getPack_code();
              booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
             is_effects_on=APICall.bdb_is_effects_on;
         }
-        else {
+        else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
+            check=false;
+            int postion1=getIntent().getIntExtra("postion",0);
+            Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
+            Log.e("TabTwo.arrayList.",postion1+"is");
+            Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
+            showDate.setText(APICall.DATE_FOR_SER_OFR);
+//            showDate.setText());
+            end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+            bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
+            is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+        }else
             try {
                 check=false;
+                int postion1=getIntent().getIntExtra("postion",0);
+                Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
+                Log.e("TabTwo.arrayList.",postion1+"is");
+                Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
+                showDate.setText(APICall.DATE_FOR_SER_OFR);
                 showDate.setText(PlaceServiceFragment.date.getText().toString());
-                end_date = TabTwo.arrayList.get(postion).getBdb_offer_end();
-                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+                end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+                bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
+                is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
             }
             catch (Exception e){};
 
@@ -109,7 +145,6 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 end_date = getIntent().getStringExtra("offer_end");
-                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -117,6 +152,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         //endregion
 
         recyclerView=findViewById(R.id.recycleview);
+        if (check)
         selectdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,8 +203,10 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         offerAdapter=new ShowServicesAdapter(context,offerClientsModels);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(offerAdapter);
+        bdb_pack_id=bdb_pack_id1;
+        Log.e("bdb_pack_id11","is"+bdb_pack_id1);
+        APICall.browseOneOfferv2(bdb_pack_id1,offerClientsModels,offerAdapter,context);
 
-        APICall.browseOneOfferv2(bdb_pack_id,offerClientsModels,offerAdapter,context);
 
         if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {

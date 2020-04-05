@@ -144,6 +144,11 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
                     bestOItem=bestOfferItems.get(position);
+                    try{
+                        Log.e("bestOItem","is"+bestOItem);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
 
 
                     if (bestOfferItems.get(position).getOffer_type().equals("2")

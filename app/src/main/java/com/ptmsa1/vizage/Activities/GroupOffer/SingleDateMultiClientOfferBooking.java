@@ -71,6 +71,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
         final int postion = getIntent().getIntExtra("postion", 0);
 
+        Boolean check=true;
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
@@ -84,7 +85,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
             is_effects_on=APICall.bdb_is_effects_on;
         }
         else {
+            check=false;
             try {
+                add_date.setText(APICall.DATE_FOR_SER_OFR);
                 end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
                 bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
                 is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
@@ -125,6 +128,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         offerAdapter = new OfferBookingMultiClientsAdapter(context, offerClientsModels);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(offerAdapter);
+        if (check)
         add_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

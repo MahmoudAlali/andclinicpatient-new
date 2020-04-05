@@ -128,7 +128,41 @@ public class DataOffer {
         this.bdb_offer_place = bdb_offer_place;
         this.bdb_is_effects_on= bdb_is_effects_on;
     }
+    String bdb_booking_period;
+    public DataOffer( String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, String longitude, String latitude, String distance,
+                      String bdb_is_journey_on,String bdb_is_old_on,String bdb_offer_place,String bdb_is_effects_on,String bdb_booking_period, ArrayList<SupIdClass> sersup_ids) {
+        this.pack_data = pack_data;
+        this.bdb_pack_code = bdb_pack_code;
+        this.bdb_sup_name = bdb_sup_name;
+        this.totalRating_to_Sup = totalRating_to_Sup;
+        this.service_count = service_count;
+        this.is_fav_sup = is_fav_sup;
+        this.bdb_offer_start = bdb_offer_start;
+        this.bdb_offer_end = bdb_offer_end;
+        Num_of_times = num_of_times;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.discount = discount;
+        this.bdb_offer_status = bdb_offer_status;
+        this.bdb_offer_type = bdb_offer_type;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.distance = distance;
+        this.sersup_ids = sersup_ids;
+        this.bdb_is_journey_on = bdb_is_journey_on;
+        this.bdb_is_old_on = bdb_is_old_on;
+        this.bdb_offer_place = bdb_offer_place;
+        this.bdb_is_effects_on= bdb_is_effects_on;
+        this.bdb_booking_period= bdb_booking_period;
+    }
 
+    public String getBdb_booking_period() {
+        return bdb_booking_period;
+    }
+
+    public void setBdb_booking_period(String bdb_booking_period) {
+        this.bdb_booking_period = bdb_booking_period;
+    }
 
     public String getBdb_is_effects_on() {
         return bdb_is_effects_on;
