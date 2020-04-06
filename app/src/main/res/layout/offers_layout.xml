@@ -104,11 +104,12 @@
         </LinearLayout>-->
 
     <LinearLayout
+
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="130dp"
         android:gravity="center"
-        android:background="@drawable/offers_header"
+        android:background="#fff"
 >
 
     </LinearLayout>

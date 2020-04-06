@@ -25,7 +25,7 @@ public class BrowseServiceItem {
                     bdb_booking_period,
                     ser_id,
                     sup_id,
-                 logoId,image_1,image_2,catId,
+                 logoId,image_1,image_2,catId,bdb_client_deposit_ratio,
     bdb_time,
                 bdb_isbride_ser;
 
@@ -82,7 +82,7 @@ public class BrowseServiceItem {
     }
 
     public BrowseServiceItem(String bdb_ser_sup_id, String bdb_sup_name, String bdb_sup_rating, String bdb_emp_rating, String totalRating, String bdb_ser_home, String bdb_ser_hall, String bdb_ser_salon, String bdb_hotel, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_ser_salon_price, String bdb_hotel_price, String distance, String longitude, String latitude,
-                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser,String bdb_logo_id) {
+                             String is_fav_sup, String bdb_booking_period,String ser_id,String sup_id,String bdb_time,String bdb_isbride_ser,String bdb_logo_id,String bdb_client_deposit_ratio) {
         this.bdb_ser_sup_id = bdb_ser_sup_id;
         this.bdb_sup_name = bdb_sup_name;
         this.bdb_sup_rating = bdb_sup_rating;
@@ -107,6 +107,7 @@ public class BrowseServiceItem {
         this.bdb_isbride_ser= bdb_isbride_ser;
         this.logoId= bdb_logo_id;
         this.newFav=is_fav_sup;
+        this.bdb_client_deposit_ratio=bdb_client_deposit_ratio;
     }
     String bdb_name_ar,bdb_name;
     public BrowseServiceItem(String bdb_ser_sup_id, String bdb_sup_name, String bdb_sup_rating, String bdb_emp_rating, String totalRating, String bdb_ser_home, String bdb_ser_hall, String bdb_ser_salon, String bdb_hotel, String bdb_ser_home_price, String bdb_ser_hall_price, String bdb_ser_salon_price, String bdb_hotel_price, String distance, String longitude, String latitude,
@@ -362,5 +363,9 @@ public class BrowseServiceItem {
 
     public String getCatId() {
         return catId;
+    }
+
+    public String getBdb_client_deposit_ratio() {
+        return bdb_client_deposit_ratio;
     }
 }

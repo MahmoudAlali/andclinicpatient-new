@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="52245270-4f3f-409a-ad7b-0f8e2a9fa7ad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/API/APICall.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/API/APICall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Activities/BeautyMainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Activities/BeautyMainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/OffersAdapterTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/OffersAdapterTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/RequestProvidersAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/RequestProvidersAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/ServicesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/Adapters/ServicesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/BrowseServiceItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/BrowseServiceItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/DataOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/DataOffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/RequestProviderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/com/ptmsa1/vizage/DataModel/RequestProviderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/offers_layout_tab_last2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/offers_layout_tab_last2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/providers_layout_adapter_last.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/providers_layout_adapter_last.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../layout/service_layout_adapter_last.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../layout/service_layout_adapter_last.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../values-ar/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../values-ar/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../values/strings.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="535" />
+    <option name="y" value="-25" />
+    <option name="width" value="1295" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52245270-4f3f-409a-ad7b-0f8e2a9fa7ad" name="Default Changelist" comment="" />
+      <created>1586152990848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586152990848</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Resources Explorer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Capture Tool" />
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.3295756" />
+      <window_info id="Image Layers" />
+      <window_info id="Structure" side_tool="true" />
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="TODO" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+    </layout>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

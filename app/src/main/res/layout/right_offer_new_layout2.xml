@@ -2,10 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
+    android:layout_height="250dp"
     android:layoutDirection="ltr"
-    android:layout_marginLeft="@dimen/standard_20"
-    android:layout_marginRight="@dimen/standard_20"
     >
     <LinearLayout
         android:id="@+id/itemBackground"
@@ -15,154 +13,18 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="215dp"
+            android:layout_width="335dp"
+            android:layout_height="250dp"
             android:orientation="horizontal"
-            android:background="@drawable/new_offer_back_ar"
+            android:background="@drawable/new_offer_back_en"
             android:weightSum="3"
             >
-            <LinearLayout
-                android:layout_weight="2"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="bottom|end"
-
-                android:paddingTop="15dp">
-
-                <!--   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:paddingTop="10dp"
-                       android:layout_weight="1"
-                       android:paddingLeft="7dp"
-                       android:paddingStart="7dp"
-                       >
-                       <TextView
-                           android:id="@+id/offer_type"
-                           android:background="@drawable/pink_offer_type"
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:textColor="@android:color/white"
-                           android:textAlignment="center"
-                           android:layout_weight="1"
-                           android:text="offer type"
-                           android:textSize="16sp"
-                           android:textStyle="bold" />
-
-                   </LinearLayout>-->
-
-<!--
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="start"
-                    >
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/myCardView"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:cardCornerRadius="50dp"
-                        android:layout_weight="1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        >
-                        <ImageView
-                            android:id="@+id/logoImg"
-                            android:src="@drawable/logo"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            />
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
--->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_gravity="end"
-                    >
-                    <com.meg7.widget.SvgImageView
-                        android:id="@+id/logoImg"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/clientlogo"
-                        app:svg_raw_resource="@raw/shape_star_3"
-                        android:scaleType="centerCrop" />
-<!--
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/myCardView"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        app:cardCornerRadius="50dp"
-                        android:layout_weight="1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        >
-                        <com.meg7.widget.SvgImageView
-                            android:id="@+id/logoImg"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/logo"
-                            android:background="null"
-                            app:svg_raw_resource="@raw/shape_star_3"
-                            android:scaleType="centerCrop" />
-                        &lt;!&ndash;<ImageView
-                            android:src="@drawable/logo"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            />&ndash;&gt;
-                    </android.support.v7.widget.CardView>
--->
-
-                </LinearLayout>
-
-                <!--
-                                <LinearLayout
-                                    android:layout_width="@dimen/standard_80"
-                                    android:layout_height="@dimen/standard_80"
-                                    >
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/logo"
-                                        android:id="@+id/logoImg"
-                                        android:layout_weight="2"
-                                        android:scaleType="centerInside"
-                                        >
-                                    </ImageView>
-                                </LinearLayout>
-                -->
-
-                <!-- <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="999"
-                     android:id="@+id/old_price"
-                     android:layout_weight="1"
-                     android:textSize="18sp"
-                     android:textStyle="bold"
-                     android:textColor="@color/red"
-                     android:layout_gravity="left|top"
-                     android:layout_marginLeft="100dp"
-                     android:layout_marginTop="50dp"
-                     android:gravity="center"
-                     />-->
-
-
-
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="190dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:weightSum="5"
-                android:paddingRight="@dimen/standard_30"
+                android:paddingLeft="@dimen/standard_30"
                 android:paddingTop="30dp"
                 android:paddingBottom="7dp"
                 android:orientation="vertical"
@@ -172,8 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingRight="15dp"
-                    android:paddingLeft="@dimen/standard_30"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="@dimen/standard_30"
                     >
                     <TextView
 
@@ -186,7 +48,7 @@
                         android:textStyle="bold"
                         android:textColor="#000"
                         android:layout_gravity="center|bottom"
-                        android:gravity="left"
+                        android:gravity="right"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -195,18 +57,10 @@
                     android:orientation="horizontal"
                     android:weightSum="3"
                     android:layout_weight="1"
-                   >
-                    <ImageView
-                        android:layout_weight="1"
-                        android:padding="7dp"
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/best_offers_i"
-                        android:id="@+id/info"/>
-                    <Space
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        />
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    >
+
                     <ImageView
                         android:padding="7dp"
                         android:layout_weight="1"
@@ -214,6 +68,18 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/best_offers_plus"
                         android:id="@+id/add"/>
+                    <Space
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        />
+                    <ImageView
+                        android:layout_weight="1"
+                        android:padding="7dp"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/best_offers_i"
+                        android:id="@+id/info"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -221,7 +87,8 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:weightSum="3"
-                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:gravity="right"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -288,7 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:paddingRight="@dimen/standard_30">
+                    android:paddingLeft="@dimen/standard_30">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -369,13 +236,151 @@
                     android:textSize="12dp"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:paddingRight="@dimen/standard_30"
+                    android:gravity="right"
+                    android:paddingLeft="@dimen/standard_30"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:text="@string/offer_type"
                     />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="bottom|start"
+
+                android:paddingTop="15dp">
+
+                <!--   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:paddingTop="10dp"
+                       android:layout_weight="1"
+                       android:paddingLeft="7dp"
+                       android:paddingStart="7dp"
+                       >
+                       <TextView
+                           android:id="@+id/offer_type"
+                           android:background="@drawable/pink_offer_type"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textColor="@android:color/white"
+                           android:textAlignment="center"
+                           android:layout_weight="1"
+                           android:text="offer type"
+                           android:textSize="16sp"
+                           android:textStyle="bold" />
+
+                   </LinearLayout>-->
+
+                <!--
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_gravity="start"
+                                    >
+                                    <android.support.v7.widget.CardView
+                                        android:id="@+id/myCardView"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        app:cardCornerRadius="50dp"
+                                        android:layout_weight="1"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        >
+                                        <ImageView
+                                            android:id="@+id/logoImg"
+                                            android:src="@drawable/logo"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:scaleType="centerCrop"
+                                            />
+                                    </android.support.v7.widget.CardView>
+
+                                </LinearLayout>
+                -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="start"
+                    >
+                    <com.meg7.widget.SvgImageView
+                        android:id="@+id/logoImg"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/clientlogo"
+                        app:svg_raw_resource="@raw/shape_star_3"
+                        android:scaleType="centerCrop" />
+                    <!--
+                                        <android.support.v7.widget.CardView
+                                            android:id="@+id/myCardView"
+                                            android:layout_width="70dp"
+                                            android:layout_height="70dp"
+                                            app:cardCornerRadius="50dp"
+                                            android:layout_weight="1"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            >
+                                            <com.meg7.widget.SvgImageView
+                                                android:id="@+id/logoImg"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:src="@drawable/logo"
+                                                android:background="null"
+                                                app:svg_raw_resource="@raw/shape_star_3"
+                                                android:scaleType="centerCrop" />
+                                            &lt;!&ndash;<ImageView
+                                                android:src="@drawable/logo"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:scaleType="centerCrop"
+                                                />&ndash;&gt;
+                                        </android.support.v7.widget.CardView>
+                    -->
+
+                </LinearLayout>
+
+                <!--
+                                <LinearLayout
+                                    android:layout_width="@dimen/standard_80"
+                                    android:layout_height="@dimen/standard_80"
+                                    >
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/logo"
+                                        android:id="@+id/logoImg"
+                                        android:layout_weight="2"
+                                        android:scaleType="centerInside"
+                                        >
+                                    </ImageView>
+                                </LinearLayout>
+                -->
+
+                <!-- <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="999"
+                     android:id="@+id/old_price"
+                     android:layout_weight="1"
+                     android:textSize="18sp"
+                     android:textStyle="bold"
+                     android:textColor="@color/red"
+                     android:layout_gravity="left|top"
+                     android:layout_marginLeft="100dp"
+                     android:layout_marginTop="50dp"
+                     android:gravity="center"
+                     />-->
+
+
+
+            </LinearLayout>
+
+
             <!--
                         <LinearLayout
                             android:visibility="gone"

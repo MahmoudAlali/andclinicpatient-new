@@ -4945,6 +4945,7 @@ public class APICall {
                                         latitude=jarray.getString("latitude"),
                                         is_fav_sup=jarray.getString("is_fav_sup"),
                                         bdb_logo_id=jarray.getString("bdb_logo_id"),
+                                        bdb_client_deposit_ratio=jarray.getString("bdb_client_deposit_ratio"),
                                         bdb_booking_period=jarray.getString("bdb_booking_period");
                                 JSONObject services=jarray.getJSONObject("services");
                                 String ser_id=services.getString("bdb_ser_id");
@@ -4972,7 +4973,7 @@ public class APICall {
                                                                             bdb_booking_period,
                                                                             ser_id,bdb_sup_id,
                                                                             bdb_time+"",
-                                        bdb_is_bride_service,bdb_logo_id);
+                                        bdb_is_bride_service,bdb_logo_id,bdb_client_deposit_ratio);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 try {
@@ -5492,6 +5493,7 @@ public class APICall {
                                             bdb_offer_place=jarray.getString("bdb_offer_place"),
                                             bdb_is_journey_on=jarray.getString("bdb_is_journey_on"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_is_effects_on=jarray.getString("bdb_is_effects_on"),
                                             discount=jarray.getString("discount"),
                                             distance=jarray.getString("distance"),
@@ -5510,7 +5512,7 @@ public class APICall {
                                     }
                                     if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
                                     {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
                                         TabTwo.arrayList.add(dof);
 
                                     }
@@ -5732,6 +5734,7 @@ public class APICall {
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             latitude=jarray.getString("latitude");
 
@@ -5746,7 +5749,7 @@ public class APICall {
                                     }
 //                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
 //                                    {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
                                         MainProviderActivity.list.add(dof);
 
 //                                    }
@@ -25469,8 +25472,9 @@ public class APICall {
                                     String sup_name=jarray.getString("sup_name"),
                                             logo_id=jarray.getString("logo_id"),
                                             rating=jarray.getString("rating"),
+                                            deposit_prcntg=jarray.getString("bdb_client_deposit_ratio"),
                                     bdb_booking_period=jarray.getString("bdb_booking_period");
-                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period);
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg);
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -26161,6 +26165,7 @@ Log.e("ERRR",e.getMessage());
                                             longitude=jarray.getString("longitude"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             latitude=jarray.getString("latitude");
 
                                     JSONArray pack_data=jarray.getJSONArray("pack_data");
@@ -26180,7 +26185,7 @@ Log.e("ERRR",e.getMessage());
                                     if(!bdb_offer_type.equals("2")&&!bdb_offer_type.equals("5"))
                                     {
 //                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses));
+                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio));
                                     }
 
 

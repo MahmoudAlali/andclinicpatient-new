@@ -626,5 +626,7 @@
     <string name="out_of_support_time">نرجو التواصل مع فريق الدعم من خلال موقع التطبيق خارج أوقات الدوام </string>
     <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
 
+    <string name="dep_prcntg">نسبة العرض :</string>
+
 
 </resources>

@@ -413,7 +413,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    booking_period = object.getString("booking_period");
+                    booking_period = object.getString("bdb_booking_period");
                     break;
                 }
                 catch (Exception e)
@@ -422,6 +422,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
                 }
             }
+            FRAGMENT_NAME="";
 
             if (bdb_offer_type.equals("2")
                     || bdb_offer_type.equals("5")){

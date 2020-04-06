@@ -129,8 +129,9 @@ public class DataOffer {
         this.bdb_is_effects_on= bdb_is_effects_on;
     }
     String bdb_booking_period;
+    String deposit_ratio;
     public DataOffer( String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, String bdb_offer_status, String bdb_offer_type, String longitude, String latitude, String distance,
-                      String bdb_is_journey_on,String bdb_is_old_on,String bdb_offer_place,String bdb_is_effects_on,String bdb_booking_period, ArrayList<SupIdClass> sersup_ids) {
+                      String bdb_is_journey_on,String bdb_is_old_on,String bdb_offer_place,String bdb_is_effects_on,String bdb_booking_period, ArrayList<SupIdClass> sersup_ids,String deposit_ratio) {
         this.pack_data = pack_data;
         this.bdb_pack_code = bdb_pack_code;
         this.bdb_sup_name = bdb_sup_name;
@@ -154,6 +155,7 @@ public class DataOffer {
         this.bdb_offer_place = bdb_offer_place;
         this.bdb_is_effects_on= bdb_is_effects_on;
         this.bdb_booking_period= bdb_booking_period;
+        this.deposit_ratio=deposit_ratio;
     }
 
     public String getBdb_booking_period() {
@@ -416,5 +418,7 @@ public class DataOffer {
         }
     }
 
-
+    public String getDeposit_ratio() {
+        return deposit_ratio;
+    }
 }

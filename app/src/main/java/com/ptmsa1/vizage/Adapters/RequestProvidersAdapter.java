@@ -127,6 +127,8 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo);
 
     ( holder).provider_rate.setText(itemArrayList.get(position).getRating());
+    String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getDeposit_prcntg()+" % ";
+    ( holder).depositPrcntg.setText(deposit);
     ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -141,7 +143,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     });
 }
 public class ListHolder extends RecyclerView.ViewHolder {
-    TextView providerName,provider_rate;
+    TextView providerName,provider_rate,depositPrcntg;
     ImageView addRequest,logo;
     public ListHolder(View itemView) {
         super(itemView);
@@ -149,6 +151,7 @@ public class ListHolder extends RecyclerView.ViewHolder {
         addRequest=itemView.findViewById(R.id.add_request);
         provider_rate=itemView.findViewById(R.id.provider_rate);
         logo=itemView.findViewById(R.id.logoImg);
+        depositPrcntg=itemView.findViewById(R.id.depPerc);
     }
 }
     @Override

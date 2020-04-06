@@ -149,6 +149,10 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 //                }
             //check check box is already checked or not because recyclerview use recycling method to reuse view
 
+
+            String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getBdb_client_deposit_ratio()+" % ";
+            ( holder).depositPrcntg.setText(deposit);
+
             Log.e("ISCHECKED:"+holder.getLayoutPosition(),isChecked.containsKey(position)+"");
             if (isChecked.containsKey(holder.getLayoutPosition())) {
                 holder.service_compare.setChecked(isChecked.get(position));
@@ -304,7 +308,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
     public class ListHolder extends RecyclerView.ViewHolder {
 //        CheckBox cb_product;
         TextView  service_name,service_price;
-        TextView pro_name;
+        TextView pro_name, depositPrcntg;
         RatingBar service_rate;
         ImageView service_add,service_fav,logo;
         CheckBox service_compare;
@@ -321,6 +325,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             service_compare=itemView.findViewById(R.id.service_compare);
 //            service_details=itemView.findViewById(R.id.service_details);
             service_fav=itemView.findViewById(R.id.service_fav);
+            depositPrcntg=itemView.findViewById(R.id.depPerc);
 
             service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -349,7 +354,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 
         TextView  service_name,service_price;
         TextView pro_name;
-        TextView service_rate;
+        TextView service_rate,depositPrcntg;
         ImageView service_add,service_fav,logo;
         CheckBox service_compare;
         LinearLayout service_details;
@@ -370,6 +375,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 //            service_details=itemView.findViewById(R.id.service_details);
             service_fav=itemView.findViewById(R.id.service_fav);
             logo=itemView.findViewById(R.id.logoImg);
+            depositPrcntg=itemView.findViewById(R.id.depPerc);
 
         }
     }

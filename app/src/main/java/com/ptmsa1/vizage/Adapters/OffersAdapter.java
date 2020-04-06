@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.meg7.widget.SvgImageView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
@@ -101,7 +102,13 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
              row = inflater.inflate(R.layout.right_offer_new_layout, parent, false);
         }*/
        // row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
-        row = inflater.inflate(R.layout.left_offer_new_layout2, parent, false);
+
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+            row = inflater.inflate(R.layout.left_offer_new_layout2, parent, false);
+        else
+            row = inflater.inflate(R.layout.right_offer_new_layout2, parent, false);
+
+
 
         counter++;
             OffersAdapter.Item item = new OffersAdapter.Item(row);
@@ -341,7 +348,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
     public static class Item extends RecyclerView.ViewHolder {
         TextView textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,percentDiscount;
-        ImageView info,logoImg,add;
+        ImageView info,logoImg2,add;
+        SvgImageView logoImg;
         LinearLayout itemBackground;
         public Item(View itemView) {
             super(itemView);
