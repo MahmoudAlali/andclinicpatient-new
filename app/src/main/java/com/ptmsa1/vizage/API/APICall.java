@@ -5228,12 +5228,15 @@ public class APICall {
                                         latitude=jarray.getString("latitude"),
                                         is_fav_sup=jarray.getString("is_fav_sup"),
                                         bdb_logo_id=jarray.getString("bdb_logo_id"),
+                                        image_1=jarray.getString("image_1"),
+                                        image_2=jarray.getString("image_2"),
                                         bdb_booking_period=jarray.getString("bdb_booking_period");
                                 JSONObject services=jarray.getJSONObject("services");
                                 String ser_id=services.getString("bdb_ser_id");
                                 String bdb_name_ar=services.getString("bdb_name_ar");
                                 String bdb_name=services.getString("bdb_name");
                                 String bdb_is_bride_service=services.getString("bdb_is_bride_service");
+                                String bdb_is_hair_service=services.getString("bdb_is_hair_service");
 
 
 
@@ -5257,7 +5260,7 @@ public class APICall {
                                                                             bdb_booking_period,
                                                                             ser_id,bdb_sup_id,
                                                                             bdb_time+"",
-                                        bdb_is_bride_service,bdb_logo_id,bdb_name_ar,bdb_name);
+                                        bdb_is_bride_service,bdb_logo_id,bdb_name_ar,bdb_name,image_1,image_2,bdb_is_hair_service);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 try {
@@ -21003,6 +21006,7 @@ public class APICall {
                                 @Override
                                 public void run() {
                                     logoImg.setImageBitmap(bit);
+                                    logoImg.setVisibility(View.VISIBLE);
                                    // OffersAdapter.logoImages.put(LogoId,bit);
                                 }
                             });

@@ -100,7 +100,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }else {
              row = inflater.inflate(R.layout.right_offer_new_layout, parent, false);
         }*/
-        row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
+       // row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
+        row = inflater.inflate(R.layout.left_offer_new_layout2, parent, false);
 
         counter++;
             OffersAdapter.Item item = new OffersAdapter.Item(row);

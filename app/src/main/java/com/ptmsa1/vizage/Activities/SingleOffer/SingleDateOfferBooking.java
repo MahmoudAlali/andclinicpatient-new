@@ -69,7 +69,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         showDate=findViewById(R.id.date);
         showDate.setText(R.string.select_date);
         next=findViewById(R.id.next);
-        String notification = "";
+       /* String notification = "";
         try {
             notification=getIntent().getStringExtra("notification");
 
@@ -85,7 +85,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
 
 
@@ -128,14 +128,50 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                 bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
                 is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
             }
-            catch (Exception e){
-                e.printStackTrace();
-            };
+            catch (Exception e){};
 
+
+/*
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){
+
+        }
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                end_date = getIntent().getStringExtra("offer_end");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //endregion
+*/
 
         //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
 
+        }
+        catch (Exception e){
 
+        }
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                end_date = getIntent().getStringExtra("offer_end");
+                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //endregion
 
         recyclerView=findViewById(R.id.recycleview);
