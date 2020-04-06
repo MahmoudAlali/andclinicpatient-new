@@ -38,12 +38,14 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.ServiceFilter;
 import com.ptmsa1.vizage.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class freeBookingFragment extends Fragment {
     LinearLayout  service_hair;
@@ -66,7 +68,7 @@ public class freeBookingFragment extends Fragment {
     //public static TextView date;
     public static String offerPlace="";
     public static String Place="";
-    public static ArrayAdapter adapter;
+    public static HintArrayAdapter adapter;
     public static String salonName="",salonId="";
     public static String Name="";
     ArrayList<String> servicesList=new ArrayList<>();
@@ -111,7 +113,8 @@ public class freeBookingFragment extends Fragment {
 
         //region Type Spinner
 
-        final ArrayAdapter TypeAdapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.requestType, R.layout.simple_spinner_dropdown_item_v1);
+        final HintArrayAdapter TypeAdapter = new HintArrayAdapter(BeautyMainPage.context, 0);
+        TypeAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.requestType)));
         TypeAdapter.setDropDownViewResource(R.layout.spinner_center_item);
         typeSpinner.setAdapter(TypeAdapter);
 
@@ -175,7 +178,8 @@ public class freeBookingFragment extends Fragment {
                 //final Spinner name=namesalonDialog.findViewById(R.id.name);
                 final EditText name=namesalonDialog.findViewById(R.id.name);
                 final SearchableSpinner add_service=namesalonDialog.findViewById(R.id.add_service);
-                adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,servicesList);
+                adapter=new HintArrayAdapter(BeautyMainPage.context,0);
+                adapter.addAll(servicesList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setTitle(getResources().getString(R.string.suppliers));
                 add_service.setAdapter(adapter);
@@ -359,7 +363,8 @@ public class freeBookingFragment extends Fragment {
 
         //region Service Place
 
-        final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, R.layout.simple_spinner_dropdown_item_v1);
+        final HintArrayAdapter adapter = new HintArrayAdapter(BeautyMainPage.context, 0);
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
         adapter.setDropDownViewResource(R.layout.spinner_center_item);
         placeSpinner.setAdapter(adapter);
 

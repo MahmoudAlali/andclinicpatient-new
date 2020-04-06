@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.API.LayoutList;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.CalenderAdapter;
@@ -94,7 +95,8 @@ public class IndividualBooking extends AppCompatActivity {
         alltimesSpinner=findViewById(R.id.alltimesSpinner);
         alltimes.add("Booking Time");
         alltimes.add("Remove Time Selected");
-        ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item,alltimes);
+        HintArrayAdapter adapter = new HintArrayAdapter(context,0);
+        adapter.addAll(alltimes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.notifyDataSetChanged();
         alltimesSpinner.setAdapter(adapter);

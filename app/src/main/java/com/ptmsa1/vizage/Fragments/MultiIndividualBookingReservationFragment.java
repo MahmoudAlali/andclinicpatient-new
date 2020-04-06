@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.ClientsViewData;
 import com.ptmsa1.vizage.DataModel.SerchGroupBookingData;
@@ -31,6 +32,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MultiIndividualBookingReservationFragment extends Fragment {
 
@@ -100,8 +102,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
             is_group_booking="3";
 
         }
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
-                R.array.service_type, R.layout.simple_spinner_dropdown_item_v1 );
+        HintArrayAdapter adapter = new HintArrayAdapter(this.getActivity(),0 );
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_type)));
         adapter.setDropDownViewResource(R.layout.spinner_center_item);
         choose_occision.setAdapter(adapter);
 
@@ -228,7 +230,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         });
 
                 //------------------ adapter for add services----------------------
-                adapter = new ArrayAdapter(BeautyMainPage.context, R.layout.simple_spinner_dropdown_item_v1, serviceNameList);
+                adapter = new HintArrayAdapter(BeautyMainPage.context, 0);
+                adapter.addAll(serviceNameList);
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 add_service.setTitle(getResources().getString(R.string.services));
                 add_service.setAdapter(adapter);

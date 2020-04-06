@@ -625,6 +625,12 @@
     </string-array>
     <string name="out_of_support_time">نرجو التواصل مع فريق الدعم من خلال موقع التطبيق خارج أوقات الدوام </string>
     <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
+    <string name="please_add_date">من فضلك ادخلي التاريخ</string>
+    <string name="please_add_location">من فضلك ادخلي الموقع</string>
+    <string name="add_service_place">من فضلك ادخلي مكان الخدمة</string>
+    <string name="pro_not_support_place">المزودة لا تدعم هذا المكان</string>
+    <string name="reference_number">الرقم المرجعي:</string>
+    <string name="book_id">رقم الحجز:</string>
 
     <string name="dep_prcntg">نسبة العرض :</string>
 

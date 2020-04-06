@@ -9418,7 +9418,9 @@ public class APICall {
                                 JSONObject jObject = bookings.getJSONObject(i);
 
                                 String booking_type = jObject.getString("booking_type");
+//                                String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
+                                String bdb_internally_number = jObject.getString("bdb_internally_number");
                                 String bdb_is_executed = jObject.getString("bdb_is_executed");
                                 String provider_rating = jObject.getString("provider_rating");
                                 String is_action_on = jObject.getString("is_action_on");
@@ -9536,7 +9538,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                     if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -9549,7 +9551,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                         if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -9561,7 +9563,7 @@ public class APICall {
                                         if (execDateCheck && bookatCehck)
                                             if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                 if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -9570,7 +9572,7 @@ public class APICall {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
                                             if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -10625,6 +10627,8 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
+//                                adapter.addAll(serviceNameList);
                                 adapter.notifyDataSetChanged();
                                 searchableSpinner.setTitle(context.getResources().getString(R.string.Service_Name));
 

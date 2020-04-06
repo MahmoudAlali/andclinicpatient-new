@@ -777,5 +777,12 @@
 
     <string name="out_of_support_time">Please contact support team through application website out of working times</string>
     <string name="out_of_support_time_link"> <a href="http://vizagep.ptm.com.sa">vizagep.ptm.com.sa</a></string>
+    <string name="please_add_date">please add date</string>
+    <string name="please_add_location">please add your location</string>
+    <string name="add_service_place">please select service place</string>
+    <string name="pro_not_support_place">provider not support this place</string>
+    <string name="reference_number">Reference Id:</string>
+    <string name="book_id">Book Id</string>
+
 
 </resources>

@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.ClientsRelationsViewClass;
 import com.ptmsa1.vizage.R;
@@ -190,7 +191,8 @@ public class GroupRelationActivity extends AppCompatActivity {
 //                adapter.remove(adapter.getItem(i));
             }
         }
-        ArrayAdapter adapter=new ArrayAdapter(context,android.R.layout.simple_spinner_item,arrayList);
+        HintArrayAdapter adapter=new HintArrayAdapter(context,0);
+        adapter.addAll(arrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        for (int i=0;i<adapter.getCount();i++){
 //            if (client_name.getText().toString().equals(adapter.getItem(i).toString())){

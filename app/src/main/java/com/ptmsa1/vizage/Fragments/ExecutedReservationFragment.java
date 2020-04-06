@@ -28,7 +28,7 @@ public class ExecutedReservationFragment extends Fragment {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    Spinner category;
+
     public static RecyclerView service_select;
     ReservationsAdapter2 reservationsAdapter2;
 

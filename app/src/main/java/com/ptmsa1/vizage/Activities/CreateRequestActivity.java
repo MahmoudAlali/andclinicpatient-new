@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.DataModel.ClientServiceDataModel;
 import com.ptmsa1.vizage.DataModel.ClientsViewData;
 import com.ptmsa1.vizage.DataModel.GroupBookingModel;
@@ -27,6 +28,7 @@ import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import static com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
@@ -229,7 +231,8 @@ public class CreateRequestActivity extends AppCompatActivity {
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         addService.setAdapter(adapter1);
 
-        adapter2= ArrayAdapter.createFromResource(context, R.array.age_range, R.layout.simple_spinner_item_layout_v1);
+        adapter2= new HintArrayAdapter(context, 0);
+        adapter2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.age_range)));
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ageRange.setAdapter(adapter2);
 

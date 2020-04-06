@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-public static TextView id,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
     public static LinearLayout myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
@@ -50,10 +50,14 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         salonName=findViewById(R.id.salon_name);
         logoId="";
         logoImg=findViewById(R.id.logoImg);
+        ref_id=findViewById(R.id.ref_id);
         id=findViewById(R.id.id);
 
         //region Check_Notification
         String book_id="";
+        String internally_book=getIntent().getStringExtra("internally_book");
+
+
 
         try
         {
@@ -69,7 +73,8 @@ public static TextView id,empname,booktype,ac_total_price,salonName,client_name,
         {
 
             APICall.browseOneBooking(book_id,context,logoImg);
-            id.setText(book_id);
+            id.setText(internally_book);
+            ref_id.setText(book_id);
             //APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
 
         }

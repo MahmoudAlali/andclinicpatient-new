@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.ReservationsAdapter;
 import com.ptmsa1.vizage.Adapters.ReservationsAdapter2;
@@ -47,6 +48,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -246,8 +248,8 @@ public class MyReservationFragment extends Fragment  {
                 //---------------------get Current supplier------------------
 
 
-                ArrayAdapter  adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1
-                        ,APICall.cSupString);
+                HintArrayAdapter adapter=new HintArrayAdapter(BeautyMainPage.context,0);
+                adapter.addAll(APICall.cSupString);
                 cSupplierSpinner.setTitle(BeautyMainPage.context.getResources().getString(R.string.suppliere_name));
                 cSupplierSpinner.setAdapter(adapter);
 
@@ -257,6 +259,8 @@ public class MyReservationFragment extends Fragment  {
                 }
                   cSupplierSpinner.setSelection(0);
                 try {
+                    adapter.clear();
+                    adapter.addAll(APICall.cSupString);
                     adapter.notifyDataSetChanged();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -792,9 +796,9 @@ public class MyReservationFragment extends Fragment  {
                             dialog.setContentView(R.layout.select_offer_type_dialog_v2);
 
                             final Spinner offer_type=dialog.findViewById(R.id.code);
-                            ArrayAdapter adapter=ArrayAdapter.createFromResource(BeautyMainPage.context
-                                    ,R.array.offer_type
-                                    ,android.R.layout.simple_spinner_item);
+                            HintArrayAdapter adapter=new HintArrayAdapter(BeautyMainPage.context
+                                    ,0);
+                            adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.offer_type)));
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                             offer_type.setAdapter(adapter);

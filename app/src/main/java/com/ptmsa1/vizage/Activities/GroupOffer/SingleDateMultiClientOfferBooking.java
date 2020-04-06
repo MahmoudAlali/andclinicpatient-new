@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.OfferBookingMultiClientsAdapter;
@@ -40,7 +41,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 
 
     static LinearLayout show_clients;
-    public static ArrayAdapter<CharSequence> adapter, adapter1, adapter2;
+    public static HintArrayAdapter adapter, adapter1, adapter2;
     public static ArrayList sname = new ArrayList();
     public static ArrayList sname1 = new ArrayList();
     RecyclerView recyclerView;

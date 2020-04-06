@@ -39,11 +39,13 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.ServiceFilter;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PlaceServiceFragment extends Fragment {
     LinearLayout  service_hair;
@@ -238,7 +240,8 @@ public class PlaceServiceFragment extends Fragment {
         });
 
 
-        final ArrayAdapter adapter = ArrayAdapter.createFromResource(BeautyMainPage.context, R.array.service_place, R.layout.simple_spinner_dropdown_item_v1);
+        final HintArrayAdapter adapter = new HintArrayAdapter(BeautyMainPage.context, 0);
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
         adapter.setDropDownViewResource(R.layout.spinner_center_item);
         placeSpinner.setAdapter(adapter);
 
