@@ -21,8 +21,6 @@ import com.ptmsa1.vizage.DataModel.ClientEffectModel;
 import com.ptmsa1.vizage.R;
 
 public class MyEffectsActivity extends AppCompatActivity {
-    Spinner select_cat,add_effect;
-    RecyclerView recyclerView;
     EffectAdapter effectAdapter;
     Button update;
     public static LinearLayout root;

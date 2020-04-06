@@ -93,6 +93,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
             final String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
+            ((Item)holder).book_id.setText(bookingAutomatedBrowseData.get(position).getBdb_internally_number());
+            ((Item)holder).reference_id.setText(bookingAutomatedBrowseData.get(position).getBdb_name_booking());
 
             //--- testing-----
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
@@ -617,6 +619,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     try {
                         book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
+
 //                        is_action_on=bookingAutomatedBrowseData.get(position).getIs_action_on();
                         Log.e("BookID",book_id);
                         logoId=bookingAutomatedBrowseData.get(position).getLogoId();
@@ -625,6 +628,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
 
                         Intent intent=new Intent(context, ReservatoinDetailsActivity.class);
+                        intent.putExtra("internally_book",bookingAutomatedBrowseData.get(position).getBdb_internally_number());
                         ((AppCompatActivity)context).startActivity(intent);
 
 
@@ -818,7 +822,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,client_name,status,delay, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
+        TextView bookType,book_id,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
         ImageView book_Details,inner_res,logoImg;
         ColorRatingBar rating;
 
@@ -830,6 +834,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             status=itemView.findViewById(R.id.status);
             delay=itemView.findViewById(R.id.delay);
             rating=itemView.findViewById(R.id.rating);
+            book_id=itemView.findViewById(R.id.book_id);
+            reference_id=itemView.findViewById(R.id.reference_number);
+
 
             totalPrice=itemView.findViewById(R.id.total_price);
             inner_res=itemView.findViewById(R.id.inner_res);

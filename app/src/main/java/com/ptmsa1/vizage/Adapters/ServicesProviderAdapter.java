@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.Activities.TabOne;
@@ -123,7 +124,8 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
 
 
-        ArrayAdapter adapter=new ArrayAdapter(context,R.layout.simple_spinner_item_layout_v1,places);
+        HintArrayAdapter adapter=new HintArrayAdapter(context,0);
+        adapter.addAll(places);
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ((Item)holder).place.setAdapter(adapter);
 
@@ -131,25 +133,25 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
             @Override
             public void onClick(View v) {
                 if(MainProviderActivity.date.getText().toString().equals(context.getResources().getString(R.string.date))){
-                    APICall.showSweetDialog(context,"","please add date");
+                    APICall.showSweetDialog(context,"",context.getResources().getString(R.string.please_add_date));
                 }else if (MainProviderActivity.date.getText().toString().equals(context.getResources().getString(R.string.MyLocation))){
-                    APICall.showSweetDialog(context,"","please add your location");
+                    APICall.showSweetDialog(context,"",context.getResources().getString(R.string.please_add_location));
                 }else if (((Item)holder).place.getSelectedItemPosition()==0){
-                    APICall.showSweetDialog(context,"","please select service place");
+                    APICall.showSweetDialog(context,"",context.getResources().getString(R.string.add_service_place));
                 }else if (((Item)holder).place.getSelectedItemPosition()==1  && (itemArrayList.get(position).getBdb_ser_salon_price().equals("0"))){
 
-                        APICall.showSweetDialog(context,"","provider not support this place");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.pro_not_support_place));
                 }else if (((Item)holder).place.getSelectedItemPosition()==2 && (itemArrayList.get(position).getBdb_ser_home_price().equals("0"))){
 
-                        APICall.showSweetDialog(context,"","provider not support this place");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.pro_not_support_place));
 
                 }else if (((Item)holder).place.getSelectedItemPosition()==3 && (itemArrayList.get(position).getBdb_ser_hall_price().equals("0"))){
 
-                        APICall.showSweetDialog(context,"","provider not support this place");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.pro_not_support_place));
 
                 }else if (((Item)holder).place.getSelectedItemPosition()==4 && (itemArrayList.get(position).getBdb_hotel_price().equals("0"))){
 
-                        APICall.showSweetDialog(context,"","provider not support this place");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.pro_not_support_place));
 
                 }else {
 

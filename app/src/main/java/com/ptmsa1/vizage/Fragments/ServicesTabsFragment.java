@@ -43,6 +43,7 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.Notification;
 import com.ptmsa1.vizage.Activities.ShoppingCart;
@@ -58,6 +59,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 //import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ServicesTabsFragment extends Fragment implements View.OnClickListener {
 
@@ -397,7 +399,9 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                     dialog.setContentView(R.layout.filter_dialog_layout);
                     //----------place service--------------
                 Spinner place_service=dialog.findViewById(R.id.place_service);
-                ArrayAdapter adapter1=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.service_place,R.layout.simple_spinner_dropdown_item_v1);
+//                ArrayAdapter adapter1=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.service_place,R.layout.simple_spinner_dropdown_item_v1);
+                final HintArrayAdapter adapter1 = new HintArrayAdapter(BeautyMainPage.context, 0);
+                adapter1.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
                 adapter1.setDropDownViewResource(R.layout.spinner_center_item);
                 place_service.setSelection(0);
                 place_service.setAdapter(adapter1);
@@ -430,6 +434,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
                 ser_name = dialog.findViewById(R.id.ser_name);
 //                ArrayList<String> serviceNameList=new ArrayList<>();
                ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,R.layout.simple_spinner_dropdown_item_v1,serviceNameList);
+
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 ser_name.setAdapter(adapter);
                 ser_name.setTitle(getResources().getString(R.string.Service_Name));

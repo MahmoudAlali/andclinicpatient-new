@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.R;
+
+import java.util.Arrays;
 
 public class EditReservation extends AppCompatActivity {
 
@@ -30,7 +33,8 @@ public class EditReservation extends AppCompatActivity {
 
         add_person=findViewById(R.id.add_person);
         servicePlace=findViewById(R.id.servicePlace);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.service_place,android.R.layout.simple_spinner_item);
+        HintArrayAdapter adapter=new HintArrayAdapter(this,0);
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         servicePlace.setAdapter(adapter);
         myRoot = (LinearLayout) findViewById(R.id.myroot);
@@ -49,7 +53,8 @@ public class EditReservation extends AppCompatActivity {
                 child = LayoutInflater.from(EditReservation.this).inflate(R.layout.layout_name_reservation_and_age_and_employee_editable, myRoot,false);
 
                 spinner1=child.findViewById(R.id.agespinner);
-                ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(getApplicationContext(),R.array.age,android.R.layout.simple_spinner_item);
+                HintArrayAdapter adapter1=new HintArrayAdapter(getApplicationContext(),0);
+                adapter1.addAll(Arrays.asList(getResources().getStringArray(R.array.age)));
                 adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spinner1.setAdapter(adapter1);
 //                myRoot.addView(child);

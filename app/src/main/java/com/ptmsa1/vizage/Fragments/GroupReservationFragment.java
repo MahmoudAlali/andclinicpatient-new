@@ -2,6 +2,8 @@ package com.ptmsa1.vizage.Fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -31,6 +33,7 @@ import com.ptmsa1.vizage.DataModel.ServicesIDS;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GroupReservationFragment extends Fragment {
 
@@ -187,8 +190,8 @@ public class GroupReservationFragment extends Fragment {
 
                 //------------------ adapter for spinner age_range------
                 Spinner age_range=layout2.findViewById(R.id.age_range);
-                ArrayAdapter adapter_age_range = ArrayAdapter.createFromResource
-                        (BeautyMainPage.context, R.array.age_range, R.layout.simple_spinner_dropdown_item_v1);
+                HintArrayAdapter adapter_age_range = new HintArrayAdapter(BeautyMainPage.context, 0);
+                adapter_age_range.addAll(Arrays.asList(getResources().getStringArray(R.array.age_range)));
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 age_range.setAdapter(adapter_age_range);
 

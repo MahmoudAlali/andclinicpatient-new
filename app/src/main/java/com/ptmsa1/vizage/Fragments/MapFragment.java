@@ -72,7 +72,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     static String  bdb_desc="null",bdb_descAr="null";
     static String subLocality="null",adminArea="null",thorourhfare="null";
     static String subLocalityAr="null",adminAreaAr="null",thorourhfareAr="null";
-    Spinner location_titles;
+
     Button my_location_btn;
     static int del_Flag=0;
     static int edit_Flag=0;

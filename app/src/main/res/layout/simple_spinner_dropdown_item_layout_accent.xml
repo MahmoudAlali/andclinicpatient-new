@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/standard_40"
     android:textSize="@dimen/standard_20"
-    android:id="@+id/text1"
 
+    android:id="@+id/text1"
+    android:background="@color/accent_v3"
     android:textColor="@color/blue"
     android:gravity="center"
     >

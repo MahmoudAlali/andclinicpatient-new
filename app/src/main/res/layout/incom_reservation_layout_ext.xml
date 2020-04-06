@@ -157,6 +157,49 @@
             android:scaleY="0.5"
 
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/high_edit_text"
+                android:gravity="center"
+                android:text="@string/reference_number"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_weight="2"
+                android:id="@+id/reference_number"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/high_edit_text"
+                android:text=""
+                android:gravity="center"
+                android:textSize="18dp"
+                />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/high_edit_text"
+                android:gravity="center"
+                android:text="@string/book_id"
+                android:textSize="18dp"
+                />
+            <TextView
+                android:layout_weight="2"
+                android:id="@+id/book_id"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/high_edit_text"
+                android:gravity="center"
+                android:text=""
+                android:textSize="18dp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

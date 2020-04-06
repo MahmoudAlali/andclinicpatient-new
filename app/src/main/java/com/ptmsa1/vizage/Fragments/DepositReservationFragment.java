@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Spinner;
+
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
@@ -31,7 +31,7 @@ public class DepositReservationFragment extends Fragment {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    Spinner category;
+
     public static RecyclerView service_select;
     public static ReservationsAdapter2 reservationsAdapter2;
 

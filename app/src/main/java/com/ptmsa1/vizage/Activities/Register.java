@@ -46,7 +46,7 @@ import java.util.List;
 
 public class Register extends AppCompatActivity implements OnMapReadyCallback {
 
-//    Spinner cities_spinner;
+
     EditText name, phone, email, password, confirm_password;
     CheckBox privacy_policy;
     public static Context context;

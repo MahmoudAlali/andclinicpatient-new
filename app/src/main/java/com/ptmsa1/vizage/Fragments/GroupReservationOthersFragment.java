@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.ClientsViewData;
 import com.ptmsa1.vizage.DataModel.SerchGroupBookingData;
@@ -28,6 +29,7 @@ import com.ptmsa1.vizage.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GroupReservationOthersFragment extends Fragment {
 //    LinearLayout services_tabs;
@@ -185,7 +187,8 @@ public class GroupReservationOthersFragment extends Fragment {
                     }
                 });
                 Spinner age_range=layout2.findViewById(R.id.age_range);
-                ArrayAdapter adapter_age_range=ArrayAdapter.createFromResource(BeautyMainPage.context,R.array.age_range,R.layout.simple_spinner_dropdown_item_v1 );
+                HintArrayAdapter adapter_age_range=new HintArrayAdapter(BeautyMainPage.context,0 );
+                adapter_age_range.addAll(Arrays.asList(getResources().getStringArray(R.array.age_range)));
                 adapter.setDropDownViewResource(R.layout.spinner_center_item);
                 age_range.setAdapter(adapter_age_range);
 

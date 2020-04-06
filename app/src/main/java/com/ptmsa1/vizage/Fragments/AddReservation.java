@@ -19,7 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.R;
+
+import java.util.Arrays;
 
 
 public class AddReservation extends AppCompatActivity
@@ -40,7 +43,8 @@ public class AddReservation extends AppCompatActivity
 
         servicePlace=findViewById(R.id.servicePlace);
         dateandtime=findViewById(R.id.dateandtime);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.service_place,android.R.layout.simple_spinner_item);
+        HintArrayAdapter adapter=new HintArrayAdapter(this,0);
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         servicePlace.setAdapter(adapter);
         myRoot = (LinearLayout) findViewById(R.id.myroot);
@@ -84,12 +88,14 @@ public class AddReservation extends AppCompatActivity
        View child = getLayoutInflater().inflate(R.layout.layout_name_reservation_and_age_and_employee, null);
        LinearLayout a = new LinearLayout(this);
        spinner1=child.findViewById(R.id.agespinner);
-       ArrayAdapter<CharSequence> adapter1=ArrayAdapter.createFromResource(this,R.array.age,android.R.layout.simple_spinner_item);
+       HintArrayAdapter adapter1=new HintArrayAdapter(this,0);
+       adapter1.addAll(Arrays.asList(getResources().getStringArray(R.array.age)));
        adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
        spinner1.setAdapter(adapter1);
 
        spinner2=child.findViewById(R.id.employeespinner);
-       ArrayAdapter<CharSequence> adapter2=ArrayAdapter.createFromResource(this,R.array.employee,android.R.layout.simple_spinner_item);
+       HintArrayAdapter adapter2=new HintArrayAdapter(this,0);
+       adapter2.addAll(Arrays.asList(getResources().getStringArray(R.array.employee)));
        adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
        spinner2.setAdapter(adapter2);
 
