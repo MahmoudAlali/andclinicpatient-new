@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class OfferBookingResult extends AppCompatActivity {
     public static Context context;
     public static String offertype;
     public static String place;
+    public static CoordinatorLayout noSolutionMsg;
 
     String url="";
     @Override
@@ -37,6 +39,7 @@ public class OfferBookingResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_offer_group_result_);
         BeautyMainPage.FRAGMENT_NAME="OfferBookingResult";
+        noSolutionMsg=findViewById(R.id.noSolMsg);
 
         context=this;
 //        ProviderMainPage.FRAGMENT_NAME="GroupReservationResultFragment";

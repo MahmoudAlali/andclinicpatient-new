@@ -2,6 +2,7 @@ package com.ptmsa1.vizage.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class GroupReservationResultFragment extends Fragment {
     public static CustomExpandableListAdapterSearchGroupBooking2 listAdapter2;
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
+    public static CoordinatorLayout noSolutionMsg;
 
 
 
@@ -33,6 +35,7 @@ public class GroupReservationResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_group_reservation_result_frag, container, false);
 
+        noSolutionMsg=view.findViewById(R.id.noSolMsg);
 
         String url="";Boolean isIn = null;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";

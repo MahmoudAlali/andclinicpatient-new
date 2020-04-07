@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Fragments;
 
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class SingleMultiAltResultActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     String url="",urlAlt="";
 
+    public static CoordinatorLayout noSolutionMsg;
     public  static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class SingleMultiAltResultActivity extends AppCompatActivity {
         Log.e("FNAME", BeautyMainPage.FRAGMENT_NAME);
 
         listView=findViewById(R.id.list_view);
+        noSolutionMsg=findViewById(R.id.noSolMsg);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         APICall.searchGroupBookingMultiAlt(urlAlt,filter,context);
 

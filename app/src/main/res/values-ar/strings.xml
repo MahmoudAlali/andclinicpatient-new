@@ -83,7 +83,7 @@
     <string name="add_delete_location">اضافة و حذف عنوان</string>
     <string name="Registered_Addresses">العناوين المسجلة</string>
     <string name="save">حفظ</string>
-    <string name="Delete_account">حذف حسابي</string>
+    <string name="Delete_account">إيقاف حسابي</string>
     <!-- Nav Bottom-->
     <string name="service">الخدمات</string>
     <string name="main">الرئيسية</string>
@@ -633,6 +633,7 @@
     <string name="book_id">رقم الحجز:</string>
 
     <string name="dep_prcntg">نسبة العرض :</string>
+    <string name="no_sol_msg">لإيجاد صالونات متاحة يرجى تغيير التاريخ أو تغيير قيم الفلاتر</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Fragments;
 
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class AlterGroupReservationResultActivity extends AppCompatActivity {
 
     public static  String filter="";
     public static   Context context;
+    public static CoordinatorLayout noSolutionMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class AlterGroupReservationResultActivity extends AppCompatActivity {
 
         context=this;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
+        noSolutionMsg=findViewById(R.id.noSolMsg);
 
          filter="{\"Filter\":\t[\n" +
                  "    \t{\"num\":34,\"value1\":21.444551364120773,\"value2\":0},\n" +

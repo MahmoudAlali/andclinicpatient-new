@@ -11585,6 +11585,10 @@ public class APICall {
                                 AlterGroupReservationResultActivity.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupReservationResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 
                             }
                         });
@@ -11595,6 +11599,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupReservationResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -11841,6 +11849,10 @@ public class APICall {
                                 AlterGroupOtherReservationResult.listView.setAdapter(AlterGroupOtherReservationResult.listAdapter);
                                 AlterGroupOtherReservationResult.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupOtherReservationResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -11852,6 +11864,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupOtherReservationResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -12093,6 +12109,10 @@ public class APICall {
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize",salons.size()+"");
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                              }else {
 
                                  GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(BeautyMainPage.context, APICall.salons, APICall.stringArrayListMap);
@@ -12100,6 +12120,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
                              boolean check=false;
@@ -12124,6 +12148,14 @@ public class APICall {
                             @Override
                             public void run() {
                                 if (salons.size()==0) {
+                                    if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                        BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }else {
+
+                                        GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                    }
+
 //                                    searchGroupBookingIndAlt(BookingIndvidualActivity.filterAlt,url,urlAlt,context);
 //                                    showSweetDialogAltSearching(context,urlAlt,filter);
 
@@ -12368,6 +12400,10 @@ public class APICall {
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
@@ -12376,6 +12412,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
 
@@ -12388,7 +12428,15 @@ public class APICall {
                             @Override
                             public void run() {
                                 if (salons.size()==0) {
-                                    APICall.showSweetDialog(context,"","لا يوجد حلول لهذه الخدمة");
+                                   // APICall.showSweetDialog(context,"","لا يوجد حلول لهذه الخدمة");
+                                    if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                        BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }else {
+
+                                        GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }
 
                                 }
 //                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
@@ -12629,6 +12677,10 @@ public class APICall {
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
@@ -12637,6 +12689,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
                             }
@@ -12647,6 +12703,15 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                    BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                }else {
+
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                }
+
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -16768,6 +16833,10 @@ public class APICall {
                                 SingleMultiAltResultActivity.listView.setAdapter(SingleMultiAltResultActivity.listAdapter);
                                 SingleMultiAltResultActivity.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    SingleMultiAltResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -16777,6 +16846,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    SingleMultiAltResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -17494,6 +17567,10 @@ public class APICall {
                                 GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                 GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -17503,6 +17580,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -18337,6 +18418,10 @@ public class APICall {
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 OfferBookingResult.listView.setAdapter(OfferBookingResult.listAdapter);
                                 OfferBookingResult.listAdapter.notifyDataSetChanged();
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
@@ -18348,6 +18433,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -18629,6 +18718,10 @@ public class APICall {
                                 OfferBookingResult.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize","salonSizw"+salons.size()+"");
                                 Log.e("SalonSize","salonSizw"+stringArrayListMap.get(salons.get(0)).size()+"");
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -18639,6 +18732,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });

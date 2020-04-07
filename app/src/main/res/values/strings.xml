@@ -96,7 +96,7 @@
     <string name="add_delete_location">Add and delete location</string>
     <string name="Registered_Addresses">Registered Addresses</string>
     <string name="save">Save</string>
-    <string name="Delete_account">Delete my account</string>
+    <string name="Delete_account">Stop my account</string>
     <!-- Nav Bottom-->
     <string name="main">Home</string>
     <string name="service">Services</string>
@@ -783,6 +783,7 @@
     <string name="pro_not_support_place">provider not support this place</string>
     <string name="reference_number">Reference Id:</string>
     <string name="book_id">Book Id</string>
+    <string name="no_sol_msg">To find available salons please change booking date or chosen filters</string>
 
 
 </resources>
