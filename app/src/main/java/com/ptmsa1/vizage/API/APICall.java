@@ -2196,12 +2196,13 @@ public class APICall {
                            String provider_logo_id=pkg.getString("provider_logo_id");
                            String old_price=pkg.getString("old_price");
                            String bdb_booking_period=pkg.getString("bdb_booking_period");
+                           String deposit_percentage=pkg.getString("deposit_percentage");
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {

@@ -635,5 +635,6 @@
     <string name="dep_prcntg">نسبة العربون :</string>
     <string name="no_sol_msg">لإيجاد صالونات متاحة يرجى تغيير التاريخ أو تغيير قيم الفلاتر</string>
 
+    <string name="googleMaps">فتح تطبيق خرائط google</string>
 
 </resources>

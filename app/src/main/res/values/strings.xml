@@ -785,5 +785,7 @@
     <string name="book_id">Book Id</string>
     <string name="no_sol_msg">To find available salons please change booking date or chosen filters</string>
 
+    <string name="googleMaps">go to google maps</string>
+
 
 </resources>

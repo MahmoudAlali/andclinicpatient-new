@@ -203,10 +203,18 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/best_offers_i"
                         android:id="@+id/info"/>
-                    <Space
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        />
+                    <TextView
+                        android:id="@+id/depPerc"
+                        android:layout_width="@dimen/standard_60"
+                        android:lines="2"
+                        android:layout_height="wrap_content"
+                        android:text="deposit percentage 50 %"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:textSize="12dp"
+                        android:textColor="#a5587a"
+                        android:gravity="center"/>
+
                     <ImageView
                         android:padding="7dp"
                         android:layout_weight="1"

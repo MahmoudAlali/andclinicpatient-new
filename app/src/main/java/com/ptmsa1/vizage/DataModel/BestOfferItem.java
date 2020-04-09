@@ -9,7 +9,7 @@ public class BestOfferItem {
 //            "provider name": "صالون5",
 //            "sersup_ids"
 
-        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type;
+        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type,deposit_prcntg;
         JSONArray sersup_ids;
 
     public BestOfferItem(String pack_code, String service_count, String provider_name, JSONArray sersup_ids) {
@@ -54,7 +54,7 @@ public class BestOfferItem {
         this.provider_id=provider_id;
     }
     String bdb_booking_period,start_date,end_date;
-    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date) {
+    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg) {
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -68,6 +68,7 @@ public class BestOfferItem {
         this.bdb_booking_period=bdb_booking_period;
         this.start_date=start_date;
         this.end_date=end_date;
+        this.deposit_prcntg=deposit_prcntg;
     }
 
     public void setProvider_logo_id(String provider_logo_id) {
@@ -180,5 +181,9 @@ public class BestOfferItem {
 
     public String getOffer_type() {
         return offer_type;
+    }
+
+    public String getDeposit_prcntg() {
+        return deposit_prcntg;
     }
 }
