@@ -173,17 +173,17 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
 
         }
 
-        if (effects.getBdb_value().equals("0")){
+        if (effects.getBdb_value().equals(Constants.effectValues[0])) {
             dzero.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals("1")){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[1])){
             done.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals("2")){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[2])){
             dtwo.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals("3")){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[3])){
             dthree.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals("4")){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
             dfour.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals("5")){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[5])){
             dfive.setBackgroundResource(R.color.colorAccent);
         }
 
@@ -192,7 +192,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dzero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("0");
+                effects.setBdb_value(Constants.effectValues[0]);
+//                effects.setBdb_effect_client_id("0");
                 dzero.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.white);
                 dtwo.setBackgroundResource(android.R.color.white);
@@ -207,8 +208,9 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("1");
-                 done.setBackgroundResource(R.color.colorAccent);
+                effects.setBdb_value(Constants.effectValues[1]);
+//                effects.setBdb_effect_client_id("0");
+                done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.white);
                 dtwo.setBackgroundResource(android.R.color.white);
                 dthree.setBackgroundResource(android.R.color.white);
@@ -219,7 +221,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("2");
+                effects.setBdb_value(Constants.effectValues[2]);
+//                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.white);
                 dzero.setBackgroundResource(android.R.color.white);
@@ -231,7 +234,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("3");
+                effects.setBdb_value(Constants.effectValues[3]);
+//                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.white);
                 dtwo.setBackgroundResource(android.R.color.white);
@@ -243,7 +247,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("4");
+                effects.setBdb_value(Constants.effectValues[4]);
+//                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.white);
                 dtwo.setBackgroundResource(android.R.color.white);
@@ -255,7 +260,8 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value("5");
+                effects.setBdb_value(Constants.effectValues[5]);
+//                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.white);
                 dtwo.setBackgroundResource(android.R.color.white);

@@ -2,6 +2,7 @@ package com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -53,9 +56,11 @@ public class MainProviderActivity extends AppCompatActivity {
     static ServicesProviderAdapter servicesProviderAdapter;
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
+    LinearLayout fra;
+    android.app.FragmentTransaction fragmentTransaction;
 
 
-    public static TextView service_Sw,offer_sw,date,my_location;
+    public static TextView service_Sw,offer_sw,date,my_location,map;
     public static RecyclerView recycleview;
     public static ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
@@ -86,9 +91,11 @@ public class MainProviderActivity extends AppCompatActivity {
         //---------- find view by Id
         service_Sw=findViewById(R.id.service_Sw);
         offer_sw=findViewById(R.id.offer_sw);
+        map=findViewById(R.id.map);
         date=findViewById(R.id.date);
         my_location=findViewById(R.id.my_location);
         recycleview=findViewById(R.id.recycleview);
+        fra=findViewById(R.id.fra);
 //        APICall.getdetailsUser(context);
 
 //        my_location.setText(PlaceServiceFragment.mylocationId);
@@ -236,8 +243,10 @@ public class MainProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 offer_sw.setBackgroundResource(android.R.color.transparent);
+                map.setBackgroundResource(android.R.color.transparent);
                 service_Sw.setBackgroundResource(R.drawable.shadow_service_tab);
 
+                fra.setVisibility(View.GONE);
                 recycleview.setHasFixedSize(true);
                 servicesProviderAdapter=new ServicesProviderAdapter(context,  arrayList);
                 LinearLayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
@@ -259,6 +268,8 @@ public class MainProviderActivity extends AppCompatActivity {
                         !my_location.getText().toString().equals(context.getResources().getString(R.string.MyLocation))
                 ) {
                     service_Sw.setBackgroundResource(android.R.color.transparent);
+                    map.setBackgroundResource(android.R.color.transparent);
+                    fra.setVisibility(View.GONE);
                     offer_sw.setBackgroundResource(R.drawable.shadow_service_tab);
                     arrayList.clear();
                     servicesProviderAdapter.notifyDataSetChanged();
@@ -278,9 +289,27 @@ public class MainProviderActivity extends AppCompatActivity {
         });
 
 
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                offer_sw.setBackgroundResource(android.R.color.transparent);
+                service_Sw.setBackgroundResource(android.R.color.transparent);
+                map.setBackgroundResource(R.drawable.shadow_service_tab);
+                fra.setVisibility(View.VISIBLE);
+
+
+                Fragment fragment = new MapTap();
+//                fragment = new MapFragment();
+                fragmentTransaction =  getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fra, fragment);
+                fragmentTransaction.commit();
+
+            }
+        });
 
         //--------------------------
         offer_sw.setBackgroundResource(android.R.color.transparent);
+        map.setBackgroundResource(android.R.color.transparent);
         service_Sw.setBackgroundResource(R.drawable.shadow_service_tab);
 
         recycleview.setHasFixedSize(true);

@@ -147,6 +147,9 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((Item)holder).age.setText(R.string.allAges);
         }
 
+        String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+offers.get(position).getDeposit_ratio()+" % ";
+        ( (Item)holder).depositPrcntg.setText(deposit);
+
         if (offers.get(position).getBdb_offer_place().equals("0")){
             ((Item)holder).place.setText(R.string.salon);
         }else if (offers.get(position).getBdb_offer_place().equals("1")){
@@ -250,7 +253,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices;
+        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
         ImageView info,add_offer;
         public Item(View itemView) {
             super(itemView);
@@ -267,6 +270,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             offer_type = itemView.findViewById(R.id.offer_type);
             total_dis = itemView.findViewById(R.id.disAmount);
             onServices = itemView.findViewById(R.id.onServices);
+            depositPrcntg = itemView.findViewById(R.id.depPerc);
 
         }
     }

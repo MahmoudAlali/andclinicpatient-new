@@ -15,10 +15,11 @@
         android:weightSum="3">
         <LinearLayout
 
-            android:paddingTop="4dp"
+            android:paddingTop="7dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:paddingBottom="7dp"
             android:gravity="end"
             >
 
@@ -89,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
+                android:paddingTop="7dp"
                 >
                 <TextView
                     android:id="@+id/offer_type"
@@ -100,6 +101,16 @@
                     android:textSize="16dp"
                     android:textColor="#a5587a"
                     android:gravity="center"/>
+                <TextView
+                    android:id="@+id/depPerc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="deposit percentage 50 %"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="#a5587a"
+                    android:gravity="center"/>
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -274,6 +285,7 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/old_price"
                         android:layout_width="match_parent"
@@ -296,6 +308,26 @@
                         android:textSize="16dp" />
 
                 </LinearLayout>
+<!--
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:id="@+id/depPerc"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:text=""
+                        />
+                </LinearLayout>
+-->
 
 
                 <LinearLayout

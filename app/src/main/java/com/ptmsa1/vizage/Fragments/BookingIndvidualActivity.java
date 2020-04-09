@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Fragments;
 
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class BookingIndvidualActivity extends AppCompatActivity {
     public static Context context;
     public static int multi_salon_client=0;
     public static String filterAlt="";
+    public static CoordinatorLayout noSolutionMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class BookingIndvidualActivity extends AppCompatActivity {
         }
         context=this;
         BeautyMainPage.FRAGMENT_NAME="BookingIndvidualActivity";
+        noSolutionMsg=findViewById(R.id.noSolMsg);
 
 //        if (MultiIndividualBookingReservationFragment.choose_occision.getText().toString().equals("different dates for services")){
 //        }

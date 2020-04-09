@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="14">
+
+
+          <!--  <com.google.android.gms.maps.MapView
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:id="@+id/map1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.google.android.gms.maps.MapView>-->
+            <com.ptmsa1.vizage.test.MapWrapperLayout
+                android:id="@+id/map_relative_layout"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                >
+
+                <!--<ViewStub-->
+                <!--android:id="@+id/stub_import"-->
+                <!--android:inflatedId="@+id/coor"-->
+                <!--android:layout="@layout/tab_three_layout"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="bottom" />-->
+
+            </com.ptmsa1.vizage.test.MapWrapperLayout>
+
+            <LinearLayout
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="@dimen/standard_20"
+                android:layout_weight="13"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_button"
+                    android:background="@drawable/shadow_button_add_site"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:text="@string/googleMaps"
+                    android:textAllCaps="false"
+                    />
+                <!--<Button-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/high_button"-->
+                <!--android:background="@drawable/shadow_button_blue"-->
+                <!--android:text="اضافة موقع"-->
+                />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Fragments;
 
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class AlterGroupOtherReservationResult extends AppCompatActivity {
     public static GroupReservationsAdapter adapter;
     public static SwipeRefreshLayout pullToRefresh;
     String url="",urlOut;Boolean isIn = null;
+    public static CoordinatorLayout noSolutionMsg;
 
     Context context;
     public static String filter;
@@ -29,6 +31,7 @@ public class AlterGroupOtherReservationResult extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_reservation_result_frag);
+        noSolutionMsg=findViewById(R.id.noSolMsg);
 
         context=this;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";

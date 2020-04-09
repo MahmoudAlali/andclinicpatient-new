@@ -2360,12 +2360,13 @@ public class APICall {
                            String provider_logo_id=pkg.getString("provider_logo_id");
                            String old_price=pkg.getString("old_price");
                            String bdb_booking_period=pkg.getString("bdb_booking_period");
+                           String deposit_percentage=pkg.getString("deposit_percentage");
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -5273,6 +5274,7 @@ public class APICall {
                                         latitude=jarray.getString("latitude"),
                                         is_fav_sup=jarray.getString("is_fav_sup"),
                                         bdb_logo_id=jarray.getString("bdb_logo_id"),
+                                        bdb_client_deposit_ratio=jarray.getString("bdb_client_deposit_ratio"),
                                         bdb_booking_period=jarray.getString("bdb_booking_period");
                                 JSONObject services=jarray.getJSONObject("services");
                                 String ser_id=services.getString("bdb_ser_id");
@@ -5300,7 +5302,7 @@ public class APICall {
                                                                             bdb_booking_period,
                                                                             ser_id,bdb_sup_id,
                                                                             bdb_time+"",
-                                        bdb_is_bride_service,bdb_logo_id);
+                                        bdb_is_bride_service,bdb_logo_id,bdb_client_deposit_ratio);
                                 Log.e("lat",latitude);
                                 Log.e("lng",longitude);
                                 try {
@@ -5820,6 +5822,7 @@ public class APICall {
                                             bdb_offer_place=jarray.getString("bdb_offer_place"),
                                             bdb_is_journey_on=jarray.getString("bdb_is_journey_on"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_is_effects_on=jarray.getString("bdb_is_effects_on"),
                                             discount=jarray.getString("discount"),
                                             distance=jarray.getString("distance"),
@@ -5838,7 +5841,7 @@ public class APICall {
                                     }
                                     if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
                                     {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
                                         TabTwo.arrayList.add(dof);
 
                                     }
@@ -6060,6 +6063,7 @@ public class APICall {
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             latitude=jarray.getString("latitude");
 
@@ -6074,7 +6078,7 @@ public class APICall {
                                     }
 //                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
 //                                    {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
                                         MainProviderActivity.list.add(dof);
 
 //                                    }
@@ -11914,6 +11918,10 @@ public class APICall {
                                 AlterGroupReservationResultActivity.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupReservationResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 
                             }
                         });
@@ -11924,6 +11932,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupReservationResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -12170,6 +12182,10 @@ public class APICall {
                                 AlterGroupOtherReservationResult.listView.setAdapter(AlterGroupOtherReservationResult.listAdapter);
                                 AlterGroupOtherReservationResult.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupOtherReservationResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -12181,6 +12197,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    AlterGroupOtherReservationResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -12422,6 +12442,10 @@ public class APICall {
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize",salons.size()+"");
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                              }else {
 
                                  GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(BeautyMainPage.context, APICall.salons, APICall.stringArrayListMap);
@@ -12429,6 +12453,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
                              boolean check=false;
@@ -12453,6 +12481,14 @@ public class APICall {
                             @Override
                             public void run() {
                                 if (salons.size()==0) {
+                                    if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                        BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }else {
+
+                                        GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                    }
+
 //                                    searchGroupBookingIndAlt(BookingIndvidualActivity.filterAlt,url,urlAlt,context);
 //                                    showSweetDialogAltSearching(context,urlAlt,filter);
 
@@ -12697,6 +12733,10 @@ public class APICall {
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
@@ -12705,6 +12745,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
 
@@ -12717,7 +12761,15 @@ public class APICall {
                             @Override
                             public void run() {
                                 if (salons.size()==0) {
-                                    APICall.showSweetDialog(context,"","لا يوجد حلول لهذه الخدمة");
+                                   // APICall.showSweetDialog(context,"","لا يوجد حلول لهذه الخدمة");
+                                    if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                        BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }else {
+
+                                        GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                    }
 
                                 }
 //                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
@@ -12958,6 +13010,10 @@ public class APICall {
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
+                                 if(salons.size()==0)
+                                 {
+                                     BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
@@ -12966,6 +13022,10 @@ public class APICall {
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  Log.e("SalonSize", salons.size() + "");
+                                 if(salons.size()==0)
+                                 {
+                                     GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                 }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
                              }
                             }
@@ -12976,6 +13036,15 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                    BookingIndvidualActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                }else {
+
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+
+                                }
+
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -17097,6 +17166,10 @@ public class APICall {
                                 SingleMultiAltResultActivity.listView.setAdapter(SingleMultiAltResultActivity.listAdapter);
                                 SingleMultiAltResultActivity.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    SingleMultiAltResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -17106,6 +17179,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    SingleMultiAltResultActivity.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -17826,6 +17903,10 @@ public class APICall {
                                 GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                 GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize",salons.size()+"");
+                                if(salons.size()==0)
+                                {
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -17835,6 +17916,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    GroupReservationResultFragment.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -18671,6 +18756,10 @@ public class APICall {
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 OfferBookingResult.listView.setAdapter(OfferBookingResult.listAdapter);
                                 OfferBookingResult.listAdapter.notifyDataSetChanged();
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
@@ -18684,6 +18773,11 @@ public class APICall {
                             public void run() {
                                 showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_offer_sol));
 //                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
+                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -18964,6 +19058,10 @@ public class APICall {
                                 OfferBookingResult.listAdapter.notifyDataSetChanged();
                                 Log.e("SalonSize","salonSizw"+salons.size()+"");
                                 Log.e("SalonSize","salonSizw"+stringArrayListMap.get(salons.get(0)).size()+"");
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
                             }
@@ -18974,6 +19072,10 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(salons.size()==0)
+                                {
+                                    OfferBookingResult.noSolutionMsg.setVisibility(View.VISIBLE);
+                                }
                                 Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
@@ -25811,8 +25913,9 @@ public class APICall {
                                     String sup_name=jarray.getString("sup_name"),
                                             logo_id=jarray.getString("logo_id"),
                                             rating=jarray.getString("rating"),
+                                            deposit_prcntg=jarray.getString("bdb_client_deposit_ratio"),
                                     bdb_booking_period=jarray.getString("bdb_booking_period");
-                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period);
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg);
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -26504,6 +26607,7 @@ Log.e("ERRR",e.getMessage());
                                             longitude=jarray.getString("longitude"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            deposit_ratio=jarray.getString("deposit_ratio"),
                                             latitude=jarray.getString("latitude");
 
                                     JSONArray pack_data=jarray.getJSONArray("pack_data");
@@ -26523,7 +26627,7 @@ Log.e("ERRR",e.getMessage());
                                     if(!bdb_offer_type.equals("2")&&!bdb_offer_type.equals("5"))
                                     {
 //                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses));
+                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio));
                                     }
 
 
