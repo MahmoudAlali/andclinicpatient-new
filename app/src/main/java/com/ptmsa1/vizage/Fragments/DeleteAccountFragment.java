@@ -44,7 +44,7 @@ public class DeleteAccountFragment extends Fragment  {
                     RadioButton radioButton =view.findViewById(reason_redio_button.getCheckedRadioButtonId());
                     reason=radioButton.getText().toString();
                     if (message.getText().toString().isEmpty()){
-                        msg="none";
+                        msg=null;
                     }else {
                         msg=message.getText().toString();
                     }

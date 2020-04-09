@@ -22,6 +22,13 @@ public class ClientServiceDataModel {
         this.bdb_name=bdb_name;
         this.bdb_name_ar=bdb_name_ar;
     }
+    public ClientServiceDataModel(String bdb_ser_id,String bdb_ser_sup_id, String bdb_name, String bdb_name_ar)
+    {
+        this.bdb_ser_id=bdb_ser_id;
+        this.bdb_name=bdb_name;
+        this.bdb_name_ar=bdb_name_ar;
+        this.bdb_ser_sup_id=bdb_ser_sup_id;
+    }
 
     public String getBdb_cat_id() {
         return bdb_cat_id;

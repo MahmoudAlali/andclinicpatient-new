@@ -353,25 +353,25 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 //        });
 
         //-------------------- compare services----------
-        compare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(TabOne.compareModels.size()>=2) {
-                    Log.d("Compare", ServicesAdapter.comparenum+"");
-//                    fragment = new CompareFragment();
-//                    fm = getActivity().getFragmentManager();
-//                    fragmentTransaction = fm.beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment, fragment);
-//                    fragmentTransaction.commit();
-
-                    Intent intent=new Intent(BeautyMainPage.context,CompareServiceActivity.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(BeautyMainPage.context,"Compare 2 items or more",Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
+//        compare.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(TabOne.compareModels.size()>=2) {
+//                    Log.d("Compare", ServicesAdapter.comparenum+"");
+////                    fragment = new CompareFragment();
+////                    fm = getActivity().getFragmentManager();
+////                    fragmentTransaction = fm.beginTransaction();
+////                    fragmentTransaction.replace(R.id.fragment, fragment);
+////                    fragmentTransaction.commit();
+//
+//                    Intent intent=new Intent(BeautyMainPage.context,CompareServiceActivity.class);
+//                    startActivity(intent);
+//                }else {
+//                    Toast.makeText(BeautyMainPage.context,"Compare 2 items or more",Toast.LENGTH_LONG).show();
+//
+//                }
+//            }
+//        });
 
 
 

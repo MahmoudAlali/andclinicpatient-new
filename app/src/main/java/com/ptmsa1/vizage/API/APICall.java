@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.API;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -17,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.ColorUtils;
@@ -40,6 +42,7 @@ import com.android.volley.toolbox.Volley;
 import com.ptmsa1.vizage.Activities.AddEffectsToRequestActivity;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.BookingRequestDetailsActivity;
+import com.ptmsa1.vizage.Activities.ConfirmAccountActivity;
 import com.ptmsa1.vizage.Activities.CreateRequestActivity;
 import com.ptmsa1.vizage.Activities.GroupOffer.MultiClientOfferEffect;
 import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
@@ -147,6 +150,8 @@ import com.ptmsa1.vizage.Fragments.ServicesTabsFragment;
 import com.ptmsa1.vizage.Fragments.SingleMultiAltResultActivity;
 import com.ptmsa1.vizage.Fragments.SingleMultiRelationActivity;
 import com.ptmsa1.vizage.Fragments.freeBookingFragment;
+import com.ptmsa1.vizage.PayFort.PayFortPayment;
+import com.ptmsa1.vizage.PayFort.PayTestActivity;
 import com.ptmsa1.vizage.R;
 import com.ptmsa1.vizage.Service.NotificationsBeauty;
 import com.google.android.gms.maps.GoogleMap;
@@ -186,6 +191,7 @@ import okhttp3.RequestBody;
 public class APICall {
 
 
+    public static  String FRAGMENT_NAME ="" ;
     public static  int PERIOD_FOR_SER_OFR  ;
     public static String bdb_is_effects_on="0";
     public static int layout;
@@ -417,44 +423,98 @@ public class APICall {
                     Log.e("TAG", mMessage);
                     pd.dismiss();
                     SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
-                    try {
-                        final JSONObject userresponse=new JSONObject(mMessage);
-                        String success=userresponse.getString("success");
-                        if(success.equals("true")){
-                            JSONObject data=userresponse.getJSONObject("data");
-                            String ac_num=userresponse.getString("activation number :");
-                            Log.d("number",ac_num);
-                            APICall.name=name;
-                            APICall.token_temp=data.getString("token");
-                            showSweetDialog(context,R.string.ExuseMeAlert,R.string.EnterVerificationCode,true);
-                        }else if(success.equals("false")) {
-                            JSONObject err= userresponse.getJSONObject("message");
-                            JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
-                            String error=bdb_mobile.getString(0);
-                            if(error.equals("bdb_mobile is already exists and not activated")){
-                                activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
-                                        phone,
-                                        context);
-                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
-                            }else if (error.equals("The bdb mobile format is invalid.")){
-                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
-//                            for email address
-                            }else if (error.equals("The bdb mobile format is invalid.")){
-                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
-                            }else if(error.equals("bdb_mobile is already exists and activated")) {
-                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.MobTakenAlert,false);
+//                    try {
+//                        final JSONObject userresponse=new JSONObject(mMessage);
+//                        String success=userresponse.getString("success");
+//                        if(success.equals("true")){
+//                            JSONObject data=userresponse.getJSONObject("data");
+//                            String ac_num=userresponse.getString("activation number :");
+//                            Log.d("number",ac_num);
+//                            APICall.name=name;
+//                            APICall.token_temp=data.getString("token");
+//                            showSweetDialog(context,R.string.ExuseMeAlert,R.string.EnterVerificationCode,true);
+//                        }else if(success.equals("false")) {
+//                            JSONObject err= userresponse.getJSONObject("message");
+//                            JSONArray bdb_mobile=err.getJSONArray("bdb_mobile");
+//                            String error=bdb_mobile.getString(0);
+//                            if(error.equals("bdb_mobile is already exists and not activated")){
+//                                activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
+//                                        phone,
+//                                        context);
+//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
+//                            }else if (error.equals("The bdb mobile format is invalid.")){
+//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+////                            for email address
+//                            }else if (error.equals("The bdb mobile format is invalid.")){
+//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.InvalidFormatNum,false);
+//                            }else if(error.equals("bdb_mobile is already exists and activated")) {
+//                                showSweetDialog(context,R.string.ExuseMeAlert,R.string.MobTakenAlert,false);
+//                            }
+//                        }
+//                    }catch (final JSONException je){
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
+//
+//                            }
+//                        });
+//
+//                    }
+
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            try {
+                                final JSONObject userresponse = new JSONObject(mMessage);
+                                Intent intent;
+                                String code = userresponse.getString("code");
+                                switch (code){
+                                    case  "0":
+                                        JSONObject data=userresponse.getJSONObject("data");
+                                        APICall.token_temp=data.getString("token");
+                                        intent=new Intent(context, ConfirmAccountActivity.class);
+                                        intent.putExtra("phone",phone);
+                                        intent.putExtra("bdb_token",data.getString("token"));
+                                        context.startActivity(intent);
+                                        break;
+                                    case  "1":
+                                        ((AppCompatActivity) context).onBackPressed();
+                                        Toast.makeText(context,context.getResources().getString(R.string.account_already_exist),Toast.LENGTH_LONG).show();
+                                        break;
+                                    case  "2":
+                                        showSweetDialogReActivate(context, context.getResources().getString(R.string.account_stop_alert) ,phone);
+                                        break;
+                                    case  "3":
+                                        showSweetDialogReActivate(context, context.getResources().getString(R.string.account_stop_alert) ,phone);
+                                        break;
+                                    case  "4":
+                                        showSweetDialogEmpAccount(context, context.getResources().getString(R.string.support_message) ,phone);
+                                        break;
+                                    case  "5":
+                                        showSweetDialogEmpAccount(context,context.getResources().getString(R.string.account_already_exist_support),phone);
+                                        break;
+                                    case  "6":
+                                        showSweetDialogEmpAccount(context, context.getResources().getString(R.string.support_message) ,phone);
+
+                                        break;
+                                    case  "7":
+                                        showSweetDialogEmpAccount(context, context.getResources().getString(R.string.part_of_data_is_exist) ,phone);
+                                        break;
+                                    case  "8":
+                                        showSweetDialogEmpAccount(context, context.getResources().getString(R.string.part_of_data_is_exist) ,phone);
+                                        break;
+
+
+
+
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
                         }
-                    }catch (final JSONException je){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
-
-                            }
-                        });
-
-                    }
+                    });
 
                 }
 
@@ -471,7 +531,111 @@ public class APICall {
         return mMessage;
 
     }
+    public static void showSweetDialogReActivate(final Context context, final String textmessage, final String num) {
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                if (iscode) {
+//                    dialog = new Dialog(context);
+//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//                    dialog.setContentView(R.layout.confirm_code_layout);
+//                    TextView message = dialog.findViewById(R.id.message);
+//                    TextView title = dialog.findViewById(R.id.title);
+//                    title.setText(texttitle);
+//                    final EditText code = dialog.findViewById(R.id.code);
+//                    TextView confirm = dialog.findViewById(R.id.confirm);
+//                    TextView resend_code = dialog.findViewById(R.id.resend_code);
+//                    message.setText(textmessage);
+//                    confirm.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//
+//                            dialog.cancel();
+//                            //----------toast for congratulations---------
+////                            activeAccount("http://clientapp.dcoret.com/api/auth/user/register/activate",
+////                                    code.getText().toString(),
+////                                    context);
+//                        }
+//                    });
+//                    dialog.show();
+//                } else {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_re_activate);
+                TextView message = dialog.findViewById(R.id.message);
+                TextView title = dialog.findViewById(R.id.title);
+                TextView confirm = dialog.findViewById(R.id.confirm);
+                TextView cancel = dialog.findViewById(R.id.cancel);
+                //                      TextView resend_code = dialog.findViewById(R.id.resend_code);
 
+                message.setText(textmessage);
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        APICall.activateAgainLogin(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
+                                num,
+                                context);
+//                            showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
+
+//                            Intent intent=new Intent(context, ConfirmAccountActivity.class);
+//                            intent.putExtra("phone",num);
+//                            intent.putExtra("bdb_token",data.getString("token"));
+//                            context.startActivity(intent);
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
+
+    public static void showSweetDialogEmpAccount(final Context context, final String textmessage, final String num) {
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v33);
+                TextView message = dialog.findViewById(R.id.message);
+                TextView title = dialog.findViewById(R.id.title);
+                TextView confirm = dialog.findViewById(R.id.confirm);
+                message.setText(textmessage);
+//                confirm.setText(R.string.support);
+                TextView cancel = dialog.findViewById(R.id.cancel);
+                //                      TextView resend_code = dialog.findViewById(R.id.resend_code);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(myAppLinkToMarket);
+
+
+                    }
+                });
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
 
 
 
@@ -3013,24 +3177,30 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context, R.string.familiyBeauty, Toast.LENGTH_LONG).show();
-                                SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+                               if (APICall.FRAGMENT_NAME.equals("activity_register")) {
+                                   Toast.makeText(context, R.string.familiyBeauty, Toast.LENGTH_LONG).show();
+                                   SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
 //                               if (!name.isEmpty()) {
-                                String t= gettoken(context);
-                                switchAccount(context,FirebaseInstanceId.getInstance().getToken(),t);
-                                editor.putString("name", "ok");
-                                editor.putString("token", token_temp);
-                                editor.putString("isGuest", "0");
-                                Log.e("Tokensaved",token_temp);
-                                editor.apply();
-                                editor.commit();
-                                Intent i=new Intent(context,BeautyMainPage.class);
-                                context.startActivity(i);
-                                ((AppCompatActivity) context).finish();
+                                   String t = gettoken(context);
+                                   switchAccount(context, FirebaseInstanceId.getInstance().getToken(), t);
+                                   editor.putString("name", "ok");
+                                   editor.putString("token", token_temp);
+                                   editor.putString("isGuest", "0");
+                                   Log.e("Tokensaved", token_temp);
+                                   editor.apply();
+                                   editor.commit();
+                                   Intent i = new Intent(context, BeautyMainPage.class);
+                                   context.startActivity(i);
+                                   ((AppCompatActivity) context).finish();
+                               }else {
+                                   ((AppCompatActivity)context).onBackPressed();
+                                   Toast.makeText(context, R.string.ur_acc_activated_pls_login_now, Toast.LENGTH_LONG).show();
+
+                               }
                             }
                         });
                     }else {
-                        showSweetDialog(context,R.string.nice,R.string.InputCodeWrongAlert,token,true,"");
+                        showSweetDialog(context,R.string.Null,R.string.InputCodeWrongAlert,token,false,"");
                     }
 
                 }catch (JSONException je){
@@ -3125,7 +3295,102 @@ public class APICall {
                     if(success.equals("true"))
                     {
                         APICall.token_temp=jsonObject.getString("bdb_token");
-                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
+//                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,false);
+                    }
+                    else
+                        showSweetDialog(context,context.getResources().getString(R.string.errActivation),false);
+                }catch (JSONException je){
+                    je.printStackTrace();
+                }
+            }
+        });
+
+    }
+    public  static  void   activateAgainLogin(final  String url, final String number, final Context context){
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_mobile", number);
+
+        } catch (JSONException e) {
+//         TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE,postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Content-Type", "application/json")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Activation_Code",mMessage);
+                pd.dismiss();
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success = jsonObject.getString("success");
+                    if(success.equals("true"))
+                    {
+                        APICall.token_temp=jsonObject.getString("bdb_token");
+                        Intent intent=new Intent(context, ConfirmAccountActivity.class);
+                        intent.putExtra("phone",number);
+                        intent.putExtra("bdb_token",jsonObject.getString("activation number"));
+                        context.startActivity(intent);
+
+
+
+                        //                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.numberNotActivatedAlert,true);
                     }
                     else
                         showSweetDialog(context,context.getResources().getString(R.string.errActivation),false);
@@ -3138,6 +3403,7 @@ public class APICall {
     }
     //------------------------------ login----------------------
         static JSONObject data;
+    public  static String CODE="";
     public  static  void  login(final String name, final String  pass, final  String url, final Context context){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
@@ -3212,67 +3478,126 @@ public class APICall {
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("TAG", mMessage);
-                try {
-                    JSONObject res=new JSONObject(mMessage);
-                    String success=res.getString("success");
-                    final String message=res.getString("message");
-                    Log.e("message",message);
-                    if (success.equals("true")){
-                        data=res.getJSONObject("data");
-                        //Intent i=new Intent(context,BeautyMainPage.class);
-                        // context.startActivity(i);
-                        // ((AppCompatActivity)context).finish();
-                        String token=data.getString("bdb_token");
-                        /*SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
-                        editor.putString("name","ok");
-                        editor.putString("isGuest","0");
-                        editor.putString("token",token);*/
-                        Log.e("updateFBToken","login");
-                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
-                       /* editor.commit();
-                        editor.apply();*/
-                    }else {
-//                        Log.e("messaged",message);
-                        if (success.equals("false")) {
-                            if (message.equals("This user is not active")) {
-                                final String password=res.getString("password");
-                                if(password.equals("true"))
+//                try {
+//                    JSONObject res=new JSONObject(mMessage);
+//                    String success=res.getString("success");
+//                    final String message=res.getString("message");
+//                    Log.e("message",message);
+//                    if (success.equals("true")){
+//                        data=res.getJSONObject("data");
+//                        //Intent i=new Intent(context,BeautyMainPage.class);
+//                        // context.startActivity(i);
+//                        // ((AppCompatActivity)context).finish();
+//                        String token=data.getString("bdb_token");
+//                        /*SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
+//                        editor.putString("name","ok");
+//                        editor.putString("isGuest","0");
+//                        editor.putString("token",token);*/
+//                        Log.e("updateFBToken","login");
+//                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
+//                       /* editor.commit();
+//                        editor.apply();*/
+//                    }else {
+////                        Log.e("messaged",message);
+//                        if (success.equals("false")) {
+//                            if (message.equals("This user is not active")) {
+//                                final String password=res.getString("password");
+//                                if(password.equals("true"))
+//
+//                                    activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
+//                                            name,
+//                                            context);
+//                                else
+//                                {
+//                                    pd.dismiss();
+//                                    showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
+//                                }
+//                                //showSweetDialog(context, R.string.ExuseMeAlert, R.string.numberNotActivatedAlert,  true);
+//
+//                            } else if (message.equals("invalid  password")) {
+//                                pd.dismiss();
+//                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
+//                            } else if (message.equals("invalid mobile number")) {
+//                                pd.dismiss();
+//                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.MobNoIncorrectAlert,  false);
+//
+//                            }else if (message.equals("{\"bdb_mobile\":[\"bdb mobile is not valid\"]}")){
+//                                pd.dismiss();
+//
+//                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongMobNumberAlert,  false);
+//                            }
+//                        }
+//                    }
+//                }catch (final JSONException je){
+//                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    });
+//                }
 
-                                    activateAgain(API_PREFIX_NAME+"/api/auth/user/register/ActivateAgain",
-                                            name,
-                                            context);
-                                else
-                                {
-                                    pd.dismiss();
-                                    showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
-                                }
-                                //showSweetDialog(context, R.string.ExuseMeAlert, R.string.numberNotActivatedAlert,  true);
-
-                            } else if (message.equals("invalid  password")) {
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            try {
                                 pd.dismiss();
-                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongPass,  false);
-                            } else if (message.equals("invalid mobile number")) {
-                                pd.dismiss();
-                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.MobNoIncorrectAlert,  false);
-
-                            }else if (message.equals("{\"bdb_mobile\":[\"bdb mobile is not valid\"]}")){
-                                pd.dismiss();
-
-                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.WrongMobNumberAlert,  false);
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
+                            final JSONObject userresponse = new JSONObject(mMessage);
+                            JSONObject data=null;
+                            try{
+                                 data = userresponse.getJSONObject("data");
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            String code=null;
+                            try {
+                                 code = data.getString("code");
+                            }catch (Exception e){
+                                code = userresponse.getString("code");
+                                e.printStackTrace();
+                            }
+                            CODE=code;
+                            switch (code){
+
+                                case  "0":
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.phone_not_found));
+                                    break;
+                                case  "1":
+//                                    String bdb_status=userresponse.getString("bdb_status");
+//                                    String bdb_is_deleted = data.getString("bdb_is_deleted");
+//                                    data = userresponse.getJSONObject("data");
+                                    String token = data.getString("bdb_token");
+                                    updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
+                                    break;
+                                case  "2":
+                                    showSweetDialogReActivate(context, context.getResources().getString(R.string.account_unactivated_yet) ,name);
+                                    break;
+                                case  "3":
+                                    showSweetDialogReActivate(context, context.getResources().getString(R.string.account_stop_alert) ,name);
+                                    break;
+                                case  "4":
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.wrong_password));
+                                    break;
+                                case  "5":
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.wrong_password));
+                                    break;
+
+
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+
                         }
+//                            Toast.makeText(context,"err:"+je.getMessage(),Toast.LENGTH_LONG).show();
+
                     }
-                }catch (final JSONException je){
-                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
-
-                        }
-                    });
-                }
-
-
+                });
             }
 
         });
@@ -3294,6 +3619,7 @@ public class APICall {
                             JSONObject postdata = new JSONObject();
                             try {
                                 postdata.put("bdb_del_reason", bdb_del_reason);
+                                if (bdb_del_message!=null)
                                 postdata.put("bdb_del_message", bdb_del_message);
                             } catch (JSONException e) {
                                 // TODO Auto-generated catch block
@@ -4296,6 +4622,7 @@ public class APICall {
                         if (success.equals("true")){
                             JSONObject data=object.getJSONObject("data");
                             String bdb_name=data.getString("bdb_name");
+                            BeautyMainPage.bdb_email=data.getString("bdb_email");
                             String bdb_mobile=data.getString("bdb_mobile");
 
 
@@ -4304,6 +4631,7 @@ public class APICall {
                             SharedPreferences.Editor prefEditor = settings.edit();
                             prefEditor.putString("client_name", bdb_name);
                             prefEditor.putString("client_number", bdb_mobile);
+                            prefEditor.putString("bdb_email", BeautyMainPage.bdb_email);
                             prefEditor.commit();
                         }
 
@@ -9421,6 +9749,8 @@ public class APICall {
                                 String bdb_is_executed = jObject.getString("bdb_is_executed");
                                 String provider_rating = jObject.getString("provider_rating");
                                 String is_action_on = jObject.getString("is_action_on");
+                                String bdb_deposit_ratio_outside = jObject.getString("bdb_deposit_ratio");
+                                String bdb_expected_deposit  = jObject.getString("bdb_expected_deposit");
                                 String is_rating_on = jObject.getString("is_rating_on");
                                 String is_per_client = jObject.getString("is_per_client");
                                 String bdb_name_booking = jObject.getString("bdb_name_booking");
@@ -9470,6 +9800,8 @@ public class APICall {
                                     String employee_name = jsonObject.getString("employee name");
                                     String service_en_name = jsonObject.getString("service en name");
                                     String service_ar_name = jsonObject.getString("service ar name");
+                                    String bdb_deposit_ratio_inside = jsonObject.getString("bdb_deposit_ratio");
+                                    String bdb_paid_deposit  = jsonObject.getString("bdb_paid_deposit");
                                     String  bdb_confirm_exec_user="";
                                     try {
                                         bdb_confirm_exec_user = jsonObject.getString(",String bdb_confirm_exec_user");
@@ -9500,8 +9832,8 @@ public class APICall {
                                     }
 
 
-                                    MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on_inside,is_rating_on_inside,bdb_confirm_exec_user));
-                                    bookingAutomatedBrowseData1.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time, supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on_inside,is_rating_on_inside,bdb_confirm_exec_user));
+                                    MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on_inside,is_rating_on_inside,bdb_confirm_exec_user,bdb_paid_deposit));
+                                    bookingAutomatedBrowseData1.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time, supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on_inside,is_rating_on_inside,bdb_confirm_exec_user,bdb_paid_deposit));
 
                                 }
                                 //-----------------------------------------------------
@@ -9535,7 +9867,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                     if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -9548,7 +9880,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                         if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -9560,7 +9892,7 @@ public class APICall {
                                         if (execDateCheck && bookatCehck)
                                             if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                 if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -9569,7 +9901,7 @@ public class APICall {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
                                             if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -17004,7 +17336,10 @@ public class APICall {
 
     public static boolean checkNumber(String text,Context context){
             Boolean check;
-            String prefix=text.substring(0,2);
+        String prefix="";
+            if (text.length()>2) {
+                prefix = text.substring(0, 2);
+            }
         String t=((AppCompatActivity)context).getResources().getString(R.string.alert);
 
         //        String prefix=text.substring(0,1);
@@ -17645,6 +17980,7 @@ public class APICall {
                         String bdb_pack_code=data.getString("bdb_pack_code");
                         String bdb_offer_place=data.getString("bdb_offer_place");
                          bdb_is_effects_on=data.getString("bdb_is_effects_on");
+                        SingleDateOfferBooking.booking_period=Integer.parseInt(data.getString("bdb_booking_period"));
                         switch (bdb_offer_place){
                             case "0":
                                 SingleDateOfferBooking.place_num="9";
@@ -17845,6 +18181,7 @@ public class APICall {
                         String bdb_pack_code=data.getString("bdb_pack_code");
                         String bdb_offer_place=data.getString("bdb_offer_place");
                         bdb_is_effects_on=data.getString("bdb_is_effects_on");
+                        SingleDateMultiClientOfferBooking.booking_period=Integer.parseInt(data.getString("bdb_booking_period"));
                         SingleDateMultiClientOfferBooking.place=bdb_offer_place;
                         ArrayList<OfferClientsModel.ServiceDetails> serviceDetails;
 
@@ -17871,7 +18208,7 @@ public class APICall {
                             }
 
 
-                            SingleDateMultiClientOfferBooking.offerClientsModels.add(new OfferClientsModel(bdb_pack_code,serviceDetails));
+                            SingleDateMultiClientOfferBooking.offerClientsModels.add(new OfferClientsModel(bdb_pack_code,bdb_offer_place,serviceDetails));
                         }
 
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -17902,7 +18239,7 @@ public class APICall {
     }
     public  static  String  browseOneMultiOffer(String bdb_pack_code, final Context context){
 
-
+        MultiDateOfferBooking.offerClientsModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
@@ -18065,7 +18402,7 @@ public class APICall {
                             }
 
 
-//                            MultiDateOfferBooking.offerClientsModels.add(new OfferClientsModel(bdb_pack_code,serviceDetails));
+                            MultiDateOfferBooking.offerClientsModels.add(new OfferClientsModel(bdb_pack_code,bdb_offer_place,serviceDetails));
                         }
 //                        Log.e("MOFFER", MultiDateOfferBooking.offerClientsModels.size()+"");
 //                        Log.e("MOFFER1", MultiDateOfferBooking.offerClientsModels.get(0).getServiceDetails().size()+"");
@@ -18345,7 +18682,8 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_offer_sol));
+//                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -25702,6 +26040,7 @@ Log.e("ERRR",e.getMessage());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e("POSTData","is"+postdata.toString());
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
@@ -26575,6 +26914,305 @@ Log.e("ERRR",e.getMessage());
 Log.e("filters",filter);
         return filter;
     }
+
+
+
+    //------------------ payment APIS--------------------
+//    api/payment/
+//    getNewPaymentCode
+
+    public static void getNewPaymentCode(final Context context, String amount, String currency, String customer_email,String device_id,String name_booking)
+        {
+
+
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+//
+            }
+        });
+
+            //        String url = API_PREFIX_NAME+"/api/service/Service";
+            OkHttpClient client = new OkHttpClient();
+            JSONObject postdata = new JSONObject();
+            try {
+                postdata.put("amount",amount);
+                postdata.put("service_command","SDK_TOKEN");
+                postdata.put("customer_email","hazem.ali1466@gmail.com");
+                postdata.put("language",ln);
+                postdata.put("currency",currency);
+                postdata.put("device_id",device_id);
+                postdata.put("bdb_name_booking",name_booking);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            Log.e("PostData",postdata.toString());
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(API_PREFIX_NAME+"/api/payment/getNewPaymentCode")
+                    .post(body)
+                    .addHeader("Content-Type","application/json")
+                    .header("Authorization", "Bearer "+gettoken(context))
+                    //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage().toString();
+                    Log.e("Payment_Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
+
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    Log.e("Token", gettoken(context));
+                    Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                    try {
+                        JSONObject j=new JSONObject(mMessage);
+                        String success=j.getString("success");
+                        if (success.equals("true"))
+                        {
+
+                        }
+
+                    }catch (final JSONException je){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.e("ERR",je.getMessage());
+                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    }
+
+                }
+
+            });
+            //        Log.d("MessageResponse",mMessage);
+        }
+
+
+
+
+        /*input
+     fort_id,amount,language,currency,customer_email,expiry_date,response_message
+    ,sdk_token,eci,customer_ip,status,merchant_reference,payment_option,card_number
+    ,authorization_code,card_holder_name,command,response_code,token_name,bdb_system_status
+
+         */
+
+    public static void getPurchaseResponseFromFrontEnd(final Context context, String fort_id,String amount,String language,String currency,String customer_email,String expiry_date,String response_message
+            ,String sdk_token,String eci,String customer_ip,String status,String merchant_reference,String payment_option,String card_number
+            ,String authorization_code,String card_holder_name,String command,String response_code,String token_name,String bdb_system_status)
+    {
+
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+//
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = null;
+
+        try {
+            postdata = new JSONObject(PayTestActivity.success_response);
+            postdata.put("bdb_system_status",bdb_system_status);
+//            postdata.put("fort_id",fort_id);
+//            postdata.put("eci",eci);
+//            postdata.put("customer_ip",customer_ip);
+//            postdata.put("status",status);
+//            postdata.put("merchant_reference",merchant_reference);
+//            postdata.put("amount",amount);
+//            postdata.put("payment_option",payment_option);
+//            postdata.put("card_number",card_number);
+//            postdata.put("service_command","SDK_TOKEN");
+//            postdata.put("customer_email",customer_email);
+//            postdata.put("language",language);
+//            postdata.put("currency",currency);
+//            postdata.put("response_message",response_message);
+//            postdata.put("sdk_token",sdk_token);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/payment/getPurchaseResponseFromFrontEnd")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("Payment_Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true"))
+                    {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                APICall.showSweetDialog(context,"",context.getResources().getString(R.string.deposit_done));
+                            }
+                        });
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
+
+
+
+
 }
 
 

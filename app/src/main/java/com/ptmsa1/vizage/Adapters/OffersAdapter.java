@@ -142,6 +142,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View v) {
 
+                    BeautyMainPage.FRAGMENT_NAME="Offers";
 
                     bestOItem=bestOfferItems.get(position);
                     try{
@@ -150,12 +151,11 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         e.printStackTrace();
                     }
 
-
                     if (bestOfferItems.get(position).getOffer_type().equals("2")
                             || bestOfferItems.get(position).getOffer_type().equals("5")){
 
                         Intent intent=new Intent(context, MultiDateOfferBooking.class);
-                        intent.putExtra("pkg",position);
+                        intent.putExtra("postion",position);
                         intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
                         ((AppCompatActivity)context).startActivity(intent);
 

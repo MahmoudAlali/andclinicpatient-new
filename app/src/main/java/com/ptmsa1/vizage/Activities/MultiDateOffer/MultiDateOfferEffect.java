@@ -185,26 +185,47 @@ public class MultiDateOfferEffect extends AppCompatActivity {
     String place_num,price_num;
 
     String getFilter(String effect){
-        switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-            case 1:
-                place_num="9";
-                price_num="32";
-                break;
-            case 2:
-                place_num="8";
-                price_num="1";
-                break;
-            case 3:
-                place_num="10";
-                price_num="30";
-                break;
-            case 4:
-                place_num="11";
-                price_num="31";
-                break;
-
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
         }
 
+
+
+        try {
+            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()) {
+                case 1:
+                    place_num = "9";
+                    price_num = "32";
+                    break;
+                case 2:
+                    place_num = "8";
+                    price_num = "1";
+                    break;
+                case 3:
+                    place_num = "10";
+                    price_num = "30";
+                    break;
+                case 4:
+                    place_num = "11";
+                    price_num = "31";
+                    break;
+
+            }
+        }catch (Exception e){
+
+
+        }
         String name= BeautyMainPage.client_name;
         String mobile=BeautyMainPage.client_number;
         String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
@@ -222,11 +243,7 @@ public class MultiDateOfferEffect extends AppCompatActivity {
                         "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                         "            \"value2\": 0\n" +
                         "        },\n" +
-                        "        {\n" +
-                        "            \"num\": "+ price_num+",\n" +
-                        "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                        "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                        "        },\n" +
+                        "  " +prices+
                         "        {\n" +
                         "            \"num\": "+place_num+",\n" +
                         "            \"value1\": 1,\n" +

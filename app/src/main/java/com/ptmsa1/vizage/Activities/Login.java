@@ -38,6 +38,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
+        APICall.FRAGMENT_NAME="activity_login";
+
         context=this;
 
         String name,pass;
@@ -81,7 +83,7 @@ public class Login extends AppCompatActivity {
         }else if (password.getText().toString().isEmpty()){
             APICall.showSweetDialog(Login.this,R.string.nice,R.string.EnterPassAlert);
         }else {
-            APICall.login(username.getText().toString(), password.getText().toString(), "http://clientapp.dcoret.com/api/auth/user/login", Login.this);
+            APICall.login(username.getText().toString(), password.getText().toString(), APICall.API_PREFIX_NAME+"/api/auth/user/login_v1", Login.this);
         }
         }
     public void forgetpass(View view) {

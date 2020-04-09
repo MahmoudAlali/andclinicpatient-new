@@ -83,7 +83,8 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getEffects();
                 Log.e("Effectfilter",getEffects().toString());
-                APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id,freeBookingFragment.Place,"",CreateRequestActivity.is_group_booking,getClients(1),context);
+                Log.e("getClients123",getClients(1)+"tostring");
+                APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id+"",freeBookingFragment.Place+"","",CreateRequestActivity.is_group_booking,getClients(1),context);
                 //Intent intent=new Intent(context, GroupReservationResultActivity.class);
 //                intent.putExtra("filter",getfilter(f));
              //   startActivity(intent);
@@ -483,7 +484,7 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
 //                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
                     JSONObject servic = new JSONObject();
 
-                    servic.put("bdb_ser_sup_id",CreateRequestActivity.clientsArrayList.get(i).getServicesModels().get(j).getBdb_ser_id());
+                    servic.put("ser_id",CreateRequestActivity.clientsArrayList.get(i).getServicesModels().get(j).getBdb_ser_id());
                     services.put(servic);
                 }
                 client.put("services",services);

@@ -631,6 +631,28 @@
     <string name="pro_not_support_place">المزودة لا تدعم هذا المكان</string>
     <string name="reference_number">الرقم المرجعي:</string>
     <string name="book_id">رقم الحجز:</string>
+    <string name="deposit_can_paid_alert">لا يمكن دفع عربون هذا الحجز إلا من قبل العميلة صاحبة الحجز</string>
+    <string name="there_is_no_offer_sol">لا يوجد حل لهذا العرض حاليا</string>
 
+
+    <string name="account_already_exist">الحساب موجود بالفعل، یرجى تسجیل الدخول</string>
+    <string name="connect_whatsapp">الدعم عن طريق واتس اب</string>
+    <string name="website_support">الدعم عن طريق الموقع</string>
+    <string name="support_message">يرجى التواصل مع فريق الدعم لتفعيل الحساب</string>
+    <string name="account_already_exist_support">الحساب موجود فعلاً ، نرجو تسجیل الدخول \n أو التواصل مع الدعم</string>
+    <string name="part_of_data_is_exist">جزء من البیانات مستخدم مسبقا،یرجى التأكد من البیانات \nأو التواصل مع الدعم من خلال\n موقع التطبیق أو من خلال تطبیق واتس أب</string>
+    <string name="this_num_acc_with_emp">رقم الهاتف موجود لكن مرتبط مع موظفة نشطة</string>
+    <string name="phone_not_found">رقم الهاتف غیر موجود</string>
+    <string name="account_unactivated_yet">هذا الحساب غير نشط بعد,يرجى الضغط على اعادة التنشيط لتفعيل الحساب مجددا</string>
+    <string name="number_sended">تم ارسال رمز التحقق الى</string>
+    <string name="please_enter_code">الرجاء إدخال الرمز</string>
+    <string name="confirm_Account">تفعيل الحساب</string>
+    <string name="Re_send_A_C">إعادة إرسال رمز التحقق</string>
+    <string name="resend_code">إعادة إرسال الرمز</string>
+    <string name="second">ثانية</string>
+    <string name="account_stop_alert">هذا الحساب متوقف, يرجى الضغط على اعادة التنشيط لتفعيل الحساب مجددا</string>
+    <string name="wrong_password">كلمة السر خاظئ</string>
+    <string name="ur_acc_activated_pls_login_now">تم تفعيل حسابك, يرجى تسجيل الدخول</string>
+    <string name="deposit_done">تمت عملية دفع العربون بنجاح</string>
 
 </resources>

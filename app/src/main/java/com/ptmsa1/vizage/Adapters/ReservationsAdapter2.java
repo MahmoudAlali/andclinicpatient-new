@@ -7,19 +7,25 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.payfort.fort.android.sdk.base.FortSdk;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.BookingAutomatedBrowseData;
@@ -30,8 +36,16 @@ import com.ptmsa1.vizage.Fragments.MyReservation.CancelReservationActivity;
 import com.ptmsa1.vizage.Fragments.MyReservationFragment;
 import com.ptmsa1.vizage.Fragments.RateSerEmpActivity;
 import com.ptmsa1.vizage.Fragments.ReservatoinDetailsActivity;
+import com.ptmsa1.vizage.PayFort.IPaymentRequestCallBack;
+import com.ptmsa1.vizage.PayFort.PayFortData;
+import com.ptmsa1.vizage.PayFort.PayFortPayment;
+import com.ptmsa1.vizage.PayFort.PayTestActivity;
 import com.ptmsa1.vizage.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -45,6 +59,11 @@ import java.util.Date;
 import java.util.Locale;
 
 import hyogeun.github.com.colorratingbarlib.ColorRatingBar;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 
 public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -174,9 +193,49 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 @Override
                 public void onClick(View v) {
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")){
+                        //------------- make deposit here-------------
+//                        Dialog dialog=new Dialog(context);
+//                        dialog.setContentView(R.layout.payment_layout_dialog);
+
+                        if (bookingAutomatedBrowseData.get(position).getBdb_expected_deposit().equals("0")){
+                            try {
+                                float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getTotalPrice())/10f);
+//                                getNewPaymentCode(context,deposit,"SAR");
+
+
+//                                initilizePayFortSDK();
+
+                                Intent intent=new Intent(context, PayTestActivity.class);
+                                intent.putExtra("amount",deposit+"");
+                                intent.putExtra("name_booking",bookingAutomatedBrowseData.get(position).getBdb_name_booking()+"");
+                                context.startActivity(intent);
+//                                getNewPaymentCode(context,deposit+"","SAR",BeautyMainPage.bdb_email,device_id,bookingAutomatedBrowseData.get(position).getBdb_name_booking(),fortCallback, (IPaymentRequestCallBack) BeautyMainPage);
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }else {
+                            try {
+                                float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getBdb_expected_deposit()));
+//                                getNewPaymentCode(context,deposit,"SAR");
+
+
+//                                initilizePayFortSDK();
+
+                                Intent intent=new Intent(context, PayTestActivity.class);
+                                intent.putExtra("amount",deposit+"");
+                                intent.putExtra("name_booking",bookingAutomatedBrowseData.get(position).getBdb_name_booking()+"");
+                                context.startActivity(intent);
+//                                getNewPaymentCode(context,deposit+"","SAR",BeautyMainPage.bdb_email,device_id,bookingAutomatedBrowseData.get(position).getBdb_name_booking(),fortCallback, (IPaymentRequestCallBack) BeautyMainPage);
+
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+
 
                     }else {
-                        APICall.showSweetDialog(context,"","لا يمكن دفع عربون هذا الحجز إلا من قبل العميلة صاحبة الحجز");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.deposit_can_paid_alert));
 
                     }
                 }
@@ -621,7 +680,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
 
 //                        is_action_on=bookingAutomatedBrowseData.get(position).getIs_action_on();
-                        Log.e("BookID",book_id);
+                        Log.e("RefId",book_id);
+                        Log.e("InternallyID",bookingAutomatedBrowseData.get(position).getBdb_internally_number());
                         logoId=bookingAutomatedBrowseData.get(position).getLogoId();
 
                         postionBook=position;
@@ -1015,4 +1075,208 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
         return  dateTimeModels;
     }
+
+    public static String response1="";
+    public  void getNewPaymentCode(final Context context, final String amount, String currency, final String customer_email, final String device_id, String name_booking, final FortCallBackManager fortCallback, final IPaymentRequestCallBack iPaymentRequestCallBack)
+    {
+
+//        payFortData.sdkToken = "";
+
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                APICall.showDialog(context);
+//
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("amount",amount);
+            postdata.put("service_command","SDK_TOKEN");
+            postdata.put("customer_email","hazem.ali1466@gmail.com");
+            postdata.put("language",APICall.ln);
+            postdata.put("currency",currency);
+            postdata.put("device_id",device_id);
+            postdata.put("bdb_name_booking",name_booking);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("PostData",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(APICall.API_PREFIX_NAME+"/api/payment/getNewPaymentCode")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+APICall.gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                String mMessage = e.getMessage().toString();
+                Log.e("Payment_Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        APICall.pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            APICall.showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                final String mMessage = response.body().string();
+                Log.e("Token", APICall.gettoken(context));
+                Log.e("TAG", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        APICall.pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true"))
+                    {
+                        JSONObject object=j.getJSONObject("result");
+                        response1=object.toString();
+                        final String signature=object.getString("signature");
+                        final String merchant_identifier=object.getString("merchant_identifier");
+                        final String access_code=object.getString("access_code");
+                        final String merchant_reference=object.getString("merchant_reference");
+                        final String sdk_token=object.getString("sdk_token");
+                        Log.e("this_is","APIBefor");
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                requestForPayfortPayment(amount,sdk_token,signature ,merchant_identifier ,access_code
+                                        ,merchant_reference,customer_email,device_id,fortCallback,iPaymentRequestCallBack,mMessage);
+                            }
+                        });
+
+
+
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            je.printStackTrace();
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    private void requestForPayfortPayment(String deposit,String sdk_token,String signature ,String merchant_identifier ,String access_code
+            ,String merchant_reference ,String customer_email,String device_id ,FortCallBackManager fortCallback, IPaymentRequestCallBack iPaymentRequestCallBack,String mMessage) {
+
+        PayFortData payFortData = new PayFortData();
+        if (!TextUtils.isEmpty(deposit)) {
+            payFortData.serviceCommand = "SDK_TOKEN";
+            payFortData.deviceId = device_id;
+//            payFortData.merchantIdentifier = merchant_identifier;
+//            payFortData.accessCode = access_code;
+//            payFortData.signature = signature;
+            payFortData.amount = String.valueOf((int) (Float.parseFloat(deposit) * 100));// Multiplying with 100, bcz amount should not be in decimal format
+            payFortData.command = PayFortPayment.PURCHASE;
+            payFortData.currency = PayFortPayment.CURRENCY_TYPE;
+            payFortData.customerEmail = customer_email;
+            payFortData.language = "en";
+            payFortData.merchantReference = merchant_reference;
+            payFortData.sdkToken = sdk_token;
+//            payFortData.paymentResponse = mMessage;
+
+//            payFortData.status= "22";
+            Log.e("amount","is: "+payFortData.amount);
+            Log.e("command","is: "+payFortData.command);
+            Log.e("currency","is: "+payFortData.currency);
+            Log.e("customerEmail","is: "+payFortData.customerEmail);
+            Log.e("deviceId","is: "+payFortData.deviceId);
+            Log.e("sdkToken","is: "+payFortData.sdkToken);
+            Log.e("signature","is: "+payFortData.signature);
+            Log.e("merchantReference","is: "+payFortData.merchantReference);
+            Log.e("merchantIdentifier","is: "+payFortData.merchantIdentifier);
+            Log.e("accessCode","is: "+payFortData.accessCode);
+
+
+//            parameters.put("amount", String.valueOf(payFortData.amount));
+//            parameters.put("command", payFortData.command);
+//            parameters.put("currency", payFortData.currency);
+//            parameters.put("customer_email", payFortData.customerEmail);
+//            parameters.put("language", payFortData.language);
+//            parameters.put("merchant_reference", payFortData.merchantReference);
+//            parameters.put("sdk_token", sdkToken);
+
+
+
+            PayFortPayment payFortPayment = new PayFortPayment((AppCompatActivity)context, fortCallback,   iPaymentRequestCallBack);
+            payFortPayment.requestForPayment(payFortData);
+        }
+    }
+
+    public static FortCallBackManager fortCallback = null;
+    private void initilizePayFortSDK() {
+        fortCallback = FortCallback.Factory.create();
+    }
+
 }

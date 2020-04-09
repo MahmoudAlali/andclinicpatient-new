@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,6 +96,7 @@ public class MyReservationFragment extends Fragment  {
     public static TextView note_cancel;
 
     //    public static FloatingTextButton floatingTextButton;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -108,6 +111,14 @@ public class MyReservationFragment extends Fragment  {
              }
          }
 
+
+        Resources res = getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.setLocale(new Locale(APICall.ln.toLowerCase())); // API 17+ only.
+        // Use conf.locale = new Locale(...) if targeting lower versions
+        res.updateConfiguration(conf, dm);
          supllierName="";
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
@@ -134,7 +145,7 @@ public class MyReservationFragment extends Fragment  {
         fm = getFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
         tabselected(incom_reservation,deposit_reservation,accept_reservation,false);
 
 
@@ -158,7 +169,7 @@ public class MyReservationFragment extends Fragment  {
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commitAllowingStateLoss();
         }
 
         String tab_id="";
@@ -195,7 +206,7 @@ public class MyReservationFragment extends Fragment  {
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commitAllowingStateLoss();
         }
         String execute_book_id="";
         if (bundle != null) {
@@ -870,14 +881,14 @@ public class MyReservationFragment extends Fragment  {
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                            fragmentTransaction.commit();
+                            fragmentTransaction.commitAllowingStateLoss();
                             tabselected(incom_reservation,deposit_reservation, accept_reservation,false);
                         }else if (APICall.layout==R.layout.accept_reservation_layout_v2){
                             fragment = new ExecutedReservationFragment();
                             fm = getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                            fragmentTransaction.commit();
+                            fragmentTransaction.commitAllowingStateLoss();
                             tabselected(accept_reservation,deposit_reservation,incom_reservation,false);
                         }
                         APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
@@ -902,7 +913,7 @@ public class MyReservationFragment extends Fragment  {
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
                 tabselected(incom_reservation,accept_reservation,deposit_reservation,true);
 
             }
@@ -917,7 +928,7 @@ public class MyReservationFragment extends Fragment  {
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
             }
         });
         deposit_reservation.setOnClickListener(new View.OnClickListener() {
@@ -928,7 +939,7 @@ public class MyReservationFragment extends Fragment  {
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
             }
         });
 

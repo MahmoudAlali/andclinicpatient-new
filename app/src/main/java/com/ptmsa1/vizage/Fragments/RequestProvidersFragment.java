@@ -42,6 +42,7 @@ public class RequestProvidersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         compareModels.clear();
+        providerItems.clear();
         View view= inflater.inflate(R.layout.request_providers_fragment,container,false);
        // filter =view.findViewById(R.id.filter);
         pullToRefresh = view.findViewById(R.id.pullToRefresh);

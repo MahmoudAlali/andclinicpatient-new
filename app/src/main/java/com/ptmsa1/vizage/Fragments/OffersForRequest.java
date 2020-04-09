@@ -32,6 +32,7 @@ public class OffersForRequest extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.tab_two, container, false);
+        arrayList.clear();
         recyclerView = view.findViewById(R.id.offers_recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyReservations.context));
         offersAdapterTab=new OffersAdapterTab(BeautyMainPage.context, arrayList);

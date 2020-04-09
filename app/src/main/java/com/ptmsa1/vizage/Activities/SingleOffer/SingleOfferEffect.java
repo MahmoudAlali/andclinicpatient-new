@@ -68,6 +68,10 @@ public class SingleOfferEffect extends AppCompatActivity {
             supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
             bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
             Log.e("free",supIdClasses.size()+"");
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+            supIdClasses =TabTwo.arrayList.get(0).getSersup_ids();
+            bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
+            Log.e("else",supIdClasses.size()+"");
         }
         else
         {
@@ -484,7 +488,20 @@ public class SingleOfferEffect extends AppCompatActivity {
         String date=SingleDateOfferBooking.showDate.getText().toString();
         String cname= BeautyMainPage.client_name;
         String cphone=BeautyMainPage.client_number;
-
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+SingleDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+SingleDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
+        }
         String services="";
         String bdb_ser_sup_id="",bdb_time="";
         for (int i=0;i<SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().size();i++){
@@ -510,11 +527,7 @@ public class SingleOfferEffect extends AppCompatActivity {
                         "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                         "            \"value2\": 0\n" +
                         "        },\n" +
-                        "        {\n" +
-                        "            \"num\": "+SingleDateOfferBooking.price_num+",\n" +
-                        "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                        "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                        "        },\n" +
+                        "     " +prices+
                         "        {\n" +
                         "            \"num\": "+SingleDateOfferBooking.place_num+",\n" +
                         "            \"value1\": 1,\n" +

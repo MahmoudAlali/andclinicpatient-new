@@ -72,6 +72,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        APICall.FRAGMENT_NAME="activity_register";
 
         context = this;
         name = findViewById(R.id.name);
@@ -125,7 +126,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(phone.getText().toString(),email.getText().toString(),"1",password.getText().toString()
-            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/auth/user/register/new_user_v1",Register.this);
+            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/auth/user/register/new_user_v2",Register.this);
         }
     }
 

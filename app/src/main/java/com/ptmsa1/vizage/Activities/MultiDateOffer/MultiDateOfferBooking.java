@@ -17,6 +17,7 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.OffersAdapter;
+import com.ptmsa1.vizage.Adapters.OffersAdapterTab;
 import com.ptmsa1.vizage.Adapters.SelectDateOfferAdapter;
 import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataModel.IDNameService;
@@ -28,12 +29,20 @@ import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
 import com.ptmsa1.vizage.Service.NotificationsBeauty;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MultiDateOfferBooking extends AppCompatActivity {
 
     public static ArrayList<String> strings=new ArrayList<>();
     public static ArrayList<OfferClientsModel.ServiceDetails> serviceDetails=new ArrayList<>();
+    public static ArrayList<OfferClientsModel> offerClientsModels=new ArrayList<>();
     RecyclerView recyclerView;
     public static SelectDateOfferAdapter selectDateOfferAdapter;
     Context context;
@@ -44,6 +53,8 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
     String bdb_pack_id;
     String is_effects_on,end_date;
+    public  static String bdb_offer_end="";
+
 
     int booking_period;
     @Override
@@ -62,6 +73,25 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         next=findViewById(R.id.next);
 
         boolean check=true;
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){}
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                place = NotificationsBeauty.offer_place;
+                supIdClasses = NotificationsBeauty.supIdClasses;
+                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //endregion
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
@@ -73,7 +103,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         }
         else if (BeautyMainPage.FRAGMENT_NAME.equals("SERVICETABFRAGMENT"))
         {
-
+            Log.e("SERVICETABFRAGMENT","SERVICETABFRAGMENT1");
 
             try {
                 bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
@@ -99,32 +129,36 @@ public class MultiDateOfferBooking extends AppCompatActivity {
             is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
             supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
             place=TabTwo.arrayList.get(postion).getBdb_offer_place();
-        }else {
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
 //            end_date = OffersAdapter.bestOItem.getEnd_date();
             bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
             booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
+            for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
+                try {
+                    JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
+                    String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
+                    String bdb_name=object.getString("bdb_name");
+                    String bdb_name_ar=object.getString("bdb_name_ar");
+                    String bdb_ser_id=object.getString("bdb_ser_id");
+                    if (APICall.ln.equals("ar")){
+                        bdb_name=bdb_name_ar;
+                    }
+                    supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            TabTwo.arrayList.clear();
+            TabTwo.arrayList.add(new DataOffer(bdb_pack_id,"","","","","","","","","","","","","","","","","","","",supIdClasses));
+
             is_effects_on=APICall.bdb_is_effects_on;
         }
 
-        //region CHECK_NOTIFICATION
-        String notification = "";
-        try {
-            notification=getIntent().getStringExtra("notification");
 
-        }
-        catch (Exception e){}
-        try {
-            if (!notification.equals("")) {
-                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
-                is_effects_on = getIntent().getStringExtra("is_effects_on");
-                place = NotificationsBeauty.offer_place;
-                supIdClasses = NotificationsBeauty.supIdClasses;
-                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //endregion
+
+
 
 
 
@@ -145,58 +179,6 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 
         APICall.detailsUser3(context);
 
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-            switch (freeBookingFragment.placeSpinner.getSelectedItemPosition()){
-                case 1:
-                    place_num="9";
-                    price_num="32";
-                    break;
-                case 2:
-                    place_num="8";
-                    price_num="1";
-                    break;
-                case 3:
-                    place_num="10";
-                    price_num="30";
-                    break;
-                case 4:
-                    place_num="11";
-                    price_num="31";
-                    break;
-
-            }
-
-        }
-        else
-        {
-            try {
-                switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-                    case 1:
-                        place_num="9";
-                        price_num="32";
-                        break;
-                    case 2:
-                        place_num="8";
-                        price_num="1";
-                        break;
-                    case 3:
-                        place_num="10";
-                        price_num="30";
-                        break;
-                    case 4:
-                        place_num="11";
-                        price_num="31";
-                        break;
-
-                }
-            }
-           catch (Exception e)
-           {
-
-           }
-        }
-
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
         {
@@ -205,8 +187,80 @@ public class MultiDateOfferBooking extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int place1;
+                    if (OffersAdapterTab.placePos==-1) {
+                        place1=Integer.parseInt(offerClientsModels.get(0).getBdb_offer_place());
+                    }else {
+                        place1=OffersAdapterTab.placePos-1;
+                    }
 
 
+                    if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+                    {
+                        switch (freeBookingFragment.placeSpinner.getSelectedItemPosition()){
+                            case 1:
+                                place_num="9";
+                                price_num="32";
+                                break;
+                            case 2:
+                                place_num="8";
+                                price_num="1";
+                                break;
+                            case 3:
+                                place_num="10";
+                                price_num="30";
+                                break;
+                            case 4:
+                                place_num="11";
+                                price_num="31";
+                                break;
+
+                        }
+
+                    }
+                    else
+                    {
+                        try {
+                            switch (place1){
+                                case 0:
+                                    place_num="9";
+                                    price_num="32";
+                                    break;
+                                case 1:
+                                    place_num="8";
+                                    price_num="1";
+                                    break;
+                                case 2:
+                                    place_num="10";
+                                    price_num="30";
+                                    break;
+                                case 3:
+                                    place_num="11";
+                                    price_num="31";
+                                    break;
+
+                            }
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+                    }
+
+                    String prices="";
+                    if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+                        prices= " {\n" +
+                                "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": 0,\n" +
+                                "            \"value2\": 10000\n" +
+                                "        },\n" ;
+                    }else {
+                        prices="{\n" +
+                                "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                "        },\n";
+                    }
                     SharedPreferences editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
 
                     String name= BeautyMainPage.client_name;
@@ -226,11 +280,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                                     "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                                     "            \"value2\": 0\n" +
                                     "        },\n" +
-                                    "        {\n" +
-                                    "            \"num\": "+ price_num+",\n" +
-                                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                                    "        },\n" +
+                                    " " +prices+
                                     "        {\n" +
                                     "            \"num\": "+place_num+",\n" +
                                     "            \"value1\": 1,\n" +
@@ -284,7 +334,21 @@ public class MultiDateOfferBooking extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    is_effects_on=APICall.bdb_is_effects_on;
+                    String prices="";
+                    if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+                        prices= " {\n" +
+                                "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": 0,\n" +
+                                "            \"value2\": 10000\n" +
+                                "        },\n" ;
+                    }else {
+                        prices="{\n" +
+                                "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                "        },\n";
+                    }
 
                     SharedPreferences editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
 
@@ -305,11 +369,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                                     "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                                     "            \"value2\": 0\n" +
                                     "        },\n" +
-                                    "        {\n" +
-                                    "            \"num\": "+ price_num+",\n" +
-                                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                                    "        },\n" +
+                                    "        \n" +prices+
                                     "        {\n" +
                                     "            \"num\": "+place_num+",\n" +
                                     "            \"value1\": 1,\n" +

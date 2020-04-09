@@ -55,8 +55,8 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
 
         //region Check_Notification
         String book_id="";
-        String internally_book=getIntent().getStringExtra("internally_book");
 
+        String internally_book=getIntent().getStringExtra("internally_book");
 
 
         try
@@ -81,13 +81,15 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         else
         {
             APICall.browseOneBooking(ReservationsAdapter2.book_id,context,logoImg);
-            id.setText(ReservationsAdapter2.book_id);
+            id.setText(internally_book);
+            ref_id.setText(ReservationsAdapter2.book_id);
             // APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
         }
 
         //endregion
 
-
+//        id.setText(internally_book);
+//        ref_id.setText(ReservationsAdapter2.book_id);
 //        v1=findViewById(R.id.vfirst);
 //        v2=findViewById(R.id.vsecond);
 //        v3=findViewById(R.id.vthird);

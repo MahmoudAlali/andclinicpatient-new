@@ -18,6 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptmsa1.vizage.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
@@ -60,7 +61,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-    public static int placePos;
+    public static int placePos=-1;
 
     @NonNull
     @Override
@@ -160,7 +161,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View v) {
 
 
-
+                BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
 
                 if (offers.get(position).getBdb_offer_place().equals("0")){
                     placePos=1;

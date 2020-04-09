@@ -18,8 +18,11 @@ import android.widget.TextView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
+import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.Adapters.OffersAdapter;
+import com.ptmsa1.vizage.Adapters.OffersAdapterTab;
 import com.ptmsa1.vizage.Adapters.ShowServicesAdapter;
+import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataModel.OfferClientsModel;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
@@ -28,12 +31,14 @@ import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class SingleDateOfferBooking extends AppCompatActivity {
     EditText client_name,phone_number;
@@ -51,7 +56,8 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     String bdb_pack_id;
     String bdb_pack_id1;
     String is_effects_on;
-    int booking_period;
+    public  static int booking_period;
+
     public static ArrayList<String> services=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         final String otype=getIntent().getStringExtra("offertype");
 
 
+        APICall.bdb_is_effects_on="0";
         client_name=findViewById(R.id.client_name);
         phone_number=findViewById(R.id.phone_number);
         selectdate=findViewById(R.id.select_date);
@@ -88,6 +95,26 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         }*/
 
 
+        //region CHECK_NOTIFICATION
+        String notification = "";
+        try {
+            notification=getIntent().getStringExtra("notification");
+
+        }
+        catch (Exception e){
+
+        }
+        try {
+            if (!notification.equals("")) {
+                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                is_effects_on = getIntent().getStringExtra("is_effects_on");
+                end_date = getIntent().getStringExtra("offer_end");
+                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //endregion
 
         Boolean check=true;
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
@@ -101,7 +128,27 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
             end_date = OffersAdapter.bestOItem.getEnd_date();
             bdb_pack_id1 = OffersAdapter.bestOItem.getPack_code();
-             booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+            ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
+            for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
+                try {
+                    JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
+                    String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
+                    String bdb_name=object.getString("bdb_name");
+                    String bdb_name_ar=object.getString("bdb_name_ar");
+                    String bdb_ser_id=object.getString("bdb_ser_id");
+                    if (APICall.ln.equals("ar")){
+                        bdb_name=bdb_name_ar;
+                    }
+                    supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            TabTwo.arrayList.clear();
+            TabTwo.arrayList.add(new DataOffer(bdb_pack_id1,"","","","","","","","","","","","","","","","","","","",supIdClasses));
+
+            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
             is_effects_on=APICall.bdb_is_effects_on;
         }
         else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
@@ -115,6 +162,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
             bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
             is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+
         }else
             try {
                 check=false;
@@ -153,75 +201,91 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         //endregion
 */
 
-        //region CHECK_NOTIFICATION
-        String notification = "";
-        try {
-            notification=getIntent().getStringExtra("notification");
 
-        }
-        catch (Exception e){
 
-        }
-        try {
-            if (!notification.equals("")) {
-                bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
-                is_effects_on = getIntent().getStringExtra("is_effects_on");
-                end_date = getIntent().getStringExtra("offer_end");
-                booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        //endregion
+
 
         recyclerView=findViewById(R.id.recycleview);
-        if (check)
-        selectdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog=new Dialog(context);
-                dialog.setContentView(R.layout.select_date);
-                TextView ok=dialog.findViewById(R.id.confirm);
-                TextView cancel=dialog.findViewById(R.id.cancel);
-                final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
-                datePicker.setMinDate(System.currentTimeMillis());
-                Calendar calendar=Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_MONTH,booking_period);
-                datePicker.setMaxDate(calendar.getTimeInMillis());
-
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-                    Date date=sdf.parse(end_date);
-
-                    datePicker.setMaxDate(date.getTime());
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                        int month=datePicker.getMonth()+1;
-                        showDate.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-                    }
-                });
-
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                        showDate.setText(R.string.select_date);
-
-//                        ((Item)holder).select_time.setText(datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
-                    }
-                });
-
-                dialog.show();
+        if (check) {
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Calendar calendar=Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_MONTH,booking_period);
+            Date bpriod=calendar.getTime();
+            Date endDate=null;
+            try {
+                endDate= format.parse(end_date);
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
+
+
+            String bdb_offer_end="";
+            if (endDate.compareTo(bpriod)==1){
+                bdb_offer_end=calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+            }else {
+                Calendar c=Calendar.getInstance();
+                c.setTime(endDate);
+                bdb_offer_end=c.get(Calendar.YEAR)+"-"+(c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.DAY_OF_MONTH);
+
+            }
+
+
+            Log.e("Bpriod","is"+bpriod);
+            Log.e("endDate","is"+end_date);
+            Log.e("endDate","is"+bdb_offer_end);
+            Log.e("endDate.compareTo","is"+endDate.compareTo(bpriod));
+
+
+
+
+            final String finalBdb_offer_end = bdb_offer_end;
+            selectdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog=new Dialog(context);
+                    dialog.setContentView(R.layout.select_date);
+                    TextView ok=dialog.findViewById(R.id.confirm);
+                    TextView cancel=dialog.findViewById(R.id.cancel);
+                    final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
+                    datePicker.setMinDate(System.currentTimeMillis());
+                    Calendar calendar=Calendar.getInstance();
+                    calendar.add(Calendar.DAY_OF_MONTH,booking_period);
+                    datePicker.setMaxDate(calendar.getTimeInMillis());
+
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                        Date date=sdf.parse(finalBdb_offer_end);
+
+                        datePicker.setMaxDate(date.getTime());
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                            int month=datePicker.getMonth()+1;
+                            showDate.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
+                        }
+                    });
+
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                            showDate.setText(R.string.select_date);
+
+    //                        ((Item)holder).select_time.setText(datePicker.getYear()+"-"+datePicker.getMonth()+"-"+datePicker.getDayOfMonth());
+                        }
+                    });
+
+                    dialog.show();
+                }
+            });
+        }
 
         offerAdapter=new ShowServicesAdapter(context,offerClientsModels);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -231,58 +295,6 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         APICall.browseOneOfferv2(bdb_pack_id1,offerClientsModels,offerAdapter,context);
 
 
-        if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-            try {
-
-
-            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-                case 1:
-                    place_num="9";
-                    price_num="32";
-                    break;
-                case 2:
-                    place_num="8";
-                    price_num="1";
-                    break;
-                case 3:
-                    place_num="10";
-                    price_num="30";
-                    break;
-                case 4:
-                    place_num="11";
-                    price_num="31";
-                    break;
-
-            }}
-            catch (Exception e){Log.e("err",e.getMessage());}
-
-        }
-        else
-        {
-            switch (freeBookingFragment.placeSpinner.getSelectedItemPosition()){
-                case 1:
-                    place_num="9";
-                    price_num="32";
-                    break;
-                case 2:
-                    place_num="8";
-                    price_num="1";
-                    break;
-                case 3:
-                    place_num="10";
-                    price_num="30";
-                    break;
-                case 4:
-                    place_num="11";
-                    price_num="31";
-                    break;
-
-            }
-
-        }
-
-
 
 
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
@@ -290,6 +302,66 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
+                    int place1;
+                    place1=Integer.parseInt(offerClientsModels.get(0).getBdb_offer_place());
+
+
+                    if(!BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+                    {
+                        try {
+
+
+                            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+                                case 1:
+                                    place_num="9";
+                                    price_num="32";
+                                    break;
+                                case 2:
+                                    place_num="8";
+                                    price_num="1";
+                                    break;
+                                case 3:
+                                    place_num="10";
+                                    price_num="30";
+                                    break;
+                                case 4:
+                                    place_num="11";
+                                    price_num="31";
+                                    break;
+
+                            }}
+                        catch (Exception e){Log.e("err",e.getMessage());}
+
+                    }
+                    else {
+                        switch (place1) {
+                            case 1:
+                                place_num = "9";
+                                price_num = "32";
+                                break;
+                            case 2:
+                                place_num = "8";
+                                price_num = "1";
+                                break;
+                            case 3:
+                                place_num = "10";
+                                price_num = "30";
+                                break;
+                            case 4:
+                                place_num = "11";
+                                price_num = "31";
+                                break;
+
+                        }
+
+                    }
+
+
+
+
+
                     String bdb_pack_code=bdb_pack_id;
                     String date=showDate.getText().toString();
                     String cname= BeautyMainPage.client_name;
@@ -368,11 +440,26 @@ public class SingleDateOfferBooking extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    is_effects_on=APICall.bdb_is_effects_on;
+                    String  prices="";
                     String bdb_pack_code=bdb_pack_id;
                     String date=showDate.getText().toString();
                     String cname= BeautyMainPage.client_name;
                     String cphone=BeautyMainPage.client_number;
                     String offerType=otype;
+                    if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+                        prices= " {\n" +
+                        "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": 0,\n" +
+                                "            \"value2\": 10000\n" +
+                                "        },\n" ;
+                    }else {
+                        prices="{\n" +
+                        "            \"num\": "+price_num+",\n" +
+                                "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                                "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                                "        },\n";
+                    }
                     String offerplace="";
 //                    ArrayList<String> arrayList =new ArrayList<>();
                     String services="";
@@ -400,11 +487,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                                     "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                                     "            \"value2\": 0\n" +
                                     "        },\n" +
-                                    "        {\n" +
-                                    "            \"num\": "+price_num+",\n" +
-                                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                                    "        },\n" +
+                                    "        " +prices+
                                     "        {\n" +
                                     "            \"num\": "+place_num+",\n" +
                                     "            \"value1\": 1,\n" +

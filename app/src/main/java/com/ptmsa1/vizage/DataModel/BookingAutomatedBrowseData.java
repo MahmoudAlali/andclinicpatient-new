@@ -50,7 +50,8 @@ public class BookingAutomatedBrowseData {
         this.bdb_end_time = bdb_end_time;
         this.provider_rating= provider_rating;
     }
-    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time,String bdb_end_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem,String provider_rating,String is_action_on_inside,String is_rating_on_inside,String bdb_confirm_exec_user) {
+    String bdb_paid_deposit;
+    public BookingAutomatedBrowseData(String bdb_id, String bdb_price, String bdb_status, String bdb_start_date, String bdb_start_time,String bdb_end_time, String supplier_name, String employee_name, String service_en_name, String service_ar_name, String client_name, String booking_price, String totalItem,String provider_rating,String is_action_on_inside,String is_rating_on_inside,String bdb_confirm_exec_user,String bdb_paid_deposit) {
         this.bdb_id = bdb_id;
         this.bdb_price = bdb_price;
         this.bdb_status = bdb_status;
@@ -68,6 +69,11 @@ public class BookingAutomatedBrowseData {
         this.is_action_on_inside= is_action_on_inside;
         this.is_rating_on_inside= is_rating_on_inside;
         this.bdb_confirm_exec_user= bdb_confirm_exec_user;
+        this.bdb_paid_deposit= bdb_paid_deposit;
+    }
+
+    public String getBdb_paid_deposit() {
+        return bdb_paid_deposit;
     }
 
     public String getBdb_confirm_exec_user() {

@@ -170,8 +170,8 @@ public class AccountFragment extends Fragment  {
                     editor.putString("lang","ar");
                     editor.commit();
 
-                   /* Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
-                    ((AppCompatActivity)BeautyMainPage.context).finish();*/
+                   Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
+                    ((AppCompatActivity)BeautyMainPage.context).finish();
 
                 }
                 else if(position == 1)
@@ -185,8 +185,8 @@ public class AccountFragment extends Fragment  {
                     res.updateConfiguration(conf, dm);
                     editor.putString("lang","en");
                     editor.commit();
-                   /* Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
-                    ((AppCompatActivity)BeautyMainPage.context).finish();*/
+                    Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
+                    ((AppCompatActivity)BeautyMainPage.context).finish();
                 }
             }
 

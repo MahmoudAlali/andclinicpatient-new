@@ -9,8 +9,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.payfort.fort.android.sdk.base.FortSdk;
 import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
+import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 import com.payfort.sdk.android.dependancies.base.FortInterfaces;
 import com.payfort.sdk.android.dependancies.models.FortRequest;
+import com.ptmsa1.vizage.Adapters.ReservationsAdapter2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,13 +87,39 @@ public class PayFortPayment {
         gson = new Gson();
     }
 
+    public PayFortPayment(){
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Processing your payment\nPlease wait...");
+        progressDialog.setCancelable(false);
+//        sdkToken = "";
+        gson = new Gson();
+        }
+
     public void requestForPayment(PayFortData payFortData) {
         this.payFortData = payFortData;
+        if (payFortData.sdkToken!=null){
+//            requestPurchase();
+            Log.e("ResponseBack", PayTestActivity.response1+"");
+            try {
+                 payFortData = gson.fromJson(PayTestActivity.response1, PayFortData.class);
+                if (!TextUtils.isEmpty(payFortData.sdkToken)) {
+                    sdkToken = payFortData.sdkToken;
+                    requestPurchase();
+                } else {
+                    payFortData.paymentResponse = PayTestActivity.response1;
+                    iPaymentRequestCallBack.onPaymentRequestResponse(RESPONSE_GET_TOKEN, payFortData);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else
         new GetTokenFromServer().execute(WS_GET_TOKEN);
     }
 
     private void requestPurchase() {
         try {
+
+            Log.e("requestPurchase","requestPurchase");
             FortSdk.getInstance().registerCallback(context, getPurchaseFortRequest(), FortSdk.ENVIRONMENT.TEST, RESPONSE_PURCHASE,
                     fortCallback, new FortInterfaces.OnTnxProcessed() {
                         @Override
@@ -112,6 +140,7 @@ public class PayFortPayment {
                             payFortData.paymentResponse = response.toString();
                             Log.e("Success Response", response.toString());
                             if (iPaymentRequestCallBack != null) {
+                                PayTestActivity.success_response=response.toString();
                                 iPaymentRequestCallBack.onPaymentRequestResponse(RESPONSE_PURCHASE_SUCCESS, payFortData);
                             }
                         }
@@ -178,6 +207,13 @@ public class PayFortPayment {
             parameters.put("language", payFortData.language);
             parameters.put("merchant_reference", payFortData.merchantReference);
             parameters.put("sdk_token", sdkToken);
+            Log.e("amount",String.valueOf(payFortData.amount));
+            Log.e("command",payFortData.command);
+            Log.e("currency",payFortData.currency);
+            Log.e("customer_email",payFortData.customerEmail);
+            Log.e("language",payFortData.language);
+            Log.e("merchant_reference",payFortData.merchantReference);
+            Log.e("sdkToken",sdkToken);
 
             fortRequest.setRequestMap(parameters);
         }
@@ -212,6 +248,7 @@ public class PayFortPayment {
                 if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = conn.getInputStream();
                     response = convertStreamToString(inputStream);
+                    Log.e("ResponseBack",response);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -223,7 +260,7 @@ public class PayFortPayment {
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             progressDialog.hide();
-            Log.e("Response", response+"");
+            Log.e("ResponseBack", response+"");
             try {
                 PayFortData payFortData = gson.fromJson(response, PayFortData.class);
                 if (!TextUtils.isEmpty(payFortData.sdkToken)) {

@@ -782,6 +782,27 @@
     <string name="pro_not_support_place">provider not support this place</string>
     <string name="reference_number">Reference Id:</string>
     <string name="book_id">Book Id</string>
+    <string name="deposit_can_paid_alert">A deposit of this reservation can only be paid by the reservation owner</string>
+    <string name="there_is_no_offer_sol">There is no sulption for this offer</string>
 
+    <string name="account_already_exist">This account already exists,Please Login</string>
+    <string name="connect_whatsapp">Whatsapp support</string>
+    <string name="website_support">Website Support</string>
+    <string name="support_message">Please Connect with Support team \n to Activate Account</string>
+    <string name="account_already_exist_support">This account exist, please register Enter or communicate With support</string>
+    <string name="part_of_data_is_exist">Part of the data is already used, please confirm the data or contact with support through the application site or through the WhatsApp</string>
+    <string name="this_num_acc_with_emp">The phone number is present but associated with an active employee</string>
+    <string name="phone_not_found">Phone number not found</string>
+    <string name="account_unactivated_yet">This account is unactivated yet</string>
+    <string name="please_enter_code">Please enter the code</string>
+    <string name="number_sended">The verification code has been sent to</string>
+    <string name="confirm_Account">Confirm Account</string>
+    <string name="Re_send_A_C">Re-send activation code</string>
+    <string name="resend_code">Resend code</string>
+    <string name="second">second</string>
+    <string name="account_stop_alert">This account is disabled Please click on reactivate to activate the account again</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="ur_acc_activated_pls_login_now">Your account has been activated,please login now</string>
+    <string name="deposit_done">The deposit payment was completed successfully</string>
 
 </resources>

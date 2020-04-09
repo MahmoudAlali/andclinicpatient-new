@@ -52,7 +52,8 @@ public class ReservationModel {
         this.bdb_name_booking=bdb_name_booking;
         this.is_per_client=is_per_client;
     }
-    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client, ArrayList<BookingAutomatedBrowseData> data) {
+    String bdb_expected_deposit;
+    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client,String bdb_expected_deposit, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -68,7 +69,24 @@ public class ReservationModel {
         this.is_rating_on=is_rating_on;
         this.bdb_name_booking=bdb_name_booking;
         this.is_per_client=is_per_client;
+        this.bdb_expected_deposit=bdb_expected_deposit;
         this.bdb_internally_number=bdb_internally_number;
+    }
+
+    public void setIs_per_client(String is_per_client) {
+        this.is_per_client = is_per_client;
+    }
+
+    public void setBdb_internally_number(String bdb_internally_number) {
+        this.bdb_internally_number = bdb_internally_number;
+    }
+
+    public String getBdb_expected_deposit() {
+        return bdb_expected_deposit;
+    }
+
+    public void setBdb_expected_deposit(String bdb_expected_deposit) {
+        this.bdb_expected_deposit = bdb_expected_deposit;
     }
 
     public String getBdb_internally_number() {

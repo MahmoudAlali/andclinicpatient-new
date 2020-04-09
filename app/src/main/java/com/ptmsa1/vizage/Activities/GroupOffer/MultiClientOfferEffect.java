@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.GroupEffectAdapter;
 import com.ptmsa1.vizage.Adapters.OfferBookingMultiClientsAdapter;
@@ -55,12 +56,17 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         {
             supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
             bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
+        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+            supIdClasses =TabTwo.arrayList.get(0).getSersup_ids();
+            bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
         }
         else
         {
             supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
             bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
         }
+
+
 
 
         //region CHECK_NOTIFICATION
@@ -266,26 +272,65 @@ public class MultiClientOfferEffect extends AppCompatActivity {
     }
     static String place_num,price_num;
     public static String getClients(ArrayList effectsArr){
-        switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
-            case 1:
-                place_num="9";
-                price_num="32";
-                break;
-            case 2:
-                place_num="8";
-                price_num="1";
-                break;
-            case 3:
-                place_num="10";
-                price_num="30";
-                break;
-            case 4:
-                place_num="11";
-                price_num="31";
-                break;
+
+        try {
+            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+                case 1:
+                    place_num="9";
+                    price_num="32";
+                    break;
+                case 2:
+                    place_num="8";
+                    price_num="1";
+                    break;
+                case 3:
+                    place_num="10";
+                    price_num="30";
+                    break;
+                case 4:
+                    place_num="11";
+                    price_num="31";
+                    break;
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            switch (Integer.parseInt(((AppCompatActivity)context).getIntent().getStringExtra("place"))){
+                case 0:
+                    place_num="9";
+                    price_num="32";
+                    break;
+                case 1:
+                    place_num="8";
+                    price_num="1";
+                    break;
+                case 2:
+                    place_num="10";
+                    price_num="30";
+                    break;
+                case 3:
+                    place_num="11";
+                    price_num="31";
+                    break;
+
+            }
 
         }
-
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
+        }
        // String bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
             String postdata =
                     "{\n" +
@@ -300,11 +345,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
                             "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
                             "            \"value2\": 0\n" +
                             "        },\n" +
-                            "        {\n" +
-                            "            \"num\": "+ price_num+",\n" +
-                            "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
-                            "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
-                            "        },\n" +
+                            "        " +prices+
                             "        {\n" +
                             "            \"num\": "+place_num+",\n" +
                             "            \"value1\": 1,\n" +

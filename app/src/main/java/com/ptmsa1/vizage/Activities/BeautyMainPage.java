@@ -56,6 +56,9 @@ import com.ptmsa1.vizage.Fragments.PlaceServiceMultipleBookingFragment;
 import com.ptmsa1.vizage.Fragments.ReservationFragment;
 import com.ptmsa1.vizage.Fragments.ServiceFragment;
 import com.ptmsa1.vizage.Fragments.ServicesTabsFragment;
+import com.ptmsa1.vizage.PayFort.IPaymentRequestCallBack;
+import com.ptmsa1.vizage.PayFort.PayFortData;
+import com.ptmsa1.vizage.PayFort.PayFortPayment;
 import com.ptmsa1.vizage.PayFort.PayTestActivity;
 import com.ptmsa1.vizage.R;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -69,15 +72,17 @@ import org.json.JSONObject;
 
 //------------------ main page---------------
 
-public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IPaymentRequestCallBack {
 
     //---------static variables for permissions----------
     public static int ACCESS_FINE_LOCATION=90;
     public static Fragment currentFragment;
     public static String is_bride_service;
+    public static String bdb_email;
     private int READ_EXTERNAL_STORAGE=93;
     public static String client_name="";
     public static String client_number="";
+    public static  IPaymentRequestCallBack iPaymentRequestCallBack;
 
     //--------------------- for call some of APIs for the first time ofopen app ---------------------
     public static Boolean isFirstOpen=true;
@@ -149,6 +154,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }else {
             client_name=settings.getString("client_name","");
             client_number=settings.getString("client_number","");
+            bdb_email=settings.getString("bdb_email","");
         }
 
 
@@ -1054,6 +1060,28 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             startActivity(myAppLinkToMarket);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onPaymentRequestResponse(int responseType, PayFortData responseData) {
+        if (responseType == PayFortPayment.RESPONSE_GET_TOKEN) {
+            Toast.makeText(this, "Token not generated", Toast.LENGTH_SHORT).show();
+            Log.e("onPaymentResponse", "Token not generated");
+        } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_CANCEL) {
+            Toast.makeText(this, "Payment cancelled", Toast.LENGTH_SHORT).show();
+            Log.e("onPaymentResponse", "Payment cancelled");
+            APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","1");
+
+        } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_FAILURE) {
+            Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
+            Log.e("onPaymentResponse", "Payment failed");
+        } else {
+            Toast.makeText(this, "Payment successful", Toast.LENGTH_SHORT).show();
+            Log.e("onPaymentResponse", "Payment successful");
+
+            APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","0");
+
         }
     }
 }
