@@ -2336,7 +2336,7 @@ public class APICall {
                     public void run() {
                         Offers.pullToRefresh.setRefreshing(false);
                         try{
-                            pd.dismiss();
+//                            pd.dismiss();
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -2360,7 +2360,12 @@ public class APICall {
                            String provider_logo_id=pkg.getString("provider_logo_id");
                            String old_price=pkg.getString("old_price");
                            String bdb_booking_period=pkg.getString("bdb_booking_period");
-                           String deposit_percentage=pkg.getString("deposit_percentage");
+                           String deposit_percentage="";
+                           try {
+                               deposit_percentage = pkg.getString("deposit_percentage");
+                           }catch (Exception e){
+                               e.getMessage();
+                           }
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
                            String offer_type=pkg.getString("offer_type");
