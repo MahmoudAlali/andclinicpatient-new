@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_weight="2"
             android:weightSum="3"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <TextView
                 android:layout_weight="1"
                 android:id="@+id/notif_title"
@@ -37,6 +37,7 @@
                 android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="6dp"
 
                 android:src="@drawable/ic_notifications_black_24dp"
                 />
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_weight="2"
             android:layout_height="match_parent"
-            android:text="\n Body  \n "
+            android:text="Body"
             android:gravity="center"
             android:textColor="#000"
             android:textSize="16dp"
@@ -59,7 +60,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
             android:text="date"
-            android:gravity="start"
+            android:gravity="start|bottom"
             android:textSize="16dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="15dp" />

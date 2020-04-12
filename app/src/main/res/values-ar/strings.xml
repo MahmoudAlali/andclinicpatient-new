@@ -658,5 +658,9 @@
     <string name="wrong_password">كلمة السر خاظئ</string>
     <string name="ur_acc_activated_pls_login_now">تم تفعيل حسابك, يرجى تسجيل الدخول</string>
     <string name="deposit_done">تمت عملية دفع العربون بنجاح</string>
+    <string name="not_completly_executed">لم يتم التنفيذ بشكل كامل</string>
+    <string name="cancelled_befor_deposit">ملغي (بعد دفع العربون)</string>
+    <string name="cancelled_after_deposit">ملغي (لم يتم دفع العربون)</string>
+    <string name="completly_executed">منفذ بشكل كامل</string>
 
 </resources>

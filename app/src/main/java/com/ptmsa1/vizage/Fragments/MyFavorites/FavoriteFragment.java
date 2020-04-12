@@ -45,7 +45,7 @@ public class FavoriteFragment extends Fragment {
             }
         });
 
-        providersFav.setBackgroundResource(android.R.color.white);
+        providersFav.setBackgroundResource(android.R.color.transparent);
         servicesFav.setBackgroundResource(R.drawable.shadow_blue_c7);
 
         fragment=new ServicesFavoriteFragment();
@@ -57,7 +57,7 @@ public class FavoriteFragment extends Fragment {
         servicesFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                providersFav.setBackgroundResource(android.R.color.white);
+                providersFav.setBackgroundResource(android.R.color.transparent);
 
                 servicesFav.setBackgroundResource(R.drawable.shadow_blue_c7);
                 fragment=new ServicesFavoriteFragment();
@@ -70,7 +70,7 @@ public class FavoriteFragment extends Fragment {
         providersFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                servicesFav.setBackgroundResource(android.R.color.white);
+                servicesFav.setBackgroundResource(android.R.color.transparent);
 
                 providersFav.setBackgroundResource(R.drawable.shadow_blue_c7);
                 fragment=new ProvidersFavoriteFragment();

@@ -809,4 +809,8 @@
     <string name="ur_acc_activated_pls_login_now">Your account has been activated,please login now</string>
     <string name="deposit_done">The deposit payment was completed successfully</string>
 
+    <string name="not_completly_executed">not completely executed</string>
+    <string name="cancelled_befor_deposit">cancelled (after paying deposit)</string>
+    <string name="cancelled_after_deposit">cancelled (no deposit paid)</string>
+    <string name="completly_executed">completely executed</string>
 </resources>
