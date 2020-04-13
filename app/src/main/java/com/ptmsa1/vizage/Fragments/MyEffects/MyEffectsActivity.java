@@ -158,11 +158,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[0]);
 //                effects.setBdb_effect_client_id("0");
                 dzero.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.white);
-                dtwo.setBackgroundResource(android.R.color.white);
-                dthree.setBackgroundResource(android.R.color.white);
-                dfour.setBackgroundResource(android.R.color.white);
-                dfive.setBackgroundResource(android.R.color.white);
+                done.setBackgroundResource(android.R.color.transparent);
+                dtwo.setBackgroundResource(android.R.color.transparent);
+                dthree.setBackgroundResource(android.R.color.transparent);
+                dfour.setBackgroundResource(android.R.color.transparent);
+                dfive.setBackgroundResource(android.R.color.transparent);
             }
         });
 
@@ -174,11 +174,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[1]);
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
-                dzero.setBackgroundResource(android.R.color.white);
-                dtwo.setBackgroundResource(android.R.color.white);
-                dthree.setBackgroundResource(android.R.color.white);
-                dfour.setBackgroundResource(android.R.color.white);
-                dfive.setBackgroundResource(android.R.color.white);
+                dzero.setBackgroundResource(android.R.color.transparent);
+                dtwo.setBackgroundResource(android.R.color.transparent);
+                dthree.setBackgroundResource(android.R.color.transparent);
+                dfour.setBackgroundResource(android.R.color.transparent);
+                dfive.setBackgroundResource(android.R.color.transparent);
             }
         });
         dtwo.setOnClickListener(new View.OnClickListener() {
@@ -187,11 +187,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[2]);
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.white);
-                dzero.setBackgroundResource(android.R.color.white);
-                dthree.setBackgroundResource(android.R.color.white);
-                dfour.setBackgroundResource(android.R.color.white);
-                dfive.setBackgroundResource(android.R.color.white);
+                done.setBackgroundResource(android.R.color.transparent);
+                dzero.setBackgroundResource(android.R.color.transparent);
+                dthree.setBackgroundResource(android.R.color.transparent);
+                dfour.setBackgroundResource(android.R.color.transparent);
+                dfive.setBackgroundResource(android.R.color.transparent);
             }
         });
         dthree.setOnClickListener(new View.OnClickListener() {
@@ -200,11 +200,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[3]);
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.white);
-                dtwo.setBackgroundResource(android.R.color.white);
-                dzero.setBackgroundResource(android.R.color.white);
-                dfour.setBackgroundResource(android.R.color.white);
-                dfive.setBackgroundResource(android.R.color.white);
+                done.setBackgroundResource(android.R.color.transparent);
+                dtwo.setBackgroundResource(android.R.color.transparent);
+                dzero.setBackgroundResource(android.R.color.transparent);
+                dfour.setBackgroundResource(android.R.color.transparent);
+                dfive.setBackgroundResource(android.R.color.transparent);
             }
         });
         dfour.setOnClickListener(new View.OnClickListener() {
@@ -213,11 +213,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[4]);
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.white);
-                dtwo.setBackgroundResource(android.R.color.white);
-                dthree.setBackgroundResource(android.R.color.white);
-                dzero.setBackgroundResource(android.R.color.white);
-                dfive.setBackgroundResource(android.R.color.white);
+                done.setBackgroundResource(android.R.color.transparent);
+                dtwo.setBackgroundResource(android.R.color.transparent);
+                dthree.setBackgroundResource(android.R.color.transparent);
+                dzero.setBackgroundResource(android.R.color.transparent);
+                dfive.setBackgroundResource(android.R.color.transparent);
             }
         });
         dfive.setOnClickListener(new View.OnClickListener() {
@@ -226,11 +226,11 @@ public class MyEffectsActivity extends AppCompatActivity {
                 effects.setBdb_value(Constants.effectValues[5]);
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.white);
-                dtwo.setBackgroundResource(android.R.color.white);
-                dthree.setBackgroundResource(android.R.color.white);
-                dzero.setBackgroundResource(android.R.color.white);
-                dfour.setBackgroundResource(android.R.color.white);
+                done.setBackgroundResource(android.R.color.transparent);
+                dtwo.setBackgroundResource(android.R.color.transparent);
+                dthree.setBackgroundResource(android.R.color.transparent);
+                dzero.setBackgroundResource(android.R.color.transparent);
+                dfour.setBackgroundResource(android.R.color.transparent);
             }
         });
 
