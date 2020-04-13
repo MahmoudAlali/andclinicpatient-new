@@ -511,7 +511,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
                     else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
 
                 }
 
@@ -537,7 +537,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
                     else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
 
                 }
 
@@ -552,7 +552,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
                     else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
 
                 }
 
@@ -578,7 +578,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
                     else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
                 }
 
             }
@@ -615,7 +615,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
                     else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
                 }
 
             }

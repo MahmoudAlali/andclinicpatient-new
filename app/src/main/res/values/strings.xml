@@ -820,4 +820,8 @@
     <string name="deposit_ratio">Deposit ratio:</string>
     <string name="order_location">Order Location</string>
 
+    <string name="not_completly_executed">not completely executed</string>
+    <string name="cancelled_befor_deposit">cancelled (after paying deposit)</string>
+    <string name="cancelled_after_deposit">cancelled (no deposit paid)</string>
+    <string name="completly_executed">completely executed</string>
 </resources>

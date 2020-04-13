@@ -18,403 +18,417 @@
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="#fff"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical" >
-
-
-        <LinearLayout
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_width="248dp"
-            android:layout_height="65dp"
-            android:background="@drawable/blue_white"
-            android:layout_marginTop="10dp"
-            android:layoutDirection="ltr"
-            android:layout_marginRight="@dimen/pf_10dp_space"
-            android:layout_marginLeft="@dimen/pf_10dp_space"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:gravity="right|center"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:text="@string/bride_res"
-                android:textColor="#000"
-                android:textSize="16dp"
-                android:textStyle="bold"
-
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_weight="1"
-                android:src="@drawable/bride_icon" />
-
-
-
-
-
-
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/pf_15_txt_size"
-            android:layout_marginRight="@dimen/pf_15_txt_size"
-            android:orientation="horizontal"
-            android:weightSum="4">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/group_res_another_bride"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/group_others_bride" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:background="@drawable/text_bride"
-                        android:text="@string/group_Reservation_another"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/group_res_bride"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/group_bride" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_bride"
-                        android:text="@string/groupReservation"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/individual_res_multi_bride"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/indiv_multi_bride" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_bride"
-                        android:text="@string/Multi_Reservation"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/bride_bride"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:src="@drawable/indiv_single_bride" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/bride"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_bride"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_width="248dp"
-            android:layout_height="65dp"
-            android:background="@drawable/pink_white"
-            android:layoutDirection="ltr"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="@dimen/pf_10dp_space"
-            android:layout_marginLeft="@dimen/pf_10dp_space"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:text="@string/normal_res"
-                android:textColor="#000"
-                android:textSize="15dp"
-                android:textStyle="bold"
-
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/normal_icon" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/pf_15_txt_size"
-            android:layout_marginRight="@dimen/pf_15_txt_size"
-            android:orientation="horizontal"
-            android:weightSum="4">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/group_res_another"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:src="@drawable/group_others_normal" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_normal"
-                        android:text="@string/group_Reservation_another"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/group_res"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/group_normal" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_normal"
-                        android:text="@string/groupReservation"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/individual_res_multi"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/indiv_multi_normal" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_normal"
-                        android:text="@string/Multi_Reservation"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:elevation="16dp"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:id="@+id/individual"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-
-                        android:src="@drawable/indiv_single_normal" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/text_normal"
-                        android:text="@string/Individual_booking"
-                        android:textColor="#000" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
         >
-
-        <Button
-            android:id="@+id/freeBooking"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:background="@drawable/add_request"
-            android:gravity="center" />
-        <Space
-            android:layout_width="15dp"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/createRequest"
-            android:textSize="@dimen/standard_20"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/lightBordeaux"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/standard_20"
+                android:orientation="vertical" >
+
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="248dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/blue_white"
+                    android:layout_marginTop="10dp"
+                    android:layoutDirection="ltr"
+                    android:layout_marginRight="@dimen/pf_10dp_space"
+                    android:layout_marginLeft="@dimen/pf_10dp_space"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:gravity="right|center"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/bride_res"
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_weight="1"
+                        android:src="@drawable/bride_icon" />
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/pf_15_txt_size"
+                    android:layout_marginRight="@dimen/pf_15_txt_size"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/group_res_another_bride"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/group_others_bride" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:background="@drawable/text_bride"
+                                android:text="@string/group_Reservation_another"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/group_res_bride"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/group_bride" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_bride"
+                                android:text="@string/groupReservation"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/individual_res_multi_bride"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/indiv_multi_bride" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_bride"
+                                android:text="@string/Multi_Reservation"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/bride_bride"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:src="@drawable/indiv_single_bride" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/bride"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_bride"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/standard_20"
+                    android:layout_width="248dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/pink_white"
+                    android:layoutDirection="ltr"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="@dimen/pf_10dp_space"
+                    android:layout_marginLeft="@dimen/pf_10dp_space"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/normal_res"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/normal_icon" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/pf_15_txt_size"
+                    android:layout_marginRight="@dimen/pf_15_txt_size"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/group_res_another"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:src="@drawable/group_others_normal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_normal"
+                                android:text="@string/group_Reservation_another"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/group_res"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/group_normal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_normal"
+                                android:text="@string/groupReservation"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/individual_res_multi"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/indiv_multi_normal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_normal"
+                                android:text="@string/Multi_Reservation"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:elevation="16dp"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/individual"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+
+                                android:src="@drawable/indiv_single_normal" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="10dp"
+                                android:textStyle="bold"
+                                android:background="@drawable/text_normal"
+                                android:text="@string/Individual_booking"
+                                android:textColor="#000" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:id="@+id/freeBooking"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/add_request"
+                    android:gravity="center" />
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/createRequest"
+                    android:textSize="@dimen/standard_20"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/lightBordeaux"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 <!--
 <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
