@@ -92,7 +92,12 @@
                 android:orientation="vertical"
                 android:paddingTop="7dp"
                 >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <TextView
+                    android:layout_weight="1"
                     android:id="@+id/offer_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,6 +106,18 @@
                     android:textSize="16dp"
                     android:textColor="#a5587a"
                     android:gravity="center"/>
+
+                    <ImageView
+                        android:id="@+id/placeL"
+                        android:layout_width="30dp"
+                        android:layout_gravity="center"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_location_on_black_24dp"
+                        />
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
                 <TextView
                     android:id="@+id/depPerc"
                     android:layout_width="match_parent"
@@ -141,14 +158,14 @@
                     android:layout_width="match_parent"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content">
-                    <!--<ImageView
-                        android:id="@+id/info"
+                    <TextView
+                        android:id="@+id/morning_offer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_info"
+                        android:text=""
                         android:layout_margin="10dp"
-                        android:layout_gravity="center_vertical"
-                        />-->
+                        android:layout_gravity="end"
+                        />
                     <TextView
                         android:id="@+id/offer_end"
                         android:layout_width="match_parent"

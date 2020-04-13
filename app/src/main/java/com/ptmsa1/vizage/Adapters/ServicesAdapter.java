@@ -26,6 +26,7 @@ import com.ptmsa1.vizage.DataModel.Location_Beauty;
 import com.ptmsa1.vizage.Fragments.MyIndEffectsActivity;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabOne;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import org.json.JSONArray;
@@ -149,6 +150,23 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 //                }
             //check check box is already checked or not because recyclerview use recycling method to reuse view
 
+
+
+            (holder).place.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemArrayList.get(position).getLatitude().equals("")
+                            &&itemArrayList.get(position).getLatitude().equals("null")
+                            &&itemArrayList.get(position).getLongitude().equals("")
+                            &&itemArrayList.get(position).getLongitude().equals("null")
+                    ){
+                        Intent intent=new Intent(context, MapsActivityLocation.class);
+                        intent.putExtra("lat",Double.parseDouble(itemArrayList.get(position).getLatitude()));
+                        intent.putExtra("lang",Double.parseDouble(itemArrayList.get(position).getLongitude()));
+                        context.startActivity(intent);
+                    }
+                }
+            });
 
             String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getBdb_client_deposit_ratio()+" % ";
             ( holder).depositPrcntg.setText(deposit);
@@ -310,7 +328,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         TextView  service_name,service_price;
         TextView pro_name, depositPrcntg;
         RatingBar service_rate;
-        ImageView service_add,service_fav,logo;
+        ImageView service_add,service_fav,place,logo;
         CheckBox service_compare;
         LinearLayout service_details;
         public ListHolder(View itemView) {
@@ -323,7 +341,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             pro_name=itemView.findViewById(R.id.provider_name);
 //            more_btn=itemView.findViewById(R.id.more_btn);
             service_compare=itemView.findViewById(R.id.service_compare);
-//            service_details=itemView.findViewById(R.id.service_details);
+            place=itemView.findViewById(R.id.place);
             service_fav=itemView.findViewById(R.id.service_fav);
             depositPrcntg=itemView.findViewById(R.id.depPerc);
 

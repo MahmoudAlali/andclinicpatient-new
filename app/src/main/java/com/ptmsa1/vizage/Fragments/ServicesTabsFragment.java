@@ -120,7 +120,7 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
         //--------------init supInfoList---------------
         supInfoList.clear();
-        supInfoList.add(new SupInfoClass("Provider Name","",""));
+        supInfoList.add(new SupInfoClass("Provider Name","","","",""));
 
 
         ServiceId="\"ServiceId\":["+APICall.idSerForOffer+"],";

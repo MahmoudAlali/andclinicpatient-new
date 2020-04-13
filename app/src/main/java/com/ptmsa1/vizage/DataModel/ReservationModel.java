@@ -52,8 +52,8 @@ public class ReservationModel {
         this.bdb_name_booking=bdb_name_booking;
         this.is_per_client=is_per_client;
     }
-    String bdb_expected_deposit;
-    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client,String bdb_expected_deposit, ArrayList<BookingAutomatedBrowseData> data) {
+    String bdb_expected_deposit,bdb_loc_lat,bdb_loc_long;
+    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client,String bdb_expected_deposit,String bdb_loc_lat,String bdb_loc_long, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -71,6 +71,24 @@ public class ReservationModel {
         this.is_per_client=is_per_client;
         this.bdb_expected_deposit=bdb_expected_deposit;
         this.bdb_internally_number=bdb_internally_number;
+        this.bdb_loc_lat=bdb_loc_lat;
+        this.bdb_loc_long=bdb_loc_long;
+    }
+
+    public String getBdb_loc_lat() {
+        return bdb_loc_lat;
+    }
+
+    public void setBdb_loc_lat(String bdb_loc_lat) {
+        this.bdb_loc_lat = bdb_loc_lat;
+    }
+
+    public String getBdb_loc_long() {
+        return bdb_loc_long;
+    }
+
+    public void setBdb_loc_long(String bdb_loc_long) {
+        this.bdb_loc_long = bdb_loc_long;
     }
 
     public void setIs_per_client(String is_per_client) {

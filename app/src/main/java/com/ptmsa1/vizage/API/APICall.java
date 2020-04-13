@@ -5154,7 +5154,7 @@ public class APICall {
                     "}";
 
 
-            Log.e("ServicePost",jsonPostData);
+            Log.e("ProviderRequest",jsonPostData);
              final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
@@ -5322,8 +5322,11 @@ public class APICall {
                                 String name=info.getString("name");
                                 String id=info.getString("id");
                                 String address=info.getString("address");
+                                String bdb_loc_lat=info.getString("bdb_loc_lat");
+                                String bdb_loc_long=info.getString("bdb_loc_long");
+                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
 
-                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
+//                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
 
                             }
 
@@ -5609,9 +5612,11 @@ public class APICall {
                                 JSONObject info=supInfo.getJSONObject(i);
                                 String name=info.getString("name");
                                 String id=info.getString("id");
-                                String address=info.getString("address");
 
-                                MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address));
+                                String address=info.getString("address");
+                                String bdb_loc_lat=info.getString("bdb_loc_lat");
+                                String bdb_loc_long=info.getString("bdb_loc_long");
+                                MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
 
                             }
 
@@ -5829,6 +5834,7 @@ public class APICall {
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
                                             deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_is_effects_on=jarray.getString("bdb_is_effects_on"),
+                                            bdb_is_morning_offer=jarray.getString("bdb_is_morning_offer"),
                                             discount=jarray.getString("discount"),
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
@@ -5846,7 +5852,7 @@ public class APICall {
                                     }
                                     if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
                                     {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer);
                                         TabTwo.arrayList.add(dof);
 
                                     }
@@ -5855,7 +5861,12 @@ public class APICall {
                                         String name=info.getString("name");
                                         String id=info.getString("id");
                                         String address=info.getString("address");
-                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
+
+                                        String bdb_loc_lat=info.getString("bdb_loc_lat");
+                                        String bdb_loc_long=info.getString("bdb_loc_long");
+                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
+
+//                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
                                     }
 
                                 }
@@ -6068,6 +6079,7 @@ public class APICall {
                                             distance=jarray.getString("distance"),
                                             longitude=jarray.getString("longitude"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            bdb_is_morning_offer=jarray.getString("bdb_is_morning_offer"),
                                             deposit_ratio=jarray.getString("deposit_ratio"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             latitude=jarray.getString("latitude");
@@ -6083,7 +6095,7 @@ public class APICall {
                                     }
 //                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
 //                                    {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer);
                                         MainProviderActivity.list.add(dof);
 
 //                                    }
@@ -6092,7 +6104,11 @@ public class APICall {
                                         String name=info.getString("name");
                                         String id=info.getString("id");
                                         String address=info.getString("address");
-                                        MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address));
+                                        String bdb_loc_lat=info.getString("bdb_loc_lat");
+                                        String bdb_loc_long=info.getString("bdb_loc_long");
+                                        MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
+
+//                                        MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address));
                                     }
 
                                 }
@@ -9755,6 +9771,8 @@ public class APICall {
 //                                String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
                                 String bdb_internally_number = jObject.getString("bdb_internally_number");
+                                String bdb_loc_long = jObject.getString("bdb_loc_long");
+                                String bdb_loc_lat = jObject.getString("bdb_loc_lat");
                                 String bdb_is_executed = jObject.getString("bdb_is_executed");
                                 String provider_rating = jObject.getString("provider_rating");
                                 String is_action_on = jObject.getString("is_action_on");
@@ -9876,7 +9894,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                     if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -9889,7 +9907,7 @@ public class APICall {
                                             if (execDateCheck && bookatCehck)
                                                 if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                         if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit+"",bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -9901,7 +9919,7 @@ public class APICall {
                                         if (execDateCheck && bookatCehck)
                                             if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
                                                 if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -9910,7 +9928,7 @@ public class APICall {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
                                         if (execDateCheck && bookatCehck)
                                             if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_deposit_ratio_outside, bookingAutomatedBrowseData1));
+                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -11578,6 +11596,16 @@ public class APICall {
                             JSONObject completeSolutions = oob.getJSONObject(n);
 
                             //------------------ not used until now-------------
+                                String journey_time="",bdb_client_deposit_ratio="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+                                try{
+                                    journey_time= completeSolutions.getString("journey_time");
+                                    bdb_loc_lat= completeSolutions.getString("bdb_loc_lat");
+                                    bdb_client_deposit_ratio= completeSolutions.getString("bdb_client_deposit_ratio");
+                                    bdb_loc_long= completeSolutions.getString("bdb_loc_long");
+                                    bdb_address_id= completeSolutions.getString("bdb_address_id");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                             String total_price=completeSolutions.getString("total_price");
                                 String journy_cost="",date_count="";
                                 try {
@@ -11642,7 +11670,7 @@ public class APICall {
                                 }
 
 
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,solutionsArr));
                                stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
                             }
@@ -12359,6 +12387,17 @@ public class APICall {
                             JSONObject completeSolutions = arraySol.getJSONObject(k);
 
                             //------------------ not used until now-------------
+
+                                String journey_time="",bdb_client_deposit_ratio="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+                                try{
+                                    journey_time= completeSolutions.getString("journey_time");
+                                    bdb_client_deposit_ratio= completeSolutions.getString("bdb_client_deposit_ratio");
+                                    bdb_loc_lat= completeSolutions.getString("bdb_loc_lat");
+                                    bdb_loc_long= completeSolutions.getString("bdb_loc_long");
+                                    bdb_address_id= completeSolutions.getString("bdb_address_id");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 String total_price="";
                                 try {
                                      total_price = completeSolutions.getString("total_price");
@@ -12427,7 +12466,7 @@ public class APICall {
                                 }
 
 
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, total_price,journy_cost, client_name, client_name, is_current_user, client_id, solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, total_price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio, solutionsArr));
                                 stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                             }
@@ -13414,6 +13453,16 @@ public class APICall {
                                 JSONObject completeSolutions = oob.getJSONObject(n);
 
                                 //------------------ not used until now-------------
+                                String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_client_deposit_ratio="",bdb_address_id="";
+                                try{
+                                    journey_time= completeSolutions.getString("journey_time");
+                                    bdb_loc_lat= completeSolutions.getString("bdb_loc_lat");
+                                    bdb_loc_long= completeSolutions.getString("bdb_loc_long");
+                                    bdb_address_id= completeSolutions.getString("bdb_address_id");
+                                    bdb_client_deposit_ratio= completeSolutions.getString("bdb_client_deposit_ratio");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 String journy_cost="",date_count="";
                                 String total_price=completeSolutions.getString("total_price");
                                 try {
@@ -13481,7 +13530,7 @@ public class APICall {
                                     }
 
 
-                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,solutionsArr));
+                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,solutionsArr));
                                     stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
                                 }
@@ -13666,9 +13715,9 @@ public class APICall {
     }
 
     //    get date just date
-    static String getFilterAddGroupItem(String bdb_is_group_booking,String date,String j_cost){
+    static String getFilterAddGroupItem( String journey_time,String bdb_loc_lat,String bdb_loc_long,String bdb_address_id ,String bdb_is_group_booking,String date,String j_cost){
         String filter="";
-        filter="{\"date\":\""+date+"\",\"journey_cost\":"+j_cost+",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
+        filter="{\"date\":\""+date+"\",\"journey_cost\":"+j_cost+",\"journey_time\":"+journey_time+",\"bdb_loc_lat\":"+bdb_loc_lat+",\"bdb_loc_long\":"+bdb_loc_long+",\"bdb_address_id\":"+bdb_address_id+",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
         return filter;
     }
     static String getFilterAddGroupItemothers(String bdb_is_group_booking,String date,String j_cost){
@@ -13676,9 +13725,9 @@ public class APICall {
         filter="{\"date\":\""+date+"\",\"journey_cost\":"+j_cost+",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
         return filter;
     }
-    static String getFilterAddGroupItemIndMulti(String bdb_is_group_booking){
+    static String getFilterAddGroupItemIndMulti(String journey_time,String bdb_loc_lat,String bdb_loc_long,String bdb_address_id,String j_cost ,String bdb_is_group_booking){
         String filter="";
-        filter="{\"date\":\""+PlaceServiceMultipleBookingFragment.dateFilter+"\",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
+        filter="{\"date\":\""+PlaceServiceMultipleBookingFragment.dateFilter+"\",\"journey_cost\":"+j_cost+",\"journey_time\":"+journey_time+",\"bdb_loc_lat\":"+bdb_loc_lat+",\"bdb_loc_long\":"+bdb_loc_long+",\"bdb_address_id\":"+bdb_address_id+",\"bdb_is_group_booking\":"+bdb_is_group_booking+",\"clients\":[";
         return filter;
     }
     //    get post data for add Group Item
@@ -13905,9 +13954,21 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-       Log.e("FilterAddGroupItm", getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter);
 
-       return getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItem(journey_time, bdb_loc_lat, bdb_loc_long, bdb_address_id, bdb_is_group_booking, date, stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost()) + filter);
+        return getFilterAddGroupItem(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+
     }
     public static String getClientsInfoAlt(ArrayList salons,Map<String,ArrayList<SearchBookingDataSTR>> stringArrayListHashMap,int bkPostion,String bdb_is_group_booking,String date){
         String filter= "";
@@ -14049,9 +14110,21 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.e("FilterAddGroupItm", getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter);
 
-        return getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItem(journey_time, bdb_loc_lat, bdb_loc_long, bdb_address_id, bdb_is_group_booking, date, stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost()) + filter);
+        return getFilterAddGroupItem(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+
     }
     public static String getClientsInfoOtherAlt(ArrayList salons,Map<String,ArrayList<SearchBookingDataSTR>> stringArrayListHashMap,int bkPostion,String bdb_is_group_booking,String date){
         String filter= "";
@@ -14428,9 +14501,22 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-       Log.e("FilterAddGroupItm", getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter);
 
-       return getFilterAddGroupItem(bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItem(journey_time, bdb_loc_lat, bdb_loc_long, bdb_address_id, bdb_is_group_booking, date, stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost()) + filter);
+        return getFilterAddGroupItem(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_is_group_booking,date,stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost())+filter;
+
+
     }
     public static String getClientsInfoforOthers(ArrayList salons,Map<String,ArrayList<SearchBookingDataSTR>> stringArrayListHashMap,int bkPostion,String bdb_is_group_booking,String date){
        String filter= "";
@@ -14896,9 +14982,28 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-       Log.e("FilterAddGroupItm", getFilterAddGroupItemIndMulti(bdb_is_group_booking)+filter);
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
 
-       return getFilterAddGroupItemIndMulti(bdb_is_group_booking)+filter;
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String j_cost="0";
+        try{
+            j_cost=stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItemIndMulti(journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",j_cost+"",bdb_is_group_booking)+filter);
+
+       return getFilterAddGroupItemIndMulti(journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",j_cost+"",bdb_is_group_booking)+filter;
+
     }
     public static String getClientsInfoforIndividualMultiDates(ArrayList salons,Map<String,ArrayList<SearchBookingDataSTR>> stringArrayListHashMap,int bkPostion,String bdb_is_group_booking){
        String filter= "";
@@ -15133,9 +15238,28 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-       Log.e("FilterAddGroupItm", getFilterAddGroupItemIndMulti(bdb_is_group_booking)+filter);
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
 
-       return getFilterAddGroupItemIndMulti(bdb_is_group_booking)+filter;
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String j_cost="0";
+        try{
+            j_cost=stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItemIndMulti(journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",j_cost+"",bdb_is_group_booking)+filter);
+
+        return getFilterAddGroupItemIndMulti(journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",j_cost+"",bdb_is_group_booking)+filter;
+
     }
 
     public  static  void  addGroupItem( String filter,final Context context){
@@ -16819,6 +16943,16 @@ public class APICall {
                             JSONObject completeSolutions = oob.getJSONObject(n);
 
                             //------------------ not used until now-------------
+                                String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_client_deposit_ratio="",bdb_address_id="";
+                                try{
+                                    journey_time= completeSolutions.getString("journey_time");
+                                    bdb_loc_lat= completeSolutions.getString("bdb_loc_lat");
+                                    bdb_loc_long= completeSolutions.getString("bdb_loc_long");
+                                    bdb_address_id= completeSolutions.getString("bdb_address_id");
+                                    bdb_client_deposit_ratio= completeSolutions.getString("bdb_client_deposit_ratio");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                             String total_price = completeSolutions.getString("total_price");
                             String journy_cost="",date_count="";
                                 try {
@@ -16906,7 +17040,7 @@ public class APICall {
                                     e.printStackTrace();
                                     price=total_price;
                                 }
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, price,journy_cost, client_name, client_name, is_current_user, client_id, solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio, solutionsArr));
                                 stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                             }
@@ -17412,7 +17546,22 @@ public class APICall {
         }
 //        Log.e("clientsDate", getFilterAddGroupItem()+filter);
 
-        return getFilterAddGroupItem("","","")+filter;
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Log.e("FilterAddGroupItm", getFilterAddGroupItem(journey_time, bdb_loc_lat, bdb_loc_long, bdb_address_id, "","","") + filter);
+        return getFilterAddGroupItem(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,"","","")+filter;
+
+
+//        return getFilterAddGroupItem("","","","","","","")+filter;
     }
 
 
@@ -18667,6 +18816,8 @@ public class APICall {
                             JSONArray completeSolutions = completeSolutions1.getJSONArray(l);
 
                             //------------------ not used until now-------------
+
+
 //                            String total_price=completeSolutions.getString("total_price");
 //                            String journy_cost="",date_count="";
 //                            try {
@@ -18679,7 +18830,17 @@ public class APICall {
                             for (int n=0;n<completeSolutions.length();n++) {
                                 JSONObject ddd = completeSolutions.getJSONObject(n);
 
-
+                                String journey_time="",bdb_loc_lat="",bdb_client_deposit_ratio="",bdb_loc_long="",bdb_address_id="",journey_cost="";
+                                try{
+                                    journey_time= ddd.getString("journey_time");
+                                    bdb_loc_lat= ddd.getString("bdb_loc_lat");
+                                    bdb_loc_long= ddd.getString("bdb_loc_long");
+                                    bdb_address_id= ddd.getString("bdb_address_id");
+                                    journey_cost= ddd.getString("journey_cost");
+                                    bdb_client_deposit_ratio= ddd.getString("bdb_client_deposit_ratio");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 String total_price = "";
                                 try {
                                     total_price = ddd.getString("total_price");
@@ -18744,7 +18905,7 @@ public class APICall {
                                     }
 
 
-                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, total_price, client_name, client_name, is_current_user, client_id, solutionsArr));
+                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id+"", salon_name+"", total_price+"", journey_cost+"", client_name+"", client_name+"", is_current_user+"",client_id+"",journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio, solutionsArr));
                                     stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                                 }
@@ -19358,11 +19519,29 @@ public class APICall {
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.e("FilterAddGroupItm", getFilterAddGroupItemOffer()+filter);
 
-        return getFilterAddGroupItemOffer()+filter;
+        String journey_time="",bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+
+        try {
+            journey_time = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourney_time();
+            bdb_loc_lat = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_lat();
+            bdb_loc_long = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_loc_long();
+            bdb_address_id = stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getBdb_address_id();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String j_cost="0";
+        try{
+            j_cost=stringArrayListHashMap.get(salons.get(bkPostion)).get(0).getJourneyCost();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.e("FilterAddGroupItm", getFilterAddGroupItemOffer(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,j_cost)+filter);
+
+        return getFilterAddGroupItemOffer(journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,j_cost)+filter;
     }
-    static String getFilterAddGroupItemOffer(){
+    static String getFilterAddGroupItemOffer(String journey_time,String bdb_loc_lat,String bdb_loc_long,String bdb_address_id,String j_cost){
         String filter="";
         String offerTpe="";
         if (OfferBookingResult.offertype.equals("1")){
@@ -19381,7 +19560,7 @@ public class APICall {
 
 
 
-        filter="{\"bdb_is_group_booking\":\""+offerTpe+"\",\"clients\":[";
+        filter="{\"bdb_is_group_booking\":\""+offerTpe+"\",\"journey_cost\":"+j_cost+",\"journey_time\":"+journey_time+",\"bdb_loc_lat\":"+bdb_loc_lat+",\"bdb_loc_long\":"+bdb_loc_long+",\"bdb_address_id\":"+bdb_address_id+",\"clients\":[";
         return filter;
     }
     public  static  void  addtocartOffer( String filter,final Context context){
@@ -23737,6 +23916,12 @@ public class APICall {
                         final String booking_type=data.getString("booking_type");
                         String journey_cost=data.getString("journey_cost");
                         final String journey_count=data.getString("journey_count");
+                       try {
+                           ReservatoinDetailsActivity.lat = Double.parseDouble(data.getString("bdb_loc_lat"));
+                           ReservatoinDetailsActivity.lang = Double.parseDouble(data.getString("bdb_loc_long"));
+                       }catch (Exception e){
+                           e.printStackTrace();
+                       }
                         final String booking_price=data.getString("booking_price");
                         String bdb_sup_final_price="";
                         final String salon_name=data.getString("salon_name");
@@ -25286,6 +25471,13 @@ public class APICall {
                     String success=jsonrespone.getString("success");
                     if (success.equals("true")){
                         final JSONObject data=jsonrespone.getJSONObject("data");
+                        try {
+                            JSONObject bdb_location_id = data.getJSONObject("bdb_location_id");
+                            BookingRequestDetailsActivity.bdb_loc_lat = Double.parseDouble(data.getString("bdb_loc_lat"));
+                            BookingRequestDetailsActivity.bdb_loc_long = Double.parseDouble(data.getString("bdb_loc_long"));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         final JSONArray clients=data.getJSONArray("clients");
                         final String bdb_booking_place=data.getString("bdb_booking_place");
                         String bdb_journey_cost=data.getString("bdb_journey_cost");
@@ -25919,8 +26111,10 @@ public class APICall {
                                             logo_id=jarray.getString("logo_id"),
                                             rating=jarray.getString("rating"),
                                             deposit_prcntg=jarray.getString("bdb_client_deposit_ratio"),
+                                            bdb_loc_lat=jarray.getString("bdb_loc_lat"),
+                                            bdb_loc_long=jarray.getString("bdb_loc_long"),
                                     bdb_booking_period=jarray.getString("bdb_booking_period");
-                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg);
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"");
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -26612,6 +26806,7 @@ Log.e("ERRR",e.getMessage());
                                             longitude=jarray.getString("longitude"),
                                             bdb_offer_type=jarray.getString("bdb_offer_type"),
                                             bdb_booking_period=jarray.getString("bdb_booking_period"),
+                                            bdb_is_morning_offer=jarray.getString("bdb_is_morning_offer"),
                                             deposit_ratio=jarray.getString("deposit_ratio"),
                                             latitude=jarray.getString("latitude");
 
@@ -26632,7 +26827,7 @@ Log.e("ERRR",e.getMessage());
                                     if(!bdb_offer_type.equals("2")&&!bdb_offer_type.equals("5"))
                                     {
 //                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio));
+                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer));
                                     }
 
 

@@ -309,5 +309,17 @@
 
 
     </LinearLayout>
-
+    <Button
+        android:id="@+id/location"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/high_edit_text"
+        android:text="@string/order_location"
+        android:textColor="@color/endblue"
+        android:textSize="18dp"
+        android:background="@drawable/shadow_button_accent_lite_v2"
+        android:layout_margin="3dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        />
 </android.support.design.widget.CoordinatorLayout>

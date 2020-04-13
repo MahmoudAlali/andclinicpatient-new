@@ -1,16 +1,19 @@
 package com.ptmsa1.vizage.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 public class BookingRequestDetailsActivity  extends AppCompatActivity {
@@ -22,6 +25,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
     static Context context;
     public static String logoId;
     ImageView logoImg;
+    Button location;
     static int [] categoryImages ={ R.drawable.hair_basic,
             R.drawable.makeup_basic,
             R.drawable.massage_basic,
@@ -31,6 +35,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
             R.drawable.skin_basic,
             R.drawable.eyebrows_basic
     };
+    public static Double bdb_loc_lat,bdb_loc_long;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         logoImg=findViewById(R.id.logoImg);
         date=findViewById(R.id.date);
         id=findViewById(R.id.id);
+        location=findViewById(R.id.location);
 
 /*
         //region Check_Notification
@@ -87,7 +93,17 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         String book_id=getIntent().getStringExtra("order_id");
         APICall.browseOneBookingRequest(book_id,context,logoImg);
         id.setText(book_id);
-
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bdb_loc_lat!=null && bdb_loc_long!=null){
+                    Intent intent=new Intent(context, MapsActivityLocation.class);
+                    intent.putExtra("lat",bdb_loc_lat);
+                    intent.putExtra("lang",bdb_loc_long);
+                    startActivity(intent);
+                }
+            }
+        });
 
 
 

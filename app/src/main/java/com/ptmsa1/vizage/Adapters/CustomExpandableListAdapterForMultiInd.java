@@ -2,6 +2,7 @@ package com.ptmsa1.vizage.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.MapActivity;
 import com.ptmsa1.vizage.DataModel.SearchBookingDataSTR;
 import com.ptmsa1.vizage.DataModel.SerchGroupBookingData;
 import com.ptmsa1.vizage.Fragments.MultiIndividualBookingReservationFragment;
 import com.ptmsa1.vizage.Fragments.PlaceServiceMultipleBookingFragment;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -88,7 +92,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_group, null);
             final TextView listTitleTextView = (TextView) convertView
                     .findViewById(R.id.listTitle);
-            TextView book =  convertView
+            ImageView book =  convertView
                     .findViewById(R.id.book);
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,11 +121,46 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
             });
             listTitleTextView.setText(listTitle);
 
+            ImageView location=convertView.findViewById(R.id.location);
+
+
+            location.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat()!=null
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat().equals("null")
+                            &&!stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat().equals("")
+                            && stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long()!=null
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long().equals("null")
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long().equals("")
+
+                    ) {
+                        Intent intent = new Intent(context, MapsActivityLocation.class);
+                        intent.putExtra("lat", Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat()));
+                        intent.putExtra("lang", Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long()));
+
+                        context.startActivity(intent);
+                    }
+                }
+            });
 //            listTitleTextViews.add(listTitleTextView);
 //            listTitleTextViews.get(groupPosition).setText( listTitleTextViews.get(groupPosition).getText().toString()+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" R");
 
 //            Log.e("pricegroup",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price());
 //            Log.e("pricegroup",groupPosition+"");
+            String place="";
+            if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                place=context.getResources().getString(R.string.salon);
+            } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                place=context.getResources().getString(R.string.home);
+            } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                place=context.getResources().getString(R.string.hall);
+            } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                place=context.getResources().getString(R.string.hotel);
+            }
+
+            TextView place1=convertView.findViewById(R.id.place);
+            place1.setText(place);
 
             listTitleTextView.setTypeface(null, Typeface.BOLD);
             return convertView;

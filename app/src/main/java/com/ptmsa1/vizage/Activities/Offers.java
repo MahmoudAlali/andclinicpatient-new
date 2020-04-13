@@ -43,7 +43,7 @@ public class Offers extends Fragment implements LocationListener {
     public static OffersAdapter bestOffer;
     public static  String name="offers";
     static Boolean isFirstOpen=true;
-    public static String Lat="32",Long="35";
+    public static String Lat="21.418923225457213",Long="39.82685700058937";
     public static int ACCESS_FINE_LOCATION = 90;
     private LocationManager locationManager;
     private String provider;

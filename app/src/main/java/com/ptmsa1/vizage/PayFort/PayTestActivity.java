@@ -54,6 +54,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
     IPaymentRequestCallBack iPaymentRequestCallBack;
     public static String success_response="";
     String amount,name_booking;
+    public static String check="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -333,22 +334,26 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
         if (responseType == PayFortPayment.RESPONSE_GET_TOKEN) {
             Toast.makeText(this, "Token not generated", Toast.LENGTH_SHORT).show();
             Log.e("onPaymentResponse", "Token not generated");
+            check="2";
             onBackPressed();
 
         } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_CANCEL) {
             Toast.makeText(this, "Payment cancelled", Toast.LENGTH_SHORT).show();
             Log.e("onPaymentResponse", "Payment cancelled");
+            check="2";
             APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","1");
             onBackPressed();
 
         } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_FAILURE) {
             Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show();
             Log.e("onPaymentResponse", "Payment failed");
+            check="2";
             onBackPressed();
 
         } else {
             Toast.makeText(this, "Payment successful", Toast.LENGTH_SHORT).show();
             Log.e("onPaymentResponse", "Payment successful");
+            check="1";
         APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","0");
         onBackPressed();
         }

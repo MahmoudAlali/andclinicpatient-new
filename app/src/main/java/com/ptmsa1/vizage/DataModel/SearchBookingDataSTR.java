@@ -56,6 +56,23 @@ public class SearchBookingDataSTR {
         this.solutions = solutions;
         this.journeyCost = journeyCost;
     }
+    String journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio;
+    public SearchBookingDataSTR(String salon_id, String salon_name, String total_price,String journeyCost, String client_response, String client_name, String is_current_user, String client_id ,String journey_time,String bdb_loc_lat,String bdb_loc_long,String bdb_address_id,String bdb_client_deposit_ratio, ArrayList<Solution> solutions) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.total_price = total_price;
+        this.client_response = client_response;
+        this.client_name = client_name;
+        this.is_current_user = is_current_user;
+        this.client_id = client_id;
+        this.solutions = solutions;
+        this.journeyCost = journeyCost;
+        this.journey_time = journey_time;
+        this.bdb_loc_lat= bdb_loc_lat;
+        this.bdb_loc_long= bdb_loc_long;
+        this.bdb_address_id= bdb_address_id;
+        this.bdb_client_deposit_ratio= bdb_client_deposit_ratio;
+    }
 
     String is_booked;
     public SearchBookingDataSTR(String salon_id, String salon_name, String total_price, String client_response, String client_name, String is_current_user, String client_id, ArrayList<Solution> solutions,String is_booked) {
@@ -75,6 +92,46 @@ public class SearchBookingDataSTR {
         this.salon_id = salon_id;
         this.salon_name = salon_name;
         this.solutions = solutions;
+    }
+
+    public String getBdb_client_deposit_ratio() {
+        return bdb_client_deposit_ratio;
+    }
+
+    public void setBdb_client_deposit_ratio(String bdb_client_deposit_ratio) {
+        this.bdb_client_deposit_ratio = bdb_client_deposit_ratio;
+    }
+
+    public String getJourney_time() {
+        return journey_time;
+    }
+
+    public void setJourney_time(String journey_time) {
+        this.journey_time = journey_time;
+    }
+
+    public String getBdb_loc_lat() {
+        return bdb_loc_lat;
+    }
+
+    public void setBdb_loc_lat(String bdb_loc_lat) {
+        this.bdb_loc_lat = bdb_loc_lat;
+    }
+
+    public String getBdb_loc_long() {
+        return bdb_loc_long;
+    }
+
+    public void setBdb_loc_long(String bdb_loc_long) {
+        this.bdb_loc_long = bdb_loc_long;
+    }
+
+    public String getBdb_address_id() {
+        return bdb_address_id;
+    }
+
+    public void setBdb_address_id(String bdb_address_id) {
+        this.bdb_address_id = bdb_address_id;
     }
 
     public String getJourneyCost() {

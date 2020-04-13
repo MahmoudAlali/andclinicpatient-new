@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -93,7 +94,7 @@ public class CustomExpandableListBagAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_group, null);
             final TextView listTitleTextView = (TextView) convertView
                     .findViewById(R.id.listTitle);
-            TextView book =  convertView
+            ImageView book =  convertView
                     .findViewById(R.id.book);
 
 //            Log.e("is_group_booking11",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getGetAllCarts().get(0).getBdb_is_group_booking());

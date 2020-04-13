@@ -658,5 +658,15 @@
     <string name="wrong_password">كلمة السر خاظئ</string>
     <string name="ur_acc_activated_pls_login_now">تم تفعيل حسابك, يرجى تسجيل الدخول</string>
     <string name="deposit_done">تمت عملية دفع العربون بنجاح</string>
+    <string name="select_pay_method">يرجى اختيار طريقة الدفع</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="success_payment">Payment completed Successfully</string>
+    <string name="faild_payment">The operation did not complete successfully, please try again later</string>
+    <string name="book_location">موقع الحجز</string>
+    <string name="deposit_val">قيمة العربون:</string>
+    <string name="morning_offer">عرض صباحي</string>
+    <string name="all_day_offer">عرض مسائي</string>
+    <string name="deposit_ratio">نسبة العربون:</string>
+    <string name="order_location">موقع الطلب</string>
 
 </resources>

@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import com.ptmsa1.vizage.Fragments.MyReservation.CancelReservationActivity;
 import com.ptmsa1.vizage.Fragments.MyReservationFragment;
 import com.ptmsa1.vizage.Fragments.RateSerEmpActivity;
 import com.ptmsa1.vizage.Fragments.ReservatoinDetailsActivity;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.PayFort.IPaymentRequestCallBack;
 import com.ptmsa1.vizage.PayFort.PayFortData;
 import com.ptmsa1.vizage.PayFort.PayFortPayment;
@@ -108,6 +110,29 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
+
+            ((Item)holder).bdb_expected_deposit.setText(context.getResources().getString(R.string.deposit_val)+" "+bookingAutomatedBrowseData.get(position).getBdb_expected_deposit());
+
+
+            ((Item)holder).place.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (bookingAutomatedBrowseData.get(position).getBdb_loc_lat()!=null
+                            && ! bookingAutomatedBrowseData.get(position).getBdb_loc_lat().equals("null")
+                            && !bookingAutomatedBrowseData.get(position).getBdb_loc_lat().equals("")
+                            &&  bookingAutomatedBrowseData.get(position).getBdb_loc_long()!=null
+                            &&  !bookingAutomatedBrowseData.get(position).getBdb_loc_long().equals("null")
+                            &&  !bookingAutomatedBrowseData.get(position).getBdb_loc_long().equals("")
+
+                    ) {
+                        Intent intent = new Intent(context, MapsActivityLocation.class);
+                        intent.putExtra("lat", Double.parseDouble(bookingAutomatedBrowseData.get(position).getBdb_loc_lat()));
+                        intent.putExtra("lang", Double.parseDouble(bookingAutomatedBrowseData.get(position).getBdb_loc_long()));
+                        context.startActivity(intent);
+                }
+                    }
+            });
+
             Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
             ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
             final String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
@@ -194,45 +219,66 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")){
                         //------------- make deposit here-------------
-//                        Dialog dialog=new Dialog(context);
-//                        dialog.setContentView(R.layout.payment_layout_dialog);
+                        final Dialog dialog=new Dialog(context);
+                        dialog.setContentView(R.layout.payment_layout_dialog);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                        final RadioButton radio_check=dialog.findViewById(R.id.radio_check);
+                        TextView next=dialog.findViewById(R.id.next);
+                        TextView cancel=dialog.findViewById(R.id.cancel);
 
-                        if (bookingAutomatedBrowseData.get(position).getBdb_expected_deposit().equals("0")){
-                            try {
-                                float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getTotalPrice())/10f);
+                        next.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (radio_check.isChecked()) {
+                                    dialog.cancel();
+                                    if (bookingAutomatedBrowseData.get(position).getBdb_expected_deposit().equals("0")) {
+                                        try {
+                                            float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getTotalPrice()) / 10f);
 //                                getNewPaymentCode(context,deposit,"SAR");
 
 
 //                                initilizePayFortSDK();
 
-                                Intent intent=new Intent(context, PayTestActivity.class);
-                                intent.putExtra("amount",deposit+"");
-                                intent.putExtra("name_booking",bookingAutomatedBrowseData.get(position).getBdb_name_booking()+"");
-                                context.startActivity(intent);
+                                            Intent intent = new Intent(context, PayTestActivity.class);
+                                            intent.putExtra("amount", deposit + "");
+                                            intent.putExtra("name_booking", bookingAutomatedBrowseData.get(position).getBdb_name_booking() + "");
+                                            context.startActivity(intent);
 //                                getNewPaymentCode(context,deposit+"","SAR",BeautyMainPage.bdb_email,device_id,bookingAutomatedBrowseData.get(position).getBdb_name_booking(),fortCallback, (IPaymentRequestCallBack) BeautyMainPage);
 
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-                        }else {
-                            try {
-                                float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getBdb_expected_deposit()));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        try {
+                                            float deposit = (Float.parseFloat(bookingAutomatedBrowseData.get(position).getBdb_expected_deposit()));
 //                                getNewPaymentCode(context,deposit,"SAR");
 
 
 //                                initilizePayFortSDK();
 
-                                Intent intent=new Intent(context, PayTestActivity.class);
-                                intent.putExtra("amount",deposit+"");
-                                intent.putExtra("name_booking",bookingAutomatedBrowseData.get(position).getBdb_name_booking()+"");
-                                context.startActivity(intent);
+                                            Intent intent = new Intent(context, PayTestActivity.class);
+                                            intent.putExtra("amount", deposit + "");
+                                            intent.putExtra("name_booking", bookingAutomatedBrowseData.get(position).getBdb_name_booking() + "");
+                                            context.startActivity(intent);
 //                                getNewPaymentCode(context,deposit+"","SAR",BeautyMainPage.bdb_email,device_id,bookingAutomatedBrowseData.get(position).getBdb_name_booking(),fortCallback, (IPaymentRequestCallBack) BeautyMainPage);
 
-                            }catch (Exception e){
-                                e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }else {
+                                    Toast.makeText(context,context.getResources().getString(R.string.select_pay_method),Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
+                        });
+                       cancel.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               dialog.cancel();
+                           }
+                       });
 
+                       dialog.show();
 
                     }else {
                         APICall.showSweetDialog(context,"",context.getResources().getString(R.string.deposit_can_paid_alert));
@@ -882,8 +928,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,book_id,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
-        ImageView book_Details,inner_res,logoImg;
+        TextView bookType,book_id,bdb_expected_deposit,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
+        ImageView book_Details,inner_res,logoImg,place;
         ColorRatingBar rating;
 
         LinearLayout myroot;
@@ -895,6 +941,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             delay=itemView.findViewById(R.id.delay);
             rating=itemView.findViewById(R.id.rating);
             book_id=itemView.findViewById(R.id.book_id);
+            place=itemView.findViewById(R.id.place);
+            bdb_expected_deposit=itemView.findViewById(R.id.bdb_expected_deposit);
             reference_id=itemView.findViewById(R.id.reference_number);
 
 

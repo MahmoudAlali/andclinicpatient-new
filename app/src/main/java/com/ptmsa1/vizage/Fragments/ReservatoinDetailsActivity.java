@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.ReservationsAdapter2;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import org.json.JSONArray;
@@ -30,6 +32,7 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
     static  Context context;
     public static String logoId;
     ImageView logoImg;
+    public static Double lat,lang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +197,15 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+//                onBackPressed();
+                if (lang!=null && lat!=null) {
+                    Intent intent = new Intent(context, MapsActivityLocation.class);
+                    intent.putExtra("lat", lat);
+                    intent.putExtra("lang", lang);
+                    context.startActivity(intent);
+                }
+
+
             }
         });
 

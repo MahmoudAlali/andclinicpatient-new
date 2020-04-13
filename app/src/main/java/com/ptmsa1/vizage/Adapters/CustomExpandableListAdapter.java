@@ -2,6 +2,7 @@ package com.ptmsa1.vizage.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
+import com.ptmsa1.vizage.Activities.MapActivity;
+import com.ptmsa1.vizage.Activities.MapFiltering;
+import com.ptmsa1.vizage.Activities.Mapfragment;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.DataModel.SearchBookingDataSTR;
@@ -32,6 +37,7 @@ import com.ptmsa1.vizage.Fragments.MultiBookingIndividualResultActivity;
 import com.ptmsa1.vizage.Fragments.MultiIndividualBookingReservationFragment;
 import com.ptmsa1.vizage.Fragments.PlaceServiceGroupFragment;
 import com.ptmsa1.vizage.Fragments.PlaceServiceMultipleBookingFragment;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -102,7 +108,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_group, null);
             final TextView listTitleTextView = (TextView) convertView
                     .findViewById(R.id.listTitle);
-            TextView book =  convertView
+            ImageView book =  convertView
                     .findViewById(R.id.book);
 
             if ( BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity"))
@@ -135,7 +141,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                             place=ServicesProviderAdapter.placePos;
                                         }
                                         APICall.addGroupItemInd(APICall.getClientsInfoInd(salons, stringArrayListHashMap, groupPosition,BookingIndvidualActivity.bdb_is_groupbooking, date,place), BookingIndvidualActivity.context);
-//                        Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
+//                                      Toast.makeText(context,"book is selected",Toast.LENGTH_SHORT).show();
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
                                         APICall.addGroupItemOther(APICall.getClientsInfoforOthers(salons, stringArrayListHashMap, groupPosition, GroupReservationOthersFragment.is_group_booking,APICall.dateforgroupbooking), GroupReservationOtherResultActivity.context);
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult") || BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking") ){
@@ -159,6 +165,100 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 }
             });
             listTitleTextView.setText(listTitle);
+
+
+            TextView bdb_expected_deposit=convertView.findViewById(R.id.bdb_expected_deposit);
+            try {
+                bdb_expected_deposit.setText(context.getResources().getString(R.string.deposit_ratio)+""+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_client_deposit_ratio()+"%");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            ImageView location=convertView.findViewById(R.id.location);
+
+
+            location.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat()!=null
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat().equals("null")
+                            &&!stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat().equals("")
+                            && stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long()!=null
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long().equals("null")
+                            && !stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long().equals("")
+
+                    ) {
+
+                        Intent intent = new Intent(context, MapsActivityLocation.class);
+                        intent.putExtra("lat", Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_lat()));
+                        intent.putExtra("lang", Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_loc_long()));
+
+                        context.startActivity(intent);
+                    }
+                }
+            });
+            String place="";
+
+            if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                int place12;
+                try{
+                    place12=PlaceServiceFragment.placeSpinner.getSelectedItemPosition();
+                }catch (Exception e){
+                    place12=ServicesProviderAdapter.placePos;
+                }
+                if (place12 == 1) {
+                    place=context.getResources().getString(R.string.salon);
+                } else if (place12 == 2) {
+                    place=context.getResources().getString(R.string.home);
+                } else if (place12 == 3) {
+                    place=context.getResources().getString(R.string.hall);
+                } else if (place12 == 4) {
+                    place=context.getResources().getString(R.string.hotel);
+                }
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")){
+                if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                    place=context.getResources().getString(R.string.salon);
+                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                    place=context.getResources().getString(R.string.home);
+                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                    place=context.getResources().getString(R.string.hall);
+                } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                    place=context.getResources().getString(R.string.hotel);
+                }
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
+                if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                    place=context.getResources().getString(R.string.salon);
+                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                    place=context.getResources().getString(R.string.home);
+                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                    place=context.getResources().getString(R.string.hall);
+                } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                    place=context.getResources().getString(R.string.hotel);
+                }
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
+                if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                    place=context.getResources().getString(R.string.salon);
+                } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                    place=context.getResources().getString(R.string.home);
+                } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                    place=context.getResources().getString(R.string.hall);
+                } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                    place=context.getResources().getString(R.string.hotel);
+                }
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
+                if (Integer.parseInt(OfferBookingResult.place) == 1) {
+                    place=context.getResources().getString(R.string.salon);
+                } else if (Integer.parseInt(OfferBookingResult.place) == 2) {
+                    place=context.getResources().getString(R.string.home);
+                } else if (Integer.parseInt(OfferBookingResult.place) == 3) {
+                    place=context.getResources().getString(R.string.hall);
+                } else if (Integer.parseInt(OfferBookingResult.place) == 4) {
+                    place=context.getResources().getString(R.string.hotel);
+                }
+            }
+
+            TextView place1=convertView.findViewById(R.id.place);
+            place1.setText(place);
 
 //            listTitleTextViews.add(listTitleTextView);
 //            listTitleTextViews.get(groupPosition).setText( listTitleTextViews.get(groupPosition).getText().toString()+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" R");

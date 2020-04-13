@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
-    android:layout_height="175dp"
-    android:background="@drawable/shadow_dialog"
+    android:layout_height="230dp"
+    android:background="@drawable/border_edit_text"
     android:layout_gravity="center">
 
 
@@ -18,18 +18,19 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!--<TextView-->
-            <!--android:id="@+id/title"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:text="Title"-->
-            <!--android:textSize="17dp" />-->
+            <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/payment_method"
+            android:textSize="17dp" />
 
             <LinearLayout
+                android:layout_marginTop="@dimen/standard_40"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -45,6 +46,7 @@
                 android:src="@drawable/pm"
                 android:textSize="15dp" />
             <RadioButton
+                android:id="@+id/radio_check"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
             </LinearLayout>
@@ -72,10 +74,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/end_gray"/>
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:background="@color/end_gray"/>-->
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -83,19 +85,22 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:id="@+id/confirm"
+                    android:id="@+id/next"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="2dp"
                     android:text="@string/next"
+                    android:layout_margin="7dp"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:background="@drawable/shadow_button_accent_lite_v2"
                     android:textColor="@color/endblue"
                     android:textSize="15dp" />
-                <TextView
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/end_gray"/>
+<!--                <TextView-->
+<!--                    android:layout_width="2dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@color/end_gray"/>-->
                 <TextView
                     android:layout_weight="1"
                     android:id="@+id/cancel"
@@ -103,8 +108,11 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom|center"
                     android:gravity="center"
+                    android:background="@drawable/shadow_accent_c5"
                     android:text="@string/cancel"
+                    android:layout_margin="7dp"
                     android:textSize="15dp"
+                    android:textStyle="bold"
                     android:textColor="@android:color/holo_red_dark"
                     />
 

@@ -73,6 +73,7 @@ public class MainProviderActivity extends AppCompatActivity {
     locOfferlong="," +
             "{\"num\":35,\"value1\":"+Offers.Long+",\"value2\":0}",place_service="";
     Context context;
+    public static Double lat1,lang1;
     public static String bdb_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -296,13 +297,21 @@ public class MainProviderActivity extends AppCompatActivity {
                 service_Sw.setBackgroundResource(android.R.color.transparent);
                 map.setBackgroundResource(R.drawable.shadow_service_tab);
                 fra.setVisibility(View.VISIBLE);
-
+                lang1=null;
+                lat1=null;
+                Log.e("pro_name_id","is "+getIntent().getStringExtra("provider_id"));
+                for (int i=0;i<supInfoList.size();i++){
+                    if (getIntent().getStringExtra("provider_id").equals(supInfoList.get(i).getId())){
+                        lat1=Double.parseDouble(supInfoList.get(i).getBdb_loc_lat());
+                        lang1=Double.parseDouble(supInfoList.get(i).getBdb_loc_long());
+                    }
+                }
 
                 Fragment fragment = new MapTap();
 //                fragment = new MapFragment();
                 fragmentTransaction =  getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fra, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commitAllowingStateLoss();
 
             }
         });

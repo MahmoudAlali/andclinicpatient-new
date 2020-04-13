@@ -41,6 +41,7 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.ReservationsAdapter;
 import com.ptmsa1.vizage.Adapters.ReservationsAdapter2;
 import com.ptmsa1.vizage.DataModel.BookingAutomatedBrowseData;
+import com.ptmsa1.vizage.PayFort.PayTestActivity;
 import com.ptmsa1.vizage.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -141,13 +142,43 @@ public class MyReservationFragment extends Fragment  {
             }
         });
 
-        fragment = new AcceptedReservationFragment();
-        fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-        fragmentTransaction.commitAllowingStateLoss();
-        tabselected(incom_reservation,deposit_reservation,accept_reservation,false);
+        if (PayTestActivity.check.equals("2")  ) {
+            fragment = new AcceptedReservationFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+            tabselected(incom_reservation, deposit_reservation, accept_reservation, false);
+            try {
+                APICall.pd.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            APICall.showSweetDialog(BeautyMainPage.context,BeautyMainPage.context.getResources().getString(R.string.faild_payment));
+            PayTestActivity.check="0";
+        }else if ( PayTestActivity.check.equals("0")){
+            fragment = new AcceptedReservationFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+            tabselected(incom_reservation, deposit_reservation, accept_reservation, false);
 
+        }else if (PayTestActivity.check.equals("1") ){
+            tabselected(deposit_reservation,accept_reservation,incom_reservation,false);
+            fragment = new DepositReservationFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+            try {
+                APICall.pd.dismiss();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            APICall.showSweetDialog(BeautyMainPage.context,BeautyMainPage.context.getResources().getString(R.string.success_payment));
+            PayTestActivity.check="0";
+        }
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();

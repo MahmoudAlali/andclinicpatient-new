@@ -26,6 +26,7 @@ import com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptmsa1.vizage.Activities.TabTwo;
 import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.DataExample.OffersData;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import java.text.DecimalFormat;
@@ -73,12 +74,32 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         return item;
     }
+    DecimalFormat doub=new DecimalFormat("#.##");
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        DecimalFormat df = new DecimalFormat("0.0");
-        DecimalFormat doub=new DecimalFormat("#.##");
+//        DecimalFormat df = new DecimalFormat("0.0");
+        if (offers.get(position).getBdb_is_morning_offer().equals("1")) {
+            ((Item) holder).morning_offer.setText(context.getResources().getString(R.string.morning_offer));
+        }else {
+            ((Item) holder).morning_offer.setText(context.getResources().getString(R.string.all_day_offer));
 
+        }
+        ((Item)holder).placeL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (offers.get(position).getLatitude().equals("")
+                        &&offers.get(position).getLatitude().equals("null")
+                        &&offers.get(position).getLongitude().equals("")
+                        &&offers.get(position).getLongitude().equals("null")
+                ){
+                    Intent intent=new Intent(context, MapsActivityLocation.class);
+                    intent.putExtra("lat",Double.parseDouble(offers.get(position).getLatitude()));
+                    intent.putExtra("lang",Double.parseDouble(offers.get(position).getLongitude()));
+                    context.startActivity(intent);
+                }
+            }
+        });
         float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
         float discountval=Float.parseFloat(Double.parseDouble(offers.get(position).getDiscount())+"");
      //   old_prc = Float.parseFloat(df.format(old_prc));
@@ -253,8 +274,8 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView pro_name,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
-        ImageView info,add_offer;
+        TextView pro_name,morning_offer,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
+        ImageView info,add_offer,placeL;
         public Item(View itemView) {
             super(itemView);
             pro_name = itemView.findViewById(R.id.pro_name);
@@ -271,6 +292,8 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             total_dis = itemView.findViewById(R.id.disAmount);
             onServices = itemView.findViewById(R.id.onServices);
             depositPrcntg = itemView.findViewById(R.id.depPerc);
+            placeL = itemView.findViewById(R.id.placeL);
+            morning_offer = itemView.findViewById(R.id.morning_offer);
 
         }
     }

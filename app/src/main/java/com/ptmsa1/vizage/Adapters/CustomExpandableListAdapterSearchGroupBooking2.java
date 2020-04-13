@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.DataModel.SearchBookingDataSTR;
@@ -85,7 +86,7 @@ CustomExpandableListAdapterSearchGroupBooking2 extends BaseExpandableListAdapter
             convertView = layoutInflater.inflate(R.layout.list_group, null);
             final TextView listTitleTextView = (TextView) convertView
                     .findViewById(R.id.listTitle);
-            TextView book =  convertView
+            ImageView book =  convertView
                     .findViewById(R.id.book);
             book.setOnClickListener(new View.OnClickListener() {
                 @Override

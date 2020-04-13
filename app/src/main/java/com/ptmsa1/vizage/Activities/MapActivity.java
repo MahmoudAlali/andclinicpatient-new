@@ -1,74 +1,61 @@
-package com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG;
+package com.ptmsa1.vizage.Activities;
 
 import android.Manifest;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Paint;
-import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.ptmsa1.vizage.Activities.BeautyMainPage;
-import com.ptmsa1.vizage.Activities.TabOne;
-import com.ptmsa1.vizage.Activities.TabTwo;
-import com.ptmsa1.vizage.Fragments.MyIndEffectsActivity;
+import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MapTap;
 import com.ptmsa1.vizage.R;
 import com.ptmsa1.vizage.test.MapWrapperLayout;
-import com.ptmsa1.vizage.test.OnInfoWindowElemTouchListener;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Locale;
 
-public class MapTap extends Fragment implements OnMapReadyCallback {
-
-    View view;
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
     MapView mMapView;
     private GoogleMap googleMap;
     LocationManager locationManager;
     LocationListener locationListener;
-    MapWrapperLayout mapWrapperLayout;
+//    MapWrapperLayout mapWrapperLayout;
     LayoutInflater layoutInflater;
     TextView service_sw,offer_sw;
+    Double lat,lang;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState)
-    {
-        Toast.makeText(BeautyMainPage.context,"CREATEd",Toast.LENGTH_LONG);
-        view = inflater.inflate(R.layout.provider_location_map_layout, container, false);
+    Context context;
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.provider_location_map_layout);
+//        mapWrapperLayout = findViewById(R.id.map_relative_layout);
 
-        mapWrapperLayout = view.findViewById(R.id.map_relative_layout);
+        context=this;
+        lat=getIntent().getDoubleExtra("lat",0.0d);
+        lang=getIntent().getDoubleExtra("lang",0.0d);
 
         // Fixing Later Map loading Delay
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    mMapView = new MapView(BeautyMainPage.context);
-                    mapWrapperLayout.addView(mMapView);
-                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    mMapView = new MapView(context);
+//                    mapWrapperLayout.addView(mMapView);
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
@@ -80,7 +67,7 @@ public class MapTap extends Fragment implements OnMapReadyCallback {
                                 e.printStackTrace();
                             }
                             mMapView.onCreate(savedInstanceState);
-                            mMapView.getMapAsync(MapTap.this);
+                            mMapView.getMapAsync(MapActivity.this);
                             mMapView.onResume(); // needed to get the map to display immediately
                         }
                     });
@@ -90,9 +77,7 @@ public class MapTap extends Fragment implements OnMapReadyCallback {
             }
         }).start();
 
-        MapsInitializer.initialize(getActivity().getApplicationContext());
-
-        return view;
+        MapsInitializer.initialize(context);
     }
 
     public static int getPixelsFromDp(Context context, float dp) {
@@ -103,20 +88,20 @@ public class MapTap extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(final GoogleMap mMap)
     {
-        googleMap = mMap;
+//        googleMap = mMap;
 
         //------------------------ info title ---------------------
         // MapWrapperLayout initialization
         // 39 - default marker height
         // 20 - offset between the default InfoWindow bottom edge and it's content bottom edge
-        mapWrapperLayout.init(googleMap, getPixelsFromDp(BeautyMainPage.context, 39 + 20));
+//        mapWrapperLayout.init(googleMap, getPixelsFromDp(BeautyMainPage.context, 39 + 20));
 
         // We want to reuse the info window for all the markers,
         // so let's create only one class member instance
 
         // Setting custom OnTouchListener which deals with the pressed state
         // so it shows up
-        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -130,18 +115,16 @@ public class MapTap extends Fragment implements OnMapReadyCallback {
         final DecimalFormat df = new DecimalFormat("0.0");
 
         //---------------show custom info title-------------------
-        Log.e("Lat","lat"+MainProviderActivity.lat1);
-        Log.e("Lang","lang"+MainProviderActivity.lang1);
         googleMap.setMyLocationEnabled(true);
-        if (MainProviderActivity.lat1!=null
-            &&  MainProviderActivity.lang1!=null
-        ) {
-            LatLng sydney = new LatLng(MainProviderActivity.lat1, MainProviderActivity.lang1);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Provider place"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
-            // for enter add + button and reserve service
-        }
+
+        // Add a marker in Sydney, Australia,
+        // and move the map's camera to the same location.
+        LatLng sydney = new LatLng(-33.852, 151.211);
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Booking Place"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        // for enter add + button and reserve service
     }
 
 }

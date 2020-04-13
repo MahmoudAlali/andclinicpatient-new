@@ -490,10 +490,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_google_map">Map</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="OK">ok</string>
     <string name="choose_offer_date">choose offer date</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
     <string name="select_date">select date</string>
     <string name="Phone_Number">phone  number</string>
     <string name="client_name">client name</string>
@@ -808,5 +808,16 @@
     <string name="wrong_password">Wrong password</string>
     <string name="ur_acc_activated_pls_login_now">Your account has been activated,please login now</string>
     <string name="deposit_done">The deposit payment was completed successfully</string>
+    <string name="select_pay_method">Please, select payment method</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="success_payment">Payment completed Successfully</string>
+    <string name="faild_payment">The operation did not complete successfully, please try again later</string>
+    <string name="title_activity_maps_location">Map</string>
+    <string name="book_location">Book location</string>
+    <string name="deposit_val">deposit value:</string>
+    <string name="morning_offer">Morning Offer</string>
+    <string name="all_day_offer">عرض مسائي</string>
+    <string name="deposit_ratio">Deposit ratio:</string>
+    <string name="order_location">Order Location</string>
 
 </resources>

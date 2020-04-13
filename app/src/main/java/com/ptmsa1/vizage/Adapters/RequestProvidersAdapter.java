@@ -19,6 +19,7 @@ import com.ptmsa1.vizage.DataModel.DateClass;
 import com.ptmsa1.vizage.DataModel.Location_Beauty;
 import com.ptmsa1.vizage.DataModel.RequestProviderItem;
 import com.ptmsa1.vizage.Fragments.RequestProvidersFragment;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -123,7 +124,24 @@ public static int comparenum=0;
 public void onBindViewHolder(@NonNull final ListHolder holder, final int position) {
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
+    (holder).place.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (itemArrayList.get(position).getBdb_loc_lat()!=null
+                    && !itemArrayList.get(position).getBdb_loc_lat().equals("null")
+                    && !itemArrayList.get(position).getBdb_loc_lat().equals("")
+                    && itemArrayList.get(position).getBdb_loc_long()!=null
+                    && !itemArrayList.get(position).getBdb_loc_long().equals("null")
+                    && !itemArrayList.get(position).getBdb_loc_long().equals("")
 
+            ) {
+                Intent intent = new Intent(context, MapsActivityLocation.class);
+                intent.putExtra("lat", Double.parseDouble(itemArrayList.get(position).getBdb_loc_lat()));
+                intent.putExtra("lang", Double.parseDouble(itemArrayList.get(position).getBdb_loc_long()));
+                context.startActivity(intent);
+            }
+        }
+    });
     APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo);
 
     ( holder).provider_rate.setText(itemArrayList.get(position).getRating());
@@ -144,13 +162,14 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 }
 public class ListHolder extends RecyclerView.ViewHolder {
     TextView providerName,provider_rate,depositPrcntg;
-    ImageView addRequest,logo;
+    ImageView addRequest,logo,place;
     public ListHolder(View itemView) {
         super(itemView);
         providerName=itemView.findViewById(R.id.service_name);
         addRequest=itemView.findViewById(R.id.add_request);
         provider_rate=itemView.findViewById(R.id.provider_rate);
         logo=itemView.findViewById(R.id.logoImg);
+        place=itemView.findViewById(R.id.place);
         depositPrcntg=itemView.findViewById(R.id.depPerc);
     }
 }

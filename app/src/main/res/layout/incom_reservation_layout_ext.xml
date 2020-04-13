@@ -55,37 +55,58 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
-            android:weightSum="3"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
                 >
-                <android.support.v7.widget.CardView
-                    android:id="@+id/myCardView"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    app:cardCornerRadius="50dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    >
+<!--                <android.support.v7.widget.CarView-->
+<!--                    android:id="@+id/myCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:cardCornerRadius="50dp"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    >-->
                     <ImageView
                         android:id="@+id/logoImg"
                         android:src="@drawable/clientlogo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
                         android:scaleType="centerCrop"
                         />
-                </android.support.v7.widget.CardView>
+<!--                </android.support.v7.widget.CarView>-->
 
 
             </LinearLayout>
+
+            <TextView
+            android:id="@+id/client_name"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#a5587a"
+            android:layout_height="@dimen/high_edit_text" />
+            <ImageView
+                android:id="@+id/place"
+                android:textColor="#9a7084"
+                android:src="@drawable/ic_location_on_black_24dp"
+                android:layout_width="@dimen/standard_40"
+                android:layout_height="@dimen/standard_30"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="3"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -96,14 +117,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/client_name"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:textSize="20dp"
-                        android:textColor="#a5587a"
-                        android:layout_height="@dimen/high_edit_text" />
+
                     <TextView
                         android:layout_weight="1"
                         android:id="@+id/total_price"
@@ -122,25 +136,32 @@
                     android:orientation="horizontal"
                     android:weightSum="2"
                     >
+
                     <TextView
                         android:id="@+id/booking_place"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_edit_text"
-                        android:text="Place"
-                        android:textColor="@android:color/black"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="20dp"
-                        />
+                        android:text="Place"
+                        android:textColor="@android:color/black"
+                        android:textSize="20dp" />
 
                     <ImageView
                         android:id="@+id/inner_res"
-                        android:layout_weight="1"
-                        android:textColor="#9a7084"
-                        android:layout_width="match_parent"
+                        android:layout_width="40dp"
                         android:layout_height="match_parent"
+                        android:textColor="#9a7084" />
 
-                        />
+                    <TextView
+                        android:id="@+id/bdb_expected_deposit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/deposit"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="18dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
