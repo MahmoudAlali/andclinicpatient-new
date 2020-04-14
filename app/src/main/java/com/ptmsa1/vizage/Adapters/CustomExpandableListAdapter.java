@@ -106,8 +106,10 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
-            final TextView listTitleTextView = (TextView) convertView
+            final LinearLayout listTitleTextView =convertView
                     .findViewById(R.id.listTitle);
+            final TextView listTitleText =convertView
+                    .findViewById(R.id.listTitle2);
             ImageView book =  convertView
                     .findViewById(R.id.book);
 
@@ -164,7 +166,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     });
                 }
             });
-            listTitleTextView.setText(listTitle);
+            listTitleText.setText(listTitle);
 
 
             TextView bdb_expected_deposit=convertView.findViewById(R.id.bdb_expected_deposit);
@@ -198,6 +200,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 }
             });
             String place="";
+            TextView costDetails=convertView.findViewById(R.id.costDetails);
 
             if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
                 int place12;
@@ -208,52 +211,72 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                 }
                 if (place12 == 1) {
                     place=context.getResources().getString(R.string.salon);
+                    costDetails.setVisibility(View.GONE);
                 } else if (place12 == 2) {
                     place=context.getResources().getString(R.string.home);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (place12 == 3) {
                     place=context.getResources().getString(R.string.hall);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (place12 == 4) {
                     place=context.getResources().getString(R.string.hotel);
+                    costDetails.setVisibility(View.VISIBLE);
                 }
             }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")){
                 if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
                     place=context.getResources().getString(R.string.salon);
+                    costDetails.setVisibility(View.GONE);
                 } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
                     place=context.getResources().getString(R.string.home);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
                     place=context.getResources().getString(R.string.hall);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
                     place=context.getResources().getString(R.string.hotel);
+                    costDetails.setVisibility(View.VISIBLE);
                 }
             }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
                 if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 1) {
                     place=context.getResources().getString(R.string.salon);
+                    costDetails.setVisibility(View.GONE);
                 } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 2) {
                     place=context.getResources().getString(R.string.home);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 3) {
                     place=context.getResources().getString(R.string.hall);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition() == 4) {
                     place=context.getResources().getString(R.string.hotel);
+                    costDetails.setVisibility(View.VISIBLE);
                 }
             }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
                 if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 1) {
                     place=context.getResources().getString(R.string.salon);
+                    costDetails.setVisibility(View.GONE);
                 } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 2) {
                     place=context.getResources().getString(R.string.home);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 3) {
                     place=context.getResources().getString(R.string.hall);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 4) {
                     place=context.getResources().getString(R.string.hotel);
+                    costDetails.setVisibility(View.VISIBLE);
                 }
             }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
                 if (Integer.parseInt(OfferBookingResult.place) == 1) {
                     place=context.getResources().getString(R.string.salon);
+                    costDetails.setVisibility(View.GONE);
                 } else if (Integer.parseInt(OfferBookingResult.place) == 2) {
                     place=context.getResources().getString(R.string.home);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (Integer.parseInt(OfferBookingResult.place) == 3) {
                     place=context.getResources().getString(R.string.hall);
+                    costDetails.setVisibility(View.VISIBLE);
                 } else if (Integer.parseInt(OfferBookingResult.place) == 4) {
                     place=context.getResources().getString(R.string.hotel);
+                    costDetails.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -266,10 +289,10 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 //            Log.e("pricegroup",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price());
 //            Log.e("pricegroup",groupPosition+"");
 
-            listTitleTextView.setTypeface(null, Typeface.BOLD);
+            listTitleText.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
-            return null;
+            return convertView;
 
         }
 

@@ -90,8 +90,10 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
-            final TextView listTitleTextView = (TextView) convertView
+            final LinearLayout listTitleTextView =convertView
                     .findViewById(R.id.listTitle);
+            final TextView listTitleText =convertView
+                    .findViewById(R.id.listTitle2);
             ImageView book =  convertView
                     .findViewById(R.id.book);
             book.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +121,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
                     });
                 }
             });
-            listTitleTextView.setText(listTitle);
+            listTitleText.setText(listTitle);
 
             ImageView location=convertView.findViewById(R.id.location);
 
@@ -149,20 +151,26 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
 //            Log.e("pricegroup",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price());
 //            Log.e("pricegroup",groupPosition+"");
             String place="";
+            TextView costDetails=convertView.findViewById(R.id.costDetails);
+
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 1) {
                 place=context.getResources().getString(R.string.salon);
+                costDetails.setVisibility(View.GONE);
             } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 2) {
                 place=context.getResources().getString(R.string.home);
+                costDetails.setVisibility(View.VISIBLE);
             } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 3) {
                 place=context.getResources().getString(R.string.hall);
+                costDetails.setVisibility(View.VISIBLE);
             } else if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 4) {
                 place=context.getResources().getString(R.string.hotel);
+                costDetails.setVisibility(View.VISIBLE);
             }
 
             TextView place1=convertView.findViewById(R.id.place);
             place1.setText(place);
 
-            listTitleTextView.setTypeface(null, Typeface.BOLD);
+            listTitleText.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
             return convertView;

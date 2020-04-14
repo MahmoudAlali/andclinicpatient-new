@@ -672,5 +672,6 @@
     <string name="all_day_offer">عرض مسائي</string>
     <string name="deposit_ratio">نسبة العربون:</string>
     <string name="order_location">موقع الطلب</string>
+    <string name="reser_location">موقع الحجز</string>
 
 </resources>
