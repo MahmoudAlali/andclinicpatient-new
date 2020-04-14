@@ -53,7 +53,7 @@ public class ListServicesFragment extends Fragment {
             R.drawable.makeup2,
             R.drawable.massage,
             R.drawable.spa,
-            R.drawable.nails_basic,
+            R.drawable.nails,
             R.drawable.body,
             R.drawable.skin,
             R.drawable.eyebrows
