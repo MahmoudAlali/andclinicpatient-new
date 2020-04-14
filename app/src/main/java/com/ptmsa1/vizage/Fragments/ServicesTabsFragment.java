@@ -1656,13 +1656,13 @@ public class ServicesTabsFragment extends Fragment implements View.OnClickListen
 
 
     void tabselected(TextView t1,TextView t2,TextView t3){
-        t1.setTextSize(20);
+        t1.setTextSize(16);
         t1.setBackgroundResource(R.drawable.selected_tab_shape);
         t1.setTextColor(Color.MAGENTA);
-        t2.setTextSize(18);
+        t2.setTextSize(14);
         t2.setBackgroundResource(R.drawable.unselected_tab_shape);
         t2.setTextColor(Color.BLACK);
-        t3.setTextSize(18);
+        t3.setTextSize(14);
         t3.setBackgroundResource(R.drawable.unselected_tab_shape);
         t3.setTextColor(Color.BLACK);
 

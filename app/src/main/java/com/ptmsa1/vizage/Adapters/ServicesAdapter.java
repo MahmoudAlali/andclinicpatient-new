@@ -172,12 +172,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             ( holder).depositPrcntg.setText(deposit);
 
             Log.e("ISCHECKED:"+holder.getLayoutPosition(),isChecked.containsKey(position)+"");
-            if (isChecked.containsKey(holder.getLayoutPosition())) {
+            /*if (isChecked.containsKey(holder.getLayoutPosition())) {
                 holder.service_compare.setChecked(isChecked.get(position));
 
             } else {
                 ( holder).service_compare.setChecked(false);
-            }
+            }*/
             APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogoId(),(holder).logo);
 
             if(itemArrayList.get(position).getIs_fav_sup().equals("0"))
@@ -205,7 +205,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 
                 }
             });
-            ( holder).service_compare.setOnClickListener(new View.OnClickListener() {
+            /*( holder).service_compare.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.e("LayoutPostion",holder.getLayoutPosition()+"");
@@ -280,7 +280,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
 
                     Log.e("COMPARE_SIZE",TabOne.compareModels.size()+"");
                     }
-                });
+                });*/
 
                 ( holder).service_price.setText(itemArrayList.get(position).getPriceByFilter()+" R");
                try {
@@ -329,23 +329,23 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         TextView pro_name, depositPrcntg;
         RatingBar service_rate;
         ImageView service_add,service_fav,place,logo;
-        CheckBox service_compare;
+       // CheckBox service_compare;
         LinearLayout service_details;
         public ListHolder(View itemView) {
             super(itemView);
-            service_compare = (CheckBox) itemView.findViewById(R.id.service_compare);
+          //  service_compare = (CheckBox) itemView.findViewById(R.id.service_compare);
             service_name=itemView.findViewById(R.id.service_name);
             service_price=itemView.findViewById(R.id.service_price);
             service_add=itemView.findViewById(R.id.service_add);
             service_rate=itemView.findViewById(R.id.service_rate);
             pro_name=itemView.findViewById(R.id.provider_name);
 //            more_btn=itemView.findViewById(R.id.more_btn);
-            service_compare=itemView.findViewById(R.id.service_compare);
+         //   service_compare=itemView.findViewById(R.id.service_compare);
             place=itemView.findViewById(R.id.place);
             service_fav=itemView.findViewById(R.id.service_fav);
             depositPrcntg=itemView.findViewById(R.id.depPerc);
 
-            service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+          /*  service_compare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
@@ -353,7 +353,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
                     isChecked.put(getAdapterPosition(), b);
 
                 }
-            });
+            });*/
             logo=itemView.findViewById(R.id.logoImg);
 
         }

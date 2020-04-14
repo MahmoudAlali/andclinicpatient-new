@@ -85,8 +85,10 @@ public class CustomExpandableListBagAdapterForOthers extends BaseExpandableListA
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
-            final TextView listTitleTextView = (TextView) convertView
+            final LinearLayout listTitleTextView =convertView
                     .findViewById(R.id.listTitle);
+            final TextView listTitleText =convertView
+                    .findViewById(R.id.listTitle2);
             ImageView book =  convertView
                     .findViewById(R.id.book);
 
@@ -118,9 +120,9 @@ public class CustomExpandableListBagAdapterForOthers extends BaseExpandableListA
                     });
                 }
             });
-            listTitleTextView.setText(listTitle);
+            listTitleText.setText(listTitle);
 
-            listTitleTextView.setTypeface(null, Typeface.BOLD);
+            listTitleText.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
             return convertView;

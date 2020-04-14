@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.DataModel.SearchBookingDataSTR;
@@ -84,8 +85,10 @@ CustomExpandableListAdapterSearchGroupBooking2 extends BaseExpandableListAdapter
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
-            final TextView listTitleTextView = (TextView) convertView
+            final LinearLayout listTitleTextView =convertView
                     .findViewById(R.id.listTitle);
+            final TextView listTitleText =convertView
+                    .findViewById(R.id.listTitle2);
             ImageView book =  convertView
                     .findViewById(R.id.book);
             book.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +103,7 @@ CustomExpandableListAdapterSearchGroupBooking2 extends BaseExpandableListAdapter
                     });
                 }
             });
-            listTitleTextView.setText(listTitle);
+            listTitleText.setText(listTitle);
 
 //            listTitleTextViews.add(listTitleTextView);
 //            listTitleTextViews.get(groupPosition).setText( listTitleTextViews.get(groupPosition).getText().toString()+" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" R");
@@ -108,7 +111,7 @@ CustomExpandableListAdapterSearchGroupBooking2 extends BaseExpandableListAdapter
 //            Log.e("pricegroup",stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price());
 //            Log.e("pricegroup",groupPosition+"");
 
-            listTitleTextView.setTypeface(null, Typeface.BOLD);
+            listTitleText.setTypeface(null, Typeface.BOLD);
             return convertView;
         }else {
             return convertView;
