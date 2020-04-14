@@ -23,6 +23,7 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.BookingRequestDetailsActivity;
 import com.ptmsa1.vizage.DataModel.BookingRequestDataModel;
 import com.ptmsa1.vizage.Fragments.MyBookingRequestsFragment;
+import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -221,6 +222,29 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             APICall.getSalonLogo(BeautyMainPage.context,bookingRequestData.get(position).getLogo_id(),((Item)holder).logoImg);
 
 
+
+            //---------------------
+        ((Item)holder).place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!bookingRequestData.get(position).getBdb_loc_lat().equals("")
+                        && !bookingRequestData.get(position).getBdb_loc_lat().equals("null")
+                        && !bookingRequestData.get(position).getBdb_loc_long().equals("")
+                        && !bookingRequestData.get(position).getBdb_loc_long().equals("null")
+                ){
+                    Intent intent=new Intent(context, MapsActivityLocation.class);
+                    intent.putExtra("lat",Double.parseDouble(bookingRequestData.get(position).getBdb_loc_lat()));
+                    intent.putExtra("lang",Double.parseDouble(bookingRequestData.get(position).getBdb_loc_long()));
+                    context.startActivity(intent);
+
+
+                }
+            }
+        });
+
+
+
+
             // >>>>>>>>>>>>> order details
             ((Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -311,7 +335,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //        MyClickListener listener;
 
         TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID;
-        ImageView book_Details,inner_res,logoImg;
+        ImageView book_Details,inner_res,place,logoImg;
 
         LinearLayout myroot;
         public Item(View itemView) {
@@ -327,7 +351,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             booking_place=itemView.findViewById(R.id.booking_place);
             book_Details=itemView.findViewById(R.id.book_details);
             cancel=itemView.findViewById(R.id.refuse);
-//            accept=itemView.findViewById(R.id.accept);
+            place=itemView.findViewById(R.id.place);
             logoImg=itemView.findViewById(R.id.logoImg);
             ID=itemView.findViewById(R.id.order_num);
 

@@ -88,10 +88,10 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((Item)holder).placeL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (offers.get(position).getLatitude().equals("")
-                        &&offers.get(position).getLatitude().equals("null")
-                        &&offers.get(position).getLongitude().equals("")
-                        &&offers.get(position).getLongitude().equals("null")
+                if (!offers.get(position).getLatitude().equals("")
+                        &&!offers.get(position).getLatitude().equals("null")
+                        &&!offers.get(position).getLongitude().equals("")
+                        &&!offers.get(position).getLongitude().equals("null")
                 ){
                     Intent intent=new Intent(context, MapsActivityLocation.class);
                     intent.putExtra("lat",Double.parseDouble(offers.get(position).getLatitude()));

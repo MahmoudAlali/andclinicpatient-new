@@ -231,6 +231,7 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
                 //--------------------- get services---------------------------
+                Log.e("getOrderedSuppliers","getOrderedSuppliers");
                 APICall.getOrderedSuppliers(BeautyMainPage.context);
 
 

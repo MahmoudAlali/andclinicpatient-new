@@ -4627,7 +4627,15 @@ public class APICall {
                         String success=object.getString("success");
                         if (success.equals("true")){
                             JSONObject data=object.getJSONObject("data");
-                            String bdb_name=data.getString("bdb_name");
+                            final String bdb_name=data.getString("bdb_name");
+                            BeautyMainPage.client_name=bdb_name;
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    BeautyMainPage.profileNameText.setText(bdb_name);
+
+                                }
+                            });
                             BeautyMainPage.bdb_email=data.getString("bdb_email");
                             String bdb_mobile=data.getString("bdb_mobile");
 
@@ -4860,6 +4868,7 @@ public class APICall {
                     Login.logout=true;
                     SharedPreferences preferences=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
                     preferences.edit().clear();
+                    preferences.edit().remove("token");
                     preferences.edit().commit();
                     preferences.edit().apply();
                     ((AppCompatActivity) context).finish();
@@ -22781,7 +22790,7 @@ public class APICall {
 
         Log.e("NewToken",postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"//api/auth/user/switchAccount")
+                .url(API_PREFIX_NAME+"/api/auth/user/switchAccount")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("Accept","application/json")
@@ -25851,6 +25860,15 @@ public class APICall {
                                 JSONObject jObject = orders.getJSONObject(i);
 
                                 String bdb_id = jObject.getString("bdb_id");
+                                JSONObject bdb_location_id = jObject.getJSONObject("bdb_location_id");
+                                String bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
+                                try {
+                                     bdb_loc_lat = jObject.getString("bdb_loc_lat");
+                                     bdb_loc_long = jObject.getString("bdb_loc_long");
+                                     bdb_address_id = jObject.getString("bdb_id");
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 String bdb_booking_place = jObject.getString("booking_place");
                                 //String bdb_location_id = jObject.getJSONObject("bdb_location_id").getString("bdb_id");
                                 String bdb_journey_time = jObject.getString("bdb_journey_time");
@@ -25900,7 +25918,7 @@ public class APICall {
 
                               //  MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on));
                                 requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,bdb_status,bdb_pack_code
-                                ,bdb_is_group_booking,total_cost,bdb_name_booking,bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,clientsList));
+                                ,bdb_is_group_booking,total_cost,bdb_name_booking,bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList));
 
 
 
