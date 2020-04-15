@@ -816,7 +816,7 @@
     <string name="book_location">Book location</string>
     <string name="deposit_val">deposit value:</string>
     <string name="morning_offer">Morning Offer</string>
-    <string name="all_day_offer">عرض مسائي</string>
+    <string name="all_day_offer">Evning offer</string>
     <string name="deposit_ratio">Deposit ratio:</string>
     <string name="order_location">Order Location</string>
 
@@ -825,4 +825,5 @@
     <string name="cancelled_after_deposit">cancelled (no deposit paid)</string>
     <string name="completly_executed">completely executed</string>
     <string name="reser_location">booking location</string>
+    <string name="cost_main">Main cost:</string>
 </resources>

@@ -25,6 +25,8 @@ import com.ptmsa1.vizage.Fragments.PlaceServiceMultipleBookingFragment;
 import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -152,7 +154,20 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
 //            Log.e("pricegroup",groupPosition+"");
             String place="";
             TextView costDetails=convertView.findViewById(R.id.costDetails);
+//            TextView costDetails=convertView.findViewById(R.id.costDetails);
+            try {
+                double main_cost = Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()) ;
+                double jcost = Double.parseDouble(stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getJourneyCost());
 
+                BigDecimal a = new BigDecimal(main_cost);
+                BigDecimal a1 = new BigDecimal(jcost);
+                BigDecimal m_cost = a.setScale(0, RoundingMode.UP);
+                BigDecimal j_cost = a1.setScale(0, RoundingMode.UP);
+                costDetails.setText(context.getResources().getString(R.string.cost_main)+" "+context.getResources().getString(R.string.ryal)+", "+m_cost+" "+context.getResources().getString(R.string.journey_cost)+": "+j_cost+" "+context.getResources().getString(R.string.ryal));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition() == 1) {
                 place=context.getResources().getString(R.string.salon);
                 costDetails.setVisibility(View.GONE);

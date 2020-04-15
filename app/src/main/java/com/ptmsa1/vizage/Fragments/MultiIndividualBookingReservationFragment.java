@@ -102,10 +102,10 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
             is_group_booking="3";
 
         }
-        HintArrayAdapter adapter = new HintArrayAdapter(this.getActivity(),0 );
-        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_type)));
-        adapter.setDropDownViewResource(R.layout.spinner_center_item);
-        choose_occision.setAdapter(adapter);
+        HintArrayAdapter adapter1 = new HintArrayAdapter(this.getActivity(),0 );
+        adapter1.addAll(Arrays.asList(getResources().getStringArray(R.array.service_type)));
+        adapter1.setDropDownViewResource(R.layout.spinner_center_item);
+        choose_occision.setAdapter(adapter1);
 
 
         choose_occision.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -173,7 +173,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                 try {
                     sh.getString("bdb_name", null).equals("");
                 } catch (NullPointerException npe) {
-                    APICall.detailsUser1("http://clientapp.dcoret.com/api/auth/user/detailsUser", BeautyMainPage.context);
+                    APICall.detailsUser1(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", BeautyMainPage.context);
 //                    editor.putString("bdb_name","");
 //                    editor.commit();
                 }
@@ -230,9 +230,9 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
         });
 
                 //------------------ adapter for add services----------------------
-                adapter = new HintArrayAdapter(BeautyMainPage.context, 0);
-                adapter.addAll(serviceNameList);
-                adapter.setDropDownViewResource(R.layout.spinner_center_item);
+                 adapter = new ArrayAdapter(BeautyMainPage.context, R.layout.spinner_center_item,serviceNameList);
+//                adapter.addAll(serviceNameList);
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
                 add_service.setTitle(getResources().getString(R.string.services));
                 add_service.setAdapter(adapter);
 

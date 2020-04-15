@@ -673,5 +673,6 @@
     <string name="deposit_ratio">نسبة العربون:</string>
     <string name="order_location">موقع الطلب</string>
     <string name="reser_location">موقع الحجز</string>
+    <string name="cost_main">التكلفة الاساسية:</string>
 
 </resources>
