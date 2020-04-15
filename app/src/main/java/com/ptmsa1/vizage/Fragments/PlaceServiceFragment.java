@@ -112,7 +112,7 @@ public class PlaceServiceFragment extends Fragment {
                 }
             } else if (i == 5) {
                 if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                    distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
+//                    distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
 //                    distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
                 }
             } else if (i == 7) {
@@ -435,6 +435,8 @@ public class PlaceServiceFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
                 } else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
+                } else if(date.getText().toString().equals(getResources().getString(R.string.date))){
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.choose_date));
                 } else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
                     dateFilter =  ",{\"num\":44,\"value1\":\"" + date.getText().toString() + "\"}";

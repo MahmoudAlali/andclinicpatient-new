@@ -5871,9 +5871,9 @@ public class APICall {
                                         String id=info.getString("id");
                                         String address=info.getString("address");
 
-                                        String bdb_loc_lat=info.getString("bdb_loc_lat");
-                                        String bdb_loc_long=info.getString("bdb_loc_long");
-                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
+//                                        String bdb_loc_lat=info.getString("latitude");
+//                                        String bdb_loc_long=info.getString("longitude");
+                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,"",""));
 
 //                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
                                     }

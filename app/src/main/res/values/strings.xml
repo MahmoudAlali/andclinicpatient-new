@@ -825,4 +825,5 @@
     <string name="cancelled_after_deposit">Cancelled (no deposit paid)</string>
     <string name="completly_executed">Completely executed</string>
     <string name="reser_location">Booking location</string>
+    <string name="cost_main">Main cost:</string>
 </resources>
