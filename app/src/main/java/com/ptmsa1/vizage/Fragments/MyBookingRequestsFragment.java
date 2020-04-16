@@ -657,7 +657,7 @@ public class MyBookingRequestsFragment extends Fragment {
             e.printStackTrace();
         }
         t1.setTextSize(14);
-        t1.setBackgroundResource(R.drawable.shadow_accent_c5);
+        t1.setBackgroundResource(R.drawable.shadow_service_tab);
         t2.setTextSize(12);
         t2.setBackgroundResource(android.R.color.transparent);
 

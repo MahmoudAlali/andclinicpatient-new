@@ -97,14 +97,14 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
 
         //---------- manual switch ------------
         offer_sw.setBackgroundResource(android.R.color.transparent);
-        service_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+        service_sw.setBackgroundResource(R.drawable.shadow_service_tab2);
         showOnMap=0;
 
         service_sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 offer_sw.setBackgroundResource(android.R.color.transparent);
-                service_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+                service_sw.setBackgroundResource(R.drawable.shadow_service_tab2);
                 showOnMap=0;
                 googleMap.clear();
                 for (int i = 0; i< TabOne.arrayList.size(); i++){
@@ -121,7 +121,7 @@ public class TabThree extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 service_sw.setBackgroundResource(android.R.color.transparent);
-                offer_sw.setBackgroundResource(R.drawable.shadow_service_tab);
+                offer_sw.setBackgroundResource(R.drawable.shadow_service_tab2);
                 showOnMap=1;
                 googleMap.clear();
 //                TabTwo.arrayList.size();

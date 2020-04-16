@@ -47,7 +47,7 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginTop="5dp"
-            android:background="@drawable/border"
+            android:background="@drawable/border2"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -56,13 +56,15 @@
                 android:layout_width="150dp"
                 android:layout_height="@dimen/high_button"
                 android:text="@string/Offers"
-                android:background="@drawable/shadow_service_tab"
+                android:textColor="#000"
+                android:background="@drawable/shadow_service_tab2"
                 android:gravity="center"
                 />
             <TextView
                 android:id="@+id/service_Sw"
                 android:layout_width="150dp"
                 android:layout_height="@dimen/high_button"
+                android:textColor="#000"
                 android:text="@string/service"
                 android:gravity="center"
                 />

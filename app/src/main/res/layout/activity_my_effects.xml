@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow_button_accent_lite_v2"
+            android:background="@drawable/ok_button"
             android:layout_marginRight="@dimen/pf_10_txt_size"
             android:layout_marginLeft="@dimen/pf_10_txt_size"
             android:text="@string/update"

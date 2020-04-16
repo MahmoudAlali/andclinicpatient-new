@@ -104,6 +104,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:paddingBottom="5dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="@color/graylight"
@@ -261,6 +262,7 @@
 
 
 
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
@@ -297,12 +299,54 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/unselected_tab_shape"/>
             </LinearLayout>
+-->
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:weightSum="3"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/servicetabclick"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/high_button"
+                    android:text="@string/services"
+                    android:textColor="#000"
+                    android:background="@drawable/shadow_service_tab"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/offertabclick"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/high_button"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:text="@string/Offers"
+                    />
+                <TextView
+                    android:id="@+id/maptabclick"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:layout_height="@dimen/high_button"
+                    android:gravity="center"
+                    android:text="@string/Map" />
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
         <LinearLayout
             android:id="@+id/pages"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:layout_marginBottom="5dp"
             android:weightSum="3"
             android:layoutDirection="ltr"
