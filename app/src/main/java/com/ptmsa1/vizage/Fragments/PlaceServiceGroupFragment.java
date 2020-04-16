@@ -14,8 +14,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -38,6 +41,9 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.API.HintArrayAdapter;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
@@ -47,7 +53,7 @@ import com.ptmsa1.vizage.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PlaceServiceGroupFragment extends Fragment {
+public class PlaceServiceGroupFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     LinearLayout  service_hair;
     Fragment fragment;
     FragmentManager fm;
@@ -296,6 +302,16 @@ public class PlaceServiceGroupFragment extends Fragment {
                                 // to handle the case where the user grants the permission. See the documentation
                                 // for ActivityCompat#requestPermissions for more details.
 
+                            }
+                            if (mGoogleApiClient == null) {
+                                mGoogleApiClient = new GoogleApiClient.Builder(BeautyMainPage.context)
+                                        .addConnectionCallbacks(PlaceServiceGroupFragment.this)
+                                        .addOnConnectionFailedListener( PlaceServiceGroupFragment.this)
+                                        .addApi(LocationServices.API)
+                                        .build();
+                            }
+                            if (mGoogleApiClient != null) {
+                                mGoogleApiClient.connect();
                             }
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
                                 @Override
@@ -557,5 +573,39 @@ public class PlaceServiceGroupFragment extends Fragment {
         return view;
     }
 
+    GoogleApiClient mGoogleApiClient;
+    Location mLastLocation;
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+            if (mLastLocation != null) {
+                lat = mLastLocation.getLatitude();
+                lng = mLastLocation.getLongitude();
+                APICall.setlocation(lat,lng);
+                Log.e("LATLANG111",lat+":"+lng);
+//
+//                locOfferlat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
+//                locOfferlong="," +
+//                        "{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
+                // APICall.detailsUser4(context);
+//            APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+            }
+
+        } else {
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

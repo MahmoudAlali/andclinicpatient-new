@@ -1,6 +1,7 @@
 package com.ptmsa1.vizage.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -642,19 +643,19 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     }
 
     //---- request permission for application =------------
-    public void requestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+    public static void requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) BeautyMainPage.context,Manifest.permission.ACCESS_COARSE_LOCATION)
                 &&
-            ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_COARSE_LOCATION)
+            ActivityCompat.shouldShowRequestPermissionRationale((Activity) BeautyMainPage.context,Manifest.permission.ACCESS_COARSE_LOCATION)
         ){
 
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder((Activity) BeautyMainPage.context)
                     .setTitle("Permission Needed")
                     .setMessage("This Permission Needed because of This and That")
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(BeautyMainPage.this,new String[]{
+                            ActivityCompat.requestPermissions((Activity) BeautyMainPage.context,new String[]{
                                     Manifest.permission.ACCESS_FINE_LOCATION
                                     , Manifest.permission.ACCESS_COARSE_LOCATION
                             },ACCESS_FINE_LOCATION);
@@ -667,7 +668,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                         }
                     }).create().show();
         }else {
-            ActivityCompat.requestPermissions(this,new String[]{
+            ActivityCompat.requestPermissions((Activity) BeautyMainPage.context,new String[]{
                      Manifest.permission.ACCESS_FINE_LOCATION
                     ,Manifest.permission.ACCESS_COARSE_LOCATION
                     ,Manifest.permission.WRITE_EXTERNAL_STORAGE

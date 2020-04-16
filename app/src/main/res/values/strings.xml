@@ -826,4 +826,5 @@
     <string name="completly_executed">completely executed</string>
     <string name="reser_location">booking location</string>
     <string name="cost_main">Main cost:</string>
+    <string name="please_wait_wihle_get_location_info">Please wait while we retrieve the site information</string>
 </resources>
