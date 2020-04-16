@@ -21412,7 +21412,12 @@ public class APICall {
                     final JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
                     final String message=j.getString("message");
-                    if (success.equals("true"))
+                    if(message.contains("error in fb token"))
+                    {
+                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), gettoken(context));
+
+                    }
+                    else if (success.equals("true"))
                     {
 
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
