@@ -674,5 +674,6 @@
     <string name="order_location">موقع الطلب</string>
     <string name="reser_location">موقع الحجز</string>
     <string name="cost_main">التكلفة الاساسية:</string>
+    <string name="please_wait_wihle_get_location_info">يرجى الانتظار لحين جلب بيانات الموقع</string>
 
 </resources>
