@@ -386,7 +386,7 @@
     <string name="effect">مؤثراتي</string>
     <string name="bookingRequests">طلبات الحجز</string>
     <string name="update">تحديث المؤثرات</string>
-    <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في ايجاد حلول مثيلة</string>
+    <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في إيجاد حلول بديلة؟</string>
 
     <string-array name="cities">
         <item>اسم المدينة</item>
@@ -488,7 +488,7 @@
     <string name="Executed">إتمام التنفيذ</string>
     <string name="Executed_res">السابقة</string>
     <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
-    <string name="accepted">محجوزة مبدئيا</string>
+    <string name="accepted">محجوزة مبدئياً</string>
     <string name="employee_evaluation">تقييم الموظفات</string>
     <string name="evaluate">تقييم</string>
     <string name="clients_count_gr_2">عدد العميلات يجب ان يكون عميلتين على الاقل</string>
