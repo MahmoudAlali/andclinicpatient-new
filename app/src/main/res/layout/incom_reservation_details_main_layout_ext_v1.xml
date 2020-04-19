@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
+                android:layout_marginTop="@dimen/pf_5dp_space"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -30,7 +32,6 @@
                 >
                 <TextView
                     android:id="@+id/rname"
-                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/prime"
@@ -38,7 +39,6 @@
                     android:text="Reservation 1"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp"
                     />
                 <ImageView
                     android:id="@+id/isExecuted"
@@ -48,6 +48,7 @@
                     android:textColor="@color/red"
                     android:textSize="16dp"
                     android:text="ID"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
@@ -55,7 +56,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -83,7 +84,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -109,7 +110,8 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:id="@+id/book_exec_layout_in"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -117,7 +119,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
-                    android:text="@string/booked_at"
+                    android:text="@string/booking_exec_date"
                     android:gravity="center"
                     />
                 <ImageView
@@ -135,7 +137,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -156,16 +158,16 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/main_price" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/main_price" />-->
                 <ImageView
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -180,32 +182,32 @@
                     android:text="" />
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ac_price_lay"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/actual_price" />
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:src="@drawable/reser_money_icon"/>
-                <TextView
-                    android:id="@+id/actual_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="" />
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ac_price_lay"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/actual_price" />-->
+<!--                <ImageView-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/reser_money_icon"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/actual_price"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
             <!--            <LinearLayout-->
             <!--                android:layout_marginBottom="20dp"-->
             <!--                android:orientation="horizontal"-->
@@ -231,70 +233,70 @@
             <!--                    android:text="" />-->
 
             <!--            </LinearLayout>-->
-            <LinearLayout
-                android:id="@+id/jtime_lay"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/journey_time" />
-                <!--                <ImageView-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="40dp"-->
-                <!--                    android:src="@drawable/reser_money_icon"/>-->
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/standard_30"
-                    android:src="@drawable/start_at_icon"/>
+<!--            <LinearLayout-->
+<!--                android:id="@+id/jtime_lay"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/journey_time" />-->
+<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="40dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:src="@drawable/reser_money_icon"/>&ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="@dimen/standard_30"-->
+<!--                    android:src="@drawable/start_at_icon"/>-->
 
-                <TextView
-                    android:id="@+id/journey_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="" />
+<!--                <TextView-->
+<!--                    android:id="@+id/journey_time"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:id="@+id/jcost_lay"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!--                <ImageView-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="40dp"-->
-                <!--                    android:src="@drawable/reser_money_icon"/>-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/journey_cost" />
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:src="@drawable/reser_money_icon"/>
+<!--            <LinearLayout-->
+<!--                android:id="@+id/jcost_lay"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                &lt;!&ndash;                <ImageView&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:layout_height="40dp"&ndash;&gt;-->
+<!--                &lt;!&ndash;                    android:src="@drawable/reser_money_icon"/>&ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/journey_cost" />-->
+<!--                <ImageView-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/reser_money_icon"/>-->
 
-                <TextView
-                    android:id="@+id/price_j_cost"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="" />
+<!--                <TextView-->
+<!--                    android:id="@+id/price_j_cost"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
         </LinearLayout>
     </LinearLayout>

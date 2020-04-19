@@ -15379,7 +15379,11 @@ public class APICall {
                             public void run() {
 //                                APICall.showSweetDialogOnBookingDone(context);
                                 Log.e("addGroupItem","AddGroupDone");
-                                ((AppCompatActivity) MyGroupEffectActivity.context).finish();
+                                try {
+                                    ((AppCompatActivity) MyGroupEffectActivity.context).finish();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 Toast.makeText(context,context.getResources().getString(R.string.success_book_items),Toast.LENGTH_LONG).show();
                                 ((AppCompatActivity) context).onBackPressed();
 
@@ -23928,7 +23932,20 @@ public class APICall {
                         final JSONObject data=jsonrespone.getJSONObject("data");
                         final JSONArray booking=data.getJSONArray("booking");
                         final String booking_type=data.getString("booking_type");
+                        final String salon_mobile=data.getString("salon_mobile");
+
+                        final String client_name=data.getString("client_name");
+                        final String salon_name=data.getString("salon_name");
                         String journey_cost=data.getString("journey_cost");
+
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ReservatoinDetailsActivity.phone_number.setText(salon_mobile);
+                                ReservatoinDetailsActivity.client_name.setText(salon_name);
+                            }
+                        });
                         final String journey_count=data.getString("journey_count");
                        try {
                            ReservatoinDetailsActivity.lat = Double.parseDouble(data.getString("bdb_loc_lat"));
@@ -23938,7 +23955,7 @@ public class APICall {
                        }
                         final String booking_price=data.getString("booking_price");
                         String bdb_sup_final_price="";
-                        final String salon_name=data.getString("salon_name");
+//                        final String salon_name=data.getString("salon_name");
                         String logo_id=data.getString("bdb_logo_id");
                         getSalonLogo(context,logo_id,logoImg);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -23965,30 +23982,33 @@ public class APICall {
                                 try {
                                     if (booking_type.equals("0")) {
                                         ReservatoinDetailsActivity.booktype.setText(context.getResources().getString(R.string.single_booking));
-                                        String cname=booking.getJSONObject(0).getString("name");
+                                        String cname=data.getString("salon_name");
                                         ReservatoinDetailsActivity.client_name.setText(cname);
 //                            ReservationDetailsFragment.time.setText(date);
                                     }else if (booking_type.equals("1")) {
                                         String date=data.getString("bdb_start_date");
 //                                        ReservatoinDetailsActivity.time.setText(convertToArabic(date));
                                         ReservatoinDetailsActivity.booktype.setText(context.getResources().getString(R.string.multi_booking));
-                                        String cname=booking.getJSONObject(0).getString("name");
+                                        String cname=data.getString("salon_name");
                                         if (!cname.equals("booking_wast_time")){
                                             ReservatoinDetailsActivity.client_name.setText(cname);
                                         }
                                     }else if (booking_type.equals("2")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.group_res_other);
                                     }else if (booking_type.equals("3")) {
+                                        ReservatoinDetailsActivity.book_exec_layout.setVisibility(View.GONE);
                                         ReservatoinDetailsActivity.booktype.setText(R.string.multi_cu_booking);
                                     }else if (booking_type.equals("4")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.single_offer_same);
                                     }else if (booking_type.equals("5")) {
+                                        ReservatoinDetailsActivity.book_exec_layout.setVisibility(View.GONE);
                                         ReservatoinDetailsActivity.booktype.setText(R.string.single_offer_multi);
                                     }else if (booking_type.equals("6")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.group_offer);
                                     }else if (booking_type.equals("7")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.individual_bride_offer);
                                     }else if (booking_type.equals("8")) {
+                                        ReservatoinDetailsActivity.book_exec_layout.setVisibility(View.GONE);
                                         ReservatoinDetailsActivity.booktype.setText(R.string.multi_service_bride_offer);
                                     }else if (booking_type.equals("9")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.group_offer_bride);
@@ -23999,7 +24019,11 @@ public class APICall {
                                     }else if (booking_type.equals("12")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.bride_group_offer_other);
                                     }else if (booking_type.equals("13")) {
+                                        ReservatoinDetailsActivity.book_exec_layout.setVisibility(View.GONE);
                                         ReservatoinDetailsActivity.booktype.setText(R.string.Multiple_booking_bride);
+                                    }else {
+                                        ReservatoinDetailsActivity.booktype.setText(booking_type+"");
+
 //                                    }else if (booking_type.equals("20")) {
 //                                        ReservatoinDetailsActivity.booktype.setText(R.string.free_ind_reservation);
 //                                    }else if (booking_type.equals("21")) {
@@ -24033,12 +24057,18 @@ public class APICall {
                         {
                             Double temp =Double.parseDouble(journey_cost);
                             Double temp2 =Double.parseDouble(booking_price);
-                            Double temp3 =temp2-temp;
+                            final Double temp3 =temp2-temp;
 
-                            ReservatoinDetailsActivity.price.setText(convertToArabic(temp3+"")+
-                                    " + "+ "وقت الرحلة:"+" " +convertToArabic(journey_cost)
-                                    +    " "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
-                        }
+                            final String finalJourney_cost1 = journey_cost;
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ReservatoinDetailsActivity.price.setText(convertToArabic(temp3+"")+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal)+ "+"+ context.getResources().getString(R.string.journey_cost)+": " +convertToArabic(finalJourney_cost1)
+                                            +    " "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
+
+                                }
+                            });
+                            }
                         if (!bdb_sup_final_price.equals("0")) {
                             ReservatoinDetailsActivity.ac_total_price.setText(convertToArabic(bdb_sup_final_price) + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal));
                             ReservatoinDetailsActivity.ac_total_price.setVisibility(View.VISIBLE);
@@ -24068,6 +24098,13 @@ public class APICall {
                         if (booking_place.equals("0")){
 //                            ReservationDetailsFragment.place.setText(context.getResources().getString(R.string.salontxt));
                             ReservatoinDetailsActivity.place.setText(R.string.salon);
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ReservatoinDetailsActivity.jtime_lay.setVisibility(View.GONE);
+
+                                }
+                            });
                         }else if (booking_place.equals("1")){
                             ReservatoinDetailsActivity.place.setText(R.string.home);
                         }else if (booking_place.equals("2")){
@@ -24080,8 +24117,8 @@ public class APICall {
                             Log.e("bookType","Single");
                             for (int i=0;i<booking.length();i++) {
                                 JSONObject object = booking.getJSONObject(i);
-
-                                JSONArray bookings = object.getJSONArray("bookings");
+                                final String name = object.getString("name");
+                                final JSONArray bookings = object.getJSONArray("bookings");
                                 Log.e("bookType","Single");
 
                                 for(int k=0;k<bookings.length();k++){
@@ -24095,11 +24132,31 @@ public class APICall {
                                             journey_time = object1.getString("bdb_journey_time"),
                                             bdb_booked_at = object1.getString("bdb_booked_at");
                                     final String bdb_emp_name = object1.getString("bdb_emp_name");
-                                    final String bdb_name = object1.getString("bdb_name"),
+                                    final String bdb_client_old = object1.getString("bdb_client_old");
+                                    final String bdb_user_name = object1.getString("bdb_user_name");
+                                    final String bdb_name = object1.getString("bdb_name");
+                                    final String bdb_journey_time = object1.getString("bdb_journey_time"),
                                       bdb_confirm_exec_user = object1.getString("bdb_confirm_exec_user"),
-                                            bdb_name_ar = object1.getString("bdb_name_ar");
+                                            bdb_name_ar = object1.getString("bdb_name_ar"),
+                                    reason = object1.getString("reason");
 
-                                    final String client_name = object1.getString("bdb_user_name");
+                                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Log.e("BookedAt123","is"+bdb_booked_at);
+                                            Log.e("bdb_start_date123","is"+bdb_start_date);
+                                            ReservatoinDetailsActivity.book_at.setText(bdb_booked_at);
+                                            ReservatoinDetailsActivity.start_date.setText(bdb_start_date);
+                                            if (bdb_journey_time.equals("0")){
+                                                ReservatoinDetailsActivity.jtime_lay.setVisibility(View.GONE);
+                                            }else {
+                                                ReservatoinDetailsActivity.journey_time.setText(bdb_journey_time+" "+context.getResources().getString(R.string.minute));
+                                            }
+                                        }
+                                    });
+
+
+//                                    final String client_name = object1.getString("bdb_user_name");
 
                                     String ac_price = "", bdb_price = "";
                                     try {
@@ -24114,26 +24171,31 @@ public class APICall {
                                         e.printStackTrace();
                                     }
                                     Log.e("bookType","Single1");
-                                    ReservatoinDetailsActivity.client_name.setText(client_name);
+//                                    ReservatoinDetailsActivity.client_name.setText(client_name);
 //                                ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
                                     final String finalBdb_price = bdb_price;
                                     final String finalAc_price = ac_price;
                                     final String finalJourney_cost = journey_cost;
+                                    final int finalK = k;
                                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             Log.e("bookType","Single11");
 
-//                                             if (BeautyMainPage.client_name.equals(client_name)) {
+                                             if (!name.equals("booking_wast_time")) {
                                                  if (context.getResources().getString(R.string.locale).equals("ar"))
                                                      ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
-                                                             bdb_name_ar, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
-                                                             , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
+                                                             bdb_name_ar, finalBdb_price,   bdb_start_time, bdb_end_time
+                                                             , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time,bdb_client_old,bdb_user_name);
                                                  else
                                                      ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
-                                                             bdb_name, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
-                                                             , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
-//                                             }
+                                                             bdb_name, finalBdb_price,  bdb_start_time, bdb_end_time
+                                                             , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time,bdb_client_old,bdb_user_name);
+                                             }else {
+                                              if (finalK ==0)
+                                                 ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot,name,"",bookings);
+                                                 ReservatoinDetailsActivity.addMainLayoutLost(ReservatoinDetailsActivity.myroot,bdb_start_time,bdb_end_time,bdb_emp_name,reason);
+                                             }
 
                                         }
                                     });
@@ -24164,7 +24226,7 @@ public class APICall {
                                     }
                                     if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
                                         names += name + ",";
-                                        ReservatoinDetailsActivity.client_name.setText(names);
+                                        ReservatoinDetailsActivity.client_name.setText(salon_name);
                                     }
 
 //                                String phone = object1.getString("phone");
@@ -24177,16 +24239,16 @@ public class APICall {
                                     } else
                                         ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot, name, "age:" + bdb_client_old, bookings);
                                     Log.e("Bookings", bookings.toString());
-                                    String client_name = "";
+                                    String client_name1 = "";
                                     for (int j = 0; j < bookings.length(); j++) {
                                         JSONObject object = bookings.getJSONObject(j);
                                         Log.e("objectBookings", object.toString());
 //                                    if (!name.equals("booking_wast_time")) {
                                         if (j == 0)
-                                            client_name = object.getString("bdb_user_name");
+                                            client_name1 = object.getString("bdb_user_name");
 //                                    }
 
-                                        String bdb_price = object.getString("bdb_price"),
+                                        final String bdb_price = object.getString("bdb_price"),
                                                 bdb_id = object.getString("bdb_id"),
                                                 bdb_start_date = object.getString("bdb_start_date"),
                                                 bdb_start_time = object.getString("bdb_start_time"),
@@ -24195,8 +24257,24 @@ public class APICall {
                                                 journey_time = object.getString("bdb_journey_time"),
                                                 bdb_booked_at = object.getString("bdb_booked_at");
                                         String bdb_emp_name = object.getString("bdb_emp_name");
-                                        String bdb_name = object.getString("bdb_name"),
-                                                bdb_name_ar = object.getString("bdb_name_ar");
+                                        final String bdb_name = object.getString("bdb_name"),
+                                                bdb_name_ar = object.getString("bdb_name_ar"),
+                                                bdb_journey_time = object.getString("bdb_journey_time");
+
+                                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Log.e("BookedAt123","is"+bdb_booked_at);
+                                                Log.e("bdb_start_date123","is"+bdb_start_date);
+                                                ReservatoinDetailsActivity.book_at.setText(bdb_booked_at);
+                                                ReservatoinDetailsActivity.start_date.setText(bdb_start_date);
+                                                if (bdb_journey_time.equals("0")){
+                                                    ReservatoinDetailsActivity.jtime_lay.setVisibility(View.GONE);
+                                                }else {
+                                                    ReservatoinDetailsActivity.journey_time.setText(bdb_journey_time+" "+context.getResources().getString(R.string.minute));
+                                                }
+                                            }
+                                        });
 
 //                                    ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
 
@@ -24223,27 +24301,28 @@ public class APICall {
                                                 if (context.getResources().getString(R.string.locale).equals("ar"))
                                                     ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                             bdb_name_ar, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                            , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
+                                                            , bdb_end_time, bdb_start_date, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
                                                 else
                                                     ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                             bdb_name, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                            , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
+                                                            , bdb_end_time, bdb_start_date, bdb_emp_name, bdb_is_executed, ac_price, journey_time, journey_cost);
 
                                             } else if (context.getResources().getString(R.string.locale).equals("ar"))
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                         bdb_name_ar, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
+                                                        , bdb_end_time, bdb_start_date, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
                                             else
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
                                                         bdb_name, bdb_price, bdb_start_date + ", " + bdb_start_time
-                                                        , bdb_end_time, bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
+                                                        , bdb_end_time, bdb_start_date, bdb_emp_name, bdb_id, bdb_is_executed, ac_price, journey_cost, journey_time);
                                         }
                                     }
 
                                 }catch (Exception e){
-                                     JSONArray array= booking.getJSONArray(i);
-                                     name=array.getJSONObject(0).getString("name");
-                                     JSONArray bookings=array.getJSONObject(0).getJSONArray("bookings");
+                                    e.printStackTrace();
+                                     JSONObject array= booking.getJSONObject(i);
+                                     name=array.getString("name");
+                                     JSONArray bookings=array.getJSONArray("bookings");
                                     ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot, name, "", bookings);
 
                                     for (int k=0;k<bookings.length();k++) {
@@ -25503,9 +25582,9 @@ public class APICall {
                         String bdb_name_booking=data.getString("bdb_name_booking");
                         String bdb_reject_reason=data.getString("bdb_reject_reason");
                         String bdb_client_id=data.getString("bdb_client_id");
-                        String supplier_name=data.getString("supplier_name");
+                        final String supplier_name=data.getString("supplier_name");
                         String logo_id=data.getString("logo_id");
-                        String bdb_created_at=data.getString("bdb_created_at");
+                        final String bdb_created_at=data.getString("bdb_created_at");
 
                         String totalCost = total_cost;
 
@@ -25517,7 +25596,12 @@ public class APICall {
 
 
                         getSalonLogo(BeautyMainPage.context,logo_id,logoImg);
-                        BookingRequestDetailsActivity.salonName.setText(supplier_name);
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                BookingRequestDetailsActivity.salonName.setText(" "+supplier_name);
+                            }
+                        });
 
                         if(bdb_is_group_booking.equals("20"))
                             BookingRequestDetailsActivity.date.setText(R.string.indivRequest);
@@ -25573,7 +25657,7 @@ public class APICall {
 
                         for (int i=0;i<clients.length();i++) {
                             JSONObject object = clients.getJSONObject(i);
-                            String bdb_start_date = object.getString("bdb_start_date"),
+                            final String bdb_start_date = object.getString("bdb_start_date"),
                                     bdb_end_date = object.getString("bdb_end_date"),
                                     bdb_client_old = object.getString("bdb_client_old"),
                                     bdb_is_current_user = object.getString("bdb_is_current_user"),
@@ -25581,6 +25665,18 @@ public class APICall {
                                     bdb_client_phone = object.getString("bdb_client_phone");
                             JSONArray ClientServices = object.getJSONArray("ClientServices");
 
+                            final int finalI = i;
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (finalI ==0)
+                                        BookingRequestDetailsActivity.order_on.setText(bdb_created_at);
+                                        BookingRequestDetailsActivity.exec_order.setText(bdb_start_date);
+                                        BookingRequestDetailsActivity.s_name.setText(supplier_name);
+                                        BookingRequestDetailsActivity.phone_number.setText(bdb_client_phone);
+
+                                }
+                            });
 
 //                                String phone = object1.getString("phone");
                             //String  bdb_client_old = bookings.getJSONObject(0).getString("bdb_client_old");
@@ -25591,7 +25687,7 @@ public class APICall {
                             else
                                 age=context.getResources().getString(R.string.forAdults);
 
-                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_name,context.getResources().getString(R.string.age2)+age);
+                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_old,bdb_client_name+"",ClientServices,bdb_client_name+"",context.getResources().getString(R.string.age2)+age);
                             //   Log.e("Bookings",bookings.toString());
                             String client_name="";
                             for (int j=0;j<ClientServices.length();j++){

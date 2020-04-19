@@ -1,8 +1,13 @@
 package com.ptmsa1.vizage.Fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +30,8 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
-    public static LinearLayout myroot;
+public static TextView id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+    public static LinearLayout jtime_lay,book_exec_layout, myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static  Context context;
@@ -55,6 +60,11 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         logoImg=findViewById(R.id.logoImg);
         ref_id=findViewById(R.id.ref_id);
         id=findViewById(R.id.id);
+        start_date=findViewById(R.id.start_date);
+        phone_number=findViewById(R.id.phone_number);
+        journey_time=findViewById(R.id.journey_time);
+        jtime_lay=findViewById(R.id.jtime_lay);
+        book_exec_layout=findViewById(R.id.book_exec_layout);
 
         //region Check_Notification
         String book_id="";
@@ -103,6 +113,28 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
 //        r3=findViewById(R.id.rthird);
 //        r4=findViewById(R.id.rforth);
 
+        phone_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT > 22) {
+
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                        ActivityCompat.requestPermissions(ReservatoinDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 101);
+
+                        return;
+                    }
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:+" + phone_number.getText().toString().trim()));
+                    startActivity(callIntent);
+                } else {
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:+" + phone_number.getText().toString().trim()));
+                    startActivity(callIntent);
+                }
+            }
+        });
 
 //        r1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
@@ -283,45 +315,53 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
 //        });
 ////
 //    }
-    public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time){
+    public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time,String c_old,String user_name){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
-        TextView rname,emp_name,client_details,price,end_time,starttime,book_at,actual_price,price_j_cost,journey_time;
+        TextView rname,emp_name,old,cname,client_details,price,end_time,starttime,book_at,actual_price,price_j_cost,journey_time;
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
-        LinearLayout ac_price_lay;
+//        LinearLayout ac_price_lay;
         price=layout2.findViewById(R.id.price);
         actual_price=layout2.findViewById(R.id.actual_price);
-        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
-        price_j_cost=layout2.findViewById(R.id.price_j_cost);
-        journey_time=layout2.findViewById(R.id.journey_time);
+//        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
+//        price_j_cost=layout2.findViewById(R.id.price_j_cost);
+//        journey_time=layout2.findViewById(R.id.journey_time);
         client_details=layout2.findViewById(R.id.client_details);
         rname=layout2.findViewById(R.id.rname);
         starttime=layout2.findViewById(R.id.time);
         book_at=layout2.findViewById(R.id.book_at);
         end_time=layout2.findViewById(R.id.end_time);
         emp_name=layout2.findViewById(R.id.emp_name);
-
-        if (ac_price.equals("0") ||ac_price.equals("") ){
-            ac_price_lay.setVisibility(View.GONE);
+        old=layout2.findViewById(R.id.old);
+        cname=layout2.findViewById(R.id.cname);
+        if (c_old.equals("0")){
+            old.setText(R.string.child);
         }else {
-            actual_price.setText(ac_price);
-            ReservatoinDetailsActivity.price.setPaintFlags(ReservatoinDetailsActivity.price.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-
+            old.setText(R.string.Adult);
         }
+        cname.setText(context.getResources().getString(R.string.cname)+" "+user_name);
 
-        client_details.setText(client_name.getText().toString()+", "+priceVal+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+//        if (ac_price.equals("0") ||ac_price.equals("") ){
+////            ac_price_lay.setVisibility(View.GONE);
+//        }else {
+//            actual_price.setText(ac_price);
+//            ReservatoinDetailsActivity.price.setPaintFlags(ReservatoinDetailsActivity.price.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+//
+//        }
+
+        client_details.setText(priceVal+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
         if(isExec.equals(1))
             isExecuted.setImageResource(R.drawable.ic_checked);
         else             isExecuted.setImageResource(R.drawable.ic_cancel);
 
-        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
-        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
 
         if (!place.getText().toString().equals(R.string.salon)) {
-         layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
-         layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
-            price_j_cost.setText(j_cost + " " + context.getResources().getString(R.string.ryal));
-            journey_time.setText(j_time + " " + context.getResources().getString(R.string.minute));
+//         layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+//         layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+//            price_j_cost.setText(j_cost + " " + context.getResources().getString(R.string.ryal));
+//            journey_time.setText(j_time + " " + context.getResources().getString(R.string.minute));
         }
         rname.setText(reservationName);
 //        rname.setText(reservationName);
@@ -345,8 +385,19 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
         TextView client_details;
+        LinearLayout check_hide;
         client_details=layout2.findViewById(R.id.client_details);
+        check_hide=layout2.findViewById(R.id.check_hide);
         client_details.setText(client_name);
+        TextView old=layout2.findViewById(R.id.old);
+        TextView cname=layout2.findViewById(R.id.cname);
+        if (client_old.equals("0")){
+            old.setText(R.string.child);
+        }else {
+            old.setText(R.string.Adult);
+        }
+        cname.setText(context.getResources().getString(R.string.cname)+" "+client_name);
+
         int ptmp=0;
         try {
             for (int j = 0; j < bookings.length(); j++) {
@@ -360,9 +411,10 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
 
         String priceRes=((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.price);
         if (client_name.equals("booking_wast_time")){
+            check_hide.setVisibility(View.GONE);
             client_details.setText(R.string.journey_time_emp);
         }else
-            client_details.setText(client_name+", "+priceRes+APICall.convertToArabic(ptmp+"")+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+            client_details.setText(priceRes+APICall.convertToArabic(ptmp+"")+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
 
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
@@ -376,22 +428,23 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
         TextView rname,emp_name,price,starttime,book_at,end_time,actual_price,j_cost,j_time,id;
-        LinearLayout ac_price_lay;
+        LinearLayout book_exec_layout_in;
 
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
         price=layout2.findViewById(R.id.price);
         rname=layout2.findViewById(R.id.rname);
         end_time=layout2.findViewById(R.id.end_time);
+        book_exec_layout_in=layout2.findViewById(R.id.book_exec_layout_in);
         actual_price=layout2.findViewById(R.id.actual_price);
-        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
+//        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
         j_cost=layout2.findViewById(R.id.price_j_cost);
         j_time=layout2.findViewById(R.id.journey_time);
 
-        if (ac_price.equals("0")){
-            ac_price_lay.setVisibility(View.GONE);
-        }else {
-            actual_price.setText(ac_price);
-        }
+//        if (ac_price.equals("0")){
+//            ac_price_lay.setVisibility(View.GONE);
+//        }else {
+//            actual_price.setText(ac_price);
+//        }
         starttime=layout2.findViewById(R.id.time);
         book_at=layout2.findViewById(R.id.book_at);
         emp_name=layout2.findViewById(R.id.emp_name);
@@ -400,6 +453,12 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         else             isExecuted.setImageResource(R.drawable.ic_cancel);
 
 
+        if (book_exec_layout.getVisibility()==View.GONE){
+            book_exec_layout_in.setVisibility(View.VISIBLE);
+        }else {
+            book_exec_layout_in.setVisibility(View.GONE);
+
+        }
 
 //        j_cost=layout2.findViewById(R.id.price_j_cost);
 
@@ -411,14 +470,14 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
         starttime.setText(APICall.convertToArabic(startTimeVal));
         book_at.setText(APICall.convertToArabic(bookat));
-        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
-        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
 
         if (!place.getText().toString().equals(R.string.salon)) {
-            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
-            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
-            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
-            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
+//            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+//            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+//            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
+//            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
         }
 //
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -443,11 +502,8 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
         j_cost=layout2.findViewById(R.id.price_j_cost);
         j_time=layout2.findViewById(R.id.journey_time);
-        if (ac_price.equals("0")){
-            ac_price_lay.setVisibility(View.GONE);
-        }else {
-            actual_price.setText(ac_price);
-        }
+        LinearLayout book_exec_layout_in=layout2.findViewById(R.id.book_exec_layout_in);
+
         starttime=layout2.findViewById(R.id.time);
         book_at=layout2.findViewById(R.id.book_at);
         emp_name=layout2.findViewById(R.id.emp_name);
@@ -456,9 +512,17 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         else
             isExecuted.setImageResource(R.drawable.ic_cancel);
 
-        j_cost=layout2.findViewById(R.id.journey_time);
 
-        j_cost.setText(jtime);
+        if (book_exec_layout.getVisibility()==View.GONE){
+            book_exec_layout_in.setVisibility(View.VISIBLE);
+        }else {
+            book_exec_layout_in.setVisibility(View.GONE);
+
+        }
+
+//        j_cost=layout2.findViewById(R.id.journey_time);
+
+//        j_cost.setText(jtime);
         end_time.setText(APICall.convertToArabic(bdb_end_time));
         rname.setText(reservationName);
 //        rname.setText(reservationName);
@@ -468,14 +532,14 @@ public static TextView id,empname,booktype,ref_id,ac_total_price,salonName,clien
         book_at.setText(APICall.convertToArabic(bookat));
 
 
-        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
-        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
+//        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);
 
         if (!place.getText().toString().equals(R.string.salon)) {
-            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
-            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
-            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
-            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
+//            layout2.findViewById(R.id.jcost_lay).setVisibility(View.VISIBLE);
+//            layout2.findViewById(R.id.jtime_lay).setVisibility(View.VISIBLE);
+//            j_cost.setText(jcost + " " + context.getResources().getString(R.string.ryal));
+//            j_time.setText(jtime + " " + context.getResources().getString(R.string.minute));
         }
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override

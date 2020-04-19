@@ -266,7 +266,7 @@
     <string name="hall">صالة</string>
     <string name="hotel">فندق</string>
     <string name="single_booking">حجز فردي</string>
-    <string name="multi_booking">حجز متعدد</string>
+    <string name="multi_booking">حجز جماعي</string>
     <string name="ryal">ريال</string>
     <string name="Accept">قبول</string>
     <string name="Refusal">رفض</string>
@@ -525,7 +525,7 @@
     <string name="ind_offer">عرض فردي</string>
     <string name="plsLogin">يرجى تسجيل الدخول لمتابعة الحجز</string>
     <string name="plsActivLoc">خدمة المواقع غير مفعلة، يُرجى تشغيلها للحصول على أبرز العروض القريبة من موقعك الحالي</string>
-    <string name="salonName">اسم الصالون</string>
+    <string name="salonName">اسم الصالون: </string>
     <string name="re_active">إعادة تنشيط</string>
     <string name="loginFailed">حصل خطأ في تسجيل الدخول، الرجاء المحاولة لاحقاً</string>
     <string name="relBetweenClients">العلاقة بين العميلات</string>
@@ -676,5 +676,9 @@
     <string name="cost_main">التكلفة الاساسية:</string>
     <string name="please_wait_wihle_get_location_info">يرجى الانتظار لحين جلب بيانات الموقع</string>
     <string name="fit">fitStart</string>
+    <string name="ordered_on">تم الطلب في:</string>
+    <string name="executing_order">تنفيذ الطلب في:</string>
+    <string name="cost">التكلفة:</string>
+    <string name="cname">الاسم: </string>
 
 </resources>
