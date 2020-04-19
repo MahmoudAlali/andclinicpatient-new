@@ -17,10 +17,10 @@
           <TextView
               android:layout_margin="@dimen/pf_10_txt_size"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/standard_50"
+              android:layout_height="35dp"
               android:background="@color/transLightPink"
               android:text="@string/Provider_Eval"
-              android:textSize="@dimen/standard_20"
+              android:textSize="16dp"
               android:textColor="@color/lightBordeaux"
               android:textStyle="bold"
               android:gravity="center" />
@@ -45,7 +45,7 @@
                       android:gravity="center"
                       android:textStyle="bold"
 
-                      android:textSize="18sp"
+                      android:textSize="16dp"
                       android:text="@string/salon_provider_name"
                       />
                   <hyogeun.github.com.colorratingbarlib.ColorRatingBar
@@ -65,21 +65,21 @@
               <EditText
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
-                  android:layout_height="@dimen/standard_40"
+                  android:layout_height="35dp"
                   android:background="@drawable/border_edit_text"
                   android:textColor="@color/lightBordeaux"
                   android:hint="@string/reason_"
-                  android:textSize="@dimen/standard_20"
+                  android:textSize="16dp"
                   android:textStyle="bold"
                   android:gravity="center" />
               <TextView
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
-                  android:layout_height="@dimen/standard_50"
+                  android:layout_height="35dp"
                   android:background="@color/transLightPink"
                   android:textColor="@color/lightBordeaux"
                   android:text="@string/employee_evaluation"
-                  android:textSize="@dimen/standard_20"
+                  android:textSize="16dp"
                   android:textStyle="bold"
                   android:gravity="center" />
           </LinearLayout>

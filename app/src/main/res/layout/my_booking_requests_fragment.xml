@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     >
 
     <android.support.v7.widget.Toolbar
@@ -58,16 +59,15 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/gray"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginTop="5dp"
-            android:background="@color/gray"
+            android:background="@drawable/border"
+            android:weightSum="2"
+            android:layout_marginRight="@dimen/standard_20"
+            android:layout_marginLeft="@dimen/standard_20"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"></Space>
 
             <TextView
                 android:id="@+id/oldRequests"
@@ -75,13 +75,12 @@
                 android:textSize="12dp"
                 android:gravity="center"
                 android:textColor="#000"
+                android:background="@drawable/shadow_service_tab"
                 android:text="@string/oldRequests"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_edit_text" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"></Space>
+
             <TextView
                 android:textColor="#000"
                 android:id="@+id/newRequests"
@@ -92,9 +91,7 @@
 
                 android:text="@string/newRequests"
                 android:textSize="12dp" />
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"></Space>
+
             <!--<TextView-->
             <!--android:textColor="#000"-->
             <!--android:id="@+id/deposited_reservation"-->
@@ -110,7 +107,6 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="#535353"
             />
     </LinearLayout>
     <TextView

@@ -199,16 +199,16 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                 String st=bookingAutomatedBrowseData.get(position).getBdb_is_executed();
                 if (st.equals("1")){
-                    ((Item) holder).status.setText("لم يتم التنفيذ بشكل كامل");
+                    ((Item) holder).status.setText(R.string.not_completly_executed);
                     ((Item) holder).rating.setVisibility(View.VISIBLE);
                 }else if (st.equals("4")){
-                    ((Item) holder).status.setText("ملغي(بعد دفع العربون)");
+                    ((Item) holder).status.setText(R.string.cancelled_after_deposit);
                     ((Item) holder).rating.setVisibility(View.GONE);
                 }else if (st.equals("5")){
-                    ((Item) holder).status.setText("ملغي (لم يتم دفع العربون)");
+                    ((Item) holder).status.setText(R.string.cancelled_before_deposit);
                     ((Item) holder).rating.setVisibility(View.GONE);
                 }else if (st.equals("7")){
-                    ((Item) holder).status.setText("منفذ بشكل كامل");
+                    ((Item) holder).status.setText(R.string.completly_executed);
                     ((Item) holder).rating.setVisibility(View.VISIBLE);
                 }
 

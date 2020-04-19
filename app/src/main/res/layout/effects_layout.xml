@@ -16,6 +16,7 @@
             android:background="@drawable/shadow_button_accent_lite_v2"
             android:layout_width="match_parent"
             android:text="text"
+            android:textColor="#000"
             android:gravity="center"
             android:textSize="20dp"
             android:layout_height="35dp"></TextView>

@@ -821,11 +821,13 @@
     <string name="order_location">Order location</string>
 
     <string name="not_completly_executed">Not completely executed</string>
-    <string name="cancelled_befor_deposit">Cancelled (after paying deposit)</string>
-    <string name="cancelled_after_deposit">Cancelled (no deposit paid)</string>
+    <string name="cancelled_after_deposit">Cancelled (after paying deposit)</string>
+    <string name="cancelled_before_deposit">Cancelled (no deposit paid)</string>
     <string name="completly_executed">Completely executed</string>
     <string name="reser_location">Booking location</string>
     <string name="cost_main">Main cost:</string>
+    <string name="fit">fitEnd</string>
+
     <string name="please_wait_wihle_get_location_info">Please wait while we retrieve the site information</string>
     <string name="ordered_on">Orderd on:</string>
     <string name="executing_order">Executing  order:</string>

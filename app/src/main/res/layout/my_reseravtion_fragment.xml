@@ -60,8 +60,8 @@
         android:orientation="vertical"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:background="@color/gray"
         android:layout_height="wrap_content">
+<!--
         <LinearLayout
             android:layout_marginTop="5dp"
             android:background="@color/gray"
@@ -108,23 +108,62 @@
             <Space
                 android:layout_width="@dimen/pf_10dp_space"
                 android:layout_height="match_parent"></Space>
-            <!--<TextView-->
-                <!--android:textColor="#000"-->
-                <!--android:id="@+id/deposited_reservation"-->
-                <!--android:layout_weight="1"-->
-                <!--android:textSize="12dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="@string/Bookings_paid_DEPOSIT"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
+            &lt;!&ndash;<TextView&ndash;&gt;
+                &lt;!&ndash;android:textColor="#000"&ndash;&gt;
+                &lt;!&ndash;android:id="@+id/deposited_reservation"&ndash;&gt;
+                &lt;!&ndash;android:layout_weight="1"&ndash;&gt;
+                &lt;!&ndash;android:textSize="12dp"&ndash;&gt;
+                &lt;!&ndash;android:gravity="center"&ndash;&gt;
+                &lt;!&ndash;android:text="@string/Bookings_paid_DEPOSIT"&ndash;&gt;
+                &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
+                &lt;!&ndash;android:layout_height="match_parent" />&ndash;&gt;
         </LinearLayout>
-        <View
-
+-->
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
+            android:background="@drawable/border"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#5F5E5E"
-            />
+            android:weightSum="3"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/incom_reservation"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="@dimen/high_button"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:text="@string/accepted"                android:background="@drawable/shadow_service_tab"
+                />
+
+            <TextView
+                android:id="@+id/deposit_reservation"
+                android:layout_weight="1"
+                android:textSize="12dp"
+                android:textColor="#000"
+                android:text="@string/Bookings_paid_DEPOSIT"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/accept_reservation"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000"
+                android:layout_height="@dimen/high_button"
+                android:gravity="center"
+                android:text="@string/Executed_res"
+                />
+
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

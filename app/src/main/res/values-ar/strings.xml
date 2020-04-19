@@ -659,8 +659,8 @@
     <string name="ur_acc_activated_pls_login_now">تم تفعيل حسابك, يرجى تسجيل الدخول</string>
     <string name="deposit_done">تمت عملية دفع العربون بنجاح</string>
     <string name="not_completly_executed">لم يتم التنفيذ بشكل كامل</string>
-    <string name="cancelled_befor_deposit">ملغي (بعد دفع العربون)</string>
-    <string name="cancelled_after_deposit">ملغي (لم يتم دفع العربون)</string>
+    <string name="cancelled_after_deposit">ملغي (بعد دفع العربون)</string>
+    <string name="cancelled_before_deposit">ملغي (لم يتم دفع العربون)</string>
     <string name="completly_executed">منفذ بشكل كامل</string>
     <string name="select_pay_method">يرجى اختيار طريقة الدفع</string>
     <string name="payment_method">طريقة الدفع</string>
@@ -675,6 +675,7 @@
     <string name="reser_location">موقع الحجز</string>
     <string name="cost_main">التكلفة الاساسية:</string>
     <string name="please_wait_wihle_get_location_info">يرجى الانتظار لحين جلب بيانات الموقع</string>
+    <string name="fit">fitStart</string>
     <string name="ordered_on">تم الطلب في:</string>
     <string name="executing_order">تنفيذ الطلب في:</string>
     <string name="cost">التكلفة:</string>
