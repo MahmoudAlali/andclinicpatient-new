@@ -341,7 +341,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
             Toast.makeText(this, "Payment cancelled", Toast.LENGTH_SHORT).show();
             Log.e("onPaymentResponse", "Payment cancelled");
             check="2";
-            APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","1");
+//            APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","1");
             onBackPressed();
 
         } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_FAILURE) {

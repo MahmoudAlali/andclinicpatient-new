@@ -35,23 +35,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:weightSum="3"
-                android:layout_height="wrap_content">
+                android:layout_weight="1"
+                >
+
+
                 <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="3"
-                    android:layout_weight="1"
-                    >
-
-
-                    <TextView
+                    android:layout_height="@dimen/standard_50">
+                    <LinearLayout
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
+                        android:layout_height="@dimen/standard_50">
+                    <TextView
+
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/salonName"
                         android:gravity="center"
@@ -59,43 +66,24 @@
                         android:textStyle="bold"
                         />
                     <TextView
-                        android:id="@+id/book_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:id="@+id/salon_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text=""
                         android:gravity="center"
-                        android:text="@string/ordered_type"
                         android:textSize="18dp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/estimated_cost"
-                        android:gravity="center"
-                        android:textSize="16dp"
                         android:textStyle="bold"
                         />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:weightSum="4"
-                    >
+                    </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_weight="1"
                         >
                         <android.support.v7.widget.CardView
                             android:id="@+id/myCardView"
-                            android:layout_width="65dp"
-                            android:layout_height="65dp"
+                            android:layout_width="@dimen/standard_50"
+                            android:layout_height="@dimen/standard_50"
                             app:cardCornerRadius="50dp"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
@@ -111,27 +99,19 @@
 
                     </LinearLayout>
 
-
-
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    >
-
-
-                    <TextView
-                        android:id="@+id/salon_name"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/high_edit_text"
-                        android:text="Value"
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        />
+                    android:layout_height="wrap_content">
+<!--                    <TextView-->
+<!--                        android:id="@+id/book_type"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="@string/ordered_type"-->
+<!--                        android:textSize="18dp"-->
+<!--                        android:textStyle="bold" />-->
                     <TextView
                         android:id="@+id/date"
                         android:layout_weight="1"
@@ -141,6 +121,111 @@
                         android:gravity="center"
                         android:textSize="18dp"
                         android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/s_name"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/salonName"
+                        android:textColor="@color/red"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/ic_call_black_24dp"
+                        />
+                    <TextView
+                        android:id="@+id/phone_number"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text="@string/Phone_Number"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="@color/blue"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/ordered_on"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/booked_at_icon"
+                        />
+                    <TextView
+                        android:id="@+id/order_on"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text=""
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/executing_order"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/booked_at_icon"
+                        />
+                    <TextView
+                        android:id="@+id/exec_order"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:text=""
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cost"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:src="@drawable/reser_money_icon"
                         />
                     <TextView
                         android:id="@+id/total_price"
@@ -152,10 +237,11 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         />
-
                 </LinearLayout>
 
             </LinearLayout>
+
+
             <TextView
                 android:visibility="gone"
                 android:id="@+id/ac_total_price"

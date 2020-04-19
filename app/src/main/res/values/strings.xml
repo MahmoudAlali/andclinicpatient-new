@@ -302,7 +302,7 @@
     <string name="ind_offer">Individual offer</string>
     <string name="plsLogin">Please login to continue booking</string>
     <string name="plsActivLoc">Your device location is not activated, Please turn it on to get the best near offers</string>
-    <string name="salonName">Salon name</string>
+    <string name="salonName">Salon name: </string>
     <string name="re_active">Re-activate</string>
     <string name="loginFailed">Login failed, Please try again later.</string>
     <string name="relBetweenClients">Relation between clients</string>
@@ -827,4 +827,8 @@
     <string name="reser_location">Booking location</string>
     <string name="cost_main">Main cost:</string>
     <string name="please_wait_wihle_get_location_info">Please wait while we retrieve the site information</string>
+    <string name="ordered_on">Orderd on:</string>
+    <string name="executing_order">Executing  order:</string>
+    <string name="cost">Cost:</string>
+    <string name="cname">Name:</string>
 </resources>

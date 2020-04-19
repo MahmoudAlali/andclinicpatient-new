@@ -1,9 +1,15 @@
 package com.ptmsa1.vizage.Activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +19,16 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Fragments.ReservatoinDetailsActivity;
 import com.ptmsa1.vizage.MapsActivityLocation;
 import com.ptmsa1.vizage.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class BookingRequestDetailsActivity  extends AppCompatActivity {
     //    View view;
-    public static TextView id,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date;
+    public static TextView id,order_on,phone_number,s_name,exec_order,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date;
     public static LinearLayout myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
@@ -58,6 +68,10 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         date=findViewById(R.id.date);
         id=findViewById(R.id.id);
         location=findViewById(R.id.location);
+        order_on=findViewById(R.id.order_on);
+        exec_order=findViewById(R.id.exec_order);
+        s_name=findViewById(R.id.s_name);
+        phone_number=findViewById(R.id.phone_number);
 
 /*
         //region Check_Notification
@@ -88,8 +102,28 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
 
         //endregion
 */
+        phone_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT > 22) {
 
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
+                        ActivityCompat.requestPermissions(BookingRequestDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 101);
+
+                        return;
+                    }
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:+" + phone_number.getText().toString().trim()));
+                    startActivity(callIntent);
+                } else {
+
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:+" + phone_number.getText().toString().trim()));
+                    startActivity(callIntent);
+                }
+            }
+        });
         String book_id=getIntent().getStringExtra("order_id");
         APICall.browseOneBookingRequest(book_id,context,logoImg);
         id.setText(book_id);
@@ -137,12 +171,38 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
 //
     }
 
-    public static void addHeaderLayout(final LinearLayout myroot,String client_name,String client_old ){
+    public static void addHeaderLayout(final LinearLayout myroot, String old, String cname, JSONArray costtxt, String client_name, String client_old ){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.request_details_header_layout, myroot, false);
-        TextView client_details;
+        TextView client_details,c_name,c_old;
         client_details=layout2.findViewById(R.id.client_details);
-        client_details.setText(client_name+","+client_old);
+        c_name=layout2.findViewById(R.id.c_name);
+        c_old=layout2.findViewById(R.id.c_old);
+        c_name.setText(context.getResources().getString(R.string.cname)+" "+cname);
+        if (old.equals("1")) {
+            c_old.setText(R.string.Adult);
+        }else {
+            c_old.setText(R.string.child);
+        }
+        int costt=0;
+        for (int j=0;j<costtxt.length();j++){
+
+//
+//                                    if (!name.equals("booking_wast_time")) {
+
+            try {
+                JSONObject object1=costtxt.getJSONObject(j);
+                Log.e("objectBookings",object1.toString());
+                final String
+                        cost = object1.getString("cost");
+                costt+=Integer.parseInt(cost);
+
+//                                    ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        client_details.setText(costt+" "+context.getResources().getString(R.string.ryal));
 
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override

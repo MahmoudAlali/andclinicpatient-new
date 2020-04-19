@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -44,18 +44,18 @@
                 <ImageView
                     android:id="@+id/categoryImg"
                     android:layout_marginBottom="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/standard_60"
+                    android:layout_height="@dimen/standard_50"
                     android:textColor="@color/red"
                     android:textSize="16dp"
                     android:text="ID"
                     android:src="@drawable/hair_basic"
                     android:gravity="center"
-                    android:layout_weight="1"
+                    android:layout_gravity="end"
                     android:layout_marginTop="5dp"
                     />
 
-            </LinearLayout>
+            </android.support.design.widget.CoordinatorLayout>
             <LinearLayout
                 android:visibility="gone"
                 android:layout_marginBottom="20dp"
@@ -113,6 +113,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
