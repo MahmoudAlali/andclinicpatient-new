@@ -57,7 +57,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:layout_height="50dp">
             <ImageView
                 android:layout_width="@dimen/standard_30"
                 android:layout_height="match_parent"
@@ -138,7 +139,7 @@
                         android:layout_width="match_parent"
                         android:text="Price"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         android:textColor="#d83269"
                         android:layout_height="@dimen/high_edit_text" />

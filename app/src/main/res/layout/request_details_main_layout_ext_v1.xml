@@ -22,43 +22,50 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.design.widget.CoordinatorLayout
+            <LinearLayout
+                android:layout_marginTop="@dimen/pf_5dp_space"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="2"
                 >
                 <TextView
                     android:id="@+id/rname"
-                    android:layout_marginBottom="10dp"
+
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/prime"
+                    android:textSize="16dp"
                     android:text="Reservation 1"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp"
+
                     />
                 <ImageView
                     android:id="@+id/categoryImg"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="@dimen/standard_60"
-                    android:layout_height="@dimen/standard_50"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:textColor="@color/red"
-                    android:textSize="16dp"
-                    android:text="ID"
                     android:src="@drawable/hair_basic"
                     android:gravity="center"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="5dp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/prime"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+
                     />
 
-            </android.support.design.widget.CoordinatorLayout>
+            </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -87,7 +94,7 @@
             </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -114,7 +121,7 @@
             </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -141,7 +148,7 @@
             </LinearLayout>
             <LinearLayout
                 android:visibility="gone"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -149,7 +156,7 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/emp_name_icon"/>
                 <TextView
                     android:id="@+id/emp_name"
@@ -162,7 +169,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -170,11 +177,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="end|center"
+                    android:textSize="16dp"
+                    android:gravity="center"
                     android:text="@string/estimated_cost" />
                 <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/reser_money_icon"/>
                 <TextView
@@ -200,8 +207,7 @@
                     android:gravity="center"
                     android:text="@string/actual_price" />
                 <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/reser_money_icon"/>
                 <TextView
@@ -240,7 +246,7 @@
             <!--            </LinearLayout>-->
             <LinearLayout
                 android:visibility="gone"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

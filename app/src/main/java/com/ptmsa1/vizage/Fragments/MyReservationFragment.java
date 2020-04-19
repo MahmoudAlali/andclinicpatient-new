@@ -1032,11 +1032,11 @@ public class MyReservationFragment extends Fragment  {
         }catch (Exception e){
             e.printStackTrace();
         }
-        t1.setTextSize(14);
+        t1.setTextSize(12);
        t1.setBackgroundResource(R.drawable.shadow_service_tab);
-        t2.setTextSize(12);
+        t2.setTextSize(10);
         t2.setBackgroundResource(android.R.color.transparent);
-        t3.setTextSize(12);
+        t3.setTextSize(10);
         t3.setBackgroundResource(android.R.color.transparent);
 
     }

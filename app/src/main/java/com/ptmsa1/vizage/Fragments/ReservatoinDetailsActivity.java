@@ -225,7 +225,7 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
 //        addLayout(myroot,"make up","100","13:00","17-8-2019","test");
 
 
-        Button ok=findViewById(R.id.ok);
+        ImageView ok=findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

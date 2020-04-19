@@ -531,7 +531,7 @@
     <string name="export_invoice">Export invoice</string>
     <string name="client_name1">Client name</string>
     <string name="service_exec_date">Service execution date</string>
-    <string name="booking_exec_date">Booking execution date</string>
+    <string name="booking_exec_date">Booking date</string>
     <string name="offer_type_select">Select offer type</string>
     <string name="reservation_date">Booking date</string>
     <string name="Service_Name">Service name</string>

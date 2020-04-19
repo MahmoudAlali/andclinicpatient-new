@@ -35,7 +35,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
     static Context context;
     public static String logoId;
     ImageView logoImg;
-    Button location;
+    ImageView location;
     static int [] categoryImages ={ R.drawable.hair_basic,
             R.drawable.makeup_basic,
             R.drawable.massage_basic,

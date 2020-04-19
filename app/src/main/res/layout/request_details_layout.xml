@@ -44,62 +44,73 @@
                 android:weightSum="3"
                 android:layout_weight="1"
                 >
-
-
-                <LinearLayout
+                <android.support.design.widget.CoordinatorLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/standard_50">
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/location"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/service_place_icon"
+                        android:layout_gravity="center|start"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginLeft="3dp" />
                     <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/standard_50">
-                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/salonName"
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:id="@+id/salon_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/high_edit_text"
-                        android:text=""
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        />
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/salonName"
+                            android:gravity="center"
+                            android:textColor="#a5587a"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/salon_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Value"
+                            android:textColor="#a5587a"
+                            android:gravity="center"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            />
+
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/standard_50"
+                        android:layout_height="match_parent"
                         android:gravity="center"
+                        android:layout_gravity="end|center"
                         >
                         <android.support.v7.widget.CardView
                             android:id="@+id/myCardView"
-                            android:layout_width="@dimen/standard_50"
-                            android:layout_height="@dimen/standard_50"
+                            android:layout_width="@dimen/standard_40"
+                            android:layout_height="@dimen/standard_40"
                             app:cardCornerRadius="50dp"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
                             >
+
                             <ImageView
                                 android:id="@+id/logoImg"
-                                android:src="@drawable/logo"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                />
+                                android:src="@drawable/logo" />
                         </android.support.v7.widget.CardView>
 
                     </LinearLayout>
+                </android.support.design.widget.CoordinatorLayout>
 
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -119,18 +130,20 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text="type"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/s_name"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/salonName"
                         android:textColor="@color/red"
                         android:gravity="center"
@@ -149,13 +162,14 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text="@string/Phone_Number"
                         android:gravity="center"
-                        android:textSize="18dp"
-                        android:textColor="@color/blue"
+                        android:textSize="16dp"
+                        android:textColor="#a5587a"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
@@ -178,12 +192,13 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text=""
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
@@ -206,12 +221,13 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text=""
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
@@ -234,7 +250,7 @@
                         android:layout_height="@dimen/high_edit_text"
                         android:text="TotalPrice"
                         android:gravity="center"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
@@ -250,11 +266,12 @@
                 android:layout_height="@dimen/high_edit_text"
                 android:text=""
                 android:gravity="center"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 />
             <LinearLayout
                 android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -263,7 +280,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/Service_Place"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -278,12 +295,13 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -292,7 +310,7 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="@string/order_id"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -307,7 +325,7 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
                     android:gravity="center"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -395,7 +413,7 @@
 
 
     </LinearLayout>
-    <Button
+  <!--  <Button
         android:id="@+id/location"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -407,5 +425,5 @@
         android:layout_margin="3dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        />
+        />-->
 </android.support.design.widget.CoordinatorLayout>
