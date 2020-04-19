@@ -145,19 +145,21 @@
                 android:id="@+id/filter"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
-                android:background="@drawable/shadow_button_blue"
                 android:textSize="@dimen/standard_20"
-                android:text="فلترة"
+                android:background="@drawable/shadow_button_spinner2"
+
+                android:text="@string/filter"
+                android:textAllCaps="false"
                 android:layout_marginBottom="10dp"
                 android:textColor="#FFF"/>
             <Button
                 android:id="@+id/clear"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
-                android:background="@drawable/shadow_button_spinner"
-                android:textSize="@dimen/standard_20"
-                android:text="ازالة جميع عناصر الفلترة"
+                android:layout_height="@dimen/high_button" android:textSize="@dimen/standard_20"
+                android:background="@drawable/shadow_button_blue"
+                android:text="@string/removeFilter"
+                android:textAllCaps="false"
                 android:textColor="#FFF"/>
 
         </LinearLayout>

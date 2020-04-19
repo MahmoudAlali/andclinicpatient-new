@@ -25,7 +25,7 @@
         android:layout_marginLeft="@dimen/pf_15_txt_size"
         android:gravity="center"
         android:layout_marginTop="@dimen/pf_5dp_space"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:background="@drawable/shadow_blue_c6"
         android:textSize="20dp"
         android:layout_marginBottom="5dp"
