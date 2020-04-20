@@ -833,4 +833,10 @@
     <string name="executing_order">Executing  order:</string>
     <string name="cost">Cost:</string>
     <string name="cname">Name:</string>
+    <string name="bookAtKnownProviders">It is preferred to book in salons already you know</string>
+    <string name="youCan">You can retrieve </string>
+    <string name="through"> riyals during </string>
+    <string name="daysAnd"> days and </string>
+    <string name="hours"> hours</string>
+
 </resources>

@@ -680,5 +680,9 @@
     <string name="executing_order">تنفيذ الطلب في:</string>
     <string name="cost">التكلفة:</string>
     <string name="cname">الاسم: </string>
-
+    <string name="bookAtKnownProviders">من الأفضل الحجز لدى المزودات اللاتي سبق تجريبهن</string>
+    <string name="youCan">يمكنك استرجاع </string>
+    <string name="through"> ريال خلال </string>
+    <string name="daysAnd"> يوم و </string>
+    <string name="hours"> ساعة</string>
 </resources>
