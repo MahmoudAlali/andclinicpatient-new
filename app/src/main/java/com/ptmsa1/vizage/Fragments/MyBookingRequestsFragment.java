@@ -435,8 +435,8 @@ public class MyBookingRequestsFragment extends Fragment {
                                     Log.e("Start",sday+"-"+smonth);
                                     Log.e("Start",eday+"-"+emonth);
                                     startdate=sday+"-"+smonth+" to "+eday+"-"+emonth;
-                                    String s =sday+"-"+smonth+"-"+syear;
-                                    String e =eday+"-"+emonth+"-"+eyear;
+                                    String s =syear+"-"+smonth+"-"+sday;
+                                    String e =eyear+"-"+emonth+"-"+eday;
                                     dateFilter = APICall.Filter("3","\""+s+"\"","\""+e+"\"");
 
 

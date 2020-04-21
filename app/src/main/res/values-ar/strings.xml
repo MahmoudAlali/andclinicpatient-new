@@ -578,7 +578,7 @@
     <string name="requestAdded">تم إرسال طلب الحجز.</string>
     <string name="KM">كم</string>
     <string name="select_service">اختاري خدمة</string>
-    <string name="requestDateFilter">تاريخ الطلب</string>
+    <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
     <string name="requestSalonFilter">اسم الصالون</string>
     <string name="requestTypeFilter">نوع الطلب</string>
     <string name="filter">فلترة</string>
@@ -600,8 +600,8 @@
     <string name="order_id">رقم الطلب:</string>
     <string name="createRequest">إنشاء طلب</string>
     <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
-    <string name="service_date_sort_up">تاريخ تنفيذ الخدمة (تنازلياً)</string>
-    <string name="service_date_sort_down">تاريخ تنفيذ الخدمة (تصاعدياَ)</string>
+    <string name="service_date_sort_up">تاريخ الطلب (تنازلياً)</string>
+    <string name="service_date_sort_down">تاريخ الطلب (تصاعدياَ)</string>
     <string name="accepted_res">مقبولة</string>
     <string name="waiting_res">بانتظار التأكيد</string>
     <string name="success_book_item">تم حجز الخدمة بنجاح</string>

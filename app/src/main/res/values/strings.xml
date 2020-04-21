@@ -531,7 +531,7 @@
     <string name="export_invoice">Export invoice</string>
     <string name="client_name1">Client name</string>
     <string name="service_exec_date">Service execution date</string>
-    <string name="booking_exec_date">Booking date</string>
+    <string name="booking_exec_date">Booking execution date</string>
     <string name="offer_type_select">Select offer type</string>
     <string name="reservation_date">Booking date</string>
     <string name="Service_Name">Service name</string>
@@ -749,7 +749,7 @@
     <string name="requestAdded">Your order has been sent.</string>
     <string name="KM">Km</string>
     <string name="select_service">Select service</string>
-    <string name="requestDateFilter">Order date</string>
+    <string name="requestDateFilter">Order execution date</string>
     <string name="requestSalonFilter">Salon name</string>
     <string name="requestTypeFilter">Order type</string>
     <string name="filter">filter</string>
@@ -763,8 +763,8 @@
     <string name="requestRelatedBooking">Booking attached to the order</string>
     <string name="createRequest">Create order</string>
     <string name="errorAddingRequest">Sorry, try again later </string>
-    <string name="service_date_sort_up">Service execution date (descending)</string>
-    <string name="service_date_sort_down">Service execution date (ascending)</string>
+    <string name="service_date_sort_up">Order date (descending)</string>
+    <string name="service_date_sort_down">Order date (ascending)</string>
     <string name="accepted_res">Accepted</string>
     <string name="waiting_res">Waiting for acceptance</string>
     <string name="success_book_item">Success book service</string>
