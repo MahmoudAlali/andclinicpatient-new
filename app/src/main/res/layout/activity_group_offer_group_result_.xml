@@ -19,6 +19,13 @@
             android:layout_height="wrap_content"
             android:textSize="10dp"
             android:gravity="center"
+            android:text="@string/bookAtKnownProviders"
+            android:textColor="@color/pf_red"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:gravity="center"
             android:text="@string/clients_names_change"
             android:textColor="@color/pf_red"/>
 
@@ -42,27 +49,35 @@
 
     </LinearLayout>
     <android.support.design.widget.CoordinatorLayout
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layoutDirection="ltr"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
         android:id="@+id/noSolMsg"
+        android:visibility="gone"
         >
-        <ImageView
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="300dp"
             android:layout_height="150dp"
-            android:src="@drawable/no_solutions"/>
-        <TextView
-            android:layout_gravity="center|end"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:textColor="#ac84ad"
-            android:textStyle="bold"
-            android:layout_width="170dp"
-            android:layout_height="70dp"
-            android:text="@string/no_sol_msg"
-            android:layout_marginRight="10dp" />
+            android:layout_gravity="center"
+            android:layoutDirection="ltr"
+            >
+            <ImageView
+                android:layout_width="310dp"
+                android:layout_height="150dp"
+                android:src="@drawable/no_solutions"/>
+            <TextView
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:textColor="#ac84ad"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text="@string/no_sol_msg"
+                android:layout_marginRight="10dp" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 </android.support.design.widget.CoordinatorLayout>

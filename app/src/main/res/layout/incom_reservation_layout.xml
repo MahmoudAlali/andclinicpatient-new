@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:layout_marginTop="5dp"
-    android:background="#F8D3E5"
+    android:background="@drawable/shadow_edit_text3"
+    android:layout_marginTop="7dp"
     android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
@@ -13,12 +13,11 @@
 
         <TextView
             android:id="@+id/rname"
-            android:layout_marginBottom="5dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
-            android:textSize="@dimen/standard_20"
+            android:textSize="16dp"
             android:text="Reservation Name"
             android:gravity="center"
             android:layout_marginTop="5dp"

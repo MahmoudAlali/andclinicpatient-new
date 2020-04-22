@@ -6,7 +6,7 @@
     android:layout_height="@dimen/nav_header_height"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:background="#FAF0F0"
+    android:background="#B8B9FA"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView

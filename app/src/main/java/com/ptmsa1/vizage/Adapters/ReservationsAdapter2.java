@@ -141,12 +141,46 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item)holder).reference_id.setText(bookingAutomatedBrowseData.get(position).getBdb_name_booking());
 
             //--- testing-----
+            if(bookingAutomatedBrowseData.get(position).getBdb_refund_days().equals("0"))
+            {
+                String refunfString =context.getString(R.string.youCan)
+                        +" "
+                        +bookingAutomatedBrowseData.get(position).getBdb_refund_amount()
+                        +" "
+                        +context.getString(R.string.through)
+                        +" "
+                        +bookingAutomatedBrowseData.get(position).getBdb_refund_hours()
+                        +" "
+                        +context.getString(R.string.hours);
+                ((Item) holder).refundText.setText(refunfString);
+
+            }
+            else
+            {
+                String refunfString =context.getString(R.string.youCan)
+                        +" "
+                        +bookingAutomatedBrowseData.get(position).getBdb_refund_amount()
+                        +" "
+                        +context.getString(R.string.through)
+                        +" "
+                        +bookingAutomatedBrowseData.get(position).getBdb_refund_days()
+                        +" "
+                        +context.getString(R.string.daysAnd)
+                        +" "
+                        +bookingAutomatedBrowseData.get(position).getBdb_refund_hours()
+                        +" "
+                        +context.getString(R.string.hours);
+                ((Item) holder).refundText.setText(refunfString);
+
+            }
+
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
             if (MyReservationFragment.tab.equals("2")){
 //                ((Item) holder).delay.setText(R.string.deposit);
                 ((Item) holder).delay.setVisibility(View.GONE);
             }
             if (MyReservationFragment.tab.equals("1")){
+
 
                 if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("2")){
                     ((Item) holder).status.setText(R.string.accepted_res);
@@ -171,6 +205,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
             if (!MyReservationFragment.tab.equals("3")){
                 ((Item) holder).rating.setVisibility(View.GONE);
+                ((Item) holder).refundText.setVisibility(View.VISIBLE);
                 if (bookingAutomatedBrowseData.get(position).getIs_rating_on().equals("1"))
                     for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++)
                         if (bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_confirm_exec_user().equals("1")){
@@ -1033,7 +1068,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,book_id,bdb_expected_deposit,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time;
+        TextView bookType,book_id,bdb_expected_deposit,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time,refundText;
         ImageView book_Details,inner_res,logoImg,place;
         ColorRatingBar rating;
 
@@ -1061,6 +1096,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //            accept=itemView.findViewById(R.id.accept);
             time=itemView.findViewById(R.id.time);
             logoImg=itemView.findViewById(R.id.logoImg);
+            refundText=itemView.findViewById(R.id.refundText);
 
         }
 

@@ -7,7 +7,7 @@
     android:layout_gravity="fill_horizontal"
     android:orientation="vertical"
     android:layout_weight="1"
-    android:background="@drawable/shadow_blue_c8"
+    android:background="@drawable/shadow_edit_text3"
     android:padding="10dp"
     >
     <ImageView

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.ptmsa1.vizage"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 25
         versionName "1.0"

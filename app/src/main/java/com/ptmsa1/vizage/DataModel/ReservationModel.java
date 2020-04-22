@@ -14,7 +14,11 @@ public class ReservationModel {
     String booked_by_me;
     String is_action_on;
     String is_rating_on;
+    String bdb_refund_days;
+    String bdb_refund_hours;
+    String bdb_refund_amount;
     ArrayList<BookingAutomatedBrowseData> data;
+
 
     public ReservationModel(String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking, ArrayList<BookingAutomatedBrowseData> data) {
         this.bookingType = bookingType;
@@ -53,7 +57,7 @@ public class ReservationModel {
         this.is_per_client=is_per_client;
     }
     String bdb_expected_deposit,bdb_loc_lat,bdb_loc_long;
-    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client,String bdb_expected_deposit,String bdb_loc_lat,String bdb_loc_long, ArrayList<BookingAutomatedBrowseData> data) {
+    public ReservationModel(String bdb_internally_number,String booked_by_me,String logoId,String bookingType,String bdb_is_executed, String totalPrice, String startTime, String place,String client_name,String bdb_inner_booking, String is_action_on,String is_rating_on,String bdb_name_booking,String is_per_client,String bdb_expected_deposit,String bdb_loc_lat,String bdb_loc_long, ArrayList<BookingAutomatedBrowseData> data,String bdb_refund_amount,String bdb_refund_days,String bdb_refund_hours) {
         this.bookingType = bookingType;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
@@ -73,6 +77,9 @@ public class ReservationModel {
         this.bdb_internally_number=bdb_internally_number;
         this.bdb_loc_lat=bdb_loc_lat;
         this.bdb_loc_long=bdb_loc_long;
+        this.bdb_refund_amount=bdb_refund_amount;
+        this.bdb_refund_days=bdb_refund_days;
+        this.bdb_refund_hours=bdb_refund_hours;
     }
 
     public String getBdb_loc_lat() {
@@ -225,5 +232,17 @@ public class ReservationModel {
 
     public String getBooked_by_me() {
         return booked_by_me;
+    }
+
+    public String getBdb_refund_amount() {
+        return bdb_refund_amount;
+    }
+
+    public String getBdb_refund_days() {
+        return bdb_refund_days;
+    }
+
+    public String getBdb_refund_hours() {
+        return bdb_refund_hours;
     }
 }

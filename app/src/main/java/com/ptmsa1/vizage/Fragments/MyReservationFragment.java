@@ -392,7 +392,7 @@ public class MyReservationFragment extends Fragment  {
                         serviceId="";
                         employee_id="";
                         service_name.setChecked(false);
-                        emp_name.setChecked(false);
+                       // emp_name.setChecked(false);
                         for (int i=0;i<filterNames.size();i++){
                             filterNames.set(i,"");
                             filterPostions.set(i,-1);
@@ -935,6 +935,7 @@ public class MyReservationFragment extends Fragment  {
                                     if (offer_type.getSelectedItemPosition()!=0){
 
                                         book_type.setText(BeautyMainPage.context.getResources().getString(R.string.book_type)+":"+offer_type.getSelectedItem().toString());
+//                                        book_type.setText(offer_type.getSelectedItem().toString());
                                         bookingType=book_type.getText().toString();
                                     }
                                     Log.e("API.BOOKTYPE",APICall.filter);
@@ -999,6 +1000,34 @@ public class MyReservationFragment extends Fragment  {
                         }
 
                         if (tab.equals("1")) {
+                        if(tab=="1")
+                        {
+                            fragment = new AcceptedReservationFragment();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
+                            tabselected(incom_reservation,accept_reservation,deposit_reservation,true);
+                        }
+                        else if ((tab=="2"))
+                        {
+                            tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+                            fragment = new DepositReservationFragment();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
+                        else if(tab=="3")
+                        {
+                            tabselected(accept_reservation,incom_reservation,deposit_reservation,true);
+                            fragment = new ExecutedReservationFragment();
+                            fm = getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
+                       /* if (APICall.layout==R.layout.incom_reservation_layout) {
                             fragment = new AcceptedReservationFragment();
                             fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
@@ -1021,6 +1050,9 @@ public class MyReservationFragment extends Fragment  {
 
 
 //                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1", APICall.filter+"",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            tabselected(accept_reservation,deposit_reservation,incom_reservation,false);
+                        }*/
+                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
 
                     }
                 });
@@ -1052,7 +1084,7 @@ public class MyReservationFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 tabselected(accept_reservation,incom_reservation,deposit_reservation,true);
-                tab="2";
+                tab="3";
                 fragment = new ExecutedReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -1063,6 +1095,7 @@ public class MyReservationFragment extends Fragment  {
         deposit_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tab="2";
                 tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
                 fragment = new DepositReservationFragment();
                 fm = getFragmentManager();
@@ -1130,11 +1163,11 @@ public class MyReservationFragment extends Fragment  {
         }catch (Exception e){
             e.printStackTrace();
         }
-        t1.setTextSize(14);
+        t1.setTextSize(12);
        t1.setBackgroundResource(R.drawable.shadow_service_tab);
-        t2.setTextSize(12);
+        t2.setTextSize(10);
         t2.setBackgroundResource(android.R.color.transparent);
-        t3.setTextSize(12);
+        t3.setTextSize(10);
         t3.setBackgroundResource(android.R.color.transparent);
 
     }

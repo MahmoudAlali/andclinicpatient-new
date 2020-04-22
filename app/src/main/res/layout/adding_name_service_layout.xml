@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  android:orientation="horizontal"
     android:weightSum="4"
-    android:background="@drawable/shadow_button_accent_lite_v2"
+    android:background="@drawable/shadow_edit_text3"
     android:layout_width="match_parent"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/high_edit_text"
         android:text="Name Service"
+        android:textColor="#000"
         android:gravity="center"
         android:textStyle="bold"
         />

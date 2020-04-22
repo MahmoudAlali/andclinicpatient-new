@@ -2,9 +2,17 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="215dp"
     android:layoutDirection="ltr"
+    android:layout_marginLeft="@dimen/standard_20"
+    android:layout_marginRight="@dimen/standard_20"
     >
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="end"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_location_on_black_24dp"/>
     <LinearLayout
         android:id="@+id/itemBackground"
         android:layout_width="wrap_content"
@@ -13,8 +21,8 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="335dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="215dp"
             android:orientation="horizontal"
             android:background="@drawable/new_offer_back_en"
             android:weightSum="3"

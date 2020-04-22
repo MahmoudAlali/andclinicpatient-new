@@ -85,15 +85,15 @@
         <LinearLayout
             android:layout_gravity="center"
             android:gravity="center"
-            android:background="@color/gray"
+            android:background="@color/main_header"
             android:layout_width="match_parent"
             android:layout_marginBottom="7dp"
             android:layout_height="@dimen/standard_30">
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                 android:id="@+id/add_service"
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textAlignment="center"></com.toptoche.searchablespinnerlibrary.SearchableSpinner>
         </LinearLayout>
         </LinearLayout>

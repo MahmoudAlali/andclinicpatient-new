@@ -749,7 +749,7 @@
     <string name="requestAdded">Your order has been sent.</string>
     <string name="KM">Km</string>
     <string name="select_service">Select service</string>
-    <string name="requestDateFilter">Order date</string>
+    <string name="requestDateFilter">Order execution date</string>
     <string name="requestSalonFilter">Salon name</string>
     <string name="requestTypeFilter">Order type</string>
     <string name="filter">filter</string>
@@ -763,8 +763,8 @@
     <string name="requestRelatedBooking">Booking attached to the order</string>
     <string name="createRequest">Create order</string>
     <string name="errorAddingRequest">Sorry, try again later </string>
-    <string name="service_date_sort_up">Service execution date (descending)</string>
-    <string name="service_date_sort_down">Service execution date (ascending)</string>
+    <string name="service_date_sort_up">Order date (descending)</string>
+    <string name="service_date_sort_down">Order date (ascending)</string>
     <string name="accepted_res">Accepted</string>
     <string name="waiting_res">Waiting for acceptance</string>
     <string name="success_book_item">Success book service</string>
@@ -840,4 +840,10 @@
     <string name="free_offer_multi_date">Free offer multi dates</string>
     <string name="free_offer_group_booking">Free offer group booking</string>
     <string name="enter_ref_number">Enter Reference number</string>
+    <string name="bookAtKnownProviders">It is preferred to book in salons already you know</string>
+    <string name="youCan">You can retrieve </string>
+    <string name="through"> riyals during </string>
+    <string name="daysAnd"> days and </string>
+    <string name="hours"> hours</string>
+
 </resources>

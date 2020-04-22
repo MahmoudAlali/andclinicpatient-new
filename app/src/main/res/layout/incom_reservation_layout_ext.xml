@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="status"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:gravity="center"
         />
     <LinearLayout
@@ -39,22 +39,22 @@
                 android:text="Booking type"
                 android:lines="1"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="#000"
                 android:layout_height="@dimen/standard_45" />
-
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:text="Start Date"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_height="@dimen/high_edit_text" />
 
 
         </LinearLayout>
-        <TextView
-            android:layout_weight="1"
-            android:id="@+id/start_date"
-            android:layout_width="match_parent"
-            android:text="Start Date"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="#000"
-            android:layout_height="@dimen/high_edit_text" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -90,7 +90,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:gravity="center"
-            android:textSize="20dp"
+                android:textSize="16dp"
             android:textColor="#a5587a"
             android:layout_height="@dimen/high_edit_text" />
             <ImageView
@@ -125,7 +125,7 @@
                         android:layout_width="match_parent"
                         android:text="Price"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:textColor="#d83269"
                         android:layout_height="@dimen/high_edit_text" />
 
@@ -146,7 +146,8 @@
                         android:gravity="center"
                         android:text="Place"
                         android:textColor="@android:color/black"
-                        android:textSize="20dp" />
+                        android:textSize="16dp"
+                        />
 
                     <ImageView
                         android:id="@+id/inner_res"
@@ -162,7 +163,7 @@
                         android:gravity="center"
                         android:text="@string/deposit"
                         android:textColor="@android:color/holo_red_dark"
-                        android:textSize="18dp" />
+                        android:textSize="16dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -192,7 +193,7 @@
                 android:layout_height="@dimen/high_edit_text"
                 android:gravity="center"
                 android:text="@string/reference_number"
-                android:textSize="18dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:layout_weight="2"
@@ -218,10 +219,18 @@
                 android:layout_height="@dimen/high_edit_text"
                 android:gravity="center"
                 android:text=""
-                android:textSize="18dp"
+                android:textSize="16dp"
                 />
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/refundText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="يمكنك استرجاع 0 ريال خلال 0 يوم و 0 ساعة"
+            android:textColor="@color/pf_red"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -235,7 +244,7 @@
             android:layout_height="@dimen/high_edit_text"
             android:text="@string/edit"
             android:textColor="#fff"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
         <android.support.v4.widget.Space
@@ -251,7 +260,8 @@
             android:gravity="center"
             android:text="@string/Delay"
             android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textSize="16dp"
+            />
 
         <android.support.v4.widget.Space
             android:layout_width="5dp"
@@ -264,7 +274,7 @@
             android:layout_height="match_parent"
             android:text="@string/cancel"
             android:textColor="#fff"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:gravity="center"
             />
 

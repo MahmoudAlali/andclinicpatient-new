@@ -4652,6 +4652,7 @@ public class APICall {
                             });
                             BeautyMainPage.bdb_email=data.getString("bdb_email");
                             String bdb_mobile=data.getString("bdb_mobile");
+                            BeautyMainPage.client_number =bdb_mobile;
 
 
                             Log.d("MessageResponse",mMessage);
@@ -9877,6 +9878,9 @@ public class APICall {
                                 String is_per_client = jObject.getString("is_per_client");
                                 String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_logo_id = jObject.getString("bdb_logo_id");
+                                String bdb_refund_days  = jObject.getString("bdb_refund_days");
+                                String bdb_refund_hours  = jObject.getString("bdb_refund_hours");
+                                String bdb_refund_amount  = jObject.getString("bdb_refund_amount");
                                 String bookedByMe = jObject.getString("bookedByMe");
                                 String bdb_booked_at="",bdb_start_dates="",bdb_start_date="";
                                 try {
@@ -11782,7 +11786,7 @@ public class APICall {
 
 
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                               GroupReservationResultActivity.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                               GroupReservationResultActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultActivity.listAdapter.notifyDataSetChanged();
                                 GroupReservationResultActivity.listView.setAdapter(GroupReservationResultActivity.listAdapter);
                                 GroupReservationResultActivity.listAdapter.notifyDataSetChanged();
@@ -12580,7 +12584,7 @@ public class APICall {
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
 
                              if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
-                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
@@ -12591,7 +12595,7 @@ public class APICall {
                                  }
                              }else {
 
-                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(BeautyMainPage.context, APICall.salons, APICall.stringArrayListMap);
+                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(context, APICall.salons, APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
@@ -12872,7 +12876,7 @@ public class APICall {
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
 
                              if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
-                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
@@ -12883,7 +12887,7 @@ public class APICall {
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
-                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(BeautyMainPage.context, APICall.salons, APICall.stringArrayListMap);
+                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(context, APICall.salons, APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
@@ -13149,7 +13153,7 @@ public class APICall {
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
 
                              if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
-                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                 BookingIndvidualActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
                                  BookingIndvidualActivity.listView.setAdapter(BookingIndvidualActivity.listAdapter);
                                  BookingIndvidualActivity.listAdapter.notifyDataSetChanged();
@@ -13160,7 +13164,7 @@ public class APICall {
                                  Log.e("SalonSize",salons.size()+"");
                              }else {
 
-                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(BeautyMainPage.context, APICall.salons, APICall.stringArrayListMap);
+                                 GroupReservationResultFragment.listAdapter = new CustomExpandableListAdapter(context, APICall.salons, APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                  GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                  GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
@@ -13640,7 +13644,7 @@ public class APICall {
                             @Override
                             public void run() {
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                                GroupReservationOtherResultActivity.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                GroupReservationOtherResultActivity.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultActivity.listAdapter.notifyDataSetChanged();
                                 GroupReservationOtherResultActivity.listView.setAdapter(GroupReservationOtherResultActivity.listAdapter);
                                 GroupReservationOtherResultActivity.listAdapter.notifyDataSetChanged();
@@ -17156,7 +17160,7 @@ public class APICall {
                             public void run() {
 
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                                MultiBookingIndividualResultActivity.listAdapter=new CustomExpandableListAdapterForMultiInd(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                MultiBookingIndividualResultActivity.listAdapter=new CustomExpandableListAdapterForMultiInd(context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 MultiBookingIndividualResultActivity.listView.setAdapter(MultiBookingIndividualResultActivity.listAdapter);
                                 MultiBookingIndividualResultActivity.listAdapter.notifyDataSetChanged();
@@ -18155,7 +18159,7 @@ public class APICall {
 
 
 //                               GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.searchBookingDataSTRS);
-                                GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(BeautyMainPage.context,APICall.salons,APICall.stringArrayListMap);
+                                GroupReservationResultFragment.listAdapter=new CustomExpandableListAdapter(context,APICall.salons,APICall.stringArrayListMap);
 //                                GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
                                 GroupReservationResultFragment.listView.setAdapter(GroupReservationResultFragment.listAdapter);
                                 GroupReservationResultFragment.listAdapter.notifyDataSetChanged();
@@ -22849,6 +22853,7 @@ public class APICall {
                         SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                         editor.putString("name", "ok");
                         editor.putString("isGuest", "1");
+                        editor.putString("bdb_mobile", data.getString("bdb_mobile"));
                         editor.putString("token", token_temp);
                         editor.commit();
                         editor.apply();
@@ -25462,6 +25467,7 @@ public class APICall {
 
     public static void showNeedToSignInDialog(final Context context)
     {
+        Log.e("ERR","showNeedToSignInDialog");
         final Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.sweet_dialog_layout_v4);
@@ -25471,7 +25477,7 @@ public class APICall {
         confirm.setText(R.string.signin);
         TextView cancel = dialog.findViewById(R.id.cancel);
         //                TextView resend_code = dialog.findViewById(R.id.resend_code);
-        title.setText(R.string.ExuseMeAlert);
+        //title.setText(R.string.ExuseMeAlert);
         message.setText(R.string.plsLogin);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override

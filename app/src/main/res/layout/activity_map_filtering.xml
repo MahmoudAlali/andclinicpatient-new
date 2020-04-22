@@ -36,6 +36,7 @@
 <LinearLayout
     android:id="@+id/my_loc_layout"
     android:gravity="center"
+    android:background="@drawable/shadow_edit_text3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
@@ -141,7 +142,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/high_button"
                             android:layout_weight="1"
-                            android:background="@drawable/shadow_button_blue"
+                            android:background="@drawable/shadow_edit_text4"
                             android:textAllCaps="false"
                             android:text="@string/deletelocation" />
                         <LinearLayout
@@ -157,7 +158,7 @@
                             android:layout_height="@dimen/high_button"
                             android:layout_weight="1"
                             android:textAllCaps="false"
-                            android:background="@drawable/shadow_button_blue"
+                            android:background="@drawable/shadow_edit_text3"
                             android:text="@string/editlocation" />
 
 
