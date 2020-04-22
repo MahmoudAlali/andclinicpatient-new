@@ -111,6 +111,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services_tabs_layout);
+        context=this;
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("Beauty");
@@ -138,7 +139,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
 
-        context=this;
         Log.e("tokeen", "token is:"+APICall.gettoken(context));
         Log.e("LastUpdate", "This");
 
@@ -184,10 +184,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             profileNameText.setText(R.string.guestAccount);
         else
             profileNameText.setText(client_name);
+        Log.e("ISGUEST :", APICall.isGuest(context));
 
 //        if(APICall.isGuest(context).equals("1"))
         if(bdb_is_guest.equals("1"))
         {
+            Log.e("guestToken", "hhhh");
             sideMenu.findItem(R.id.signin).setVisible(true);
             sideMenu.findItem(R.id.signout).setVisible(false);
             sideMenu.findItem(R.id.manageaccount).setVisible(false);
@@ -195,6 +197,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.effcts).setVisible(false);
             sideMenu.findItem(R.id.requests).setVisible(false);
             sideMenu.findItem(R.id.setting).setVisible(true);
+            menu.findItem(R.id.favorites).setEnabled(false);
+            menu.findItem(R.id.notification).setEnabled(false);
+            menu.findItem(R.id.reservations).setEnabled(false);
         }
 //        else if(APICall.isGuest(context).equals("0"))
         else if(bdb_is_guest.equals("0"))

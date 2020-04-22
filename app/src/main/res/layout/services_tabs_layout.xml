@@ -52,6 +52,7 @@
         app:itemTextColor="#000"
         android:theme="@style/NavigationTheme"
         app:itemIconTint="@color/colorAccent"
+        app:headerLayout="@layout/nav_header_layout"
         app:menu="@menu/activity_main__example_drawer">
         <!--app:headerLayout="@layout/nav_header_main__example"-->
     </android.support.design.widget.NavigationView>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.FilterAndSortModel;
 import com.ptmsa1.vizage.DataModel.ServiceFilter;
@@ -35,6 +36,7 @@ public class ServiceFragment extends Fragment {
 
     public static String bdb_ser_id="360";
     Button freeBooking;
+    LinearLayout addOrderLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_service_type_frag, container, false);
@@ -54,6 +56,7 @@ public class ServiceFragment extends Fragment {
         group_res_bride= view.findViewById(R.id.group_res_bride);
         group_res_another=view.findViewById(R.id.group_res_another);
         group_res_another_bride=view.findViewById(R.id.group_res_another_bride);
+        addOrderLayout=view.findViewById(R.id.addOrderLayout);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +65,12 @@ public class ServiceFragment extends Fragment {
         });
 
 
-        Toolbar toolbar;
+        if(APICall.isGuest(BeautyMainPage.context).equals("1"))
+
+        {
+            addOrderLayout.setVisibility(View.INVISIBLE);
+        }
+            Toolbar toolbar;
         toolbar=view.findViewById(R.id.toolbarm);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

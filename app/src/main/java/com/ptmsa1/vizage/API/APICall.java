@@ -23126,7 +23126,7 @@ public class APICall {
                         SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                         editor.putString("name", "ok");
                         editor.putString("isGuest", "1");
-                        editor.putString("bdb_mobile", data.getString("bdb_mobile"));
+                        editor.putString("bdb_mobile", data.getString("mobile"));
                         editor.putString("token", token_temp);
                         editor.commit();
                         editor.apply();
