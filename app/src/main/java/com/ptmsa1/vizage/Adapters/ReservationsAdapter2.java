@@ -618,6 +618,106 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
                 }
 
+            }else if (offtypetmp.equals("20"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_ind_reservation);
+                ((Item) holder).bookType.setText(s);
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                    else
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
+                }
+
+            }else if (offtypetmp.equals("21"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_multi_date_ind_booking);
+                ((Item) holder).bookType.setText(s);
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_status().equals("7")){
+//                        ((Item)holder).refuse.setVisibility(View.GONE);
+//                        break;
+//                    }
+//                }
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
+//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
+//                }
+
+            }else if (offtypetmp.equals("22"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_group_booking);
+                ((Item) holder).bookType.setText(s);
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
+//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
+//                }
+
+            }else if (offtypetmp.equals("23"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_ind_offer_booking);
+                ((Item) holder).bookType.setText(s);
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
+                    else
+                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
+                }
+
+            }else if (offtypetmp.equals("24"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_offer_multi_date);
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_status().equals("7")){
+//                        ((Item)holder).refuse.setVisibility(View.GONE);
+//                        break;
+//                    }
+//                }
+                ((Item) holder).bookType.setText(s);
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
+//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
+//                }
+
+            }else if (offtypetmp.equals("25"))
+            {
+//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
+                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
+                //حجز متعدد (عروس)
+                String s=((AppCompatActivity)context).getResources().getString(R.string.free_offer_group_booking);
+                ((Item) holder).bookType.setText(s);
+                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
+                ((Item)holder).myroot.removeAllViews();
+//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
+//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
+//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
+//                }
+
             }
 
             if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
@@ -626,6 +726,10 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).refuse.setText(R.string.cancel);
             }
 
+            Log.e("Position"+position,"is"+position);
+            Log.e("OfferTypeTmp","is"+offtypetmp);
+            Log.e("SizeBooking","is"+bookingAutomatedBrowseData.get(position).getData().size());
+            Log.e("PerClient","is"+ bookingAutomatedBrowseData.get(position).getIs_per_client());
 
             ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -634,12 +738,13 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")
                         ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("1")){
 //
-                        if ((!offtypetmp.equals("3") &&!offtypetmp.equals("1") && !offtypetmp.equals("10")  && !offtypetmp.equals("13")
-                            && !offtypetmp.equals("4") && !offtypetmp.equals("5") && !offtypetmp.equals("7") && !offtypetmp.equals("8"))
+                        if (( offtypetmp.equals("1") ||offtypetmp.equals("2") ||offtypetmp.equals("11") ||offtypetmp.equals("12") ||offtypetmp.equals("22")
+//                                (!offtypetmp.equals("3")  && !offtypetmp.equals("10")  && !offtypetmp.equals("13")
+//                            && !offtypetmp.equals("4") && !offtypetmp.equals("5") && !offtypetmp.equals("7") && !offtypetmp.equals("8")
+//
+                                )
                         && (bookingAutomatedBrowseData.get(position).getData().size()>1) &&
-                                bookingAutomatedBrowseData.get(position).getIs_per_client().equals("1")
-                        ){
-
+                                bookingAutomatedBrowseData.get(position).getIs_per_client().equals("1")){
                         {
                             //------- cancel activity reservation-----------------
                             book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();

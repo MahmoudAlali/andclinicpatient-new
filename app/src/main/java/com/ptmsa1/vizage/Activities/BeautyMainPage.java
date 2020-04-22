@@ -146,21 +146,23 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         SharedPreferences settings = getSharedPreferences("LOGIN", MODE_PRIVATE);
-        if (settings.getString("client_name","").equals("")
-                || settings.getString("client_number","").equals("")) {
+//        if (settings.getString("client_name","").equals("")
+//                || settings.getString("client_number","").equals("")) {
+//            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
+//        }else if(settings.getString("client_name","").equals("Guest"))
+//        {
             APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
-        }else if(settings.getString("client_name","").equals("Guest"))
-        {
-            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
-        }else {
+//        }else {
             client_name=settings.getString("client_name","");
             client_number=settings.getString("client_number","");
             bdb_email=settings.getString("bdb_email","");
-        }
+
+//        }
 
 
 
         Log.e("Tokenc",editor.getString("token_client",""));
+        Log.e("client_number123",editor.getString("client_number","qwqwqwq"));
 
         navigation=findViewById(R.id.navigation);
         sideNavBar=findViewById(R.id.nav_view);

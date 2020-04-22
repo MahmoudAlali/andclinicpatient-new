@@ -30,8 +30,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CancelReservationActivity extends AppCompatActivity {
-    public static TextView empname,booktype,id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
-    public static LinearLayout myroot;
+    public static TextView empname,booktype,ref_id,journey_time,start_date,phone_number,id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+    public static LinearLayout myroot,jtime_lay;
     static Boolean checkAllTrue=true;
 
     static Context context;
@@ -58,6 +58,12 @@ public class CancelReservationActivity extends AppCompatActivity {
         id=findViewById(R.id.id);
         service_name=findViewById(R.id.rname);
         salonName=findViewById(R.id.salon_name);
+        start_date=findViewById(R.id.start_date);
+        phone_number=findViewById(R.id.phone_number);
+        journey_time=findViewById(R.id.journey_time);
+        jtime_lay=findViewById(R.id.jtime_lay);
+        ref_id=findViewById(R.id.ref_id);
+//        book_at=findViewById(R.id.book_at);
 
 
         APICall.browseOneBookingForCancel(ReservationsAdapter2.book_id,context);
@@ -191,11 +197,11 @@ public class CancelReservationActivity extends AppCompatActivity {
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext_v1, myroot, false);
         TextView rname,emp_name,client_details,price,end_time,starttime,book_at,actual_price,price_j_cost,journey_time;
         ImageView isExecuted=layout2.findViewById(R.id.isExecuted);
-        LinearLayout ac_price_lay;
+//        LinearLayout ac_price_lay;
         final CheckBox check;
         price=layout2.findViewById(R.id.price);
         actual_price=layout2.findViewById(R.id.actual_price);
-        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
+//        ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
         price_j_cost=layout2.findViewById(R.id.price_j_cost);
         journey_time=layout2.findViewById(R.id.journey_time);
         client_details=layout2.findViewById(R.id.client_details);
@@ -207,7 +213,7 @@ public class CancelReservationActivity extends AppCompatActivity {
         check=layout2.findViewById(R.id.check);
 
         if (ac_price.equals("0") ||ac_price.equals("") ){
-            ac_price_lay.setVisibility(View.GONE);
+//            ac_price_lay.setVisibility(View.GONE);
         }else {
             actual_price.setText(ac_price);
             ReservatoinDetailsActivity.price.setPaintFlags(ReservatoinDetailsActivity.price.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
@@ -271,11 +277,11 @@ public class CancelReservationActivity extends AppCompatActivity {
         actual_price=layout2.findViewById(R.id.actual_price);
         ac_price_lay=layout2.findViewById(R.id.ac_price_lay);
 
-        if (ac_price.equals("0")){
-            ac_price_lay.setVisibility(View.GONE);
-        }else {
-            actual_price.setText(ac_price);
-        }
+//        if (ac_price.equals("0")){
+//            ac_price_lay.setVisibility(View.GONE);
+//        }else {
+//            actual_price.setText(ac_price);
+//        }
         starttime=layout2.findViewById(R.id.time);
         book_at=layout2.findViewById(R.id.book_at);
         emp_name=layout2.findViewById(R.id.emp_name);
@@ -307,11 +313,18 @@ public class CancelReservationActivity extends AppCompatActivity {
         final View layout2;
 
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext_v1, myroot, false);
-        TextView client_details;
+        TextView client_details,cname,c_old;
         CheckBox check;
         client_details=layout2.findViewById(R.id.client_details);
         check=layout2.findViewById(R.id.checkbox);
-        client_details.setText(client_name);
+        cname=layout2.findViewById(R.id.name);
+        c_old=layout2.findViewById(R.id.old);
+        cname.setText(context.getResources().getString(R.string.name)+" "+client_name);
+        if (client_old.equals("0")) {
+            c_old.setText(context.getResources().getString(R.string.child));
+        }else {
+            c_old.setText(context.getResources().getString(R.string.Adult));
+        }
         int ptmp=0;
         try {
             for (int j = 0; j < bookings.length(); j++) {
@@ -336,6 +349,7 @@ public class CancelReservationActivity extends AppCompatActivity {
             }
         });
         try {
+            int pricetxt=0;
             for (int j = 0; j < bookings.length(); j++) {
                 JSONObject object = bookings.getJSONObject(j);
                 Log.e("objectBookings", object.toString());
@@ -344,7 +358,7 @@ public class CancelReservationActivity extends AppCompatActivity {
                     client_name = object.getString("bdb_user_name");
 //                                    }
 
-                String bdb_price = object.getString("bdb_price"),
+                final String bdb_price = object.getString("bdb_price"),
                         bdb_id = object.getString("bdb_id"),
                         bdb_start_date = object.getString("bdb_start_date"),
                         bdb_start_time = object.getString("bdb_start_time"),
@@ -352,6 +366,20 @@ public class CancelReservationActivity extends AppCompatActivity {
                         bdb_is_executed = object.getString("bdb_confirm_exec_sup"),
                         journey_time = object.getString("bdb_journey_time"),
                         bdb_booked_at = object.getString("bdb_booked_at");
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("BookedAt123","is"+bdb_booked_at);
+                        Log.e("bdb_start_date123","is"+bdb_start_date);
+                        CancelReservationActivity.book_at.setText(bdb_booked_at);
+                        CancelReservationActivity.start_date.setText(bdb_start_date);
+                        if (journey_time.equals("0")){
+                            CancelReservationActivity.jtime_lay.setVisibility(View.GONE);
+                        }else {
+                            CancelReservationActivity.journey_time.setText(journey_time+" "+context.getResources().getString(R.string.minute));
+                        }
+                    }
+                });
                 String bdb_emp_name = object.getString("bdb_emp_name");
                 String bdb_name = object.getString("bdb_name"),
                         bdb_name_ar = object.getString("bdb_name_ar");
@@ -364,6 +392,8 @@ public class CancelReservationActivity extends AppCompatActivity {
                 } catch (Exception e) {
 
                 }
+
+                pricetxt=+Integer.parseInt(bdb_price);
 
 
 //                                    if (name.equals("booking_wast_time") ){
@@ -400,6 +430,7 @@ public class CancelReservationActivity extends AppCompatActivity {
 
                 cancelPerClientModels.add(new CancelPerClientModel(bdb_id,check));
             }
+            client_details.setText(pricetxt+"");
 
         }catch (Exception e){
             e.printStackTrace();

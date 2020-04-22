@@ -15,7 +15,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Fragments.AccountFragment;
+import com.ptmsa1.vizage.Fragments.ServiceFragment;
 import com.ptmsa1.vizage.R;
 import com.google.firebase.FirebaseApp;
 
@@ -42,6 +45,19 @@ public class Login extends AppCompatActivity {
 
         context=this;
 
+
+        //---------- get guest token-----then-- get sys info-----
+        APICall.getGuestTokenThenInfo(context, FirebaseInstanceId.getInstance().getToken());
+
+
+
+        try{
+            ServiceFragment.serviceFilters.clear();
+            AccountFragment.locationTitles.clear();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         String name,pass;
         SharedPreferences prefs = getSharedPreferences("LOGIN", MODE_PRIVATE);
         if(logout==false) {

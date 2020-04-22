@@ -680,5 +680,12 @@
     <string name="executing_order">تنفيذ الطلب في:</string>
     <string name="cost">التكلفة:</string>
     <string name="cname">الاسم: </string>
+    <string name="free_ind_reservation">حجز فردي حر</string>
+    <string name="free_multi_date_ind_booking">حجز فردي متعدد حر</string>
+    <string name="free_group_booking">حجز جماعي حر</string>
+    <string name="free_ind_offer_booking">عرض فردي حر</string>
+    <string name="free_offer_multi_date">عرض متعدد التواريخ حر</string>
+    <string name="free_offer_group_booking">عرض جماعي حر</string>
+    <string name="enter_ref_number">ادخلي الرقم المرجعي</string>
 
 </resources>

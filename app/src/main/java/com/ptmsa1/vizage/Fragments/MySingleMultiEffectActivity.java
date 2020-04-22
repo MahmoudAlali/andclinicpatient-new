@@ -83,6 +83,7 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
             public void onClick(View v) {
                String f= getEffects();
                 Log.e("Effectfilter",f);
+                Log.e("getFilterMultiDates",getFilterMultiDates(f));
 
                 Intent intent = new Intent(context, MultiBookingIndividualResultActivity.class);
                 intent.putExtra("filter",getfilter(f));
@@ -175,6 +176,39 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         return clientf;
     }
 
+
+
+    public static String getFilterMultiDates(String effects){
+        String f="";
+        String clientf=null;
+        clientf = "\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[";
+
+        for (int i=0;i<MultiIndividualBookingReservationFragment.servicesForClientGroups.size();i++)
+            {
+                if (clientf==null || i==0) {
+                    clientf+="\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+//                    clientf = "\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+                    clientf += "{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;
+                    clientf +="],\"effect\":["+effects+"] " +
+                            " \t}\n" ;
+                }else {
+                    clientf+=",\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+
+//                    clientf += ",{\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+                    clientf += "{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;
+                    clientf +="],\"effect\":["+effects+"] " +
+                            " \t}\n" ;
+                }
+
+
+
+
+        }
+        clientf+=" ]}";
+        return clientf;
+
+    }
+
     static ArrayList<String> effectsArr = new ArrayList<>();
     public static void addCatLayout(final LinearLayout myroot, ClientEffectRequestModel clientEffectModel){
         //------- add degrees
@@ -200,7 +234,7 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
                 myroot.addView(layout2);
             }
         });
-        Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
+//        Log.e("Effects_cat",clientEffectModel.getClientEffectModels().get(0).getCat_name());
        try {
            for (int i = 0; i < clientEffectModel.getClientEffectModels().get(0).getEffects().size(); i++) {
                Log.e("Effects_name", clientEffectModel.getClientEffectModels().get(0).getEffects().get(i).getBdb_effect_name_ar());

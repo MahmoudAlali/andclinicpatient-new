@@ -5,9 +5,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,6 +44,7 @@ public class DepositReservationFragment extends Fragment {
     ImageView sortbtn;
     int layout;
     public String tmp="2";
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,7 +65,13 @@ public class DepositReservationFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout= R.layout.incom_reservation_layout;
-        APICall.filter=filter= APICall.bookingFilter("1","7","0");
+        try {
+            APICall.arrayAB.remove(0);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+//        if (APICall.arrayAB==null)
+            APICall.filter=filter= APICall.bookingFilterV1("1","7","0");
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
@@ -96,6 +105,9 @@ public class DepositReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
+            if (filter==null){
+                APICall.filter=filter= APICall.bookingFilterV1("1","7","0");
+            }
             APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;
