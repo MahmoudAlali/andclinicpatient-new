@@ -90,6 +90,7 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
                 }else {
                     ((Item)holder).name.setEnabled(true);
                     ((Item)holder).phone_number.setEnabled(true);
+                    ((Item)holder).phone_number.setVisibility(View.VISIBLE);
                     ((Item)holder).name.setText("");
                     ((Item)holder).phone_number.setText("");
                 }

@@ -106,6 +106,7 @@
                     android:layout_marginBottom="20dp"
                     android:textColor="@color/endblue"
                     android:text="@string/enterasaguset"
+                    android:onClick="enterguest"
                     android:background="@drawable/signin_btn"
                     android:textAllCaps="false"
 

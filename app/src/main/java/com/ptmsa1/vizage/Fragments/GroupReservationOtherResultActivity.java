@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ExpandableListView;
 
 import com.ptmsa1.vizage.API.APICall;
@@ -42,6 +43,7 @@ public class GroupReservationOtherResultActivity extends AppCompatActivity {
         }
 
 
+        Log.e("GUESTIS","isss"+context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("isGuest","-1"));
 
         APICall.searchGroupBookingOther(context,url,urlAlt);
 

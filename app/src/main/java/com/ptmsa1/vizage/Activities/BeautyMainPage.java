@@ -79,7 +79,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static int ACCESS_FINE_LOCATION=90;
     public static Fragment currentFragment;
     public static String is_bride_service;
-    public static String bdb_email;
+    public static String bdb_email,bdb_is_guest="0";
     private int READ_EXTERNAL_STORAGE=93;
     public static String client_name="";
     public static String client_number="";
@@ -99,7 +99,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    public Menu menu,sideMenu;
+    public static Menu menu,sideMenu;
     NavigationView sideNavBar;
     public static TextView profileNameText;
 //  ------------ not used------------
@@ -185,7 +185,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         else
             profileNameText.setText(client_name);
 
-        if(APICall.isGuest(context).equals("1"))
+//        if(APICall.isGuest(context).equals("1"))
+        if(bdb_is_guest.equals("1"))
         {
             sideMenu.findItem(R.id.signin).setVisible(true);
             sideMenu.findItem(R.id.signout).setVisible(false);
@@ -195,13 +196,15 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.requests).setVisible(false);
             sideMenu.findItem(R.id.setting).setVisible(true);
         }
-        else if(APICall.isGuest(context).equals("0"))
+//        else if(APICall.isGuest(context).equals("0"))
+        else if(bdb_is_guest.equals("0"))
         {
             sideMenu.findItem(R.id.signin).setVisible(false);
             sideMenu.findItem(R.id.signout).setVisible(true);
             sideMenu.findItem(R.id.setting).setVisible(false);
 
         }
+        Log.e("GUESTIS","isss"+APICall.isGuest(context).equals("1"));
 
         //------------------- show Service Fragment -------------
 

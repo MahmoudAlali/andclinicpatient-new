@@ -53,9 +53,11 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     RecyclerView recyclerView;
    public static String place_num="",price_num="";
     public static String end_date;
-    String bdb_pack_id;
+    public static String bdb_pack_id;
     String bdb_pack_id1;
     String is_effects_on;
+    public static String offerType="";
+    public static String offerplace="";
     public  static int booking_period;
 
     public static ArrayList<String> services=new ArrayList<>();
@@ -67,6 +69,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         context=this;
         final int postion=getIntent().getIntExtra("postion",0);
         final String otype=getIntent().getStringExtra("offertype");
+        APICall.OFFER_CLASS_NAME="SingleOfferEffect";
 
 
         APICall.bdb_is_effects_on="0";
@@ -366,8 +369,8 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                     String date=showDate.getText().toString();
                     String cname= BeautyMainPage.client_name;
                     String cphone=BeautyMainPage.client_number;
-                    String offerType=otype;
-                    String offerplace="";
+                     offerType=otype;
+                     offerplace="";
 //                    ArrayList<String> arrayList =new ArrayList<>();
                     String servicesf="";
                     String bdb_ser_sup_id="",bdb_time="";

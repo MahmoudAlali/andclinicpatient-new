@@ -51,7 +51,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     public static String place_num="",price_num="";
     static String place="";
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
-    String bdb_pack_id;
+    public static String bdb_pack_id;
     String is_effects_on,end_date;
     public  static String bdb_offer_end="";
 
@@ -66,6 +66,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         context=this;
         serviceDetails.clear();
         selectDateOfferAdapter.dates.clear();
+        APICall.OFFER_CLASS_NAME="MultiDateOfferEffect";
 
 //        int postion=getIntent().getIntExtra("postion",0);
 //        client_name=findViewById(R.id.client_name);

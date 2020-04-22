@@ -31,13 +31,14 @@ public class MultiDateOfferEffect extends AppCompatActivity {
 
     Context context;
 
-    String postdata,offertype,place;
-    int postion;
+    public  static String postdata,offertype,place;
+    public  static int postion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
+        Log.e("OFFER_CLASS_NAME2","is"+APICall.OFFER_CLASS_NAME);
 
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);
@@ -182,9 +183,9 @@ public class MultiDateOfferEffect extends AppCompatActivity {
         }
         return clientf;
     }
-    String place_num,price_num;
+    public  static String place_num,price_num;
 
-    String getFilter(String effect){
+   public static String getFilter(String effect){
         String prices="";
         if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
             prices= " {\n" +
@@ -252,6 +253,89 @@ public class MultiDateOfferEffect extends AppCompatActivity {
                         "    ],\n" +
                         "\n" +
                         "\t\"bdb_pack_code\":" + bdb_pack_code + ",\n" +
+                        "\t\"clients\": [  ";
+//                    String cname = client_name.getText().toString();
+//                    String phone = phone_number.getText().toString();
+
+
+        String services = sortdates(MultiDateOfferBooking.selectDateOfferAdapter.dates,name,mobile,effect, postion);
+
+        postdata = postdata + services + "],\"offer_type\":" + offertype + "}";
+
+
+        Log.e("POSTDATA", postdata);
+
+
+        return postdata;
+    }
+   public static String getFilter(String effect,String offertype){
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+MultiDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+MultiDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
+        }
+
+
+
+        try {
+            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()) {
+                case 1:
+                    place_num = "9";
+                    price_num = "32";
+                    break;
+                case 2:
+                    place_num = "8";
+                    price_num = "1";
+                    break;
+                case 3:
+                    place_num = "10";
+                    price_num = "30";
+                    break;
+                case 4:
+                    place_num = "11";
+                    price_num = "31";
+                    break;
+
+            }
+        }catch (Exception e){
+
+
+        }
+        String name= BeautyMainPage.client_name;
+        String mobile=BeautyMainPage.client_number;
+        String bdb_pack_code = TabTwo.arrayList.get(postion).getBdb_pack_code();
+
+        String postdata =
+                "{\n" +
+                        "    \"Filter\": [\n" +
+                        "        {\n" +
+                        "            \"num\": 34,\n" +
+                        "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                        "            \"value2\": 0\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"num\": 35,\n" +
+                        "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                        "            \"value2\": 0\n" +
+                        "        },\n" +
+                        "  " +prices+
+                        "        {\n" +
+                        "            \"num\": "+MultiDateOfferBooking.place_num+",\n" +
+                        "            \"value1\": 1,\n" +
+                        "            \"value2\": 0\n" +
+                        "        }\n" +
+                        "    ],\n" +
+                        "\n" +
+                        "\t\"bdb_pack_code\":" + MultiDateOfferBooking.bdb_pack_id + ",\n" +
                         "\t\"clients\": [  ";
 //                    String cname = client_name.getText().toString();
 //                    String phone = phone_number.getText().toString();

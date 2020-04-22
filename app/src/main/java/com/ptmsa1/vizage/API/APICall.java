@@ -47,6 +47,7 @@ import com.ptmsa1.vizage.Activities.ConfirmAccountActivity;
 import com.ptmsa1.vizage.Activities.CreateRequestActivity;
 import com.ptmsa1.vizage.Activities.GroupOffer.MultiClientOfferEffect;
 import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferBooking;
+import com.ptmsa1.vizage.Activities.MultiDateOffer.MultiDateOfferEffect;
 import com.ptmsa1.vizage.Activities.NewBookingRequestsFragment;
 import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking;
@@ -248,9 +249,8 @@ public class APICall {
     return shared_token;
     }
     public static String isGuest(Context context){
-        String isGuest="";
+      String isGuest="";
             isGuest = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("isGuest","0");
-
         return isGuest;
     }
         //---استعراض خدمات المزودين لخدمة معينة-----------------------------done
@@ -2814,6 +2814,14 @@ public class APICall {
 
                             name.setText(bdb_name);
                             mobile.setText(bdb_mobile);
+                            if (BeautyMainPage.bdb_is_guest.equals("1")) {
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mobile.setVisibility(View.GONE);
+                                    }
+                                });
+                            }
 //                                editor.putString("bdb_name", bdb_name);
 //                            editor.putString("bdb_email", bdb_email);
 //                            editor.putString("bdb_name", bdb_name);
@@ -4652,7 +4660,9 @@ public class APICall {
                             });
                             BeautyMainPage.bdb_email=data.getString("bdb_email");
                             String bdb_mobile=data.getString("bdb_mobile");
+                            String bdb_is_guest=data.getString("bdb_is_guest");
                             BeautyMainPage.client_number =bdb_mobile;
+                            BeautyMainPage.bdb_is_guest =bdb_is_guest;
 
 
                             Log.d("MessageResponse",mMessage);
@@ -4661,9 +4671,33 @@ public class APICall {
                             prefEditor.putString("client_name", bdb_name);
                             prefEditor.putString("client_number", bdb_mobile);
                             prefEditor.putString("bdb_email", BeautyMainPage.bdb_email);
+                            prefEditor.putString("bdb_is_guest", BeautyMainPage.bdb_is_guest);
                             prefEditor.commit();
                             prefEditor.apply();
+
+                            try{
+//                                if(data.getString("bdb_is_guest").equals("1"))
+//                                {
+//                                    BeautyMainPage.sideMenu.findItem(R.id.signin).setVisible(true);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.signout).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.manageaccount).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.points).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.effcts).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.requests).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.setting).setVisible(true);
+//                                }
+//                                else if(data.getString("bdb_is_guest").equals("0"))
+//                                {
+//                                    BeautyMainPage.sideMenu.findItem(R.id.signin).setVisible(false);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.signout).setVisible(true);
+//                                    BeautyMainPage.sideMenu.findItem(R.id.setting).setVisible(false);
+//
+//                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                         }
+
 
 
 
@@ -7345,6 +7379,239 @@ public class APICall {
 //                        pd.dismiss();
 
                     }
+
+                });
+
+                Log.d("MessageResponse", mMessage);
+            }
+            public static String OFFER_CLASS_NAME="";
+         public    static void getdetailsUserForLogin(final Context context){
+                String token = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("token", null);
+                MediaType MEDIA_TYPE = MediaType.parse("application/json");
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        showDialog(context);
+//                        pd.show();
+                    }
+                });
+
+                OkHttpClient client = new OkHttpClient();
+                JSONObject postdata = new JSONObject();
+
+                RequestBody body = RequestBody.create(MEDIA_TYPE, "");
+
+                okhttp3.Request request = new okhttp3.Request.Builder()
+                        .url(API_PREFIX_NAME+"/api/auth/user/detailsUser")
+                        .post(body)
+                        .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                        .addHeader("X-Requested-With", "XMLHttpRequest")
+                        .header("Authorization", "Bearer " + token)
+                        //                .header("Content-Type", "application/json")
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        mMessage = e.getMessage().toString();
+                        Log.e("failure Response", mMessage);
+//                        pd.dismiss();
+
+
+                        if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                        {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    final Dialog dialog = new Dialog(context);
+                                    dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                    dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                    TextView confirm = dialog.findViewById(R.id.confirm);
+                                    TextView message = dialog.findViewById(R.id.message);
+                                    TextView title = dialog.findViewById(R.id.title);
+                                    title.setText(R.string.Null);
+                                    message.setText(R.string.check_internet_con);
+                                    confirm.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialog.cancel();
+
+                                        }
+                                    });
+                                    dialog.show();
+
+                                }
+                            });
+
+
+                        }
+                        else {
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                                }
+                            });
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                        String mMessage = response.body().string();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+
+                                pd.dismiss();
+
+
+                            }
+                        });
+                        Log.e("TAG", mMessage);
+
+                        try {
+                            JSONObject object=new JSONObject(mMessage);
+
+
+                            String success=object.getString("success");
+                            if (success.equals("true")){
+                                JSONObject data=object.getJSONObject("data");
+                                final String bdb_name=data.getString("bdb_name");
+                                BeautyMainPage.client_name=bdb_name;
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        BeautyMainPage.profileNameText.setText(bdb_name);
+
+                                    }
+                                });
+                                BeautyMainPage.bdb_email=data.getString("bdb_email");
+                                String bdb_mobile=data.getString("bdb_mobile");
+                                String bdb_is_guest=data.getString("bdb_is_guest");
+                                BeautyMainPage.client_number =bdb_mobile;
+                                BeautyMainPage.bdb_is_guest =bdb_is_guest;
+
+
+                                Log.d("MessageResponse",mMessage);
+                                SharedPreferences settings = context.getSharedPreferences("LOGIN", context.MODE_PRIVATE);
+                                SharedPreferences.Editor prefEditor = settings.edit();
+                                prefEditor.putString("client_name", bdb_name);
+                                prefEditor.putString("client_number", bdb_mobile);
+                                prefEditor.putString("bdb_email", BeautyMainPage.bdb_email);
+                                prefEditor.putString("bdb_is_guest", BeautyMainPage.bdb_is_guest);
+                                prefEditor.commit();
+                                prefEditor.apply();
+
+
+
+
+
+
+                                try{
+//                                    if(data.getString("bdb_is_guest").equals("1"))
+//                                    {
+//                                        BeautyMainPage.sideMenu.findItem(R.id.signin).setVisible(true);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.signout).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.manageaccount).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.points).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.effcts).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.requests).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.setting).setVisible(true);
+//                                    }
+//                                    else if(APICall.isGuest(context).equals("0"))
+//                                    {
+//                                        BeautyMainPage.sideMenu.findItem(R.id.signin).setVisible(false);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.signout).setVisible(true);
+//                                        BeautyMainPage.sideMenu.findItem(R.id.setting).setVisible(false);
+//                                    }
+
+
+
+                                    ((AppCompatActivity) context).finish();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                Log.e("NewIntent","isss"+BeautyMainPage.FRAGMENT_NAME);
+                                Log.e("OfferBookingResultP","is"+OFFER_CLASS_NAME);
+
+                                if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                                    ((AppCompatActivity)BookingIndvidualActivity.context).finish();
+                                    Intent intent=new Intent(context,BookingIndvidualActivity.class);
+                                    context.startActivity(intent);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")){
+                                    for (int i=0;i< GroupReservationFragment.clientsViewData.size();i++){
+                                        if ( GroupReservationFragment.clientsViewData.get(i).getIs_current_user().equals("1")){
+                                            GroupReservationFragment.clientsViewData.get(i).getClient_name().setText( BeautyMainPage.client_name);
+                                            GroupReservationFragment.clientsViewData.get(i).getPhone_number().setText( BeautyMainPage.client_number);
+                                        }
+                                    }
+                                    ((AppCompatActivity)GroupReservationResultActivity.context).finish();
+                                    Intent intent=new Intent(context,GroupReservationResultActivity.class);
+                                    context.startActivity(intent);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationOtherResultFragment")){
+//                                    GroupReservationFragment.clientsViewData.get(i).getIs_current_user;
+                                    ((AppCompatActivity)GroupReservationOtherResultActivity.context).finish();
+                                    Intent intent=new Intent(context,GroupReservationOtherResultActivity.class);
+                                    context.startActivity(intent);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("MultiBookingIndividualResult")){
+                                    for (int i=0;i< MultiIndividualBookingReservationFragment.clientsViewData.size();i++){
+                                        if ( MultiIndividualBookingReservationFragment.clientsViewData.get(i).getIs_current_user().equals("1")){
+                                            MultiIndividualBookingReservationFragment.clientsViewData.get(i).getClient_name().setText( BeautyMainPage.client_name);
+                                            MultiIndividualBookingReservationFragment.clientsViewData.get(i).getPhone_number().setText( BeautyMainPage.client_number);
+                                        }
+                                    }
+                                    ((AppCompatActivity)MultiBookingIndividualResultActivity.context).finish();
+                                    Intent intent=new Intent(context,MultiBookingIndividualResultActivity.class);
+                                    context.startActivity(intent);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("multiple_individual_booking")){
+                                    ((AppCompatActivity)MultiBookingIndividualResultActivity.context).finish();
+                                    Intent intent=new Intent(context,MultiBookingIndividualResultActivity.class);
+                                    context.startActivity(intent);
+                                }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
+                                    ((AppCompatActivity)OfferBookingResult.context).finish();
+                                    Intent intent=new Intent(context,OfferBookingResult.class);
+                                   if (OFFER_CLASS_NAME.equals("MultiClientOfferEffect")) {
+                                       intent.putExtra("filter", MultiClientOfferEffect.getClients(MultiClientOfferEffect.effectsArr,OfferBookingResult.offerTypeTMP));
+                                       intent.putExtra("offertype",OfferBookingResult.offerTypeTMP);
+                                       intent.putExtra("place",OfferBookingResult.placeTMP);
+                                   }else if (OFFER_CLASS_NAME.equals("MultiDateOfferEffect")){
+                                       intent.putExtra("filter", MultiDateOfferEffect.getFilter(MultiDateOfferEffect.getEffectFilter(),OfferBookingResult.offerTypeTMP));
+//                intent.putExtra("filter", postdata);
+//                                       intent.putExtra("offertype", MultiDateOfferEffect.offertype);
+                                       intent.putExtra("position", MultiDateOfferEffect.postion);
+                                       intent.putExtra("offertype",OfferBookingResult.offerTypeTMP);
+                                       intent.putExtra("place",OfferBookingResult.placeTMP);
+                                   }else if (OFFER_CLASS_NAME.equals("SingleOfferEffect")){
+                                       Log.e("placeOffer",SingleDateOfferBooking.offerplace);
+                                       Log.e("placeOffer","is"+SingleDateOfferBooking.offerplace);
+                                       Log.e("offertyperr","is"+SingleDateOfferBooking.offerType);
+                                       Log.e("offerFilter","is"+SingleOfferEffect.getFilter(SingleOfferEffect.effectFilter));
+//                                       intent.putExtra("filter", SingleOfferEffect.getClients(MultiClientOfferEffect.effectsArr));
+                                       intent.putExtra("filter",SingleOfferEffect.getFilter(SingleOfferEffect.effectFilter,OfferBookingResult.offerTypeTMP));
+                                       intent.putExtra("offertype",OfferBookingResult.offerTypeTMP);
+                                       intent.putExtra("place",OfferBookingResult.placeTMP);
+//                                       intent.putExtra("offertype", OfferBookingResult.offertype);
+                                   }
+                                    context.startActivity(intent);
+                                }
+
+                            }
+
+
+                    }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+
 
                 });
 
@@ -22746,10 +23013,15 @@ public class APICall {
                         editor.commit();
                         editor.apply();
                         pd.dismiss();
-                        Intent i = new Intent(context, BeautyMainPage.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(i);
-                        ((AppCompatActivity) context).finish();
+                        if (BeautyMainPage.bdb_is_guest.equals("1")){
+                            Log.e("isGuestis","is"+BeautyMainPage.bdb_is_guest);
+                            APICall.getdetailsUserForLogin(context);
+                        }else {
+                            Intent i = new Intent(context, BeautyMainPage.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
+                            ((AppCompatActivity) context).finish();
+                        }
                     }else if(success.equals("false")) {
 
 

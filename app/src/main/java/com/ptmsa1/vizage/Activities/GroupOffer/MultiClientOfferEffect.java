@@ -40,7 +40,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
     Button update;
     static Context context;
     public static LinearLayout root;
-    static int position;
+    public static int position;
     public static String bdb_pack_code;
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
 
@@ -50,6 +50,9 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
+
+
+        Log.e("OFFER_CLASS_NAME1","is"+APICall.OFFER_CLASS_NAME);
 
         position=getIntent().getIntExtra("position",0);
         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
@@ -241,7 +244,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
         return clientf;
     }
-    static ArrayList<String> effectsArr=new ArrayList<>();
+    public static ArrayList<String> effectsArr=new ArrayList<>();
 
     ArrayList<String> getEffects(){
         for (int i=0;i< APICall.clientEffectRequestModels.size();i++){
@@ -398,6 +401,137 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
             }
             postdata = postdata + client + "],\"offer_type\":" + ((AppCompatActivity)context).getIntent().getStringExtra("offertype") + "\n" +
+                    "\t\t   }\n" +
+                    "\t\t";
+        return postdata;
+    }
+    public static String getClients(ArrayList effectsArr,String offerType){
+
+        try {
+            switch (PlaceServiceFragment.placeSpinner.getSelectedItemPosition()){
+                case 1:
+                    place_num="9";
+                    price_num="32";
+                    break;
+                case 2:
+                    place_num="8";
+                    price_num="1";
+                    break;
+                case 3:
+                    place_num="10";
+                    price_num="30";
+                    break;
+                case 4:
+                    place_num="11";
+                    price_num="31";
+                    break;
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            switch (Integer.parseInt(((AppCompatActivity)context).getIntent().getStringExtra("place"))){
+                case 0:
+                    place_num="9";
+                    price_num="32";
+                    break;
+                case 1:
+                    place_num="8";
+                    price_num="1";
+                    break;
+                case 2:
+                    place_num="10";
+                    price_num="30";
+                    break;
+                case 3:
+                    place_num="11";
+                    price_num="31";
+                    break;
+
+            }
+
+        }
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+SingleDateMultiClientOfferBooking.price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+SingleDateMultiClientOfferBooking.price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
+        }
+       // String bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+            String postdata =
+                    "{\n" +
+                            "    \"Filter\": [\n" +
+                            "        {\n" +
+                            "            \"num\": 34,\n" +
+                            "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                            "            \"value2\": 0\n" +
+                            "        },\n" +
+                            "        {\n" +
+                            "            \"num\": 35,\n" +
+                            "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                            "            \"value2\": 0\n" +
+                            "        },\n" +
+                            "        " +prices+
+                            "        {\n" +
+                            "            \"num\": "+SingleDateMultiClientOfferBooking.place_num+",\n" +
+                            "            \"value1\": 1,\n" +
+                            "            \"value2\": 0\n" +
+                            "        }\n" +
+                            "    ],\n" +
+                    "\n" +
+                    "\"date\":\"" + SingleDateMultiClientOfferBooking.add_date.getText().toString() + "\"," +
+                    "\t\"bdb_pack_code\":" +SingleDateMultiClientOfferBooking.bdb_pack_id + ",\n" +
+                    "\t\"clients\": [ \n ";
+//                offerClientsModels
+            Log.e("offerClientsModels", SingleDateMultiClientOfferBooking.offerClientsModels.size() + "");
+            Log.e("selectDateOfferModels", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+            String client = "";
+
+            for (int i = 0; i < SingleDateMultiClientOfferBooking.offerClientsModels.size(); i++) {
+
+                    String cname = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString();
+                    String phone = OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString();
+                    if (i == 0) {
+                        client = client + "{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(SingleDateMultiClientOfferBooking.add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
+                        String services = "";
+                        for (int j = 0; j < SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                            if (j == 0) {
+                                services = "{ \"bdb_ser_sup_id\": " + SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                            } else {
+                                services += ",{ \"bdb_ser_sup_id\": " + SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                            }
+                        }
+                        client = client + services + "],\"effect\":["+effectsArr.get(i)+"]}";
+                        Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                    } else {
+                        client = client + ",{\"client_name\": \"" + cname + "\",\"client_phone\": \"" + phone + "\",\"is_adult\":1,\"date\":\""+APICall.arabicToDecimal(SingleDateMultiClientOfferBooking.add_date.getText().toString())+"\",\"is_current_user\": 0,\"services\": [ \n";
+                        String services = "";
+                        for (int j = 0; j < SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().size(); j++) {
+                            if (j == 0) {
+                                services = "{ \"bdb_ser_sup_id\": " + SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                            } else {
+                                services += "\n,{ \"bdb_ser_sup_id\": " + SingleDateMultiClientOfferBooking.offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id() + ",  \"ser_time\": 60,  \"bdb_ext_pack_code\":0 }\n";
+                            }
+                        }
+                        client = client + services + "],\"effect\":["+effectsArr.get(i)+"]}";
+                        Log.e("selectDateOff.size()", OfferBookingMultiClientsAdapter.selectDateOfferModels.size() + "");
+                    }
+//                        View view = recyclerView.getLayoutManager().findViewByPosition(1);
+//                            String bdb_ser_sup_id = API.dofs.get(i).getSersup_ids().get(i).getBdb_ser_sup_id();
+//                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+
+
+
+            }
+            postdata = postdata + client + "],\"offer_type\":" +offerType + "\n" +
                     "\t\t   }\n" +
                     "\t\t";
         return postdata;

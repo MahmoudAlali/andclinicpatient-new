@@ -94,6 +94,11 @@ public class PlaceServiceFragment extends Fragment implements GoogleApiClient.Co
         rateService = view.findViewById(R.id.service_rate);
         distance = view.findViewById(R.id.distance);
         ok = view.findViewById(R.id.ok);
+
+
+        Log.e("GUESTIS","isss"+APICall.isGuest(BeautyMainPage.context).equals("1"));
+
+
         if (BeautyMainPage.client_name.equals(""))
             APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser",BeautyMainPage.context);
 

@@ -31,7 +31,7 @@ import com.ptmsa1.vizage.R;
         context=this;
         Log.e("FNAMEMBI",BeautyMainPage.FRAGMENT_NAME);
 
-        final String filter=getIntent().getStringExtra("filter");
+         String filter=getIntent().getStringExtra("filter");
 
         if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2){
             if (PlaceServiceMultipleBookingFragment.placeSpinner.getSelectedItemPosition()==1) {
@@ -58,17 +58,22 @@ import com.ptmsa1.vizage.R;
 
 
         Log.e("dateURLS",url);
-        Log.e("filter",filter);
+        try {
+            Log.e("filter", filter);
+        }catch (Exception e){
+           filter= MySingleMultiEffectActivity.getfilter(MySingleMultiEffectActivity.getEffects());
+        }
         Log.e("FNAME", BeautyMainPage.FRAGMENT_NAME);
 
         listView=findViewById(R.id.list_view);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         APICall.searchGroupBookingMulti(url,urlAlt,filter,context);
 
+        final String finalFilter = filter;
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                APICall.searchGroupBookingMulti(url,urlAlt,filter,context);
+                APICall.searchGroupBookingMulti(url,urlAlt, finalFilter,context);
             }
         });
 

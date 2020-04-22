@@ -33,6 +33,8 @@ public class OfferBookingResult extends AppCompatActivity {
     public static String place;
     public static CoordinatorLayout noSolutionMsg;
 
+
+    public static String offerTypeTMP,placeTMP;
     String url="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,18 @@ public class OfferBookingResult extends AppCompatActivity {
         pullToRefresh=findViewById(R.id.pullToRefresh);
         final String filter=getIntent().getStringExtra("filter");
          offertype=getIntent().getStringExtra("offertype");
-        String offerplace=getIntent().getStringExtra("offerplace");
+         String offerplace=getIntent().getStringExtra("offerplace");
          place=getIntent().getStringExtra("place");
 
 
          APICall.offertypeAll=offertype;
+        Log.e("OFFER_CLASS_NAME4","is"+APICall.OFFER_CLASS_NAME);
 
 
+        if (BeautyMainPage.bdb_is_guest.equals("1")){
+            offerTypeTMP=offertype;
+            placeTMP=place;
+        }
 
          if (place.equals("0")){
              url="http://clientapp.dcoret.com/api/service/offer/searchOfferBookingInside";

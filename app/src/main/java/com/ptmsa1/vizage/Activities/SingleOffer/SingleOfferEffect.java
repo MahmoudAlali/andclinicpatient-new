@@ -41,7 +41,7 @@ public class SingleOfferEffect extends AppCompatActivity {
 
     static Context context;
     static  int position=0;
-    String postdata,offerType,offerplace;
+    public  static String postdata,offerType,offerplace;
     public static String bdb_pack_code;
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
 
@@ -50,7 +50,7 @@ public class SingleOfferEffect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
-
+        Log.e("OFFER_CLASS_NAME3","is"+APICall.OFFER_CLASS_NAME);
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);
         root=findViewById(R.id.root);
@@ -183,7 +183,7 @@ public class SingleOfferEffect extends AppCompatActivity {
     }
 
 
-    static String effectFilter="";
+    public  static String effectFilter="";
     public static String getEffectClients(){
         String clients = "{\"clients\":[";
         try {
@@ -484,7 +484,7 @@ public class SingleOfferEffect extends AppCompatActivity {
     }
 
 
-    public String getFilter(String effect){
+    public static String getFilter(String effect){
        // String bdb_pack_code=TabTwo.arrayList.get(position).getBdb_pack_code();
         String date=SingleDateOfferBooking.showDate.getText().toString();
         String cname= BeautyMainPage.client_name;
@@ -537,6 +537,70 @@ public class SingleOfferEffect extends AppCompatActivity {
                         "    ],\n" +
 
                         "\"bdb_pack_code\":"+bdb_pack_code+",\"date\":\""+date+"\",\"clients\": [        \n" +
+                        "\t{\"client_name\": \""+cname+"\",\"client_phone\": \""+cphone+"\",\"is_current_user\": 0,\n" +
+                        "\"is_adult\":1\n" +",\"date\":\""+date+"\",\n"+
+                        "\t\"services\": [\n" +
+                        services+
+                        "\t\t],\"effect\":["+effect+"]\n" +
+                        "\t}\n" +
+                        "\t],\"offer_type\":"+offerType+"\n" +
+                        "}";
+        Log.e("postdata",postdata);
+    return postdata;
+    }
+    public static String getFilter(String effect,String offerType){
+       // String bdb_pack_code=TabTwo.arrayList.get(position).getBdb_pack_code();
+        String date=SingleDateOfferBooking.showDate.getText().toString();
+        String cname= BeautyMainPage.client_name;
+        String cphone=BeautyMainPage.client_number;
+        String prices="";
+        if (PlaceServiceFragment.maxprice.equals("") || PlaceServiceFragment.maxprice.equals("")){
+            prices= " {\n" +
+                    "            \"num\": "+SingleDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": 0,\n" +
+                    "            \"value2\": 10000\n" +
+                    "        },\n" ;
+        }else {
+            prices="{\n" +
+                    "            \"num\": "+SingleDateOfferBooking.price_num+",\n" +
+                    "            \"value1\": "+PlaceServiceFragment.minprice+",\n" +
+                    "            \"value2\": "+PlaceServiceFragment.maxprice+"\n" +
+                    "        },\n";
+        }
+        String services="";
+        String bdb_ser_sup_id="",bdb_time="";
+        for (int i=0;i<SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().size();i++){
+            bdb_ser_sup_id=SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().get(i).getBdb_ser_sup_id();
+            bdb_time=SingleDateOfferBooking.offerClientsModels.get(0).getServiceDetails().get(i).getBdb_time();
+            if (i==0){
+                services="\t\t{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": "+bdb_time+" }\n";
+            }else {
+                services=services+"\t\t,{\"bdb_ser_sup_id\": "+bdb_ser_sup_id+",\"ser_time\": "+bdb_time+" }\n";
+            }
+        }
+
+        String postdata=
+                "{\n" +
+                        "    \"Filter\": [\n" +
+                        "        {\n" +
+                        "            \"num\": 34,\n" +
+                        "            \"value1\": "+ PlaceServiceFragment.lat+",\n" +
+                        "            \"value2\": 0\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"num\": 35,\n" +
+                        "            \"value1\": "+PlaceServiceFragment.lng+",\n" +
+                        "            \"value2\": 0\n" +
+                        "        },\n" +
+                        "     " +prices+
+                        "        {\n" +
+                        "            \"num\": "+SingleDateOfferBooking.place_num+",\n" +
+                        "            \"value1\": 1,\n" +
+                        "            \"value2\": 0\n" +
+                        "        }\n" +
+                        "    ],\n" +
+
+                        "\"bdb_pack_code\":"+SingleDateOfferBooking.bdb_pack_id+",\"date\":\""+date+"\",\"clients\": [        \n" +
                         "\t{\"client_name\": \""+cname+"\",\"client_phone\": \""+cphone+"\",\"is_current_user\": 0,\n" +
                         "\"is_adult\":1\n" +",\"date\":\""+date+"\",\n"+
                         "\t\"services\": [\n" +

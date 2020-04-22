@@ -408,7 +408,7 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         });
     }
 
-    String getEffects() {
+    public  static String getEffects() {
         String ef = "";
 
         for (int i = 0; i < APICall.clientEffectRequestModels.size(); i++) {

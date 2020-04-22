@@ -55,8 +55,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
     Button next;
     public static String place="";
     public static String end_date;
-    String bdb_pack_id;
+    public static String bdb_pack_id;
     String is_effects_on;
+    public static String place_num="",price_num="";
 
     String maxPrice="0",minPrice="10000";
     public  static int booking_period;
@@ -70,6 +71,9 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         add_date = findViewById(R.id.add_date);
         context = this;
         offerClientsModels.clear();
+
+
+        APICall.OFFER_CLASS_NAME="MultiClientOfferEffect";
 
         if (OfferBookingMultiClientsAdapter.selectDateOfferModels.size()>0){
             OfferBookingMultiClientsAdapter.selectDateOfferModels.clear();
@@ -266,7 +270,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                         for (int i = 0; i < offerClientsModels.size(); i++) {
                             JSONObject clientJ = new JSONObject();
 
-                            if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0) {
+                            if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getCname().getText().toString().length() == 0  ) {
                                 APICall.showSweetDialog(context, getResources().getString(R.string.alert), getResources().getString(R.string.enter_client_name));
                             } else if (OfferBookingMultiClientsAdapter.selectDateOfferModels.get(i).getPhone_number().getText().toString().length() == 0) {
                                 APICall.showSweetDialog(context, getResources().getString(R.string.alert),getResources().getString(R.string.enter_phone_num) );
@@ -297,7 +301,18 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                                     clientJ.put("services",services);
                                     clients.put(clientJ);
 
-
+                                    if (is_effects_on.equals("1")) {
+                                        Intent intent = new Intent(context, MultiClientOfferEffect.class);
+                                        intent.putExtra("filter", "");
+                                        intent.putExtra("place", place);
+                                        intent.putExtra("position", postion);
+                                        intent.putExtra("bdb_pack_id",bdb_pack_id);
+                                        intent.putExtra("notification","true");
+                                        intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
+                                        startActivity(intent);
+                                    }else {
+                                        APICall.addBookingRequest(freeBookingFragment.lat + "", freeBookingFragment.lng + "", "", freeBookingFragment.Place, bdb_pack_code, "25", clients, context);
+                                    }
 
                                 }
                                 catch (Exception e)
@@ -309,19 +324,8 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
 //                        String ser_time=API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
 
 
-                            }
+
                         }
-                        if (is_effects_on.equals("1")) {
-                            Intent intent = new Intent(context, MultiClientOfferEffect.class);
-                            intent.putExtra("filter", "");
-                            intent.putExtra("place", place);
-                            intent.putExtra("position", postion);
-                            intent.putExtra("bdb_pack_id",bdb_pack_id);
-                            intent.putExtra("notification","true");
-                            intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
-                            startActivity(intent);
-                        }else {
-                            APICall.addBookingRequest(freeBookingFragment.lat+"",freeBookingFragment.lng+"", "",freeBookingFragment.Place,bdb_pack_code,"25",clients,context);
 
                             /*Intent intent = new Intent(context, OfferBookingResult.class);
                             intent.putExtra("filter", postdata);
@@ -339,7 +343,6 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    String place_num="",price_num="";
 
                     int place1;
                     Log.e("OffersAdapterTab.place",OffersAdapterTab.placePos+"is");

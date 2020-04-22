@@ -25,7 +25,7 @@ import com.google.firebase.FirebaseApp;
 public class Login extends AppCompatActivity {
 
     EditText username, password;
-    Button login,new_user;
+    Button login,new_user,viewApp;
     TextView forgetpass
 //            register
                     ;
@@ -78,6 +78,7 @@ public class Login extends AppCompatActivity {
         forgetpass = findViewById(R.id.forgetpass);
 //        register = findViewById(R.id.register);
         new_user = findViewById(R.id.new_user);
+        viewApp = findViewById(R.id.viewApp);
         linearLayout=findViewById(R.id.layout_login );
 
 
@@ -108,5 +109,15 @@ public class Login extends AppCompatActivity {
 
 
     public void register(View view) {
+    }
+
+    public void enterguest(View view) {
+        SharedPreferences.Editor prefs = getSharedPreferences("LOGIN", MODE_PRIVATE).edit();
+        prefs.putString("isGuest", "1");
+        prefs.apply();
+        prefs.commit();
+        BeautyMainPage.bdb_is_guest="1";
+        APICall.getGuestToken(context,FirebaseInstanceId.getInstance().getToken());
+
     }
 }

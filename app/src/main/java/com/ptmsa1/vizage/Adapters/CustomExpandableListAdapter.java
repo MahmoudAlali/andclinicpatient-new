@@ -119,6 +119,9 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
             if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
                 listTitleTextView.setBackgroundResource(R.drawable.shadow_edit_text3);
             }
+            //------------- call client data if any
+//            if (groupPosition==0)
+//            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
 
 
             book.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +130,8 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if(APICall.isGuest(context).equals("0"))
-
+                            Log.e("GUESTIS","isss"+context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("isGuest","-1"));
+                            if(BeautyMainPage.bdb_is_guest.equals("0"))
                             {
                                 try {
                                     if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")) {
@@ -160,9 +163,9 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                     e.printStackTrace();
                                     Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                            else
+                            }else {
                                 APICall.showNeedToSignInDialog(context);
+                            }
 
                         }
                     });
