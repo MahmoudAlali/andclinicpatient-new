@@ -43,6 +43,11 @@ public class AcceptedReservationFragment extends Fragment {
         service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
         MyReservationFragment.tab="1";
         MyReservationFragment.groupbooking="";
+
+        LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        service_select.setLayoutManager(llm);
+        service_select.setAdapter( MyReservationFragment.reservationsAdapter2 );
 //        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
 
 //        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
@@ -50,7 +55,8 @@ public class AcceptedReservationFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout= R.layout.incom_reservation_layout;
-        APICall.filter=filter= APICall.bookingFilter("1","10","0");
+//        if (APICall.arrayAB==null)
+        APICall.filter=filter= APICall.bookingFilterV1("1","10","0");
 
 
 
@@ -62,6 +68,9 @@ public class AcceptedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
+            if (filter==null){
+                APICall.filter=filter= APICall.bookingFilterV1("1","10","0");
+            }
             APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;

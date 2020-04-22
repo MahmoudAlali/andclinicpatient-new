@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -29,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
@@ -68,7 +70,7 @@ public class MyReservationFragment extends Fragment  {
    public static TextView incom_reservation,accept_reservation,deposit_reservation;
 //           deposited_reservation;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
-    public static ReservationsAdapter reservationsAdapter;
+
     public static ReservationsAdapter2 reservationsAdapter2;
 
     public static View view;
@@ -78,7 +80,7 @@ public class MyReservationFragment extends Fragment  {
     public static String serviceNamefilter="",empnamefilter="";
     public static Button filter;
     public static Dialog dialog;
-    public static CheckBox service_name,service_exec_date,emp_name,service_date,service_reservation_date,book_type;
+    public static CheckBox service_name, ref_num,service_exec_date,emp_name,service_date,service_reservation_date,book_type;
     public static SearchableSpinner cSupplierSpinner;
     public static boolean filtercheck=false;
     public static ArrayList<String> filterNames=new ArrayList<>();
@@ -86,6 +88,7 @@ public class MyReservationFragment extends Fragment  {
     public static String groupbooking="";
     ArrayList<String> servicesList=new ArrayList<>();
     public static boolean [] checkitems;
+    public static String  REF_NUMBER="-1";
 
     public static String service_date_txt="",tab="1";
 
@@ -111,6 +114,12 @@ public class MyReservationFragment extends Fragment  {
                 filterPostions.add(-1);
              }
          }
+
+
+         //---------- for testb -----------
+        Log.e("SKEY","is"+APICall.SERVER_KEY);
+        Log.e("GKEY","is"+APICall.GOOGLE_KEY);
+        Log.e("PKEY","is"+APICall.PROVIDER_SERVER_KEY);
 
 
         Resources res = getResources();
@@ -325,7 +334,7 @@ public class MyReservationFragment extends Fragment  {
                 });
 
                 //--------------------- get services---------------------------
-                APICall.getServicesForFilter("1",BeautyMainPage.context);
+                APICall.getServicesForFilter("2",BeautyMainPage.context);
 
                 try {
                     if (APICall.empNames.isEmpty()) {
@@ -363,10 +372,13 @@ public class MyReservationFragment extends Fragment  {
                         service_reservation_date.setChecked(true);
                         service_reservation_date.setText(service_date_txt);
                     }
+                    Log.e("groupbookingP",groupbooking);
                     if (!groupbooking.equals("")) {
                         book_type.setChecked(true);
                         book_type.setText(bookingType);
                     }
+
+
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -515,9 +527,11 @@ public class MyReservationFragment extends Fragment  {
 
                                     srmonth=sDate.getMonthValue();
                                     srday=sDate.getDayOfMonth();
+                                    sryear=sDate.getYear();
 
                                     ermonth=eDate.getMonthValue();
                                     erday=eDate.getDayOfMonth();
+                                    eryear=eDate.getYear();
 
 //                                    Log.e("dates",calendar.getSelectedDates()+"");
                                     Log.e("Start",srday+"-"+srmonth);
@@ -616,9 +630,11 @@ public class MyReservationFragment extends Fragment  {
 
                                     smonth=sDate.getMonthValue();
                                     sday=sDate.getDayOfMonth();
+                                    syear=sDate.getYear();
 
                                     emonth=eDate.getMonthValue();
                                     eday=eDate.getDayOfMonth();
+                                    eyear=eDate.getYear();
 
 //                                    Log.e("dates",calendar.getSelectedDates()+"");
                                     Log.e("Start",sday+"-"+smonth);
@@ -660,6 +676,42 @@ public class MyReservationFragment extends Fragment  {
                         }
                     }
                 });
+
+                 ref_num=dialog.findViewById(R.id.ref_num);
+                if (!REF_NUMBER.equals("-1")){
+                    ref_num.setChecked(true);
+                    ref_num.setText(BeautyMainPage.context.getResources().getString(R.string.reser_id)+":"+REF_NUMBER);
+                }
+                ref_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            final Dialog d=new Dialog(BeautyMainPage.context);
+                            d.setContentView(R.layout.confirm_code_layout);
+                            final EditText code=d.findViewById(R.id.code);
+                            TextView message=d.findViewById(R.id.message);
+                            TextView resend_code=d.findViewById(R.id.resend_code);
+                            TextView confirm=d.findViewById(R.id.confirm);
+                            resend_code.setVisibility(View.GONE);
+                            message.setText(R.string.enter_ref_number);
+                            code.setHint(R.string.reser_id);
+
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                     d.cancel();
+                                     REF_NUMBER=code.getText().toString();
+                                }
+                            });
+                            d.show();
+
+                        }else {
+                            ref_num.setText(BeautyMainPage.context.getResources().getString(R.string.reser_id));
+                            REF_NUMBER="-1";
+                        }
+                    }
+                });
+
 //                service_date.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //                    @Override
 //                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -852,30 +904,42 @@ public class MyReservationFragment extends Fragment  {
                                     if (offer_type.getSelectedItemPosition()==1){
                                         dialog.cancel();
                                         groupbooking="0";
+                                        APICall.filter=APICall.bookingFilterV1("5","0","");
                                     }else if (offer_type.getSelectedItemPosition()==2){
                                         dialog.cancel();
-                                        groupbooking="2";
+//                                        groupbooking="2";
+                                        APICall.filter=APICall.bookingFilterV1("5","2","");
                                     }else if (offer_type.getSelectedItemPosition()==3){
                                         dialog.cancel();
                                         groupbooking="1";
+//                                        APICall.bookingFilterV1("5","2","");
+                                        APICall.filter=APICall.bookingFilterV1("5","1","");
+
                                     }else if (offer_type.getSelectedItemPosition()==4){
                                         dialog.cancel();
                                         groupbooking="3";
+                                        APICall.filter=APICall.bookingFilterV1("5","3","");
+
                                     }else if (offer_type.getSelectedItemPosition()==5){
                                         dialog.cancel();
                                         groupbooking="4";
+                                        APICall.filter=APICall.bookingFilterV1("5","4","");
                                     }else if (offer_type.getSelectedItemPosition()==6){
                                         dialog.cancel();
                                         groupbooking="5";
+                                        APICall.filter=APICall.bookingFilterV1("5","5","");
                                     }else if (offer_type.getSelectedItemPosition()==7){
                                         dialog.cancel();
+
                                         groupbooking="6";
                                     }
                                     if (offer_type.getSelectedItemPosition()!=0){
 
-                                        book_type.setText(offer_type.getSelectedItem().toString());
+                                        book_type.setText(BeautyMainPage.context.getResources().getString(R.string.book_type)+":"+offer_type.getSelectedItem().toString());
+//                                        book_type.setText(offer_type.getSelectedItem().toString());
                                         bookingType=book_type.getText().toString();
                                     }
+                                    Log.e("API.BOOKTYPE",APICall.filter);
                                 }
                             });
 
@@ -903,10 +967,40 @@ public class MyReservationFragment extends Fragment  {
 
                 filter=dialog.findViewById(R.id.filter);
                 filter.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onClick(View v) {
-                        filtercheck=true;
+//                        filtercheck=true;
+                        APICall.arrayAB=null;
                         dialog.cancel();
+                        Log.e("if1", (APICall.layout == R.layout.incom_reservation_layout) + "");
+                        Log.e("if2", (APICall.layout == R.layout.accept_reservation_layout_v2) + "");
+
+
+                        if (tab.equals("1")) {
+                            APICall.filter = APICall.bookingFilterV1("1", "10", "0");
+                        } else if (tab.equals("2")) {
+                            APICall.filter = APICall.bookingFilterV1("1", "3", "0");
+                        } else {
+                            APICall.filter = APICall.bookingFilterV1("1", "7", "0");
+                        }
+
+                        if (!bookingType.equals("")){
+                            APICall.filter = APICall.bookingFilterV1("5", bookingType, "");
+                        }
+                        if (!startdate.equals("")){
+                            APICall.filter= APICall.bookingFilterV1("2",syear+"-"+smonth+"-"+sday,eyear+"-"+emonth+"-"+eday);
+                        }
+                        if (!service_date_txt.equals("")){
+                            APICall.filter= APICall.bookingFilterV1("3",sryear+"-"+srmonth+"-"+srday,eryear+"-"+ermonth+"-"+erday);
+                        }
+
+                        if (!REF_NUMBER.equals("-1")){
+                            APICall.filter= APICall.bookingFilterV1("6",REF_NUMBER,"");
+
+                        }
+
+
                         if(tab=="1")
                         {
                             fragment = new AcceptedReservationFragment();
@@ -936,17 +1030,27 @@ public class MyReservationFragment extends Fragment  {
                         }
                        /* if (APICall.layout==R.layout.incom_reservation_layout) {
                             fragment = new AcceptedReservationFragment();
-                            fm = getFragmentManager();
+                            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
                             fragmentTransaction.commitAllowingStateLoss();
-                            tabselected(incom_reservation,deposit_reservation, accept_reservation,false);
-                        }else if (APICall.layout==R.layout.accept_reservation_layout_v2){
-                            fragment = new ExecutedReservationFragment();
-                            fm = getFragmentManager();
+                        }else if (tab.equals("2")){
+                            fragment = new ExecutedReservationFragment ();
+                            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
                             fragmentTransaction = fm.beginTransaction();
                             fragmentTransaction.replace(R.id.tabs_fragment, fragment);
                             fragmentTransaction.commitAllowingStateLoss();
+                        }else if (tab.equals("3")){
+                            fragment = new DepositReservationFragment ();
+                            fm = ((AppCompatActivity) BeautyMainPage.context).getFragmentManager();
+                            fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+                            fragmentTransaction.commitAllowingStateLoss();
+                        }
+
+
+
+//                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1", APICall.filter+"",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
                             tabselected(accept_reservation,deposit_reservation,incom_reservation,false);
                         }*/
                         APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);

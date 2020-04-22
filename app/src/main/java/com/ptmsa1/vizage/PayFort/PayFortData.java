@@ -47,6 +47,9 @@ public class PayFortData {
     @SerializedName("fort_id")
     @Expose
     public String fortId;
+    @SerializedName("token_name")
+    @Expose
+    public String tokenName;
     @SerializedName("customer_email")
     @Expose
     public String customerEmail;

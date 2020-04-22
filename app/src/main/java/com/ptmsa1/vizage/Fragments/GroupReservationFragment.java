@@ -249,7 +249,7 @@ public class GroupReservationFragment extends Fragment {
                 try {
                     sh.getString("bdb_name", null).equals("");
                 } catch (NullPointerException npe) {
-                    APICall.detailsUser1("http://clientapp.dcoret.com/api/auth/user/detailsUser", BeautyMainPage.context);
+                    APICall.detailsUser1(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", BeautyMainPage.context);
 //                    editor.putString("bdb_name","");
 //                    editor.commit();
                 }
@@ -407,6 +407,7 @@ public class GroupReservationFragment extends Fragment {
                     }
 
                     for (int i = 0; i < clientsViewData.size(); i++) {
+                        if (clientsViewData.get(i).getIs_current_user().equals("0"))
                         if (clientsViewData.get(i).getPhone_number().getText().toString().length() != 0)
                             if (!APICall.checkNumber(clientsViewData.get(i).getPhone_number().getText().toString(), BeautyMainPage.context)) {
                                 alert = 2;

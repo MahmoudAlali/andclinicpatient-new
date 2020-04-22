@@ -108,7 +108,7 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
 
                             {
                                 Log.e("choose",MultiIndividualBookingReservationFragment.choose_occision.getSelectedItem().toString());
-                                if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2) {
+                                if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==1) {
                                     APICall.addGroupItem(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);
                                 }else {
                                     APICall.addGroupItemMultDates(APICall.getClientsInfoforIndividualMultiDates(salons, stringArrayListHashMap, groupPosition,MultiIndividualBookingReservationFragment.is_group_booking), BeautyMainPage.context);

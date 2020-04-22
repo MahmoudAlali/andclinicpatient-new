@@ -57,7 +57,8 @@ public class InternalChatActivity extends AppCompatActivity {
 
     public static String ChatID,Token,ProviderId;
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
-    final private String serverKey = "key=" + "AAAAjaJV_ws:APA91bEeV0bieSYrDrkwR0Yoj7lnvCQUSBgwwO2VyAJRWwzNeoGNoer9Mu3OoaRHBGB9ocEdwOEk2eN45o8YcB0CnG-HtrlWpKEu4jraPuagHKJy9a89g1nmzkOU7lkm6fniWCn5YxHg";
+    final private String serverKey = "key=" + APICall.SERVER_KEY;
+//            "AAAAjaJV_ws:APA91bEeV0bieSYrDrkwR0Yoj7lnvCQUSBgwwO2VyAJRWwzNeoGNoer9Mu3OoaRHBGB9ocEdwOEk2eN45o8YcB0CnG-HtrlWpKEu4jraPuagHKJy9a89g1nmzkOU7lkm6fniWCn5YxHg";
 
 
     //final  private String maiToken ="eVFnsR1ZGpy77CvK5J0sgM:APA91bFfzR83qKLt9NtWC-uWW6fcVeHuDa4IRhXlZmygHdrhuZWjmpSUw964Op-TU4KKc0_SdJymp6le_4R08Mmv-MtWngF5kcg9PaZq-kBM-A04dM9VjfuSJVddoWI6JjHWo6rhHT7d";

@@ -83,17 +83,17 @@
             android:textColor="#000"
             android:textSize="@dimen/standard_20" />
 
-<!--        <CheckBox-->
-<!--            android:id="@+id/emp_name"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginBottom="15dp"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/suppliere_name_salon"-->
-<!--            android:textColor="#000"-->
-<!--            android:textSize="@dimen/standard_20"-->
+        <CheckBox
+            android:id="@+id/ref_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:text="@string/ref_number"
+            android:textColor="#000"
+            android:textSize="@dimen/standard_20"
 
-<!--            />-->
+            />
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/cSupplierSpinner"
             android:layout_width="match_parent"

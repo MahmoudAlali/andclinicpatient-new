@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -35,6 +36,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderApi;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.DataModel.BestOfferItem;
@@ -71,6 +73,14 @@ public class Offers extends Fragment implements LocationListener ,
         Context context = getContext();
         check=false;
 
+        try{
+            bestOfferItems.clear();
+            // APICall.detailsUser4(context);
+            bestOffer.notifyDataSetChanged();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +106,20 @@ public class Offers extends Fragment implements LocationListener ,
         }
 
 
+
+        //-------------- get keys------------
+        SharedPreferences prefs = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+      APICall.SERVER_KEY=  prefs.getString("SERVER_KEY","null");
+        APICall.GOOGLE_KEY=  prefs.getString("GOOGLE_KEY","null");
+        APICall.PROVIDER_SERVER_KEY=prefs.getString("PROVIDER_SERVER_KEY","null");
+        if (APICall.SERVER_KEY.equals("null") || APICall.GOOGLE_KEY.equals("null") || APICall.PROVIDER_SERVER_KEY.equals("null") ){
+           Log.e("GETKEYS","ok");
+           if (prefs.getString("isGuest","").equals("0")){
+               APICall.getSystemInfo(context);
+           }else
+            APICall.getGuestTokenThenInfo(context, FirebaseInstanceId.getInstance().getToken());
+        }
+
 //        if (bestOfferItems.size()>0){
 
         final LocationManager locationManager = (LocationManager)
@@ -118,9 +142,11 @@ public class Offers extends Fragment implements LocationListener ,
                 Long=String.valueOf(location.getLongitude());
                 Log.e("LATLANG",Lat+":"+Long);
 
+                if (bestOfferItems.size()==0)
                 if (!check) {
                     check = true;
                     bestOfferItems.clear();
+                    bestOffer.notifyDataSetChanged();
                     // APICall.detailsUser4(context);
                     APICall.bestOffer(BeautyMainPage.context, Lat, Long);
                 }
@@ -191,6 +217,13 @@ public class Offers extends Fragment implements LocationListener ,
             @Override
             public void onRefresh() {
                 check=false;
+                try {
+                    bestOfferItems.clear();
+                    // APICall.detailsUser4(context);
+                    bestOffer.notifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 LocationManager service = (LocationManager) BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
                 boolean enabled = service
                         .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -227,10 +260,12 @@ public class Offers extends Fragment implements LocationListener ,
                             Lat=String.valueOf(location.getLatitude());
                             Long=String.valueOf(location.getLongitude());
                             Log.e("LATLANG",Lat+":"+Long);
-                            if (!check) {
+                            if (bestOfferItems.size()==0)
+                                if (!check) {
                                 check = true;
                                 bestOfferItems.clear();
                                 // APICall.detailsUser4(context);
+                                bestOffer.notifyDataSetChanged();
                                 APICall.bestOffer(BeautyMainPage.context, Lat, Long);
                             }
 
@@ -408,6 +443,7 @@ public class Offers extends Fragment implements LocationListener ,
                     Log.e("LocationChanged","ok");
                     Lat=String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude());
                     Long = String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
+                    if (bestOfferItems.size()==0)
                     if (!check) {
                         check=false;
                         bestOfferItems.clear();

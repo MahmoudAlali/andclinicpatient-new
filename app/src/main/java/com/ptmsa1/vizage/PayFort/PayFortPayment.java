@@ -207,6 +207,7 @@ public class PayFortPayment {
             parameters.put("language", payFortData.language);
             parameters.put("merchant_reference", payFortData.merchantReference);
             parameters.put("sdk_token", sdkToken);
+//            parameters.put("token_name ", "7d932978f81c402fbe414f29fb1d30fe");
             Log.e("amount",String.valueOf(payFortData.amount));
             Log.e("command",payFortData.command);
             Log.e("currency",payFortData.currency);
@@ -248,7 +249,7 @@ public class PayFortPayment {
                 if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = conn.getInputStream();
                     response = convertStreamToString(inputStream);
-                    Log.e("ResponseBack",response);
+                    Log.e("ResponseBack123",response);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -260,14 +261,14 @@ public class PayFortPayment {
         protected void onPostExecute(String response) {
             super.onPostExecute(response);
             progressDialog.hide();
-            Log.e("ResponseBack", response+"");
+            Log.e("ResponseBack234", PayTestActivity.response1+"");
             try {
-                PayFortData payFortData = gson.fromJson(response, PayFortData.class);
+                PayFortData payFortData = gson.fromJson(PayTestActivity.response1, PayFortData.class);
                 if (!TextUtils.isEmpty(payFortData.sdkToken)) {
                     sdkToken = payFortData.sdkToken;
                     requestPurchase();
                 } else {
-                    payFortData.paymentResponse = response;
+                    payFortData.paymentResponse = PayTestActivity.response1;
                     iPaymentRequestCallBack.onPaymentRequestResponse(RESPONSE_GET_TOKEN, payFortData);
                 }
             } catch (Exception e) {

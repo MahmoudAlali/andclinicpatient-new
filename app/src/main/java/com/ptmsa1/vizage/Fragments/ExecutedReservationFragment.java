@@ -3,11 +3,14 @@ package com.ptmsa1.vizage.Fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,7 @@ public class ExecutedReservationFragment extends Fragment {
     int layout;
     TextView incom_reservation,accept_reservation,deposited_reservation;
     public String tmp="3";
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,7 +61,10 @@ public class ExecutedReservationFragment extends Fragment {
 //        service_select.setAdapter(reservationsAdapter2);
 
         APICall.layout= R.layout.incom_reservation_layout;
-        APICall.filter=filter= APICall.bookingFilter("1","3","0");
+
+        Log.e("ArraABLength",APICall.arrayAB.length()+"is");
+//        if (APICall.arrayAB==null)
+            APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
 
 
 
@@ -69,6 +76,9 @@ public class ExecutedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         if (MyReservationFragment.filtercheck==false) {
+            if (filter==null){
+                APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
+            }
             APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;

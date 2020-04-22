@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.R;
 import com.google.android.gms.maps.CameraUpdateFactory;

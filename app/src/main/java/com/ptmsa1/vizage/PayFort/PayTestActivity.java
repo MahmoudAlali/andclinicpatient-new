@@ -53,7 +53,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
     static Context context;
     IPaymentRequestCallBack iPaymentRequestCallBack;
     public static String success_response="";
-    String amount,name_booking;
+    String amount="10",name_booking="200";
     public static String check="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
 
 
     private void requestForPayfortPayment(String sdk_token,String signature ,String merchant_identifier ,String access_code
-            ,String merchant_reference ,String customer_email,String device_id ,FortCallBackManager fortCallback, IPaymentRequestCallBack iPaymentRequestCallBack,String mMessage) {
+            ,String merchant_reference ,String customer_email,String device_id ,FortCallBackManager fortCallback, IPaymentRequestCallBack iPaymentRequestCallBack,String token_name ,String mMessage) {
 
         PayFortData payFortData = new PayFortData();
         if (amount!=null) {
@@ -127,6 +127,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
             payFortData.command = PayFortPayment.PURCHASE;
             payFortData.currency = PayFortPayment.CURRENCY_TYPE;
             payFortData.customerEmail = customer_email;
+            payFortData.tokenName = token_name;
             payFortData.language = "en";
             payFortData.merchantReference = merchant_reference;
             payFortData.sdkToken = sdk_token;
@@ -143,6 +144,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
             Log.e("merchantReference","is: "+payFortData.merchantReference);
             Log.e("merchantIdentifier","is: "+payFortData.merchantIdentifier);
             Log.e("accessCode","is: "+payFortData.accessCode);
+            Log.e("tokenName","is: "+payFortData.tokenName);
 
 
 //            parameters.put("amount", String.valueOf(payFortData.amount));
@@ -196,7 +198,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
         try {
             postdata.put("amount",amount);
             postdata.put("service_command","SDK_TOKEN");
-            postdata.put("customer_email","hazem.ali1466@gmail.com");
+            postdata.put("customer_email",BeautyMainPage.bdb_email);
             postdata.put("language",APICall.ln);
             postdata.put("currency",currency);
             postdata.put("device_id",device_id);
@@ -289,6 +291,11 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
                     if (success.equals("true"))
                     {
                         JSONObject object=j.getJSONObject("result");
+                        final String token_name=object.getString("token_name");
+
+                        if (token_name.equals("") || token_name.equals("null") )
+                        object.remove("token_name");
+
                         response1=object.toString();
                         final String signature=object.getString("signature");
                         final String merchant_identifier=object.getString("merchant_identifier");
@@ -301,7 +308,7 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
                             @Override
                             public void run() {
                                 requestForPayfortPayment(sdk_token,signature ,merchant_identifier ,access_code
-                                        ,merchant_reference,customer_email,device_id,fortCallback,iPaymentRequestCallBack,mMessage);
+                                        ,merchant_reference,customer_email,device_id,fortCallback,iPaymentRequestCallBack,mMessage,token_name);
                             }
                         });
 

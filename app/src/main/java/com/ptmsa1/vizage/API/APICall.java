@@ -23,6 +23,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -207,6 +208,10 @@ public class APICall {
     public static String isBride;
 
     public static String DATE_FOR_SER_OFR="";
+    public static String SERVER_KEY="";
+    public static String GOOGLE_KEY="";
+    public static String PROVIDER_SERVER_KEY="";
+
 
 
 //    public static Dialog pd;
@@ -225,14 +230,17 @@ public class APICall {
     public static void showDialog(Context context){
         int color = ((AppCompatActivity)context).getResources().getColor(android.R.color.transparent);
         int color50percent = ColorUtils.setAlphaComponent(color, 50);
-
-        pd = KProgressHUD.create(context)
+        pd = KProgressHUD.create(context);
+        if (pd!=null)
+        if (!pd.isShowing())
+        pd
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
 //                            .setLabel("Please wait")
                 .setCancellable(true)
                 .setBackgroundColor(color50percent)
                 .setMaxProgress(100)
                 .show();
+
     }
 
     public static String gettoken(Context context){
@@ -322,7 +330,8 @@ public class APICall {
             JSONObject postdata = new JSONObject();
             try {
                 String fb_token= FirebaseInstanceId.getInstance().getToken();
-                String server_key="AAAA6gZ1CO8:APA91bHEg19SqKpRdvifPk3-o-nWwDm350IZaNjqX0yy0eHkRUnv1hSBHN6zaQZR0ZvoINJUNX1zbRMDto0W4ePuFwckOOBabMECCscYuwyisY4YEGHhCr10kjEVPoifc9IOz_x7dP0q";
+                String server_key=SERVER_KEY;
+//                        "AAAA6gZ1CO8:APA91bHEg19SqKpRdvifPk3-o-nWwDm350IZaNjqX0yy0eHkRUnv1hSBHN6zaQZR0ZvoINJUNX1zbRMDto0W4ePuFwckOOBabMECCscYuwyisY4YEGHhCr10kjEVPoifc9IOz_x7dP0q";
                 postdata.put("bdb_mobile", phone);
                 postdata.put("bdb_gender", gender);
                 postdata.put("password", password);
@@ -2027,6 +2036,8 @@ public class APICall {
                         JSONObject data = j.getJSONObject("data");
                         JSONArray request_effect = data.getJSONArray("request_effect");
                         String client_name;
+                        Log.e("request_effectL","is"+request_effect.length());
+
                         for (int n = 0; n < request_effect.length(); n++){
                             JSONObject o = request_effect.getJSONObject(n);
                             JSONArray client_effect = o.getJSONArray("client_effect");
@@ -2034,6 +2045,7 @@ public class APICall {
 
                             String category_id, category_name_ar, category_name_en;
                             ArrayList<ClientEffectModel> effectsModelArrayList= new ArrayList<>();
+                            if (client_effect.length()>0)
                             for (int i = 0; i < client_effect.length(); i++) {
                                 JSONObject ob = client_effect.getJSONObject(i);
 
@@ -2233,7 +2245,7 @@ public class APICall {
 
 
     //   ------------------ Best Offer-------------------------
-    public  static  void  bestOffer(final Context context,String lat,String lon){
+    public  static  void bestOffer(final Context context,String lat,String lon){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -4613,7 +4625,9 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            pd.dismiss();
+
+
+                               pd.dismiss();
 
 
                         }
@@ -4648,6 +4662,7 @@ public class APICall {
                             prefEditor.putString("client_number", bdb_mobile);
                             prefEditor.putString("bdb_email", BeautyMainPage.bdb_email);
                             prefEditor.commit();
+                            prefEditor.apply();
                         }
 
 
@@ -9526,18 +9541,74 @@ public class APICall {
     //        Log.d("MessageResponse",mMessage);
         }
         //------------------------------booking automated browse--------------------------------
-        public static String bookingFilter(String filterNum,String val1,String val2){
+        public  static JSONArray arrayAB;
+    public static String bookingFilter(String filterNum,String val1,String val2){
             String filter;
 //            if (val1.equals("4")){
 //                filter="\"Filter\":[{\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}," +
 //                        "{\"num\":"+filterNum+",\"value1\":5,\"value2\":"+val2+"}" +
 //                        "]";
 //            }else {
+//            JSONObject object=new JSONObject();
+//            try {
+//                object.put("num", filterNum);
+//                object.put("value1", val1);
+//                object.put("value2", val2);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
                 filter="\"Filter\":[{\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}]";
 //            }
 
                 return filter;
         }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static String bookingFilterV1(String filterNum, String val1, String val2){
+        String filter;
+//            if (val1.equals("4")){
+//                filter="\"Filter\":[{\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}," +
+//                        "{\"num\":"+filterNum+",\"value1\":5,\"value2\":"+val2+"}" +
+//                        "]";
+//            }else {
+
+
+        if (arrayAB==null){
+            arrayAB=new JSONArray();
+        }
+        JSONObject object=new JSONObject();
+        try {
+                object.put("num", filterNum);
+                object.put("value1", val1);
+                if (!val2.equals(""))
+                    object.put("value2", val2);
+
+
+                object.put("num", filterNum);
+                object.put("value1", val1);
+                if (!val2.equals(""))
+                    object.put("value2", val2);
+
+
+
+            if (filterNum.equals("1")) {
+                if (arrayAB.length()>0)
+                arrayAB.remove(0);
+                arrayAB.put(0, object);
+            }else{
+                arrayAB.put(object);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        filter="\"Filter\":"+arrayAB
+//        {\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}
+                +"";
+//            }
+
+        return filter;
+    }
+
         public static String bookingSort(String num,String by){
                 String sort="";
                 sort="\"sort\":{\"num\":"+num+",\"by\":\""+by+"\"}";
@@ -9558,7 +9629,22 @@ public class APICall {
 //        suppliersBooking.add("Select Employee");
         MyReservationFragment.bookingAutomatedBrowseData.clear();
         try {
-//                  MyReservationFragment.reservationsAdapter.notifyDataSetChanged();
+            if (MyReservationFragment.tab.equals("1")){
+                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                AcceptedReservationFragment.service_select.setLayoutManager(llm);
+                AcceptedReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+            }else if (MyReservationFragment.tab.equals("2")){
+                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                ExecutedReservationFragment.service_select.setLayoutManager(llm);
+                ExecutedReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+            }else {
+                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                DepositReservationFragment.service_select.setLayoutManager(llm);
+                DepositReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+            }
             MyReservationFragment.reservationsAdapter2.notifyDataSetChanged();
         }catch (Exception e){
             e.printStackTrace();
@@ -9630,10 +9716,10 @@ public class APICall {
                         "\t\"ItemPerPage\":" + itemPerPage + "\n" +
                         "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
                         filter +
-                        emID+
-                        sdate+
-                        srdate+
-                        btype+
+//                        emID+
+//                        sdate+
+//                        srdate+
+//                        btype+
 
                         ""+
                         //                    "\t,\"Filter\":{\"num\":1,\"value1\":\""\"}\n" +
@@ -9645,11 +9731,11 @@ public class APICall {
                         "\t\"ItemPerPage\":" + itemPerPage + "\n" +
                         "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
                         filter
-                        +emID
+//                        +emID
                         +
-                        sdate+
-                        srdate+
-                        btype+
+//                        sdate+
+//                        srdate+
+//                        btype+
                         ","+
                         sort+
                         //                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
@@ -9661,10 +9747,10 @@ public class APICall {
                     "\t\"ItemPerPage\":" + itemPerPage + "\n" +
                     "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
                     filter+
-                    emID+
-                    sdate+
-                    srdate+
-                    btype+
+//                    emID+
+//                    sdate+
+//                    srdate+
+
                     ""+
                     sort+
                     //                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
@@ -9904,9 +9990,10 @@ public class APICall {
 //                                        if (MyReservationFragment.startdate.equals("")|| MyReservationFragment.startdate.equals(bdb_booked_at)) {
 //                                            if (MyReservationFragment.service_date_txt.equals("") || MyReservationFragment.service_date_txt.equals(bdb_start_date))
 
-                                            if (execDateCheck && bookatCehck)
-                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                    if (checkSupplier)
+//                                            if (execDateCheck && bookatCehck)
+//                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
+//                                                    if (checkSupplier)
+//                                                        if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
                                                     reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
@@ -9917,10 +10004,12 @@ public class APICall {
                                         if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
 //                                        if (MyReservationFragment.startdate.equals("") || MyReservationFragment.startdate.equals(bdb_booked_at)){
 //                                            if (MyReservationFragment.service_date_txt.equals("") || MyReservationFragment.service_date_txt.equals(bdb_start_dates))
-                                            if (execDateCheck && bookatCehck)
-                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                        if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit+"",bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
+//                                            if (execDateCheck && bookatCehck)
+//                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
+//                                                        if (checkSupplier)
+//                                                            if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
+
+                                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit+"",bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -9929,19 +10018,21 @@ public class APICall {
 //                                    if (booking_type.equals("4") || booking_type.equals("5") || booking_type.equals("6") ||
 //                                            booking_type.equals("7") || booking_type.equals("8") || booking_type.equals("9")){
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
-                                        if (execDateCheck && bookatCehck)
-                                            if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
-                                                if (checkSupplier)
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
+//                                        if (execDateCheck && bookatCehck)
+//                                            if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
+//                                                if (checkSupplier)
+//                                                    if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
+                                                        reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
                                     }
                                 }else {
                                     if(booking_type.equals(MyReservationFragment.groupbooking) || MyReservationFragment.groupbooking.equals("")) {
-                                        if (execDateCheck && bookatCehck)
-                                            if (checkSupplier)
-                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
+//                                        if (execDateCheck && bookatCehck)
+//                                            if (checkSupplier)
+//                                                if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -17077,9 +17168,9 @@ public class APICall {
                                 Log.e("SalonSize",salons.size()+"");
 //                                Log.e("searchBookingDataSTRS",searchBookingDataSTRS.size()+"");
 
-                                if (salons.size()==0){
-                                    showSweetDialogAltMultiSearching(context,urlAlt,filter1);
-                                }
+//                                if (salons.size()==0){
+//                                    showSweetDialogAltMultiSearching(context,urlAlt,filter1);
+//                                }
                             }
                         });
                     }else {
@@ -17088,10 +17179,10 @@ public class APICall {
                             public void run() {
 
                                 if (salons.size()==0){
-                                    showSweetDialogAltMultiSearching(context,urlAlt,filter1);
+                                    showSweetDialog(context,"","لا يوجد حل ,يُرجى تغيير التاريخ و المحاولة مرة أخرى");
                                 }
 
-                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -19761,7 +19852,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE,postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://providerapp.dcoret.com/api/auth/supplier/getSalonEmployees")
+                .url(API_PREFIX_NAME+"/api/auth/supplier/getSalonEmployees")
                 .post(body)
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -22649,6 +22740,9 @@ public class APICall {
                         editor.putString("name", "ok");
                         editor.putString("isGuest","0");
                         editor.putString("token", userToken);
+                        editor.remove("GOOGLE_KEY");
+                        editor.remove("SERVER_KEY");
+                        editor.remove("PROVIDER_SERVER_KEY");
                         editor.commit();
                         editor.apply();
                         pd.dismiss();
@@ -22712,7 +22806,8 @@ public class APICall {
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
 //        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
-        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
+        String server_key="";
+//                "AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
 
         try {
 
@@ -22772,6 +22867,80 @@ public class APICall {
                 }catch (final JSONException je){
                     Intent i = new Intent(context, BeautyMainPage.class);
                     context.startActivity(i);
+
+                }
+
+                Log.e("guestToken", mMessage);
+
+            }
+
+        });
+    }
+    public static void getGuestTokenThenInfo(final Context context, String fbToken)
+    {
+//        showDialog(context);
+        Log.e("NewToken","getting guest token");
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+//        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
+        String server_key="AAAAezPALlA:APA91bHwYzq9WUVGDqpqyoPZhz_p82JZLqdLnvIqbiUZDewT2Dcbgfp7wKSnSGdRmKlXaNGPrOIoFMx5CT-3Z7Ey0H4p9PJFlh73sNrCPiDcskxJ_8MWFDy8Lxr80zaEjazdQdpWc6o_";
+
+        try {
+
+            postdata.put("bdb_fb_token",fbToken);
+            postdata.put("bdb_server_key",server_key);
+            postdata.put("bdb_sys_type","0");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/auth/user/getGuestToken")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("guestToken ERRR", mMessage);
+                Intent i = new Intent(context, BeautyMainPage.class);
+                context.startActivity(i);
+                //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                try {
+                    final JSONObject userresponse=new JSONObject(mMessage);
+                    String success=userresponse.getString("success");
+                    String msg=userresponse.getString("message");
+                    if(success.equals("true")){
+
+                        JSONObject data=userresponse.getJSONObject("data");
+                        APICall.token_temp=data.getString("token");
+                        SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+//                        editor.putString("name", "ok");
+//                        editor.putString("isGuest", "1");
+                        editor.putString("token", token_temp);
+                        editor.commit();
+                        editor.apply();
+                        APICall.getSystemInfo(context);
+
+                    }else if(success.equals("false")) {
+
+                    }
+                }catch (final JSONException je){
 
                 }
 
@@ -23170,7 +23339,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://providerapp.dcoret.com/api/booking/cancelPaidBooking")
+                .url(API_PREFIX_NAME+"/api/booking/cancelPaidBooking")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -23937,12 +24106,12 @@ public class APICall {
                         final JSONObject data=jsonrespone.getJSONObject("data");
                         final JSONArray booking=data.getJSONArray("booking");
                         final String booking_type=data.getString("booking_type");
-                        final String salon_mobile=data.getString("salon_mobile");
 
                         final String client_name=data.getString("client_name");
                         final String salon_name=data.getString("salon_name");
                         String journey_cost=data.getString("journey_cost");
 
+                        final String salon_mobile=data.getString("salon_mobile");
 
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
@@ -23988,7 +24157,7 @@ public class APICall {
                                     if (booking_type.equals("0")) {
                                         ReservatoinDetailsActivity.booktype.setText(context.getResources().getString(R.string.single_booking));
                                         String cname=data.getString("salon_name");
-                                        ReservatoinDetailsActivity.client_name.setText(cname);
+                                        ReservatoinDetailsActivity.client_name.setText(salon_name);
 //                            ReservationDetailsFragment.time.setText(date);
                                     }else if (booking_type.equals("1")) {
                                         String date=data.getString("bdb_start_date");
@@ -23996,7 +24165,7 @@ public class APICall {
                                         ReservatoinDetailsActivity.booktype.setText(context.getResources().getString(R.string.multi_booking));
                                         String cname=data.getString("salon_name");
                                         if (!cname.equals("booking_wast_time")){
-                                            ReservatoinDetailsActivity.client_name.setText(cname);
+                                            ReservatoinDetailsActivity.client_name.setText(salon_name);
                                         }
                                     }else if (booking_type.equals("2")) {
                                         ReservatoinDetailsActivity.booktype.setText(R.string.group_res_other);
@@ -24854,8 +25023,30 @@ public class APICall {
                         final String booking_price=data.getString("booking_price");
                         final String salon_name=data.getString("salon_name");
                         final String bdb_name_booking=data.getString("bdb_name_booking");
-                        CancelReservationActivity.salonName.setText(salon_name);
-                        CancelReservationActivity.id.setText(bdb_name_booking);
+                        final String bdb_internally_number=data.getString("bdb_internally_number");
+//                        final String bdb_booked_at=data.getString("bdb_booked_at");
+                        final String bdb_start_date=data.getString("bdb_start_date");
+//                        final String bdb_journey_time=data.getString("bdb_journey_time");
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CancelReservationActivity.salonName.setText(salon_name);
+                            }
+                        });
+
+
+
+                        final String salon_mobile=data.getString("salon_mobile");
+
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CancelReservationActivity.phone_number.setText(salon_mobile);
+                                CancelReservationActivity.client_name.setText(salon_name);
+                            }
+                        });
+                        CancelReservationActivity.id.setText(bdb_internally_number);
+                        CancelReservationActivity.ref_id.setText(bdb_name_booking);
                         String bdb_sup_final_price="";
 
                         try {
@@ -24877,7 +25068,7 @@ public class APICall {
                                     if (booking_type.equals("0")) {
                                         CancelReservationActivity.booktype.setText(context.getResources().getString(R.string.single_booking));
                                         String cname=booking.getJSONObject(0).getString("name");
-                                        CancelReservationActivity.client_name.setText(cname);
+                                        CancelReservationActivity.client_name.setText(salon_name);
 //                            ReservationDetailsFragment.time.setText(date);
                                     }else if (booking_type.equals("1")) {
                                         String date=data.getString("bdb_start_date");
@@ -24885,7 +25076,7 @@ public class APICall {
                                         CancelReservationActivity.booktype.setText(context.getResources().getString(R.string.multi_booking));
                                         String cname=booking.getJSONObject(0).getString("name");
                                         if (!cname.equals("booking_wast_time")){
-                                            CancelReservationActivity.client_name.setText(cname);
+                                            CancelReservationActivity.client_name.setText(salon_name);
                                         }
                                     }else if (booking_type.equals("2")) {
                                         CancelReservationActivity.booktype.setText(R.string.group_res_other);
@@ -25012,7 +25203,7 @@ public class APICall {
                                     }
                                     if (!name.equals("booking_wast_time") && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
                                         names+=name+",";
-                                        CancelReservationActivity.client_name.setText(names);
+                                        CancelReservationActivity.client_name.setText(salon_name);
                                     }
 
 //                                String phone = object1.getString("phone");
@@ -25022,10 +25213,10 @@ public class APICall {
 
                                     if (name.equals("booking_wast_time")){
                                         if (!BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT"))
-                                            CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,"",bookings,booking_type);
+                                            CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot,name,bdb_client_old,bookings,booking_type);
                                     }else {
                                         CancelReservationActivity.count+=1;
-                                        CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot, name, "age:" + bdb_client_old, bookings, booking_type);
+                                        CancelReservationActivity.addHeaderLayout(CancelReservationActivity.myroot, name,  bdb_client_old, bookings, booking_type);
 
                                         Log.e("Bookings", bookings.toString());
                                     }
@@ -27501,7 +27692,7 @@ Log.e("filters",filter);
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                showDialog(context);
+//                showDialog(context);
 //
             }
         });
@@ -27543,13 +27734,13 @@ Log.e("filters",filter);
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e){
                 mMessage = e.getMessage().toString();
                 Log.e("Payment_Response", mMessage);
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pd.dismiss();
+//                        pd.dismiss();
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
@@ -27602,7 +27793,7 @@ Log.e("filters",filter);
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        pd.dismiss();
+//                        pd.dismiss();
 //                        ReservationFragment.pullToRefresh.setRefreshing(false);
                     }
                 });
@@ -27616,7 +27807,7 @@ Log.e("filters",filter);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                APICall.showSweetDialog(context,"",context.getResources().getString(R.string.deposit_done));
+//                                APICall.showSweetDialog(context,"",context.getResources().getString(R.string.deposit_done));
                             }
                         });
                     }
@@ -27639,6 +27830,123 @@ Log.e("filters",filter);
     }
 
 
+    public  static  void getSystemInfo( final Context context){
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+//        try {
+//            postdata.put("token", token);
+////            postdata.put("password", "12345");
+//        } catch (JSONException e) {
+////         TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE,postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getSystemInfo")
+                .post(body)
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + gettoken(context))
+//                .header("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQzNGYzMGUwZTliZTI4NDQ1ZWFiNTg4YmM2YzVjYzNjN2MwODZlY2E5NTdhMWNiYzRmZjNhMzQ4ZGZiNjA0NWMzMmQ3ZDA2NWEyZTU4ZTUxIn0.eyJhdWQiOiI5IiwianRpIjoiZDM0ZjMwZTBlOWJlMjg0NDVlYWI1ODhiYzZjNWNjM2M3YzA4NmVjYTk1N2ExY2JjNGZmM2EzNDhkZmI2MDQ1YzMyZDdkMDY1YTJlNThlNTEiLCJpYXQiOjE1Njc0MDY5MjcsIm5iZiI6MTU2NzQwNjkyNywiZXhwIjoxNTk5MDI5MzI3LCJzdWIiOiI0OCIsInNjb3BlcyI6W119.CFoTC294Z9suaczjlMeQBU5njHyEUNScjPmI5XjaBG8hesv0oGj5irruJfE9sv1F_CnRGfU0aqQbkxc5HVnN6G76SaBFTSREef6ElqB_1XdsF5CF4d4bMkr2cAs8aC2D2ydHq25AHfCqUYlYseqnQeWzKr-cxwBCnPFx8lCszqj6WN8iviUnXaZbHYdJqw_PmPtweiQy8xP7TFUixtxwJnOguhFiPgbJaCAJREVqx6eWwOZfSAtN-B5JtCWUEUCubnW0t00EhWDNw0K-8Zz45STyDAkiWq_5B0zUvhmqUuvfgJ9P192pK4AKDxRuJxSUcyYKf1Wko9VJLFJRGO7KSsDX63jwFqGKKJfCsI8htxmRihi0yMNTvGZBDrRvGnIoHBKmj_A-JBCLB_P1X-huZvFrb0MfpQz4-r-QzK5qx1tCcSuT3iD52AG-3YyN3-XkF0PeS3h302KUJWm03nPB11M4exI-Ws2rfH5sv_xa7ujBHf9iNNHMun-VIaqzu5MRf6waaDqoRRTe0R9W_XCy6ljQWUhxKYYE9eKImWcVZy3PSp10JyBR8v7YfAqMtadw6dKKRsEIs9xQNZUfNPRzi1Nblo9PioUTmRoCEuQzKgA-zXK3xqBIrn0Kn2CtdZnr80l51cP_6EcOgCtb7utqlrkeiSDKe1iG8ftISPF424Q")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                try {
+                    final JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+                        JSONObject data=j.getJSONObject("data");
+                        SERVER_KEY=data.getString("server_key");
+                        GOOGLE_KEY=data.getString("google_key");
+                        PROVIDER_SERVER_KEY=data.getString("provider_server_key");
+
+                        String experince="",book_sol="";
+                        if (ln.equals("ar")) {
+                            experince = data.getString("previous_experience_ar");
+                            book_sol = data.getString("book_sol_ar");
+                        }else {
+                            experince = data.getString("previous_experience_en");
+                            book_sol = data.getString("book_sol_en");
+                        }
+                        SharedPreferences.Editor prefs = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        prefs.putString("SERVER_KEY",SERVER_KEY);
+                        prefs.putString("GOOGLE_KEY",GOOGLE_KEY);
+                        prefs.putString("PROVIDER_SERVER_KEY",PROVIDER_SERVER_KEY);
+
+
+                    }
+                }catch (JSONException je){
+                }
+                Log.e("TAG", mMessage);
+
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        pd.dismiss();
+//
+////                        Toast.makeText(context,mMessage,Toast.LENGTH_LONG).show();
+//                    }
+//                });
+            }
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
 
 
 
