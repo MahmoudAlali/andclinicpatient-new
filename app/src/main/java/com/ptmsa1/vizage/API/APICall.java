@@ -9994,7 +9994,7 @@ public class APICall {
 //                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
 //                                                    if (checkSupplier)
 //                                                        if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking.getJSONObject(0).getString("bdb_price"), booking.getJSONObject(0).getString("bdb_start_date"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                             Log.e("BookTypeAdded", "Single");
 //                                        }
                                         }
@@ -10008,7 +10008,8 @@ public class APICall {
 //                                                if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
 //                                                        if (checkSupplier)
 //                                                            if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
-                                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit+"",bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
+
+                                                                reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit+"",bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                             Log.e("BookTypeAdded", "Group");
 //                                        }
 //                                    }
@@ -10021,7 +10022,7 @@ public class APICall {
 //                                            if (!bdb_status.equals("4") ||!bdb_status.equals("0"))
 //                                                if (checkSupplier)
 //                                                    if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
-                                                        reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
+                                                        reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }
@@ -10031,7 +10032,7 @@ public class APICall {
 //                                        if (execDateCheck && bookatCehck)
 //                                            if (checkSupplier)
 //                                                if (bdb_name_booking.equals(MyReservationFragment.REF_NUMBER) || MyReservationFragment.REF_NUMBER.equals("-1") )
-                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1));
+                                                    reservationModels.add(new ReservationModel(bdb_internally_number,bookedByMe,bdb_logo_id,booking_type,bdb_is_executed, booking_price, jObject.getString("bdb_start_dates"), jObject.getString("booking_place"),jObject.getString("client_name"),bdb_inner_booking,is_action_on,is_rating_on,bdb_name_booking,is_per_client,bdb_expected_deposit,bdb_loc_lat,bdb_loc_long, bookingAutomatedBrowseData1,bdb_refund_amount,bdb_refund_days,bdb_refund_hours));
                                         Log.e("BookTypeAdded", "Group");
 //                                            }
 //                                        }

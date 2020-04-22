@@ -680,7 +680,7 @@ public class MyReservationFragment extends Fragment  {
                  ref_num=dialog.findViewById(R.id.ref_num);
                 if (!REF_NUMBER.equals("-1")){
                     ref_num.setChecked(true);
-                    ref_num.setText(BeautyMainPage.context.getResources().getString(R.string.ref_number)+":"+REF_NUMBER);
+                    ref_num.setText(BeautyMainPage.context.getResources().getString(R.string.reser_id)+":"+REF_NUMBER);
                 }
                 ref_num.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -694,7 +694,7 @@ public class MyReservationFragment extends Fragment  {
                             TextView confirm=d.findViewById(R.id.confirm);
                             resend_code.setVisibility(View.GONE);
                             message.setText(R.string.enter_ref_number);
-                            code.setHint(R.string.ref_number);
+                            code.setHint(R.string.reser_id);
 
                             confirm.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -706,6 +706,7 @@ public class MyReservationFragment extends Fragment  {
                             d.show();
 
                         }else {
+                            ref_num.setText(BeautyMainPage.context.getResources().getString(R.string.reser_id));
                             REF_NUMBER="-1";
                         }
                     }
@@ -999,7 +1000,7 @@ public class MyReservationFragment extends Fragment  {
 
                         }
 
-                        if (tab.equals("1")) {
+
                         if(tab=="1")
                         {
                             fragment = new AcceptedReservationFragment();
