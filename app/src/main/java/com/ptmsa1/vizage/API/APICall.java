@@ -20072,7 +20072,7 @@ public class APICall {
                             @Override
                             public void run() {
 //                                API.NotAvlBookingDialog(context,"Alert!","This time is not available because another customer has booked it.");
-                                Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+                                showUnexpectedErrMsg(context);
                             }
                         });
                         //---------------------------------------------------------
@@ -20081,9 +20081,9 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
-                            Log.e("jeMessage",je.getMessage());
-                        }
+                            //Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());                        }
                     });
 
                 }
@@ -20223,7 +20223,11 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (JSONException je){
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",je.getMessage());
                 }
                 Log.e("TAG", mMessage);
 
@@ -20954,7 +20958,11 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (JSONException e){
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",e.getMessage());
                     e.printStackTrace();
                 }
 
@@ -21102,8 +21110,12 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (JSONException e){
                     e.printStackTrace();
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",e.getMessage());
                 }
 
 
@@ -21272,8 +21284,12 @@ public class APICall {
 
 
                     }
-                }catch (JSONException e){
+                    else
+                        showUnexpectedErrMsg(context);
+                }catch (final JSONException e){
                     e.printStackTrace();
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",e.getMessage());
                 }
 
 
@@ -21533,14 +21549,16 @@ public class APICall {
                         });
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je)
                 {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             je.printStackTrace();
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
-
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
                 }
@@ -21662,12 +21680,16 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je)
                 {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             je.printStackTrace();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
 
                         }
                     });
@@ -21800,13 +21822,16 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                             Log.e("jeMessage",je.getMessage());
+                            showUnexpectedErrMsg(context);
                         }
                     });
 
@@ -22239,13 +22264,16 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(cont);
 
                 }
                 catch (JSONException e)
                 {
                     e.printStackTrace();
                     Log.e("NotifErr",e.getMessage());
-
+                    showUnexpectedErrMsg(cont);
+                    Log.e("ERROR",e.getMessage());
                 }
                 ((AppCompatActivity)cont).runOnUiThread(new Runnable()
                 {
@@ -22804,11 +22832,15 @@ public class APICall {
                             //   TabTwo.arrayList.add(dof);
                         }
                     }
+                    else
+                        showUnexpectedErrMsg(cont);
 
                 }
                 catch (JSONException e)
                 {
                     e.printStackTrace();
+                    showUnexpectedErrMsg(cont);
+                    Log.e("ERROR",e.getMessage());
                 }
                 ((AppCompatActivity)cont).runOnUiThread(new Runnable()
                 {
@@ -22936,10 +22968,13 @@ public class APICall {
 
 
                             }
+                            else
+                                showUnexpectedErrMsg(cont);
                         }
                         catch (JSONException e)
                         {
                             e.printStackTrace();
+                            showUnexpectedErrMsg(cont);
                         }
                         PointsFragment.setData(used_points,terminated_points,termin_in_month,current_points);
 
@@ -23023,7 +23058,7 @@ public class APICall {
                             ((AppCompatActivity) context).finish();
                         }
                     }else if(success.equals("false")) {
-
+                        showUnexpectedErrMsg(context);
 
                         showSweetDialog(context,R.string.ExuseMeAlert,R.string.loginFailed,false);
                     }
@@ -23031,8 +23066,9 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
-
+                            //Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -23137,9 +23173,10 @@ public class APICall {
                         context.startActivity(i);
                     }
                 }catch (final JSONException je){
-                    Intent i = new Intent(context, BeautyMainPage.class);
-                    context.startActivity(i);
-
+                   // Intent i = new Intent(context, BeautyMainPage.class);
+                  //  context.startActivity(i);
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",je.getMessage());
                 }
 
                 Log.e("guestToken", mMessage);
@@ -23210,10 +23247,11 @@ public class APICall {
                         APICall.getSystemInfo(context);
 
                     }else if(success.equals("false")) {
-
+                        showUnexpectedErrMsg(context);
                     }
                 }catch (final JSONException je){
-
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",je.getMessage());
                 }
 
                 Log.e("guestToken", mMessage);
@@ -23433,12 +23471,16 @@ public class APICall {
                             }
                         });
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -23565,12 +23607,16 @@ public class APICall {
                             cSupString.add(cSupplierModels.get(i).getBdb_owner_name());
                         }
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
+                           // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -23710,11 +23756,15 @@ public class APICall {
 //                            }
 //                        });
                     }
+                    else
+                         showUnexpectedErrMsg(context);
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            //Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -23845,12 +23895,15 @@ public class APICall {
 
 
                     }
-
+                    else
+                        showUnexpectedErrMsg(context);
                 }
-                catch (JSONException e)
+                catch (final JSONException e)
                 {
                     e.printStackTrace();
                     Log.e("ExecErr",e.getMessage());
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",e.getMessage());
                 }
             }
 
@@ -23940,11 +23993,15 @@ public class APICall {
 
 
                     }
+                    else
+                        showUnexpectedErrMsg(context);
 
                 }
-                catch (JSONException e)
+                catch (final JSONException e)
                 {
                     e.printStackTrace();
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",e.getMessage());
                     Log.e("ExecErr",e.getMessage());
                 }
             }
@@ -24242,12 +24299,15 @@ public class APICall {
                             }
                         }
                     }
-                }catch (JSONException e){
+                    else
+                        showUnexpectedErrMsg(context);
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.error));
-
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.error));
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
                         }
                     });
                     e.printStackTrace();
@@ -24793,12 +24853,16 @@ public class APICall {
 
                             }
                         }
+                    else
+                        showUnexpectedErrMsg(context);
 
-                }catch (JSONException e){
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
 
                         }
                     });
@@ -25154,11 +25218,13 @@ public class APICall {
                             }
                         }
                     }
-                }catch (JSONException e){
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
 
                         }
                     });
@@ -25582,12 +25648,15 @@ public class APICall {
                             }
                         }
                     }
-                }catch (JSONException e){
+                    else
+                        showUnexpectedErrMsg(context);
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
                         }
                     });
                     e.printStackTrace();
@@ -25719,12 +25788,15 @@ public class APICall {
                             }
                         });
                     }
-                }catch (JSONException e){
+                    else
+                        showUnexpectedErrMsg(context);
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
-
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
                         }
                     });
                     e.printStackTrace();
@@ -25900,11 +25972,15 @@ public class APICall {
 //                            }
 //                        });
                     }
+                    else
+                        showUnexpectedErrMsg(context);
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
+                            //Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -26183,13 +26259,17 @@ public class APICall {
 
                         }
                     }
+                    else
+                        showUnexpectedErrMsg(context);
 
-                }catch (JSONException e){
+                }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.err));
+                           // showSweetDialog(context,"",context.getResources().getString(R.string.err));
 
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",e.getMessage());
                         }
                     });
                     e.printStackTrace();
@@ -26516,13 +26596,16 @@ public class APICall {
                             });
                         }
                     }
+                    else  showUnexpectedErrMsg(context);
 
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                           // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -26720,6 +26803,11 @@ public class APICall {
 
                         }
                     }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+                        Log.e("ERROR",message);
+                    }
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
                     ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -26727,9 +26815,8 @@ public class APICall {
                         public void run() {
                             TabOne.arrayList.clear();
                             TabOne.refreshRV();
-                            String t=((AppCompatActivity)context).getResources().getString(R.string.alert);
-
-                            showSweetDialog(context,t,je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -26883,7 +26970,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showSweetDialog(context,context.getResources().getString(R.string.errorAddingRequest));
+                        showUnexpectedErrMsg(context);
                     }
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
@@ -26893,8 +26980,8 @@ Log.e("ERRR",e.getMessage());
                          /*   TabOne.arrayList.clear();
                             TabOne.refreshRV();
                             String t=((AppCompatActivity)context).getResources().getString(R.string.alert);*/
-
-                            showSweetDialog(context,je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
                         }
                     });
 
@@ -27044,8 +27131,12 @@ Log.e("ERRR",e.getMessage());
 
                         }
                     }
+                    else
+                        showUnexpectedErrMsg(context);
+
                 }catch (JSONException e){
                     e.printStackTrace();
+                    showUnexpectedErrMsg(context);
                 }
             }
 
@@ -27187,6 +27278,9 @@ Log.e("ERRR",e.getMessage());
 
                     }
 
+                    else
+                        showUnexpectedErrMsg(context);
+
 
 
 //                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -27201,7 +27295,8 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                           // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
                         }
                     });
 
@@ -27452,6 +27547,9 @@ Log.e("ERRR",e.getMessage());
                             });
                         }
                     }
+                    else
+                        showUnexpectedErrMsg(context);
+
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -27634,13 +27732,18 @@ Log.e("ERRR",e.getMessage());
                             allSuppliers.add(new SupInfoClass(bdb_owner_name, bdb_id));
                         }
                     }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+                    }
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Log.e("ERR",je.getMessage());
-                           // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -27763,12 +27866,16 @@ Log.e("ERRR",e.getMessage());
                             allSuppliers.add(new SupInfoClass(bdb_owner_name, bdb_id));
                         }
                     }
+                    else {
+                        showUnexpectedErrMsg(context);
+                    }
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
                             // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
@@ -28220,6 +28327,40 @@ Log.e("filters",filter);
 //        Log.d("MessageResponse",mMessage);
     }
 
+    public  static  void showUnexpectedErrMsg(final Context context){
+
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v34);
+                TextView websiteSupport = dialog.findViewById(R.id.confirm);
+                TextView whatsAppSupport = dialog.findViewById(R.id.cancel);
+                websiteSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(myAppLinkToMarket);
+
+
+                    }
+                });
+                whatsAppSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
 
 
 }
