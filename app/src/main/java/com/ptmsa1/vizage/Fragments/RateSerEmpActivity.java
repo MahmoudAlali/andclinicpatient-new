@@ -26,7 +26,7 @@ public class RateSerEmpActivity extends AppCompatActivity {
 
     static Context context;
     static LinearLayout myroot;
-    public static TextView sup_name;
+    public static TextView sup_name,provider_rate_txt;
     public static ColorRatingBar sup_rating;
     public static String salon_id;
     public static int [] servicsImgsBasic ={ R.drawable.hair_basic,
@@ -39,6 +39,7 @@ public class RateSerEmpActivity extends AppCompatActivity {
             R.drawable.eyebrows_basic
     };
     Button eval;
+    public static LinearLayout provider_rate_layout;
     public  static ArrayList<SupRatingModel> arrayList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class RateSerEmpActivity extends AppCompatActivity {
         sup_rating=findViewById(R.id.sup_rating);
         sup_name=findViewById(R.id.sup_name);
         eval=findViewById(R.id.eval);
+        provider_rate_layout=findViewById(R.id.provider_rate_layout);
+        provider_rate_txt=findViewById(R.id.provider_rate_txt);
        arrayList.clear();
 
 //        ReservationsAdapter2.book_id;

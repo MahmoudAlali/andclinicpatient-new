@@ -17373,12 +17373,12 @@ public class APICall {
                                     String ser_sup_id = data1.getString("ser_sup_id");
                                     String from = data1.getString("from");
                                     String to = data1.getString("to");
-                                    String date = "";
-                                    try {
-                                        date = data1.getString("date");
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
+                                    String date =   data1.getString("date");;
+//                                    try {
+//
+//                                    } catch (Exception e) {
+//                                        e.printStackTrace();
+//                                    }
 //                                    String old_from = data1.getString("old_from");
 //                                    String old_to = data1.getString("old_to");
 //                                    String new_from = data1.getString("new_from");
@@ -23015,6 +23015,7 @@ public class APICall {
                         pd.dismiss();
                         if (BeautyMainPage.bdb_is_guest.equals("1")){
                             Log.e("isGuestis","is"+BeautyMainPage.bdb_is_guest);
+                            BeautyMainPage.RELOADAPP=true;
                             APICall.getdetailsUserForLogin(context);
                         }else {
                             Intent i = new Intent(context, BeautyMainPage.class);
@@ -23130,6 +23131,7 @@ public class APICall {
                         editor.putString("token", token_temp);
                         editor.commit();
                         editor.apply();
+                        BeautyMainPage.bdb_is_guest="1";
                         Intent i = new Intent(context, BeautyMainPage.class);
                         context.startActivity(i);
                     }else if(success.equals("false")) {
@@ -24982,7 +24984,14 @@ public class APICall {
                             Log.e("bookType","Single");
                             for (int i=0;i<booking.length();i++) {
                                 JSONObject object = booking.getJSONObject(i);
-
+                                try {
+                                    String is_main_user = object.getString("is_main_user");
+                                    if (is_main_user.equals("0") ||is_main_user.equals("false"))
+                                    RateSerEmpActivity.provider_rate_layout.setVisibility(View.GONE);
+                                    RateSerEmpActivity.provider_rate_txt.setVisibility(View.GONE);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 JSONArray bookings = object.getJSONArray("bookings");
                                 for(int k=0;k<bookings.length();k++){
                                     JSONObject object1 = bookings.getJSONObject(k);
@@ -24998,7 +25007,13 @@ public class APICall {
                                     final String bdb_name = object1.getString("bdb_name");
                                     final String is_rating_on = object1.getString("is_rating_on"),
                                             bdb_name_ar = object1.getString("bdb_name_ar");
-                                    final String category_id = object.getString("bdb_is_hair_service");
+
+                                     String category_id ="";
+                                            try {
+                                                category_id = object1.getString("bdb_is_hair_service");
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
 
                                     final String client_name = object1.getString("bdb_user_name");
 
@@ -25016,6 +25031,7 @@ public class APICall {
                                     final String finalBdb_price = bdb_price;
                                     final String finalAc_price = ac_price;
                                     final String finalJourney_cost = journey_cost;
+                                    final String finalCategory_id = category_id;
                                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -25027,14 +25043,14 @@ public class APICall {
 //                                                        bdb_name_ar, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
                                                 if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar,category_id);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name_ar, finalCategory_id);
 
                                             }else{
 //                                                ReservatoinDetailsActivity.addLayout(ReservatoinDetailsActivity.myroot,
 //                                                        bdb_name, finalBdb_price, bdb_start_date + "," + bdb_start_time, bdb_end_time
 //                                                        , bdb_booked_at, bdb_emp_name, bdb_id, bdb_is_executed, finalAc_price, finalJourney_cost, journey_time);
                                                 if (is_rating_on.equals("1") ||is_rating_on.equals("true") )
-                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name,category_id);
+                                                RateSerEmpActivity.addLayout(bdb_id,bdb_emp_name,bdb_name, finalCategory_id);
 
                                             }
                                         }
@@ -25052,6 +25068,16 @@ public class APICall {
                             String names="";
                             for (int i=0;i<booking.length();i++){
                                 JSONObject object1=booking.getJSONObject(i);
+                                try {
+                                    String is_main_user = object1.getString("is_main_user");
+                                    Log.e("is_main_userPrint","is"+is_main_user);
+                                    if (is_main_user.equals("0") || is_main_user.equals("false"))
+
+                                        RateSerEmpActivity.provider_rate_layout.setVisibility(View.GONE);
+                                        RateSerEmpActivity.provider_rate_txt.setVisibility(View.GONE);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 JSONArray bookings;
                                 try {
                                     bookings = object1.getJSONArray("bookings");

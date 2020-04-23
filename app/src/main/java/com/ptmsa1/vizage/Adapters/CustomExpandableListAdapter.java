@@ -399,7 +399,8 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                         }else if (stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getReason().equals("2")) {
                             reason.setText(R.string.wait_emp_lost_time);
                         }
-                    }else {
+                    }
+                    else {
                         try {
                             partnum = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getPart_num();
                         } catch (Exception e) {
@@ -484,15 +485,26 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                     priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
 
                                 }
-                            } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                            }else if (BeautyMainPage.FRAGMENT_NAME.equals("GroupReservationResultFragment")){
+                             if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 1) {
                                 priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
                             } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 2) {
                                 priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
                             } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 3) {
                                 priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
                             } else if (PlaceServiceGroupFragment.placeSpinner.getSelectedItemPosition() == 4) {
-                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
-
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+                                }
+                            }else if (BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity")){
+                             if (PlaceServiceFragment.placeSpinner.getSelectedItemPosition() == 1) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
+                            } else if (PlaceServiceFragment.placeSpinner.getSelectedItemPosition() == 2) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                            } else if (PlaceServiceFragment.placeSpinner.getSelectedItemPosition() == 3) {
+                                priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
+                            } else if (PlaceServiceFragment.placeSpinner.getSelectedItemPosition() == 4) {
+                                    priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_hotel_price();
+                                }
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -500,7 +512,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 //                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
 //
 //                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==2) {
-                            priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_home_price();
+                            priceService = stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_salon_price();
 //
 //                       }else if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==3) {
 //                           priceService=  stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getBdb_ser_hall_price();
@@ -522,17 +534,21 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
 //                       service_name.setText(APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name()+" : "+priceService+"-"+((AppCompatActivity)context).getResources().getString(R.string.ryal))+" "+context.getResources().getString(R.string.date)+": "+
 //                               APICall.convertToArabic(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getDate()));
 //                   }
+                        String datetxt="";
+                        if (!date.equals("") && !date.equals("null") && !date.equals("null")){
+                            datetxt=" - "+((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date);
+                        }
                         if (partnum.equals("1")) {
-                            if (APICall.ln.equals("ar")) {
-                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal)  +datetxt );
                             } else
-                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal)  +datetxt);
                         } else if (partnum.equals("0")) {
-                            if (APICall.ln.equals("ar")) {
-                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name_ar() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal)  + datetxt);
 
                             } else
-                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal) + " - " + ((AppCompatActivity) context).getResources().getString(R.string.date) + ": " + APICall.convertToArabic(date));
+                                service_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getSer_name() + " : " + priceService + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal)  + datetxt);
                         }
                 }
                     employee_name.setText(stringArrayListHashMap.get(salons.get(groupPosition)).get(childPosition).getSolutions().get(i).getEmp_name());

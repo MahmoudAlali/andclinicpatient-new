@@ -81,6 +81,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static String is_bride_service;
     public static String bdb_email,bdb_is_guest="0";
     private int READ_EXTERNAL_STORAGE=93;
+    public static Boolean RELOADAPP=false;
     public static String client_name="";
     public static String client_number="";
     public static  IPaymentRequestCallBack iPaymentRequestCallBack;
@@ -998,26 +999,38 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
                     switch (item.getItemId()) {
                         case R.id.services:
-                            menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
-                            fragment = new ServiceFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                            fragmentTransaction.detach(fragment);
-                            fragmentTransaction.attach(fragment);
-                                            fragmentTransaction.commitAllowingStateLoss();
+                            if (RELOADAPP){
 
+                                finish();
+                                RELOADAPP=false;
+                                startActivity(getIntent());
+                            }else {
+                                menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
+                                fragment = new ServiceFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.detach(fragment);
+                                fragmentTransaction.attach(fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
+                            }
                             return true;
                         case R.id.reservations:
-                            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
-                            FRAGMENT_NAME="";
-                            fragment = new MyReservationFragment();
-//                            fragment = new ReservationFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                                            fragmentTransaction.commitAllowingStateLoss();
+                            if (RELOADAPP){
 
+                                finish();
+                                RELOADAPP=false;
+                                startActivity(getIntent());
+                            }else {
+                                menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
+                                FRAGMENT_NAME = "";
+                                fragment = new MyReservationFragment();
+//                            fragment = new ReservationFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
+                            }
                             return true;
 //                        case R.id.service_bag:
 //                            FRAGMENT_NAME="";
@@ -1030,34 +1043,52 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 //                            return true;
                         case R.id.favorites:
                             FRAGMENT_NAME="";
-                            menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_selected);
+                            if (RELOADAPP){
 
-                            fragment = new FavoriteFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                                            fragmentTransaction.commitAllowingStateLoss();
+                                finish();
+                                                                RELOADAPP=false;
+                                startActivity(getIntent());
+                            }else {
+                                menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_selected);
 
+                                fragment = new FavoriteFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
+                            }
                             return true;
                         case R.id.notification:
                             FRAGMENT_NAME="";
-                            menu.findItem(R.id.notification).setIcon(R.drawable.notifications_selected);
-                            fragment = new NotificationsFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                                            fragmentTransaction.commitAllowingStateLoss();
+                            if (RELOADAPP){
 
+                                finish();
+                                RELOADAPP=false;
+                                startActivity(getIntent());
+                            }else {
+                                menu.findItem(R.id.notification).setIcon(R.drawable.notifications_selected);
+                                fragment = new NotificationsFragment();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
+                            }
                             return true;
                         case R.id.main:
-                            FRAGMENT_NAME="";
-                            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
-                            fragment = new Offers();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment, fragment);
-                            fragmentTransaction.commitAllowingStateLoss();
+                            if (RELOADAPP){
 
+                                finish();
+                                RELOADAPP=false;
+                                startActivity(getIntent());
+                            }else {
+                                FRAGMENT_NAME = "";
+                                menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+                                fragment = new Offers();
+                                fm = getFragmentManager();
+                                fragmentTransaction = fm.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment, fragment);
+                                fragmentTransaction.commitAllowingStateLoss();
+                            }
                             return true;
                     }
 

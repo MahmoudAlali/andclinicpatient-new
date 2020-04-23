@@ -86,7 +86,13 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
                 Log.e("getFilterMultiDates",getFilterMultiDates(f));
 
                 Intent intent = new Intent(context, MultiBookingIndividualResultActivity.class);
-                intent.putExtra("filter",getfilter(f));
+                if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==1) {
+                    intent.putExtra("filter", getfilter(f));
+                }else if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2){
+                   String ff= MultiIndividualBookingReservationFragment.sortdates(MultiIndividualBookingReservationFragment.dates,BeautyMainPage.client_name ,BeautyMainPage.client_number,"1",f,0);
+//                     ff=getFilterMultiDates(f);
+                    intent.putExtra("filter", ff);
+                }
                 Log.e("Allfilter",getfilter(f));
                 startActivity(intent);
             }
@@ -186,13 +192,13 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         for (int i=0;i<MultiIndividualBookingReservationFragment.servicesForClientGroups.size();i++)
             {
                 if (clientf==null || i==0) {
-                    clientf+="\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+                    clientf+="\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getDate().getText().toString() + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
 //                    clientf = "\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
                     clientf += "{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;
                     clientf +="],\"effect\":["+effects+"] " +
                             " \t}\n" ;
                 }else {
-                    clientf+=",\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
+                    clientf+=",\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getDate().getText().toString() + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
 
 //                    clientf += ",{\"multi_salon_client\": 0,  \"multi_salon_clients_rel\": 0,\t\t\"clients\":[\t{\"client_name\":\"" + BeautyMainPage.client_name + "\",\"client_phone\":\"" + BeautyMainPage.client_number + "\",\"is_current_user\":1,\"date\": \"" + PlaceServiceMultipleBookingFragment.dateFilter + "\",\"rel\":\"0\",\"is_adult\":1 ,\"services\":[\n";
                     clientf += "{\"ser_id\":"+MultiIndividualBookingReservationFragment.servicesForClientGroups.get(i).getId()+"}\n" ;

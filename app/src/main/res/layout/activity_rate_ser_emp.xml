@@ -15,6 +15,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
           <TextView
+              android:id="@+id/provider_rate_txt"
               android:layout_margin="@dimen/pf_10_txt_size"
               android:layout_width="match_parent"
               android:layout_height="35dp"
@@ -29,6 +30,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
               <LinearLayout
+                  android:id="@+id/provider_rate_layout"
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="350dp"
                   android:layout_gravity="center"

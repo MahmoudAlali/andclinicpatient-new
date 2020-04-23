@@ -58,7 +58,11 @@ public class ShowServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //        selectDateOfferModels.add(new SelectDateOfferModel,((Item)holder).phone_number,position));
 //        for (int i=0;i<offerClientsModels.get(position).getServiceDetails().size();i++){
 //            addLayout2(offerClientsModels.get(position).getServiceDetails().get(i).getBdb_name_ar(),context,((Item)holder).show_services);
-        ((Item)holder).name.setText(offerClientsModels.get(0).getServiceDetails().get(position).getBdb_name_ar());
+       if (context.getResources().getString(R.string.locale).equals("ar")) {
+           ((Item) holder).name.setText(offerClientsModels.get(0).getServiceDetails().get(position).getBdb_name_ar());
+       }else {
+           ((Item) holder).name.setText(offerClientsModels.get(0).getServiceDetails().get(position).getBdb_ser_name_en());
+       }
 //        }
 
     }

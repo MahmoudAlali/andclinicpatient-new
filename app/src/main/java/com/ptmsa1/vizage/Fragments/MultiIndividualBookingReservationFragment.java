@@ -48,6 +48,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
     public static ArrayList<ServiceItems> servicesList = new ArrayList<>();
     public static ArrayList<String> serviceNameList = new ArrayList<>();
     public static ArrayAdapter adapter;
+    public static  ArrayList<TextView> dates=new ArrayList<>();
 
     //-----------not used --------------
     public static ArrayList<SerchGroupBookingData> serchGroupBookingData = new ArrayList<>();
@@ -76,6 +77,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
         //----------- init----
         servicesForClientGroups.clear();
+        dates.clear();
 
 //        BeautyMainPage.FRAGMENT_NAME="MultiIndividualBookingReservationFragment";
 
@@ -181,8 +183,8 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 
 
         //--------- find views --------------------
-        EditText client_name = layout2.findViewById(R.id.client_name);
-        EditText phone_number = layout2.findViewById(R.id.phone_num);
+        final EditText client_name = layout2.findViewById(R.id.client_name);
+        final EditText phone_number = layout2.findViewById(R.id.phone_num);
         final SearchableSpinner add_service = layout2.findViewById(R.id.add_service);
         final LinearLayout adding_name_service = layout2.findViewById(R.id.adding_service_layout);
 
@@ -279,7 +281,7 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
                         textView.setText(add_service.getSelectedItem().toString());
                         final LinearLayout selectdate = view1.findViewById(R.id.select_date);
                         final TextView select_time = view1.findViewById(R.id.select_time);
-
+                        dates.add(select_time);
 
                         if (multicheck) {
                             selectdate.setOnClickListener(new View.OnClickListener() {
@@ -633,4 +635,122 @@ public class MultiIndividualBookingReservationFragment extends Fragment {
 ////        return services;
 ////    }
 //    }
+
+
+    public static String sortdates(ArrayList<TextView> dates,String cname,String phone,String is_adult,String effects,int postion){
+        ArrayList<ArrayList<IDNameService>> arrayList=new ArrayList<>();
+        ArrayList<Integer> index=new ArrayList<>();
+
+
+
+        Log.e("datesSize",dates.size()+"");
+        for (int i=0;i<dates.size();i++){
+
+            try {
+//                String ser_sup_id = API.dofs.get(postion).getSersup_ids().get(i).getBdb_ser_sup_id();
+
+                if (i == 0) {
+                    ArrayList<IDNameService> list = new ArrayList();
+                    list.add(new IDNameService(servicesForClientGroups.get(i).getId(), dates.get(i).getText().toString()));
+                    arrayList.add(list);
+                    index.add(i);
+                } else {
+                    Boolean check = false;
+                    for (int k = 0; k < arrayList.size(); k++) {
+                        for (int j = 0; j < arrayList.get(k).size(); j++) {
+                            if (dates.get(i).getText().toString().equals(arrayList.get(k).get(j).getName())) {
+//                            ArrayList list = new ArrayList();
+                                arrayList.get(k).add(new IDNameService(servicesForClientGroups.get(i).getId(), dates.get(i).getText().toString()));
+//                            .add(dates.get(i).getText().toString());
+//                            arrayList.add(list);
+                                index.add(i);
+                                check = true;
+                                break;
+                            }
+
+                        }
+                    }
+
+                    if (!check) {
+                        ArrayList<IDNameService> list = new ArrayList();
+                        list.add(new IDNameService(servicesForClientGroups.get(i).getId(), dates.get(i).getText().toString()));
+                        arrayList.add(list);
+                        index.add(i);
+                    }
+
+
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+        String services="";
+
+
+
+//        String cname="c1";
+//        String phone_num="0500500011";
+
+
+
+
+        for (int k=0;k<arrayList.size();k++) {
+            String tmp="\t\t   {\n"+
+                    "\t\t   \"client_name\": \""+cname+"\",\n" +
+                    "\t\t   \"client_phone\": \""+phone+"\",\n" +
+                    "\t\t   \"is_current_user\":1,\n" +
+                    "\t\t   \"date\":\""+ APICall.arabicToDecimal(arrayList.get(k).get(0).getName())+"\",\n" +
+                    "\t\t   \"is_adult\":1," +
+                    "\t\t   \"services\": [\n" ;
+            if (k==0) {
+                services = services + tmp;
+            }
+
+//            else {
+//                services=services+",[";
+//            }
+            else {
+                services = services + ","+tmp;
+            }
+            for (int j = 0; j < arrayList.get(k).size(); j++) {
+
+                Log.e("date"+k+""+j,arrayList.get(k).get(j).getName());
+
+
+                if (j==0) {
+                    services =services+ " \t\t\t{\n" +
+                            "    \t\t\t\t\"ser_id\": "+arrayList.get(k).get(j).getId()+"\n" +
+                            "    \t\t\t\t\n" +
+
+                            "      }";
+                }else {
+                    services =services+ " ,\t\t\t{\n" +
+                            "    \t\t\t\t\"ser_id\": "+arrayList.get(k).get(j).getId()+"\n" +
+                            "    \t\t\t\t\n" +
+
+                            "      }";
+                }
+
+//                if (j==arrayList.get(k).size()-1){
+//                    services=services+"]";
+//                }
+            }
+
+            services=services+"\n ]" +
+                    "" +",\"effect\":["+effects+"]" +
+                    "" +
+                    "}";
+
+        }
+
+//        services=services+"}";
+        Log.e("ServicesDate","\"clients\":["+services+"]}");
+        return  "\"clients\":["+services+"]}";
+    }
+
+
 }

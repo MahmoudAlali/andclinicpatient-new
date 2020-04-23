@@ -101,7 +101,11 @@ public class OfferBookingMultiClientsAdapter extends RecyclerView.Adapter<Recycl
         selectDateOfferModels.add(new SelectDateOfferModel(((Item)holder).name,((Item)holder).phone_number,((Item) holder).in_grp_offer,position));
 
         for (int i=0;i<strings.get(position).getServiceDetails().size();i++){
-            addLayout2(strings.get(position).getServiceDetails().get(i).getBdb_name_ar(),context,((Item)holder).show_services);
+            if (context.getResources().getString(R.string.locale).equals("ar")) {
+                addLayout2(strings.get(position).getServiceDetails().get(i).getBdb_name_ar(), context, ((Item) holder).show_services);
+            }else {
+                addLayout2(strings.get(position).getServiceDetails().get(i).getBdb_ser_name_en(), context, ((Item) holder).show_services);
+            }
         }
 
 
