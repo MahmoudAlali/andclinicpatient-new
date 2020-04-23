@@ -692,5 +692,7 @@
     <string name="free_offer_multi_date">عرض متعدد التواريخ حر</string>
     <string name="free_offer_group_booking">عرض جماعي حر</string>
     <string name="enter_ref_number">ادخلي الرقم المرجعي</string>
-
+    <string name="unExpctdErrMsg">حدث خطأ في العملية، أعيدي المحاولة من فضلك. في حال استمرت المشكلة، نرجو إعادة تشغيل التطبيق، كذلك يمكن لمسح ذاكرة التطبيق (من الاعدادات) أن تساعد في حل المشكلة. أو يمكنكم التواصل مع فريق التشغيل للمساعدة.</string>
+    <string name="contactSupportWhatsApp"> التواصل مع الدعم عبر تطبيق واتس آب</string>
+    <string name="contactSupportWebsite">  التواصل مع الدعم عبر موقع التطبيق</string>
 </resources>

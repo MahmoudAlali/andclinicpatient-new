@@ -845,5 +845,8 @@
     <string name="through"> riyals during </string>
     <string name="daysAnd"> days and </string>
     <string name="hours"> hours</string>
+    <string name="unExpctdErrMsg">An operation error has occurred, please try again. If the problem persists, please restart the application. Also, clearing the application memory (from settings) can help solve the problem. Or you can contact the operating team for assistance.</string>
+    <string name="contactSupportWhatsApp">Contact support team through WhatsApp</string>
+    <string name="contactSupportWebsite">Contact support team through the application website</string>
 
 </resources>
