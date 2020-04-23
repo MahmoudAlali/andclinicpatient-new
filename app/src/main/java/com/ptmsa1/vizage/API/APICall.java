@@ -4878,7 +4878,7 @@ public class APICall {
                     pd.dismiss();
                     SharedPreferences.Editor editor = ((AppCompatActivity)context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                     editor.clear();
-                    editor.commit();
+                    editor.apply();
                     Intent intent=new Intent(context, Login.class);
                     Login.logout=true;
                     SharedPreferences preferences=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
