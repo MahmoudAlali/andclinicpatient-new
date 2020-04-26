@@ -156,7 +156,7 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
                                         APICall.addGroupItemMulti(APICall.getClientsInfoforIndividual(salons, stringArrayListHashMap, groupPosition, MultiIndividualBookingReservationFragment.is_group_booking), MultiBookingIndividualResultActivity.context);
 
                                     }else if (BeautyMainPage.FRAGMENT_NAME.equals("OfferBookingResult")){
-                                        APICall.addtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
+                                        APICalladdtocartOffer(APICall.getClientsInfoOffer(salons, stringArrayListHashMap, groupPosition), OfferBookingResult.context);
 
                                     }
                                 }catch (Exception e){

@@ -21381,7 +21381,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/communication/sendSupportEvent\n")
+                .url(API_PREFIX_NAME+"/api/communication/sendSupportEvent")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -21511,7 +21511,7 @@ public class APICall {
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/communication/sendWhatsAppEvent\n")
+                .url(API_PREFIX_NAME+"/api/communication/sendWhatsAppEvent")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer " + gettoken(context))
@@ -24496,14 +24496,15 @@ public class APICall {
                             });
                             }
                         if (!bdb_sup_final_price.equals("0")) {
-                            ReservatoinDetailsActivity.ac_total_price.setText(convertToArabic(bdb_sup_final_price) + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal));
-                            ReservatoinDetailsActivity.ac_total_price.setVisibility(View.VISIBLE);
-                            Log.e("bdb_sup_price",bdb_sup_final_price);
 
+                            Log.e("bdb_sup_price",bdb_sup_final_price);
+                            final String finalBdb_sup_final_price = bdb_sup_final_price;
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     ReservatoinDetailsActivity.ac_total_price.setVisibility(View.GONE);
+                                    ReservatoinDetailsActivity.ac_total_price.setText(convertToArabic(finalBdb_sup_final_price) + " " + ((AppCompatActivity) context).getResources().getString(R.string.ryal));
+                                    ReservatoinDetailsActivity.ac_total_price.setVisibility(View.VISIBLE);
 
 
                                 }
@@ -24553,7 +24554,7 @@ public class APICall {
                                     final String bdb_id = object1.getString("bdb_id"),
                                             bdb_start_date = object1.getString("bdb_start_date"),
                                             bdb_start_time = object1.getString("bdb_start_time"),
-                                            bdb_is_executed = object1.getString("bdb_confirm_exec_sup"),
+                                            bdb_is_executed = object1.getString("bdb_confirm_exec_user"),
                                             bdb_end_time = object1.getString("bdb_end_time"),
                                             journey_time = object1.getString("bdb_journey_time"),
                                             bdb_booked_at = object1.getString("bdb_booked_at");

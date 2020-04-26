@@ -349,10 +349,12 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
 //
 //        }
 
+        Log.e("isExec","is"+isExec);
         client_details.setText(priceVal+" "+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
-        if(isExec.equals(1))
+        if(isExec.equals("1"))
             isExecuted.setImageResource(R.drawable.ic_checked);
-        else             isExecuted.setImageResource(R.drawable.ic_cancel);
+        else
+            isExecuted.setImageResource(R.drawable.ic_cancel);
 
 //        layout2.findViewById(R.id.jcost_lay).setVisibility(View.GONE);
 //        layout2.findViewById(R.id.jtime_lay).setVisibility(View.GONE);

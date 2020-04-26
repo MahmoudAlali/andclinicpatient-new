@@ -924,7 +924,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         }else if (id == R.id.setting) {
-            Intent intent=new Intent(this, PayTestActivity.class);
+            Intent intent=new Intent(this, AccountFragment.class);
             startActivity(intent);
 
         }else if (id == R.id.points) {
