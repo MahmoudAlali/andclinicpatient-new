@@ -74,6 +74,71 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         next=findViewById(R.id.next);
 
         boolean check=true;
+
+        try {
+            if (BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment")) {
+
+                bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+                is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+                place = OffersForRequest.arrayList.get(postion).getBdb_offer_place();
+                supIdClasses = OffersForRequest.arrayList.get(postion).getSersup_ids();
+            } else if (BeautyMainPage.FRAGMENT_NAME.equals("SERVICETABFRAGMENT")) {
+                Log.e("SERVICETABFRAGMENT", "SERVICETABFRAGMENT1");
+
+                try {
+                    bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                    is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+                    place = TabTwo.arrayList.get(postion).getBdb_offer_place();
+                    supIdClasses = TabTwo.arrayList.get(postion).getSersup_ids();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("eRR", e.getMessage());
+                }
+
+            } else if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")) {
+                check = false;
+                int postion1 = getIntent().getIntExtra("postion", 0);
+                Log.e("TabTwo.arrayList.", TabTwo.arrayList.size() + "is");
+                Log.e("TabTwo.arrayList.", postion1 + "is");
+                Log.e("bdb_pack_id123", TabTwo.arrayList.get(postion1).getBdb_pack_code() + "is");
+                bdb_pack_id = TabTwo.arrayList.get(postion1).getBdb_pack_code();
+                APICall.PERIOD_FOR_SER_OFR = Integer.parseInt(TabTwo.arrayList.get(postion1).getBdb_booking_period());
+                end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+                is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+                supIdClasses = TabTwo.arrayList.get(postion).getSersup_ids();
+                place = TabTwo.arrayList.get(postion).getBdb_offer_place();
+            } else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
+//            end_date = OffersAdapter.bestOItem.getEnd_date();
+                bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+                booking_period = Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+                ArrayList<DataOffer.SupIdClass> supIdClasses = new ArrayList<>();
+                for (int i = 0; i < OffersAdapter.bestOItem.getSersup_ids().length(); i++) {
+                    try {
+                        JSONObject object = OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
+                        String bdb_ser_sup_id = object.getString("bdb_ser_sup_id");
+                        String bdb_name = object.getString("bdb_name");
+                        String bdb_name_ar = object.getString("bdb_name_ar");
+                        String bdb_ser_id = object.getString("bdb_ser_id");
+                        if (APICall.ln.equals("ar")) {
+                            bdb_name = bdb_name_ar;
+                        }
+                        supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id, bdb_name, bdb_ser_id));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                TabTwo.arrayList.clear();
+                TabTwo.arrayList.add(new DataOffer(bdb_pack_id, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", supIdClasses));
+
+                is_effects_on = APICall.bdb_is_effects_on;
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR",e.getMessage());
+        }
+
         //region CHECK_NOTIFICATION
         String notification = "";
         try {
@@ -83,6 +148,8 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         catch (Exception e){}
         try {
             if (!notification.equals("")) {
+                Log.e("MMMMMMMMMM",notification);
+
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 place = NotificationsBeauty.offer_place;
@@ -93,69 +160,6 @@ public class MultiDateOfferBooking extends AppCompatActivity {
             e.printStackTrace();
         }
         //endregion
-
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-
-            bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
-            place=OffersForRequest.arrayList.get(postion).getBdb_offer_place();
-            supIdClasses =OffersForRequest.arrayList.get(postion).getSersup_ids();
-        }
-        else if (BeautyMainPage.FRAGMENT_NAME.equals("SERVICETABFRAGMENT"))
-        {
-            Log.e("SERVICETABFRAGMENT","SERVICETABFRAGMENT1");
-
-            try {
-                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
-                place=TabTwo.arrayList.get(postion).getBdb_offer_place();
-                supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                Log.e("eRR",e.getMessage());
-            }
-
-        }else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
-            check=false;
-            int postion1=getIntent().getIntExtra("postion",0);
-            Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
-            Log.e("TabTwo.arrayList.",postion1+"is");
-            Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
-            bdb_pack_id =TabTwo.arrayList.get(postion1).getBdb_pack_code();
-            APICall.PERIOD_FOR_SER_OFR =Integer.parseInt(TabTwo.arrayList.get(postion1).getBdb_booking_period());
-            end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
-            is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
-            supIdClasses =TabTwo.arrayList.get(postion).getSersup_ids();
-            place=TabTwo.arrayList.get(postion).getBdb_offer_place();
-        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
-//            end_date = OffersAdapter.bestOItem.getEnd_date();
-            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
-            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
-            ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
-            for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
-                try {
-                    JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
-                    String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
-                    String bdb_name=object.getString("bdb_name");
-                    String bdb_name_ar=object.getString("bdb_name_ar");
-                    String bdb_ser_id=object.getString("bdb_ser_id");
-                    if (APICall.ln.equals("ar")){
-                        bdb_name=bdb_name_ar;
-                    }
-                    supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            TabTwo.arrayList.clear();
-            TabTwo.arrayList.add(new DataOffer(bdb_pack_id,"","","","","","","","","","","","","","","","","","","",supIdClasses));
-
-            is_effects_on=APICall.bdb_is_effects_on;
-        }
 
 
 
@@ -295,7 +299,8 @@ public class MultiDateOfferBooking extends AppCompatActivity {
 //                    String phone = phone_number.getText().toString();
 
 
-                    String services = sortdates(selectDateOfferAdapter.dates,name,mobile);
+                    String services =
+                            sortdates(selectDateOfferAdapter.dates,name,mobile);
 
                     postdata = postdata + services + "],\"offer_type\":" + offertype + "}";
 

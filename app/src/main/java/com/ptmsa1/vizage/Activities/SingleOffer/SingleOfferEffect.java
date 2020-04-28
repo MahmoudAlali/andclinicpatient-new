@@ -26,6 +26,7 @@ import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabTwo;
 import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
+import com.ptmsa1.vizage.Service.NotificationsBeauty;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,25 +64,28 @@ public class SingleOfferEffect extends AppCompatActivity {
 
          position=getIntent().getIntExtra("position",0);
 
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-            supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
-            bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
-            Log.e("free",supIdClasses.size()+"");
-        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
-            supIdClasses =TabTwo.arrayList.get(0).getSersup_ids();
-            bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
-            Log.e("else",supIdClasses.size()+"");
-        }
-        else
-        {
-            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
-            bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
-            Log.e("else",supIdClasses.size()+"");
+         try {
+             if (BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment")) {
+                 supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
+                 bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
+                 Log.e("free", supIdClasses.size() + "");
+             } else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
+                 supIdClasses = TabTwo.arrayList.get(0).getSersup_ids();
+                 bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
+                 Log.e("else", supIdClasses.size() + "");
+             } else {
+                 supIdClasses = TabTwo.arrayList.get(position).getSersup_ids();
+                 bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+                 Log.e("else", supIdClasses.size() + "");
 
-        }
+             }
+         }
+         catch (Exception e)
+         {
+             Log.e("ERROR","SingleOfferEffect : "+e.getMessage());
 
-/*
+         }
+
             //region CHECK_NOTIFICATION
             String notification = "";
             try {
@@ -94,15 +98,15 @@ public class SingleOfferEffect extends AppCompatActivity {
 
             {
                 bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
-                Log.e("notif ",supIdClasses.get(0).getBdb_name()+"");
+                //Log.e("notif ",supIdClasses.get(0).getBdb_name()+"");
                 supIdClasses = NotificationsBeauty.supIdClasses;
 
             }
         }
-        catch (Exception e){}
+        catch (Exception e){                Log.e("notifERR ",e.getMessage()+"");
+        }
 
             //endregion
-*/
 
        /* Log.e("SERVICES",supIdClasses.get(0).getBdb_ser_id());
         Log.e("SERVICEcS",supIdClasses.size()+"");

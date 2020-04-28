@@ -28,6 +28,7 @@ import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabTwo;
 import com.ptmsa1.vizage.Fragments.freeBookingFragment;
 import com.ptmsa1.vizage.R;
+import com.ptmsa1.vizage.Service.NotificationsBeauty;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,19 +56,27 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         Log.e("OFFER_CLASS_NAME1","is"+APICall.OFFER_CLASS_NAME);
 
         position=getIntent().getIntExtra("position",0);
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-            supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
-            bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
-        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
-            supIdClasses =TabTwo.arrayList.get(0).getSersup_ids();
-            bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
+        try {
+            if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+            {
+                supIdClasses = OffersForRequest.arrayList.get(position).getSersup_ids();
+                bdb_pack_code = OffersForRequest.arrayList.get(position).getBdb_pack_code();
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+                supIdClasses =TabTwo.arrayList.get(0).getSersup_ids();
+                bdb_pack_code = TabTwo.arrayList.get(0).getBdb_pack_code();
+            }
+            else
+            {
+                supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
+                bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+            }
         }
-        else
+        catch (Exception e)
         {
-            supIdClasses =TabTwo.arrayList.get(position).getSersup_ids();
-            bdb_pack_code = TabTwo.arrayList.get(position).getBdb_pack_code();
+            Log.e("ERROR","MultiClientOfferEffect : "+e.getMessage());
+
         }
+
 
 
 
@@ -84,7 +93,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
             {
                 bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
-//            supIdClasses = NotificationsBeauty.supIdClasses;
+               supIdClasses = NotificationsBeauty.supIdClasses;
             }
         }
         catch (Exception e){}

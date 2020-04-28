@@ -98,6 +98,75 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         }*/
 
 
+        Boolean check=true;
+
+        try {
+            if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+            {
+
+                end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
+                bdb_pack_id1 = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+                is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+                booking_period =Integer.parseInt(OffersForRequest.arrayList.get(postion).getBdb_booking_period());
+
+            }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+                end_date = OffersAdapter.bestOItem.getEnd_date();
+                bdb_pack_id1 = OffersAdapter.bestOItem.getPack_code();
+                ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
+                for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
+                    try {
+                        JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
+                        String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
+                        String bdb_name=object.getString("bdb_name");
+                        String bdb_name_ar=object.getString("bdb_name_ar");
+                        String bdb_ser_id=object.getString("bdb_ser_id");
+                        if (APICall.ln.equals("ar")){
+                            bdb_name=bdb_name_ar;
+                        }
+                        supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                TabTwo.arrayList.clear();
+                TabTwo.arrayList.add(new DataOffer(bdb_pack_id1,"","","","","","","","","","","","","","","","","","","",supIdClasses));
+
+                booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+                is_effects_on=APICall.bdb_is_effects_on;
+            }
+            else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
+                check=false;
+                int postion1=getIntent().getIntExtra("postion",0);
+                Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
+                Log.e("TabTwo.arrayList.",postion1+"is");
+                Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
+                showDate.setText(APICall.DATE_FOR_SER_OFR);
+//            showDate.setText());
+                end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+                bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
+                is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+
+            }else
+                try {
+                    check=false;
+                    int postion1=getIntent().getIntExtra("postion",0);
+                    Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
+                    Log.e("TabTwo.arrayList.",postion1+"is");
+                    Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
+                    showDate.setText(APICall.DATE_FOR_SER_OFR);
+                    showDate.setText(PlaceServiceFragment.date.getText().toString());
+                    end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
+                    bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
+                    is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
+                }
+                catch (Exception e){};
+
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR",e.getMessage());
+        }
         //region CHECK_NOTIFICATION
         String notification = "";
         try {
@@ -109,77 +178,24 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         }
         try {
             if (!notification.equals("")) {
+                Log.e("MMMMMMMMMM",notification);
+
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
+                bdb_pack_id1 = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 end_date = getIntent().getStringExtra("offer_end");
                 booking_period =Integer.parseInt(getIntent().getStringExtra("booking_period"));
+                Log.e("bdb_pack_id",bdb_pack_id);
+                Log.e("is_effects_on",is_effects_on);
+                Log.e("end_date",end_date);
+                Log.e("booking_period",booking_period+"");
+
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         //endregion
 
-        Boolean check=true;
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-
-            end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
-            bdb_pack_id1 = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
-            booking_period =Integer.parseInt(OffersForRequest.arrayList.get(postion).getBdb_booking_period());
-
-        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
-            end_date = OffersAdapter.bestOItem.getEnd_date();
-            bdb_pack_id1 = OffersAdapter.bestOItem.getPack_code();
-            ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
-            for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
-                try {
-                    JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
-                    String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
-                    String bdb_name=object.getString("bdb_name");
-                    String bdb_name_ar=object.getString("bdb_name_ar");
-                    String bdb_ser_id=object.getString("bdb_ser_id");
-                    if (APICall.ln.equals("ar")){
-                        bdb_name=bdb_name_ar;
-                    }
-                    supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            TabTwo.arrayList.clear();
-            TabTwo.arrayList.add(new DataOffer(bdb_pack_id1,"","","","","","","","","","","","","","","","","","","",supIdClasses));
-
-            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
-            is_effects_on=APICall.bdb_is_effects_on;
-        }
-        else  if (BeautyMainPage.FRAGMENT_NAME.equals("MainProviderActivity")){
-            check=false;
-            int postion1=getIntent().getIntExtra("postion",0);
-            Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
-            Log.e("TabTwo.arrayList.",postion1+"is");
-            Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
-            showDate.setText(APICall.DATE_FOR_SER_OFR);
-//            showDate.setText());
-            end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
-            bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
-            is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
-
-        }else
-            try {
-                check=false;
-                int postion1=getIntent().getIntExtra("postion",0);
-                Log.e("TabTwo.arrayList.",TabTwo.arrayList.size()+"is");
-                Log.e("TabTwo.arrayList.",postion1+"is");
-                Log.e("bdb_pack_id123",TabTwo.arrayList.get(postion1).getBdb_pack_code()+"is");
-                showDate.setText(APICall.DATE_FOR_SER_OFR);
-                showDate.setText(PlaceServiceFragment.date.getText().toString());
-                end_date = TabTwo.arrayList.get(postion1).getBdb_offer_end();
-                bdb_pack_id1 = TabTwo.arrayList.get(postion1).getBdb_pack_code();
-                is_effects_on = TabTwo.arrayList.get(postion1).getBdb_is_effects_on();
-            }
-            catch (Exception e){};
 
 
 /*

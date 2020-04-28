@@ -22149,6 +22149,7 @@ public class APICall {
                 try {
                     JSONObject jsonrespone = new JSONObject(mMessage);
                     String success=jsonrespone.getString("success");
+                    String msg=jsonrespone.getString("message");
                     if (success.equals("true")){
                         // JSONObject data=jsonrespone.getJSONObject("data");
                         JSONArray da=jsonrespone.getJSONArray("data");
@@ -22182,7 +22183,7 @@ public class APICall {
 
 
                     }
-                    else
+                    else  if (!msg.equals("there is no notifications"))
                         showUnexpectedErrMsg(cont);
 
                 }
@@ -22208,7 +22209,7 @@ public class APICall {
 
         });
     }
-    public  static  void   browseOneMultiOfferNotification(String bdb_pack_code, final Context context, final String titlen,final String bodyn,final JSONArray pairsn,final String coden){
+    public  static  void   browseOneMultiOfferNotification(String bdb_pack_code, final Context context, final String titlen, final String bodyn, final JSONArray pairsn, final String coden, final Boolean isNotif){
 
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -22348,7 +22349,14 @@ public class APICall {
                                 Log.e("CALLING",bodyn);
                                 Log.e("CALLING",pairsn.toString());
 
-                                NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
+                                if(isNotif)
+                                    NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
+                                else
+                                {
+                                    Intent intent = new Intent(BeautyMainPage.context,BeautyMainPage.class);
+                                    intent.putExtra("notify_pairs",pairsn.toString());
+                                    BeautyMainPage.context.startActivity(intent);
+                                }
 
 
                             }
