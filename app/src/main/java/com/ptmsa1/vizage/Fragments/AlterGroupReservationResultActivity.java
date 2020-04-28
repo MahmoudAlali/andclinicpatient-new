@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.AltCustomExpandableListAdapter;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapterSearchGroupBooking2;
@@ -35,7 +37,19 @@ public class AlterGroupReservationResultActivity extends AppCompatActivity {
         context=this;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
         noSolutionMsg=findViewById(R.id.noSolMsg);
-
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=findViewById(R.id.messageOfKnownProviders);
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
          filter="{\"Filter\":\t[\n" +
                  "    \t{\"num\":34,\"value1\":21.444551364120773,\"value2\":0},\n" +
                  "    \t{\"num\":35,\"value1\":39.88135412335396,\"value2\":0},{\"num\":32,\"value1\":0,\"value2\":1000},{\"num\":9,\"value1\":1,\"value2\":0}\t],\n" +

@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapter;
@@ -47,7 +49,19 @@ public class BookingIndvidualActivity extends AppCompatActivity {
         context=this;
         BeautyMainPage.FRAGMENT_NAME="BookingIndvidualActivity";
         noSolutionMsg=findViewById(R.id.noSolMsg);
-
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=findViewById(R.id.messageOfKnownProviders);
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
 //        if (MultiIndividualBookingReservationFragment.choose_occision.getText().toString().equals("different dates for services")){
 //        }
 

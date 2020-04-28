@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.AltCustomExpandableListAdapter;
 import com.ptmsa1.vizage.Adapters.GroupReservationsAdapter;
@@ -66,7 +68,19 @@ public class SingleMultiAltResultActivity extends AppCompatActivity {
         noSolutionMsg=findViewById(R.id.noSolMsg);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         APICall.searchGroupBookingMultiAlt(urlAlt,filter,context);
-
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=findViewById(R.id.messageOfKnownProviders);
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

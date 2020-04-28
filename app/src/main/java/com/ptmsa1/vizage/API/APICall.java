@@ -28247,22 +28247,32 @@ Log.e("filters",filter);
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
 
-                        String experince="",book_sol="";
+                       /* String experince="",book_sol="";
                         if (ln.equals("ar")) {
                             experince = data.getString("previous_experience_ar");
                             book_sol = data.getString("book_sol_ar");
                         }else {
                             experince = data.getString("previous_experience_en");
                             book_sol = data.getString("book_sol_en");
-                        }
+                        }*/
                         SharedPreferences.Editor prefs = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                         prefs.putString("SERVER_KEY",SERVER_KEY);
                         prefs.putString("GOOGLE_KEY",GOOGLE_KEY);
                         prefs.putString("PROVIDER_SERVER_KEY",PROVIDER_SERVER_KEY);
+                        Constants.messageOfClientsNames_ar=data.getString("book_sol_ar");
+                        Constants.messageOfClientsNames_en=data.getString("book_sol_en ");
+                        Constants.messageOfKnownProviders_ar=data.getString("previous_experience_ar");
+                        Constants.messageOfKnownProviders_en=data.getString("previous_experience_en");
+                        Log.e("TAG1", Constants.messageOfClientsNames_ar);
+                        Log.e("TAG2", Constants.messageOfClientsNames_en);
+                        Log.e("TAG3", Constants.messageOfKnownProviders_ar);
+                        Log.e("TAG4", Constants.messageOfKnownProviders_en);
 
 
                     }
                 }catch (JSONException je){
+                    Log.e("ERR", je.getMessage());
+
                 }
                 Log.e("TAG", mMessage);
 

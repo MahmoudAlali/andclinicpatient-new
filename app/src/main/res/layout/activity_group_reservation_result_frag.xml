@@ -26,16 +26,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10dp"
+            android:id="@+id/messageOfKnownProviders"
             android:gravity="center"
             android:text="@string/bookAtKnownProviders"
             android:textColor="@color/colorAccentend"/>
         <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/pf_10dp_space"
+            android:id="@+id/messageOfClientsNames"
             android:gravity="center"
             android:text="@string/clients_names_change"
             android:textColor="@color/colorAccentend"/>
