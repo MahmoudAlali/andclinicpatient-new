@@ -79,7 +79,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static int ACCESS_FINE_LOCATION=90;
     public static Fragment currentFragment;
     public static String is_bride_service;
-    public static String bdb_email,bdb_is_guest="0";
+    public static String bdb_email,bdb_is_guest="0",bdb_id="";
     private int READ_EXTERNAL_STORAGE=93;
     public static Boolean RELOADAPP=false;
     public static String client_name="";

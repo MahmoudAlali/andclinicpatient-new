@@ -848,5 +848,9 @@
     <string name="unExpctdErrMsg">An operation error has occurred, please try again. If the problem persists, please restart the application. Also, clearing the application memory (from settings) can help solve the problem. Or you can contact the operating team for assistance.</string>
     <string name="contactSupportWhatsApp">Contact support team through WhatsApp</string>
     <string name="contactSupportWebsite">Contact support team through the application website</string>
+    <string name="effect_updated">Your effects have been updated</string>
+    <string name="update_effects">Do you want to apply these changes to your effects?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 
 </resources>

@@ -21,6 +21,7 @@ import com.ptmsa1.vizage.Adapters.GroupEffectAdapter;
 import com.ptmsa1.vizage.DataModel.ClientEffectModel;
 import com.ptmsa1.vizage.DataModel.ClientEffectRequestModel;
 import com.ptmsa1.vizage.DataModel.DataOffer;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabTwo;
@@ -38,6 +39,7 @@ public class SingleOfferEffect extends AppCompatActivity {
     GroupEffectAdapter effectAdapter;
     Button update;
     public static LinearLayout root;
+    public static boolean checkClick=false;
 
     static Context context;
     static  int position=0;
@@ -175,6 +177,9 @@ public class SingleOfferEffect extends AppCompatActivity {
                     intent.putExtra("offertype",offerType);
                     intent.putExtra("place",offerplace);
 //                intent.putExtra("filter",getfilter(f));
+                    if (checkClick){
+                        APICall.showUpdateEffectsDialog(context,intent, MyEffectsActivity.getEffectFilter());
+                    }else
                     startActivity(intent);
                 }
             });
@@ -387,10 +392,20 @@ public class SingleOfferEffect extends AppCompatActivity {
 
 
 
+
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[1]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -403,7 +418,17 @@ public class SingleOfferEffect extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[2]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -416,7 +441,17 @@ public class SingleOfferEffect extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[3]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -429,7 +464,17 @@ public class SingleOfferEffect extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[4]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -442,7 +487,16 @@ public class SingleOfferEffect extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+                }
                 effects.setBdb_value(Constants.effectValues[5]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);

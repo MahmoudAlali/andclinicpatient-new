@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +14,7 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.EffectAdapter;
 import com.ptmsa1.vizage.Activities.TabOne;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.R;
 
 public class MyIndEffectsActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class MyIndEffectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects_v1);
         context=this;
+        EffectAdapter.checkClick=false;
 
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);
@@ -64,9 +67,16 @@ public class MyIndEffectsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getEffectFilter();
+                Log.e("effectsCheck","is"+EffectAdapter.checkClick);
+                if (EffectAdapter.checkClick){
+                    Intent intent = new Intent(context, BookingIndvidualActivity.class);
+                    APICall.showUpdateEffectsDialog(context,intent,MyEffectsActivity.getEffectFilter());
 
-                Intent intent=new Intent(context,BookingIndvidualActivity.class);
-                startActivity(intent);
+//                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, BookingIndvidualActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

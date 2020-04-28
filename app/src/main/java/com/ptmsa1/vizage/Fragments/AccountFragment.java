@@ -170,6 +170,7 @@ public class AccountFragment extends Fragment  {
                     editor.putString("lang","ar");
                     editor.commit();
 
+                    APICall.ln="ar";
                    Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                     ((AppCompatActivity)BeautyMainPage.context).finish();
 
@@ -185,6 +186,8 @@ public class AccountFragment extends Fragment  {
                     res.updateConfiguration(conf, dm);
                     editor.putString("lang","en");
                     editor.commit();
+                    APICall.ln="en";
+
                     Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                     ((AppCompatActivity)BeautyMainPage.context).finish();
                 }

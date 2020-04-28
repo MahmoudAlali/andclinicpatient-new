@@ -514,6 +514,9 @@ public class APICall {
                                     case  "8":
                                         showSweetDialogEmpAccount(context, context.getResources().getString(R.string.part_of_data_is_exist) ,phone);
                                         break;
+                                    case  "9":
+                                        showSweetDialogEmpAccount(context, context.getResources().getString(R.string.part_of_data_is_exist) ,phone);
+                                        break;
 
 
 
@@ -1024,11 +1027,11 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context,R.string.rate_toast,Toast.LENGTH_LONG).show();
+                                showUnexpectedErrMsg(context);
+//                                Toast.makeText(context,R.string.rate_toast,Toast.LENGTH_LONG).show();
 
                             }
                         });
@@ -2190,8 +2193,146 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(context,"تم تحديث مؤثراتك",Toast.LENGTH_LONG).show();
+                                Toast.makeText(context,context.getResources().getString(R.string.effect_updated),Toast.LENGTH_LONG).show();
+                                MyEffectsActivity.checkClick=false;
+                                try {
+                                    MyEffectsActivity.update.setEnabled(false);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        }
+                    else
+                        showUnexpectedErrMsg(context);
 
+//                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                effectAdapter.notifyDataSetChanged();
+//                            }
+//                        });
+
+
+
+
+
+
+
+                }catch (final JSONException je){
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",je.getMessage());
+
+                }
+
+            }
+
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  updateEffectsClient(final Context context, String effectFilter, final Intent intent){
+        clientEffectModels.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+//        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, effectFilter);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/effect/updateEffect")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG", mMessage);
+                pd.dismiss();
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+//                        JSONObject data=j.getJSONObject("data");
+//                        JSONArray user_effect=data.getJSONArray("user_effect");
+//                       String category_id,category_name_ar,category_name_en;
+//                        for (int i=0;i<user_effect.length();i++){
+//                            JSONObject ob=user_effect.getJSONObject(i);
+//                            category_id=ob.getString("category_id");
+//                            category_name_ar=ob.getString("category_name_ar");
+//                            category_name_en=ob.getString("category_name_en");
+//                            JSONArray effect=ob.getJSONArray("effect");
+//                            ArrayList<ClientEffectModel.Effects> effectsModel=new ArrayList<>();
+//                            String bdb_effect_id,bdb_client_id,bdb_effect_name_ar,bdb_effect_name_en,bdb_value,bdb_effect_client_id;
+//                            for (int k=0;k<effect.length();k++){
+//                                JSONObject oob=effect.getJSONObject(k);
+//                                bdb_effect_id=oob.getString("bdb_effect_id");
+//                                bdb_client_id=oob.getString("bdb_client_id");
+//                                bdb_effect_name_ar=oob.getString("bdb_effect_name_ar");
+//                                bdb_effect_name_en=oob.getString("bdb_effect_name_en");
+//                                bdb_value=oob.getString("bdb_value");
+//                                bdb_effect_client_id=oob.getString("bdb_effect_client_id");
+//                                effectsModel.add(new ClientEffectModel.Effects(bdb_effect_id,bdb_client_id,bdb_effect_name_ar,bdb_effect_name_en,bdb_value,bdb_effect_client_id));
+//                            }
+//                            clientEffectModels.add(new ClientEffectModel(category_id,category_name_en+"",category_name_ar+"",effectsModel));
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context,context.getResources().getString(R.string.effect_updated),Toast.LENGTH_LONG).show();
+                               context.startActivity(intent);
                             }
                         });
                         }
@@ -4626,8 +4767,10 @@ public class APICall {
                             BeautyMainPage.bdb_email=data.getString("bdb_email");
                             String bdb_mobile=data.getString("bdb_mobile");
                             String bdb_is_guest=data.getString("bdb_is_guest");
+                            String bdb_id=data.getString("bdb_id");
                             BeautyMainPage.client_number =bdb_mobile;
                             BeautyMainPage.bdb_is_guest =bdb_is_guest;
+                            BeautyMainPage.bdb_id =bdb_id;
 
 
                             Log.d("MessageResponse",mMessage);
@@ -4637,6 +4780,7 @@ public class APICall {
                             prefEditor.putString("client_number", bdb_mobile);
                             prefEditor.putString("bdb_email", BeautyMainPage.bdb_email);
                             prefEditor.putString("bdb_is_guest", BeautyMainPage.bdb_is_guest);
+                            prefEditor.putString("bdb_id", BeautyMainPage.bdb_id);
                             prefEditor.commit();
                             prefEditor.apply();
 
@@ -7124,8 +7268,8 @@ public class APICall {
             return password;
         }
         public  static  boolean validationPassword(String pass){
-
-           if (pass.length()>=6 &&pass.length()<=10){
+//          &&pass.length()<=10
+           if (pass.length()>=6 ){
                Log.e("length",pass.matches(".*[A-Z].*")+"");
                if (pass.matches(".*[A-Z].*")){
                    Log.e("A-Z","ok");
@@ -23024,6 +23168,43 @@ public class APICall {
         });
 
     }
+    public static void showUpdateEffectsDialog(final Context context, final Intent intent , final String filter) {
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                {
+                    final Dialog dialog = new Dialog(context);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.confirm_effect);
+                    TextView message = dialog.findViewById(R.id.message);
+//                    TextView title = dialog.findViewById(R.id.title);
+                    TextView confirm = dialog.findViewById(R.id.confirm);
+                    //                      TextView resend_code = dialog.findViewById(R.id.resend_code);
+//                    title.setText(texttitle);
+                    message.setText(R.string.update_effects);
+                    confirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                            APICall.updateEffectsClient(context,  filter,intent);
+
+                        }
+                    });
+                    TextView cancel=dialog.findViewById(R.id.cancel);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            context.startActivity(intent);
+                        }
+                    });
+                    dialog.show();
+                }
+            }
+        });
+
+    }
+
     public static void getGuestToken(final Context context, String fbToken)
     {
 //        showDialog(context);

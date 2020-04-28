@@ -1,6 +1,9 @@
 package com.ptmsa1.vizage.Fragments.MyEffects;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +25,12 @@ import com.ptmsa1.vizage.R;
 
 public class MyEffectsActivity extends AppCompatActivity {
     EffectAdapter effectAdapter;
-    Button update;
+    public static Button update;
     public static LinearLayout root;
 
     static Context context;
 
+    public static Boolean checkClick=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,7 @@ public class MyEffectsActivity extends AppCompatActivity {
         root=findViewById(R.id.root);
 //        recyclerView=findViewById(R.id.recycleview);
 
+        update.setEnabled(false);
 
 //        effectAdapter=new EffectAdapter(BeautyMainPage.context, APICall.clientEffectModels,false);
 //        LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
@@ -49,8 +54,9 @@ public class MyEffectsActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                APICall.updateEffectsClient(context, getEffectFilter());
+                if (checkClick) {
+                    APICall.updateEffectsClient(context, getEffectFilter());
+                }
             }
         });
 
@@ -137,42 +143,54 @@ public class MyEffectsActivity extends AppCompatActivity {
 
 
         if (effects.getBdb_value().equals(Constants.effectValues[0])) {
-            dzero.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[1])){
             done.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[2])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[1])){
             dtwo.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[3])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[2])){
             dthree.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[3])){
             dfour.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[5])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
             dfive.setBackgroundResource(R.color.colorAccent);
         }
+//        else if (effects.getBdb_value().equals(Constants.effectValues[5])){
+//            dfive.setBackgroundResource(R.color.colorAccent);
+//        }
 
 
 
-        dzero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[0]);
-//                effects.setBdb_effect_client_id("0");
-                dzero.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.transparent);
-                dtwo.setBackgroundResource(android.R.color.transparent);
-                dthree.setBackgroundResource(android.R.color.transparent);
-                dfour.setBackgroundResource(android.R.color.transparent);
-                dfive.setBackgroundResource(android.R.color.transparent);
-            }
-        });
+
+//        dzero.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                effects.setBdb_value(Constants.effectValues[0]);
+////                effects.setBdb_effect_client_id("0");
+//                if (!effects.getBdb_value().equals(Constants.effectValues[0])){
+//                    checkClick=true;
+//                }
+//                dzero.setBackgroundResource(R.color.colorAccent);
+//                done.setBackgroundResource(android.R.color.transparent);
+//                dtwo.setBackgroundResource(android.R.color.transparent);
+//                dthree.setBackgroundResource(android.R.color.transparent);
+//                dfour.setBackgroundResource(android.R.color.transparent);
+//                dfive.setBackgroundResource(android.R.color.transparent);
+//
+//            }
+//        });
 
 
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[1]);
+                if (!effects.getBdb_value().equals(Constants.effectValues[0])){
+                    checkClick=true;
+                    update.setEnabled(true);
+
+                }
+                effects.setBdb_value(Constants.effectValues[0]);
 //                effects.setBdb_effect_client_id("0");
+
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
                 dtwo.setBackgroundResource(android.R.color.transparent);
@@ -184,8 +202,14 @@ public class MyEffectsActivity extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[2]);
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+                    update.setEnabled(true);
+
+                }
+                effects.setBdb_value(Constants.effectValues[1]);
 //                effects.setBdb_effect_client_id("0");
+
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -197,8 +221,14 @@ public class MyEffectsActivity extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[3]);
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+                    update.setEnabled(true);
+
+                }
+                effects.setBdb_value(Constants.effectValues[2]);
 //                effects.setBdb_effect_client_id("0");
+
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
                 dtwo.setBackgroundResource(android.R.color.transparent);
@@ -210,8 +240,14 @@ public class MyEffectsActivity extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[4]);
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+                    update.setEnabled(true);
+
+                }
+                effects.setBdb_value(Constants.effectValues[3]);
 //                effects.setBdb_effect_client_id("0");
+
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
                 dtwo.setBackgroundResource(android.R.color.transparent);
@@ -223,8 +259,14 @@ public class MyEffectsActivity extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[5]);
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+                    update.setEnabled(true);
+
+                }
+                effects.setBdb_value(Constants.effectValues[4]);
 //                effects.setBdb_effect_client_id("0");
+
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
                 dtwo.setBackgroundResource(android.R.color.transparent);
@@ -256,28 +298,32 @@ public class MyEffectsActivity extends AppCompatActivity {
         String filter="{\"client_effects\":[";
 
         for (int i=0;i<APICall.clientEffectModels.size();i++){
+
             for (int j=0;j<APICall.clientEffectModels.get(i).getEffects().size();j++) {
+                Log.e(APICall.clientEffectModels.get(i).getCat_name_ar(),"is"+APICall.clientEffectModels.get(i).getEffects().size());
 
                 if (filter.equals("{\"client_effects\":[")) {
                     filter += "{" +
                             "\"bdb_effect_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_id()+",\n" +
-                            "                        \"bdb_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_client_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
                             "                        \"bdb_value\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_value()+",\n" +
                             "                        \"bdb_effect_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_client_id()+"" +
                             "                        }";
                 } else {
                     filter += "\n,{" +
                             "\"bdb_effect_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_id()+",\n" +
-                            "                        \"bdb_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_client_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
                             "                        \"bdb_value\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_value()+",\n" +
                             "                        \"bdb_effect_client_id\": "+APICall.clientEffectModels.get(i).getEffects().get(j).getBdb_effect_client_id()+"" +
                             "                        }";
                 }
             }
+            Log.e("EffectFilter"+i,filter);
+
         }
 
         filter=filter+"]}";
-        Log.e("EffectFilter",filter);
+        Log.e("EffectFilter11",filter);
         return filter;
     }
 

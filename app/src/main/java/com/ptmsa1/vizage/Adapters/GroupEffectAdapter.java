@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     Boolean grid=false;
     String items[];
     DataOffer[] offers;
+    public  static  boolean checkClick=false;
 //    ArrayList<ClientEffectModel> clientEffectModels;
     ArrayList<ClientEffectRequestModel> clientEffectRequestModels;
     static  LinearLayout postionSelected,tmpSelected;
@@ -213,10 +215,20 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
+
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[1]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -229,7 +241,17 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[2]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -242,7 +264,17 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[3]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -255,7 +287,17 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[4]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -268,7 +310,16 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+                }
                 effects.setBdb_value(Constants.effectValues[5]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -278,7 +329,6 @@ public class GroupEffectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 dfour.setBackgroundResource(android.R.color.transparent);
             }
         });
-
 
         effect_name=layout2.findViewById(R.id.effect_name);
         if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")) {

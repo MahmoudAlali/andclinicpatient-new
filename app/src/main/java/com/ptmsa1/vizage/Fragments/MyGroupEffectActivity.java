@@ -19,6 +19,7 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.GroupEffectAdapter;
 import com.ptmsa1.vizage.DataModel.ClientEffectModel;
 import com.ptmsa1.vizage.DataModel.ClientEffectRequestModel;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GroupEffectAdapter effectAdapter;
     Button update;
+    public static Boolean checkClick=false;
 
     public  static Context context;
     public  static LinearLayout root;
@@ -81,12 +83,46 @@ public class MyGroupEffectActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getEffects();
 //                Log.e("Effectfilter",f);
-
-                Intent intent=new Intent(context, GroupReservationResultActivity.class);
+                if (checkClick){
+                    Intent intent=new Intent(context, GroupReservationResultActivity.class);
+                    APICall.showUpdateEffectsDialog(context,intent, getEffectFilter());
+                }else {
+                    Intent intent=new Intent(context, GroupReservationResultActivity.class);
 //                intent.putExtra("filter",getfilter(f));
-                startActivity(intent);
+                    startActivity(intent);
+                }
+
+
             }
         });
+    }
+    public static String getEffectFilter(){
+        String filter="{\"client_effects\":[";
+
+        for (int i=0;i<APICall.clientEffectRequestModels.size();i++){
+            for (int j=0;j<APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().size();j++) {
+
+                if (filter.equals("{\"client_effects\":[")) {
+                    filter += "{" +
+                            "\"bdb_effect_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
+                            "                        \"bdb_value\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_value()+",\n" +
+                            "                        \"bdb_effect_client_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_client_id()+"" +
+                            "                        }";
+                } else {
+                    filter += "\n,{" +
+                            "\"bdb_effect_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
+                            "                        \"bdb_value\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_value()+",\n" +
+                            "                        \"bdb_effect_client_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_client_id()+"" +
+                            "                        }";
+                }
+            }
+        }
+
+        filter=filter+"]}";
+        Log.e("EffectFilter",filter);
+        return filter;
     }
 
 
@@ -287,7 +323,16 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[1]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -300,7 +345,17 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[2]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -313,7 +368,17 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[3]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -326,7 +391,17 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[4]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -339,7 +414,16 @@ public class MyGroupEffectActivity extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+                }
                 effects.setBdb_value(Constants.effectValues[5]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -349,7 +433,6 @@ public class MyGroupEffectActivity extends AppCompatActivity {
                 dfour.setBackgroundResource(android.R.color.transparent);
             }
         });
-
 
         effect_name=layout2.findViewById(R.id.effect_name);
         if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){
@@ -391,6 +474,7 @@ public class MyGroupEffectActivity extends AppCompatActivity {
 
         }
         Log.e("effArrSize","Size:"+effectsArr.size());
+        Log.e("effArrPrint","is:"+effectsArr);
 
 
         return effectsArr;

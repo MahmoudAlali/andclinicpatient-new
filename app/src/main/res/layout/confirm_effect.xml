@@ -45,8 +45,6 @@
         </android.support.design.widget.CoordinatorLayout>
 
 
-
-
         <!--<EditText-->
         <!--android:id="@+id/code"-->
         <!--android:layout_width="match_parent"-->
@@ -59,6 +57,7 @@
         <!--android:layout_marginTop="10dp"-->
         <!--android:layout_marginBottom="10dp"-->
         <!--android:layout_gravity="center"/>-->
+
         <LinearLayout
             android:layout_weight="2"
             android:gravity="bottom"
@@ -76,22 +75,26 @@
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="2dp"
-                android:text="@string/ok"
+                android:text="@string/yes"
                 android:gravity="center"
                 android:textColor="@color/endblue"
                 android:textSize="15dp" />
 
-<!--            <TextView-->
-<!--                android:layout_weight="1"-->
-<!--                android:id="@+id/cancel"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/high_button"-->
-<!--                android:layout_gravity="bottom|center"-->
-<!--                android:layout_marginBottom="2dp"-->
-<!--                android:text="@string/no"-->
-<!--                android:gravity="center"-->
-<!--                android:textColor="@color/endblue"-->
-<!--                android:textSize="15dp" />-->
+
+
+
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_button"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="2dp"
+                android:text="@string/no"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="15dp" />
             <!--<TextView-->
             <!--android:layout_weight="1"-->
             <!--android:id="@+id/re_activate"-->
@@ -122,6 +125,4 @@
 
 
     </LinearLayout>
-
-
 </android.support.design.widget.CoordinatorLayout>

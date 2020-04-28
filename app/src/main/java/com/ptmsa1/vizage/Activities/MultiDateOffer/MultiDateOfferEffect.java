@@ -16,6 +16,8 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.OfferBookingResult;
 import com.ptmsa1.vizage.Adapters.EffectAdapter;
 import com.ptmsa1.vizage.DataModel.IDNameService;
+import com.ptmsa1.vizage.Fragments.BookingIndvidualActivity;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabTwo;
 import com.ptmsa1.vizage.Fragments.MultiIndividualBookingReservationFragment;
@@ -38,6 +40,8 @@ public class MultiDateOfferEffect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
+        EffectAdapter.checkClick=false;
+
         Log.e("OFFER_CLASS_NAME2","is"+APICall.OFFER_CLASS_NAME);
 
 //        select_cat=findViewById(R.id.select_cat);
@@ -97,13 +101,28 @@ public class MultiDateOfferEffect extends AppCompatActivity {
                 String f=getEffectFilter();
                 Log.e("filter",getFilter(f));
                 Log.e("Effectfilter",f);
+                if (EffectAdapter.checkClick){
+                    Intent intent=new Intent(context, OfferBookingResult.class);
+                    intent.putExtra("filter",getFilter(f));
+                    intent.putExtra("offertype", offertype);
+                    intent.putExtra("place", place);
+                    intent.putExtra("position", postion);
+                    APICall.showUpdateEffectsDialog(context,intent, MyEffectsActivity.getEffectFilter());
 
-                Intent intent=new Intent(context, OfferBookingResult.class);
-                intent.putExtra("filter",getFilter(f));
-                intent.putExtra("offertype", offertype);
-                intent.putExtra("place", place);
-                intent.putExtra("position", postion);
-                startActivity(intent);
+                }else {
+                    Intent intent=new Intent(context, OfferBookingResult.class);
+                    intent.putExtra("filter",getFilter(f));
+                    intent.putExtra("offertype", offertype);
+                    intent.putExtra("place", place);
+                    intent.putExtra("position", postion);
+                    startActivity(intent);
+                }
+//                Intent intent=new Intent(context, OfferBookingResult.class);
+//                intent.putExtra("filter",getFilter(f));
+//                intent.putExtra("offertype", offertype);
+//                intent.putExtra("place", place);
+//                intent.putExtra("position", postion);
+//                startActivity(intent);
             }
         });
     }

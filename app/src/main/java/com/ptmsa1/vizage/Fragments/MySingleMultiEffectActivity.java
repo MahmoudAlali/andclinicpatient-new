@@ -19,6 +19,7 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.GroupEffectAdapter;
 import com.ptmsa1.vizage.DataModel.ClientEffectModel;
 import com.ptmsa1.vizage.DataModel.ClientEffectRequestModel;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -31,12 +32,14 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
 
     public static Context context;
     public static LinearLayout root;
+    public  static  boolean checkClick=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context = this;
+        checkClick=false;
 
 //        select_cat=findViewById(R.id.select_cat);
         update = findViewById(R.id.update);
@@ -83,7 +86,6 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
             public void onClick(View v) {
                String f= getEffects();
                 Log.e("Effectfilter",f);
-                Log.e("getFilterMultiDates",getFilterMultiDates(f));
 
                 Intent intent = new Intent(context, MultiBookingIndividualResultActivity.class);
                 if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==1) {
@@ -91,10 +93,17 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
                 }else if (MultiIndividualBookingReservationFragment.choose_occision.getSelectedItemPosition()==2){
                    String ff= MultiIndividualBookingReservationFragment.sortdates(MultiIndividualBookingReservationFragment.dates,BeautyMainPage.client_name ,BeautyMainPage.client_number,"1",f,0);
 //                     ff=getFilterMultiDates(f);
+                    Log.e("getFilterMultiDates",getFilterMultiDates(f));
+
                     intent.putExtra("filter", ff);
                 }
                 Log.e("Allfilter",getfilter(f));
-                startActivity(intent);
+
+                if (checkClick){
+                    APICall.showUpdateEffectsDialog(context,intent, MyEffectsActivity.getEffectFilter());
+                }else {
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -332,11 +341,19 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         });
 
 
-
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[1]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -349,7 +366,17 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[2]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -362,7 +389,17 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[3]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -375,7 +412,17 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[4]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -388,7 +435,16 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+                }
                 effects.setBdb_value(Constants.effectValues[5]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -398,7 +454,6 @@ public class MySingleMultiEffectActivity extends AppCompatActivity {
                 dfour.setBackgroundResource(android.R.color.transparent);
             }
         });
-
 
         effect_name=layout2.findViewById(R.id.effect_name);
         if (BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar")){

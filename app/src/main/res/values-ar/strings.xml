@@ -695,4 +695,8 @@
     <string name="unExpctdErrMsg">حدث خطأ في العملية، أعيدي المحاولة من فضلك. في حال استمرت المشكلة، نرجو إعادة تشغيل التطبيق، كذلك يمكن لمسح ذاكرة التطبيق (من الاعدادات) أن تساعد في حل المشكلة. أو يمكنكم التواصل مع فريق التشغيل للمساعدة.</string>
     <string name="contactSupportWhatsApp"> التواصل مع الدعم عبر تطبيق واتس آب</string>
     <string name="contactSupportWebsite">  التواصل مع الدعم عبر موقع التطبيق</string>
+    <string name="effect_updated">تم تحديث مؤثراتك</string>
+    <string name="update_effects">هل ترغبين في تطبيق هذه التغييرات في مؤثراتك؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
 </resources>

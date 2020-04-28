@@ -23,6 +23,7 @@ import com.ptmsa1.vizage.Adapters.OfferBookingMultiClientsAdapter;
 import com.ptmsa1.vizage.DataModel.ClientEffectModel;
 import com.ptmsa1.vizage.DataModel.ClientEffectRequestModel;
 import com.ptmsa1.vizage.DataModel.DataOffer;
+import com.ptmsa1.vizage.Fragments.MyEffects.MyEffectsActivity;
 import com.ptmsa1.vizage.Fragments.OffersForRequest;
 import com.ptmsa1.vizage.Fragments.PlaceServiceFragment;
 import com.ptmsa1.vizage.Activities.TabTwo;
@@ -42,6 +43,7 @@ public class MultiClientOfferEffect extends AppCompatActivity {
     public static LinearLayout root;
     public static int position;
     public static String bdb_pack_code;
+    public static Boolean checkClick=false,checkClick2=false;
     static ArrayList<DataOffer.SupIdClass> supIdClasses;
 
     String filter,place;
@@ -50,7 +52,8 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
-
+        checkClick=false;
+        checkClick2=false;
 
         Log.e("OFFER_CLASS_NAME1","is"+APICall.OFFER_CLASS_NAME);
 
@@ -162,7 +165,13 @@ public class MultiClientOfferEffect extends AppCompatActivity {
                     intent.putExtra("place", getIntent().getStringExtra("place"));
                     intent.putExtra("position", position);
                     intent.putExtra("offertype",getIntent().getStringExtra("offertype")  );
-                    startActivity(intent);
+
+
+                    if (checkClick && checkClick2){
+                        APICall.showUpdateEffectsDialog(context,intent, getEffectFilter());
+                    }else {
+                        startActivity(intent);
+                    }
                 }
             });
         }
@@ -248,6 +257,9 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
     ArrayList<String> getEffects(){
         for (int i=0;i< APICall.clientEffectRequestModels.size();i++){
+            if (APICall.clientEffectRequestModels.get(i).getClient_name().equals(BeautyMainPage.client_name)){
+                checkClick2=true;
+            }
             String ef="";
             for (int j=0;j<APICall.clientEffectRequestModels.get(i).getClientEffectModels().size();j++){
                 for (int k=0;k<APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(j).getEffects().size();k++){
@@ -266,13 +278,51 @@ public class MultiClientOfferEffect extends AppCompatActivity {
             }
             Log.e("clientEffectRe.size",APICall.clientEffectRequestModels.get(i).getClientEffectModels().size()+"");
             Log.e("getClient_name",APICall.clientEffectRequestModels.get(i).getClient_name()+"");
+
             effectsArr.add(ef);
 
         }
-
+        for (int i=0;i< APICall.clientEffectRequestModels.size();i++) {
+            if (APICall.clientEffectRequestModels.get(i).getClient_name().equals(BeautyMainPage.client_name)) {
+                checkClick2 = true;
+                break;
+            }
+        }
 
         return effectsArr;
     }
+
+
+    public static String getEffectFilter(){
+        String filter="{\"client_effects\":[";
+
+        for (int i=0;i<APICall.clientEffectRequestModels.size();i++){
+            for (int j=0;j<APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().size();j++) {
+
+                if (filter.equals("{\"client_effects\":[")) {
+                    filter += "{" +
+                            "\"bdb_effect_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
+                            "                        \"bdb_value\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_value()+",\n" +
+                            "                        \"bdb_effect_client_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_client_id()+"" +
+                            "                        }";
+                } else {
+                    filter += "\n,{" +
+                            "\"bdb_effect_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_id()+",\n" +
+                            "                        \"bdb_client_id\": "+BeautyMainPage.bdb_id+",\n" +
+                            "                        \"bdb_value\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_value()+",\n" +
+                            "                        \"bdb_effect_client_id\": "+APICall.clientEffectRequestModels.get(i).getClientEffectModels().get(0).getEffects().get(j).getBdb_effect_client_id()+"" +
+                            "                        }";
+                }
+            }
+        }
+
+        filter=filter+"]}";
+        Log.e("EffectFilter",filter);
+        return filter;
+    }
+
+
     static String place_num,price_num;
     public static String getClients(ArrayList effectsArr){
 
@@ -712,11 +762,19 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         });
 
 
-
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[1]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
 //                effects.setBdb_effect_client_id("0");
                 done.setBackgroundResource(R.color.colorAccent);
                 dzero.setBackgroundResource(android.R.color.transparent);
@@ -729,7 +787,17 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[2]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dtwo.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -742,7 +810,17 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[3]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dthree.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -755,7 +833,17 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+
+                }
                 effects.setBdb_value(Constants.effectValues[4]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfour.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
@@ -768,7 +856,16 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                    checkClick=true;
+//                    update.setEnabled(true);
+                }
                 effects.setBdb_value(Constants.effectValues[5]);
+
+                Log.e(" checkClick","is "+checkClick);
+                Log.e(" checkClick","is "+effects.getBdb_value());
+
+
 //                effects.setBdb_effect_client_id("0");
                 dfive.setBackgroundResource(R.color.colorAccent);
                 done.setBackgroundResource(android.R.color.transparent);
