@@ -5,16 +5,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonIOException;
 import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.DataModel.NotificationModel;
 import com.ptmsa1.vizage.R;
+import com.ptmsa1.vizage.Service.NotificationsBeauty;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,8 +93,28 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 else if(type.equals("2"))
                 {
                     Intent i = new Intent(BeautyMainPage.context,BeautyMainPage.class);
-                    i.putExtra("notify_pairs",notificationModel.get(position).getPairsStr());
-                    BeautyMainPage.context.startActivity(i);
+                    if( notificationModel.get(position).getNotificationCode().equals("16")||notificationModel.get(position).getNotificationCode().equals("18"))
+                    {
+                        JSONArray jArray = new JSONArray();
+                        try {
+                             jArray = new JSONArray(notificationModel.get(position).getPairsStr());
+
+                        }
+                        catch (JSONException e)
+                        {
+                            Log.e("JSONERR",e.getMessage());
+                        }
+                        NotificationsBeauty.showOfferDetailsNotification(context,notificationModel.get(position).getNotificationTitle(),notificationModel.get(position).getNotificationBody(),jArray,notificationModel.get(position).getNotificationCode(),false);
+                    }
+                    else
+                    {
+                        String s=notificationModel.get(position).getPairsStr();
+                        Log.e("Pairs",s);
+                        i.putExtra("notify_pairs",s);
+                        BeautyMainPage.context.startActivity(i);
+                    }
+                  //  String s=getPairs(notificationModel.get(position).getPairsStr());
+
 
                 }
                 view.setClickable(false);
@@ -115,6 +143,33 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             actionTwo = itemView.findViewById(R.id.action2);
 
         }
+    }
+    public static String getPairs(String All)
+    {
+        Log.e("ALL",All);
+        JSONArray result =new JSONArray();
+        try {
+            //JSONObject oldPairs = new JSONObject(All);
+            JSONArray pairs =new JSONArray(All);
+            for (int i=0;i<pairs.length();i++)
+            {
+                JSONObject item = new JSONObject();
+                JSONObject data1=pairs.getJSONObject(i);
+                String key = data1.getString("bdb_key");
+                String value = data1.getString("bdb_value");
+                item.put(key,value);
+                result.put(item);
+
+
+            }
+
+        }
+        catch (JSONException e){
+            Log.e("ERR",e.getMessage());
+        }
+
+        Log.e("JSOPAIRS",result.toString());
+        return result.toString();
     }
 
 }

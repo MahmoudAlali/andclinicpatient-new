@@ -87,6 +87,65 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         Boolean check=true;
 
 
+     try {
+         if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
+         {
+             end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
+             bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
+             is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
+         }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
+             end_date = OffersAdapter.bestOItem.getEnd_date();
+             bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
+
+
+             ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
+             for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
+                 try {
+                     JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
+                     String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
+                     String bdb_name=object.getString("bdb_name");
+                     String bdb_name_ar=object.getString("bdb_name_ar");
+                     String bdb_ser_id=object.getString("bdb_ser_id");
+                     if (APICall.ln.equals("ar")){
+                         bdb_name=bdb_name_ar;
+                     }
+                     supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
+                 } catch (JSONException e) {
+                     e.printStackTrace();
+                 }
+             }
+
+             TabTwo.arrayList.clear();
+             TabTwo.arrayList.add(new DataOffer(bdb_pack_id,"","","","","","","","","","","","","","","","","","","",supIdClasses));
+             booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
+             is_effects_on=APICall.bdb_is_effects_on;
+         }
+         else {
+             check=false;
+             try {
+                 add_date.setText(APICall.DATE_FOR_SER_OFR);
+                 end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
+                 bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+                 is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
+                 minPrice=PlaceServiceFragment.minprice;
+                 maxPrice=PlaceServiceFragment.maxprice;
+             }
+             catch (Exception e)
+             {
+                 Log.e("eRR",e.getMessage());
+             }
+
+         }
+     }
+     catch (Exception e)
+     {
+         Log.e("ERROR",e.getMessage());
+     }
+
+
+        // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
+
+        //region CHECK_NOTIFICATION
         String notification = "";
         try {
             notification=getIntent().getStringExtra("notification");
@@ -97,6 +156,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         }
         try {
             if (!notification.equals("")) {
+                Log.e("MMMMMMMMMM",notification);
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 end_date = getIntent().getStringExtra("offer_end");
@@ -105,59 +165,6 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        if(BeautyMainPage.FRAGMENT_NAME.equals("freeBookingFragment"))
-        {
-            end_date = OffersForRequest.arrayList.get(postion).getBdb_offer_end();
-            bdb_pack_id = OffersForRequest.arrayList.get(postion).getBdb_pack_code();
-            is_effects_on = OffersForRequest.arrayList.get(postion).getBdb_is_effects_on();
-        }else if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")){
-            end_date = OffersAdapter.bestOItem.getEnd_date();
-            bdb_pack_id = OffersAdapter.bestOItem.getPack_code();
-
-
-            ArrayList<DataOffer.SupIdClass> supIdClasses=new ArrayList<>();
-            for (int i=0;i<OffersAdapter.bestOItem.getSersup_ids().length();i++){
-                try {
-                    JSONObject object=OffersAdapter.bestOItem.getSersup_ids().getJSONObject(i);
-                    String bdb_ser_sup_id=object.getString("bdb_ser_sup_id");
-                    String bdb_name=object.getString("bdb_name");
-                    String bdb_name_ar=object.getString("bdb_name_ar");
-                    String bdb_ser_id=object.getString("bdb_ser_id");
-                    if (APICall.ln.equals("ar")){
-                        bdb_name=bdb_name_ar;
-                    }
-                    supIdClasses.add(new DataOffer.SupIdClass(bdb_ser_sup_id,bdb_name,bdb_ser_id));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            TabTwo.arrayList.clear();
-            TabTwo.arrayList.add(new DataOffer(bdb_pack_id,"","","","","","","","","","","","","","","","","","","",supIdClasses));
-            booking_period =Integer.parseInt(OffersAdapter.bestOItem.getBdb_booking_period());
-            is_effects_on=APICall.bdb_is_effects_on;
-        }
-        else {
-            check=false;
-            try {
-                add_date.setText(APICall.DATE_FOR_SER_OFR);
-                end_date=TabTwo.arrayList.get(postion).getBdb_offer_end();
-                bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-                is_effects_on = TabTwo.arrayList.get(postion).getBdb_is_effects_on();
-                minPrice=PlaceServiceFragment.minprice;
-                maxPrice=PlaceServiceFragment.maxprice;
-            }
-            catch (Exception e)
-            {
-                Log.e("eRR",e.getMessage());
-            }
-
-        }
-
-        // String bdb_pack_id = TabTwo.arrayList.get(postion).getBdb_pack_code();
-
-        //region CHECK_NOTIFICATION
 
         //endregion
 

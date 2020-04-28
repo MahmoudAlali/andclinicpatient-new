@@ -226,12 +226,12 @@ public class MyReservationFragment extends Fragment  {
                 tabselected(incom_reservation,deposit_reservation,accept_reservation,true);
                 fragment = new AcceptedReservationFragment();
             }
-            else if(tab_id.equals("3"))
+            else if(tab_id.equals("7"))
             {
                 tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
                 fragment = new DepositReservationFragment();
             }
-            else if(tab_id.equals("7"))
+            else if(tab_id.equals("3"))
             {
                 tabselected(accept_reservation,deposit_reservation,incom_reservation,true);
                 fragment = new ExecutedReservationFragment();
@@ -261,10 +261,10 @@ public class MyReservationFragment extends Fragment  {
 
         if(!execute_book_id.equals(""))
         {
-            Log.e("execute_book_id", "is:" + execute_book_id);
+            Log.e("execute_book_id", "issssss:" + execute_book_id);
 
             Intent intent=new Intent(BeautyMainPage.context, ExecuteBookActivity.class);
-            intent.putExtra("execute_book_id", book_id);
+            intent.putExtra("execute_book_id", execute_book_id);
             if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12"))
                 intent.putExtra("isOffer", true);
             else

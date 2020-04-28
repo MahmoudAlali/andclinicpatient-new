@@ -22293,6 +22293,7 @@ public class APICall {
                 try {
                     JSONObject jsonrespone = new JSONObject(mMessage);
                     String success=jsonrespone.getString("success");
+                    String msg=jsonrespone.getString("message");
                     if (success.equals("true")){
                         // JSONObject data=jsonrespone.getJSONObject("data");
                         JSONArray da=jsonrespone.getJSONArray("data");
@@ -22326,7 +22327,7 @@ public class APICall {
 
 
                     }
-                    else
+                    else  if (!msg.equals("there is no notifications"))
                         showUnexpectedErrMsg(cont);
 
                 }
@@ -22352,7 +22353,7 @@ public class APICall {
 
         });
     }
-    public  static  void   browseOneMultiOfferNotification(String bdb_pack_code, final Context context, final String titlen,final String bodyn,final JSONArray pairsn,final String coden){
+    public  static  void   browseOneMultiOfferNotification(String bdb_pack_code, final Context context, final String titlen, final String bodyn, final JSONArray pairsn, final String coden, final Boolean isNotif){
 
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -22492,7 +22493,14 @@ public class APICall {
                                 Log.e("CALLING",bodyn);
                                 Log.e("CALLING",pairsn.toString());
 
-                                NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
+                                if(isNotif)
+                                    NotificationsBeauty.showBookingDetailsNotification(context,titlen,bodyn,pairsn,coden);
+                                else
+                                {
+                                    Intent intent = new Intent(BeautyMainPage.context,BeautyMainPage.class);
+                                    intent.putExtra("notify_pairs",pairsn.toString());
+                                    BeautyMainPage.context.startActivity(intent);
+                                }
 
 
                             }
@@ -28420,22 +28428,32 @@ Log.e("filters",filter);
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
 
-                        String experince="",book_sol="";
+                       /* String experince="",book_sol="";
                         if (ln.equals("ar")) {
                             experince = data.getString("previous_experience_ar");
                             book_sol = data.getString("book_sol_ar");
                         }else {
                             experince = data.getString("previous_experience_en");
                             book_sol = data.getString("book_sol_en");
-                        }
+                        }*/
                         SharedPreferences.Editor prefs = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                         prefs.putString("SERVER_KEY",SERVER_KEY);
                         prefs.putString("GOOGLE_KEY",GOOGLE_KEY);
                         prefs.putString("PROVIDER_SERVER_KEY",PROVIDER_SERVER_KEY);
+                        Constants.messageOfClientsNames_ar=data.getString("book_sol_ar");
+                        Constants.messageOfClientsNames_en=data.getString("book_sol_en ");
+                        Constants.messageOfKnownProviders_ar=data.getString("previous_experience_ar");
+                        Constants.messageOfKnownProviders_en=data.getString("previous_experience_en");
+                        Log.e("TAG1", Constants.messageOfClientsNames_ar);
+                        Log.e("TAG2", Constants.messageOfClientsNames_en);
+                        Log.e("TAG3", Constants.messageOfKnownProviders_ar);
+                        Log.e("TAG4", Constants.messageOfKnownProviders_en);
 
 
                     }
                 }catch (JSONException je){
+                    Log.e("ERR", je.getMessage());
+
                 }
                 Log.e("TAG", mMessage);
 

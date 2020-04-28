@@ -10,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapter;
 import com.ptmsa1.vizage.R;
 
@@ -45,6 +47,19 @@ public class OfferBookingResult extends AppCompatActivity {
 
         context=this;
 //        ProviderMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=findViewById(R.id.messageOfKnownProviders);
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
         listView=findViewById(R.id.list_view);
         pullToRefresh=findViewById(R.id.pullToRefresh);
         final String filter=getIntent().getStringExtra("filter");

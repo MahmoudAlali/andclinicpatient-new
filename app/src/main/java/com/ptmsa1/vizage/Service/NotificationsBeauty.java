@@ -293,7 +293,7 @@ public class NotificationsBeauty {
         notificationManager2.notify(RANDOM_N_ID, builder2.build());
     }
 
-    public void showOfferDetailsNotification(Context context,  String title, String body, JSONArray pairs, String code)
+    public static void showOfferDetailsNotification(Context context,  String title, String body, JSONArray pairs, String code,Boolean isNotif)
     {
         String bdb_offer_type="";
         for (int i=0;i<pairs.length();i++)
@@ -330,7 +330,7 @@ public class NotificationsBeauty {
 
        /* if (bdb_offer_type.equals("2")
                 || bdb_offer_type.equals("5")){*/
-            APICall.browseOneMultiOfferNotification(packCode,context,title,body,pairs,code);
+            APICall.browseOneMultiOfferNotification(packCode,context,title,body,pairs,code,isNotif);
 
         /*}else if (bdb_offer_type.equals("1")
                 || bdb_offer_type.equals("4")){
@@ -408,7 +408,7 @@ public class NotificationsBeauty {
         }
         else if(code.equals("16")||code.equals("18"))
         {
-            showOfferDetailsNotification(context,title,body,j,code);
+            showOfferDetailsNotification(context,title,body,j,code,true);
         }
 
 

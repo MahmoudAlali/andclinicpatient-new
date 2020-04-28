@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapter;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapterSearchGroupBooking2;
@@ -47,7 +49,19 @@ public class GroupReservationResultFragment extends Fragment {
             url="http://clientapp.dcoret.com/api/booking/searchGroupBookingOutside";
             isIn=false;
         }
-
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=view.findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=view.findViewById(R.id.messageOfKnownProviders);
+        if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
 
 
         listView=view.findViewById(R.id.list_view);

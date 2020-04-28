@@ -70,5 +70,12 @@ public class Constants {
             {"جافة جداً","جافة","متوسط","مختلطة","دهنية"},
             {"ليست حساسة","تميل للحساسية","متوسطة","حساسة","حساسة للغاية"}};
 
+//    public static String[] effectValues = {"0","0","2.5","5","7.5","10"};
+
+    public static String messageOfKnownProviders_en="";
+    public static String messageOfKnownProviders_ar="";
+    public static String messageOfClientsNames_en="";
+    public static String messageOfClientsNames_ar="";
+
     public static String[] effectValues = {"0","2.5","5","7.5","10"};
 }

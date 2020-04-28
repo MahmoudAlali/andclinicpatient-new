@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Adapters.AltCustomExpandableListAdapter;
 import com.ptmsa1.vizage.Adapters.CustomExpandableListAdapterSearchGroupBooking2;
@@ -36,6 +38,20 @@ public class AlterGroupOtherReservationResult extends AppCompatActivity {
         context=this;
         BeautyMainPage.FRAGMENT_NAME="GroupReservationResultFragment";
 
+
+        TextView msgOfKnownProviders,msgOfClientsNames;
+        msgOfClientsNames=findViewById(R.id.messageOfClientsNames);
+        msgOfKnownProviders=findViewById(R.id.messageOfKnownProviders);
+        if(context.getResources().getString(R.string.locale).equals("ar"))
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_ar);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_ar);
+        }
+        else
+        {
+            msgOfClientsNames.setText(Constants.messageOfClientsNames_en);
+            msgOfKnownProviders.setText(Constants.messageOfKnownProviders_en);
+        }
         if (PlaceServiceGroupOthersFragment.placeSpinner.getSelectedItemPosition()==1){
             url=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingInside";
             urlOut=APICall.API_PREFIX_NAME+"/api/booking/searchGroupBookingAlternativeInside";

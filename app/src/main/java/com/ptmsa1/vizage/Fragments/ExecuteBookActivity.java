@@ -65,14 +65,21 @@ public class ExecuteBookActivity extends AppCompatActivity {
         {
             Log.e("Notif", "Execute Activity is trying to get bookid");
             execute_book_id=getIntent().getStringExtra("execute_book_id");
+            Log.e("Notif2", "Execute ID is: "+execute_book_id);
+            APICall.browseOneExecutedBooking(execute_book_id,this);
+            isOffer=getIntent().getBooleanExtra("isOffer",false);
+            Log.e("Notif4", "Execute ID isOffer: "+isOffer);
         }
         catch (Exception e)
         {
             Log.e("NotifErr",e.getMessage());
+            APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
+            isOffer=ReservationsAdapter2.isOffer;
         }
 
-        if(execute_book_id!=null)
+     /*   if(execute_book_id!=null)
         {
+            Log.e("Notif3", "Execute ID is: "+execute_book_id);
             APICall.browseOneExecutedBooking(execute_book_id,this);
             isOffer=getIntent().getBooleanExtra("isOffer",false);
 
@@ -82,7 +89,7 @@ public class ExecuteBookActivity extends AppCompatActivity {
             APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
             isOffer=ReservationsAdapter2.isOffer;
         }
-
+*/
         //endregion
 
      //   APICall.browseOneExecutedBooking(ReservationsAdapter2.book_id,this);
