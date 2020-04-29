@@ -10192,6 +10192,7 @@ public class APICall {
 
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
+                    String message=j.getString("message");
                     if (success.equals("true")) {
                         if (j.getString("message").equals("no booking")) {
                             showSweetDialog(context,((AppCompatActivity)context).getResources().getString(R.string.nobooking),((AppCompatActivity)context).getResources().getString(R.string.nobookingyet));
@@ -10420,6 +10421,13 @@ public class APICall {
                             });
                         }
                     }
+                    else if(message.contains("no booking ."))
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,((AppCompatActivity)context).getResources().getString(R.string.nobooking),((AppCompatActivity)context).getResources().getString(R.string.nobookingyet));
+                            }
+                        });
                     else
                         showUnexpectedErrMsg(context);
 
@@ -10908,6 +10916,7 @@ public class APICall {
                     try {
                         JSONObject j=new JSONObject(mMessage);
                         String success=j.getString("success");
+                        String message=j.getString("message");
                         if (success.equals("true"))
                         {
                             JSONObject data=j.getJSONObject("data");
@@ -10939,6 +10948,13 @@ public class APICall {
                                 }
                             });
                         }
+                        else if(message.contains("no booking ."))
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showSweetDialog(context,((AppCompatActivity)context).getResources().getString(R.string.nobooking),((AppCompatActivity)context).getResources().getString(R.string.nobookingyet));
+                                }
+                            });
                         else
                             showUnexpectedErrMsg(context);
 
@@ -11065,6 +11081,7 @@ public class APICall {
                 try {
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
+                    String message=j.getString("message");
                     if (success.equals("true"))
                     {
                         JSONObject data=j.getJSONObject("data");
@@ -11101,6 +11118,13 @@ public class APICall {
                             }
                         });
                     }
+                    else if(message.contains("no booking ."))
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,((AppCompatActivity)context).getResources().getString(R.string.nobooking),((AppCompatActivity)context).getResources().getString(R.string.nobookingyet));
+                            }
+                        });
                     else
                         showUnexpectedErrMsg(context);
 
@@ -23716,14 +23740,14 @@ public class APICall {
                             cSupString.add(cSupplierModels.get(i).getBdb_owner_name());
                         }
                     }
-                    else
-                        showUnexpectedErrMsg(context);
+                   /* else
+                        showUnexpectedErrMsg(context);*/
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showUnexpectedErrMsg(context);
+                          //  showUnexpectedErrMsg(context);
                             Log.e("ERROR",je.getMessage());
                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                         }
