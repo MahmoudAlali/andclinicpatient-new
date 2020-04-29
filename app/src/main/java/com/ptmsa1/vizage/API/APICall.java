@@ -2093,7 +2093,7 @@ public class APICall {
 //        Log.d("MessageResponse",mMessage);
     }
     public  static  void  updateEffectsClient(final Context context, String effectFilter){
-        clientEffectModels.clear();
+//        clientEffectModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
 //        String url = API_PREFIX_NAME+"/api/service/Service";
@@ -2231,7 +2231,7 @@ public class APICall {
 //        Log.d("MessageResponse",mMessage);
     }
     public  static  void  updateEffectsClient(final Context context, String effectFilter, final Intent intent){
-        clientEffectModels.clear();
+//        clientEffectModels.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
 //        String url = API_PREFIX_NAME+"/api/service/Service";

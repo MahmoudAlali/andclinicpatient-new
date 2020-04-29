@@ -71,6 +71,8 @@ public class AccountFragment extends Fragment  {
         language = view.findViewById(R.id.language);
 
 
+
+
         old_pass.setEnabled(false);
         e_c_pass.setEnabled(false);
         e_pass.setEnabled(false);
@@ -169,7 +171,9 @@ public class AccountFragment extends Fragment  {
                     res.updateConfiguration(conf, dm);
                     editor.putString("lang","ar");
                     editor.commit();
+                    editor.apply();
 
+                    Log.e("applanguageset",BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang","klsjjlkj"));
                     APICall.ln="ar";
                    Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                     ((AppCompatActivity)BeautyMainPage.context).finish();
@@ -186,7 +190,11 @@ public class AccountFragment extends Fragment  {
                     res.updateConfiguration(conf, dm);
                     editor.putString("lang","en");
                     editor.commit();
+                    editor.apply();
                     APICall.ln="en";
+                    Log.e("applanguageset",BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang","klsjjlkj"));
+
+
 
                     Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);
                     ((AppCompatActivity)BeautyMainPage.context).finish();

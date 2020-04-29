@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +73,8 @@ import com.ptmsa1.vizage.Activities.SingleOffer.SingleDateOfferBooking;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 //------------------ main page---------------
 
 public class BeautyMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IPaymentRequestCallBack {
@@ -114,7 +118,21 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.services_tabs_layout);
         context=this;
 
+        Log.e("applanguageset",BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang","klsjjlkj"));
 
+       try {
+         APICall.ln=  BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang", "en");
+           Resources res = getResources();
+           // Change locale settings in the app.
+           DisplayMetrics dm = res.getDisplayMetrics();
+           android.content.res.Configuration conf = res.getConfiguration();
+           conf.setLocale(new Locale(APICall.ln.toLowerCase())); // API 17+ only.
+           // Use conf.locale = new Locale(...) if targeting lower versions
+           res.updateConfiguration(conf, dm);
+
+       }catch (Exception e){
+           e.printStackTrace();
+       }
         FirebaseMessaging.getInstance().subscribeToTopic("Beauty");
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);

@@ -36,6 +36,7 @@ public class MyEffectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_effects);
         context=this;
+        APICall.clientEffectModels.clear();
 
 //        select_cat=findViewById(R.id.select_cat);
         update=findViewById(R.id.update);

@@ -47,7 +47,22 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         context = this;
         sharedPreferences=getSharedPreferences("LOGIN",MODE_PRIVATE);
-        APICall.ln=sharedPreferences.getString("lang","en");
+        APICall.ln=sharedPreferences.getString("lang","no");
+        if ((Locale.getDefault().getDisplayLanguage().equals("English") || Locale.getDefault().getDisplayLanguage().equals("Arabic") &&
+                APICall.ln.equals("no"))){
+            if (Locale.getDefault().getDisplayLanguage().equals("English")) {
+                APICall.ln = "en";
+                sharedPreferences.edit().putString("lang","en");
+            }else {
+                APICall.ln = "ar";
+                sharedPreferences.edit().putString("lang","ar");
+            }
+        }else {
+            APICall.ln=   "en";
+            sharedPreferences.edit().putString("lang","en");
+        }
+        Log.e("LanguageApp",sharedPreferences.getString("lang","en1"));
+        Log.e("Device",Locale.getDefault().getDisplayLanguage());
         Log.e("LanguageApp",APICall.ln);
         ln=APICall.ln;
 
