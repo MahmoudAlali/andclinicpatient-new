@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -178,6 +179,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             if (MyReservationFragment.tab.equals("2")){
 //                ((Item) holder).delay.setText(R.string.deposit);
                 ((Item) holder).delay.setVisibility(View.GONE);
+                ((Item) holder).space2.setVisibility(View.GONE);
             }
             if (MyReservationFragment.tab.equals("1")){
 
@@ -187,15 +189,18 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     if (bookingAutomatedBrowseData.get(position).getIs_action_on().equals("1")
                             || bookingAutomatedBrowseData.get(position).getIs_action_on().equals("true")) {
                         ((Item) holder).delay.setVisibility(View.VISIBLE);
+                        ((Item) holder).space2.setVisibility(View.VISIBLE);
                         ((Item) holder).delay.setText(R.string.deposit);
                     }else {
                         ((Item) holder).delay.setVisibility(View.GONE);
+                        ((Item) holder).space2.setVisibility(View.GONE);
 
                     }
 
                 }else  if (bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status().equals("8")){
                     ((Item) holder).status.setText(R.string.waiting_res);
                     ((Item) holder).delay.setVisibility(View.GONE);
+                    ((Item) holder).space2.setVisibility(View.GONE);
 
                 }
 //                ((Item) holder).delay.setVisibility(View.GONE);
@@ -210,6 +215,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++)
                         if (bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_confirm_exec_user().equals("1")){
                             ((Item) holder).time.setVisibility(View.VISIBLE);
+                            ((Item)holder).space.setVisibility(View.VISIBLE);
                             ((Item) holder).time.setText(R.string.rate);
                             break;
                         }
@@ -229,6 +235,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).refuse.setVisibility(View.GONE);
                 ((Item) holder).delay.setVisibility(View.GONE);
                 ((Item) holder).time.setVisibility(View.GONE);
+                ((Item)holder).space2.setVisibility(View.GONE);
+                ((Item)holder).space.setVisibility(View.GONE);
 //                ((Item) holder).time.setVisibility(View.GONE);
                 ((Item) holder).status.setVisibility(View.VISIBLE);
 
@@ -424,11 +432,18 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             Log.e("Executed99","is:"+allExecuted+"");
             if(allExecuted && !BeautyMainPage.FRAGMENT_NAME.equals("MYRESERVATIONEXECUTEDFRAGMENT")) {
                 ((Item) holder).time.setText(R.string.Executed);
-                if (!MyReservationFragment.tab.equals("3"))
-                ((Item) holder).time.setVisibility(View.VISIBLE);
+                if (!MyReservationFragment.tab.equals("3")) {
+                    ((Item) holder).time.setVisibility(View.VISIBLE);
+                    ((Item)holder).space.setVisibility(View.VISIBLE);
+
+                }
             }
             else
+            {
+                ((Item)holder).space.setVisibility(View.GONE);
                 ((Item)holder).time.setVisibility(View.GONE);
+
+            }
 
 
             if (bookingAutomatedBrowseData.get(position).getIs_action_on().equals("true")){
@@ -1071,6 +1086,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         TextView bookType,book_id,bdb_expected_deposit,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time,refundText;
         ImageView book_Details,inner_res,logoImg,place;
         ColorRatingBar rating;
+        Space space,space2;
 
         LinearLayout myroot;
         public Item(View itemView) {
@@ -1084,7 +1100,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             place=itemView.findViewById(R.id.place);
             bdb_expected_deposit=itemView.findViewById(R.id.bdb_expected_deposit);
             reference_id=itemView.findViewById(R.id.reference_number);
-
+            space=itemView.findViewById(R.id.space);
+            space2=itemView.findViewById(R.id.space2);
 
             totalPrice=itemView.findViewById(R.id.total_price);
             inner_res=itemView.findViewById(R.id.inner_res);

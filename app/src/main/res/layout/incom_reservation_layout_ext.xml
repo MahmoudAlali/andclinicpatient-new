@@ -247,8 +247,9 @@
             android:textSize="16dp"
             android:gravity="center"
             />
-        <android.support.v4.widget.Space
+        <Space
             android:layout_width="5dp"
+            android:id="@+id/space"
             android:layout_height="match_parent" />
 
         <TextView
@@ -263,8 +264,9 @@
             android:textSize="16dp"
             />
 
-        <android.support.v4.widget.Space
+        <Space
             android:layout_width="5dp"
+            android:id="@+id/space2"
             android:layout_height="match_parent" />
         <TextView
             android:background="#E4C8FB"
