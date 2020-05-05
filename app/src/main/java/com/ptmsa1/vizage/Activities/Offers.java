@@ -138,6 +138,9 @@ public class Offers extends Fragment implements LocationListener ,
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+
+
+
                 Lat=String.valueOf(location.getLatitude());
                 Long=String.valueOf(location.getLongitude());
                 Log.e("LATLANG",Lat+":"+Long);
@@ -148,7 +151,11 @@ public class Offers extends Fragment implements LocationListener ,
                     bestOfferItems.clear();
                     bestOffer.notifyDataSetChanged();
                     // APICall.detailsUser4(context);
-                    APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                    if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
+                        APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                    }else {
+                        locationManager.removeUpdates(this);
+                    }
                 }
             }
             @Override
@@ -266,7 +273,11 @@ public class Offers extends Fragment implements LocationListener ,
                                 bestOfferItems.clear();
                                 // APICall.detailsUser4(context);
                                 bestOffer.notifyDataSetChanged();
-                                APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
+                                    APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                }else {
+                                    locationManager.removeUpdates(this);
+                                }
                             }
 
                         }

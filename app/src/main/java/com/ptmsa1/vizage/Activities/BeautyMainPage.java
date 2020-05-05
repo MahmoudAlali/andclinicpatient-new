@@ -121,7 +121,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Log.e("applanguageset",BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang","klsjjlkj"));
 
        try {
-         APICall.ln=  BeautyMainPage.context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang", "en");
+           if (APICall.ln.equals("")|| !APICall.ln.equals("ar") || !APICall.ln.equals("en"))
+         APICall.ln=getSharedPreferences("LOGIN", Context.MODE_PRIVATE).getString("lang", "en");
            Resources res = getResources();
            // Change locale settings in the app.
            DisplayMetrics dm = res.getDisplayMetrics();
@@ -129,13 +130,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
            conf.setLocale(new Locale(APICall.ln.toLowerCase())); // API 17+ only.
            // Use conf.locale = new Locale(...) if targeting lower versions
            res.updateConfiguration(conf, dm);
+           refreshNavigationView();
+
 
        }catch (Exception e){
            e.printStackTrace();
        }
         FirebaseMessaging.getInstance().subscribeToTopic("Beauty");
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
 
         //------- test notificatoin----------
@@ -182,7 +184,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         Log.e("Tokenc",editor.getString("token_client",""));
         Log.e("client_number123",editor.getString("client_number","qwqwqwq"));
-
+        navigationView =  findViewById(R.id.nav_view);
         navigation=findViewById(R.id.navigation);
         sideNavBar=findViewById(R.id.nav_view);
         mDrawerLayout=findViewById(R.id.drawer);
@@ -199,6 +201,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         View hView =  navigationView.getHeaderView(0);
         profileNameText = hView.findViewById(R.id.profile_name);
+
         if(client_name.equals("Guest"))
             profileNameText.setText(R.string.guestAccount);
         else
@@ -1144,5 +1147,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             APICall.getPurchaseResponseFromFrontEnd(context,"","","","","","","","","","","","","","","","","","","","0");
 
         }
+    }
+    private void refreshNavigationView(){
+
+        setContentView(R.layout.services_tabs_layout);
+         navigationView =  findViewById(R.id.nav_view);
+
     }
 }

@@ -33,6 +33,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -91,6 +92,7 @@ public class MyReservationFragment extends Fragment  {
     public static String  REF_NUMBER="-1";
 
     public static String service_date_txt="",tab="1";
+    public static ProgressBar progressBar;
 
 
     public static int syear,smonth,sday,eyear,emonth,eday;
@@ -99,6 +101,8 @@ public class MyReservationFragment extends Fragment  {
     public  static String tmp="0";
     public static TextView note_cancel;
 
+
+    public  static TextView action_floating_btn;
     //    public static FloatingTextButton floatingTextButton;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Nullable
@@ -133,6 +137,7 @@ public class MyReservationFragment extends Fragment  {
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         incom_reservation=view.findViewById(R.id.incom_reservation);
+        action_floating_btn=view.findViewById(R.id.action_button);
         //note_cancel=view.findViewById(R.id.note_cancel);
 //        floatingTextButton=view.findViewById(R.id.action_button);
         accept_reservation=view.findViewById(R.id.accept_reservation);
@@ -435,7 +440,7 @@ public class MyReservationFragment extends Fragment  {
                             builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String service="اسم الخدمة:";
+                                    String service=BeautyMainPage.context.getResources().getString(R.string.Service_Name)+":";
                                     for (int i=0;i<mUserItems.size();i++) {
                                         Log.e("ser" + i, mUserItems.get(i) + "");
                                         service=service+"-"+servicesList.get(mUserItems.get(i));
@@ -899,6 +904,7 @@ public class MyReservationFragment extends Fragment  {
                             TextView ok=dialog.findViewById(R.id.confirm);
 
                             ok.setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                 @Override
                                 public void onClick(View v) {
                                     if (offer_type.getSelectedItemPosition()==1){
@@ -1000,6 +1006,7 @@ public class MyReservationFragment extends Fragment  {
 
                         }
 
+                        Log.e("TabPrint","is"+tab);
 
                         if(tab=="1")
                         {
@@ -1053,7 +1060,7 @@ public class MyReservationFragment extends Fragment  {
 //                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1", APICall.filter+"",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
                             tabselected(accept_reservation,deposit_reservation,incom_reservation,false);
                         }*/
-                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+//                        APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
 
                     }
                 });

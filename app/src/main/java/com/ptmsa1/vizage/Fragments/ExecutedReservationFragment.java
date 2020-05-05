@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,13 @@ public class ExecutedReservationFragment extends Fragment {
     public static RecyclerView service_select;
     ReservationsAdapter2 reservationsAdapter2;
 
+
+    Boolean isScrolling=false;
+    int curentItems,totalItems,scrollOutItems;
+    LinearLayoutManager manager;
+    public static int pageNum=1;
+
+
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
     String filter,sort;
     ImageView sortbtn;
@@ -46,16 +54,44 @@ public class ExecutedReservationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.incom_reservatiom_fragment, container, false);
+        pageNum=1;
 
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         MyReservationFragment.tab="3";
         MyReservationFragment.groupbooking="";
 
         service_select=view.findViewById(R.id.incom_ree);
-        sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
-        service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
-//        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
+        MyReservationFragment.progressBar=view.findViewById(R.id.progress);
 
+        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
+        sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
+        manager=new LinearLayoutManager(BeautyMainPage.context);
+        service_select.setLayoutManager(manager);
+//        service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
+//        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
+        service_select.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState== AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+                    isScrolling=true;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                curentItems=manager.getChildCount();
+                totalItems=manager.getItemCount();
+                scrollOutItems=manager.findFirstVisibleItemPosition();
+                if (isScrolling && (curentItems+scrollOutItems==totalItems))
+                {
+                    //-------- fetch data
+                    isScrolling=false;
+                    getdata();
+                }
+            }
+        });
 //        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
 
 //        service_select.setAdapter(reservationsAdapter2);
@@ -79,12 +115,18 @@ public class ExecutedReservationFragment extends Fragment {
             if (filter==null){
                 APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
             }
-            APICall.bookingAutomatedBrowse1("en", "100", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
+            APICall.bookingAutomatedBrowse1(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
         }else {
             MyReservationFragment.filtercheck=false;
         }
 //        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
         return view;
+    }
+
+    private void getdata() {
+        MyReservationFragment.progressBar.setVisibility(View.VISIBLE);
+        pageNum++;
+        APICall.bookingAutomatedBrowseScrolling(APICall.ln, "20", MyReservationFragment.serviceId, pageNum, APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
     }
 
 }

@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class MyBookingRequestsFragment extends Fragment {
 
     public static String salonFilter="",dateFilter="",typeFilter="";
     public static String salonFilterTemp="",dateFilterTemp="",typeFilterTemp="";
+    public  static ProgressBar progressBar;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

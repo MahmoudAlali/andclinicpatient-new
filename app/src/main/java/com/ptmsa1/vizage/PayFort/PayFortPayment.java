@@ -207,7 +207,7 @@ public class PayFortPayment {
             parameters.put("language", payFortData.language);
             parameters.put("merchant_reference", payFortData.merchantReference);
             parameters.put("sdk_token", sdkToken);
-//            parameters.put("token_name ", "7d932978f81c402fbe414f29fb1d30fe");
+            parameters.put("token_name",payFortData.tokenName);
             Log.e("amount",String.valueOf(payFortData.amount));
             Log.e("command",payFortData.command);
             Log.e("currency",payFortData.currency);

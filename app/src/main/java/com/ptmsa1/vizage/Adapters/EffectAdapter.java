@@ -186,37 +186,35 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
             dthree.setBackgroundResource(R.color.colorAccent);
         }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
             dfour.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[5])){
-            dfive.setBackgroundResource(R.color.colorAccent);
         }
 
 
 
-        dzero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                effects.setBdb_value(Constants.effectValues[0]);
-//                effects.setBdb_effect_client_id("0");
-                dzero.setBackgroundResource(R.color.colorAccent);
-                done.setBackgroundResource(android.R.color.transparent);
-                dtwo.setBackgroundResource(android.R.color.transparent);
-                dthree.setBackgroundResource(android.R.color.transparent);
-                dfour.setBackgroundResource(android.R.color.transparent);
-                dfive.setBackgroundResource(android.R.color.transparent);
-            }
-        });
+//        dzero.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                effects.setBdb_value(Constants.effectValues[0]);
+////                effects.setBdb_effect_client_id("0");
+//                dzero.setBackgroundResource(R.color.colorAccent);
+//                done.setBackgroundResource(android.R.color.transparent);
+//                dtwo.setBackgroundResource(android.R.color.transparent);
+//                dthree.setBackgroundResource(android.R.color.transparent);
+//                dfour.setBackgroundResource(android.R.color.transparent);
+//                dfive.setBackgroundResource(android.R.color.transparent);
+//            }
+//        });
 
 
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[0])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[1]);
+                effects.setBdb_value(Constants.effectValues[0]);
 
                 Log.e(" checkClick","is "+checkClick);
                                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -233,12 +231,12 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[2]);
+                effects.setBdb_value(Constants.effectValues[1]);
 
                 Log.e(" checkClick","is "+checkClick);
                                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -256,12 +254,12 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[3]);
+                effects.setBdb_value(Constants.effectValues[2]);
 
                 Log.e(" checkClick","is "+checkClick);
                                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -279,12 +277,12 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[4]);
+                effects.setBdb_value(Constants.effectValues[3]);
 
                 Log.e(" checkClick","is "+checkClick);
                                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -302,11 +300,11 @@ public class EffectAdapter extends RecyclerView.Adapter<EffectAdapter.ListHolder
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
                     checkClick=true;
 //                    update.setEnabled(true);
                 }
-                effects.setBdb_value(Constants.effectValues[5]);
+                effects.setBdb_value(Constants.effectValues[4]);
 
                 Log.e(" checkClick","is "+checkClick);
                                 Log.e(" checkClick","is "+effects.getBdb_value());

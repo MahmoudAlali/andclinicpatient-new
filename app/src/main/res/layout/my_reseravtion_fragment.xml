@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarm"
@@ -47,7 +46,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_filter_list_black_blue_24dp"
+                android:src="@drawable/ic_filter"
                 />
 
         </LinearLayout>
@@ -56,131 +55,305 @@
 
     </android.support.v7.widget.Toolbar>
 
+<!--    <LinearLayout-->
+<!--        android:layout_marginTop="?attr/actionBarSize"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@color/end_gray"-->
+<!--        android:layout_height="?attr/actionBarSize">-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+<!--            <TextView-->
+<!--                android:id="@+id/incom_reservation"-->
+<!--                android:layout_weight="1"-->
+<!--                android:textSize="12dp"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="#000"-->
+<!--                android:text="@string/Reservations_received"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+
+<!--            <TextView-->
+<!--                android:textColor="#000"-->
+
+<!--                android:id="@+id/accept_reservation"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+
+<!--                android:text="@string/Acceptable_reservations"-->
+<!--                android:textSize="12dp" />-->
+<!--            <TextView-->
+<!--                android:textColor="#000"-->
+
+<!--                android:id="@+id/deposited_reservation"-->
+<!--                android:layout_weight="1"-->
+<!--                android:textSize="12dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/Bookings_paid_DEPOSIT"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:weightSum="3"
         android:layout_height="wrap_content">
-<!--
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:background="@color/gray"
+        <TextView
+            android:lines="1"
+            android:id="@+id/incom_reservation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"></Space>
-            <TextView
-                android:id="@+id/incom_reservation"
-                android:layout_weight="1"
-                android:textSize="12dp"
-                android:gravity="center"
-                android:textColor="#000"
-                android:text="@string/accepted"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_edit_text" />
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"></Space>
-            <TextView
-                android:id="@+id/deposit_reservation"
-                android:layout_weight="1"
-                android:textSize="12dp"
-                android:gravity="center"
-                android:textColor="#000"
-                android:text="@string/Bookings_paid_DEPOSIT"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_edit_text" />
+            android:layout_weight="1"
+            android:layout_height="@dimen/high_button"
+            android:textSize="12dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:text="@string/accepted"
+            android:background="@drawable/shadow_service_tab"
+            />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"></Space>
-            <TextView
-                android:textColor="#000"
-                android:id="@+id/accept_reservation"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_edit_text"
-                android:layout_weight="1"
-                android:gravity="center"
-
-                android:text="@string/Executed_res"
-                android:textSize="12dp" />
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"></Space>
-            &lt;!&ndash;<TextView&ndash;&gt;
-                &lt;!&ndash;android:textColor="#000"&ndash;&gt;
-                &lt;!&ndash;android:id="@+id/deposited_reservation"&ndash;&gt;
-                &lt;!&ndash;android:layout_weight="1"&ndash;&gt;
-                &lt;!&ndash;android:textSize="12dp"&ndash;&gt;
-                &lt;!&ndash;android:gravity="center"&ndash;&gt;
-                &lt;!&ndash;android:text="@string/Bookings_paid_DEPOSIT"&ndash;&gt;
-                &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
-                &lt;!&ndash;android:layout_height="match_parent" />&ndash;&gt;
-        </LinearLayout>
--->
-        <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/border"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
+        <TextView
+            android:id="@+id/deposit_reservation"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:lines="1"
+            android:textColor="#000"
+            android:text="@string/Bookings_paid_DEPOSIT"
             android:layout_width="match_parent"
-            android:weightSum="3"
-            android:layout_height="wrap_content">
-            <TextView
-                android:lines="1"
-                android:id="@+id/incom_reservation"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="@dimen/high_button"
-                android:textSize="12dp"
-                android:gravity="center"
-                android:textColor="#000"
-                android:text="@string/accepted"
-                android:background="@drawable/shadow_service_tab"
-                />
-
-            <TextView
-                android:id="@+id/deposit_reservation"
-                android:layout_weight="1"
-                android:textSize="12dp"
-                android:lines="1"
-                android:textColor="#000"
-                android:text="@string/Bookings_paid_DEPOSIT"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_button"
-                android:gravity="center"
-                />
-            <TextView
-                android:lines="1"
-                android:id="@+id/accept_reservation"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textColor="#000"
-                android:layout_height="@dimen/high_button"
-                android:gravity="center"
-                android:text="@string/Executed_res"
-                />
-
-
-        </LinearLayout>
+            android:layout_height="@dimen/high_button"
+            android:gravity="center"
+            />
+        <TextView
+            android:lines="1"
+            android:id="@+id/accept_reservation"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:layout_height="@dimen/high_button"
+            android:gravity="center"
+            android:text="@string/Executed_res"
+            />
 
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="122dp"
+        android:layout_marginTop="110dp"
         android:orientation="vertical"
         android:id="@+id/tabs_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
     </LinearLayout>
 
 
+    <!--
+        <ru.dimorinny.floatingtextbutton.FloatingTextButton
+            android:id="@+id/action_button"
+            android:layout_marginTop="115dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/reser_count_icon"
+            app:floating_background_color="@color/transparent"
+            app:floating_title="0"
+            app:floating_title_color="@android:color/white">
+        </ru.dimorinny.floatingtextbutton.FloatingTextButton>
+    -->
 
+    <LinearLayout
+        android:layout_marginTop="115dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="5dp"
+
+        android:padding="4dp"
+        android:background="@drawable/border_edit_text_v5"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:id="@+id/action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/lightBordeaux"
+                android:textSize="@dimen/standard_20"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="@dimen/standard_45"
+                android:layout_height="@dimen/standard_45"
+                android:src="@drawable/reser_count_icon"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/tabs_fragment"
+        app:layout_anchorGravity="center">
+
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="115dp">-->
+
+        <!--</android.support.design.widget.FloatingActionButton>-->
+
+
+        <!--<com.github.clans.fab.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="@dimen/standard_80"-->
+        <!--android:layout_height="@dimen/standard_80"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:src="@drawable/fab_add"-->
+        <!--app:fab_colorNormal="#DA4336"-->
+        <!--app:fab_colorPressed="#E75043"-->
+        <!--app:fab_colorRipple="#99FFFFFF"-->
+        <!--app:fab_showShadow="true"-->
+        <!--app:fab_shadowColor="#66000000"-->
+        <!--app:fab_shadowRadius="4dp"-->
+        <!--app:fab_shadowXOffset="1dp"-->
+        <!--app:fab_shadowYOffset="3dp"-->
+        <!--app:fab_size="normal"-->
+        <!--app:fab_showAnimation="@anim/fab_scale_up"-->
+        <!--app:fab_hideAnimation="@anim/fab_scale_down"-->
+        <!--app:fab_label=""-->
+        <!--app:fab_progress_color="#FF009688"-->
+        <!--app:fab_progress_backgroundColor="#4D000000"-->
+        <!--app:fab_progress_indeterminate="false"-->
+        <!--app:fab_progress_max="100"-->
+        <!--app:fab_progress="0"-->
+        <!--app:fab_progress_showBackground="true"-->
+        <!--/>-->
+
+    </FrameLayout>
+
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/myprofile"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:onClick="myprofile"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="بروفايلي"-->
+    <!--android:textStyle="bold" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView32"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:onClick="pauseAccount"-->
+    <!--android:text="ايقاف حسابي"-->
+    <!--android:textStyle="bold" />-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/shadow"-->
+    <!--android:elevation="16dp"-->
+    <!--android:orientation="horizontal">-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView31"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="حذف حسابي" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+
+    <!--android:layout_weight="1"-->
+
+    <!--android:orientation="horizontal"-->
+    <!--android:weightSum="3">-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:orientation="horizontal"></LinearLayout>-->
+    <!--</LinearLayout>-->
 </android.support.design.widget.CoordinatorLayout>

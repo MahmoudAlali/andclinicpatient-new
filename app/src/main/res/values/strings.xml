@@ -852,5 +852,31 @@
     <string name="update_effects">Do you want to apply these changes to your effects?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="offer_not_found">Offer not found</string>
+    <string name="supplier_not_found">Supplier not found</string>
+    <string name="service_not_found">Service not found</string>
+    <string name="invaled_order_id">Invalid order ID</string>
+    <string name="no_order_found">No order found</string>
+    <string name="no_services">There is no services</string>
+    <string name="invalid_book_id">Invalid book ID</string>
+    <string name="please_use_cancel_booking_api">Please use cancel booking api</string>
+    <string name="client_not_exist">Client not exist</string>
+    <string name="error_in_merchant_refernce_try_again">Error in marchent refernce try again</string>
+    <string name="we_receive_an_incorrect_signature_from_payfort">We receive an incorrect signature from payfort</string>
+    <string name="distance_is_required">The distance is required</string>
+    <string name="can_not_sort_distance">Can not sort by distance because not founddeterminated location</string>
+    <string name="no_offers_on_this_service">No offers on this service</string>
+    <string name="there_is_no_supplier">there is no suppliered services with your searchfilters</string>
+    <string name="employee_id_you_sent_is_invalid">employee_id you sent is invalid</string>
+    <string name="booking_times_you_select_not_avaliable_right_now_try_find_another">booking times you select not avaliable right nowtry find another</string>
+    <string name="you_cant_activate_account_4times">you can not activate your account today becauseyou have requested activation code more than 4times today</string>
+    <string name="bdb_mobile_is_already_exists_and_activated">bdb_mobile is already exists and activated</string>
+    <string name="bdb_mobile_is_not_registered">bdb_mobile is not registered</string>
+    <string name="success_add_address">Success add address</string>
+    <string name="This_Location_is_deleted">This Location is deleted</string>
+    <string name="success_update_address">Success update address</string>
+    <string name="your_acc_deleted">Your account has been successfully paused</string>
+    <string name="there_is_no_items">There is no fav Items</string>
+    <string name="this_res_can_only_canceld_by_the_owner">This reservation can only be canceled by the reservation owner</string>
 
 </resources>

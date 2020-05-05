@@ -288,7 +288,8 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
                 try {
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
-                    if (success.equals("true"))
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("37"))
                     {
                         JSONObject object=j.getJSONObject("result");
                         final String token_name=object.getString("token_name");
@@ -303,18 +304,35 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
                         final String merchant_reference=object.getString("merchant_reference");
                         final String sdk_token=object.getString("sdk_token");
                         Log.e("this_is","APIBefor");
+                        Log.e("Token_name","iiiii"+token_name);
 
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 requestForPayfortPayment(sdk_token,signature ,merchant_identifier ,access_code
-                                        ,merchant_reference,customer_email,device_id,fortCallback,iPaymentRequestCallBack,mMessage,token_name);
+                                        ,merchant_reference,customer_email,device_id,fortCallback,iPaymentRequestCallBack,token_name,mMessage);
                             }
                         });
 
 
 
+                    }else if(j.getString("resonse_code").equals("38")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                               APICall.showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            }
+                        });
+                    }else if(j.getString("resonse_code").equals("39")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                               APICall.showSweetDialog(context,"",context.getResources().getString(R.string.we_receive_an_incorrect_signature_from_payfort));
+                            }
+                        });
                     }
+
+
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {

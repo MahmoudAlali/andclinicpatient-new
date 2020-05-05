@@ -792,8 +792,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                         }
                         }else {
+                            Log.e("bookingAu(0)","is"+bookingAutomatedBrowseData.get(position).getData().get(0));
 
-                            if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("7")) {
+                            if (bookingAutomatedBrowseData.get(position).getBookingType().equals("7")) {
                                 if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
                                     //-------cancelpaid api--------
 //                            /api/booking/BookingProcessing
@@ -811,33 +812,33 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                                 Toast.makeText(context, R.string.enter_reason, Toast.LENGTH_LONG).show();
                                             } else {
                                                 //----------------- cancel paid----------
-                                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), reason.getText().toString(), context);
+                                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), reason.getText().toString(), context);
                                             }
                                         }
                                     });
                                 } else {
 
                                     //------------- cancel paid ----------
-                                    APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 4, "0", context);
+                                    APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 4, "0", context);
 
 //                            /api/booking/cancelPaidBooking
                                 }
                             }
-                            else if (bookingAutomatedBrowseData.get(position).getData().get(0).equals("2") ||
-                                    bookingAutomatedBrowseData.get(position).getData().get(0).equals("8")) {
+                            else if (bookingAutomatedBrowseData.get(position).getBookingType().equals("2") ||
+                                    bookingAutomatedBrowseData.get(position).getBookingType().equals("8")) {
                                 //---------- book proccessing --------- to 0
 //                        /api/booking/BookingProcessing
-                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 5, "0", context);
+                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 5, "0", context);
 
                             }
                             else {
                                 //---------- Other cases
 //                        /api/booking/BookingProcessing
-                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_id(), 5, "0", context);
+                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 5, "0", context);
                             }
                         }
                 }else {
-                        APICall.showSweetDialog(context,"","لا يمكن إلغاء هذا الحجز إلا من قبل العميلة صاحبة الحجز");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.this_res_can_only_canceld_by_the_owner));
                     }
                 }
             });
@@ -849,10 +850,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
             }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("1")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
-
             }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("2")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hall));
-
             }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("3")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
 
