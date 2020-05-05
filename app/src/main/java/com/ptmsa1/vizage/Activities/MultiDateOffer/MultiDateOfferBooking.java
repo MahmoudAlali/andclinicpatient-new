@@ -54,6 +54,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
     public static String bdb_pack_id;
     String is_effects_on,end_date;
     public  static String bdb_offer_end="";
+    String notification2 = "";
 
 
     int booking_period;
@@ -143,13 +144,14 @@ public class MultiDateOfferBooking extends AppCompatActivity {
         String notification = "";
         try {
             notification=getIntent().getStringExtra("notification");
+            notification2=notification;
 
         }
         catch (Exception e){}
         try {
             if (!notification.equals("")) {
                 Log.e("MMMMMMMMMM",notification);
-
+                notification2=notification;
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 place = NotificationsBeauty.offer_place;
@@ -404,7 +406,7 @@ public class MultiDateOfferBooking extends AppCompatActivity {
                         intent.putExtra("offertype", offertype);
                         intent.putExtra("place", place);
                         intent.putExtra("bdb_pack_id",bdb_pack_id);
-                        intent.putExtra("notification","true");
+                        intent.putExtra("notification",notification2);
                         intent.putExtra("position", postion);
                         startActivity(intent);
                     }else {

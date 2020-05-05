@@ -95,11 +95,16 @@ public class MultiClientOfferEffect extends AppCompatActivity {
             if(!notification.equals(""))
 
             {
+                Log.e("MULTIClientEffect",notification);
                 bdb_pack_code = getIntent().getStringExtra("bdb_pack_id");
                supIdClasses = NotificationsBeauty.supIdClasses;
+                Log.e("MULTIClientEffect",notification);
             }
         }
-        catch (Exception e){}
+        catch (Exception e){
+            Log.e("MULTIClientEffect",e.getMessage());
+
+        }
 
 
         //endregion

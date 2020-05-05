@@ -56,6 +56,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
     public static String bdb_pack_id;
     String bdb_pack_id1;
     String is_effects_on;
+    String notification2="";
     public static String offerType="";
     public static String offerplace="";
     public  static int booking_period;
@@ -179,7 +180,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         try {
             if (!notification.equals("")) {
                 Log.e("MMMMMMMMMM",notification);
-
+                notification2=notification;
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 bdb_pack_id1 = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
@@ -432,7 +433,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                             intent.putExtra("offertype", offerType);
                             intent.putExtra("position", postion);
                             intent.putExtra("bdb_pack_id",bdb_pack_id);
-                            intent.putExtra("notification","true");
+                            intent.putExtra("notification",notification2);
                             intent.putExtra("place", offerplace);
                             startActivity(intent);
                         }else {
