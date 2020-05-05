@@ -57,6 +57,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
     public static String end_date;
     public static String bdb_pack_id;
     String is_effects_on;
+    String notification2="";
     public static String place_num="",price_num="";
 
     String maxPrice="0",minPrice="10000";
@@ -157,6 +158,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
         try {
             if (!notification.equals("")) {
                 Log.e("MMMMMMMMMM",notification);
+                notification2=notification;
                 bdb_pack_id = getIntent().getStringExtra("bdb_pack_id");
                 is_effects_on = getIntent().getStringExtra("is_effects_on");
                 end_date = getIntent().getStringExtra("offer_end");
@@ -482,7 +484,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                             intent.putExtra("place", place);
                             intent.putExtra("position", postion);
                             intent.putExtra("bdb_pack_id",bdb_pack_id);
-                            intent.putExtra("notification","true");
+                            intent.putExtra("notification",notification2);
                             intent.putExtra("offertype", getIntent().getStringExtra("offertype"));
                             startActivity(intent);
                         }else {
