@@ -22451,7 +22451,7 @@ public class APICall {
 
 
     }
-    public static void sendFirstChatMsg(final Context context ,String msg)
+    public static void sendFirstChatMsg(final Context context ,final String msg)
     {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
 
@@ -22558,6 +22558,29 @@ public class APICall {
                         JSONObject object = j.getJSONObject("data");
                         InternalChatActivity.ChatID=object.getString("bdb_chat_id");
                         InternalChatActivity.Token=object.getString("token");
+                            JSONObject notification = new JSONObject();
+                            JSONObject notificationBody = new JSONObject();
+                            String title="";
+                            if (SupportActivity.providerSalonName!=null && !SupportActivity.providerSalonName.equals(""))
+                                title=SupportActivity.providerSalonName;
+                            else
+                                title=SupportActivity.providerName;
+                            try {
+                                notificationBody.put("body", msg);
+                                notificationBody.put("title", title);
+                                notificationBody.put("chat_id", InternalChatActivity.ChatID);
+                                notificationBody.put("content_available", true);
+                                notificationBody.put("action", "5");
+                                notificationBody.put("author", "1");
+                                notificationBody.put("sender_id", InternalChatActivity.ProviderId);
+                                notification.put("to", InternalChatActivity.Token);
+                                notification.put("data", notificationBody);
+                            } catch (JSONException e) {
+                                Log.e("NotificationErr", "onCreate: " + e.getMessage() );
+                            }
+                            InternalChatActivity.sendNotification(notification);
+                            Log.e("N", notification.toString() );
+
                     }else if (response_code.equals("45")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
@@ -29550,6 +29573,11 @@ Log.e("filters",filter);
 
 
                     }
+                    else
+                    {
+                        showUnexpectedErrMsgWithLogout(context);
+
+                    }
                 }catch (JSONException je){
                     Log.e("ERR", je.getMessage());
 
@@ -29878,6 +29906,50 @@ Log.e("filters",filter);
                     public void onClick(View v) {
                         dialog.cancel();
                         SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
+    public  static  void showUnexpectedErrMsgWithLogout(final Context context){
+
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v35);
+                TextView websiteSupport = dialog.findViewById(R.id.confirm);
+                TextView whatsAppSupport = dialog.findViewById(R.id.cancel);
+                TextView ok = dialog.findViewById(R.id.ok);
+                websiteSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(myAppLinkToMarket);
+
+
+                    }
+                });
+                whatsAppSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SharedPreferences editor = context.getSharedPreferences("REG_ID", context.MODE_PRIVATE);
+                        logout(context,editor.getString("token_provider",""));
+
                     }
                 });
                 dialog.show();
