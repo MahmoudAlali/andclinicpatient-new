@@ -35,7 +35,7 @@
             >
             <ImageView
                 android:id="@+id/img_profile"
-                android:src="@drawable/clientlogo"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"

@@ -101,8 +101,8 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         //------------------- titles--------------------------
-        String listTitle =  (String) getGroup(groupPosition);
-//                +" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
+        String listTitle =  (String) getGroup(groupPosition)
+                +" : "+stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getTotal_price()+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal);
             Log.e("LISTTITLE",listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.

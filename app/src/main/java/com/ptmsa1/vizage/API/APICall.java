@@ -212,6 +212,7 @@ public class APICall {
     public static String SERVER_KEY="";
     public static String GOOGLE_KEY="";
     public static String PROVIDER_SERVER_KEY="";
+    public static String LOGO_ID="";
 
 
 
@@ -29523,6 +29524,7 @@ Log.e("filters",filter);
                         SERVER_KEY=data.getString("server_key");
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
+                        LOGO_ID=data.getString("provider_logo_id");
 
                        /* String experince="",book_sol="";
                         if (ln.equals("ar")) {
@@ -29544,6 +29546,7 @@ Log.e("filters",filter);
                         Log.e("TAG2", Constants.messageOfClientsNames_en);
                         Log.e("TAG3", Constants.messageOfKnownProviders_ar);
                         Log.e("TAG4", Constants.messageOfKnownProviders_en);
+                        setLogo(context,LOGO_ID,BeautyMainPage.client_name,"");
 
 
                     }
@@ -29565,6 +29568,252 @@ Log.e("filters",filter);
             }
         });
 //        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void getSystemInfoForLogo( final Context context){
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+//        try {
+//            postdata.put("token", token);
+////            postdata.put("password", "12345");
+//        } catch (JSONException e) {
+////         TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE,postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getSystemInfo")
+                .post(body)
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + gettoken(context))
+//                .header("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQzNGYzMGUwZTliZTI4NDQ1ZWFiNTg4YmM2YzVjYzNjN2MwODZlY2E5NTdhMWNiYzRmZjNhMzQ4ZGZiNjA0NWMzMmQ3ZDA2NWEyZTU4ZTUxIn0.eyJhdWQiOiI5IiwianRpIjoiZDM0ZjMwZTBlOWJlMjg0NDVlYWI1ODhiYzZjNWNjM2M3YzA4NmVjYTk1N2ExY2JjNGZmM2EzNDhkZmI2MDQ1YzMyZDdkMDY1YTJlNThlNTEiLCJpYXQiOjE1Njc0MDY5MjcsIm5iZiI6MTU2NzQwNjkyNywiZXhwIjoxNTk5MDI5MzI3LCJzdWIiOiI0OCIsInNjb3BlcyI6W119.CFoTC294Z9suaczjlMeQBU5njHyEUNScjPmI5XjaBG8hesv0oGj5irruJfE9sv1F_CnRGfU0aqQbkxc5HVnN6G76SaBFTSREef6ElqB_1XdsF5CF4d4bMkr2cAs8aC2D2ydHq25AHfCqUYlYseqnQeWzKr-cxwBCnPFx8lCszqj6WN8iviUnXaZbHYdJqw_PmPtweiQy8xP7TFUixtxwJnOguhFiPgbJaCAJREVqx6eWwOZfSAtN-B5JtCWUEUCubnW0t00EhWDNw0K-8Zz45STyDAkiWq_5B0zUvhmqUuvfgJ9P192pK4AKDxRuJxSUcyYKf1Wko9VJLFJRGO7KSsDX63jwFqGKKJfCsI8htxmRihi0yMNTvGZBDrRvGnIoHBKmj_A-JBCLB_P1X-huZvFrb0MfpQz4-r-QzK5qx1tCcSuT3iD52AG-3YyN3-XkF0PeS3h302KUJWm03nPB11M4exI-Ws2rfH5sv_xa7ujBHf9iNNHMun-VIaqzu5MRf6waaDqoRRTe0R9W_XCy6ljQWUhxKYYE9eKImWcVZy3PSp10JyBR8v7YfAqMtadw6dKKRsEIs9xQNZUfNPRzi1Nblo9PioUTmRoCEuQzKgA-zXK3xqBIrn0Kn2CtdZnr80l51cP_6EcOgCtb7utqlrkeiSDKe1iG8ftISPF424Q")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                try {
+                    final JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    if (success.equals("true")) {
+                        JSONObject data=j.getJSONObject("data");
+                        SERVER_KEY=data.getString("server_key");
+                        GOOGLE_KEY=data.getString("google_key");
+                        PROVIDER_SERVER_KEY=data.getString("provider_server_key");
+                        LOGO_ID=data.getString("provider_logo_id");
+
+                       /* String experince="",book_sol="";
+                        if (ln.equals("ar")) {
+                            experince = data.getString("previous_experience_ar");
+                            book_sol = data.getString("book_sol_ar");
+                        }else {
+                            experince = data.getString("previous_experience_en");
+                            book_sol = data.getString("book_sol_en");
+                        }*/
+                        SharedPreferences.Editor prefs = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        prefs.putString("SERVER_KEY",SERVER_KEY);
+                        prefs.putString("GOOGLE_KEY",GOOGLE_KEY);
+                        prefs.putString("PROVIDER_SERVER_KEY",PROVIDER_SERVER_KEY);
+                        Constants.messageOfClientsNames_ar=data.getString("book_sol_ar");
+                        Constants.messageOfClientsNames_en=data.getString("book_sol_en ");
+                        Constants.messageOfKnownProviders_ar=data.getString("previous_experience_ar");
+                        Constants.messageOfKnownProviders_en=data.getString("previous_experience_en");
+                        Log.e("TAG1", Constants.messageOfClientsNames_ar);
+                        Log.e("TAG2", Constants.messageOfClientsNames_en);
+                        Log.e("TAG3", Constants.messageOfKnownProviders_ar);
+                        Log.e("TAG4", Constants.messageOfKnownProviders_en);
+                        Log.e("TAG5","setLogoID");
+                        setLogo(context,LOGO_ID,BeautyMainPage.client_name,"");
+                    }
+                }catch (JSONException je){
+                    Log.e("ERR", je.getMessage());
+
+                }
+                Log.e("TAG", mMessage);
+
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        pd.dismiss();
+//
+////                        Toast.makeText(context,mMessage,Toast.LENGTH_LONG).show();
+//                    }
+//                });
+            }
+        });
+//        Log.d("MessageResponse",mMessage);
+    }
+    public static void setLogo(final Context context, String LogoId,final String salonName,final String ownerName)
+    {
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(!salonName.equals("") && salonName!=null)
+                    BeautyMainPage.profileNameText.setText(salonName);
+
+
+
+            }
+        });
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        // showDialog(context);
+
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+
+        if(!LogoId.equals("null"))
+        {
+            try
+            {
+                postdata.put("bdb_id",LogoId);
+
+            }
+            catch (Exception e)
+            {
+                e.getStackTrace();
+            }
+            Log.e("LOgoBDBID","is"+LogoId);
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(API_PREFIX_NAME+"/api/get/image")
+                    .post(body)
+                    .addHeader("Content-Type","application/json")
+                    .header("Authorization", "Bearer " + gettoken(context))
+
+//                .addHeader("X-Requested-With","XMLHttpRequest")
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage();
+                    //pd1.dismiss();
+                    Log.e("LOGOResponseErr","is"+mMessage);
+
+
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname")||mMessage.contains("faild to connect to")){
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+//                            title.setText(R.string.Null);
+//                            message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+                    }else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    Bitmap bitmap = null;
+                    final Bitmap bit ;
+                    Log.e("LOGOResponse","is"+response.toString());
+
+                    Log.e("LOGO","returned");
+
+
+                    try {
+                        bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                    } catch (Exception e)
+                    {
+                        // TODO Auto-generated catch block
+                        Log.e("ERRLOGO",e.getMessage());
+                        e.printStackTrace();
+                    }
+                    bit =bitmap;
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            BeautyMainPage.ImageLogo=bit;
+                            BeautyMainPage.setLogo(bit);
+//                            Log.e("LOGOIDSc","is"+  BeautyMainPage.ImageLogo.getByteCount());
+                        }
+                    });
+                }
+
+            });
+
+        }
+
     }
 
     public  static  void showUnexpectedErrMsg(final Context context){
