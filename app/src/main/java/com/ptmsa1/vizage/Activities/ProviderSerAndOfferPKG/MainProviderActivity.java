@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -60,8 +61,9 @@ public class MainProviderActivity extends AppCompatActivity {
     android.app.FragmentTransaction fragmentTransaction;
 
 
-    public static TextView service_Sw,offer_sw,date,my_location,map;
+    public static TextView service_Sw,offer_sw,date,my_location,map,salon_name;
     public static RecyclerView recycleview;
+    ImageView exp,health;
     public static ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
     public static   ArrayList<DataOffer>  list=new ArrayList<>();
@@ -91,6 +93,9 @@ public class MainProviderActivity extends AppCompatActivity {
 
         //---------- find view by Id
         service_Sw=findViewById(R.id.service_Sw);
+        exp=findViewById(R.id.exp);
+        health=findViewById(R.id.health);
+        salon_name=findViewById(R.id.salon_name);
         offer_sw=findViewById(R.id.offer_sw);
         map=findViewById(R.id.map);
         date=findViewById(R.id.date);
@@ -100,6 +105,16 @@ public class MainProviderActivity extends AppCompatActivity {
 //        APICall.getdetailsUser(context);
 
 //        my_location.setText(PlaceServiceFragment.mylocationId);
+
+        salon_name.setText(getIntent().getStringExtra("provider_name"));
+        if (getIntent().getStringExtra("exp").equals("1")){
+            exp.setImageResource(R.drawable.ic_experience_care);
+        }
+        if (getIntent().getStringExtra("health").equals("1")){
+            health.setImageResource(R.drawable.ic_health_care);
+        }
+
+
         my_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,7 +269,7 @@ public class MainProviderActivity extends AppCompatActivity {
                 recycleview.setLayoutManager(manager);
                 recycleview.setAdapter(servicesProviderAdapter);
 
-                APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "20", pagenum+"", context);
+                APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", APICall.ln, "20", pagenum+"", context);
 
 
             }
@@ -283,7 +298,7 @@ public class MainProviderActivity extends AppCompatActivity {
 
                     APICall.automatedBrowseProviderOffers("8", "1", date1, context);
                 }else {
-                    APICall.showSweetDialog(context,"","plese select date and location before browse offers");
+                    APICall.showSweetDialog(context,"",context.getResources().getString(R.string.please_select_date_and_location));
                 }
 
             }
@@ -302,8 +317,12 @@ public class MainProviderActivity extends AppCompatActivity {
                 Log.e("pro_name_id","is "+getIntent().getStringExtra("provider_id"));
                 for (int i=0;i<supInfoList.size();i++){
                     if (getIntent().getStringExtra("provider_id").equals(supInfoList.get(i).getId())){
-                        lat1=Double.parseDouble(supInfoList.get(i).getBdb_loc_lat());
-                        lang1=Double.parseDouble(supInfoList.get(i).getBdb_loc_long());
+                        try {
+                            lat1 = Double.parseDouble(supInfoList.get(i).getBdb_loc_lat());
+                            lang1 = Double.parseDouble(supInfoList.get(i).getBdb_loc_long());
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -328,7 +347,7 @@ public class MainProviderActivity extends AppCompatActivity {
         recycleview.setAdapter(servicesProviderAdapter);
 
 
-        APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", "en", "20", pagenum+"", context);
+        APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", APICall.ln, "20", pagenum+"", context);
 
 
 

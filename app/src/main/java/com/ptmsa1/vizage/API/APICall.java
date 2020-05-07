@@ -427,7 +427,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                               showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                               showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -880,7 +880,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -984,7 +984,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1125,7 +1125,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1270,7 +1270,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1421,7 +1421,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1573,7 +1573,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1725,7 +1725,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -1881,7 +1881,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -2030,7 +2030,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -2179,7 +2179,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -2284,7 +2284,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -2448,7 +2448,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -2498,10 +2498,12 @@ public class APICall {
                            }
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
+                           String bdb_has_experience_cer=pkg.getString("bdb_has_experience_cer");
+                           String bdb_has_health_cer=pkg.getString("bdb_has_health_cer");
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -2617,7 +2619,7 @@ public class APICall {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                    showUnexpectedErrMsg(context);
 
                                 }
                             });
@@ -2770,7 +2772,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -2907,7 +2909,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -3037,7 +3039,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -3166,7 +3168,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -3301,7 +3303,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -3423,7 +3425,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -3533,7 +3535,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -3637,7 +3639,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -3847,7 +3849,7 @@ public class APICall {
                                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                                showUnexpectedErrMsg(context);
 
                                             }
                                         });
@@ -3991,7 +3993,7 @@ public class APICall {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                    showUnexpectedErrMsg(context);
 
                                 }
                             });
@@ -4095,7 +4097,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -4259,7 +4261,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -4367,7 +4369,7 @@ public class APICall {
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                        showUnexpectedErrMsg(context);
 
                                     }
                                 });
@@ -4467,7 +4469,7 @@ public class APICall {
                                                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                                             @Override
                                                             public void run() {
-                                                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                                                showUnexpectedErrMsg(context);
 
                                                             }
                                                         });
@@ -4531,13 +4533,7 @@ public class APICall {
                                     }
                                 } else {
                                     pd.dismiss();
-                                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            String t=((AppCompatActivity)context).getResources().getString(R.string.an_error_occurred);
-                                            showSweetDialog(context, t,  t+": "+mMessage );
-                                        }
-                                    });
+                                   showUnexpectedErrMsg(context);
                                 }
                             } catch (JSONException je) {
                                 je.printStackTrace();
@@ -4622,7 +4618,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -4747,7 +4743,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -4926,7 +4922,7 @@ public class APICall {
                                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                            showUnexpectedErrMsg(context);
 
                                         }
                                     });
@@ -5031,7 +5027,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -5135,7 +5131,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -5265,7 +5261,7 @@ public class APICall {
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                        showUnexpectedErrMsg(context);
 
                     }
                 });
@@ -5406,7 +5402,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -5522,10 +5518,12 @@ public class APICall {
                                 JSONObject info=supInfo.getJSONObject(i);
                                 String name=info.getString("name");
                                 String id=info.getString("id");
+                                String bdb_has_experience_cer=info.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=info.getString("bdb_has_health_cer");
                                 String address=info.getString("address");
                                 String bdb_loc_lat=info.getString("bdb_loc_lat");
                                 String bdb_loc_long=info.getString("bdb_loc_long");
-                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
+                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long,bdb_has_experience_cer,bdb_has_health_cer));
 
 //                                ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
 
@@ -5581,40 +5579,30 @@ public class APICall {
                             });
                         }else if (jsonObject.getString("resonse_code").equals("83")){
                             TabTwo.arrayList.clear();
-                            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
                                     TabOne.refreshRV();
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.distance_is_required));
-                                }
-                            });
+                                    APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                            context.getResources().getString(R.string.try_again_later));;
+
                         }else if (jsonObject.getString("resonse_code").equals("84")){
                             TabTwo.arrayList.clear();
-                            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
                                     TabOne.refreshRV();
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.can_not_sort_distance));
-                                }
-                            });
+                                    APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                            context.getResources().getString(R.string.try_again_later));
+
                         }else if (jsonObject.getString("resonse_code").equals("86")){
                             TabTwo.arrayList.clear();
-                            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
                                     TabOne.refreshRV();
                                     showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_supplier));
-                                }
-                            });
+
                         }else if (jsonObject.getString("resonse_code").equals("87")){
                             TabTwo.arrayList.clear();
-                            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+
                                     TabOne.refreshRV();
                                     showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_provider));
-                                }
-                            });
+
                         }
                         else
                             showUnexpectedErrMsg(context);
@@ -5747,7 +5735,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -5757,7 +5745,7 @@ public class APICall {
                 @Override
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     mMessage = response.body().string();
-                    Log.e("TAG123", mMessage);
+                    Log.e("TAG1231", mMessage);
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -5866,11 +5854,13 @@ public class APICall {
                                 JSONObject info=supInfo.getJSONObject(i);
                                 String name=info.getString("name");
                                 String id=info.getString("id");
+                                String bdb_has_experience_cer=info.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=info.getString("bdb_has_health_cer");
 
                                 String address=info.getString("address");
                                 String bdb_loc_lat=info.getString("bdb_loc_lat");
                                 String bdb_loc_long=info.getString("bdb_loc_long");
-                                MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
+                                MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long,bdb_has_experience_cer,bdb_has_health_cer));
 
                             }
 
@@ -6023,7 +6013,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -6078,6 +6068,8 @@ public class APICall {
                                     JSONObject jarray = offersArray.getJSONObject(i);
                                     String bdb_pack_code=jarray.getString("bdb_pack_code"),
                                             bdb_sup_name=jarray.getString("bdb_sup_name"),
+                                            bdb_has_experience_cer=jarray.getString("bdb_has_experience_cer"),
+                                            bdb_has_health_cer=jarray.getString("bdb_has_health_cer"),
                                             totalRating_to_Sup=jarray.getString("totalRating_to_Sup"),
                                             service_count=jarray.getString("service count"),
                                             is_fav_sup=jarray.getString("is_fav_sup"),
@@ -6110,7 +6102,7 @@ public class APICall {
                                     }
                                     if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
                                     {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer,bdb_has_experience_cer,bdb_has_health_cer);
                                         TabTwo.arrayList.add(dof);
 
                                     }
@@ -6118,6 +6110,7 @@ public class APICall {
                                         JSONObject info=supInfo.getJSONObject(j);
                                         String name=info.getString("name");
                                         String id=info.getString("id");
+
                                         String address=info.getString("address");
 
 //                                        String bdb_loc_lat=info.getString("latitude");
@@ -6266,7 +6259,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -6288,7 +6281,7 @@ public class APICall {
                 try{
                     JSONObject jsonObject=new JSONObject(mMessage);
                     String success=jsonObject.getString("success");
-                    String response_code=jsonObject.getString("response_code");
+                    final String response_code=jsonObject.getString("response_code");
                     Log.e("success",success);
                     String message;
                     try {
@@ -6305,7 +6298,7 @@ public class APICall {
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(context,"there is no suppliered services with your search filters",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(context,R.string.there_is_no_supplier,Toast.LENGTH_LONG).show();
                                         TabOne.refreshRV();
                                     }
                                 });
@@ -6326,6 +6319,8 @@ public class APICall {
                                     JSONObject jarray = offersArray.getJSONObject(i);
                                     String bdb_pack_code=jarray.getString("bdb_pack_code"),
                                             bdb_sup_name=jarray.getString("bdb_sup_name"),
+                                            bdb_has_experience_cer=jarray.getString("bdb_has_experience_cer"),
+                                            bdb_has_health_cer=jarray.getString("bdb_has_health_cer"),
                                             totalRating_to_Sup=jarray.getString("totalRating_to_Sup"),
                                             service_count=jarray.getString("service count"),
                                             is_fav_sup=jarray.getString("is_fav_sup"),
@@ -6358,7 +6353,7 @@ public class APICall {
                                     }
 //                                    if(PlaceServiceFragment.offerPlace.equals(bdb_offer_place))
 //                                    {
-                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer);
+                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer,bdb_has_experience_cer,bdb_has_health_cer);
                                         MainProviderActivity.list.add(dof);
 
 //                                    }
@@ -6367,8 +6362,13 @@ public class APICall {
                                         String name=info.getString("name");
                                         String id=info.getString("id");
                                         String address=info.getString("address");
-                                        String bdb_loc_lat=info.getString("bdb_loc_lat");
-                                        String bdb_loc_long=info.getString("bdb_loc_long");
+                                        String bdb_loc_lat="",bdb_loc_long="";
+                                        try {
+                                             bdb_loc_lat = info.getString("bdb_loc_lat");
+                                             bdb_loc_long = info.getString("bdb_loc_long");
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
                                         MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address,bdb_loc_lat,bdb_loc_long));
 
 //                                        MainProviderActivity.supInfoList.add(new SupInfoClass(name,id,address));
@@ -6414,7 +6414,8 @@ public class APICall {
                             @Override
                             public void run() {
                                 TabOne.refreshRV();
-                                showSweetDialog(context,"",context.getResources().getString(R.string.distance_is_required));
+                                APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                        context.getResources().getString(R.string.try_again_later));
                             }
                         });
                     }else if (jsonObject.getString("resonse_code").equals("60")){
@@ -6423,7 +6424,8 @@ public class APICall {
                             @Override
                             public void run() {
                                 TabOne.refreshRV();
-                                showSweetDialog(context,"",context.getResources().getString(R.string.can_not_sort_distance));
+                                APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                        context.getResources().getString(R.string.try_again_later));
                             }
                         });
                     }else if (jsonObject.getString("resonse_code").equals("62")){
@@ -7548,7 +7550,7 @@ public class APICall {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                    showUnexpectedErrMsg(context);
 
                                 }
                             });
@@ -7688,7 +7690,7 @@ public class APICall {
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                    showUnexpectedErrMsg(context);
 
                                 }
                             });
@@ -7920,7 +7922,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -8055,7 +8057,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -8206,7 +8208,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -8374,7 +8376,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -8531,7 +8533,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -8676,7 +8678,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -8820,7 +8822,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -8941,7 +8943,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -9074,7 +9076,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -9209,7 +9211,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -9354,7 +9356,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -9483,7 +9485,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -9627,7 +9629,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -9755,7 +9757,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -9920,7 +9922,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -10290,7 +10292,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -10772,7 +10774,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -11230,7 +11232,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -11478,7 +11480,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -11650,7 +11652,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -11809,7 +11811,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -11985,7 +11987,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -12167,7 +12169,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -12332,7 +12334,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -12636,7 +12638,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -12691,6 +12693,8 @@ public class APICall {
                                     e.printStackTrace();
                                 }
                             String total_price=completeSolutions.getString("total_price");
+                            String bdb_has_experience_cer=completeSolutions.getString("bdb_has_experience_cer");
+                            String bdb_has_health_cer=completeSolutions.getString("bdb_has_health_cer");
                                 String journy_cost="",date_count="";
                                 try {
                                     journy_cost= completeSolutions.getString("journey_cost");
@@ -12754,7 +12758,7 @@ public class APICall {
                                 }
 
 
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,bdb_has_experience_cer,bdb_has_health_cer,solutionsArr));
                                stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
                             }
@@ -12902,7 +12906,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -13168,7 +13172,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -13429,7 +13433,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -13486,6 +13490,10 @@ public class APICall {
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }
+                                String bdb_has_experience_cer=completeSolutions.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=completeSolutions.getString("bdb_has_health_cer");
+
+
                                 String journy_cost="",date_count="";
                                 try {
                                     journy_cost= completeSolutions.getString("journey_cost");
@@ -13548,7 +13556,7 @@ public class APICall {
                                 }
 
 
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, total_price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio, solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, total_price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio,bdb_has_experience_cer,bdb_has_health_cer, solutionsArr));
                                 stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                             }
@@ -13596,7 +13604,7 @@ public class APICall {
 
 
                              if (!check){
-                                 APICall.showSweetDialog(context,"","للاسف ليس هناك وقت متاح لدى المزودة التي تم اختيارهاو لكن قمنا بالبحث لكِ عن حلول أخرى");
+                                 APICall.showSweetDialog(context,"",context.getResources().getString(R.string.unfor_there_is_notime));
 
                              }
 
@@ -13730,7 +13738,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -13757,7 +13765,7 @@ public class APICall {
                     String success=j.getString("success");
                     final String message=j.getString("message");
                     if (success.equals("true")) {
-                        APICall.showSweetDialog(context,"","للاسف ليس هناك وقت متاح لدى المزودة التي تم اختيارهاو لكن قمنا بالبحث لكِ عن حلول أخرى");
+                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.unfor_there_is_notime));
 
                         JSONObject d = j.getJSONObject("data");
 
@@ -14009,7 +14017,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -14275,7 +14283,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -14496,7 +14504,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -14547,6 +14555,10 @@ public class APICall {
                                 }
                                 String journy_cost="",date_count="";
                                 String total_price=completeSolutions.getString("total_price");
+                                String bdb_has_experience_cer=completeSolutions.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=completeSolutions.getString("bdb_has_health_cer");
+
+
                                 try {
                                     journy_cost= completeSolutions.getString("journey_cost");
                                     date_count= completeSolutions.getString("date_count");
@@ -14612,7 +14624,7 @@ public class APICall {
                                     }
 
 
-                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,solutionsArr));
+                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id,salon_name,total_price,journy_cost,client_name,client_name,is_current_user,client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,bdb_has_experience_cer,bdb_has_health_cer,solutionsArr));
                                     stringArrayListMap.put(salons.get(l),searchBookingDataSTRS);
 
                                 }
@@ -14736,7 +14748,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -16420,7 +16432,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -16579,7 +16591,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -16738,7 +16750,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -16887,7 +16899,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -17036,7 +17048,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -17178,7 +17190,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -17317,7 +17329,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -17587,7 +17599,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -17990,7 +18002,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -18040,7 +18052,11 @@ public class APICall {
                                     e.printStackTrace();
                                 }
                             String total_price = completeSolutions.getString("total_price");
-                            String journy_cost="",date_count="";
+                                String bdb_has_experience_cer=completeSolutions.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=completeSolutions.getString("bdb_has_health_cer");
+
+
+                                String journy_cost="",date_count="";
                                 try {
                                     journy_cost= completeSolutions.getString("journey_cost");
                                     date_count= completeSolutions.getString("date_count");
@@ -18126,7 +18142,7 @@ public class APICall {
                                     e.printStackTrace();
                                     price=total_price;
                                 }
-                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio, solutionsArr));
+                                searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id, salon_name, price,journy_cost, client_name, client_name, is_current_user, client_id,journey_time,bdb_loc_lat,bdb_loc_long,bdb_address_id,bdb_client_deposit_ratio,bdb_has_experience_cer,bdb_has_health_cer, solutionsArr));
                                 stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                             }
@@ -18157,7 +18173,7 @@ public class APICall {
                             public void run() {
 
                                 if (salons.size()==0){
-                                    showSweetDialog(context,"","لا يوجد حل ,يُرجى تغيير التاريخ و المحاولة مرة أخرى");
+                                    showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_sol));
                                 }
 
 //                                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
@@ -18272,7 +18288,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19026,7 +19042,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19264,7 +19280,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19464,7 +19480,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19644,7 +19660,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19870,7 +19886,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -19941,6 +19957,10 @@ public class APICall {
                                     e.printStackTrace();
                                 }
 
+                                String bdb_has_experience_cer=ddd.getString("bdb_has_experience_cer");
+                                String bdb_has_health_cer=ddd.getString("bdb_has_health_cer");
+
+
                                 salons.add(ddd.getJSONArray("solution").getJSONObject(0).getString("salon_name"));
                                 JSONArray sol = ddd.getJSONArray("solution");
                                 for (int i = 0; i < sol.length(); i++) {
@@ -19998,7 +20018,7 @@ public class APICall {
                                     }
 
 
-                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id+"", salon_name+"", total_price+"", journey_cost+"", client_name+"", client_name+"", is_current_user+"",client_id+"",journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio, solutionsArr));
+                                    searchBookingDataSTRS.add(new SearchBookingDataSTR(salon_id+"", salon_name+"", total_price+"", journey_cost+"", client_name+"", client_name+"", is_current_user+"",client_id+"",journey_time+"",bdb_loc_lat+"",bdb_loc_long+"",bdb_address_id+"",bdb_client_deposit_ratio,bdb_has_experience_cer,bdb_has_health_cer, solutionsArr));
                                     stringArrayListMap.put(salons.get(l), searchBookingDataSTRS);
 
                                 }
@@ -20158,7 +20178,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -20728,7 +20748,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -20889,7 +20909,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -21363,7 +21383,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -21602,7 +21622,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -21762,7 +21782,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -21936,7 +21956,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -22113,7 +22133,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -22238,7 +22258,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -22367,7 +22387,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -22501,7 +22521,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -22649,13 +22669,7 @@ public class APICall {
 
                 }
                 else {
-                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
-
-                        }
-                    });
+                    showUnexpectedErrMsg(cont);
                 }
 
             }
@@ -22757,7 +22771,7 @@ public class APICall {
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                        showUnexpectedErrMsg(context);
 
                                     }
                                 });
@@ -22862,13 +22876,7 @@ public class APICall {
 
                 }
                 else {
-                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
-
-                        }
-                    });
+                   showUnexpectedErrMsg(cont);
                 }
             }
 
@@ -23372,13 +23380,7 @@ public class APICall {
 
                 }
                 else {
-                    ((AppCompatActivity)cont).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSweetDialog(cont,"",cont.getResources().getString(R.string.an_error_occurred));
-
-                        }
-                    });
+                   showUnexpectedErrMsg(cont);
                 }
             }
 
@@ -24221,7 +24223,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -24268,13 +24270,8 @@ public class APICall {
                             }
                         });
                     }else if (response_code.equals("112")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.invalid_book_id));
-
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }
                     else
                         showUnexpectedErrMsg(context);
@@ -24372,7 +24369,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -24515,7 +24512,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -24663,7 +24660,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -24909,7 +24906,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -25221,7 +25218,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -25778,7 +25775,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -26164,7 +26161,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -26589,7 +26586,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -26628,26 +26625,14 @@ public class APICall {
                             }
                         });
                     }else if(jsonrespone.getString("resonse_code").equals("21")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.invalid_book_id));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }else if(jsonrespone.getString("resonse_code").equals("22")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }else if(jsonrespone.getString("resonse_code").equals("24")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.please_use_cancel_booking_api));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }else
                         showUnexpectedErrMsg(context);
                 }catch (final JSONException e){
@@ -26782,7 +26767,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -26833,12 +26818,8 @@ public class APICall {
 //                            }
 //                        });
                     }else if(j.getString("resonse_code").equals("5")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.invaled_order_id));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }
                     else
                         showUnexpectedErrMsg(context);
@@ -26944,7 +26925,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -27341,7 +27322,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -27672,7 +27653,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -27938,7 +27919,7 @@ public class APICall {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -27974,17 +27955,7 @@ public class APICall {
                         {
                             JSONObject data=jsonObject.getJSONObject("data");
                             final String totalitem=data.getString("total_item");
-                            if (totalitem.equals("0")){
-                                RequestProvidersFragment.providerItems.clear();
-                                ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(BeautyMainPage.context,"there is no suppliers with your search filters",Toast.LENGTH_LONG).show();
-                                        RequestProvidersFragment.refreshRV();
-                                    }
-                                });
-
-                            }else {
+                           {
 
                                 JSONArray suppliers=data.getJSONArray("suppliers");
                                 //JSONArray supInfo=data.getJSONArray("supplier info");
@@ -27999,6 +27970,8 @@ public class APICall {
                                 for (int i=0;i<suppliers.length();i++){
                                     JSONObject jarray = suppliers.getJSONObject(i);
                                     String sup_id=jarray.getString("sup_id");
+                                    String bdb_has_experience_cer=jarray.getString("bdb_has_experience_cer");
+                                    String bdb_has_health_cer=jarray.getString("bdb_has_health_cer");
                                     String sup_name=jarray.getString("sup_name"),
                                             logo_id=jarray.getString("logo_id"),
                                             rating=jarray.getString("rating"),
@@ -28006,7 +27979,7 @@ public class APICall {
                                             bdb_loc_lat=jarray.getString("bdb_loc_lat"),
                                             bdb_loc_long=jarray.getString("bdb_loc_long"),
                                     bdb_booking_period=jarray.getString("bdb_booking_period");
-                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"");
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"",bdb_has_experience_cer,bdb_has_health_cer);
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -28164,7 +28137,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -28211,11 +28184,8 @@ Log.e("ERRR",e.getMessage());
                                 showSweetDialog(context, "", context.getResources().getString(R.string.service_not_found));
                             }});
                     }else if (jsonObject.getString("response_code").equals("18")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context, "", context.getResources().getString(R.string.an_error_occurred));
-                            }});
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }
                     else
                     {
@@ -28322,7 +28292,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -28384,7 +28354,7 @@ Log.e("ERRR",e.getMessage());
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.no_services));
+                                showSweetDialog(context,"",context.getResources().getString(R.string.provider_doesnt_provide_services));
                             }
                         });
                     }else
@@ -28458,7 +28428,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -28673,7 +28643,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -28729,6 +28699,8 @@ Log.e("ERRR",e.getMessage());
                                     Log.e("HERE","111 "+i);
                                     String bdb_pack_code=jarray.getString("bdb_pack_code"),
                                             bdb_sup_name=jarray.getString("bdb_sup_name"),
+                                            bdb_has_experience_cer=jarray.getString("bdb_has_experience_cer"),
+                                            bdb_has_health_cer=jarray.getString("bdb_has_health_cer"),
                                             totalRating_to_Sup=jarray.getString("totalRating_to_Sup"),
                                             service_count=jarray.getString("service count"),
                                             is_fav_sup=jarray.getString("is_fav_sup"),
@@ -28767,7 +28739,7 @@ Log.e("ERRR",e.getMessage());
                                     if(!bdb_offer_type.equals("2")&&!bdb_offer_type.equals("5"))
                                     {
 //                                        DataOffer dof = new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",supIdClasses);
-                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer));
+                                        OffersForRequest.arrayList.add(new DataOffer(bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,num_of_times,oldPrice,newPrice,discount,"",bdb_offer_type,longitude,latitude,distance,bdb_is_journey_on+"",bdb_is_old_on+"",bdb_offer_place+"",bdb_is_effects_on+"",bdb_booking_period,supIdClasses,deposit_ratio,bdb_is_morning_offer,bdb_has_experience_cer,bdb_has_health_cer));
                                     }
 
 
@@ -28804,24 +28776,12 @@ Log.e("ERRR",e.getMessage());
                             }
                         });
                     }else if (jsonObject.getString("resonse_code").equals("58")){
-                        TabTwo.arrayList.clear();
-                        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TabOne.refreshRV();
-                                showSweetDialog(context,"",context.getResources().getString(R.string.distance_is_required));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
 
                     }else if (jsonObject.getString("resonse_code").equals("60")){
-                        TabTwo.arrayList.clear();
-                        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                TabOne.refreshRV();
-                                showSweetDialog(context,"",context.getResources().getString(R.string.can_not_sort_distance));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }else if (jsonObject.getString("resonse_code").equals("62")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -28979,7 +28939,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -29114,7 +29074,7 @@ Log.e("ERRR",e.getMessage());
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -29291,7 +29251,7 @@ Log.e("filters",filter);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                                showUnexpectedErrMsg(context);
 
                             }
                         });
@@ -29443,7 +29403,7 @@ Log.e("filters",filter);
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -29478,12 +29438,8 @@ Log.e("filters",filter);
                             }
                         });
                     }else if(j.getString("resonse_code").equals("36")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showSweetDialog(context,"",context.getResources().getString(R.string.error_in_merchant_refernce_try_again));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }
 
 
@@ -29571,7 +29527,7 @@ Log.e("filters",filter);
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
+//                            showUnexpectedErrMsg(context);
 
                         }
                     });
@@ -29649,6 +29605,42 @@ Log.e("filters",filter);
                 dialog.setContentView(R.layout.sweet_dialog_layout_v34);
                 TextView websiteSupport = dialog.findViewById(R.id.confirm);
                 TextView whatsAppSupport = dialog.findViewById(R.id.cancel);
+                websiteSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(myAppLinkToMarket);
+
+
+                    }
+                });
+                whatsAppSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
+    public  static  void showNumberErrMsg(final Context context, final String t){
+
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v34);
+                TextView title = dialog.findViewById(R.id.title);
+                TextView websiteSupport = dialog.findViewById(R.id.confirm);
+                TextView whatsAppSupport = dialog.findViewById(R.id.cancel);
+                title.setText(t);
                 websiteSupport.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

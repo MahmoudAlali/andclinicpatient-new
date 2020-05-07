@@ -119,6 +119,14 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //---------------------for prices decimal format-----------------
         try {
+            if (bestOfferItems.get(position).getBdb_has_experience_cer().equals("1")){
+                ((Item)holder).exp.setImageResource(R.drawable.ic_experience_care);
+            }
+            if (bestOfferItems.get(position).getBdb_has_health_cer().equals("1")){
+                ((Item)holder).health.setImageResource(R.drawable.ic_health_care);
+            }
+
+
             DecimalFormat integer=new DecimalFormat("#");
             DecimalFormat doub=new DecimalFormat("#.##");
 //            float old_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getOld_price()) ));
@@ -142,6 +150,9 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     Log.e("Position","is"+position);
                     Intent intent=new Intent(context, MainProviderActivity.class);
                     intent.putExtra("provider_id",bestOfferItems.get(position).getProvider_id());
+                    intent.putExtra("provider_name",((Item)holder).pro_name.getText().toString());
+                    intent.putExtra("health",bestOfferItems.get(position).getBdb_has_health_cer());
+                    intent.putExtra("exp",bestOfferItems.get(position).getBdb_has_experience_cer());
                     context.startActivity(intent);
                 }
             });
@@ -351,7 +362,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
     public static class Item extends RecyclerView.ViewHolder {
         TextView textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
-        ImageView info,logoImg2,add;
+        ImageView info,logoImg2,add,exp,health;
         SvgImageView logoImg;
         LinearLayout itemBackground;
         public Item(View itemView) {
@@ -374,6 +385,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             old_price = itemView.findViewById(R.id.old_price);
             offer_type = itemView.findViewById(R.id.offer_type);
             depositPrcntg = itemView.findViewById(R.id.depPerc);
+            exp = itemView.findViewById(R.id.exp);
+            health = itemView.findViewById(R.id.health);
         }
     }
 }

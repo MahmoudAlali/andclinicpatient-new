@@ -7,7 +7,50 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".Activities.ProviderSerAndOfferPKG.MainProviderActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Space
+            android:layout_width="@dimen/standard_40"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/salon_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/transparent"
+            android:text="@string/salonName"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:gravity="center"
+            />
+        <ImageView
+            android:id="@+id/exp"
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="@dimen/standard_30"
+            android:textColor="#000"
+            android:textAlignment="center"
+            />
+        <Space
+            android:layout_width="@dimen/pf_10dp_space"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/health"
+            android:layout_width="@dimen/standard_30"
+            android:layout_height="@dimen/standard_30"
+            android:textColor="#000"
+            android:textAlignment="center"
+            />
+        <Space
+            android:layout_width="@dimen/pf_10dp_space"
+            android:layout_height="match_parent"/>
 
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

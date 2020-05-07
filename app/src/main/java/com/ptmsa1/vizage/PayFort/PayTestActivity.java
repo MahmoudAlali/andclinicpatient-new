@@ -317,19 +317,11 @@ public class PayTestActivity extends AppCompatActivity implements IPaymentReques
 
 
                     }else if(j.getString("resonse_code").equals("38")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                               APICall.showSweetDialog(context,"",context.getResources().getString(R.string.an_error_occurred));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }else if(j.getString("resonse_code").equals("39")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                               APICall.showSweetDialog(context,"",context.getResources().getString(R.string.we_receive_an_incorrect_signature_from_payfort));
-                            }
-                        });
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
                     }
 
 

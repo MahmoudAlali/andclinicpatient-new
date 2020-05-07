@@ -100,8 +100,17 @@ CustomExpandableListAdapterForMultiInd extends BaseExpandableListAdapter {
                     .findViewById(R.id.listTitle);
             final TextView listTitleText =convertView
                     .findViewById(R.id.listTitle2);
-            ImageView book =  convertView
-                    .findViewById(R.id.book);
+            ImageView book =  convertView.findViewById(R.id.book);
+            ImageView exp =  convertView.findViewById(R.id.exp);
+            ImageView health =  convertView.findViewById(R.id.health);
+
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_has_health_cer().equals("1")){
+              health.setImageResource(R.drawable.ic_health_care);
+            }
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_has_experience_cer().equals("1")){
+                exp.setImageResource(R.drawable.ic_experience_care);
+            }
+
             book.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

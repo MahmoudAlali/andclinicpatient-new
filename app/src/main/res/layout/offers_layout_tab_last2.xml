@@ -88,15 +88,49 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
-                <TextView
-                    android:id="@+id/pro_name"
-                    android:text="Provider name"
-                    android:textColor="@color/prime"
+                <LinearLayout
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:gravity="center"/>
+                    android:layout_height="wrap_content">
+                    <Space
+                        android:layout_width="@dimen/standard_20"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/pro_name"
+                        android:text="Provider name"
+                        android:layout_weight="1"
+                        android:textColor="@color/prime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="14dp"
+                        android:gravity="center"/>
+
+                    <ImageView
+                        android:id="@+id/exp"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:textAlignment="center"
+                        />
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/health"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:textAlignment="center"
+                        />
+                    <Space
+                        android:layout_width="@dimen/standard_20"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

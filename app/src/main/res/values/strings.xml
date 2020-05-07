@@ -878,5 +878,10 @@
     <string name="your_acc_deleted">Your account has been successfully paused</string>
     <string name="there_is_no_items">There is no fav Items</string>
     <string name="this_res_can_only_canceld_by_the_owner">This reservation can only be canceled by the reservation owner</string>
+    <string name="provider_doesnt_provide_services">This provider does not provide services at this time</string>
+    <string name="there_is_an_err">Client error, error number:</string>
+    <string name="try_again_later">please try again</string>
+    <string name="please_select_date_and_location">please select date and location before browse offers</string>
+    <string name="unfor_there_is_notime">Unfortunately, there is no time available for the selected provider, but we have looked for other solutions for you</string>
 
 </resources>

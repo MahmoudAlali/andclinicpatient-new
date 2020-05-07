@@ -54,7 +54,8 @@ public class BestOfferItem {
         this.provider_id=provider_id;
     }
     String bdb_booking_period,start_date,end_date;
-    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg) {
+    String bdb_has_experience_cer,bdb_has_health_cer;
+    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg,String bdb_has_experience_cer,String bdb_has_health_cer ) {
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -69,6 +70,16 @@ public class BestOfferItem {
         this.start_date=start_date;
         this.end_date=end_date;
         this.deposit_prcntg=deposit_prcntg;
+        this.bdb_has_health_cer=bdb_has_health_cer;
+        this.bdb_has_experience_cer=bdb_has_experience_cer;
+    }
+
+    public String getBdb_has_experience_cer() {
+        return bdb_has_experience_cer;
+    }
+
+    public String getBdb_has_health_cer() {
+        return bdb_has_health_cer;
     }
 
     public void setProvider_logo_id(String provider_logo_id) {

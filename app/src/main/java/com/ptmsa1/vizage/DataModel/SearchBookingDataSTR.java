@@ -73,6 +73,25 @@ public class SearchBookingDataSTR {
         this.bdb_address_id= bdb_address_id;
         this.bdb_client_deposit_ratio= bdb_client_deposit_ratio;
     }
+    String bdb_has_experience_cer,bdb_has_health_cer;
+    public SearchBookingDataSTR(String salon_id, String salon_name, String total_price,String journeyCost, String client_response, String client_name, String is_current_user, String client_id ,String journey_time,String bdb_loc_lat,String bdb_loc_long,String bdb_address_id,String bdb_client_deposit_ratio, String bdb_has_experience_cer,String bdb_has_health_cer, ArrayList<Solution> solutions) {
+        this.salon_id = salon_id;
+        this.salon_name = salon_name;
+        this.total_price = total_price;
+        this.client_response = client_response;
+        this.client_name = client_name;
+        this.is_current_user = is_current_user;
+        this.client_id = client_id;
+        this.solutions = solutions;
+        this.journeyCost = journeyCost;
+        this.journey_time = journey_time;
+        this.bdb_loc_lat= bdb_loc_lat;
+        this.bdb_loc_long= bdb_loc_long;
+        this.bdb_address_id= bdb_address_id;
+        this.bdb_client_deposit_ratio= bdb_client_deposit_ratio;
+        this.bdb_has_experience_cer= bdb_has_experience_cer;
+        this.bdb_has_health_cer= bdb_has_health_cer;
+    }
 
     String is_booked;
     public SearchBookingDataSTR(String salon_id, String salon_name, String total_price, String client_response, String client_name, String is_current_user, String client_id, ArrayList<Solution> solutions,String is_booked) {
@@ -92,6 +111,14 @@ public class SearchBookingDataSTR {
         this.salon_id = salon_id;
         this.salon_name = salon_name;
         this.solutions = solutions;
+    }
+
+    public String getBdb_has_experience_cer() {
+        return bdb_has_experience_cer;
+    }
+
+    public String getBdb_has_health_cer() {
+        return bdb_has_health_cer;
     }
 
     public String getBdb_client_deposit_ratio() {
