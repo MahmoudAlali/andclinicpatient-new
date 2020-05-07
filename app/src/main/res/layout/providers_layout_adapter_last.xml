@@ -110,12 +110,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:weightSum="3"
+                    android:paddingStart="5dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
                     >
+
+                    <ImageView
+                        android:id="@+id/exp"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:src="@drawable/ic_experience_care"
+                        android:textAlignment="center"
+                        />
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/health"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:src="@drawable/ic_health_care"
+                        android:textAlignment="center"
+                        />
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="match_parent"/>
                     <TextView
                         android:id="@+id/depPerc"
                         android:layout_weight="1"

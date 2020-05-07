@@ -162,7 +162,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:weightSum="5"
-                android:paddingRight="@dimen/standard_30"
+                android:paddingRight="@dimen/standard_20"
                 android:paddingTop="30dp"
                 android:paddingBottom="7dp"
                 android:orientation="vertical"
@@ -173,8 +173,26 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:paddingRight="15dp"
-                    android:paddingLeft="@dimen/standard_30"
+
                     >
+
+                    <ImageView
+                        android:id="@+id/exp"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:textAlignment="center"
+                        />
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/health"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:textAlignment="center"
+                        />
                     <TextView
 
                         android:layout_width="wrap_content"

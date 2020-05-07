@@ -725,4 +725,9 @@
     <string name="your_acc_deleted">تم إيقاف حسابك بنجاح</string>
     <string name="there_is_no_items">لا يوجد عناصر في المفضلة</string>
     <string name="this_res_can_only_canceld_by_the_owner">لا يمكن إلغاء هذا الحجز إلا من قبل العميلة صاحبة الحجز</string>
+    <string name="provider_doesnt_provide_services">هذه المزودة لا تقدم خدمات في الوقت الحالي</string>
+    <string name="there_is_an_err">حدث خطأ في العميلة، رقم الخطأ:</string>
+    <string name="try_again_later">أعيدي المحاولة من فضلك</string>
+    <string name="please_select_date_and_location">يرجى تحديد التاريخ والمكان قبل تصفح العروض</string>
+    <string name="unfor_there_is_notime">للاسف ليس هناك وقت متاح لدى المزودة التي تم اختيارهاو لكن قمنا بالبحث لكِ عن حلول أخرى</string>
 </resources>

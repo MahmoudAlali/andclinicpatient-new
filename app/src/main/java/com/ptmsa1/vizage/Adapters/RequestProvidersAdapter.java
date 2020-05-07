@@ -122,6 +122,16 @@ public static int comparenum=0;
  */
 @Override
 public void onBindViewHolder(@NonNull final ListHolder holder, final int position) {
+    (holder).exp.setImageDrawable(null);
+    (holder).health.setImageDrawable(null);
+
+    if (itemArrayList.get(position).getBdb_has_experience_cer().equals("1")){
+        (holder).exp.setImageResource(R.drawable.ic_experience_care);
+    }
+
+    if (itemArrayList.get(position).getBdb_has_health_cer().equals("1")){
+        (holder).health.setImageResource(R.drawable.ic_health_care);
+    }
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
     (holder).place.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +172,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 }
 public class ListHolder extends RecyclerView.ViewHolder {
     TextView providerName,provider_rate,depositPrcntg;
-    ImageView addRequest,logo,place;
+    ImageView addRequest,logo,place,health,exp;
     public ListHolder(View itemView) {
         super(itemView);
         providerName=itemView.findViewById(R.id.service_name);
@@ -171,6 +181,8 @@ public class ListHolder extends RecyclerView.ViewHolder {
         logo=itemView.findViewById(R.id.logoImg);
         place=itemView.findViewById(R.id.place);
         depositPrcntg=itemView.findViewById(R.id.depPerc);
+        health=itemView.findViewById(R.id.health);
+        exp=itemView.findViewById(R.id.exp);
     }
 }
     @Override

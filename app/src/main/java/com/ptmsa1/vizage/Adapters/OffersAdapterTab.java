@@ -79,6 +79,20 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //        DecimalFormat df = new DecimalFormat("0.0");
+
+        ((Item)holder).exp.setImageDrawable(null);
+        ((Item)holder).health.setImageDrawable(null);
+
+        if (offers.get(position).getBdb_has_experience_cer().equals("1")){
+            ((Item)holder).exp.setImageResource(R.drawable.ic_experience_care);
+        }
+
+        if (offers.get(position).getBdb_has_health_cer().equals("1")){
+            ((Item)holder).health.setImageResource(R.drawable.ic_health_care);
+        }
+
+
+
         if (offers.get(position).getBdb_is_morning_offer().equals("1")) {
             ((Item) holder).morning_offer.setText(context.getResources().getString(R.string.morning_offer));
         }else {
@@ -275,7 +289,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     public static class Item extends RecyclerView.ViewHolder {
 
         TextView pro_name,morning_offer,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
-        ImageView info,add_offer,placeL;
+        ImageView info,add_offer,placeL,health,exp;
         public Item(View itemView) {
             super(itemView);
             pro_name = itemView.findViewById(R.id.pro_name);
@@ -292,6 +306,9 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             total_dis = itemView.findViewById(R.id.disAmount);
             onServices = itemView.findViewById(R.id.onServices);
             depositPrcntg = itemView.findViewById(R.id.depPerc);
+            placeL = itemView.findViewById(R.id.placeL);
+            health = itemView.findViewById(R.id.health);
+            exp = itemView.findViewById(R.id.exp);
             placeL = itemView.findViewById(R.id.placeL);
             morning_offer = itemView.findViewById(R.id.morning_offer);
 

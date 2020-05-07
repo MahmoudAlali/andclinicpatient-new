@@ -115,6 +115,18 @@ CustomExpandableListAdapter extends BaseExpandableListAdapter {
             ImageView book =  convertView
                     .findViewById(R.id.book);
 
+            ImageView exp =  convertView.findViewById(R.id.exp);
+            ImageView health =  convertView.findViewById(R.id.health);
+
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_has_health_cer().equals("1")){
+                health.setImageResource(R.drawable.ic_health_care);
+            }
+            if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getBdb_has_experience_cer().equals("1")){
+                exp.setImageResource(R.drawable.ic_experience_care);
+            }
+
+
+
             if ( BeautyMainPage.FRAGMENT_NAME.equals("BookingIndvidualActivity"))
             if (stringArrayListHashMap.get(salons.get(groupPosition)).get(0).getSalon_id().equals(TabOne.bdb_sup_id)){
                 listTitleTextView.setBackgroundResource(R.drawable.shadow_edit_text3);

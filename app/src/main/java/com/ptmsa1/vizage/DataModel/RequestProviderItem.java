@@ -1,9 +1,9 @@
 package com.ptmsa1.vizage.DataModel;
 
 public class RequestProviderItem {
-    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat;
+    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat,bdb_has_experience_cer,bdb_has_health_cer;
 
-    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long )
+    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer )
     {
         this.sup_id=sup_id;
         this.sup_name=sup_name;
@@ -13,6 +13,24 @@ public class RequestProviderItem {
         this.deposit_prcntg=deposit_prcntg;
         this.bdb_loc_lat=bdb_loc_lat;
         this.bdb_loc_long=bdb_loc_long;
+        this.bdb_has_health_cer=bdb_has_health_cer;
+        this.bdb_has_experience_cer=bdb_has_experience_cer;
+    }
+
+    public String getBdb_has_experience_cer() {
+        return bdb_has_experience_cer;
+    }
+
+    public void setBdb_has_experience_cer(String bdb_has_experience_cer) {
+        this.bdb_has_experience_cer = bdb_has_experience_cer;
+    }
+
+    public String getBdb_has_health_cer() {
+        return bdb_has_health_cer;
+    }
+
+    public void setBdb_has_health_cer(String bdb_has_health_cer) {
+        this.bdb_has_health_cer = bdb_has_health_cer;
     }
 
     public void setSup_id(String sup_id) {
