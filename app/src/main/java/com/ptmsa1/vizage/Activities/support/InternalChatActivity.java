@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Dialog.Dialogs;
 import com.ptmsa1.vizage.Dialog.MyRunnable;
 import com.ptmsa1.vizage.R;
@@ -56,8 +57,8 @@ public class InternalChatActivity extends AppCompatActivity {
     static int TIMER_TIME = 300000; //5 minutes
 
     public static String ChatID,Token,ProviderId;
-    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
-    final private String serverKey = "key=" + APICall.SERVER_KEY;
+    final private static String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private static String serverKey = "key=" + APICall.SERVER_KEY;
 //            "AAAAjaJV_ws:APA91bEeV0bieSYrDrkwR0Yoj7lnvCQUSBgwwO2VyAJRWwzNeoGNoer9Mu3OoaRHBGB9ocEdwOEk2eN45o8YcB0CnG-HtrlWpKEu4jraPuagHKJy9a89g1nmzkOU7lkm6fniWCn5YxHg";
 
 
@@ -65,7 +66,7 @@ public class InternalChatActivity extends AppCompatActivity {
     //My server key
    // final private String serverKey = "key=" + "AAAAqc212tE:APA91bGdoZGyA74Qsdoul7ph79xB1Mct-KB89qxI0HgcP5aOf_cI1qoHsSgeuY_BIspCNTEB1_2v-Ky0G70Vy75iV6y6rkVBwqn1FzTVdFuQ0etKZx4wcYDgmIZz_rx-9YI2NFDeJYw2";
 
-    final private String contentType = "application/json";
+    final private static String contentType = "application/json";
     String TOPIC = "/topics/userABC";
 
     //My token
@@ -159,7 +160,7 @@ public class InternalChatActivity extends AppCompatActivity {
 
     }
 
-    private void sendNotification(JSONObject notification)
+    public static void sendNotification(JSONObject notification)
     {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
                 new Response.Listener<JSONObject>() {
@@ -172,7 +173,7 @@ public class InternalChatActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(InternalChatActivity.this, "Request error", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(InternalChatActivity.this, "Request error", Toast.LENGTH_LONG).show();
                         Log.i("errResponse", "onErrorResponse: Didn't work");
                     }
                 }){
@@ -184,7 +185,7 @@ public class InternalChatActivity extends AppCompatActivity {
                 return params;
             }
         };
-        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(BeautyMainPage.context).addToRequestQueue(jsonObjectRequest);
     }
 
     public static void NewMsg(Context context, String body, boolean isSent)
