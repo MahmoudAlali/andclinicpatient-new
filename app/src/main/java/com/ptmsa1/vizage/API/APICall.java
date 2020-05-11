@@ -29699,7 +29699,9 @@ Log.e("filters",filter);
                     public void onClick(View v) {
                         dialog.cancel();
                         SharedPreferences editor = context.getSharedPreferences("REG_ID", context.MODE_PRIVATE);
-                        logout(context,editor.getString("token_provider",""));
+                        //logout(context,editor.getString("token_provider",""));
+                        APICall.logout(APICall.API_PREFIX_NAME+"/api/auth/user/logout",context);
+
 
                     }
                 });

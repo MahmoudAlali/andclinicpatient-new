@@ -5,11 +5,13 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,7 @@ import com.ptmsa1.vizage.Activities.BeautyMainPage;
 import com.ptmsa1.vizage.Activities.MyReservations;
 import com.ptmsa1.vizage.Activities.Offers;
 import com.ptmsa1.vizage.Activities.TabOne;
+import com.ptmsa1.vizage.Activities.support.SupportActivity;
 import com.ptmsa1.vizage.Adapters.OffersAdapterTab;
 import com.ptmsa1.vizage.Adapters.ServicesAdapter;
 import com.ptmsa1.vizage.Adapters.ServicesProviderAdapter;
@@ -147,6 +150,16 @@ public class MainProviderActivity extends AppCompatActivity {
                                 // for ActivityCompat#requestPermissions for more details.
 
                             }
+                            boolean enabled = locationManager
+                                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+                            if(!enabled)
+                            {
+                                showLocationServiceMsg(BeautyMainPage.context);
+                            }
+                            else
+                            {
+                                mylocationId=item.getTitle().toString();
+                                my_location.setText(mylocationId);
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
                                 @Override
                                 public void onLocationChanged(Location location) {
@@ -169,7 +182,7 @@ public class MainProviderActivity extends AppCompatActivity {
                                 public void onProviderDisabled(String provider) {
                                 }
 
-                            });
+                            });}
                         }else if (item.getTitle().equals(getResources().getString(R.string.new_location))){
 //                            fragment = new MapFragment();
 //                            fm = getActivity().getFragmentManager();
@@ -365,5 +378,41 @@ public class MainProviderActivity extends AppCompatActivity {
         offersAdapterTab.notifyDataSetChanged();
 //        recyclerView.invalidate();
     }
+    private void showLocationServiceMsg(final Context context)
+    {
+        final Dialog dialog=new Dialog(context);
+        dialog.setContentView(R.layout.lcation_service_turnon_msg);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+       /* dialog.getWindow()
+                .setBackgroundResource(android.R.color.transparent);*/
+        TextView cancel=dialog.findViewById(R.id.cancel);
+        TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
+        TextView webSupport=dialog.findViewById(R.id.website_support);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
 
+        webSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                context.startActivity(myAppLinkToMarket);
+            }
+        });
+        whatsSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                SupportActivity.openWhatsappChat(context);
+            }
+        });
+
+        dialog.show();
+
+    }
 }

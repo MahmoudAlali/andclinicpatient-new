@@ -1,9 +1,12 @@
 package com.ptmsa1.vizage.Activities;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.Activities.support.SupportActivity;
 import com.ptmsa1.vizage.Fragments.AccountFragment;
 import com.ptmsa1.vizage.Fragments.ServiceFragment;
 import com.ptmsa1.vizage.R;
@@ -29,6 +33,9 @@ public class Login extends AppCompatActivity {
     TextView forgetpass
 //            register
                     ;
+    LocationManager lm ;
+    boolean gps_enabled = false;
+    boolean network_enabled = false;
     static double latit;
     static double longit;
    public static boolean logout=false;
@@ -44,6 +51,7 @@ public class Login extends AppCompatActivity {
         APICall.FRAGMENT_NAME="activity_login";
 
         context=this;
+        lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 
 
         //---------- get guest token-----then-- get sys info-----
@@ -85,8 +93,55 @@ public class Login extends AppCompatActivity {
         new_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,Register.class);
-                startActivity(intent);
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                } catch(Exception ex) {}
+
+                try {
+                    network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+                } catch(Exception ex) {}
+
+                if(!gps_enabled) {
+                    // notify user
+                    final Dialog dialog=new Dialog(context);
+                    dialog.setContentView(R.layout.lcation_service_turnon_msg);
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+       /* dialog.getWindow()
+                .setBackgroundResource(android.R.color.transparent);*/
+                    TextView cancel=dialog.findViewById(R.id.cancel);
+                    TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
+                    TextView webSupport=dialog.findViewById(R.id.website_support);
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    webSupport.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                            Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                            context.startActivity(myAppLinkToMarket);
+                        }
+                    });
+                    whatsSupport.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            SupportActivity.openWhatsappChat(context);
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                else {
+                    Intent intent = new Intent(context, Register.class);
+                    startActivity(intent);
+                }
             }
         });
 

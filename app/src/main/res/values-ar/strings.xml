@@ -730,4 +730,7 @@
     <string name="try_again_later">أعيدي المحاولة من فضلك</string>
     <string name="please_select_date_and_location">يرجى تحديد التاريخ والمكان قبل تصفح العروض</string>
     <string name="unfor_there_is_notime">للاسف ليس هناك وقت متاح لدى المزودة التي تم اختيارهاو لكن قمنا بالبحث لكِ عن حلول أخرى</string>
+    <string name="locationMsg">يرجى تشغيل خدمة المواقع الجغرافية والسماح للتطبيق بالوصول إلى موقعك من الإعدادات العامة للجهاز.</string>
+    <string name="locationMsg2">في حال تكرار المشكلة يرجى إيقاف وإعادة تشغيل خدمة المواقع للتطبيق من الإعدادات العامة للجهاز أو يمكنكِ التواصل مع الدعم التقني للمساعدة من خلال موقع التطبيق أو من خلال تطبيق واتس آب</string>
+    <string name="update_pass">تغيير</string>
 </resources>
