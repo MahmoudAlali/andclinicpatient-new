@@ -183,9 +183,7 @@
                         android:textColor="#000"
                         android:textAlignment="center"
                         />
-                    <Space
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"/>
+
                     <ImageView
                         android:id="@+id/health"
                         android:layout_width="@dimen/standard_30"

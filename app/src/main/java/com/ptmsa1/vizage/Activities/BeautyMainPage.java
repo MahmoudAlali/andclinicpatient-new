@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -84,6 +86,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static Fragment currentFragment;
     public static String is_bride_service;
     public static String bdb_email,bdb_is_guest="0",bdb_id="";
+    public static Bitmap ImageLogo;
     private int READ_EXTERNAL_STORAGE=93;
     public static Boolean RELOADAPP=false;
     public static String client_name="";
@@ -200,6 +203,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         sideNavBar.setItemIconTintList(null);
 
         View hView =  navigationView.getHeaderView(0);
+        LogoImageView = hView.findViewById(R.id.img_profile);
         profileNameText = hView.findViewById(R.id.profile_name);
 
         if(client_name.equals("Guest"))
@@ -1153,5 +1157,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         setContentView(R.layout.services_tabs_layout);
          navigationView =  findViewById(R.id.nav_view);
 
+    }
+    public  static  ImageView LogoImageView;
+    public static void setLogo(Bitmap bitmap) {
+        LogoImageView.setImageBitmap(bitmap);   //MyPhoto is image control.
+
+    }
+    public static Bitmap getLogo(){
+        return  ImageLogo;
     }
 }

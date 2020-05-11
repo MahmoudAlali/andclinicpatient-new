@@ -142,6 +142,19 @@ public class MapTap extends Fragment implements OnMapReadyCallback {
             mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
             // for enter add + button and reserve service
         }
+
+
+        if ( MainProviderActivity.arrayList.size()>0) {
+            Double longtude=Double.parseDouble(MainProviderActivity.arrayList.get(0).getLongitude());
+            Double latitude=Double.parseDouble(MainProviderActivity.arrayList.get(0).getLatitude());
+
+            LatLng sydney = new LatLng(longtude, latitude);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Provider place"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+
+
+        }
     }
 
 }
