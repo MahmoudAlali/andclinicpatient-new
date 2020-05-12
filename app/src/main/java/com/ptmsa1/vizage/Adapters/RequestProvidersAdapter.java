@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -152,7 +153,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             }
         }
     });
-    APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo);
+    APICall.getSalonLogoDltWhenEmptyWithCard(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo,(holder).cardView);
 
     ( holder).provider_rate.setText(itemArrayList.get(position).getRating());
     String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getDeposit_prcntg()+" % ";
@@ -173,6 +174,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 public class ListHolder extends RecyclerView.ViewHolder {
     TextView providerName,provider_rate,depositPrcntg;
     ImageView addRequest,logo,place,health,exp;
+    CardView cardView;
     public ListHolder(View itemView) {
         super(itemView);
         providerName=itemView.findViewById(R.id.service_name);
@@ -183,6 +185,7 @@ public class ListHolder extends RecyclerView.ViewHolder {
         depositPrcntg=itemView.findViewById(R.id.depPerc);
         health=itemView.findViewById(R.id.health);
         exp=itemView.findViewById(R.id.exp);
+        cardView=itemView.findViewById(R.id.myCardView);
     }
 }
     @Override

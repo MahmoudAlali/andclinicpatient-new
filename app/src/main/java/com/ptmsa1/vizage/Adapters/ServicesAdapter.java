@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -178,7 +179,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             } else {
                 ( holder).service_compare.setChecked(false);
             }*/
-            APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getLogoId(),(holder).logo);
+            APICall.getSalonLogoDltWhenEmptyWithCard(BeautyMainPage.context,itemArrayList.get(position).getLogoId(),(holder).logo,(holder).cardView);
 
             if(itemArrayList.get(position).getIs_fav_sup().equals("0"))
                 (holder).service_fav.setImageResource(R.drawable.un_favorite);
@@ -329,6 +330,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
         TextView pro_name, depositPrcntg;
         RatingBar service_rate;
         ImageView service_add,service_fav,place,logo;
+        CardView cardView;
        // CheckBox service_compare;
         LinearLayout service_details;
         public ListHolder(View itemView) {
@@ -339,6 +341,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ListHo
             service_add=itemView.findViewById(R.id.service_add);
             service_rate=itemView.findViewById(R.id.service_rate);
             pro_name=itemView.findViewById(R.id.provider_name);
+            cardView=itemView.findViewById(R.id.myCardView);
 //            more_btn=itemView.findViewById(R.id.more_btn);
          //   service_compare=itemView.findViewById(R.id.service_compare);
             place=itemView.findViewById(R.id.place);

@@ -23,6 +23,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -22809,6 +22810,247 @@ public class APICall {
             }
         }
     }
+    public static void getSalonLogoDltWhenEmpty(final Context context, String LogoId, final ImageView logoImg)
+    {
+        if(!LogoId.equals("null"))
+        {
+            logoImg.setVisibility(View.INVISIBLE);
+
+            {
+                MediaType MEDIA_TYPE = MediaType.parse("application/json");
+                // showDialog(context);
+
+
+                OkHttpClient client = new OkHttpClient();
+                JSONObject postdata = new JSONObject();
+
+                {
+                    try
+                    {
+                        postdata.put("bdb_id",LogoId);
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.getStackTrace();
+                    }
+                    RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+                    okhttp3.Request request = new okhttp3.Request.Builder()
+                            .url(API_PREFIX_NAME+"/api/get/image")
+                            .post(body)
+                            .addHeader("Content-Type","application/json")
+                            .header("Authorization", "Bearer " + gettoken(context))
+
+//                .addHeader("X-Requested-With","XMLHttpRequest")
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            mMessage = e.getMessage();
+                            //pd1.dismiss();
+
+                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                            {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        final Dialog dialog = new Dialog(context);
+                                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                        dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                        TextView confirm = dialog.findViewById(R.id.confirm);
+                                        TextView message = dialog.findViewById(R.id.message);
+                                        TextView title = dialog.findViewById(R.id.title);
+                                        title.setText(R.string.Null);
+                                        message.setText(R.string.check_internet_con);
+                                        confirm.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.cancel();
+
+                                            }
+                                        });
+                                        dialog.show();
+
+                                    }
+                                });
+
+
+                            }
+                            else {
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showUnexpectedErrMsg(context);
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                            Bitmap bitmap = null;
+                            final Bitmap bit ;
+                            try {
+                                bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                                Log.e("logo",bitmap.toString());
+                                bit =bitmap;
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        logoImg.setImageBitmap(bit);
+                                        logoImg.setVisibility(View.VISIBLE);
+                                        // OffersAdapter.logoImages.put(LogoId,bit);
+                                    }
+                                });
+                            } catch (Exception e)
+                            {
+                                // TODO Auto-generated catch block
+                                Log.e("ERRLOGO",e.getMessage());
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    });
+
+                }
+            }
+        }
+        else
+            logoImg.setVisibility(View.INVISIBLE);
+
+
+
+    }
+    public static void getSalonLogoDltWhenEmptyWithCard(final Context context, String LogoId, final ImageView logoImg,final CardView card)
+    {
+        if(!LogoId.equals("null"))
+        {
+            logoImg.setVisibility(View.INVISIBLE);
+            card.setVisibility(View.INVISIBLE);
+
+            {
+                MediaType MEDIA_TYPE = MediaType.parse("application/json");
+                // showDialog(context);
+
+
+                OkHttpClient client = new OkHttpClient();
+                JSONObject postdata = new JSONObject();
+
+                {
+                    try
+                    {
+                        postdata.put("bdb_id",LogoId);
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.getStackTrace();
+                    }
+                    RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+                    okhttp3.Request request = new okhttp3.Request.Builder()
+                            .url(API_PREFIX_NAME+"/api/get/image")
+                            .post(body)
+                            .addHeader("Content-Type","application/json")
+                            .header("Authorization", "Bearer " + gettoken(context))
+
+//                .addHeader("X-Requested-With","XMLHttpRequest")
+                            .build();
+
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            mMessage = e.getMessage();
+                            //pd1.dismiss();
+
+                            if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                            {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                                ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        final Dialog dialog = new Dialog(context);
+                                        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                        dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                        TextView confirm = dialog.findViewById(R.id.confirm);
+                                        TextView message = dialog.findViewById(R.id.message);
+                                        TextView title = dialog.findViewById(R.id.title);
+                                        title.setText(R.string.Null);
+                                        message.setText(R.string.check_internet_con);
+                                        confirm.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialog.cancel();
+
+                                            }
+                                        });
+                                        dialog.show();
+
+                                    }
+                                });
+
+
+                            }
+                            else {
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showUnexpectedErrMsg(context);
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                            Bitmap bitmap = null;
+                            final Bitmap bit ;
+                            try {
+                                bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+                                Log.e("logo",bitmap.toString());
+                                bit =bitmap;
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        logoImg.setImageBitmap(bit);
+                                        logoImg.setVisibility(View.VISIBLE);
+                                        card.setVisibility(View.VISIBLE);
+
+                                        // OffersAdapter.logoImages.put(LogoId,bit);
+                                    }
+                                });
+                            } catch (Exception e)
+                            {
+                                // TODO Auto-generated catch block
+                                Log.e("ERRLOGO",e.getMessage());
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    });
+
+                }
+            }
+        }
+        else
+        {
+            logoImg.setVisibility(View.INVISIBLE);
+            card.setVisibility(View.INVISIBLE);
+
+        }
+
+
+
+    }
 
     public static void SetNotificationRead(final Context cont ,String id){
 //        showDialog(context);
@@ -25135,7 +25377,7 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  browseOneBooking(String book_id, final Context context, final ImageView logoImg){
+    public  static  void  browseOneBooking(String book_id, final Context context, final ImageView logoImg, final CardView cardView){
         servicesArrayList.clear();
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
@@ -25278,7 +25520,7 @@ public class APICall {
                         String bdb_sup_final_price="";
 //                        final String salon_name=data.getString("salon_name");
                         String logo_id=data.getString("bdb_logo_id");
-                        getSalonLogo(context,logo_id,logoImg);
+                        getSalonLogoDltWhenEmptyWithCard(context,logo_id,logoImg,cardView);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -26841,7 +27083,7 @@ public class APICall {
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  browseOneBookingRequest(String book_id,final Context context,final ImageView logoImg)
+    public  static  void  browseOneBookingRequest(String book_id,final Context context,final ImageView logoImg,final CardView card)
     {
         servicesArrayList.clear();
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -26991,7 +27233,7 @@ public class APICall {
                         totalCost+= context.getResources().getString(R.string.ryal);
 
 
-                        getSalonLogo(BeautyMainPage.context,logo_id,logoImg);
+                        getSalonLogoDltWhenEmptyWithCard(context,logo_id,logoImg,card);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

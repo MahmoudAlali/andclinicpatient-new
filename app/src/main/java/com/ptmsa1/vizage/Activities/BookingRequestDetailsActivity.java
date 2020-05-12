@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,7 +126,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
             }
         });
         String book_id=getIntent().getStringExtra("order_id");
-        APICall.browseOneBookingRequest(book_id,context,logoImg);
+        APICall.browseOneBookingRequest(book_id,context,logoImg,(CardView) findViewById(R.id.myCardView));
         id.setText(book_id);
         location.setOnClickListener(new View.OnClickListener() {
             @Override

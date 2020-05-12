@@ -75,7 +75,7 @@
                         android:id="@+id/provider_rate"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:layout_height="35dp"
+                        android:layout_height="match_parent"
                         android:text="0.0"
                         />
                 </LinearLayout>
@@ -212,10 +212,12 @@
                     android:layout_height="50dp"
                     app:cardCornerRadius="50dp"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/transparent"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     >
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/logoImg"
                         android:src="@drawable/logo"
                         android:layout_width="match_parent"

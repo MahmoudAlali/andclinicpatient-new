@@ -8,6 +8,7 @@
     android:background="@drawable/background"
     tools:context=".Activities.ProviderSerAndOfferPKG.MainProviderActivity">
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -78,12 +79,13 @@
                 android:background="@android:color/transparent"
                 android:elevation="5dp"
                 android:text="@string/MyLocation"
-                android:textSize="16sp"
+                android:textSize="14dp"
+                android:maxWidth="110dp"
                 android:textColor="#000"
                 android:gravity="center"
                 />
             <ImageView
-                android:layout_width="@dimen/standard_50"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:src="@drawable/filter_my_location_icon" />
@@ -107,13 +109,13 @@
                 android:layout_marginRight="10dp"
                 android:background="@android:color/transparent"
                 android:elevation="5dp"
-                android:textSize="16sp"
+                android:textSize="14dp"
                 android:textColor="#000"                android:text="@string/date"
                 android:gravity="center"
                 android:textAlignment="center"/>
 
             <ImageView
-                android:layout_width="@dimen/standard_50"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/filter_date_icon"/>
 

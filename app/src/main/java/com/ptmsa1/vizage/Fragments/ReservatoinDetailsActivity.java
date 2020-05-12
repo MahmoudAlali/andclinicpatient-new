@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         if(book_id!=null)
         {
 
-            APICall.browseOneBooking(book_id,context,logoImg);
+            APICall.browseOneBooking(book_id,context,logoImg,(CardView) findViewById(R.id.myCardView));
             id.setText(internally_book);
             ref_id.setText(book_id);
             //APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);
@@ -93,7 +94,7 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         }
         else
         {
-            APICall.browseOneBooking(ReservationsAdapter2.book_id,context,logoImg);
+            APICall.browseOneBooking(ReservationsAdapter2.book_id,context,logoImg,(CardView) findViewById(R.id.myCardView));
             id.setText(internally_book);
             ref_id.setText(ReservationsAdapter2.book_id);
             // APICall.getSalonLogo(BeautyMainPage.context,ReservationsAdapter2.logoId,logoImg);

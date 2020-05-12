@@ -871,7 +871,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
 
             }
-            APICall.getSalonLogo(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((Item)holder).logoImg);
+            APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((Item)holder).logoImg);
 
             ((Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
                 @Override

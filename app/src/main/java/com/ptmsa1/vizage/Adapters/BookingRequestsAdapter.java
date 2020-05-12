@@ -219,7 +219,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
         // >>>>>>>>>>>>> provider logo
-            APICall.getSalonLogo(BeautyMainPage.context,bookingRequestData.get(position).getLogo_id(),((Item)holder).logoImg);
+            APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,bookingRequestData.get(position).getLogo_id(),((Item)holder).logoImg);
 
 
 

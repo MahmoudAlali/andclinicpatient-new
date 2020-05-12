@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,7 +133,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
         if(itemArrayList.get(position).getBdb_type().equals("1"))
         {
-            APICall.getSalonLogo(BeautyMainPage.context,itemArrayList.get(position).getBdb_logo_id(),((Item)holder).logoImg);
+            APICall.getSalonLogoDltWhenEmptyWithCard(BeautyMainPage.context,itemArrayList.get(position).getBdb_logo_id(),((Item)holder).logoImg,((Item)holder).cardView);
             //((Item)holder).logoImg.setImageResource(R.drawable.un_favorite);
         }
         else
@@ -156,6 +157,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView favoriteName;
 
         ImageView isFav,logoImg;
+        CardView cardView;
 
         /**
          * @param itemView
@@ -166,6 +168,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             favoriteName=itemView.findViewById(R.id.pro_name);
             isFav=itemView.findViewById(R.id.is_fav);
             logoImg=itemView.findViewById(R.id.logoImg);
+            cardView=itemView.findViewById(R.id.myCardView);
         }
     }
 }

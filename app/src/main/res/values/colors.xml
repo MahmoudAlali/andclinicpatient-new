@@ -24,6 +24,7 @@
 
     <color name="primeliet">#B399E4</color>
     <color name="transLightPink">#36941751</color>
+    <color name="transparent">#00941751</color>
     <color name="grey">#636263</color>
     <color name="transLightRose">#2E941751</color>
     <color name="red">#BB2F5D</color>

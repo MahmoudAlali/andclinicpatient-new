@@ -250,7 +250,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 });
             }
             else*/
-            APICall.getSalonLogo(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
+            APICall.getSalonLogoDltWhenEmpty(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
             if (bestOfferItems.get(position).getOffer_type().equals("1") ||bestOfferItems.get(position).getOffer_type().equals("4")) {
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));

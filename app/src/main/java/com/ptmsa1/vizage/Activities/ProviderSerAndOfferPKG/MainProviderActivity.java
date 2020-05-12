@@ -154,7 +154,7 @@ public class MainProviderActivity extends AppCompatActivity {
                                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
                             if(!enabled)
                             {
-                                showLocationServiceMsg(BeautyMainPage.context);
+                                showLocationServiceMsg(context);
                             }
                             else
                             {

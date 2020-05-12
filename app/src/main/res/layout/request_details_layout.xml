@@ -96,11 +96,14 @@
                             android:layout_width="@dimen/standard_40"
                             android:layout_height="@dimen/standard_40"
                             app:cardCornerRadius="50dp"
+                            android:visibility="gone"
+                            app:cardBackgroundColor="@color/transparent"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
                             >
 
                             <ImageView
+                                android:visibility="gone"
                                 android:id="@+id/logoImg"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
