@@ -103,16 +103,11 @@
             </LinearLayout>
         </LinearLayout>-->
 
-    <LinearLayout
-
-        android:orientation="vertical"
+    <ImageView
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:gravity="center"
-        android:background="#fff"
->
-
-    </LinearLayout>
+        android:layout_height="150dp"
+        android:id="@+id/offer_image"/>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
