@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/standard_30"
+    android:layout_marginRight="@dimen/standard_30"
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_dialog"
     android:layout_gravity="center">
@@ -78,7 +80,7 @@
                     android:layout_weight="1"
                     android:id="@+id/confirm"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_gravity="bottom|center"
                     android:layout_marginBottom="2dp"
                     android:text="@string/contactSupportWebsite"
@@ -93,7 +95,7 @@
                     android:layout_weight="1"
                     android:id="@+id/cancel"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_gravity="bottom|center"
                     android:gravity="center"
                     android:text="@string/contactSupportWhatsApp"
@@ -109,17 +111,14 @@
                     android:layout_weight="1"
                     android:id="@+id/ok"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_gravity="bottom|center"
                     android:gravity="center"
                     android:text="@string/ok"
                     android:textSize="14dp"
                     android:textColor="@color/endblue"
                     />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@color/end_gray"/>
+
             </LinearLayout>
 
         </LinearLayout>

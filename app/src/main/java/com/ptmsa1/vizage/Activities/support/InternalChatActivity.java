@@ -55,7 +55,9 @@ public class InternalChatActivity extends AppCompatActivity {
     Dialogs terminateChat;
 
     static int TIMER_TIME = 300000; //5 minutes
-
+    static boolean isRunning = true;
+    static boolean firstRun= true;
+    static boolean resume= false;
     public static String ChatID,Token,ProviderId;
     final private static String FCM_API = "https://fcm.googleapis.com/fcm/send";
     final private static String serverKey = "key=" + APICall.SERVER_KEY;
@@ -82,6 +84,7 @@ public class InternalChatActivity extends AppCompatActivity {
         scrollView =findViewById(R.id.scrollView);
         adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1);
         context=this;
+        isNoChat=false;
 
         //----------- back btn process------
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -95,10 +98,12 @@ public class InternalChatActivity extends AppCompatActivity {
         innerTimer = new CountDownTimer(TIMER_TIME, 1000) {
 
             public void onTick(long millisUntilFinished) {
+                isRunning=true;
             }
 
             public void onFinish()
             {
+                isRunning=false;
                 terminateChatOkClick.run();
 
             }
@@ -116,6 +121,7 @@ public class InternalChatActivity extends AppCompatActivity {
                 {
                     NewMsg(context,string,true);
                     startNewInnerTimer();
+                    isNoChat=false;
                     String NOTIFICATION_MESSAGE = msgEditTxt.getText().toString();
 
                     if(!isFirstMsg)
@@ -225,13 +231,24 @@ public class InternalChatActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        if(!isNoChat)
+        if(!isRunning && firstRun && resume)
         {
-            terminateChat = new Dialogs(context, R.string.terminatingChat, R.string.exit,terminateChatOkClick);
-            terminateChat.show();
+            Log.e("BACH from Resume2","TRUE");
+
+            super.onBackPressed();
         }
         else
-            super.onBackPressed();
+        {
+            if(!isNoChat)
+            {
+                terminateChat = new Dialogs(context, R.string.terminatingChat, R.string.exit,terminateChatOkClick);
+                terminateChat.show();
+            }
+            else
+                super.onBackPressed();
+        }
+
+
     }
 
     @Override
@@ -258,7 +275,8 @@ public class InternalChatActivity extends AppCompatActivity {
         public void run() {
             APICall.TerminateChat(context,ChatID);
             InternalChatActivity.super.onBackPressed();
-
+            innerTimer.cancel();
+            firstRun =false;
 
         }
     };
@@ -273,5 +291,16 @@ public class InternalChatActivity extends AppCompatActivity {
         Dialogs dialogs=new Dialogs(context, R.string.noOperator);
         isNoChat=true;
         dialogs.show();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("RESUME","TRUE");
+
+        resume=true;
+        if(!isRunning && firstRun)
+            onBackPressed();
+        super.onResume();
+
     }
 }

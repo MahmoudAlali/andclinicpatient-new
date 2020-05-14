@@ -75,8 +75,6 @@
         <activity android:name=".PayFort.PayTestActivity" />
         <activity
             android:name=".Activities.support.InternalChatActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
             android:parentActivityName=".Activities.support.SupportActivity"
             android:screenOrientation="portrait"
             android:taskAffinity="" />
