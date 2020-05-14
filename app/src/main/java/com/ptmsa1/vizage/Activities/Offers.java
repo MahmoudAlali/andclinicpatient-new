@@ -45,6 +45,7 @@ import com.ptmsa1.vizage.API.APICall;
 import com.ptmsa1.vizage.Activities.support.SupportActivity;
 import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.DataModel.BestOfferItem;
+import com.ptmsa1.vizage.DataModel.DataOffer;
 import com.ptmsa1.vizage.R;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class Offers extends Fragment implements LocationListener ,
     Toolbar toolbar;
     public static int bdb_booking_period;
     Location mLastLocation;
-
+    public static ArrayList<DataOffer.SupIdClass> sersup_ids;
 
 
     public static Boolean check=false;

@@ -217,20 +217,23 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                 public void onClick(View v) {
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.select_date);
+
                     TextView confirm = dialog.findViewById(R.id.confirm);
                     TextView cancel = dialog.findViewById(R.id.cancel);
                     final DatePicker datePicker = dialog.findViewById(R.id.date_picker);
+                    datePicker.setCalendarViewShown(false);
                     datePicker.setMinDate(System.currentTimeMillis());
                     Calendar calendar=Calendar.getInstance();
                     calendar.add(Calendar.DAY_OF_MONTH,booking_period);
                     datePicker.setMaxDate(calendar.getTimeInMillis());
+
                     try {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
                         Date date = sdf.parse(finalBdb_offer_end);
-
-                        datePicker.setMaxDate(date.getTime());
+                        if (date.getTime()>datePicker.getMinDate())
+                            datePicker.setMaxDate(date.getTime());
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -253,6 +256,7 @@ public class SingleDateMultiClientOfferBooking extends AppCompatActivity {
                         }
                     });
 
+                    datePicker.setCalendarViewShown(false);
 
                     dialog.show();
                 }
