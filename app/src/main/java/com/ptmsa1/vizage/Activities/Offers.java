@@ -32,6 +32,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ptmsa1.vizage.API.APICall;
+import com.ptmsa1.vizage.API.Constants;
 import com.ptmsa1.vizage.Activities.support.SupportActivity;
 import com.ptmsa1.vizage.Adapters.OffersAdapter;
 import com.ptmsa1.vizage.DataModel.BestOfferItem;
@@ -67,15 +69,18 @@ public class Offers extends Fragment implements LocationListener ,
     public static int bdb_booking_period;
     Location mLastLocation;
     public static ArrayList<DataOffer.SupIdClass> sersup_ids;
+    static ImageView offerImage;
+
 
 
     public static Boolean check=false;
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.offers_layout, container, false);
         toolbar = view.findViewById(R.id.toolbarm);
         BeautyMainPage.FRAGMENT_NAME = "Offers";
+        offerImage= view.findViewById(R.id.offer_image);
         final Context context = getContext();
         check=false;
 
@@ -549,4 +554,14 @@ public class Offers extends Fragment implements LocationListener ,
 
             }
 
+            public static void setOfferImage()
+            {
+                ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        APICall.getSalonLogoDltWhenEmpty2(BeautyMainPage.context, Constants.offerImageId,offerImage);
+
+                    }
+                });
+            }
 }
