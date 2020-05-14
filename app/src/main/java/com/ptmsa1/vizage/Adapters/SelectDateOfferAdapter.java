@@ -115,7 +115,12 @@ public class SelectDateOfferAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
 
-                    datePicker.setMaxDate(format.parse(bdb_offer_end).getTime());
+                    if (format.parse(bdb_offer_end).getTime()>System.currentTimeMillis()) {
+                        datePicker.setMaxDate(format.parse(bdb_offer_end).getTime());
+                    }else {
+                        datePicker.setMaxDate(System.currentTimeMillis());
+
+                    }
 
                 }catch (Exception e){
                     e.printStackTrace();

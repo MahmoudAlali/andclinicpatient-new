@@ -745,17 +745,18 @@ public class MultiClientOfferEffect extends AppCompatActivity {
 
 
 
-        if (effects.getBdb_value().equals(Constants.effectValues[0])) {
-            dzero.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[1])){
+//        if (effects.getBdb_value().equals(Constants.effectValues[0])) {
+//            dzero.setBackgroundResource(R.color.colorAccent);
+//        }else
+            if (effects.getBdb_value().equals(Constants.effectValues[0])){
             done.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[2])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[1])){
             dtwo.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[3])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[2])){
             dthree.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[3])){
             dfour.setBackgroundResource(R.color.colorAccent);
-        }else if (effects.getBdb_value().equals(Constants.effectValues[5])){
+        }else if (effects.getBdb_value().equals(Constants.effectValues[4])){
             dfive.setBackgroundResource(R.color.colorAccent);
         }
 
@@ -779,12 +780,12 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[0])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[1]);
+                effects.setBdb_value(Constants.effectValues[0]);
 
                 Log.e(" checkClick","is "+checkClick);
                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -801,12 +802,12 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dtwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[1])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[2]);
+                effects.setBdb_value(Constants.effectValues[1]);
 
                 Log.e(" checkClick","is "+checkClick);
                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -824,12 +825,12 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[2])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[3]);
+                effects.setBdb_value(Constants.effectValues[2]);
 
                 Log.e(" checkClick","is "+checkClick);
                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -847,12 +848,12 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[3])){
                     checkClick=true;
 //                    update.setEnabled(true);
 
                 }
-                effects.setBdb_value(Constants.effectValues[4]);
+                effects.setBdb_value(Constants.effectValues[3]);
 
                 Log.e(" checkClick","is "+checkClick);
                 Log.e(" checkClick","is "+effects.getBdb_value());
@@ -870,11 +871,11 @@ public class MultiClientOfferEffect extends AppCompatActivity {
         dfive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!effects.getBdb_value().equals(Constants.effectValues[5])){
+                if (!effects.getBdb_value().equals(Constants.effectValues[4])){
                     checkClick=true;
 //                    update.setEnabled(true);
                 }
-                effects.setBdb_value(Constants.effectValues[5]);
+                effects.setBdb_value(Constants.effectValues[4]);
 
                 Log.e(" checkClick","is "+checkClick);
                 Log.e(" checkClick","is "+effects.getBdb_value());

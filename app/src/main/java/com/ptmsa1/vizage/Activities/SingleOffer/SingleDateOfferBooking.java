@@ -267,17 +267,18 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                     TextView ok=dialog.findViewById(R.id.confirm);
                     TextView cancel=dialog.findViewById(R.id.cancel);
                     final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
+                    datePicker.setCalendarViewShown(false);
+                    Log.e("finalBdb_offer_end","is"+finalBdb_offer_end);
                     datePicker.setMinDate(System.currentTimeMillis());
                     Calendar calendar=Calendar.getInstance();
                     calendar.add(Calendar.DAY_OF_MONTH,booking_period);
                     datePicker.setMaxDate(calendar.getTimeInMillis());
-
                     try {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     //                    sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 
                         Date date=sdf.parse(finalBdb_offer_end);
-
+                        if (date.getTime()>datePicker.getMinDate())
                         datePicker.setMaxDate(date.getTime());
 
                     }catch (Exception e){
@@ -302,6 +303,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
                         }
                     });
 
+
                     dialog.show();
                 }
             });
@@ -312,6 +314,7 @@ public class SingleDateOfferBooking extends AppCompatActivity {
         recyclerView.setAdapter(offerAdapter);
         bdb_pack_id=bdb_pack_id1;
         Log.e("bdb_pack_id11","is"+bdb_pack_id1);
+
         APICall.browseOneOfferv2(bdb_pack_id1,offerClientsModels,offerAdapter,context);
 
 

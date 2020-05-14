@@ -1378,7 +1378,7 @@ public class APICall {
         Log.e("FilterRequest",filter);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/effect/getRequestEffects")
+                .url(API_PREFIX_NAME+"/api/effect/getOfferRequestEffects")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -1440,7 +1440,7 @@ public class APICall {
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
                     String response_code=j.getString("response_code");
-                    if (response_code.equals("28")) {
+                    if (response_code.equals("29")) {
                         JSONObject data = j.getJSONObject("data");
                         JSONArray request_effect = data.getJSONArray("request_effect");
                         String client_name;
@@ -2375,6 +2375,7 @@ public class APICall {
             }
         });
 
+        lat = "21.418923225457213"; lon = "39.82685700058937";
 //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -19366,6 +19367,12 @@ public class APICall {
 
                             Log.e("OfferDetailSize",i+"");
                             offerClientsModels.add(new OfferClientsModel(bdb_pack_code,bdb_offer_place,serviceDetails));
+                        }
+                        Offers.sersup_ids=new ArrayList<>();
+                        for (int i=0;i<offerClientsModels.size();i++){
+                            for(int j=0;j<offerClientsModels.get(i).getServiceDetails().size();j++)
+                            Offers.sersup_ids.add(new DataOffer.SupIdClass(offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_sup_id()+"",
+                                    "",offerClientsModels.get(i).getServiceDetails().get(j).getBdb_ser_id()));
                         }
 
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
