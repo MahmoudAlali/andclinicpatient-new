@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ptmsa1.vizage">
+    package="com.ptmsa1.clinicclient">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -42,44 +42,44 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivityLocation"
+            android:name="com.ptmsa1.clinicclient.MapsActivityLocation"
             android:label="@string/title_activity_maps_location"></activity>
-        <activity android:name=".Activities.MapActivity" />
-        <activity android:name=".Activities.ConfirmAccountActivity" />
-        <activity android:name=".Activities.ProviderSerAndOfferPKG.MainProviderActivity" />
-        <activity android:name=".Activities.SettingActivity" />
-        <activity android:name=".Fragments.MyReservation.CancelReservationActivity" />
-        <activity android:name=".Fragments.SingleMultiAltResultActivity" />
-        <activity android:name=".Fragments.SingleMultiRelationActivity" />
-        <activity android:name=".Fragments.RateSerEmpActivity" />
-        <activity android:name=".Fragments.ExecuteBookActivity" />
-        <activity android:name=".Fragments.RatingBookActivity" />
-        <activity android:name=".Fragments.AlterGroupOtherReservationResult" />
-        <activity android:name=".Fragments.OtherRelationActivity" />
-        <activity android:name=".Fragments.CompareServiceActivity" />
-        <activity android:name=".Fragments.AlterGroupReservationResultActivity" />
-        <activity android:name=".Fragments.GroupRelationActivity" />
-        <activity android:name=".Activities.GroupOffer.MultiClientOfferEffect" />
-        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferEffect" />
-        <activity android:name=".Activities.SingleOffer.SingleOfferEffect" />
-        <activity android:name=".Fragments.GroupReservationOtherResultActivity" />
-        <activity android:name=".Fragments.MyOtherEffectActivity" />
-        <activity android:name=".Fragments.GroupReservationResultActivity" />
-        <activity android:name=".Fragments.MyGroupEffectActivity" />
-        <activity android:name=".Fragments.MultiBookingIndividualResultActivity" />
-        <activity android:name=".Fragments.MySingleMultiEffectActivity" />
-        <activity android:name=".Activities.BookingRequestDetailsActivity" />
-        <activity android:name=".Activities.CreateRequestActivity" />
-        <activity android:name=".Activities.AddEffectsToRequestActivity" />
-        <activity android:name=".Fragments.MyIndEffectsActivity" />
-        <activity android:name=".PayFort.PayTestActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.MapActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ConfirmAccountActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ProviderSerAndOfferPKG.MainProviderActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SettingActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MyReservation.CancelReservationActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.SingleMultiAltResultActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.SingleMultiRelationActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.RateSerEmpActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.ExecuteBookActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.RatingBookActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.AlterGroupOtherReservationResult" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.OtherRelationActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.CompareServiceActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.AlterGroupReservationResultActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.GroupRelationActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.GroupOffer.MultiClientOfferEffect" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.MultiDateOffer.MultiDateOfferEffect" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SingleOffer.SingleOfferEffect" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.GroupReservationOtherResultActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MyOtherEffectActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.GroupReservationResultActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MyGroupEffectActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MultiBookingIndividualResultActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MySingleMultiEffectActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.BookingRequestDetailsActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.CreateRequestActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.AddEffectsToRequestActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MyIndEffectsActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.PayFort.PayTestActivity" />
         <activity
-            android:name=".Activities.support.InternalChatActivity"
-            android:parentActivityName=".Activities.support.SupportActivity"
+            android:name="com.ptmsa1.clinicclient.Activities.support.InternalChatActivity"
+            android:parentActivityName="com.ptmsa1.clinicclient.Activities.support.SupportActivity"
             android:screenOrientation="portrait"
             android:taskAffinity="" />
 
-        <receiver android:name=".Service.PackegeRemovedBR">
+        <receiver android:name="com.ptmsa1.clinicclient.Service.PackegeRemovedBR">
             <intent-filter>
 
                 <!-- <action android:name="android.intent.action.PACKAGE_REMOVED"/> -->
@@ -88,54 +88,54 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Fragments.MyEffects.MyEffectsActivity" />
-        <activity android:name=".Fragments.BookingIndvidualActivity" />
-        <activity android:name=".Activities.support.SupportActivity" />
-        <activity android:name=".Fragments.ReservatoinDetailsActivity" />
-        <activity android:name=".Activities.AddEffectOffersActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.MyEffects.MyEffectsActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.BookingIndvidualActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.support.SupportActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.ReservatoinDetailsActivity" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.AddEffectOffersActivity" />
 
         <receiver
-            android:name=".Service.CancelNotifyBroadcast"
+            android:name="com.ptmsa1.clinicclient.Service.CancelNotifyBroadcast"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activities.OfferBookingResult" />
-        <activity android:name=".Activities.GroupOffer.SingleDateMultiClientOfferBooking" />
-        <activity android:name=".Activities.SingleOffer.SingleDateOfferBooking" />
-        <activity android:name=".Activities.MultiDateOffer.MultiDateOfferBooking" />
-        <activity android:name=".Fragments.IndividualBooking" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.OfferBookingResult" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.GroupOffer.SingleDateMultiClientOfferBooking" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SingleOffer.SingleDateOfferBooking" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.MultiDateOffer.MultiDateOfferBooking" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.IndividualBooking" />
         <activity
-            android:name=".test.Main2Activity"
+            android:name="com.ptmsa1.clinicclient.test.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Fragments.EditReservation" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.EditReservation" />
         <activity
-            android:name=".Fragments.GoogleMapBeauty"
+            android:name="com.ptmsa1.clinicclient.Fragments.GoogleMapBeauty"
             android:label="@string/title_activity_google_map" />
-        <activity android:name=".Fragments.AddLocation" />
-        <activity android:name=".Fragments.ReservationTime" />
-        <activity android:name=".Fragments.ResevationDate" />
-        <activity android:name=".Fragments.AddReservation" />
-        <activity android:name=".Activities.Payment" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.AddLocation" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.ReservationTime" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.ResevationDate" />
+        <activity android:name="com.ptmsa1.clinicclient.Fragments.AddReservation" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Payment" />
 
-        <service android:name=".Service.MyFirebaseInstanceService">
+        <service android:name="com.ptmsa1.clinicclient.Service.MyFirebaseInstanceService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <receiver
-            android:name=".Activities.SMSReceiver"
+            android:name="com.ptmsa1.clinicclient.Activities.SMSReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activities.Setting" />
-        <activity android:name=".Activities.Login" />
-        <activity android:name=".Activities.MapFiltering" />
-        <activity android:name=".Activities.SelectServiceForOffer" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Setting" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Login" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.MapFiltering" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SelectServiceForOffer" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -147,29 +147,29 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".Activities.Compartion" />
-        <activity android:name=".Activities.Search" />
-        <activity android:name=".Activities.ShoppingCart" />
-        <activity android:name=".Activities.SearchInterface" />
-        <activity android:name=".Activities.Notification" />
-        <activity android:name=".Activities.ReservationDetails" />
-        <activity android:name=".Activities.ServiceDetails" />
-        <activity android:name=".Activities.ServiceType" />
-        <activity android:name=".Activities.SplashScreen">
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Compartion" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Search" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ShoppingCart" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SearchInterface" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Notification" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ReservationDetails" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ServiceDetails" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.ServiceType" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Register" />
-        <activity android:name=".Activities.Services" />
-        <activity android:name=".Activities.Offers" />
-        <activity android:name=".Activities.FavoritesList" />
-        <activity android:name=".Activities.Point" />
-        <activity android:name=".Activities.BeautyMainPage" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Register" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Services" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Offers" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.FavoritesList" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.Point" />
+        <activity android:name="com.ptmsa1.clinicclient.Activities.BeautyMainPage" />
         <activity
-            android:name=".Activities.MyReservations"
+            android:name="com.ptmsa1.clinicclient.Activities.MyReservations"
             android:label="@string/title_activity_my_reservations"
             android:theme="@style/AppTheme.NoActionBar" />
 

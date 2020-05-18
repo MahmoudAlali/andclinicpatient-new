@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.google.android.gms.maps.MapView>-->
-            <com.ptmsa1.vizage.test.MapWrapperLayout
+            <com.ptmsa1.clinicclient.test.MapWrapperLayout
                 android:id="@+id/map_relative_layout"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -38,7 +38,7 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_gravity="bottom" />-->
 
-            </com.ptmsa1.vizage.test.MapWrapperLayout>
+            </com.ptmsa1.clinicclient.test.MapWrapperLayout>
 
             <LinearLayout
                 android:layout_marginRight="20dp"

@@ -733,4 +733,14 @@
     <string name="locationMsg">يرجى تشغيل خدمة المواقع الجغرافية والسماح للتطبيق بالوصول إلى موقعك من الإعدادات العامة للجهاز.</string>
     <string name="locationMsg2">في حال تكرار المشكلة يرجى إيقاف وإعادة تشغيل خدمة المواقع للتطبيق من الإعدادات العامة للجهاز أو يمكنكِ التواصل مع الدعم التقني للمساعدة من خلال موقع التطبيق أو من خلال تطبيق واتس آب</string>
     <string name="update_pass">تغيير</string>
+    <string name="EnterName">الرجاء إدخال الاسم</string>
+    <string name="gender">الجنس :</string>
+    <string-array name="gender">
+    <item>الجنس</item>
+    <item>ذكر</item>
+    <item>أنثى</item>
+    </string-array>
+    <string name="EnterGender">الرجاء اختيار الجنس</string>
+    <string name="EnterEmail">الرجاء ادخال البريد الالكتروني</string>
+
 </resources>

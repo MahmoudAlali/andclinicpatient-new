@@ -282,9 +282,9 @@
 
 
     <string-array name="gender">
-        <item>الجنس</item>
-        <item>ذكر</item>
-        <item>انثى</item>
+        <item>Gender</item>
+        <item>male</item>
+        <item>female</item>
 
     </string-array>
 
@@ -886,5 +886,9 @@
     <string name="locationMsg">Please turn on location service and allow the application to reach your location from the device\'s general settings.</string>
     <string name="locationMsg2">In the event of a recurrence of the problem, Please stop and restart the application\'s location service from the device\'s general settings, Or you can contact technical support through application website or through WhatsApp.</string>
     <string name="update_pass">Update</string>
+    <string name="EnterName">Enter your name</string>
+    <string name="EnterEmail">Enter your email</string>
+    <string name="EnterGender">Please select your gender</string>
+    <string name="gender">Gender :</string>
 
 </resources>

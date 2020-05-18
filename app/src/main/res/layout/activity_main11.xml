@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ptmsa1.vizage.test.MapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ptmsa1.clinicclient.test.MapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map_relative_layout"
     android:layout_width="match_parent"
@@ -12,4 +12,4 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-</com.ptmsa1.vizage.test.MapWrapperLayout>
+</com.ptmsa1.clinicclient.test.MapWrapperLayout>

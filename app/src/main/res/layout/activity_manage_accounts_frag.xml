@@ -147,6 +147,33 @@
                         android:layout_gravity="center|start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/gender"
+                        android:textSize="@dimen/standard_20"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:gravity="center"
+                        android:id="@+id/gender"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:textColor="#96b2fd"
+                        android:layout_marginRight="5dp"
+                        android:enabled="false"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_gravity="center|start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/language"
                         android:textSize="@dimen/standard_20"
                         android:textStyle="bold" />
