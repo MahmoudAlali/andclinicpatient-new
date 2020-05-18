@@ -226,6 +226,7 @@ public class AccountFragment extends Fragment  {
                 else
                 {
                     genderType=oldGender;
+
                 }
 
 
