@@ -4902,7 +4902,7 @@ public class APICall {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 mMessage = e.getMessage();
-                                Log.w("failure Response", mMessage);
+                                Log.e("failure Response", mMessage);
 
                                 d.dismiss();
                                 pd.dismiss();
@@ -23031,7 +23031,7 @@ public class APICall {
                             final Bitmap bit ;
                             try {
                                 bitmap = BitmapFactory.decodeStream(response.body().byteStream());
-                                Log.e("logo",bitmap.toString());
+                               // Log.e("logo",bitmap.toString());
                                 bit =bitmap;
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                     @Override
@@ -29926,7 +29926,7 @@ Log.e("filters",filter);
                         SERVER_KEY=data.getString("server_key");
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
-                        LOGO_ID=data.getString("provider_logo_id");
+                        LOGO_ID=data.getString("client_logo_id");
 
                        /* String experince="",book_sol="";
                         if (ln.equals("ar")) {
@@ -30064,7 +30064,7 @@ Log.e("filters",filter);
                         SERVER_KEY=data.getString("server_key");
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
-                        LOGO_ID=data.getString("provider_logo_id");
+                        LOGO_ID=data.getString("client_logo_id");
 
                        /* String experince="",book_sol="";
                         if (ln.equals("ar")) {

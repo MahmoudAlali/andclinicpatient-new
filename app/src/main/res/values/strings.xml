@@ -75,7 +75,7 @@
     <string name="InvalidEmail">This email address is invalid, please rewrite it</string>
     <string name="InvalidPassword">Password length must be 6, Password must contain one uppercase letter, at least one number
     and at least one letter of lowercase</string>
-    <string name="SendNewPass">New password was sent to your phone</string>
+    <string name="SendNewPass">Setting new password link was sent to your Email</string>
     <string name="CantFindNum">We can not find a user with that mobile</string>
     <string name="numberNotActivatedAlert">This number is already registered,Please activate it by entering the verification code</string>
     <string name="EnterVerificationCode">Please enter the verification code</string>
@@ -751,7 +751,7 @@
     <string name="KM">Km</string>
     <string name="select_service">Select service</string>
     <string name="requestDateFilter">Order execution date</string>
-    <string name="requestSalonFilter">Salon name</string>
+    <string name="requestSalonFilter">Clinic name</string>
     <string name="requestTypeFilter">Order type</string>
     <string name="filter">filter</string>
     <string name="removeFilter">Remove all filters</string>

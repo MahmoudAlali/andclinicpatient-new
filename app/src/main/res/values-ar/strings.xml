@@ -56,7 +56,7 @@
     <string name="InvalidPassword">يجب أن يكون طول كلمة المرور 6 ، ويجب أن تحتوي كلمة المرور على حرف كبير واحد ورقم واحد على األقل وحرف واحد
 صغير على الأقل
 </string>
-    <string name="SendNewPass">تم إرسال كلمة المرور الجديدة إلى هاتفك, الرجاء التحقق</string>
+    <string name="SendNewPass">تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الالكتروني, الرجاء التحقق</string>
     <string name="numberNotActivatedAlert">هذا الرقم مسجل مسبقاً, يرجى تفعيله بإدخال رمز التحقق</string>
     <string name="CantFindNum">لم نستطع ايجاد حساب لهذا الرقم, يرجى التأكد</string>
 
@@ -581,7 +581,7 @@
     <string name="KM">كم</string>
     <string name="select_service">اختاري خدمة</string>
     <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
-    <string name="requestSalonFilter">اسم الصالون</string>
+    <string name="requestSalonFilter">اسم المركز</string>
     <string name="requestTypeFilter">نوع الطلب</string>
     <string name="filter">فلترة</string>
     <string name="removeFilter">إزالة جميع عناصر الفلترة</string>

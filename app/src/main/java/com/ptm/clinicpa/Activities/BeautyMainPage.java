@@ -979,11 +979,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             Intent intent=new Intent(getApplicationContext(), MyEffectsActivity.class);
             startActivity(intent);
         }else if (id == R.id.requests) {
-            fragment = new MyBookingRequestsFragment();
+            fragment = new MyReservationFragment();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commitAllowingStateLoss();
        /* } else if (id == R.id.rate_app) {
          launchMarket();*/
         }else if (id == R.id.signout) {
@@ -1048,12 +1048,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             }else {
                                 menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
                                 FRAGMENT_NAME = "";
-                                fragment = new MyReservationFragment();
-//                            fragment = new ReservationFragment();
+                                fragment = new MyBookingRequestsFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);
-                                fragmentTransaction.commitAllowingStateLoss();
+                                fragmentTransaction.commit();
+
                             }
                             return true;
 //                        case R.id.service_bag:

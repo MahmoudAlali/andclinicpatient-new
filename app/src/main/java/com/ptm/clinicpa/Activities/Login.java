@@ -159,7 +159,7 @@ public class Login extends AppCompatActivity {
         }
         }
     public void forgetpass(View view) {
-        APICall.reset_pass(APICall.API_PREFIX_NAME+"/api/password/user/reset", Login.this);
+        APICall.reset_pass(APICall.API_PREFIX_NAME+"/api/user/password/reset", Login.this);
     }
 
 
