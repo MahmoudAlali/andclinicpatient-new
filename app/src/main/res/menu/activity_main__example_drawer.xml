@@ -30,7 +30,7 @@
             <item
                 android:id="@+id/requests"
                 android:icon="@drawable/side_requests_icon"
-                android:title="@string/bookingRequests" />
+                android:title="@string/myAppointment" />
 
             <item
                 android:id="@+id/nav_share"

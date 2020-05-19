@@ -57,25 +57,11 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ProNotShard"
                         />
+
+
+
                     <RadioButton
-                        android:layout_marginBottom="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/OtherReasons"
-                        />
-                    <RadioButton
-                        android:layout_marginBottom="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TechnicalReason"
-                        />
-                    <RadioButton
-                        android:layout_marginBottom="20dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ManyOption"
-                        />
-                    <RadioButton
+                        android:visibility="gone"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -91,9 +77,27 @@
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/ManyOption"
+                        />
+                    <RadioButton
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/HandleApp"
                         />
                 </RadioGroup>
+                <RadioButton
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/TechnicalReason"
+                    />
+                <RadioButton
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/OtherReasons"
+                    />
                 <LinearLayout
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"

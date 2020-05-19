@@ -235,14 +235,14 @@
     <string name="OfferPrice">Offer price</string>
 
     <!--Delete Account-->
-    <string name="ServiceCovering">I did not get services covering my area / city</string>
-    <string name="ProNotShard">The requested provider/salon is not using this application</string>
-    <string name="OtherReasons">Other reasons</string>
-    <string name="TechnicalReason">There are technical reasons that hinder app usage</string>
+    <string name="ServiceCovering">There is no clinics covering my area / city</string>
+    <string name="ProNotShard">The requested clinic is not using this application</string>
+    <string name="PricesRealistic">I need to know some services prices</string>
     <string name="ManyOption">The application does not offer many options</string>
     <string name="ServiceAvailable">No outside/home services available in my area</string>
-    <string name="PricesRealistic">Prices are not realistic</string>
     <string name="HandleApp">I could not handle the application</string>
+    <string name="TechnicalReason">There are technical reasons that hinder app usage</string>
+    <string name="OtherReasons">Other reasons</string>
     <string name="ShareMoreDetails">Share more details</string>
     <string name="send">Send</string>
 
@@ -309,7 +309,7 @@
     <string name="locationName">Please enter location name</string>
     <string name="relatedClientsOneSalon">Execute booking for related clients in the same salon</string>
     <string name="sameClientSameSalon">Execute all services of the booking in the same salon</string>
-    <string name="errActivation">You can not request activation code more than 3 times a day</string>
+    <string name="errActivation">You can not request activation code more than 4 times a day</string>
     <string name="allAges">All ages</string>
     <string name="guestAccount">Guest user</string>
 
@@ -626,7 +626,8 @@
     <string name="service_effect">Service effects</string>
     <string name="support">Support</string>
     <string name="effect">My effects</string>
-    <string name="bookingRequests">Booking orders</string>
+    <string name="bookingRequests">My orders</string>
+    <string name="myAppointment">My appointments</string>
     <string name="update">Update effects</string>
     <string name="there_is_no_sol">There is no similar solution. Do you want to find alternative solutions?</string>
 
@@ -866,10 +867,10 @@
     <string name="distance_is_required">The distance is required</string>
     <string name="can_not_sort_distance">Can not sort by distance because not founddeterminated location</string>
     <string name="no_offers_on_this_service">No offers on this service</string>
-    <string name="there_is_no_supplier">there is no suppliered services with your searchfilters</string>
+    <string name="there_is_no_supplier">there is no suppliered services with your search filters</string>
     <string name="employee_id_you_sent_is_invalid">employee_id you sent is invalid</string>
-    <string name="booking_times_you_select_not_avaliable_right_now_try_find_another">booking times you select not avaliable right nowtry find another</string>
-    <string name="you_cant_activate_account_4times">you can not activate your account today becauseyou have requested activation code more than 4times today</string>
+    <string name="booking_times_you_select_not_avaliable_right_now_try_find_another">Booking times you select not available right now try to find another one</string>
+    <string name="you_cant_activate_account_4times">You can not request activation code more than 4 times a day</string>
     <string name="bdb_mobile_is_already_exists_and_activated">bdb_mobile is already exists and activated</string>
     <string name="bdb_mobile_is_not_registered">bdb_mobile is not registered</string>
     <string name="success_add_address">Success add address</string>
@@ -890,5 +891,7 @@
     <string name="EnterEmail">Enter your email</string>
     <string name="EnterGender">Please select your gender</string>
     <string name="gender">Gender :</string>
+    <string name="sure_add_location">Do you want to add this location?</string>
+    <string name="sure_edit_location">Do you want to edit this location?</string>
 
 </resources>

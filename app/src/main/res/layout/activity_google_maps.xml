@@ -73,7 +73,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <com.ptmsa1.clinicclient.test.MapWrapperLayout
+    <com.ptm.clinicpa.test.MapWrapperLayout
         android:id="@+id/map_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,7 +89,7 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_gravity="bottom" />-->
 
-    </com.ptmsa1.clinicclient.test.MapWrapperLayout>
+    </com.ptm.clinicpa.test.MapWrapperLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

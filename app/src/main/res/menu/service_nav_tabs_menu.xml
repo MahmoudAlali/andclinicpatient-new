@@ -16,7 +16,7 @@
     <item
         android:id="@+id/reservations"
         android:icon="@drawable/reservations_grey"
-        android:title="@string/reservations"
+        android:title="@string/bookingRequests"
         />
 <!--    <item-->
 <!--        android:id="@+id/service_bag"-->
