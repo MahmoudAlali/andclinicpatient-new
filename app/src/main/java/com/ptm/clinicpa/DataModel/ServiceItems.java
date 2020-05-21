@@ -22,6 +22,12 @@ public class ServiceItems {
         this.bdb_is_bride_service = bdb_is_bride_service;
         this.images = images;
     }
+    public ServiceItems(String bdb_ser_id, String bdb_name, String bdb_name_ar) {
+        this.bdb_ser_id = bdb_ser_id;
+        this.bdb_name = bdb_name;
+        this.bdb_name_ar = bdb_name_ar;
+    }
+
 
 
     public String getBdb_is_bride_service() {

@@ -156,6 +156,18 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     APICall.getSalonLogoDltWhenEmptyWithCard(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo,(holder).cardView);
 
     ( holder).provider_rate.setText(itemArrayList.get(position).getRating());
+    if(context.getResources().getString(R.string.locale).equals("ar"))
+    {
+        ( holder).speciality.setText(itemArrayList.get(position).getSpeciality_ar());
+        ( holder).healthCntr.setText(itemArrayList.get(position).getHealthCntr_ar());
+    }
+    else
+    {
+        ( holder).speciality.setText(itemArrayList.get(position).getSpeciality());
+        ( holder).healthCntr.setText(itemArrayList.get(position).getHealthCntr());
+    }
+
+
     String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getDeposit_prcntg()+" % ";
     ( holder).depositPrcntg.setText(deposit);
     ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +184,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     });
 }
 public class ListHolder extends RecyclerView.ViewHolder {
-    TextView providerName,provider_rate,depositPrcntg;
+    TextView providerName,provider_rate,depositPrcntg,healthCntr,speciality;
     ImageView addRequest,logo,place,health,exp;
     CardView cardView;
     public ListHolder(View itemView) {
@@ -186,6 +198,8 @@ public class ListHolder extends RecyclerView.ViewHolder {
         health=itemView.findViewById(R.id.health);
         exp=itemView.findViewById(R.id.exp);
         cardView=itemView.findViewById(R.id.myCardView);
+        healthCntr=itemView.findViewById(R.id.healthCntr);
+        speciality=itemView.findViewById(R.id.speciality);
     }
 }
     @Override

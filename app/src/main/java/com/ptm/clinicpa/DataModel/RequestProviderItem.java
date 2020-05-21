@@ -1,9 +1,9 @@
 package com.ptm.clinicpa.DataModel;
 
 public class RequestProviderItem {
-    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat,bdb_has_experience_cer,bdb_has_health_cer;
+    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat,bdb_has_experience_cer,bdb_has_health_cer,healthCntr,speciality,healthCntr_ar,speciality_ar;
 
-    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer )
+    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar )
     {
         this.sup_id=sup_id;
         this.sup_name=sup_name;
@@ -15,6 +15,10 @@ public class RequestProviderItem {
         this.bdb_loc_long=bdb_loc_long;
         this.bdb_has_health_cer=bdb_has_health_cer;
         this.bdb_has_experience_cer=bdb_has_experience_cer;
+        this.healthCntr=healthCntr;
+        this.healthCntr_ar=healthCntr_ar;
+        this.speciality_ar=speciality_ar;
+        this.speciality=speciality;
     }
 
     public String getBdb_has_experience_cer() {
@@ -95,5 +99,21 @@ public class RequestProviderItem {
 
     public String getDeposit_prcntg() {
         return deposit_prcntg;
+    }
+
+    public String getHealthCntr() {
+        return healthCntr;
+    }
+
+    public String getHealthCntr_ar() {
+        return healthCntr_ar;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public String getSpeciality_ar() {
+        return speciality_ar;
     }
 }

@@ -48,6 +48,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static String is_group_booking="";
     public  String postdata;
     public static String sup_id;
+    public static Spinner hourSpinner,minutesSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +74,25 @@ public class CreateRequestActivity extends AppCompatActivity {
         add_date=findViewById(R.id.add_date);
         next=findViewById(R.id.search);
         show_clients=findViewById(R.id.show_clients);
+        hourSpinner = findViewById(R.id.hour_from);
+        minutesSpinner = findViewById(R.id.minutes_from);
          sup_id = getIntent().getStringExtra("sup_id");
 
         context=this;
         APICall.freegetServiceNames(context,sup_id);
 
+        ArrayAdapter adapter = new HintArrayAdapter(this, 0);
+        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.hours)));
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        hourSpinner.setAdapter(adapter);
+
+
+
+//        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(ProviderMainPage.context, R.array.minutes, R.layout.simple_spinner_item_layout_v1);
+        ArrayAdapter adapter2 = new HintArrayAdapter(this, 0);
+        adapter2.addAll(Arrays.asList(getResources().getStringArray(R.array.minutes)));
+        adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        minutesSpinner.setAdapter(adapter2);
         add_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

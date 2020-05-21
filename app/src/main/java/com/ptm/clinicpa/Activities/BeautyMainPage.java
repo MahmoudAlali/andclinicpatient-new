@@ -1037,6 +1037,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 fragmentTransaction.detach(fragment);
                                 fragmentTransaction.attach(fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
+
                             }
                             return true;
                         case R.id.reservations:

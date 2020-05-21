@@ -203,6 +203,7 @@
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
     <string name="providerRate">تقييم المزودة</string>
+    <string name="doctorName">اسم الطبيب/الطبيبة</string>
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
 
 
@@ -250,10 +251,13 @@
     <string name="current_location">الموقع الحالي</string>
     <string name="new_location">موقع آخر</string>
     <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
+    <string name="location_first">يجب عليك اختيار الموقع أولاً</string>
     <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
+    <string name="distance_first">يجب عليك اختيار قيمة للبعد أولاً</string>
     <string name="type_proceed">يجب عليك اختيار نوع الطلب لإكمال العملية</string>
     <string name="offerPrice_proceed">يجب عليك اختيار سعر العرض لإكمال العملية</string>
+    <string name="speciality_proceed">يجب عليك اختيار التخصص الطبي لإكمال العملية</string>
     <string name="cancel">إلغاء</string>
     <string name="OK">موافق</string>
     <string name="select_date">اختاري تاريخ</string>
@@ -349,6 +353,12 @@
     <string name="enter_client_name">يرجى إدخال اسم العميلة</string>
     <string name="enter_phone_num">please, enter phone number</string>
     <string name="no_offer">لا يوجد عروض مميزة، يرجى المحاولة لاحقاً</string>
+    <string name="no_specialities">لا يوجد تخصصات طبية</string>
+    <string name="no_healthCenter">لا يوجد مراكز صحية ضمن فلاتر البحث التي اخترتها.</string>
+    <string name="no_doctors">لا يوجد أطباء ضمن فلاتر البحث التي اخترتها.</string>
+    <string name="specialities">التخصصات الطبية</string>
+    <string name="doctors">الأطباء</string>
+    <string name="healthCenteres">المراكز الصحية</string>
     <string name="allowed">مسموح</string>
     <string name="busy">مشغول</string>
     <string name="on_Vacation">في عطلة</string>
@@ -416,11 +426,9 @@
 
     </string-array>
     <string-array name="service_place">
-        <item>مكان الخدمة</item>
-        <item>صالون</item>
-        <item>منزل العميلة</item>
-        <item>صالة</item>
-        <item>فندق</item>
+        <item>مكان تقديم الخدمة الطبية</item>
+        <item>المركز الصحي</item>
+        <item>المنزل</item>
 
     </string-array>
 
@@ -550,7 +558,7 @@
     </string-array>
     <string name="language">اللغة:</string>
     <string name="requestType">نوع الطلب</string>
-    <string name="providerName">اسم المزودة</string>
+    <string name="providerName">اسم المركز الصحي</string>
     <string name="oldRequests">طلبات سابقة</string>
     <string name="newRequests">طلبات تتم معالجتها</string>
     <string name="rejectedByProvider">رُفض من قبل المزودة</string>
@@ -742,9 +750,43 @@
     <item>ذكر</item>
     <item>أنثى</item>
     </string-array>
+    <string-array name="hours">
+        <item>ساعات</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+    <string-array name="minutes">
+        <item>دقائق</item>
+        <item>00</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+    </string-array>
+
     <string name="EnterGender">الرجاء اختيار الجنس</string>
     <string name="EnterEmail">الرجاء ادخال البريد الالكتروني</string>
     <string name="sure_add_location">هل تريد إضافة هذا الموقع؟</string>
     <string name="sure_edit_location">هل تريد تعديل هذا الموقع؟</string>
+    <string name="speciality">التخصص</string>
 
 </resources>

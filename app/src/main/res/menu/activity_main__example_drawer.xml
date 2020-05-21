@@ -14,6 +14,7 @@
                 android:title="@string/manage_account" />
 
             <item
+                android:visible="false"
                 android:id="@+id/points"
                 android:icon="@drawable/side_points_icon"
                 android:title="@string/points" />
@@ -24,6 +25,7 @@
                 android:icon="@drawable/ic_settings_black_24dp"
                 android:title="@string/setting" />
             <item
+                android:visible="false"
                 android:id="@+id/effcts"
                 android:icon="@drawable/side_effects_icon"
                 android:title="@string/effect" />

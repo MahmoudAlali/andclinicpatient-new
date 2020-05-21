@@ -1,44 +1,41 @@
 {
   "project_info": {
-    "project_number": "529149210192",
-    "firebase_url": "https://vizage-project.firebaseio.com",
-    "project_id": "vizage-project",
-    "storage_bucket": "vizage-project.appspot.com"
+    "project_number": "614121624955",
+    "firebase_url": "https://ptmclinic-6c6cf.firebaseio.com",
+    "project_id": "ptmclinic-6c6cf",
+    "storage_bucket": "ptmclinic-6c6cf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:529149210192:android:3f747f58515023895e6b55",
+        "mobilesdk_app_id": "1:614121624955:android:fcc06a28cb979c93a399de",
         "android_client_info": {
-          "package_name": "com.ptm.vizage"
+          "package_name": "com.ptm.clinic"
         }
       },
       "oauth_client": [
         {
-          "client_id": "529149210192-06h23le4nc0ukfp96v2rf8heau80cj0h.apps.googleusercontent.com",
+          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBk2pLGd_3TgCSLRqGTe2n3ge8D4XQYhwc"
-        },
-        {
-          "current_key": "AIzaSyBbCJk3WlebQ1pQf1lx4-tVzlnY567URd0"
+          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "529149210192-06h23le4nc0ukfp96v2rf8heau80cj0h.apps.googleusercontent.com",
+              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "529149210192-j1ied4e0qpbiijs662qor68c1tv4e8qp.apps.googleusercontent.com",
+              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ptmsa1.vizage"
+                "bundle_id": "com.ptm.clinicpa"
               }
             }
           ]
@@ -47,37 +44,106 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:529149210192:android:41d42f9344609dfb5e6b55",
+        "mobilesdk_app_id": "1:614121624955:android:600edf69a00b945aa399de",
         "android_client_info": {
-          "package_name": "com.ptmsa1.vizage"
+          "package_name": "com.ptm.clinicpa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "529149210192-06h23le4nc0ukfp96v2rf8heau80cj0h.apps.googleusercontent.com",
+          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBk2pLGd_3TgCSLRqGTe2n3ge8D4XQYhwc"
-        },
-        {
-          "current_key": "AIzaSyBbCJk3WlebQ1pQf1lx4-tVzlnY567URd0"
+          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "529149210192-06h23le4nc0ukfp96v2rf8heau80cj0h.apps.googleusercontent.com",
+              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "529149210192-j1ied4e0qpbiijs662qor68c1tv4e8qp.apps.googleusercontent.com",
+              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ptmsa1.vizage"
+                "bundle_id": "com.ptm.clinicpa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614121624955:android:0920b6a20da3f6a3a399de",
+        "android_client_info": {
+          "package_name": "ptm.com.clinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ptm.clinicpa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614121624955:android:d286ac44ca9b30c6a399de",
+        "android_client_info": {
+          "package_name": "ptm.com.clinicpa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ptm.clinicpa"
               }
             }
           ]

@@ -233,6 +233,11 @@
     <string name="ServiceRate">Service rate</string>
     <string name="providerRate">Provider rate</string>
     <string name="OfferPrice">Offer price</string>
+    <string name="speciality">Speciality</string>
+    <string name="specialities">Specialities</string>
+    <string name="doctors">Doctors</string>
+    <string name="healthCenteres">Health centers</string>
+    <string name="doctorName">Doctor name</string>
 
     <!--Delete Account-->
     <string name="ServiceCovering">There is no clinics covering my area / city</string>
@@ -274,12 +279,46 @@
     <string name="current_location">Current location</string>
     <string name="new_location">Another location</string>
     <string name="Reserve">Reserve</string>
-    <string name="location_proceed">You have to choose a location to proceed</string>
-    <string name="place_proceed">You have to choose a service place to proceed</string>
-    <string name="distance_proceed">You have to choose a distance to proceed</string>
-    <string name="type_proceed">You have to choose order type to proceed</string>
-    <string name="offerPrice_proceed">You have to choose offer price to proceed</string>
-
+    <string name="location_proceed">You have to choose a location to proceed.</string>
+    <string name="location_first">You have to choose a location first.</string>
+    <string name="place_proceed">You have to choose a service place to proceed.</string>
+    <string name="distance_proceed">You have to choose a distance to proceed.</string>
+    <string name="distance_first">You have to choose a distance first.</string>
+    <string name="type_proceed">You have to choose order type to proceed.</string>
+    <string name="offerPrice_proceed">You have to choose offer price to proceed.</string>
+    <string name="speciality_proceed">You have to choose speciality to proceed.</string>
+    <string-array name="hours">
+        <item>Hours</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+    </string-array>
+    <string-array name="minutes">
+        <item>Minutes</item>
+        <item>00</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+    </string-array>
 
     <string-array name="gender">
         <item>Gender</item>
@@ -383,11 +422,10 @@
 
     </string-array>
     <string-array name="service_place">
-        <item>Service Place</item>
-        <item>Salon</item>
-        <item>Client house</item>
-        <item>Hall</item>
-        <item>Hotel</item>
+        <item>Medical service place</item>
+        <item>Clinic</item>
+        <item>Patient house</item>
+
 
     </string-array>
     <string-array name="AvailableTime">
@@ -590,6 +628,9 @@
     <string name="enter_client_name">Please enter client name</string>
     <string name="enter_phone_num">please, enter phone number</string>
     <string name="no_offer">There are no special offers, Please try again later</string>
+    <string name="no_specialities">There are no specialities .</string>
+    <string name="no_healthCenter">There are no health centers with your search filters .</string>
+    <string name="no_doctors">There are no doctors centers with your search filters .</string>
     <string name="allowed">Allowed</string>
     <string name="busy">Busy</string>
     <string name="on_Vacation">On Vacation</string>
@@ -716,7 +757,7 @@
     <string name="language">Language:</string>
     <string name="sign_out">Sign out</string>
     <string name="requestType">Order type</string>
-    <string name="providerName">Provider name</string>
+    <string name="providerName">Clinic name</string>
     <string name="oldRequests">Old orders</string>
     <string name="newRequests">New orders</string>
     <string name="rejectedByProvider">Rejected by the provider</string>
