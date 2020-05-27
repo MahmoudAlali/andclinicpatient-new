@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time (optional)"
+                android:text="@string/time_opt"
                 android:textColor="#000"
                 android:gravity="center"
                 android:layout_marginRight="5dp"
@@ -145,7 +145,7 @@
             android:layout_height="@dimen/standard_30"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
-            android:text="This request is personal"/>
+            android:text="@string/personalReserv"/>
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -188,7 +188,7 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/border_edit_text"
             android:gravity="center"
-            android:hint="more description (optional)"
+            android:hint="@string/more_desc"
             />
 
         <android.support.v4.widget.NestedScrollView
@@ -237,7 +237,7 @@
                             android:background="@drawable/border_edit_text"
                             android:gravity="center"
 
-                            android:hint="Phone Number" />
+                            android:hint="@string/patient_number" />
 
 
 
@@ -252,7 +252,7 @@
                             android:inputType="text"
                             android:background="@drawable/border_edit_text"
                             android:gravity="center"
-                            android:hint="client name" />
+                            android:hint="@string/patient_name" />
 
                         <LinearLayout
                             android:id="@+id/relativesLayout"

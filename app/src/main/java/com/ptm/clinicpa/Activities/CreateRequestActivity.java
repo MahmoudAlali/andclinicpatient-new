@@ -114,12 +114,19 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
                     findViewById(R.id.relativesLayout).setVisibility(View.GONE);
                     phoneNumber.setText(BeautyMainPage.client_number);
                     ClientName.setText(BeautyMainPage.client_name);
+                    if(BeautyMainPage.client_gender.equals("0"))
+                        genderSpinner.setSelection(1);
+                    else
+                        genderSpinner.setSelection(2);
+
                 }
                 else
                 {
                     findViewById(R.id.relativesLayout).setVisibility(View.VISIBLE);
                     phoneNumber.setText("");
                     ClientName.setText("");
+                    genderSpinner.setSelection(0);
+
 
 
                 }
@@ -330,6 +337,10 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
                     check = false;
 
+                }
+                else if (genderSpinner.getSelectedItemPosition() == 0) {
+                    APICall.showSweetDialog(context, getResources().getString(R.string.enter_gender), false);
+                    check = false;
                 }/*else if (servicesModels.size() == 0) {
                     APICall.showSweetDialog(context, getResources().getString(R.string.add_atleast_one_service), false);
                     check = false;
@@ -353,14 +364,14 @@ public class CreateRequestActivity extends AppCompatActivity implements AdapterV
                 if (check) {
                     if(freeBookingFragment.filterType.equals("0"))//offer
                     {
-                        if(clientsArrayList.size()==1)
+                        if(clientsArrayList.size()<=1)
                             is_group_booking="23";//free single offer
                         else
                             is_group_booking="25";//free group offer
                     }
                     else //normal
                     {
-                        if(clientsArrayList.size()==1)
+                        if(clientsArrayList.size()<=1)
                             is_group_booking="20";//free single
                         else
                             is_group_booking="22";//free group

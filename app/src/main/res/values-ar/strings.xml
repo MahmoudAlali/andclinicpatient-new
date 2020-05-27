@@ -447,10 +447,11 @@
     </string-array>
 
     <string name="enter_c_name">من فضلكِ ادخلي اسم المريض/ة</string>
-    <string name="enter_age_range">من فضلكِ ادخلي عمر العميلة</string>
+    <string name="enter_age_range">من فضلكِ ادخلي عمر المريض/المريضة</string>
+    <string name="enter_gender">من فضلكِ ادخلي جنس المريض/المريضة</string>
     <string name="add_atleast_one_service">من فضلكِ ادخلي خدمة واحدة على الاقل</string>
     <string name="select_date_of_booking">من فضلكِ ادخلي تاريخ الحجز</string>
-    <string name="add_atleast_one_client">يرجى إضافة عميلة واحدة على الأقل</string>
+    <string name="add_atleast_one_client">يرجى إضافة مريضة واحدة على الأقل</string>
 
 
     <string name="supportWelcoming">مرحباً بكِ في خدمة العملاء Vizage. كيف يمكننا مساعدتكِ ؟</string>
@@ -588,6 +589,10 @@
     <string name="requestAdded">تم إرسال طلب الحجز.</string>
     <string name="KM">كم</string>
     <string name="select_service">اختاري خدمة</string>
+    <string name="select_service_opt">إضافة خدمة(اختياري)</string>
+    <string name="time_opt">الموعد المطلوب(اختياري)</string>
+    <string name="personalReserv">هذا الحجز شخصي</string>
+    <string name="more_desc">وصف إضافي(اختياري)</string>
     <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
     <string name="requestSalonFilter">اسم المركز</string>
     <string name="requestTypeFilter">نوع الطلب</string>
@@ -804,5 +809,7 @@
 
     </string-array>
     <string name="Select_Time">اختر الوقت</string>
+    <string name="patient_name">اسم المريض/المريضة</string>
+    <string name="patient_number">رقم الهاتف</string>
 
 </resources>
