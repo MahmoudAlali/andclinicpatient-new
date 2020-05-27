@@ -89,6 +89,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     private int READ_EXTERNAL_STORAGE=93;
     public static Boolean RELOADAPP=false;
     public static String client_name="";
+    public static String client_gender="";
     public static String client_number="";
     public static  IPaymentRequestCallBack iPaymentRequestCallBack;
 
@@ -178,6 +179,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 //        }else {
             client_name=settings.getString("client_name","");
             client_number=settings.getString("client_number","");
+            client_gender=settings.getString("client_gender","");
             bdb_email=settings.getString("bdb_email","");
 
 //        }

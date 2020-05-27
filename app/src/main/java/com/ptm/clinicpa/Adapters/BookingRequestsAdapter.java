@@ -71,7 +71,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
            // Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
-            ((Item)holder).client_name.setText(bookingRequestData.get(position).getSupplier_name());
+        String S= context.getResources().getString(R.string.doctorName) +": "+bookingRequestData.get(position).getSupplier_name();
+            ((Item)holder).doctorName.setText(S);
            // String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
 
@@ -140,6 +141,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         Log.e("Outer","بب");
                         final Dialog dialog1=new Dialog(context);
                         dialog1.setContentView(R.layout.sweet_dialog_layout_v4);
+                        dialog1.getWindow().setBackgroundDrawableResource(R.color.transparent);
                         TextView confirm=dialog1.findViewById(R.id.confirm);
                         TextView cancel=dialog1.findViewById(R.id.cancel);
                         TextView message=dialog1.findViewById(R.id.message);
@@ -181,23 +183,36 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
         //>>>>>>> ID
-        String id = bookingRequestData.get(position).getBdb_id();
+        String id =context.getString(R.string.order_id)+ bookingRequestData.get(position).getBdb_id();
         ((Item)holder).ID.setText(id);
 
 
-            // >>>>>>>>>>>>> order booking place
+        //>>>>>>>> center name
+        if(context.getString(R.string.locale).equals("en"))
+            ((Item)holder).client_name.setText(bookingRequestData.get(position).getHealthCntr_en());
+        else
+            ((Item)holder).client_name.setText(bookingRequestData.get(position).getHealthCntr_ar());
+
+
+        //>>>>>>>>>>>> patient name
+        ((Item)holder).show_clients_names.setText(bookingRequestData.get(position).getClients().get(0).getBdb_client_name());
+
+
+
+
+        // >>>>>>>>>>>>> order booking place
             if (bookingRequestData.get(position).getBdb_booking_place().equals("0")) {
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
             }else if (bookingRequestData.get(position).getBdb_booking_place().equals("1")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
 
-            }else if (bookingRequestData.get(position).getBdb_booking_place().equals("2")){
+            }/*else if (bookingRequestData.get(position).getBdb_booking_place().equals("2")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hall));
 
             }else if (bookingRequestData.get(position).getBdb_booking_place().equals("3")){
                 ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
 
-            }
+            }*/
 
 
             // >>>>>>>> Request type
@@ -334,7 +349,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID;
+        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID,doctorName,show_clients_names;
         ImageView book_Details,inner_res,place,logoImg;
 
         LinearLayout myroot;
@@ -354,6 +369,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             place=itemView.findViewById(R.id.place);
             logoImg=itemView.findViewById(R.id.logoImg);
             ID=itemView.findViewById(R.id.order_num);
+            doctorName=itemView.findViewById(R.id.doctorName);
+            show_clients_names=itemView.findViewById(R.id.show_clients_names);
 
         }
 

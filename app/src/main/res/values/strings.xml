@@ -328,8 +328,9 @@
     </string-array>
 
     <string-array name="age">
-        <item>فوق 15 سنة</item>
-        <item>تحت 15 سنة</item>
+        <item>Age </item>
+        <item>less than 13 </item>
+        <item>more than 13 </item>
 
     </string-array>
 
@@ -537,7 +538,7 @@
     <string name="client_name">Client name</string>
     <string name="services_dates">Select dates</string>
     <string name="group_book_done">Offer booked successfully</string>
-    <string name="salon">Salon</string>
+    <string name="salon">Health center</string>
     <string name="home">Client house</string>
     <string name="hall">Hall</string>
     <string name="hotel">Hotel</string>
@@ -741,7 +742,7 @@
     <string name="clients_count_gr_2">The number of clients must be at least two</string>
     <string name="reser_id">ID</string>
     <string name="ref_number">Reference ID</string>
-    <string name="order_id">Order number :</string>
+    <string name="order_id">Order number:</string>
     <string name="journey_time">Journey time</string>
     <string name="journey_cost">Journey cost</string>
     <string name="actual_price">Actual price</string>
@@ -760,8 +761,8 @@
     <string name="providerName">Clinic name</string>
     <string name="oldRequests">Old orders</string>
     <string name="newRequests">New orders</string>
-    <string name="rejectedByProvider">Rejected by the provider</string>
-    <string name="canceledByClient">Canceled by the client</string>
+    <string name="rejectedByProvider">Rejected by the health center</string>
+    <string name="canceledByClient">Canceled by the patient</string>
     <string name="canceledBySystem">Canceled by the system</string>
     <string name="approved">Approved order</string>
     <string name="suppliere_name">Supplier name</string>
@@ -773,7 +774,7 @@
         <item>Normal</item>
     </string-array>
     <string name="add_new_client">Add new client</string>
-    <string name="enter_c_name">Please enter client name</string>
+    <string name="enter_c_name">Please enter patient name</string>
     <string name="enter_age_range">Please enter client age</string>
     <string name="add_atleast_one_service">Please add at least one service for your offer</string>
     <string name="select_date_of_booking">Please select booking date</string>
@@ -934,5 +935,14 @@
     <string name="gender">Gender :</string>
     <string name="sure_add_location">Do you want to add this location?</string>
     <string name="sure_edit_location">Do you want to edit this location?</string>
-
+    <string name="med_id">Medical file number</string>
+    <string name="Select_Time">Select time</string>
+    <string-array name="relativesType">
+        <item>Relative</item>
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Son</item>
+        <item>Husband/Wife</item>
+        <item>Daughter</item>
+    </string-array>
 </resources>

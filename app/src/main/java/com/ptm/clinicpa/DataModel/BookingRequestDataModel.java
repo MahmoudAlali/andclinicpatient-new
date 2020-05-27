@@ -13,6 +13,7 @@ public class BookingRequestDataModel {
             bdb_is_group_booking,
             bdb_name_booking,
             bdb_reject_reason,
+            healthCenter_ID,
             bdb_created_at,
             bdb_sup_id,
             supplier_name,
@@ -20,6 +21,8 @@ public class BookingRequestDataModel {
             cost,
             bdb_loc_lat,
             bdb_loc_long,
+            healthCntr_en,
+            healthCntr_ar,
             bdb_client_id;
 
     ArrayList <BookingRequestClientDataModel> clients = new ArrayList<>();
@@ -49,6 +52,35 @@ public class BookingRequestDataModel {
         this.clients=clients;
         this.bdb_loc_lat=bdb_loc_lat;
         this.bdb_loc_long=bdb_loc_long;
+    }
+    public BookingRequestDataModel(String bdb_id, String bdb_booking_place, String bdb_location_id, String bdb_journey_time,
+                                   String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,String cost,
+                                   String bdb_name_booking, String bdb_reject_reason, String bdb_created_at,
+                                   String bdb_sup_id,String supplier_name,String logo_id,  String bdb_client_id,String bdb_loc_lat,String bdb_loc_long
+            ,ArrayList <BookingRequestClientDataModel> clients,String healthCenter_en,String healthCenter_ar,String healthCenter_ID)
+    {
+        this.bdb_id=bdb_id;
+        this.bdb_booking_place=bdb_booking_place;
+        this.bdb_location_id=bdb_location_id;
+        this.bdb_journey_time=bdb_journey_time;
+        this.bdb_journey_cost=bdb_journey_cost;
+        this.bdb_status=bdb_status;
+        this.bdb_pack_code=bdb_pack_code;
+        this.bdb_is_group_booking=bdb_is_group_booking;
+        this.bdb_name_booking=bdb_name_booking;
+        this.cost=cost;
+        this.bdb_reject_reason=bdb_reject_reason;
+        this.bdb_created_at=bdb_created_at;
+        this.bdb_sup_id=bdb_sup_id;
+        this.supplier_name=supplier_name;
+        this.logo_id=logo_id;
+        this.bdb_client_id=bdb_client_id;
+        this.clients=clients;
+        this.bdb_loc_lat=bdb_loc_lat;
+        this.bdb_loc_long=bdb_loc_long;
+        this.healthCntr_ar=healthCenter_ar;
+        this.healthCntr_en=healthCenter_en;
+        this.healthCenter_ID=healthCenter_ID;
     }
 
     public void setBdb_id(String bdb_id) {
@@ -201,5 +233,17 @@ public class BookingRequestDataModel {
 
     public String getCost() {
         return cost;
+    }
+
+    public String getHealthCntr_ar() {
+        return healthCntr_ar;
+    }
+
+    public String getHealthCntr_en() {
+        return healthCntr_en;
+    }
+
+    public String getHealthCenter_ID() {
+        return healthCenter_ID;
     }
 }

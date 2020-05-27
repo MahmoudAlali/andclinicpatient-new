@@ -3,7 +3,9 @@ package com.ptm.clinicpa.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,12 +14,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.HintArrayAdapter;
@@ -28,13 +33,17 @@ import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.freeBookingFragment;
 import com.ptm.clinicpa.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
 import static com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
 
-public class CreateRequestActivity extends AppCompatActivity {
+public class CreateRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public static Button next,addNewClient,add_date;
     public static Context context;
@@ -42,14 +51,19 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static ArrayList<String> supplierServicesNames=new ArrayList();
     public static ArrayList<ClientServiceDataModel> supplierServices=new ArrayList();
     public static ArrayList<GroupBookingModel> clientsArrayList=new ArrayList();
-
+    public static ArrayList<ClientServiceDataModel> servicesModels=new ArrayList<>();
     public static ArrayList<ClientsViewData> clientsViewData=new ArrayList<>();
+    public static TextView start_time;
 
     public static String is_group_booking="";
     public  String postdata;
     public static String sup_id;
-    public static Spinner hourSpinner,minutesSpinner;
+    public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner,ageSpinner,genderSpinner,servicesSpinner;
 
+    public  static HintArrayAdapter adapter1;
+    public static CheckBox personalReserv;
+    public static EditText phoneNumber,ClientName,description,healthFileNum;
+    int startWorkHour,startWorkMinutes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,18 +87,48 @@ public class CreateRequestActivity extends AppCompatActivity {
         addNewClient=findViewById(R.id.add_new_client);
         add_date=findViewById(R.id.add_date);
         next=findViewById(R.id.search);
-        show_clients=findViewById(R.id.show_clients);
-        hourSpinner = findViewById(R.id.hour_from);
-        minutesSpinner = findViewById(R.id.minutes_from);
-         sup_id = getIntent().getStringExtra("sup_id");
+       // show_clients=findViewById(R.id.show_clients);
+      /*  hourSpinner = findViewById(R.id.hour_from);
+        minutesSpinner = findViewById(R.id.minutes_from);*/
+        ageSpinner = findViewById(R.id.age_range);
+        genderSpinner = findViewById(R.id.gender);
+        servicesSpinner = findViewById(R.id.add_service);
+        relativeSpinner = findViewById(R.id.relative);
+        personalReserv = findViewById(R.id.personalReserv);
+        phoneNumber = findViewById(R.id.phone_number);
+        ClientName = findViewById(R.id.client_name);
+        description = findViewById(R.id.description);
+        healthFileNum = findViewById(R.id.healthNum);
+        start_time=findViewById(R.id.start_time);
+
+        sup_id = getIntent().getStringExtra("sup_id");
 
         context=this;
-        APICall.freegetServiceNames(context,sup_id);
+        APICall.freegetServiceNames(context,sup_id,freeBookingFragment.Place);
 
+        personalReserv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    findViewById(R.id.relativesLayout).setVisibility(View.GONE);
+                    phoneNumber.setText(BeautyMainPage.client_number);
+                    ClientName.setText(BeautyMainPage.client_name);
+                }
+                else
+                {
+                    findViewById(R.id.relativesLayout).setVisibility(View.VISIBLE);
+                    phoneNumber.setText("");
+                    ClientName.setText("");
+
+
+                }
+            }
+        });
         ArrayAdapter adapter = new HintArrayAdapter(this, 0);
         adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.hours)));
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
-        hourSpinner.setAdapter(adapter);
+     //   hourSpinner.setAdapter(adapter);
 
 
 
@@ -92,7 +136,58 @@ public class CreateRequestActivity extends AppCompatActivity {
         ArrayAdapter adapter2 = new HintArrayAdapter(this, 0);
         adapter2.addAll(Arrays.asList(getResources().getStringArray(R.array.minutes)));
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
-        minutesSpinner.setAdapter(adapter2);
+    //    minutesSpinner.setAdapter(adapter2);
+
+        ArrayAdapter ageAdapter = new HintArrayAdapter(this, 0);
+        ageAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.age)));
+        ageAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        ageSpinner.setAdapter(ageAdapter);
+
+        ArrayAdapter relativeAdapter = new HintArrayAdapter(this, 0);
+        relativeAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.relativesType)));
+        relativeAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        relativeSpinner.setAdapter(relativeAdapter);
+
+        ArrayAdapter genderAdapter = new HintArrayAdapter(this, 0);
+        genderAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.gender)));
+        genderAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        genderSpinner.setAdapter(genderAdapter);
+
+       /* ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
+        adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        servicesSpinner.setAdapter(adapter1);
+
+
+        final ArrayList<ClientServiceDataModel> servicesModels=new ArrayList<>();
+
+        servicesSpinner.setOnItemSelectedListener(this);
+*/
+
+        /*supplierServicesNames.clear();
+        supplierServicesNames.add(getResources().getString(R.string.select_service));*/
+        adapter1=new HintArrayAdapter(context, 0);
+        adapter1.addAll(supplierServicesNames);
+        adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        servicesSpinner.setAdapter(adapter1);
+
+        servicesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != 0) {
+
+                    final LinearLayout adding_service_layout = findViewById(R.id.adding_service_layout);
+
+                    Log.e("Step", "1");
+                    addLayout2(servicesSpinner.getSelectedItem() + "", adding_service_layout, servicesSpinner, servicesModels);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         add_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +229,51 @@ public class CreateRequestActivity extends AppCompatActivity {
             }
         });
 
+        start_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(context);
+                dialog.setContentView(R.layout.time_select_layout);
+                final TimePicker timePicker=dialog.findViewById(R.id.time_picker);
+                TextView ok=dialog.findViewById(R.id.confirm);
+                TextView cancel=dialog.findViewById(R.id.cancel);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        startWorkHour=timePicker.getHour();
+                        startWorkMinutes=timePicker.getMinute();
+                        String ho,min;
+                        if (timePicker.getHour()<10){
+                            ho="0"+timePicker.getHour();
+                        }else {
+                            ho=timePicker.getHour()+"";
+                        }
+
+                        if (timePicker.getMinute()<10){
+                            min="0"+timePicker.getMinute();
+                        }else {
+                            min=timePicker.getMinute()+"";
+                        }
+                        String st = ho + ":" + min+":"+"00";
+//                        String st=timePicker.getHour()+":"+timePicker.getMinute();
+                        start_time.setText(st);
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+
+
+            }
+        });
         addNewClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +296,7 @@ public class CreateRequestActivity extends AppCompatActivity {
 
               //  Log.e("DateDecemal", API.arabicToDecimal(add_date.getText().toString()));
                 Boolean check = true;
+/*
                 for (int i = 0; i < clientsArrayList.size(); i++) {
                     if (!APICall.checkNumber(clientsArrayList.get(i).getPhoneNumber().getText().toString(), context)) {
                         check = false;
@@ -178,17 +319,32 @@ public class CreateRequestActivity extends AppCompatActivity {
 
 
                 }
+*/
+                if (!APICall.checkNumber(phoneNumber.getText().toString(), context)) {
+                    check = false;
+                } else if (ClientName.getText().toString().length() == 0) {
+                    APICall.showSweetDialog(context,getResources().getString(R.string.enter_c_name), false);
+                    check = false;
+
+                } else if (ageSpinner.getSelectedItemPosition() == 0){
+                    APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
+                    check = false;
+
+                }/*else if (servicesModels.size() == 0) {
+                    APICall.showSweetDialog(context, getResources().getString(R.string.add_atleast_one_service), false);
+                    check = false;
+                }*/
 
                 if (check){
                     if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
                         APICall.showSweetDialog(context,getResources().getString(R.string.select_date_of_booking)
                                 , false);
                         check = false;
-                    } else if (clientsArrayList.size() == 0) {
+                    }/* else if (clientsArrayList.size() == 0) {
                         APICall.showSweetDialog(context,getResources().getString(R.string.add_atleast_one_client)
                                 , false);
                         check = false;
-                    }
+                    }*/
                 }
 
 
@@ -220,13 +376,14 @@ public class CreateRequestActivity extends AppCompatActivity {
 
 */
 
-                    Intent intent = new Intent(context, AddEffectsToRequestActivity.class);
+                //    Intent intent = new Intent(context, AddEffectsToRequestActivity.class);
                    /* intent.putExtra("postdata",postdata);
                     intent.putExtra("seearchgroup","1");
                     intent.putExtra("rtype", API.rtpe);
                     intent.putExtra("effects",geteffectclient(API.groupBookingModels));
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*/
-                    startActivity(intent);
+                 //   startActivity(intent);
+                    APICall.addBookingRequest2(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id+"",freeBookingFragment.Place+"","",CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
 
 //                    onBackPressed();
 //                    finish();
@@ -249,16 +406,16 @@ public class CreateRequestActivity extends AppCompatActivity {
         final LinearLayout adding_service_layout=layout2.findViewById(R.id.adding_service_layout);
         final Spinner ageRange=layout2.findViewById(R.id.age_range);
         final Spinner addService=layout2.findViewById(R.id.add_service);
+        adapter2= new HintArrayAdapter(context, 0);
+        adapter2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.age_range)));
+        adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        ageRange.setAdapter(adapter2);
 
 //        boolean is_bride_service=false;
         ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         addService.setAdapter(adapter1);
 
-        adapter2= new HintArrayAdapter(context, 0);
-        adapter2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.age_range)));
-        adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
-        ageRange.setAdapter(adapter2);
 
         final ArrayList<ClientServiceDataModel> servicesModels=new ArrayList<>();
 
@@ -304,6 +461,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     private static void addLayout2(String s, final LinearLayout layout, Spinner addService, final ArrayList<ClientServiceDataModel> servicesModels) {
 
         final View layout2;
+        Log.e("Step","2");
 
 //        ArrayList<GroupBookingModel.ServicesModel> servicesModels1=new ArrayList<>();
         layout2 = LayoutInflater.from(context).inflate(R.layout.show_emp_layout, layout, false);
@@ -312,6 +470,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         ImageView delete =  layout2.findViewById(R.id.delete);
 
         emp_name.setText(s);
+        Log.e("Step","3");
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,6 +494,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         layout.addView(layout2);
 
     }
+
 
     public static String getEffectsOneClient(GroupBookingModel groupBookingModels) {
         String names="";
@@ -426,6 +586,103 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     }
 */
+public static JSONArray getClients(int c)
+{
+    JSONArray clients =new JSONArray();
+    try {
+
+        for (int i=0;i<CreateRequestActivity.clientsArrayList.size();i++) {
 
 
+        }
+        JSONObject client = new JSONObject();
+
+        client.put("client_name",ClientName.getText().toString());
+        client.put("client_phone",phoneNumber.getText().toString());
+        client.put("start_date",CreateRequestActivity.add_date.getText());
+        if(healthFileNum.getText().toString().length()!=0)
+        {
+            client.put("health_record",healthFileNum.getText());
+        }
+        if(!start_time.getText().toString().equals("00:00:00"))
+        {
+            client.put("start_time",CreateRequestActivity.start_time.getText());
+        }
+        if(personalReserv.isChecked())
+        {
+            client.put("bdb_gender",BeautyMainPage.client_gender);
+        }
+        else
+        {
+            client.put("bdb_gender",genderSpinner.getSelectedItemPosition()-1);
+            client.put("relations",relativeSpinner.getSelectedItemPosition());
+        }
+        String s = personalReserv.isChecked()?"1":"0";
+        client.put("is_current_user",s);
+        client.put("old",(ageSpinner.getSelectedItemPosition()-1));
+        Log.e("rrrr","index-i");
+
+        JSONArray services=new JSONArray() ;
+        //JSONObject effects=new JSONObject(effectsArr.get(i)) ;
+
+        // client.put("effect",effects);
+
+        //  Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+
+        for (int j = 0; j < servicesModels.size(); j++) {
+//                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
+            JSONObject servic = new JSONObject();
+
+            servic.put("ser_id",servicesModels.get(j).getBdb_ser_id());
+            services.put(servic);
+        }
+        client.put("services",services);
+
+        String eff="";
+        Log.e("index-i","index-i");
+            /*try {
+                eff=effectsArr.get(i);
+            }catch (Exception e){
+                e.printStackTrace();
+            }*/
+               /* if (CreateRequestActivity.clientsArrayList.size()==1){
+
+                    clients=clients+"],\"effect\":["+eff+"]}";
+                }else if (i==CreateRequestActivity.clientsArrayList.size()-1){
+                    clients=clients+"],\"effect\":["+eff+"]}";
+
+                }else {
+                    clients=clients+"],\"effect\":["+eff+"]},";
+
+                }*/
+
+        clients.put(client);
+    }catch (Exception e){
+        e.printStackTrace();
+        Log.e("err",e.getMessage());
+    }
+    //clients=clients+"]";
+
+    Log.e("clients",clients.toString());
+    return clients;
+}
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.e("Step", "0");
+
+        if (position != 0) {
+
+            final LinearLayout adding_service_layout = findViewById(R.id.adding_service_layout);
+
+            Log.e("Step", "1");
+            addLayout2(servicesSpinner.getSelectedItem() + "", adding_service_layout, servicesSpinner, servicesModels);
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

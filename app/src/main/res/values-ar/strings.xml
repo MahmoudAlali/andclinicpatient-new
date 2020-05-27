@@ -265,7 +265,7 @@
     <string name="client_name">اسم العميلة</string>
     <string name="services_dates">اختاري التاريخ</string>
     <string name="group_book_done">تم حجز العرض بنجاح</string>
-    <string name="salon">صالون</string>
+    <string name="salon">المركز الصحي</string>
     <string name="home">منزل العميلة</string>
     <string name="hall">صالة</string>
     <string name="hotel">فندق</string>
@@ -446,7 +446,7 @@
         <item>اكبر من 13</item>
     </string-array>
 
-    <string name="enter_c_name">من فضلكِ ادخلي اسم العميلة</string>
+    <string name="enter_c_name">من فضلكِ ادخلي اسم المريض/ة</string>
     <string name="enter_age_range">من فضلكِ ادخلي عمر العميلة</string>
     <string name="add_atleast_one_service">من فضلكِ ادخلي خدمة واحدة على الاقل</string>
     <string name="select_date_of_booking">من فضلكِ ادخلي تاريخ الحجز</string>
@@ -561,8 +561,8 @@
     <string name="providerName">اسم المركز الصحي</string>
     <string name="oldRequests">طلبات سابقة</string>
     <string name="newRequests">طلبات تتم معالجتها</string>
-    <string name="rejectedByProvider">رُفض من قبل المزودة</string>
-    <string name="canceledByClient">أُلغي من قبل العميلة</string>
+    <string name="rejectedByProvider">رُفض من قبل المركز الصحي</string>
+    <string name="canceledByClient">أُلغي من قبل المرض/المريضة</string>
     <string name="canceledBySystem">أُلغي من قبل النظام</string>
     <string name="approved">تمت الموافقة عليه</string>
     <string name="suppliere_name">اسم المزودة</string>
@@ -788,5 +788,21 @@
     <string name="sure_add_location">هل تريد إضافة هذا الموقع؟</string>
     <string name="sure_edit_location">هل تريد تعديل هذا الموقع؟</string>
     <string name="speciality">التخصص</string>
+    <string name="med_id">رقم الملف الطبي</string>
+    <string-array name="relativesType">
+        <item>صلة القرابة</item>
+        <item>أب</item>
+        <item>أم</item>
+        <item>ابن</item>
+        <item>زوج/زوجة</item>
+        <item>ابنة</item>
+    </string-array>
+    <string-array name="age">
+        <item>العمر </item>
+        <item> طفل/ة أصغر من 13  </item>
+        <item>بالغ/ة أكبر من 13 </item>
+
+    </string-array>
+    <string name="Select_Time">اختر الوقت</string>
 
 </resources>

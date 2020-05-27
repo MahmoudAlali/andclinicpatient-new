@@ -253,7 +253,7 @@ public class freeBookingFragment extends Fragment {
 */
                 if (position==1) {
                     filterServicePlace = ",{\"num\":9,\"value1\":1}";
-                    Place="salon";
+                    Place="center";
                 }else if (position==2){
                     filterServicePlace = ",{\"num\":8,\"value1\":1}";
                     Place="home";
