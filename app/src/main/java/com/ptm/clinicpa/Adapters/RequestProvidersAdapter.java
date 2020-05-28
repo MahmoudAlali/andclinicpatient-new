@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
+import com.ptm.clinicpa.Activities.Offers;
+import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptm.clinicpa.DataModel.DateClass;
 import com.ptm.clinicpa.DataModel.Location_Beauty;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
@@ -151,6 +153,25 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
                 intent.putExtra("lang", Double.parseDouble(itemArrayList.get(position).getBdb_loc_long()));
                 context.startActivity(intent);
             }
+        }
+    });
+    ( holder).healthCntr.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                Offers.bdb_booking_period = Integer.parseInt(itemArrayList.get(position).getBdb_booking_period());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+           // Log.e("PIDDDD","is"+bestOfferItems.get(position).getProvider_id());
+            Log.e("Position","is"+position);
+            Intent intent=new Intent(context, MainProviderActivity.class);
+          //  intent.putExtra("provider_id",bestOfferItems.get(position).getProvider_id());
+            intent.putExtra("provider_name",(holder).healthCntr.getText().toString());
+            intent.putExtra("provider_id",itemArrayList.get(position).getSup_id());
+            intent.putExtra("health",itemArrayList.get(position).getBdb_has_health_cer());
+            intent.putExtra("exp",itemArrayList.get(position).getBdb_has_experience_cer());
+            context.startActivity(intent);
         }
     });
     APICall.getSalonLogoDltWhenEmptyWithCard(BeautyMainPage.context,itemArrayList.get(position).getLogo_id(),(holder).logo,(holder).cardView);

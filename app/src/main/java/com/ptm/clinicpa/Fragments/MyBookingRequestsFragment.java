@@ -262,7 +262,11 @@ public class MyBookingRequestsFragment extends Fragment {
 //                            servicesList.add("اختاري خدمة");
                             if (servicesList.size()==0)
                                 for (int i=0;i<APICall.allSuppliers.size();i++){
-                                    servicesList.add(APICall.allSuppliers.get(i).getName());
+                                    if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
+                                        servicesList.add(APICall.allSuppliers.get(i).getName());
+                                    else
+                                        servicesList.add(APICall.allSuppliers.get(i).getName_ar());
+
                                 }
 
                             final Dialog dialog=new Dialog(BeautyMainPage.context);

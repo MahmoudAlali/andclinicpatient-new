@@ -63,7 +63,7 @@
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <TextView
+                       <!-- <TextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -72,9 +72,9 @@
                             android:textColor="#a5587a"
                             android:textSize="16dp"
                             android:textStyle="bold"
-                            />
+                            />-->
                         <TextView
-                            android:id="@+id/salon_name"
+                            android:id="@+id/s_name"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="Value"
@@ -143,11 +143,12 @@
                     android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/s_name"
+                        android:id="@+id/salon_name"
+
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/salonName"
+                        android:text="@string/doctorName"
                         android:textColor="@color/red"
                         android:gravity="center"
                         android:textSize="16dp"
@@ -175,6 +176,7 @@
                     android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textColor="#000"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -189,6 +191,7 @@
                         android:src="@drawable/booked_at_icon"
                         />
                     <TextView
+                        android:textColor="#000"
                         android:id="@+id/order_on"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
@@ -204,6 +207,7 @@
                     android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textColor="#000"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -218,6 +222,7 @@
                         android:src="@drawable/booked_at_icon"
                         />
                     <TextView
+                        android:textColor="#000"
                         android:id="@+id/exec_order"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
@@ -229,10 +234,12 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/costLayout"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/pf_5dp_space"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textColor="#000"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -247,6 +254,7 @@
                         android:src="@drawable/reser_money_icon"
                         />
                     <TextView
+                        android:textColor="#000"
                         android:id="@+id/total_price"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
@@ -278,12 +286,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:textColor="#000"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/Service_Place"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="12dp"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -292,6 +301,7 @@
                     android:src="@drawable/service_place_icon"
                     />
                 <TextView
+                    android:textColor="#000"
                     android:id="@+id/place"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -308,6 +318,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:textColor="#000"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
@@ -322,11 +333,73 @@
                     android:src="@drawable/reser_count_icon"
                     />
                 <TextView
+                    android:textColor="#000"
                     android:id="@+id/id"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="@string/med_id"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="35dp"
+                    android:src="@drawable/reser_count_icon"
+                    />
+                <TextView
+                    android:textColor="#000"
+                    android:id="@+id/medical_id"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text=""
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/descriptionLayout"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="@string/more_desc2"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:textColor="#000"
+                    android:id="@+id/description"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="-"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"

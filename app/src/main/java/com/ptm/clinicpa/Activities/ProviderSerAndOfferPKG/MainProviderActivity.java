@@ -272,7 +272,7 @@ public class MainProviderActivity extends AppCompatActivity {
                 recycleview.setLayoutManager(manager);
                 recycleview.setAdapter(servicesProviderAdapter);
 
-                APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", APICall.ln, "20", pagenum+"", context);
+                APICall.getHealthCenterDoctors(getIntent().getStringExtra("provider_id"), context);
 
 
             }
@@ -350,7 +350,7 @@ public class MainProviderActivity extends AppCompatActivity {
         recycleview.setAdapter(servicesProviderAdapter);
 
 
-        APICall.automatedBrowseProvider(APICall.API_PREFIX_NAME+"/api/service/automatedBrowse", APICall.ln, "20", pagenum+"", context);
+        APICall.getHealthCenterDoctors(getIntent().getStringExtra("provider_id"), context);
 
 
 

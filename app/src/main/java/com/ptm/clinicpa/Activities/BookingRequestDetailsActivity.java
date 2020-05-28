@@ -27,8 +27,8 @@ import org.json.JSONObject;
 
 public class BookingRequestDetailsActivity  extends AppCompatActivity {
     //    View view;
-    public static TextView id,order_on,phone_number,s_name,exec_order,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date;
-    public static LinearLayout myroot;
+    public static TextView id,order_on,phone_number,s_name,exec_order,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date,medFileNumber,description;
+    public static LinearLayout myroot,descriptionLayout,costLayout;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static Context context;
@@ -71,6 +71,10 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         exec_order=findViewById(R.id.exec_order);
         s_name=findViewById(R.id.s_name);
         phone_number=findViewById(R.id.phone_number);
+        description=findViewById(R.id.description);
+        medFileNumber=findViewById(R.id.medical_id);
+        descriptionLayout=findViewById(R.id.descriptionLayout);
+        costLayout=findViewById(R.id.costLayout);
 
 /*
         //region Check_Notification
@@ -201,7 +205,13 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        client_details.setText(costt+" "+context.getResources().getString(R.string.ryal));
+        String s=costt+" "+context.getResources().getString(R.string.ryal);
+        if(costt==0)
+        {
+            client_details.setVisibility(View.GONE);
+        }
+        else
+            client_details.setText(s);
 
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override

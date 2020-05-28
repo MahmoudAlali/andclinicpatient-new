@@ -43,7 +43,7 @@ import java.util.Calendar;
 
 import static com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
 
-public class CreateRequestActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CreateRequestActivity extends AppCompatActivity {
 
     public static Button next,addNewClient,add_date;
     public static Context context;
@@ -678,22 +678,5 @@ public static JSONArray getClients(int c)
     return clients;
 }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("Step", "0");
 
-        if (position != 0) {
-
-            final LinearLayout adding_service_layout = findViewById(R.id.adding_service_layout);
-
-            Log.e("Step", "1");
-            addLayout2(servicesSpinner.getSelectedItem() + "", adding_service_layout, servicesSpinner, servicesModels);
-
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

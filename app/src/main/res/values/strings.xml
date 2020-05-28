@@ -555,7 +555,7 @@
     <string name="nobooking">No bookings</string>
     <string name="noRequests">You don\'t have any booking orders</string>
     <string name="nobookingyet">There is no bookings yet</string>
-    <string name="Service_Place">Service place</string>
+    <string name="Service_Place">Medical service provided at:</string>
     <string name="time">Time</string>
     <string name="end_time">End time</string>
     <string name="booked_at">Booked at</string>
@@ -599,6 +599,7 @@
     <string name="wrong">Wrong!</string>
     <string name="alert">Alert!</string>
     <string name="there_is_no_provider">There is no provider with your search filters</string>
+    <string name="there_is_no_doctors">There is no doctors in this health center</string>
     <string name="cant_insert_char">You can\'t insert characters in phone number field</string>
     <string name="number_great_than_10">The phone number is more/less than 10 numbers</string>
     <string name="prefix_05">The Prefix is not 05</string>
@@ -797,13 +798,14 @@
     <string name="time_opt">Appointment time(optional)</string>
     <string name="personalReserv">This order is personal</string>
     <string name="more_desc">more description (optional)</string>
+    <string name="more_desc2">more description:</string>
     <string name="requestDateFilter">Order execution date</string>
     <string name="requestSalonFilter">Clinic name</string>
     <string name="requestTypeFilter">Order type</string>
     <string name="filter">filter</string>
     <string name="removeFilter">Remove all filters</string>
     <string name="select_request_type">Select order type</string>
-    <string name="select_supplier">Select supplier</string>
+    <string name="select_supplier">Select health center</string>
     <string name="type">type :</string>
     <string name="suppliers">Suppliers</string>
     <string name="lost_time_emp">Employee lost time</string>
@@ -940,7 +942,7 @@
     <string name="gender">Gender :</string>
     <string name="sure_add_location">Do you want to add this location?</string>
     <string name="sure_edit_location">Do you want to edit this location?</string>
-    <string name="med_id">Medical file number</string>
+    <string name="med_id">Medical file number:</string>
     <string name="Select_Time">Select time</string>
     <string-array name="relativesType">
         <item>Relative</item>
@@ -953,4 +955,12 @@
 
     <string name="patient_name">Patient name</string>
     <string name="patient_number">Phone number</string>
+    <string name="dr">Dr.</string>
+    <string name="healthCntrPix">Health center photos</string>
+    <string name="providedGender">Services may be provided to:</string>
+    <string name="speciality_points">Speciality :</string>
+    <string name="males">Males</string>
+    <string name="females">Females</string>
+    <string name="females_and_males">Males and females</string>
+    <string name="doesnt_exist">Doesn\'t exist</string>
 </resources>

@@ -3,7 +3,7 @@ package com.ptm.clinicpa.DataModel;
 public class SupInfoClass {
 
 
-    String name,id,address;
+    String name,id,address,name_ar;
         String bdb_loc_lat,bdb_loc_long,bdb_has_health_cer,bdb_has_experience_cer;
     public SupInfoClass(String name, String id, String address,String bdb_loc_lat,String bdb_loc_long) {
         this.name = name;
@@ -24,6 +24,11 @@ public class SupInfoClass {
     public SupInfoClass(String name, String id) {
         this.name = name;
         this.id = id;
+    }
+    public SupInfoClass(String name,String name_ar, String id) {
+        this.name = name;
+        this.id = id;
+        this.name_ar=name_ar;
     }
 
     public String getBdb_loc_lat() {
@@ -64,5 +69,9 @@ public class SupInfoClass {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getName_ar() {
+        return name_ar;
     }
 }
