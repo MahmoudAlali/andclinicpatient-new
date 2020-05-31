@@ -140,21 +140,41 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
 
-    if(itemArrayList.get(position).getIs_fav_center().equals("1"))
+    if(itemArrayList.get(position).getIs_fav_center().equals("1")) {
         (holder).centerFavorite.setImageResource(R.drawable.favorite);
+        (holder).centerFavorite.setTag(R.drawable.favorite);
+    }
+    else
+        (holder).centerFavorite.setTag(R.drawable.un_favorite);
+
 
     if(itemArrayList.get(position).getIs_fav_doctor().equals("1"))
+    {
         (holder).doctorFavorite.setImageResource(R.drawable.favorite);
+        (holder).doctorFavorite.setTag(R.drawable.favorite);
+
+    }
+    else
+        (holder).doctorFavorite.setTag(R.drawable.un_favorite);
 
 
     (holder).doctorFavorite.setOnClickListener(new View.OnClickListener() {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onClick(View v) {
-            if((holder).doctorFavorite.getDrawable()==context.getDrawable(R.drawable.favorite))
+            if((holder).doctorFavorite.getTag().equals(R.drawable.favorite)) {
                 (holder).doctorFavorite.setImageResource(R.drawable.un_favorite);
-            else
+                APICall.sendUnFavorites(context,itemArrayList.get(position).getSup_id(),"2");
+                (holder).doctorFavorite.setTag(R.drawable.un_favorite);
+
+            }
+            else {
                 (holder).doctorFavorite.setImageResource(R.drawable.favorite);
+                APICall.sendFavorites(context,itemArrayList.get(position).getSup_id(),"2");
+                (holder).doctorFavorite.setTag(R.drawable.favorite);
+
+
+            }
 
 
         }
@@ -164,10 +184,18 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onClick(View v) {
-            if((holder).centerFavorite.getDrawable()==context.getDrawable(R.drawable.favorite))
+            if((holder).centerFavorite.getTag().equals(R.drawable.favorite)) {
                 (holder).centerFavorite.setImageResource(R.drawable.un_favorite);
-            else
+                APICall.sendUnFavorites(context,itemArrayList.get(position).getHealthCntr_id(),"1");
+                (holder).centerFavorite.setTag(R.drawable.un_favorite);
+
+            }
+            else {
                 (holder).centerFavorite.setImageResource(R.drawable.favorite);
+                APICall.sendFavorites(context,itemArrayList.get(position).getHealthCntr_id(),"1");
+                (holder).centerFavorite.setTag(R.drawable.favorite);
+
+            }
 
 
         }
