@@ -228,7 +228,7 @@
     <string name="select_city_alert">Please select a city</string>
 
     <!--service place frag-->
-    <string name="PlaceService">Service place</string>
+    <string name="PlaceService">Medical service place</string>
     <string name="ServicePrice">Service price</string>
     <string name="ServiceRate">Service rate</string>
     <string name="providerRate">Provider rate</string>
@@ -600,6 +600,7 @@
     <string name="alert">Alert!</string>
     <string name="there_is_no_provider">There is no provider with your search filters</string>
     <string name="there_is_no_doctors">There is no doctors in this health center</string>
+    <string name="there_is_no_images">There is no images for this health center</string>
     <string name="cant_insert_char">You can\'t insert characters in phone number field</string>
     <string name="number_great_than_10">The phone number is more/less than 10 numbers</string>
     <string name="prefix_05">The Prefix is not 05</string>

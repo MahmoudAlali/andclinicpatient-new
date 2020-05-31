@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,13 +32,17 @@ import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
+import com.ptm.clinicpa.Adapters.HealthCenterImagesAdapter;
 import com.ptm.clinicpa.Adapters.OffersAdapterTab;
 import com.ptm.clinicpa.Adapters.ServicesProviderAdapter;
 import com.ptm.clinicpa.DataModel.BrowseServiceItem;
 import com.ptm.clinicpa.DataModel.DataOffer;
+import com.ptm.clinicpa.DataModel.DoctorDataModel;
+import com.ptm.clinicpa.DataModel.HealthCenterImages;
 import com.ptm.clinicpa.DataModel.SupInfoClass;
 import com.ptm.clinicpa.Fragments.AccountFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceFragment;
+import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
 import java.util.ArrayList;
@@ -48,8 +53,10 @@ public class MainProviderActivity extends AppCompatActivity {
 
     public static OffersAdapterTab offersAdapterTab;
     static ServicesProviderAdapter servicesProviderAdapter;
+    static HealthCenterImagesAdapter healthCenterImagesAdapter;
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
+    public static ImageView image;
     LinearLayout fra;
     android.app.FragmentTransaction fragmentTransaction;
 
@@ -58,9 +65,12 @@ public class MainProviderActivity extends AppCompatActivity {
     public static RecyclerView recycleview;
     ImageView exp,health;
     public static ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
+    public static ArrayList<DoctorDataModel> doctorsList=new ArrayList<>();
+    public static ArrayList<HealthCenterImages> imagesList=new ArrayList<>();
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
     public static   ArrayList<DataOffer>  list=new ArrayList<>();
 
+    ImageView location;
     public static  String mylocationId="", distanceOffer=",{\"num\":2,\"value1\":0,\"value2\":100000}";
 
     public static String
@@ -95,6 +105,8 @@ public class MainProviderActivity extends AppCompatActivity {
         my_location=findViewById(R.id.my_location);
         recycleview=findViewById(R.id.recycleview);
         fra=findViewById(R.id.fra);
+        location=findViewById(R.id.location);
+        image=findViewById(R.id.image);
 //        APICall.getdetailsUser(context);
 
 //        my_location.setText(PlaceServiceFragment.mylocationId);
@@ -107,6 +119,23 @@ public class MainProviderActivity extends AppCompatActivity {
             health.setImageResource(R.drawable.ic_health_care);
         }
 
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!getIntent().getStringExtra("lat").equals("")
+                        && !getIntent().getStringExtra("lat").equals("null")
+                        && !getIntent().getStringExtra("long").equals("")
+                        && !getIntent().getStringExtra("long").equals("null")
+                ){
+                    Intent intent=new Intent(context, MapsActivityLocation.class);
+                    intent.putExtra("lat",Double.parseDouble(getIntent().getStringExtra("lat")));
+                    intent.putExtra("lang",Double.parseDouble(getIntent().getStringExtra("long")));
+                    context.startActivity(intent);
+
+
+                }
+            }
+        });
 
         my_location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,7 +296,7 @@ public class MainProviderActivity extends AppCompatActivity {
 
                 fra.setVisibility(View.GONE);
                 recycleview.setHasFixedSize(true);
-                servicesProviderAdapter=new ServicesProviderAdapter(context,  arrayList);
+                servicesProviderAdapter=new ServicesProviderAdapter(context,  doctorsList);
                 LinearLayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
                 recycleview.setLayoutManager(manager);
                 recycleview.setAdapter(servicesProviderAdapter);
@@ -314,37 +343,26 @@ public class MainProviderActivity extends AppCompatActivity {
                 offer_sw.setBackgroundResource(android.R.color.transparent);
                 service_Sw.setBackgroundResource(android.R.color.transparent);
                 map.setBackgroundResource(R.drawable.shadow_service_tab);
-                fra.setVisibility(View.VISIBLE);
-                lang1=null;
-                lat1=null;
-                Log.e("pro_name_id","is "+getIntent().getStringExtra("provider_id"));
-                for (int i=0;i<supInfoList.size();i++){
-                    if (getIntent().getStringExtra("provider_id").equals(supInfoList.get(i).getId())){
-                        try {
-                            lat1 = Double.parseDouble(supInfoList.get(i).getBdb_loc_lat());
-                            lang1 = Double.parseDouble(supInfoList.get(i).getBdb_loc_long());
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                fra.setVisibility(View.GONE);
 
-                Fragment fragment = new MapTap();
-//                fragment = new MapFragment();
-                fragmentTransaction =  getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fra, fragment);
-                fragmentTransaction.commitAllowingStateLoss();
+
+                recycleview.setHasFixedSize(true);
+                healthCenterImagesAdapter=new HealthCenterImagesAdapter(context,  imagesList);
+                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
+                recycleview.setLayoutManager(mLayoutManager);
+                recycleview.setAdapter(healthCenterImagesAdapter);
+
+                APICall.getHealthCenterImages(getIntent().getStringExtra("provider_id"), context);
 
             }
         });
-
         //--------------------------
         offer_sw.setBackgroundResource(android.R.color.transparent);
         map.setBackgroundResource(android.R.color.transparent);
         service_Sw.setBackgroundResource(R.drawable.shadow_service_tab);
 
         recycleview.setHasFixedSize(true);
-        servicesProviderAdapter=new ServicesProviderAdapter(context,  arrayList);
+        servicesProviderAdapter=new ServicesProviderAdapter(context,  doctorsList);
         LinearLayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
         recycleview.setLayoutManager(manager);
         recycleview.setAdapter(servicesProviderAdapter);
@@ -366,6 +384,10 @@ public class MainProviderActivity extends AppCompatActivity {
     }
     public static void refreshRVOffers(){
         offersAdapterTab.notifyDataSetChanged();
+//        recyclerView.invalidate();
+    }
+    public static void refreshRVImages(){
+        healthCenterImagesAdapter.notifyDataSetChanged();
 //        recyclerView.invalidate();
     }
     private void showLocationServiceMsg(final Context context)
@@ -404,5 +426,13 @@ public class MainProviderActivity extends AppCompatActivity {
 
         dialog.show();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(image.getVisibility()==View.VISIBLE)
+            image.setVisibility(View.GONE);
+        else
+            super.onBackPressed();
     }
 }

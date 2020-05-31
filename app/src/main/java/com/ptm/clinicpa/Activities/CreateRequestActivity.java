@@ -47,7 +47,7 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     public static Button next,addNewClient,add_date;
     public static Context context;
-    static LinearLayout show_clients;
+    public static LinearLayout show_clients,servicesLayout;
     public static ArrayList<String> supplierServicesNames=new ArrayList();
     public static ArrayList<ClientServiceDataModel> supplierServices=new ArrayList();
     public static ArrayList<GroupBookingModel> clientsArrayList=new ArrayList();
@@ -87,6 +87,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         addNewClient=findViewById(R.id.add_new_client);
         add_date=findViewById(R.id.add_date);
         next=findViewById(R.id.search);
+        servicesLayout=findViewById(R.id.servicesLayout);
        // show_clients=findViewById(R.id.show_clients);
       /*  hourSpinner = findViewById(R.id.hour_from);
         minutesSpinner = findViewById(R.id.minutes_from);*/

@@ -1,9 +1,10 @@
 package com.ptm.clinicpa.DataModel;
 
 public class RequestProviderItem {
-    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat,bdb_has_experience_cer,bdb_has_health_cer,healthCntr,speciality,healthCntr_ar,speciality_ar;
+    String sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_long,bdb_loc_lat,bdb_has_experience_cer,bdb_has_health_cer,healthCntr,speciality,healthCntr_ar,speciality_ar,healthCntr_id;
 
-    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar )
+    String is_fav_center,is_fav_doctor,gender;
+    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar ,String healthCntr_id,String gender,String is_fav_doctor,String is_fav_center)
     {
         this.sup_id=sup_id;
         this.sup_name=sup_name;
@@ -19,6 +20,10 @@ public class RequestProviderItem {
         this.healthCntr_ar=healthCntr_ar;
         this.speciality_ar=speciality_ar;
         this.speciality=speciality;
+        this.healthCntr_id=healthCntr_id;
+        this.gender=gender;
+        this.is_fav_center=is_fav_center;
+        this.is_fav_doctor=is_fav_doctor;
     }
 
     public String getBdb_has_experience_cer() {
@@ -93,6 +98,10 @@ public class RequestProviderItem {
         return sup_id;
     }
 
+    public String getHealthCntr_id() {
+        return healthCntr_id;
+    }
+
     public String getSup_name() {
         return sup_name;
     }
@@ -115,5 +124,17 @@ public class RequestProviderItem {
 
     public String getSpeciality_ar() {
         return speciality_ar;
+    }
+
+    public String getIs_fav_doctor() {
+        return is_fav_doctor;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getIs_fav_center() {
+        return is_fav_center;
     }
 }

@@ -7,14 +7,22 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".Activities.ProviderSerAndOfferPKG.MainProviderActivity">
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-        <Space
+        <ImageView
+            android:id="@+id/location"
             android:layout_width="@dimen/standard_40"
+            android:src="@drawable/service_place_icon"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/salon_name"
@@ -33,7 +41,7 @@
         <ImageView
             android:id="@+id/exp"
             android:layout_width="@dimen/standard_30"
-            android:layout_height="@dimen/standard_30"
+            android:layout_height="35dp"
             android:textColor="#000"
             android:textAlignment="center"
             />
@@ -43,7 +51,7 @@
         <ImageView
             android:id="@+id/health"
             android:layout_width="@dimen/standard_30"
-            android:layout_height="@dimen/standard_30"
+            android:layout_height="35dp"
             android:textColor="#000"
             android:textAlignment="center"
             />

@@ -96,6 +96,19 @@
                     android:textSize="16dp"
                     android:textStyle="bold"
                     android:paddingLeft="4dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/centerFavorite"
+                        android:src="@drawable/un_favorite"
+                        android:layout_width="25dp"
+                        android:layout_marginEnd="@dimen/standard_20"
+                        android:layout_height="match_parent"
+                        />
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -104,49 +117,101 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:weightSum="2"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 >
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingStart="15dp"
                     >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/myCardView"
+                        android:layout_width="@dimen/standard_50"
+                        android:layout_height="@dimen/standard_50"
+                        app:cardCornerRadius="50dp"
                         android:layout_weight="1"
-                        android:text="@string/doctorName"
-                        android:textStyle="bold"
-                        android:textAlignment="viewEnd"
-                        />
-                    <TextView
-                        android:id="@+id/service_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textAlignment="viewStart"
-                        android:paddingRight="5dp"
-                        android:paddingLeft="5dp"
-                        android:text="hgjs;jdg"
-                        android:paddingBottom="2dp"
-                        android:textStyle="bold"
-                        />
+                        app:cardBackgroundColor="@color/transparent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        >
+                        <ImageView
+                            android:id="@+id/logoImg"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            />
+                    </android.support.v7.widget.CardView>
+
                 </LinearLayout>
 
-<TextView
-    android:id="@+id/speciality"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:textStyle="bold"
-    android:paddingRight="5dp"
-    android:paddingLeft="5dp"
-    android:textAlignment="center"
-    android:text="hgjs;jdg"
-    android:paddingTop="2dp"
-    />
+
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:layout_weight="1"
+                   >
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:orientation="horizontal"
+                       >
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:layout_weight="1"
+                           android:text="@string/doctorName"
+                           android:textStyle="bold"
+                           android:textAlignment="viewEnd"
+                           />
+                       <TextView
+                           android:id="@+id/service_name"
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:layout_weight="1"
+                           android:textAlignment="viewStart"
+                           android:paddingRight="5dp"
+                           android:paddingLeft="5dp"
+                           android:text="hgjs;jdg"
+                           android:paddingBottom="2dp"
+                           android:textStyle="bold"
+                           />
+                   </LinearLayout>
+
+                   <TextView
+                       android:id="@+id/speciality"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:textStyle="bold"
+                       android:paddingRight="5dp"
+                       android:paddingLeft="5dp"
+                       android:textAlignment="center"
+                       android:text="hgjs;jdg"
+                       android:paddingTop="2dp"
+                       />
+               </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/doctorFavorite"
+                        android:src="@drawable/un_favorite"
+                        android:layout_width="25dp"
+                        android:layout_marginEnd="@dimen/standard_20"
+                        android:layout_height="match_parent"
+                        />
+
+                </LinearLayout>
+
+
+
+
             </LinearLayout>
             <LinearLayout
                 android:layout_weight="1"
@@ -191,6 +256,7 @@
                         android:layout_height="match_parent"/>
                     <TextView
                         android:id="@+id/depPerc"
+                        android:visibility="gone"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -213,38 +279,13 @@
 
         </LinearLayout>
 
-        <LinearLayout
+      <!--  <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="4"
             android:gravity="center|start"
             android:orientation="vertical"
             android:layout_weight="4">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:paddingStart="15dp"
-                >
-                <android.support.v7.widget.CardView
-                    android:id="@+id/myCardView"
-                    android:layout_width="@dimen/standard_60"
-                    android:layout_height="@dimen/standard_60"
-                    app:cardCornerRadius="50dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="@color/transparent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    >
-                    <ImageView
-                        android:id="@+id/logoImg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        />
-                </android.support.v7.widget.CardView>
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/provider_name"
@@ -255,7 +296,7 @@
                 android:gravity="center"
                 android:text="provider name"/>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

@@ -20,6 +20,7 @@ import com.ptm.clinicpa.Activities.TabOne;
 import com.ptm.clinicpa.DataModel.BrowseServiceItem;
 import com.ptm.clinicpa.DataModel.DataService;
 import com.ptm.clinicpa.DataModel.DateClass;
+import com.ptm.clinicpa.DataModel.DoctorDataModel;
 import com.ptm.clinicpa.Fragments.MyIndEffectsActivity;
 import com.ptm.clinicpa.R;
 
@@ -39,7 +40,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     Context context;
     ArrayList<DataService> dataServices;
-    ArrayList<BrowseServiceItem> itemArrayList;
+    ArrayList<DoctorDataModel> itemArrayList;
     int [] servicsImgsBasic ={ R.drawable.hair_basic,
             R.drawable.makeup_basic,
             R.drawable.massage_basic,
@@ -54,7 +55,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
      */
 
-    public ServicesProviderAdapter(Context context,ArrayList<BrowseServiceItem> itemArrayList){
+    public ServicesProviderAdapter(Context context,ArrayList<DoctorDataModel> itemArrayList){
         this.context=context;
         this.itemArrayList=itemArrayList;
 
@@ -93,16 +94,34 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
 
-        if (APICall.ln.equals("ar"))
-        ((Item)holder).name.setText(itemArrayList.get(position).getBdb_name_ar());
+
+        String s=context.getString(R.string.dr)+itemArrayList.get(position).getBdb_name();
+
+        String gender ="";
+        if(itemArrayList.get(position).getBdb_supported_gender().equals("0"))
+            gender=context.getString(R.string.males);
+        else if(itemArrayList.get(position).getBdb_supported_gender().equals("1"))
+            gender=context.getString(R.string.females);
+        else if(itemArrayList.get(position).getBdb_supported_gender().equals("2"))
+            gender=context.getString(R.string.females_and_males);
+        String providedGender=context.getString(R.string.providedGender)+gender;
+        ((Item)holder).name.setText(s);
+        ((Item)holder).patientGender.setText(providedGender);
+
+        String speciality=context.getString(R.string.speciality_points);
+
+        if(context.getString(R.string.locale).equals("en"))
+            speciality+=itemArrayList.get(position).getBdb_specialization_name_en();
         else
-            ((Item)holder).name.setText(itemArrayList.get(position).getBdb_name());
+            speciality+=itemArrayList.get(position).getBdb_specialization_name_ar();
+
+        ((Item)holder).speciality.setText(speciality);
 
         ArrayList<String> places= new ArrayList<>();
 
         places.add(context.getResources().getString(R.string.PlaceService));
 
-        if (itemArrayList.get(position).getBdb_ser_salon().equals("1")) {
+       /* if (itemArrayList.get(position).getBdb_ser_salon().equals("1")) {
             places.add(context.getResources().getString(R.string.salon)+":"+itemArrayList.get(position).getBdb_ser_salon_price());
         }else {
             places.add(context.getResources().getString(R.string.salon)+": 0");
@@ -124,11 +143,11 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
             places.add(context.getResources().getString(R.string.hotel)+":"+itemArrayList.get(position).getBdb_hotel_price());
         }else {
             places.add(context.getResources().getString(R.string.hotel)+": 0");
-        }
-        ((Item)holder).image.setImageResource(servicsImgsBasic[Integer.parseInt(itemArrayList.get(position).getCatId())]);
+        }*/
+       // ((Item)holder).image.setImageResource(servicsImgsBasic[Integer.parseInt(itemArrayList.get(position).getCatId())]);
 
-        APICall.getSalonLogo(context,itemArrayList.get(position).getImage_1(),((Item) holder).image);
-        APICall.getSalonLogo(context,itemArrayList.get(position).getImage_2(),((Item) holder).image2);
+       // APICall.getSalonLogo(context,itemArrayList.get(position).getImage_1(),((Item) holder).image);
+       // APICall.getSalonLogo(context,itemArrayList.get(position).getImage_2(),((Item) holder).image2);
 
 
         HintArrayAdapter adapter=new HintArrayAdapter(context,0);
@@ -136,7 +155,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ((Item)holder).place.setAdapter(adapter);
 
-        ((Item)holder).add.setOnClickListener(new View.OnClickListener() {
+        /*((Item)holder).add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(MainProviderActivity.date.getText().toString().equals(context.getResources().getString(R.string.date))){
@@ -179,7 +198,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 }
             }
-        });
+        });*/
 
 
 
@@ -277,7 +296,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
      */
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView name;
+        TextView name,speciality,patientGender;
         Spinner place;
         ImageView add,image,image2;
 
@@ -292,6 +311,8 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
             add=itemView.findViewById(R.id.add);
             image=itemView.findViewById(R.id.image);
             image2=itemView.findViewById(R.id.image2);
+            speciality=itemView.findViewById(R.id.speciality);
+            patientGender=itemView.findViewById(R.id.patientGender);
         }
     }
 }

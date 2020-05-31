@@ -3,7 +3,9 @@ package com.ptm.clinicpa.Adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -137,6 +139,41 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     }
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
+
+    if(itemArrayList.get(position).getIs_fav_center().equals("1"))
+        (holder).centerFavorite.setImageResource(R.drawable.favorite);
+
+    if(itemArrayList.get(position).getIs_fav_doctor().equals("1"))
+        (holder).doctorFavorite.setImageResource(R.drawable.favorite);
+
+
+    (holder).doctorFavorite.setOnClickListener(new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public void onClick(View v) {
+            if((holder).doctorFavorite.getDrawable()==context.getDrawable(R.drawable.favorite))
+                (holder).doctorFavorite.setImageResource(R.drawable.un_favorite);
+            else
+                (holder).doctorFavorite.setImageResource(R.drawable.favorite);
+
+
+        }
+    });
+
+    (holder).centerFavorite.setOnClickListener(new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public void onClick(View v) {
+            if((holder).centerFavorite.getDrawable()==context.getDrawable(R.drawable.favorite))
+                (holder).centerFavorite.setImageResource(R.drawable.un_favorite);
+            else
+                (holder).centerFavorite.setImageResource(R.drawable.favorite);
+
+
+        }
+    });
+
+
     (holder).place.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -167,8 +204,10 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             Log.e("Position","is"+position);
             Intent intent=new Intent(context, MainProviderActivity.class);
           //  intent.putExtra("provider_id",bestOfferItems.get(position).getProvider_id());
+            intent.putExtra("lat",itemArrayList.get(position).getBdb_loc_lat());
+            intent.putExtra("long",itemArrayList.get(position).getBdb_loc_long());
             intent.putExtra("provider_name",(holder).healthCntr.getText().toString());
-            intent.putExtra("provider_id",itemArrayList.get(position).getSup_id());
+            intent.putExtra("provider_id",itemArrayList.get(position).getHealthCntr_id());
             intent.putExtra("health",itemArrayList.get(position).getBdb_has_health_cer());
             intent.putExtra("exp",itemArrayList.get(position).getBdb_has_experience_cer());
             context.startActivity(intent);
@@ -206,7 +245,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 }
 public class ListHolder extends RecyclerView.ViewHolder {
     TextView providerName,provider_rate,depositPrcntg,healthCntr,speciality;
-    ImageView addRequest,logo,place,health,exp;
+    ImageView addRequest,logo,place,health,exp,doctorFavorite,centerFavorite;
     CardView cardView;
     public ListHolder(View itemView) {
         super(itemView);
@@ -221,6 +260,8 @@ public class ListHolder extends RecyclerView.ViewHolder {
         cardView=itemView.findViewById(R.id.myCardView);
         healthCntr=itemView.findViewById(R.id.healthCntr);
         speciality=itemView.findViewById(R.id.speciality);
+        centerFavorite=itemView.findViewById(R.id.centerFavorite);
+        doctorFavorite=itemView.findViewById(R.id.doctorFavorite);
     }
 }
     @Override

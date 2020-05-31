@@ -308,6 +308,7 @@
 
                         <LinearLayout
 
+                            android:id="@+id/servicesLayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/standard_30"
                             android:layout_gravity="center"

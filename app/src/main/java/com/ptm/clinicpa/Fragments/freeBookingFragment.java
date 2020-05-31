@@ -86,8 +86,6 @@ public class freeBookingFragment extends Fragment {
         View view = inflater.inflate(R.layout.activity_free_booking_filters, container, false);
         //service_hair = view.findViewById(R.id.service_hair);
 
-
-
         //---------------------init my location spinner-----------
         BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
 
@@ -299,7 +297,7 @@ public class freeBookingFragment extends Fragment {
                         if (item.getTitle().equals(getResources().getString(R.string.current_location))) {
 
                             LocationManager locationManager = (LocationManager)
-                                    ((AppCompatActivity) BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
+                                    ( BeautyMainPage.context).getSystemService(Context.LOCATION_SERVICE);
                             if (ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                                 // TODO: Consider calling
                                 //    ActivityCompat#requestPermissions
@@ -323,12 +321,13 @@ public class freeBookingFragment extends Fragment {
                                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
                                     @Override
                                     public void onLocationChanged(Location location) {
+                                        Log.e("LATLANG",lat+":"+lng +"FIRST");
                                         lat=location.getLatitude();
                                         lng=location.getLongitude();
                                         Log.e("LATLANG",lat+":"+lng);
                                         //APICall.setlocation(lat,lng);
                                         filterMyLocationLat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
-                                        filterMyLocationLng="," + "{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
+                                        filterMyLocationLng="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                         clinicName.setText(getResources().getText(R.string.providerName));
                                         filterSupplierName="";
                                         doctorName.setText(getResources().getText(R.string.doctorName));
@@ -366,7 +365,7 @@ public class freeBookingFragment extends Fragment {
                                     Log.e("LATLANG",lat+":"+lng);
                                    // APICall.setlocation(lat,lng);
                                     filterMyLocationLat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
-                                    filterMyLocationLng=",{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
+                                    filterMyLocationLng="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                     clinicName.setText(getResources().getText(R.string.providerName));
                                     filterSupplierName="";
                                     doctorName.setText(getResources().getText(R.string.doctorName));
@@ -442,7 +441,7 @@ public class freeBookingFragment extends Fragment {
                         //APICall.filterSortAlgorithm("2", Min.getText().toString(), Max.getText().toString());
                         //ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 //                               ------------For Offer Filter-------------------------------
-                        filterDistance=",{\"num\":2,\"value1\":"+Min.getText()+",\"value2\":"+Max.getText()+"}";
+                        filterDistance="{\"num\":2,\"value1\":"+Min.getText()+",\"value2\":"+Max.getText()+"}";
                         Log.e("DistanceOffer",distanceOffer);
                         clinicName.setText(getResources().getText(R.string.providerName));
                         filterSupplierName="";
@@ -564,101 +563,6 @@ public class freeBookingFragment extends Fragment {
 
         //endregion
 
-/*
-        for (int i = 0; i < ServiceFragment.serviceFilters.size(); i++) {
-            if (i == 2) {
-                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                    priceService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    price.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-
-                }
-            } else if (i == 3) {
-                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                    rateService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    rateService.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-                }
-            } else if (i == 4) {
-                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-//                    rateProvider.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    rateProvider.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-                }
-            } else if (i == 5) {
-                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                    distance.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    distance.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-                }
-            } else if (i == 7) {
-                if (!ServiceFragment.serviceFilters.get(i).getFilterName().equals("")) {
-                    priceService.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                    servicePlace.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-                }
-            } else if (i == 1) {
-//                                    price.setText(ServiceFragment.serviceFilters.get(i).getFilterName());
-//                                    price.setChecked(ServiceFragment.serviceFilters.get(i).getIschecked());
-            }
-
-        }
-*/
-
-
-        //date=view.findViewById(R.id.date);
-      /*  if (ServiceFragment.date.equals("")) {
-            date.setText(R.string.date);
-        }else {
-            date.setText(ServiceFragment.date);
-        }
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog=new Dialog(BeautyMainPage.context);
-                dialog.setContentView(R.layout.active_date_dialog);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                Button search=dialog.findViewById(R.id.search);
-                final DatePicker datePicker=dialog.findViewById(R.id.date);
-                datePicker.setMinDate(System.currentTimeMillis() - 1000);
-
-                search.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        int month=datePicker.getMonth()+1;
-                        date.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
-
-//                        dateFilter=date.getText().toString();
-//                        ServiceFragment.date=dateFilter;
-                    }
-                });
-                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        date.setText(R.string.date);
-                    }
-                });
-                dialog.show();
-            }
-
-        });
-
-
-
-*/
-
-
-
-
-
-//        if (fregmentIsFirstOpen==false){
-//            fregmentIsFirstOpen=true;
-//        }
-
-
-
-      //  Log.e("Size",mylocation.size()+"");
-
-
-
-
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -686,83 +590,6 @@ public class freeBookingFragment extends Fragment {
                 }
             }
         });
-
-
-      /*  priceService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //-------------- range price filter--------------------
-                final Dialog rangePriceDialog = new Dialog(BeautyMainPage.context);
-                rangePriceDialog.setContentView(R.layout.price_range_dialog);
-                rangePriceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-                // get seekbar from view
-                final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) rangePriceDialog.findViewById(R.id.rangeSeekbar5);
-
-                // get min and max text view
-                final TextView tvMin = (TextView) rangePriceDialog.findViewById(R.id.textMin1);
-                final TextView tvMax = (TextView) rangePriceDialog.findViewById(R.id.textMax1);
-                final EditText Min = rangePriceDialog.findViewById(R.id.minval);
-                final EditText Max = rangePriceDialog.findViewById(R.id.maxval);
-                Button search = rangePriceDialog.findViewById(R.id.search);
-                // set listener
-                rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-                    @Override
-                    public void valueChanged(Number minValue, Number maxValue) {
-                        tvMin.setText(String.valueOf(minValue));
-                        Min.setText(String.valueOf(minValue));
-                        Max.setText(String.valueOf(maxValue));
-                        tvMax.setText(String.valueOf(maxValue));
-                    }
-                });
-
-                // set final value listener
-                rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
-                    @Override
-                    public void finalValue(Number minValue, Number maxValue) {
-                        Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
-                    }
-                });
-
-                search.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rangePriceDialog.dismiss();
-                        priceService.setText(BeautyMainPage.context.getResources().getString(R.string.price)+": " + Min.getText().toString() + "-" + Max.getText().toString());
-                        APICall.filterSortAlgorithm(PlaceServiceFragment.placeId+"", Min.getText().toString(), Max.getText().toString());
-                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(true, priceService.getText().toString()));
-//                                    priceOffer=",{\"num\":32,\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
-
-                        minprice=tvMin.getText().toString();
-                        maxprice=tvMax.getText().toString();
-
-//                                  priceServiceValue=",{\"num\":"+placeId+",\"value1\":"+tvMin.getText()+",\"value2\":"+tvMax.getText()+"}";
-
-                    }
-                });
-
-                rangePriceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-//                                    price.setChecked(false);
-                        priceService.setText(R.string.ServicePrice);
-//                                    Log.e("Cancel","ok");
-                        APICall.filterSortAlgorithm(placeId+"", "", "");
-                        ServiceFragment.serviceFilters.set(2, new ServiceFilter(false, priceService.getText().toString()));
-                        priceOffer="";
-                    }
-                });
-
-                rangePriceDialog.show();
-
-
-            }
-        });*/
-
-
-
-
-
 
         return view;
     }
