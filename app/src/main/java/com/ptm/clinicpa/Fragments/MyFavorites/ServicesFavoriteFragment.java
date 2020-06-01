@@ -31,7 +31,7 @@ public class ServicesFavoriteFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
         recyclerView.setAdapter(favoritesAdapter);
 
-        APICall.getFavorites(BeautyMainPage.context,"0");
+        APICall.getFavorites(BeautyMainPage.context,"1");
         return view;
     }
 }

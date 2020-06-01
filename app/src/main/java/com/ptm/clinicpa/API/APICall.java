@@ -22113,12 +22113,16 @@ public class APICall {
                 }
             }
         });
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+
+        JSONObject postdata = new JSONObject();
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
         OkHttpClient client = new OkHttpClient();
         Log.e("TOKEN",gettoken(context));
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/auth/user/retFav")
-                .get()
+                .url(API_PREFIX_NAME+"/api/user/retFav")
+                .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
                 .build();
@@ -22210,9 +22214,12 @@ public class APICall {
                             String bdb_name_ar = data.getString("bdb_name_ar");
                             String bdb_cat_id = data.getString("bdb_cat_id");
                             String bdb_logo_id = data.getString("bdb_logo_id");
-                            if(bdb_type.equals(type))
-                                favItemsArrayList.add(new FavoriteModel(bdb_fav_id,bdb_name,bdb_name_ar,bdb_type,bdb_item_id,bdb_cat_id,bdb_logo_id));
+                            if(bdb_type.equals(type)) {
+                                favItemsArrayList.add(new FavoriteModel(bdb_fav_id, bdb_name, bdb_name_ar, bdb_type, bdb_item_id, bdb_cat_id, bdb_logo_id));
 
+                                Log.e("FAVORITE", i + " fffff");
+
+                            }
                         }
 
 
@@ -22221,13 +22228,18 @@ public class APICall {
                             @Override
                             public void run() {
                                 try {
-                                    ServicesFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
                                     ProvidersFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
+
+                                    ServicesFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
+                                    Log.e("FAVORITE22",type+" fffff");
 
 
                                 }
                                 catch (Exception e)
                                 {
+                                    Log.e("FAVORITERR",e.getMessage()+" fffff");
+                                    ServicesFavoriteFragment.favoritesAdapter.notifyDataSetChanged();
+
                                 }
                             }
                         });

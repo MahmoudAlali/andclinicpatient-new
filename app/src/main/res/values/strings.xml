@@ -703,8 +703,9 @@
     <string name="body">Body</string>
     <string name="eyebrows">Eyebrows</string>
     <string name="makeup2">Make up</string>
-    <string name="providersFav">Providers</string>
+    <string name="providersFav"></string>
     <string name="servicesFav">Services</string>
+    <string name="centersFav">Health centers</string>
     <string name="Notifications">Notifications</string>
 
     <string name="current_points">Current points </string>

@@ -3,7 +3,9 @@ package com.ptm.clinicpa.Adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -121,6 +123,41 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         places.add(context.getResources().getString(R.string.PlaceService));
 
+        if(APICall.isGuest(context).equals("1"))
+        {
+            ((Item)holder).doctorFavorite.setVisibility(View.INVISIBLE);
+        }
+        if(itemArrayList.get(position).getIs_fav_doctor().equals("1"))
+        {
+            ((Item)holder).doctorFavorite.setImageResource(R.drawable.favorite);
+            ((Item)holder).doctorFavorite.setTag(R.drawable.favorite);
+
+        }
+        else
+            ((Item)holder).doctorFavorite.setTag(R.drawable.un_favorite);
+
+
+        ((Item)holder).doctorFavorite.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                if(((Item)holder).doctorFavorite.getTag().equals(R.drawable.favorite)) {
+                    ((Item)holder).doctorFavorite.setImageResource(R.drawable.un_favorite);
+                    APICall.sendUnFavorites(context,itemArrayList.get(position).getBdb_id(),"2");
+                    ((Item)holder).doctorFavorite.setTag(R.drawable.un_favorite);
+
+                }
+                else {
+                    ((Item)holder).doctorFavorite.setImageResource(R.drawable.favorite);
+                    APICall.sendFavorites(context,itemArrayList.get(position).getBdb_id(),"2");
+                    ((Item)holder).doctorFavorite.setTag(R.drawable.favorite);
+
+
+                }
+
+
+            }
+        });
        /* if (itemArrayList.get(position).getBdb_ser_salon().equals("1")) {
             places.add(context.getResources().getString(R.string.salon)+":"+itemArrayList.get(position).getBdb_ser_salon_price());
         }else {
@@ -298,7 +335,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         TextView name,speciality,patientGender;
         Spinner place;
-        ImageView add,image,image2;
+        ImageView add,image,image2,doctorFavorite;
 
         /**
          * @param itemView
@@ -313,6 +350,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
             image2=itemView.findViewById(R.id.image2);
             speciality=itemView.findViewById(R.id.speciality);
             patientGender=itemView.findViewById(R.id.patientGender);
+            doctorFavorite=itemView.findViewById(R.id.favorite);
         }
     }
 }

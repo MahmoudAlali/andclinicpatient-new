@@ -140,6 +140,11 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
 
+    if(APICall.isGuest(context).equals("1"))
+    {
+        (holder).centerFavorite.setVisibility(View.INVISIBLE);
+        (holder).doctorFavorite.setVisibility(View.INVISIBLE);
+    }
     if(itemArrayList.get(position).getIs_fav_center().equals("1")) {
         (holder).centerFavorite.setImageResource(R.drawable.favorite);
         (holder).centerFavorite.setTag(R.drawable.favorite);
@@ -236,6 +241,12 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             intent.putExtra("long",itemArrayList.get(position).getBdb_loc_long());
             intent.putExtra("provider_name",(holder).healthCntr.getText().toString());
             intent.putExtra("provider_id",itemArrayList.get(position).getHealthCntr_id());
+            if((holder).centerFavorite.getTag().equals(R.drawable.favorite)) {
+                intent.putExtra("is_fav","1");
+            }
+            else {
+                intent.putExtra("is_fav","0");
+            }
             intent.putExtra("health",itemArrayList.get(position).getBdb_has_health_cer());
             intent.putExtra("exp",itemArrayList.get(position).getBdb_has_experience_cer());
             context.startActivity(intent);
@@ -261,13 +272,19 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
-            i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
+            if(APICall.isGuest(context).equals("1"))
+            {
+                APICall.showNeedToSignInDialog(context);
+            }
+            else
+            {
+                Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
+                i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
 
-            RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
-            Log.e("t.bdb_booking_period","is"+ RequestProvidersFragment.bdb_booking_period);
-            BeautyMainPage.context.startActivity(i);
-
+                RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
+                Log.e("t.bdb_booking_period","is"+ RequestProvidersFragment.bdb_booking_period);
+                BeautyMainPage.context.startActivity(i);
+            }
         }
     });
 }

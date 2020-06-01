@@ -21,8 +21,14 @@
         >
         <ImageView
             android:id="@+id/location"
-            android:layout_width="@dimen/standard_40"
+            android:layout_width="40dp"
             android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/centerFavorite"
+            android:layout_width="40dp"
+            android:src="@drawable/un_favorite"
+            android:padding="4dp"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/salon_name"

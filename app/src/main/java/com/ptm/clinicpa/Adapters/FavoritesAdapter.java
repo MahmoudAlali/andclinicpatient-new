@@ -138,7 +138,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
         else
         {
-            ((Item)holder).logoImg.setImageResource(servicsImgsBasic[Integer.parseInt(itemArrayList.get(position).getBdb_cat_id())]);
+           // ((Item)holder).logoImg.setImageResource(servicsImgsBasic[Integer.parseInt(itemArrayList.get(position).getBdb_cat_id())]);
         }
 
 

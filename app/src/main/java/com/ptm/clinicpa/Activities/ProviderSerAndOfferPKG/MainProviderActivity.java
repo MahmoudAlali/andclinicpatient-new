@@ -12,6 +12,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,7 +72,7 @@ public class MainProviderActivity extends AppCompatActivity {
     public static   ArrayList<BrowseServiceItem>  arrayList=new ArrayList<>();
     public static   ArrayList<DataOffer>  list=new ArrayList<>();
 
-    ImageView location;
+    ImageView location,centerFavorite;
     public static  String mylocationId="", distanceOffer=",{\"num\":2,\"value1\":0,\"value2\":100000}";
 
     public static String
@@ -107,6 +109,42 @@ public class MainProviderActivity extends AppCompatActivity {
         fra=findViewById(R.id.fra);
         location=findViewById(R.id.location);
         image=findViewById(R.id.image);
+        centerFavorite=findViewById(R.id.centerFavorite);
+        String isFav= getIntent().getStringExtra("is_fav");
+        final String provider_id= getIntent().getStringExtra("provider_id");
+
+        if(APICall.isGuest(context).equals("1"))
+        {
+            centerFavorite.setVisibility(View.INVISIBLE);
+        }
+        if(isFav.equals("1")) {
+            centerFavorite.setImageResource(R.drawable.favorite);
+            centerFavorite.setTag(R.drawable.favorite);
+        }
+        else
+            centerFavorite.setTag(R.drawable.un_favorite);
+
+        centerFavorite.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                if(centerFavorite.getTag().equals(R.drawable.favorite)) {
+                    centerFavorite.setImageResource(R.drawable.un_favorite);
+                    APICall.sendUnFavorites(context,provider_id,"1");
+                    centerFavorite.setTag(R.drawable.un_favorite);
+
+                }
+                else {
+                    centerFavorite.setImageResource(R.drawable.favorite);
+                    APICall.sendFavorites(context,provider_id,"1");
+                    centerFavorite.setTag(R.drawable.favorite);
+
+                }
+
+
+            }
+        });
+
 //        APICall.getdetailsUser(context);
 
 //        my_location.setText(PlaceServiceFragment.mylocationId);

@@ -44,7 +44,7 @@
                 android:textColor="#000"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
-                android:text="@string/servicesFav"
+                android:text="@string/centersFav"
                 android:background="@drawable/shadow_blue_c7"
                 android:gravity="center"
                 />
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
-                android:text="@string/providersFav"
+                android:text="@string/doctors"
                 android:gravity="center"
                 />
 

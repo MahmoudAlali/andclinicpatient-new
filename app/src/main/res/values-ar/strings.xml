@@ -231,8 +231,9 @@
     <string name="end_offer">هذا العرض ساري حتى:</string>
     <string name="on">على</string>
     <string name="onservice">من الخدمات</string>
-    <string name="providersFav">المزودات</string>
+    <string name="providersFav">الأطباء</string>
     <string name="servicesFav">الخدمات</string>
+    <string name="centersFav">المراكز الصحية</string>
 
 
 
