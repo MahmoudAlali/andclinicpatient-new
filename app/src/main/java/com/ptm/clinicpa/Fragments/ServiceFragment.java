@@ -35,7 +35,7 @@ public class ServiceFragment extends Fragment {
     public static ArrayList<ServiceFilter> serviceFilters=new ArrayList<>();
 
     public static String bdb_ser_id="360";
-    Button freeBooking;
+    Button freeBooking,freeGroupBooking;
     LinearLayout addOrderLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class ServiceFragment extends Fragment {
         bride_bride= view.findViewById(R.id.bride_bride);
         ind_normal_service= view.findViewById(R.id.individual);
         freeBooking = view.findViewById(R.id.freeBooking);
+        freeGroupBooking = view.findViewById(R.id.freeGroupBooking);
 
         group_res= view.findViewById(R.id.group_res);
         group_res_bride= view.findViewById(R.id.group_res_bride);
@@ -232,6 +233,21 @@ public class ServiceFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
             }
-        });        return view;
+        });
+
+        freeGroupBooking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "freeGroupBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new FreeGroupBooking();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+        return view;
     }
 }

@@ -48,6 +48,7 @@
         <activity android:name="com.ptm.clinicpa.Activities.ConfirmAccountActivity" />
         <activity android:name="com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity" />
         <activity android:name="com.ptm.clinicpa.Activities.SettingActivity" />
+        <activity android:name="com.ptm.clinicpa.Activities.CreateGroupRequestActivity" />
         <activity android:name="com.ptm.clinicpa.Fragments.MyReservation.CancelReservationActivity" />
         <activity android:name="com.ptm.clinicpa.Fragments.SingleMultiAltResultActivity" />
         <activity android:name="com.ptm.clinicpa.Fragments.SingleMultiRelationActivity" />

@@ -814,6 +814,7 @@
     <string name="journey_time_emp">Journey time for employee</string>
     <string name="requestRelatedBooking">Booking attached to the order</string>
     <string name="createRequest">Create order</string>
+    <string name="createGroupRequest">Create group order</string>
     <string name="errorAddingRequest">Sorry, try again later </string>
     <string name="service_date_sort_up">Order date (descending)</string>
     <string name="service_date_sort_down">Order date (ascending)</string>
