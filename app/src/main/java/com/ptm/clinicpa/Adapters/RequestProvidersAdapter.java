@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.CreateGroupRequestActivity;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
@@ -278,7 +279,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             }
             else
             {
-                Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
+                Intent i = new Intent(BeautyMainPage.context, CreateGroupRequestActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
 
                 RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();

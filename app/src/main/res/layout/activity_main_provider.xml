@@ -16,25 +16,29 @@
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
+        android:gravity="center"
         >
-        <ImageView
-            android:id="@+id/location"
-            android:layout_width="40dp"
-            android:src="@drawable/service_place_icon"
+
+        <Space
+            android:layout_width="5dp"
             android:layout_height="match_parent"/>
         <ImageView
-            android:id="@+id/centerFavorite"
+            android:id="@+id/logo"
             android:layout_width="40dp"
-            android:src="@drawable/un_favorite"
-            android:padding="4dp"
+            android:layout_height="40dp"
+            android:textColor="#000"
+            android:textAlignment="center"
+            />
+        <Space
+            android:layout_width="5dp"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/salon_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -42,31 +46,156 @@
             android:text="@string/salonName"
             android:textSize="16sp"
             android:textColor="#000"
-            android:gravity="center"
+            android:gravity="start|center"
             />
+
         <ImageView
-            android:id="@+id/exp"
-            android:layout_width="@dimen/standard_30"
-            android:layout_height="35dp"
-            android:textColor="#000"
-            android:textAlignment="center"
-            />
-        <Space
-            android:layout_width="@dimen/pf_10dp_space"
+            android:id="@+id/centerFavorite"
+            android:layout_width="40dp"
+            android:src="@drawable/un_favorite"
+            android:padding="4dp"
             android:layout_height="match_parent"/>
         <ImageView
+            android:id="@+id/location"
+            android:layout_width="40dp"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:visibility="gone"
             android:id="@+id/health"
             android:layout_width="@dimen/standard_30"
             android:layout_height="35dp"
             android:textColor="#000"
             android:textAlignment="center"
             />
-        <Space
-            android:layout_width="@dimen/pf_10dp_space"
-            android:layout_height="match_parent"/>
+
 
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="7"
+        android:id="@+id/featuresLine1"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature1"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature2"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature3"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature4"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature5"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature6"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature7"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/featuresLine2"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="7"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature8"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature9"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature10"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature11"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature12"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature13"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/feature14"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/service_place_icon"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:paddingBottom="5dp"
-    android:textSize="@dimen/standard_20"
+    android:textSize="16dp"
     android:paddingTop="5dp"
     android:gravity="center"
     />

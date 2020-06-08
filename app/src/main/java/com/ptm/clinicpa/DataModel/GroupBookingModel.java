@@ -2,13 +2,16 @@ package com.ptm.clinicpa.DataModel;
 
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class GroupBookingModel {
-    EditText clientName,PhoneNumber;
-    Spinner ageRange;
+    EditText clientName,PhoneNumber,medicalFileNumber,description;
+    Spinner ageRange,genderSpinner,relationSpinner,doctorSpeciality,doctorName;
     ArrayList<ClientServiceDataModel> servicesModels;
+    TextView appointmentTime;
+
 
 
     public GroupBookingModel(EditText clientName, EditText phoneNumber, Spinner ageRange, ArrayList<ClientServiceDataModel> servicesModels) {
@@ -18,6 +21,19 @@ public class GroupBookingModel {
         this.servicesModels = servicesModels;
     }
 
+    public GroupBookingModel(EditText clientName, Spinner ageRange,Spinner genderSpinner,Spinner relationSpinner,Spinner doctorName,Spinner doctorSpeciality,TextView appointmentTime,
+                             EditText medicalFileNumber , EditText description,ArrayList<ClientServiceDataModel> servicesModels) {
+        this.clientName = clientName;
+        this.ageRange = ageRange;
+        this.servicesModels = servicesModels;
+        this.genderSpinner=genderSpinner;
+        this.relationSpinner=relationSpinner;
+        this.doctorName=doctorName;
+        this.doctorSpeciality=doctorSpeciality;
+        this.description=description;
+        this.medicalFileNumber=medicalFileNumber;
+        this.appointmentTime=appointmentTime;
+    }
     public EditText getClientName() {
         return clientName;
     }

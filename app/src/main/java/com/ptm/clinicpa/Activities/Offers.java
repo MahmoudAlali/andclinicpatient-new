@@ -165,6 +165,8 @@ public class Offers extends Fragment implements LocationListener ,
                             // APICall.detailsUser4(context);
                             if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
                                 APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                Log.e("first","ok"+Lat+Long);
+
                             }else {
                                 locationManager.removeUpdates(this);
                             }
@@ -222,6 +224,7 @@ public class Offers extends Fragment implements LocationListener ,
                                 bestOffer.notifyDataSetChanged();
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
                                     APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                    Log.e("second","ok"+Lat+Long);
                                 }else {
                                     locationManager.removeUpdates(this);
                                 }
@@ -303,6 +306,7 @@ public class Offers extends Fragment implements LocationListener ,
                                 bestOffer.notifyDataSetChanged();
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
                                     APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                    Log.e("third","ok"+Lat+Long);
                                 }else {
                                     locationManager.removeUpdates(this);
                                 }
@@ -486,7 +490,8 @@ public class Offers extends Fragment implements LocationListener ,
                     if (!check) {
                         check=false;
                         bestOfferItems.clear();
-                        APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                       // APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                        Log.e("forth","ok"+Lat+Long);
                     }
 
                 }

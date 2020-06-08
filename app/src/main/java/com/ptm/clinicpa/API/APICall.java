@@ -41,12 +41,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 import com.ptm.clinicpa.Activities.AddEffectsToRequestActivity;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.BookingRequestDetailsActivity;
 import com.ptm.clinicpa.Activities.ConfirmAccountActivity;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.GroupOffer.MultiClientOfferEffect;
+import com.ptm.clinicpa.Activities.HealthCentersFilters;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferEffect;
 import com.ptm.clinicpa.Activities.NewBookingRequestsFragment;
@@ -76,6 +78,7 @@ import com.ptm.clinicpa.DataModel.RequestProviderItem;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
 import com.ptm.clinicpa.DataModel.ServiceItem;
 import com.ptm.clinicpa.DataModel.ServicesIDS;
+import com.ptm.clinicpa.Fragments.HealthCentersFragment;
 import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
 import com.ptm.clinicpa.Fragments.MyIndEffectsActivity;
 import com.ptm.clinicpa.Fragments.MyEffects.MyEffectsActivity;
@@ -3237,6 +3240,7 @@ public class APICall {
                                     }
                                 });
                                 APICall.bestOffer(context,bdb_loc_lat,bdb_loc_lat);
+                                Log.e("fifth","ok"+bdb_loc_lat+bdb_loc_lat);
 
                                 break;
                             }
@@ -28831,6 +28835,240 @@ public class APICall {
         Log.d("MessageResponse",mMessage);
         return mMessage;
     }
+    public  static  String  automatedCentersBrowse( final String pageNum, final Context context,String currentLat,String currentLong){
+
+
+        HealthCentersFragment.providerItems.clear();
+       /* try {
+            RequestProvidersFragment.refreshRV();
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+        Log.e("PlaceId",PlaceServiceFragment.placeId+"");
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+        OkHttpClient client = new OkHttpClient();
+        /*String temp="{\"lang\":\""+ln+"\",\"ItemPerPage\":8,\"PageNum\":\""+pageNum+"\",\"Filter\":[" +
+                "{\"num\":6,\"value1\":4,\"value2\":0}," +
+                "{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
+                "{\"num\":35,\"value1\":36.23389,\"value2\":0}" +
+                "]" +
+                "}";
+*/
+
+       /* if (PlaceServiceFragment.placeId==0){
+            PlaceServiceFragment.priceServiceValue="";
+        }else {
+            PlaceServiceFragment.priceServiceValue=",{\"num\":"+PlaceServiceFragment.placeId+",\"value1\":"+PlaceServiceFragment.minprice+",\"value2\":"+PlaceServiceFragment.maxprice+"}";
+        }
+
+*/
+
+        String jsonPostData="{\"lang\":\"en\"," +
+                "\"ItemPerPage\":10," +
+                "\"PageNum\":\""+pageNum+"\"," ;
+
+        jsonPostData+=  "\"Filter\":[" ;
+//                    getCityId()+
+ //               "{\"num\":33,\"value1\":"+ ListServicesFragment.bdb_ser_id +",\"value2\":0},"+
+//                    getFilterList()+  // need to try catch
+
+        if( !HealthCentersFilters.filterMyLocationLat.equals(""))
+            jsonPostData+=HealthCentersFilters.filterMyLocationLat;
+        else
+            jsonPostData+="{\"num\":34,\"value1\":"+currentLat+",\"value2\":0}";
+        if( !HealthCentersFilters.filterMyLocationLng.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterMyLocationLng;
+        else
+            jsonPostData+=","+"{\"num\":35,\"value1\":"+currentLong+",\"value2\":0}";;
+        if( !HealthCentersFilters.filterDistance.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterDistance;
+        else
+            jsonPostData+=","+"{\"num\":2,\"value1\":0,\"value2\":10000}";
+        if( !HealthCentersFilters.filterServicePlace.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterServicePlace;
+        if( !HealthCentersFilters.filterProviderRate.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterProviderRate;
+        if( !HealthCentersFilters.filterSupplierName.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterSupplierName;
+        if( !HealthCentersFilters.filterSupplierId.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterSupplierId;
+        if( !HealthCentersFilters.filterSpeciality.equals(""))
+
+            jsonPostData+=","+HealthCentersFilters.filterSpeciality;
+        /*if( !HealthCentersFilters.filterDoctorName.equals(""))
+            jsonPostData+= ","+HealthCentersFilters.filterDoctorName;*/
+             jsonPostData+=   "]\n" +
+              //  ServicesTabsFragment.sortby+
+
+//                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
+                "}";
+
+
+        Log.e("RequestsPost",jsonPostData);
+        final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getHealthCenter")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")
+                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+              //  TabOne.pullToRefresh.setRefreshing(false);
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("CENTERS", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+                        HealthCentersFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success=jsonObject.getString("success");
+                    String response_code=jsonObject.getString("response_code");
+                    Log.e("success",success);
+                    String message;
+//                    try {
+//                        message=jsonObject.getString("message");
+//                    }catch (JSONException je){
+//                        message=jsonObject.getString("error");
+//                    }
+                    if (response_code.equals("183")){
+                        {
+                            JSONArray data=jsonObject.getJSONArray("data");
+                            final String totalitem=jsonObject.getString("total_item");
+                           {
+
+                               // JSONArray suppliers=jsonObject.getJSONArray("suppliers");
+                                //JSONArray supInfo=data.getJSONArray("supplier info");
+                               // Log.e("SizeSERSUP",sersup.length()+"");
+                               HealthCentersFragment.providerItems.clear();
+
+                                for (int i=0;i<data.length();i++){
+                                    JSONObject jarray = data.getJSONObject(i);
+                                    String sup_id=jarray.getString("id");
+                                    String logo_id=jarray.getString("bdb_logo_id"),
+                                            rating=jarray.getString("total_rating"),
+                                            bdb_loc_lat=jarray.getString("lat"),
+                                            bdb_loc_long=jarray.getString("long"),
+                                    bdb_booking_period=jarray.getString("bdb_booking_period");
+                                    String health_center_ar=jarray.getString("name_ar");
+                                    String health_center_en=jarray.getString("name_en");
+                                    String health_center_id=jarray.getString("id");
+                                    String is_fav_center=jarray.getString("is_fav_center");
+                                    JSONArray feature=jarray.getJSONArray("feature");
+                                    ArrayList<String> featuresIds= new ArrayList<>();
+                                    for(int l=0;l<feature.length();l++)
+                                    {
+                                        JSONObject j = feature.getJSONObject(l);
+
+                                        String bdb_logo_id=j.getString("bdb_logo_id");
+                                        featuresIds.add(bdb_logo_id);
+
+                                    }
+
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,logo_id,rating,bdb_booking_period,bdb_loc_lat+"",bdb_loc_long+"",health_center_en,health_center_ar,health_center_id,is_fav_center,featuresIds);
+                                   // Log.e("lat",latitude);
+                                    HealthCentersFragment.providerItems.add(provider);
+
+                                }
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        HealthCentersFragment.refreshRV();
+//                                    TabOne.recyclerView.invalidate();
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }else if(jsonObject.getString("response_code").equals("182")||jsonObject.getString("response_code").equals("181")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_provider));
+                            }
+                        });
+                    }else
+                    {
+                        showUnexpectedErrMsg(context);
+
+                    }
+                }catch (final JSONException je){
+                    //there is no suppliered services with your search filters
+                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+                        }
+                    });
+
+                    je.printStackTrace();
+                }
+            }
+        });
+
+        Log.d("MessageResponse",mMessage);
+        return mMessage;
+    }
     public  static  String  addBookingRequest(String loc_lat, String loc_long, String sup_id, String booking_place, String bdb_pack_code,
                                               String is_group_booking , final JSONArray clients, final Context context)
     {
@@ -30171,6 +30409,155 @@ Log.e("ERRR",e.getMessage());
 
         Log.e("getClinicsPost",filter);
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getHealthCenter")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("failure Response", mMessage);
+                pd.dismiss();
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("getClinicsResponse", mMessage);
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                pd.dismiss();
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("183"))
+                    {
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject jsonObject=data.getJSONObject(i);
+                            Log.e("ttttttttttt",jsonObject+"");
+
+
+                            String   bdb_id=jsonObject.getString("id");
+                            String   name_ar=jsonObject.getString("name_ar");
+                            String   name_en=jsonObject.getString("name_en");
+
+                            allClinics.add(new ServiceItems( bdb_id,name_en,name_ar));
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                freeBookingFragment.showClinicsNamesFilterDialog(context);
+                            }
+                        });
+                    }
+                    else if(response_code.equals("181"))
+                    {
+                        //showUnexpectedErrMsg(context);
+                        showSweetDialog(context,R.string.no_healthCenter);
+
+                    }
+                    else if(response_code.equals("182"))
+                    {
+                        showSweetDialog(context,R.string.no_healthCenter);
+
+                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  getClinics( final Context context){
+
+        allClinics.clear();
+        showDialog(context);
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        final JSONObject postdata = new JSONObject();
+
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
 
         okhttp3.Request request = new okhttp3.Request.Builder()

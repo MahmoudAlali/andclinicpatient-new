@@ -195,10 +195,10 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         layout=findViewById(R.id.fragment);
         menu = navigation.getMenu();
         sideMenu = sideNavBar.getMenu();
-        menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
+        menu.findItem(R.id.services).setIcon(R.drawable.side_requests_icon);
         menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
         menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-        menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+        menu.findItem(R.id.centers).setIcon(R.drawable.services_grey);
         menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
         navigation.setItemIconTintList(null);
         sideNavBar.setItemIconTintList(null);
@@ -981,11 +981,26 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             Intent intent=new Intent(getApplicationContext(), MyEffectsActivity.class);
             startActivity(intent);
         }else if (id == R.id.requests) {
-            fragment = new MyReservationFragment();
+
+            fragment = new ServiceFragment();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.detach(fragment);
+            fragmentTransaction.attach(fragment);
             fragmentTransaction.commitAllowingStateLoss();
+       /* } else if (id == R.id.rate_app) {
+         launchMarket();*/
+        }else if (id == R.id.notification) {
+
+            fragment = new NotificationsFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.detach(fragment);
+            fragmentTransaction.attach(fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+
        /* } else if (id == R.id.rate_app) {
          launchMarket();*/
         }else if (id == R.id.signout) {
@@ -1020,7 +1035,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                     menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
                     menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
                     menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-                    menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+                    menu.findItem(R.id.centers).setIcon(R.drawable.services_grey);
                     menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
 
                     switch (item.getItemId()) {
@@ -1032,12 +1047,10 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 startActivity(getIntent());
                             }else {
                                 menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
-                                fragment = new ServiceFragment();
+                                fragment = new MyReservationFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);
-                                fragmentTransaction.detach(fragment);
-                                fragmentTransaction.attach(fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
 
                             }
@@ -1085,7 +1098,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 fragmentTransaction.commitAllowingStateLoss();
                             }
                             return true;
-                        case R.id.notification:
+                        case R.id.centers:
                             FRAGMENT_NAME="";
                             if (RELOADAPP){
 
@@ -1093,12 +1106,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 RELOADAPP=false;
                                 startActivity(getIntent());
                             }else {
-                                menu.findItem(R.id.notification).setIcon(R.drawable.notifications_selected);
-                                fragment = new NotificationsFragment();
+                                menu.findItem(R.id.centers).setIcon(R.drawable.services_selected);
+                                fragment = new HealthCentersFilters();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);
                                 fragmentTransaction.commitAllowingStateLoss();
+
+
                             }
                             return true;
                         case R.id.main:

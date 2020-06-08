@@ -65,7 +65,7 @@ public class MainProviderActivity extends AppCompatActivity {
 
     public static TextView service_Sw,offer_sw,date,my_location,map,salon_name;
     public static RecyclerView recycleview;
-    ImageView exp,health;
+    ImageView logo,health;
     public static ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
     public static ArrayList<DoctorDataModel> doctorsList=new ArrayList<>();
     public static ArrayList<HealthCenterImages> imagesList=new ArrayList<>();
@@ -82,6 +82,10 @@ public class MainProviderActivity extends AppCompatActivity {
     Context context;
     public static Double lat1,lang1;
     public static String bdb_name;
+    ArrayList<String> featuresList;
+    LinearLayout lineOne,lineTwo;
+    ImageView [] features=new ImageView[14];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,12 +97,26 @@ public class MainProviderActivity extends AppCompatActivity {
 
         //------ get sup id------------------
         bdb_name="\"SupplierId\":"+getIntent().getStringExtra("provider_id")+",";
-
+        features[0]=findViewById(R.id.feature1);
+        features[1]=findViewById(R.id.feature2);
+        features[2]=findViewById(R.id.feature3);
+        features[3]=findViewById(R.id.feature4);
+        features[4]=findViewById(R.id.feature5);
+        features[5]=findViewById(R.id.feature6);
+        features[6]=findViewById(R.id.feature7);
+        features[7]=findViewById(R.id.feature8);
+        features[8]=findViewById(R.id.feature9);
+        features[9]=findViewById(R.id.feature10);
+        features[10]=findViewById(R.id.feature11);
+        features[11]=findViewById(R.id.feature12);
+        features[12]=findViewById(R.id.feature13);
+        features[13]=findViewById(R.id.feature14);
+        featuresList=getIntent().getStringArrayListExtra("features");
 
 
         //---------- find view by Id
         service_Sw=findViewById(R.id.service_Sw);
-        exp=findViewById(R.id.exp);
+        logo=findViewById(R.id.logo);
         health=findViewById(R.id.health);
         salon_name=findViewById(R.id.salon_name);
         offer_sw=findViewById(R.id.offer_sw);
@@ -110,8 +128,22 @@ public class MainProviderActivity extends AppCompatActivity {
         location=findViewById(R.id.location);
         image=findViewById(R.id.image);
         centerFavorite=findViewById(R.id.centerFavorite);
+        lineOne=findViewById(R.id.featuresLine1);
+        lineTwo=findViewById(R.id.featuresLine2);
+        for (int i=0;i<featuresList.size();i++)
+        {
+            if(i<14)
+            {
+                if(i>6)
+                    lineTwo.setVisibility(View.VISIBLE);
+                else
+                    lineOne.setVisibility(View.VISIBLE);
+                APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,featuresList.get(i),features[i]);
+            }
+        }
         String isFav= getIntent().getStringExtra("is_fav");
         final String provider_id= getIntent().getStringExtra("provider_id");
+        APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,getIntent().getStringExtra("logo_id"),logo);
 
         if(APICall.isGuest(context).equals("1"))
         {
@@ -150,12 +182,12 @@ public class MainProviderActivity extends AppCompatActivity {
 //        my_location.setText(PlaceServiceFragment.mylocationId);
 
         salon_name.setText(getIntent().getStringExtra("provider_name"));
-        if (getIntent().getStringExtra("exp").equals("1")){
+        /*if (getIntent().getStringExtra("exp").equals("1")){
             exp.setImageResource(R.drawable.ic_experience_care);
         }
         if (getIntent().getStringExtra("health").equals("1")){
             health.setImageResource(R.drawable.ic_health_care);
-        }
+        }*/
 
         location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +207,7 @@ public class MainProviderActivity extends AppCompatActivity {
             }
         });
 
-        my_location.setOnClickListener(new View.OnClickListener() {
+        /*my_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu=new PopupMenu(context,v);
@@ -277,15 +309,15 @@ public class MainProviderActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
         //---------- get my locations --------
-        APICall.getdetailsUser(this);
+       // APICall.getdetailsUser(this);
 
         //------- min max price------
         PlaceServiceFragment.minprice="0";
         PlaceServiceFragment.maxprice="1000000";
         //------------------  date   --------------------
-        date.setOnClickListener(new View.OnClickListener() {
+        /*date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Dialog dialog=new Dialog(context);
@@ -320,7 +352,7 @@ public class MainProviderActivity extends AppCompatActivity {
             }
 
         });
-
+*/
 
         //-----------------------------------------
         final int pagenum=1;

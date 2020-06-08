@@ -231,6 +231,8 @@
     <string name="PlaceService">Medical service place</string>
     <string name="ServicePrice">Service price</string>
     <string name="ServiceRate">Service rate</string>
+    <string name="centerRate">Health center\'s rating</string>
+    <string name="nearestCenters">Nearest centers</string>
     <string name="providerRate">Provider rate</string>
     <string name="OfferPrice">Offer price</string>
     <string name="speciality">Speciality</string>

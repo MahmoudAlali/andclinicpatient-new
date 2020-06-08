@@ -32,7 +32,11 @@
             <item
                 android:id="@+id/requests"
                 android:icon="@drawable/side_requests_icon"
-                android:title="@string/myAppointment" />
+                android:title="@string/service" />
+            <item
+                android:id="@+id/notification"
+                android:icon="@drawable/notifications_selected"
+                android:title="@string/Notifications" />
 
             <item
                 android:id="@+id/nav_share"

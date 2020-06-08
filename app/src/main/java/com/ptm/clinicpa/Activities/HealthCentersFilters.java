@@ -1,4 +1,4 @@
-package com.ptm.clinicpa.Fragments;
+package com.ptm.clinicpa.Activities;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -15,11 +15,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,145 +29,66 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RatingBar;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
-import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
+import com.ptm.clinicpa.Fragments.AccountFragment;
+import com.ptm.clinicpa.Fragments.HealthCentersFragment;
+import com.ptm.clinicpa.Fragments.MapFragment;
+import com.ptm.clinicpa.Fragments.OffersForRequest;
+import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
+import com.ptm.clinicpa.Fragments.ServiceFragment;
 import com.ptm.clinicpa.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class freeBookingFragment extends Fragment {
-    LinearLayout  service_hair;
+public class HealthCentersFilters extends Fragment {
+
+    public static String maxValDistance,mylocationId="";
+    static TextView distance,mylocationbtn,specialityType, clinicName, rateService,nearestCenters;
+    public static String filterSupplierName="",filterSupplierId="",filterDistance="",filterType="",filterProviderRate="",filterAgeRange="",filterGender="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="",filterSpeciality="",filterClinicRate="";
+    public static ArrayList<String> mylocation = new ArrayList();
+    public static double lat,lng;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    Toolbar toolbar;
-    public static ArrayList<String> mylocation = new ArrayList();
-    public static double lat,lng;
-    Button ok;
-    public static Spinner  placeSpinner,typeSpinner,genderSpinner,ageSpinner;
-    public static int citiyitemSelected;
-    public static int placeId = 0;
-    ArrayAdapter locatioAdapter;
-    public static String maxValDistance,mylocationId="";
-    static TextView distance,mylocationbtn,specialityType, clinicName, doctorName;
-    static  boolean fregmentIsFirstOpen=false;
-    public static String distanceOffer="",locOfferlat="",locOfferlong="",place_service="",priceOffer="",rateOffer="",supRate="";
-    public static String priceServiceValue="",minprice="",maxprice="";
-    //public static TextView date;
-    public static String offerPlace="";
-    public static String Place="";
-    public static HintArrayAdapter adapter;
+    ArrayList<String> specialitiesList=new ArrayList<>();
     public static String clinName="",salonId="",docName="";
     public static String Name="";
     private static ArrayList<String> servicesList=new ArrayList<>();
-    ArrayList<String> specialitiesList=new ArrayList<>();
-
-    public static String filterSupplierName="",filterSupplierId="",filterDistance="",filterType="",filterProviderRate="",filterAgeRange="",filterGender="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="",filterSpeciality="",filterDoctorName="";
-
+    public static HintArrayAdapter adapter;
+    Button ok;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_free_booking_filters, container, false);
-        //service_hair = view.findViewById(R.id.service_hair);
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.activity_health_centers_filters, container, false);
 
-        //---------------------init my location spinner-----------
-        BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
-
-        placeSpinner = view.findViewById(R.id.service_place);
-        genderSpinner = view.findViewById(R.id.gender);
-        ageSpinner = view.findViewById(R.id.age_range);
-        typeSpinner = view.findViewById(R.id.requestType);
         mylocationbtn = view.findViewById(R.id.my_location);
         clinicName = view.findViewById(R.id.providerName);
-        doctorName = view.findViewById(R.id.service_rate);
         distance = view.findViewById(R.id.distance);
+        rateService = view.findViewById(R.id.service_rate);
+        nearestCenters = view.findViewById(R.id.nearestCenters);
         ok = view.findViewById(R.id.ok);
-        APICall.getdetailsUser(BeautyMainPage.context);
-        //APICall.getAllSuppliers(BeautyMainPage.context);
-        APICall.getAllSpecialities(BeautyMainPage.context);
-
-        toolbar= view.findViewById(R.id.toolbar);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                // If the navigation drawer is not open then open it, if its already open then close it.
-//                if(!BeautyMainPage.mDrawerLayout.isDrawerOpen(GravityCompat.START)) BeautyMainPage.mDrawerLayout.openDrawer(Gravity.START);
-//                else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
-                ((AppCompatActivity)BeautyMainPage.context).onBackPressed();
-            }
-        });
-
-        if (BeautyMainPage.client_name.equals(""))
-            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser",BeautyMainPage.context);
-
-        //region Type Spinner
-
-        final HintArrayAdapter TypeAdapter = new HintArrayAdapter(BeautyMainPage.context, 0);
-        TypeAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.requestType)));
-        TypeAdapter.setDropDownViewResource(R.layout.spinner_center_item);
-        typeSpinner.setAdapter(TypeAdapter);
-
-/*
-        switch (placeId) {
-            case 32:
-                placeSpinner.setSelection(1);
-                break;
-            case 1:
-                placeSpinner.setSelection(2);
-                break;
-            case 30:
-                placeSpinner.setSelection(3);
-                break;
-            case 31:
-                placeSpinner.setSelection(4);
-                break;
-        }
-*/
-
-        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    switch (position) {
-                        case 1:
-                            filterType="0";
-                            break;
-                        case 2:
-                            filterType="1";
-                            break;
-                    }
-                }
-            }
 
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-//                Log.e("getCities", "http://clientapp.dcoret.com/api/auth/user/getCities");
-
-            }
-        });
-
-
-        //endregion
 
         //region Clinic Name
 
@@ -179,186 +102,7 @@ public class freeBookingFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.distance_first));
                 }
                 else
-                APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality);
-
-            }
-        });
-
-        //endregion
-
-        //region Doctor Name
-
-        doctorName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String genderFilter=Filters.getString(Filters.PATIENT_GENDER,APICall.getGender(BeautyMainPage.context));
-                if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.location_first));
-                } else if(distance.getText().toString().equals(getResources().getString(R.string.distance))) {
-                    APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.distance_first));
-                }
-                else
-                APICall.getDoctors(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,filterSupplierName,genderFilter);
-
-            }
-        });
-
-
-        //endregion
-
-        //region Service Place
-
-        final HintArrayAdapter adapter = new HintArrayAdapter(BeautyMainPage.context, 0);
-        adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.service_place)));
-        adapter.setDropDownViewResource(R.layout.spinner_center_item);
-        placeSpinner.setAdapter(adapter);
-
-
-        switch (placeId) {
-            case 32:
-                placeSpinner.setSelection(1);
-                break;
-            case 1:
-                placeSpinner.setSelection(2);
-                break;
-            case 30:
-                placeSpinner.setSelection(3);
-                break;
-            case 31:
-                placeSpinner.setSelection(4);
-                break;
-        }
-
-
-        placeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-/*
-                    switch (position) {
-                        case 1:
-                            placeId = 32;
-                            filterServicePlace="0";
-                            break;
-                        case 2:
-                            placeId = 1;
-                            filterServicePlace="1";
-                            break;
-                        case 3:
-                            placeId = 30;
-                            filterServicePlace="2";
-                            break;
-                        case 4:
-                            placeId = 31;
-                            filterServicePlace="3";
-                            break;
-                    }
-*/
-                if (position==1) {
-                    filterServicePlace = ",{\"num\":9,\"value1\":1}";
-                    Place="center";
-                }else if (position==2){
-                    filterServicePlace = ",{\"num\":8,\"value1\":1}";
-                    Place="home";
-
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-//                Log.e("getCities", "http://clientapp.dcoret.com/api/auth/user/getCities");
-                filterServicePlace = "";
-
-            }
-        });
-
-
-        //endregion
-
-        //region Age range
-
-        final HintArrayAdapter ageAdapter = new HintArrayAdapter(BeautyMainPage.context, 0);
-        ageAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.age)));
-        ageAdapter.setDropDownViewResource(R.layout.spinner_center_item);
-        ageSpinner.setAdapter(ageAdapter);
-        ageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-/*
-                    switch (position) {
-                        case 1:
-                            placeId = 32;
-                            filterServicePlace="0";
-                            break;
-                        case 2:
-                            placeId = 1;
-                            filterServicePlace="1";
-                            break;
-                        case 3:
-                            placeId = 30;
-                            filterServicePlace="2";
-                            break;
-                        case 4:
-                            placeId = 31;
-                            filterServicePlace="3";
-                            break;
-                    }
-*/
-                if (position==1) {
-                    filterAgeRange = ",{\"num\":9,\"value1\":1}";
-                }else if (position==2){
-                    filterAgeRange = ",{\"num\":8,\"value1\":1}";
-
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-//                Log.e("getCities", "http://clientapp.dcoret.com/api/auth/user/getCities");
-                filterServicePlace = "";
-
-            }
-        });
-
-        //endregion
-
-        //region Gender
-
-        final HintArrayAdapter genderAdapter = new HintArrayAdapter(BeautyMainPage.context, 0);
-        genderAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.gender)));
-        genderAdapter.setDropDownViewResource(R.layout.spinner_center_item);
-        genderSpinner.setAdapter(genderAdapter);
-        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-/*
-                    switch (position) {
-                        case 1:
-                            placeId = 32;
-                            filterServicePlace="0";
-                            break;
-                        case 2:
-                            placeId = 1;
-                            filterServicePlace="1";
-                            break;
-                        case 3:
-                            placeId = 30;
-                            filterServicePlace="2";
-                            break;
-                        case 4:
-                            placeId = 31;
-                            filterServicePlace="3";
-                            break;
-                    }
-*/
-                if (position==1) {
-                    filterGender = ",{\"num\":9,\"value1\":1}";
-                }else if (position==2){
-                    filterGender = ",{\"num\":8,\"value1\":1}";
-
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-//                Log.e("getCities", "http://clientapp.dcoret.com/api/auth/user/getCities");
-                filterServicePlace = "";
+                    APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality);
 
             }
         });
@@ -376,7 +120,7 @@ public class freeBookingFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v,Gravity.CENTER);
+                PopupMenu popupMenu=new PopupMenu(BeautyMainPage.context,v, Gravity.CENTER);
                 mylocation.clear();
                 mylocation.add(getResources().getString(R.string.MyLocation));
                 mylocation.add(getResources().getString(R.string.current_location));
@@ -426,9 +170,6 @@ public class freeBookingFragment extends Fragment {
                                         filterMyLocationLng="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                         clinicName.setText(getResources().getText(R.string.providerName));
                                         filterSupplierName="";
-                                        doctorName.setText(getResources().getText(R.string.doctorName));
-                                        filterDoctorName="";
-
                                     }
                                     @Override
                                     public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -459,13 +200,11 @@ public class freeBookingFragment extends Fragment {
                                     lat=AccountFragment.locationTitles.get(i).getLatLng().latitude;
                                     lng=AccountFragment.locationTitles.get(i).getLatLng().longitude;
                                     Log.e("LATLANG",lat+":"+lng);
-                                   // APICall.setlocation(lat,lng);
+                                    // APICall.setlocation(lat,lng);
                                     filterMyLocationLat="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
                                     filterMyLocationLng="{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                     clinicName.setText(getResources().getText(R.string.providerName));
                                     filterSupplierName="";
-                                    doctorName.setText(getResources().getText(R.string.doctorName));
-                                    filterDoctorName="";
                                 }
                             }
                             mylocationId=item.getTitle().toString();
@@ -538,11 +277,9 @@ public class freeBookingFragment extends Fragment {
                         //ServiceFragment.serviceFilters.set(5, new ServiceFilter(true, distance.getText().toString()));
 //                               ------------For Offer Filter-------------------------------
                         filterDistance="{\"num\":2,\"value1\":"+Min.getText()+",\"value2\":"+Max.getText()+"}";
-                        Log.e("DistanceOffer",distanceOffer);
+                       // Log.e("DistanceOffer",distanceOffer);
                         clinicName.setText(getResources().getText(R.string.providerName));
                         filterSupplierName="";
-                        doctorName.setText(getResources().getText(R.string.doctorName));
-                        filterDoctorName="";
                     }
                 });
 
@@ -553,7 +290,7 @@ public class freeBookingFragment extends Fragment {
                         distance.setText(R.string.distance);
                         filterDistance="";
                         //APICall.filterSortAlgorithm("2", "", "");
-                       // ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
+                        // ServiceFragment.serviceFilters.set(5, new ServiceFilter(false, distance.getText().toString()));
 
                     }
                 });
@@ -568,13 +305,14 @@ public class freeBookingFragment extends Fragment {
 
         specialityType=view.findViewById(R.id.offerPrice);
         specialityType.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onClick(View v) {
                 //-------------- range price filter--------------------
                 if (specialitiesList.size()==0)
                     for (int i=0;i<APICall.allSpecialities.size();i++){
                         if(getResources().getString(R.string.locale).equals("en"))
-                             specialitiesList.add(APICall.allSpecialities.get(i).getBdb_name());
+                            specialitiesList.add(APICall.allSpecialities.get(i).getBdb_name());
                         else
                             specialitiesList.add(APICall.allSpecialities.get(i).getBdb_name_ar());
 
@@ -597,8 +335,8 @@ public class freeBookingFragment extends Fragment {
                 add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                      //  salonName="\"supplier_name\":" +"\""+ APICall.allSpecialities.get(position).getBdb_name()+"\",";
-                      //  salonId="\"SupplierId\":" +"\""+ APICall.allSpecialities.get(position).getBdb_ser_id()+"\",";
+                        //  salonName="\"supplier_name\":" +"\""+ APICall.allSpecialities.get(position).getBdb_name()+"\",";
+                        //  salonId="\"SupplierId\":" +"\""+ APICall.allSpecialities.get(position).getBdb_ser_id()+"\",";
 
                         salonId= Filters.getString(Filters.SPECIALITY_ID,APICall.allSpecialities.get(position).getBdb_ser_id());
 
@@ -648,7 +386,7 @@ public class freeBookingFragment extends Fragment {
                         specialityType.setText(getResources().getText(R.string.speciality));
                         filterSpeciality="";
                         APICall.filterSortAlgorithm("3", "", "");
-                       // ServiceFragment.serviceFilters.set(7, new ServiceFilter(false, providerName.getText().toString()));
+                        // ServiceFragment.serviceFilters.set(7, new ServiceFilter(false, providerName.getText().toString()));
                         // idsup="";
                     }
                 });
@@ -659,36 +397,93 @@ public class freeBookingFragment extends Fragment {
 
         //endregion
 
-        ok.setOnClickListener(new View.OnClickListener() {
+        //region Center Rate
+
+        rateService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.location_proceed));
-                } else  if (placeSpinner.getSelectedItemPosition() == 0) {
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
-                } else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
-                } else if(typeSpinner.getSelectedItemPosition()==0){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.type_proceed));
-                /*} else if(typeSpinner.getSelectedItemPosition()==1&& filterSpeciality.equals("")){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.speciality_proceed));*/
-                } else {
-//                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
-                    citiyitemSelected = placeSpinner.getSelectedItemPosition();
-                    if(typeSpinner.getSelectedItemPosition()==2)
-                        fragment = new RequestProvidersFragment();
-                    else
-                        fragment= new OffersForRequest();
+                final Dialog rateServiceDialog = new Dialog(BeautyMainPage.context);
+                rateServiceDialog.setContentView(R.layout.rating_dialog);
+                Button ok = rateServiceDialog.findViewById(R.id.ok);
+                Button cancel = rateServiceDialog.findViewById(R.id.cancel);
+                final RatingBar ratingBar = rateServiceDialog.findViewById(R.id.ratingBar);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rateServiceDialog.dismiss();
+                        rateService.setText(BeautyMainPage.context.getResources().getString(R.string.srvcEvaluation)+": " + (int) ratingBar.getRating());
+                        APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
+                        ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
+
+
+                    }
+                });
+
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        rateService.setChecked(false);
+                        ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
+                        rateServiceDialog.dismiss();
+                    }
+                });
+                rateServiceDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                rateServiceDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+//                        rateService.setChecked(false);
+                        rateService.setText(R.string.srvcEvaluation);
+                        ServiceFragment.serviceFilters.set(3, new ServiceFilter(false, rateService.getText().toString()));
+                        Log.e("Cancel","ok");
+                        APICall.filterSortAlgorithm("5", "", "");
+
+                    }
+                });
+                rateServiceDialog.show();
+            }
+        });
+
+        //endregion
+
+        //region Nearest Centers
+
+        nearestCenters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                    fragment= new HealthCentersFragment();
                     fm = getActivity().getFragmentManager();
                     fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();
                 }
-            }
+
         });
 
+        //endregion
+
+        //region Search
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment= new HealthCentersFragment();
+
+                fm = getActivity().getFragmentManager();
+                    fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment, fragment);
+                    fragmentTransaction.commit();
+                }
+        });
+
+        //endregion
         return view;
     }
+
     private void showLocationServiceMsg(final Context context)
     {
         final Dialog dialog=new Dialog(context);
@@ -753,8 +548,8 @@ public class freeBookingFragment extends Fragment {
         add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //  salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
-              //  salonId="\"SupplierId\":" +"\""+ APICall.allSuppliers.get(position).getId()+"\",";
+                //  salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
+                //  salonId="\"SupplierId\":" +"\""+ APICall.allSuppliers.get(position).getId()+"\",";
 
                 clinName=Filters.getString(Filters.CLINIC_ID,APICall.allClinics.get(position).getBdb_ser_id());
                 if(context.getResources().getString(R.string.locale).equals("en"))
@@ -811,13 +606,13 @@ public class freeBookingFragment extends Fragment {
                     // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
                     ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
 
-                    doctorName.setText(context.getResources().getText(R.string.doctorName));
-                    filterDoctorName="";
-                    // bdb_name="\"SupplierId\":"+idsup+",";
+
                 }else {
                     namesalonDialog.cancel();
                     clinicName.setText(context.getResources().getText(R.string.providerName));
                     filterSupplierName="";
+                    filterSupplierId="";
+
                     //  APICall.filterSortAlgorithm("3", "", "");
                     //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, providerName.getText().toString()));
 
@@ -842,117 +637,7 @@ public class freeBookingFragment extends Fragment {
         });
         namesalonDialog.show();
     }
-    public static void showDoctorsNamesFilterDialog(final Context context)
-    {
-        servicesList.clear();
-        for (int i=0;i<APICall.allDoctors.size();i++){
-            if(context.getResources().getString(R.string.locale).equals("en"))
-                servicesList.add(APICall.allDoctors.get(i).getBdb_name());
-            else
-                servicesList.add(APICall.allDoctors.get(i).getBdb_name_ar());
-        }
-
-        final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
-        namesalonDialog.setContentView(R.layout.provider_name_layout);
-        namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        //final Spinner name=namesalonDialog.findViewById(R.id.name);
-        final EditText name=namesalonDialog.findViewById(R.id.name);
-        final SearchableSpinner add_service=namesalonDialog.findViewById(R.id.add_service);
-        adapter=new HintArrayAdapter(BeautyMainPage.context,0);
-        adapter.addAll(servicesList);
-        adapter.setDropDownViewResource(R.layout.spinner_center_item);
-        String s = context.getResources().getString(R.string.doctors)+" :";
-        add_service.setTitle(s);
-        add_service.setAdapter(adapter);
-        // set listener
-        add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //  salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
-              //  salonId="\"SupplierId\":" +"\""+ APICall.allSuppliers.get(position).getId()+"\",";
-
-                docName=Filters.getString(Filters.CLINIC_ID,APICall.allDoctors.get(position).getBdb_ser_id());
-                if(context.getResources().getString(R.string.locale).equals("en"))
-                    Name=APICall.allDoctors.get(position).getBdb_name();
-                else
-                    Name=APICall.allDoctors.get(position).getBdb_name_ar();            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                docName="";
-            }
-        });
-
-        //ArrayList<String> namesList=new ArrayList<>();
-
-               /* for (int i = 0; i < supInfoList.size(); i++) {
-                    namesList.add(supInfoList.get(i).getName() + "," + supInfoList.get(i).getAddress());
-                }*/
-
-                /*ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,
-                        android.R.layout.simple_spinner_item, namesList);
-                name.setAdapter(adapter);*/
-
-        Button search = namesalonDialog.findViewById(R.id.search);
-               /* name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if (position!=0){
-
-                            idsup = supInfoList.get(position).getId();
-
-                        }else {
-                            idsup="";
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });*/
 
 
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // if (!name.getSelectedItem().toString().isEmpty()){
-                if (!name.getText().equals("")){
-                    namesalonDialog.dismiss();
-                    doctorName.setText( Name);
-                    // filterSupplierName= "\"supplier_name\":" +"\""+ name.getText().toString()+"\",";
-                    filterDoctorName=docName;
-                    // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
-                  //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
-
-                    // bdb_name="\"SupplierId\":"+idsup+",";
-                }else {
-                    namesalonDialog.cancel();
-                    doctorName.setText(context.getResources().getText(R.string.doctorName));
-                    filterDoctorName="";
-                    //  APICall.filterSortAlgorithm("3", "", "");
-                    //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, providerName.getText().toString()));
-
-                    //  bdb_name="";
-                }
-
-
-
-
-            }
-        });
-        namesalonDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                // nameSalonOrProvider.setChecked(false);
-                doctorName.setText(context.getResources().getText(R.string.doctorName));
-                filterDoctorName="";
-                APICall.filterSortAlgorithm("3", "", "");
-                //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, clinicName.getText().toString()));
-                // idsup="";
-            }
-        });
-        namesalonDialog.show();
-    }
 
 }

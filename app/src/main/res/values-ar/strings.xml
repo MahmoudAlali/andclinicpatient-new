@@ -202,6 +202,8 @@
     <string name="OfferPrice">سعر العرض</string>
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
+    <string name="centerRate">تقييم المركز الصحي</string>
+    <string name="nearestCenters">أقرب المراكز لي</string>
     <string name="providerRate">تقييم المزودة</string>
     <string name="doctorName">اسم الطبيب/الطبيبة</string>
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
@@ -242,7 +244,7 @@
     <string name="Compare2">مقارنة</string>
     <string name="Distance_Range">مجال البعد</string>
     <string name="Reserve">حجز</string>
-    <string name="distance">البعد</string>
+    <string name="distance">المسافة</string>
     <string name="MyLocation">موقعي</string>
     <string name="Provider_Rate">تقييم المزودة</string>
     <string name="Service_Eval">تقييم الخدمة </string>
@@ -398,7 +400,7 @@
     <string name="support">الدعم</string>
     <string name="effect">مؤثراتي</string>
     <string name="bookingRequests">طلباتي </string>
-    <string name="myAppointment">طلباتي</string>
+    <string name="myAppointment">مواعيدي</string>
 
     <string name="update">تحديث المؤثرات</string>
     <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في إيجاد حلول بديلة؟</string>

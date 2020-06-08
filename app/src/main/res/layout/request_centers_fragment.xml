@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/background"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="top"
+            android:background="@color/end_gray"
+            app:navigationIcon="@string/Backicon"
+            app:popupTheme="@style/AppTheme"
+            app:theme="@style/ToolbarColoredBackArrow"
+            app:title=""
+            app:titleMarginStart="@dimen/standard_175"
+            app:titleTextColor="@color/end_gray" />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/pages"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="3"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+            <LinearLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"></LinearLayout>
+            <LinearLayout
+                android:id="@+id/pagePrev"
+                android:orientation="horizontal"
+                android:background="@drawable/previous"
+                android:layout_weight="1"
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/PreviousPage"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/pagenum"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/page"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/pageNext"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="@drawable/next"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/NextPage"
+                    android:textSize="12dp"
+                    android:textColor="#000" />
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                ></android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <!--
+                <LinearLayout
+
+                    android:orientation="vertical"
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        -->
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

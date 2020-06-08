@@ -3,7 +3,9 @@ package com.ptm.clinicpa.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,12 +14,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.HintArrayAdapter;
@@ -235,6 +239,16 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         final Spinner ageRange=layout2.findViewById(R.id.age_range);
         final Spinner addService=layout2.findViewById(R.id.add_service);
 
+        final Spinner ageSpinner = layout2.findViewById(R.id.age_range);
+        final Spinner genderSpinner = layout2.findViewById(R.id.gender);
+        final Spinner servicesSpinner = layout2.findViewById(R.id.add_service);
+        final Spinner relativeSpinner = layout2.findViewById(R.id.relative);
+        final Spinner doctorName = layout2.findViewById(R.id.doctorName);
+        final Spinner doctorSpeciality = layout2.findViewById(R.id.doctorSpeciality);
+        final CheckBox personalReserv = layout2.findViewById(R.id.personalReserv);
+        final EditText description = layout2.findViewById(R.id.description);
+        final EditText healthFileNum = layout2.findViewById(R.id.healthNum);
+        final  TextView start_time=layout2.findViewById(R.id.start_time);
 //        boolean is_bride_service=false;
         ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
@@ -264,6 +278,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         });
 
         clientsArrayList.add(new GroupBookingModel(cname,cnumber,ageRange,servicesModels));
+        clientsArrayList.add(new GroupBookingModel(cname,ageRange,genderSpinner,relativeSpinner,doctorName,doctorSpeciality,
+                start_time,healthFileNum,description,servicesModels));
 
 
 //        emp_name.setText(s);
@@ -280,7 +296,49 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 }
             }
         });
+        start_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(context);
+                dialog.setContentView(R.layout.time_select_layout);
+                final TimePicker timePicker=dialog.findViewById(R.id.time_picker);
+                TextView ok=dialog.findViewById(R.id.confirm);
+                TextView cancel=dialog.findViewById(R.id.cancel);
 
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        String ho,min;
+                        if (timePicker.getHour()<10){
+                            ho="0"+timePicker.getHour();
+                        }else {
+                            ho=timePicker.getHour()+"";
+                        }
+
+                        if (timePicker.getMinute()<10){
+                            min="0"+timePicker.getMinute();
+                        }else {
+                            min=timePicker.getMinute()+"";
+                        }
+                        String st = ho + ":" + min+":"+"00";
+//                        String st=timePicker.getHour()+":"+timePicker.getMinute();
+                        start_time.setText(st);
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+
+
+            }
+        });
 
 
         show_clients.addView(layout2);
