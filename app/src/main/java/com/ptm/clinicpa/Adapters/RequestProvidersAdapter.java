@@ -128,16 +128,16 @@ public static int comparenum=0;
  */
 @Override
 public void onBindViewHolder(@NonNull final ListHolder holder, final int position) {
-    (holder).exp.setImageDrawable(null);
+    /*(holder).exp.setImageDrawable(null);
     (holder).health.setImageDrawable(null);
-
-    if (itemArrayList.get(position).getBdb_has_experience_cer().equals("1")){
+*/
+    /*if (itemArrayList.get(position).getBdb_has_experience_cer().equals("1")){
         (holder).exp.setImageResource(R.drawable.ic_experience_care);
     }
 
     if (itemArrayList.get(position).getBdb_has_health_cer().equals("1")){
         (holder).health.setImageResource(R.drawable.ic_health_care);
-    }
+    }*/
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
 
@@ -279,7 +279,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             }
             else
             {
-                Intent i = new Intent(BeautyMainPage.context, CreateGroupRequestActivity.class);
+                Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
 
                 RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();

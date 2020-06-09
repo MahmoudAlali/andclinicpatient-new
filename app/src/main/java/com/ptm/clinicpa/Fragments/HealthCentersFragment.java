@@ -189,7 +189,7 @@ public class HealthCentersFragment extends Fragment implements LocationListener,
 
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
-        providersAdapter=new HealthCentersAdapter(BeautyMainPage.context,  providerItems,R.layout.centers_layout_adapter_last);
+        providersAdapter=new HealthCentersAdapter(BeautyMainPage.context,  providerItems,R.layout.centers_layout_adapter_last,false);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(providersAdapter);

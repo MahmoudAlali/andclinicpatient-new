@@ -73,11 +73,13 @@ import com.ptm.clinicpa.DataModel.DoctorDataModel;
 import com.ptm.clinicpa.DataModel.FavoriteModel;
 import com.ptm.clinicpa.DataModel.HealthCenterImages;
 import com.ptm.clinicpa.DataModel.NotificationModel;
+import com.ptm.clinicpa.DataModel.PatientDataModel;
 import com.ptm.clinicpa.DataModel.PointModel;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
 import com.ptm.clinicpa.DataModel.ServiceItem;
 import com.ptm.clinicpa.DataModel.ServicesIDS;
+import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.HealthCentersFragment;
 import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
 import com.ptm.clinicpa.Fragments.MyIndEffectsActivity;
@@ -7943,7 +7945,7 @@ public class APICall {
                         SharedPreferences.Editor editor=((AppCompatActivity)context).getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
                         mMessage = response.body().string();
                         pd.dismiss();
-                        Log.e("TAG", mMessage);
+                        Log.e("detailsUser", mMessage);
                         try {
                             JSONObject jsonObject = new JSONObject(mMessage);
                             String success = jsonObject.getString("success");
@@ -29069,6 +29071,234 @@ public class APICall {
         Log.d("MessageResponse",mMessage);
         return mMessage;
     }
+    public  static  String  automatedCentersBrowseForGroupBooking( final String pageNum, final Context context){
+
+
+        RequestProvidersFragment.providerItems.clear();
+       /* try {
+            RequestProvidersFragment.refreshRV();
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+        Log.e("PlaceId",PlaceServiceFragment.placeId+"");
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+        OkHttpClient client = new OkHttpClient();
+        /*String temp="{\"lang\":\""+ln+"\",\"ItemPerPage\":8,\"PageNum\":\""+pageNum+"\",\"Filter\":[" +
+                "{\"num\":6,\"value1\":4,\"value2\":0}," +
+                "{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
+                "{\"num\":35,\"value1\":36.23389,\"value2\":0}" +
+                "]" +
+                "}";
+*/
+
+       /* if (PlaceServiceFragment.placeId==0){
+            PlaceServiceFragment.priceServiceValue="";
+        }else {
+            PlaceServiceFragment.priceServiceValue=",{\"num\":"+PlaceServiceFragment.placeId+",\"value1\":"+PlaceServiceFragment.minprice+",\"value2\":"+PlaceServiceFragment.maxprice+"}";
+        }
+
+*/
+
+        String jsonPostData="{\"lang\":\"en\"," +
+                "\"ItemPerPage\":10," +
+                "\"PageNum\":\""+pageNum+"\"," ;
+
+        jsonPostData+=  "\"Filter\":[" ;
+//                    getCityId()+
+ //               "{\"num\":33,\"value1\":"+ ListServicesFragment.bdb_ser_id +",\"value2\":0},"+
+//                    getFilterList()+  // need to try catch
+
+        if( !freeBookingFragment.filterMyLocationLat.equals(""))
+            jsonPostData+=freeBookingFragment.filterMyLocationLat;
+
+        if( !freeBookingFragment.filterMyLocationLng.equals(""))
+            jsonPostData+=","+freeBookingFragment.filterMyLocationLng;
+
+        if( !freeBookingFragment.filterDistance.equals(""))
+            jsonPostData+=","+HealthCentersFilters.filterDistance;
+        else
+            jsonPostData+=","+"{\"num\":2,\"value1\":0,\"value2\":10000}";
+        if( !freeBookingFragment.filterServicePlace.equals(""))
+            jsonPostData+=","+freeBookingFragment.filterServicePlace;
+        if( !freeBookingFragment.filterSupplierName.equals(""))
+            jsonPostData+=","+freeBookingFragment.filterSupplierName;
+        if( !freeBookingFragment.filterSupplierId.equals(""))
+            jsonPostData+=","+freeBookingFragment.filterSupplierId;
+
+        /*if( !HealthCentersFilters.filterDoctorName.equals(""))
+            jsonPostData+= ","+HealthCentersFilters.filterDoctorName;*/
+             jsonPostData+=   "]\n" +
+              //  ServicesTabsFragment.sortby+
+
+//                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
+                "}";
+
+
+        Log.e("RequestsPost",jsonPostData);
+        final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getHealthCenter")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")
+                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+              //  TabOne.pullToRefresh.setRefreshing(false);
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("CENTERS", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+
+                        RequestProvidersFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success=jsonObject.getString("success");
+                    String response_code=jsonObject.getString("response_code");
+                    Log.e("success",success);
+                    String message;
+//                    try {
+//                        message=jsonObject.getString("message");
+//                    }catch (JSONException je){
+//                        message=jsonObject.getString("error");
+//                    }
+                    if (response_code.equals("183")){
+                        {
+                            JSONArray data=jsonObject.getJSONArray("data");
+                            final String totalitem=jsonObject.getString("total_item");
+                           {
+
+                               // JSONArray suppliers=jsonObject.getJSONArray("suppliers");
+                                //JSONArray supInfo=data.getJSONArray("supplier info");
+                               // Log.e("SizeSERSUP",sersup.length()+"");
+                               RequestProvidersFragment.providerItems.clear();
+
+                                for (int i=0;i<data.length();i++){
+                                    JSONObject jarray = data.getJSONObject(i);
+                                    String sup_id=jarray.getString("id");
+                                    String logo_id=jarray.getString("bdb_logo_id"),
+                                            rating=jarray.getString("total_rating"),
+                                            bdb_loc_lat=jarray.getString("lat"),
+                                            bdb_loc_long=jarray.getString("long"),
+                                    bdb_booking_period=jarray.getString("bdb_booking_period");
+                                    String health_center_ar=jarray.getString("name_ar");
+                                    String health_center_en=jarray.getString("name_en");
+                                    String health_center_id=jarray.getString("id");
+                                    String is_fav_center=jarray.getString("is_fav_center");
+                                    JSONArray feature=jarray.getJSONArray("feature");
+                                    ArrayList<String> featuresIds= new ArrayList<>();
+                                    for(int l=0;l<feature.length();l++)
+                                    {
+                                        JSONObject j = feature.getJSONObject(l);
+
+                                        String bdb_logo_id=j.getString("bdb_logo_id");
+                                        featuresIds.add(bdb_logo_id);
+
+                                    }
+
+                                    RequestProviderItem provider = new RequestProviderItem(sup_id,logo_id,rating,bdb_booking_period,bdb_loc_lat+"",bdb_loc_long+"",health_center_en,health_center_ar,health_center_id,is_fav_center,featuresIds);
+                                   // Log.e("lat",latitude);
+                                    RequestProvidersFragment.providerItems.add(provider);
+
+                                }
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        RequestProvidersFragment.refreshRV();
+//                                    TabOne.recyclerView.invalidate();
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }else if(jsonObject.getString("response_code").equals("182")||jsonObject.getString("response_code").equals("181")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_provider));
+                            }
+                        });
+                    }else
+                    {
+                        showUnexpectedErrMsg(context);
+
+                    }
+                }catch (final JSONException je){
+                    //there is no suppliered services with your search filters
+                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+                        }
+                    });
+
+                    je.printStackTrace();
+                }
+            }
+        });
+
+        Log.d("MessageResponse",mMessage);
+        return mMessage;
+    }
     public  static  String  addBookingRequest(String loc_lat, String loc_long, String sup_id, String booking_place, String bdb_pack_code,
                                               String is_group_booking , final JSONArray clients, final Context context)
     {
@@ -29447,6 +29677,194 @@ Log.e("ERRR",e.getMessage());
         Log.d("MessageResponse",mMessage);
         return mMessage;
     }
+    public  static  String  addGroupBookingRequest2(String loc_lat, String loc_long, String date, String booking_place,
+                                              String is_group_booking , final JSONArray clients, final Context context,String description)
+    {
+       /* RequestProvidersFragment.providerItems.clear();
+        try {
+            RequestProvidersFragment.refreshRV();
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+        // Log.e("PlaceId",PlaceServiceFragment.placeId+"");
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+            }
+        });
+        OkHttpClient client = new OkHttpClient();
+        final JSONArray jsnobject =new JSONArray();
+       /* try {
+             jsnobject = new JSONArray(clients);
+
+        }
+        catch (Exception e)
+        {
+Log.e("ERRR",e.getMessage());
+        }*/
+        /*String temp="{\"lang\":\""+ln+"\",\"ItemPerPage\":8,\"PageNum\":\""+pageNum+"\",\"Filter\":[" +
+                "{\"num\":6,\"value1\":4,\"value2\":0}," +
+                "{\"num\":34,\"value1\":36.47792,\"value2\":0}," +
+                "{\"num\":35,\"value1\":36.23389,\"value2\":0}" +
+                "]" +
+                "}";
+*/
+
+       /* if (PlaceServiceFragment.placeId==0){
+            PlaceServiceFragment.priceServiceValue="";
+        }else {
+            PlaceServiceFragment.priceServiceValue=",{\"num\":"+PlaceServiceFragment.placeId+",\"value1\":"+PlaceServiceFragment.minprice+",\"value2\":"+PlaceServiceFragment.maxprice+"}";
+        }
+
+*/
+
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("loc_lat",loc_lat);
+            postdata.put("loc_long",loc_long);
+            postdata.put("start_date",date);
+            postdata.put("booking_place",booking_place);
+            postdata.put("is_group_booking",is_group_booking);
+            if(!description.equals(""))
+            {
+                postdata.put("description",description);
+            }
+            postdata.put("clients",clients);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+
+
+        Log.e("RequestsPost",postdata.toString());
+        final RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/order/addOrder")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("Accept","application/json")
+                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.w("failure Response", mMessage);
+                pd.dismiss();
+                //   TabOne.pullToRefresh.setRefreshing(false);
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("TAG123", mMessage);
+
+
+                try{
+                    JSONObject jsonObject=new JSONObject(mMessage);
+                    String success=jsonObject.getString("success");
+                    String response_code=jsonObject.getString("response_code");
+                    Log.e("success",success);
+                    final String message=jsonObject.getString("message");
+
+                    if (response_code.equals("4")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showRequestAddedSweetDialog(context,R.string.requestAdded);
+                            }
+                        });
+
+                    }else if (jsonObject.getString("response_code").equals("1")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context, "", context.getResources().getString(R.string.offer_not_found));
+                            }});
+                    }else if (jsonObject.getString("response_code").equals("2")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context, "", context.getResources().getString(R.string.supplier_not_found));
+                            }});
+                    }else if (jsonObject.getString("response_code").equals("3")){
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context, "", context.getResources().getString(R.string.service_not_found));
+                            }});
+                    }else if (jsonObject.getString("response_code").equals("18")){
+                        APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
+                                context.getResources().getString(R.string.try_again_later));
+                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+                    }
+                }catch (final JSONException je){
+                    //there is no suppliered services with your search filters
+                    ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                         /*   TabOne.arrayList.clear();
+                            TabOne.refreshRV();
+                            String t=((AppCompatActivity)context).getResources().getString(R.string.alert);*/
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
+                        }
+                    });
+
+                    je.printStackTrace();
+                }
+            }
+        });
+
+        Log.d("MessageResponse",mMessage);
+        return mMessage;
+    }
     public static ArrayList<ClientServiceDataModel> allSupplierServices=new ArrayList();
 
     public  static  void  freegetServiceNames(final Context context, final String sup_id,String place){
@@ -29595,14 +30013,14 @@ Log.e("ERRR",e.getMessage());
 
                         }
                      }else if(jsonrespone.getString("response_code").equals("9")){
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        /*((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 //showSweetDialog(context,"",context.getResources().getString(R.string.provider_doesnt_provide_services));
 
                                 CreateRequestActivity.servicesLayout.setVisibility(View.GONE);
                             }
-                        });
+                        });*/
                     }else
                         showUnexpectedErrMsg(context);
 
@@ -30253,14 +30671,14 @@ Log.e("ERRR",e.getMessage());
 
         allSpecialities.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-//        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                showDialog(context);
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
 ////                ReservationFragment.pullToRefresh.setRefreshing(true);
-////                pd.show();
-//            }
-//        });
+//               pd.show();
+            }
+        });
 
         //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
@@ -30333,14 +30751,14 @@ Log.e("ERRR",e.getMessage());
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("Token", gettoken(context));
-                Log.e("TAG", mMessage);
-//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        pd.dismiss();
+                Log.e("getSpecialization", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
 ////                        ReservationFragment.pullToRefresh.setRefreshing(false);
-//                    }
-//                });
+                    }
+                });
 
 
                 try {
@@ -30364,6 +30782,161 @@ Log.e("ERRR",e.getMessage());
                     else if(response_code.equals("179"))
                     {
                         showSweetDialog(context,R.string.no_specialities);
+                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
+    public static ArrayList<PatientDataModel> allRelativesList=new ArrayList<>();
+    public  static  void  getAllRelatives( final Context context,String health_center_id){
+
+        allRelativesList.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+////                ReservationFragment.pullToRefresh.setRefreshing(true);
+//               pd.show();
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("health_center_id",health_center_id);
+        }
+        catch (Exception e)
+        {
+
+        }
+        Log.e("getUserRelationshipReq", postdata.toString());
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/user/getUserRelationship")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("getUserRelationshipRes", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+                    allRelativesList.add(new PatientDataModel( "1","12354","0","1","sam"));
+                    allRelativesList.add(new PatientDataModel( "2","125554","1","2","lama"));
+                    allRelativesList.add(new PatientDataModel( "3","11154","0","3","fadi"));
+
+                    if (response_code.equals("191"))
+                    {
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject jsonObject=data.getJSONObject(i);
+                            Log.e("ttttttttttt",jsonObject+"");
+
+                            String   bdb_user_name=jsonObject.getString("bdb_user_name");
+                            String   bdb_relation=jsonObject.getString("bdb_relation");
+                            String   bdb_gender=jsonObject.getString("bdb_gender");
+                            String   bdb_health_record=jsonObject.getString("bdb_health_record");
+                            String   bdb_id=jsonObject.getString("bdb_id");
+
+                            allRelativesList.add(new PatientDataModel( bdb_id,bdb_health_record,bdb_gender,bdb_relation,bdb_user_name));
+                        }
+                    }
+                    else if(response_code.equals("190"))
+                    {
+                        //showSweetDialog(context,R.string.no_specialities);
                     }
                     else
                     {
@@ -30695,7 +31268,7 @@ Log.e("ERRR",e.getMessage());
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  getDoctors( final Context context,String latFilter,String longFilter,String distanceFilter,String specialityFilter,String clinicIdfilter, String patientGender){
+    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender, final ArrayAdapter adapter, final ArrayList<String> doctorNames){
 
         allDoctors.clear();
         showDialog(context);
@@ -30707,7 +31280,8 @@ Log.e("ERRR",e.getMessage());
 
         String  filter="{\"Filter\":[" +
                 latFilter +longFilter+distanceFilter;
-        filter+=","+patientGender;
+        if(!patientGender.equals(""))
+            filter+=","+patientGender;
         if(!specialityFilter.equals(""))
         {
             filter+=","+specialityFilter;
@@ -30821,6 +31395,174 @@ Log.e("ERRR",e.getMessage());
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                doctorNames.clear();
+                                for (int i=0;i<APICall.allDoctors.size();i++){
+                                    if(context.getResources().getString(R.string.locale).equals("en"))
+                                        doctorNames.add(APICall.allDoctors.get(i).getBdb_name());
+                                    else
+                                        doctorNames.add(APICall.allDoctors.get(i).getBdb_name_ar());
+                                }
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        });
+                    }
+                    else if(response_code.equals("184"))
+                    {
+                        //showUnexpectedErrMsg(context);
+                        showSweetDialog(context,R.string.no_doctors);
+
+                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender){
+
+        allDoctors.clear();
+        showDialog(context);
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        final JSONObject postdata = new JSONObject();
+
+
+        String  filter="{\"Filter\":[" +
+                latFilter +longFilter+distanceFilter;
+        if(!patientGender.equals(""))
+            filter+=","+patientGender;
+        if(!specialityFilter.equals(""))
+        {
+            filter+=","+specialityFilter;
+        }
+        if(!clinicIdfilter.equals(""))
+        {
+            filter+=","+clinicIdfilter;
+        }
+
+                      filter+=  "]}";
+
+        Log.e("getDoctorsPost",filter);
+        RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
+
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/getDoctors")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("failure Response", mMessage);
+                pd.dismiss();
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("getDoctorsResponse", mMessage);
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                pd.dismiss();
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("185"))
+                    {
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject jsonObject=data.getJSONObject(i);
+                            Log.e("ttttttttttt",jsonObject+"");
+
+
+                            String   bdb_id=jsonObject.getString("bdb_id");
+                            String   name_ar=jsonObject.getString("bdb_name");
+                            String   name_en=jsonObject.getString("bdb_name");
+
+                            allDoctors.add(new ServiceItems( bdb_id,name_en,name_ar));
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
                                 freeBookingFragment.showDoctorsNamesFilterDialog(context);
                             }
                         });

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Adapters.HealthCentersAdapter;
 import com.ptm.clinicpa.Adapters.RequestProvidersAdapter;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
 import com.ptm.clinicpa.R;
@@ -29,6 +30,7 @@ public class RequestProvidersFragment extends Fragment {
 
     public static ArrayList<RequestProviderItem> providerItems=new ArrayList<>();
     public static RequestProvidersAdapter providersAdapter;
+    public static HealthCentersAdapter centersAdapter;
     public static RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
     public static int pageNum=1;
@@ -36,6 +38,8 @@ public class RequestProvidersFragment extends Fragment {
     public static LinearLayout previousPage,nextPage;
     public static TextView pageNumView;
     public static String bdb_booking_period;
+    public static boolean isGroup;
+
     @Nullable
     @Override
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -49,6 +53,7 @@ public class RequestProvidersFragment extends Fragment {
         previousPage = view.findViewById(R.id.pagePrev);
         nextPage = view.findViewById(R.id.pageNext);
         pageNumView = view.findViewById(R.id.pagenum);
+        isGroup =savedInstanceState.getBoolean("isGroup");
 
 
         nextPage.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +65,10 @@ public class RequestProvidersFragment extends Fragment {
 
                 providersAdapter.notifyDataSetChanged();
                 //---------------------call API for Services and get items-------------
-                APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
+                if(isGroup)
+                    APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);
+                else
+                    APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
 
             }
         });
@@ -74,8 +82,11 @@ public class RequestProvidersFragment extends Fragment {
 
                     providersAdapter.notifyDataSetChanged();
                     //---------------------call API for Services and get items-------------
-                    APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
-                }
+                    if(isGroup)
+                        APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);
+
+                    else
+                        APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);                }
             }
         });
         pageNumView.setText(getResources().getString(R.string.page)+": "+pageNum);
@@ -87,19 +98,32 @@ public class RequestProvidersFragment extends Fragment {
 
                 providersAdapter.notifyDataSetChanged();
                 //---------------------call API for Services and get items-------------
-                APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
-            }
-        });
-        APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
+                if(isGroup)
+                    APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);
 
+                else
+                    APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);            }
+        });
+        if(isGroup)
+            APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);
+
+        else
+            APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
 
 
 
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
-        providersAdapter=new RequestProvidersAdapter(BeautyMainPage.context,  providerItems,R.layout.providers_layout_adapter_last);
+        if(isGroup)
+            centersAdapter=new HealthCentersAdapter(BeautyMainPage.context,  providerItems,R.layout.centers_layout_adapter_last,true);
+
+        else
+            providersAdapter=new RequestProvidersAdapter(BeautyMainPage.context,  providerItems,R.layout.providers_layout_adapter_last);
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
+        if (isGroup)
+        recyclerView.setAdapter(centersAdapter);
+        else
         recyclerView.setAdapter(providersAdapter);
 
         return view;
@@ -108,7 +132,10 @@ public class RequestProvidersFragment extends Fragment {
 
     //------------- when refresh DATA you must notify adapter---------
     public static void refreshRV(){
+        if(!isGroup)
         providersAdapter.notifyDataSetChanged();
+        else
+        centersAdapter.notifyDataSetChanged();
 //        recyclerView.invalidate();
     }
     public static void rechekPages(int totalCount){

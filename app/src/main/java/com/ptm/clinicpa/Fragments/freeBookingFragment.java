@@ -198,7 +198,7 @@ public class freeBookingFragment extends Fragment {
                     APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.distance_first));
                 }
                 else
-                APICall.getDoctors(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,filterSupplierName,genderFilter);
+                APICall.getDoctors(false,BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,filterSupplierName,genderFilter);
 
             }
         });
@@ -679,7 +679,10 @@ public class freeBookingFragment extends Fragment {
                         fragment = new RequestProvidersFragment();
                     else
                         fragment= new OffersForRequest();
+                    Bundle b= new Bundle();
+                    b.putBoolean("isGroup",false);
                     fm = getActivity().getFragmentManager();
+                    fragment.setArguments(b);
                     fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();

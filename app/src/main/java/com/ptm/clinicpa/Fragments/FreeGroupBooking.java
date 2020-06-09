@@ -70,14 +70,14 @@ public class FreeGroupBooking extends Fragment {
     public static String priceServiceValue="",minprice="",maxprice="";
     //public static TextView date;
     public static String offerPlace="";
-    public static String Place="";
+    public static String Place="center";
     public static HintArrayAdapter adapter;
     public static String clinName="",salonId="",docName="";
     public static String Name="";
     private static ArrayList<String> servicesList=new ArrayList<>();
     ArrayList<String> specialitiesList=new ArrayList<>();
 
-    public static String filterSupplierName="",filterSupplierId="",filterDistance="",filterType="",filterProviderRate="",filterServicePlace="",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="",filterSpeciality="",filterDoctorName="";
+    public static String filterSupplierName="",filterSupplierId="",filterDistance="",filterType="",filterProviderRate="",filterServicePlace=",{\"num\":9,\"value1\":1}",filterMyLocationLat="",filterMyLocationLng="",filterOfferPrice="",filterSpeciality="",filterDoctorName="";
 
 
     @Override
@@ -567,9 +567,9 @@ public class FreeGroupBooking extends Fragment {
             public void onClick(View v) {
                 if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.location_proceed));
-                } else  if (placeSpinner.getSelectedItemPosition() == 0) {
+                } /*else  if (placeSpinner.getSelectedItemPosition() == 0) {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
-                } else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
+                }*/ else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
                 } else if(typeSpinner.getSelectedItemPosition()==0){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.type_proceed));
@@ -578,11 +578,23 @@ public class FreeGroupBooking extends Fragment {
                 } else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
+                    freeBookingFragment.filterMyLocationLat=filterMyLocationLat;
+                    freeBookingFragment.filterDistance=filterDistance;
+                    freeBookingFragment.filterMyLocationLng=filterMyLocationLng;
+                    freeBookingFragment.filterServicePlace=filterServicePlace;
+                    freeBookingFragment.placeId=placeId;
+                    freeBookingFragment.filterSupplierId=filterSupplierId;
+                    freeBookingFragment.filterSupplierName=filterSupplierName;
+
                     if(typeSpinner.getSelectedItemPosition()==2)
                         fragment = new RequestProvidersFragment();
                     else
                         fragment= new OffersForRequest();
+
+                    Bundle b= new Bundle();
+                    b.putBoolean("isGroup",true);
                     fm = getActivity().getFragmentManager();
+                    fragment.setArguments(b);
                     fragmentTransaction = fm.beginTransaction();
                     fragmentTransaction.replace(R.id.fragment, fragment);
                     fragmentTransaction.commit();

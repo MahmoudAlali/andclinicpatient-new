@@ -55,16 +55,18 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
     int layout;
     Location_Beauty[] location_beauties;
     boolean[] fav;
+    Boolean isGroup;
     ArrayList<RequestProviderItem> itemArrayList;
 
     public HealthCentersAdapter(Context context, String[] items){
         this.context=context;
         this.items=items;
     }
-    public HealthCentersAdapter(Context context, ArrayList<RequestProviderItem> itemArrayList, int layout){
+    public HealthCentersAdapter(Context context, ArrayList<RequestProviderItem> itemArrayList, int layout,Boolean isGroup){
         this.context=context;
         this.itemArrayList=itemArrayList;
         this.layout=layout;
+        this.isGroup=isGroup;
     }
 
     public HealthCentersAdapter(Context context, String[] items, Boolean list, int layout){
@@ -278,7 +280,11 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
 
        // String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+itemArrayList.get(position).getDeposit_prcntg()+" % ";
         //( holder).depositPrcntg.setText(deposit);
-       /* ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
+        if(isGroup)
+            ( holder).addRequest.setVisibility(View.VISIBLE);
+        else
+            ( holder).addRequest.setVisibility(View.INVISIBLE);
+        ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(APICall.isGuest(context).equals("1"))
@@ -288,13 +294,13 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
                 else
                 {
                     Intent i = new Intent(BeautyMainPage.context, CreateGroupRequestActivity.class);
-                    i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
+                    i.putExtra("sup_id",itemArrayList.get(position).getHealthCntr_id());
 
                    // HealthCentersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
                     BeautyMainPage.context.startActivity(i);
                 }
             }
-        });*/
+        });
     }
     public class ListHolder extends RecyclerView.ViewHolder {
         TextView providerName,provider_rate,depositPrcntg,healthCntr,speciality;

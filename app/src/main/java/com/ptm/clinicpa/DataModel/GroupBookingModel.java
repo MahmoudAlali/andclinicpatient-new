@@ -1,5 +1,7 @@
 package com.ptm.clinicpa.DataModel;
 
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ public class GroupBookingModel {
     Spinner ageRange,genderSpinner,relationSpinner,doctorSpeciality,doctorName;
     ArrayList<ClientServiceDataModel> servicesModels;
     TextView appointmentTime;
+    CheckBox isCurrentUser;
 
 
 
@@ -33,6 +36,19 @@ public class GroupBookingModel {
         this.description=description;
         this.medicalFileNumber=medicalFileNumber;
         this.appointmentTime=appointmentTime;
+    }public GroupBookingModel(AutoCompleteTextView clientName, Spinner ageRange, Spinner genderSpinner, Spinner relationSpinner, Spinner doctorName, Spinner doctorSpeciality, TextView appointmentTime,
+                              EditText medicalFileNumber , EditText description, ArrayList<ClientServiceDataModel> servicesModels, CheckBox isCurrentUser) {
+        this.clientName = clientName;
+        this.ageRange = ageRange;
+        this.servicesModels = servicesModels;
+        this.genderSpinner=genderSpinner;
+        this.relationSpinner=relationSpinner;
+        this.doctorName=doctorName;
+        this.doctorSpeciality=doctorSpeciality;
+        this.description=description;
+        this.medicalFileNumber=medicalFileNumber;
+        this.appointmentTime=appointmentTime;
+        this.isCurrentUser=isCurrentUser;
     }
     public EditText getClientName() {
         return clientName;
@@ -138,6 +154,38 @@ public class GroupBookingModel {
         public void setBdb_time(String bdb_time) {
             this.bdb_time = bdb_time;
         }
+    }
+
+    public EditText getDescription() {
+        return description;
+    }
+
+    public EditText getMedicalFileNumber() {
+        return medicalFileNumber;
+    }
+
+    public Spinner getDoctorName() {
+        return doctorName;
+    }
+
+    public Spinner getDoctorSpeciality() {
+        return doctorSpeciality;
+    }
+
+    public Spinner getGenderSpinner() {
+        return genderSpinner;
+    }
+
+    public Spinner getRelationSpinner() {
+        return relationSpinner;
+    }
+
+    public TextView getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public CheckBox getIsCurrentUser() {
+        return isCurrentUser;
     }
 
 }
