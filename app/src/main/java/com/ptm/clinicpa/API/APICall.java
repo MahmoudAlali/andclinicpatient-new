@@ -63,6 +63,7 @@ import com.ptm.clinicpa.Adapters.EffectAdapter;
 import com.ptm.clinicpa.Adapters.GroupEffectAdapter;
 import com.ptm.clinicpa.Adapters.NotificationsAdapter;
 import com.ptm.clinicpa.Adapters.PointAdapter;
+import com.ptm.clinicpa.DataModel.AppointmentsDataModel;
 import com.ptm.clinicpa.DataModel.BookingRequestClientDataModel;
 import com.ptm.clinicpa.DataModel.BookingRequestDataModel;
 import com.ptm.clinicpa.DataModel.CSupplierModel;
@@ -79,6 +80,7 @@ import com.ptm.clinicpa.DataModel.RequestProviderItem;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
 import com.ptm.clinicpa.DataModel.ServiceItem;
 import com.ptm.clinicpa.DataModel.ServicesIDS;
+import com.ptm.clinicpa.DataModel.ServicesInsideAppointment;
 import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.HealthCentersFragment;
 import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
@@ -10622,17 +10624,18 @@ public class APICall {
                     "}";
         }
 
-        Log.e("bookingfilte",tmp);
+        Log.e("appointAutoReq",tmp);
         RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
 
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(API_PREFIX_NAME+"/api/booking/bookingAutomatedBrowse")
+                .url(API_PREFIX_NAME+"/api/appointment/appointmentAutomatedBrowse")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
                 //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
                 .build();
 
+/*
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -10690,7 +10693,7 @@ public class APICall {
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
-                Log.e("TAG", mMessage);
+                Log.e("appointAutoRes", mMessage);
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -10728,48 +10731,53 @@ public class APICall {
                                 }
                                 JSONObject jObject = bookings.getJSONObject(i);
 
-                                String booking_type = jObject.getString("booking_type");
+                              //  String booking_type = jObject.getString("booking_type");
 //                                String bdb_name_booking = jObject.getString("bdb_name_booking");
+                                String bdb_appointment_id = jObject.getString("bdb_appointment_id");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
+                                String bookedByMe = jObject.getString("bookedByMe");
+                                String booking_place = jObject.getString("booking_place");
+                                String services_price = jObject.getString("services_price");
+                                String journey_cost = jObject.getString("journey_cost");
+                                String journey_count = jObject.getString("journey_count");
+                                String client_name = jObject.getString("client_name");
+                                String bdb_start_date = jObject.getString("bdb_start_date");
+                                String bdb_start_time = jObject.getString("bdb_start_time");
+                                //String bdb_end_time = jObject.getString("bdb_end_time");
 
+                                String clients_count = jObject.getString("clients_count");
+                                String services_count = jObject.getString("services_count");
+                                String client_phone = jObject.getString("client_phone");
+                                String bdb_user_level2_id = jObject.getString("bdb_user_level2_id");
                                 String bdb_internally_number = jObject.getString("bdb_internally_number");
                                 String bdb_loc_long = jObject.getString("bdb_loc_long");
                                 String bdb_loc_lat = jObject.getString("bdb_loc_lat");
-                                String bdb_is_executed = jObject.getString("bdb_is_executed");
-                                String provider_rating = jObject.getString("provider_rating");
-                                String is_action_on = jObject.getString("is_action_on");
-                                String bdb_deposit_ratio_outside = jObject.getString("bdb_deposit_ratio");
-                                String bdb_expected_deposit  = jObject.getString("bdb_expected_deposit");
-                                String is_rating_on = jObject.getString("is_rating_on");
-                                String is_per_client = jObject.getString("is_per_client");
-                                String bdb_name_booking = jObject.getString("bdb_name_booking");
-                                String bdb_logo_id = jObject.getString("bdb_logo_id");
-                                String bdb_refund_days  = jObject.getString("bdb_refund_days");
-                                String bdb_refund_hours  = jObject.getString("bdb_refund_hours");
-                                String bdb_refund_amount  = jObject.getString("bdb_refund_amount");
-                                String bookedByMe = jObject.getString("bookedByMe");
-                                String bdb_booked_at="",bdb_start_dates="",bdb_start_date="";
-                                try {
-                                    bdb_start_dates = jObject.getString("bdb_start_dates");
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    bdb_booked_at = jObject.getJSONArray("booking").getJSONObject(0).getString("bdb_booked_at");
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                String client_name = jObject.getString("client_name");
+                                String bdb_health_center_logo_id = jObject.getString("bdb_health_center_logo_id");
+                                String can_cancel = jObject.getString("can_cancel");
+                                String can_rating = jObject.getString("can_rating");
+                                String can_check_in = jObject.getString("can_check_in");
+                                String can_order_change = jObject.getString("can_order_change");
+                                String can_health_center_rating = jObject.getString("can_health_center_rating");
+                                String doctor_rating = jObject.getString("doctor_rating");
+                                String health_center_rating = jObject.getString("health_center_rating");
+                                String health_center_ar = jObject.getString("health_center_ar");
+                                String health_record = jObject.getString("health_record");
+                                String health_center_en = jObject.getString("health_center_en");
+                                String specialization_ar = jObject.getString("specialization_ar");
+                                String specialization_en = jObject.getString("specialization_en");
+                                String doctor_name = jObject.getString("doctor_name");
+                                String doctor_id = jObject.getString("doctor_id");
+                                String health_center_id = jObject.getString("health_center_id");
+                                String bdb_max_delay = jObject.getString("bdb_max_delay");
+                                String bdb_health_center_phone = jObject.getString("bdb_health_center_phone");
+                                String is_shifted = jObject.getString("is_shifted");
+                                String shifted_period = jObject.getString("shifted_period");
+                                String is_has_change_order = jObject.getString("is_has_change_order");
+                                String bdb_is_group_booking  = jObject.getString("bdb_is_group_booking");
+                                String is_checked_in = jObject.getString("is_checked_in");
+                                String visit_type = jObject.getString("visit_type");
+                                String basic_price = jObject.getString("basic_price");
 
-                                String booking_price="";
-                                try {
-                                    booking_price = jObject.getString("booking_price");
-                                    Double p=Double.parseDouble(booking_price);
-                                    String price=df2.format(p);
-                                    booking_price=price;
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
                                 JSONArray booking = jObject.getJSONArray("booking");
                                 String bdb_status="";
                                 ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData1=new ArrayList<>();
@@ -10779,29 +10787,16 @@ public class APICall {
 
 //                                Log.e("Object", jsonObject + "");
 
-                                    String bdb_client_old = jsonObject.getString("bdb_client_old");
+                                   // String bdb_client_old = jsonObject.getString("bdb_client_old");
                                     String bdb_id = jsonObject.getString("bdb_id");
                                     String bdb_price = jsonObject.getString("bdb_price");
-                                    bdb_status = jsonObject.getString("bdb_status");
-                                    bdb_start_date = jsonObject.getString("bdb_start_date");
-                                    String bdb_start_time = jsonObject.getString("bdb_start_time");
-                                    String bdb_end_time = jsonObject.getString("bdb_end_time");
-                                    String supplier_name = jsonObject.getString("supplier_name");
-                                    String is_rating_on_inside = jsonObject.getString("is_rating_on");
-                                    String is_action_on_inside = jsonObject.getString("is_action_on");
-                                    String employee_name = jsonObject.getString("employee name");
                                     String service_en_name = jsonObject.getString("service en name");
                                     String service_ar_name = jsonObject.getString("service ar name");
-                                    String bdb_deposit_ratio_inside = jsonObject.getString("bdb_deposit_ratio");
-                                    String bdb_paid_deposit  = jsonObject.getString("bdb_paid_deposit");
-                                    String  bdb_confirm_exec_user="";
-                                    try {
-                                        bdb_confirm_exec_user = jsonObject.getString(",String bdb_confirm_exec_user");
-                                    }catch (Exception e){
-                                        Log.w("Err","bdb_confirm_exec_user");
-                                    }
-                                    Double p=Double.parseDouble(bdb_price);
-                                    String price=df2.format(p);
+                                    String service_category = jsonObject.getString("service_category");
+                                    String is_checked_in = jsonObject.getString("is_checked_in");
+                                    String visit_type = jsonObject.getString("visit_type");
+                                    String basic_price = jsonObject.getString("basic_price");
+
 
                                     if (!MyReservationFragment.supllierName.equals("") ){
                                             if(supplier_name.equals(MyReservationFragment.supllierName)) {
@@ -10829,11 +10824,13 @@ public class APICall {
 
                                 }
                                 //-----------------------------------------------------
-                                Log.e("grBooking",MyReservationFragment.groupbooking);
+                                */
+/*Log.e("grBooking",MyReservationFragment.groupbooking);
                                 Log.e("sdate",MyReservationFragment.startdate);
                                 Log.e("sdates",bdb_start_dates);
                                 Log.e("s_d_txt",MyReservationFragment.service_date_txt);
-                                Log.e("book at",bdb_booked_at);
+                                Log.e("book at",bdb_booked_at);*//*
+
 
                                 Boolean execDateCheck=true;
                                 Boolean bookatCehck=true;
@@ -10842,9 +10839,11 @@ public class APICall {
                                     execDateCheck=checkRangeDate(MyReservationFragment.startdate,bdb_start_date,MyReservationFragment.sday,MyReservationFragment.smonth
                                             ,MyReservationFragment.eday,MyReservationFragment.emonth);
 
-                                if ( !bdb_booked_at.equals("null") && !MyReservationFragment.service_date_txt.equals(""))
+                               */
+/* if ( !bdb_booked_at.equals("null") && !MyReservationFragment.service_date_txt.equals(""))
                                     bookatCehck=checkRangeDate(MyReservationFragment.service_date_txt,bdb_booked_at,MyReservationFragment.srday,MyReservationFragment.srmonth
-                                            ,MyReservationFragment.erday,MyReservationFragment.ermonth);
+                                            ,MyReservationFragment.erday,MyReservationFragment.ermonth);*//*
+
                                 Log.e("ExecCehck",execDateCheck+"");
                                 Log.e("BookCehck",bookatCehck+"");
                                 Log.e("BookCehck1",MyReservationFragment.startdate+"");
@@ -10949,6 +10948,383 @@ public class APICall {
                             }
                         });
                     } else {
+                        showUnexpectedErrMsg(context);
+                    }
+                }catch (final JSONException je){
+                    je.printStackTrace();
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());                        }
+                    });
+
+                }
+
+            }
+
+        });
+*/
+        //        Log.d("MessageResponse",mMessage);
+    }
+    public static ArrayList<AppointmentsDataModel> myAppointments=new ArrayList<>();
+    public  static  void  appointmentsAutomatedBrowse(String language, String itemPerPage, String serviceId,String pageNum, String filter, String sort, final Context context, final int layout,String temp){
+        myAppointments.clear();
+
+        Log.e("Tab112","112"+temp);
+//        suppliersBooking.add("Select Employee");
+        MyReservationFragment.bookingAutomatedBrowseData.clear();
+//        try {
+//            if (MyReservationFragment.tab.equals("1")){
+//                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+//                llm.setOrientation(LinearLayoutManager.VERTICAL);
+//                AcceptedReservationFragment.service_select.setLayoutManager(llm);
+//                AcceptedReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+//            }else if (MyReservationFragment.tab.equals("2")){
+//                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+//                llm.setOrientation(LinearLayoutManager.VERTICAL);
+//                ExecutedReservationFragment.service_select.setLayoutManager(llm);
+//                ExecutedReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+//            }else {
+//                LinearLayoutManager llm = new LinearLayoutManager(BeautyMainPage.context);
+//                llm.setOrientation(LinearLayoutManager.VERTICAL);
+//                DepositReservationFragment.service_select.setLayoutManager(llm);
+//                DepositReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+//            }
+//            MyReservationFragment.reservationsAdapter2.notifyDataSetChanged();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+//                MyReservationFragment.reservationsAdapter=new ReservationsAdapter(context,MyReservationFragment.bookingAutomatedBrowseData,layout);
+                showDialog(context);
+//                Reservations.pullToRefresh.setRefreshing(true);
+//                pd.show();
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        //        {	"lang":"en",
+        //	"ItemPerPage":18
+        //	,"PageNum":"1"
+        //	,"sort":{"num":1,"by":"desc"}
+        //}
+
+//    serviceName="",empname="",startdate="",start_r_date="",bookingType="";
+        String sID="",emID="",sdate="",srdate="",btype="";
+        Log.e("ServiceID",MyReservationFragment.serviceId);
+        Log.e("EMID",MyReservationFragment.employee_id);
+        if (!MyReservationFragment.serviceId.equals("")){
+            sID="\"ServiceId\":["+MyReservationFragment.serviceId+"],";
+        }
+        if (!MyReservationFragment.employee_id.equals("")){
+//            bookingFilter("3",MyReservationFragment.employee_id,"");
+            emID="\t,{\"num\":4,\"value1\":"+MyReservationFragment.employee_id+"}\n";
+        }
+//
+//        if (!MyReservationFragment.startdate.equals("")){
+//            sdate="\t,{\"num\":2,\"value1\":\""+MyReservationFragment.startdate+"\"}\n";
+//
+//        }
+
+        if (!MyReservationFragment.start_r_date.equals("")){
+//            srdate="\t,{\"num\":3,\"value1\":\""+MyReservationFragment.start_r_date+"\"}\n";
+        }
+
+        if (!MyReservationFragment.bookingType.equals("")){
+            if (MyReservationFragment.bookingType.equals("Single Booking"))
+            {
+                btype="\t,{\"num\":5,\"value1\":0}\n";
+            }else {
+                btype="\t,{\"num\":5,\"value1\":1}\n";
+
+            }
+            Log.e("BBOOKTTYPEE",MyReservationFragment.bookingType);
+        }
+
+        String tmp="";
+        if(filter.equals("") && sort.equals("")){
+            tmp="{\t\"lang\":\""+language+"\",\n" +
+                    sID+
+                    "\t\"ItemPerPage\":"+itemPerPage+"\n" +
+                    "\t,\"PageNum\":\""+pageNum+"\"\n " +
+                    "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                    "}";
+        }else if (!filter.equals("")){
+            if (sort.equals("")) {
+                tmp = "{\t\"lang\":\"" + language + "\",\n" +
+                        sID+
+                        "\t\"ItemPerPage\":" + itemPerPage + "\n" +
+                        "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
+                        filter +
+//                        emID+
+//                        sdate+
+//                        srdate+
+//                        btype+
+
+                        ""+
+                        //                    "\t,\"Filter\":{\"num\":1,\"value1\":\""\"}\n" +
+                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                        "}";
+            }else {
+                tmp = "{\t\"lang\":\"" + language + "\",\n" +
+                        sID+
+                        "\t\"ItemPerPage\":" + itemPerPage + "\n" +
+                        "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
+                        filter
+//                        +emID
+                        +
+//                        sdate+
+//                        srdate+
+//                        btype+
+                        ","+
+                        sort+
+                        //                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                        "}";
+            }
+        }else {
+            tmp = "{\t\"lang\":\"" + language + "\",\n" +
+                    sID+
+                    "\t\"ItemPerPage\":" + itemPerPage + "\n" +
+                    "\t,\"PageNum\":\"" + pageNum + "\"\n ," +
+                    filter+
+//                    emID+
+//                    sdate+
+//                    srdate+
+
+                    ""+
+                    sort+
+                    //                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                    "}";
+        }
+
+        Log.e("appointAutoReq",tmp);
+        RequestBody body = RequestBody.create(MEDIA_TYPE, tmp);
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/appointment/appointmentAutomatedBrowse")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("appointAutoRes", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+//                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String message=j.getString("message");
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("107")) {
+                        {
+                            JSONObject data = j.getJSONObject("data");
+                            JSONArray bookings = data.getJSONArray("bookings");
+
+                            Log.e("ttttttttttt", bookings + "");
+                            final String totalItem = data.getString("totalItem");
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    MyReservationFragment.action_floating_btn.setText(totalItem);
+
+                                }
+                            });
+                            for (int i = 0; i < bookings.length(); i++) {
+                                JSONObject jObject = bookings.getJSONObject(i);
+                                String bdb_appointment_id = jObject.getString("bdb_appointment_id");
+                                String bdb_inner_booking = jObject.getString("bdb_inner_booking");
+                                String bookedByMe = jObject.getString("bookedByMe");
+                                String booking_place = jObject.getString("booking_place");
+                                String services_price = jObject.getString("services_price");
+                                String journey_cost = jObject.getString("journey_cost");
+                                String journey_count = jObject.getString("journey_count");
+                                String client_name = jObject.getString("client_name");
+                                String bdb_start_date = jObject.getString("bdb_start_date");
+                                String bdb_start_time = jObject.getString("bdb_start_time");
+                                String clients_count = jObject.getString("clients_count");
+                                String services_count = jObject.getString("services_count");
+                                String client_phone = jObject.getString("client_phone");
+                                String bdb_user_level2_id = jObject.getString("bdb_user_level2_id");
+                                String bdb_internally_number = jObject.getString("bdb_internally_number");
+                                String bdb_loc_long = jObject.getString("bdb_loc_long");
+                                String bdb_loc_lat = jObject.getString("bdb_loc_lat");
+                                String bdb_health_center_logo_id = jObject.getString("bdb_health_center_logo_id");
+                                String can_cancel = jObject.getString("can_cancel");
+                                String can_rating = jObject.getString("can_rating");
+                                String can_check_in = jObject.getString("can_check_in");
+                                String can_order_change = jObject.getString("can_order_change");
+                                String can_health_center_rating = jObject.getString("can_health_center_rating");
+                                String doctor_rating = jObject.getString("doctor_rating");
+                                String health_center_rating = jObject.getString("health_center_rating");
+                                String health_center_ar = jObject.getString("health_center_ar");
+                                String health_record = jObject.getString("health_record");
+                                String health_center_en = jObject.getString("health_center_en");
+                                String specialization_ar = jObject.getString("specialization_ar");
+                                String specialization_en = jObject.getString("specialization_en");
+                                String doctor_name = jObject.getString("doctor_name");
+                                String doctor_id = jObject.getString("doctor_id");
+                                String health_center_id = jObject.getString("health_center_id");
+                                String bdb_max_delay = jObject.getString("bdb_max_delay");
+                                String bdb_health_center_phone = jObject.getString("bdb_health_center_phone");
+                                String is_shifted = jObject.getString("is_shifted");
+                                String shifted_period = jObject.getString("shifted_period");
+                                String is_has_change_order = jObject.getString("is_has_change_order");
+                                String bdb_is_group_booking  = jObject.getString("bdb_is_group_booking");
+                                String is_checked_in = jObject.getString("is_checked_in");
+                                String visit_type = jObject.getString("visit_type");
+                                String basic_price = jObject.getString("basic_price");
+
+                                JSONArray booking = jObject.getJSONArray("booking");
+                                String bdb_status="";
+                                ArrayList<ServicesInsideAppointment> services=new ArrayList<>();
+                                for (int g = 0; g < booking.length(); g++) {
+
+                                    JSONObject jsonObject = booking.getJSONObject(g);
+
+//                                Log.e("Object", jsonObject + "");
+
+                                   // String bdb_client_old = jsonObject.getString("bdb_client_old");
+                                    String bdb_id = jsonObject.getString("bdb_id");
+                                    String bdb_price = jsonObject.getString("bdb_price");
+                                    String service_en_name = jsonObject.getString("service en name");
+                                    String service_ar_name = jsonObject.getString("service ar name");
+                                    String service_category = jsonObject.getString("service_category");
+                                    String is_checked_in2 = jsonObject.getString("is_checked_in");
+                                    String visit_type2 = jsonObject.getString("visit_type");
+                                    String basic_price2 = jsonObject.getString("basic_price");
+
+                                    services.add(new ServicesInsideAppointment(bdb_id, bdb_price, service_en_name, service_ar_name,
+                                            service_category, is_checked_in2, visit_type2, basic_price2));
+
+                                }
+
+                                myAppointments.add(new AppointmentsDataModel(bdb_appointment_id,bdb_inner_booking,bookedByMe,booking_place,services_price,journey_cost,journey_count
+                                ,client_name,bdb_start_date,bdb_start_time,clients_count,services_count,client_phone,bdb_user_level2_id,bdb_internally_number
+                                ,bdb_loc_long,bdb_loc_lat,bdb_health_center_logo_id,can_cancel,can_rating,can_check_in,can_order_change,can_health_center_rating,doctor_rating
+                                        ,health_center_rating,health_center_ar,health_record,health_center_en,specialization_ar,specialization_en,doctor_name,doctor_id
+                                ,health_center_id,bdb_max_delay,bdb_health_center_phone,is_shifted,shifted_period,is_has_change_order,bdb_is_group_booking
+                                ,is_checked_in,visit_type,basic_price,services));
+
+                            }
+
+
+                            ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.e("APINotify1","OK");
+                                    Log.e("APINotify2",reservationModels.size()+"");
+                                    MyReservationFragment.action_floating_btn.setText(MyReservationFragment.reservationsAdapter2.getItemCount()+"");
+
+                                    MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(context,reservationModels);
+                                    if (MyReservationFragment.tab.equals("1")){
+                                        Log.e("tab1","OK");
+                                        AcceptedReservationFragment.service_select.setAdapter( MyReservationFragment.reservationsAdapter2);
+                                    }else if (MyReservationFragment.tab.equals("2")){
+                                        Log.e("tab2","OK");
+                                        DepositReservationFragment.service_select.setAdapter( MyReservationFragment.reservationsAdapter2);
+
+                                    }else if (MyReservationFragment.tab.equals("3")){
+                                        Log.e("tab3","OK");
+                                        ExecutedReservationFragment.service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
+
+                                    }
+                                    MyReservationFragment.reservationsAdapter2.notifyDataSetChanged();
+                                    Log.e("APINotify3",MyReservationFragment.reservationsAdapter2.getItemCount()+"OK");
+
+                                }
+                            });
+                        }
+                    }
+                    else if(j.getString("response_code").equals("106")) {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MyReservationFragment.action_floating_btn.setText("0");
+                                showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.nobooking), ((AppCompatActivity) context).getResources().getString(R.string.nobookingyet));
+                            }
+                        });
+                    }else if(j.getString("response_code").equals("105")) {
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MyReservationFragment.action_floating_btn.setText("0");
+                                showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.nobooking), ((AppCompatActivity) context).getResources().getString(R.string.nobookingyet));
+                            }
+                        });
+                    } else {
+                        MyReservationFragment.action_floating_btn.setText("0");
                         showUnexpectedErrMsg(context);
                     }
                 }catch (final JSONException je){
@@ -27730,8 +28106,8 @@ public class APICall {
                         final JSONObject data=jsonrespone.getJSONObject("data");
                         try {
                             JSONObject bdb_location_id = data.getJSONObject("bdb_location_id");
-                            BookingRequestDetailsActivity.bdb_loc_lat = Double.parseDouble(data.getString("bdb_loc_lat"));
-                            BookingRequestDetailsActivity.bdb_loc_long = Double.parseDouble(data.getString("bdb_loc_long"));
+                            BookingRequestDetailsActivity.bdb_loc_lat = Double.parseDouble(bdb_location_id.getString("bdb_loc_lat"));
+                            BookingRequestDetailsActivity.bdb_loc_long = Double.parseDouble(bdb_location_id.getString("bdb_loc_long"));
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -27740,16 +28116,16 @@ public class APICall {
                         String bdb_journey_cost=data.getString("bdb_journey_cost");
                         String bdb_journey_time=data.getString("bdb_journey_time");
                         String total_cost=data.getString("total_cost");
-                        String bdb_status=data.getString("bdb_status");
+                       // String bdb_status=data.getString("bdb_status");
                         String bdb_pack_code=data.getString("bdb_pack_code");
-                        String bdb_is_group_booking=data.getString("bdb_is_group_booking");
-                        String bdb_name_booking=data.getString("bdb_name_booking");
+                        final String bdb_is_group_booking=data.getString("bdb_is_group_booking");
+                        //String bdb_name_booking=data.getString("bdb_name_booking");
                         String bdb_reject_reason=data.getString("bdb_reject_reason");
-                        final String bdb_client_id=data.getString("bdb_client_id"),
-                                bdb_start_date = data.getString("bdb_start_date");
+                        /*final String *//*bdb_client_id=data.getString("bdb_client_id"),*//*
+                                bdb_start_date = data.getString("bdb_start_date");*/
 
-                        final String supplier_name=data.getString("doctor_name");
-                        final String supplier_phone=data.getString("doctor_phone");
+                       // final String supplier_name=data.getString("doctor_name");
+                        final String supplier_phone=data.getString("health_center_phone");
                         final String healthCntr_ar=data.getString("health_center_ar");
                         final String healthCntr_en=data.getString("health_center_en");
                         final String description=data.getString("description");
@@ -27769,8 +28145,24 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                String s= context.getString(R.string.dr)+supplier_name;
-                                BookingRequestDetailsActivity.salonName.setText(s);
+                                if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
+                                {
+                                    try {
+                                        String s= context.getString(R.string.dr)+  clients.getJSONObject(0).getString("doctor_name")
+                                                ;
+                                        BookingRequestDetailsActivity.salonName.setText(s);
+                                    }
+                                    catch (Exception e){}
+
+                                }
+                                else
+                                {
+                                    if(context.getString(R.string.locale).equals("en"))
+                                        BookingRequestDetailsActivity.salonName.setText(healthCntr_en);
+                                    else
+                                        BookingRequestDetailsActivity.salonName.setText(healthCntr_ar);
+                                }
+
                             }
                         });
 
@@ -27828,13 +28220,18 @@ public class APICall {
 
                         for (int i=0;i<clients.length();i++) {
                             JSONObject object = clients.getJSONObject(i);
-                            final String /*bdb_start_date = object.getString("bdb_start_date"),
-                                    bdb_end_date = object.getString("bdb_end_date"),*/
+                            final String bdb_start_date = object.getString("bdb_start_date"),
+                                    bdb_end_date = object.getString("bdb_end_date"),
                                     bdb_client_old = object.getString("bdb_client_old"),
                                     bdb_is_current_user = object.getString("bdb_is_current_user"),
                                     bdb_client_name = object.getString("bdb_client_name"),
                                     health_record = object.getString("health_record"),
-                                    bdb_client_phone = object.getString("bdb_client_phone");
+                                    bdb_status = object.getString("bdb_status"),
+                                    doctor_name = object.getString("doctor_name"),
+                                    doctor_phone = object.getString("doctor_phone"),
+                                    specialization_name_ar = object.getString("specialization_name_ar"),
+                                    specialization_name_en = object.getString("specialization_name_en");
+                                    //bdb_client_phone = object.getString("bdb_client_phone");
                             JSONArray ClientServices = object.getJSONArray("ClientServices");
 
 
@@ -27848,7 +28245,7 @@ public class APICall {
                             else
                                 age=context.getResources().getString(R.string.forAdults);
 
-                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_old,bdb_client_name+"",ClientServices,bdb_client_name+"",context.getResources().getString(R.string.age2)+age);
+                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_old,bdb_client_name+"",ClientServices,bdb_client_name+"",context.getResources().getString(R.string.age2)+bdb_client_old+" "+context.getResources().getString(R.string.years));
                             //   Log.e("Bookings",bookings.toString());
                             String client_name="";
                             for (int j=0;j<ClientServices.length();j++){
@@ -27861,14 +28258,17 @@ public class APICall {
                                         bdb_name = object1.getString("bdb_name"),
                                         bdb_name_ar = object1.getString("bdb_name_ar"),
                                         cost = object1.getString("cost"),
+                                        time = object1.getString("time"),
+                                        rounded_time = object1.getString("rounded_time"),
                                         bdb_cat_id = object1.getString("bdb_cat_id");
+
 //                                    ReservatoinDetailsActivity.time.setText(convertToArabic(bdb_start_date));
                                 if(context.getResources().getString(R.string.locale).equals("ar"))
                                     BookingRequestDetailsActivity.addMainLayout(BookingRequestDetailsActivity.myroot,
-                                            bdb_name_ar, bdb_cat_id,cost,bdb_start_date);
+                                            bdb_name_ar, bdb_cat_id,cost,"",doctor_name,bdb_status,bdb_is_group_booking);
                                 else
                                     BookingRequestDetailsActivity.addMainLayout(BookingRequestDetailsActivity.myroot,
-                                            bdb_name, bdb_cat_id,cost,bdb_start_date);
+                                            bdb_name, bdb_cat_id,cost,"",doctor_name,bdb_status,bdb_is_group_booking);
 
                             }
                             final int finalI = i;
@@ -28168,24 +28568,31 @@ public class APICall {
                                 //String bdb_location_id = jObject.getJSONObject("bdb_location_id").getString("bdb_id");
                                 String bdb_journey_time = jObject.getString("bdb_journey_time");
                                 String bdb_journey_cost = jObject.getString("journey_cost");
-                                String bdb_status = jObject.getString("bdb_status");
+                                //String bdb_status = jObject.getString("bdb_status");
                                 String bdb_pack_code = jObject.getString("bdb_pack_code");
                                 String bdb_is_group_booking = jObject.getString("booking_type");
-                                String bdb_name_booking = jObject.getString("bdb_name_booking");
+                                //String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_reject_reason = jObject.getString("bdb_reject_reason");
                                 String bdb_created_at = jObject.getString("bdb_created_at");
                                 String bdb_sup_id = jObject.getString("bdb_sup_id");
-                                String supplier_name = jObject.getString("doctor_name");
+                                String supplier_name = jObject.getString("doctors_names");
                                 String logo_id = jObject.getString("logo_id");
                                 String bdb_client_id = jObject.getString("bdb_client_id");
-                                String health_center_ar = jObject.getString("health_center_ar");
-                                String health_center_en = jObject.getString("health_center_en");
-                                String health_center_id = jObject.getString("health_center_id");
-                                String doctor_id = jObject.getString("doctor_id");
-                                String bdb_start_date = jObject.getString("bdb_start_date");
-                                String bdb_end_date = jObject.getString("bdb_end_date");
-                                String bdb_start_time = jObject.getString("bdb_start_time");
+                                String health_center_arReq = jObject.getString("health_center_ar");
+                                String health_center_enReq = jObject.getString("health_center_en");
+                                String health_center_idReq = jObject.getString("health_center_id");
+                                String client_name = jObject.getString("client_name");
+                               // String doctor_id = jObject.getString("doctor_id");
+                                String bdb_start_dateReq = jObject.getString("bdb_start_date");
+                                String bdb_end_dateReq = jObject.getString("bdb_end_date");
+                                String bdb_start_timeReq = jObject.getString("bdb_start_time");
+                                JSONArray appointment_idsJson = jObject.getJSONArray("appointment_ids");
 
+                                ArrayList<String> appointment_ids=new ArrayList<>();
+                                for (int in=0;in<appointment_idsJson.length();in++)
+                                {
+                                    appointment_ids.add(appointment_idsJson.get(in).toString());
+                                }
                                 JSONArray clients = jObject.getJSONArray("clients");
                                 ArrayList<BookingRequestClientDataModel> clientsList=new ArrayList<>();
                                 for (int g = 0; g < clients.length(); g++)
@@ -28195,7 +28602,19 @@ public class APICall {
                                     String bdb_client_old = jsonObject.getString("bdb_client_old");
                                     String bdb_is_current_user = jsonObject.getString("bdb_is_current_user");
                                     String bdb_client_name = jsonObject.getString("bdb_client_name");
-                                    String bdb_client_phone = jsonObject.getString("bdb_client_phone");
+                                   // String bdb_client_phone = jsonObject.getString("bdb_client_phone");
+                                    String doctor_name = jsonObject.getString("doctor_name");
+                                    String bdb_status = jsonObject.getString("bdb_status");
+                                    String specialization_name_ar = jsonObject.getString("specialization_name_ar");
+                                    String specialization_name_en = jsonObject.getString("specialization_name_en");
+                                   /* String health_center_ar = jsonObject.getString("health_center_ar");
+                                    String health_center_en = jsonObject.getString("health_center_en");
+                                    String health_center_id = jsonObject.getString("health_center_id");
+                                    String health_center_phone = jsonObject.getString("health_center_phone");*/
+                                    //String bdb_start_date = jsonObject.getString("bdb_start_date");
+                                    //String bdb_end_date = jsonObject.getString("bdb_end_date");
+                                    String bdb_start_time = jsonObject.getString("start_time");
+                                    //String client_phone = jsonObject.getString("client_phone");
                                     ArrayList<ClientServiceDataModel> clientServicesList=new ArrayList<>();
                                     JSONArray clientServices = jsonObject.getJSONArray("ClientServices");
                                     for (int m = 0; m < clientServices.length(); m++) {
@@ -28206,16 +28625,19 @@ public class APICall {
                                         String bdb_name = serviceObject.getString("bdb_name");
                                         String bdb_name_ar = serviceObject.getString("bdb_name_ar");
                                         String bdb_cat_id = serviceObject.getString("bdb_cat_id");
+                                        String cost = serviceObject.getString("cost");
+                                        String time = serviceObject.getString("time");
+                                        String rounded_time = serviceObject.getString("rounded_time");
 
-                                        clientServicesList.add(new ClientServiceDataModel(bdb_ser_id,bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_cat_id));
+                                        clientServicesList.add(new ClientServiceDataModel(bdb_ser_id,bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_cat_id,cost,time,rounded_time));
 
                                     }
-                                    clientsList.add(new BookingRequestClientDataModel(bdb_start_date,bdb_end_date,bdb_client_old,bdb_is_current_user,bdb_client_name,bdb_client_phone,clientServicesList));
+                                    clientsList.add(new BookingRequestClientDataModel("","",bdb_client_old,bdb_is_current_user,bdb_client_name,"",clientServicesList,specialization_name_ar,specialization_name_en,bdb_status,bdb_start_time,doctor_name));
                                 }
 
                               //  MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on));
-                                requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,bdb_status,bdb_pack_code
-                                ,bdb_is_group_booking,total_cost,bdb_name_booking,bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_en,health_center_ar,health_center_id));
+                                requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,"",bdb_pack_code
+                                ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq));
 
 
 
@@ -28498,47 +28920,70 @@ public class APICall {
                             for (int i = 0; i < orders.length(); i++)
                             {
                                 JSONObject jObject = orders.getJSONObject(i);
+                                String total_cost = jObject.getString("total_cost");
 
                                 String bdb_id = jObject.getString("bdb_id");
+                                String bdb_booking_place = jObject.getString("booking_place");
+
                                 JSONObject bdb_location_id = jObject.getJSONObject("bdb_location_id");
                                 String bdb_loc_lat="",bdb_loc_long="",bdb_address_id="";
                                 try {
-                                    bdb_loc_lat = jObject.getString("bdb_loc_lat");
-                                    bdb_loc_long = jObject.getString("bdb_loc_long");
-                                    bdb_address_id = jObject.getString("bdb_id");
+                                    bdb_loc_lat = bdb_location_id.getString("bdb_loc_lat");
+                                    bdb_loc_long = bdb_location_id.getString("bdb_loc_long");
+                                    bdb_address_id = bdb_location_id.getString("bdb_id");
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }
-                                String bdb_booking_place = jObject.getString("booking_place");
                                 //String bdb_location_id = jObject.getJSONObject("bdb_location_id").getString("bdb_id");
                                 String bdb_journey_time = jObject.getString("bdb_journey_time");
                                 String bdb_journey_cost = jObject.getString("journey_cost");
-                                String bdb_status = jObject.getString("bdb_status");
+                                //String bdb_status = jObject.getString("bdb_status");
                                 String bdb_pack_code = jObject.getString("bdb_pack_code");
-                                String total_cost = jObject.getString("total_cost");
                                 String bdb_is_group_booking = jObject.getString("booking_type");
-                                String bdb_name_booking = jObject.getString("bdb_name_booking");
+                                //String bdb_name_booking = jObject.getString("bdb_name_booking");
                                 String bdb_reject_reason = jObject.getString("bdb_reject_reason");
                                 String bdb_created_at = jObject.getString("bdb_created_at");
                                 String bdb_sup_id = jObject.getString("bdb_sup_id");
-                                String supplier_name = jObject.getString("supplier_name");
+                                String supplier_name = jObject.getString("doctors_names");
                                 String logo_id = jObject.getString("logo_id");
                                 String bdb_client_id = jObject.getString("bdb_client_id");
+                                String health_center_arReq = jObject.getString("health_center_ar");
+                                String health_center_enReq = jObject.getString("health_center_en");
+                                String health_center_idReq = jObject.getString("health_center_id");
+                                String client_name = jObject.getString("client_name");
+                              //  String doctor_id = jObject.getString("doctor_id");
+                                String bdb_start_dateReq = jObject.getString("bdb_start_date");
+                                String bdb_end_dateReq = jObject.getString("bdb_end_date");
+                                String bdb_start_timeReq = jObject.getString("bdb_start_time");
+                                JSONArray appointment_idsJson = jObject.getJSONArray("appointment_ids");
+
+                                ArrayList<String> appointment_ids=new ArrayList<>();
+                                for (int in=0;in<appointment_idsJson.length();in++)
+                                {
+                                    appointment_ids.add(appointment_idsJson.get(in).toString());
+                                }
                                 JSONArray clients = jObject.getJSONArray("clients");
                                 ArrayList<BookingRequestClientDataModel> clientsList=new ArrayList<>();
                                 for (int g = 0; g < clients.length(); g++)
                                 {
 
                                     JSONObject jsonObject = clients.getJSONObject(g);
-
-//                                Log.e("Object", jsonObject + "");
-
-                                    String bdb_start_date = jsonObject.getString("bdb_start_date");
-                                    String bdb_end_date = jsonObject.getString("bdb_end_date");
                                     String bdb_client_old = jsonObject.getString("bdb_client_old");
                                     String bdb_is_current_user = jsonObject.getString("bdb_is_current_user");
                                     String bdb_client_name = jsonObject.getString("bdb_client_name");
                                     String bdb_client_phone = jsonObject.getString("bdb_client_phone");
+                                    String doctor_name = jsonObject.getString("doctor_name");
+                                    String bdb_status = jsonObject.getString("bdb_status");
+                                    String specialization_name_ar = jsonObject.getString("specialization_name_ar");
+                                    String specialization_name_en = jsonObject.getString("specialization_name_en");
+                                    /*String health_center_ar = jsonObject.getString("health_center_ar");
+                                    String health_center_en = jsonObject.getString("health_center_en");
+                                    String health_center_id = jsonObject.getString("health_center_id");
+                                    String health_center_phone = jsonObject.getString("health_center_phone");*/
+                                    //String bdb_start_date = jsonObject.getString("bdb_start_date");
+                                    //String bdb_end_date = jsonObject.getString("bdb_end_date");
+                                    String bdb_start_time = jsonObject.getString("start_time");
+                                   // String client_phone = jsonObject.getString("client_phone");
                                     ArrayList<ClientServiceDataModel> clientServicesList=new ArrayList<>();
                                     JSONArray clientServices = jsonObject.getJSONArray("ClientServices");
                                     for (int m = 0; m < clientServices.length(); m++) {
@@ -28549,16 +28994,19 @@ public class APICall {
                                         String bdb_name = serviceObject.getString("bdb_name");
                                         String bdb_name_ar = serviceObject.getString("bdb_name_ar");
                                         String bdb_cat_id = serviceObject.getString("bdb_cat_id");
+                                        String cost = serviceObject.getString("cost");
+                                        String time = serviceObject.getString("time");
+                                        String rounded_time = serviceObject.getString("rounded_time");
 
-                                        clientServicesList.add(new ClientServiceDataModel(bdb_ser_id,bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_cat_id));
+                                        clientServicesList.add(new ClientServiceDataModel(bdb_ser_id,bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_cat_id,cost,time,rounded_time));
 
                                     }
-                                    clientsList.add(new BookingRequestClientDataModel(bdb_start_date,bdb_end_date,bdb_client_old,bdb_is_current_user,bdb_client_name,bdb_client_phone,clientServicesList));
+                                    clientsList.add(new BookingRequestClientDataModel("","",bdb_client_old,bdb_is_current_user,bdb_client_name,"",clientServicesList,specialization_name_ar,specialization_name_en,bdb_status,bdb_start_time,doctor_name));
                                 }
 
                                 //  MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on));
-                                requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,bdb_status,bdb_pack_code
-                                        ,bdb_is_group_booking,total_cost,bdb_name_booking,bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList));
+                                requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,"",bdb_pack_code
+                                        ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq));
 
 
 
@@ -29486,7 +29934,7 @@ Log.e("ERRR",e.getMessage());
         Log.d("MessageResponse",mMessage);
         return mMessage;
     }
-    public  static  String  addBookingRequest2(String loc_lat, String loc_long, String sup_id, String booking_place, String bdb_pack_code,
+    public  static  String  addBookingRequest2(String loc_lat, String loc_long, String booking_place, String date,
                                               String is_group_booking , final JSONArray clients, final Context context,String description)
     {
        /* RequestProvidersFragment.providerItems.clear();
@@ -29533,16 +29981,17 @@ Log.e("ERRR",e.getMessage());
         try {
             postdata.put("loc_lat",loc_lat);
             postdata.put("loc_long",loc_long);
-            if(!sup_id.equals(""))
-                postdata.put("doctor_id",sup_id);
+            /*if(!sup_id.equals(""))
+                postdata.put("doctor_id",sup_id);*/
             postdata.put("booking_place",booking_place);
             postdata.put("is_group_booking",is_group_booking);
+            postdata.put("start_date",date);
             if(!description.equals(""))
             {
                 postdata.put("description",description);
             }
-            if(!bdb_pack_code.equals(""))
-                postdata.put("bdb_pack_code",bdb_pack_code);
+           /* if(!bdb_pack_code.equals(""))
+                postdata.put("bdb_pack_code",bdb_pack_code);*/
             postdata.put("clients",clients);
         }catch (JSONException e){
             e.printStackTrace();
@@ -30920,7 +31369,8 @@ Log.e("ERRR",e.getMessage());
 
                     if (response_code.equals("191"))
                     {
-                        JSONArray data=j.getJSONArray("data");
+                        JSONObject data2=j.getJSONObject("data");
+                        JSONArray data=data2.getJSONArray("relation");
                         for (int i=0;i<data.length();i++){
                             JSONObject jsonObject=data.getJSONObject(i);
                             Log.e("ttttttttttt",jsonObject+"");
@@ -31268,7 +31718,7 @@ Log.e("ERRR",e.getMessage());
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender, final ArrayAdapter adapter, final ArrayList<String> doctorNames){
+    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender, final ArrayAdapter adapter, final ArrayList<String> doctorNames, final ArrayList<ServiceItems> allDocs){
 
         allDoctors.clear();
         showDialog(context);
@@ -31391,6 +31841,7 @@ Log.e("ERRR",e.getMessage());
                             String   name_en=jsonObject.getString("bdb_name");
 
                             allDoctors.add(new ServiceItems( bdb_id,name_en,name_ar));
+                            allDocs.add(new ServiceItems( bdb_id,name_en,name_ar));
                         }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override

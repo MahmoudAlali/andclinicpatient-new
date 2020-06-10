@@ -53,7 +53,7 @@ public class RequestProvidersFragment extends Fragment {
         previousPage = view.findViewById(R.id.pagePrev);
         nextPage = view.findViewById(R.id.pageNext);
         pageNumView = view.findViewById(R.id.pagenum);
-        isGroup =savedInstanceState.getBoolean("isGroup");
+        isGroup =getArguments().getBoolean("isGroup");
 
 
         nextPage.setOnClickListener(new View.OnClickListener() {

@@ -407,16 +407,16 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
                             CreateRequestActivity.clientsArrayList.get(i).getPhoneNumber().getText()+"\",\"is_current_user\":"+
                             "1"+
                             ",\"start_date\": \""+CreateRequestActivity.add_date.getText()+"\""+
-                            ",\"old\": "+(CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1)+
+                            //",\"old\": "+(CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1)+
 //                            ClientRelationsFragment.relations.get(i)
 //                            +
                             ",\"services\":[";
                 } else {
 //                    clients = clients + "\t{\"client_name\":\"" + GroupReservationFragment.clientsViewData.get(i).getClient_name().getText().toString() + "\",\"services\":[\n";
                     clients = clients+"{\"client_name\":\"" + CreateRequestActivity.clientsArrayList.get(i).getClientName().getText().toString() + "\",\"client_phone\":\""+CreateRequestActivity.clientsArrayList.get(i).getPhoneNumber().getText()+"\",\"is_current_user\":"+"1"
-                    +",\"start_date\": \""+CreateRequestActivity.add_date.getText()+"\""+
-                            ",\"old\": "+CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()
-                            +",\"services\":[";
+                    +",\"start_date\": \""+CreateRequestActivity.add_date.getText()+"\"";
+                       //     ",\"old\": "+CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()
+                         //   +",\"services\":[";
 
                 }
               //  Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
@@ -470,7 +470,7 @@ public class AddEffectsToRequestActivity extends AppCompatActivity {
                 client.put("client_phone",CreateRequestActivity.clientsArrayList.get(i).getPhoneNumber().getText().toString());
                 client.put("start_date",CreateRequestActivity.add_date.getText());
                 client.put("is_current_user","1");
-                client.put("old",(CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1));
+               // client.put("old",(CreateRequestActivity.clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1));
                 JSONArray services=new JSONArray() ;
                 JSONObject effects=new JSONObject(effectsArr.get(i)) ;
 

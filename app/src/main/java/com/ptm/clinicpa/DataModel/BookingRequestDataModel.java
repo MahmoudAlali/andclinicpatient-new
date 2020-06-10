@@ -23,9 +23,13 @@ public class BookingRequestDataModel {
             bdb_loc_long,
             healthCntr_en,
             healthCntr_ar,
+            client_name,
+            bdb_start_dateReq,
             bdb_client_id;
 
+
     ArrayList <BookingRequestClientDataModel> clients = new ArrayList<>();
+    ArrayList <String> appointmentsIds = new ArrayList<>();
 
     public BookingRequestDataModel(String bdb_id, String bdb_booking_place, String bdb_location_id, String bdb_journey_time,
                                    String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,String cost,
@@ -57,7 +61,8 @@ public class BookingRequestDataModel {
                                    String bdb_journey_cost, String bdb_status, String bdb_pack_code, String bdb_is_group_booking,String cost,
                                    String bdb_name_booking, String bdb_reject_reason, String bdb_created_at,
                                    String bdb_sup_id,String supplier_name,String logo_id,  String bdb_client_id,String bdb_loc_lat,String bdb_loc_long
-            ,ArrayList <BookingRequestClientDataModel> clients,String healthCenter_en,String healthCenter_ar,String healthCenter_ID)
+            ,ArrayList <BookingRequestClientDataModel> clients,String healthCenter_en,String healthCenter_ar,String healthCenter_ID
+                ,String client_name,ArrayList<String> appointmentsIds ,String bdb_start_dateReq)
     {
         this.bdb_id=bdb_id;
         this.bdb_booking_place=bdb_booking_place;
@@ -81,6 +86,9 @@ public class BookingRequestDataModel {
         this.healthCntr_ar=healthCenter_ar;
         this.healthCntr_en=healthCenter_en;
         this.healthCenter_ID=healthCenter_ID;
+        this.client_name=client_name;
+        this.appointmentsIds=appointmentsIds;
+        this.bdb_start_dateReq=bdb_start_dateReq;
     }
 
     public void setBdb_id(String bdb_id) {
@@ -245,5 +253,17 @@ public class BookingRequestDataModel {
 
     public String getHealthCenter_ID() {
         return healthCenter_ID;
+    }
+
+    public ArrayList<String> getAppointmentsIds() {
+        return appointmentsIds;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public String getBdb_start_dateReq() {
+        return bdb_start_dateReq;
     }
 }

@@ -1,5 +1,6 @@
 package com.ptm.clinicpa.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -67,11 +68,12 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
            // Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
-        String S= context.getResources().getString(R.string.doctorName) +": "+bookingRequestData.get(position).getSupplier_name();
+        String S= context.getResources().getString(R.string.doctorNames) +": "/*+bookingRequestData.get(position).getSupplier_name()*/;
             ((Item)holder).doctorName.setText(S);
            // String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
 
@@ -89,7 +91,10 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
 
             // >>>>>>>>>>>>> status
-            if (MyBookingRequestsFragment.tab.equals("2"))
+            if (MyBookingRequestsFragment.tab.equals("2")&&(bookingRequestData.get(position).getBdb_is_group_booking().equals("20")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("21")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("23")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("24")))
             {
                 if (bookingRequestData.get(position).getBdb_status().equals("1")){
                     ((Item) holder).status.setText(R.string.approved);
@@ -109,19 +114,26 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             //>>>>>>>> add all services layouts
         ((Item)holder).myroot.removeAllViews();
-        for ( int i=0;i<bookingRequestData.get(position).getClients().size();i++)
-        {
-            for ( int j=0;j<bookingRequestData.get(position).getClients().get(i).getServices().size();j++)
+            if(bookingRequestData.get(position).getBdb_is_group_booking().equals("20")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("21")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("23")
+                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("24")) /// individual
             {
-                if(context.getResources().getString(R.string.locale).equals("en"))
-                    addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name());
-                else
-                    addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name_ar());
+                for ( int i=0;i<bookingRequestData.get(position).getClients().size();i++)
+                {
+                    for ( int j=0;j<bookingRequestData.get(position).getClients().get(i).getServices().size();j++)
+                    {
+                        if(context.getResources().getString(R.string.locale).equals("en"))
+                            addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name());
+                        else
+                            addLayout(((Item)holder).myroot,bookingRequestData.get(position).getClients().get(i).getServices().get(j).getBdb_name_ar());
 
+                    }
+
+
+                }
             }
 
-
-        }
 
             // >>>>>>>>>>>>> cancel Button
             ((Item) holder).cancel.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +185,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 
             // >>>>>>>>>>>>> date
-            ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getClients().get(0).getBdb_start_date()));
+            ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getBdb_start_dateReq()));
 
             //>>>>>>>>> price
         String price = APICall.convertToArabic(bookingRequestData.get(position).getCost());
@@ -257,6 +269,21 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
         });
 
+        //>>>>>>>>>> Doctor Names
+        for (int i=0;i<bookingRequestData.get(position).getClients().size();i++)
+        {
+            TextView doctorName = new TextView(context);
+            final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout_request, ((Item)holder).doctorNamesLayout, false);
+
+            doctorName.setText(bookingRequestData.get(position).getClients().get(i).getDoctor_name());
+            doctorName.setTextColor(R.color.doctorNames);
+            doctorName.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            doctorName.setGravity(View.TEXT_ALIGNMENT_CENTER);
+            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
+                    (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+            doctorName.setLayoutParams(textParam);
+            ((Item)holder).doctorNamesLayout.addView(doctorName);
+        }
 
 
 
@@ -351,6 +378,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID,doctorName,show_clients_names;
         ImageView book_Details,inner_res,place,logoImg;
+        LinearLayout doctorNamesLayout;
 
         LinearLayout myroot;
         public Item(View itemView) {
@@ -371,6 +399,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ID=itemView.findViewById(R.id.order_num);
             doctorName=itemView.findViewById(R.id.doctorName);
             show_clients_names=itemView.findViewById(R.id.show_clients_names);
+            doctorNamesLayout=itemView.findViewById(R.id.doctorNamesLayout);
 
         }
 

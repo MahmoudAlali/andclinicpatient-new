@@ -395,7 +395,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                     intent.putExtra("effects",geteffectclient(API.groupBookingModels));
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*/
                  //   startActivity(intent);
-                    APICall.addBookingRequest2(freeBookingFragment.lat+"",freeBookingFragment.lng+"", CreateRequestActivity.sup_id+"",freeBookingFragment.Place+"","",CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+                    APICall.addBookingRequest2(freeBookingFragment.lat+"",freeBookingFragment.lng+"",freeBookingFragment.Place+"",add_date.getText().toString(),CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
 
 //                    onBackPressed();
 //                    finish();
@@ -416,12 +416,12 @@ public class CreateRequestActivity extends AppCompatActivity {
         final EditText cnumber=layout2.findViewById(R.id.phone_number);
         final EditText cname=layout2.findViewById(R.id.client_name);
         final LinearLayout adding_service_layout=layout2.findViewById(R.id.adding_service_layout);
-        final Spinner ageRange=layout2.findViewById(R.id.age_range);
+        final EditText ageRange=layout2.findViewById(R.id.age_range);
         final Spinner addService=layout2.findViewById(R.id.add_service);
-        adapter2= new HintArrayAdapter(context, 0);
+       /* adapter2= new HintArrayAdapter(context, 0);
         adapter2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.age_range)));
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
-        ageRange.setAdapter(adapter2);
+        //ageRange.setAdapter(adapter2);*/
 
 //        boolean is_bride_service=false;
         ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
@@ -610,8 +610,9 @@ public static JSONArray getClients(int c)
         JSONObject client = new JSONObject();
 
         client.put("client_name",ClientName.getText().toString());
-        client.put("client_phone",phoneNumber.getText().toString());
-        client.put("start_date",CreateRequestActivity.add_date.getText());
+       // client.put("client_phone",phoneNumber.getText().toString());
+       // client.put("start_date",CreateRequestActivity.add_date.getText());
+        client.put("doctor_id",sup_id);
         if(healthFileNum.getText().toString().length()!=0)
         {
             client.put("health_record",healthFileNum.getText());
@@ -622,12 +623,13 @@ public static JSONArray getClients(int c)
         }
         if(personalReserv.isChecked())
         {
-            client.put("bdb_gender",BeautyMainPage.client_gender);
+            client.put("gender",BeautyMainPage.client_gender);
+            client.put("relation","0");
         }
         else
         {
-            client.put("bdb_gender",genderSpinner.getSelectedItemPosition()-1);
-            client.put("relations",relativeSpinner.getSelectedItemPosition());
+            client.put("gender",genderSpinner.getSelectedItemPosition()-1);
+            client.put("relation",relativeSpinner.getSelectedItemPosition());
         }
         String s = personalReserv.isChecked()?"1":"0";
         client.put("is_current_user",s);

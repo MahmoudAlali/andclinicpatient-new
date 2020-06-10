@@ -400,8 +400,10 @@
                         android:background="#F0B5CA"
                         android:gravity="center">
 
-                        <Spinner
+                        <EditText
                             android:id="@+id/age_range"
+                            android:background="@drawable/border_edit_text"
+                            android:hint="@string/age"
                             android:layout_width="match_parent"
                             android:textAlignment="center"
                             android:layout_height="match_parent"/>

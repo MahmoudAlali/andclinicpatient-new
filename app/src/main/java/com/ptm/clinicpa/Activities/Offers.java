@@ -470,7 +470,7 @@ public class Offers extends Fragment implements LocationListener ,
 
     private final FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;
     GoogleApiClient mGoogleApiClient;
-//    private static boolean check=false;
+    //    private static boolean check=false;
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
@@ -487,12 +487,12 @@ public class Offers extends Fragment implements LocationListener ,
                     Lat=String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude());
                     Long = String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
                     if (bestOfferItems.size()==0)
-                    if (!check) {
-                        check=false;
-                        bestOfferItems.clear();
-                       // APICall.bestOffer(BeautyMainPage.context, Lat, Long);
-                        Log.e("forth","ok"+Lat+Long);
-                    }
+                        if (!check) {
+                            check=false;
+                            bestOfferItems.clear();
+                            // APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                            Log.e("forth","ok"+Lat+Long);
+                        }
 
                 }
             });
@@ -511,64 +511,65 @@ public class Offers extends Fragment implements LocationListener ,
 
 
     }
-        @Override
-        public void onConnectionSuspended ( int i){
 
-        }
+    @Override
+    public void onConnectionSuspended ( int i){
 
-        @Override
-        public void onConnectionFailed (@NonNull ConnectionResult connectionResult){
-            APICall.showSweetDialog(getActivity(), getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.plsActivLoc));
+    }
 
-        }
+    @Override
+    public void onConnectionFailed (@NonNull ConnectionResult connectionResult){
+        APICall.showSweetDialog(getActivity(), getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.plsActivLoc));
+
+    }
 
 
-        private void showLocationServiceMsg(final Context context)
-        {
-                final Dialog dialog=new Dialog(context);
-                dialog.setContentView(R.layout.lcation_service_turnon_msg);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    private void showLocationServiceMsg(final Context context)
+    {
+        final Dialog dialog=new Dialog(context);
+        dialog.setContentView(R.layout.lcation_service_turnon_msg);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
        /* dialog.getWindow()
                 .setBackgroundResource(android.R.color.transparent);*/
-                TextView cancel=dialog.findViewById(R.id.cancel);
-                TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
-                TextView webSupport=dialog.findViewById(R.id.website_support);
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                    }
-                });
+        TextView cancel=dialog.findViewById(R.id.cancel);
+        TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
+        TextView webSupport=dialog.findViewById(R.id.website_support);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
 
-                webSupport.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
-                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                        context.startActivity(myAppLinkToMarket);
-                    }
-                });
-                whatsSupport.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        SupportActivity.openWhatsappChat(context);
-                    }
-                });
+        webSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                context.startActivity(myAppLinkToMarket);
+            }
+        });
+        whatsSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                SupportActivity.openWhatsappChat(context);
+            }
+        });
 
-                dialog.show();
+        dialog.show();
+
+    }
+
+    public static void setOfferImage()
+    {
+        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                APICall.getSalonLogoDltWhenEmpty2(BeautyMainPage.context, Constants.offerImageId,offerImage);
 
             }
-
-            public static void setOfferImage()
-            {
-                ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        APICall.getSalonLogoDltWhenEmpty2(BeautyMainPage.context, Constants.offerImageId,offerImage);
-
-                    }
-                });
-            }
+        });
+    }
 }

@@ -240,6 +240,7 @@
     <string name="doctors">Doctors</string>
     <string name="healthCenteres">Health centers</string>
     <string name="doctorName">Doctor name</string>
+    <string name="doctorNames">Doctors names</string>
 
     <!--Delete Account-->
     <string name="ServiceCovering">There is no clinics covering my area / city</string>
@@ -968,4 +969,8 @@
     <string name="females">Females</string>
     <string name="females_and_males">Males and females</string>
     <string name="doesnt_exist">Doesn\'t exist</string>
+    <string name="lessThanYear">age :less than year</string>
+    <string name="years">years</string>
+    <string name="twoYears">age :Two years</string>
+    <string name="oneYear">age :One year</string>
 </resources>

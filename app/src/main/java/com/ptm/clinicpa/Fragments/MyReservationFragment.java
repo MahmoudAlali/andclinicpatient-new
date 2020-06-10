@@ -153,7 +153,7 @@ public class MyReservationFragment extends Fragment  {
             }
         });
 
-        if (PayTestActivity.check.equals("2")  ) {
+      /*  if (PayTestActivity.check.equals("2")  ) {
             fragment = new AcceptedReservationFragment();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
@@ -189,7 +189,14 @@ public class MyReservationFragment extends Fragment  {
             }
             APICall.showSweetDialog(BeautyMainPage.context,BeautyMainPage.context.getResources().getString(R.string.success_payment));
             PayTestActivity.check="0";
-        }
+        }*/
+        tab="2";
+        tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+        fragment = new DepositReservationFragment();
+        fm = getFragmentManager();
+        fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
@@ -1074,13 +1081,13 @@ public class MyReservationFragment extends Fragment  {
             @Override
             public void onClick(View v) {
 
-                tab="1";
+               /* tab="1";
                 fragment = new AcceptedReservationFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.tabs_fragment, fragment);
                 fragmentTransaction.commitAllowingStateLoss();
-                tabselected(incom_reservation,accept_reservation,deposit_reservation,true);
+                tabselected(incom_reservation,accept_reservation,deposit_reservation,true);*/
 
             }
         });

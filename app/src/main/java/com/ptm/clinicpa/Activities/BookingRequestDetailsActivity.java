@@ -19,6 +19,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.Adapters.BookingRequestsAdapter;
+import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
@@ -145,16 +147,18 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
 
 
     }
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String catigoryVal,String cost,String requestedOn)
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String catigoryVal,String cost,String requestedOn,String docName,String status,String bdb_is_group_booking)
     {
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.request_details_main_layout_ext_v1, myroot, false);
-        TextView rname;
+        TextView rname,doctorName,statusTxt;
         TextView VCost;
         TextView requestedOnView;
 
         ImageView categoryImg=layout2.findViewById(R.id.categoryImg);
         rname=layout2.findViewById(R.id.rname);
+        doctorName=layout2.findViewById(R.id.doctorName);
+        statusTxt=layout2.findViewById(R.id.status);
         requestedOnView=layout2.findViewById(R.id.book_at);
         VCost=layout2.findViewById(R.id.cost);
         String c =cost+context.getResources().getString(R.string.ryal);
@@ -165,7 +169,31 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         categoryImg.setImageResource(categoryImages[index]);
 //        rname.setText(reservationName);
 //
-        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+        if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
+        {
+            doctorName.setVisibility(View.GONE);
+              statusTxt.setVisibility(View.GONE);
+        }
+        else
+        {
+            doctorName.setText(docName);
+            if (status.equals("1")){
+                statusTxt.setText(R.string.approved);
+            }else  if (status.equals("2")){
+                statusTxt.setText(R.string.rejectedByProvider);
+            }else  if (status.equals("3")){
+                statusTxt.setText(R.string.canceledByClient);
+            }else  if (status.equals("4")){
+                statusTxt.setText(R.string.canceledBySystem);
+            }
+            else  if (status.equals("0")){
+                statusTxt.setVisibility(View.GONE);
+            }
+
+
+        }
+
+            ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myroot.addView(layout2);
@@ -182,11 +210,19 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         c_name=layout2.findViewById(R.id.c_name);
         c_old=layout2.findViewById(R.id.c_old);
         c_name.setText(context.getResources().getString(R.string.cname)+" "+cname);
-        if (old.equals("1")) {
+       /* if (old.equals("1")) {
             c_old.setText(R.string.Adult);
         }else {
             c_old.setText(R.string.child);
-        }
+        }*/
+       if(old.equals("0"))
+           c_old.setText(R.string.lessThanYear);
+       else if(old.equals("1"))
+           c_old.setText(R.string.oneYear);
+       else if(old.equals("1"))
+           c_old.setText(R.string.twoYears);
+       else
+           c_old.setText(client_old);
         int costt=0;
         for (int j=0;j<costtxt.length();j++){
 

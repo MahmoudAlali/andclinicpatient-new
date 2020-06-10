@@ -32,6 +32,50 @@
                 android:layout_weight="2"
                 >
                 <TextView
+                    android:id="@+id/status"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:text="status 1"
+                    android:gravity="center"
+                    android:layout_weight="1"
+
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                >
+                <TextView
+                    android:id="@+id/doctorName"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/prime"
+                    android:textSize="16dp"
+                    android:text="doctor Name 1"
+                    android:gravity="center"
+                    android:layout_weight="1"
+
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/pf_5dp_space"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                >
+                <TextView
                     android:id="@+id/rname"
 
                     android:layout_width="match_parent"

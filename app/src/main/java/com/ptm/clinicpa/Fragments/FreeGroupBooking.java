@@ -16,6 +16,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +40,8 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
@@ -50,7 +54,8 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FreeGroupBooking extends Fragment {
+public class FreeGroupBooking extends Fragment implements LocationListener ,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     LinearLayout service_hair;
     Fragment fragment;
     FragmentManager fm;
@@ -639,6 +644,41 @@ public class FreeGroupBooking extends Fragment {
         });
 
         dialog.show();
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }

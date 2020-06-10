@@ -10,14 +10,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -39,10 +43,16 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
 import com.ptm.clinicpa.R;
@@ -51,7 +61,8 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class freeBookingFragment extends Fragment {
+public class freeBookingFragment extends Fragment implements LocationListener ,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     LinearLayout  service_hair;
     Fragment fragment;
     FragmentManager fm;
@@ -414,7 +425,11 @@ public class freeBookingFragment extends Fragment {
                             {
                                 mylocationId=item.getTitle().toString();
                                 mylocationbtn.setText(mylocationId);
-                                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
+                                Criteria crit = new Criteria();
+                                crit.setAccuracy(Criteria.ACCURACY_FINE);
+                                //locationManager.requestLocationUpdates( locationListener);
+                                LocationManager locationManager2 = (LocationManager)BeautyMainPage.context.getSystemService(Context.LOCATION_SERVICE);
+                                locationManager2.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1.0f, new LocationListener() {
                                     @Override
                                     public void onLocationChanged(Location location) {
                                         Log.e("LATLANG",lat+":"+lng +"FIRST");
@@ -957,5 +972,61 @@ public class freeBookingFragment extends Fragment {
         });
         namesalonDialog.show();
     }
+    private final FusedLocationProviderApi fusedLocationProviderApi = LocationServices.FusedLocationApi;
+    GoogleApiClient mGoogleApiClient;
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(BeautyMainPage.context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            final LocationRequest locationRequest = LocationRequest.create();
+            locationRequest
+                    .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            locationRequest.setInterval(30 * 1000);
+            locationRequest.setFastestInterval(5 * 1000);
+            fusedLocationProviderApi.requestLocationUpdates(mGoogleApiClient, locationRequest, new com.google.android.gms.location.LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    Log.e("LocationChangedFree","ok" +fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude()+" "+fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
+                   /* Lat=String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude());
+                    Long = String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
+                    */
 
+                }
+            });
+        } else {
+           // requestLocationPermission();
+        }
+
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

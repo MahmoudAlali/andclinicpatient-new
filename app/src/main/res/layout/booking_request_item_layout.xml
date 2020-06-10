@@ -157,7 +157,8 @@
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
-            android:orientation="horizontal"
+            android:id="@+id/doctorNamesLayout"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
@@ -165,7 +166,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
 
-                android:text="Doctor name"
+                android:text="@string/doctorNames"
                 android:gravity="center"
                 android:textSize="14dp"
                 android:textColor="#a5587a"

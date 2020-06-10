@@ -205,7 +205,8 @@
     <string name="centerRate">تقييم المركز الصحي</string>
     <string name="nearestCenters">أقرب المراكز لي</string>
     <string name="providerRate">تقييم المزودة</string>
-    <string name="doctorName">اسم الطبيب/الطبيبة</string>
+    <string name="doctorName">اسم الطبيب/ة</string>
+    <string name="doctorNames">أسماء الأطباء</string>
     <string name="select_city_alert">من فضلك اختاري اسم المدينة</string>
 
 
@@ -826,5 +827,9 @@
     <string name="females">الإناث</string>
     <string name="females_and_males">كلا الجنسين</string>
     <string name="doesnt_exist">لا يوجد</string>
+    <string name="lessThanYear">العمر: أقل من سنة</string>
+    <string name="years">سنوات</string>
+    <string name="twoYears">العمر: سنتين</string>
+    <string name="oneYear">العمر: سنة واحدة</string>
 
 </resources>

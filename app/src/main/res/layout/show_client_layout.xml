@@ -89,10 +89,10 @@
                 android:background="#F0B5CA"
                 android:gravity="center">
 
-                <Spinner
+                <EditText
                     android:id="@+id/age_range"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Spinner>
+                    android:layout_height="wrap_content"></EditText>
             </LinearLayout>
 
             <LinearLayout

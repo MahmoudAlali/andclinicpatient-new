@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.DataModel.ClientServiceDataModel;
 import com.ptm.clinicpa.DataModel.ClientsViewData;
 import com.ptm.clinicpa.DataModel.GroupBookingModel;
+import com.ptm.clinicpa.DataModel.ServiceItems;
 import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.freeBookingFragment;
@@ -165,7 +167,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                         check = false;
                         break;
 
-                    } else if (clientsArrayList.get(i).getAgeRange().getSelectedItemPosition() == 0){
+                    }
+                    else if (clientsArrayList.get(i).getAgeRange().getText() .equals("")){
                         APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
                         check = false;
                         break;
@@ -239,7 +242,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     intent.putExtra("effects",geteffectclient(API.groupBookingModels));
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*//*
                     startActivity(intent);*/
-                    APICall.addGroupBookingRequest2(freeBookingFragment.filterMyLocationLat+"",freeBookingFragment.filterMyLocationLng+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,"");
+                    APICall.addGroupBookingRequest2(FreeGroupBooking.lat+"",FreeGroupBooking.lng+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,"");
 
 
 //                    onBackPressed();
@@ -263,7 +266,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         final EditText cnumber=layout2.findViewById(R.id.phone_number);
         final AutoCompleteTextView cname=layout2.findViewById(R.id.client_name);
         final LinearLayout adding_service_layout=layout2.findViewById(R.id.adding_service_layout);
-        final Spinner ageRange=layout2.findViewById(R.id.age_range);
+        final EditText ageRange=layout2.findViewById(R.id.age_range);
         final Spinner addService=layout2.findViewById(R.id.add_service);
 
         final Spinner ageSpinner = layout2.findViewById(R.id.age_range);
@@ -277,15 +280,42 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         final EditText healthFileNum = layout2.findViewById(R.id.healthNum);
         final  TextView start_time=layout2.findViewById(R.id.start_time);
 //        boolean is_bride_service=false;
+        personalReserv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    layout2.findViewById(R.id.relativesLayout).setVisibility(View.GONE);
+                   // phoneNumber.setText(BeautyMainPage.client_number);
+                    cname.setText(BeautyMainPage.client_name);
+                    if(BeautyMainPage.client_gender.equals("0"))
+                        genderSpinner.setSelection(1);
+                    else
+                        genderSpinner.setSelection(2);
+
+                }
+                else
+                {
+                    layout2.findViewById(R.id.relativesLayout).setVisibility(View.VISIBLE);
+                    //phoneNumber.setText("");
+                    cname.setText("");
+                    genderSpinner.setSelection(0);
+
+
+
+                }
+            }
+        });
+
         ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         addService.setAdapter(adapter1);
 
-        adapter2= new HintArrayAdapter(context, 0);
+        /*adapter2= new HintArrayAdapter(context, 0);
         adapter2.addAll(Arrays.asList(context.getResources().getStringArray(R.array.age_range)));
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ageRange.setAdapter(adapter2);
-
+*/
 
         ArrayAdapter relativeAdapter = new HintArrayAdapter(context, 0);
         relativeAdapter.addAll(Arrays.asList(context.getResources().getStringArray(R.array.relativesType)));
@@ -315,9 +345,12 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
             }
         });
 
+        final ArrayList<String> docNames=new ArrayList<>();
+
+        final ArrayList<ServiceItems> allDocs=new ArrayList<>();
         //clientsArrayList.add(new GroupBookingModel(cname,cnumber,ageRange,servicesModels));
         clientsArrayList.add(new GroupBookingModel(cname,ageRange,genderSpinner,relativeSpinner,doctorName,doctorSpeciality,
-                start_time,healthFileNum,description,servicesModels,personalReserv));
+                start_time,healthFileNum,description,servicesModels,personalReserv,allDocs));
 
 
 //        emp_name.setText(s);
@@ -391,7 +424,6 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         }
 
 
-        final ArrayList<String> docNames=new ArrayList<>();
         final ArrayAdapter adapter3 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, docNames);
         adapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         doctorName.setAdapter(adapter3);
@@ -404,7 +436,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
-                    APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames);
+
+                    APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs);
 
                 }
             }
@@ -425,7 +458,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_dropdown_item_1line, relativesList);
         cname.setAdapter(adapter);
-        cname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*cname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(APICall.allRelativesList.get(position).getBdb_gender().equals("0"))
@@ -436,6 +469,25 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 if(!APICall.allRelativesList.get(position).getBdb_health_record().equals("null"))
                      healthFileNum.setText(APICall.allRelativesList.get(position).getBdb_health_record());
               //  ageRange.setSelection(Integer.getInteger(APICall.allRelativesList.get(position).get()));
+
+            }
+        });*/
+        cname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(APICall.allRelativesList.get(position).getBdb_gender().equals("0"))
+                    genderSpinner.setSelection(1);
+                else
+                    genderSpinner.setSelection(2);
+                relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(position).getBdb_relation()));
+                if(!APICall.allRelativesList.get(position).getBdb_health_record().equals("null"))
+                    healthFileNum.setText(APICall.allRelativesList.get(position).getBdb_health_record());
+                //  ageRange.setSelection(Integer.getInteger(APICall.allRelativesList.get(position).get()));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -578,7 +630,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
 
                 Log.e("Client1","11");
                 client.put("client_name",clientsArrayList.get(i).getClientName().getText().toString());
-                client.put("client_phone",clientsArrayList.get(i).getPhoneNumber().getText().toString());
+               // client.put("client_phone",clientsArrayList.get(i).getPhoneNumber().getText().toString());
                 if(clientsArrayList.get(i).getMedicalFileNumber().getText().toString().length()!=0)
                 {
                     client.put("health_record",clientsArrayList.get(i).getMedicalFileNumber().getText());
@@ -606,9 +658,9 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
 
                 Log.e("Client4","11");
 
-                client.put("old",(clientsArrayList.get(i).getAgeRange().getSelectedItemPosition()-1));
+                client.put("old",(clientsArrayList.get(i).getAgeRange().getText()));
                 Log.e("Client1","11");
-                client.put("doctor_id",(clientsArrayList.get(i).getDoctorName()));
+                client.put("doctor_id",clientsArrayList.get(i).getAllDoctors().get(clientsArrayList.get(i).getDoctorName().getSelectedItemPosition()).getBdb_ser_id());
                 Log.e("rrrr","index-i");
 
                 JSONArray services=new JSONArray() ;
@@ -625,7 +677,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     servic.put("ser_id",clientsArrayList.get(i).getServicesModels().get(j).getBdb_ser_id());
                     services.put(servic);
                 }
-                client.put("services",services);
+                if(clientsArrayList.get(i).getServicesModels().size()!=0)
+                   client.put("services",services);
 
                 String eff="";
                 Log.e("index-i","index-i");

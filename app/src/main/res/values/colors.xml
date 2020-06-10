@@ -37,6 +37,7 @@
     <color name="list_group_details">#FDFDFE</color>
     <color name="main_header">#AAC5DD</color>
     <color name="second_header">#D5BFD4</color>
+    <color name="doctorNames">#a5587a</color>
 
 
 </resources>

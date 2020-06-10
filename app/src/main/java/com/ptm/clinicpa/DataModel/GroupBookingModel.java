@@ -6,25 +6,28 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.ptm.clinicpa.Activities.Services;
+
 import java.util.ArrayList;
 
 public class GroupBookingModel {
-    EditText clientName,PhoneNumber,medicalFileNumber,description;
-    Spinner ageRange,genderSpinner,relationSpinner,doctorSpeciality,doctorName;
+    EditText clientName,PhoneNumber,medicalFileNumber,description,ageRange;
+    Spinner genderSpinner,relationSpinner,doctorSpeciality,doctorName;
     ArrayList<ClientServiceDataModel> servicesModels;
     TextView appointmentTime;
     CheckBox isCurrentUser;
+     ArrayList<ServiceItems> allDoctors=new ArrayList<>();
 
 
 
-    public GroupBookingModel(EditText clientName, EditText phoneNumber, Spinner ageRange, ArrayList<ClientServiceDataModel> servicesModels) {
+    public GroupBookingModel(EditText clientName, EditText phoneNumber, EditText ageRange, ArrayList<ClientServiceDataModel> servicesModels) {
         this.clientName = clientName;
         PhoneNumber = phoneNumber;
         this.ageRange = ageRange;
         this.servicesModels = servicesModels;
     }
 
-    public GroupBookingModel(EditText clientName, Spinner ageRange,Spinner genderSpinner,Spinner relationSpinner,Spinner doctorName,Spinner doctorSpeciality,TextView appointmentTime,
+    public GroupBookingModel(EditText clientName, EditText ageRange,Spinner genderSpinner,Spinner relationSpinner,Spinner doctorName,Spinner doctorSpeciality,TextView appointmentTime,
                              EditText medicalFileNumber , EditText description,ArrayList<ClientServiceDataModel> servicesModels) {
         this.clientName = clientName;
         this.ageRange = ageRange;
@@ -36,8 +39,10 @@ public class GroupBookingModel {
         this.description=description;
         this.medicalFileNumber=medicalFileNumber;
         this.appointmentTime=appointmentTime;
-    }public GroupBookingModel(AutoCompleteTextView clientName, Spinner ageRange, Spinner genderSpinner, Spinner relationSpinner, Spinner doctorName, Spinner doctorSpeciality, TextView appointmentTime,
-                              EditText medicalFileNumber , EditText description, ArrayList<ClientServiceDataModel> servicesModels, CheckBox isCurrentUser) {
+
+    }
+    public GroupBookingModel(AutoCompleteTextView clientName, EditText ageRange, Spinner genderSpinner, Spinner relationSpinner, Spinner doctorName, Spinner doctorSpeciality, TextView appointmentTime,
+                              EditText medicalFileNumber , EditText description, ArrayList<ClientServiceDataModel> servicesModels, CheckBox isCurrentUser, ArrayList<ServiceItems> allDoctors ) {
         this.clientName = clientName;
         this.ageRange = ageRange;
         this.servicesModels = servicesModels;
@@ -49,6 +54,7 @@ public class GroupBookingModel {
         this.medicalFileNumber=medicalFileNumber;
         this.appointmentTime=appointmentTime;
         this.isCurrentUser=isCurrentUser;
+        this.allDoctors=allDoctors;
     }
     public EditText getClientName() {
         return clientName;
@@ -66,12 +72,8 @@ public class GroupBookingModel {
         PhoneNumber = phoneNumber;
     }
 
-    public Spinner getAgeRange() {
+    public EditText getAgeRange() {
         return ageRange;
-    }
-
-    public void setAgeRange(Spinner ageRange) {
-        this.ageRange = ageRange;
     }
 
     public ArrayList<ClientServiceDataModel> getServicesModels() {
@@ -188,4 +190,7 @@ public class GroupBookingModel {
         return isCurrentUser;
     }
 
+    public ArrayList<ServiceItems> getAllDoctors() {
+        return allDoctors;
+    }
 }
