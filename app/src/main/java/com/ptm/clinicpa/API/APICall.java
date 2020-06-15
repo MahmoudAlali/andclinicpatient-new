@@ -46,6 +46,7 @@ import com.ptm.clinicpa.Activities.AddEffectsToRequestActivity;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.BookingRequestDetailsActivity;
 import com.ptm.clinicpa.Activities.ConfirmAccountActivity;
+import com.ptm.clinicpa.Activities.CreateGroupRequestActivity;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.GroupOffer.MultiClientOfferEffect;
 import com.ptm.clinicpa.Activities.HealthCentersFilters;
@@ -347,7 +348,7 @@ public class APICall {
         //    ------------------- register new user in beauty client app----------------
         static String mMessage="";
 
-    public  static  String  new_user(final String name, final String phone,String bdb_email,final String gender ,final String password, final String confirm_password, final String loc_long
+    public  static  String  new_user(final String age,final String name, final String phone,String bdb_email,final String gender ,final String password, final String confirm_password, final String loc_long
             , final String loc_lat, final String description,final String my_description,String loc_details,String loc_detailsAr,final  String url, final Context context){
         if (validationPassword(password)){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -362,6 +363,7 @@ public class APICall {
                 postdata.put("bdb_mobile", phone);
                 postdata.put("bdb_name", name);
                 postdata.put("bdb_gender", gender);
+                postdata.put("bdb_old", age);
                 postdata.put("password", password);
                 postdata.put("c_password", confirm_password);
                 postdata.put("bdb_email", bdb_email);
@@ -2556,7 +2558,7 @@ public class APICall {
 
 
         //    ------------------------------ detailsuser-----------------
-        public  static  void  detailsUser(final  String url, final EditText e_bdb_name, final EditText e_bdb_email, final EditText e_bdb_mobile, final Spinner gender, final Context context){
+        public  static  void  detailsUser(final  String url, final EditText e_bdb_name, final EditText e_bdb_email, final EditText e_bdb_mobile, final Spinner gender, final Context context, final EditText e_bdb_old){
             final SharedPreferences.Editor editor=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE).edit();
             SharedPreferences sh=context.getSharedPreferences("LOGIN",Context.MODE_PRIVATE);
             try{
@@ -2660,9 +2662,11 @@ public class APICall {
                                 final String bdb_email = data.getString("bdb_email");
                                 final String bdb_mobile = data.getString("bdb_mobile");
                                 final String bdb_gender = data.getString("bdb_gender");
+                                final String bdb_old = data.getString("bdb_old");
 
                                 //to check if changed when update info
                                 AccountFragment.oldEmail=bdb_email;
+                                AccountFragment.oldAge=bdb_old;
                                 AccountFragment.oldName=bdb_name;
                                 AccountFragment.oldGender=bdb_gender;
 
@@ -2673,6 +2677,7 @@ public class APICall {
                                         e_bdb_mobile.setText(convertToArabic(bdb_mobile));
                                         e_bdb_email.setText(bdb_email);
                                         e_bdb_name.setText(bdb_name);
+                                        e_bdb_old.setText(bdb_old);
                                         if(bdb_gender.equals("0"))
                                         gender.setSelection(1);
                                         else if(bdb_gender.equals("1"))
@@ -4575,7 +4580,7 @@ public class APICall {
                 }
             });
         }
-        public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email,String bdb_gender, final Context context) {
+        public  static  void   update_user(final  String url, final String bdb_name, final String bdb_email,String bdb_gender,String bdb_old, final Context context) {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
@@ -4597,6 +4602,11 @@ public class APICall {
             if (!AccountFragment.oldGender.equals(bdb_gender))
             {
                 postdata.put("bdb_gender", bdb_gender);
+                indx++;
+            }
+            if (!AccountFragment.oldAge.equals(bdb_old))
+            {
+                postdata.put("bdb_old", bdb_old);
                 indx++;
             }
         } catch (JSONException e) {
@@ -4826,10 +4836,13 @@ public class APICall {
                             String bdb_is_guest=data.getString("bdb_is_guest");
                             String bdb_id=data.getString("bdb_id");
                             String bdb_gender=data.getString("bdb_gender");
+                            String bdb_old=data.getString("bdb_old");
                             BeautyMainPage.client_number =bdb_mobile;
                             BeautyMainPage.client_gender =bdb_gender;
                             BeautyMainPage.bdb_is_guest =bdb_is_guest;
                             BeautyMainPage.bdb_id =bdb_id;
+                            BeautyMainPage.bdb_old =bdb_old;
+                            BeautyMainPage.client_name =bdb_name;
 
 
                             Log.d("MessageResponse",mMessage);
@@ -4842,6 +4855,7 @@ public class APICall {
                             prefEditor.putString("isGuest", bdb_is_guest);
                             prefEditor.putString("bdb_gender", bdb_gender);
                             prefEditor.putString("bdb_id", BeautyMainPage.bdb_id);
+                            prefEditor.putString("bdb_old", BeautyMainPage.bdb_old);
                             prefEditor.commit();
                             prefEditor.apply();
 
@@ -29914,14 +29928,13 @@ public class APICall {
         if( !HealthCentersFilters.filterSpeciality.equals(""))
 
             jsonPostData+=","+HealthCentersFilters.filterSpeciality;
-        /*if( !HealthCentersFilters.filterDoctorName.equals(""))
-            jsonPostData+= ","+HealthCentersFilters.filterDoctorName;*/
-             jsonPostData+=   "]\n" +
-              //  ServicesTabsFragment.sortby+
+        jsonPostData+=   "]\n" ;
+        if( !HealthCentersFragment.Sort.equals(""))
+            jsonPostData+=","+HealthCentersFragment.Sort;
+        else
+            jsonPostData+=",\"sort\":{\"num\":23,\"by\":\"asc\"}\n" ;
 
-//                    ",\"sort\":{\"num\":27,\"by\":\"desc\"}\n" +
-                "}";
-
+        jsonPostData+="}";
 
         Log.e("RequestsPost",jsonPostData);
         final RequestBody body = RequestBody.create(MEDIA_TYPE, jsonPostData);
@@ -31935,6 +31948,8 @@ Log.e("ERRR",e.getMessage());
                     if (response_code.equals("191"))
                     {
                         JSONObject data2=j.getJSONObject("data");
+                        String auth_user_health_record=j.getString("auth_user_health_record");
+                        CreateGroupRequestActivity.userHealthRecord=auth_user_health_record;
                         JSONArray data=data2.getJSONArray("relation");
                         for (int i=0;i<data.length();i++){
                             JSONObject jsonObject=data.getJSONObject(i);
@@ -33264,14 +33279,13 @@ Log.e("ERRR",e.getMessage());
 
         allSuppliers.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-//        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                showDialog(context);
-////                ReservationFragment.pullToRefresh.setRefreshing(true);
-////                pd.show();
-//            }
-//        });
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+
+            }
+        });
 
         //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
@@ -33291,6 +33305,7 @@ Log.e("ERRR",e.getMessage());
             @Override
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
+                pd.dismiss();
                 Log.w("failure Response", mMessage);
 //                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
 //                    @Override
@@ -33345,15 +33360,13 @@ Log.e("ERRR",e.getMessage());
                 mMessage = response.body().string();
                 Log.e("Token", gettoken(context));
                 Log.e("TAG", mMessage);
-//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        pd.dismiss();
-////                        ReservationFragment.pullToRefresh.setRefreshing(false);
-//                    }
-//                });
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
 
-
+                    }
+                });
                 try {
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");

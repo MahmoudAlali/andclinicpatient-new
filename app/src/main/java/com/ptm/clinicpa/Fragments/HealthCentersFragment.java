@@ -3,6 +3,8 @@ package com.ptm.clinicpa.Fragments;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,8 +22,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.HealthCentersFilters;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
 import com.ptm.clinicpa.Adapters.HealthCentersAdapter;
@@ -48,10 +54,12 @@ public class HealthCentersFragment extends Fragment implements LocationListener,
     public static HealthCentersAdapter providersAdapter;
     public static RecyclerView recyclerView;
     public static SwipeRefreshLayout pullToRefresh;
-    static String lati,lngi;
+    public static String lati,lngi,Sort="";
     static double lat,lng;
     Location mLastLocation;
     public static int ACCESS_FINE_LOCATION = 90;
+    ImageView filterbtn;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -194,6 +202,61 @@ public class HealthCentersFragment extends Fragment implements LocationListener,
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(providersAdapter);
+
+
+        //region SortBtn
+        ImageView sortbtn=view.findViewById(R.id.sort);
+
+        sortbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), v);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.health_centers_sort_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int id=item.getItemId();
+                        //  bookingRequestsAdapter.notifyDataSetChanged();
+                        if (id==R.id.one){
+                            Sort="\"sort\":{\"num\":23,\"by\":\"asc\"}\n";
+                            APICall.automatedCentersBrowse( 1+"", BeautyMainPage.context, Offers.Lat,Offers.Long);
+
+                        }else if (id==R.id.two) {
+                            Sort="\"sort\":{\"num\":23,\"by\":\"desc\"}\n";
+                            APICall.automatedCentersBrowse( 1+"", BeautyMainPage.context, Offers.Lat,Offers.Long);
+                        }else if (id==R.id.three) {
+                            Sort="\"sort\":{\"num\":26,\"by\":\"asc\"}\n";
+                            APICall.automatedCentersBrowse( 1+"", BeautyMainPage.context, Offers.Lat,Offers.Long);
+                        }else if (id==R.id.four) {
+                            Sort="\"sort\":{\"num\":26,\"by\":\"desc\"}\n";
+                            APICall.automatedCentersBrowse( 1+"", BeautyMainPage.context, Offers.Lat,Offers.Long);
+                        }
+                        return true;
+                    }
+                });
+                popup.show(); //showing popup menu
+            }
+        });
+
+        //endregion
+
+        //region FilterBtn
+        filterbtn=view.findViewById(R.id.filter);
+        filterbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment= new HealthCentersFilters();
+                FragmentManager fm = getActivity().getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+
+        //region
 
         return view;
     }

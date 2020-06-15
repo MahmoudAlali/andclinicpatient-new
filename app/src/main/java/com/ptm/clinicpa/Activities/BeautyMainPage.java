@@ -47,6 +47,7 @@ import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.GroupReservationFragment;
 //import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
 import com.ptm.clinicpa.Fragments.GroupReservationOthersFragment;
+import com.ptm.clinicpa.Fragments.HealthCentersFragment;
 import com.ptm.clinicpa.Fragments.ListServicesBrideFragment;
 import com.ptm.clinicpa.Fragments.ListServicesFragment;
 import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
@@ -86,7 +87,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static int ACCESS_FINE_LOCATION=90;
     public static Fragment currentFragment;
     public static String is_bride_service;
-    public static String bdb_email,bdb_is_guest="0",bdb_id="";
+    public static String bdb_email,bdb_is_guest="0",bdb_id="",bdb_old;
     public static Bitmap ImageLogo;
     private int READ_EXTERNAL_STORAGE=93;
     public static Boolean RELOADAPP=false;
@@ -183,6 +184,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             client_number=settings.getString("client_number","");
             client_gender=settings.getString("client_gender","");
             bdb_email=settings.getString("bdb_email","");
+            bdb_old=settings.getString("bdb_old","");
 
 //        }
 
@@ -1128,7 +1130,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 startActivity(getIntent());
                             }else {
                                 menu.findItem(R.id.centers).setIcon(R.drawable.services_selected);
-                                fragment = new HealthCentersFilters();
+                                fragment = new HealthCentersFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);

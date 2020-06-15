@@ -42,12 +42,12 @@ public class AccountFragment extends Fragment  {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
-    EditText e_bdb_mobile,e_bdb_name,e_bdb_email,e_pass,e_c_pass,old_pass;
+    EditText e_bdb_mobile,e_bdb_name,e_bdb_email,e_pass,e_c_pass,old_pass,e_bdb_old;
     Button save,deleteaccount;
     TextView edit;
     Spinner language,gender;
     SharedPreferences.Editor editor;
-    public static String oldEmail="",oldName="",oldGender="";
+    public static String oldEmail="",oldName="",oldGender="",oldAge="";
 
     String genderType="";
 
@@ -62,6 +62,7 @@ public class AccountFragment extends Fragment  {
         toolbar=view.findViewById(R.id.toolbar);
         e_bdb_email=view.findViewById(R.id.e_bdb_email);
         e_bdb_name=view.findViewById(R.id.e_bdb_name);
+        e_bdb_old=view.findViewById(R.id.e_bdb_old);
         e_bdb_mobile=view.findViewById(R.id.e_bdb_mobile);
         e_pass=view.findViewById(R.id.pass);
         e_c_pass=view.findViewById(R.id.c_pass);
@@ -114,7 +115,7 @@ public class AccountFragment extends Fragment  {
         });
 
 
-        APICall.detailsUser(APICall.API_PREFIX_NAME+"/api/user/detailsUser",e_bdb_name,e_bdb_email,e_bdb_mobile,gender,BeautyMainPage.context);
+        APICall.detailsUser(APICall.API_PREFIX_NAME+"/api/user/detailsUser",e_bdb_name,e_bdb_email,e_bdb_mobile,gender,BeautyMainPage.context,e_bdb_old);
         BeautyMainPage.FRAGMENT_NAME="";
         BeautyMainPage.FRAGMENT_NAME="ACCOUNTFRAGMENT";
         add_del_site=view.findViewById(R.id.add_del_site);

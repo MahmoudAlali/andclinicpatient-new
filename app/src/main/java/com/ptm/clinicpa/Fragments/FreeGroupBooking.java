@@ -576,10 +576,6 @@ public class FreeGroupBooking extends Fragment implements LocationListener ,
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
                 }*/ else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
-                } else if(typeSpinner.getSelectedItemPosition()==0){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.type_proceed));
-                /*} else if(typeSpinner.getSelectedItemPosition()==1&& filterSpeciality.equals("")){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.speciality_proceed));*/
                 } else {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();

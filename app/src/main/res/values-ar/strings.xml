@@ -604,6 +604,7 @@
     <string name="more_desc">وصف إضافي(اختياري)</string>
     <string name="more_desc2">وصف إضافي:</string>
     <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
+    <string name="creationDateFilter">تاريخ إنشاء الطلب</string>
     <string name="requestSalonFilter">اسم المركز</string>
     <string name="requestTypeFilter">نوع الطلب</string>
     <string name="filter">فلترة</string>
@@ -844,5 +845,8 @@
     <string name="creation_date">تاريخ الإنشاء</string>
     <string name="edit_request_sent">تم إرسال طلب التعديل</string>
     <string name="edit_request_not_sent">لم يتم إرسال طلب التعديل</string>
-
+    <string name="distance_asc">المسافة (تصاعدياً)</string>
+    <string name="distance_desc">المسافة (تنازلياً)</string>
+    <string name="rating_asc">التقييم (تصاعدياً)</string>
+    <string name="rating_desc">التقييم (تنازلياً)</string>
 </resources>

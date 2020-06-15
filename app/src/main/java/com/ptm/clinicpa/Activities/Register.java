@@ -50,7 +50,7 @@ import java.util.List;
 public class Register extends AppCompatActivity implements OnMapReadyCallback {
 
 
-    EditText name, phone, email, password, confirm_password;
+    EditText name, phone, email, password, confirm_password,age;
     CheckBox privacy_policy;
     public static Context context;
     public static int ACCESS_FINE_LOCATION = 90;
@@ -107,6 +107,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
         name = findViewById(R.id.name);
+        age = findViewById(R.id.age);
         current_location = findViewById(R.id.cur_location);
         another_location = findViewById(R.id.anthor_location);
         phone = findViewById(R.id.phone);
@@ -166,7 +167,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.cant_reg_without_loc) );
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
-            APICall.new_user(name.getText().toString(),phone.getText().toString(),email.getText().toString(),gender,password.getText().toString()
+            APICall.new_user(age.getText().toString(),name.getText().toString(),phone.getText().toString(),email.getText().toString(),gender,password.getText().toString()
             ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/user/register/new_user",Register.this);
         }
     }

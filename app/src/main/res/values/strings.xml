@@ -806,6 +806,7 @@
     <string name="more_desc">more description (optional)</string>
     <string name="more_desc2">more description:</string>
     <string name="requestDateFilter">Order execution date</string>
+    <string name="creationDateFilter">Order creation date</string>
     <string name="requestSalonFilter">Clinic name</string>
     <string name="requestTypeFilter">Order type</string>
     <string name="filter">filter</string>
@@ -985,5 +986,9 @@
     <string name="enter_age_btwn_range">Please enter patient age between 0 and 100</string>
     <string name="edit_request_sent">Edition request sent successfully</string>
     <string name="edit_request_not_sent">Edition request is not sent</string>
+    <string name="distance_asc">Distance (ascending)</string>
+    <string name="distance_desc">Distance (descending)</string>
+    <string name="rating_asc">Rating (ascending)</string>
+    <string name="rating_desc">Rating (descending)</string>
 
 </resources>

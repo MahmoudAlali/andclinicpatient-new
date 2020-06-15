@@ -284,6 +284,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
         });
 
+        ArrayList <String> doctorIds=new ArrayList<>();
         //>>>>>>>>>> Doctor Names
         for (int i=0;i<bookingRequestData.get(position).getClients().size();i++)
         {
@@ -291,19 +292,20 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.doc_name_layout, ((Item)holder).doctorNamesLayout, false);
             TextView doctorName;
             doctorName=layout2.findViewById(R.id.rname);
-           // final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout_request, ((Item)holder).doctorNamesLayout, false);
-
             doctorName.setText(bookingRequestData.get(position).getClients().get(i).getDoctor_name());
-           // doctorName.setTextColor(R.color.doctorNames);
-           // doctorName.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            //doctorName.setGravity(View.TEXT_ALIGNMENT_CENTER);
-           /* LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
-                    (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-            doctorName.setLayoutParams(textParam);*/
             if(doctorName.getParent() != null) {
                 ((ViewGroup)doctorName.getParent()).removeView(doctorName); // <- fix
             }
-            ((Item)holder).doctorNamesLayout.addView(doctorName);
+            boolean exist=false;
+            for (String item:doctorIds) {
+                if(item.equals(bookingRequestData.get(position).getClients().get(i).getDoctor_name()));
+                     exist=true;
+            }
+            if(!exist)
+            {
+                doctorIds.add(bookingRequestData.get(position).getClients().get(i).getDoctor_name());
+                ((Item)holder).doctorNamesLayout.addView(doctorName);
+            }
         }
 
 

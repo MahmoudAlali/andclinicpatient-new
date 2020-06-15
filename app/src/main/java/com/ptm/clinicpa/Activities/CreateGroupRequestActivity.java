@@ -50,6 +50,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
     public static Button next,addNewClient,add_date;
     public static Context context;
     static LinearLayout show_clients;
+    public static String userHealthRecord="";
     public static ArrayList<String> supplierServicesNames=new ArrayList();
     public static ArrayList<ClientServiceDataModel> supplierServices=new ArrayList();
     public static ArrayList<GroupBookingModel> clientsArrayList=new ArrayList();
@@ -293,6 +294,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     layout2.findViewById(R.id.relativesLayout).setVisibility(View.GONE);
                    // phoneNumber.setText(BeautyMainPage.client_number);
                     cname.setText(BeautyMainPage.client_name);
+                    healthFileNum.setText(userHealthRecord);
+                    ageRange.setText(BeautyMainPage.bdb_old);
                     if(BeautyMainPage.client_gender.equals("0"))
                         genderSpinner.setSelection(1);
                     else
@@ -304,6 +307,8 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     layout2.findViewById(R.id.relativesLayout).setVisibility(View.VISIBLE);
                     //phoneNumber.setText("");
                     cname.setText("");
+                    healthFileNum.setText("");
+                    ageRange.setText("");
                     genderSpinner.setSelection(0);
 
 

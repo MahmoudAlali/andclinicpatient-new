@@ -89,7 +89,19 @@ public class HealthCentersFilters extends Fragment {
         ok = view.findViewById(R.id.ok);
 
         APICall.getdetailsUser(BeautyMainPage.context);
-
+        filterSupplierName="";
+        filterSupplierId="";
+        filterDistance="";
+        filterType="";
+        filterProviderRate="";
+        filterAgeRange="";
+        filterGender="";
+        filterServicePlace="";
+        filterMyLocationLat="";
+        filterMyLocationLng="";
+        filterOfferPrice="";
+        filterSpeciality="";
+        filterClinicRate="";
 
 
         //region Clinic Name
@@ -415,8 +427,9 @@ public class HealthCentersFilters extends Fragment {
                     public void onClick(View v) {
                         rateServiceDialog.dismiss();
                         rateService.setText(BeautyMainPage.context.getResources().getString(R.string.srvcEvaluation)+": " + (int) ratingBar.getRating());
-                        APICall.filterSortAlgorithm("5", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
-                        ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
+                        filterProviderRate=Filters.getString(Filters.CENTER_RATING,(int) ratingBar.getRating()+"",(int) ratingBar.getRating()+"");
+                       // APICall.filterSortAlgorithm("50", (int) ratingBar.getRating() + "", (int) ratingBar.getRating() + "");
+                        //ServiceFragment.serviceFilters.set(3, new ServiceFilter(true, rateService.getText().toString()));
 
 
                     }

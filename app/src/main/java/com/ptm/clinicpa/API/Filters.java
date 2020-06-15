@@ -7,6 +7,7 @@ public class Filters {
     public static String CLINIC_ID ="47";
     public static String PATIENT_GENDER ="48";
     public static String DOCTOR_ID ="49";
+    public static String CENTER_RATING ="50";
 
     public static String getString(String filterNum,String val1,String val2){
         String filter;

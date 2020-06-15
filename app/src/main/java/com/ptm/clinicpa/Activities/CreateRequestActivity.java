@@ -115,6 +115,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                     findViewById(R.id.relativesLayout).setVisibility(View.GONE);
                     phoneNumber.setText(BeautyMainPage.client_number);
                     ClientName.setText(BeautyMainPage.client_name);
+                    ageRange.setText(BeautyMainPage.bdb_old);
                     if(BeautyMainPage.client_gender.equals("0"))
                         genderSpinner.setSelection(1);
                     else
@@ -127,6 +128,8 @@ public class CreateRequestActivity extends AppCompatActivity {
                     phoneNumber.setText("");
                     ClientName.setText("");
                     genderSpinner.setSelection(0);
+                    ageRange.setText("");
+
 
 
 

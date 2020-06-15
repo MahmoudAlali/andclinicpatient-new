@@ -47,6 +47,18 @@ public class NewBookingRequestsFragment extends Fragment {
         manager=new LinearLayoutManager(BeautyMainPage.context);
         service_select.setLayoutManager(manager);
         MyBookingRequestsFragment.tab="1";
+        MyBookingRequestsFragment.salonFilterTemp="";
+        MyBookingRequestsFragment.salonFilter="";
+        MyBookingRequestsFragment.dateFilterTemp="";
+        MyBookingRequestsFragment.dateFilter="";
+        MyBookingRequestsFragment.typeFilterTemp="";
+        MyBookingRequestsFragment.typeFilter="";
+        MyBookingRequestsFragment.creationDateFilter="";
+        MyBookingRequestsFragment.creationDateFilterTemp="";
+        MyBookingRequestsFragment.sortbtn.setImageResource(R.drawable.ic_descending_arrangement_grey);
+        MyBookingRequestsFragment.filterbtn.setImageResource(R.drawable.ic_filter_list_black_grey);
+        MyBookingRequestsFragment.sortbtn.setVisibility(View.GONE);
+        MyBookingRequestsFragment.filterbtn.setVisibility(View.GONE);
 /*
         MyBookingRequestsFragment.groupbooking="";
 */

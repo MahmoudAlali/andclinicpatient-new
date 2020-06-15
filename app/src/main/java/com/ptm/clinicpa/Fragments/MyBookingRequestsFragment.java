@@ -64,8 +64,8 @@ public class MyBookingRequestsFragment extends Fragment {
 
     public static View view;
     public static String serviceId="",employee_id="";
-    ImageView filterbtn;
-    public static String serviceName="",empname="",startdate="",start_r_date="",bookingType="";
+    public static ImageView filterbtn,sortbtn,addIndivRequest,addGroupRequest;
+    public static String serviceName="",empname="",startdate="",start_r_date="",bookingType="",startdateCr="";
     public static Button filter;
     public static Dialog dialog;
     public static CheckBox salonName,requestDate,requestType;
@@ -76,12 +76,14 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
     public static int syear,smonth,sday,eyear,emonth,eday;
+    public static int syearCr,smonthCr,sdayCr,eyearCr,emonthCr,edayCr;
     public static int sryear,srmonth,srday,eryear,ermonth,erday;
 
+    public static boolean isNew=true;
     public  static String tmp="0";
 
-    public static String salonFilter="",dateFilter="",typeFilter="";
-    public static String salonFilterTemp="",dateFilterTemp="",typeFilterTemp="";
+    public static String salonFilter,dateFilter,typeFilter,creationDateFilter;
+    public static String salonFilterTemp,dateFilterTemp,typeFilterTemp,creationDateFilterTemp;
     public  static ProgressBar progressBar;
     @Nullable
     @Override
@@ -94,6 +96,8 @@ public class MyBookingRequestsFragment extends Fragment {
         oldRequests=view.findViewById(R.id.oldRequests);
         newRequests=view.findViewById(R.id.newRequests);
         filterbtn=view.findViewById(R.id.filter);
+        addGroupRequest=view.findViewById(R.id.addGroupRequest);
+        addIndivRequest=view.findViewById(R.id.addIndivRequest);
 
         Toolbar toolbar;
         toolbar=view.findViewById(R.id.toolbarm);
@@ -106,13 +110,52 @@ public class MyBookingRequestsFragment extends Fragment {
                 else BeautyMainPage.mDrawerLayout.closeDrawer(Gravity.END);
             }
         });
-        fragment = new NewBookingRequestsFragment();
-        fm = getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
-        fragmentTransaction.commit();
-        tabselected(newRequests,oldRequests,false);
+        if (isNew)
+        {
+            fragment = new NewBookingRequestsFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
+            fragmentTransaction.commit();
+            tabselected(newRequests,oldRequests,false);
+        }
+        else
+        {
+            isNew=true;
+            tabselected(oldRequests,newRequests,true);
+            tab="2";
+            fragment = new OldBookingRequestsFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
+            fragmentTransaction.commit();
+        }
 
+
+        addIndivRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new freeBookingFragment();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
+        addGroupRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BeautyMainPage.FRAGMENT_NAME = "freeGroupBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+                fragment = new FreeGroupBooking();
+                fm = getActivity().getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+        });
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
@@ -208,379 +251,11 @@ public class MyBookingRequestsFragment extends Fragment {
         filterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog=new Dialog(BeautyMainPage.context);
-                dialog.setContentView(R.layout.filter_dialog_layout_v3);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                salonName=dialog.findViewById(R.id.service_name);
-                requestDate=dialog.findViewById(R.id.service_exec_date);
-                requestType=dialog.findViewById(R.id.book_type);
-                if(!salonFilterTemp.equals(""))
-                {
-                    salonName.setChecked(true);
-                    salonName.setText(salonFilterTemp);
-                }
-                if(!dateFilterTemp.equals(""))
-                {
-                    requestDate.setChecked(true);
-                    requestDate.setText(dateFilterTemp);
-                }
-                if(!typeFilterTemp.equals(""))
-                {
-                    requestType.setChecked(true);
-                    requestType.setText(typeFilterTemp);
-                }
-
-
-                //--------------------- get services---------------------------
-                Log.e("getOrderedSuppliers","getOrderedSuppliers");
-                APICall.getOrderedSuppliers(BeautyMainPage.context);
-
-
-                Button clear=dialog.findViewById(R.id.clear);
-                clear.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        requestDate.setChecked(false);
-                        requestType.setChecked(false);
-                        salonName.setChecked(false);
-                        salonFilterTemp="";
-                        salonFilter="";
-                        dateFilterTemp="";
-                        dateFilter="";
-                        typeFilterTemp="";
-                        typeFilter="";
-                    }
-                });
-
-
-                salonName.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        if (isChecked)
-                        {
-//                            servicesList.add("اختاري خدمة");
-                            if (servicesList.size()==0)
-                                for (int i=0;i<APICall.allSuppliers.size();i++){
-                                    if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
-                                        servicesList.add(APICall.allSuppliers.get(i).getName());
-                                    else
-                                        servicesList.add(APICall.allSuppliers.get(i).getName_ar());
-
-                                }
-
-                            final Dialog dialog=new Dialog(BeautyMainPage.context);
-                            dialog.setContentView(R.layout.select_offer_type_dialog_v3);
-
-                            final Spinner supplier=dialog.findViewById(R.id.code);
-                            final TextView msg=dialog.findViewById(R.id.message);
-                            msg.setText(R.string.select_supplier);
-                            HintArrayAdapter adapter;
-                            adapter =new HintArrayAdapter(BeautyMainPage.context, 0);
-                            adapter.addAll(servicesList);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                            supplier.setAdapter(adapter);
-                            TextView ok=dialog.findViewById(R.id.confirm);
-                            TextView cancel=dialog.findViewById(R.id.cancel);
-
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                   // if (supplier.getSelectedItemPosition()!=0){
-
-                                        salonName.setText(supplier.getSelectedItem().toString());
-                                        salonFilterTemp=supplier.getSelectedItem().toString();
-                                        bookingType=requestType.getText().toString();
-                                        salonFilter = APICall.Filter("6",APICall.allSuppliers.get(supplier.getSelectedItemPosition()).getId()+"");
-                                   // }
-                                    dialog.dismiss();
-                                }
-                            });
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    serviceId="";
-                                    salonName.setText(getResources().getString(R.string.requestSalonFilter));
-                                    salonFilterTemp="";
-                                    salonFilter="";
-                                    serviceName="" ;
-                                    salonName.setChecked(false);
-                                    dialog.dismiss();
-
-                                }
-                            });
-
-                            dialog.show();
-                           /* final ArrayList<Integer> mUserItems=new ArrayList<>();
-                            CharSequence[] listser=new CharSequence[servicesList.size()];
-                            listser=servicesList.toArray(listser);
-                            AlertDialog.Builder builder=new AlertDialog.Builder(BeautyMainPage.context);
-                            builder.setTitle(getString(R.string.suppliers));
-                            builder.setMultiChoiceItems(listser, checkitems, new DialogInterface.OnMultiChoiceClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int position, boolean isChecked) {
-
-                                    if (isChecked){
-                                        if(!mUserItems.contains(position)){
-                                            mUserItems.add(position);
-                                        }else {
-                                            mUserItems.remove(position);
-                                        }
-                                    }
-                                }
-                            });
-
-                            builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String service="اسم المزودة:";
-                                    for (int i=0;i<mUserItems.size();i++) {
-                                        Log.e("ser" + i, mUserItems.get(i) + "");
-                                        service=service+"-"+servicesList.get(mUserItems.get(i));
-//                                        if(ProviderMainPage.FRAGMENT_NAME.equals("ServiceReportActivity")){
-                                        if(i==0) {
-                                            serviceId = APICall.allSuppliers.get(mUserItems.get(i)).getId();
-                                        }else {
-                                            serviceId =serviceId+","+APICall.allSuppliers.get(mUserItems.get(i)).getId();
-                                        }
-//                                        }
-
-//                                        serviceInsideOfferList.add(servicesList.get(mUserItems.get(i)));
-
-                                    }
-
-
-                                    serviceName=service;
-                                    salonName.setText(service);
-                                    Log.e("SERVID",serviceId);
-                                    filterNames.set(0,serviceName);
-//                                    filterPostions.set(0,;
-                                }
-                            });
-
-                            builder.show();*/
-
-                        }
-                        else {
-                            serviceId="";
-                            salonName.setText(getResources().getString(R.string.requestSalonFilter));
-                            serviceName="" ;
-                            salonName.setChecked(false);
-                            salonFilterTemp="";
-                            salonFilter="";
-                        }
-                    }
-                });
-
-
-                requestDate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            final Dialog name=new Dialog(BeautyMainPage.context);
-                            name.setContentView(R.layout.select_date_range);
-                            name.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//                            final DatePicker datePicker=name.findViewById(R.id.date_picker);
-                            final CalendarPickerView calendar=name.findViewById(R.id.calendar);
-//                            final Spinner nameEdTXT=name.findViewById(R.id.name);
-                            TextView ok=name.findViewById(R.id.confirm);
-                            TextView cancel=name.findViewById(R.id.cancel);
-                            Calendar pastYear = Calendar.getInstance();
-                            pastYear.add(Calendar.MONTH, -2);
-                            Calendar nextYear = Calendar.getInstance();
-                            nextYear.add(Calendar.DATE,1);
-                            calendar.init(pastYear.getTime(), nextYear.getTime()) //
-                                    .inMode(CalendarPickerView.SelectionMode.RANGE)
-                                    .withSelectedDate(new Date());
-                            calendar.setTypeface(Typeface.SANS_SERIF);
-
-
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.O)
-                                @Override
-                                public void onClick(View v) {
-//                                    if (.getSelectedItemPosition()!=0){
-                                    name.dismiss();
-//                                    int month=datePicker.getMonth()+1;
-
-//                                    service_date_txt = datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth();
-//                                        serviceId=API.servicesArrayList.get();
-//                                        Log.e("SERVID",serviceId);
-
-//                                    filterNames.set(2,startdate);
-                                    Date date1=null,date2=null;
-                                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-                                    try {
-
-                                        date1=sdf.parse(calendar.getSelectedDates().get(0).toString());
-                                        date2=sdf.parse(calendar.getSelectedDates().get(calendar.getSelectedDates().size()-1).toString());
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                    }
-                                    LocalDate sDate=null,eDate=null;
-                                    try {
-                                        sDate=date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                                        eDate=date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                    }
-
-
-                                    syear=sDate.getYear();
-                                    smonth=sDate.getMonthValue();
-                                    sday=sDate.getDayOfMonth();
-
-                                    emonth=eDate.getMonthValue();
-                                    eday=eDate.getDayOfMonth();
-                                    eyear=eDate.getYear();
-
-//                                    Log.e("dates",calendar.getSelectedDates()+"");
-                                    Log.e("Start",sday+"-"+smonth);
-                                    Log.e("Start",eday+"-"+emonth);
-                                    startdate=sday+"-"+smonth+" to "+eday+"-"+emonth;
-                                    String s =syear+"-"+smonth+"-"+sday;
-                                    String e =eyear+"-"+emonth+"-"+eday;
-                                    dateFilter = APICall.Filter("3","\""+s+"\"","\""+e+"\"");
-
-
-//                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-                                    requestDate.setText(getResources().getString(R.string.requestDateFilter)+":"+startdate);
-                                    dateFilterTemp=getResources().getString(R.string.requestDateFilter)+":"+startdate;
-                                }
-                            });
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                    dateFilter = "";
-                                    dateFilterTemp="";
-
-                                }
-                            });
-
-
-                            name.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-//                                    service_name.setText("اسم الخدمة");
-//                                    service_name.setChecked(false);
-//                                    serviceName="";
-//                                    filterNames.set(0,"");
-//                                    filterPostions.set(0,-1);
-                                }
-                            });
-                            name.show();
-
-                        }else {
-                            requestDate.setText(getResources().getString(R.string.requestDateFilter));
-                            startdate="";
-                            dateFilter = "";
-                            requestDate.setChecked(false);
-                            dateFilterTemp="";
-                        }
-                    }
-                });
-
-
-                requestType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-
-                            final Dialog dialog=new Dialog(BeautyMainPage.context);
-                            dialog.setContentView(R.layout.select_offer_type_dialog_v3);
-
-                            final Spinner offer_type=dialog.findViewById(R.id.code);
-                            HintArrayAdapter adapter=new HintArrayAdapter(BeautyMainPage.context,0);
-                            adapter .addAll(Arrays.asList(getResources().getStringArray(R.array.request_type)));
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                            offer_type.setAdapter(adapter);
-                            TextView ok=dialog.findViewById(R.id.confirm);
-                            TextView cancel=dialog.findViewById(R.id.cancel);
-
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (offer_type.getSelectedItemPosition()==1){
-                                        dialog.cancel();
-                                        typeFilter=APICall.Filter("5","20");
-                                    }else if (offer_type.getSelectedItemPosition()==2){
-                                        dialog.cancel();
-                                        typeFilter=APICall.Filter("5","22");
-                                    }else if (offer_type.getSelectedItemPosition()==3){
-                                        dialog.cancel();
-                                        typeFilter=APICall.Filter("5","23");
-                                    }else if (offer_type.getSelectedItemPosition()==4) {
-                                        dialog.cancel();
-                                        typeFilter=APICall.Filter("5","25");
-                                    }
-                                    if (offer_type.getSelectedItemPosition()!=0){
-
-                                        requestType.setText(getResources().getString(R.string.type)+offer_type.getSelectedItem().toString());
-                                        bookingType=requestType.getText().toString();
-                                        typeFilterTemp=getResources().getString(R.string.type)+offer_type.getSelectedItem().toString();
-                                    }
-                                }
-                            });
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.cancel();
-                                    typeFilterTemp="";
-                                    typeFilter="";
-                                }
-                            });
-
-
-                            dialog.show();
-
-
-                        }else {
-                            requestType.setText(R.string.book_type);
-                            bookingType="";
-                            typeFilter="";
-                            typeFilterTemp="";
-
-                        }
-
-                    }
-
-                });
-
-
-
-
-
-                filter=dialog.findViewById(R.id.filter);
-                filter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        filtercheck=true;
-                        dialog.cancel();
-                        if (tab.equals("1")) {
-                            fragment = new NewBookingRequestsFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
-                            fragmentTransaction.commit();
-                            tabselected(newRequests,oldRequests,true);
-                        }else if (tab.equals("2")){
-                            fragment = new OldBookingRequestsFragment();
-                            fm = getFragmentManager();
-                            fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
-                            fragmentTransaction.commit();
-                            tabselected(oldRequests,newRequests,true);
-                        }
-                       // APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
-
-                    }
-                });
-
-                dialog.show();
+                fragment = new MyBookingRequestsFilters();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
 
             }
 
@@ -614,7 +289,7 @@ public class MyBookingRequestsFragment extends Fragment {
             }
         });
 
-        ImageView sortbtn=MyBookingRequestsFragment.view.findViewById(R.id.sort);
+        sortbtn =view.findViewById(R.id.sort);
 
         sortbtn.setOnClickListener(new View.OnClickListener() {
             @Override
