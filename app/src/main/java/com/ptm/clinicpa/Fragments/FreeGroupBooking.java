@@ -591,10 +591,11 @@ public class FreeGroupBooking extends Fragment implements LocationListener ,
                     freeBookingFragment.filterSupplierId=filterSupplierId;
                     freeBookingFragment.filterSupplierName=filterSupplierName;
 
-                    if(typeSpinner.getSelectedItemPosition()==2)
-                        fragment = new RequestProvidersFragment();
+                   /* if(typeSpinner.getSelectedItemPosition()==2)
                     else
                         fragment= new OffersForRequest();
+*/
+                    fragment = new RequestProvidersFragment();
 
                     Bundle b= new Bundle();
                     b.putBoolean("isGroup",true);

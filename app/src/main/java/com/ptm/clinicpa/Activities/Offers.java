@@ -484,9 +484,16 @@ public class Offers extends Fragment implements LocationListener ,
                 @Override
                 public void onLocationChanged(Location location) {
                     Log.e("LocationChanged","ok");
-                    Lat=String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude());
-                    Long = String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
-                    if (bestOfferItems.size()==0)
+                    try {
+                        Lat=String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLatitude());
+                        Long = String.valueOf(fusedLocationProviderApi.getLastLocation(mGoogleApiClient).getLongitude());
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                   if (bestOfferItems.size()==0)
                         if (!check) {
                             check=false;
                             bestOfferItems.clear();

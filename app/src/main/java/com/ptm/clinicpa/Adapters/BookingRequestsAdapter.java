@@ -29,6 +29,8 @@ import com.ptm.clinicpa.R;
 
 import java.util.ArrayList;
 
+import static com.ptm.clinicpa.Fragments.ReservatoinDetailsActivity.myroot;
+
 public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
@@ -91,23 +93,36 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
 
             // >>>>>>>>>>>>> status
-            if (MyBookingRequestsFragment.tab.equals("2")&&(bookingRequestData.get(position).getBdb_is_group_booking().equals("20")
-                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("21")
-                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("23")
-                    ||bookingRequestData.get(position).getBdb_is_group_booking().equals("24")))
+        Log.e("StatusTab",MyBookingRequestsFragment.tab);
+        Log.e("StatusType",bookingRequestData.get(position).getBdb_is_group_booking());
+            if (MyBookingRequestsFragment.tab.equals("2"))
             {
-                if (bookingRequestData.get(position).getBdb_status().equals("1")){
-                    ((Item) holder).status.setText(R.string.approved);
-                }else  if (bookingRequestData.get(position).getBdb_status().equals("2")){
-                    ((Item) holder).status.setText(R.string.rejectedByProvider);
-                }else  if (bookingRequestData.get(position).getBdb_status().equals("3")){
-                    ((Item) holder).status.setText(R.string.canceledByClient);
-                }else  if (bookingRequestData.get(position).getBdb_status().equals("4")){
-                    ((Item) holder).status.setText(R.string.canceledBySystem);
+
+                if(bookingRequestData.get(position).getBdb_is_group_booking().equals("20")
+                        ||bookingRequestData.get(position).getBdb_is_group_booking().equals("21")
+                        ||bookingRequestData.get(position).getBdb_is_group_booking().equals("23")
+                        ||bookingRequestData.get(position).getBdb_is_group_booking().equals("24"))
+                {
+                    Log.e("Status",bookingRequestData.get(position).getBdb_status());
+
+                    if (bookingRequestData.get(position).getBdb_status().equals("1")){
+                        ((Item) holder).status.setText(R.string.approved);
+                    }else  if (bookingRequestData.get(position).getBdb_status().equals("2")){
+                        ((Item) holder).status.setText(R.string.rejectedByProvider);
+                    }else  if (bookingRequestData.get(position).getBdb_status().equals("3")){
+                        ((Item) holder).status.setText(R.string.canceledByClient);
+                    }else  if (bookingRequestData.get(position).getBdb_status().equals("4")){
+                        ((Item) holder).status.setText(R.string.canceledBySystem);
+                    }
+
+
                 }
+                else {
 
-
+                    ((Item) holder).status.setVisibility(View.GONE);
+                }
             }
+
             else {
                 ((Item) holder).status.setVisibility(View.GONE);
             }
@@ -272,16 +287,22 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         //>>>>>>>>>> Doctor Names
         for (int i=0;i<bookingRequestData.get(position).getClients().size();i++)
         {
-            TextView doctorName = new TextView(context);
-            final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout_request, ((Item)holder).doctorNamesLayout, false);
+            final View layout2;
+            layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.doc_name_layout, ((Item)holder).doctorNamesLayout, false);
+            TextView doctorName;
+            doctorName=layout2.findViewById(R.id.rname);
+           // final View layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout_request, ((Item)holder).doctorNamesLayout, false);
 
             doctorName.setText(bookingRequestData.get(position).getClients().get(i).getDoctor_name());
-            doctorName.setTextColor(R.color.doctorNames);
-            doctorName.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            doctorName.setGravity(View.TEXT_ALIGNMENT_CENTER);
-            LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
+           // doctorName.setTextColor(R.color.doctorNames);
+           // doctorName.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            //doctorName.setGravity(View.TEXT_ALIGNMENT_CENTER);
+           /* LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams
                     (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
-            doctorName.setLayoutParams(textParam);
+            doctorName.setLayoutParams(textParam);*/
+            if(doctorName.getParent() != null) {
+                ((ViewGroup)doctorName.getParent()).removeView(doctorName); // <- fix
+            }
             ((Item)holder).doctorNamesLayout.addView(doctorName);
         }
 
@@ -388,7 +409,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             status=itemView.findViewById(R.id.status);
 
             totalPrice=itemView.findViewById(R.id.total_price);
-            inner_res=itemView.findViewById(R.id.inner_res);
+            //inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);

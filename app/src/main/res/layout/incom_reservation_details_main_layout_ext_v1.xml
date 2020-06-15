@@ -44,6 +44,7 @@
 
                     />
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/isExecuted"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -53,6 +54,7 @@
 
                     />
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/prime"
@@ -64,6 +66,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -92,6 +95,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -118,6 +122,62 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="@string/doctorName"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    />
+                <TextView
+                    android:id="@+id/doctorName"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text=""
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="@string/speciality"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    />
+                <TextView
+                    android:id="@+id/speciality"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text=""
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/book_exec_layout_in"
                 android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
@@ -145,6 +205,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:gravity="center"
@@ -167,6 +228,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="@dimen/pf_5dp_space"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

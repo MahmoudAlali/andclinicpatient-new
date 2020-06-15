@@ -126,58 +126,6 @@ public class CancelReservationActivity extends AppCompatActivity {
 //                    }
 //                }
 //                else
-                    {
-
-                        Log.e("countCancel","is"+c);
-                        Log.e("countCancel1","is"+count);
-                        if (c==count){
-
-
-                                    if (ReservationsAdapter2.reservationModel.getData().get(0).equals("7")) {
-                                        if (ReservationsAdapter2.reservationModel.getBdb_inner_booking().equals("1")) {
-                                            //-------cancelpaid api--------
-//                            /api/booking/BookingProcessing
-                                            Log.e("Outer", ReservationsAdapter2.reservationModel.getBdb_inner_booking());
-                                            Dialog dialog1 = new Dialog(context);
-                                            dialog1.setContentView(R.layout.map_title_layout);
-                                            final EditText reason = dialog1.findViewById(R.id.code);
-                                            TextView ok = dialog1.findViewById(R.id.confirm);
-                                            TextView message = dialog1.findViewById(R.id.message);
-                                            message.setText(R.string.enter_reason);
-                                            ok.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-                                                    if (reason.getText().toString().length() == 0) {
-                                                        Toast.makeText(context, R.string.enter_reason, Toast.LENGTH_LONG).show();
-                                                    } else {
-                                                        //----------------- cancel paid----------
-                                                        APICall.cancelPaidBooking(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), reason.getText().toString(), context);
-                                                    }
-                                                }
-                                            });
-                                        } else {
-
-                                            //------------- cancel paid ----------
-                                            APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 4, "0", context);
-
-//                            /api/booking/cancelPaidBooking
-                                        }
-                                    } else if (ReservationsAdapter2.reservationModel.getData().get(0).equals("2") ||
-                                            ReservationsAdapter2.reservationModel.getData().get(0).equals("8")) {
-                                        //---------- book proccessing --------- to 0
-//                        /api/booking/BookingProcessing
-                                        APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 5, "0", context);
-
-                                    } else {
-                                        //---------- Other cases
-//                        /api/booking/BookingProcessing
-                                        APICall.bookingProcessing(ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id(), 5, "0", context);
-                                    }
-
-
-                        }else
-                    APICall.cancelPerClient(getfilterCancel(cancelPerClientModels),context);
-                }
 //                Toast.makeText(context,"Reservation deleted",Toast.LENGTH_LONG).show();
 //                onBackPressed();
             }

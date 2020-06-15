@@ -273,7 +273,7 @@
     <string name="distance">Distance</string>
     <string name="MyLocation">My location</string>
     <string name="Service_Eval">Service evaluation</string>
-    <string name="Provider_Eval">Provider evaluation</string>
+    <string name="Provider_Eval">Health center evaluation</string>
     <string name="Provider_Rate">Provider rate</string>
     <string name="salon_provider_name">Salon or Provider name </string>
     <string name="Price">Price</string>
@@ -284,6 +284,7 @@
     <string name="Reserve">Reserve</string>
     <string name="location_proceed">You have to choose a location to proceed.</string>
     <string name="location_first">You have to choose a location first.</string>
+    <string name="doc_name_first">You have to choose a doctor name first.</string>
     <string name="place_proceed">You have to choose a service place to proceed.</string>
     <string name="distance_proceed">You have to choose a distance to proceed.</string>
     <string name="distance_first">You have to choose a distance first.</string>
@@ -542,7 +543,7 @@
     <string name="services_dates">Select dates</string>
     <string name="group_book_done">Offer booked successfully</string>
     <string name="salon">Health center</string>
-    <string name="home">Client house</string>
+    <string name="home">Patient house</string>
     <string name="hall">Hall</string>
     <string name="hotel">Hotel</string>
     <string name="single_booking">Single booking</string>
@@ -743,10 +744,10 @@
     <string name="Executed_res">Previous</string>
     <string name="please_select_an_service_or_back_to_cancel">Please select a service or back to cancel</string>
     <string name="accepted">Initially reserved</string>
-    <string name="employee_evaluation">Employees evaluation</string>
-    <string name="evaluate">evaluate</string>
+    <string name="employee_evaluation">Doctor evaluation</string>
+    <string name="evaluate">Evaluate</string>
     <string name="clients_count_gr_2">The number of clients must be at least two</string>
-    <string name="reser_id">ID</string>
+    <string name="reser_id">Appointment ID</string>
     <string name="ref_number">Reference ID</string>
     <string name="order_id">Order number:</string>
     <string name="journey_time">Journey time</string>
@@ -816,7 +817,7 @@
     <string name="lost_time_emp">Employee lost time</string>
     <string name="journey_time_emp">Journey time for employee</string>
     <string name="requestRelatedBooking">Booking attached to the order</string>
-    <string name="createRequest">Create order</string>
+    <string name="createRequest">Create individual order</string>
     <string name="createGroupRequest">Create group order</string>
     <string name="errorAddingRequest">Sorry, try again later </string>
     <string name="service_date_sort_up">Order date (descending)</string>
@@ -838,7 +839,7 @@
     <string name="add_service_place">Please select service place</string>
     <string name="pro_not_support_place">Provider does not support this place</string>
     <string name="reference_number">Reference Id:</string>
-    <string name="book_id">Book Id</string>
+    <string name="book_id">Book Id:</string>
     <string name="deposit_can_paid_alert">The deposit of this booking can only be paid by the booking owner</string>
     <string name="there_is_no_offer_sol">There is no solution for this offer</string>
     <string name="no_sol_msg">To find available salons please change booking date or chosen filters</string>
@@ -973,4 +974,16 @@
     <string name="years">years</string>
     <string name="twoYears">age :Two years</string>
     <string name="oneYear">age :One year</string>
+    <string name="appUnderEditing">appointment is being edited</string>
+    <string name="newVisit">New Visit</string>
+    <string name="oldVisit">Review visit</string>
+    <string name="unDeterminedVisit">Un determined visit</string>
+    <string name="unDeterminedPrice">Un determined price</string>
+    <string name="isShifted">Appointment is shifted:</string>
+    <string name="exec_date">Execution date</string>
+    <string name="creation_date">Creation date</string>
+    <string name="enter_age_btwn_range">Please enter patient age between 0 and 100</string>
+    <string name="edit_request_sent">Edition request sent successfully</string>
+    <string name="edit_request_not_sent">Edition request is not sent</string>
+
 </resources>

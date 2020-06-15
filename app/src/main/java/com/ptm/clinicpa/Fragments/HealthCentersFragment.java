@@ -59,6 +59,7 @@ public class HealthCentersFragment extends Fragment implements LocationListener,
         View view= inflater.inflate(R.layout.request_centers_fragment,container,false);
         // filter =view.findViewById(R.id.filter);
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
+
 //        providersAdapter.notifyDataSetChanged();
         //---------------------call API for Services and get items-------------
         APICall.automatedCentersBrowse( 1+"", BeautyMainPage.context, Offers.Lat,Offers.Long);

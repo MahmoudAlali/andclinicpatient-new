@@ -62,8 +62,9 @@ public class DepositReservationFragment extends Fragment {
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         MyReservationFragment.tab="2";
         MyReservationFragment.groupbooking="";
+        MyReservationFragment.note_cancel.setVisibility(View.VISIBLE);
 
-        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
+       // MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
         service_select=view.findViewById(R.id.incom_ree);
         MyReservationFragment.progressBar=view.findViewById(R.id.progress);
         sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
@@ -95,6 +96,8 @@ public class DepositReservationFragment extends Fragment {
             }
         });
 
+        MyReservationFragment.filterbtn.setVisibility(View.GONE);
+        MyReservationFragment.sortbtn.setVisibility(View.GONE);
 
 //        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
 
@@ -144,7 +147,7 @@ public class DepositReservationFragment extends Fragment {
             if (filter==null){
                 APICall.filter=filter= APICall.bookingFilterV1("1","7","0");
             }
-            APICall.bookingAutomatedBrowse1(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
+            APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
         }else {
             MyReservationFragment.filtercheck=false;
         }

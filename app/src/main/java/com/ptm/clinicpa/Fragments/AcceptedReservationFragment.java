@@ -57,7 +57,7 @@ public class AcceptedReservationFragment extends Fragment {
         sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
         MyReservationFragment.progressBar=view.findViewById(R.id.progress);
 
-        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
+       // MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
         service_select.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
         MyReservationFragment.tab="1";
         MyReservationFragment.groupbooking="";

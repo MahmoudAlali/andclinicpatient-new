@@ -143,9 +143,19 @@
 
 
     </LinearLayout>
+    <TextView
+        android:layout_marginTop="100dp"
+        android:id="@+id/cancelReserMsg"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=" لضمان الحقوق يرجى ألغاء الحجوزات التي لم تنفذ"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="#000"/>
 
     <LinearLayout
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="130dp"
         android:orientation="vertical"
         android:id="@+id/tabs_fragment"
         android:layout_width="match_parent"

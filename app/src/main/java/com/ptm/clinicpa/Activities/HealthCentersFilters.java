@@ -88,6 +88,8 @@ public class HealthCentersFilters extends Fragment {
         nearestCenters = view.findViewById(R.id.nearestCenters);
         ok = view.findViewById(R.id.ok);
 
+        APICall.getdetailsUser(BeautyMainPage.context);
+
 
 
         //region Clinic Name

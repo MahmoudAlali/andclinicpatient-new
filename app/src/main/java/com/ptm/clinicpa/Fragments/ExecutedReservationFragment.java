@@ -19,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.OldAppointmentsFiltersActivity;
 import com.ptm.clinicpa.Adapters.ReservationsAdapter2;
 import com.ptm.clinicpa.R;
 
@@ -59,10 +61,12 @@ public class ExecutedReservationFragment extends Fragment {
         MyReservationFragment.tab="3";
         MyReservationFragment.groupbooking="";
 
-        service_select=view.findViewById(R.id.incom_ree);
+        MyReservationFragment.note_cancel.setVisibility(View.GONE);
+                service_select=view.findViewById(R.id.incom_ree);
         MyReservationFragment.progressBar=view.findViewById(R.id.progress);
-
-        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
+        MyReservationFragment.filterbtn.setVisibility(View.VISIBLE);
+        MyReservationFragment.sortbtn.setVisibility(View.VISIBLE);
+      //  MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
         sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
         manager=new LinearLayoutManager(BeautyMainPage.context);
         service_select.setLayoutManager(manager);
@@ -113,8 +117,20 @@ public class ExecutedReservationFragment extends Fragment {
         if (MyReservationFragment.filtercheck==false) {
             if (filter==null){
                 APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
+                 filter="\"Filter\":["+APICall.Filter("1","3","0")+
+                         OldAppointmentsFiltersActivity.filterCreateDate+
+                         OldAppointmentsFiltersActivity.filterDistance+
+                         OldAppointmentsFiltersActivity.filterDoctorName+
+                         OldAppointmentsFiltersActivity.filterExecDate+
+                         OldAppointmentsFiltersActivity.filterMyLocationLat+
+                         OldAppointmentsFiltersActivity.filterMyLocationLng+
+                         OldAppointmentsFiltersActivity.filterServices+
+                         OldAppointmentsFiltersActivity.filterSpeciality+
+                         OldAppointmentsFiltersActivity.filterSupplierId
+//        {\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}
+                        +"]";
             }
-            APICall.bookingAutomatedBrowse1(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp);
+            APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp,false);
         }else {
             MyReservationFragment.filtercheck=false;
         }

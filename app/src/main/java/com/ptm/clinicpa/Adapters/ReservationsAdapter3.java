@@ -473,7 +473,7 @@ public class ReservationsAdapter3 extends RecyclerView.Adapter<RecyclerView.View
             myroot=itemView.findViewById(R.id.myroot);
 
             totalPrice=itemView.findViewById(R.id.total_price);
-            inner_res=itemView.findViewById(R.id.inner_res);
+           // inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);

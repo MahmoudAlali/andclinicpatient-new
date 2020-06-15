@@ -176,7 +176,6 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/salonName"
                             android:gravity="center"
                             android:textColor="#a5587a"
                             android:textSize="16dp"
@@ -331,7 +330,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/booking_exec_date"
+                    android:text="@string/date"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
@@ -381,6 +380,7 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/jtime_lay"
                 android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:orientation="horizontal"

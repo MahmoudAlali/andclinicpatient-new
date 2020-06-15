@@ -1,15 +1,16 @@
 package com.ptm.clinicpa.DataModel;
 
 public class PatientDataModel {
-    String bdb_id,bdb_health_record,bdb_gender,bdb_relation,bdb_user_name;
+    String bdb_id,bdb_health_record,bdb_gender,bdb_relation,bdb_user_name,bdb_old;
 
-    public PatientDataModel(String bdb_id,String bdb_health_record,String bdb_gender,String bdb_relation,String bdb_user_name )
+    public PatientDataModel(String bdb_id,String bdb_health_record,String bdb_gender,String bdb_relation,String bdb_user_name,String bdb_old )
     {
         this.bdb_gender=bdb_gender;
         this.bdb_health_record=bdb_health_record;
         this.bdb_id=bdb_id;
         this.bdb_relation=bdb_relation;
         this.bdb_user_name=bdb_user_name;
+        this.bdb_old=bdb_old;
     }
 
     public String getBdb_id() {
@@ -30,5 +31,9 @@ public class PatientDataModel {
 
     public String getBdb_user_name() {
         return bdb_user_name;
+    }
+
+    public String getBdb_old() {
+        return bdb_old;
     }
 }

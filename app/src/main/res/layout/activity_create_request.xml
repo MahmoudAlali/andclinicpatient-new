@@ -296,11 +296,12 @@
                             android:layout_marginLeft="2dp"
                             android:layout_marginRight="2dp"
                             android:layout_marginBottom="10dp"
-                            android:background="#F0B5CA"
                             android:gravity="center">
 
-                            <Spinner
+                            <EditText
+                                android:background="@drawable/border_edit_text"
                                 android:id="@+id/age_range"
+                                android:hint="@string/age"
                                 android:layout_width="match_parent"
                                 android:textAlignment="center"
                                 android:layout_height="match_parent"/>

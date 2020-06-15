@@ -8,7 +8,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,25 +19,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Space;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
 import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.DataModel.AppointmentsDataModel;
 import com.ptm.clinicpa.DataModel.BookingAutomatedBrowseData;
 import com.ptm.clinicpa.DataModel.DateTimeModel;
 import com.ptm.clinicpa.DataModel.ReservationModel;
+import com.ptm.clinicpa.Dialog.Dialogs;
+import com.ptm.clinicpa.Dialog.MyRunnable;
 import com.ptm.clinicpa.Fragments.ExecuteBookActivity;
 import com.ptm.clinicpa.Fragments.MyReservation.CancelReservationActivity;
 import com.ptm.clinicpa.Fragments.MyReservationFragment;
 import com.ptm.clinicpa.Fragments.RateSerEmpActivity;
+import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.ReservatoinDetailsActivity;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.PayFort.IPaymentRequestCallBack;
@@ -76,6 +84,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     //    ArrayList <DataService> services;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData1;
     public static ArrayList<ReservationModel> bookingAutomatedBrowseData;
+    public static ArrayList<AppointmentsDataModel> appointmentsDataModels;
     //    ArrayList<DataReservation> reservations;
     int layout;
     public static Fragment fragment;
@@ -84,7 +93,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public static FragmentTransaction fragmentTransaction;
     public static String book_id="0",is_action_on="",logoId;
     public static int postionBook;
-    public static ReservationModel reservationModel;
+    public static AppointmentsDataModel reservationModel;
+    boolean isNew;
     public ReservationsAdapter2(Context context, String items[]){
         this.context=context;
         this.items=items;
@@ -93,6 +103,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         this.context=context;
         this.bookingAutomatedBrowseData=bookingAutomatedBrowseData;
         this.layout=layout;
+    }
+    public ReservationsAdapter2(Context context, ArrayList<AppointmentsDataModel> bookingAutomatedBrowseData,boolean isNew){
+        this.context=context;
+        this.appointmentsDataModels=bookingAutomatedBrowseData;
+        this.layout=layout;
+        this.isNew=isNew;
     }
 
     @NonNull
@@ -111,36 +127,146 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         try {
 
-            ((Item)holder).bdb_expected_deposit.setText(context.getResources().getString(R.string.deposit_val)+" "+bookingAutomatedBrowseData.get(position).getBdb_expected_deposit());
+
+            if(appointmentsDataModels.get(position).getIs_has_change_order().equals("1")&&isNew)
+                ((Item)holder).bdb_expected_deposit.setText(context.getResources().getString(R.string.appUnderEditing));
+            else
+                ((Item)holder).bdb_expected_deposit.setVisibility(View.GONE);
+
 
 
             ((Item)holder).place.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (bookingAutomatedBrowseData.get(position).getBdb_loc_lat()!=null
-                            && ! bookingAutomatedBrowseData.get(position).getBdb_loc_lat().equals("null")
-                            && !bookingAutomatedBrowseData.get(position).getBdb_loc_lat().equals("")
-                            &&  bookingAutomatedBrowseData.get(position).getBdb_loc_long()!=null
-                            &&  !bookingAutomatedBrowseData.get(position).getBdb_loc_long().equals("null")
-                            &&  !bookingAutomatedBrowseData.get(position).getBdb_loc_long().equals("")
+                    if (appointmentsDataModels.get(position).getBdb_loc_lat()!=null
+                            && ! appointmentsDataModels.get(position).getBdb_loc_lat().equals("null")
+                            && !appointmentsDataModels.get(position).getBdb_loc_lat().equals("")
+                            &&  appointmentsDataModels.get(position).getBdb_loc_long()!=null
+                            &&  !appointmentsDataModels.get(position).getBdb_loc_long().equals("null")
+                            &&  !appointmentsDataModels.get(position).getBdb_loc_long().equals("")
 
                     ) {
                         Intent intent = new Intent(context, MapsActivityLocation.class);
-                        intent.putExtra("lat", Double.parseDouble(bookingAutomatedBrowseData.get(position).getBdb_loc_lat()));
-                        intent.putExtra("lang", Double.parseDouble(bookingAutomatedBrowseData.get(position).getBdb_loc_long()));
+                        intent.putExtra("lat", Double.parseDouble(appointmentsDataModels.get(position).getBdb_loc_lat()));
+                        intent.putExtra("lang", Double.parseDouble(appointmentsDataModels.get(position).getBdb_loc_long()));
                         context.startActivity(intent);
                 }
                     }
             });
 
-            Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
-            ((Item)holder).client_name.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getSupplier_name());
-            final String offtypetmp=bookingAutomatedBrowseData.get(position).getBookingType();
+           // Log.e("booktype",bookingAutomatedBrowseData.get(position).getBookingType());
+            if(context.getString(R.string.locale).equals("en"))
+                ((Item)holder).client_name.setText(appointmentsDataModels.get(position).getHealth_center_en());
+            else
+                ((Item)holder).client_name.setText(appointmentsDataModels.get(position).getHealth_center_ar());
 
-            ((Item)holder).book_id.setText(bookingAutomatedBrowseData.get(position).getBdb_internally_number());
-            ((Item)holder).reference_id.setText(bookingAutomatedBrowseData.get(position).getBdb_name_booking());
 
-            //--- testing-----
+            final String vizitType=appointmentsDataModels.get(position).getVisit_type();
+
+            if(vizitType.equals("0"))
+                ((Item)holder).bookingType.setText(R.string.newVisit);
+            else if(vizitType.equals("1"))
+                ((Item)holder).bookingType.setText(R.string.oldVisit);
+            else
+                ((Item)holder).bookingType.setText(R.string.unDeterminedVisit);
+
+
+            ((Item)holder).book_id.setText(context.getString(R.string.ref_number)+appointmentsDataModels.get(position).getBdb_internally_number());
+            ((Item)holder).reference_id.setText(context.getString(R.string.book_id)+appointmentsDataModels.get(position).getBdb_appointment_id());
+
+            if(!isNew)
+            {
+                ((Item)holder).centerRating.setText(appointmentsDataModels.get(position).getHealth_center_rating());
+                ((Item)holder).docRating.setText(appointmentsDataModels.get(position).getDoctor_rating());
+            }
+            else
+            {
+                ((Item)holder).centerStar.setVisibility(View.GONE);
+                ((Item)holder).centerRating.setVisibility(View.GONE);
+                ((Item)holder).docRatingLayout.setVisibility(View.GONE);
+            }
+
+            Log.e("11111","111");
+            if(appointmentsDataModels.get(position).getIs_shifted().equals("1")&& isNew)
+            {
+                Log.e("getIs_shifted","true");
+
+                ((Item)holder).isShifted.setText(context.getString(R.string.isShifted)+appointmentsDataModels.get(position).getShifted_period());
+            }
+            else
+            {
+                Log.e("getIs_shifted","false");
+
+                ((Item)holder).isShifted.setVisibility(View.GONE);
+            }
+            Log.e("11111","222");
+
+            if(appointmentsDataModels.get(position).getIs_checked_in().equals("1"))
+            {
+                Log.e("getIs_checked_in","true");
+
+                ((Item)holder).isChecked.setImageResource(R.drawable.ic_checked);
+            }
+            Log.e("11111","333");
+
+            ((Item)holder).date.setText(APICall.convertToArabic(appointmentsDataModels.get(position).getBdb_start_date()));
+            if (appointmentsDataModels.get(position).getBooking_place().equals("0")) {
+                Log.e("11111","444");
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
+            }else if (appointmentsDataModels.get(position).getBooking_place().equals("1")){
+                Log.e("11111","555");
+
+                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
+            }
+
+            Log.e("11111","666");
+
+            String docN=context.getString(R.string.doctorName) +": "+appointmentsDataModels.get(position).getDoctor_name();
+            ((Item)holder).docName.setText(docN);
+            Log.e("11111","777");
+
+            ((Item)holder).patName.setText(appointmentsDataModels.get(position).getClient_name());
+            Log.e("11111","888");
+            int servicesPrice=0,basicPrice=0;
+            try
+            {
+                 servicesPrice=Integer.parseInt(appointmentsDataModels.get(position).getServices_price());
+
+            }
+            catch (Exception e){}
+            try {
+                 basicPrice=Integer.parseInt(appointmentsDataModels.get(position).getBasic_price());
+
+            }
+            catch (Exception e){}
+
+            String allPrice=servicesPrice+basicPrice+" "+context.getString(R.string.ryal);
+            if(appointmentsDataModels.get(position).getBasic_price().equals("null"))
+            {
+                ((Item)holder).totalPrice.setText(context.getString(R.string.unDeterminedPrice));
+            }
+            else
+              ((Item)holder).totalPrice.setText(allPrice);
+
+
+            final String appointmentType=appointmentsDataModels.get(position).getBdb_is_group_booking();
+
+            if(appointmentType.equals("20")||appointmentType.equals("23")) // individual appointment
+            {
+                for (int i=0;i<appointmentsDataModels.get(position).getServices().size();i++)
+                {
+                    addLayout(((Item)holder).myroot,appointmentsDataModels.get(position).getServices().get(i).getService_en_name(),appointmentsDataModels.get(position).getServices().get(i).getService_ar_name());
+                }
+            }
+            else //group appointment
+            {
+                //do nothing
+            }
+
+
+
+
+           /* //--- testing-----
             if(bookingAutomatedBrowseData.get(position).getBdb_refund_days().equals("0"))
             {
                 String refunfString =context.getString(R.string.youCan)
@@ -172,10 +298,10 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         +context.getString(R.string.hours);
                 ((Item) holder).refundText.setText(refunfString);
 
-            }
+            }*/
 
 //            ((Item) holder).accept.setText(bookingAutomatedBrowseData.get(position).getData().get(0).getBdb_status());
-            if (MyReservationFragment.tab.equals("2")){
+           /* if (MyReservationFragment.tab.equals("2")){
 //                ((Item) holder).delay.setText(R.string.deposit);
                 ((Item) holder).delay.setVisibility(View.GONE);
                 ((Item) holder).space2.setVisibility(View.GONE);
@@ -203,7 +329,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                 }
 //                ((Item) holder).delay.setVisibility(View.GONE);
-            }else{
+            }
+            else{
                 ((Item) holder).status.setVisibility(View.GONE);
             }
 
@@ -328,12 +455,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     }
                 }
             });
+*/
 
-
-            String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
+           /* String inner=bookingAutomatedBrowseData.get(position).getBdb_inner_booking();
             String byMe=bookingAutomatedBrowseData.get(position).getBooked_by_me();
-
-            if (inner.equals("1")){
+*/
+           /* if (inner.equals("1")){
                 ((Item)holder).inner_res.setImageResource(R.drawable.inner_booking);
             }
             else {
@@ -343,10 +470,10 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                     ((Item)holder).inner_res.setImageResource(R.drawable.client_booking);
 
             }
+*/
 
 
-
-            boolean allExecuted=false;
+           /* boolean allExecuted=false;
 
 //                if (position<3)
 
@@ -453,441 +580,249 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item) holder).time.setText(R.string.rate);
 
             }
+*/
 
-            ((Item)holder).time.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    reservationModel=bookingAutomatedBrowseData.get(position);
-                    String type=bookingAutomatedBrowseData.get(position).getBookingType();
-                    if(type.equals("4")||type.equals("5")||type.equals("6")||type.equals("7")||type.equals("8")||type.equals("9")||type.equals("11")||type.equals("12")){
-                        isOffer=true;
-                        book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
-                    }
-                    book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
 
-                    if (bookingAutomatedBrowseData.get(position).getIs_action_on().equals("true")) {
-//                        if (bookingAutomatedBrowseData.get(position).getData().get(0).)
-                        Intent intent = new Intent(context, ExecuteBookActivity.class);
-                        context.startActivity(intent);
-                    }else if ((bookingAutomatedBrowseData.get(position).getIs_action_on().equals("false")
-                            && bookingAutomatedBrowseData.get(position).getIs_rating_on().equals("true"))
-                        || ((Item) holder).time.getText().toString().equals(R.string.rate)
-                    ){
-                            Intent intent = new Intent(context, RateSerEmpActivity.class);
-                            context.startActivity(intent);
 
-                    }
-                    }
-            });
-
-            if (offtypetmp.equals("0")) {
-                String s=((AppCompatActivity)context).getResources().getString(R.string.ind_res);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                     addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(0).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("1")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_booking);
-
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-
-            else if (offtypetmp.equals("2")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_res_other);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-            else if (offtypetmp.equals("3")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.multi_cu_booking);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("4")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.single_offer_same);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("5")) {
-//                Log.e("uuu","uuuu");
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.single_offer_multi);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("6")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_offer);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-            else if (offtypetmp.equals("7")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.individual_bride_offer);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("8")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.multi_service_bride_offer);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-
-                }
-
-            }
-            else if (offtypetmp.equals("9")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.group_offer_bride);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-            else if (offtypetmp.equals("10")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.Single_bride_reservation);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-                }
-
-            }
-            else if (offtypetmp.equals("11")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.bride_group_offer);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-            else if (offtypetmp.equals("12")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                String s=((AppCompatActivity)context).getResources().getString(R.string.bride_group_offer_other);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-//                }
-
-            }
-            else if (offtypetmp.equals("13")) {
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.Multiple_booking_bride);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("20"))
+            if(!isNew || appointmentsDataModels.get(position).getCan_cancel().equals("0"))
             {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_ind_reservation);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("21"))
-            {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_multi_date_ind_booking);
-                ((Item) holder).bookType.setText(s);
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_status().equals("7")){
-//                        ((Item)holder).refuse.setVisibility(View.GONE);
-//                        break;
-//                    }
-//                }
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
-//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
-//                }
-
-            }else if (offtypetmp.equals("22"))
-            {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_group_booking);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
-//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
-//                }
-
-            }else if (offtypetmp.equals("23"))
-            {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_ind_offer_booking);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("ar"))
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i);
-                    else
-                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_en_name(),position,i);
-                }
-
-            }else if (offtypetmp.equals("24"))
-            {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_offer_multi_date);
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getBdb_status().equals("7")){
-//                        ((Item)holder).refuse.setVisibility(View.GONE);
-//                        break;
-//                    }
-//                }
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
-//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
-//                }
-
-            }else if (offtypetmp.equals("25"))
-            {
-//                ((Item)holder).inner_res.setImageResource(R.drawable.free_time_icon);
-                Log.e("booktypesyze",bookingAutomatedBrowseData.get(position).getData().size()+"");
-                //حجز متعدد (عروس)
-                String s=((AppCompatActivity)context).getResources().getString(R.string.free_offer_group_booking);
-                ((Item) holder).bookType.setText(s);
-                Log.e("booktypesyze1","1"+bookingAutomatedBrowseData.get(position).getData().get(0).getService_ar_name()+"");
-                ((Item)holder).myroot.removeAllViews();
-//                for (int i=0;i<bookingAutomatedBrowseData.get(position).getData().size();i++){
-//                    if (!bookingAutomatedBrowseData.get(position).getData().get(i).getPart_num().equals("2"))
-//                        addLayout(((Item)holder).myroot,bookingAutomatedBrowseData.get(position).getData().get(i).getService_ar_name(),position,i,context);
-//                }
-
+                ((Item) holder).refuse.setVisibility(View.GONE);
+                ((Item) holder).space2.setVisibility(View.GONE);
             }
-
-            if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                ((Item) holder).refuse.setText(R.string.cancel_req);
-            }else {
-                ((Item) holder).refuse.setText(R.string.cancel);
-            }
-
-            Log.e("Position"+position,"is"+position);
-            Log.e("OfferTypeTmp","is"+offtypetmp);
-            Log.e("SizeBooking","is"+bookingAutomatedBrowseData.get(position).getData().size());
-            Log.e("PerClient","is"+ bookingAutomatedBrowseData.get(position).getIs_per_client());
-
-            ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                reservationModel=bookingAutomatedBrowseData.get(position);
-                    if (bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("true")
-                        ||bookingAutomatedBrowseData.get(position).getData().get(0).getIs_action_on_inside().equals("1")){
+            else
+            {
+                ((Item) holder).refuse.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        reservationModel=appointmentsDataModels.get(position);
+                        if (appointmentsDataModels.get(position).getCan_cancel().equals("true")
+                                ||appointmentsDataModels.get(position).getCan_cancel().equals("1")) {
 //
-                        if (( offtypetmp.equals("1") ||offtypetmp.equals("2") ||offtypetmp.equals("11") ||offtypetmp.equals("12") ||offtypetmp.equals("22")
-//                                (!offtypetmp.equals("3")  && !offtypetmp.equals("10")  && !offtypetmp.equals("13")
-//                            && !offtypetmp.equals("4") && !offtypetmp.equals("5") && !offtypetmp.equals("7") && !offtypetmp.equals("8")
-//
-                                )
-                        && (bookingAutomatedBrowseData.get(position).getData().size()>1) &&
-                                bookingAutomatedBrowseData.get(position).getIs_per_client().equals("1")){
+                            APICall.appointmentProcessing(appointmentsDataModels.get(position).getBdb_appointment_id(), 5, "0", context);
+
+                        }
+                        else {
+                            APICall.showSweetDialog(context,"",context.getResources().getString(R.string.this_res_can_only_canceld_by_the_owner));
+                        }
+                    }
+                });
+
+
+            }
+
+
+            if(!isNew || appointmentsDataModels.get(position).getCan_check_in().equals("0"))
+            {
+                ((Item) holder).checkIn.setVisibility(View.GONE);
+                ((Item) holder).space.setVisibility(View.GONE);
+            }
+            else
+            {
+                ((Item)holder).checkIn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("CheckIn","ediiiiiiiiiiit..");
+
+                        book_id=appointmentsDataModels.get(position).getBdb_appointment_id();
+                        if(appointmentsDataModels.get(position).getHealth_record().equals("")||appointmentsDataModels.get(position).getHealth_record().equals("null"))
                         {
-                            //------- cancel activity reservation-----------------
-                            book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
-                            Log.e("BookIDCancel",book_id);
-                            postionBook=position;
-
-                            Intent intent=new Intent(context, CancelReservationActivity.class);
-                            context.startActivity(intent);
-
-
+                            Dialogs getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn,context.getString(R.string.med_id));
+                            getReasonDialog.show();
                         }
-                        }else {
-                            Log.e("bookingAu(0)","is"+bookingAutomatedBrowseData.get(position).getData().get(0));
-
-                            if (bookingAutomatedBrowseData.get(position).getBookingType().equals("7")) {
-                                if (bookingAutomatedBrowseData.get(position).getBdb_inner_booking().equals("1")) {
-                                    //-------cancelpaid api--------
-//                            /api/booking/BookingProcessing
-                                    Log.e("Outer", bookingAutomatedBrowseData.get(position).getBdb_inner_booking());
-                                    Dialog dialog1 = new Dialog(context);
-                                    dialog1.setContentView(R.layout.map_title_layout);
-                                    final EditText reason = dialog1.findViewById(R.id.code);
-                                    TextView ok = dialog1.findViewById(R.id.confirm);
-                                    TextView message = dialog1.findViewById(R.id.message);
-                                    message.setText(R.string.enter_reason);
-                                    ok.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            if (reason.getText().toString().length() == 0) {
-                                                Toast.makeText(context, R.string.enter_reason, Toast.LENGTH_LONG).show();
-                                            } else {
-                                                //----------------- cancel paid----------
-                                                APICall.cancelPaidBooking(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), reason.getText().toString(), context);
-                                            }
-                                        }
-                                    });
-                                } else {
-
-                                    //------------- cancel paid ----------
-                                    APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 4, "0", context);
-
-//                            /api/booking/cancelPaidBooking
-                                }
-                            }
-                            else if (bookingAutomatedBrowseData.get(position).getBookingType().equals("2") ||
-                                    bookingAutomatedBrowseData.get(position).getBookingType().equals("8")) {
-                                //---------- book proccessing --------- to 0
-//                        /api/booking/BookingProcessing
-                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 5, "0", context);
-
-                            }
-                            else {
-                                //---------- Other cases
-//                        /api/booking/BookingProcessing
-                                APICall.bookingProcessing(bookingAutomatedBrowseData.get(position).getBdb_name_booking(), 5, "0", context);
-                            }
+                        else
+                        {
+                            APICall.CheckIn(context,book_id,appointmentsDataModels.get(position).getHealth_record());
                         }
-                }else {
-                        APICall.showSweetDialog(context,"",context.getResources().getString(R.string.this_res_can_only_canceld_by_the_owner));
+
+
                     }
-                }
-            });
+                });
+            }
+
+            if(isNew&&appointmentsDataModels.get(position).getCan_order_change().equals("1"))
+            {
+                ((Item)holder).edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("edit","ediiiiiiiiiiit..");
+
+                        final Dialog dialog = new Dialog(context);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                        dialog.setContentView(R.layout.edit_appointment_layout);
+                        final TextView oldTime,oldDate,newTime,newDate,ok,cancel;
+                        newTime = dialog.findViewById(R.id.newTime);
+                        newDate = dialog.findViewById(R.id.newDate);
+                        oldDate = dialog.findViewById(R.id.oldDate);
+                        oldTime = dialog.findViewById(R.id.oldTime);
+                        ok = dialog.findViewById(R.id.confirm);
+                        cancel = dialog.findViewById(R.id.cancel);
+                        oldDate.setText(appointmentsDataModels.get(position).getBdb_start_date());
+                        oldTime.setText(appointmentsDataModels.get(position).getBdb_start_time());
+                        newTime.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final Dialog dialog=new Dialog(context);
+                                dialog.setContentView(R.layout.time_select_layout);
+                                final TimePicker timePicker=dialog.findViewById(R.id.time_picker);
+                                TextView ok=dialog.findViewById(R.id.confirm);
+                                TextView cancel=dialog.findViewById(R.id.cancel);
+
+                                ok.setOnClickListener(new View.OnClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.M)
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                        ///startWorkHour=timePicker.getHour();
+                                        //   startWorkMinutes=timePicker.getMinute();
+                                        String ho,min;
+                                        if (timePicker.getHour()<10){
+                                            ho="0"+timePicker.getHour();
+                                        }else {
+                                            ho=timePicker.getHour()+"";
+                                        }
+
+                                        if (timePicker.getMinute()<10){
+                                            min="0"+timePicker.getMinute();
+                                        }else {
+                                            min=timePicker.getMinute()+"";
+                                        }
+                                        String st = ho + ":" + min+":"+"00";
+//                        String st=timePicker.getHour()+":"+timePicker.getMinute();
+                                        newTime.setText(st);
+                                    }
+                                });
+                                cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                dialog.show();
 
 
+                            }
+                        });
 
-            ((Item)holder).date.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getStartTime()));
-            if (bookingAutomatedBrowseData.get(position).getPlace().equals("0")) {
-                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.salon));
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("1")){
-                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.home));
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("2")){
-                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hall));
-            }else if (bookingAutomatedBrowseData.get(position).getPlace().equals("3")){
-                ((Item) holder).booking_place.setText(context.getResources().getString(R.string.hotel));
+                        newDate.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final Dialog dialog=new Dialog(context);
+                                dialog.setContentView(R.layout.select_date);
+                                TextView confirm=dialog.findViewById(R.id.confirm);
+                                TextView cancel=dialog.findViewById(R.id.cancel);
+                                final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
+                                datePicker.setMinDate(System.currentTimeMillis());
+
+//                RequestProvidersFragment.bdb_booking_period)
+                                try {
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.add(Calendar.DAY_OF_MONTH, Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
+                                    datePicker.setMaxDate(calendar.getTimeInMillis());
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                        int month=datePicker.getMonth()+1;
+                                        newDate.setText(datePicker.getYear()+"-"+month+"-"+datePicker.getDayOfMonth());
+                                    }
+                                });
+
+                                cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+
+                                dialog.show();
+                            }
+                        });
+
+                        cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                        ok.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                String newDateStr,newTimeStr;
+                                if(newDate.getText().toString().equals(""))
+                                {
+                                    newDateStr=oldDate.getText().toString();
+                                }
+                                else
+                                {
+                                    newDateStr=newDate.getText().toString();
+                                }
+                                if(newTime.getText().toString().equals(""))
+                                {
+                                    newTimeStr=oldTime.getText().toString();
+                                }
+                                else
+                                {
+                                    newTimeStr=newTime.getText().toString();
+                                }
+                                APICall.editAppointment(context,appointmentsDataModels.get(position).getBdb_appointment_id(),newTimeStr,newDateStr);
+                            }
+                        });
+                        dialog.show();
+
+
+                    }
+                });
+            }
+
+            else if(!isNew&&appointmentsDataModels.get(position).getCan_rating().equals("1"))
+            {
+                ((Item)holder).edit.setText(R.string.evaluate);
+                ((Item)holder).edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent i =new Intent(context,RateSerEmpActivity.class);
+                        i.putExtra("doctor_name",appointmentsDataModels.get(position).getDoctor_name());
+                        i.putExtra("patient_name",appointmentsDataModels.get(position).getClient_name());
+                        i.putExtra("appointment_id",appointmentsDataModels.get(position).getBdb_appointment_id());
+                        i.putExtra("center_id",appointmentsDataModels.get(position).getHealth_center_id());
+                        i.putExtra("doctor_id",appointmentsDataModels.get(position).getDoctor_id());
+
+                        context.startActivity(i);
+
+                    }
+                });
+            }
+            else
+            {
+                ((Item)holder).edit.setVisibility(View.GONE);
+                ((Item)holder).space.setVisibility(View.GONE);
 
             }
-            APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,bookingAutomatedBrowseData.get(position).getLogoId(),((Item)holder).logoImg);
+
+            APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,appointmentsDataModels.get(position).getBdb_health_center_logo_id(),((Item)holder).logoImg);
 
             ((Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        book_id=bookingAutomatedBrowseData.get(position).getBdb_name_booking();
-
-//                        is_action_on=bookingAutomatedBrowseData.get(position).getIs_action_on();
-                        Log.e("RefId",book_id);
-                        Log.e("InternallyID",bookingAutomatedBrowseData.get(position).getBdb_internally_number());
-                        logoId=bookingAutomatedBrowseData.get(position).getLogoId();
+                        book_id=appointmentsDataModels.get(position).getBdb_appointment_id();
+                        logoId=appointmentsDataModels.get(position).getBdb_health_center_logo_id();
 
                         postionBook=position;
 
 
                         Intent intent=new Intent(context, ReservatoinDetailsActivity.class);
-                        intent.putExtra("internally_book",bookingAutomatedBrowseData.get(position).getBdb_internally_number());
+                       // intent.putExtra("appointment_id",appointmentsDataModels.get(position).getBdb_appointment_id());
+                        intent.putExtra("internally_book",appointmentsDataModels.get(position).getBdb_appointment_id());
                         ((AppCompatActivity)context).startActivity(intent);
 
 
@@ -914,7 +849,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 //                ((Item)holder).bookType.setText(context.getResources().getText(R.string.multi_booking));
 //            }
 
-            ((Item)holder).totalPrice.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getTotalPrice())+context.getResources().getString(R.string.ryal));
+           // ((Item)holder).totalPrice.setText(APICall.convertToArabic(bookingAutomatedBrowseData.get(position).getTotalPrice())+context.getResources().getString(R.string.ryal));
 
 
         }catch (Exception e){
@@ -925,9 +860,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        Log.e("bookingAutomatedcheck",bookingAutomatedBrowseData.size()+"");
+//        Log.e("bookingAutomatedcheck",bookingAutomatedBrowseData.size()+"");
 
-        return bookingAutomatedBrowseData.size();
+        return appointmentsDataModels.size();
     }
 
 
@@ -1077,22 +1012,40 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         });
 //
     }
+    public static void addLayout(final LinearLayout myroot, String serviceName,String serviceName_ar){
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_layout, myroot, false);
+        TextView emp_name;
+        emp_name=layout2.findViewById(R.id.rname);
+        if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
+            emp_name.setText(serviceName);
+        else
+            emp_name.setText(serviceName_ar);
+
+        ((AppCompatActivity) BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+    }
 
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,book_id,bdb_expected_deposit,client_name,status,delay,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,time,refundText;
-        ImageView book_Details,inner_res,logoImg,place;
+        TextView bookingType,book_id,bdb_expected_deposit,client_name,status,checkIn,reference_id, totalPrice,booking_place,export_invoice,date,accept,refuse,edit,refundText;
+        ImageView book_Details,inner_res,logoImg,place,isChecked;
         ColorRatingBar rating;
         Space space,space2;
 
-        LinearLayout myroot;
+        TextView centerRating,docRating,isShifted,docName,patName;
+        LinearLayout myroot,centerStar,docRatingLayout,actions;
         public Item(View itemView) {
             super(itemView);
-            bookType=itemView.findViewById(R.id.booktype);
+            bookingType=itemView.findViewById(R.id.booktype);
             myroot=itemView.findViewById(R.id.myroot);
             status=itemView.findViewById(R.id.status);
-            delay=itemView.findViewById(R.id.delay);
+            checkIn=itemView.findViewById(R.id.delay);
             rating=itemView.findViewById(R.id.rating);
             book_id=itemView.findViewById(R.id.book_id);
             place=itemView.findViewById(R.id.place);
@@ -1102,16 +1055,25 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             space2=itemView.findViewById(R.id.space2);
 
             totalPrice=itemView.findViewById(R.id.total_price);
-            inner_res=itemView.findViewById(R.id.inner_res);
+           // inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);
             book_Details=itemView.findViewById(R.id.book_details);
             refuse=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);
-            time=itemView.findViewById(R.id.time);
+            edit=itemView.findViewById(R.id.time);
             logoImg=itemView.findViewById(R.id.logoImg);
             refundText=itemView.findViewById(R.id.refundText);
+            docRating=itemView.findViewById(R.id.doctor_rate);
+            docRatingLayout=itemView.findViewById(R.id.doctor_rateLayout);
+            centerRating=itemView.findViewById(R.id.provider_rate);
+            centerStar=itemView.findViewById(R.id.centerRatingStar);
+            isShifted=itemView.findViewById(R.id.is_shifted);
+            isChecked=itemView.findViewById(R.id.isCheckedIn);
+            docName=itemView.findViewById(R.id.doctorName);
+            patName=itemView.findViewById(R.id.patientName);
+            actions=itemView.findViewById(R.id.actions);
 
         }
 
@@ -1482,5 +1444,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     private void initilizePayFortSDK() {
         fortCallback = FortCallback.Factory.create();
     }
+    private MyRunnable OnClickCallMeBtn =new MyRunnable()
+    {
+        @Override
+        public void run() {
+            APICall.CheckIn(context,book_id,getValue());
 
+        }
+    };
 }

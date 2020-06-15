@@ -38,6 +38,7 @@
                   android:orientation="horizontal"
                   >
                   <TextView
+                      android:visibility="gone"
                       android:layout_weight="1"
                       android:id="@+id/sup_name"
                       android:layout_width="match_parent"
@@ -65,6 +66,7 @@
 
 
               <EditText
+                  android:id="@+id/reason"
                   android:layout_margin="@dimen/pf_10_txt_size"
                   android:layout_width="match_parent"
                   android:layout_height="35dp"
@@ -86,11 +88,119 @@
                   android:gravity="center" />
           </LinearLayout>
           <LinearLayout
+              android:id="@+id/itemBackground"
+              android:layout_marginLeft="@dimen/standard_20"
+              android:layout_marginRight="@dimen/standard_20"
+              android:background="@drawable/favorite_cell"
+              android:layout_width="match_parent"
+              android:layout_height="110dp"
+              android:layout_marginBottom="10dp"
+              android:orientation="horizontal"
+              android:weightSum="5">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:weightSum="3"
+                  android:layout_marginBottom="10dp"
+                  android:paddingStart="10dp"
+                  android:layoutDirection="ltr"
+                  android:paddingLeft="10dp">
+
+                  <LinearLayout
+                      android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/standard_60">
+                      <android.support.v7.widget.CardView
+                          android:visibility="gone"
+                          android:id="@+id/myCardView"
+                          android:layout_width="50dp"
+                          android:layout_height="50dp"
+                          app:cardCornerRadius="50dp"
+                          android:layout_gravity="center"
+                          android:layout_centerHorizontal="true"
+                          android:layout_centerVertical="true"
+                          >
+                          <ImageView
+                              android:id="@+id/logoImg"
+                              android:src="@drawable/logo"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:scaleType="centerCrop"
+                              />
+                      </android.support.v7.widget.CardView>
+                      <TextView
+                          android:id="@+id/service_name"
+                          android:layout_weight="1"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:text="@string/patient_name"
+                          android:gravity="center"
+                          android:textStyle="bold"
+                          android:textSize="16dp"
+                          android:textColor="@color/red"
+                          />
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingStart="@dimen/standard_20"
+                      android:orientation="horizontal"
+                      android:paddingLeft="@dimen/standard_20">
+                      <TextView
+                          android:id="@+id/employee_name"
+                          android:textSize="12dp"
+                          android:textColor="#000"
+                          android:layout_width="wrap_content"
+                          android:layout_height="match_parent"
+                          android:text="@string/doctorName"
+                          android:gravity="center"
+                          />
+                      <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:scaleY="0.5"
+                          android:scaleX="0.5"
+                          android:id="@+id/rating"
+                          android:numStars="5"
+                          app:progress_color="#FFD700"
+                          app:empty_color="@color/gray"
+                          android:layout_gravity="end"
+                          />
+                  </LinearLayout>
+
+
+                  <!--  <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Salon Name"
+                        android:id="@+id/pro_name"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/standard_20"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/is_fav"
+                        android:src="@drawable/favorite"
+                        android:layout_gravity="center|end"
+                        android:layout_marginEnd="@dimen/standard_20"
+                        android:layout_marginRight="@dimen/standard_20" />-->
+              </LinearLayout>
+          </LinearLayout>
+
+          <LinearLayout
               android:id="@+id/myroot"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"/>
       </LinearLayout>
+
   </android.support.v4.widget.NestedScrollView>
     <Button
         android:id="@+id/eval"

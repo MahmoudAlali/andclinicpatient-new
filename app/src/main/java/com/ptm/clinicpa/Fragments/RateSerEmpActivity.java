@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +42,10 @@ public class RateSerEmpActivity extends AppCompatActivity {
     Button eval;
     public static LinearLayout provider_rate_layout;
     public  static ArrayList<SupRatingModel> arrayList=new ArrayList<>();
+    TextView employee_name,ser_name;
+    ImageView logoImg ;
+    ColorRatingBar rating;
+    EditText reason;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,17 +58,54 @@ public class RateSerEmpActivity extends AppCompatActivity {
         eval=findViewById(R.id.eval);
         provider_rate_layout=findViewById(R.id.provider_rate_layout);
         provider_rate_txt=findViewById(R.id.provider_rate_txt);
-       arrayList.clear();
+        employee_name=findViewById(R.id.employee_name);
+        ser_name=findViewById(R.id.service_name);
+        rating=findViewById(R.id.rating);
+        reason=findViewById(R.id.reason);
+
+        String docName=context.getString(R.string.dr)+ getIntent().getStringExtra("doctor_name");
+        String patientName=getIntent().getStringExtra("patient_name");
+        final String appointmentId=getIntent().getStringExtra("appointment_id");
+        final String center_id=getIntent().getStringExtra("center_id");
+        final String doctor_id=getIntent().getStringExtra("doctor_id");
+        employee_name.setText(docName);
+        ser_name.setText(patientName);
+       // logoImg=findViewById(R.id.logoImg);
+     //  arrayList.clear();
 
 //        ReservationsAdapter2.book_id;
 
-        APICall.browseOneRatingBooking(ReservationsAdapter2.book_id,context);
+       // APICall.browseOneRatingBooking(ReservationsAdapter2.book_id,context);
 
         eval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                arrayList.add(new SupRatingModel("supplier",sup_rating,ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id()));
-                APICall.rateBooking(context,getrating(arrayList));
+                JSONArray jsonArray=new JSONArray();
+                JSONObject object=new JSONObject();
+                try{
+                    object.put("bdb_type","doctor");
+                    object.put("bdb_value",rating.getRating()+"");
+                    object.put("bdb_appointment_id",appointmentId);
+                    object.put("bdb_item_id",doctor_id);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                jsonArray.put(object);
+                object=new JSONObject();
+                try{
+                    object.put("bdb_type","healthCenter");
+                    object.put("bdb_value",sup_rating.getRating()+"");
+                    object.put("bdb_appointment_id",appointmentId);
+                    object.put("bdb_item_id",center_id);
+                    object.put("bdb_note",reason.getText().toString());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                jsonArray.put(object);
+
+                // arrayList.add(new SupRatingModel("healthCenter",sup_rating,ReservationsAdapter2.reservationModel.getData().get(0).getBdb_id()));
+               // APICall.rateBooking(context,rating.getRating()+"",appointmentId,"doctor",doctor_id,"");
+                APICall.rateBooking(context,jsonArray);
             }
         });
     }

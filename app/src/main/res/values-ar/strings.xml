@@ -249,13 +249,14 @@
     <string name="MyLocation">موقعي</string>
     <string name="Provider_Rate">تقييم المزودة</string>
     <string name="Service_Eval">تقييم الخدمة </string>
-    <string name="Provider_Eval">تقييم المزودة</string>
+    <string name="Provider_Eval">تقييم المركز الصحي</string>
     <string name="salon_provider_name">اسم المزودة او الصالون</string>
     <string name="Price">السعر</string>
     <string name="current_location">الموقع الحالي</string>
     <string name="new_location">موقع آخر</string>
     <string name="location_proceed">يجب عليك اختيار موقع لإكمال العملية</string>
     <string name="location_first">يجب عليك اختيار الموقع أولاً</string>
+    <string name="doc_name_first">يجب عليك اختيار اسم الطبيب أولاً</string>
     <string name="place_proceed">يجب عليك اختيار مكان الخدمة لإكمال العملية</string>
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
     <string name="distance_first">يجب عليك اختيار قيمة للبعد أولاً</string>
@@ -270,7 +271,7 @@
     <string name="services_dates">اختاري التاريخ</string>
     <string name="group_book_done">تم حجز العرض بنجاح</string>
     <string name="salon">المركز الصحي</string>
-    <string name="home">منزل العميلة</string>
+    <string name="home">منزل المريض/ة</string>
     <string name="hall">صالة</string>
     <string name="hotel">فندق</string>
     <string name="single_booking">حجز فردي</string>
@@ -453,8 +454,10 @@
     </string-array>
 
     <string name="enter_c_name">من فضلكِ ادخلي اسم المريض/ة</string>
-    <string name="enter_age_range">من فضلكِ ادخلي عمر المريض/المريضة</string>
-    <string name="enter_gender">من فضلكِ ادخلي جنس المريض/المريضة</string>
+    <string name="enter_age_range">من فضلكِ ادخلي عمر المريض/ة</string>
+    <string name="enter_age_btwn_range">من فضلكِ ادخلي عمر المريض/ة بين 0 و 100 عام</string>
+
+    <string name="enter_gender">من فضلكِ ادخلي جنس المريض/ة</string>
     <string name="add_atleast_one_service">من فضلكِ ادخلي خدمة واحدة على الاقل</string>
     <string name="select_date_of_booking">من فضلكِ ادخلي تاريخ الحجز</string>
     <string name="add_atleast_one_client">يرجى إضافة مريضة واحدة على الأقل</string>
@@ -506,10 +509,10 @@
     <string name="Executed_res">السابقة</string>
     <string name="please_select_an_service_or_back_to_cancel">please select an service or back to cancel</string>
     <string name="accepted">محجوزة مبدئياً</string>
-    <string name="employee_evaluation">تقييم الموظفات</string>
+    <string name="employee_evaluation">تقييم الطبيب/ة</string>
     <string name="evaluate">تقييم</string>
     <string name="clients_count_gr_2">عدد العميلات يجب ان يكون عميلتين على الاقل</string>
-    <string name="reser_id">رقم الحجز</string>
+    <string name="reser_id">رقم الموعد</string>
     <string name="ref_number">الرقم المرجعي</string>
     <string name="journey_time">وقت الرحلة</string>
     <string name="journey_cost">كلفة الرحلة</string>
@@ -620,7 +623,7 @@
     <string name="select_supplier">اختاري المركز الصحي</string>
     <string name="requestRelatedBooking">الحجز المرتبط بالطلب</string>
     <string name="order_id">رقم الطلب:</string>
-    <string name="createRequest">إنشاء طلب</string>
+    <string name="createRequest">إنشاء طلب فردي</string>
     <string name="createGroupRequest">إنشاء طلب جماعي</string>
     <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
     <string name="service_date_sort_up">تاريخ الطلب (تنازلياً)</string>
@@ -831,5 +834,15 @@
     <string name="years">سنوات</string>
     <string name="twoYears">العمر: سنتين</string>
     <string name="oneYear">العمر: سنة واحدة</string>
+    <string name="appUnderEditing">الموعد تحت التعديل</string>
+    <string name="newVisit">زيارة جديدة</string>
+    <string name="oldVisit">مراجعة</string>
+    <string name="unDeterminedVisit">نوع الزيارة غير محدد</string>
+    <string name="unDeterminedPrice">السعر غير محدد</string>
+    <string name="isShifted">تمت إزاحة الموعد بمقدار:</string>
+    <string name="exec_date">تاريخ التنفيذ</string>
+    <string name="creation_date">تاريخ الإنشاء</string>
+    <string name="edit_request_sent">تم إرسال طلب التعديل</string>
+    <string name="edit_request_not_sent">لم يتم إرسال طلب التعديل</string>
 
 </resources>

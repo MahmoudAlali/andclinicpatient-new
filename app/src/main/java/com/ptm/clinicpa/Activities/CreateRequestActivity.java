@@ -58,11 +58,11 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static String is_group_booking="";
     public  String postdata;
     public static String sup_id;
-    public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner,ageSpinner,genderSpinner,servicesSpinner;
+    public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner/*ageSpinner*/,genderSpinner,servicesSpinner;
 
     public  static HintArrayAdapter adapter1;
     public static CheckBox personalReserv;
-    public static EditText phoneNumber,ClientName,description,healthFileNum;
+    public static EditText phoneNumber,ClientName,description,healthFileNum,ageRange;
     int startWorkHour,startWorkMinutes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class CreateRequestActivity extends AppCompatActivity {
        // show_clients=findViewById(R.id.show_clients);
       /*  hourSpinner = findViewById(R.id.hour_from);
         minutesSpinner = findViewById(R.id.minutes_from);*/
-        ageSpinner = findViewById(R.id.age_range);
+        ageRange = findViewById(R.id.age_range);
         genderSpinner = findViewById(R.id.gender);
         servicesSpinner = findViewById(R.id.add_service);
         relativeSpinner = findViewById(R.id.relative);
@@ -146,11 +146,11 @@ public class CreateRequestActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
     //    minutesSpinner.setAdapter(adapter2);
 
-        ArrayAdapter ageAdapter = new HintArrayAdapter(this, 0);
+       /* ArrayAdapter ageAdapter = new HintArrayAdapter(this, 0);
         ageAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.age)));
         ageAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ageSpinner.setAdapter(ageAdapter);
-
+*/
         ArrayAdapter relativeAdapter = new HintArrayAdapter(this, 0);
         relativeAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.relativesType)));
         relativeAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
@@ -282,14 +282,14 @@ public class CreateRequestActivity extends AppCompatActivity {
 
             }
         });
-        addNewClient.setOnClickListener(new View.OnClickListener() {
+       /* addNewClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                     addLayout2("");
             }
-        });
+        });*/
 
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -334,8 +334,13 @@ public class CreateRequestActivity extends AppCompatActivity {
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_c_name), false);
                     check = false;
 
-                } else if (ageSpinner.getSelectedItemPosition() == 0){
+                } else if (ageRange.getText().length() == 0){
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
+                    check = false;
+
+                }
+                else if (Integer.parseInt(ageRange.getText().toString())<0 ||Integer.parseInt(ageRange.getText().toString())>100){
+                    APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_btwn_range), false);
                     check = false;
 
                 }
@@ -506,98 +511,6 @@ public class CreateRequestActivity extends AppCompatActivity {
         layout.addView(layout2);
 
     }
-
-
-    public static String getEffectsOneClient(GroupBookingModel groupBookingModels) {
-        String names="";
-        String services="";
-//        for (int i = 0; i < groupBookingModels.ssize(); i++) {
-//            if (i == 0) {
-        names = "{\"clients\":[{\"client_name\":\"" + clientsArrayList.get(0).getClientName().getText().toString() + "\",\"client_phone\":\"" + clientsArrayList.get(0).getPhoneNumber().getText() + "\",\n" +
-                "\t\t\t\"is_current_user\":0,\"services\":[";
-        for (int j = 0; j < groupBookingModels.getServicesModels().size(); j++) {
-            if (j == 0) {
-                services =
-                        groupBookingModels.getServicesModels().get(j).getBdb_ser_id();
-                names = names + services;
-            } else {
-                services =
-                        "," + groupBookingModels.getServicesModels().get(j).getBdb_ser_id();
-                names = names + services;
-            }
-
-            if (j == groupBookingModels.getServicesModels().size() - 1) {
-                names = names + "]}\n";
-            }
-        }
-
-        return names+"]}";
-    }
-/*
-    public static String getgroupFilter(ArrayList<GroupBookingModel> groupBookingModels, String bookplace, String date){
-
-        String postdata="{\"booking_place\":\""+bookplace+"\",\"max_emp_count\":5,\"journey_time\":40,\n" +
-                "\"date\":\"" + date + "\",\"clients\":[";
-
-
-
-        String names="";
-        String services="";
-        String adultCheck="";
-        for (int i=0;i<groupBookingModels.size();i++){
-            if (i!=0&&groupBookingModels.get(i).getAgeRange().getSelectedItemPosition()==1){
-                adultCheck="0";
-            }else {
-                adultCheck="1";
-            }
-            if (i==0){
-                names = "{\"client_name\":\"" + API.groupBookingModels.get(i).getClientName().getText().toString() + "\",\"client_phone\":\"" + API.groupBookingModels.get(i).getPhoneNumber().getText() + "\",\n" +
-                        "\t\t\t\"is_current_user\":0,\"is_adult\":"+adultCheck+",\"services\":[\n";
-                for (int j = 0; j < API.groupBookingModels.get(i).getServicesModels().size(); j++) {
-                    if (j == 0) {
-                        services =
-                                "\t\t\t\t{\"ser_id\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getSer_id() + ",\"ser_time\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getBdb_time() + ",\"effects\": []}\n" ;
-                        names = names + services;
-                    }else {
-                        services =
-                                "\t\t\t\t,{\"ser_id\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getSer_id() + ",\"ser_time\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getBdb_time() + ",\"effects\": []}\n" ;
-                        names = names + services;
-                    }
-
-                    if (j== API.groupBookingModels.get(i).getServicesModels().size()-1){
-                        names=names+"]}\n";
-                    }
-                }
-                postdata=postdata+names;
-
-            }else  {
-                names = ",{\"client_name\":\"" + API.groupBookingModels.get(i).getClientName().getText().toString() + "\",\"client_phone\":\"" + API.groupBookingModels.get(i).getPhoneNumber().getText() + "\",\n" +
-                        "\t\t\t\"is_current_user\":0,\"is_adult\":"+adultCheck+",\"services\":[\n";
-                for (int j = 0; j < API.groupBookingModels.get(i).getServicesModels().size(); j++) {
-                    if (j == 0) {
-                        services =
-                                "\t\t\t\t{\"ser_id\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getSer_id() + ",\"ser_time\":" + API.arabicToDecimal(API.groupBookingModels.get(i).getServicesModels().get(j).getBdb_time() )+ ",\"effects\": []}\n" ;
-                        names = names + services;
-                    }else {
-                        services =
-                                "\t\t\t\t,{\"ser_id\":" + API.groupBookingModels.get(i).getServicesModels().get(j).getSer_id() + ",\"ser_time\":" + API.arabicToDecimal(API.groupBookingModels.get(i).getServicesModels().get(j).getBdb_time() )+ ",\"effects\": []}\n" ;
-                        names = names + services;
-                    }
-                }
-                names=names+"]}\n";
-                postdata=postdata+names;
-
-            }
-        }
-        postdata=postdata+"]}";
-
-
-
-//        postdata=postdata+names;
-        return postdata;
-
-    }
-*/
 public static JSONArray getClients(int c)
 {
     JSONArray clients =new JSONArray();
@@ -633,7 +546,7 @@ public static JSONArray getClients(int c)
         }
         String s = personalReserv.isChecked()?"1":"0";
         client.put("is_current_user",s);
-        client.put("old",(ageSpinner.getSelectedItemPosition()-1));
+        client.put("old",(ageRange.getText().toString()));
         Log.e("rrrr","index-i");
 
         JSONArray services=new JSONArray() ;

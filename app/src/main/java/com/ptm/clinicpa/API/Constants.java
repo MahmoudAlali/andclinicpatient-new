@@ -77,6 +77,10 @@ public class Constants {
     public static String messageOfClientsNames_en="";
     public static String messageOfClientsNames_ar="";
     public static String offerImageId="";
+    public static String checkInMessageEn="";
+    public static String checkInMessageAr="";
+    public static String cancelReservationsAr="";
+    public static String cancelReservationsEn="";
 
     public static String[] effectValues = {"0","2.5","5","7.5","10"};
 }

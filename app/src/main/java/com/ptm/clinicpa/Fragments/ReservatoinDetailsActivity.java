@@ -69,6 +69,7 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         String book_id="";
 
         String internally_book=getIntent().getStringExtra("internally_book");
+        Boolean isNew=getIntent().getBooleanExtra("isNew",false);
 
 
         try
@@ -425,6 +426,41 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         });
 //
     }
+    public static void addHeaderLayout(final LinearLayout myroot, String client_name, String old , String price){
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
+        TextView client_details;
+        client_details=layout2.findViewById(R.id.client_details);
+        TextView c_old=layout2.findViewById(R.id.old);
+        TextView cname=layout2.findViewById(R.id.cname);
+        String o=context.getResources().getString(R.string.age2)+old+" "+context.getResources().getString(R.string.years);
+        if(old.equals("0"))
+            c_old.setText(R.string.lessThanYear);
+        else if(old.equals("1"))
+            c_old.setText(R.string.oneYear);
+        else if(old.equals("1"))
+            c_old.setText(R.string.twoYears);
+        else
+            c_old.setText(o);
+        String name=context.getResources().getString(R.string.cname)+" "+client_name;
+        cname.setText(name);
+
+        int ptmp=0;
+        ptmp=Integer.parseInt(price);
+        String s=price+" "+context.getResources().getString(R.string.ryal);
+        if(ptmp!=0)
+            client_details.setText(s);
+        else
+            client_details.setVisibility(View.GONE);
+
+        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+//
+    }
     public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String isExec,String ac_price,String jcost,String jtime){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
@@ -550,6 +586,23 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         });
 //
     }
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal){
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
+        TextView rname,price;
+
+        price=layout2.findViewById(R.id.price);
+        rname=layout2.findViewById(R.id.rname);
+        rname.setText(reservationName);
+        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+//
+    }
     public static void addMainLayoutLost(final LinearLayout myroot,String startTimeVal,String bdb_end_time,String empName,String reasontxt ){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_lost_ext, myroot, false);
@@ -578,6 +631,32 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         });
 //
     }
+
+    public static void addStatusLayout(final LinearLayout myroot, String Status){
+        final View layout2;
+        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext2, myroot, false);
+        TextView statusTxt=layout2.findViewById(R.id.rname);
+        if (Status.equals("3")){
+            statusTxt.setText(R.string.completly_executed);
+        }else  if (Status.equals("9")){
+            statusTxt.setText(R.string.rejectedByProvider);
+        }else  if (Status.equals("5")){
+            statusTxt.setText(R.string.canceledByClient);
+        }else  if (Status.equals("10")){
+            statusTxt.setText(R.string.canceledBySystem);
+        }
+        else  {
+            statusTxt.setVisibility(View.GONE);
+        }
+        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                myroot.addView(layout2);
+            }
+        });
+//
+    }
+
 
 
 }

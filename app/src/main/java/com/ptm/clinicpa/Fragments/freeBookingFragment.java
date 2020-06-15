@@ -126,7 +126,7 @@ public class freeBookingFragment extends Fragment implements LocationListener ,
         });
 
         if (BeautyMainPage.client_name.equals(""))
-            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser",BeautyMainPage.context);
+            APICall.details_user(APICall.API_PREFIX_NAME+"/api/user/detailsUser",BeautyMainPage.context);
 
         //region Type Spinner
 

@@ -43,6 +43,7 @@ import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
 import com.ptm.clinicpa.Fragments.AccountFragment;
 //import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
+import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.GroupReservationFragment;
 //import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
 import com.ptm.clinicpa.Fragments.GroupReservationOthersFragment;
@@ -61,6 +62,7 @@ import com.ptm.clinicpa.Fragments.PlaceServiceMultipleBookingFragment;
 import com.ptm.clinicpa.Fragments.ReservationFragment;
 import com.ptm.clinicpa.Fragments.ServiceFragment;
 import com.ptm.clinicpa.Fragments.ServicesTabsFragment;
+import com.ptm.clinicpa.Fragments.freeBookingFragment;
 import com.ptm.clinicpa.PayFort.IPaymentRequestCallBack;
 import com.ptm.clinicpa.PayFort.PayFortData;
 import com.ptm.clinicpa.PayFort.PayFortPayment;
@@ -225,7 +227,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.requests).setVisible(false);
             sideMenu.findItem(R.id.setting).setVisible(true);
             menu.findItem(R.id.favorites).setEnabled(false);
-            menu.findItem(R.id.notification).setEnabled(false);
+            menu.findItem(R.id.centers).setEnabled(false);
             menu.findItem(R.id.reservations).setEnabled(false);
         }
         else if(APICall.isGuest(context).equals("0"))
@@ -953,6 +955,25 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             Intent intent=new Intent(this, AccountFragment.class);
             startActivity(intent);
 
+        }
+        else if (id == R.id.indiv_request) {
+            BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+            fragment = new freeBookingFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+
+        }
+        else if (id == R.id.group_request) {
+            BeautyMainPage.FRAGMENT_NAME = "freeGroupBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+            fragment = new FreeGroupBooking();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
         }else if (id == R.id.points) {
             fragment = new PointsMainFragment();
             fm = getFragmentManager();

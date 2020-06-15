@@ -30,9 +30,18 @@
                 android:icon="@drawable/side_effects_icon"
                 android:title="@string/effect" />
             <item
+                android:visible="false"
                 android:id="@+id/requests"
                 android:icon="@drawable/side_requests_icon"
                 android:title="@string/service" />
+            <item
+                android:id="@+id/indiv_request"
+                android:icon="@drawable/add_request"
+                android:title="@string/createRequest" />
+            <item
+                android:id="@+id/group_request"
+                android:icon="@drawable/add_request"
+                android:title="@string/createGroupRequest" />
             <item
                 android:id="@+id/notification"
                 android:icon="@drawable/notifications_selected"

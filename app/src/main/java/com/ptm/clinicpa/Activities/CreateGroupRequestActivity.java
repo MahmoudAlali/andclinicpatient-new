@@ -174,6 +174,11 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                         break;
 
                     }
+                    else if (Integer.parseInt(clientsArrayList.get(i).getAgeRange().getText().toString())<0 ||Integer.parseInt(clientsArrayList.get(i).getAgeRange().getText().toString())>100){
+                        APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_btwn_range), false);
+                        check = false;
+
+                    }
                     else if (clientsArrayList.get(i).getGenderSpinner().getSelectedItemPosition() == 0){
                         APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
                         check = false;
@@ -307,7 +312,9 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
+        final ArrayList<String> supplierServicesNames=new ArrayList();
+
+        final ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         addService.setAdapter(adapter1);
 
@@ -328,13 +335,14 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         genderSpinner.setAdapter(genderAdapter);
 
         final ArrayList<ClientServiceDataModel> servicesModels=new ArrayList<>();
+        final ArrayList<ClientServiceDataModel> ChosenServicesModels=new ArrayList<>();
 
         addService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
 
-                    addLayout2(addService.getSelectedItem()+"",adding_service_layout,addService,servicesModels);
+                    addLayout2(addService.getSelectedItem()+"",adding_service_layout,addService,servicesModels,ChosenServicesModels);
 
                 }
             }
@@ -350,7 +358,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         final ArrayList<ServiceItems> allDocs=new ArrayList<>();
         //clientsArrayList.add(new GroupBookingModel(cname,cnumber,ageRange,servicesModels));
         clientsArrayList.add(new GroupBookingModel(cname,ageRange,genderSpinner,relativeSpinner,doctorName,doctorSpeciality,
-                start_time,healthFileNum,description,servicesModels,personalReserv,allDocs));
+                start_time,healthFileNum,description,ChosenServicesModels,personalReserv,allDocs));
 
 
 //        emp_name.setText(s);
@@ -428,6 +436,20 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         doctorName.setAdapter(adapter3);
 
+        doctorName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String doc_id=allDocs.get(position).getBdb_ser_id();
+                APICall.groupFreeGetServiceNames(context,doc_id,FreeGroupBooking.Place,adapter1,supplierServicesNames,servicesModels);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ArrayAdapter adapter2 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, specialitiesList);
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         doctorSpeciality.setAdapter(adapter2);
@@ -458,43 +480,39 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_dropdown_item_1line, relativesList);
         cname.setAdapter(adapter);
-        /*cname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        cname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(APICall.allRelativesList.get(position).getBdb_gender().equals("0"))
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
+                Log.e("onItemSelected","Item "+position);
+                int index=relativesList.indexOf(parent.getItemAtPosition(position));
+                if(APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
                     genderSpinner.setSelection(1);
                 else
                     genderSpinner.setSelection(2);
-                relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(position).getBdb_relation()));
-                if(!APICall.allRelativesList.get(position).getBdb_health_record().equals("null"))
-                     healthFileNum.setText(APICall.allRelativesList.get(position).getBdb_health_record());
-              //  ageRange.setSelection(Integer.getInteger(APICall.allRelativesList.get(position).get()));
+                relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(index).getBdb_relation()));
+                if(!APICall.allRelativesList.get(index).getBdb_health_record().equals("null"))
+                    healthFileNum.setText(APICall.allRelativesList.get(index).getBdb_health_record());
+               /* if(APICall.allRelativesList.get(index).getBdb_old().equals("0"))
+                    ageRange.setText(R.string.lessThanYear);
+                else if(APICall.allRelativesList.get(index).getBdb_old().equals("1"))
+                    ageRange.setText(R.string.oneYear);
+                else if(APICall.allRelativesList.get(index).getBdb_old().equals("2"))
+                    ageRange.setText(R.string.twoYears);
+                else*/
+                {
+                    String s=APICall.allRelativesList.get(index).getBdb_old();
+                    ageRange.setText(s);
 
-            }
-        });*/
-        cname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(APICall.allRelativesList.get(position).getBdb_gender().equals("0"))
-                    genderSpinner.setSelection(1);
-                else
-                    genderSpinner.setSelection(2);
-                relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(position).getBdb_relation()));
-                if(!APICall.allRelativesList.get(position).getBdb_health_record().equals("null"))
-                    healthFileNum.setText(APICall.allRelativesList.get(position).getBdb_health_record());
-                //  ageRange.setSelection(Integer.getInteger(APICall.allRelativesList.get(position).get()));
+                }
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         show_clients.addView(layout2);
 
     }
-    private static void addLayout2(String s, final LinearLayout layout, Spinner addService, final ArrayList<ClientServiceDataModel> servicesModels) {
+    private static void addLayout2(String s, final LinearLayout layout, Spinner addService, final ArrayList<ClientServiceDataModel> servicesModels, final ArrayList<ClientServiceDataModel> chosenServices) {
 
         final View layout2;
 
@@ -509,9 +527,9 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i< servicesModels.size(); i++){
-                    if (emp_name.getText().toString().equals(servicesModels.get(i).getBdb_name())||emp_name.getText().toString().equals(servicesModels.get(i).getBdb_name_ar())){
-                        servicesModels.remove(i);
+                for(int i = 0; i< chosenServices.size(); i++){
+                    if (emp_name.getText().toString().equals(chosenServices.get(i).getBdb_name())||emp_name.getText().toString().equals(chosenServices.get(i).getBdb_name_ar())){
+                        chosenServices.remove(i);
                         layout.removeView(layout2);
                         break;
                     }
@@ -521,10 +539,10 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         });
 //        API.groupBookingModels.add(new GroupBookingModel(client_name,client_no,age,))
 
-        Log.e("ServiceName",s);
+       /* Log.e("ServiceName",s);
         Log.e("nameAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar());
-        Log.e("IdAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id());
-        servicesModels.add(new ClientServiceDataModel(APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id()+"",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_sup_id()+"",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name(),APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar()));
+        Log.e("IdAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id());*/
+        chosenServices.add(new ClientServiceDataModel(servicesModels.get(addService.getSelectedItemPosition()-1).getBdb_ser_id()+"",servicesModels.get(addService.getSelectedItemPosition()-1).getBdb_ser_sup_id()+"",servicesModels.get(addService.getSelectedItemPosition()-1).getBdb_name(),servicesModels.get(addService.getSelectedItemPosition()-1).getBdb_name_ar()));
         layout.addView(layout2);
 
     }
