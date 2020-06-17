@@ -31,6 +31,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
@@ -41,6 +42,7 @@ import com.ptm.clinicpa.DataModel.BrowseServiceItem;
 import com.ptm.clinicpa.DataModel.DataOffer;
 import com.ptm.clinicpa.DataModel.DoctorDataModel;
 import com.ptm.clinicpa.DataModel.HealthCenterImages;
+import com.ptm.clinicpa.DataModel.OfferModel;
 import com.ptm.clinicpa.DataModel.SupInfoClass;
 import com.ptm.clinicpa.Fragments.AccountFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceFragment;
@@ -51,6 +53,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainProviderActivity extends AppCompatActivity {
+
 
 
     public static OffersAdapterTab offersAdapterTab;
@@ -132,18 +135,19 @@ public class MainProviderActivity extends AppCompatActivity {
         lineTwo=findViewById(R.id.featuresLine2);
         for (int i=0;i<featuresList.size();i++)
         {
+            if (!featuresList.get(i).equals("null"))
             if(i<14)
             {
                 if(i>6)
                     lineTwo.setVisibility(View.VISIBLE);
                 else
                     lineOne.setVisibility(View.VISIBLE);
-                APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,featuresList.get(i),features[i]);
+                APICall.getSalonLogoDltWhenEmpty(context,featuresList.get(i),features[i]);
             }
         }
         String isFav= getIntent().getStringExtra("is_fav");
         final String provider_id= getIntent().getStringExtra("provider_id");
-        APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,getIntent().getStringExtra("logo_id"),logo);
+        APICall.getSalonLogoDltWhenEmpty(context,getIntent().getStringExtra("logo_id"),logo);
 
         if(APICall.isGuest(context).equals("1"))
         {
@@ -382,9 +386,9 @@ public class MainProviderActivity extends AppCompatActivity {
         offer_sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!date.getText().toString().equals(context.getResources().getString(R.string.date)) &&
+                /*if (!date.getText().toString().equals(context.getResources().getString(R.string.date)) &&
                         !my_location.getText().toString().equals(context.getResources().getString(R.string.MyLocation))
-                ) {
+                )*/ {
                     service_Sw.setBackgroundResource(android.R.color.transparent);
                     map.setBackgroundResource(android.R.color.transparent);
                     fra.setVisibility(View.GONE);
@@ -393,15 +397,26 @@ public class MainProviderActivity extends AppCompatActivity {
                     servicesProviderAdapter.notifyDataSetChanged();
                     LinearLayoutManager manager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                     recycleview.setLayoutManager(manager);
-                    offersAdapterTab = new OffersAdapterTab(context, list);
+                    offersAdapterTab = new OffersAdapterTab(context, APICall.offers,"center");
                     recycleview.setAdapter(offersAdapterTab);
                     String date1 = "  ,{\"num\":13,\"value1\":\"" + date.getText().toString() + "\"}\n" +
                             "     ,{\"num\":44,\"value1\":\"" + date.getText().toString() + "\"}";
 
-                    APICall.automatedBrowseProviderOffers("8", "1", date1, context);
-                }else {
+                    String filter2="\"Filter\":["+/*APICall.Filter("7","1")+","*/
+
+                            Filters.getString(Filters.CLINIC_ID,getIntent().getStringExtra("provider_id"));
+                    filter2+=",{\"num\":2,\"value1\":0,\"value2\":100000}";
+                    filter2+=",{\"num\":34,\"value1\":"+Offers.Lat+",\"value2\":0}"+",{\"num\":35,\"value1\":"+Offers.Long+",\"value2\":0}";
+                    filter2+="]";
+
+                    final String filter =filter2;
+                    APICall.automatedBrowseOffers( 1+"", context, filter,"",offersAdapterTab);
+
+
+                   // APICall.automatedBrowseProviderOffers("8", "1", date1, context);
+                }/*else {
                     APICall.showSweetDialog(context,"",context.getResources().getString(R.string.please_select_date_and_location));
-                }
+                }*/
 
             }
         });

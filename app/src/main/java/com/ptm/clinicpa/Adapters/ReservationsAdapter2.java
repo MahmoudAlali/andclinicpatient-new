@@ -171,7 +171,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                 ((Item)holder).bookingType.setText(R.string.unDeterminedVisit);
 
 
-            ((Item)holder).book_id.setText(context.getString(R.string.ref_number)+appointmentsDataModels.get(position).getBdb_internally_number());
+            ((Item)holder).book_id.setText(context.getString(R.string.ref_number)+": "+appointmentsDataModels.get(position).getBdb_internally_number());
             ((Item)holder).reference_id.setText(context.getString(R.string.book_id)+appointmentsDataModels.get(position).getBdb_appointment_id());
 
             if(!isNew)

@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.NewBookingRequestsFragment;
@@ -51,7 +52,9 @@ public class MyBookingRequestsFilters extends Fragment {
         requestDate=view.findViewById(R.id.order_date);
         requestType=view.findViewById(R.id.book_type);
         creationDate=view.findViewById(R.id.creation_date);
-        if(!MyBookingRequestsFragment.salonFilterTemp.equals(""))
+        BeautyMainPage.FRAGMENT_NAME="MyBookingRequestsFilters";
+
+        /*if(!MyBookingRequestsFragment.salonFilterTemp.equals(""))
         {
             salonName.setText(MyBookingRequestsFragment.salonFilterTemp);
         }
@@ -63,10 +66,21 @@ public class MyBookingRequestsFilters extends Fragment {
         {
             requestType.setText(MyBookingRequestsFragment.typeFilterTemp);
         }
+        if(!MyBookingRequestsFragment.creationDateFilterTemp.equals(""))
+        {
+            requestType.setText(MyBookingRequestsFragment.creationDateFilterTemp);
+        }*/
+        MyBookingRequestsFragment.salonFilterTemp="";
+        MyBookingRequestsFragment.salonFilter="";
+        MyBookingRequestsFragment.dateFilterTemp="";
+        MyBookingRequestsFragment.dateFilter="";
+        MyBookingRequestsFragment.typeFilterTemp="";
+        MyBookingRequestsFragment.typeFilter="";
+        MyBookingRequestsFragment.creationDateFilter="";
+        MyBookingRequestsFragment.creationDateFilterTemp="";
 
 
         //--------------------- get services---------------------------
-        Log.e("getOrderedSuppliers","getOrderedSuppliers");
         APICall.getOrderedSuppliers(BeautyMainPage.context);
 
 
@@ -90,15 +104,20 @@ public class MyBookingRequestsFilters extends Fragment {
            @Override
            public void onClick(View v) {
 
-               servicesList.add("اختاري خدمة");
                if (servicesList.size()==0)
+               {
+                   servicesList.add(BeautyMainPage.context.getString(R.string.healthCenteres));
                    for (int i=0;i<APICall.allSuppliers.size();i++){
+                       Log.e("adding","supp"+i);
+
                        if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
                            servicesList.add(APICall.allSuppliers.get(i).getName());
                        else
                            servicesList.add(APICall.allSuppliers.get(i).getName_ar());
 
                    }
+               }
+
 
                final Dialog dialog=new Dialog(BeautyMainPage.context);
                dialog.setContentView(R.layout.select_offer_type_dialog_v3);
@@ -124,7 +143,7 @@ public class MyBookingRequestsFilters extends Fragment {
                        salonName.setText(supplier.getSelectedItem().toString());
                        MyBookingRequestsFragment.salonFilterTemp=supplier.getSelectedItem().toString();
                        MyBookingRequestsFragment.bookingType=requestType.getText().toString();
-                       MyBookingRequestsFragment.salonFilter = APICall.Filter("47",APICall.allSuppliers.get(supplier.getSelectedItemPosition()).getId()+"");
+                       MyBookingRequestsFragment.salonFilter = APICall.Filter(Filters.CLINIC_ID,APICall.allSuppliers.get(supplier.getSelectedItemPosition()-1).getId()+"");
                        // }
                        dialog.dismiss();
                    }
@@ -228,6 +247,7 @@ public class MyBookingRequestsFilters extends Fragment {
                        MyBookingRequestsFragment.creationDateFilter = "";
                        MyBookingRequestsFragment.creationDateFilterTemp="";
 
+                       creationDate.setText(getResources().getString(R.string.creationDateFilter));
                    }
                });
 
@@ -238,6 +258,8 @@ public class MyBookingRequestsFilters extends Fragment {
                        name.dismiss();
                        MyBookingRequestsFragment.creationDateFilter = "";
                        MyBookingRequestsFragment.creationDateFilterTemp="";
+                       creationDate.setText(getResources().getString(R.string.creationDateFilter));
+
                    }
                });
                name.show();
@@ -315,6 +337,8 @@ public class MyBookingRequestsFilters extends Fragment {
                         name.dismiss();
                         MyBookingRequestsFragment.dateFilter = "";
                         MyBookingRequestsFragment.dateFilterTemp="";
+                        requestDate.setText(getResources().getString(R.string.exec_date));
+
 
                     }
                 });
@@ -326,6 +350,8 @@ public class MyBookingRequestsFilters extends Fragment {
                         name.dismiss();
                         MyBookingRequestsFragment.dateFilter = "";
                         MyBookingRequestsFragment.dateFilterTemp="";
+                        requestDate.setText(getResources().getString(R.string.exec_date));
+
                     }
                 });
                 name.show();
@@ -376,9 +402,20 @@ public class MyBookingRequestsFilters extends Fragment {
                        dialog.cancel();
                        MyBookingRequestsFragment.typeFilterTemp="";
                        MyBookingRequestsFragment.typeFilter="";
+                       requestType.setText(getResources().getString(R.string.requestType));
+
                    }
                });
 
+               dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                   @Override
+                   public void onCancel(DialogInterface dialog) {
+                       dialog.cancel();
+                       MyBookingRequestsFragment.typeFilterTemp="";
+                       MyBookingRequestsFragment.typeFilter="";
+                       requestType.setText(getResources().getString(R.string.requestType));
+                   }
+               });
 
                dialog.show();
 

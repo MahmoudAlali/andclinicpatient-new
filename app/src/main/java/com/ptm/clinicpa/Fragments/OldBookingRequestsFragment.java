@@ -48,7 +48,8 @@ public class OldBookingRequestsFragment extends Fragment {
     int curentItems,totalItems,scrollOutItems;
     LinearLayoutManager manager;
     public  static int pageNum=1;
-
+    public static String salonFilter,dateFilter,typeFilter,creationDateFilter;
+    public static String salonFilterTemp,dateFilterTemp,typeFilterTemp,creationDateFilterTemp;
     public String tmp="2";
     @Nullable
     @Override
@@ -112,6 +113,8 @@ public class OldBookingRequestsFragment extends Fragment {
             filters.add(MyBookingRequestsFragment.typeFilter);
         if(!MyBookingRequestsFragment.salonFilter.equals(""))
             filters.add(MyBookingRequestsFragment.salonFilter);
+        if(!MyBookingRequestsFragment.creationDateFilter.equals(""))
+            filters.add(MyBookingRequestsFragment.creationDateFilter);
 
         APICall.filter=APICall.Filter(filters);
         //region CHECK_NOTIFICATIONS

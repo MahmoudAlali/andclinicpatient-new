@@ -53,6 +53,7 @@ import com.ptm.clinicpa.Fragments.ListServicesFragment;
 import com.ptm.clinicpa.Fragments.MyBookingRequestsFragment;
 import com.ptm.clinicpa.Fragments.MyEffects.MyEffectsActivity;
 import com.ptm.clinicpa.Fragments.MyFavorites.FavoriteFragment;
+import com.ptm.clinicpa.Fragments.MyOffersFragment;
 import com.ptm.clinicpa.Fragments.Notifications.NotificationsFragment;
 import com.ptm.clinicpa.Fragments.Points.PointsMainFragment;
 import com.ptm.clinicpa.Fragments.MultiIndividualBookingReservationFragment;
@@ -792,7 +793,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             APICall.sendFavorites(context,ListServicesFragment.getFavorites(APICall.itemArrayList));
 
         }else if (FRAGMENT_NAME.equals("PointsFragment")){
-            fragment = new ServiceFragment();
+            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+            navigation.setSelectedItemId(R.id.main);
+            fragment = new Offers();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
@@ -836,16 +839,39 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
 
-        }else if (FRAGMENT_NAME.equals("ACCOUNTFRAGMENT")){
-            FRAGMENT_NAME="";
-            fragment = new ServiceFragment();
+        }
+        else if (FRAGMENT_NAME.equals("MyBookingRequestsFilters")){
+            MyBookingRequestsFragment.isNew=false;
+            Fragment fragment = new MyBookingRequestsFragment();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+
+        }else if (FRAGMENT_NAME.equals("HealthCentersFragment")){
+            fragment= new HealthCentersFragment();
+
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
+            fragmentTransaction.commit();
 
-            navigation.setSelectedItemId(R.id.services);
+        }else if (FRAGMENT_NAME.equals("ACCOUNTFRAGMENT")){
+            FRAGMENT_NAME="";
+           // menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+            navigation.setSelectedItemId(R.id.main);
+            //fragment = new Offers();
+            /*fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();*/
+
+         //   navigation.setSelectedItemId(R.id.services);
 //
+        }else if (FRAGMENT_NAME.equals("NotificationsFragment")){
+            FRAGMENT_NAME="";
+            navigation.setSelectedItemId(R.id.main);
+
         }else if (FRAGMENT_NAME.equals("MAPFRAGMENTSPINNER")){
             fragment = new PlaceServiceFragment();
             fm = getFragmentManager();
@@ -854,7 +880,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
 
         }else if (FRAGMENT_NAME.equals("SETTING")){
-            fragment = new ServiceFragment();
+            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+            navigation.setSelectedItemId(R.id.main);
+            fragment = new Offers();
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
@@ -916,13 +944,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
             FRAGMENT_NAME="SERVICEFRAGMENT";
         }else  {
-            if(navigation.getSelectedItemId()!=R.id.services){
-                navigation.setSelectedItemId(R.id.services);
-                fragment = new ServiceFragment();
+            if(navigation.getSelectedItemId()!=R.id.main){
+                navigation.setSelectedItemId(R.id.main);
+                /*menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+                fragment = new Offers();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commitAllowingStateLoss();
+                fragmentTransaction.commitAllowingStateLoss();*/
 
             }else {
                 AlertDialog.Builder builder=  new AlertDialog.Builder(context);
@@ -1114,7 +1143,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                             }else {
                                 menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_selected);
 
-                                fragment = new FavoriteFragment();
+                                //fragment = new FavoriteFragment();
+                                fragment=new MyOffersFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
                                 fragmentTransaction.replace(R.id.fragment, fragment);

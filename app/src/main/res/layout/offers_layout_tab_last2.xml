@@ -89,8 +89,10 @@
                 android:orientation="vertical"
                 >
                 <LinearLayout
+                    android:id="@+id/centerNameLayout"
                     android:layout_marginRight="@dimen/standard_20"
                     android:layout_marginLeft="@dimen/standard_20"
+                    android:layout_marginTop="9dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -108,21 +110,53 @@
                         android:textSize="14dp"
                         android:gravity="center"/>
 
-                    <ImageView
-                        android:id="@+id/exp"
-                        android:layout_width="@dimen/standard_30"
-                        android:layout_height="@dimen/standard_30"
-                        android:textColor="#000"
-                        android:textAlignment="center"
-                        />
+
                     <Space
                         android:layout_width="@dimen/pf_10dp_space"
                         android:layout_height="match_parent"/>
                     <ImageView
-                        android:id="@+id/health"
+                        android:id="@+id/is_fav_center"
                         android:layout_width="@dimen/standard_30"
                         android:layout_height="@dimen/standard_30"
                         android:textColor="#000"
+                        android:textAlignment="center"
+                        android:src="@drawable/un_favorite"
+                        />
+                    <Space
+                        android:layout_width="@dimen/standard_20"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Space
+                        android:layout_width="@dimen/standard_20"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/doctorName"
+                        android:text="Doctor name"
+                        android:layout_weight="1"
+                        android:textColor="@color/prime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="14dp"
+                        android:gravity="center"/>
+
+
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/is_fav_doctor"
+                        android:layout_width="@dimen/standard_30"
+                        android:layout_height="@dimen/standard_30"
+                        android:textColor="#000"
+                        android:src="@drawable/un_favorite"
                         android:textAlignment="center"
                         />
                     <Space
@@ -132,32 +166,74 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="visible"
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_weight="1"
+                        android:id="@+id/offer_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reserv_from_center"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="#000"
+                        android:gravity="center"/>
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
-                        android:id="@+id/offer_type"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/age_range"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="offer type"
+                        android:text="Age"
                         android:textStyle="bold"
                         android:textSize="16dp"
                         android:textColor="#a5587a"
                         android:gravity="center"/>
-                    <TextView
-                        android:id="@+id/morning_offer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:layout_gravity="end"
-                        />
                     <ImageView
-                        android:id="@+id/placeL"
                         android:layout_width="30dp"
                         android:layout_gravity="center"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_location_on_black_24dp"
+                        />
+                    <Space
+                        android:layout_width="@dimen/pf_10dp_space"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/speciality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="speciality"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="#a5587a"
+                        android:gravity="center"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_gravity="center"
+                        android:layout_height="match_parent"
                         />
                     <Space
                         android:layout_width="@dimen/pf_10dp_space"
@@ -166,10 +242,15 @@
 
 
                 <LinearLayout
+                    android:layout_marginRight="@dimen/standard_20"
+                    android:layout_marginLeft="@dimen/standard_20"
                     android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:visibility="gone"
                         android:layout_weight="1"
                         android:id="@+id/place"
                         android:gravity="center"
@@ -334,6 +415,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>-->
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:orientation="horizontal"
@@ -400,6 +482,7 @@
                         android:textColor="#a5587a"
                         android:gravity="center"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         android:paddingBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />

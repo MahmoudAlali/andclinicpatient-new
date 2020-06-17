@@ -6,7 +6,42 @@ import java.util.ArrayList;
 
 public class OfferModel {
 
-    String bdb_pack_code,bdb_sup_name,totalRating_to_Sup,service_count,is_fav_sup,bdb_offer_start,bdb_offer_end,Num_of_times,oldPrice,newPrice,discount,bdb_offer_status,bdb_offer_type,bdb_is_effects_on,bdb_is_journey_on,bdb_is_old_on,bdb_is_season_on,bdb_offer_place;
+    String bdb_pack_code,
+            bdb_doctor_name,
+            health_center_name_ar,
+            specialization_ar,
+            specialization_en,
+            supported_gender,
+            health_center_name_en,
+            health_center_id,
+            is_fav_center,
+            is_fav_doctor,
+            bdb_offer_start,
+            bdb_offer_end,
+            bdb_sup_name,
+            totalRating_to_Sup,
+            oldPrice,
+            newPrice,
+            discount,
+            service_count,
+            distance,
+            longitude,
+            minAge,
+            maxAge,
+            latitude,
+
+            is_fav_sup,
+
+            Num_of_times,
+                    bdb_logo_id,
+
+            bdb_offer_status,
+            bdb_offer_type,
+            bdb_is_effects_on,
+            bdb_is_journey_on,
+            bdb_is_old_on,
+            bdb_is_season_on,
+            bdb_offer_place;
     ArrayList<SupIdClass> sersup_ids;
 
 //    public OfferModel(String bdb_pack_code, String bdb_sup_name, String totalRating_to_Sup, String service_count, String is_fav_sup, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount, ArrayList<SupIdClass> sersup_ids) {
@@ -93,6 +128,40 @@ public class OfferModel {
         this.bdb_is_season_on = bdb_is_season_on;
         this.sersup_ids = sersup_ids;
         this.bdb_offer_place= bdb_offer_place;
+    }
+    public OfferModel(String bdb_pack_code, String health_center_id,String health_center_name_ar,String health_center_name_en,String bdb_doctor_name,
+                      String totalRating_to_Sup, String service_count,
+                      String is_fav_doctor,String is_fav_center, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount,String distance,String latitude,String longitude, String bdb_offer_status, String bdb_offer_type, String bdb_is_journey_on, String bdb_is_old_on,String bdb_offer_place,String bdb_logo_id, ArrayList<SupIdClass> sersup_ids,String minAge,String maxAge,String supported_gender,String specialization_ar,String specialization_en) {
+        this.bdb_pack_code = bdb_pack_code;
+        this.health_center_id = health_center_id;
+        this.health_center_name_ar = health_center_name_ar;
+        this.health_center_name_en = health_center_name_en;
+        this.bdb_doctor_name = bdb_doctor_name;
+        this.is_fav_center = is_fav_center;
+        this.is_fav_doctor = is_fav_doctor;
+        this.bdb_logo_id = bdb_logo_id;
+        this.totalRating_to_Sup = totalRating_to_Sup;
+        this.service_count = service_count;
+        this.distance = distance;
+        this.bdb_offer_start = bdb_offer_start;
+        this.bdb_offer_end = bdb_offer_end;
+        Num_of_times = num_of_times;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.discount = discount;
+        this.bdb_offer_status = bdb_offer_status;
+        this.bdb_offer_type = bdb_offer_type;
+        this.latitude = latitude;
+        this.bdb_is_journey_on = bdb_is_journey_on;
+        this.bdb_is_old_on = bdb_is_old_on;
+        this.longitude = longitude;
+        this.sersup_ids = sersup_ids;
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+        this.bdb_offer_place= bdb_offer_place;
+        this.specialization_ar= specialization_ar;
+        this.specialization_en= specialization_en;
+        this.supported_gender= supported_gender;
     }
 
     public String getBdb_offer_place() {
@@ -247,6 +316,66 @@ public class OfferModel {
         this.sersup_ids = sersup_ids;
     }
 
+    public String getHealth_center_id() {
+        return health_center_id;
+    }
+
+    public String getIs_fav_center() {
+        return is_fav_center;
+    }
+
+    public String getIs_fav_doctor() {
+        return is_fav_doctor;
+    }
+
+    public String getBdb_logo_id() {
+        return bdb_logo_id;
+    }
+
+    public String getBdb_doctor_name() {
+        return bdb_doctor_name;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public String getHealth_center_name_ar() {
+        return health_center_name_ar;
+    }
+
+    public String getHealth_center_name_en() {
+        return health_center_name_en;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getSpecialization_ar() {
+        return specialization_ar;
+    }
+
+    public String getSpecialization_en() {
+        return specialization_en;
+    }
+
+    public String getMaxAge() {
+        return maxAge;
+    }
+
+    public String getMinAge() {
+        return minAge;
+    }
+
+    public String getSupported_gender() {
+        return supported_gender;
+    }
+
     public static class SupIdClass{
         String bdb_ser_sup_id,bdb_name,bdb_name_ar,bdb_ser_id;
 
@@ -289,5 +418,7 @@ public class OfferModel {
         public void setBdb_ser_id(String bdb_ser_id) {
             this.bdb_ser_id = bdb_ser_id;
         }
+
+
     }
 }

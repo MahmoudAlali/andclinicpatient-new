@@ -160,44 +160,6 @@ public static ImageView sortbtn;
             }
         });
 
-      /*  if (PayTestActivity.check.equals("2")  ) {
-            fragment = new AcceptedReservationFragment();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-            tabselected(incom_reservation, deposit_reservation, accept_reservation, false);
-            try {
-                APICall.pd.dismiss();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            APICall.showSweetDialog(BeautyMainPage.context,BeautyMainPage.context.getResources().getString(R.string.faild_payment));
-            PayTestActivity.check="0";
-        }else if ( PayTestActivity.check.equals("0")){
-            fragment = new AcceptedReservationFragment();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-            tabselected(incom_reservation, deposit_reservation, accept_reservation, false);
-
-        }else if (PayTestActivity.check.equals("1") ){
-            tabselected(deposit_reservation,accept_reservation,incom_reservation,false);
-            fragment = new DepositReservationFragment();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-            try {
-                APICall.pd.dismiss();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            APICall.showSweetDialog(BeautyMainPage.context,BeautyMainPage.context.getResources().getString(R.string.success_payment));
-            PayTestActivity.check="0";
-        }*/
-
       reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.myAppointments,true);
         tab="2";
         tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
@@ -308,20 +270,7 @@ public static ImageView sortbtn;
                 BeautyMainPage.context.startActivity(i);
             }});
         //endregion
-        incom_reservation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-               /* tab="1";
-                fragment = new AcceptedReservationFragment();
-                fm = getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-                fragmentTransaction.commitAllowingStateLoss();
-                tabselected(incom_reservation,accept_reservation,deposit_reservation,true);*/
-
-            }
-        });
 
         accept_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,17 +319,17 @@ public static ImageView sortbtn;
                         reservationsAdapter2.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            APICall.appointmentsAutomatedBrowse("en","100",MyReservationFragment.serviceId,"1",ExecutedReservationFragment.filter,APICall.sort,BeautyMainPage.context,APICall.layout,tmp,false);
 
                         }else if (id==R.id.two){
                             APICall.sort=APICall.bookingSort("1","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            APICall.appointmentsAutomatedBrowse("en","100",MyReservationFragment.serviceId,"1",ExecutedReservationFragment.filter,APICall.sort,BeautyMainPage.context,APICall.layout,tmp,false);
                         }else if (id==R.id.three){
                             APICall.sort=APICall.bookingSort("2","asc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            APICall.appointmentsAutomatedBrowse("en","100",MyReservationFragment.serviceId,"1",ExecutedReservationFragment.filter,APICall.sort,BeautyMainPage.context,APICall.layout,tmp,false);
                         }else if (id==R.id.four){
                             APICall.sort=APICall.bookingSort("2","desc");
-                            APICall.bookingAutomatedBrowse1("en","100",MyReservationFragment.serviceId,"1","",APICall.sort,BeautyMainPage.context,APICall.layout,tmp);
+                            APICall.appointmentsAutomatedBrowse("en","100",MyReservationFragment.serviceId,"1",ExecutedReservationFragment.filter,APICall.sort,BeautyMainPage.context,APICall.layout,tmp,false);
                         }
                         Log.e("Sort1",APICall.sort);
                         Log.e("filter1",APICall.filter);

@@ -16,5 +16,4 @@
         android:id="@+id/four"
         android:title="@string/rating_desc"/>
 
-
 </menu>

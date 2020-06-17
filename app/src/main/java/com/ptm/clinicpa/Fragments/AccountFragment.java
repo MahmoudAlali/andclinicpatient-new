@@ -148,7 +148,7 @@ public class AccountFragment extends Fragment  {
 
 
                 }else {
-                    APICall.update_user(APICall.API_PREFIX_NAME+"/api/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),genderType,BeautyMainPage.context);
+                    APICall.update_user(APICall.API_PREFIX_NAME+"/api/user/updateUser",e_bdb_name.getText().toString(),e_bdb_email.getText().toString(),genderType,e_bdb_old.getText().toString(),BeautyMainPage.context);
 
                 }
                // Intent intent=new Intent(BeautyMainPage.context, BeautyMainPage.class);startActivity(intent);

@@ -110,7 +110,6 @@ public class DepositReservationFragment extends Fragment {
             e.printStackTrace();
         }
 //        if (APICall.arrayAB==null)
-            APICall.filter=filter= APICall.bookingFilterV1("1","7","0");
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
@@ -142,15 +141,10 @@ public class DepositReservationFragment extends Fragment {
         //---------cancel---------
 //        filter=APICall.bookingFilter("1","4","0");
 
+        APICall.filter= APICall.bookingFilterV1("1","7","0");
+        APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1",  APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
+
         //---------wait confirm by provider
-        if (MyReservationFragment.filtercheck==false) {
-            if (filter==null){
-                APICall.filter=filter= APICall.bookingFilterV1("1","7","0");
-            }
-            APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
-        }else {
-            MyReservationFragment.filtercheck=false;
-        }
 //        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);
         return view;
     }

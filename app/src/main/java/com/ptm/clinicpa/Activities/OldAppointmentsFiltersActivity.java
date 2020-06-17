@@ -42,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -49,7 +50,7 @@ import java.util.Locale;
 public class OldAppointmentsFiltersActivity extends AppCompatActivity implements LocationListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    static TextView distance,mylocationbtn,specialityType, clinicName, doctorName,serviceName,excecutionDate,creationDate;
+    static TextView distance,mylocationbtn,specialityType, clinicName, doctorName,serviceName,excecutionDate,creationDate,appointmentType;
     public static Spinner typeSpinner,genderSpinner,ageSpinner;
     ArrayList<String> specialitiesList=new ArrayList<>();
     private static ArrayList<String> servicesList=new ArrayList<>();
@@ -64,6 +65,7 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
     public static String filterCreateDate="";
     public static String filterServices="";
     public static String filterDoctorName="";
+    public static String filterAppointmentType="";
     public static String filterMyLocationLat="",filterMyLocationLng="";
     public static String tempName="",tempFilter="";
     Double lat,lng;
@@ -77,9 +79,22 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_appointments_filters);
         context=this;
+         filterSpeciality="";
+         filterDistance="";
+         filterSupplierId="";
+         filterExecDate="";
+         filterCreateDate="";
+         filterServices="";
+         filterDoctorName="";
+         filterAppointmentType="";
+         filterMyLocationLat="";
+         filterMyLocationLng="";
+         tempName="";
+         tempFilter="";
         filterDistance="{\"num\":2,\"value1\":0,\"value2\":10000}";
 
         APICall.getAllSpecialities(context);
+
 
         findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +102,79 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
                 onBackPressed();
             }
         });
+
+        //region request Type
+        appointmentType=findViewById(R.id.requestType);
+        appointmentType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog=new Dialog(context);
+                dialog.setContentView(R.layout.select_offer_type_dialog_v3);
+
+                final Spinner offer_type=dialog.findViewById(R.id.code);
+                HintArrayAdapter adapter=new HintArrayAdapter(context,0);
+                adapter .addAll(Arrays.asList(getResources().getStringArray(R.array.appointment_type)));
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                offer_type.setAdapter(adapter);
+                TextView ok=dialog.findViewById(R.id.confirm);
+                TextView cancel=dialog.findViewById(R.id.cancel);
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("SELECTED",offer_type.getSelectedItemPosition()+" ddg");
+                        if (offer_type.getSelectedItemPosition()==1){
+                            dialog.cancel();
+                            filterAppointmentType=","+APICall.Filter("5","20");
+                        }else if (offer_type.getSelectedItemPosition()==2){
+                            dialog.cancel();
+                            filterAppointmentType=","+APICall.Filter("5","24");
+                        }else if (offer_type.getSelectedItemPosition()==3){
+                            dialog.cancel();
+                            filterAppointmentType=","+APICall.Filter("5","23");
+                        }
+                        if (offer_type.getSelectedItemPosition()!=0){
+
+                            appointmentType.setText(getResources().getString(R.string.type)+offer_type.getSelectedItem().toString());
+                           // MyBookingRequestsFragment.bookingType=requestType.getText().toString();
+                           // MyBookingRequestsFragment.typeFilterTemp=getResources().getString(R.string.type)+offer_type.getSelectedItem().toString();
+                        }
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        tempFilter="";filterAppointmentType="";
+                        appointmentType.setText(R.string.appointment_type);
+                        Log.e("CNCL",offer_type.getSelectedItemPosition()+" ddg");
+
+                        //  MyBookingRequestsFragment.typeFilterTemp="";
+                      //  MyBookingRequestsFragment.typeFilter="";
+                       // requestType.setText(getResources().getString(R.string.requestType));
+
+                    }
+                });
+
+                /*dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        dialog.cancel();
+                        tempFilter="";
+                        filterAppointmentType="";
+                        Log.e("ONCNCLBTN",offer_type.getSelectedItemPosition()+" ddg");
+
+                        appointmentType.setText(R.string.appointment_type);
+                    }
+                });*/
+
+                dialog.show();
+
+            }
+        });
+        //endregion
+
         //region Speciality
 
         specialityType=findViewById(R.id.offerPrice);
@@ -267,9 +355,9 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
         doctorName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String genderFilter=Filters.getString(Filters.PATIENT_GENDER,APICall.getGender(context));
+                //String genderFilter=Filters.getString(Filters.PATIENT_GENDER,APICall.getGender(context));
 
-                    APICall.getDoctorsForFilter(false,context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,filterSupplierId,genderFilter);
+                    APICall.getDoctorsForFilter(false,context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,filterSupplierId,"");
 
             }
         });
@@ -287,7 +375,8 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
                 if(doctorName.getText().toString().equals(getResources().getString(R.string.doctorName))){
                     APICall.showSweetDialog(context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.doc_name_first));
                 }
-                APICall.freegetServiceNamesForFilter(context,docId,"");
+                else
+                    APICall.freegetServiceNamesForFilter(context,docId,"");
             }
         });
 
@@ -362,12 +451,12 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
                         tempName=sday+"-"+smonth+" to "+eday+"-"+emonth;
                         String s =syear+"-"+smonth+"-"+sday;
                         String e =eyear+"-"+emonth+"-"+eday;
-                        tempFilter = APICall.Filter("44","\""+s+"\"","\""+e+"\"");
+                        tempFilter = APICall.Filter("2","\""+s+"\"","\""+e+"\"");
                         filterExecDate=","+tempFilter;
 
 
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-                        excecutionDate.setText(getResources().getString(R.string.requestDateFilter)+":"+tempName);
+                        excecutionDate.setText(getResources().getString(R.string.exec_date)+":"+tempName);
                         tempFilter = "";
                         tempName="";
                         //dateFilterTemp=getResources().getString(R.string.requestDateFilter)+":"+startdate;
@@ -478,7 +567,7 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
 
 
 //                                        filterPostions.set(0,nameEdTXT.getSelectedItemPosition());
-                        creationDate.setText(getResources().getString(R.string.requestDateFilter)+":"+tempName);
+                        creationDate.setText(getResources().getString(R.string.creation_date)+":"+tempName);
                         tempFilter = "";
                         tempName="";
                         //dateFilterTemp=getResources().getString(R.string.requestDateFilter)+":"+startdate;

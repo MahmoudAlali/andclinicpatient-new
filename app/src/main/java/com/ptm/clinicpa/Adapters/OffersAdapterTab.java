@@ -14,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
@@ -26,6 +28,7 @@ import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptm.clinicpa.Activities.TabTwo;
 import com.ptm.clinicpa.DataModel.DataOffer;
 import com.ptm.clinicpa.DataExample.OffersData;
+import com.ptm.clinicpa.DataModel.OfferModel;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
@@ -39,11 +42,12 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     Context context;
     Boolean grid=false;
     String items[];
-    ArrayList<DataOffer> offers=new ArrayList<>();
+    ArrayList<OfferModel> offers=new ArrayList<>();
     String name;
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    String tab;
 
     public OffersAdapterTab(Context context, String items[]){
         this.context=context;
@@ -54,11 +58,18 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.items=items;
         this.grid=grid;
     }
-    public OffersAdapterTab(Context context, ArrayList<DataOffer> offers){
+    public OffersAdapterTab(Context context, ArrayList<OfferModel> offers,String f){
         this.context=context;
         this.offers=offers;
+        this.tab=f;
 
-        new OffersData(offers);
+       // new OffersData(offers);
+    }
+    public OffersAdapterTab(Context context, ArrayList<DataOffer> offers){
+        this.context=context;
+       // this.offers=offers;
+
+        // new OffersData(offers);
     }
 
 
@@ -80,26 +91,26 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //        DecimalFormat df = new DecimalFormat("0.0");
 
-        ((Item)holder).exp.setImageDrawable(null);
+      /*  ((Item)holder).exp.setImageDrawable(null);
         ((Item)holder).health.setImageDrawable(null);
-
-        if (offers.get(position).getBdb_has_experience_cer().equals("1")){
+*/
+       /* if (offers.get(position).getBdb_has_experience_cer().equals("1")){
             ((Item)holder).exp.setImageResource(R.drawable.ic_experience_care);
         }
 
         if (offers.get(position).getBdb_has_health_cer().equals("1")){
             ((Item)holder).health.setImageResource(R.drawable.ic_health_care);
-        }
+        }*/
 
 
 
-        if (offers.get(position).getBdb_is_morning_offer().equals("1")) {
+        /*if (offers.get(position).getBdb_is_morning_offer().equals("1")) {
             ((Item) holder).morning_offer.setText(context.getResources().getString(R.string.morning_offer));
         }else {
             ((Item) holder).morning_offer.setText(context.getResources().getString(R.string.all_day_offer));
 
-        }
-        ((Item)holder).placeL.setOnClickListener(new View.OnClickListener() {
+        }*/
+       /* ((Item)holder).placeL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!offers.get(position).getLatitude().equals("")
@@ -113,12 +124,73 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                     context.startActivity(intent);
                 }
             }
-        });
+        });*/
         float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
         float discountval=Float.parseFloat(Double.parseDouble(offers.get(position).getDiscount())+"");
      //   old_prc = Float.parseFloat(df.format(old_prc));
      //   discountval = Float.parseFloat(df.format(discountval));
-        ((Item)holder).pro_name.setText(offers.get(position).getBdb_sup_name());
+        if(tab.equals("center"))
+        {
+            ((Item)holder).centerNameLayout.setVisibility(View.GONE);
+        }
+        if(context.getString(R.string.locale).equals("ar")){
+            ((Item)holder).centerName.setText(context.getString(R.string.salon)+": " +offers.get(position).getHealth_center_name_ar());
+            ((Item)holder).speciality.setText(context.getString(R.string.speciality_points)+" " +offers.get(position).getSpecialization_ar());
+
+        }
+        else
+        {
+            ((Item)holder).centerName.setText(context.getString(R.string.salon)+": " +offers.get(position).getHealth_center_name_en());
+            ((Item)holder).speciality.setText(context.getString(R.string.speciality_points)+" "  +offers.get(position).getSpecialization_en());
+
+        }
+         if(offers.get(position).getIs_fav_center().equals("1"))
+             ((Item)holder).is_fav_center.setImageResource(R.drawable.favorite);
+        if(offers.get(position).getIs_fav_doctor().equals("1"))
+            ((Item)holder).is_fav_doctor.setImageResource(R.drawable.favorite);
+        ((Item)holder).doctorName.setText(context.getString(R.string.dr) +offers.get(position).getBdb_doctor_name());
+
+        String STR;
+        if(offers.get(position).getSupported_gender().equals("0"))
+            STR=context.getString(R.string.providedGender)+context.getString( R.string.males);
+        else if(offers.get(position).getSupported_gender().equals("1"))
+            STR=context.getString(R.string.providedGender)+context.getString(R.string.females);
+        else
+            STR=context.getString(R.string.providedGender)+context.getString(R.string.females_and_males);
+
+        if (offers.get(position).getBdb_offer_place().equals("0")){
+            STR+=" "+context.getString(R.string.in)+" "+context.getString(R.string.salon);
+        }else if (offers.get(position).getBdb_offer_place().equals("1")){
+            STR+=" "+context.getString(R.string.in)+" "+context.getString(R.string.home);
+        }
+        ((Item)holder).supportedGender.setText(STR);
+        String s;
+        if(offers.get(position).getMaxAge().equals(offers.get(position).getMinAge()))
+        {
+            if(offers.get(position).getMinAge().equals("0"))
+                s=context.getString(R.string.lessThanYear);
+            else if(offers.get(position).getMinAge().equals("1"))
+                s=context.getString(R.string.oneYear);
+            else if(offers.get(position).getMinAge().equals("2"))
+                s=context.getString(R.string.twoYears);
+            else
+                s=context.getString(R.string.age2)+" "+offers.get(position).getMinAge()+" "+context.getString(R.string.years);
+           // s=offers.get(position).getMinAge().equals("0")?context.getString(R.string.lessThanYear):context.getString(R.string.age2)+" "+offers.get(position).getMinAge()+" "+context.getString(R.string.years);
+        }
+        else
+        {
+            if(offers.get(position).getMinAge().equals("0")&&offers.get(position).getMaxAge().equals("1"))
+                s=context.getString(R.string.lessThanYear);
+            else if(offers.get(position).getMinAge().equals("0"))
+                s= context.getString(R.string.lessThanYear)+" ~ "+offers.get(position).getMaxAge()+" "+context.getString(R.string.years);
+            else
+                s= context.getString(R.string.age2)+" "+offers.get(position).getMinAge()+" ~ "+offers.get(position).getMaxAge()+" "+context.getString(R.string.years);
+        }
+           // s= /*context.getString(R.string.age2)+*/" "+a+" ~ "+offers.get(position).getMaxAge()+" "+context.getString(R.string.years);
+
+        ((Item)holder).age.setText(s);
+
+
         ((Item)holder).new_price.setText(offers.get(position).getNewPrice());
         ((Item)holder).num_of_times.setText(context.getResources().getText(R.string.num_of_times)+offers.get(position).getNum_of_times());
         ((Item)holder).old_price.setText(old_prc+"");
@@ -135,7 +207,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (offers.get(position).getBdb_offer_type().equals("1") ||offers.get(position).getBdb_offer_type().equals("4")) {
             ((Item) holder).offer_type.setText(R.string.ind_offer);
         }else if (offers.get(position).getBdb_offer_type().equals("2") ||offers.get(position).getBdb_offer_type().equals("5")) {
-            ((Item) holder).offer_type.setText(R.string.single_offer_multi);
+            ((Item) holder).offer_type.setVisibility(View.VISIBLE);
         }else if (offers.get(position).getBdb_offer_type().equals("3") ||offers.get(position).getBdb_offer_type().equals("6")) {
             ((Item) holder).offer_type.setText(R.string.group_offer);
         }
@@ -159,10 +231,11 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View v) {
                 try {
 //                    JSONArray jsonArray= offers.get(position).getPack_data();
+
                     PopupMenu popup = new PopupMenu(context,((Item)holder).info);
-                    for(int i = 0; i< TabTwo.arrayList.get(position).getSersup_ids().size(); i++){
+                    for(int i = 0; i< offers.get(position).getSersup_ids().size(); i++){
 //                        JSONObject jsonObject=jsonArray.getJSONObject(i);
-                        String bdb_ser_name=TabTwo.arrayList.get(position).getSersup_ids().get(i).getBdb_name ();
+                        String bdb_ser_name= offers.get(position).getSersup_ids().get(i).getBdb_name ();
                         Log.e("SHOWSoffers",bdb_ser_name);
                         popup.getMenu().add(bdb_ser_name);
                     }
@@ -174,29 +247,22 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             }
         });
-        if (offers.get(position).getBdb_is_old_on().equals("0")){
+        /*if (offers.get(position).getBdb_is_old_on().equals("0")){
             ((Item)holder).age.setText(R.string.child);
         }else if (offers.get(position).getBdb_is_old_on().equals("1")){
             ((Item)holder).age.setText(R.string.Adult);
         }else if (offers.get(position).getBdb_is_old_on().equals("2")){
             ((Item)holder).age.setText(R.string.allAges);
-        }
+        }*/
 
-        String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+offers.get(position).getDeposit_ratio()+" % ";
-        ( (Item)holder).depositPrcntg.setText(deposit);
+     //   String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+offers.get(position).getDeposit_ratio()+" % ";
+        ( (Item)holder).depositPrcntg.setText("deposit");
 
-        if (offers.get(position).getBdb_offer_place().equals("0")){
-            ((Item)holder).place.setText(R.string.salon);
-        }else if (offers.get(position).getBdb_offer_place().equals("1")){
-            ((Item)holder).place.setText(R.string.home);
-        }else if (offers.get(position).getBdb_offer_place().equals("2")){
-            ((Item)holder).place.setText(R.string.hall);
-        }else if (offers.get(position).getBdb_offer_place().equals("3")){
-            ((Item)holder).place.setText(R.string.hotel);
-        }
+
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+/*
 
 
                 BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
@@ -216,62 +282,14 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                 if (offers.get(position).getBdb_offer_type().equals("2")
                         || offers.get(position).getBdb_offer_type().equals("5")){
 
-                    Intent intent=new Intent(context, MultiDateOfferBooking.class);
-                    intent.putExtra("postion",position);
-                    intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
+                    Intent intent=new Intent(context, CreateRequestActivity.class);
+                    intent.putExtra("is_offer",true);
+                    //intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
                     ((AppCompatActivity)context).startActivity(intent);
 
-                }else if (offers.get(position).getBdb_offer_type().equals("1")
-                        || offers.get(position).getBdb_offer_type().equals("4")){
-                    Intent  intent=new Intent(context, SingleDateOfferBooking.class);
-                    intent.putExtra("postion",position);
-                    intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
-                    ((AppCompatActivity)context).startActivity(intent);
-                }else if (offers.get(position).getBdb_offer_type().equals("3")
-                        || offers.get(position).getBdb_offer_type().equals("6")){
-
-                    Intent  intent=new Intent(context, SingleDateMultiClientOfferBooking.class);
-                    intent.putExtra("postion",position);
-                    intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
-                    ((AppCompatActivity)context).startActivity(intent);
                 }
-//            }
-//        });
-//                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
-//                ArrayList list=new ArrayList();
-//                list.add("Fixed Date Offer");
-//                list.add("Group Offer");
-//                list.add("Multi Date Offer");
-//                for(int i=0;i<list.size();i++){
-//                    popup.getMenu().add((CharSequence) list.get(i));
-//                }
-//
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        if (item.getTitle().equals("Fixed Date Offer")){
-//                            fragment = new FixedDateOffersFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }else if (item.getTitle().equals("Group Offer")){
-//                            fragment = new GroupOfferFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }else if (item.getTitle().equals("Multi Date Offer")){
-//                            fragment = new MultiDateOfferFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }
-//                        return false;
-//                    }
-//                });
-//                popup.show();
+*/
+
             }
         });
     }
@@ -288,12 +306,18 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView pro_name,morning_offer,new_price,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
-        ImageView info,add_offer,placeL,health,exp;
+        TextView centerName,speciality,doctorName,morning_offer,new_price,supportedGender,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
+        ImageView info,add_offer,placeL,health,exp,is_fav_center,is_fav_doctor;
+        LinearLayout centerNameLayout;
         public Item(View itemView) {
             super(itemView);
-            pro_name = itemView.findViewById(R.id.pro_name);
-            age = itemView.findViewById(R.id.age);
+            centerName = itemView.findViewById(R.id.pro_name);
+            is_fav_center = itemView.findViewById(R.id.is_fav_center);
+            is_fav_doctor = itemView.findViewById(R.id.is_fav_doctor);
+            speciality = itemView.findViewById(R.id.speciality);
+            doctorName = itemView.findViewById(R.id.doctorName);
+            age = itemView.findViewById(R.id.age_range);
+            supportedGender = itemView.findViewById(R.id.age);
             place = itemView.findViewById(R.id.place);
             new_price = itemView.findViewById(R.id.new_price);
             old_price = itemView.findViewById(R.id.old_price);
@@ -306,11 +330,12 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             total_dis = itemView.findViewById(R.id.disAmount);
             onServices = itemView.findViewById(R.id.onServices);
             depositPrcntg = itemView.findViewById(R.id.depPerc);
-            placeL = itemView.findViewById(R.id.placeL);
-            health = itemView.findViewById(R.id.health);
-            exp = itemView.findViewById(R.id.exp);
-            placeL = itemView.findViewById(R.id.placeL);
-            morning_offer = itemView.findViewById(R.id.morning_offer);
+            centerNameLayout = itemView.findViewById(R.id.centerNameLayout);
+           // placeL = itemView.findViewById(R.id.placeL);
+           // health = itemView.findViewById(R.id.health);
+           // exp = itemView.findViewById(R.id.exp);
+          //  placeL = itemView.findViewById(R.id.placeL);
+          //  morning_offer = itemView.findViewById(R.id.morning_offer);
 
         }
     }

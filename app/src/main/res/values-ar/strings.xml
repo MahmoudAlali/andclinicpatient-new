@@ -362,6 +362,8 @@
     <string name="no_offer">لا يوجد عروض مميزة، يرجى المحاولة لاحقاً</string>
     <string name="no_specialities">لا يوجد تخصصات طبية</string>
     <string name="no_healthCenter">لا يوجد مراكز صحية ضمن فلاتر البحث التي اخترتها.</string>
+    <string name="no_offers">لا يوجد عروض ضمن فلاتر البحث التي اخترتها.</string>
+    <string name="no_Services">لا يوجد خدمات ضمن فلاتر البحث التي اخترتها.</string>
     <string name="no_doctors">لا يوجد أطباء ضمن فلاتر البحث التي اخترتها.</string>
     <string name="specialities">التخصصات الطبية</string>
     <string name="doctors">الأطباء</string>
@@ -604,6 +606,8 @@
     <string name="more_desc">وصف إضافي(اختياري)</string>
     <string name="more_desc2">وصف إضافي:</string>
     <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
+    <string name="appointmentDateFilter">تاريخ الموعد</string>
+    <string name="appointmentcreationDateFilter">تاريخ الإنشاء</string>
     <string name="creationDateFilter">تاريخ إنشاء الطلب</string>
     <string name="requestSalonFilter">اسم المركز</string>
     <string name="requestTypeFilter">نوع الطلب</string>
@@ -633,10 +637,10 @@
     <string name="waiting_res">بانتظار التأكيد</string>
     <string name="success_book_item">تم حجز الخدمة بنجاح</string>
     <string name="success_book_items">تم حجز مجموعة الخدمات بنجاح</string>
-    <string name="start_asc">حسب تاريخ البدء (تصاعدياَ)</string>
-    <string name="booking_asc">حسب تاريخ الحجز (تصاعدياَ)</string>
-    <string name="booking_desc">حسب تاريخ الحجز (تنازلياً)</string>
-    <string name="start_desc">حسب تاريخ البدء (تنازلياً)</string>
+    <string name="start_asc">حسب تاريخ الموعد (تصاعدياَ)</string>
+    <string name="booking_asc">حسب تاريخ الإنشاء (تصاعدياَ)</string>
+    <string name="booking_desc">حسب تاريخ الإنشاء (تنازلياً)</string>
+    <string name="start_desc">حسب تاريخ الموعد (تنازلياً)</string>
 
     <string-array name="offer_type">
         <item> نوع الحجز</item>
@@ -657,7 +661,7 @@
     <string name="add_service_place">من فضلك ادخلي مكان الخدمة</string>
     <string name="pro_not_support_place">المزودة لا تدعم هذا المكان</string>
     <string name="reference_number">الرقم المرجعي:</string>
-    <string name="book_id">رقم الحجز:</string>
+    <string name="book_id">رقم الموعد:</string>
     <string name="deposit_can_paid_alert">لا يمكن دفع عربون هذا الحجز إلا من قبل العميلة صاحبة الحجز</string>
     <string name="there_is_no_offer_sol">لا يوجد حل لهذا العرض حاليا</string>
 
@@ -849,4 +853,16 @@
     <string name="distance_desc">المسافة (تنازلياً)</string>
     <string name="rating_asc">التقييم (تصاعدياً)</string>
     <string name="rating_desc">التقييم (تنازلياً)</string>
+    <string name="appointment_type">نوع الموعد</string>
+    <string name="reserv_from_center">حجز هذا العرض يتم من خلال المركز</string>
+    <string-array name="appointment_type">
+        <item> نوع الموعد</item>
+        <item>موعد فردي</item>
+        <item>موعد متعدد التواريخ</item>
+        <item>موعد عرض</item>
+
+
+    </string-array>
+    <string name="in">في</string>
+
 </resources>

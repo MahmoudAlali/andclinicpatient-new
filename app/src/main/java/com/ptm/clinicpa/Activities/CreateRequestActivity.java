@@ -60,6 +60,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static String sup_id;
     public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner/*ageSpinner*/,genderSpinner,servicesSpinner;
 
+    boolean isOffer;
     public  static HintArrayAdapter adapter1;
     public static CheckBox personalReserv;
     public static EditText phoneNumber,ClientName,description,healthFileNum,ageRange;
@@ -103,6 +104,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         start_time=findViewById(R.id.start_time);
 
         sup_id = getIntent().getStringExtra("sup_id");
+        isOffer = getIntent().getBooleanExtra("is_offer",false);
 
         context=this;
         APICall.freegetServiceNames(context,sup_id,freeBookingFragment.Place);

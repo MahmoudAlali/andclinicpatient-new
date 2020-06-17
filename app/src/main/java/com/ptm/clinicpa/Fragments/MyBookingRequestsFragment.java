@@ -85,12 +85,13 @@ public class MyBookingRequestsFragment extends Fragment {
     public static String salonFilter,dateFilter,typeFilter,creationDateFilter;
     public static String salonFilterTemp,dateFilterTemp,typeFilterTemp,creationDateFilterTemp;
     public  static ProgressBar progressBar;
+    public static Fragment oldFrag,newFrag;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.my_booking_requests_fragment, container, false);
 
-        salonFilter="";dateFilter="";typeFilter="";
+        //salonFilter="";dateFilter="";typeFilter="";
 
         BeautyMainPage.FRAGMENT_NAME="MyBookingRequestsFragment";
         oldRequests=view.findViewById(R.id.oldRequests);
