@@ -33,6 +33,7 @@ import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.DataModel.ClientServiceDataModel;
 import com.ptm.clinicpa.DataModel.ServiceFilter;
+import com.ptm.clinicpa.Fragments.MyReservationFragment;
 import com.ptm.clinicpa.Fragments.ServiceFragment;
 import com.ptm.clinicpa.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
@@ -93,12 +94,68 @@ public class OldAppointmentsFiltersActivity extends AppCompatActivity implements
          tempFilter="";
         filterDistance="{\"num\":2,\"value1\":0,\"value2\":10000}";
 
+        if(!MyReservationFragment.salonFilterName.equals(""))
+        {
+            clinicName.setText(MyReservationFragment.salonFilterName);
+            filterSupplierId=MyReservationFragment.salonFilterOld;
+        }
+        if(!MyReservationFragment.dateFilterName.equals(""))
+        {
+            excecutionDate.setText(MyReservationFragment.dateFilterName);
+            filterExecDate=MyReservationFragment.dateFilterOld;
+
+        }
+        if(!MyReservationFragment.typeFilterName.equals(""))
+        {
+            appointmentType.setText(MyReservationFragment.typeFilterName);
+            filterAppointmentType=MyReservationFragment.typeFilterOld;
+        }
+        if(!MyReservationFragment.creationDateFilterName.equals(""))
+        {
+            creationDate.setText(MyReservationFragment.creationDateFilterName);
+            filterCreateDate=MyReservationFragment.creationDateFilterOld;
+
+        }
+        if(!MyReservationFragment.specialityFilterName.equals(""))
+        {
+            specialityType.setText(MyReservationFragment.specialityFilterName);
+            filterSpeciality=MyReservationFragment.specialityFilterOld;
+
+        }
+        if(!MyReservationFragment.doctorNameFilterName.equals(""))
+        {
+            doctorName.setText(MyReservationFragment.doctorNameFilterName);
+            filterDoctorName=MyReservationFragment.doctorNameFilterOld;
+
+        }
+        if(!MyReservationFragment.serviceFilterName.equals(""))
+        {
+            serviceName.setText(MyReservationFragment.specialityFilterName);
+            filterServices=MyReservationFragment.serviceFilterOld;
+
+        }
         APICall.getAllSpecialities(context);
 
 
         findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyReservationFragment.salonFilterOld=filterSupplierId;
+                MyReservationFragment.dateFilterOld=filterExecDate;
+                MyReservationFragment.creationDateFilterOld=filterCreateDate;
+                MyReservationFragment.typeFilterOld=filterAppointmentType;
+                MyReservationFragment.specialityFilterOld=filterSpeciality;
+                MyReservationFragment.doctorNameFilterOld=filterDoctorName;
+                MyReservationFragment.serviceFilterOld=filterServices;
+
+                MyReservationFragment.salonFilterName=clinicName.getText().toString();
+                MyReservationFragment.dateFilterName=excecutionDate.getText().toString();
+                MyReservationFragment.creationDateFilterName=creationDate.getText().toString();
+                MyReservationFragment.typeFilterName=appointmentType.getText().toString();
+                MyReservationFragment.specialityFilterName=specialityType.getText().toString();
+                MyReservationFragment.doctorNameFilterName=doctorName.getText().toString();
+                MyReservationFragment.serviceFilterName=serviceName.getText().toString();
+
                 onBackPressed();
             }
         });

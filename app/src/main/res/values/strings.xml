@@ -68,6 +68,7 @@
     <string name="PasswordNotMatchAlert">Password does not match</string>
     <string name="ExuseMeAlert">Excuse Me!</string>
     <string name="EnterMobAndPass">Enter mobile number and password</string>
+    <string name="EnterAge">Enter your age</string>
     <string name="ApplicationPolicyAlert">The application policy must first be approved</string>
     <string name="MobEmailTakenAlert">Mobile number and Email address are already taken, please try another</string>
     <string name="MobTakenAlert">Mobile number is already taken, please try another one</string>
@@ -114,6 +115,7 @@
     <string name="rate">Rate</string>
     <string name="points">My points</string>
     <string name="setting">Settings</string>
+    <string name="relatives">My relatives</string>
     <string name="share_app">Share application</string>
     <string name="help">Help</string>
     <string name="call_salon">Call salon</string>
@@ -973,7 +975,9 @@
     <string name="providedGender">Services may be provided to:</string>
     <string name="speciality_points">Speciality :</string>
     <string name="males">Males</string>
+    <string name="male">Male</string>
     <string name="females">Females</string>
+    <string name="female">Female</string>
     <string name="females_and_males">Males and females</string>
     <string name="doesnt_exist">Doesn\'t exist</string>
     <string name="lessThanYear">age: less than year</string>
@@ -1012,5 +1016,21 @@
     <string name="appointment_type">Appointment type</string>
     <string name="reserv_from_center">Booking this offer can be done only from the health center</string>
     <string name="in">in</string>
+    <string name="can_be_edited">The chosen appointment can be edited by the health center</string>
+    <string name="current_date">Current date :</string>
+    <string name="current_time">Current time :</string>
+    <string name="wanted_date">Wanted date :</string>
+    <string name="wanted_time">Wanted time :</string>
+    <string name="edit_request">Edit request</string>
+    <string name="send_request">Send request</string>
+    <string name="no_followers">You don\'t have any followers</string>
+
+    <string name="relationship">Relationship :</string>
+    <string name="father">Father</string>
+    <string name="mother">Mother</string>
+    <string name="daughter">Daughter</string>
+    <string name="son">Son</string>
+    <string name="husband">Husband/wife</string>
+    <string name="me">Account user</string>
 
 </resources>

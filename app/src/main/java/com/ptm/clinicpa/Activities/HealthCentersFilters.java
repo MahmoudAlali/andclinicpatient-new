@@ -103,7 +103,35 @@ public class HealthCentersFilters extends Fragment implements LocationListener,G
         filterOfferPrice="";
         filterSpeciality="";
         filterClinicRate="";
+        if(!HealthCentersFragment.salonFilterName.equals(""))
+        {
+            clinicName.setText(HealthCentersFragment.salonFilterName);
+            filterSupplierId=HealthCentersFragment.salonFilterOld;
+        }
+        if(!HealthCentersFragment.distanceFilterName.equals(""))
+        {
+            distance.setText(HealthCentersFragment.distanceFilterName);
+            filterDistance=HealthCentersFragment.distanceFilterOld;
 
+        }
+        if(!HealthCentersFragment.locationFilterName.equals(""))
+        {
+            mylocationbtn.setText(HealthCentersFragment.locationFilterName);
+            filterMyLocationLat=HealthCentersFragment.locationFilterOld;
+            filterMyLocationLng=HealthCentersFragment.locationFilterOld2;
+        }
+        if(!HealthCentersFragment.clinicRateFilterName.equals(""))
+        {
+            rateService.setText(HealthCentersFragment.clinicRateFilterName);
+            filterClinicRate=HealthCentersFragment.clinicRateFilterOld;
+
+        }
+        if(!HealthCentersFragment.specialityFilterName.equals(""))
+        {
+            specialityType.setText(HealthCentersFragment.specialityFilterName);
+            filterSpeciality=HealthCentersFragment.specialityFilterOld;
+
+        }
 
         //region Clinic Name
 
@@ -487,6 +515,19 @@ public class HealthCentersFilters extends Fragment implements LocationListener,G
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HealthCentersFragment.salonFilterOld=filterSupplierId;
+                HealthCentersFragment.distanceFilterOld=filterDistance;
+                HealthCentersFragment.clinicRateFilterOld=filterClinicRate;
+                HealthCentersFragment.locationFilterOld=filterMyLocationLat;
+                HealthCentersFragment.specialityFilterOld=filterSpeciality;
+                HealthCentersFragment.locationFilterOld2=filterMyLocationLng;
+
+                HealthCentersFragment.salonFilterName=clinicName.getText().toString();
+                HealthCentersFragment.distanceFilterName=distance.getText().toString();
+                HealthCentersFragment.clinicRateFilterName=rateService.getText().toString();
+                HealthCentersFragment.locationFilterName=mylocationbtn.getText().toString();
+                HealthCentersFragment.specialityFilterName=specialityType.getText().toString();
+
                 fragment= new HealthCentersFragment();
 
                 fm = getActivity().getFragmentManager();

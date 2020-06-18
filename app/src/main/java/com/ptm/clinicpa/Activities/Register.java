@@ -160,6 +160,8 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.PasswordNotMatchAlert);
         } else if (password.getText().toString().isEmpty() && confirm_password.getText().toString().isEmpty()) {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.EnterMobAndPass);
+        }else if (age.getText().toString().isEmpty()) {
+            APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.EnterAge);
         } else if (!privacy_policy.isChecked()) {
             APICall.showSweetDialog(Register.this, R.string.ExuseMeAlert, R.string.ApplicationPolicyAlert);
             privacy_policy.setChecked(true);

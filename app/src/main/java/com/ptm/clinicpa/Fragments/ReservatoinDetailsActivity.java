@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-public static TextView id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+public static TextView description, id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
     public static LinearLayout jtime_lay,book_exec_layout, myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
@@ -64,6 +64,7 @@ public static TextView id,empname,booktype,journey_time,phone_number,start_date,
         journey_time=findViewById(R.id.journey_time);
         jtime_lay=findViewById(R.id.jtime_lay);
         book_exec_layout=findViewById(R.id.book_exec_layout);
+        description=findViewById(R.id.description);
 
         //region Check_Notification
         String book_id="";

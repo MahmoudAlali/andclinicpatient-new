@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/requestItemBack"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="6"
+            >
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/client_name"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textColor="#a5587a"
+                        android:layout_height="@dimen/high_edit_text" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="3"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/total_price"
+                        android:layout_width="match_parent"
+                        android:text="Gender"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textColor="#000"
+                        android:layout_height="@dimen/high_edit_text" />
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/patientName"
+                        android:layout_width="match_parent"
+                        android:text="Age"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textColor="#000"
+                        android:layout_height="@dimen/high_edit_text" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <TextView
+                        android:id="@+id/booking_place"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/high_edit_text"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Relationship"
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/actions"
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="#E4C8FB"
+            android:id="@+id/time"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_edit_text"
+            android:text="@string/edit"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+        <Space
+            android:layout_width="5dp"
+            android:id="@+id/space"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:background="#E4C8FB"
+            android:id="@+id/refuse"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/delete"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:id="@+id/myroot"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></LinearLayout>
+
+</LinearLayout>

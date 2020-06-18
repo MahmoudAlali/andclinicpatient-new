@@ -47,9 +47,10 @@
     <string name="ConfirmAlert">موافق</string>
     <string name="PasswordNotMatchAlert">كلمة المرور غير متطابقة</string>
     <string name="ExuseMeAlert">عفواً</string>
-    <string name="EnterMobAndPass">ادخلي رقم الجوال و كلمة المرور</string>
-    <string name="ApplicationPolicyAlert">جب اوال الموافقة على سياسة التطبيق</string>
-    <string name="MobEmailTakenAlert">رقم الجوال وعنوان البريد اإللكتروني مأخوذان بالفعل ، يرجى تجربة آخر</string>
+    <string name="EnterMobAndPass">ادخل رقم الجوال و كلمة المرور</string>
+    <string name="EnterAge">الرجاء إدخال العمر</string>
+    <string name="ApplicationPolicyAlert">يجب اولاَ الموافقة على سياسة التطبيق</string>
+    <string name="MobEmailTakenAlert">رقم الجوال وعنوان البريد الإلكتروني مأخوذان بالفعل ، يرجى تجربة آخر</string>
     <string name="MobTakenAlert">رقم الجوال مأخوذ بالفعل ، يرجى تجربة آخر</string>
     <string name="InvalidEmail">عنوان البريد اإللكتروني هذا غير صالح ، يرجى إعادة كتابته</string>
     <string name="EmailTakenAlert">عنوان البريد اإللكتروني هذا غير صالح ، يرجى إعادة كتابته</string>
@@ -98,6 +99,7 @@
     <string name="rate">تقييم</string>
     <string name="points">نقاطي</string>
     <string name="setting">الضبط</string>
+    <string name="relatives">أقاربي</string>
     <string name="share_app">مشاركة التطبيق</string>
     <string name="help">مساعدة</string>
     <string name="call_salon">اتصال بصالون</string>
@@ -832,7 +834,10 @@
     <string name="providedGender">يمكن تقديم الخدمات ل:</string>
     <string name="speciality_points">التخصص :</string>
     <string name="males">الذكور</string>
+    <string name="male">ذكر</string>
+    <string name="relationship">Relationship :</string>
     <string name="females">الإناث</string>
+    <string name="female">أنثى</string>
     <string name="females_and_males">كلا الجنسين</string>
     <string name="doesnt_exist">لا يوجد</string>
     <string name="lessThanYear">العمر: أقل من سنة</string>
@@ -864,5 +869,21 @@
 
     </string-array>
     <string name="in">في</string>
+    <string name="can_be_edited">يمكن التعديل على الموعد المطلوب من قبل المركز</string>
+    <string name="current_date">التاريخ الحالي :</string>
+    <string name="current_time">الوقت الحالي :</string>
+    <string name="wanted_date">التاريخ المطلوب :</string>
+    <string name="wanted_time">الوقت المطلوب :</string>
+    <string name="edit_request">طلب تعديل</string>
+    <string name="send_request">إرسال الطلب</string>
+    <string name="no_followers">لا يوجد لديك أشخاص تابعين</string>
+    <string name="relationship">صلة القرابة :</string>
+    <string name="father">أب</string>
+    <string name="mother">أم</string>
+    <string name="daughter">ابنة</string>
+    <string name="son">ابن</string>
+    <string name="husband">زوج/زوجة</string>
+    <string name="me">صاحب الحساب</string>
+
 
 </resources>

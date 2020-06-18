@@ -55,6 +55,7 @@ import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferEffect;
 import com.ptm.clinicpa.Activities.NewBookingRequestsFragment;
 import com.ptm.clinicpa.Activities.OldAppointmentsFiltersActivity;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptm.clinicpa.Activities.SingleOffer.SingleOfferEffect;
 import com.ptm.clinicpa.Activities.support.InternalChatActivity;
@@ -77,6 +78,7 @@ import com.ptm.clinicpa.DataModel.ClientServiceDataModel;
 import com.ptm.clinicpa.DataModel.DoctorDataModel;
 import com.ptm.clinicpa.DataModel.FavoriteModel;
 import com.ptm.clinicpa.DataModel.HealthCenterImages;
+import com.ptm.clinicpa.DataModel.HealthCenterRecord;
 import com.ptm.clinicpa.DataModel.NotificationModel;
 import com.ptm.clinicpa.DataModel.PatientDataModel;
 import com.ptm.clinicpa.DataModel.PointModel;
@@ -367,7 +369,7 @@ public class APICall {
                 postdata.put("bdb_mobile", phone);
                 postdata.put("bdb_name", name);
                 postdata.put("bdb_gender", gender);
-               // postdata.put("bdb_old", age);
+                postdata.put("bdb_old", age);
                 postdata.put("password", password);
                 postdata.put("c_password", confirm_password);
                 postdata.put("bdb_email", bdb_email);
@@ -23382,7 +23384,7 @@ public class APICall {
 
 
     }
-    public static void editAppointment(final Context context, String Id, String new_start_time, String new_start_date)
+    public static void editAppointment(final Context context, String Id, String new_start_time, String new_start_date,String canBeEdited)
     {
         Log.e("EditAppointment","EditAppointment triggered");
 
@@ -23394,6 +23396,7 @@ public class APICall {
             postdata.put("bdb_appointment_id",Id);
             postdata.put("new_start_date",new_start_date);
             postdata.put("new_start_time",new_start_time);
+            postdata.put("keep_current",canBeEdited);
         }catch (Exception e){
             e.printStackTrace();
             Log.e("EditAppointment ","errrrr"+e.getMessage());
@@ -24958,6 +24961,116 @@ public class APICall {
                 {
                     e.printStackTrace();
                     Log.e("favErr",e.getMessage());
+
+                }
+            }
+
+        });
+
+    }
+    public static void DeleteFollower(final  Context cont,String item_id)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject item = new JSONObject();
+        try {
+            item .put("id",item_id);
+
+        }
+        catch (Exception e){}
+
+        JSONArray items = new JSONArray();
+        items.put(item);
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("items",items);
+
+        }
+        catch (Exception e){}
+        Log.e("DeleteFollower",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/follower/deleteFollower")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("Favorites ERRR", mMessage);
+
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    showUnexpectedErrMsg(cont);
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("DeleteFollower", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    String response_code=jsonrespone.getString("response_code");
+                    if(response_code.equals("211"))
+                    {
+                        allRelativesList.clear();
+                        RelativesActivity.relativesAdapter.notifyDataSetChanged();
+                        //---------------------call API for Services and get items-------------
+                        APICall.getAllFollowers( cont);
+                    }
+                    else if(response_code.equals("210"))
+                    {
+                        showSweetDialog(cont,R.string.SomethingWentWrongAlert);
+                    }
+                    else
+                        showUnexpectedErrMsg(cont);
+
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+                    showUnexpectedErrMsg(cont);
 
                 }
             }
@@ -27556,6 +27669,7 @@ public class APICall {
                         final String bdb_internally_number=data.getString("bdb_internally_number");
                         final String basic_price=data.getString("basic_price");
                         final String services_price=data.getString("services_price");
+                        final String bdb_description=data.getString("bdb_description");
                         final String bdb_appointment_id=data.getString("bdb_appointment_id");
                         try {
                             ReservatoinDetailsActivity.lat = Double.parseDouble(data.getString("bdb_loc_lat"));
@@ -27582,7 +27696,10 @@ public class APICall {
                             @Override
                             public void run() {
                                 ReservatoinDetailsActivity.phone_number.setText(salon_mobile);
-                                ReservatoinDetailsActivity.phone_number.setText(salon_mobile);
+                                if(bdb_description.equals("")||bdb_description.equals("null"))
+                                    ReservatoinDetailsActivity.description.setText(R.string.doesnt_exist);
+                                else
+                                    ReservatoinDetailsActivity.description.setText(bdb_description);
                                 if(context.getString(R.string.locale).equals("en"))
                                 {
                                     ReservatoinDetailsActivity.client_name.setText(health_center_en);
@@ -32263,6 +32380,185 @@ Log.e("ERRR",e.getMessage());
         });
         //        Log.d("MessageResponse",mMessage);
     }
+    public  static  void  getAllFollowers( final Context context){
+
+        allRelativesList.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+////                ReservationFragment.pullToRefresh.setRefreshing(true);
+//               pd.show();
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+          //  postdata.put("health_center_id",health_center_id);
+        }
+        catch (Exception e)
+        {
+
+        }
+        Log.e("getFollowers", postdata.toString());
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/follower/getFollowers")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("getFollowers", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("207"))
+                    {
+                        /*JSONObject data2=j.getJSONObject("data");
+                        String auth_user_health_record=j.getString("auth_user_health_record");
+                        CreateGroupRequestActivity.userHealthRecord=auth_user_health_record;*/
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject jsonObject=data.getJSONObject(i);
+                            Log.e("ttttttttttt",jsonObject+"");
+
+                            String   bdb_user_name=jsonObject.getString("name");
+                            String   bdb_relation=jsonObject.getString("relation");
+                            String   bdb_gender=jsonObject.getString("gender");
+                           // String   bdb_health_record=jsonObject.getString("bdb_health_record");
+                            String   bdb_id=jsonObject.getString("id");
+                            String   bdb_old=jsonObject.getString("old");
+                            JSONArray records =jsonObject.getJSONArray("health_records");
+                            ArrayList<HealthCenterRecord> recordArrayList=new ArrayList<>();
+                            for (int l=0;l<records.length();l++)
+                            {
+                                JSONObject record=records.getJSONObject(l);
+                                Log.e("ttttttttttt",jsonObject+"");
+
+                                String   id=record.getString("id");
+                                String   health_record=record.getString("health_record");
+                                String   health_center_id=record.getString("health_center_id");
+                                String   health_center_ar=record.getString("health_center_name_ar");
+                                String   health_center_en=record.getString("health_center_name_en");
+                                recordArrayList.add(new HealthCenterRecord(id,health_center_id,health_record,health_center_ar,health_center_en));
+                            }
+
+                            allRelativesList.add(new PatientDataModel( bdb_id,bdb_gender,bdb_relation,bdb_user_name,bdb_old,recordArrayList));
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+RelativesActivity.relativesAdapter.notifyDataSetChanged();                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else if(response_code.equals("206"))
+                    {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,R.string.no_followers);
+                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
     public  static  void  getClinics( final Context context,String latFilter,String longFilter,String distanceFilter,String specialityFilter){
 
         allClinics.clear();

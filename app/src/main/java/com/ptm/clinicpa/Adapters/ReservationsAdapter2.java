@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -240,7 +242,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             }
             catch (Exception e){}
 
-            String allPrice=servicesPrice+basicPrice+" "+context.getString(R.string.ryal);
+            int a=servicesPrice+basicPrice;
+            String allPrice=a+" "+context.getString(R.string.ryal);
             if(appointmentsDataModels.get(position).getBasic_price().equals("null"))
             {
                 ((Item)holder).totalPrice.setText(context.getString(R.string.unDeterminedPrice));
@@ -251,7 +254,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
             final String appointmentType=appointmentsDataModels.get(position).getBdb_is_group_booking();
 
-            if(appointmentType.equals("20")||appointmentType.equals("23")) // individual appointment
+            if(appointmentType.equals("20")||appointmentType.equals("23")||appointmentType.equals("24")||appointmentType.equals("21")) // individual appointment
             {
                 for (int i=0;i<appointmentsDataModels.get(position).getServices().size();i++)
                 {
@@ -651,10 +654,12 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
                         dialog.setContentView(R.layout.edit_appointment_layout);
                         final TextView oldTime,oldDate,newTime,newDate,ok,cancel;
+                        final CheckBox canBeEdited;
                         newTime = dialog.findViewById(R.id.newTime);
                         newDate = dialog.findViewById(R.id.newDate);
                         oldDate = dialog.findViewById(R.id.oldDate);
                         oldTime = dialog.findViewById(R.id.oldTime);
+                        canBeEdited = dialog.findViewById(R.id.canBeEdited);
                         ok = dialog.findViewById(R.id.confirm);
                         cancel = dialog.findViewById(R.id.cancel);
                         oldDate.setText(appointmentsDataModels.get(position).getBdb_start_date());
@@ -750,12 +755,18 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                 dialog.dismiss();
                             }
                         });
+
                         ok.setOnClickListener(new View.OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
                                 dialog.dismiss();
                                 String newDateStr,newTimeStr;
+                                String keep_current="0";
+                                if(canBeEdited.isChecked())
+                                    keep_current="0";
+                                else
+                                    keep_current="1";
                                 if(newDate.getText().toString().equals(""))
                                 {
                                     newDateStr=oldDate.getText().toString();
@@ -772,7 +783,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                                 {
                                     newTimeStr=newTime.getText().toString();
                                 }
-                                APICall.editAppointment(context,appointmentsDataModels.get(position).getBdb_appointment_id(),newTimeStr,newDateStr);
+                                APICall.editAppointment(context,appointmentsDataModels.get(position).getBdb_appointment_id(),newTimeStr,newDateStr,keep_current);
                             }
                         });
                         dialog.show();

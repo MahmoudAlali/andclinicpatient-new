@@ -30,7 +30,7 @@
                 android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="طلب تعديل"
+                android:text="@string/edit_request"
                 android:textSize="14dp" />
 
            <LinearLayout
@@ -44,6 +44,12 @@
                    android:layout_height="match_parent"
                    android:orientation="horizontal"
                    >
+                   <TextView
+                       android:layout_weight="2"
+                       android:layout_width="match_parent"
+                       android:layout_height="35dp"
+                       android:text="@string/current_date"
+                       android:textColor="#000"/>
 
                    <TextView
                        android:id="@+id/oldDate"
@@ -54,12 +60,6 @@
                        android:textStyle="bold"
                        android:textAlignment="center"
                        android:textColor="#000" />
-                   <TextView
-                       android:layout_weight="2"
-                       android:layout_width="match_parent"
-                       android:layout_height="35dp"
-                       android:text="التاريخ الحالي :"
-                       android:textColor="#000"/>
 
 
 
@@ -70,6 +70,12 @@
                    android:orientation="horizontal"
                    >
                    <TextView
+                       android:layout_weight="2"
+                       android:layout_width="match_parent"
+                       android:layout_height="35dp"
+                       android:text="@string/wanted_date"
+                       android:textColor="#000"/>
+                   <TextView
                        android:layout_weight="1"
                        android:id="@+id/newDate"
                        android:layout_width="match_parent"
@@ -78,12 +84,7 @@
                        android:background="#99DAF1"
                        android:textAlignment="center"
                        android:textColor="#000"/>
-                   <TextView
-                       android:layout_weight="2"
-                       android:layout_width="match_parent"
-                       android:layout_height="35dp"
-                       android:text="التاريخ المطلوب :"
-                       android:textColor="#000"/>
+
 
 
 
@@ -101,6 +102,13 @@
                     android:orientation="horizontal"
                     >
                     <TextView
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="@string/current_time"
+                        android:textColor="#000"/>
+
+                    <TextView
                         android:layout_weight="1"
                         android:id="@+id/oldTime"
                         android:layout_width="match_parent"
@@ -110,12 +118,6 @@
                         android:textSize="14dp"
                         android:textAlignment="center"
 
-                        android:textColor="#000"/>
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:text="الوقت الحالي :"
                         android:textColor="#000"/>
 
 
@@ -127,6 +129,12 @@
                     android:orientation="horizontal"
                     >
                     <TextView
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:text="@string/wanted_time"
+                        android:textColor="#000"/>
+                    <TextView
                         android:layout_weight="1"
                         android:id="@+id/newTime"
                         android:layout_width="match_parent"
@@ -134,18 +142,19 @@
                         android:background="#99DAF1"
                         android:textAlignment="center"
                         android:textColor="#000"/>
-                    <TextView
-                        android:layout_weight="2"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:text="الوقت المطلوب :"
-                        android:textColor="#000"/>
+
 
 
 
                 </LinearLayout>
             </LinearLayout>
 
+            <CheckBox
+                android:id="@+id/canBeEdited"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_30"
+                android:text="@string/can_be_edited"/>
         </LinearLayout>
 
 
@@ -177,7 +186,7 @@
                 android:layout_height="@dimen/high_button"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="2dp"
-                android:text="@string/Edit"
+                android:text="@string/send_request"
                 android:gravity="center"
                 android:textColor="@color/endblue"
                 android:textSize="15dp" />

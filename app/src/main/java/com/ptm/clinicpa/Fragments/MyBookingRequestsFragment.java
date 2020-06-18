@@ -84,6 +84,8 @@ public class MyBookingRequestsFragment extends Fragment {
 
     public static String salonFilter,dateFilter,typeFilter,creationDateFilter;
     public static String salonFilterTemp,dateFilterTemp,typeFilterTemp,creationDateFilterTemp;
+    public static String salonFilterOld="",dateFilterOld="",typeFilterOld="",creationDateFilterOld="";
+    public static String salonFilterName="",dateFilterName="",typeFilterName="",creationDateFilterName="";
     public  static ProgressBar progressBar;
     public static Fragment oldFrag,newFrag;
     @Nullable

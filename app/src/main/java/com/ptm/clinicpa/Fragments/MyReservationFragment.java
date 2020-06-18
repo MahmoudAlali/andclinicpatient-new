@@ -72,7 +72,8 @@ public static ImageView sortbtn;
     public static ArrayList<BookingAutomatedBrowseData> bookingAutomatedBrowseData=new ArrayList<>();
 
     public static ReservationsAdapter2 reservationsAdapter2;
-
+    public static String salonFilterOld="",dateFilterOld="",typeFilterOld="",creationDateFilterOld="",doctorNameFilterOld="",serviceFilterOld="",specialityFilterOld="";
+    public static String salonFilterName="",dateFilterName="",typeFilterName="",creationDateFilterName="",doctorNameFilterName="",serviceFilterName="",specialityFilterName="";
     public static View view;
     public static String serviceId="",employee_id="",supllierName="";
     public static ImageView filterbtn;

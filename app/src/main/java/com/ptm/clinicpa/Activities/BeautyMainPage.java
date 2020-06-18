@@ -238,7 +238,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         {
             sideMenu.findItem(R.id.signin).setVisible(false);
             sideMenu.findItem(R.id.signout).setVisible(true);
-            sideMenu.findItem(R.id.setting).setVisible(false);
+            sideMenu.findItem(R.id.setting).setVisible(true);
 
         }
         Log.e("GUESTIS","isss"+APICall.isGuest(context).equals("1"));
@@ -983,7 +983,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
 
         }else if (id == R.id.setting) {
-            Intent intent=new Intent(this, AccountFragment.class);
+            Intent intent=new Intent(this, RelativesActivity.class);
             startActivity(intent);
 
         }

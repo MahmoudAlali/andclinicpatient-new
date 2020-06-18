@@ -54,30 +54,36 @@ public class MyBookingRequestsFilters extends Fragment {
         creationDate=view.findViewById(R.id.creation_date);
         BeautyMainPage.FRAGMENT_NAME="MyBookingRequestsFilters";
 
-        /*if(!MyBookingRequestsFragment.salonFilterTemp.equals(""))
+        if(!MyBookingRequestsFragment.salonFilterName.equals(""))
         {
-            salonName.setText(MyBookingRequestsFragment.salonFilterTemp);
+            salonName.setText(MyBookingRequestsFragment.salonFilterName);
+            MyBookingRequestsFragment.salonFilter=MyBookingRequestsFragment.salonFilterOld;
         }
-        if(!MyBookingRequestsFragment.dateFilterTemp.equals(""))
+        if(!MyBookingRequestsFragment.dateFilterName.equals(""))
         {
-            requestDate.setText(MyBookingRequestsFragment.dateFilterTemp);
+            requestDate.setText(MyBookingRequestsFragment.dateFilterName);
+            MyBookingRequestsFragment.dateFilter=MyBookingRequestsFragment.dateFilterOld;
+
         }
-        if(!MyBookingRequestsFragment.typeFilterTemp.equals(""))
+        if(!MyBookingRequestsFragment.typeFilterName.equals(""))
         {
-            requestType.setText(MyBookingRequestsFragment.typeFilterTemp);
+            requestType.setText(MyBookingRequestsFragment.typeFilterName);
+            MyBookingRequestsFragment.typeFilter=MyBookingRequestsFragment.typeFilterOld;
         }
-        if(!MyBookingRequestsFragment.creationDateFilterTemp.equals(""))
+        if(!MyBookingRequestsFragment.creationDateFilterName.equals(""))
         {
-            requestType.setText(MyBookingRequestsFragment.creationDateFilterTemp);
-        }*/
-        MyBookingRequestsFragment.salonFilterTemp="";
+            creationDate.setText(MyBookingRequestsFragment.creationDateFilterName);
+            MyBookingRequestsFragment.creationDateFilter=MyBookingRequestsFragment.creationDateFilterOld;
+
+        }
+      /*  MyBookingRequestsFragment.salonFilterTemp="";
         MyBookingRequestsFragment.salonFilter="";
         MyBookingRequestsFragment.dateFilterTemp="";
         MyBookingRequestsFragment.dateFilter="";
         MyBookingRequestsFragment.typeFilterTemp="";
         MyBookingRequestsFragment.typeFilter="";
         MyBookingRequestsFragment.creationDateFilter="";
-        MyBookingRequestsFragment.creationDateFilterTemp="";
+        MyBookingRequestsFragment.creationDateFilterTemp="";*/
 
 
         //--------------------- get services---------------------------
@@ -428,6 +434,16 @@ public class MyBookingRequestsFilters extends Fragment {
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                MyBookingRequestsFragment.salonFilterOld=MyBookingRequestsFragment.salonFilter;
+                MyBookingRequestsFragment.dateFilterOld=MyBookingRequestsFragment.dateFilter;
+                MyBookingRequestsFragment.creationDateFilterOld=MyBookingRequestsFragment.creationDateFilter;
+                MyBookingRequestsFragment.typeFilterOld=MyBookingRequestsFragment.typeFilter;
+
+                MyBookingRequestsFragment.salonFilterName=salonName.getText().toString();
+                MyBookingRequestsFragment.dateFilterName=requestDate.getText().toString();
+                MyBookingRequestsFragment.creationDateFilterName=creationDate.getText().toString();
+                MyBookingRequestsFragment.typeFilterName=requestType.getText().toString();
 
                 MyBookingRequestsFragment.isNew=false;
                 Fragment fragment = new MyBookingRequestsFragment();

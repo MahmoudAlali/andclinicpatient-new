@@ -59,7 +59,8 @@ public class HealthCentersFragment extends Fragment implements LocationListener,
     Location mLastLocation;
     public static int ACCESS_FINE_LOCATION = 90;
     ImageView filterbtn;
-
+    public static String salonFilterOld="",distanceFilterOld="",locationFilterOld="",locationFilterOld2="",clinicRateFilterOld="",specialityFilterOld="";
+    public static String salonFilterName="",distanceFilterName="",locationFilterName="",clinicRateFilterName="",specialityFilterName="";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
