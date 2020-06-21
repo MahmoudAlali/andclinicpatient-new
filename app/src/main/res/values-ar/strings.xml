@@ -408,7 +408,10 @@
     <string name="bookingRequests">طلباتي </string>
     <string name="myAppointment">مواعيدي</string>
 
-    <string name="update">تحديث المؤثرات</string>
+    <string name="update">تحديث البيانات</string>
+    <string name="update_r">تحديث بيانات المرافق</string>
+    <string name="add_relative">إضافة مرافق</string>
+    <string name="add_relative_r">إضافة مرافق جديد</string>
     <string name="there_is_no_sol">لا يوجد حل مماثل هل ترغبين في إيجاد حلول بديلة؟</string>
 
     <string-array name="cities">
@@ -457,7 +460,11 @@
         <item>اكبر من 13</item>
     </string-array>
 
-    <string name="enter_c_name">من فضلكِ ادخلي اسم المريض/ة</string>
+    <string name="enter_c_name">من فضلك ادخل اسم المريض/ة</string>
+    <string name="enter_r_name">من فضلك ادخل اسم القريب/ة</string>
+    <string name="enter_age_r_range">من فضلك ادخل عمر القريب/ة</string>
+    <string name="enter_r_gender">من فضلك ادخل جنس القريب/ة</string>
+    <string name="enter_relation">من فضلك ادخل صلة القرابة</string>
     <string name="enter_age_range">من فضلكِ ادخلي عمر المريض/ة</string>
     <string name="enter_age_btwn_range">من فضلكِ ادخلي عمر المريض/ة بين 0 و 100 عام</string>
 
@@ -835,7 +842,6 @@
     <string name="speciality_points">التخصص :</string>
     <string name="males">الذكور</string>
     <string name="male">ذكر</string>
-    <string name="relationship">Relationship :</string>
     <string name="females">الإناث</string>
     <string name="female">أنثى</string>
     <string name="females_and_males">كلا الجنسين</string>
@@ -884,6 +890,8 @@
     <string name="son">ابن</string>
     <string name="husband">زوج/زوجة</string>
     <string name="me">صاحب الحساب</string>
-
+    <string name="success_add_follower">تمت إضافة المرافق بنجاح</string>
+    <string name="success_update_follower">تم تعديل بيانات المرافق بنجاح</string>
+    <string name="follower_exist">هذا الشخص موجود مسبقاً</string>
 
 </resources>

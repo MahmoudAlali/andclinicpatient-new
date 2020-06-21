@@ -827,7 +827,7 @@ public class freeBookingFragment extends Fragment implements LocationListener ,
                     filterSupplierName=clinName;
                     filterSupplierId=salonId;
                     // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
-                    ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
+//                    ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
 
                     doctorName.setText(context.getResources().getText(R.string.doctorName));
                     filterDoctorName="";

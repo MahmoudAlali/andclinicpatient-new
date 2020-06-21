@@ -1,11 +1,14 @@
 package com.ptm.clinicpa.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Adapters.HealthCentersAdapter;
@@ -18,11 +21,13 @@ public class RelativesActivity extends AppCompatActivity {
     public static SwipeRefreshLayout pullToRefresh;
     public static RelativesAdapter relativesAdapter;
     public static Context context;
+    ImageView add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatives);
         pullToRefresh = findViewById(R.id.pullToRefresh);
+        add = findViewById(R.id.add);
         context=this;
         APICall.getAllFollowers( context);
 
@@ -44,6 +49,14 @@ public class RelativesActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(relativesAdapter);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,AddRelativeActivity.class);
+                i.putExtra("isEditRelative",false);
+                startActivity(i);
+            }
+        });
 
     }
 }

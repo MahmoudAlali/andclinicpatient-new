@@ -97,9 +97,9 @@ public class NewBookingRequestsFragment extends Fragment {
 
       //  APICall.layout= R.layout.incom_reservation_layout;
         APICall.filter=filter= APICall.Filter("1","9","0");
-        //filters.clear();
+        filters.clear();
 
-        //filters.add(APICall.filter);
+        filters.add(APICall.filter);
        /* if(!MyBookingRequestsFragment.dateFilter.equals(""))
             filters.add(MyBookingRequestsFragment.dateFilter);
         if(!MyBookingRequestsFragment.typeFilter.equals(""))
@@ -107,7 +107,7 @@ public class NewBookingRequestsFragment extends Fragment {
         if(!MyBookingRequestsFragment.salonFilter.equals(""))
             filters.add(MyBookingRequestsFragment.salonFilter);
 */
-       // APICall.filter=APICall.Filter(filters);
+        APICall.filter=APICall.Filter(filters);
 
 
         //---------cancel---------

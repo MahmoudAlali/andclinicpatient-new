@@ -63,6 +63,8 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
     ImageView filterbtn;
     public static  ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
     String filterMyLocationLat="",filterMyLocationLng="";
+    public static String salonFilterOld="",distanceFilterOld="",locationFilterOld="",clinicRateFilterOld="",locationFilterOld2="",dateFilterOld="",priceFilterOld="",serviceFilterOld="";
+    public static String salonFilterName="",distanceFilterName="",locationFilterName="",clinicRateFilterName="",dateFilterName="",priceFilterName="",serviceFilterName="",specialityFilterName="";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

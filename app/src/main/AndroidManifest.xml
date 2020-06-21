@@ -27,7 +27,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.RelativesActivity"></activity>
+        <activity android:name=".Activities.AddRelativeActivity"></activity>
+        <activity android:name=".Activities.RelativesActivity" />
         <activity android:name=".Activities.OldAppointmentsFiltersActivity" />
         <activity android:name=".Activities.HealthCentersFilters" />
         <!--

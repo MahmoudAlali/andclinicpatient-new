@@ -153,7 +153,7 @@ public class DepositReservationFragment extends Fragment {
         private void getdata() {
             MyReservationFragment.progressBar.setVisibility(View.VISIBLE);
             pageNum++;
-            APICall.bookingAutomatedBrowseScrolling(APICall.ln, "20", MyReservationFragment.serviceId, pageNum, APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
+            APICall.appointmentsAutomatedBrowseScrolling("en", "20", MyReservationFragment.serviceId, pageNum+"", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
 
 
         }

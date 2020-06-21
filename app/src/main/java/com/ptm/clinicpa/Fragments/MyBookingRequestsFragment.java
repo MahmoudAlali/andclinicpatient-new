@@ -310,11 +310,11 @@ public class MyBookingRequestsFragment extends Fragment {
                       //  bookingRequestsAdapter.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout,tmp);
+                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout,tmp);
 
                         }else if (id==R.id.two) {
                             APICall.sort = APICall.bookingSort("1", "desc");
-                            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout, tmp);
+                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout, tmp);
                         }
                         Log.e("Sort1",APICall.sort);
                         Log.e("filter1",APICall.filter);

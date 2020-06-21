@@ -228,10 +228,12 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.points).setVisible(false);
             sideMenu.findItem(R.id.effcts).setVisible(false);
             sideMenu.findItem(R.id.requests).setVisible(false);
-            sideMenu.findItem(R.id.setting).setVisible(true);
-            menu.findItem(R.id.favorites).setEnabled(false);
-            menu.findItem(R.id.centers).setEnabled(false);
+            sideMenu.findItem(R.id.setting).setVisible(false);
+            sideMenu.findItem(R.id.notification).setVisible(false);
+           // menu.findItem(R.id.favorites).setEnabled(false);
+           // menu.findItem(R.id.centers).setEnabled(false);
             menu.findItem(R.id.reservations).setEnabled(false);
+            menu.findItem(R.id.services).setEnabled(false);
         }
         else if(APICall.isGuest(context).equals("0"))
  //       else if(bdb_is_guest.equals("0"))

@@ -36,7 +36,7 @@
     <string name="EnterActivationCodeAlert">Please enter the activation code</string>
     <string name="ActivationCodeMustBeFourDigistAlert">Activation code must be four digits</string>
     <string name="CheckInternetConnectionAlert">Please check your internet connection</string>
-    <string name="SomethingWentWrongAlert">Something went wrong, please try again</string>
+    <string name="SomethingWentWrongAlert">Something went wrong, please try again later</string>
     <string name="MobNumberActivatedAlert">Your mobile number has been activated, you can now sign in</string>
     <string name="InputCodeWrongAlert">The entered code is wrong, please try again</string>
     <string name="ResendCodeAlert">Resend code</string>
@@ -679,7 +679,10 @@
     <string name="effect">My effects</string>
     <string name="bookingRequests">My orders</string>
     <string name="myAppointment">My appointments</string>
-    <string name="update">Update effects</string>
+    <string name="update">Update information</string>
+    <string name="update_r">Update companion information</string>
+    <string name="add_relative_r">Add new companion</string>
+    <string name="add_relative">Add companion</string>
     <string name="there_is_no_sol">There is no similar solution. Do you want to find alternative solutions?</string>
 
 
@@ -785,7 +788,11 @@
     </string-array>
     <string name="add_new_client">Add new client</string>
     <string name="enter_c_name">Please enter patient name</string>
+    <string name="enter_r_name">Please enter relative name</string>
     <string name="enter_age_range">Please enter patient age</string>
+    <string name="enter_age_r_range">Please enter relative age</string>
+    <string name="enter_r_gender">Please enter relative gender</string>
+    <string name="enter_relation">Please enter relationship</string>
     <string name="enter_gender">Please enter patient gender</string>
     <string name="add_atleast_one_service">Please add at least one service for your offer</string>
     <string name="select_date_of_booking">Please select booking date</string>
@@ -1032,5 +1039,8 @@
     <string name="son">Son</string>
     <string name="husband">Husband/wife</string>
     <string name="me">Account user</string>
+    <string name="success_add_follower">Companion added successfully</string>
+    <string name="success_update_follower">Companion information updated successfully</string>
+    <string name="follower_exist">This relative already exists</string>
 
 </resources>

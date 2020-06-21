@@ -22,6 +22,7 @@ import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.BookingRequestDetailsActivity;
 import com.ptm.clinicpa.Adapters.BookingRequestsAdapter;
+import com.ptm.clinicpa.Adapters.EndlessRecyclerViewScrollListener;
 import com.ptm.clinicpa.R;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class OldBookingRequestsFragment extends Fragment {
     Spinner category;
     public static RecyclerView service_select;
     public static BookingRequestsAdapter bookingRequestsAdapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
 
@@ -73,7 +75,18 @@ public class OldBookingRequestsFragment extends Fragment {
         sortbtn= MyBookingRequestsFragment.view.findViewById(R.id.sort);
         manager=new LinearLayoutManager(BeautyMainPage.context);
         service_select.setLayoutManager(manager);
-//        reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels,0);
+        scrollListener = new EndlessRecyclerViewScrollListener(manager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                getdata();
+            }
+        };
+        service_select.addOnScrollListener(scrollListener);
+
+
+/*
         service_select.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -97,12 +110,10 @@ public class OldBookingRequestsFragment extends Fragment {
                 }
             }
         });
+*/
 
-//        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
 
-//        service_select.setAdapter(reservationsAdapter2);
 
-       // APICall.layout= R.layout.incom_reservation_layout;
         APICall.filter=filter= APICall.Filter("1","8","0");
 
         filters.clear();

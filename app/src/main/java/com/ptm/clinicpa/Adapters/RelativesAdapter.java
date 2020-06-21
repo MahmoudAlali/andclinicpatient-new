@@ -1,6 +1,7 @@
 package com.ptm.clinicpa.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.Space;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.Activities.AddRelativeActivity;
 import com.ptm.clinicpa.DataModel.PatientDataModel;
 import com.ptm.clinicpa.R;
 
@@ -88,6 +90,24 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onClick(View v) {
                     String id=patientDataModels.get(position).getBdb_id();
                     APICall.DeleteFollower(context,id);
+                }
+            });
+            ((Item)viewHolder).edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id=patientDataModels.get(position).getBdb_id();
+                    String name=patientDataModels.get(position).getBdb_user_name();
+                    String gender=patientDataModels.get(position).getBdb_gender();
+                    String relation=patientDataModels.get(position).getBdb_relation();
+                    String old=patientDataModels.get(position).getBdb_old();
+                    Intent i=new Intent(context, AddRelativeActivity.class);
+                    i.putExtra("isEditRelative",true);
+                    i.putExtra("id",id);
+                    i.putExtra("name",name);
+                    i.putExtra("gender",gender);
+                    i.putExtra("relation",relation);
+                    i.putExtra("old",old);
+                    context.startActivity(i);
                 }
             });
         }

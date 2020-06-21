@@ -102,7 +102,46 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
         filterMyLocationLng="";
         filterOfferPrice="";
         filterClinicRate="";
+        if(!MyOffersFragment.salonFilterName.equals(""))
+        {
+            clinicName.setText(MyOffersFragment.salonFilterName);
+            filterSupplierId=MyOffersFragment.salonFilterOld;
+        }
+        if(!MyOffersFragment.dateFilterName.equals(""))
+        {
+            offerDate.setText(MyOffersFragment.dateFilterName);
+            filterOfferDate=MyOffersFragment.dateFilterOld;
 
+        }
+        if(!MyOffersFragment.distanceFilterName.equals(""))
+        {
+            distance.setText(MyOffersFragment.distanceFilterName);
+            filterDistance=MyOffersFragment.distanceFilterOld;
+
+        }
+        if(!MyOffersFragment.locationFilterName.equals(""))
+        {
+            mylocationbtn.setText(MyOffersFragment.locationFilterName);
+            filterMyLocationLat=MyOffersFragment.locationFilterOld;
+            filterMyLocationLng=MyOffersFragment.locationFilterOld2;
+        }
+        if(!MyOffersFragment.clinicRateFilterName.equals(""))
+        {
+            centerRate.setText(MyOffersFragment.clinicRateFilterName);
+            filterClinicRate=MyOffersFragment.clinicRateFilterOld;
+
+        }
+        if(!MyOffersFragment.serviceFilterName.equals(""))
+        {
+            services.setText(MyOffersFragment.specialityFilterName);
+            filterServiceId=MyOffersFragment.serviceFilterOld;
+
+        }
+        if(!MyOffersFragment.priceFilterName.equals(""))
+        {
+            offerPrice.setText(MyOffersFragment.priceFilterName);
+            filterOfferPrice=MyOffersFragment.priceFilterOld;
+        }
         // region get Current Location
         {
 
@@ -678,6 +717,22 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyOffersFragment.salonFilterOld=filterSupplierId;
+                MyOffersFragment.dateFilterOld=filterOfferDate;
+                MyOffersFragment.distanceFilterOld=filterDistance;
+                MyOffersFragment.priceFilterOld=filterOfferPrice;
+                MyOffersFragment.locationFilterOld=filterMyLocationLat;
+                MyOffersFragment.locationFilterOld2=filterMyLocationLng;
+                MyOffersFragment.serviceFilterOld=filterServiceId;
+                MyOffersFragment.clinicRateFilterOld=filterClinicRate;
+
+                MyOffersFragment.salonFilterName=clinicName.getText().toString();
+                MyOffersFragment.dateFilterName=offerDate.getText().toString();
+                MyOffersFragment.locationFilterName=mylocationbtn.getText().toString();
+                MyOffersFragment.priceFilterName=offerPrice.getText().toString();
+                MyOffersFragment.clinicRateFilterName=centerRate.getText().toString();
+                MyOffersFragment.distanceFilterName=distance.getText().toString();
+                MyOffersFragment.serviceFilterName=services.getText().toString();
                 fragment= new MyOffersFragment();
 
                 fm = getActivity().getFragmentManager();
