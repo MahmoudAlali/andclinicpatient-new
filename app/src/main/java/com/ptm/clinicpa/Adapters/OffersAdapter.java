@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.meg7.widget.SvgImageView;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.Offers;
@@ -135,6 +136,17 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
             ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+            if(context.getString(R.string.locale).equals("en"))
+                ((Item) holder).speciality.setText(bestOfferItems.get(position).getSpeciality_en());
+            else
+                ((Item) holder).speciality.setText(bestOfferItems.get(position).getSpeciality_ar());
+            if(context.getString(R.string.locale).equals("en"))
+                ((Item) holder).centerName.setText(bestOfferItems.get(position).getHealth_center_en());
+            else
+                ((Item) holder).centerName.setText(bestOfferItems.get(position).getHealth_center_ar());
+
+
+            // ((Item) holder).centerName.setText(bestOfferItems.get(position).getProvider_name());
             String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+bestOfferItems.get(position).getDeposit_prcntg()+" % ";
             ( (Item)holder).depositPrcntg.setText(deposit);
             //((Item) holder).depositPrcntg.setText(bestOfferItems.get(position).getDeposit_prcntg());
@@ -159,7 +171,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
 
-            ((Item)holder).add.setOnClickListener(new View.OnClickListener() {
+            ((Item)holder).
+                    add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -172,7 +185,15 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         e.printStackTrace();
                     }
 
-                    if (bestOfferItems.get(position).getOffer_type().equals("2")
+                    Intent i=new Intent(context, CreateRequestActivity.class);
+                    i.putExtra("is_offer",true);
+                    i.putExtra("sup_id",bestOfferItems.get(position).getProvider_id());
+                    i.putExtra("pack_code",bestOfferItems.get(position).getPack_code());
+                    i.putExtra("longNum",Offers.Lat);
+                    i.putExtra("latNum",Offers.Long);
+                    context.startActivity(i);
+
+                    /*if (bestOfferItems.get(position).getOffer_type().equals("2")
                             || bestOfferItems.get(position).getOffer_type().equals("5")){
 
                         Intent intent=new Intent(context, MultiDateOfferBooking.class);
@@ -193,7 +214,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         intent.putExtra("postion",position);
                         intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
                         ((AppCompatActivity)context).startActivity(intent);
-                    }
+                    }*/
 //            }
 //        });
 //                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
@@ -252,11 +273,12 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             else*/
             APICall.getSalonLogoDltWhenEmpty(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
-            if (bestOfferItems.get(position).getOffer_type().equals("1") ||bestOfferItems.get(position).getOffer_type().equals("4")) {
+            if (bestOfferItems.get(position).getOffer_type().equals("1") ) {// individual
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
-            }else if (bestOfferItems.get(position).getOffer_type().equals("2") ||bestOfferItems.get(position).getOffer_type().equals("5")) {
+
+            }else if (bestOfferItems.get(position).getOffer_type().equals("2") ) {// multi dates individual
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
-            }else if (bestOfferItems.get(position).getOffer_type().equals("3") ||bestOfferItems.get(position).getOffer_type().equals("6")) {
+            }else if (bestOfferItems.get(position).getOffer_type().equals("3") ) {// group
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.group));
             }
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
@@ -361,7 +383,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return st;
     }
     public static class Item extends RecyclerView.ViewHolder {
-        TextView textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
+        TextView speciality,centerName,textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
         ImageView info,logoImg2,add,exp,health;
         SvgImageView logoImg;
         LinearLayout itemBackground;
@@ -387,6 +409,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             depositPrcntg = itemView.findViewById(R.id.depPerc);
             exp = itemView.findViewById(R.id.exp);
             health = itemView.findViewById(R.id.health);
+            centerName = itemView.findViewById(R.id.centerName);
+            speciality = itemView.findViewById(R.id.speciality);
         }
     }
 }

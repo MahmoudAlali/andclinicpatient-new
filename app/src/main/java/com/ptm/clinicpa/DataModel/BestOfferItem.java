@@ -9,7 +9,7 @@ public class BestOfferItem {
 //            "provider name": "صالون5",
 //            "sersup_ids"
 
-        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type,deposit_prcntg;
+        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type,deposit_prcntg,health_center_ar,health_center_en;
         JSONArray sersup_ids;
 
     public BestOfferItem(String pack_code, String service_count, String provider_name, JSONArray sersup_ids) {
@@ -54,8 +54,8 @@ public class BestOfferItem {
         this.provider_id=provider_id;
     }
     String bdb_booking_period,start_date,end_date;
-    String bdb_has_experience_cer,bdb_has_health_cer;
-    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg,String bdb_has_experience_cer,String bdb_has_health_cer ) {
+    String bdb_has_experience_cer,bdb_has_health_cer,speciality_ar,speciality_en;
+    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg,String bdb_has_experience_cer,String bdb_has_health_cer ,String health_center_ar,String health_center_en,String speciality_ar,String speciality_en) {
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -72,6 +72,10 @@ public class BestOfferItem {
         this.deposit_prcntg=deposit_prcntg;
         this.bdb_has_health_cer=bdb_has_health_cer;
         this.bdb_has_experience_cer=bdb_has_experience_cer;
+        this.health_center_ar=health_center_ar;
+        this.health_center_en=health_center_en;
+        this.speciality_ar=speciality_ar;
+        this.speciality_en=speciality_en;
     }
 
     public String getBdb_has_experience_cer() {
@@ -196,5 +200,21 @@ public class BestOfferItem {
 
     public String getDeposit_prcntg() {
         return deposit_prcntg;
+    }
+
+    public String getHealth_center_ar() {
+        return health_center_ar;
+    }
+
+    public String getHealth_center_en() {
+        return health_center_en;
+    }
+
+    public String getSpeciality_ar() {
+        return speciality_ar;
+    }
+
+    public String getSpeciality_en() {
+        return speciality_en;
     }
 }

@@ -57,14 +57,15 @@ public class CreateRequestActivity extends AppCompatActivity {
 
     public static String is_group_booking="";
     public  String postdata;
-    public static String sup_id;
+    public static String sup_id,pack_code,latNum,longNum;
     public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner/*ageSpinner*/,genderSpinner,servicesSpinner;
 
-    boolean isOffer;
+    public static boolean isOffer;
     public  static HintArrayAdapter adapter1;
     public static CheckBox personalReserv;
     public static EditText phoneNumber,ClientName,description,healthFileNum,ageRange;
     int startWorkHour,startWorkMinutes;
+    public static LinearLayout adding_service_layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,10 +106,22 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         sup_id = getIntent().getStringExtra("sup_id");
         isOffer = getIntent().getBooleanExtra("is_offer",false);
+        if(isOffer) {
+            pack_code = getIntent().getStringExtra("pack_code");
+            latNum = getIntent().getStringExtra("latNum");
+            longNum = getIntent().getStringExtra("longNum");
+        }
 
         context=this;
-        APICall.freegetServiceNames(context,sup_id,freeBookingFragment.Place);
+        if(!isOffer)
+            APICall.freegetServiceNames(context,sup_id,freeBookingFragment.Place);
 
+        else
+        {
+            servicesLayout.setVisibility(View.GONE);
+            APICall.browseOneOffer(context,pack_code);
+
+        }
         personalReserv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -182,15 +195,17 @@ public class CreateRequestActivity extends AppCompatActivity {
         adapter1.addAll(supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         servicesSpinner.setAdapter(adapter1);
+        adding_service_layout = findViewById(R.id.adding_service_layout);
 
         servicesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
 
-                    final LinearLayout adding_service_layout = findViewById(R.id.adding_service_layout);
+
 
                     Log.e("Step", "1");
+
                     addLayout2(servicesSpinner.getSelectedItem() + "", adding_service_layout, servicesSpinner, servicesModels);
 
                 }
@@ -373,7 +388,7 @@ public class CreateRequestActivity extends AppCompatActivity {
 
 
                 if (check) {
-                    if(freeBookingFragment.filterType.equals("0"))//offer
+                    if(freeBookingFragment.filterType.equals("0")||isOffer)//offer
                     {
                         if(clientsArrayList.size()<=1)
                             is_group_booking="23";//free single offer
@@ -405,7 +420,17 @@ public class CreateRequestActivity extends AppCompatActivity {
                     intent.putExtra("effects",geteffectclient(API.groupBookingModels));
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*/
                  //   startActivity(intent);
+                    if(!isOffer)
                     APICall.addBookingRequest2(freeBookingFragment.lat+"",freeBookingFragment.lng+"",freeBookingFragment.Place+"",add_date.getText().toString(),CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+
+                    else {
+                        String place;
+                        if(APICall.offerBrowse.getBdb_offer_place().equals("0"))
+                            place="center";
+                        else
+                            place="home";
+                        APICall.addBookingRequest2(latNum, longNum,place, add_date.getText().toString(), CreateRequestActivity.is_group_booking, getClients(1), context, description.getText().toString());
+                    }
 
 //                    onBackPressed();
 //                    finish();
@@ -510,13 +535,54 @@ public class CreateRequestActivity extends AppCompatActivity {
 //        API.groupBookingModels.add(new GroupBookingModel(client_name,client_no,age,))
 
         Log.e("ServiceName",s);
-        Log.e("nameAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar());
-        Log.e("IdAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id());
+       // Log.e("nameAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar());
+       // Log.e("IdAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id());
         servicesModels.add(new ClientServiceDataModel(APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id()+"",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_sup_id()+"",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name(),APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar()));
         layout.addView(layout2);
 
     }
-public static JSONArray getClients(int c)
+    private static void addLayout3(String name_en,String name_ar,String bdb_ser_id,String bdb_ser_sup_id, final LinearLayout layout, final ArrayList<ClientServiceDataModel> servicesModels) {
+
+        final View layout2;
+        Log.e("Step","2");
+
+//        ArrayList<GroupBookingModel.ServicesModel> servicesModels1=new ArrayList<>();
+        layout2 = LayoutInflater.from(context).inflate(R.layout.show_emp_layout2, layout, false);
+
+        final Button emp_name =  layout2.findViewById(R.id.emp_name);
+        ImageView delete =  layout2.findViewById(R.id.delete);
+
+        if(context.getString(R.string.locale).equals("en"))
+            emp_name.setText(name_en);
+        else
+            emp_name.setText(name_ar);
+
+        Log.e("Step","3");
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i = 0; i< servicesModels.size(); i++){
+                    if (emp_name.getText().toString().equals(servicesModels.get(i).getBdb_name())||emp_name.getText().toString().equals(servicesModels.get(i).getBdb_name_ar())){
+                        servicesModels.remove(i);
+                        layout.removeView(layout2);
+                        break;
+                    }
+                }
+
+            }
+        });
+//        API.groupBookingModels.add(new GroupBookingModel(client_name,client_no,age,))
+
+        Log.e("ServiceName",name_ar);
+        // Log.e("nameAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_name_ar());
+        // Log.e("IdAPI",APICall.allSupplierServices.get(addService.getSelectedItemPosition()-1).getBdb_ser_id());
+        servicesModels.add(new ClientServiceDataModel(bdb_ser_id,bdb_ser_sup_id,name_en,name_ar));
+        layout.addView(layout2);
+
+    }
+
+    public static JSONArray getClients(int c)
 {
     JSONArray clients =new JSONArray();
     try {
@@ -565,7 +631,10 @@ public static JSONArray getClients(int c)
 //                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
             JSONObject servic = new JSONObject();
 
-            servic.put("ser_id",servicesModels.get(j).getBdb_ser_id());
+            if(!isOffer)
+                servic.put("ser_id",servicesModels.get(j).getBdb_ser_id());
+            else
+                servic.put("bdb_ser_sup_id",servicesModels.get(j).getBdb_ser_sup_id());
             services.put(servic);
         }
         client.put("services",services);
@@ -597,6 +666,11 @@ public static JSONArray getClients(int c)
 
     Log.e("clients",clients.toString());
     return clients;
+}
+public static void showServices(String name_en,String name_ar,String serId,String serSupId )
+{
+    addLayout3(name_en,name_ar,serId,serSupId, adding_service_layout, servicesModels);
+
 }
 
 

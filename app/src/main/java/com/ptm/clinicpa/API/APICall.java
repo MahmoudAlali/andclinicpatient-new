@@ -2647,7 +2647,8 @@ public class APICall {
 
 
     //   ------------------ Best Offer-------------------------
-    public  static  void bestOffer(final Context context,String lat,String lon){
+    public  static  void bestOffer(final Context context,String lat,String lon)
+    {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -2769,6 +2770,10 @@ public class APICall {
                        for (int i=0;i<packages.length();i++){
                            JSONObject pkg=packages.getJSONObject(i);
                            String pack_code=pkg.getString("pack_code");
+                           String health_center_en=pkg.getString("health_center_name_en");
+                           String health_center_ar=pkg.getString("health_center_name_ar");
+                           String speciality_ar=pkg.getString("specialization_ar");
+                           String speciality_en=pkg.getString("specialization_en");
                            String start_date=pkg.getString("start_date");
                            String end_date=pkg.getString("end_date");
                            String provider_id=pkg.getString("doctor_id");
@@ -2790,7 +2795,7 @@ public class APICall {
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer));
+                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer,health_center_ar,health_center_en,speciality_ar,speciality_en));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -2809,6 +2814,205 @@ public class APICall {
                                         if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
                                         showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.alert)
                                                 , ((AppCompatActivity) context).getResources().getString(R.string.no_offer));
+                            }
+                        });
+                    }
+                }catch (final JSONException je){
+                    showUnexpectedErrMsg(context);
+                    Log.e("ERROR",je.getMessage());
+                }
+            }
+        });
+        Log.d("MessageResponse",mMessage);
+    }
+    public static OfferModel offerBrowse;
+    public  static  void browseOneOffer(final Context context,String packCode)
+    {
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+               showDialog(context);
+              //  Offers.pullToRefresh.setRefreshing(true);
+
+            }
+        });
+
+       // lat = "21.418923225457213"; lon = "39.82685700058937";
+//        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_pack_code",packCode);
+        }
+        catch (Exception e){}
+
+        Log.e("browseOneOffer",postdata.toString());
+
+
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/service/offer/browse")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+//                .addHeader("Accept","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                       // Offers.pullToRefresh.setRefreshing(false);
+
+                        try{
+                            pd.dismiss();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+//                        pd.dismiss();
+                    }
+                });
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("browseOneOffer", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                      //  Offers.pullToRefresh.setRefreshing(false);
+                        try{
+                            pd.dismiss();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                try {
+                    final JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+
+                    if (response_code.equals("64")) {
+                        // int pkg_count=Integer.parseInt(j.getString( "packages count"));
+                        JSONObject jarray = j.getJSONObject("data");
+                        {
+                            //JSONObject jarray = packages.getJSONObject(i);
+                            String bdb_pack_code = jarray.getString("bdb_pack_code"),
+                                    bdb_doctor_name = jarray.getString("doctor_name"),
+                                    //health_center_name_ar = jarray.getString("health_center_name_ar"),
+                                   // health_center_id = jarray.getString("health_center_id"),
+                                   // health_center_name_en = jarray.getString("health_center_name_en"),
+                                    specialization_ar = jarray.getString("specialization_name_ar"),
+                                    specialization_en = jarray.getString("specialization_name_en"),
+                                    supported_gender = jarray.getString("supported_gender"),
+                                    min_suported_old = jarray.getString("min_supported_old"),
+                                    max_supported_old = jarray.getString("max_supported_old"),
+                                    bdb_offer_place = jarray.getString("bdb_offer_place"),
+                                    bdb_offer_type = jarray.getString("bdb_offer_type"),
+                                    bdb_offer_end = jarray.getString("bdb_offer_end"),
+                                    bdb_offer_start = jarray.getString("bdb_offer_start"),
+
+                                    // totalRating_to_Sup = jarray.getString("totalRating_to_Sup"),
+                                  /*  service_count = jarray.getString("service count"),
+                                    is_fav_center = jarray.getString("is_fav_center"),
+                                    is_fav_doctor = jarray.getString("is_fav_doctor"),*/
+                                    bdb_is_journey_on = jarray.getString("bdb_is_journey_on");
+                                 //   bdb_booking_period = jarray.getString("bdb_booking_period");
+
+                                   /* num_of_times = jarray.getString("Num_of_times"),
+                                    oldPrice = jarray.getString("oldPrice"),
+                                    newPrice = jarray.getString("newPrice"),
+                                    bdb_is_old_on = jarray.getString("bdb_is_old_on"),
+                                    deposit_ratio = jarray.getString("deposit_ratio"),
+                                    bdb_is_effects_on = jarray.getString("bdb_is_effects_on"),
+                                    bdb_is_morning_offer = jarray.getString("bdb_is_morning_offer"),
+                                    discount = jarray.getString("discount"),
+                                    distance = jarray.getString("distance"),
+                                    longitude = jarray.getString("longitude"),
+                                    bdb_logo_id = jarray.getString("bdb_logo_id"),
+                                    bdb_offer_status = jarray.getString("bdb_offer_status"),
+                                    latitude = jarray.getString("latitude");*/
+
+                            JSONArray pack_data = jarray.getJSONArray("groups");
+                            ArrayList<OfferModel.SupIdClass> supIdClasses = new ArrayList<>();
+                            for (int k = 0; k < pack_data.length(); k++) {
+                                JSONObject object = pack_data.getJSONArray(k).getJSONObject(0);
+                                final String bdb_ser_sup_id = object.getString("bdb_ser_sup_id");
+                                final String bdb_name = object.getString("bdb_name_ar");
+                                final String bdb_ser_name_en = object.getString("bdb_ser_name_en");
+                                final String bdb_ser_id = object.getString("bdb_ser_sup_id");
+                                String bdb_ext_pack_code = object.getString("bdb_ext_pack_code");
+                                String bdb_time = object.getString("bdb_time");
+                                Log.e("supIdClasses", bdb_ser_id + "hgf adding ");
+                                supIdClasses.add(new OfferModel.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,bdb_name, bdb_ser_id,bdb_ext_pack_code,bdb_time));
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
+                                        CreateRequestActivity.showServices(bdb_ser_name_en,bdb_name,bdb_ser_id,bdb_ser_sup_id);
+                                    }
+                                });
+                            }
+
+                            offerBrowse=new OfferModel( bdb_pack_code, bdb_doctor_name, bdb_offer_start,  bdb_offer_end,   bdb_offer_type,  bdb_is_journey_on,  "", bdb_offer_place, supIdClasses,min_suported_old,max_supported_old, supported_gender, specialization_ar, specialization_en) ;
+                        }
+                    }
+                    if (j.getString("response_code").equals("63")) {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
+                                    showSweetDialog(context, R.string.SomethingWentWrongAlert);
                             }
                         });
                     }
@@ -24753,6 +24957,8 @@ public class APICall {
                     }
                     RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
 
+                    Log.e("OfferImageReq",postdata.toString());
+
                     okhttp3.Request request = new okhttp3.Request.Builder()
                             .url(API_PREFIX_NAME+"/api/user/download")
                             .post(body)
@@ -24821,6 +25027,9 @@ public class APICall {
                                     public void run() {
                                         logoImg.setImageBitmap(bit);
                                         logoImg.setVisibility(View.VISIBLE);
+                                        Log.e("OfferImageRes","TRUEEEE");
+                                        Offers.scaleImage(logoImg);
+
                                         // OffersAdapter.logoImages.put(LogoId,bit);
                                     }
                                 });
@@ -31551,8 +31760,10 @@ Log.e("ERRR",e.getMessage());
 
         JSONObject postdata = new JSONObject();
         try {
-            postdata.put("loc_lat",loc_lat);
-            postdata.put("loc_long",loc_long);
+            if(!loc_lat.equals(""))
+                postdata.put("loc_lat",loc_lat);
+            if(!loc_long.equals(""))
+                postdata.put("loc_long",loc_long);
             /*if(!sup_id.equals(""))
                 postdata.put("doctor_id",sup_id);*/
             postdata.put("booking_place",booking_place);
@@ -35336,15 +35547,17 @@ Log.e("filters",filter);
                         prefs.putString("SERVER_KEY",SERVER_KEY);
                         prefs.putString("GOOGLE_KEY",GOOGLE_KEY);
                         prefs.putString("PROVIDER_SERVER_KEY",PROVIDER_SERVER_KEY);
-                        Constants.messageOfClientsNames_ar=data.getString("book_sol_ar");
-                        Constants.messageOfClientsNames_en=data.getString("book_sol_en ");
-                        Constants.messageOfKnownProviders_ar=data.getString("previous_experience_ar");
-                        Constants.messageOfKnownProviders_en=data.getString("previous_experience_en");
+                       // Constants.messageOfClientsNames_ar=data.getString("book_sol_ar");
+                       // Constants.messageOfClientsNames_en=data.getString("book_sol_en ");
+                       // Constants.messageOfKnownProviders_ar=data.getString("previous_experience_ar");
+                       // Constants.messageOfKnownProviders_en=data.getString("previous_experience_en");
                         Constants.offerImageId=data.getString("offer_image_id");
                         Constants.checkInMessageAr=data.getString("automated_waiting_ar");
                         Constants.checkInMessageEn=data.getString("automated_waiting_en");
                         Constants.cancelReservationsAr=data.getString("automated_appointment_ar");
                         Constants.cancelReservationsEn=data.getString("automated_appointment_en");
+                        Constants.filterMessageEn=data.getString("filter_message_en");
+                        Constants.filterMessageAr=data.getString("filter_message_ar");
                         Offers.setOfferImage();
                         Log.e("TAG1", Constants.messageOfClientsNames_ar);
                         Log.e("TAG2", Constants.messageOfClientsNames_en);

@@ -163,6 +163,37 @@ public class OfferModel {
         this.specialization_en= specialization_en;
         this.supported_gender= supported_gender;
     }
+    public OfferModel(String bdb_pack_code,String bdb_doctor_name,String bdb_offer_start, String bdb_offer_end,  String bdb_offer_type, String bdb_is_journey_on, String bdb_is_old_on,String bdb_offer_place, ArrayList<SupIdClass> sersup_ids,String minAge,String maxAge,String supported_gender,String specialization_ar,String specialization_en) {
+        this.bdb_pack_code = bdb_pack_code;
+        this.health_center_id = health_center_id;
+        this.health_center_name_ar = health_center_name_ar;
+        this.health_center_name_en = health_center_name_en;
+        this.bdb_doctor_name = bdb_doctor_name;
+        this.is_fav_center = is_fav_center;
+        this.is_fav_doctor = is_fav_doctor;
+        this.bdb_logo_id = bdb_logo_id;
+        this.totalRating_to_Sup = totalRating_to_Sup;
+        this.service_count = service_count;
+        this.distance = distance;
+        this.bdb_offer_start = bdb_offer_start;
+        this.bdb_offer_end = bdb_offer_end;
+        this.oldPrice = oldPrice;
+        this.newPrice = newPrice;
+        this.discount = discount;
+        this.bdb_offer_status = bdb_offer_status;
+        this.bdb_offer_type = bdb_offer_type;
+        this.latitude = latitude;
+        this.bdb_is_journey_on = bdb_is_journey_on;
+        this.bdb_is_old_on = bdb_is_old_on;
+        this.longitude = longitude;
+        this.sersup_ids = sersup_ids;
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+        this.bdb_offer_place= bdb_offer_place;
+        this.specialization_ar= specialization_ar;
+        this.specialization_en= specialization_en;
+        this.supported_gender= supported_gender;
+    }
 
     public String getBdb_offer_place() {
         return bdb_offer_place;
@@ -386,6 +417,15 @@ public class OfferModel {
 //            this.bdb_name_ar = bdb_name_ar;
             this.bdb_ser_id = bdb_ser_id;
         }
+        String bdb_ext_pack_code,bdb_time;
+        public SupIdClass(String bdb_ser_sup_id, String bdb_name,String bdb_name_ar, String bdb_ser_id,String bdb_ext_pack_code,String bdb_time) {
+            this.bdb_ser_sup_id = bdb_ser_sup_id;
+            this.bdb_name = bdb_name;
+            this.bdb_name_ar = bdb_name_ar;
+            this.bdb_ser_id = bdb_ser_id;
+            this.bdb_time = bdb_time;
+            this.bdb_ext_pack_code = bdb_ext_pack_code;
+        }
 
         public String getBdb_ser_sup_id() {
             return bdb_ser_sup_id;
@@ -393,6 +433,14 @@ public class OfferModel {
 
         public void setBdb_ser_sup_id(String bdb_ser_sup_id) {
             this.bdb_ser_sup_id = bdb_ser_sup_id;
+        }
+
+        public String getBdb_ext_pack_code() {
+            return bdb_ext_pack_code;
+        }
+
+        public String getBdb_time() {
+            return bdb_time;
         }
 
         public String getBdb_name() {

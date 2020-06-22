@@ -158,16 +158,38 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="190dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:weightSum="5"
                 android:paddingRight="@dimen/standard_20"
-                android:paddingTop="30dp"
-                android:paddingBottom="7dp"
+                android:paddingTop="35dp"
+                android:paddingBottom="10dp"
                 android:orientation="vertical"
 
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+
+                    >
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Center Name"
+                        android:id="@+id/centerName"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:layout_gravity="center|bottom"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -177,6 +199,7 @@
                     >
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/exp"
                         android:layout_width="@dimen/standard_30"
                         android:layout_height="@dimen/standard_30"
@@ -185,6 +208,7 @@
                         />
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/health"
                         android:layout_width="@dimen/standard_30"
                         android:layout_height="@dimen/standard_30"
@@ -194,45 +218,79 @@
                     <TextView
 
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="Salon Name"
                         android:id="@+id/pro_name"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#000"
                         android:layout_gravity="center|bottom"
-                        android:gravity="left"
+                        android:gravity="center"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
                     android:layout_weight="1"
+
+
+                    >
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Speciality"
+                        android:id="@+id/speciality"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:layout_gravity="center|bottom"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_20"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
                    >
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/best_offers_i"
+                        android:id="@+id/info"/>
                     <ImageView
                         android:layout_weight="1"
                         android:padding="7dp"
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/best_offers_i"
-                        android:id="@+id/info"/>
+                        />
+                    <ImageView
+                    android:layout_weight="1"
+                    android:padding="7dp"
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"
+                    />
+
                     <TextView
                         android:id="@+id/depPerc"
                         android:layout_width="@dimen/standard_60"
-                        android:lines="2"
                         android:layout_height="wrap_content"
-                        android:text="deposit percentage 50 %"
-                        android:textStyle="bold"
                         android:layout_weight="1"
-                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:text="deposit percentage 50 %"
                         android:textColor="#a5587a"
-                        android:gravity="center"/>
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <ImageView
-                        android:padding="7dp"
                         android:layout_weight="1"
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
@@ -387,6 +445,7 @@
                      </LinearLayout>-->
                 </LinearLayout>
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/offer_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -396,7 +455,6 @@
                     android:paddingRight="@dimen/standard_30"
                     android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:text="@string/offer_type"
                     />
 
             </LinearLayout>
@@ -458,4 +516,20 @@
         android:layout_marginTop="10dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_location_on_black_24dp"/>
+    <ImageView
+        android:padding="2dp"
+        android:layout_width="35dp"
+        android:layout_gravity="start"
+        android:layout_height="35dp"
+        android:layout_marginTop="43dp"
+        android:src="@drawable/add_offer_new"
+        />
+    <ImageView
+        android:padding="2dp"
+        android:layout_width="35dp"
+        android:layout_gravity="start"
+        android:layout_height="35dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/offer_info_new"
+        />
 </android.support.design.widget.CoordinatorLayout>
