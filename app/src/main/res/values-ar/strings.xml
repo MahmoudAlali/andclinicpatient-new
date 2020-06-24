@@ -541,6 +541,7 @@
     <string name="next">التالي</string>
     <string name="searchLoc">ادخلي عنوان أو منطقة</string>
     <string name="age">العمر</string>
+    <string name="select_patient">اختر المريض/ة</string>
     <string name="discountPrcnt">نسبة الحسم</string>
     <string name="ClientDetails">تفاصيل العميلة</string>
     <string name="priceRange">مجال السعر</string>
@@ -893,5 +894,6 @@
     <string name="success_add_follower">تمت إضافة المرافق بنجاح</string>
     <string name="success_update_follower">تم تعديل بيانات المرافق بنجاح</string>
     <string name="follower_exist">هذا الشخص موجود مسبقاً</string>
+    <string name="cant_reserv_yourself">لا يمكنك حجز هذا العرض لنفسك لأن بعض بياناتك الشخصية لا تتوافق مع بيانات الفئة المخصص لها العرض</string>
 
 </resources>

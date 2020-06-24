@@ -7,6 +7,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.Activities.Services;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class GroupBookingModel {
     TextView appointmentTime;
     CheckBox isCurrentUser;
      ArrayList<ServiceItems> allDoctors=new ArrayList<>();
+     SearchableSpinner clientNameSearchable;
 
 
 
@@ -41,9 +43,9 @@ public class GroupBookingModel {
         this.appointmentTime=appointmentTime;
 
     }
-    public GroupBookingModel(AutoCompleteTextView clientName, EditText ageRange, Spinner genderSpinner, Spinner relationSpinner, Spinner doctorName, Spinner doctorSpeciality, TextView appointmentTime,
-                              EditText medicalFileNumber , EditText description, ArrayList<ClientServiceDataModel> servicesModels, CheckBox isCurrentUser, ArrayList<ServiceItems> allDoctors ) {
-        this.clientName = clientName;
+    public GroupBookingModel(SearchableSpinner clientName, EditText ageRange, Spinner genderSpinner, Spinner relationSpinner, Spinner doctorName, Spinner doctorSpeciality, TextView appointmentTime,
+                             EditText medicalFileNumber , EditText description, ArrayList<ClientServiceDataModel> servicesModels, CheckBox isCurrentUser, ArrayList<ServiceItems> allDoctors ) {
+        this.clientNameSearchable = clientName;
         this.ageRange = ageRange;
         this.servicesModels = servicesModels;
         this.genderSpinner=genderSpinner;
@@ -192,5 +194,9 @@ public class GroupBookingModel {
 
     public ArrayList<ServiceItems> getAllDoctors() {
         return allDoctors;
+    }
+
+    public SearchableSpinner getClientNameSearchable() {
+        return clientNameSearchable;
     }
 }

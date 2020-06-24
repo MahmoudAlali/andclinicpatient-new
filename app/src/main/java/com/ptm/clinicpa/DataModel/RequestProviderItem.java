@@ -7,7 +7,8 @@ public class RequestProviderItem {
 
     ArrayList<String> featuresIds = new ArrayList<>();
     String is_fav_center,is_fav_doctor,gender;
-    public RequestProviderItem(String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar ,String healthCntr_id,String gender,String is_fav_doctor,String is_fav_center)
+    String max_age,min_age,supported_gender;
+    public RequestProviderItem(String max_age,String min_age,String supported_gender,String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar ,String healthCntr_id,String gender,String is_fav_doctor,String is_fav_center)
     {
         this.sup_id=sup_id;
         this.sup_name=sup_name;
@@ -27,6 +28,9 @@ public class RequestProviderItem {
         this.gender=gender;
         this.is_fav_center=is_fav_center;
         this.is_fav_doctor=is_fav_doctor;
+        this.max_age=max_age;
+        this.min_age=min_age;
+        this.supported_gender=supported_gender;
     }
 
     public RequestProviderItem(String sup_id,String logo_id,String rating,String bdb_booking_period,String bdb_loc_lat,String bdb_loc_long,String healthCntr ,String healthCntr_ar,String healthCntr_id,String is_fav_center,ArrayList featuresIds)
@@ -157,5 +161,17 @@ public class RequestProviderItem {
 
     public ArrayList<String> getFeaturesIds() {
         return featuresIds;
+    }
+
+    public String getSupported_gender() {
+        return supported_gender;
+    }
+
+    public String getMax_age() {
+        return max_age;
+    }
+
+    public String getMin_age() {
+        return min_age;
     }
 }

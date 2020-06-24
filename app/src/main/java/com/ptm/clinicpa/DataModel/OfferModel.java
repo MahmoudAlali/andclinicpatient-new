@@ -129,9 +129,14 @@ public class OfferModel {
         this.sersup_ids = sersup_ids;
         this.bdb_offer_place= bdb_offer_place;
     }
-    public OfferModel(String bdb_pack_code, String health_center_id,String health_center_name_ar,String health_center_name_en,String bdb_doctor_name,
+    String doctor_id;
+    public OfferModel(String doctor_id,String bdb_pack_code, String health_center_id,String health_center_name_ar,String health_center_name_en,String bdb_doctor_name,
                       String totalRating_to_Sup, String service_count,
-                      String is_fav_doctor,String is_fav_center, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice, String discount,String distance,String latitude,String longitude, String bdb_offer_status, String bdb_offer_type, String bdb_is_journey_on, String bdb_is_old_on,String bdb_offer_place,String bdb_logo_id, ArrayList<SupIdClass> sersup_ids,String minAge,String maxAge,String supported_gender,String specialization_ar,String specialization_en) {
+                      String is_fav_doctor,String is_fav_center, String bdb_offer_start, String bdb_offer_end, String num_of_times, String oldPrice, String newPrice,
+                      String discount,String distance,String latitude,String longitude,
+                      String bdb_offer_status, String bdb_offer_type, String bdb_is_journey_on,
+                      String bdb_is_old_on,String bdb_offer_place,String bdb_logo_id,
+                      ArrayList<SupIdClass> sersup_ids,String minAge,String maxAge,String supported_gender,String specialization_ar,String specialization_en) {
         this.bdb_pack_code = bdb_pack_code;
         this.health_center_id = health_center_id;
         this.health_center_name_ar = health_center_name_ar;
@@ -162,6 +167,7 @@ public class OfferModel {
         this.specialization_ar= specialization_ar;
         this.specialization_en= specialization_en;
         this.supported_gender= supported_gender;
+        this.doctor_id= doctor_id;
     }
     public OfferModel(String bdb_pack_code,String bdb_doctor_name,String bdb_offer_start, String bdb_offer_end,  String bdb_offer_type, String bdb_is_journey_on, String bdb_is_old_on,String bdb_offer_place, ArrayList<SupIdClass> sersup_ids,String minAge,String maxAge,String supported_gender,String specialization_ar,String specialization_en) {
         this.bdb_pack_code = bdb_pack_code;
@@ -405,6 +411,10 @@ public class OfferModel {
 
     public String getSupported_gender() {
         return supported_gender;
+    }
+
+    public String getDoctor_id() {
+        return doctor_id;
     }
 
     public static class SupIdClass{

@@ -32,6 +32,7 @@ import com.ptm.clinicpa.DataModel.GroupBookingModel;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.freeBookingFragment;
 import com.ptm.clinicpa.R;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import static com.ptm.clinicpa.Activities.AddRelativeActivity.relativeSpinner;
 import static com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
 
 public class CreateRequestActivity extends AppCompatActivity {
@@ -49,6 +51,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static Context context;
     public static LinearLayout show_clients,servicesLayout;
     public static ArrayList<String> supplierServicesNames=new ArrayList();
+    public static ArrayList<String> agesList=new ArrayList();
     public static ArrayList<ClientServiceDataModel> supplierServices=new ArrayList();
     public static ArrayList<GroupBookingModel> clientsArrayList=new ArrayList();
     public static ArrayList<ClientServiceDataModel> servicesModels=new ArrayList<>();
@@ -58,18 +61,23 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static String is_group_booking="";
     public  String postdata;
     public static String sup_id,pack_code,latNum,longNum;
-    public static Spinner /*hourSpinner,minutesSpinner,*/relativeSpinner/*ageSpinner*/,genderSpinner,servicesSpinner;
+    public static Spinner /*hourSpinner,minutesSpinner,*//*relativeSpinner,genderSpinner,*/servicesSpinner;
 
+    //public static SearchableSpinner ageSpinner;
     public static boolean isOffer;
-    public  static HintArrayAdapter adapter1;
+    public  static HintArrayAdapter adapter1,adapterAge;
     public static CheckBox personalReserv;
-    public static EditText phoneNumber,ClientName,description,healthFileNum,ageRange;
+    public static EditText phoneNumber,ClientName,description,healthFileNum;
     int startWorkHour,startWorkMinutes;
     public static LinearLayout adding_service_layout;
+    public static String age,gender,relation,health_record,client_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_request);
+        context=this;
+
+        health_record="";
 //        --- init arrays----------
         supplierServicesNames.clear();
         supplierServices.clear();
@@ -77,6 +85,11 @@ public class CreateRequestActivity extends AppCompatActivity {
         clientsViewData.clear();
 //        ---------------------------------
 
+        age =getIntent().getStringExtra("age");
+        relation =getIntent().getStringExtra("relation");
+        gender =getIntent().getStringExtra("gender");
+        health_record =getIntent().getStringExtra("health_record");
+        client_name =getIntent().getStringExtra("client_name");
 
 
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -86,24 +99,28 @@ public class CreateRequestActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        addNewClient=findViewById(R.id.add_new_client);
+        //addNewClient=findViewById(R.id.add_new_client);
         add_date=findViewById(R.id.add_date);
         next=findViewById(R.id.search);
         servicesLayout=findViewById(R.id.servicesLayout);
        // show_clients=findViewById(R.id.show_clients);
       /*  hourSpinner = findViewById(R.id.hour_from);
         minutesSpinner = findViewById(R.id.minutes_from);*/
-        ageRange = findViewById(R.id.age_range);
-        genderSpinner = findViewById(R.id.gender);
+       // ageSpinner = findViewById(R.id.age_range);
+       // genderSpinner = findViewById(R.id.gender);
         servicesSpinner = findViewById(R.id.add_service);
-        relativeSpinner = findViewById(R.id.relative);
-        personalReserv = findViewById(R.id.personalReserv);
-        phoneNumber = findViewById(R.id.phone_number);
+       // relativeSpinner = findViewById(R.id.relative);
+      //  personalReserv = findViewById(R.id.personalReserv);
+       // phoneNumber = findViewById(R.id.phone_number);
         ClientName = findViewById(R.id.client_name);
         description = findViewById(R.id.description);
-        healthFileNum = findViewById(R.id.healthNum);
+      //  healthFileNum = findViewById(R.id.healthNum);
         start_time=findViewById(R.id.start_time);
+      //  ageSpinner.setTitle(context.getString(R.string.age));
 
+        ClientName.setText(client_name);
+        ClientName.setEnabled(false);
+        servicesModels.clear();
         sup_id = getIntent().getStringExtra("sup_id");
         isOffer = getIntent().getBooleanExtra("is_offer",false);
         if(isOffer) {
@@ -112,7 +129,6 @@ public class CreateRequestActivity extends AppCompatActivity {
             longNum = getIntent().getStringExtra("longNum");
         }
 
-        context=this;
         if(!isOffer)
             APICall.freegetServiceNames(context,sup_id,freeBookingFragment.Place);
 
@@ -120,9 +136,8 @@ public class CreateRequestActivity extends AppCompatActivity {
         {
             servicesLayout.setVisibility(View.GONE);
             APICall.browseOneOffer(context,pack_code);
-
         }
-        personalReserv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+     /*   personalReserv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
@@ -130,11 +145,63 @@ public class CreateRequestActivity extends AppCompatActivity {
                     findViewById(R.id.relativesLayout).setVisibility(View.GONE);
                     phoneNumber.setText(BeautyMainPage.client_number);
                     ClientName.setText(BeautyMainPage.client_name);
-                    ageRange.setText(BeautyMainPage.bdb_old);
-                    if(BeautyMainPage.client_gender.equals("0"))
-                        genderSpinner.setSelection(1);
+                    if(isOffer)
+                    {
+                        if(BeautyMainPage.client_gender.equals(APICall.offerBrowse.getSupported_gender())||APICall.offerBrowse.getSupported_gender().equals("2"))
+                        {
+                            if(BeautyMainPage.client_gender.equals("0"))
+                                genderSpinner.setSelection(1);
+                            else
+                                genderSpinner.setSelection(2);
+
+                            int age=Integer.parseInt(BeautyMainPage.bdb_old);
+                          //  ageSpinner.setSelection(age+1);
+                            String search="";
+                            if(age==0)
+                            {
+                                search=context.getString(R.string.lessThanYear);
+                            }
+                            else if(age==1)
+                                search=context.getString(R.string.oneYear);
+                            else if(age==2)
+                                search=context.getString(R.string.twoYears);
+                            else
+                            {
+                                search=age+" "+context.getString(R.string.years);
+                            }
+                            int index=-1;
+                            for (int i=0;i<agesList.size();i++
+                                 ) {
+                                if(agesList.get(i).equals(search))
+                                {
+                                    index=i;
+                                    break;
+                                }
+                            }
+                            if(index!=-1)
+                                ageSpinner.setSelection(index);
+                            else
+                                APICall.showSweetDialog(context,R.string.cant_reserv_yourself);
+
+
+
+                        }
+                        else
+                        {
+                            APICall.showSweetDialog(context,R.string.cant_reserv_yourself);
+                        }
+
+                    }
                     else
-                        genderSpinner.setSelection(2);
+                    {
+                        int age=Integer.parseInt(BeautyMainPage.bdb_old);
+                        ageSpinner.setSelection(age+1);
+                        if(BeautyMainPage.client_gender.equals("0"))
+                            genderSpinner.setSelection(1);
+                        else
+                            genderSpinner.setSelection(2);
+                    }
+
 
                 }
                 else
@@ -143,14 +210,14 @@ public class CreateRequestActivity extends AppCompatActivity {
                     phoneNumber.setText("");
                     ClientName.setText("");
                     genderSpinner.setSelection(0);
-                    ageRange.setText("");
+                    ageSpinner.setSelection(0);
 
 
 
 
                 }
             }
-        });
+        });*/
         ArrayAdapter adapter = new HintArrayAdapter(this, 0);
         adapter.addAll(Arrays.asList(getResources().getStringArray(R.array.hours)));
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
@@ -169,16 +236,16 @@ public class CreateRequestActivity extends AppCompatActivity {
         ageAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ageSpinner.setAdapter(ageAdapter);
 */
-        ArrayAdapter relativeAdapter = new HintArrayAdapter(this, 0);
+       /* ArrayAdapter relativeAdapter = new HintArrayAdapter(this, 0);
         relativeAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.relativesType)));
-        relativeAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
-        relativeSpinner.setAdapter(relativeAdapter);
+        relativeAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);*/
+        //relativeSpinner.setAdapter(relativeAdapter);
 
-        ArrayAdapter genderAdapter = new HintArrayAdapter(this, 0);
+      /*  ArrayAdapter genderAdapter = new HintArrayAdapter(this, 0);
         genderAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.gender)));
         genderAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         genderSpinner.setAdapter(genderAdapter);
-
+*/
        /* ArrayAdapter adapter1 = new ArrayAdapter(context, R.layout.simple_spinner_item_layout_v1, supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         servicesSpinner.setAdapter(adapter1);
@@ -191,6 +258,23 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         /*supplierServicesNames.clear();
         supplierServicesNames.add(getResources().getString(R.string.select_service));*/
+      /*  agesList.clear();
+        agesList.add(context.getString(R.string.age));
+        agesList.add(context.getString(R.string.lessThanYear));
+        agesList.add(context.getString(R.string.oneYear));
+        agesList.add(context.getString(R.string.twoYears));
+
+        for (int i=3;i<101;i++)
+        {
+            String a=i+" "+context.getString(R.string.twoYears);
+            agesList.add(a);
+        }
+        adapterAge=new HintArrayAdapter(context, 0);
+        adapterAge.addAll(agesList);
+        adapterAge.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        ageSpinner.setAdapter(adapterAge);
+*/
+
         adapter1=new HintArrayAdapter(context, 0);
         adapter1.addAll(supplierServicesNames);
         adapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
@@ -348,44 +432,34 @@ public class CreateRequestActivity extends AppCompatActivity {
 
                 }
 */
-                if (!APICall.checkNumber(phoneNumber.getText().toString(), context)) {
+               /* if (!APICall.checkNumber(phoneNumber.getText().toString(), context)) {
                     check = false;
                 } else if (ClientName.getText().toString().length() == 0) {
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_c_name), false);
                     check = false;
 
-                } else if (ageRange.getText().length() == 0){
+                } else if (ageSpinner.getSelectedItemPosition() == 0){
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_range), false);
                     check = false;
 
-                }
-                else if (Integer.parseInt(ageRange.getText().toString())<0 ||Integer.parseInt(ageRange.getText().toString())>100){
+                }*/
+                /*else if (Integer.parseInt(ageRange.getText().toString())<0 ||Integer.parseInt(ageRange.getText().toString())>100){
                     APICall.showSweetDialog(context,getResources().getString(R.string.enter_age_btwn_range), false);
                     check = false;
 
-                }
-                else if (genderSpinner.getSelectedItemPosition() == 0) {
+                }*/
+               /* else if (genderSpinner.getSelectedItemPosition() == 0) {
                     APICall.showSweetDialog(context, getResources().getString(R.string.enter_gender), false);
                     check = false;
-                }/*else if (servicesModels.size() == 0) {
+                }*//*else if (servicesModels.size() == 0) {
                     APICall.showSweetDialog(context, getResources().getString(R.string.add_atleast_one_service), false);
                     check = false;
-                }*/
-
-                if (check){
-                    if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
-                        APICall.showSweetDialog(context,getResources().getString(R.string.select_date_of_booking)
-                                , false);
-                        check = false;
-                    }/* else if (clientsArrayList.size() == 0) {
-                        APICall.showSweetDialog(context,getResources().getString(R.string.add_atleast_one_client)
-                                , false);
-                        check = false;
-                    }*/
+                }*//*
+*/
+                if (add_date.getText().toString().equals(getResources().getString(R.string.select_date))) {
+                    APICall.showSweetDialog(context,getResources().getString(R.string.select_date_of_booking), false);
+                    check = false;
                 }
-
-
-
 
                 if (check) {
                     if(freeBookingFragment.filterType.equals("0")||isOffer)//offer
@@ -421,7 +495,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*/
                  //   startActivity(intent);
                     if(!isOffer)
-                    APICall.addBookingRequest2(freeBookingFragment.lat+"",freeBookingFragment.lng+"",freeBookingFragment.Place+"",add_date.getText().toString(),CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+                    APICall.addBookingRequest2("",freeBookingFragment.lat+"",freeBookingFragment.lng+"",freeBookingFragment.Place+"",add_date.getText().toString(),CreateRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
 
                     else {
                         String place;
@@ -429,7 +503,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                             place="center";
                         else
                             place="home";
-                        APICall.addBookingRequest2(latNum, longNum,place, add_date.getText().toString(), CreateRequestActivity.is_group_booking, getClients(1), context, description.getText().toString());
+                        APICall.addBookingRequest2(APICall.offerBrowse.getBdb_pack_code(),latNum, longNum,place, add_date.getText().toString(), CreateRequestActivity.is_group_booking, getClients(1), context, description.getText().toString());
                     }
 
 //                    onBackPressed();
@@ -587,48 +661,45 @@ public class CreateRequestActivity extends AppCompatActivity {
     JSONArray clients =new JSONArray();
     try {
 
-        for (int i=0;i<CreateRequestActivity.clientsArrayList.size();i++) {
 
-
-        }
         JSONObject client = new JSONObject();
 
-        client.put("client_name",ClientName.getText().toString());
+        client.put("client_name",client_name);
        // client.put("client_phone",phoneNumber.getText().toString());
        // client.put("start_date",CreateRequestActivity.add_date.getText());
         client.put("doctor_id",sup_id);
-        if(healthFileNum.getText().toString().length()!=0)
-        {
-            client.put("health_record",healthFileNum.getText());
+        try {
+            if(!health_record.equals(""))
+            {
+                client.put("health_record",health_record);
+            }
         }
+        catch (Exception e)
+        {
+            Log.e("health_recordERR",e.getMessage());
+        }
+
         if(!start_time.getText().toString().equals("00:00:00"))
         {
             client.put("start_time",CreateRequestActivity.start_time.getText());
         }
-        if(personalReserv.isChecked())
+       /* if(personalReserv.isChecked())
         {
             client.put("gender",BeautyMainPage.client_gender);
             client.put("relation","0");
         }
-        else
+        else*/
         {
-            client.put("gender",genderSpinner.getSelectedItemPosition()-1);
-            client.put("relation",relativeSpinner.getSelectedItemPosition());
+            client.put("gender",gender);
+            client.put("relation",relation);
         }
-        String s = personalReserv.isChecked()?"1":"0";
+        String s = relation.equals("0")?"1":"0";
         client.put("is_current_user",s);
-        client.put("old",(ageRange.getText().toString()));
+        client.put("old",age);
         Log.e("rrrr","index-i");
 
         JSONArray services=new JSONArray() ;
-        //JSONObject effects=new JSONObject(effectsArr.get(i)) ;
-
-        // client.put("effect",effects);
-
-        //  Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
-
         for (int j = 0; j < servicesModels.size(); j++) {
-//                        Log.e("SIZE",""+GroupReservationFragment.clientsViewData.get(i).getServicesSelected().size());
             JSONObject servic = new JSONObject();
 
             if(!isOffer)
@@ -639,31 +710,12 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
         client.put("services",services);
 
-        String eff="";
         Log.e("index-i","index-i");
-            /*try {
-                eff=effectsArr.get(i);
-            }catch (Exception e){
-                e.printStackTrace();
-            }*/
-               /* if (CreateRequestActivity.clientsArrayList.size()==1){
-
-                    clients=clients+"],\"effect\":["+eff+"]}";
-                }else if (i==CreateRequestActivity.clientsArrayList.size()-1){
-                    clients=clients+"],\"effect\":["+eff+"]}";
-
-                }else {
-                    clients=clients+"],\"effect\":["+eff+"]},";
-
-                }*/
-
         clients.put(client);
     }catch (Exception e){
         e.printStackTrace();
         Log.e("err",e.getMessage());
     }
-    //clients=clients+"]";
-
     Log.e("clients",clients.toString());
     return clients;
 }
@@ -671,6 +723,60 @@ public static void showServices(String name_en,String name_ar,String serId,Strin
 {
     addLayout3(name_en,name_ar,serId,serSupId, adding_service_layout, servicesModels);
 
+}
+public static void setOffer()
+{
+    for (int i=0;i<APICall.offerBrowse.getSersup_ids().size();i++)
+    {
+        addLayout3(APICall.offerBrowse.getSersup_ids().get(i).getBdb_name(),
+                APICall.offerBrowse.getSersup_ids().get(i).getBdb_name_ar(),
+                APICall.offerBrowse.getSersup_ids().get(i).getBdb_ser_id(),
+                APICall.offerBrowse.getSersup_ids().get(i).getBdb_ser_sup_id(),
+                adding_service_layout,servicesModels);
+    }
+    //addLayout3(name_en,name_ar,serId,serSupId, adding_service_layout, servicesModels);
+  /*  if(APICall.offerBrowse.getSupported_gender().equals("0"))
+    {
+        genderSpinner.setSelection(1);
+    }
+    else if(APICall.offerBrowse.getSupported_gender().equals("1"))
+    {
+        genderSpinner.setSelection(2);
+    }
+    if(APICall.offerBrowse.getMaxAge().equals(APICall.offerBrowse.getMinAge()))
+    {
+        int l=Integer.parseInt(APICall.offerBrowse.getMaxAge());
+       ageSpinner.setSelection(l+1);
+       ageSpinner.setEnabled(false);
+    }
+    else
+    {
+        agesList.clear();
+        agesList.add(context.getString(R.string.age));
+        int maxAge=Integer.parseInt(APICall.offerBrowse.getMaxAge());
+
+        for (int i=1;i<=maxAge+1;i++)
+        {
+            if(i==1)
+            {
+                agesList.add(context.getString(R.string.lessThanYear));
+            }
+            else if(i==2)
+                agesList.add(context.getString(R.string.oneYear));
+            else if(i==3)
+                agesList.add(context.getString(R.string.twoYears));
+            else
+            {
+                String a=i-1+" "+context.getString(R.string.years);
+                agesList.add(a);
+            }
+        }
+        adapterAge=new HintArrayAdapter(context, 0);
+        adapterAge.addAll(agesList);
+        adapterAge.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
+        ageSpinner.setAdapter(adapterAge);
+    }
+*/
 }
 
 

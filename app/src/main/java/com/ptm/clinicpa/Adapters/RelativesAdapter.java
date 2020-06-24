@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.AddRelativeActivity;
+import com.ptm.clinicpa.Activities.CreateRequestActivity;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.DataModel.PatientDataModel;
 import com.ptm.clinicpa.R;
 
@@ -26,9 +28,12 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public static ArrayList<PatientDataModel> patientDataModels;
     public static Context context;
-    public RelativesAdapter(Context context, ArrayList<PatientDataModel> bookingAutomatedBrowseData, boolean isNew){
+    boolean isBooking,isOffer;
+    public RelativesAdapter(Context context, ArrayList<PatientDataModel> bookingAutomatedBrowseData, boolean isNew,boolean isOffer){
         this.context=context;
         this.patientDataModels=bookingAutomatedBrowseData;
+        isBooking=isNew;
+        this.isOffer=isOffer;
     }
     @NonNull
     @Override
@@ -57,6 +62,49 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             ((Item)viewHolder).age.setText(age);
 
+            if(isBooking)
+            {
+                ((Item)viewHolder).actions.setVisibility(View.GONE);
+                ((Item)viewHolder).item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                         Intent i = new Intent(context, CreateRequestActivity.class);
+                         i.putExtra("sup_id",RelativesActivity.sup_id);
+                         i.putExtra("age",patientDataModels.get(position).getBdb_old());
+                         i.putExtra("relation",patientDataModels.get(position).getBdb_relation());
+                         i.putExtra("gender",patientDataModels.get(position).getBdb_gender());
+                         i.putExtra("client_name",patientDataModels.get(position).getBdb_user_name());
+                         if(isOffer)
+                         {
+                             i.putExtra("is_offer",true);
+                             i.putExtra("pack_code",RelativesActivity.pack_code);
+                             i.putExtra("longNum",RelativesActivity.longNum);
+                             i.putExtra("latNum",RelativesActivity.latNum);
+                         }
+                        for (int j=0;j<patientDataModels.get(position).getRecords().size();j++)
+                        {
+                            if(RelativesActivity.center_id.equals(patientDataModels.get(position).getRecords().get(j).getHealth_center_id()))
+                                i.putExtra("health_record",patientDataModels.get(position).getBdb_health_record());
+
+                        }
+
+               // RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
+                context.startActivity(i);
+                    }
+                });
+                for (int i=0;i<patientDataModels.get(position).getRecords().size();i++)
+                {
+                    if(RelativesActivity.center_id.equals(patientDataModels.get(position).getRecords().get(i).getHealth_center_id()))
+                         addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record());
+                }
+            }
+            else
+            {
+                for (int i=0;i<patientDataModels.get(position).getRecords().size();i++)
+                {
+                    addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record());
+                }
+            }
             String gender =context.getString(R.string.gender);
             if(patientDataModels.get(position).getBdb_gender().equals("0"))
                 gender+=context.getString(R.string.male);
@@ -80,10 +128,6 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 relation=context.getString(R.string.me);
             ((Item)viewHolder).Relationship.setText(relation);
 
-            for (int i=0;i<patientDataModels.get(position).getRecords().size();i++)
-            {
-                addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record());
-            }
 
             ((Item)viewHolder).delete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -146,7 +190,7 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Space space;
 
         TextView  age;
-        LinearLayout myroot, actions;
+        LinearLayout myroot, actions,item;
 
         public Item(View itemView) {
             super(itemView);
@@ -159,6 +203,7 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             edit = itemView.findViewById(R.id.time);
             age = itemView.findViewById(R.id.patientName);
             actions = itemView.findViewById(R.id.actions);
+            item = itemView.findViewById(R.id.item);
 
         }
     }

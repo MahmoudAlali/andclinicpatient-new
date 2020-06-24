@@ -24,6 +24,7 @@ import com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptm.clinicpa.DataModel.BestOfferItem;
 import com.ptm.clinicpa.DataModel.DataOffer;
@@ -185,92 +186,31 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         e.printStackTrace();
                     }
 
-                    Intent i=new Intent(context, CreateRequestActivity.class);
+                   /* Intent i=new Intent(context, CreateRequestActivity.class);
                     i.putExtra("is_offer",true);
                     i.putExtra("sup_id",bestOfferItems.get(position).getProvider_id());
                     i.putExtra("pack_code",bestOfferItems.get(position).getPack_code());
-                    i.putExtra("longNum",Offers.Lat);
-                    i.putExtra("latNum",Offers.Long);
+                    i.putExtra("longNum",Offers.Long);
+                    i.putExtra("latNum",Offers.Lat);
+                    context.startActivity(i);*/
+
+                    Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
+                    i.putExtra("sup_id",bestOfferItems.get(position).getProvider_id());
+                    i.putExtra("center_id",bestOfferItems.get(position).getHealth_center_id());
+                    i.putExtra("isBooking",true);
+                    i.putExtra("is_offer",true);
+                    i.putExtra("pack_code",bestOfferItems.get(position).getPack_code());
+                    i.putExtra("longNum",Offers.Long);
+                    i.putExtra("latNum",Offers.Lat);
+                    i.putExtra("max_age",bestOfferItems.get(position).getMax_age());
+                    i.putExtra("min_age",bestOfferItems.get(position).getMin_age());
+                    i.putExtra("supported_gender",bestOfferItems.get(position).getSupported_gender());
+
                     context.startActivity(i);
 
-                    /*if (bestOfferItems.get(position).getOffer_type().equals("2")
-                            || bestOfferItems.get(position).getOffer_type().equals("5")){
-
-                        Intent intent=new Intent(context, MultiDateOfferBooking.class);
-                        intent.putExtra("postion",position);
-                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
-                        ((AppCompatActivity)context).startActivity(intent);
-
-                    }else if (bestOfferItems.get(position).getOffer_type().equals("1")
-                            || bestOfferItems.get(position).getOffer_type().equals("4")){
-                        Intent  intent=new Intent(context, SingleDateOfferBooking.class);
-                        intent.putExtra("postion",position);
-                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
-                        ((AppCompatActivity)context).startActivity(intent);
-                    }else if (bestOfferItems.get(position).getOffer_type().equals("3")
-                            || bestOfferItems.get(position).getOffer_type().equals("6")){
-
-                        Intent  intent=new Intent(context, SingleDateMultiClientOfferBooking.class);
-                        intent.putExtra("postion",position);
-                        intent.putExtra("offertype",bestOfferItems.get(position).getOffer_type());
-                        ((AppCompatActivity)context).startActivity(intent);
-                    }*/
-//            }
-//        });
-//                PopupMenu popup = new PopupMenu(context,((Item)holder).add_offer);
-//                ArrayList list=new ArrayList();
-//                list.add("Fixed Date Offer");
-//                list.add("Group Offer");
-//                list.add("Multi Date Offer");
-//                for(int i=0;i<list.size();i++){
-//                    popup.getMenu().add((CharSequence) list.get(i));
-//                }
-//
-//                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        if (item.getTitle().equals("Fixed Date Offer")){
-//                            fragment = new FixedDateOffersFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }else if (item.getTitle().equals("Group Offer")){
-//                            fragment = new GroupOfferFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }else if (item.getTitle().equals("Multi Date Offer")){
-//                            fragment = new MultiDateOfferFragment();
-//                            fm = ((AppCompatActivity)context).getFragmentManager();
-//                            fragmentTransaction = fm.beginTransaction();
-//                            fragmentTransaction.replace(R.id.fragment, fragment);
-//                            fragmentTransaction.commit();
-//                        }
-//                        return false;
-//                    }
-//                });
-//                popup.show();
                 }
             });
 
-           /* if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
-                    ((Item) holder).itemBackground.setBackgroundResource(backgrounds[position%5]);
-            else
-                ((Item) holder).itemBackground.setBackgroundResource(backgroundsAr[position%5]);
-*/
-       //     ((Item) holder).offer_type.setBackgroundResource(offerBackGrounds[position%5]);
-            /*if(OffersAdapter.logoImages.containsKey(bestOfferItems.get(position).getProvider_logo_id()))
-            {
-                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                       // logoImg.setImageBitmap(OffersAdapter.logoImages.get(LogoId));
-                    }
-                });
-            }
-            else*/
             APICall.getSalonLogoDltWhenEmpty(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
             if (bestOfferItems.get(position).getOffer_type().equals("1") ) {// individual

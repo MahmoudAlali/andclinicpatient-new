@@ -66,6 +66,8 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
     public static String salonFilterOld="",distanceFilterOld="",locationFilterOld="",clinicRateFilterOld="",locationFilterOld2="",dateFilterOld="",priceFilterOld="",serviceFilterOld="";
     public static String salonFilterName="",distanceFilterName="",locationFilterName="",clinicRateFilterName="",dateFilterName="",priceFilterName="",serviceFilterName="",specialityFilterName="";
 
+    public static String  filterMyLocationLngNum="",
+    filterMyLocationLatNum="";
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         APICall.offers.clear();
@@ -73,6 +75,8 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
         // filter =view.findViewById(R.id.filter);
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
 
+        filterMyLocationLatNum=Offers.Lat;
+        filterMyLocationLngNum=Offers.Long;
 //        providersAdapter.notifyDataSetChanged();
         //---------------------call API for Services and get items-------------
 

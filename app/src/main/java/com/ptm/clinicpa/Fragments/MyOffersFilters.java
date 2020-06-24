@@ -65,7 +65,8 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
             filterMyLocationLat="",
             filterMyLocationLatNoComa="",
             filterMyLocationLng="",
-            filterClinicRate="";
+
+    filterClinicRate="";
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
     Fragment fragment;
@@ -178,6 +179,8 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
                         Log.e("OffersFilters",lat+":"+lng);
                         //APICall.setlocation(lat,lng);
                         filterMyLocationLat=",{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
+                        MyOffersFragment.filterMyLocationLatNum=lat+"";
+                        MyOffersFragment.filterMyLocationLngNum=lng+"";
                         filterMyLocationLatNoComa="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
                         filterMyLocationLng=",{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                     }
@@ -298,7 +301,8 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
                                         filterMyLocationLat=",{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
                                         filterMyLocationLatNoComa="{\"num\":34,\"value1\":"+lat+",\"value2\":0}";
                                         filterMyLocationLng=",{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
-
+                                        MyOffersFragment.filterMyLocationLatNum=lat+"";
+                                        MyOffersFragment.filterMyLocationLngNum=lng+"";
                                         clinicName.setText(getResources().getText(R.string.providerName));
                                         filterSupplierName="";
                                     }
@@ -337,6 +341,8 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
                                     filterMyLocationLng=",{\"num\":35,\"value1\":"+lng+",\"value2\":0}";
                                     clinicName.setText(getResources().getText(R.string.providerName));
                                     filterSupplierName="";
+                                    MyOffersFragment.filterMyLocationLatNum=lat+"";
+                                    MyOffersFragment.filterMyLocationLngNum=lng+"";
                                 }
                             }
                             mylocationId=item.getTitle().toString();

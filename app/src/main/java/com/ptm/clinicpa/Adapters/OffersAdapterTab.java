@@ -24,11 +24,13 @@ import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking;
 //import com.dcoret.beautyclient.Activities.SingleDateOfferBooking;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
 import com.ptm.clinicpa.Activities.TabTwo;
 import com.ptm.clinicpa.DataModel.DataOffer;
 import com.ptm.clinicpa.DataExample.OffersData;
 import com.ptm.clinicpa.DataModel.OfferModel;
+import com.ptm.clinicpa.Fragments.MyOffersFragment;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
@@ -262,34 +264,20 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((Item)holder).add_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
 
+                Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
+                i.putExtra("center_id",offers.get(position).getHealth_center_id());
+                i.putExtra("isBooking",true);
+                i.putExtra("is_offer",true);
+                i.putExtra("sup_id",offers.get(position).getDoctor_id());
+                i.putExtra("pack_code",offers.get(position).getBdb_pack_code());
+                i.putExtra("longNum", MyOffersFragment.filterMyLocationLngNum);
+                i.putExtra("latNum",MyOffersFragment.filterMyLocationLatNum);
+                i.putExtra("max_age",offers.get(position).getMaxAge());
+                i.putExtra("min_age",offers.get(position).getMinAge());
+                i.putExtra("supported_gender",offers.get(position).getSupported_gender());
 
-                BeautyMainPage.FRAGMENT_NAME="SERVICETABFRAGMENT";
-
-                if (offers.get(position).getBdb_offer_place().equals("0")){
-                    placePos=1;
-                }else if (offers.get(position).getBdb_offer_place().equals("1")){
-                    placePos=2;
-                }else if (offers.get(position).getBdb_offer_place().equals("2")){
-                    placePos=3;
-                }else if (offers.get(position).getBdb_offer_place().equals("3")){
-                    placePos=4;
-                }
-
-
-
-                if (offers.get(position).getBdb_offer_type().equals("2")
-                        || offers.get(position).getBdb_offer_type().equals("5")){
-
-                    Intent intent=new Intent(context, CreateRequestActivity.class);
-                    intent.putExtra("is_offer",true);
-                    //intent.putExtra("offertype",offers.get(position).getBdb_offer_type());
-                    ((AppCompatActivity)context).startActivity(intent);
-
-                }
-*/
-
+                context.startActivity(i);
             }
         });
     }

@@ -21,6 +21,7 @@ import com.ptm.clinicpa.Activities.CreateGroupRequestActivity;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.DataModel.DateClass;
 import com.ptm.clinicpa.DataModel.Location_Beauty;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
@@ -279,12 +280,23 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
             }
             else
             {
-                Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
+               /* Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
 
                 RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
                 Log.e("t.bdb_booking_period","is"+ RequestProvidersFragment.bdb_booking_period);
-                BeautyMainPage.context.startActivity(i);
+                BeautyMainPage.context.startActivity(i);*/
+                Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
+                i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
+                i.putExtra("center_id",itemArrayList.get(position).getHealthCntr_id());
+                i.putExtra("isBooking",true);
+                i.putExtra("max_age",itemArrayList.get(position).getMax_age());
+                i.putExtra("min_age",itemArrayList.get(position).getMin_age());
+                i.putExtra("supported_gender",itemArrayList.get(position).getSupported_gender());
+
+                RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
+                context.startActivity(i);
+
             }
         }
     });

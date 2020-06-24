@@ -165,8 +165,8 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         VCost.setText(c);
         requestedOnView.setText(requestedOn);
         rname.setText(reservationName);
-        int index =Integer.parseInt(catigoryVal);
-        categoryImg.setImageResource(categoryImages[index]);
+//        int index =Integer.parseInt(catigoryVal);
+   //     categoryImg.setImageResource(categoryImages[index]);
 //        rname.setText(reservationName);
 //
         if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))

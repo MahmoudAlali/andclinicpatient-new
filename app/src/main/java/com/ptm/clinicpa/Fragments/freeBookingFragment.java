@@ -360,16 +360,16 @@ public class freeBookingFragment extends Fragment implements LocationListener ,
                     }
 */
                 if (position==1) {
-                    filterGender = ",{\"num\":9,\"value1\":1}";
+                    filterGender = Filters.getString(Filters.PATIENT_GENDER,0+"");
                 }else if (position==2){
-                    filterGender = ",{\"num\":8,\"value1\":1}";
+                    filterGender =Filters.getString(Filters.PATIENT_GENDER,1+"");
 
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 //                Log.e("getCities", "http://clientapp.dcoret.com/api/auth/user/getCities");
-                filterServicePlace = "";
+                filterGender = "";
 
             }
         });

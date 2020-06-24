@@ -2772,6 +2772,7 @@ public class APICall {
                            String pack_code=pkg.getString("pack_code");
                            String health_center_en=pkg.getString("health_center_name_en");
                            String health_center_ar=pkg.getString("health_center_name_ar");
+                           String health_center_id=pkg.getString("health_center_id");
                            String speciality_ar=pkg.getString("specialization_ar");
                            String speciality_en=pkg.getString("specialization_en");
                            String start_date=pkg.getString("start_date");
@@ -2780,6 +2781,9 @@ public class APICall {
                            String service_count=pkg.getString("service count");
                            String provider_name=pkg.getString("doctor_name");
                            String provider_logo_id=pkg.getString("center_logo_id");
+                           String min_age=pkg.getString("min_suported_old");
+                           String max_age=pkg.getString("max_supported_old");
+                           String supported_gender=pkg.getString("supported_gender");
                            String old_price=pkg.getString("old_price");
                            String bdb_booking_period=pkg.getString("bdb_booking_period");
                            String deposit_percentage="";
@@ -2795,7 +2799,7 @@ public class APICall {
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer,health_center_ar,health_center_en,speciality_ar,speciality_en));
+                        Offers.bestOfferItems.add(new BestOfferItem(health_center_id,pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer,health_center_ar,health_center_en,speciality_ar,speciality_en,max_age,min_age,supported_gender));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -2995,15 +2999,15 @@ public class APICall {
                                 String bdb_time = object.getString("bdb_time");
                                 Log.e("supIdClasses", bdb_ser_id + "hgf adding ");
                                 supIdClasses.add(new OfferModel.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,bdb_name, bdb_ser_id,bdb_ext_pack_code,bdb_time));
-                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
-                                        CreateRequestActivity.showServices(bdb_ser_name_en,bdb_name,bdb_ser_id,bdb_ser_sup_id);
-                                    }
-                                });
-                            }
 
+                            }
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
+                                    CreateRequestActivity.setOffer();
+                                }
+                            });
                             offerBrowse=new OfferModel( bdb_pack_code, bdb_doctor_name, bdb_offer_start,  bdb_offer_end,   bdb_offer_type,  bdb_is_journey_on,  "", bdb_offer_place, supIdClasses,min_suported_old,max_supported_old, supported_gender, specialization_ar, specialization_en) ;
                         }
                     }
@@ -7175,6 +7179,7 @@ public class APICall {
                                             supported_gender=jarray.getString("supported_gender"),
                                             min_suported_old=jarray.getString("min_suported_old"),
                                             max_supported_old=jarray.getString("max_supported_old"),
+                                            doctor_id=jarray.getString("doctor_id"),
                                             totalRating_to_Sup=jarray.getString("totalRating_to_Sup"),
                                             service_count=jarray.getString("service count"),
                                             is_fav_center=jarray.getString("is_fav_center"),
@@ -7215,25 +7220,12 @@ public class APICall {
                                         TabTwo.arrayList.add(dof);
 
                                     }*/
-                                    offers.add(new OfferModel( bdb_pack_code, health_center_id, health_center_name_ar, health_center_name_en, bdb_doctor_name,
+                                    offers.add(new OfferModel(doctor_id, bdb_pack_code, health_center_id, health_center_name_ar, health_center_name_en, bdb_doctor_name,
                                              totalRating_to_Sup,  service_count,
                                              is_fav_doctor, is_fav_center,  bdb_offer_start,  bdb_offer_end,  num_of_times,  oldPrice,  newPrice,  discount,
                                             distance, latitude, longitude,  bdb_offer_status,
                                             bdb_offer_type,  bdb_is_journey_on,  bdb_is_old_on, bdb_offer_place,
                                              bdb_logo_id,  supIdClasses,min_suported_old,max_supported_old,supported_gender,specialization_ar,specialization_en));
-                                    for (int j=0;j<supInfo.length();j++){
-                                        JSONObject info=supInfo.getJSONObject(j);
-                                        String name=info.getString("name");
-                                        String id=info.getString("id");
-
-                                        String address=info.getString("address");
-
-//                                        String bdb_loc_lat=info.getString("latitude");
-//                                        String bdb_loc_long=info.getString("longitude");
-                                        //MyOffersFragment.supInfoList.add(new SupInfoClass(name,id,address,"",""));
-
-//                                        ServicesTabsFragment.supInfoList.add(new SupInfoClass(name,id,address));
-                                    }
 
                                 }
                                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -30962,7 +30954,7 @@ public class APICall {
             @Override
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
-                Log.e("TAG123", mMessage);
+                Log.e("searchDoctors", mMessage);
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -31003,6 +30995,9 @@ public class APICall {
                                 for (int i=0;i<suppliers.length();i++){
                                     JSONObject jarray = suppliers.getJSONObject(i);
                                     String sup_id=jarray.getString("sup_id");
+                                    String min_age=jarray.getString("min_age");
+                                    String max_age=jarray.getString("max_age");
+                                    String supported_gender=jarray.getString("supported_gender");
                                     String bdb_has_experience_cer=jarray.getString("bdb_has_certificate");
                                     String bdb_has_health_cer=jarray.getString("bdb_has_health_cer");
                                     String sup_name=jarray.getString("sup_name"),
@@ -31021,7 +31016,7 @@ public class APICall {
                                     String is_fav_doctor=jarray.getString("is_fav_doctor");
                                     String is_fav_center=jarray.getString("is_fav_center");
 
-                                    RequestProviderItem provider = new RequestProviderItem(sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"",bdb_has_experience_cer,bdb_has_health_cer,health_center_en,health_center_ar,specialization_en,specialization_ar,health_center_id,gender,is_fav_doctor,is_fav_center);
+                                    RequestProviderItem provider = new RequestProviderItem(max_age,min_age,supported_gender,sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"",bdb_has_experience_cer,bdb_has_health_cer,health_center_en,health_center_ar,specialization_en,specialization_ar,health_center_id,gender,is_fav_doctor,is_fav_center);
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -31715,7 +31710,7 @@ Log.e("ERRR",e.getMessage());
         Log.d("MessageResponse",mMessage);
         return mMessage;
     }
-    public  static  String  addBookingRequest2(String loc_lat, String loc_long, String booking_place, String date,
+    public  static  String  addBookingRequest2(String bdb_pack_code,String loc_lat, String loc_long, String booking_place, String date,
                                               String is_group_booking , final JSONArray clients, final Context context,String description)
     {
        /* RequestProvidersFragment.providerItems.clear();
@@ -31764,6 +31759,8 @@ Log.e("ERRR",e.getMessage());
                 postdata.put("loc_lat",loc_lat);
             if(!loc_long.equals(""))
                 postdata.put("loc_long",loc_long);
+            if(!bdb_pack_code.equals(""))
+                postdata.put("bdb_pack_code",bdb_pack_code);
             /*if(!sup_id.equals(""))
                 postdata.put("doctor_id",sup_id);*/
             postdata.put("booking_place",booking_place);
@@ -33151,7 +33148,7 @@ Log.e("ERRR",e.getMessage());
                     if (response_code.equals("191"))
                     {
                         JSONObject data2=j.getJSONObject("data");
-                        String auth_user_health_record=j.getString("auth_user_health_record");
+                        String auth_user_health_record=data2.getString("auth_user_health_record");
                         CreateGroupRequestActivity.userHealthRecord=auth_user_health_record;
                         JSONArray data=data2.getJSONArray("relation");
                         for (int i=0;i<data.length();i++){
@@ -33338,6 +33335,190 @@ Log.e("ERRR",e.getMessage());
                             @Override
                             public void run() {
 RelativesActivity.relativesAdapter.notifyDataSetChanged();                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else if(response_code.equals("206"))
+                    {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showSweetDialog(context,R.string.no_followers);
+                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });                    }
+                    else
+                    {
+                        showUnexpectedErrMsg(context);
+
+                    }
+
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.e("ERR",je.getMessage());
+                            showUnexpectedErrMsg(context);
+                            // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            }
+
+        });
+        //        Log.d("MessageResponse",mMessage);
+    }
+
+    public  static  void  getFollowersForBooking(final Context context, final int maxAge, final int minAge, final String supportedGender){
+
+        allRelativesList.clear();
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showDialog(context);
+////                ReservationFragment.pullToRefresh.setRefreshing(true);
+//               pd.show();
+            }
+        });
+
+        //        String url = API_PREFIX_NAME+"/api/service/Service";
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            //  postdata.put("health_center_id",health_center_id);
+        }
+        catch (Exception e)
+        {
+
+        }
+        Log.e("getFollowers", postdata.toString());
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/follower/getFollowers")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(context))
+                //                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijg5MzY2Yjk1NTM3NTg4ZjRhYTdlZTVmOTdlODY0MGQzOGQ4NWI4NTI0M2Y5MjQ2ZWYzNGM3MmI1OTgxZmIzNmU4ZGI3NWY4OTNlOTQxNzVjIn0.eyJhdWQiOiI5IiwianRpIjoiODkzNjZiOTU1Mzc1ODhmNGFhN2VlNWY5N2U4NjQwZDM4ZDg1Yjg1MjQzZjkyNDZlZjM0YzcyYjU5ODFmYjM2ZThkYjc1Zjg5M2U5NDE3NWMiLCJpYXQiOjE1NjMzNTU2MTMsIm5iZiI6MTU2MzM1NTYxMywiZXhwIjoxNTk0OTc4MDEzLCJzdWIiOiIyNDEiLCJzY29wZXMiOltdfQ.KXJ_ee6Oy4-sSEDYF9TQqfBOwj6kWVjxoxXY6ygXMKmx3mc9kPz3grwy87PEsltszjKJeTW4Mn72mthRU4VSezsO8t7z2OKLt_SOWrgaptvvGS6S3eFj9BzOY1F6RYlfLmnCKUBEMem7joAYSNTBdy6KHDVZ3leOLAtkvyCquFQsoSL1IT1x_7m3WTedYivBPHcF99XU_dmNxDvdrWc6-0Ci28MTO2LaCVf3UEV4SA7tIkzrCBBEI35Wvpev9uKha46rRYg_MtFN8RYoMnwF-pbj92wmy-DvMrljCuStJ_K45v8N7Q_in9MwnQK0bAz5i8yDGdLqmsPF92hbaMRHE1nbS0WofUCtlu5_8BCXpIVIPJXGaQReeZA7IuQLF7X0hJf12oM_MRp6PeuDQRvB1iw1Gh9H5ZcCeX2WV8MQ8LxEF1RA_TBdGa1SPOqTINzbLllMFt69ni2v5SMatRijjnLd-Du_9CTnaHz9e2QEL7Pzf64wogQz2LzcQ0UkI2sCOcOHaZ4vpAwhPXgjZBux9fLNkO18Yksk3sppD-4FTwn6TQRKaOfD7fQRaSjky9m3hLBr2YV3Vg6rvlpun3nYFdG130mwhb3lBBzFLsmTdX-evobpUPFLP8h-Y7fNk7P8NMqxIpNRJQWTJbxNsVE4TWf_IOSppYEh_llNzPJ1d_k")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+//                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pd.dismiss();
+////                        ReservationFragment.pullToRefresh.setRefreshing(false);
+//                    }
+//                });
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("Token", gettoken(context));
+                Log.e("getFollowers", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+                        RelativesActivity.pullToRefresh.setRefreshing(false);
+                    }
+                });
+
+
+                try {
+                    JSONObject j=new JSONObject(mMessage);
+                    String success=j.getString("success");
+                    String response_code=j.getString("response_code");
+                    if (response_code.equals("207"))
+                    {
+                        /*JSONObject data2=j.getJSONObject("data");
+                        String auth_user_health_record=j.getString("auth_user_health_record");
+                        CreateGroupRequestActivity.userHealthRecord=auth_user_health_record;*/
+                        JSONArray data=j.getJSONArray("data");
+                        for (int i=0;i<data.length();i++){
+                            JSONObject jsonObject=data.getJSONObject(i);
+                            Log.e("ttttttttttt",jsonObject+"");
+
+                            String   bdb_user_name=jsonObject.getString("name");
+                            String   bdb_relation=jsonObject.getString("relation");
+                            String   bdb_gender=jsonObject.getString("gender");
+                            // String   bdb_health_record=jsonObject.getString("bdb_health_record");
+                            String   bdb_id=jsonObject.getString("id");
+                            String   bdb_old=jsonObject.getString("old");
+                            JSONArray records =jsonObject.getJSONArray("health_records");
+                            ArrayList<HealthCenterRecord> recordArrayList=new ArrayList<>();
+                            for (int l=0;l<records.length();l++)
+                            {
+                                JSONObject record=records.getJSONObject(l);
+                                Log.e("ttttttttttt",jsonObject+"");
+
+                                String   id=record.getString("id");
+                                String   health_record=record.getString("health_record");
+                                String   health_center_id=record.getString("health_center_id");
+                                String   health_center_ar=record.getString("health_center_name_ar");
+                                String   health_center_en=record.getString("health_center_name_en");
+                                recordArrayList.add(new HealthCenterRecord(id,health_center_id,health_record,health_center_ar,health_center_en));
+                            }
+
+                            int age =Integer.parseInt(bdb_old);
+                            if(age>=minAge && age<=maxAge)
+                            {
+                                if(bdb_gender.equals(supportedGender)||supportedGender.equals("2"))
+                                    allRelativesList.add(new PatientDataModel( bdb_id,bdb_gender,bdb_relation,bdb_user_name,bdb_old,recordArrayList));
+                            }
+                        }
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RelativesActivity.relativesAdapter.notifyDataSetChanged();                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -34306,7 +34487,7 @@ RelativesActivity.relativesAdapter.notifyDataSetChanged();                      
         });
         //        Log.d("MessageResponse",mMessage);
     }
-    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender, final ArrayAdapter adapter, final ArrayList<String> doctorNames, final ArrayList<ServiceItems> allDocs){
+    public  static  void  getDoctors(final Boolean isGroup, final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, String clinicIdfilter, String patientGender, final ArrayAdapter adapter, final ArrayList<String> doctorNames, final ArrayList<ServiceItems> allDocs,String age){
 
         allDoctors.clear();
         showDialog(context);
@@ -34320,6 +34501,8 @@ RelativesActivity.relativesAdapter.notifyDataSetChanged();                      
                 latFilter +longFilter+distanceFilter;
         if(!patientGender.equals(""))
             filter+=","+patientGender;
+        if(!age.equals(""))
+            filter+=","+age;
         if(!specialityFilter.equals(""))
         {
             filter+=","+specialityFilter;

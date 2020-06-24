@@ -731,6 +731,7 @@
 
     <string name="searchLoc">Enter your location or region</string>
     <string name="age">age</string>
+    <string name="select_patient">select patient</string>
     <string name="age2">age :</string>
     <string name="discountPrcnt">Discount percent</string>
     <string name="ClientDetails">Client details</string>
@@ -1042,5 +1043,6 @@
     <string name="success_add_follower">Companion added successfully</string>
     <string name="success_update_follower">Companion information updated successfully</string>
     <string name="follower_exist">This relative already exists</string>
+    <string name="cant_reserv_yourself">You can\'t reserve this offer for yourself because some of your personal information doesn\'t match the information required for the offer</string>
 
 </resources>

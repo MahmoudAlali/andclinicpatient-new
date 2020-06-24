@@ -283,7 +283,7 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
         if(isGroup)
             ( holder).addRequest.setVisibility(View.VISIBLE);
         else
-            ( holder).addRequest.setVisibility(View.INVISIBLE);
+            ( holder).addRequest.setVisibility(View.VISIBLE);
         ( holder).addRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

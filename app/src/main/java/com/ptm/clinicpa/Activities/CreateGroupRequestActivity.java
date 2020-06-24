@@ -163,7 +163,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                         check = false;
                         break;
                     } else*/
-                    if (clientsArrayList.get(i).getClientName().getText().toString().length() == 0) {
+                    if (clientsArrayList.get(i).getClientNameSearchable().getSelectedItemPosition() == 0) {
                         APICall.showSweetDialog(context,getResources().getString(R.string.enter_c_name), false);
                         check = false;
                         break;
@@ -248,7 +248,10 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     intent.putExtra("effects",geteffectclient(API.groupBookingModels));
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*//*
                     startActivity(intent);*/
-                    APICall.addGroupBookingRequest2(FreeGroupBooking.lat+"",FreeGroupBooking.lng+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,"");
+                    if(FreeGroupBooking.lat==0.0 || FreeGroupBooking.lng==0.0)
+                        APICall.addGroupBookingRequest2( Offers.Lat,Offers.Long, CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,"");
+                    else
+                        APICall.addGroupBookingRequest2(FreeGroupBooking.lat+"",FreeGroupBooking.lng+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,"");
 
 
 //                    onBackPressed();
@@ -270,7 +273,9 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
 
         ImageView delete =  layout2.findViewById(R.id.delete);
         final EditText cnumber=layout2.findViewById(R.id.phone_number);
-        final AutoCompleteTextView cname=layout2.findViewById(R.id.client_name);
+        final SearchableSpinner cname=layout2.findViewById(R.id.client_name);
+        cname.setTitle(context.getString(R.string.select_patient));
+       // cname.setse
         final LinearLayout adding_service_layout=layout2.findViewById(R.id.adding_service_layout);
         final EditText ageRange=layout2.findViewById(R.id.age_range);
         final Spinner addService=layout2.findViewById(R.id.add_service);
@@ -293,7 +298,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 {
                     layout2.findViewById(R.id.relativesLayout).setVisibility(View.GONE);
                    // phoneNumber.setText(BeautyMainPage.client_number);
-                    cname.setText(BeautyMainPage.client_name);
+                   // cname.setText(BeautyMainPage.client_name);
                     healthFileNum.setText(userHealthRecord);
                     ageRange.setText(BeautyMainPage.bdb_old);
                     if(BeautyMainPage.client_gender.equals("0"))
@@ -306,7 +311,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 {
                     layout2.findViewById(R.id.relativesLayout).setVisibility(View.VISIBLE);
                     //phoneNumber.setText("");
-                    cname.setText("");
+                  //  cname.setText("");
                     healthFileNum.setText("");
                     ageRange.setText("");
                     genderSpinner.setSelection(0);
@@ -334,7 +339,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         relativeAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         relativeSpinner.setAdapter(relativeAdapter);
 
-        ArrayAdapter genderAdapter = new HintArrayAdapter(context, 0);
+        final ArrayAdapter genderAdapter = new HintArrayAdapter(context, 0);
         genderAdapter.addAll(Arrays.asList(context.getResources().getStringArray(R.array.gender)));
         genderAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         genderSpinner.setAdapter(genderAdapter);
@@ -461,10 +466,11 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         doctorSpeciality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position!=0) {
+                if(position!=0 && cname.getSelectedItemPosition()!=0) {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
 
-                    APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs);
+                    String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
+                    APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs,filterAge);
 
                 }
             }
@@ -477,17 +483,19 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         });
 
 
-        if (relativesList.size()==0)
-            for (int i=0;i<APICall.allRelativesList.size();i++){
+        if (relativesList.size()==0) {
+            relativesList.add(context.getString(R.string.select_patient));
+            for (int i = 0; i < APICall.allRelativesList.size(); i++) {
                 relativesList.add(APICall.allRelativesList.get(i).getBdb_user_name());
             }
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_dropdown_item_1line, relativesList);
         cname.setAdapter(adapter);
-        cname.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        cname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("onItemSelected","Item "+position);
                 int index=relativesList.indexOf(parent.getItemAtPosition(position));
                 if(APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
@@ -497,20 +505,32 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(index).getBdb_relation()));
                 if(!APICall.allRelativesList.get(index).getBdb_health_record().equals("null"))
                     healthFileNum.setText(APICall.allRelativesList.get(index).getBdb_health_record());
-               /* if(APICall.allRelativesList.get(index).getBdb_old().equals("0"))
-                    ageRange.setText(R.string.lessThanYear);
-                else if(APICall.allRelativesList.get(index).getBdb_old().equals("1"))
-                    ageRange.setText(R.string.oneYear);
-                else if(APICall.allRelativesList.get(index).getBdb_old().equals("2"))
-                    ageRange.setText(R.string.twoYears);
-                else*/
                 {
                     String s=APICall.allRelativesList.get(index).getBdb_old();
                     ageRange.setText(s);
 
                 }
+                if( cname.getSelectedItemPosition()!=0) {
+                    String filterSpeciality="";
+                    if(doctorSpeciality.getSelectedItemPosition()!=0)
+                        filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(doctorSpeciality.getSelectedItemPosition() - 1).getBdb_ser_id());
+
+                    String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
+                    String filterGender=Filters.getString(Filters.PATIENT_GENDER,APICall.allRelativesList.get(index).getBdb_gender());
+                    String distance;
+                    if(freeBookingFragment.filterDistance.equals(""))
+                        distance="{\"num\":2,\"value1\":"+0+",\"value2\":"+10000+"}";
+                    else
+                        distance=freeBookingFragment.filterDistance;
+                    APICall.getDoctors(true, context, "", "", distance, filterSpeciality, "", filterGender,adapter3,docNames,allDocs,filterAge);
+
+                }
 
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -652,7 +672,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 JSONObject client = new JSONObject();
 
                 Log.e("Client1","11");
-                client.put("client_name",clientsArrayList.get(i).getClientName().getText().toString());
+                client.put("client_name",clientsArrayList.get(i).getClientNameSearchable().getSelectedItem().toString());
                // client.put("client_phone",clientsArrayList.get(i).getPhoneNumber().getText().toString());
                 if(clientsArrayList.get(i).getMedicalFileNumber().getText().toString().length()!=0)
                 {

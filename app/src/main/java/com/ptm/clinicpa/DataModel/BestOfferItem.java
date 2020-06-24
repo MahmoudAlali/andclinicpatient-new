@@ -9,7 +9,7 @@ public class BestOfferItem {
 //            "provider name": "صالون5",
 //            "sersup_ids"
 
-        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type,deposit_prcntg,health_center_ar,health_center_en;
+        String packages_count,pack_code,service_count,provider_name,old_price,new_price,total_discount,provider_logo_id,offer_type,deposit_prcntg,health_center_ar,health_center_en,health_center_id;
         JSONArray sersup_ids;
 
     public BestOfferItem(String pack_code, String service_count, String provider_name, JSONArray sersup_ids) {
@@ -54,8 +54,13 @@ public class BestOfferItem {
         this.provider_id=provider_id;
     }
     String bdb_booking_period,start_date,end_date;
-    String bdb_has_experience_cer,bdb_has_health_cer,speciality_ar,speciality_en;
-    public BestOfferItem( String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg,String bdb_has_experience_cer,String bdb_has_health_cer ,String health_center_ar,String health_center_en,String speciality_ar,String speciality_en) {
+    String bdb_has_experience_cer,bdb_has_health_cer,speciality_ar,speciality_en,max_age,min_age,supported_gender;
+    public BestOfferItem(String health_center_id, String pack_code,String provider_id, String service_count, String provider_name, String old_price, String new_price, String total_discount,JSONArray sersup_ids,String provider_logo_id,String offer_type,String bdb_booking_period,String start_date,String end_date,String deposit_prcntg,
+                         String bdb_has_experience_cer,String bdb_has_health_cer ,String health_center_ar,String health_center_en,String speciality_ar,String speciality_en,String max_age,String min_age,String supported_gender) {
+        this.supported_gender = supported_gender;
+        this.min_age = min_age;
+        this.max_age = max_age;
+        this.health_center_id = health_center_id;
         this.pack_code = pack_code;
         this.service_count = service_count;
         this.provider_name = provider_name;
@@ -216,5 +221,21 @@ public class BestOfferItem {
 
     public String getSpeciality_en() {
         return speciality_en;
+    }
+
+    public String getHealth_center_id() {
+        return health_center_id;
+    }
+
+    public String getMin_age() {
+        return min_age;
+    }
+
+    public String getMax_age() {
+        return max_age;
+    }
+
+    public String getSupported_gender() {
+        return supported_gender;
     }
 }

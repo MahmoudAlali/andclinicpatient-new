@@ -13,111 +13,8 @@
     <!--android:background="#000"-->
     <!--android:layout_marginBottom="5dp"-->
     <!--&gt;</View>-->
-<!--
-    <LinearLayout
-        android:layout_marginLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/phone_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:layout_weight="1"
-                    android:inputType="phone"
-                    android:background="@drawable/border_edit_text"
-                    android:gravity="center"
-
-                    android:hint="Phone Number" />
-
-                <ImageView
-                    android:id="@+id/delete"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_close_black_24dp" />
-
-            </LinearLayout>
-
-
-            <EditText
-
-                android:id="@+id/client_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/high_edit_text"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="10dp"
-                android:inputType="text"
-                android:background="@drawable/border_edit_text"
-                android:gravity="center"
-                android:hint="client name" />
-            &lt;!&ndash;<LinearLayout&ndash;&gt;
-            &lt;!&ndash;android:layout_gravity="center"&ndash;&gt;
-            &lt;!&ndash;android:gravity="center"&ndash;&gt;
-            &lt;!&ndash;android:background="@color/yellow"&ndash;&gt;
-            &lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;
-            &lt;!&ndash;android:layout_marginBottom="5dp"&ndash;&gt;
-            &lt;!&ndash;android:layout_height="@dimen/standard_30">&ndash;&gt;
-            &lt;!&ndash;<Spinner&ndash;&gt;
-            &lt;!&ndash;android:id="@+id/client_status"&ndash;&gt;
-            &lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;
-            &lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;
-            &lt;!&ndash;android:textAlignment="center"></Spinner>&ndash;&gt;
-            &lt;!&ndash;</LinearLayout>&ndash;&gt;
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_30"
-                android:layout_gravity="center"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="10dp"
-                android:background="#F0B5CA"
-                android:gravity="center">
-
-                <Spinner
-                    android:id="@+id/age_range"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Spinner>
-            </LinearLayout>
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/standard_30"
-                android:layout_gravity="center"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginBottom="7dp"
-                android:background="@color/gray"
-                android:gravity="center">
-
-                <Spinner
-                    android:id="@+id/add_service"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"></Spinner>
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
--->
     <CheckBox
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:id="@+id/personalReserv"
         android:layout_width="match_parent"
@@ -125,6 +22,52 @@
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
         android:text="@string/personalReserv"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/border_edit_text"
+
+            >
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                android:id="@+id/client_name"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/high_edit_text"
+
+                android:background="#F8F2F2"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:prompt="@string/select_patient"
+                android:gravity="center"
+                android:hint="@string/patient_name" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_close_black_24dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/doctorNameLayout"
@@ -256,6 +199,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -326,37 +270,10 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <AutoCompleteTextView
-
-                            android:id="@+id/client_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/high_edit_text"
-                            android:layout_marginLeft="2dp"
-                            android:layout_marginRight="2dp"
-                            android:inputType="text"
-                            android:layout_weight="1"
-                            android:background="@drawable/border_edit_text"
-                            android:gravity="center"
-                            android:hint="@string/patient_name" />
-
-                        <ImageView
-                            android:id="@+id/delete"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:src="@drawable/ic_close_black_24dp" />
-
-                    </LinearLayout>
 
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/relativesLayout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/standard_30"
@@ -374,6 +291,7 @@
                             android:layout_height="match_parent"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/standard_30"
                         android:layout_gravity="center"
@@ -393,6 +311,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/standard_30"
+                        android:visibility="gone"
                         android:layout_gravity="center"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
