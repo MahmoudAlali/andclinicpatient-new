@@ -6524,7 +6524,7 @@ public class APICall {
                 @Override
                 public void onResponse(Call call, okhttp3.Response response) throws IOException {
                     mMessage = response.body().string();
-                    Log.e("TAG1231", mMessage);
+                    Log.e("getDocOfHlthCntr", mMessage);
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -6551,6 +6551,8 @@ public class APICall {
                                     String bdb_id=info.getString("bdb_id");
                                     String bdb_name=info.getString("bdb_name");
                                     String bdb_gender=info.getString("bdb_gender");
+                                    String max_age=info.getString("max_age");
+                                    String min_age=info.getString("min_age");
                                     String bdb_extra_info=info.getString("bdb_extra_info");
 
                                     String bdb_supported_gender=info.getString("bdb_supported_gender");
@@ -6558,7 +6560,7 @@ public class APICall {
                                     String bdb_specialization_name_en=info.getString("bdb_specialization_name_en");
                                     String is_fav_doctor=info.getString("is_fav_doctor");
                                     MainProviderActivity.doctorsList.add(new DoctorDataModel(bdb_id,bdb_name,bdb_gender,bdb_extra_info,
-                                            bdb_supported_gender,bdb_specialization_name_ar,bdb_specialization_name_en,is_fav_doctor));
+                                            bdb_supported_gender,bdb_specialization_name_ar,bdb_specialization_name_en,is_fav_doctor,min_age,max_age));
 
                                 }
 

@@ -200,11 +200,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         layout=findViewById(R.id.fragment);
         menu = navigation.getMenu();
         sideMenu = sideNavBar.getMenu();
-        menu.findItem(R.id.services).setIcon(R.drawable.side_requests_icon);
-        menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
-        menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-        menu.findItem(R.id.centers).setIcon(R.drawable.services_grey);
-        menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+        menu.findItem(R.id.services).setIcon(R.drawable.appointments_grey);
+        menu.findItem(R.id.reservations).setIcon(R.drawable.orders_grey);
+        menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
+        menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
+        menu.findItem(R.id.main).setIcon(R.drawable.home_selected);
         navigation.setItemIconTintList(null);
         sideNavBar.setItemIconTintList(null);
 
@@ -321,9 +321,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
             Bundle bundle = new Bundle();
             bundle.putString("book_id", book_id);
-            menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
-            menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-            menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
+            menu.findItem(R.id.services).setIcon(R.drawable.appointments_grey);
+            menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
+            menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
             menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
             menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
             navigation.setSelectedItemId(R.id.reservations);
@@ -795,7 +795,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             APICall.sendFavorites(context,ListServicesFragment.getFavorites(APICall.itemArrayList));
 
         }else if (FRAGMENT_NAME.equals("PointsFragment")){
-            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+            menu.findItem(R.id.main).setIcon(R.drawable.home_selected);
             navigation.setSelectedItemId(R.id.main);
             fragment = new Offers();
             fm = getFragmentManager();
@@ -882,7 +882,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragmentTransaction.commitAllowingStateLoss();
 
         }else if (FRAGMENT_NAME.equals("SETTING")){
-            menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+            menu.findItem(R.id.main).setIcon(R.drawable.home_grey);
             navigation.setSelectedItemId(R.id.main);
             fragment = new Offers();
             fm = getFragmentManager();
@@ -1086,11 +1086,11 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
-                    menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_grey);
-                    menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-                    menu.findItem(R.id.centers).setIcon(R.drawable.services_grey);
-                    menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
+                    menu.findItem(R.id.services).setIcon(R.drawable.appointments_grey);
+                    menu.findItem(R.id.reservations).setIcon(R.drawable.orders_grey);
+                    menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
+                    menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
+                    menu.findItem(R.id.main).setIcon(R.drawable.home_grey);
 
                     switch (item.getItemId()) {
                         case R.id.services:
@@ -1100,7 +1100,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 RELOADAPP=false;
                                 startActivity(getIntent());
                             }else {
-                                menu.findItem(R.id.services).setIcon(R.drawable.services_selected);
+                                menu.findItem(R.id.services).setIcon(R.drawable.appointments_selected);
                                 fragment = new MyReservationFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
@@ -1116,7 +1116,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 RELOADAPP=false;
                                 startActivity(getIntent());
                             }else {
-                                menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
+                                menu.findItem(R.id.reservations).setIcon(R.drawable.orders_selected);
                                 FRAGMENT_NAME = "";
                                 fragment = new MyBookingRequestsFragment();
                                 fm = getFragmentManager();
@@ -1143,7 +1143,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                                                 RELOADAPP=false;
                                 startActivity(getIntent());
                             }else {
-                                menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_selected);
+                                menu.findItem(R.id.favorites).setIcon(R.drawable.offers_selected);
 
                                 //fragment = new FavoriteFragment();
                                 fragment=new MyOffersFragment();
@@ -1161,7 +1161,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 RELOADAPP=false;
                                 startActivity(getIntent());
                             }else {
-                                menu.findItem(R.id.centers).setIcon(R.drawable.services_selected);
+                                menu.findItem(R.id.centers).setIcon(R.drawable.centers_selected);
                                 fragment = new HealthCentersFragment();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();
@@ -1179,7 +1179,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                                 startActivity(getIntent());
                             }else {
                                 FRAGMENT_NAME = "";
-                                menu.findItem(R.id.main).setIcon(R.drawable.main_grey);
+                                menu.findItem(R.id.main).setIcon(R.drawable.home_selected);
                                 fragment = new Offers();
                                 fm = getFragmentManager();
                                 fragmentTransaction = fm.beginTransaction();

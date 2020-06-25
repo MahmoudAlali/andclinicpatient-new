@@ -64,8 +64,10 @@ public class ExecutedReservationFragment extends Fragment {
         MyReservationFragment.note_cancel.setVisibility(View.GONE);
                 service_select=view.findViewById(R.id.incom_ree);
         MyReservationFragment.progressBar=view.findViewById(R.id.progress);
-        MyReservationFragment.filterbtn.setVisibility(View.VISIBLE);
-        MyReservationFragment.sortbtn.setVisibility(View.VISIBLE);
+        MyReservationFragment.filterbtn.setImageResource(R.drawable.filter_on);
+        MyReservationFragment.sortbtn.setImageResource(R.drawable.sort_on);
+        MyReservationFragment.sortbtn.setClickable(true);
+        MyReservationFragment.filterbtn.setClickable(true);
       //  MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
         sortbtn= MyReservationFragment.view.findViewById(R.id.sort);
         manager=new LinearLayoutManager(BeautyMainPage.context);

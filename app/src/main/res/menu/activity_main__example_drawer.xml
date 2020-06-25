@@ -36,20 +36,20 @@
                 android:title="@string/service" />
             <item
                 android:id="@+id/indiv_request"
-                android:icon="@drawable/add_request"
+                android:icon="@drawable/add_indiv_order"
                 android:title="@string/createRequest" />
             <item
                 android:id="@+id/group_request"
-                android:icon="@drawable/add_request"
+                android:icon="@drawable/add_group_order"
                 android:title="@string/createGroupRequest" />
             <item
                 android:id="@+id/notification"
-                android:icon="@drawable/notifications_selected"
+                android:icon="@drawable/side_notification_icon"
                 android:title="@string/Notifications" />
 
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/side_share_icone"
+                android:icon="@drawable/side_share_icon"
                 android:title="@string/share_app" />
 
 

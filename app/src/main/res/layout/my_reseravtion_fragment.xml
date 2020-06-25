@@ -10,16 +10,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/end_gray"
-        android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="@drawable/ic_menu_wihte_24dp"
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="#fff" >
         <LinearLayout
-
+            android:paddingBottom="13dp"
+            android:paddingTop="13dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -32,11 +32,21 @@
             <ImageView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <ImageView
                 android:id="@+id/sort"
-                android:src="@drawable/ic_descending_arrangement_blue"
+                android:src="@drawable/sort_on"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -46,7 +56,7 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_filter"
+                android:src="@drawable/filter_on"
                 />
 
         </LinearLayout>
@@ -163,23 +173,7 @@
 
     </LinearLayout>
 
-
-    <!--
-        <ru.dimorinny.floatingtextbutton.FloatingTextButton
-            android:id="@+id/action_button"
-            android:layout_marginTop="115dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="end"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/reser_count_icon"
-            app:floating_background_color="@color/transparent"
-            app:floating_title="0"
-            app:floating_title_color="@android:color/white">
-        </ru.dimorinny.floatingtextbutton.FloatingTextButton>
-    -->
-
+<!--
     <LinearLayout
         android:layout_marginTop="115dp"
         android:layout_width="wrap_content"
@@ -213,6 +207,65 @@
                 android:layout_height="@dimen/standard_45"
                 android:src="@drawable/reser_count_icon"/>
         </LinearLayout>
+
+    </LinearLayout>
+-->
+    <!--<LinearLayout
+        android:layout_marginTop="115dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="5dp"
+
+        android:padding="4dp"
+        android:background="@drawable/border_edit_text_v5"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:id="@+id/action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/lightBordeaux"
+                android:textSize="@dimen/standard_20"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="@dimen/standard_45"
+                android:layout_height="@dimen/standard_45"
+                android:src="@drawable/reser_count_icon"/>
+        </LinearLayout>
+
+    </LinearLayout>-->
+    <LinearLayout
+        android:layout_marginTop="115dp"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/appointment_count"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="top"
+            android:text="999"
+            android:textColor="@color/lightBordeaux"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

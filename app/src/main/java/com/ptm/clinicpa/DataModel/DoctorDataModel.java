@@ -10,9 +10,12 @@ public class DoctorDataModel {
             bdb_specialization_name_en,
             is_fav_doctor;
 
+    String max_age,min_age;
     public DoctorDataModel(String bdb_id,String bdb_name,String bdb_gender,String bdb_extra_info,String bdb_supported_gender,
-                           String bdb_specialization_name_ar,String bdb_specialization_name_en,String is_fav_doctor)
+                           String bdb_specialization_name_ar,String bdb_specialization_name_en,String is_fav_doctor,String min_age,String max_age)
     {
+        this.max_age=max_age;
+        this.min_age=min_age;
         this.bdb_extra_info=bdb_extra_info;
         this.bdb_gender=bdb_gender;
         this.bdb_id=bdb_id;
@@ -55,4 +58,11 @@ public class DoctorDataModel {
         return is_fav_doctor;
     }
 
+    public String getMax_age() {
+        return max_age;
+    }
+
+    public String getMin_age() {
+        return min_age;
+    }
 }

@@ -52,7 +52,7 @@
 
                 <ImageView
                     android:id="@+id/sort"
-                    android:src="@drawable/ic_descending_arrangement_blue"
+                    android:src="@drawable/sort_on"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -62,7 +62,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_filter_list_black_blue_24dp"
+                    android:src="@drawable/filter_on"
                     />
 
             </LinearLayout>

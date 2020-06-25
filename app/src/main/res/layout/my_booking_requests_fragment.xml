@@ -33,28 +33,12 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/one_add"
+                android:src="@drawable/add_indiv_order"
                 />
             <ImageView
                 android:padding="3dp"
                 android:id="@+id/addGroupRequest"
-                android:src="@drawable/group_add"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <ImageView
+                android:src="@drawable/add_group_order"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -68,20 +52,18 @@
                 android:layout_height="match_parent" />
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/sort"
-                android:src="@drawable/ic_descending_arrangement_blue"
+                android:src="@drawable/sort_on"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <ImageView
-                android:visibility="gone"
                 android:id="@+id/filter"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_filter_list_black_grey"
+                android:src="@drawable/filter_on"
                 />
 
         </LinearLayout>

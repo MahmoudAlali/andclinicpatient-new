@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
+import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.TabOne;
 import com.ptm.clinicpa.DataModel.BrowseServiceItem;
 import com.ptm.clinicpa.DataModel.DataService;
@@ -192,6 +193,21 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         ((Item)holder).place.setAdapter(adapter);
 
+        ((Item)holder).add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, RelativesActivity.class);
+                i.putExtra("sup_id",itemArrayList.get(position).getBdb_id());
+                i.putExtra("center_id",MainProviderActivity.center_id);
+                i.putExtra("isBooking",true);
+                i.putExtra("isServicesAdapter",true);
+                i.putExtra("max_age",itemArrayList.get(position).getMax_age());
+                i.putExtra("min_age",itemArrayList.get(position).getMin_age());
+                i.putExtra("supported_gender",itemArrayList.get(position).getBdb_supported_gender());
+
+                context.startActivity(i);
+            }
+        });
         /*((Item)holder).add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

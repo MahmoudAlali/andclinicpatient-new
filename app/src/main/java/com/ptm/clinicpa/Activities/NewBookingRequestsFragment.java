@@ -55,10 +55,10 @@ public class NewBookingRequestsFragment extends Fragment {
         MyBookingRequestsFragment.typeFilter="";
         MyBookingRequestsFragment.creationDateFilter="";
         MyBookingRequestsFragment.creationDateFilterTemp="";
-        MyBookingRequestsFragment.sortbtn.setImageResource(R.drawable.ic_descending_arrangement_grey);
-        MyBookingRequestsFragment.filterbtn.setImageResource(R.drawable.ic_filter_list_black_grey);
-        MyBookingRequestsFragment.sortbtn.setVisibility(View.GONE);
-        MyBookingRequestsFragment.filterbtn.setVisibility(View.GONE);
+        MyBookingRequestsFragment.sortbtn.setImageResource(R.drawable.sort_off);
+        MyBookingRequestsFragment.filterbtn.setImageResource(R.drawable.filter_off);
+        MyBookingRequestsFragment.sortbtn.setClickable(false);
+        MyBookingRequestsFragment.filterbtn.setClickable(false);
 /*
         MyBookingRequestsFragment.groupbooking="";
 */

@@ -66,10 +66,10 @@ public class OldBookingRequestsFragment extends Fragment {
 */
 
         MyBookingRequestsFragment.progressBar=view.findViewById(R.id.progress);
-        MyBookingRequestsFragment.sortbtn.setImageResource(R.drawable.ic_descending_arrangement_blue);
-        MyBookingRequestsFragment.filterbtn.setImageResource(R.drawable.ic_filter_list_black_blue_24dp);
-        MyBookingRequestsFragment.sortbtn.setVisibility(View.VISIBLE);
-        MyBookingRequestsFragment.filterbtn.setVisibility(View.VISIBLE);
+        MyBookingRequestsFragment.sortbtn.setImageResource(R.drawable.sort_on);
+        MyBookingRequestsFragment.filterbtn.setImageResource(R.drawable.filter_on);
+        MyBookingRequestsFragment.sortbtn.setClickable(true);
+        MyBookingRequestsFragment.filterbtn.setClickable(true);
 
         service_select=view.findViewById(R.id.incom_ree);
         sortbtn= MyBookingRequestsFragment.view.findViewById(R.id.sort);

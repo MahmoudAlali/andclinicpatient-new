@@ -96,8 +96,11 @@ public class DepositReservationFragment extends Fragment {
             }
         });
 
-        MyReservationFragment.filterbtn.setVisibility(View.GONE);
-        MyReservationFragment.sortbtn.setVisibility(View.GONE);
+        MyReservationFragment.filterbtn.setImageResource(R.drawable.filter_off);
+        MyReservationFragment.sortbtn.setImageResource(R.drawable.sort_off);
+        MyReservationFragment.sortbtn.setClickable(false);
+        MyReservationFragment.filterbtn.setClickable(false);
+
 
 //        MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,);
 

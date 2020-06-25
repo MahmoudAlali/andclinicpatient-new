@@ -61,8 +61,10 @@ public class MainProviderActivity extends AppCompatActivity {
     static HealthCenterImagesAdapter healthCenterImagesAdapter;
     public static ArrayList<String> mylocation = new ArrayList();
     public static double lat,lng;
+    public static String center_id;
     public static ImageView image;
     LinearLayout fra;
+
     android.app.FragmentTransaction fragmentTransaction;
 
 
@@ -99,7 +101,8 @@ public class MainProviderActivity extends AppCompatActivity {
 
 
         //------ get sup id------------------
-        bdb_name="\"SupplierId\":"+getIntent().getStringExtra("provider_id")+",";
+        center_id=getIntent().getStringExtra("provider_id");
+        bdb_name="\"SupplierId\":"+center_id+",";
         features[0]=findViewById(R.id.feature1);
         features[1]=findViewById(R.id.feature2);
         features[2]=findViewById(R.id.feature3);
