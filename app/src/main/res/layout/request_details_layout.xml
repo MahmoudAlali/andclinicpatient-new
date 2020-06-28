@@ -330,7 +330,7 @@
                 <ImageView
                     android:layout_width="@dimen/standard_40"
                     android:layout_height="35dp"
-                    android:src="@drawable/reser_count_icon"
+                    android:src="@drawable/order_number_icon"
                     />
                 <TextView
                     android:textColor="#000"
@@ -362,7 +362,7 @@
                 <ImageView
                     android:layout_width="@dimen/standard_40"
                     android:layout_height="35dp"
-                    android:src="@drawable/reser_count_icon"
+                    android:src="@drawable/file_number_icon"
                     />
                 <TextView
                     android:textColor="#000"

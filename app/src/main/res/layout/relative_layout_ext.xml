@@ -11,7 +11,7 @@
         android:id="@+id/item"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/requestItemBack"
+        android:background="@drawable/automated_browse_back"
         android:layout_height="wrap_content">
 
 
@@ -36,10 +36,11 @@
                     <TextView
                         android:id="@+id/client_name"
                         android:layout_weight="1"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:gravity="center"
                         android:textSize="16dp"
-                        android:textColor="#a5587a"
+                        android:textColor="#38539A"
                         android:layout_height="@dimen/high_edit_text" />
 
 
@@ -122,7 +123,7 @@
         android:id="@+id/actions"
         android:layout_height="wrap_content">
         <TextView
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:id="@+id/time"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -138,7 +139,7 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:id="@+id/refuse"
             android:layout_weight="1"
             android:layout_width="match_parent"

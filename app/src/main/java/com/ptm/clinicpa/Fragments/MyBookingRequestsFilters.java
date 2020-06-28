@@ -47,7 +47,7 @@ public class MyBookingRequestsFilters extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        view = inflater.inflate(R.layout.my_booking_requests_fragment_filter, container, false);
+        view = inflater.inflate(R.layout.my_booking_requests_fragment_filter2, container, false);
         salonName=view.findViewById(R.id.providerName);
         requestDate=view.findViewById(R.id.order_date);
         requestType=view.findViewById(R.id.book_type);

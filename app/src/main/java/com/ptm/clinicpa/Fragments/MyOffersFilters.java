@@ -81,7 +81,7 @@ public class MyOffersFilters extends Fragment implements LocationListener, Googl
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_my_offers_filters, container, false);
+        View view = inflater.inflate(R.layout.activity_my_offers_filters2, container, false);
 
         mylocationbtn = view.findViewById(R.id.my_location);
         clinicName = view.findViewById(R.id.providerName);

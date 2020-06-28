@@ -495,7 +495,7 @@
                 <ImageView
                     android:layout_width="@dimen/standard_30"
                     android:layout_height="@dimen/standard_30"
-                    android:src="@drawable/reser_count_icon"
+                    android:src="@drawable/order_number_icon"
                     />
                 <TextView
                     android:id="@+id/id"

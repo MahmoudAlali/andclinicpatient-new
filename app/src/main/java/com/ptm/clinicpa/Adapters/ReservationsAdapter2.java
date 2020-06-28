@@ -207,7 +207,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             {
                 Log.e("getIs_checked_in","true");
 
-                ((Item)holder).isChecked.setImageResource(R.drawable.ic_checked);
+                ((Item)holder).isChecked.setImageResource(R.drawable.checked_in);
             }
             Log.e("11111","333");
 

@@ -18,12 +18,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/requestItemBack"
+        android:background="@drawable/automated_browse_back"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:background="@color/requestItemBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -50,7 +49,8 @@
                 android:text="Start Date"
                 android:gravity="center"
                 android:textSize="16dp"
-                android:textColor="#000"
+                android:textColor="#133277"
+                android:textStyle="bold"
                 android:layout_height="@dimen/high_edit_text" />
 
 
@@ -280,7 +280,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Place"
-                        android:textColor="@android:color/black"
+                        android:textColor="#133277"
                         android:textSize="16dp"
                         />
 
@@ -360,7 +360,7 @@
         android:id="@+id/actions"
         android:layout_height="wrap_content">
         <TextView
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:id="@+id/time"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -380,7 +380,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:gravity="center"
             android:text="Check in"
             android:textColor="#fff"
@@ -392,7 +392,7 @@
             android:id="@+id/space2"
             android:layout_height="match_parent" />
         <TextView
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:id="@+id/refuse"
             android:layout_weight="1"
             android:layout_width="match_parent"

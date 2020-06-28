@@ -361,13 +361,16 @@ public static ImageView sortbtn;
             e.printStackTrace();
         }
         t1.setTextSize(12);
+       t1.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.white));
        t1.setBackgroundResource(R.drawable.shadow_service_tab);
         t2.setTextSize(10);
         t2.setBackgroundResource(android.R.color.transparent);
-        t3.setTextSize(10);
+       t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
+       t3.setTextSize(10);
         t3.setBackgroundResource(android.R.color.transparent);
+       t3.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
 
-    }
+   }
     public static void updateDeposit(){
         if (tab.equals("1")) {
             fragment = new AcceptedReservationFragment();

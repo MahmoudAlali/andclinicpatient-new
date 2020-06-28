@@ -340,9 +340,12 @@ public class MyBookingRequestsFragment extends Fragment {
             e.printStackTrace();
         }
         t1.setTextSize(14);
+        t1.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.white));
         t1.setBackgroundResource(R.drawable.shadow_service_tab);
         t2.setTextSize(12);
         t2.setBackgroundResource(android.R.color.transparent);
+        t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
+
 
 
     }

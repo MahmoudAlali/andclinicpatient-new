@@ -79,7 +79,7 @@ public class HealthCentersFilters extends Fragment implements LocationListener,G
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.activity_health_centers_filters, container, false);
+        View view = inflater.inflate(R.layout.activity_health_centers_filters2, container, false);
 
         mylocationbtn = view.findViewById(R.id.my_location);
         clinicName = view.findViewById(R.id.providerName);

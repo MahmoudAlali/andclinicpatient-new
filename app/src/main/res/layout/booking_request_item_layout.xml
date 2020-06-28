@@ -17,12 +17,11 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/requestItemBack"
+        android:background="@drawable/automated_browse_back"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:background="@color/requestItemBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -49,66 +48,12 @@
                 android:text="Start Date"
                 android:gravity="center"
                 android:textSize="14dp"
-                android:textColor="#000"
+                android:textColor="#133277"
+                android:textStyle="bold"
                 android:layout_height="@dimen/standard_30" />
 
 
         </LinearLayout>
-<!--
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="50dp">
-            <ImageView
-                android:layout_width="@dimen/standard_30"
-                android:layout_height="match_parent"
-                android:id="@+id/place"
-                android:src="@drawable/ic_location_on_black_24dp"
-                />
-            <Space
-                android:layout_width="@dimen/pf_10dp_space"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:id="@+id/client_name"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-
-                android:text="Salon name"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#a5587a"
-                android:layout_height="@dimen/high_edit_text" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_weight="2"
-                >
-               &lt;!&ndash; <android.support.v7.widget.CardView
-                    android:id="@+id/myCardView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:cardCornerRadius="50dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    >&ndash;&gt;
-                    <ImageView
-                        android:id="@+id/logoImg"
-                        android:src="@drawable/clientlogo"
-                        android:layout_width="@dimen/standard_30"
-                        android:layout_height="@dimen/standard_30"
-                        android:scaleType="centerCrop"
-                        />
-&lt;!&ndash;
-                </android.support.v7.widget.CardView>
-&ndash;&gt;
-
-
-            </LinearLayout>
-
-        </LinearLayout>
--->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -165,7 +110,6 @@
                 android:id="@+id/doctorName"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
-
                 android:text="@string/doctorNames"
                 android:gravity="center"
                 android:textSize="14dp"
@@ -233,7 +177,7 @@
                 <TextView
                     android:id="@+id/booking_place"
                     android:layout_weight="1"
-                    android:textColor="#9a7084"
+                    android:textColor="#133277"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="14dp"
@@ -294,7 +238,7 @@
             android:layout_width="5dp"
             android:layout_height="match_parent" />-->
         <TextView
-            android:background="#E4C8FB"
+            android:background="@drawable/automated_browse_btns_back"
             android:id="@+id/refuse"
             android:layout_weight="1"
             android:layout_width="match_parent"

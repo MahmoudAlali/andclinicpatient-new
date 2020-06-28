@@ -24,4 +24,5 @@
     <dimen name="design_navigation_icon_size" tools:override="true">45dp</dimen>
     <dimen name="design_navigation_icon_padding" tools:override="true">16dp</dimen>
     <dimen name="design_navigation_separator_vertical_padding" tools:override="true">2dp</dimen>
+    <dimen name="standard_70">70dp</dimen>
 </resources>

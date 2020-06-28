@@ -106,9 +106,9 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
        // row = inflater.inflate(R.layout.left_offer_new_layout, parent, false);
 
         if(context.getResources().getString(R.string.locale).equals("ar"))
-            row = inflater.inflate(R.layout.left_offer_new_layout2, parent, false);
+            row = inflater.inflate(R.layout.left_offer_new_layout3, parent, false);
         else
-            row = inflater.inflate(R.layout.right_offer_new_layout2, parent, false);
+            row = inflater.inflate(R.layout.right_offer_new_layout3, parent, false);
 
 
 
@@ -121,13 +121,13 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 //---------------------for prices decimal format-----------------
         try {
-            if (bestOfferItems.get(position).getBdb_has_experience_cer().equals("1")){
+           /* if (bestOfferItems.get(position).getBdb_has_experience_cer().equals("1")){
                 ((Item)holder).exp.setImageResource(R.drawable.ic_experience_care);
             }
             if (bestOfferItems.get(position).getBdb_has_health_cer().equals("1")){
                 ((Item)holder).health.setImageResource(R.drawable.ic_health_care);
             }
-
+*/
 
             DecimalFormat integer=new DecimalFormat("#");
             DecimalFormat doub=new DecimalFormat("#.##");
