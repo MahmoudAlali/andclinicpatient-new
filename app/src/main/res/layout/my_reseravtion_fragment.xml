@@ -155,6 +155,7 @@
     </LinearLayout>
     <TextView
         android:layout_marginTop="100dp"
+        android:visibility="gone"
         android:id="@+id/cancelReserMsg"
         android:layout_width="match_parent"
         android:layout_height="35dp"

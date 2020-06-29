@@ -136,15 +136,19 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            float tot_dis = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) ));
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
-            ((Item) holder).pro_name.setText(bestOfferItems.get(position).getProvider_name());
+            String doctorName=context.getString(R.string.doctorName)+": "+bestOfferItems.get(position).getProvider_name();
+            ((Item) holder).pro_name.setText(doctorName);
             if(context.getString(R.string.locale).equals("en"))
                 ((Item) holder).speciality.setText(bestOfferItems.get(position).getSpeciality_en());
             else
                 ((Item) holder).speciality.setText(bestOfferItems.get(position).getSpeciality_ar());
+
+            String center=context.getString(R.string.providerName)+": ";
             if(context.getString(R.string.locale).equals("en"))
-                ((Item) holder).centerName.setText(bestOfferItems.get(position).getHealth_center_en());
+                center+=bestOfferItems.get(position).getHealth_center_en();
             else
-                ((Item) holder).centerName.setText(bestOfferItems.get(position).getHealth_center_ar());
+                center+=bestOfferItems.get(position).getHealth_center_ar();
+            ((Item) holder).centerName.setText(center);
 
 
             // ((Item) holder).centerName.setText(bestOfferItems.get(position).getProvider_name());

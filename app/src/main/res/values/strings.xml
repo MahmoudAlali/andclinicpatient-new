@@ -1044,5 +1044,7 @@
     <string name="success_update_follower">Companion information updated successfully</string>
     <string name="follower_exist">This relative already exists</string>
     <string name="cant_reserv_yourself">You can\'t reserve this offer for yourself because some of your personal information doesn\'t match the information required for the offer</string>
+    <string name="appoint_being_edited">Appointment is being edited</string>
+    <string name="appoint_being_shifted">Appointment is shifted by half an hour</string>
 
 </resources>

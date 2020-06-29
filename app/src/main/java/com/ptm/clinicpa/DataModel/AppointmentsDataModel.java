@@ -45,6 +45,7 @@ public class AppointmentsDataModel {
     String is_checked_in ;
     String visit_type ;
     String basic_price ;
+    String status ;
     ArrayList<ServicesInsideAppointment> services=new ArrayList<>();
 
     public AppointmentsDataModel(String bdb_appointment_id , String bdb_inner_booking,
@@ -60,7 +61,8 @@ public class AppointmentsDataModel {
             String specialization_en , String doctor_name , String doctor_id ,
             String health_center_id , String bdb_max_delay , String bdb_health_center_phone ,
             String is_shifted , String shifted_period , String is_has_change_order ,
-            String bdb_is_group_booking  , String is_checked_in , String visit_type , String basic_price,ArrayList <ServicesInsideAppointment> services )
+            String bdb_is_group_booking  , String is_checked_in , String visit_type ,
+                                 String basic_price,ArrayList <ServicesInsideAppointment> services,String status)
     {
         this. bdb_appointment_id=bdb_appointment_id ;
         this. bdb_inner_booking=bdb_inner_booking;
@@ -105,6 +107,7 @@ public class AppointmentsDataModel {
         this. visit_type=visit_type ;
         this. basic_price=basic_price ;
         this. services=services ;
+        this. status=status ;
     }
 
     public String getClient_name() {
@@ -277,5 +280,9 @@ public class AppointmentsDataModel {
 
     public ArrayList<ServicesInsideAppointment> getServices() {
         return services;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

@@ -11948,6 +11948,7 @@ public class APICall {
                             for (int i = 0; i < bookings.length(); i++) {
                                 JSONObject jObject = bookings.getJSONObject(i);
                                 String bdb_appointment_id = jObject.getString("bdb_appointment_id");
+                                String status = jObject.getString("status");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
                                 String bookedByMe = jObject.getString("bookedByMe");
                                 String booking_place = jObject.getString("booking_place");
@@ -12019,7 +12020,7 @@ public class APICall {
                                 ,bdb_loc_long,bdb_loc_lat,bdb_health_center_logo_id,can_cancel,can_rating,can_check_in,can_order_change,can_health_center_rating,doctor_rating
                                         ,health_center_rating,health_center_ar,health_record,health_center_en,specialization_ar,specialization_en,doctor_name,doctor_id
                                 ,health_center_id,bdb_max_delay,bdb_health_center_phone,is_shifted,shifted_period,is_has_change_order,bdb_is_group_booking
-                                ,is_checked_in,visit_type,basic_price,services));
+                                ,is_checked_in,visit_type,basic_price,services,status));
 
                             }
 
@@ -12293,6 +12294,7 @@ public class APICall {
                             for (int i = 0; i < bookings.length(); i++) {
                                 JSONObject jObject = bookings.getJSONObject(i);
                                 String bdb_appointment_id = jObject.getString("bdb_appointment_id");
+                                String status = jObject.getString("status");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
                                 String bookedByMe = jObject.getString("bookedByMe");
                                 String booking_place = jObject.getString("booking_place");
@@ -12364,7 +12366,7 @@ public class APICall {
                                 ,bdb_loc_long,bdb_loc_lat,bdb_health_center_logo_id,can_cancel,can_rating,can_check_in,can_order_change,can_health_center_rating,doctor_rating
                                         ,health_center_rating,health_center_ar,health_record,health_center_en,specialization_ar,specialization_en,doctor_name,doctor_id
                                 ,health_center_id,bdb_max_delay,bdb_health_center_phone,is_shifted,shifted_period,is_has_change_order,bdb_is_group_booking
-                                ,is_checked_in,visit_type,basic_price,services));
+                                ,is_checked_in,visit_type,basic_price,services,status));
 
                             }
 

@@ -162,7 +162,6 @@
                 android:layout_width="190dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingRight="@dimen/standard_20"
                 android:paddingTop="@dimen/standard_20"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
@@ -178,10 +177,11 @@
                     <TextView
 
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Center Name"
                         android:id="@+id/centerName"
                         android:layout_weight="1"
+                        android:lines="1"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#000"
@@ -217,8 +217,9 @@
                         />
                     <TextView
 
+                        android:lines="1"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Salon Name"
                         android:id="@+id/pro_name"
                         android:layout_weight="1"

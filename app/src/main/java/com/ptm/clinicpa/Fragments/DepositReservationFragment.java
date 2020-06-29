@@ -62,7 +62,7 @@ public class DepositReservationFragment extends Fragment {
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         MyReservationFragment.tab="2";
         MyReservationFragment.groupbooking="";
-        MyReservationFragment.note_cancel.setVisibility(View.VISIBLE);
+       // MyReservationFragment.note_cancel.setVisibility(View.VISIBLE);
 
        // MyReservationFragment.reservationsAdapter2=new ReservationsAdapter2(BeautyMainPage.context,APICall.reservationModels);
         service_select=view.findViewById(R.id.incom_ree);

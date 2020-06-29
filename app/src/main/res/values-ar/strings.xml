@@ -894,6 +894,8 @@
     <string name="success_add_follower">تمت إضافة المرافق بنجاح</string>
     <string name="success_update_follower">تم تعديل بيانات المرافق بنجاح</string>
     <string name="follower_exist">هذا الشخص موجود مسبقاً</string>
+    <string name="appoint_being_edited">الموعد تحت التعديل</string>
+    <string name="appoint_being_shifted">تمت إزاحة الموعد بمقدار نصف ساعة</string>
     <string name="cant_reserv_yourself">لا يمكنك حجز هذا العرض لنفسك لأن بعض بياناتك الشخصية لا تتوافق مع بيانات الفئة المخصص لها العرض</string>
 
 </resources>
