@@ -129,8 +129,8 @@
                     >
                     <android.support.v7.widget.CardView
                         android:id="@+id/myCardView"
-                        android:layout_width="@dimen/standard_50"
-                        android:layout_height="@dimen/standard_50"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         app:cardCornerRadius="50dp"
                         android:layout_weight="1"
                         app:cardBackgroundColor="@color/transparent"

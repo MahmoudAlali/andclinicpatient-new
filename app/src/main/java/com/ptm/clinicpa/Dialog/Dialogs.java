@@ -131,6 +131,24 @@ public class Dialogs extends Dialog {
         });
 
     }
+    public Dialogs(@NonNull Context context, int message, final MyRunnable onClickFun)
+    {
+        super(context);
+        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        setContentView(R.layout.sweet_dialog_layout_v2);
+        TextView Dialogmessage = findViewById(R.id.message);
+        TextView confirm = findViewById(R.id.confirm);
+        Dialogmessage.setText(message);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickFun.run();
+                cancel();
+            }
+
+
+        });
+    }
     public Dialogs(@NonNull Context context, int message,int message2)
     {
         super(context);

@@ -110,7 +110,7 @@ public class InternalChatActivity extends AppCompatActivity {
         };
         CheckIntentForNotification();
         ProviderId = getIntent().getStringExtra("providerId");
-        noSupporterMsg=new Dialogs(context,R.string.noOperator,R.string.ok,Back);
+        noSupporterMsg=new Dialogs(context,R.string.noOperator,Back);
 
 
         sendBtn.setOnClickListener(new View.OnClickListener()
