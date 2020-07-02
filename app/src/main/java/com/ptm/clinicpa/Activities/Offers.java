@@ -612,7 +612,7 @@ public class Offers extends Fragment implements LocationListener ,
 
         int height = bitmap.getHeight();
         DisplayMetrics metrics = BeautyMainPage.context.getResources().getDisplayMetrics();
-        int bounding = dpToPx((int)metrics.xdpi-1);
+        int bounding = dpToPx((int)metrics.xdpi-45);
         Log.i("Test", "original width = " + Integer.toString(width));
         Log.i("Test", "original height = " + Integer.toString(height));
         Log.i("Test", "bounding = " + Integer.toString(bounding));

@@ -52,6 +52,7 @@ public class InternalChatActivity extends AppCompatActivity {
     static CountDownTimer timer;
      CountDownTimer innerTimer;
     Dialogs terminateChat;
+    public static Dialogs noSupporterMsg;
 
     static int TIMER_TIME = 300000; //5 minutes
     static boolean isRunning = true;
@@ -109,6 +110,7 @@ public class InternalChatActivity extends AppCompatActivity {
         };
         CheckIntentForNotification();
         ProviderId = getIntent().getStringExtra("providerId");
+        noSupporterMsg=new Dialogs(context,R.string.noOperator,R.string.ok,Back);
 
 
         sendBtn.setOnClickListener(new View.OnClickListener()
@@ -279,6 +281,14 @@ public class InternalChatActivity extends AppCompatActivity {
 
         }
     };
+    public MyRunnable Back = new MyRunnable()
+
+    {
+        @Override
+        public void run() {
+            InternalChatActivity.super.onBackPressed();
+        }
+    };
 
     private void startNewInnerTimer()
     {
@@ -287,9 +297,9 @@ public class InternalChatActivity extends AppCompatActivity {
     }
     public static void showUnavailableSupport()
     {
-        Dialogs dialogs=new Dialogs(context, R.string.noOperator);
+       // Dialogs dialogs=new Dialogs(context, R.string.noOperator,R.string.ok);
         isNoChat=true;
-        dialogs.show();
+        noSupporterMsg.show();
     }
 
     @Override
