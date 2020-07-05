@@ -2,6 +2,7 @@ package com.ptm.clinicpa.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -147,6 +148,14 @@ public class Dialogs extends Dialog {
             }
 
 
+        });
+        this.setCanceledOnTouchOutside(false);
+        this.setOnCancelListener(new OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                onClickFun.run();
+
+            }
         });
     }
     public Dialogs(@NonNull Context context, int message,int message2)
