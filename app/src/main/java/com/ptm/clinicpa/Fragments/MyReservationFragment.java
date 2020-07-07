@@ -365,10 +365,10 @@ public static ImageView sortbtn;
        t1.setBackgroundResource(R.drawable.shadow_service_tab);
         t2.setTextSize(10);
         t2.setBackgroundResource(android.R.color.transparent);
-       t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
+       t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
        t3.setTextSize(10);
         t3.setBackgroundResource(android.R.color.transparent);
-       t3.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
+       t3.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
 
    }
     public static void updateDeposit(){

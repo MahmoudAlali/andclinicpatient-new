@@ -344,7 +344,7 @@ public class MyBookingRequestsFragment extends Fragment {
         t1.setBackgroundResource(R.drawable.shadow_service_tab);
         t2.setTextSize(12);
         t2.setBackgroundResource(android.R.color.transparent);
-        t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.black));
+        t2.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
 
 
 

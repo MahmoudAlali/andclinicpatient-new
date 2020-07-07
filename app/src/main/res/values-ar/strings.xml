@@ -474,18 +474,18 @@
     <string name="add_atleast_one_client">يرجى إضافة مريضة واحدة على الأقل</string>
 
 
-    <string name="supportWelcoming">مرحباً بكِ في خدمة العملاء Vizage. كيف يمكننا مساعدتكِ ؟</string>
+    <string name="supportWelcoming">مرحباً بكِ في خدمة العملاء UnaCita. كيف يمكننا مساعدتكِ ؟</string>
 
 
     Support Activity
     <string name="enterReasonMsg">يرجى ادخال سبب لطلب مكالمتك مع خدمة العملاء</string>
     <string name="weWillCall">خدمة العملاء سوف تتصل بك خلال 10 دقائق</string>
     <string name="empty"></string>
-    <string name="talkToSupport">التحدث مع خدمة عملاء Vizage</string>
+    <string name="talkToSupport">التحدث مع خدمة عملاء UnaCita</string>
     <string name="teamWorkingTime">فريق الدعم متاح من 9 صباحا حتى 9:30 مساءاً</string>
     <string name="callMe">اتصل بي</string>
     <string name="waitingTime">وقت الانتظار :10 دقائق</string>
-    <string name="chatWithSupport">الدردشة مع خدمة عملاء Vizage</string>
+    <string name="chatWithSupport">الدردشة مع خدمة عملاء UnaCita</string>
     <string name="internalChat">دردشة داخلية</string>
     <string name="whatsappChat">دردشة WhatsApp</string>
     <string name="noOperator">فريق الدعم مشغول بخدمة عميلات أخريات، يرجى طلب الدعم بعد قليل</string>
@@ -538,6 +538,7 @@
     <string name="wait_emp_lost_time">wait employee</string>
 
     <string name="choose_offer_date">اختاري تاريخ العرض</string>
+    <string name="offer_date">تاريخ العرض</string>
     <string name="next">التالي</string>
     <string name="searchLoc">ادخلي عنوان أو منطقة</string>
     <string name="age">العمر</string>

@@ -15,7 +15,7 @@
         android:id="@+id/notification"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@drawable/shadow_edit_text3"
+        android:background="@drawable/automated_browse_back"
         android:weightSum="6"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -32,7 +32,8 @@
                 android:gravity="start|center"
                 android:layout_marginTop="5dp"
                 android:textSize="14dp"
-                android:textColor="@color/endblue"
+                android:textStyle="bold"
+                android:textColor="@color/blueClinic"
                 android:layout_height="@dimen/high_edit_text" />
             <ImageView
                 android:layout_width="match_parent"
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Body"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -61,7 +63,8 @@
             android:layout_height="35dp"
             android:layout_marginStart="25dp"
             android:text="date"
-            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textColor="@color/redClinic"
             android:gravity="start|bottom"
             android:textSize="14dp"
             android:layout_marginBottom="5dp"

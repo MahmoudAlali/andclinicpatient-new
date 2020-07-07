@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/signup_back"
     android:weightSum="6"
+    android:background="@drawable/light_background"
     tools:context=".Activities.Login">
     <LinearLayout
 
@@ -53,7 +53,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/enter_pass_edittxt"
+                    android:background="@drawable/border_edit_text3"
                     android:gravity="center"
                     android:elevation="5dp"
                     android:hint="@string/usernamehint" />
@@ -66,7 +66,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/enter_pass_edittxt"
+                    android:background="@drawable/border_edit_text3"
                     android:gravity="center"
                     android:elevation="5dp"
                     android:hint="@string/passwordhint"
@@ -76,12 +76,14 @@
                     android:id="@+id/login"
                     android:layout_width="300dp"
                     android:layout_height="45dp"
-                    android:background="@drawable/signin_btn"
+                    android:background="@drawable/shadow_edit_text_blue"
                     android:layout_gravity="center"
                     android:layout_marginBottom="7dp"
                     android:onClick="login"
                     android:text="@string/signin"
-                    android:textColor="@color/endblue"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/lightBlueClinic"
                     />
 
                 <Button
@@ -91,10 +93,11 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="7dp"
                     android:onClick="forgetpass"
-                    android:background="@drawable/signin_btn"
+                    android:background="@drawable/shadow_edit_text_blue"
                     android:text="@string/forgetmypas"
                     android:textAllCaps="false"
-                    android:textColor="@color/endblue"
+                    android:textStyle="bold"
+                    android:textColor="@color/lightBlueClinic"
 
                     />
 
@@ -104,10 +107,11 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/endblue"
+                    android:textColor="@color/lightBlueClinic"
+                    android:textStyle="bold"
                     android:text="@string/enterasaguset"
                     android:onClick="enterguest"
-                    android:background="@drawable/signin_btn"
+                    android:background="@drawable/shadow_edit_text_blue"
                     android:textAllCaps="false"
 
                     />
@@ -120,11 +124,12 @@
                     <Button
                         android:id="@+id/new_user"
                         android:layout_width="300dp"
-                        android:layout_height="@dimen/standard_40"
+                        android:layout_height="40dp"
                         android:layout_gravity="bottom|center"
-                        android:background="@drawable/signup_btn"
+                        android:background="@drawable/light_blue_button"
                         android:onClick="register"
                         android:elevation="5dp"
+                        android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:text="@string/signupText" />
 

@@ -39,6 +39,10 @@
     <color name="main_header">#AAC5DD</color>
     <color name="second_header">#D5BFD4</color>
     <color name="doctorNames">#a5587a</color>
-
+    <color name="blueClinic">#133277</color>
+    <color name="greenClinic">#73BB89</color>
+    <color name="redClinic">#F01010</color>
+    <color name="lightBlueClinic">#1070AE</color>
+    <color name="translightBlueClinic">#CAA6D2EF</color>
 
 </resources>

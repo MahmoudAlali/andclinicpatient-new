@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/signup_back"
+    android:background="@drawable/light_background"
     android:orientation="vertical"
     >
     <!--<android.support.v7.widget.Toolbar-->
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -45,8 +45,8 @@
             android:layout_marginLeft="10dp"
             android:inputType="text"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/username"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shadow_edit_text_blue"
             android:ems="10"
             android:hint="@string/UserNameTextField" />
 
@@ -63,7 +63,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -78,7 +78,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:inputType="phone"
-            android:background="@drawable/username"
+            android:background="@drawable/shadow_edit_text_blue"
             android:ems="10"
             android:prompt="@string/gender"
             android:hint="@string/MobileNumberTextField" />
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -122,7 +122,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="phone"
-        android:background="@drawable/username"
+        android:background="@drawable/shadow_edit_text_blue"
         android:ems="10"
         android:hint="@string/MobileNumberTextField" />
     </LinearLayout>
@@ -137,7 +137,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -152,7 +152,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="phone"
-        android:background="@drawable/username"
+        android:background="@drawable/shadow_edit_text_blue"
         android:ems="10"
         android:hint="@string/age" />
     </LinearLayout>
@@ -167,7 +167,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -182,7 +182,7 @@
         android:layout_marginLeft="10dp"
         android:inputType="textEmailAddress"
         android:layout_marginRight="10dp"
-        android:background="@drawable/username"
+        android:background="@drawable/shadow_edit_text_blue"
         android:ems="10"
         android:hint="@string/EmailAddressTextField" />
     </LinearLayout>
@@ -207,7 +207,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -221,7 +221,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:inputType="textPassword"
-        android:background="@drawable/password"
+        android:background="@drawable/shadow_edit_text_green"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/PasswordTextField" />
@@ -237,7 +237,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/red"
+            android:textColor="@color/redClinic"
             android:text="⭑"
             android:gravity="bottom"
             android:layout_gravity="bottom"
@@ -250,7 +250,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/password"
+        android:background="@drawable/shadow_edit_text_green"
         android:ems="10"
         android:inputType="textPassword"
         android:gravity="center"
@@ -277,9 +277,11 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
-                android:background="@drawable/shadow_button_blue"/>
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/light_blue_button"/>
             <LinearLayout
-                android:layout_width="5dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"></LinearLayout>
             <Button
                 android:id="@+id/anthor_location"
@@ -288,7 +290,8 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
-                android:background="@drawable/shadow_button_add_site"/>
+                android:textColor="@color/white"
+                android:background="@drawable/green_button"/>
             <LinearLayout
                 android:layout_width="10dp"
                 android:layout_height="match_parent"></LinearLayout>
@@ -339,8 +342,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shadow_button_blue"
+        android:background="@drawable/light_blue_button"
         android:elevation="5dp"
+        android:textStyle="bold"
         android:onClick="registerAction"
         android:text="@string/OkButtnTitle"
         android:textColor="@android:color/white" />

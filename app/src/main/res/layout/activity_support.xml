@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="15dp"
-    android:background="@drawable/background"
+    android:background="@drawable/light_background"
     tools:context=".Activities.support.SupportActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,10 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/teamWorkingTime"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/black"
             android:textSize="14dp"
             android:layout_gravity="center"
-            android:background="@color/transLightPink"
+            android:background="@color/translightBlueClinic"
             android:textStyle="bold"
             android:padding="7dp"
             android:layout_marginTop="4dp"
@@ -81,12 +81,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/shadow_gray__v1"
+                        android:background="@drawable/light_blue_button"
                         android:text="@string/callMe"
+                        android:textStyle="bold"
                         android:elevation="5dp"
                         android:translationZ="5dp"
                         android:layout_weight="1"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -135,12 +136,13 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/shadow_gray__v1"
+                        android:background="@drawable/light_blue_button"
                         android:text="@string/internalChat"
+                        android:textStyle="bold"
                         android:elevation="5dp"
                         android:translationZ="5dp"
                         android:layout_weight="1"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -190,9 +192,10 @@
                         android:layout_weight="1"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:background="@drawable/shadow_gray__v1"
+                        android:background="@drawable/light_blue_button"
                         android:text="@string/whatsappChat"
-                        android:textColor="@color/blue" />
+                        android:textColor="@color/white"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
             </LinearLayout>
