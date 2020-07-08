@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-
+    android:background="@drawable/light_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Fragments.AccountFragment"
-
     >
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -62,7 +60,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/name"
                         android:layout_gravity="center|start"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:textStyle="bold" />
 
                     <EditText
@@ -72,8 +71,8 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:textColor="#B15788"
-                        android:background="@drawable/pass_border"
+                        android:textColor="#000"
+                        android:background="@drawable/shadow_edit_text_blue"
 
                         />
                 </LinearLayout>
@@ -89,8 +88,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/Email"
-                        android:textSize="@dimen/standard_20"
-                        android:gravity="center|start"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
@@ -99,9 +98,9 @@
                         android:id="@+id/e_bdb_email"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="#B15788"
+                        android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/pass_border"
+                        android:background="@drawable/shadow_edit_text_blue"
                         android:hint="name@example.com"
 
                         />
@@ -120,7 +119,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/phone"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:textStyle="bold" />
 
                     <EditText
@@ -129,9 +129,9 @@
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="#B15788"
+                        android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/pass_border"
+                        android:background="@drawable/shadow_edit_text_blue"
                         android:enabled="false"
                         />
                 </LinearLayout>
@@ -148,7 +148,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/age2"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:textStyle="bold" />
 
                     <EditText
@@ -157,9 +158,9 @@
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="#B15788"
+                        android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/pass_border"
+                        android:background="@drawable/shadow_edit_text_blue"
                         android:enabled="false"
                         />
                 </LinearLayout>
@@ -176,7 +177,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/gender"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -203,7 +205,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/language"
-                        android:textSize="@dimen/standard_20"
+                        android:textSize="18dp"
+                        android:textColor="@color/lightBlueClinic"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -239,13 +242,14 @@
                             android:gravity="center"
                             android:text="@string/update_pass"
                             android:textSize="20dp"
-                            android:textColor="@color/blue" />
+                            android:textStyle="bold"
+                            android:textColor="@color/greenClinic" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/password"
-                            android:textColor="#000"
+                            android:textColor="@color/redClinic"
                             android:textSize="@dimen/standard_20"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -254,13 +258,11 @@
                         android:hint="@string/old_password"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:textColor="#B15788"
-                        android:textColorHint="#B15788"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:inputType="textPassword"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/profile_pass2" />
+                        android:background="@drawable/shadow_edit_text_green" />
                     <EditText
                         android:id="@+id/pass"
                         android:hint="@string/new_password"
@@ -268,11 +270,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:textColor="#B15788"
-                        android:textColorHint="#B15788"
                         android:inputType="textPassword"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/profile_pass2" />
+                        android:background="@drawable/shadow_edit_text_green" />
 
                     <EditText
                         android:id="@+id/c_pass"
@@ -281,11 +281,9 @@
                         android:inputType="textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textColor="#B15788"
-                        android:textColorHint="#B15788"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/profile_pass2" />
+                        android:background="@drawable/shadow_edit_text_green" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -302,9 +300,10 @@
                         android:layout_height="@dimen/high_button"
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/shadow_blue_c9"
+                        android:background="@drawable/light_blue_button"
+                        android:textStyle="bold"
                         android:text="@string/save"
-                        android:textColor="#000" />
+                        android:textColor="@color/white" />
 
                     <Button
                         android:id="@+id/add_del_site"
@@ -313,9 +312,10 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:textAllCaps="false"
-                        android:background="@drawable/shadow_blue_c9"
+                        android:textStyle="bold"
+                        android:background="@drawable/light_blue_button"
                         android:text="@string/add_delete_location"
-                        android:textColor="#000" />
+                        android:textColor="#fff" />
 
                     <Button
                         android:id="@+id/deleteaccount"
@@ -324,9 +324,10 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:textAllCaps="false"
-                        android:background="@drawable/shadow_blue_c9"
+                        android:background="@drawable/light_blue_button"
                         android:text="@string/Delete_account"
-                        android:textColor="#000" />
+                        android:textColor="#fff"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
 

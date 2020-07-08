@@ -62,6 +62,7 @@ public class RelativesActivity extends AppCompatActivity {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                APICall.allRelativesList.clear();
                 relativesAdapter.notifyDataSetChanged();
                 //---------------------call API for Services and get items-------------
                 if(isBooking)
@@ -86,8 +87,8 @@ public class RelativesActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
-        relativesAdapter=new RelativesAdapter(BeautyMainPage.context,  APICall.allRelativesList,isBooking,isOffer);
-        LinearLayoutManager manager = new LinearLayoutManager(BeautyMainPage.context,LinearLayoutManager.VERTICAL,false);
+        relativesAdapter=new RelativesAdapter(context,  APICall.allRelativesList,isBooking,isOffer);
+        LinearLayoutManager manager = new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(relativesAdapter);
         add.setOnClickListener(new View.OnClickListener() {

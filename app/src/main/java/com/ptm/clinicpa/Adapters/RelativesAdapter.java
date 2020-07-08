@@ -1,10 +1,13 @@
 package com.ptm.clinicpa.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +18,23 @@ import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.AddRelativeActivity;
+import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.CreateRequestActivity;
 import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.DataModel.PatientDataModel;
+import com.ptm.clinicpa.Dialog.Dialogs;
+import com.ptm.clinicpa.Dialog.MyRunnable;
 import com.ptm.clinicpa.R;
 
 import java.util.ArrayList;
 
 import hyogeun.github.com.colorratingbarlib.ColorRatingBar;
 
+import static com.ptm.clinicpa.Activities.support.SupportActivity.providerMail;
+
 public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    static Dialogs getReasonDialog;
 
     public static ArrayList<PatientDataModel> patientDataModels;
     public static Context context;
@@ -44,7 +54,7 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return item;    }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int position) {
         try {
 
             ((Item)viewHolder).client_name.setText(patientDataModels.get(position).getBdb_user_name());
@@ -92,17 +102,29 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 context.startActivity(i);
                     }
                 });
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((Item)viewHolder).myroot.removeAllViews();
+                    }
+                });
                 for (int i=0;i<patientDataModels.get(position).getRecords().size();i++)
                 {
                     if(RelativesActivity.center_id.equals(patientDataModels.get(position).getRecords().get(i).getHealth_center_id()))
-                         addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record());
+                         addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record(),position,i);
                 }
             }
             else
             {
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ((Item)viewHolder).myroot.removeAllViews();
+                    }
+                });
                 for (int i=0;i<patientDataModels.get(position).getRecords().size();i++)
                 {
-                    addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record());
+                    addLayout(((Item)viewHolder).myroot,patientDataModels.get(position).getRecords().get(i).getHealth_center_en(),patientDataModels.get(position).getRecords().get(i).getHealth_center_ar(),patientDataModels.get(position).getRecords().get(i).getHealth_record(),position,i);
                 }
             }
             String gender =context.getString(R.string.gender);
@@ -161,10 +183,12 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
     }
-    public static void addLayout(final LinearLayout myroot, String serviceName,String serviceName_ar,String number){
+    public static void addLayout(final LinearLayout myroot, String serviceName,String serviceName_ar,String number,final int position,final int index){
         final View layout2;
         layout2 = LayoutInflater.from(context).inflate(R.layout.record_layout, myroot, false);
         TextView emp_name,healthNum;
+        ImageView delete =layout2.findViewById(R.id.delete);
+        ImageView edit =layout2.findViewById(R.id.edit);
         emp_name=layout2.findViewById(R.id.healthCntr);
         healthNum=layout2.findViewById(R.id.healthNum);
         healthNum.setText(number);
@@ -173,12 +197,57 @@ public class RelativesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         else
             emp_name.setText(serviceName_ar);
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(context)
+                        .setTitle(R.string.delete)
+                        .setMessage(R.string.dltRelativeHlthRcrd)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                String id=patientDataModels.get(position).getRecords().get(index).getId()+"";
+                                APICall.DeleteFollowerHealthRecord(context,id);
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        myroot.removeViewInLayout(layout2);
+                                    }
+                                });                            }
+                        })
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
+            }
+        });
+        final MyRunnable OnClickEditBtn =new MyRunnable()
+        {
+            @Override
+            public void run() {
+
+                String id=patientDataModels.get(position).getRecords().get(index).getId()+"";
+                APICall.EditFollowerHealthRecord(context,id,getValue());
+            }
+        };
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getReasonDialog =new Dialogs(context, R.string.empty, R.string.med_id2, R.string.ok,OnClickEditBtn,true);
+                getReasonDialog.show();
+            }
+        });
         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 myroot.addView(layout2);
             }
         });
+
+
     }
 
     @Override

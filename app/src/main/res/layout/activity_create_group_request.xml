@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/light_background"
     >
 
     <android.support.v7.widget.Toolbar
@@ -31,7 +31,9 @@
             android:layout_gravity="center"
             android:id="@+id/add_date"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shadow_button_brown"
+            android:background="@drawable/green_button"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="@string/select_date"
             android:textAllCaps="false"
             android:layout_width="match_parent"
@@ -45,7 +47,6 @@
 
 
         <android.support.design.widget.CoordinatorLayout
-            android:background="@drawable/shadow_blue_c5"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -54,12 +55,16 @@
             <Button
                 android:layout_gravity="center"
                 android:id="@+id/add_new_client"
-                android:background="@android:color/transparent"
+                android:background="@drawable/light_blue_button"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="@string/add_new_client"
                 android:textSize="@dimen/standard_20"
                 android:layout_width="match_parent"
                 android:textAllCaps="false"
-                android:layout_height="@dimen/high_edit_text"></Button>
+                android:layout_height="@dimen/high_edit_text">
+
+            </Button>
         </android.support.design.widget.CoordinatorLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -90,8 +95,9 @@
         android:textSize="@dimen/standard_20"
         android:textAllCaps="false"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/ok_button"
-        android:textColor="@android:color/black"
+        android:background="@drawable/light_blue_button"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:text="@string/next"
         />
 </android.support.design.widget.CoordinatorLayout>

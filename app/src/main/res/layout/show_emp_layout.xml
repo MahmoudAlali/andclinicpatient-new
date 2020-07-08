@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:background="@drawable/shadow_button_accent_lite"
+        android:background="@drawable/green_button"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -26,6 +26,8 @@
         <Button
             android:background="@android:color/transparent"
             android:id="@+id/emp_name"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/high_edit_text"
             android:text="Employee Name"

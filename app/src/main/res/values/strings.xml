@@ -115,7 +115,7 @@
     <string name="rate">Rate</string>
     <string name="points">My points</string>
     <string name="setting">Settings</string>
-    <string name="relatives">My relatives</string>
+    <string name="relatives">My companions</string>
     <string name="share_app">Share application</string>
     <string name="help">Help</string>
     <string name="call_salon">Call salon</string>
@@ -224,6 +224,7 @@
     <string name="DeleteAccountMessage">Do you really want to delete your account?</string>
 
     <string name="Signout">Do you want to sign out? </string>
+    <string name="dltRelativeHlthRcrd">Do you want to delete this health record? </string>
     <string name="ExitMessage">Do you want to exit the app? </string>
 
     <string name="shareAppMessage">Beauty application for beauty and design services download it now from the App Store</string>
@@ -245,8 +246,8 @@
     <string name="doctorNames">Doctors names</string>
 
     <!--Delete Account-->
-    <string name="ServiceCovering">There is no clinics covering my area / city</string>
-    <string name="ProNotShard">The requested clinic is not using this application</string>
+    <string name="ServiceCovering">There is no health centers covering my area/city</string>
+    <string name="ProNotShard">The requested health center is not using this application</string>
     <string name="PricesRealistic">I need to know some services prices</string>
     <string name="ManyOption">The application does not offer many options</string>
     <string name="ServiceAvailable">No outside/home services available in my area</string>
@@ -790,10 +791,10 @@
     </string-array>
     <string name="add_new_client">Add new client</string>
     <string name="enter_c_name">Please enter patient name</string>
-    <string name="enter_r_name">Please enter relative name</string>
+    <string name="enter_r_name">Please enter companion name</string>
     <string name="enter_age_range">Please enter patient age</string>
-    <string name="enter_age_r_range">Please enter relative age</string>
-    <string name="enter_r_gender">Please enter relative gender</string>
+    <string name="enter_age_r_range">Please enter companion age</string>
+    <string name="enter_r_gender">Please enter companion gender</string>
     <string name="enter_relation">Please enter relationship</string>
     <string name="enter_gender">Please enter patient gender</string>
     <string name="add_atleast_one_service">Please add at least one service for your offer</string>
@@ -967,6 +968,7 @@
     <string name="sure_add_location">Do you want to add this location?</string>
     <string name="sure_edit_location">Do you want to edit this location?</string>
     <string name="med_id">Medical file number:</string>
+    <string name="med_id2">Medical file number</string>
     <string name="Select_Time">Select time</string>
     <string-array name="relativesType">
         <item>Relative</item>
@@ -1043,7 +1045,7 @@
     <string name="me">Account user</string>
     <string name="success_add_follower">Companion added successfully</string>
     <string name="success_update_follower">Companion information updated successfully</string>
-    <string name="follower_exist">This relative already exists</string>
+    <string name="follower_exist">This companion already exists</string>
     <string name="cant_reserv_yourself">You can\'t reserve this offer for yourself because some of your personal information doesn\'t match the information required for the offer</string>
     <string name="appoint_being_edited">Appointment is being edited</string>
     <string name="appoint_being_shifted">Appointment is shifted by half an hour</string>

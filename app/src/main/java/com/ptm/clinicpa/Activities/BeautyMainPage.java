@@ -230,6 +230,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.requests).setVisible(false);
             sideMenu.findItem(R.id.setting).setVisible(false);
             sideMenu.findItem(R.id.notification).setVisible(false);
+            sideMenu.findItem(R.id.favorite).setVisible(false);
            // menu.findItem(R.id.favorites).setEnabled(false);
            // menu.findItem(R.id.centers).setEnabled(false);
             menu.findItem(R.id.reservations).setEnabled(false);
@@ -987,6 +988,14 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         }else if (id == R.id.setting) {
             Intent intent=new Intent(this, RelativesActivity.class);
             startActivity(intent);
+
+        }else if (id == R.id.favorites) {
+
+            fragment = new FavoriteFragment();
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
 
         }
         else if (id == R.id.indiv_request) {

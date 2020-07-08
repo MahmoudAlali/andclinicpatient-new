@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/background"
+    android:background="@drawable/light_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Fragments.AccountFragment"
 
@@ -49,9 +49,11 @@
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="@string/ServiceCovering"
                         />
                     <RadioButton
+                        android:textStyle="bold"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -61,6 +63,7 @@
 
 
                     <RadioButton
+                        android:textStyle="bold"
                         android:visibility="gone"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
@@ -68,18 +71,21 @@
                         android:text="@string/ServiceAvailable"
                         />
                     <RadioButton
+                        android:textStyle="bold"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/PricesRealistic"
                         />
                     <RadioButton
+                        android:textStyle="bold"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/ManyOption"
                         />
                     <RadioButton
+                        android:textStyle="bold"
                         android:layout_marginBottom="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -87,12 +93,14 @@
                         />
                 </RadioGroup>
                 <RadioButton
+                    android:textStyle="bold"
                     android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/TechnicalReason"
                     />
                 <RadioButton
+                    android:textStyle="bold"
                     android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,8 +110,10 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="#000"></LinearLayout>
+                    android:layout_height="3dp"
+                    android:background="#6E6E6E">
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -111,6 +121,7 @@
                     android:text="@string/ShareMoreDetails"
                     android:gravity="center"
                     android:textColor="#000"
+                    android:textStyle="bold"
                     android:textSize="18dp"
                     />
 
@@ -130,7 +141,9 @@
                     android:text="@string/send"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_button"
-                    android:background="@drawable/shadow_button_add_site"
+                    android:background="@drawable/light_blue_button"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
                     />
 
             </LinearLayout>

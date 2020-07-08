@@ -99,7 +99,7 @@ public class SupportActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(nowHour >=9 &&nowHour<21 || nowHour==21 && nowMinuts<30)
                 {
-                    getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn);
+                    getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn,false);
                     getReasonDialog.show();
                 }
                 else

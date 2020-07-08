@@ -25887,6 +25887,248 @@ public class APICall {
         });
 
     }
+    public static void DeleteFollowerHealthRecord(final  Context cont,String item_id)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject item = new JSONObject();
+        int id=Integer.parseInt(item_id);
+        try {
+            item .put("id",id);
+
+        }
+        catch (Exception e){}
+
+        JSONArray items = new JSONArray();
+        items.put(item);
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("items",items);
+
+        }
+        catch (Exception e){}
+        Log.e("deleteHealthRecord",item.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, item.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/follower/deleteHealthRecord")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("deleteHealthRecord ERRR", mMessage);
+
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    showUnexpectedErrMsg(cont);
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("deleteHlthRcrdRes", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    String response_code=jsonrespone.getString("response_code");
+                    if(response_code.equals("215"))
+                    {
+                        ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                allRelativesList.clear();
+                                RelativesActivity.relativesAdapter.notifyDataSetChanged();
+                                //---------------------call API for Services and get items-------------
+                                APICall.getAllFollowers( cont);
+
+                            }
+                        });
+
+
+                    }
+                    else if(response_code.equals("214"))
+                    {
+                        showSweetDialog(cont,R.string.SomethingWentWrongAlert);
+                    }
+                    else
+                        showUnexpectedErrMsg(cont);
+
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+                    showUnexpectedErrMsg(cont);
+
+                }
+            }
+
+        });
+
+    }
+    public static void EditFollowerHealthRecord(final  Context cont,String item_id,String newRecord)
+    {
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject item = new JSONObject();
+        if(newRecord.equals(""))
+        {
+            showSweetDialog(cont,R.string.SomethingWentWrongAlert);
+            return;
+        }
+        int id=Integer.parseInt(item_id);
+
+        try {
+            item .put("id",id);
+            item .put("health_record",newRecord);
+
+        }
+        catch (Exception e){}
+
+        JSONArray items = new JSONArray();
+        items.put(item);
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata .put("items",items);
+
+        }
+        catch (Exception e){}
+        Log.e("updateHealthRecord",item.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, item.toString());
+
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/follower/updateHealthRecord")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+gettoken(cont))
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("updateHealthRecord ERRR", mMessage);
+
+                pd.dismiss();
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(cont);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    showUnexpectedErrMsg(cont);
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("updateHealthRecord", mMessage);
+
+                pd.dismiss();
+                try {
+                    JSONObject jsonrespone = new JSONObject(mMessage);
+                    String success=jsonrespone.getString("success");
+                    String response_code=jsonrespone.getString("response_code");
+                    if(response_code.equals("217"))
+                    {((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            allRelativesList.clear();
+                            RelativesActivity.relativesAdapter.notifyDataSetChanged();
+                            //---------------------call API for Services and get items-------------
+                            APICall.getAllFollowers( cont);
+
+                        }
+                    });
+                    }
+                    else if(response_code.equals("216"))
+                    {
+                        showSweetDialog(cont,R.string.SomethingWentWrongAlert);
+                    }
+                    else
+                        showUnexpectedErrMsg(cont);
+
+
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Log.e("favErr",e.getMessage());
+                    showUnexpectedErrMsg(cont);
+
+                }
+            }
+
+        });
+
+    }
     public static void sendUnFavorites(final  Context cont,String item_id,String bdb_type)
     {
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -33289,6 +33531,8 @@ Log.e("ERRR",e.getMessage());
                 mMessage = response.body().string();
                 Log.e("Token", gettoken(context));
                 Log.e("getFollowers", mMessage);
+                allRelativesList.clear();
+
                 ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

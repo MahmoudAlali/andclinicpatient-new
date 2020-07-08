@@ -32,24 +32,25 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginTop="5dp"
-            android:background="@drawable/main_header"
+            android:background="@drawable/border"
             android:orientation="horizontal"
-            android:padding="3dp"
             android:weightSum="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/serviceFav"
                 android:layout_weight="1"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/high_button"
                 android:text="@string/centersFav"
-                android:background="@drawable/shadow_blue_c7"
+                android:background="@drawable/shadow_service_tab"
+                android:textStyle="bold"
                 android:gravity="center"
                 />
             <TextView
-                android:textColor="#000"
+                android:textColor="@color/redClinic"
+                android:textStyle="bold"
                 android:id="@+id/providersFav"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package com.ptm.clinicpa.Fragments.MyFavorites;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -28,6 +29,7 @@ public class FavoriteFragment extends Fragment {
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.activity_favoriate_fragment, container, false);
@@ -46,7 +48,10 @@ public class FavoriteFragment extends Fragment {
         });
 
         providersFav.setBackgroundResource(android.R.color.transparent);
-        servicesFav.setBackgroundResource(R.drawable.shadow_blue_c7);
+        providersFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
+        servicesFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.white));
+
+        servicesFav.setBackgroundResource(R.drawable.shadow_service_tab);
 
         fragment=new ServicesFavoriteFragment();
         fm = getFragmentManager();
@@ -55,11 +60,14 @@ public class FavoriteFragment extends Fragment {
         fragmentTransaction.commit();
 
         servicesFav.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 providersFav.setBackgroundResource(android.R.color.transparent);
+                providersFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
+                servicesFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.white));
 
-                servicesFav.setBackgroundResource(R.drawable.shadow_blue_c7);
+                servicesFav.setBackgroundResource(R.drawable.shadow_service_tab);
                 fragment=new ServicesFavoriteFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();
@@ -68,11 +76,13 @@ public class FavoriteFragment extends Fragment {
             }
         });
         providersFav.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
                 servicesFav.setBackgroundResource(android.R.color.transparent);
-
-                providersFav.setBackgroundResource(R.drawable.shadow_blue_c7);
+                servicesFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.redClinic));
+                providersFav.setTextColor(BeautyMainPage.context.getResources().getColor(R.color.white));
+                providersFav.setBackgroundResource(R.drawable.shadow_service_tab);
                 fragment=new ProvidersFavoriteFragment();
                 fm = getFragmentManager();
                 fragmentTransaction = fm.beginTransaction();

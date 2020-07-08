@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,13 +17,15 @@ public class Dialogs extends Dialog {
     public String EnteredText="";
 
 
-    public Dialogs(@NonNull Context context, int title, int message, int btnText, final MyRunnable onClickFun)
+    public Dialogs(@NonNull Context context, int title, int message, int btnText, final MyRunnable onClickFun,boolean isNumerical)
     {
         super(context);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         setContentView(R.layout.sweetalert_layout);
         TextView Dialogmessage = findViewById(R.id.message);
         final EditText enteredMsg = findViewById(R.id.code);
+        if(isNumerical)
+            enteredMsg.setInputType(InputType.TYPE_CLASS_NUMBER);
         final TextView Dialogtitle = findViewById(R.id.title);
         Dialogtitle.setText(title);
         enteredMsg.setHint("");

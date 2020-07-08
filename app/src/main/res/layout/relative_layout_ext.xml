@@ -123,7 +123,7 @@
         android:id="@+id/actions"
         android:layout_height="wrap_content">
         <TextView
-            android:background="@drawable/automated_browse_btns_back"
+            android:background="@drawable/green_button"
             android:id="@+id/time"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -131,6 +131,7 @@
             android:text="@string/edit"
             android:textColor="#fff"
             android:textSize="16dp"
+            android:textStyle="bold"
             android:gravity="center"
             />
         <Space
@@ -139,12 +140,13 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:background="@drawable/automated_browse_btns_back"
+            android:background="@drawable/green_button"
             android:id="@+id/refuse"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/delete"
+            android:textStyle="bold"
             android:textColor="#fff"
             android:textSize="16dp"
             android:gravity="center"

@@ -44,6 +44,7 @@
         android:background="@android:color/transparent"
         android:id="@+id/my_location_btn"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="my location"
         />
@@ -84,7 +85,8 @@
 
 
                 android:layout_weight="3"
-                android:background="@drawable/shadow_button_blue"
+                android:background="@drawable/light_blue_button"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:text="@string/search"
                 android:textAllCaps="false"
@@ -127,7 +129,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_button"
                         android:textAllCaps="false"
-                        android:background="@drawable/shadow_button_add_site"
+                        android:background="@drawable/light_blue_button"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
                         android:text="@string/addlocation" />
 
                     <LinearLayout
@@ -142,7 +146,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/high_button"
                             android:layout_weight="1"
-                            android:background="@drawable/shadow_edit_text4"
+                            android:background="@drawable/red_button"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
                             android:textAllCaps="false"
                             android:text="@string/deletelocation" />
                         <LinearLayout
@@ -158,7 +164,9 @@
                             android:layout_height="@dimen/high_button"
                             android:layout_weight="1"
                             android:textAllCaps="false"
-                            android:background="@drawable/shadow_edit_text3"
+                            android:background="@drawable/green_button"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
                             android:text="@string/editlocation" />
 
 
