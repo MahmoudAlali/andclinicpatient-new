@@ -570,13 +570,14 @@ public class FreeGroupBooking extends Fragment implements LocationListener ,
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
+                /*if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.location_proceed));
-                } /*else  if (placeSpinner.getSelectedItemPosition() == 0) {
+                } *//*else  if (placeSpinner.getSelectedItemPosition() == 0) {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
-                }*/ else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
+                }*//* else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
-                } else {
+                } else*/
+                {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
                     citiyitemSelected = placeSpinner.getSelectedItemPosition();
                     freeBookingFragment.filterMyLocationLat=filterMyLocationLat;

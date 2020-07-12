@@ -1,8 +1,11 @@
 package com.ptm.clinicpa.Fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,11 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.Offers;
+import com.ptm.clinicpa.Adapters.EndlessRecyclerViewScrollListener;
 import com.ptm.clinicpa.Adapters.HealthCentersAdapter;
 import com.ptm.clinicpa.Adapters.RequestProvidersAdapter;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
@@ -39,6 +46,9 @@ public class RequestProvidersFragment extends Fragment {
     public static TextView pageNumView;
     public static String bdb_booking_period;
     public static boolean isGroup;
+    public static ImageView filter;
+    public  static ProgressBar progressBar;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Nullable
     @Override
@@ -52,8 +62,10 @@ public class RequestProvidersFragment extends Fragment {
         pullToRefresh = view.findViewById(R.id.pullToRefresh);
         previousPage = view.findViewById(R.id.pagePrev);
         nextPage = view.findViewById(R.id.pageNext);
+        filter = view.findViewById(R.id.filter);
         pageNumView = view.findViewById(R.id.pagenum);
         isGroup =getArguments().getBoolean("isGroup");
+        progressBar=view.findViewById(R.id.progress);
 
 
         nextPage.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +103,14 @@ public class RequestProvidersFragment extends Fragment {
         });
         pageNumView.setText(getResources().getString(R.string.page)+": "+pageNum);
 
+        pageNum=1;
+
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 providerItems.clear();
 
+                pageNum=1;
                 providersAdapter.notifyDataSetChanged();
                 //---------------------call API for Services and get items-------------
                 if(isGroup)
@@ -105,13 +120,57 @@ public class RequestProvidersFragment extends Fragment {
                     APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);            }
         });
         if(isGroup)
+        {
+
+            freeBookingFragment.filterDistance="";
+            if(FreeGroupBooking.filterMyLocationLat.equals(""))
+            {
+                freeBookingFragment.filterMyLocationLat="{\"num\":34,\"value1\":"+ Offers.Lat+",\"value2\":0}";
+                freeBookingFragment.filterMyLocationLng="{\"num\":35,\"value1\":"+Offers.Long+",\"value2\":0}";
+            }
+            else
+            {
+                freeBookingFragment.filterMyLocationLat=FreeGroupBooking.filterMyLocationLat;
+                freeBookingFragment.filterMyLocationLng=FreeGroupBooking.filterMyLocationLng;
+            }
             APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);
+
+        }
 
         else
             APICall.automatedProvidersBrowse( pageNum+"", BeautyMainPage.context);
 
 
 
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isGroup)
+                {
+                    Fragment fragment = new FreeGroupBooking();
+
+                    Bundle b= new Bundle();
+                    b.putBoolean("isGroup",true);
+                    FragmentManager fm = getActivity().getFragmentManager();
+                    fragment.setArguments(b);
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment, fragment);
+                    fragmentTransaction.commit();
+                }
+                else
+                {
+                    Fragment fragment = new freeBookingFragment();
+                    Bundle b= new Bundle();
+                    b.putBoolean("isGroup",false);
+                    FragmentManager fm = getActivity().getFragmentManager();
+                    fragment.setArguments(b);
+                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment, fragment);
+                    fragmentTransaction.commit();
+                }
+
+            }
+        });
         recyclerView=view.findViewById(R.id.recycleview);
         recyclerView.setHasFixedSize(true);
         if(isGroup)
@@ -125,6 +184,16 @@ public class RequestProvidersFragment extends Fragment {
         recyclerView.setAdapter(centersAdapter);
         else
         recyclerView.setAdapter(providersAdapter);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(manager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                getdata();
+            }
+        };
+        recyclerView.addOnScrollListener(scrollListener);
 
         return view;
     }
@@ -166,4 +235,16 @@ public class RequestProvidersFragment extends Fragment {
 
 //        recyclerView.invalidate();
     }
+
+    private void getdata() {
+        pageNum++;
+        RequestProvidersFragment.progressBar.setVisibility(View.VISIBLE);
+        if(isGroup)
+            APICall.automatedCentersBrowseForGroupBookingScrolling( pageNum+"", BeautyMainPage.context);
+
+        else
+            APICall.automatedProvidersBrowseScroll( pageNum+"", BeautyMainPage.context);
+
+    }
+
 }

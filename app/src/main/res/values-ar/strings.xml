@@ -122,7 +122,7 @@
     <string name="Bookallcourierservices">حجز جميع خدمات الحقيبة</string>
     <string name="Deleteallcourierservices">حذف جميع خدمات الحقيبة</string>
     <string name="ServiceName">اسم الخدمة</string>
-    <string name="ServicePlace">مكان الخدمة</string>
+    <string name="ServicePlace">موقع تقديم الخدمة الطبية</string>
     <string name="reminingtime">الوقت المتبقي لحذف الخدمة </string>
     <string name="delete">حذف</string>
     <!--compare-->
@@ -264,6 +264,8 @@
     <string name="distance_proceed">يجب عليك اختيار قيمة للبعد لإكمال العملية</string>
     <string name="distance_first">يجب عليك اختيار قيمة للبعد أولاً</string>
     <string name="type_proceed">يجب عليك اختيار نوع الطلب لإكمال العملية</string>
+    <string name="filenum_proceed">يجب عليك اختيار رقم الملف الطبي لإكمال العملية</string>
+    <string name="relative_proceed">يجب عليك اختيار اسم المرافق أولاً</string>
     <string name="offerPrice_proceed">يجب عليك اختيار سعر العرض لإكمال العملية</string>
     <string name="speciality_proceed">يجب عليك اختيار التخصص الطبي لإكمال العملية</string>
     <string name="cancel">إلغاء</string>
@@ -641,7 +643,9 @@
     <string name="requestRelatedBooking">الحجز المرتبط بالطلب</string>
     <string name="order_id">رقم الطلب:</string>
     <string name="createRequest">إنشاء طلب فردي</string>
-    <string name="createGroupRequest">إنشاء طلب جماعي</string>
+    <string name="createGroupRequest"> طلب موعد جماعي</string>
+    <string name="indivAppPersonal">طلب موعد شخصي</string>
+    <string name="indivAppOthers">طلب موعد لمرافق</string>
     <string name="errorAddingRequest">عذراً، حاول مرة أُخرى لاحقاً</string>
     <string name="service_date_sort_up">تاريخ الطلب (تنازلياً)</string>
     <string name="service_date_sort_down">تاريخ الطلب (تصاعدياَ)</string>
@@ -823,6 +827,8 @@
     <string name="speciality">التخصص</string>
     <string name="med_id">رقم الملف الطبي:</string>
     <string name="med_id2">رقم الملف الطبي</string>
+    <string name="relative_name">اسم المرافق</string>
+    <string name="new_center">مركز طبي جديد</string>
     <string-array name="relativesType">
         <item>صلة القرابة</item>
         <item>أب</item>
@@ -900,5 +906,8 @@
     <string name="appoint_being_edited">الموعد تحت التعديل</string>
     <string name="appoint_being_shifted">تمت إزاحة الموعد بمقدار نصف ساعة</string>
     <string name="cant_reserv_yourself">لا يمكنك حجز هذا العرض لنفسك لأن بعض بياناتك الشخصية لا تتوافق مع بيانات الفئة المخصص لها العرض</string>
+    <string name="appointment_home">طلب موعد في منزل العميلة</string>
+    <string name="appointment_center">طلب موعد في المركز الصحي</string>
+    <string name="show_doctors">عرض الأطباء المتاحين</string>
 
 </resources>

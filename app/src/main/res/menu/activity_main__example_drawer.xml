@@ -37,7 +37,11 @@
             <item
                 android:id="@+id/indiv_request"
                 android:icon="@drawable/add_indiv_order"
-                android:title="@string/createRequest" />
+                android:title="@string/indivAppPersonal" />
+            <item
+                android:id="@+id/indiv_request_others"
+                android:icon="@drawable/add_indiv_order"
+                android:title="@string/indivAppOthers" />
             <item
                 android:id="@+id/group_request"
                 android:icon="@drawable/add_group_order"

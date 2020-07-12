@@ -677,23 +677,25 @@ public class freeBookingFragment extends Fragment implements LocationListener ,
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
+                /*if(mylocationbtn.getText().toString().equals(getResources().getString(R.string.MyLocation))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.location_proceed));
                 } else  if (placeSpinner.getSelectedItemPosition() == 0) {
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
                 } else if(distance.getText().toString().equals(getResources().getString(R.string.distance))){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.distance_proceed));
-                } else if(typeSpinner.getSelectedItemPosition()==0){
+                }*/ /*else if(typeSpinner.getSelectedItemPosition()==0){
                     APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.type_proceed));
-                /*} else if(typeSpinner.getSelectedItemPosition()==1&& filterSpeciality.equals("")){
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.speciality_proceed));*/
-                } else {
+                *//*} else if(typeSpinner.getSelectedItemPosition()==1&& filterSpeciality.equals("")){
+                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.speciality_proceed));*//*
+                }*/ /*else*/ {
 //                    APICall.setCityId(placeSpinner.getSelectedItemPosition());
-                    citiyitemSelected = placeSpinner.getSelectedItemPosition();
-                    if(typeSpinner.getSelectedItemPosition()==2)
+                    //citiyitemSelected = placeSpinner.getSelectedItemPosition();
+                  /*  if(typeSpinner.getSelectedItemPosition()==2)
                         fragment = new RequestProvidersFragment();
                     else
-                        fragment= new OffersForRequest();
+                        fragment= new OffersForRequest();*/
+
+                    fragment = new RequestProvidersFragment();
                     Bundle b= new Bundle();
                     b.putBoolean("isGroup",false);
                     fm = getActivity().getFragmentManager();

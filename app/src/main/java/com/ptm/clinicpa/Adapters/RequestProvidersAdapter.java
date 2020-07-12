@@ -25,6 +25,7 @@ import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.DataModel.DateClass;
 import com.ptm.clinicpa.DataModel.Location_Beauty;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
+import com.ptm.clinicpa.Fragments.PersonalIndivRequest;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
@@ -286,14 +287,23 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
                 RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
                 Log.e("t.bdb_booking_period","is"+ RequestProvidersFragment.bdb_booking_period);
                 BeautyMainPage.context.startActivity(i);*/
-                Intent i = new Intent(context, RelativesActivity.class);
+
+                Intent i = new Intent(context, CreateRequestActivity.class);
+                i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
+                i.putExtra("age", PersonalIndivRequest.clientAge);
+                i.putExtra("relation",PersonalIndivRequest.clientRelation);
+                i.putExtra("gender",PersonalIndivRequest.clientGender);
+                i.putExtra("client_name",PersonalIndivRequest.clientName);
+
+
+               /* Intent i = new Intent(context, RelativesActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getSup_id());
                 i.putExtra("center_id",itemArrayList.get(position).getHealthCntr_id());
                 i.putExtra("isBooking",true);
                 i.putExtra("max_age",itemArrayList.get(position).getMax_age());
                 i.putExtra("min_age",itemArrayList.get(position).getMin_age());
                 i.putExtra("supported_gender",itemArrayList.get(position).getSupported_gender());
-
+*/
                 RequestProvidersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
                 context.startActivity(i);
 

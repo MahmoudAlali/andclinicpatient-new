@@ -55,12 +55,14 @@ import com.ptm.clinicpa.Fragments.MyEffects.MyEffectsActivity;
 import com.ptm.clinicpa.Fragments.MyFavorites.FavoriteFragment;
 import com.ptm.clinicpa.Fragments.MyOffersFragment;
 import com.ptm.clinicpa.Fragments.Notifications.NotificationsFragment;
+import com.ptm.clinicpa.Fragments.PersonalIndivRequest;
 import com.ptm.clinicpa.Fragments.Points.PointsMainFragment;
 import com.ptm.clinicpa.Fragments.MultiIndividualBookingReservationFragment;
 import com.ptm.clinicpa.Fragments.MyReservationFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceGroupFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceMultipleBookingFragment;
+import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.ReservationFragment;
 import com.ptm.clinicpa.Fragments.ServiceFragment;
 import com.ptm.clinicpa.Fragments.ServicesTabsFragment;
@@ -1001,7 +1003,22 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         else if (id == R.id.indiv_request) {
             BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
 //                APICall.filterSortAlgorithm("33", "1", "0");
-            fragment = new freeBookingFragment();
+            fragment = new PersonalIndivRequest();
+            Bundle b=new Bundle();
+            b.putBoolean("isMe",true);
+            fragment.setArguments(b);
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+
+        }else if (id == R.id.indiv_request_others) {
+            BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
+//                APICall.filterSortAlgorithm("33", "1", "0");
+            fragment = new PersonalIndivRequest();
+            Bundle b=new Bundle();
+            b.putBoolean("isMe",false);
+            fragment.setArguments(b);
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
@@ -1011,8 +1028,17 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         else if (id == R.id.group_request) {
             BeautyMainPage.FRAGMENT_NAME = "freeGroupBookingFragment";
 //                APICall.filterSortAlgorithm("33", "1", "0");
-            fragment = new FreeGroupBooking();
+         /*   fragment = new FreeGroupBooking();
             fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();*/
+            fragment = new RequestProvidersFragment();
+
+            Bundle b= new Bundle();
+            b.putBoolean("isGroup",true);
+            fm = getFragmentManager();
+            fragment.setArguments(b);
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commit();

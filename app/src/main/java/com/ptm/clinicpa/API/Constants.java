@@ -83,6 +83,7 @@ public class Constants {
     public static String cancelReservationsEn="";
     public static String filterMessageEn="";
     public static String filterMessageAr="";
+    public static String defaultDistance="";
 
     public static String[] effectValues = {"0","2.5","5","7.5","10"};
 }

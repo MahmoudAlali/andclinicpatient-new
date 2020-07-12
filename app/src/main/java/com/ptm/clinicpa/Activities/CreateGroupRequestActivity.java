@@ -2,7 +2,9 @@ package com.ptm.clinicpa.Activities;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -754,9 +756,120 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         return clients;
     }
 
-    public static void refreshDoctors(ArrayAdapter adapter)
+   /* public static void showClinicsNamesFilterDialog(final Context context)
     {
+        servicesList.clear();
+        for (int i=0;i<APICall.allClinics.size();i++){
+            if(context.getResources().getString(R.string.locale).equals("en"))
+                servicesList.add(APICall.allClinics.get(i).getBdb_name());
+            else
+                servicesList.add(APICall.allClinics.get(i).getBdb_name_ar());
+        }
 
-    }
+        final Dialog namesalonDialog = new Dialog(BeautyMainPage.context);
+        namesalonDialog.setContentView(R.layout.provider_name_layout);
+        namesalonDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        //final Spinner name=namesalonDialog.findViewById(R.id.name);
+        final EditText name=namesalonDialog.findViewById(R.id.name);
+        final SearchableSpinner add_service=namesalonDialog.findViewById(R.id.add_service);
+        adapter=new HintArrayAdapter(BeautyMainPage.context,0);
+        adapter.addAll(servicesList);
+        adapter.setDropDownViewResource(R.layout.spinner_center_item);
+        String s = context.getResources().getString(R.string.healthCenteres)+" :";
+        add_service.setTitle(s);
+        add_service.setAdapter(adapter);
+        // set listener
+        add_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //  salonName="\"supplier_name\":" +"\""+ APICall.allSuppliers.get(position).getName()+"\",";
+                //  salonId="\"SupplierId\":" +"\""+ APICall.allSuppliers.get(position).getId()+"\",";
+
+                clinName=Filters.getString(Filters.CLINIC_ID,APICall.allClinics.get(position).getBdb_ser_id());
+                if(context.getResources().getString(R.string.locale).equals("en"))
+                    Name=APICall.allClinics.get(position).getBdb_name();
+                else
+                    Name=APICall.allClinics.get(position).getBdb_name_ar();            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+                clinName="";
+            }
+        });
+
+        //ArrayList<String> namesList=new ArrayList<>();
+
+               *//* for (int i = 0; i < supInfoList.size(); i++) {
+                    namesList.add(supInfoList.get(i).getName() + "," + supInfoList.get(i).getAddress());
+                }*//*
+
+                *//*ArrayAdapter adapter=new ArrayAdapter(BeautyMainPage.context,
+                        android.R.layout.simple_spinner_item, namesList);
+                name.setAdapter(adapter);*//*
+
+        Button search = namesalonDialog.findViewById(R.id.search);
+               *//* name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        if (position!=0){
+
+                            idsup = supInfoList.get(position).getId();
+
+                        }else {
+                            idsup="";
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });*//*
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // if (!name.getSelectedItem().toString().isEmpty()){
+                if (!name.getText().equals("")){
+                    namesalonDialog.dismiss();
+                    clinicName.setText( Name);
+                    // filterSupplierName= "\"supplier_name\":" +"\""+ name.getText().toString()+"\",";
+                    filterSupplierName=clinName;
+                    filterSupplierId=salonId;
+                    // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
+//                    ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
+
+                    doctorName.setText(context.getResources().getText(R.string.doctorName));
+                    filterDoctorName="";
+                    // bdb_name="\"SupplierId\":"+idsup+",";
+                }else {
+                    namesalonDialog.cancel();
+                    clinicName.setText(context.getResources().getText(R.string.providerName));
+                    filterSupplierName="";
+                    //  APICall.filterSortAlgorithm("3", "", "");
+                    //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, providerName.getText().toString()));
+
+                    //  bdb_name="";
+                }
+
+
+
+
+            }
+        });
+        namesalonDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // nameSalonOrProvider.setChecked(false);
+                clinicName.setText(context.getResources().getText(R.string.providerName));
+                filterSupplierName="";
+                APICall.filterSortAlgorithm("3", "", "");
+                //  ServiceFragment.serviceFilters.set(6, new ServiceFilter(false, clinicName.getText().toString()));
+                // idsup="";
+            }
+        });
+        namesalonDialog.show();
+    }*/
 }
 

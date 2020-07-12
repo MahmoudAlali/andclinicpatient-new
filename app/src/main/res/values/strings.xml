@@ -143,7 +143,7 @@
     <string name="Bookallcourierservices">Book all courier services</string>
     <string name="Deleteallcourierservices">Delete all courier services</string>
     <string name="ServiceName">Service name</string>
-    <string name="ServicePlace">Service place</string>
+    <string name="ServicePlace">Medical service place</string>
     <string name="reminingtime">Remaining time to delete service is </string>
     <string name="delete">Delete</string>
     <!--compare-->
@@ -292,6 +292,8 @@
     <string name="distance_proceed">You have to choose a distance to proceed.</string>
     <string name="distance_first">You have to choose a distance first.</string>
     <string name="type_proceed">You have to choose order type to proceed.</string>
+    <string name="filenum_proceed">You have to choose medical file number to proceed.</string>
+    <string name="relative_proceed">You have to choose companion name first.</string>
     <string name="offerPrice_proceed">You have to choose offer price to proceed.</string>
     <string name="speciality_proceed">You have to choose speciality to proceed.</string>
     <string-array name="hours">
@@ -835,7 +837,9 @@
     <string name="journey_time_emp">Journey time for employee</string>
     <string name="requestRelatedBooking">Booking attached to the order</string>
     <string name="createRequest">Create individual order</string>
-    <string name="createGroupRequest">Create group order</string>
+    <string name="indivAppPersonal">Individual appointment order</string>
+    <string name="indivAppOthers">Companion appointment order</string>
+    <string name="createGroupRequest">Group appointment order</string>
     <string name="errorAddingRequest">Sorry, try again later </string>
     <string name="service_date_sort_up">Order date (descending)</string>
     <string name="service_date_sort_down">Order date (ascending)</string>
@@ -969,6 +973,8 @@
     <string name="sure_edit_location">Do you want to edit this location?</string>
     <string name="med_id">Medical file number:</string>
     <string name="med_id2">Medical file number</string>
+    <string name="relative_name">Companion name</string>
+    <string name="new_center">New medical center</string>
     <string name="Select_Time">Select time</string>
     <string-array name="relativesType">
         <item>Relative</item>
@@ -1049,5 +1055,8 @@
     <string name="cant_reserv_yourself">You can\'t reserve this offer for yourself because some of your personal information doesn\'t match the information required for the offer</string>
     <string name="appoint_being_edited">Appointment is being edited</string>
     <string name="appoint_being_shifted">Appointment is shifted by half an hour</string>
+    <string name="appointment_home">Appointment is in patient house</string>
+    <string name="appointment_center">Appointment is in the medical center</string>
+    <string name="show_doctors">Show available doctors</string>
 
 </resources>

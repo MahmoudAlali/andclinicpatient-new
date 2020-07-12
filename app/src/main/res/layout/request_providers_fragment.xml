@@ -21,8 +21,53 @@
             app:theme="@style/ToolbarColoredBackArrow"
             app:title=""
             app:titleMarginStart="@dimen/standard_175"
-            app:titleTextColor="@color/end_gray" />
+            app:titleTextColor="@color/end_gray" >
+            <LinearLayout
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/sort"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/filter"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/filter_on"
+                    />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/pages"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
@@ -105,17 +150,26 @@
 
                 ></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
-<!--
-        <LinearLayout
 
-            android:orientation="vertical"
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
--->
+
+        <!--
+                <LinearLayout
+
+                    android:orientation="vertical"
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        -->
     </LinearLayout>
 
-
+    <ProgressBar
+        android:layout_gravity="bottom"
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_height="@dimen/standard_40"
+        android:layout_alignParentBottom="true" />
 
 </android.support.design.widget.CoordinatorLayout>
