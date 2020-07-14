@@ -6,16 +6,21 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
@@ -31,6 +36,8 @@ import com.ptm.clinicpa.DataModel.DataOffer;
 import com.ptm.clinicpa.DataExample.OffersData;
 import com.ptm.clinicpa.DataModel.OfferModel;
 import com.ptm.clinicpa.Fragments.MyOffersFragment;
+import com.ptm.clinicpa.Fragments.PersonalIndivOfferRequest;
+import com.ptm.clinicpa.Fragments.PersonalIndivRequest;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
@@ -127,7 +134,20 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             }
         });*/
-        float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
+       // float old_prc=Float.parseFloat(Double.parseDouble(offers.get(position).getOldPrice())+"");
+        Log.e("old_prc","old_prc :"+offers.get(position).getOldPrice());
+        if(offers.get(position).getOldPrice().equals("null"))
+        {
+            ((Item)holder).old_price.setVisibility(View.INVISIBLE);
+
+        }
+        else
+        {
+            float old_prc=Float.parseFloat(offers.get(position).getOldPrice());
+            ((Item)holder).old_price.setText(old_prc+"");
+
+        }
+
         float discountval=Float.parseFloat(Double.parseDouble(offers.get(position).getDiscount())+"");
      //   old_prc = Float.parseFloat(df.format(old_prc));
      //   discountval = Float.parseFloat(df.format(discountval));
@@ -195,7 +215,6 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ((Item)holder).new_price.setText(offers.get(position).getNewPrice());
         ((Item)holder).num_of_times.setText(context.getResources().getText(R.string.num_of_times)+offers.get(position).getNum_of_times());
-        ((Item)holder).old_price.setText(old_prc+"");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String newDateString=null ;
         Date d = null;
@@ -265,7 +284,22 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
+                int[] location = new int[2];
+                Log.e("ERR","GGGGG");
+                v.getLocationOnScreen(location);
+                //Initialize the Point with x, and y positions
+                Point point = new Point();
+                point.x = location[0];
+                point.y = location[1];
+                showInfoPopup(BeautyMainPage.context,point,offers.get(position).getDoctor_id()
+                ,offers.get(position).getMaxAge(),offers.get(position).getMinAge(),
+                        offers.get(position).getSupported_gender(),MyOffersFragment.filterMyLocationLatNum,
+                        MyOffersFragment.filterMyLocationLngNum,offers.get(position).getHealth_center_id(),offers.get(position).getBdb_pack_code());
+
+
+
+
+               /* Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
                 i.putExtra("center_id",offers.get(position).getHealth_center_id());
                 i.putExtra("isBooking",true);
                 i.putExtra("is_offer",true);
@@ -277,9 +311,78 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                 i.putExtra("min_age",offers.get(position).getMinAge());
                 i.putExtra("supported_gender",offers.get(position).getSupported_gender());
 
-                context.startActivity(i);
+                context.startActivity(i);*/
             }
         });
+    }
+    private static void showInfoPopup(final Context context , Point p,final  String sup_id,final String max_age,
+                                      final String min_age,final String supported_gender,final String latNum,
+                                      final String longNum,final String center_id,final String pack_code) {
+
+        // Inflate the popup_layout.xml
+        final PopupWindow changeInfoPopUp = new PopupWindow(context);
+        //LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.llStatusChangePopup);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.emp_info_pop_up_menu, null);
+        LinearLayout indivPersonal = layout.findViewById(R.id.empServicesLayout);
+        indivPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new PersonalIndivOfferRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",true);
+                b.putBoolean("is_offer",true);
+                b.putString("sup_id",sup_id);
+                b.putString("center_id",center_id);
+                b.putString("pack_code",pack_code);
+                b.putString("longNum",longNum);
+                b.putString("latNum",latNum);
+                b.putString("supported_gender",supported_gender);
+                b.putString("sup_id",sup_id);
+                b.putString("max_age",max_age);
+                b.putString("min_age",min_age);
+                fragment.setArguments(b);
+                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+                changeInfoPopUp.dismiss();
+            }
+        });
+        LinearLayout indivOther = layout.findViewById(R.id.empWorkingLayout);
+        indivOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new PersonalIndivOfferRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",false);
+                b.putBoolean("is_offer",true);
+                b.putString("sup_id",sup_id);
+                b.putString("center_id",center_id);
+                b.putString("pack_code",pack_code);
+                b.putString("longNum",longNum);
+                b.putString("latNum",latNum);
+                b.putString("supported_gender",supported_gender);
+                b.putString("sup_id",sup_id);
+                b.putString("max_age",max_age);
+                b.putString("min_age",min_age);
+                fragment.setArguments(b);
+                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+                changeInfoPopUp.dismiss();
+            }
+        });
+        // Creating the PopupWindow
+        changeInfoPopUp.setContentView(layout);
+        changeInfoPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setFocusable(true);
+        int OFFSET_X = -20;
+        int OFFSET_Y = 50;
+        changeInfoPopUp.setBackgroundDrawable(new BitmapDrawable());
+        changeInfoPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
     }
 
     @Override

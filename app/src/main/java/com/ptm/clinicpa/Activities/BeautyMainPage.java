@@ -1006,6 +1006,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragment = new PersonalIndivRequest();
             Bundle b=new Bundle();
             b.putBoolean("isMe",true);
+            b.putBoolean("is_offer",false);
             fragment.setArguments(b);
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
@@ -1018,6 +1019,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             fragment = new PersonalIndivRequest();
             Bundle b=new Bundle();
             b.putBoolean("isMe",false);
+            b.putBoolean("is_offer",false);
             fragment.setArguments(b);
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();

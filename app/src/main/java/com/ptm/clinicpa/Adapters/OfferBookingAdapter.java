@@ -68,7 +68,17 @@ public class OfferBookingAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((Item) holder).discount.setText(APICall.convertToArabic(offerModels.get(position).getDiscount()+"%"));
         }
         ((Item) holder).new_price.setText(APICall.convertToArabic(offerModels.get(position).getNewPrice())+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
-        ((Item) holder).old_price.setText(APICall.convertToArabic(offerModels.get(position).getOldPrice())+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
+        if(offerModels.get(position).getOldPrice().equals("null"))
+        {
+            ((Item)holder).old_price.setVisibility(View.INVISIBLE);
+
+        }
+        else
+        {
+            ((Item) holder).old_price.setText(APICall.convertToArabic(offerModels.get(position).getOldPrice())+" "+((AppCompatActivity)context).getResources().getString(R.string.ryal));
+
+        }
+
         ((Item) holder).offer_start.setText(((AppCompatActivity)context).getResources().getString(R.string.start_at)+APICall.convertToArabic(offerModels.get(position).getBdb_offer_start()));
         ((Item) holder).end_offer.setText(((AppCompatActivity)context).getResources().getString(R.string.valid_until)+APICall.convertToArabic(offerModels.get(position).getBdb_offer_end()));
         String serviecs="";

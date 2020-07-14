@@ -42,6 +42,7 @@
             >
 
             <LinearLayout
+                android:id="@+id/compNameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
@@ -120,10 +121,12 @@
                 android:textSize="16dp"
                 android:textColor="@color/blueClinic"
                 android:textAlignment="center"
+                android:id="@+id/medPlace"
                 android:layout_marginBottom="@dimen/standard_20"
                 android:textStyle="bold"
                 />
             <RadioGroup
+                android:id="@+id/placeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/standard_20"

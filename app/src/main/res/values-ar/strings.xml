@@ -885,14 +885,16 @@
 
     </string-array>
     <string name="in">في</string>
-    <string name="can_be_edited">يمكن التعديل على الموعد المطلوب من قبل المركز</string>
+    <string name="can_be_edited">يمكن للمركز تعديل الوقت المطلوب</string>
     <string name="current_date">التاريخ الحالي :</string>
     <string name="current_time">الوقت الحالي :</string>
     <string name="wanted_date">التاريخ المطلوب :</string>
     <string name="wanted_time">الوقت المطلوب :</string>
+    <string name="wanted_time2">الوقت المطلوب </string>
     <string name="edit_request">طلب تعديل</string>
     <string name="send_request">إرسال الطلب</string>
     <string name="no_followers">لا يوجد لديك أشخاص تابعين</string>
+    <string name="no_availtimes">لا يوجد لدى هذا الطبيب أوقات متاحة للحجز</string>
     <string name="relationship">صلة القرابة :</string>
     <string name="father">أب</string>
     <string name="mother">أم</string>

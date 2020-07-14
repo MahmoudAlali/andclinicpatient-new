@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llSortChangePopup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/border_edit_text_v6"
+    android:paddingLeft="20dp"
+    android:paddingRight="@dimen/standard_20">
+    <LinearLayout
+        android:id="@+id/empServicesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|end"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/firstTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/indivAppPersonal"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="5dp"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/firstIcon"
+            android:layout_marginLeft="11dp"
+            android:layout_width="@dimen/standard_45"
+            android:layout_height="@dimen/standard_45"
+            android:src="@drawable/add_indiv_order"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        />
+    <LinearLayout
+        android:id="@+id/empWorkingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center|end"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/secondTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/indivAppOthers"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="5dp"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/secondIcon"
+            android:layout_marginLeft="11dp"
+            android:layout_width="@dimen/standard_45"
+            android:layout_height="@dimen/standard_45"
+            android:src="@drawable/add_indiv_order"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

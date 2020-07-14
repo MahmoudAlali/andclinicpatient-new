@@ -39,7 +39,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.ArrayList;
 
-public class PersonalIndivRequest extends Fragment implements LocationListener,
+public class PersonalIndivOfferRequest extends Fragment implements LocationListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     RadioButton home,center;
@@ -48,31 +48,46 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
     static ArrayList<String> filesList=new ArrayList<>();
     String filterCenterName="";
     public static ArrayAdapter adapter,adapter2;
-    public static boolean isPersonalReser;
+    public static boolean isPersonalReser,isOffer;
     static ArrayList<String> relativesList=new ArrayList<>();
 
     public static String clientName,clientAge,clientGender,clientRelation,HealthRecord="";
+    public static String sup_id,max_age,min_age,supported_gender,center_id="",pack_code,longNum,latNum;
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_free_booking_filters2, container, false);
         home=view.findViewById(R.id.home);
         center=view.findViewById(R.id.center);
+        view.findViewById(R.id.medPlace).setVisibility(View.GONE);
+        view.findViewById(R.id.placeLayout).setVisibility(View.GONE);
         showDoctorsBtn=view.findViewById(R.id.ok);
         companionName=view.findViewById(R.id.companionName);
         medFileNum=view.findViewById(R.id.providerName);
         isPersonalReser=getArguments().getBoolean("isMe");
-
+        isOffer=getArguments().getBoolean("is_offer");
+        sup_id=getArguments().getString("sup_id");
+        max_age=getArguments().getString("max_age");
+        min_age=getArguments().getString("min_age");
+        supported_gender=getArguments().getString("supported_gender");
+        latNum=getArguments().getString("latNum");
+        longNum=getArguments().getString("longNum");
+        pack_code=getArguments().getString("pack_code");
+        center_id=getArguments().getString("center_id");
+        int max=Integer.parseInt(max_age);
+        int min =Integer.parseInt(min_age);
         //final Spinner doctorSpeciality = layout2.findViewById(R.id.doctorSpeciality);
 
-       // APICall.getdetailsUser(BeautyMainPage.context);
+        // APICall.getdetailsUser(BeautyMainPage.context);
         if (!isPersonalReser)
-            APICall.getAllFollowers(BeautyMainPage.context);
+                APICall.getFollowersForBooking(BeautyMainPage.context,max,min,supported_gender,true);
 
 
+        Log.e("IsOffer","o "+isOffer);
+        Log.e("IsMe","o "+isPersonalReser);
         //region Medical file number
 
 
 
-         adapter2 = new ArrayAdapter(BeautyMainPage.context, R.layout.simple_spinner_item_layout_v1, filesList);
+        adapter2 = new ArrayAdapter(BeautyMainPage.context, R.layout.simple_spinner_item_layout_v1, filesList);
         adapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_layout_v3);
         medFileNum.setAdapter(adapter2);
         medFileNum.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,7 +136,7 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-                   // else
+                    // else
                     {
                         if (medFileNum.getSelectedItem().equals(BeautyMainPage.context.getString(R.string.new_center)))
                         {
@@ -171,12 +186,16 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                         filesList.add(BeautyMainPage.context.getString(R.string.med_id2));
 
                         for (int i=0;i<APICall.allRelativesList.get(index).getRecords().size();i++){
-                            if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
-                                filesList.add(APICall.allRelativesList.get(index).getRecords().get(i).getHealth_center_en()+": " + APICall.allRelativesList.get(index).getRecords().get(i).getHealth_record());
-                            else
-                                filesList.add(APICall.allRelativesList.get(index).getRecords().get(i).getHealth_center_ar()+": " + APICall.allRelativesList.get(index).getRecords().get(i).getHealth_record());
+                                if(center_id.equals(APICall.allRelativesList.get(index).getRecords().get(i).getHealth_center_id()))
+                                {
+                                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+                                        filesList.add(APICall.allRelativesList.get(index).getRecords().get(i).getHealth_center_en()+": " + APICall.allRelativesList.get(index).getRecords().get(i).getHealth_record());
+                                    else
+                                        filesList.add(APICall.allRelativesList.get(index).getRecords().get(i).getHealth_center_ar()+": " + APICall.allRelativesList.get(index).getRecords().get(i).getHealth_record());
+                                }
 
                         }
+                        if(filesList.size()==1)
                         filesList.add(BeautyMainPage.context.getString(R.string.new_center));
 
                         adapter2.notifyDataSetChanged();
@@ -193,14 +212,15 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
         }
         else
         {
-            companionName.setVisibility(View.GONE);
-            APICall.getAllFileNumbers(BeautyMainPage.context,false);
+            view.findViewById(R.id.compNameLayout).setVisibility(View.GONE);
+            APICall.getAllFileNumbers(BeautyMainPage.context,true);
             clientAge=BeautyMainPage.bdb_old;
             clientGender=BeautyMainPage.client_gender;
             clientName=BeautyMainPage.client_name;
             clientRelation="0";
         }
 
+        showDoctorsBtn.setText(R.string.next);
         showDoctorsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,30 +239,22 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                     Log.e("filterCenterName","filterCenterName"+freeBookingFragment.filterSupplierName);
 
                 }
-                if (center.isChecked()) {
-                    freeBookingFragment.filterServicePlace = ",{\"num\":9,\"value1\":1}";
-                    freeBookingFragment.Place="center";
-                }else if (home.isChecked()){
-                    freeBookingFragment.filterServicePlace = ",{\"num\":8,\"value1\":1}";
-                    freeBookingFragment.Place="home";
+                freeBookingFragment.filterServicePlace = ",{\"num\":9,\"value1\":1}";
+                freeBookingFragment.Place="center";
 
-                }
-                else
-                {
-                    APICall.showSweetDialog(BeautyMainPage.context,getResources().getString(R.string.ExuseMeAlert),getResources().getString(R.string.place_proceed));
-                    return;
-                }
-                {
-                    Fragment fragment = new RequestProvidersFragment();
-                    Bundle b= new Bundle();
-                    b.putBoolean("isGroup",false);
-                    FragmentManager fm = getActivity().getFragmentManager();
-                    fragment.setArguments(b);
-                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, fragment);
-                    fragmentTransaction.commit();
-                }
+                    Intent i = new Intent(BeautyMainPage.context, CreateRequestActivity.class);
+                    i.putExtra("sup_id", sup_id);
+                    i.putExtra("age",clientAge);
+                    i.putExtra("relation",clientRelation);
+                    i.putExtra("gender",clientGender);
+                    i.putExtra("client_name",clientName);
+                    i.putExtra("is_offer",true);
+                    i.putExtra("pack_code",pack_code);
+                    i.putExtra("longNum",longNum);
+                    i.putExtra("latNum",latNum);
+                    i.putExtra("health_record",medFileNum.getSelectedItem().toString());
 
+                startActivity(i);
             }
         });
 
@@ -251,22 +263,24 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
 
     public static void fillFiles()
     {
-            if (filesList.size()==0)
+        if (filesList.size()==0)
+        {
+            filesList.add(BeautyMainPage.context.getString(R.string.med_id2));
+
+            for (int i=0;i<APICall.allFileNumbers.size();i++){
+                if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
+                    filesList.add(APICall.allFileNumbers.get(i).getHealth_center_en()+": " + APICall.allFileNumbers.get(i).getHealth_record());
+                else
+                    filesList.add(APICall.allFileNumbers.get(i).getHealth_center_ar()+": " + APICall.allFileNumbers.get(i).getHealth_record());
+
+            }
+            if(filesList.size()==1)
             {
-                filesList.add(BeautyMainPage.context.getString(R.string.med_id2));
-
-                for (int i=0;i<APICall.allFileNumbers.size();i++){
-                    if(BeautyMainPage.context.getResources().getString(R.string.locale).equals("en"))
-                        filesList.add(APICall.allFileNumbers.get(i).getHealth_center_en()+": " + APICall.allFileNumbers.get(i).getHealth_record());
-                    else
-                        filesList.add(APICall.allFileNumbers.get(i).getHealth_center_ar()+": " + APICall.allFileNumbers.get(i).getHealth_record());
-
-                }
                 filesList.add(BeautyMainPage.context.getString(R.string.new_center));
-
-                adapter2.notifyDataSetChanged();
             }
 
+            adapter2.notifyDataSetChanged();
+        }
     }
     public static void fillRelatives()
     {

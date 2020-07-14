@@ -1033,14 +1033,16 @@
     <string name="appointment_type">Appointment type</string>
     <string name="reserv_from_center">Booking this offer can be done only from the health center</string>
     <string name="in">in</string>
-    <string name="can_be_edited">The chosen appointment can be edited by the health center</string>
+    <string name="can_be_edited">The health center can edit the wanted time</string>
     <string name="current_date">Current date :</string>
     <string name="current_time">Current time :</string>
     <string name="wanted_date">Wanted date :</string>
     <string name="wanted_time">Wanted time :</string>
+    <string name="wanted_time2">Wanted time</string>
     <string name="edit_request">Edit request</string>
     <string name="send_request">Send request</string>
     <string name="no_followers">You don\'t have any followers</string>
+    <string name="no_availtimes">This doctor doesn\'t have any available times</string>
 
     <string name="relationship">Relationship :</string>
     <string name="father">Father</string>

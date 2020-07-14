@@ -46,10 +46,11 @@
         </Button>
 
 
-        <android.support.design.widget.CoordinatorLayout
+        <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
@@ -65,7 +66,17 @@
                 android:layout_height="@dimen/high_edit_text">
 
             </Button>
-        </android.support.design.widget.CoordinatorLayout>
+            <CheckBox
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/personalReserv"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@string/personalReserv"/>
+        </LinearLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_marginTop="5dp"
@@ -77,7 +88,10 @@
                 android:id="@+id/show_clients"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></LinearLayout>
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+
         </android.support.v4.widget.NestedScrollView>
 
 

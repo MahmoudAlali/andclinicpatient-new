@@ -45,7 +45,7 @@ public class RelativesActivity extends AppCompatActivity {
             center_id=getIntent().getStringExtra("center_id");
             int max=Integer.parseInt(max_age);
             int min =Integer.parseInt(min_age);
-            APICall.getFollowersForBooking(context,max,min,supported_gender);
+            APICall.getFollowersForBooking(context,max,min,supported_gender,false);
             if(isOffer)
             {
                 pack_code=getIntent().getStringExtra("pack_code");
@@ -73,7 +73,7 @@ public class RelativesActivity extends AppCompatActivity {
                     supported_gender=getIntent().getStringExtra("supported_gender");
                     int max=Integer.parseInt(max_age);
                     int min =Integer.parseInt(min_age);
-                    APICall.getFollowersForBooking(context,max,min,supported_gender);
+                    APICall.getFollowersForBooking(context,max,min,supported_gender,false);
                 }
                 else
                 {
