@@ -64,6 +64,7 @@ import com.ptm.clinicpa.Fragments.PlaceServiceGroupFragment;
 import com.ptm.clinicpa.Fragments.PlaceServiceMultipleBookingFragment;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.ReservationFragment;
+import com.ptm.clinicpa.Fragments.ReservatoinDetailsActivity;
 import com.ptm.clinicpa.Fragments.ServiceFragment;
 import com.ptm.clinicpa.Fragments.ServicesTabsFragment;
 import com.ptm.clinicpa.Fragments.freeBookingFragment;
@@ -232,7 +233,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.requests).setVisible(false);
             sideMenu.findItem(R.id.setting).setVisible(false);
             sideMenu.findItem(R.id.notification).setVisible(false);
-            sideMenu.findItem(R.id.favorite).setVisible(false);
+            sideMenu.findItem(R.id.favorites).setVisible(false);
            // menu.findItem(R.id.favorites).setEnabled(false);
            // menu.findItem(R.id.centers).setEnabled(false);
             menu.findItem(R.id.reservations).setEnabled(false);
@@ -304,7 +305,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Log.e("NotifCode",code);
         Log.e("Notif", " pairs :"+notificationPairs);
 
-        if(code.equals("2")||code.equals("3")||code.equals("25")||code.equals("49")||code.equals("50")||code.equals("46"))
+        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("36")||code.equals("37")
+                ||code.equals("23")||code.equals("22")||code.equals("25")||code.equals("28"))
         {
             String book_id="";
             for (int i=0;i<j.length();i++)
@@ -312,7 +314,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    book_id = object.getString("bdb_name_booking");
+                    book_id = object.getString("appointment_id");
                     break;
                 }
                 catch (Exception e)
@@ -321,252 +323,46 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
                 }
             }
+            Intent detailsIntent=new Intent(context, ReservatoinDetailsActivity.class);
+            detailsIntent.putExtra("book_id",book_id);
 
-            Bundle bundle = new Bundle();
-            bundle.putString("book_id", book_id);
-            menu.findItem(R.id.services).setIcon(R.drawable.appointments_grey);
-            menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
-            menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
-            menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
-            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
-            navigation.setSelectedItemId(R.id.reservations);
-            FRAGMENT_NAME="";
-            fragment = new MyReservationFragment();
-            fragment.setArguments(bundle);
+            detailsIntent.putExtra("internally_book",book_id);
+            (context).startActivity(detailsIntent);
+
+        }
+
+        else if(code.equals("29")||code.equals("30")||code.equals("31"))
+        {
+            String packCode="";
+            for (int i=0;i<j.length();i++)
+            {
+                Log.e("Notif","i :"+i);
+                try{
+                    JSONObject object = j.getJSONObject(i);
+                    packCode = object.getString("bdb_pack_code");
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Log.e("NotifErr",i+" : "+e.getMessage());
+
+                }
+            }
+           // navigation.setSelectedItemId(R.id.favorites);
+            menu.findItem(R.id.favorites).setIcon(R.drawable.offers_selected);
+
+            //fragment = new FavoriteFragment();
+            fragment=new MyOffersFragment();
+            Bundle b=new Bundle();
+            b.putString("pack_code",packCode);
+            fragment.setArguments(b);
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
-        else if(code.equals("20"))
-        {
-            //Bundle bundle = new Bundle();
-            fragment = new PointsMainFragment();
-            //fragment.setArguments(bundle);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commit();
 
-        }
-
-       /* if(code.equals("32"))
-        {
-            Bundle bundle = new Bundle();
-            bundle.putString("tab_id", "2");
-            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
-            FRAGMENT_NAME="";
-            fragment = new MyReservationFragment();
-            fragment.setArguments(bundle);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-        }*/
-
-        else if(code.equals("22")||code.equals("32")||code.equals("40")||code.equals("52"))
-        {
-            String tab_id="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    tab_id = object.getString("filter");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-            Bundle bundle = new Bundle();
-            bundle.putString("tab_id", tab_id);
-            menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
-            menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-            menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
-            menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
-            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
-            navigation.setSelectedItemId(R.id.reservations);
-            FRAGMENT_NAME="";
-            fragment = new MyReservationFragment();
-            fragment.setArguments(bundle);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-        }
-        else if(code.equals("16")||code.equals("18"))
-        {
-            String bdb_offer_type="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    bdb_offer_type = object.getString("bdb_offer_type");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-            String bdb_pack_id="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    bdb_pack_id = object.getString("bdb_pack_code");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-
-            String is_effect_on="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    is_effect_on = object.getString("is_effects_on");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-            String offer_end="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    offer_end = object.getString("bdb_offer_end");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-
-            String booking_period="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    booking_period = object.getString("bdb_booking_period");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-            FRAGMENT_NAME="";
-
-            if (bdb_offer_type.equals("2")
-                    || bdb_offer_type.equals("5")){
-
-                Intent intent2=new Intent(context, MultiDateOfferBooking.class);
-                intent2.putExtra("bdb_pack_id",bdb_pack_id);
-                intent2.putExtra("notification","true");
-                intent2.putExtra("is_effects_on",is_effect_on);
-                intent2.putExtra("offer_end",offer_end);
-                intent2.putExtra("offertype",bdb_offer_type);
-                intent2.putExtra("booking_period",booking_period);
-                ((AppCompatActivity)context).startActivity(intent2);
-
-            }else if (bdb_offer_type.equals("1")
-                    || bdb_offer_type.equals("4")){
-                Intent  intent3=new Intent(context, SingleDateOfferBooking.class);
-                intent3.putExtra("bdb_pack_id",bdb_pack_id);
-                intent3.putExtra("notification","true");
-                intent3.putExtra("is_effects_on",is_effect_on);
-                intent3.putExtra("offer_end",offer_end);
-                intent3.putExtra("offertype",bdb_offer_type);
-                intent3.putExtra("booking_period",booking_period);
-                ((AppCompatActivity)context).startActivity(intent3);
-            }else if (bdb_offer_type.equals("3")
-                    || bdb_offer_type.equals("6")){
-
-                Intent  intent4=new Intent(context, SingleDateMultiClientOfferBooking.class);
-                intent4.putExtra("bdb_pack_id",bdb_pack_id);
-                intent4.putExtra("notification","true");
-                intent4.putExtra("notification","true");
-                intent4.putExtra("is_effects_on",is_effect_on);
-                intent4.putExtra("offer_end",offer_end);
-                intent4.putExtra("offertype",bdb_offer_type);
-                intent4.putExtra("booking_period",booking_period);
-                ((AppCompatActivity)context).startActivity(intent4);
-            }
-        }
-        else if(code.equals("15"))
-        {
-            String book_id="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    book_id = object.getString("bdb_name_booking");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-            String type="";
-            for (int i=0;i<j.length();i++)
-            {
-                Log.e("Notif","i :"+i);
-                try{
-                    JSONObject object = j.getJSONObject(i);
-                    type = object.getString("booking_type");
-                    break;
-                }
-                catch (Exception e)
-                {
-                    Log.e("NotifErr",i+" : "+e.getMessage());
-
-                }
-            }
-
-            Bundle bundle = new Bundle();
-            Log.e("execute_book_id", "is:" + book_id);
-
-            bundle.putString("execute_book_id", book_id);
-            bundle.putString("type", type);
-            menu.findItem(R.id.services).setIcon(R.drawable.services_grey);
-            menu.findItem(R.id.favorites).setIcon(R.drawable.favorite_grey);
-            menu.findItem(R.id.notification).setIcon(R.drawable.notifications_grey);
-            menu.findItem(R.id.main).setIcon(R.drawable.main_selected);
-            menu.findItem(R.id.reservations).setIcon(R.drawable.reservations_selected);
-            navigation.setSelectedItemId(R.id.reservations);
-            FRAGMENT_NAME="";
-            fragment = new MyReservationFragment();
-            fragment.setArguments(bundle);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
-        }
-        else if(code.equals("45"))
+        else if(code.equals("20")||code.equals("21")||code.equals("32"))
         {
             String order_id="";
             for (int i=0;i<j.length();i++)
@@ -574,7 +370,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
                 Log.e("Notif","i :"+i);
                 try{
                     JSONObject object = j.getJSONObject(i);
-                    order_id = object.getString("bdb_id");
+                    order_id = object.getString("order_id");
                     break;
                 }
                 catch (Exception e)
@@ -583,26 +379,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
                 }
             }
-
-            Bundle bundle = new Bundle();
-            bundle.putString("order_id", order_id);
-            FRAGMENT_NAME="";
-            fragment = new MyBookingRequestsFragment();
-            fragment.setArguments(bundle);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();
+            Intent detailsIntent=new Intent(context, BookingRequestDetailsActivity.class);
+            detailsIntent.putExtra("order_id",order_id);
+            (context).startActivity(detailsIntent);
         }
 
         else {
             Log.e("ELSSSSe","go to else");
-           /* fragment = new Offers();
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commitAllowingStateLoss();*/
-
         }
         //endregion
 

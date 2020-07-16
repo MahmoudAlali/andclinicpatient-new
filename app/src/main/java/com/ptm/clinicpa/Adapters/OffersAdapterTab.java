@@ -291,7 +291,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Point point = new Point();
                 point.x = location[0];
                 point.y = location[1];
-                showInfoPopup(BeautyMainPage.context,point,offers.get(position).getDoctor_id()
+                showInfoPopup(context,point,offers.get(position).getDoctor_id()
                 ,offers.get(position).getMaxAge(),offers.get(position).getMinAge(),
                         offers.get(position).getSupported_gender(),MyOffersFragment.filterMyLocationLatNum,
                         MyOffersFragment.filterMyLocationLngNum,offers.get(position).getHealth_center_id(),offers.get(position).getBdb_pack_code());
@@ -325,6 +325,16 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.emp_info_pop_up_menu, null);
         LinearLayout indivPersonal = layout.findViewById(R.id.empServicesLayout);
+        if(!supported_gender.equals("2") && !supported_gender.equals(BeautyMainPage.client_gender))
+        {
+            indivPersonal.setVisibility(View.GONE);
+            layout.findViewById(R.id.line).setVisibility(View.GONE);
+        }
+        if(!(Integer.parseInt(BeautyMainPage.bdb_old)>Integer.parseInt(min_age)&&Integer.parseInt(BeautyMainPage.bdb_old)<Integer.parseInt(max_age)))
+        {
+            indivPersonal.setVisibility(View.GONE);
+            layout.findViewById(R.id.line).setVisibility(View.GONE);
+        }
         indivPersonal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

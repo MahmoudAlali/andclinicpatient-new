@@ -251,7 +251,60 @@ public class NotificationsBeauty {
             Log.e("Notif","i :"+i);
             try{
                 JSONObject object = pairs.getJSONObject(i);
-                book_id = object.getString("book_id");
+                book_id = object.getString("appointment_id");
+                break;
+            }
+            catch (Exception e)
+            {
+                Log.e("NotifErr",i+" : "+e.getMessage());
+
+            }
+        }
+
+        resultIntent.putExtra("book_id", book_id);
+        resultIntent.putExtra("notify_pairs", pairs.toString());
+        Log.e("Notif", "showBookingDetailsNotification is triggered");
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder2 = new NotificationCompat.Builder(context, notification_id_channel);
+        builder2.setContentIntent(resultPendingIntent);
+        builder2.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.logo2)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setContentInfo("INFO")
+        ;
+        NotificationManagerCompat notificationManager2 = NotificationManagerCompat.from(context);
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            @SuppressLint("WrongConstant") NotificationChannel notificationChannel=new NotificationChannel(notification_id_channel,
+                    "Notificatio", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Firebase channel");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.WHITE);
+            ((NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(notificationChannel);
+        }
+        notificationManager2.notify(RANDOM_N_ID, builder2.build());
+    }
+    public static void showOrderDetailsNotification(Context context, String title, String body, JSONArray pairs, String code)
+    {
+
+        Intent resultIntent = new Intent(context, BeautyMainPage.class);
+        resultIntent.putExtra("notify_title", title);
+        resultIntent.putExtra("notify_code", code);
+        String book_id="";
+        for (int i=0;i<pairs.length();i++)
+        {
+            Log.e("Notif","i :"+i);
+            try{
+                JSONObject object = pairs.getJSONObject(i);
+                book_id = object.getString("order_id");
                 break;
             }
             catch (Exception e)
@@ -398,19 +451,23 @@ public class NotificationsBeauty {
         Log.e("NotifCode",code);
         Log.e("Notif", " pairs :"+notificationPairs);
 
-        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("21")||code.equals("38")
-                ||code.equals("45")||code.equals("46")||code.equals("49")||code.equals("50")||code.equals("40")
-                ||code.equals("2")||code.equals("3")||code.equals("15")||code.equals("19")
-                ||code.equals("20")||code.equals("22")||code.equals("25")||code.equals("32")||code.equals("52")
+        if(code.equals("22")||code.equals("23")||code.equals("24")||code.equals("25")||code.equals("26")
+                ||code.equals("27")||code.equals("28")||code.equals("36")||code.equals("37")
         )
         {
             showBookingDetailsNotification(context,title,body,j,code);
         }
-        else if(code.equals("16")||code.equals("18"))
+        else if(code.equals("29")||code.equals("30")||code.equals("31"))
         {
-            showOfferDetailsNotification(context,title,body,j,code,true);
-        }
+            showBookingDetailsNotification(context,title,body,j,code);
 
+           // showOfferDetailsNotification(context,title,body,j,code,true);
+        }
+        else if(code.equals("20")||code.equals("21")||code.equals("32"))
+        {
+            showOrderDetailsNotification(context,title,body,j,code);
+
+        }
 
     }
 

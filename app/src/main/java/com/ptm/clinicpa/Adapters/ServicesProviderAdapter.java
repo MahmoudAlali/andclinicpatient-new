@@ -1,22 +1,34 @@
 package com.ptm.clinicpa.Adapters;
 
 import android.app.Dialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.HintArrayAdapter;
+import com.ptm.clinicpa.Activities.BeautyMainPage;
+import com.ptm.clinicpa.Activities.PersonalOrderActivity;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.TabOne;
@@ -25,6 +37,8 @@ import com.ptm.clinicpa.DataModel.DataService;
 import com.ptm.clinicpa.DataModel.DateClass;
 import com.ptm.clinicpa.DataModel.DoctorDataModel;
 import com.ptm.clinicpa.Fragments.MyIndEffectsActivity;
+import com.ptm.clinicpa.Fragments.PersonalIndivOfferRequest;
+import com.ptm.clinicpa.Fragments.PersonalIndivRequest;
 import com.ptm.clinicpa.R;
 
 import java.text.SimpleDateFormat;
@@ -196,7 +210,25 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
         ((Item)holder).add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, RelativesActivity.class);
+
+                int[] location = new int[2];
+                Log.e("ERR","GGGGG");
+                v.getLocationOnScreen(location);
+                //Initialize the Point with x, and y positions
+                Point point = new Point();
+                point.x = location[0];
+                point.y = location[1];
+                showInfoPopup(context,point,itemArrayList.get(position).getBdb_id()
+                        ,itemArrayList.get(position).getMax_age(),itemArrayList.get(position).getMin_age(),
+                        itemArrayList.get(position).getBdb_supported_gender()
+                        ,MainProviderActivity.center_id);
+
+
+
+
+
+
+               /* Intent i = new Intent(context, RelativesActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getBdb_id());
                 i.putExtra("center_id",MainProviderActivity.center_id);
                 i.putExtra("isBooking",true);
@@ -205,7 +237,7 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
                 i.putExtra("min_age",itemArrayList.get(position).getMin_age());
                 i.putExtra("supported_gender",itemArrayList.get(position).getBdb_supported_gender());
 
-                context.startActivity(i);
+                context.startActivity(i);*/
             }
         });
         /*((Item)holder).add.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +297,62 @@ public class ServicesProviderAdapter extends RecyclerView.Adapter<RecyclerView.V
 //    public  static ArrayList<DateClass> dateClasses=new ArrayList<>() ;
 
 
+    private static void showInfoPopup(final Context context , Point p, final  String sup_id, final String max_age,
+                                      final String min_age, final String supported_gender, final String center_id) {
+
+        // Inflate the popup_layout.xml
+        final PopupWindow changeInfoPopUp = new PopupWindow(context);
+        //LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.llStatusChangePopup);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.emp_info_pop_up_menu, null);
+        LinearLayout indivPersonal = layout.findViewById(R.id.empServicesLayout);
+        indivPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,PersonalOrderActivity.class);
+                i.putExtra("isMe",true);
+                i.putExtra("is_offer",false);
+                i.putExtra("fromDoctors",true);
+                i.putExtra("sup_id",sup_id);
+                i.putExtra("center_id",center_id);
+                i.putExtra("supported_gender",supported_gender);
+                i.putExtra("sup_id",sup_id);
+                i.putExtra("max_age",max_age);
+                i.putExtra("min_age",min_age);
+                context.startActivity(i);
+
+                changeInfoPopUp.dismiss();
+            }
+        });
+        LinearLayout indivOther = layout.findViewById(R.id.empWorkingLayout);
+        indivOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,PersonalOrderActivity.class);
+                i.putExtra("isMe",false);
+                i.putExtra("is_offer",false);
+                i.putExtra("fromDoctors",true);
+                i.putExtra("sup_id",sup_id);
+                i.putExtra("center_id",center_id);
+                i.putExtra("supported_gender",supported_gender);
+                i.putExtra("sup_id",sup_id);
+                i.putExtra("max_age",max_age);
+                i.putExtra("min_age",min_age);
+                context.startActivity(i);
+
+                changeInfoPopUp.dismiss();
+            }
+        });
+        // Creating the PopupWindow
+        changeInfoPopUp.setContentView(layout);
+        changeInfoPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setFocusable(true);
+        int OFFSET_X = -20;
+        int OFFSET_Y = 50;
+        changeInfoPopUp.setBackgroundDrawable(new BitmapDrawable());
+        changeInfoPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+    }
 
     public static ArrayList<DateClass> ListOfDates(int priod){
         Calendar now = Calendar.getInstance();

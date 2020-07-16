@@ -66,8 +66,9 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
     public static String salonFilterOld="",distanceFilterOld="",locationFilterOld="",clinicRateFilterOld="",locationFilterOld2="",dateFilterOld="",priceFilterOld="",serviceFilterOld="";
     public static String salonFilterName="",distanceFilterName="",locationFilterName="",clinicRateFilterName="",dateFilterName="",priceFilterName="",serviceFilterName="",specialityFilterName="";
 
-    public static String  filterMyLocationLngNum="",
+    public static String  filterMyLocationLngNum="",filterPackCode="",packCode="",
     filterMyLocationLatNum="";
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         APICall.offers.clear();
@@ -77,13 +78,34 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
 
         filterMyLocationLatNum=Offers.Lat;
         filterMyLocationLngNum=Offers.Long;
+        filterPackCode="";
+
 //        providersAdapter.notifyDataSetChanged();
+        try {
+            packCode=getArguments().getString("pack_code");
+            if(!packCode.equals(""))
+            {
+                filterPackCode=",{\"num\":55,\"value1\":"+packCode+",\"value2\":0}";
+                Log.e("filterPackCode","dddd"+filterPackCode);
+            }
+        }
+        catch (Exception e)
+        {
+            filterPackCode="";
+            Log.e("filterPackCode","catch"+filterPackCode);
+
+        }
+
+
+
+
         //---------------------call API for Services and get items-------------
 
          String filter2="\"Filter\":["+APICall.Filter("7","1")+
                 MyOffersFilters.filterOfferDate+
                 MyOffersFilters.filterClinicName+
                 MyOffersFilters.filterServiceId+
+                 filterPackCode+
                 MyOffersFilters.filterClinicRate;
 
         if(!MyOffersFilters.filterDistance.equals(""))

@@ -55,6 +55,7 @@ import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferBooking;
 import com.ptm.clinicpa.Activities.MultiDateOffer.MultiDateOfferEffect;
 import com.ptm.clinicpa.Activities.NewBookingRequestsFragment;
 import com.ptm.clinicpa.Activities.OldAppointmentsFiltersActivity;
+import com.ptm.clinicpa.Activities.PersonalOrderActivity;
 import com.ptm.clinicpa.Activities.ProviderSerAndOfferPKG.MainProviderActivity;
 import com.ptm.clinicpa.Activities.RelativesActivity;
 import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
@@ -2662,7 +2663,7 @@ public class APICall {
             }
         });
 
-        lat = "21.418923225457213"; lon = "39.82685700058937";
+       // lat = "21.418923225457213"; lon = "39.82685700058937";
 //        String url = API_PREFIX_NAME+"/api/service/Service";
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
@@ -5507,6 +5508,7 @@ public class APICall {
             {
 
             }
+            Log.e("LOGOUTPost",postdata.toString());
             RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
             okhttp3.Request request = new okhttp3.Request.Builder()
                     .url(url)
@@ -5581,7 +5583,6 @@ public class APICall {
                             SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
                             preferences.edit().clear();
                             preferences.edit().remove("token");
-                            preferences.edit().commit();
                             preferences.edit().apply();
                             ((AppCompatActivity) context).finish();
                             context.startActivity(intent);
@@ -6553,8 +6554,8 @@ public class APICall {
                                     String bdb_id=info.getString("bdb_id");
                                     String bdb_name=info.getString("bdb_name");
                                     String bdb_gender=info.getString("bdb_gender");
-                                    String max_age=info.getString("max_age");
-                                    String min_age=info.getString("min_age");
+                                    String max_age=info.getString("max_supported_age");
+                                    String min_age=info.getString("min_supported_age");
                                     String bdb_extra_info=info.getString("bdb_extra_info");
 
                                     String bdb_supported_gender=info.getString("bdb_supported_gender");
@@ -25531,7 +25532,7 @@ public class APICall {
                     }catch (JSONException je){
                         message=jsonObject.getString("error");
                     }
-                    if (response_code.equals("response_code")){
+                    if (response_code.equals("64")){
                         JSONObject data=jsonObject.getJSONObject("data");
 
                         JSONArray groups=data.getJSONArray("groups");
@@ -33863,7 +33864,13 @@ Log.e("ERRR",e.getMessage());
                                 if(isOffer)
                                 PersonalIndivOfferRequest.fillFiles();
                                 else
-                                PersonalIndivRequest.fillFiles();
+                                    try {
+                                        PersonalOrderActivity.fillFiles();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        PersonalIndivRequest.fillFiles();
+                                    }
 
                             }
                         });
@@ -34577,7 +34584,15 @@ Log.e("ERRR",e.getMessage());
                                     if(isOffer)
                                     PersonalIndivOfferRequest.fillRelatives();
                                     else
-                                    PersonalIndivRequest.fillRelatives();
+                                        try {
+                                            PersonalOrderActivity.fillRelatives();
+
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            PersonalIndivRequest.fillRelatives();
+
+                                        }
                                 }
                                 catch (Exception e)
                                 {

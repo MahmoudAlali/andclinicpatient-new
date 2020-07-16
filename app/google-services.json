@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
+              "client_id": "614121624955-lgon9jjrrnd99n3h3c7ceph2g3v3nqg1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ptm.clinicpa"
+                "bundle_id": "com.ptm.clinicapp"
               }
             }
           ]
@@ -68,82 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
+              "client_id": "614121624955-lgon9jjrrnd99n3h3c7ceph2g3v3nqg1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ptm.clinicpa"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:614121624955:android:0920b6a20da3f6a3a399de",
-        "android_client_info": {
-          "package_name": "ptm.com.clinic"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ptm.clinicpa"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:614121624955:android:d286ac44ca9b30c6a399de",
-        "android_client_info": {
-          "package_name": "ptm.com.clinicpa"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDzkGUebFrmm0Iu3CZoiK3f-zvKqjKPlN0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "614121624955-76pb4fsl6bb3lkdfjoihgqnqmai6ll6e.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "614121624955-p6q1hohrqr551239c9d3jkvrkvr82svv.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ptm.clinicpa"
+                "bundle_id": "com.ptm.clinicapp"
               }
             }
           ]

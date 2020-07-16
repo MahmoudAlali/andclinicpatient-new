@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".Activities.ProviderSerAndOfferPKG.MainProviderActivity">
+
+
     <ImageView
         android:visibility="gone"
         android:id="@+id/image"

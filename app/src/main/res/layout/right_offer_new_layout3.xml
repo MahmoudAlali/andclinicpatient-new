@@ -27,6 +27,7 @@
         android:padding="2dp"
         android:layout_width="35dp"
         android:layout_gravity="end"
+        android:id="@+id/info"
         android:layout_height="35dp"
         android:layout_marginTop="80dp"
         android:src="@drawable/offer_info_new"
@@ -179,7 +180,7 @@
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/best_offers_i"
-                        android:id="@+id/info"/>
+                        />
 
                 </LinearLayout>
 

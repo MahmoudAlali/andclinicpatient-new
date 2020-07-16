@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/light_background"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
+        android:background="@color/end_gray"
+        app:navigationIcon="@string/Backicon"
+        app:popupTheme="@style/AppTheme"
+        app:theme="@style/ToolbarColoredBackArrow"
+        app:title="الخيارات المطلوبة"
+        app:titleMarginStart="@dimen/standard_175"
+        app:titleTextColor="@color/greenClinic" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="@dimen/standard_80"
+        android:orientation="vertical">
+
+        <!--<android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:id="@+id/compNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="5"
+                android:gravity="end">
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_weight="3"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/relative_name"
+                    />
+                <Spinner
+                    android:background="@drawable/light_blue_button"
+                    android:layout_weight="2"
+                    android:id="@+id/companionName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:elevation="5dp"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:text="@string/providerName"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:weightSum="5"
+                android:gravity="end">
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_weight="3"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/med_id2"
+                    />
+                <Spinner
+                    android:background="@drawable/light_blue_button"
+                    android:layout_weight="2"
+                    android:id="@+id/providerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:elevation="5dp"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:text="@string/providerName"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/standard_30"
+                android:text="@string/ServicePlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/standard_20"
+                android:layout_marginLeft="@dimen/standard_20"
+                android:textSize="16dp"
+                android:textColor="@color/blueClinic"
+                android:textAlignment="center"
+                android:id="@+id/medPlace"
+                android:layout_marginBottom="@dimen/standard_20"
+                android:textStyle="bold"
+                />
+            <RadioGroup
+                android:id="@+id/placeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/standard_20"
+                android:layout_marginRight="@dimen/standard_20"
+                android:layout_marginBottom="@dimen/standard_30"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/center"
+                    android:text="@string/appointment_center"
+                    android:textStyle="bold"
+                    />
+                <RadioButton
+                    android:id="@+id/home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/appointment_home"
+                    android:textStyle="bold"
+
+                    />
+            </RadioGroup>
+
+
+        </LinearLayout>
+        <!--
+                    </android.support.v4.widget.NestedScrollView>
+        -->
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="@dimen/standard_20"
+        android:layout_marginRight="@dimen/standard_20"
+        android:text="@string/show_doctors"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/light_blue_button"
+        />
+</android.support.design.widget.CoordinatorLayout>

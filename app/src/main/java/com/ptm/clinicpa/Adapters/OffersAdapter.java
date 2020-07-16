@@ -1,19 +1,27 @@
 package com.ptm.clinicpa.Adapters;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.meg7.widget.SvgImageView;
@@ -30,6 +38,7 @@ import com.ptm.clinicpa.DataModel.BestOfferItem;
 import com.ptm.clinicpa.DataModel.DataOffer;
 import com.ptm.clinicpa.DataModel.ServiceItem;
 import com.ptm.clinicpa.DataExample.OffersData;
+import com.ptm.clinicpa.Fragments.PersonalIndivOfferRequest;
 import com.ptm.clinicpa.R;
 //import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
@@ -190,27 +199,17 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         e.printStackTrace();
                     }
 
-                   /* Intent i=new Intent(context, CreateRequestActivity.class);
-                    i.putExtra("is_offer",true);
-                    i.putExtra("sup_id",bestOfferItems.get(position).getProvider_id());
-                    i.putExtra("pack_code",bestOfferItems.get(position).getPack_code());
-                    i.putExtra("longNum",Offers.Long);
-                    i.putExtra("latNum",Offers.Lat);
-                    context.startActivity(i);*/
-
-                    Intent i = new Intent(BeautyMainPage.context, RelativesActivity.class);
-                    i.putExtra("sup_id",bestOfferItems.get(position).getProvider_id());
-                    i.putExtra("center_id",bestOfferItems.get(position).getHealth_center_id());
-                    i.putExtra("isBooking",true);
-                    i.putExtra("is_offer",true);
-                    i.putExtra("pack_code",bestOfferItems.get(position).getPack_code());
-                    i.putExtra("longNum",Offers.Long);
-                    i.putExtra("latNum",Offers.Lat);
-                    i.putExtra("max_age",bestOfferItems.get(position).getMax_age());
-                    i.putExtra("min_age",bestOfferItems.get(position).getMin_age());
-                    i.putExtra("supported_gender",bestOfferItems.get(position).getSupported_gender());
-
-                    context.startActivity(i);
+                    int[] location = new int[2];
+                    Log.e("ERR","GGGGG");
+                    v.getLocationOnScreen(location);
+                    //Initialize the Point with x, and y positions
+                    Point point = new Point();
+                    point.x = location[0];
+                    point.y = location[1];
+                    showInfoPopup(context,point,bestOfferItems.get(position).getProvider_id()
+                            ,bestOfferItems.get(position).getMax_age(),bestOfferItems.get(position).getMin_age(),
+                            bestOfferItems.get(position).getSupported_gender(),Offers.Lat,
+                            Offers.Long,bestOfferItems.get(position).getHealth_center_id(),bestOfferItems.get(position).getPack_code());
 
                 }
             });
@@ -226,7 +225,18 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.group));
             }
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
-            ((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
+            if(bestOfferItems.get(position).getOld_price().equals("null"))
+            {
+                ((Item)holder).old_price.setVisibility(View.INVISIBLE);
+
+            }
+            else
+            {
+                float old_prc=Float.parseFloat(bestOfferItems.get(position).getOld_price());
+                ((Item)holder).old_price.setText(old_prc+"");
+
+            }
+            //((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
             ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
             String on= context.getResources().getString(R.string.on);
             String sevices= context.getResources().getString(R.string.ser);
@@ -240,12 +250,12 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             else
                 ((Item) holder).total_dis.setText(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% ");
 
-            ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     JSONArray jsonArray = bestOfferItems.get(position).getSersup_ids();
 
+                    Log.e("INFO","sfasfd");
 //                    APICall.arabicToDecimal()
 //               StringBuilder infoItem=new StringBuilder();
                     try {
@@ -280,6 +290,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //                        .show(); //Display the ShowCase
                 }
             });
+            ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -301,6 +312,85 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //        }catch (Exception e){
 ////        Toast.makeText(context,e.getMessage()+"",Toast.LENGTH_LONG).show();
 //        }
+    }
+    private static void showInfoPopup(final Context context , Point p,final  String sup_id,final String max_age,
+                                      final String min_age,final String supported_gender,final String latNum,
+                                      final String longNum,final String center_id,final String pack_code) {
+
+        // Inflate the popup_layout.xml
+        final PopupWindow changeInfoPopUp = new PopupWindow(context);
+        //LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.llStatusChangePopup);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.emp_info_pop_up_menu, null);
+        LinearLayout indivPersonal = layout.findViewById(R.id.empServicesLayout);
+        if(!supported_gender.equals("2") && !supported_gender.equals(BeautyMainPage.client_gender))
+        {
+            indivPersonal.setVisibility(View.GONE);
+            layout.findViewById(R.id.line).setVisibility(View.GONE);
+        }
+        if(!(Integer.parseInt(BeautyMainPage.bdb_old)>Integer.parseInt(min_age)&&Integer.parseInt(BeautyMainPage.bdb_old)<Integer.parseInt(max_age)))
+        {
+            indivPersonal.setVisibility(View.GONE);
+            layout.findViewById(R.id.line).setVisibility(View.GONE);
+        }
+        indivPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new PersonalIndivOfferRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",true);
+                b.putBoolean("is_offer",true);
+                b.putString("sup_id",sup_id);
+                b.putString("center_id",center_id);
+                b.putString("pack_code",pack_code);
+                b.putString("longNum",longNum);
+                b.putString("latNum",latNum);
+                b.putString("supported_gender",supported_gender);
+                b.putString("sup_id",sup_id);
+                b.putString("max_age",max_age);
+                b.putString("min_age",min_age);
+                fragment.setArguments(b);
+                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+                changeInfoPopUp.dismiss();
+            }
+        });
+        LinearLayout indivOther = layout.findViewById(R.id.empWorkingLayout);
+        indivOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new PersonalIndivOfferRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",false);
+                b.putBoolean("is_offer",true);
+                b.putString("sup_id",sup_id);
+                b.putString("center_id",center_id);
+                b.putString("pack_code",pack_code);
+                b.putString("longNum",longNum);
+                b.putString("latNum",latNum);
+                b.putString("supported_gender",supported_gender);
+                b.putString("sup_id",sup_id);
+                b.putString("max_age",max_age);
+                b.putString("min_age",min_age);
+                fragment.setArguments(b);
+                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+                changeInfoPopUp.dismiss();
+            }
+        });
+        // Creating the PopupWindow
+        changeInfoPopUp.setContentView(layout);
+        changeInfoPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setFocusable(true);
+        int OFFSET_X = -20;
+        int OFFSET_Y = 50;
+        changeInfoPopUp.setBackgroundDrawable(new BitmapDrawable());
+        changeInfoPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
     }
 
     @Override

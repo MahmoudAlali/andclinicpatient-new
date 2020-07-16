@@ -264,7 +264,7 @@
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
                         android:src="@drawable/best_offers_i"
-                        android:id="@+id/info"/>
+                        />
                     <ImageView
                         android:layout_weight="1"
                         android:padding="7dp"
@@ -526,6 +526,7 @@
         android:src="@drawable/add_offer_new"
         />
     <ImageView
+        android:id="@+id/info"
         android:padding="2dp"
         android:layout_width="35dp"
         android:layout_gravity="start"

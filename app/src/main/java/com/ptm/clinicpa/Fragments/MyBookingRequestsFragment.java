@@ -4,8 +4,12 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,7 +28,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,6 +40,7 @@ import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.NewBookingRequestsFragment;
 //import com.dcoret.beautyclient.Adapters.BookingRequestsAdapter;
+import com.ptm.clinicpa.Activities.PersonalOrderActivity;
 import com.ptm.clinicpa.Adapters.BookingRequestsAdapter;
 import com.ptm.clinicpa.DataModel.BookingAutomatedBrowseData;
 import com.ptm.clinicpa.DataModel.BookingRequestDataModel;
@@ -138,22 +145,28 @@ public class MyBookingRequestsFragment extends Fragment {
         addIndivRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
-//                APICall.filterSortAlgorithm("33", "1", "0");
-                fragment = new freeBookingFragment();
-                fm = getActivity().getFragmentManager();
-                fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, fragment);
-                fragmentTransaction.commit();
+
+                int[] location = new int[2];
+                Log.e("ERR","GGGGG");
+                v.getLocationOnScreen(location);
+                //Initialize the Point with x, and y positions
+                Point point = new Point();
+                point.x = location[0];
+                point.y = location[1];
+                showInfoPopup(BeautyMainPage.context,point);
+
             }
         });
         addGroupRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BeautyMainPage.FRAGMENT_NAME = "freeGroupBookingFragment";
-//                APICall.filterSortAlgorithm("33", "1", "0");
-                fragment = new FreeGroupBooking();
-                fm = getActivity().getFragmentManager();
+                fragment = new RequestProvidersFragment();
+
+                Bundle b= new Bundle();
+                b.putBoolean("isGroup",true);
+                fm = getFragmentManager();
+                fragment.setArguments(b);
                 fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
@@ -349,11 +362,57 @@ public class MyBookingRequestsFragment extends Fragment {
 
 
     }
-   /* public static void updateDeposit(){
-        fragment = new AcceptedReservationFragment();
-        fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
-        fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.tabs_fragment, fragment);
-        fragmentTransaction.commitAllowingStateLoss();
-    }*/
+
+    private void showInfoPopup(final Context context, Point p) {
+
+        // Inflate the popup_layout.xml
+        final PopupWindow changeInfoPopUp = new PopupWindow(context);
+        //LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.llStatusChangePopup);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.emp_info_pop_up_menu, null);
+        LinearLayout indivPersonal = layout.findViewById(R.id.empServicesLayout);
+        indivPersonal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment = new PersonalIndivRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",true);
+                b.putBoolean("is_offer",false);
+                fragment.setArguments(b);
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+
+                changeInfoPopUp.dismiss();
+            }
+        });
+        LinearLayout indivOther = layout.findViewById(R.id.empWorkingLayout);
+        indivOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragment = new PersonalIndivRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",false);
+                b.putBoolean("is_offer",false);
+                fragment.setArguments(b);
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+
+                changeInfoPopUp.dismiss();
+            }
+        });
+        // Creating the PopupWindow
+        changeInfoPopUp.setContentView(layout);
+        changeInfoPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        changeInfoPopUp.setFocusable(true);
+        int OFFSET_X = -20;
+        int OFFSET_Y = 50;
+        changeInfoPopUp.setBackgroundDrawable(new BitmapDrawable());
+        changeInfoPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+    }
+
 }

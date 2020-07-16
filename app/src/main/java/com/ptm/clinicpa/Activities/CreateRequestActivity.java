@@ -708,6 +708,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                 servic.put("bdb_ser_sup_id",servicesModels.get(j).getBdb_ser_sup_id());
             services.put(servic);
         }
+        if(servicesModels.size()!=0)
         client.put("services",services);
 
         Log.e("index-i","index-i");
@@ -779,5 +780,9 @@ public static void setOffer()
 */
 }
 
-
+    @Override
+    public void onBackPressed() {
+        Log.e("Back","Pressed");
+        super.onBackPressed();
+    }
 }
