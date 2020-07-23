@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 public class BookingRequestDetailsActivity  extends AppCompatActivity {
     //    View view;
-    public static TextView id,order_on,phone_number,s_name,exec_order,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date,medFileNumber,description;
-    public static LinearLayout myroot,descriptionLayout,costLayout;
+    public static TextView costTxt,journeyCost,id,order_on,phone_number,s_name,exec_order,empname,booktype,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,date,medFileNumber,description;
+    public static LinearLayout myroot,descriptionLayout,costLayout,jrCostLayout;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static Context context;
@@ -64,6 +64,9 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         booktype=findViewById(R.id.book_type);
         service_name=findViewById(R.id.rname);
         salonName=findViewById(R.id.salon_name);
+        journeyCost=findViewById(R.id.journey_price);
+        costTxt=findViewById(R.id.costTxt);
+        jrCostLayout=findViewById(R.id.jrcostLayout);
         logoId="";
         logoImg=findViewById(R.id.logoImg);
         date=findViewById(R.id.date);
@@ -162,7 +165,10 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         requestedOnView=layout2.findViewById(R.id.book_at);
         VCost=layout2.findViewById(R.id.cost);
         String c =cost+context.getResources().getString(R.string.ryal);
-        VCost.setText(c);
+        if(cost.equals("null"))
+            VCost.setText(R.string.unDeterminedPrice);
+        else
+            VCost.setText(c);
         requestedOnView.setText(requestedOn);
         rname.setText(reservationName);
 //        int index =Integer.parseInt(catigoryVal);

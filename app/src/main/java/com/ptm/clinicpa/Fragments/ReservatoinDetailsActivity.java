@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-public static TextView description, id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
-    public static LinearLayout jtime_lay,book_exec_layout, myroot;
+public static TextView costTxt,medFileNumber,journeyCost,description, id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+    public static LinearLayout jrCostLayout,jtime_lay,book_exec_layout, myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static  Context context;
@@ -54,6 +54,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         book_at=findViewById(R.id.book_at);
         booktype=findViewById(R.id.book_type);
         service_name=findViewById(R.id.rname);
+        costTxt=findViewById(R.id.costTxt);
         salonName=findViewById(R.id.salon_name);
         logoId="";
         logoImg=findViewById(R.id.logoImg);
@@ -65,6 +66,9 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         jtime_lay=findViewById(R.id.jtime_lay);
         book_exec_layout=findViewById(R.id.book_exec_layout);
         description=findViewById(R.id.description);
+        journeyCost=findViewById(R.id.journey_price);
+        jrCostLayout=findViewById(R.id.jrcostLayout);
+        medFileNumber=findViewById(R.id.medical_id);
 
         //region Check_Notification
         String book_id="";
@@ -137,95 +141,6 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
             }
         });
 
-//        r1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                v1.setBackgroundResource(R.color.green);
-//            }
-//        });
-//
-//        r2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                v2.setBackgroundResource(R.color.green);
-//            }
-//        });
-//        r3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                v3.setBackgroundResource(R.color.green);
-//            }
-//        });
-//        r4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                v4.setBackgroundResource(R.color.green);
-//            }
-//        });
-       // APICall.browseOneBooking(ReservationsAdapter2.book_id,context);
-
-
-
-//              service_name.setText(MyReservationFragment.bookingAutomatedBrowseData.get(position).getService_en_name());
-//                    empname.setText(bookingAutomatedBrowseData.get(position).getEmployee_name());
-//                    time.setText(bookingAutomatedBrowseData.get(position).getBdb_start_date()+","+bookingAutomatedBrowseData.get(position).getBdb_start_time());
-//
-
-
-//
-//        accept.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new AlertDialog.Builder(BeautyMainPage.context)
-//                        .setTitle("Accept")
-//                        .setMessage("Do you want accept This Reservation?")
-//                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                //-------------api here
-//                                API.bookingProcessing1(ReservationsAdapter.book_id,"2",BeautyMainPage.context);
-//                            }
-//                        })
-//                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                //----------------- api here
-//                                dialog.cancel();
-//                            }
-//                        })
-//                        .show();
-//            }
-//        });
-//
-//
-//        refuse.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new AlertDialog.Builder(BeautyMainPage.context)
-//                        .setTitle("Accept")
-//                        .setMessage("Do you want cancel This Reservation?")
-//                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                //-------------api here
-//                                API.bookingProcessing1(ReservationsAdapter.book_id,"0",BeautyMainPage.context);
-//                            }
-//                        })
-//                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                //----------------- api here
-//                                dialog.cancel();
-//                            }
-//                        })
-//                        .show();
-//
-//            }
-//        });
-
-//        addLayout(myroot,"make up","100","13:00","17-8-2019","test");
-
-
         ImageView ok=findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,77 +160,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
 
     }
 
-//    public static void addLayout(final LinearLayout myroot,String details,String reservationName,String priceVal,String startTimeVal,String end_time,String bookat,String empName ){
-//        final View layout2;
-//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
-//        TextView endtime,rname,emp_name,price,starttime,client_details,book_at;
-//        price=layout2.findViewById(R.id.price);
-//        client_details=layout2.findViewById(R.id.client_details);
-//        rname=layout2.findViewById(R.id.rname);
-//        starttime=layout2.findViewById(R.id.time);
-//        endtime=layout2.findViewById(R.id.end_time);
-//        book_at=layout2.findViewById(R.id.book_at);
-//        emp_name=layout2.findViewById(R.id.emp_name);
-//
-//        rname.setText(reservationName);
-//        client_details.setText(details);
-//        endtime.setText(APICall.convertToArabic(end_time));
-//        emp_name.setText(empName);
-//        price.setText(APICall.convertToArabic(priceVal));
-//        starttime.setText(APICall.convertToArabic(startTimeVal));
-//        book_at.setText(APICall.convertToArabic(bookat));
-//
-////
-//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                myroot.addView(layout2);
-//            }
-//        });
-////
-//    }
-//    public static void addHeaderLayout(final LinearLayout myroot,String client_name,String client_old ){
-//        final View layout2;
-//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
-//        TextView client_details;
-//        client_details=layout2.findViewById(R.id.client_details);
-//        client_details.setText(client_name+","+client_old);
-//
-//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                myroot.addView(layout2);
-//            }
-//        });
-////
-//    }
-//    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String endtime,String bookat,String empName ){
-//        final View layout2;
-//        layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext, myroot, false);
-//        TextView end_time,rname,emp_name,price,starttime,book_at;
-//        price=layout2.findViewById(R.id.price);
-//        rname=layout2.findViewById(R.id.rname);
-//        end_time=layout2.findViewById(R.id.end_time);
-//        starttime=layout2.findViewById(R.id.time);
-//        book_at=layout2.findViewById(R.id.book_at);
-//        emp_name=layout2.findViewById(R.id.emp_name);
-//
-//        rname.setText(reservationName);
-//        end_time.setText(APICall.convertToArabic(endtime));
-//        emp_name.setText(APICall.convertToArabic(empName));
-//        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
-//        starttime.setText(APICall.convertToArabic(startTimeVal));
-//        book_at.setText(APICall.convertToArabic(bookat));
-//
-////
-//        ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                myroot.addView(layout2);
-//            }
-//        });
-////
-//    }
+/*
     public static void addLayout(final LinearLayout myroot, String reservationName, String priceVal, String startTimeVal, String bdb_end_time, String bookat, String empName,String ID ,String isExec,String ac_price,String j_cost,String j_time,String c_old,String user_name){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_layout_ext, myroot, false);
@@ -383,7 +228,9 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+*/
 
+/*
     public static void addHeaderLayout(final LinearLayout myroot, String client_name, String client_old , JSONArray bookings){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
@@ -427,6 +274,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+*/
     public static void addHeaderLayout(final LinearLayout myroot, String client_name, String old , String price){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
@@ -462,6 +310,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+/*
     public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String isExec,String ac_price,String jcost,String jtime){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
@@ -526,6 +375,8 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+*/
+/*
     public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String startTimeVal,String bdb_end_time,String bookat,String empName ,String Id,String isExec,String ac_price,String jtime,String jcost){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
@@ -587,6 +438,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+*/
     public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
@@ -595,7 +447,10 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         price=layout2.findViewById(R.id.price);
         rname=layout2.findViewById(R.id.rname);
         rname.setText(reservationName);
-        price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
+        if(priceVal.equals("null"))
+            price.setText(R.string.unDeterminedPrice);
+        else
+            price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -604,6 +459,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+/*
     public static void addMainLayoutLost(final LinearLayout myroot,String startTimeVal,String bdb_end_time,String empName,String reasontxt ){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_lost_ext, myroot, false);
@@ -632,6 +488,7 @@ public static TextView description, id,empname,booktype,journey_time,phone_numbe
         });
 //
     }
+*/
 
     public static void addStatusLayout(final LinearLayout myroot, String Status){
         final View layout2;

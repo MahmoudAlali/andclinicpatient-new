@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vizage</string>
+    <string name="app_name">UnaCita</string>
     <string name="title_activity_my_reservations" translatable="false">MyReservations</string>
     <string name="title_activity_main2" translatable="false">Main2Activity</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
@@ -904,6 +904,8 @@
     <string name="completly_executed">Completely executed</string>
     <string name="reser_location">Booking location</string>
     <string name="cost_main">Main cost:</string>
+    <string name="cost_offer">Offer cost:</string>
+
     <string name="fit">fitEnd</string>
 
     <string name="please_wait_wihle_get_location_info">Please wait while we retrieve the site information</string>
@@ -997,6 +999,7 @@
     <string name="female">Female</string>
     <string name="females_and_males">Males and females</string>
     <string name="doesnt_exist">Doesn\'t exist</string>
+    <string name="undetermined">undetermined</string>
     <string name="lessThanYear">age: less than year</string>
     <string name="years">years</string>
     <string name="twoYears">age: Two years</string>
@@ -1060,5 +1063,9 @@
     <string name="appointment_home">Appointment is in patient house</string>
     <string name="appointment_center">Appointment is in the medical center</string>
     <string name="show_doctors">Show available doctors</string>
-
+    <string name="offer_request">Offer request for</string>
+    <string name="normal_request">Request for</string>
+    <string name="complete_request">Complete request</string>
+    <string name="desc_note">Note shown to the center</string>
+    <string name="desc_note_in">This note is shown to the center when accepting the request(optional)</string>
 </resources>

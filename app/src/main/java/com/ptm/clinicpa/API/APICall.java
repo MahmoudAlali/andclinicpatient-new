@@ -3004,6 +3004,8 @@ public class APICall {
                                 supIdClasses.add(new OfferModel.SupIdClass(bdb_ser_sup_id,bdb_ser_name_en,bdb_name, bdb_ser_id,bdb_ext_pack_code,bdb_time));
 
                             }
+                            offerBrowse=new OfferModel( bdb_pack_code, bdb_doctor_name, bdb_offer_start,  bdb_offer_end,   bdb_offer_type,  bdb_is_journey_on,  "", bdb_offer_place, supIdClasses,min_suported_old,max_supported_old, supported_gender, specialization_ar, specialization_en) ;
+
                             ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -3011,7 +3013,6 @@ public class APICall {
                                     CreateRequestActivity.setOffer();
                                 }
                             });
-                            offerBrowse=new OfferModel( bdb_pack_code, bdb_doctor_name, bdb_offer_start,  bdb_offer_end,   bdb_offer_type,  bdb_is_journey_on,  "", bdb_offer_place, supIdClasses,min_suported_old,max_supported_old, supported_gender, specialization_ar, specialization_en) ;
                         }
                     }
                     if (j.getString("response_code").equals("63")) {
@@ -11995,7 +11996,7 @@ public class APICall {
                                 String basic_price = jObject.getString("basic_price");
 
                                 JSONArray booking = jObject.getJSONArray("booking");
-                                String bdb_status="";
+                                String bdb_status=jObject.getString("bdb_status");
                                 ArrayList<ServicesInsideAppointment> services=new ArrayList<>();
                                 for (int g = 0; g < booking.length(); g++) {
 
@@ -12023,7 +12024,7 @@ public class APICall {
                                 ,bdb_loc_long,bdb_loc_lat,bdb_health_center_logo_id,can_cancel,can_rating,can_check_in,can_order_change,can_health_center_rating,doctor_rating
                                         ,health_center_rating,health_center_ar,health_record,health_center_en,specialization_ar,specialization_en,doctor_name,doctor_id
                                 ,health_center_id,bdb_max_delay,bdb_health_center_phone,is_shifted,shifted_period,is_has_change_order,bdb_is_group_booking
-                                ,is_checked_in,visit_type,basic_price,services,""));
+                                ,is_checked_in,visit_type,basic_price,services,bdb_status));
 
                             }
 
@@ -12297,7 +12298,7 @@ public class APICall {
                             for (int i = 0; i < bookings.length(); i++) {
                                 JSONObject jObject = bookings.getJSONObject(i);
                                 String bdb_appointment_id = jObject.getString("bdb_appointment_id");
-                                String status = jObject.getString("status");
+                                String status = jObject.getString("bdb_status");
                                 String bdb_inner_booking = jObject.getString("bdb_inner_booking");
                                 String bookedByMe = jObject.getString("bookedByMe");
                                 String booking_place = jObject.getString("booking_place");
@@ -25174,8 +25175,14 @@ public class APICall {
         }
         else
         {
-            logoImg.setVisibility(View.INVISIBLE);
-            card.setVisibility(View.INVISIBLE);
+            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    logoImg.setVisibility(View.INVISIBLE);
+                    card.setVisibility(View.INVISIBLE);
+                }
+            });
+
 
         }
 
@@ -28720,6 +28727,7 @@ public class APICall {
                         final String bdb_start_date=data.getString("bdb_start_date");
                         final String bdb_created_at=data.getString("bdb_created_at");
                         final String bdb_booking_place=data.getString("booking_place");
+                        final String health_record=data.getString("health_record");
                         final String bdb_internally_number=data.getString("bdb_internally_number");
                         final String basic_price=data.getString("basic_price");
                         final String services_price=data.getString("services_price");
@@ -28739,7 +28747,7 @@ public class APICall {
                         final String specialization_ar=data.getString("specialization_ar");
                         final String specialization_en=data.getString("specialization_en");
                         final String doctor_name=data.getString("doctor_name");
-                        String journey_cost=data.getString("journey_cost");
+                        final String journey_cost=data.getString("journey_cost");
                         String logo_id=data.getString("bdb_health_center_logo_id");
 
                         getSalonLogoDltWhenEmptyWithCard(context,logo_id,logoImg,cardView);
@@ -28779,6 +28787,42 @@ public class APICall {
                                 ReservatoinDetailsActivity.book_at.setText(bdb_created_at);
                                 ReservatoinDetailsActivity.ref_id.setText(bdb_appointment_id);
                                 ReservatoinDetailsActivity.id.setText(bdb_internally_number);
+
+                                if(bdb_booking_place.equals("1"))
+                                {
+                                    if(!journey_cost.equals("0"))
+
+                                        ReservatoinDetailsActivity.journeyCost.setText(journey_cost+" "+ context.getResources().getString(R.string.ryal));
+                                    else
+                                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ReservatoinDetailsActivity.jrCostLayout.setVisibility(View.GONE);
+
+
+                                            }
+                                        });
+
+                                }
+                                else
+
+                                {
+                                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ReservatoinDetailsActivity.jrCostLayout.setVisibility(View.GONE);
+
+
+                                        }
+                                    });
+
+
+                                }
+                                if(!health_record.equals("null")&&!health_record.equals(""))
+                                    ReservatoinDetailsActivity.medFileNumber.setText(health_record);
+                                else
+                                    ReservatoinDetailsActivity.medFileNumber.setText(R.string.undetermined);
+
                                 if (bdb_booking_place.equals("0")){
                                     ReservatoinDetailsActivity.place.setText(R.string.salon);
                                 }else if (bdb_booking_place.equals("1")) {
@@ -30203,6 +30247,42 @@ public class APICall {
                             BookingRequestDetailsActivity.date.setText(R.string.groupRequestOffer);
 
 
+                        if(bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24")||bdb_is_group_booking.equals("25"))
+                        {
+                            BookingRequestDetailsActivity.costTxt.setText(R.string.cost_offer);
+                        }
+                        else
+                        {
+
+                        }
+                        if(bdb_booking_place.equals("1"))
+                        {
+                            if(!bdb_journey_cost.equals("0"))
+
+                                BookingRequestDetailsActivity.journeyCost.setText(bdb_journey_cost+" "+ context.getResources().getString(R.string.ryal));
+                            else
+                                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        BookingRequestDetailsActivity.jrCostLayout.setVisibility(View.GONE);
+
+
+                                    }
+                                });
+
+                        }
+                        else
+                        {
+                            ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    BookingRequestDetailsActivity.jrCostLayout.setVisibility(View.GONE);
+
+
+                                }
+                            });
+
+                        }
                         BookingRequestDetailsActivity.price.setText(totalCost);
                         if (bdb_booking_place.equals("0")){
 //                            ReservationDetailsFragment.place.setText(context.getResources().getString(R.string.salontxt));
@@ -30310,7 +30390,7 @@ public class APICall {
                                     if(!health_record.equals("null")&&!health_record.equals(""))
                                         BookingRequestDetailsActivity.medFileNumber.setText(health_record);
                                     else
-                                        BookingRequestDetailsActivity.medFileNumber.setText(R.string.doesnt_exist);
+                                        BookingRequestDetailsActivity.medFileNumber.setText(R.string.undetermined);
 
                                     if(!description.equals("null"))
                                     {
@@ -34635,7 +34715,7 @@ Log.e("ERRR",e.getMessage());
         //        Log.d("MessageResponse",mMessage);
     }
 
-    public  static  void  getClinics( final Context context,String latFilter,String longFilter,String distanceFilter,String specialityFilter){
+    public  static  void  getClinics(final Context context, String latFilter, String longFilter, String distanceFilter, String specialityFilter, final int fragment){
 
         allClinics.clear();
         showDialog(context);
@@ -34756,7 +34836,14 @@ Log.e("ERRR",e.getMessage());
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                if(fragment==1)
                                 freeBookingFragment.showClinicsNamesFilterDialog(context);
+                                if(fragment==2)
+                                    FreeGroupBooking.showClinicsNamesFilterDialog(context);
+                                if(fragment==3)
+                                    HealthCentersFilters.showClinicsNamesFilterDialog(context);
+
+
                             }
                         });
                     }

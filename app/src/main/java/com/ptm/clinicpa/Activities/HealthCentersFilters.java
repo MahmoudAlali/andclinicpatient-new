@@ -145,7 +145,7 @@ public class HealthCentersFilters extends Fragment implements LocationListener,G
                     APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.distance_first));
                 }
                 else
-                    APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality);
+                    APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,3);
 
             }
         });
@@ -661,7 +661,7 @@ public class HealthCentersFilters extends Fragment implements LocationListener,G
                     filterSupplierName=clinName;
                     filterSupplierId=salonId;
                     // APICall.filterSortAlgorithm("3","\""+name.getText().toString()+"\"" , null);
-                    ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
+                //    ServiceFragment.serviceFilters.set(6, new ServiceFilter(true, clinicName.getText().toString()));
 
 
                 }else {

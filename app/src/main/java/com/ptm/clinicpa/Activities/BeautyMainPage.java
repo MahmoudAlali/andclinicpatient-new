@@ -447,29 +447,6 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         //endregion
 
-
-
-
-        //        APICall.getcities("http://clientapp.dcoret.com/api/auth/user/getCities",BeautyMainPage.context);
-
-        cutdownBagReservation();
-    }
-
-   //-----------  refresh bag reservation every 5 minutes
-    public void cutdownBagReservation(){
-        new CountDownTimer(10000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-//                Toast.makeText(context,"seconds remaining: " + millisUntilFinished / 1000,Toast.LENGTH_SHORT).show();
-//                mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-//                APICall.getCart(BeautyMainPage.context,false);
-//                mTextField.setText("done!");
-                cutdownBagReservation();
-            }
-        }.start();
     }
 
     //---- request permission for application =------------

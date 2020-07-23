@@ -190,7 +190,7 @@ public class freeBookingFragment extends Fragment implements LocationListener ,
                     APICall.showSweetDialog(BeautyMainPage.context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.distance_first));
                 }
                 else
-                APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality);
+                APICall.getClinics(BeautyMainPage.context,filterMyLocationLat,filterMyLocationLng,filterDistance,filterSpeciality,1);
 
             }
         });

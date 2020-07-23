@@ -11,6 +11,7 @@ public class Filters {
     public static String CENTER_RATING ="50";
     public static String PATIENT_OLD ="51";
     public static String DOCTOR_NAME ="52";
+    public static String DATE ="54";
 
     public static String getString(String filterNum,String val1,String val2){
         String filter;

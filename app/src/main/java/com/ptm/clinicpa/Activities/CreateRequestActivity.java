@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.API.HintArrayAdapter;
+import com.ptm.clinicpa.DataModel.AppointmentsDataModel;
 import com.ptm.clinicpa.DataModel.ClientServiceDataModel;
 import com.ptm.clinicpa.DataModel.ClientsViewData;
 import com.ptm.clinicpa.DataModel.GroupBookingModel;
@@ -41,6 +42,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static com.ptm.clinicpa.Activities.AddRelativeActivity.relativeSpinner;
 import static com.ptm.clinicpa.Activities.GroupOffer.SingleDateMultiClientOfferBooking.adapter2;
@@ -58,9 +61,11 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static ArrayList<ClientsViewData> clientsViewData=new ArrayList<>();
     public static TextView start_time;
 
+    public  static  DatePicker dateDialog;
     public static String is_group_booking="";
     public  String postdata;
     public static String sup_id,pack_code,latNum,longNum;
+    public  static Date startDate,endDate;
     public static Spinner /*hourSpinner,minutesSpinner,*//*relativeSpinner,genderSpinner,*/servicesSpinner;
 
     //public static SearchableSpinner ageSpinner;
@@ -69,8 +74,9 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static CheckBox personalReserv;
     public static EditText phoneNumber,ClientName,description,healthFileNum;
     int startWorkHour,startWorkMinutes;
-    public static LinearLayout adding_service_layout;
+    public static LinearLayout adding_service_layout,offerInfoLayout;
     public static String age,gender,relation,health_record,client_name;
+    public static TextView speciality,centerName,doctorName,title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +109,15 @@ public class CreateRequestActivity extends AppCompatActivity {
         add_date=findViewById(R.id.add_date);
         next=findViewById(R.id.search);
         servicesLayout=findViewById(R.id.servicesLayout);
-       // show_clients=findViewById(R.id.show_clients);
+        offerInfoLayout=findViewById(R.id.offerInfoLayout);
+        speciality=findViewById(R.id.speciality);
+        doctorName=findViewById(R.id.doctorName);
+        centerName=findViewById(R.id.healthCntr);
+        title=findViewById(R.id.title);
+        String s= context.getString(R.string.normal_request)+" "+client_name;
+        title.setText(s);
+
+        // show_clients=findViewById(R.id.show_clients);
       /*  hourSpinner = findViewById(R.id.hour_from);
         minutesSpinner = findViewById(R.id.minutes_from);*/
        // ageSpinner = findViewById(R.id.age_range);
@@ -308,13 +322,13 @@ public class CreateRequestActivity extends AppCompatActivity {
                 TextView confirm=dialog.findViewById(R.id.confirm);
                 TextView cancel=dialog.findViewById(R.id.cancel);
                 final DatePicker datePicker=dialog.findViewById(R.id.date_picker);
-                datePicker.setMinDate(System.currentTimeMillis());
+                datePicker.setMinDate(startDate.getTime());
 
 //                RequestProvidersFragment.bdb_booking_period)
                 try {
                     Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.DAY_OF_MONTH, Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
-                    datePicker.setMaxDate(calendar.getTimeInMillis());
+                  //  calendar.add(Calendar.DAY_OF_MONTH, Integer.parseInt(RequestProvidersFragment.bdb_booking_period));
+                    datePicker.setMaxDate(endDate.getTime());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -336,6 +350,7 @@ public class CreateRequestActivity extends AppCompatActivity {
                     }
                 });
 
+                dateDialog=datePicker;
 
                 dialog.show();
             }
@@ -735,6 +750,51 @@ public static void setOffer()
                 APICall.offerBrowse.getSersup_ids().get(i).getBdb_ser_sup_id(),
                 adding_service_layout,servicesModels);
     }
+    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"); // or "YYYY-MM-DDThh:mm:ss±0000"
+    String dateInString = APICall.offerBrowse.getBdb_offer_start();
+    String dateInString2 = APICall.offerBrowse.getBdb_offer_end();
+    inputFormat.setTimeZone(TimeZone.getTimeZone("GMT") );
+    Date date=null;
+    Date date2=null;
+
+    try
+    {
+        date = inputFormat.parse(dateInString);
+        date2 = inputFormat.parse(dateInString2);
+    }
+    catch (Exception e)
+    {
+    }
+    Calendar c= Calendar.getInstance();
+    c.setTime(date);
+    c.add(Calendar.DATE,-1);
+    date=c.getTime();
+
+    c.setTime(date2);
+    c.add(Calendar.DATE,-1);
+
+    date2=c.getTime();
+    Date now = Calendar.getInstance().getTime();
+    if(now.before(date))
+    startDate=date;
+    else
+        startDate=now;
+    endDate=date2;
+
+    offerInfoLayout.setVisibility(View.VISIBLE);
+    doctorName.setText(APICall.offerBrowse.getBdb_doctor_name());
+    if(context.getString(R.string.locale).equals("ar")) {
+        speciality.setText(APICall.offerBrowse.getSpecialization_ar());
+        centerName.setText(APICall.offerBrowse.getHealth_center_name_ar());
+    }
+    else {
+        speciality.setText(APICall.offerBrowse.getSpecialization_en());
+        centerName.setText(APICall.offerBrowse.getHealth_center_name_en());
+    }
+
+    String s= context.getString(R.string.offer_request)+" "+client_name;
+    title.setText(s);
+
     //addLayout3(name_en,name_ar,serId,serSupId, adding_service_layout, servicesModels);
   /*  if(APICall.offerBrowse.getSupported_gender().equals("0"))
     {

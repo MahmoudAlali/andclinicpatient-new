@@ -721,6 +721,7 @@
     <string name="order_location">موقع الطلب</string>
     <string name="reser_location">موقع الحجز</string>
     <string name="cost_main">التكلفة الاساسية:</string>
+    <string name="cost_offer">تكلفة العرض:</string>
     <string name="please_wait_wihle_get_location_info">يرجى الانتظار لحين جلب بيانات الموقع</string>
     <string name="fit">fitStart</string>
     <string name="ordered_on">تم الطلب في:</string>
@@ -856,14 +857,15 @@
     <string name="female">أنثى</string>
     <string name="females_and_males">كلا الجنسين</string>
     <string name="doesnt_exist">لا يوجد</string>
+    <string name="undetermined">غير محدد</string>
     <string name="lessThanYear">العمر: أقل من سنة</string>
     <string name="years">سنوات</string>
     <string name="twoYears">العمر: سنتين</string>
     <string name="oneYear">العمر: سنة واحدة</string>
     <string name="appUnderEditing">الموعد تحت التعديل</string>
-    <string name="newVisit">زيارة جديدة</string>
+    <string name="newVisit">معاينة جديدة</string>
     <string name="oldVisit">مراجعة</string>
-    <string name="unDeterminedVisit">نوع الزيارة غير محدد</string>
+    <string name="unDeterminedVisit">نوع المعاينة غير محدد</string>
     <string name="unDeterminedPrice">السعر غير محدد</string>
     <string name="isShifted">تمت إزاحة الموعد بمقدار:</string>
     <string name="exec_date">تاريخ التنفيذ</string>
@@ -911,5 +913,11 @@
     <string name="appointment_home">طلب موعد في منزل العميلة</string>
     <string name="appointment_center">طلب موعد في المركز الصحي</string>
     <string name="show_doctors">عرض الأطباء المتاحين</string>
+    <string name="offer_request">طلب عرض</string>
+    <string name="normal_request">طلب</string>
+    <string name="complete_request">إتمام الطلب</string>
+    <string name="desc_note">ملاحظة للعرض على المركز</string>
+    <string name="desc_note_in">هذه الملاحظة تظهر للمركز عند قبول طلب الموعد (اختياري)</string>
+
 
 </resources>
