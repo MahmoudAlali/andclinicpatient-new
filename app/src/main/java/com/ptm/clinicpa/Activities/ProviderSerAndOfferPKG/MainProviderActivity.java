@@ -68,7 +68,7 @@ public class MainProviderActivity extends AppCompatActivity {
     android.app.FragmentTransaction fragmentTransaction;
 
 
-    public static TextView service_Sw,offer_sw,date,my_location,map,salon_name;
+    public static TextView service_Sw,offer_sw,date,my_location,Images_tab,salon_name;
     public static RecyclerView recycleview;
     ImageView logo,health;
     public static ArrayList<SupInfoClass> supInfoList=new ArrayList<>();
@@ -126,7 +126,7 @@ public class MainProviderActivity extends AppCompatActivity {
         health=findViewById(R.id.health);
         salon_name=findViewById(R.id.salon_name);
         offer_sw=findViewById(R.id.offer_sw);
-        map=findViewById(R.id.map);
+        Images_tab=findViewById(R.id.map);
         date=findViewById(R.id.date);
         my_location=findViewById(R.id.my_location);
         recycleview=findViewById(R.id.recycleview);
@@ -368,7 +368,7 @@ public class MainProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 offer_sw.setBackgroundResource(android.R.color.transparent);
-                map.setBackgroundResource(android.R.color.transparent);
+                Images_tab.setBackgroundResource(android.R.color.transparent);
                 service_Sw.setBackgroundResource(R.drawable.shadow_service_tab);
 
                 fra.setVisibility(View.GONE);
@@ -393,7 +393,7 @@ public class MainProviderActivity extends AppCompatActivity {
                         !my_location.getText().toString().equals(context.getResources().getString(R.string.MyLocation))
                 )*/ {
                     service_Sw.setBackgroundResource(android.R.color.transparent);
-                    map.setBackgroundResource(android.R.color.transparent);
+                    Images_tab.setBackgroundResource(android.R.color.transparent);
                     fra.setVisibility(View.GONE);
                     offer_sw.setBackgroundResource(R.drawable.shadow_service_tab);
                     arrayList.clear();
@@ -425,12 +425,12 @@ public class MainProviderActivity extends AppCompatActivity {
         });
 
 
-        map.setOnClickListener(new View.OnClickListener() {
+        Images_tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 offer_sw.setBackgroundResource(android.R.color.transparent);
                 service_Sw.setBackgroundResource(android.R.color.transparent);
-                map.setBackgroundResource(R.drawable.shadow_service_tab);
+                Images_tab.setBackgroundResource(R.drawable.shadow_service_tab);
                 fra.setVisibility(View.GONE);
 
 
@@ -446,7 +446,7 @@ public class MainProviderActivity extends AppCompatActivity {
         });
         //--------------------------
         offer_sw.setBackgroundResource(android.R.color.transparent);
-        map.setBackgroundResource(android.R.color.transparent);
+        Images_tab.setBackgroundResource(android.R.color.transparent);
         service_Sw.setBackgroundResource(R.drawable.shadow_service_tab);
 
         recycleview.setHasFixedSize(true);
