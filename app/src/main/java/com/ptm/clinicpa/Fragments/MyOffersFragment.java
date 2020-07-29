@@ -321,7 +321,7 @@ public class MyOffersFragment extends Fragment implements LocationListener, Goog
             }
         });
 
-        //region
+        //endregion
 
         return view;
     }

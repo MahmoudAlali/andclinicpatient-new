@@ -30207,6 +30207,8 @@ public class APICall {
 
                         totalCost+=" "+ context.getResources().getString(R.string.ryal);
 
+                        if(total_cost.equals("null"))
+                            totalCost=context.getString(R.string.undetermined);
 
                         getSalonLogoDltWhenEmptyWithCard(context,logo_id,logoImg,card);
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {

@@ -115,7 +115,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
             }
         }
 //        Log.e("click_action",click_action);
-            showNotification(this,title,body,notify_type,key_1,key_2);
+          //  showNotification(this,title,body,notify_type,key_1,key_2);
     }
 
 
@@ -162,7 +162,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         nBuilder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setSmallIcon(R.drawable.logo2)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -215,7 +215,10 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
-        sendRegistrationToServer(token);
+        SharedPreferences.Editor editor = getSharedPreferences("REG_ID", MODE_PRIVATE).edit();
+        editor.putString("token_client",token);
+        editor.apply();
+        Log.e("preference",token);
     }
 
     private void sendRegistrationToServer(String token) {
@@ -224,10 +227,7 @@ public class MyFirebaseInstanceService extends FirebaseMessagingService {
         //------------------ Reg In SharedPreference------------
        // APICall.updateFBToken(BeautyMainPage.context, token, token);
 
-        SharedPreferences.Editor editor = getSharedPreferences("REG_ID", MODE_PRIVATE).edit();
-        editor.putString("token_client",token);
-        editor.apply();
-        Log.e("preference",token);
+
 
     }
 
