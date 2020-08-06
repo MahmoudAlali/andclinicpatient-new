@@ -918,6 +918,9 @@
     <string name="complete_request">إتمام الطلب</string>
     <string name="desc_note">ملاحظة للعرض على المركز</string>
     <string name="desc_note_in">هذه الملاحظة تظهر للمركز عند قبول طلب الموعد (اختياري)</string>
-
+    <string name="logOutAllDevices">تسجيل الخروج من الأجهزة الأخرى؟</string>
+    <string name="AllDevices">تسجيل الخروج من جميع الأجهزة</string>
+    <string name="AllDevicesNotMe">تسجيل الخروج من جميع الأجهزة باستثناء هذا الجهاز</string>
+    <string name="DontLogout">عدم تسجيل الخروج</string>
 
 </resources>

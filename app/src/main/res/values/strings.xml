@@ -1068,4 +1068,8 @@
     <string name="complete_request">Complete request</string>
     <string name="desc_note">Note shown to the center</string>
     <string name="desc_note_in">This note is shown to the center when accepting the request(optional)</string>
+    <string name="logOutAllDevices">Logout from all other devices?</string>
+    <string name="AllDevices">Logout from all devices</string>
+    <string name="AllDevicesNotMe">Logout from all other devices except this device</string>
+    <string name="DontLogout">Don\'t logout</string>
 </resources>

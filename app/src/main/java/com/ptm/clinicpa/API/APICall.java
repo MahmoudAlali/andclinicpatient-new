@@ -208,6 +208,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.NoSuchElementException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -5001,6 +5003,8 @@ public class APICall {
                                                                 @Override
                                                                 public void run() {
                                                                     APICall.showSweetDialog(BeautyMainPage.context, R.string.Null, R.string.EditFinished);
+                                                                    showLogoutAllDevicesMsg(BeautyMainPage.context);
+
                                                                 }
                                                             });
                                                         } else {
@@ -5576,6 +5580,110 @@ public class APICall {
                             Log.d("token", gettoken(context));
                             Log.e("TAG", mMessage);
                             pd.dismiss();
+                            SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                            editor.clear();
+                            editor.apply();
+                            Intent intent = new Intent(context, Login.class);
+                            Login.logout = true;
+                            SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                            preferences.edit().clear();
+                            preferences.edit().remove("token");
+                            preferences.edit().apply();
+                            ((AppCompatActivity) context).finish();
+                            context.startActivity(intent);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            Log.d("MessageResponse",mMessage);
+            return mMessage;
+
+        }
+        public  static  String  logout2(final  String url,final Context context){
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+          // showDialog(context);
+
+            OkHttpClient client = new OkHttpClient();
+            JSONObject postdata = new JSONObject();
+            try {
+                postdata.put("bdb_fb_token",FirebaseInstanceId.getInstance().getToken());
+            }
+            catch (Exception e)
+            {
+
+            }
+            Log.e("LOGOUTPost",postdata.toString());
+            RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .addHeader("Content-Type","application/json")
+                    .addHeader("X-Requested-With","XMLHttpRequest")
+                    .header("Authorization","Bearer "+gettoken(context))
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage();
+                    Log.e("failure Response", mMessage);
+                   // pd.dismiss();
+
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(context);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }
+                    else {
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showUnexpectedErrMsg(context);
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    Log.e("Logout2", mMessage);
+
+                    try {
+                        JSONObject object=new JSONObject(mMessage);
+                        String response_code=object.getString("response_code");
+                        if (response_code.equals("303")) {
+                            Log.d("token", gettoken(context));
+                            Log.e("TAG", mMessage);
+                          //  pd.dismiss();
                             SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
                             editor.clear();
                             editor.apply();
@@ -7031,7 +7139,234 @@ public class APICall {
         return mMessage;
     }
     public static ArrayList<OfferModel> offers=new ArrayList<>();
+    public  static  void showLogoutAllDevicesMsg(final Context context){
 
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v36);
+                TextView LogoutAll = dialog.findViewById(R.id.logoutAll);
+                TextView LogoutExceptMe = dialog.findViewById(R.id.logoutExceptMe);
+                TextView dontLogout = dialog.findViewById(R.id.dont);
+                LogoutExceptMe.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        APICall.logoutFromAllDevices("0",context);
+
+                    }
+                });
+                dontLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+                LogoutAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        APICall.logoutFromAllDevices("1",context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
+
+    public  static  String  logoutFromAllDevices(final  String include_me,final Context context){
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("include_me",include_me);
+        }
+        catch (Exception e)
+        {
+
+        }
+        Log.e("logoutFromAllDevices",postdata.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(APICall.API_PREFIX_NAME+"/api/user/logoutFromAllDevices")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.e("failure Response", mMessage);
+                pd.dismiss();
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("LOGOUTALLDEVICES",mMessage);
+                if(include_me.equals("1"))
+                {
+                    APICall.logout2(APICall.API_PREFIX_NAME+"/api/user/logout",BeautyMainPage.context);
+                }
+                try {
+                    JSONObject object=new JSONObject(mMessage);
+                    Log.e("logoutFromAllDevices", mMessage);
+                    String response_code=object.getString("response_code");
+                    pd.dismiss();
+                    if (response_code.equals("303")) {
+                        Log.e("logoutFromAllDevices", mMessage);
+                    }
+                    else
+                    {
+                        deleteFBToken(context);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return mMessage;
+
+    }
+    public  static  String  deleteFBToken(final Context context){
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        showDialog(context);
+
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_fb_token",FirebaseInstanceId.getInstance().getToken());
+        }
+        catch (Exception e)
+        {
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(APICall.API_PREFIX_NAME+"/api/auth/user/deleteFirebaseToken")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .addHeader("X-Requested-With","XMLHttpRequest")
+                .header("Authorization","Bearer "+gettoken(context))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage();
+                Log.e("failure Response", mMessage);
+                pd.dismiss();
+
+                if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                    ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                            dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                            TextView confirm = dialog.findViewById(R.id.confirm);
+                            TextView message = dialog.findViewById(R.id.message);
+                            TextView title = dialog.findViewById(R.id.title);
+                            title.setText(R.string.Null);
+                            message.setText(R.string.check_internet_con);
+                            confirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+
+                                }
+                            });
+                            dialog.show();
+
+                        }
+                    });
+
+
+                }
+                else {
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showUnexpectedErrMsg(context);
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                try {
+                    JSONObject object=new JSONObject(mMessage);
+                    Log.e("logoutFromAllDevices", mMessage);
+                    String response_code=object.getString("response_code");
+                    pd.dismiss();
+                    if (response_code.equals("299")) {
+                        Log.e("logoutFromAllDevices", mMessage);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Log.d("LOGOUTALLDEVICES",mMessage);
+        return mMessage;
+
+    }
     public  static  String  automatedBrowseOffers(final String pageNum, final Context context, String filter, String sort,final OffersAdapterTab adapter){
             offerSupplier.clear();
 
@@ -25028,7 +25363,15 @@ public class APICall {
                                         logoImg.setImageBitmap(bit);
                                         logoImg.setVisibility(View.VISIBLE);
                                         Log.e("OfferImageRes","TRUEEEE");
-                                        Offers.scaleImage(logoImg);
+                                        try {
+                                            Offers.scaleImage(logoImg);
+
+                                        }
+                                        catch (NoSuchElementException e)
+                                        {
+                                            Log.e("ERR",e.getMessage());
+
+                                        }
 
                                         // OffersAdapter.logoImages.put(LogoId,bit);
                                     }
