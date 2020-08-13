@@ -73,8 +73,8 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
             max_age = getArguments().getString("max_age");
             min_age = getArguments().getString("min_age");
             supported_gender = getArguments().getString("supported_gender");
-            int max = Integer.parseInt(max_age);
-            int min = Integer.parseInt(min_age);
+           // int max = Integer.parseInt(max_age);
+           // int min = Integer.parseInt(min_age);
             APICall.getAllFollowers(BeautyMainPage.context);
 
         }

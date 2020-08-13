@@ -234,6 +234,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             sideMenu.findItem(R.id.setting).setVisible(false);
             sideMenu.findItem(R.id.notification).setVisible(false);
             sideMenu.findItem(R.id.favorites).setVisible(false);
+            sideMenu.findItem(R.id.indiv_request_others).setVisible(false);
            // menu.findItem(R.id.favorites).setEnabled(false);
            // menu.findItem(R.id.centers).setEnabled(false);
             menu.findItem(R.id.reservations).setEnabled(false);
@@ -444,6 +445,27 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         {
             Log.e("goToReservation",e.getMessage());
         }
+
+        //endregion
+
+        //region CHECK_WAS_GUEST
+        String center_id; /// check if guest user was reserving group appointment and already chose center
+        try {
+            center_id=getIntent().getStringExtra("center_id");
+            if(!center_id.equals(""))
+            {
+                Log.e("center_id","Going to group booking");
+                Intent i = new Intent(context, CreateGroupRequestActivity.class);
+                i.putExtra("sup_id",center_id);
+                context.startActivity(i);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("goToReservation",e.getMessage());
+        }
+
 
         //endregion
 
@@ -761,17 +783,26 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 
         }
         else if (id == R.id.indiv_request) {
-            BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
+            if(APICall.isGuest(context).equals("1"))
+            {
+                APICall.showNeedToSignInDialog(context);
+            }
+            else
+            {
+                BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";
 //                APICall.filterSortAlgorithm("33", "1", "0");
-            fragment = new PersonalIndivRequest();
-            Bundle b=new Bundle();
-            b.putBoolean("isMe",true);
-            b.putBoolean("is_offer",false);
-            fragment.setArguments(b);
-            fm = getFragmentManager();
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, fragment);
-            fragmentTransaction.commit();
+
+                fragment = new PersonalIndivRequest();
+                Bundle b=new Bundle();
+                b.putBoolean("isMe",true);
+                b.putBoolean("is_offer",false);
+                fragment.setArguments(b);
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
+            }
+
 
         }else if (id == R.id.indiv_request_others) {
             BeautyMainPage.FRAGMENT_NAME = "freeBookingFragment";

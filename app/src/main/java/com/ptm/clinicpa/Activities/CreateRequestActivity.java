@@ -84,6 +84,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         context=this;
 
         health_record="";
+        startDate=Calendar.getInstance().getTime();
 //        --- init arrays----------
         supplierServicesNames.clear();
         supplierServices.clear();
@@ -776,7 +777,8 @@ public static void setOffer()
     date2=c.getTime();
     Date now = Calendar.getInstance().getTime();
     if(now.before(date))
-    startDate=date;
+
+        startDate=date;
     else
         startDate=now;
     endDate=date2;

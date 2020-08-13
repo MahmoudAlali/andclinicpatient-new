@@ -43,6 +43,17 @@
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manage_account"
+                    android:textSize="16dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/greenClinic"
+                    android:textStyle="bold"
+                    android:layout_marginTop="7dp"
+                    />
                 <!--<ListView-->
                 <!--android:id="@+id/list_view"-->
                 <!--android:layout_width="match_parent"-->
@@ -50,7 +61,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layoutDirection="inherit"
 
                     android:orientation="horizontal">
@@ -60,19 +71,19 @@
                         android:layout_height="wrap_content"
                         android:text="@string/name"
                         android:layout_gravity="center|start"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
                         android:gravity="center"
                         android:id="@+id/e_bdb_name"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:textColor="#000"
-                        android:background="@drawable/shadow_edit_text_blue"
+                        android:background="@drawable/border_edit_text4"
 
                         />
                 </LinearLayout>
@@ -88,8 +99,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/Email"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:textStyle="bold" />
 
@@ -97,10 +108,10 @@
                         android:gravity="center"
                         android:id="@+id/e_bdb_email"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_blue"
+                        android:background="@drawable/border_edit_text4"
                         android:hint="name@example.com"
 
                         />
@@ -119,8 +130,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/phone"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
@@ -128,10 +139,10 @@
                         android:id="@+id/e_bdb_mobile"
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_blue"
+                        android:background="@drawable/border_edit_text4"
                         android:enabled="false"
                         />
                 </LinearLayout>
@@ -148,8 +159,8 @@
                         android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/age2"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <EditText
@@ -157,10 +168,10 @@
                         android:id="@+id/e_bdb_old"
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:textColor="#000"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_blue"
+                        android:background="@drawable/border_edit_text4"
                         android:enabled="true"
                         />
                 </LinearLayout>
@@ -174,23 +185,29 @@
 
                     <TextView
                         android:layout_gravity="center|start"
-                        android:layout_width="wrap_content"
+                        android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:text="@string/gender"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
-                    <Spinner
-                        android:gravity="center"
-                        android:id="@+id/gender"
-                        android:layout_gravity="center"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:textColor="#96b2fd"
-                        android:layout_marginRight="5dp"
-                        android:enabled="false"
-                        />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_button">
+                        <Spinner
+                            android:gravity="center"
+                            android:id="@+id/gender"
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:textColor="#96b2fd"
+                            android:layout_marginRight="5dp"
+                            android:enabled="false"
+                            />
+
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,8 +222,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/language"
-                        android:textSize="18dp"
-                        android:textColor="@color/lightBlueClinic"
+                        android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -214,7 +231,7 @@
                         android:id="@+id/language"
                         android:layout_gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:textColor="#96b2fd"
                         android:layout_marginRight="5dp"
                         android:enabled="false"
@@ -241,16 +258,16 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/update_pass"
-                            android:textSize="20dp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
-                            android:textColor="@color/greenClinic" />
+                            android:textColor="@color/lightBlueClinic" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/password"
                             android:textColor="@color/redClinic"
-                            android:textSize="@dimen/standard_20"
+                            android:textSize="14dp"
                             android:textStyle="bold" />
                     </LinearLayout>
                     <EditText
@@ -258,21 +275,21 @@
                         android:hint="@string/old_password"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginTop="5dp"
                         android:inputType="textPassword"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_green" />
+                        android:background="@drawable/border_edit_text4" />
                     <EditText
                         android:id="@+id/pass"
                         android:hint="@string/new_password"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginTop="5dp"
                         android:inputType="textPassword"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_green" />
+                        android:background="@drawable/border_edit_text4" />
 
                     <EditText
                         android:id="@+id/c_pass"
@@ -280,10 +297,10 @@
                         android:gravity="center"
                         android:inputType="textPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:background="@drawable/shadow_edit_text_green" />
+                        android:background="@drawable/border_edit_text4" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -300,7 +317,7 @@
                         android:layout_height="@dimen/high_button"
                         android:layout_gravity="center"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/light_blue_button"
+                        android:background="@drawable/blue_button"
                         android:textStyle="bold"
                         android:text="@string/save"
                         android:textColor="@color/white" />
@@ -313,11 +330,12 @@
                         android:layout_marginTop="10dp"
                         android:textAllCaps="false"
                         android:textStyle="bold"
-                        android:background="@drawable/light_blue_button"
+                        android:background="@drawable/blue_button"
                         android:text="@string/add_delete_location"
                         android:textColor="#fff" />
 
                     <Button
+                        android:visibility="gone"
                         android:id="@+id/deleteaccount"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/high_button"

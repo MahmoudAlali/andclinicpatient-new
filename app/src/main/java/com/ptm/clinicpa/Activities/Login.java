@@ -42,6 +42,7 @@ public class Login extends AppCompatActivity {
     LinearLayout linearLayout;
     ProgressDialog pd;
     Context context;
+    String key="",value="";
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class Login extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.colorAccent));
         APICall.FRAGMENT_NAME="activity_login";
 
+        key=getIntent().getStringExtra("key");
+        value=getIntent().getStringExtra("value");
         context=this;
         lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 
@@ -155,7 +158,7 @@ public class Login extends AppCompatActivity {
         }else if (password.getText().toString().isEmpty()){
             APICall.showSweetDialog(Login.this,R.string.nice,R.string.EnterPassAlert);
         }else {
-            APICall.login(username.getText().toString(), password.getText().toString(), APICall.API_PREFIX_NAME+"/api/user/login", Login.this);
+            APICall.login(username.getText().toString(), password.getText().toString(), APICall.API_PREFIX_NAME+"/api/user/login", Login.this,key,value);
         }
         }
     public void forgetpass(View view) {

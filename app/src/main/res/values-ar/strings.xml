@@ -202,7 +202,7 @@
     <string name="shareAppMessage">تطبيق beauty لخدمات التجميل و التصميم حمله الآن من App Store</string>
 <!--service place frag-->
     <string name="PlaceService">مكان الخدمة الطبية</string>
-    <string name="OfferPrice">سعر العرض</string>
+    <string name="OfferPrice">كلفة العرض</string>
     <string name="ServicePrice">سعر الخدمة</string>
     <string name="ServiceRate">تقييم الخدمة</string>
     <string name="centerRate">تقييم المركز الصحي</string>
@@ -466,12 +466,12 @@
     <string name="enter_c_name">من فضلك ادخل اسم المريض/ة</string>
     <string name="enter_r_name">من فضلك ادخل اسم القريب/ة</string>
     <string name="enter_age_r_range">من فضلك ادخل عمر القريب/ة</string>
-    <string name="enter_r_gender">من فضلك ادخل جنس القريب/ة</string>
+    <string name="enter_r_gender">من فضلك ادخل نوع القريب/ة</string>
     <string name="enter_relation">من فضلك ادخل صلة القرابة</string>
     <string name="enter_age_range">من فضلكِ ادخلي عمر المريض/ة</string>
     <string name="enter_age_btwn_range">من فضلكِ ادخلي عمر المريض/ة بين 0 و 100 عام</string>
 
-    <string name="enter_gender">من فضلكِ ادخلي جنس المريض/ة</string>
+    <string name="enter_gender">من فضلكِ ادخلي نوع المريض/ة</string>
     <string name="add_atleast_one_service">من فضلكِ ادخلي خدمة واحدة على الاقل</string>
     <string name="select_date_of_booking">من فضلكِ ادخلي تاريخ الحجز</string>
     <string name="add_atleast_one_client">يرجى إضافة مريضة واحدة على الأقل</string>
@@ -782,9 +782,9 @@
     <string name="locationMsg2">في حال تكرار المشكلة يرجى إيقاف وإعادة تشغيل خدمة المواقع للتطبيق من الإعدادات العامة للجهاز أو يمكنكِ التواصل مع الدعم التقني للمساعدة من خلال موقع التطبيق أو من خلال تطبيق واتس آب</string>
     <string name="update_pass">تغيير</string>
     <string name="EnterName">الرجاء إدخال الاسم</string>
-    <string name="gender">الجنس :</string>
+    <string name="gender">النوع :</string>
     <string-array name="gender">
-    <item>الجنس</item>
+    <item>النوع</item>
     <item>ذكر</item>
     <item>أنثى</item>
     </string-array>
@@ -821,7 +821,7 @@
         <item>45</item>
     </string-array>
 
-    <string name="EnterGender">الرجاء اختيار الجنس</string>
+    <string name="EnterGender">الرجاء اختيار النوع</string>
     <string name="EnterEmail">الرجاء ادخال البريد الالكتروني</string>
     <string name="sure_add_location">هل تريد إضافة هذا الموقع؟</string>
     <string name="sure_edit_location">هل تريد تعديل هذا الموقع؟</string>
@@ -855,7 +855,7 @@
     <string name="male">ذكر</string>
     <string name="females">الإناث</string>
     <string name="female">أنثى</string>
-    <string name="females_and_males">كلا الجنسين</string>
+    <string name="females_and_males">كلا النوعين</string>
     <string name="doesnt_exist">لا يوجد</string>
     <string name="undetermined">غير محدد</string>
     <string name="lessThanYear">العمر: أقل من سنة</string>
@@ -922,5 +922,12 @@
     <string name="AllDevices">تسجيل الخروج من جميع الأجهزة</string>
     <string name="AllDevicesNotMe">تسجيل الخروج من جميع الأجهزة باستثناء هذا الجهاز</string>
     <string name="DontLogout">عدم تسجيل الخروج</string>
-
+    <string name="discount_asc">نسبة الخصم (تصاعدياً)</string>
+    <string name="discount_desc">نسبة الخصم (تنازلياً)</string>
+    <string name="discount_price_desc">كمية الخصم (تصاعدياً)</string>
+    <string name="discount_price_asc">كمية الخصم (تنازلياً)</string>
+    <string name="offer_price_asc">سعر العرض (تصاعدياً)</string>
+    <string name="offer_price_desc">سعر العرض (تنازلياً)</string>
+    <string name="offer_booking_count_asc">عدد مرات الحجز (تصاعدياً)</string>
+    <string name="offer_booking_count_desc">عدد مرات الحجز (تنازلياً)</string>
 </resources>

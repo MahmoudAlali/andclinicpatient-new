@@ -47,13 +47,13 @@
                     android:id="@+id/username"
                     android:layout_marginTop="@dimen/standard_20"
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:inputType="phone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="5dp"
-                    android:background="@drawable/border_edit_text3"
+                    android:background="@drawable/border_edit_text4"
                     android:gravity="center"
                     android:elevation="5dp"
                     android:hint="@string/usernamehint" />
@@ -61,12 +61,12 @@
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/border_edit_text3"
+                    android:background="@drawable/border_edit_text4"
                     android:gravity="center"
                     android:elevation="5dp"
                     android:hint="@string/passwordhint"
@@ -75,43 +75,43 @@
                 <Button
                     android:id="@+id/login"
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/shadow_edit_text_blue"
+                    android:layout_height="35dp"
+                    android:background="@drawable/blue_button"
                     android:layout_gravity="center"
                     android:layout_marginBottom="7dp"
                     android:onClick="login"
                     android:text="@string/signin"
                     android:layout_marginTop="10dp"
                     android:textStyle="bold"
-                    android:textColor="@color/lightBlueClinic"
+                    android:textColor="@color/white"
                     />
 
                 <Button
                     android:id="@+id/forgetpass"
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="7dp"
                     android:onClick="forgetpass"
-                    android:background="@drawable/shadow_edit_text_blue"
+                    android:background="@drawable/blue_button"
                     android:text="@string/forgetmypas"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:textColor="@color/lightBlueClinic"
+                    android:textColor="@color/white"
 
                     />
 
                 <Button
                     android:id="@+id/viewApp"
                     android:layout_width="300dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/lightBlueClinic"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:text="@string/enterasaguset"
                     android:onClick="enterguest"
-                    android:background="@drawable/shadow_edit_text_blue"
+                    android:background="@drawable/blue_button"
                     android:textAllCaps="false"
 
                     />
@@ -124,13 +124,13 @@
                     <Button
                         android:id="@+id/new_user"
                         android:layout_width="300dp"
-                        android:layout_height="40dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="bottom|center"
-                        android:background="@drawable/light_blue_button"
+                        android:background="@drawable/green_button"
                         android:onClick="register"
                         android:elevation="5dp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:text="@string/signupText" />
 
                 </LinearLayout>

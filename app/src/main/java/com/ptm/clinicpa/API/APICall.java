@@ -4088,7 +4088,7 @@ public class APICall {
     //------------------------------ login----------------------
         static JSONObject data;
     public  static String CODE="";
-    public  static  void  login(final String name, final String  pass, final  String url, final Context context){
+    public  static  void  login(final String name, final String  pass, final  String url, final Context context, final String key, final String value){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
 
@@ -4257,7 +4257,10 @@ public class APICall {
 //                                    String bdb_is_deleted = data.getString("bdb_is_deleted");
 //                                    data = userresponse.getJSONObject("data");
                                     String token = data.getString("bdb_token");
-                                    updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
+                                    if(!key.equals(""))
+                                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token,key,value);
+                                    else
+                                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
                                     break;
                                 case  "2":
                                     showSweetDialogReActivate(context, context.getResources().getString(R.string.account_unactivated_yet) ,name);
@@ -5576,21 +5579,22 @@ public class APICall {
                     try {
                         JSONObject object=new JSONObject(mMessage);
                         String response_code=object.getString("response_code");
+                        pd.dismiss();
+                        SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        editor.clear();
+                        editor.apply();
+                        Intent intent = new Intent(context, Login.class);
+                        Login.logout = true;
+                        SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                        preferences.edit().clear();
+                        preferences.edit().remove("token");
+                        preferences.edit().apply();
+                        ((AppCompatActivity) context).finish();
+                        context.startActivity(intent);
                         if (response_code.equals("129")) {
                             Log.d("token", gettoken(context));
                             Log.e("TAG", mMessage);
-                            pd.dismiss();
-                            SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
-                            editor.clear();
-                            editor.apply();
-                            Intent intent = new Intent(context, Login.class);
-                            Login.logout = true;
-                            SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-                            preferences.edit().clear();
-                            preferences.edit().remove("token");
-                            preferences.edit().apply();
-                            ((AppCompatActivity) context).finish();
-                            context.startActivity(intent);
+
                         }
                     }catch (Exception e){
                         e.printStackTrace();
@@ -7292,7 +7296,7 @@ public class APICall {
         }
         RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
         okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(APICall.API_PREFIX_NAME+"/api/auth/user/deleteFirebaseToken")
+                .url(APICall.API_PREFIX_NAME+"/api/user/deleteFirebaseToken")
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .addHeader("X-Requested-With","XMLHttpRequest")
@@ -26923,6 +26927,98 @@ public class APICall {
 
         });
     }
+    public static void updateFBToken(final Context context, String newToken, final String userToken, final String key, final String value)
+    {
+//        showDialog(context);
+        Log.e("NewToken","updating FB token");
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        OkHttpClient client = new OkHttpClient();
+        JSONObject postdata = new JSONObject();
+        try {
+            postdata.put("bdb_fb_token",newToken);
+            postdata.put("bdb_sys_type","0");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("PostData ","errrrr"+e.getMessage());
+
+        }
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Log.e("NewToken",postdata.toString());
+        Log.e("UserToken",userToken.toString());
+        okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(API_PREFIX_NAME+"/api/user/updateFirebaseToken")
+                .post(body)
+                .addHeader("Content-Type","application/json")
+                .header("Authorization", "Bearer "+userToken)
+//                .header("Authorization", "Bearer "+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZjc3MjA4MWE1ZjZhNzc4ZTY0NWQ4NjdmOWYxZGVkM2YxY2I5ZTNmYzllZjU5YTc2ZmM5NzE3MzIzMzg3OThhMDg4NmJiZjJjNWUyMmIxIn0.eyJhdWQiOiIxIiwianRpIjoiYjJmNzcyMDgxYTVmNmE3NzhlNjQ1ZDg2N2Y5ZjFkZWQzZjFjYjllM2ZjOWVmNTlhNzZmYzk3MTczMjMzODc5OGEwODg2YmJmMmM1ZTIyYjEiLCJpYXQiOjE1NTg5MDY3MDEsIm5iZiI6MTU1ODkwNjcwMSwiZXhwIjoxNTkwNTI5MTAxLCJzdWIiOiI0OCIsInNjb3BlcyI6W119.SzlRGvvR1MLqNG2uYU8OCFRm0nzTNXqKK_3Y9nPUqy7CAGcqWWS_kzGbrMn3DR1dck7-rManDR1OlxpErRyQ-8EDrFgVpHzfFIdGoha_Jtnjgk7SoHO24PElfbxbQzPLdqOBRWY2du5tjQuconUeWY1TsouglH6L_Uvn-DqgbDHqGkv6yqwGSwtHEzLgDI72Dd4BMMmBnliKBtLYBArDQEfmUXjNI220X1VVa0NzCgYsvVebYW80OZ-E0vq8PJD3uOEgl4huO6dOsWSDQN_h2IQR0tVN_9fxPMasaP9oWjjW5Rs-wDb2qHKZ15zC0GBYAeEqAqXyfU2qRT_yqAFLHAbzlFRAk3dQ3Hzcfaa2twEVPJvYNi7DcOkQTMU14yvcemBOcG4iDuWWrblJyD6Z3iWPkv5e8bhgkSPyDvkDEx-X2z0wCpYyQXihHXmoiXYmwHVT4Kw2_GctLxqGZNkHEAhs_uW8tDmbCh_eISsbljRjvz6Mjxn_VBmP4GiAjgE6JykTZvm--Wrv767cHe95tK8ppuL18caeBYcdG6HjEmW3uPoOBIflMcv3iaXXeH_hfDoZ-c0Jf6FrwuioLN-C-X8eU_ztC6e67rPk5vNog3kX6C-lpTpjyC5hdTJpdsNJjm4o99nsbB7GvvctB8NhpsGm1L36VGvIi6QVrbaF8nc")
+                .build();
+
+        client.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMessage = e.getMessage().toString();
+                Log.e("deletePayment ERRR", mMessage);
+                pd.dismiss();
+                showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                mMessage = response.body().string();
+                Log.e("updateFBToken", mMessage);
+                try {
+                    final JSONObject userresponse=new JSONObject(mMessage);
+                    String success=userresponse.getString("success");
+                    if(success.equals("true")){
+                        String t= gettoken(context);
+                        switchAccount(context,FirebaseInstanceId.getInstance().getToken(),t);
+                        SharedPreferences.Editor editor = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                        editor.putString("name", "ok");
+                        editor.putString("isGuest","0");
+                        editor.putString("token", userToken);
+                        editor.remove("GOOGLE_KEY");
+                        editor.remove("SERVER_KEY");
+                        editor.remove("PROVIDER_SERVER_KEY");
+                        editor.commit();
+                        editor.apply();
+                        pd.dismiss();
+                        if(APICall.isGuest(context).equals("1"))
+                        {
+                            Log.e("isGuestis","is"+BeautyMainPage.bdb_is_guest);
+                            BeautyMainPage.RELOADAPP=true;
+                            APICall.getdetailsUserForLogin(context);
+                        }else {
+                            Intent i = new Intent(context, BeautyMainPage.class);
+                            i.putExtra(key,value);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
+                            ((AppCompatActivity) context).finish();
+                        }
+                    }else if(success.equals("false")) {
+                        // showUnexpectedErrMsg(context);
+
+                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.loginFailed,false);
+                    }
+                }catch (final JSONException je){
+                    ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Toast.makeText(context,je.getMessage(), Toast.LENGTH_LONG).show();
+                            showUnexpectedErrMsg(context);
+                            Log.e("ERROR",je.getMessage());
+                        }
+                    });
+
+                }
+
+
+            }
+
+        });
+    }
     public static void showSweetDialog(final Context context, final String textmessage, final Boolean iscode) {
         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
             @Override
@@ -30229,6 +30325,40 @@ public class APICall {
             public void onClick(View v) {
 
                 Intent i = new Intent(context,Login.class);
+                context.startActivity(i);
+                dialog.cancel();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+    }
+    public static void showNeedToSignInDialog(final Context context, final String key, final String value)
+    {
+        Log.e("ERR","showNeedToSignInDialog");
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.sweet_dialog_layout_v4);
+        TextView message = dialog.findViewById(R.id.message);
+        TextView title = dialog.findViewById(R.id.title);
+        TextView confirm = dialog.findViewById(R.id.confirm);
+        confirm.setText(R.string.signin);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        //                TextView resend_code = dialog.findViewById(R.id.resend_code);
+        //title.setText(R.string.ExuseMeAlert);
+        message.setText(R.string.plsLogin);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(context,Login.class);
+                if(!key.equals(""))
+                    i.putExtra("key",key);
+                    i.putExtra("value",value);
                 context.startActivity(i);
                 dialog.cancel();
             }

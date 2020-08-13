@@ -289,7 +289,7 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
             public void onClick(View v) {
                 if(APICall.isGuest(context).equals("1"))
                 {
-                    APICall.showNeedToSignInDialog(context);
+                    APICall.showNeedToSignInDialog(context,"center_id",itemArrayList.get(position).getHealthCntr_id());
                 }
                 else
                 {
