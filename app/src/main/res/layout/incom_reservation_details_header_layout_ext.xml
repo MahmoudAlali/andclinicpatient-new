@@ -16,17 +16,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/second_header"
+            android:background="@color/greenClinic"
             >
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/second_header"
+                android:background="@color/greenClinic"
                 >
                 <LinearLayout
                     android:id="@+id/check_hide"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -40,6 +42,57 @@
                         android:textSize="16dp" />
                     <TextView
                         android:id="@+id/old"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:text="Client Details"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:id="@+id/doctor"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/doctorName"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/doctorName"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="16dp"
+                        android:text="doc name"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/speciality"
+                        android:textColor="#000"
+                        android:textSize="16dp" />
+                    <TextView
+                        android:id="@+id/speciality"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

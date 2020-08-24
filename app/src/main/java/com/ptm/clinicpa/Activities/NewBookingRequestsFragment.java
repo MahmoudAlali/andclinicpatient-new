@@ -115,7 +115,7 @@ public class NewBookingRequestsFragment extends Fragment {
 
         //---------wait confirm by provider
      //   if (MyBookingRequestsFragment.filtercheck==false) {
-            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
+            APICall.requestsAutomatedBrowse("en", "100", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,"");
        /* }else {
             MyBookingRequestsFragment.filtercheck=false;
         }*/

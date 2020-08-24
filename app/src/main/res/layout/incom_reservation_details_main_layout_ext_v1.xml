@@ -36,7 +36,8 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/prime"
+                    android:textColor="@color/redClinic"
+                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:text="Reservation 1"
                     android:gravity="center"
@@ -230,6 +231,7 @@
             <LinearLayout
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="@dimen/pf_5dp_space"
+                android:id="@+id/priceLayout"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -242,13 +244,15 @@
                 <ImageView
                     android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/reser_money_icon"/>
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:text="" />
 

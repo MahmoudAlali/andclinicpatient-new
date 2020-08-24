@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="status"
+        android:textStyle="bold"
         android:textSize="16dp"
         android:gravity="center"
         />
@@ -34,12 +35,13 @@
             <TextView
                 android:layout_weight="1"
                 android:id="@+id/booktype"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:text="Booking type"
                 android:lines="1"
                 android:gravity="center"
                 android:textSize="14dp"
-                android:textColor="#000"
+                android:textColor="@color/redClinic"
                 android:layout_height="@dimen/standard_30" />
             <TextView
                 android:layout_weight="1"
@@ -48,12 +50,30 @@
                 android:text="Start Date"
                 android:gravity="center"
                 android:textSize="14dp"
-                android:textColor="#133277"
+                android:textColor="@color/blueClinic"
                 android:textStyle="bold"
                 android:layout_height="@dimen/standard_30" />
 
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/booktime"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="@string/time"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:textColor="@color/blueClinic"
+                android:textStyle="bold"
+                android:layout_height="@dimen/standard_30" />
+
+        </LinearLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -90,7 +110,8 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:textSize="14dp"
-                android:textColor="#a5587a"
+                android:textStyle="bold"
+                android:textColor="@color/blueClinic"
                 android:layout_height="@dimen/standard_30" />
             <ImageView
                 android:id="@+id/place"
@@ -100,21 +121,23 @@
                 android:layout_height="@dimen/standard_30"/>
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/doctorName"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:text="@string/doctorNames"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:textColor="@color/blueClinic"
+            android:textStyle="bold"
+            android:layout_height="@dimen/standard_30" />
         <LinearLayout
             android:layout_weight="1"
             android:id="@+id/doctorNamesLayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/doctorName"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:text="@string/doctorNames"
-                android:gravity="center"
-                android:textSize="14dp"
-                android:textColor="#a5587a"
-                android:layout_height="@dimen/standard_30" />
+
 
         </LinearLayout>
 
@@ -138,19 +161,19 @@
                     android:text="Patient name"
                     android:gravity="center"
                     android:textSize="14dp"
-                    android:textColor="#000"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
                     android:layout_height="match_parent" />
                 <TextView
-                    android:visibility="gone"
                     android:layout_weight="1"
                     android:id="@+id/total_price"
                     android:layout_width="match_parent"
                     android:text="Price"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
-                    android:textColor="#d83269"
-                    android:layout_height="@dimen/high_edit_text" />
+                    android:textColor="@color/blueClinic"
+                    android:layout_height="match_parent" />
 
 
             </LinearLayout>
@@ -164,7 +187,8 @@
                 <TextView
                     android:id="@+id/order_num"
                     android:layout_weight="1"
-                    android:textColor="#9a7084"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="14dp"
@@ -177,7 +201,8 @@
                 <TextView
                     android:id="@+id/booking_place"
                     android:layout_weight="1"
-                    android:textColor="#133277"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="14dp"
@@ -244,6 +269,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/cancel"
+            android:textStyle="bold"
             android:textColor="#fff"
             android:textSize="14dp"
             android:gravity="center"

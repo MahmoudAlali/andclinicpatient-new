@@ -201,10 +201,13 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             // >>>>>>>>>>>>> date
             ((Item)holder).date.setText(APICall.convertToArabic(bookingRequestData.get(position).getBdb_start_dateReq()));
+            ((Item)holder).time.setText(APICall.convertToArabic(bookingRequestData.get(position).getBdb_start_time()));
 
             //>>>>>>>>> price
-        String price = APICall.convertToArabic(bookingRequestData.get(position).getCost());
+        String price =context.getString(R.string.cost)+ APICall.convertToArabic(bookingRequestData.get(position).getCost());
         price+= " "+BeautyMainPage.context.getResources().getString(R.string.ryal);
+        if(bookingRequestData.get(position).getCost().equals("null")||bookingRequestData.get(position).getCost().equals("0"))
+            price =context.getString(R.string.unDeterminedPrice);
 
         ((Item)holder).totalPrice.setText(price);
 
@@ -285,6 +288,8 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         });
 
         ArrayList <String> doctorIds=new ArrayList<>();
+        ((Item)holder).doctorNamesLayout.removeAllViews();
+
         //>>>>>>>>>> Doctor Names
         for (int i=0;i<bookingRequestData.get(position).getClients().size();i++)
         {
@@ -399,7 +404,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,date,accept,cancel,ID,doctorName,show_clients_names;
+        TextView bookType,client_name,status, totalPrice,booking_place,export_invoice,time,date,accept,cancel,ID,doctorName,show_clients_names;
         ImageView book_Details,inner_res,place,logoImg;
         LinearLayout doctorNamesLayout;
 
@@ -413,6 +418,7 @@ public class BookingRequestsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             totalPrice=itemView.findViewById(R.id.total_price);
             //inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
+            time=itemView.findViewById(R.id.booktime);
             date=itemView.findViewById(R.id.start_date);
             booking_place=itemView.findViewById(R.id.booking_place);
             book_Details=itemView.findViewById(R.id.book_details);

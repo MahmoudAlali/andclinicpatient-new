@@ -384,7 +384,39 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             detailsIntent.putExtra("order_id",order_id);
             (context).startActivity(detailsIntent);
         }
+        else if(code.equals("40")||code.equals("42")||code.equals("43")||code.equals("44")||code.equals("45"))
+        {
+            String order_ids="";
+            for (int i=0;i<j.length();i++)
+            {
+                Log.e("Notif","i :"+i);
+                try{
+                    JSONObject object = j.getJSONObject(i);
+                    order_ids = object.getString("order_ids");
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Log.e("NotifErr",i+" : "+e.getMessage());
 
+                }
+            }
+            menu.findItem(R.id.services).setIcon(R.drawable.appointments_grey);
+            menu.findItem(R.id.reservations).setIcon(R.drawable.orders_grey);
+            menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
+            menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
+            menu.findItem(R.id.main).setIcon(R.drawable.home_grey);
+            menu.findItem(R.id.reservations).setIcon(R.drawable.orders_selected);
+            FRAGMENT_NAME = "";
+            fragment = new MyBookingRequestsFragment();
+            Bundle b= new Bundle();
+            b.putString("order_ids",order_ids);
+            fm = getFragmentManager();
+            fragment.setArguments(b);
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+        }
         else {
             Log.e("ELSSSSe","go to else");
         }
@@ -466,6 +498,24 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             Log.e("goToReservation",e.getMessage());
         }
 
+        String offer; /// check if guest user was reserving Offer
+        try {
+            offer=getIntent().getStringExtra("offer");
+            if(!offer.equals(""))
+            {
+                menu.findItem(R.id.favorites).setIcon(R.drawable.offers_selected);
+                fragment=new MyOffersFragment();
+                fm = getFragmentManager();
+                fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.e("goToOffers",e.getMessage());
+        }
 
         //endregion
 

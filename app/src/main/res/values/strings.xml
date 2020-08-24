@@ -76,7 +76,7 @@
     <string name="InvalidEmail">This email address is invalid, please rewrite it</string>
     <string name="InvalidPassword">Password length must be 6, Password must contain one uppercase letter, at least one number
     and at least one letter of lowercase</string>
-    <string name="SendNewPass">Setting new password link was sent to your Email</string>
+    <string name="SendNewPass">Reset password link was sent to the E-mail, P.S. it might be arrived to junk mails.</string>
     <string name="CantFindNum">We can not find a user with that mobile</string>
     <string name="numberNotActivatedAlert">This number is already registered,Please activate it by entering the verification code</string>
     <string name="EnterVerificationCode">Please enter the verification code</string>
@@ -661,7 +661,8 @@
     <string name="emp_name">Employee Name :</string>
     <string name="Servicr_Time">Service Time :</string>
     <string name="delete_all">Delete all</string>
-    <string name="start_at">Start at</string>
+    <string name="start_at">Starts at</string>
+    <string name="end_at">Ends at</string>
     <string name="valid_until">Valid until</string>
     <string name="normal_offer">Normal offer</string>
     <string name="bride_offer">Bride offer</string>
@@ -740,6 +741,10 @@
     <string name="discountPrcnt">Discount percent</string>
     <string name="ClientDetails">Client details</string>
     <string name="priceRange">Price range</string>
+    <string name="total_price">Total price :</string>
+    <string name="ser_cost">Services price :</string>
+    <string name="service_place">Appointment in :</string>
+
     <string name="price">Price</string>
     <string name="srvcEvaluation">Service evaluation </string>
     <string name="distanceRange">Distance range</string>
@@ -763,6 +768,7 @@
     <string name="order_id">Order number:</string>
     <string name="journey_time">Journey time</string>
     <string name="journey_cost">Journey cost</string>
+    <string name="review_cost">Review cost</string>
     <string name="actual_price">Actual price</string>
     <string name="main_price">Main price</string>
     <string name="minute">Minute</string>
@@ -810,7 +816,14 @@
     <string name="groupRequest">Group order</string>
     <string name="indivRequestOffer">Individual offer</string>
     <string name="indivMultiRequestOffer">Individual offer</string>
+    <string name="indivMultiappointmentOffer">Individual offer appointment</string>
+    <string name="groupappointment">Group appointment</string>
+    <string name="indivAppointment">Individual appointment</string>
+    <string name="indivMultiappointment">Individual appointment</string>
+    <string name="indivappointmentOffer">Individual offer appointment</string>
+
     <string name="groupRequestOffer">Group offer</string>
+    <string name="groupAppoinmentOffer">Group offer appointment</string>
 
     <string name="requestAdded">Your order has been sent.</string>
     <string name="KM">Km</string>
@@ -820,6 +833,7 @@
     <string name="personalReserv">This order is personal</string>
     <string name="more_desc">more description (optional)</string>
     <string name="more_desc2">more description:</string>
+    <string name="appointment_desc">appointment description:</string>
     <string name="requestDateFilter">Order execution date</string>
     <string name="appointmentDateFilter">Execution date</string>
     <string name="appointmentcreationDateFilter">Creation date</string>
@@ -861,6 +875,8 @@
     <string name="pro_not_support_place">Provider does not support this place</string>
     <string name="reference_number">Reference Id:</string>
     <string name="book_id">Appointment Id:</string>
+    <string name="visit_type">Visit type:</string>
+
     <string name="deposit_can_paid_alert">The deposit of this booking can only be paid by the booking owner</string>
     <string name="there_is_no_offer_sol">There is no solution for this offer</string>
     <string name="no_sol_msg">To find available salons please change booking date or chosen filters</string>
@@ -1007,8 +1023,8 @@
     <string name="appUnderEditing">appointment is being edited</string>
     <string name="newVisit">New Visit</string>
     <string name="oldVisit">Review visit</string>
-    <string name="unDeterminedVisit">Un determined visit</string>
-    <string name="unDeterminedPrice">Un determined price</string>
+    <string name="unDeterminedVisit">Undetermined visit type</string>
+    <string name="unDeterminedPrice">Undetermined price</string>
     <string name="isShifted">Appointment is shifted:</string>
     <string name="exec_date">Execution date</string>
     <string name="creation_date">Creation date</string>
@@ -1047,6 +1063,8 @@
     <string name="no_followers">You don\'t have any followers</string>
     <string name="no_availtimes">This doctor doesn\'t have any available times</string>
 
+    <string name="appointmentDetails">Appointment details</string>
+    <string name="requestDetails">Request details</string>
     <string name="relationship">Relationship :</string>
     <string name="father">Father</string>
     <string name="mother">Mother</string>

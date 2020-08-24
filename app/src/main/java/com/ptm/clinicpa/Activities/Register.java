@@ -71,6 +71,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
     public static String my_description,description;
     Geocoder geocoder;
     public static boolean iscurrent_location=false;
+    String key="",value="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,8 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_register);
         APICall.FRAGMENT_NAME="activity_register";
         gender ="" ;
+        key=getIntent().getStringExtra("key");
+        value=getIntent().getStringExtra("value");
         Spinner spin =findViewById(R.id.userGender);
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -170,7 +173,7 @@ public class Register extends AppCompatActivity implements OnMapReadyCallback {
         }else {
 //            Log.e("lat_Lang",lat+","+lang);
             APICall.new_user(age.getText().toString(),name.getText().toString(),phone.getText().toString(),email.getText().toString(),gender,password.getText().toString()
-            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/user/register/new_user",Register.this);
+            ,confirm_password.getText().toString(),lang+"",lat+"",description,my_description,getFilterLocationDetails()+"",getFilterLocationDetailsAr()+"",APICall.API_PREFIX_NAME+"/api/user/register/new_user",Register.this,key,value);
         }
     }
 

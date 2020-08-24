@@ -468,6 +468,11 @@ public class NotificationsBeauty {
             showOrderDetailsNotification(context,title,body,j,code);
 
         }
+        else if(code.equals("40")||code.equals("42")||code.equals("43")||code.equals("44")||code.equals("45"))
+        {
+            showBookingDetailsNotification(context,title,body,j,code);
+
+        }
 
     }
 

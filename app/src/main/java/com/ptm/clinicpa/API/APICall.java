@@ -19,6 +19,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -360,8 +361,8 @@ public class APICall {
         //    ------------------- register new user in beauty client app----------------
         static String mMessage="";
 
-    public  static  String  new_user(final String age,final String name, final String phone,String bdb_email,final String gender ,final String password, final String confirm_password, final String loc_long
-            , final String loc_lat, final String description,final String my_description,String loc_details,String loc_detailsAr,final  String url, final Context context){
+    public  static  String  new_user(final String age, final String name, final String phone, String bdb_email, final String gender , final String password, final String confirm_password, final String loc_long
+            , final String loc_lat, final String description, final String my_description, String loc_details, String loc_detailsAr, final  String url, final Context context ,final String key, final String vale){
         if (validationPassword(password)){
             MediaType MEDIA_TYPE = MediaType.parse("application/json");
            showDialog(context);
@@ -386,6 +387,7 @@ public class APICall {
                 postdata.put("bdb_fb_token", fb_token);
                 postdata.put("bdb_server_key", server_key);
                 postdata.put("bdb_sys_type", "0");
+                postdata.put("device_id",getDeviceId(context));
 
 
 
@@ -527,6 +529,8 @@ public class APICall {
                                         APICall.token_temp=data.getString("token");
                                         intent=new Intent(context, ConfirmAccountActivity.class);
                                         intent.putExtra("phone",phone);
+                                        intent.putExtra("key",key);
+                                        intent.putExtra("value",vale);
                                         intent.putExtra("bdb_token",data.getString("token"));
                                         context.startActivity(intent);
                                         break;
@@ -690,6 +694,9 @@ public class APICall {
                                         ((AppCompatActivity) context).onBackPressed();
                                         Toast.makeText(context,context.getResources().getString(R.string.success_add_follower),Toast.LENGTH_LONG).show();
                                         break;
+                                    case "255":
+                                        showUnexpectedErrMsg(context,"255");
+                                        break;
                                 }
                             }catch (Exception e){
                                 e.printStackTrace();
@@ -827,6 +834,9 @@ public class APICall {
                                     case  "209":
                                         ((AppCompatActivity) context).onBackPressed();
                                         Toast.makeText(context,context.getResources().getString(R.string.success_update_follower),Toast.LENGTH_LONG).show();
+                                        break;
+                                    case "255":
+                                        showUnexpectedErrMsg(context,"255");
                                         break;
                                 }
                             }catch (Exception e){
@@ -1291,7 +1301,7 @@ public class APICall {
                 try {
                     JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
-                    String response_code=j.getString("response_code");
+                    final String response_code=j.getString("response_code");
                     if (response_code.equals("26")) {
                         JSONObject data=j.getJSONObject("data");
                         JSONArray user_effect=data.getJSONArray("user_effect");
@@ -1326,7 +1336,8 @@ public class APICall {
 //                            }
 //                        });
 
-                    }else if(j.getString("response_code").equals("25")){
+                    }
+                    else if(response_code.equals("25")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -1335,12 +1346,11 @@ public class APICall {
                         });
                     }
 
-
                     else
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                showUnexpectedErrMsg(context);
+                                showUnexpectedErrMsg(context,response_code);
 //                                Toast.makeText(context,R.string.rate_toast,Toast.LENGTH_LONG).show();
 
                             }
@@ -1479,7 +1489,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -1631,7 +1641,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -1782,7 +1792,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -1934,7 +1944,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -2086,7 +2096,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -2239,7 +2249,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -2388,7 +2398,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -2503,7 +2513,7 @@ public class APICall {
                         });
                         }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException je){
                     showUnexpectedErrMsg(context);
@@ -2816,7 +2826,7 @@ public class APICall {
                         });
 
                     }
-                    if (j.getString("response_code").equals("54")) {
+                    if (response_code.equals("54")) {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -2826,6 +2836,8 @@ public class APICall {
                             }
                         });
                     }
+                    else
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     showUnexpectedErrMsg(context);
                     Log.e("ERROR",je.getMessage());
@@ -3017,7 +3029,7 @@ public class APICall {
                             });
                         }
                     }
-                    if (j.getString("response_code").equals("63")) {
+                    if (response_code.equals("63")) {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -3026,6 +3038,7 @@ public class APICall {
                             }
                         });
                     }
+                    showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     showUnexpectedErrMsg(context);
                     Log.e("ERROR",je.getMessage());
@@ -3462,6 +3475,7 @@ public class APICall {
 
 
                         }
+
                     } catch (JSONException e) {
                     e.printStackTrace();
                     }
@@ -3754,7 +3768,7 @@ public class APICall {
 
     //---------------------- active account-------------------
         static   String name,token_temp;
-    public  static  void   activeAccount(final  String url, final String token, final Context context){
+    public  static  void   activeAccount(final  String url, final String token, final Context context,final String key,final String value){
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         showDialog(context);
         OkHttpClient client = new OkHttpClient();
@@ -3848,6 +3862,15 @@ public class APICall {
                                    editor.apply();
                                    editor.commit();
                                    Intent i = new Intent(context, BeautyMainPage.class);
+                                   try
+                                   {
+                                       if(!key.equals(""))
+                                           i.putExtra(key,value);
+                                   }
+                                   catch (Exception e)
+                                   {
+
+                                   }
                                    context.startActivity(i);
                                    ((AppCompatActivity) context).finish();
                                }else {
@@ -3979,6 +4002,8 @@ public class APICall {
                             }
                         });
                     }
+                    else
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
                     showUnexpectedErrMsg(context);
@@ -4257,10 +4282,18 @@ public class APICall {
 //                                    String bdb_is_deleted = data.getString("bdb_is_deleted");
 //                                    data = userresponse.getJSONObject("data");
                                     String token = data.getString("bdb_token");
-                                    if(!key.equals(""))
-                                        updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token,key,value);
-                                    else
+                                    try
+                                    {
+                                        if(!key.equals(""))
+                                            updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token,key,value);
+                                        else
+                                            updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
+
+                                    }
+                                    catch (Exception e)
+                                    {
                                         updateFBToken(context, FirebaseInstanceId.getInstance().getToken(), token);
+                                    }
                                     break;
                                 case  "2":
                                     showSweetDialogReActivate(context, context.getResources().getString(R.string.account_unactivated_yet) ,name);
@@ -4536,7 +4569,7 @@ public class APICall {
                                     }
                                 });
                             }      else {
-                                showUnexpectedErrMsg(context);
+                                showUnexpectedErrMsg(context,response_code);
                             }
                         }catch (JSONException je){
                             je.printStackTrace();
@@ -5053,7 +5086,7 @@ public class APICall {
                                     }
                                 } else {
                                     pd.dismiss();
-                                   showUnexpectedErrMsg(context);
+                                   showUnexpectedErrMsg(context,response_code);
                                 }
                             } catch (JSONException je) {
                                 je.printStackTrace();
@@ -5165,7 +5198,7 @@ public class APICall {
                     try {
                         final JSONObject j=new JSONObject(mMessage);
                         String success=j.getString("success");
-                        String response_code=j.getString("response_code");
+                        final String response_code=j.getString("response_code");
                         String msg=j.getString("message");
                         if (response_code.equals("127")) {
                             ((AppCompatActivity) context).runOnUiThread(new Runnable() {
@@ -5192,7 +5225,7 @@ public class APICall {
                                 ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                            showUnexpectedErrMsg(context);
+                                            showUnexpectedErrMsg(context,response_code);
 
                                     }
                                 });
@@ -5479,7 +5512,7 @@ public class APICall {
                                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Toast.makeText(context, R.string.SendNewPass, Toast.LENGTH_LONG).show();
+                                                showSweetDialog(context, R.string.ExuseMeAlert, R.string.SendNewPass);
                                             }
                                         });
                                     } else  if (response_code.equals("116")){
@@ -5491,6 +5524,8 @@ public class APICall {
                                             });
 
                                     }
+                                    else
+                                        showUnexpectedErrMsg(context,response_code);
                                 } catch (JSONException je) {
                                     je.printStackTrace();
                                 }
@@ -5580,21 +5615,25 @@ public class APICall {
                         JSONObject object=new JSONObject(mMessage);
                         String response_code=object.getString("response_code");
                         pd.dismiss();
-                        SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
-                        editor.clear();
-                        editor.apply();
-                        Intent intent = new Intent(context, Login.class);
-                        Login.logout = true;
-                        SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
-                        preferences.edit().clear();
-                        preferences.edit().remove("token");
-                        preferences.edit().apply();
-                        ((AppCompatActivity) context).finish();
-                        context.startActivity(intent);
                         if (response_code.equals("129")) {
                             Log.d("token", gettoken(context));
                             Log.e("TAG", mMessage);
+                            SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                            editor.clear();
+                            editor.apply();
+                            Intent intent = new Intent(context, Login.class);
+                            Login.logout = true;
+                            SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                            preferences.edit().clear();
+                            preferences.edit().remove("token");
+                            preferences.edit().apply();
+                            ((AppCompatActivity) context).finish();
+                            context.startActivity(intent);
 
+                        }
+                        else
+                        {
+                            deleteFBToken(context);
                         }
                     }catch (Exception e){
                         e.printStackTrace();
@@ -5699,6 +5738,10 @@ public class APICall {
                             preferences.edit().apply();
                             ((AppCompatActivity) context).finish();
                             context.startActivity(intent);
+                        }
+                        else
+                        {
+                            deleteFBToken(context);
                         }
                     }catch (Exception e){
                         e.printStackTrace();
@@ -6206,10 +6249,10 @@ public class APICall {
                                 }
                             });
                         }else if (
-                                jsonObject.getString("response_code").equals("79")||
-                                jsonObject.getString("response_code").equals("80")||
-                                jsonObject.getString("response_code").equals("81")||
-                                jsonObject.getString("response_code").equals("82")
+                                response_code.equals("79")||
+                                        response_code.equals("80")||
+                                        response_code.equals("81")||
+                                        response_code.equals("82")
 
                         ){
                             TabTwo.arrayList.clear();
@@ -6220,27 +6263,27 @@ public class APICall {
                                     showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_provider));
                                 }
                             });
-                        }else if (jsonObject.getString("response_code").equals("83")){
+                        }else if (response_code.equals("83")){
                             TabTwo.arrayList.clear();
 
                                     TabOne.refreshRV();
                                     APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
                                             context.getResources().getString(R.string.try_again_later));;
 
-                        }else if (jsonObject.getString("response_code").equals("84")){
+                        }else if (response_code.equals("84")){
                             TabTwo.arrayList.clear();
 
                                     TabOne.refreshRV();
                                     APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
                                             context.getResources().getString(R.string.try_again_later));
 
-                        }else if (jsonObject.getString("response_code").equals("86")){
+                        }else if (response_code.equals("86")){
                             TabTwo.arrayList.clear();
 
                                     TabOne.refreshRV();
                                     showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_supplier));
 
-                        }else if (jsonObject.getString("response_code").equals("87")){
+                        }else if (response_code.equals("87")){
                             TabTwo.arrayList.clear();
 
                                     TabOne.refreshRV();
@@ -6248,7 +6291,7 @@ public class APICall {
 
                         }
                         else
-                            showUnexpectedErrMsg(context);
+                            showUnexpectedErrMsg(context,response_code);
                     }catch (final JSONException je){
                         //there is no suppliered services with your search filters
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -6714,7 +6757,7 @@ public class APICall {
                             });
                         }
                         else
-                            showUnexpectedErrMsg(context);
+                            showUnexpectedErrMsg(context,response_code);
                     }catch (final JSONException je){
                         //there is no suppliered services with your search filters
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -6871,7 +6914,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
                     ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -7110,7 +7153,7 @@ public class APICall {
 
                         }
                     }
-                    else if (jsonObject.getString("response_code").equals("62")){
+                    else if (response_code.equals("62")){
                             TabTwo.arrayList.clear();
                             ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                                 @Override
@@ -7121,7 +7164,7 @@ public class APICall {
                             });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -7358,9 +7401,22 @@ public class APICall {
                     Log.e("logoutFromAllDevices", mMessage);
                     String response_code=object.getString("response_code");
                     pd.dismiss();
+                    SharedPreferences.Editor editor = ((AppCompatActivity) context).getSharedPreferences("LOGIN", Context.MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(context, Login.class);
+                    Login.logout = true;
+                    SharedPreferences preferences = context.getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+                    preferences.edit().clear();
+                    preferences.edit().remove("token");
+                    preferences.edit().apply();
+                    ((AppCompatActivity) context).finish();
+                    context.startActivity(intent);
                     if (response_code.equals("299")) {
-                        Log.e("logoutFromAllDevices", mMessage);
+                        Log.e("FbTokenDeleted", mMessage);
                     }
+                    else
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -7602,7 +7658,7 @@ public class APICall {
                             });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -7855,7 +7911,7 @@ public class APICall {
 //                                }
 //                            });
 //                        }
-                    }else if (jsonObject.getString("response_code").equals("59")){
+                    }else if (response_code.equals("59")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
@@ -7864,7 +7920,7 @@ public class APICall {
                                 showSweetDialog(context,"",context.getResources().getString(R.string.there_is_no_provider));
                             }
                         });
-                    }else if (jsonObject.getString("response_code").equals("58")){
+                    }else if (response_code.equals("58")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
@@ -7874,7 +7930,7 @@ public class APICall {
                                         context.getResources().getString(R.string.try_again_later));
                             }
                         });
-                    }else if (jsonObject.getString("response_code").equals("60")){
+                    }else if (response_code.equals("60")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
@@ -7884,7 +7940,7 @@ public class APICall {
                                         context.getResources().getString(R.string.try_again_later));
                             }
                         });
-                    }else if (jsonObject.getString("response_code").equals("62")){
+                    }else if (response_code.equals("62")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
@@ -7895,7 +7951,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
                     showUnexpectedErrMsg(context);
@@ -8481,7 +8537,7 @@ public class APICall {
                             //----------toast for congratulations---------
                             activeAccount(API_PREFIX_NAME+"/api/user/register/activate",
                                     code.getText().toString(),
-                                    context);
+                                    context,"","");
                         }
                     });
                     dialog.show();
@@ -8528,7 +8584,7 @@ public class APICall {
                             //----------toast for congratulations---------
                             activeAccount(API_PREFIX_NAME+"/api/user/register/activate",
                                     code.getText().toString(),
-                                    context);
+                                    context,"","");
                         }
                     });
                     dialog.show();
@@ -8576,7 +8632,7 @@ public class APICall {
                             //----------toast for congratulations---------
                             activeAccount(API_PREFIX_NAME+"/api/user/register/activate",
                                     code.getText().toString(),
-                                    context);
+                                    context,"","");
                         }
                     });
                     dialog.show();
@@ -12395,7 +12451,7 @@ public class APICall {
                             });
                         }
                     }
-                    else if(j.getString("response_code").equals("106")) {
+                    else if(response_code.equals("106")) {
                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -12403,7 +12459,7 @@ public class APICall {
                                 showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.nobooking), ((AppCompatActivity) context).getResources().getString(R.string.nobookingyet));
                             }
                         });
-                    }else if(j.getString("response_code").equals("105")) {
+                    }else if(response_code.equals("105")) {
                         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -12413,7 +12469,7 @@ public class APICall {
                         });
                     } else {
                         MyReservationFragment.action_floating_btn.setText("0");
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     je.printStackTrace();
@@ -12741,7 +12797,7 @@ public class APICall {
                             });
                         }
                     }
-                    else if(j.getString("response_code").equals("106")) {
+                    else if(response_code.equals("106")) {
                         /*((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -12749,7 +12805,7 @@ public class APICall {
                                 showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.nobooking), ((AppCompatActivity) context).getResources().getString(R.string.nobookingyet));
                             }
                         });*/
-                    }else if(j.getString("response_code").equals("105")) {
+                    }else if(response_code.equals("105")) {
                         /*((AppCompatActivity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -12759,7 +12815,7 @@ public class APICall {
                         });*/
                     } else {
                         MyReservationFragment.action_floating_btn.setText("0");
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     je.printStackTrace();
@@ -13911,7 +13967,7 @@ public class APICall {
                             }
                         });
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -14090,7 +14146,8 @@ public class APICall {
                         });
                     }
 
-//                        showUnexpectedErrMsg(context);
+                    else
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -14606,7 +14663,8 @@ public class APICall {
                         });
                     }
 
-//                        showUnexpectedErrMsg(context);
+                    else
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -18653,9 +18711,9 @@ public class APICall {
                     final JSONObject j=new JSONObject(mMessage);
                     String success=j.getString("success");
                     final String message=j.getString("message");
-                    final String resonse_code=j.getString("response_code");
+                    final String response_code=j.getString("response_code");
 
-                    if (resonse_code.equals("92")) {
+                    if (response_code.equals("92")) {
 //                        JSONObject d = j.getJSONObject("data");
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
@@ -18681,7 +18739,7 @@ public class APICall {
 
                             }
                         });
-                    }else if (j.getString("response_code").equals("90")){
+                    }else if (response_code.equals("90")){
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -18692,7 +18750,7 @@ public class APICall {
                     }
                     else {
 
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -19149,7 +19207,7 @@ public class APICall {
                     }else {
 
 
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,j.getString("response_code"));
                     }
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -19291,7 +19349,7 @@ public class APICall {
                         });
                     }else {
 
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,j.getString("response_code"));
                     }
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -19432,7 +19490,7 @@ public class APICall {
                         });
                     }else {
 
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,j.getString("response_code"));
                     }
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -19562,7 +19620,7 @@ public class APICall {
                                 ((AppCompatActivity) context).onBackPressed();
                             }
                         });
-                    }else if (j.getString("response_code").equals("100")){
+                    }else if (resonse_code.equals("100")){
                         TabTwo.arrayList.clear();
                         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
                             @Override
@@ -21580,7 +21638,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -21762,7 +21820,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -21962,7 +22020,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException je){
                     je.printStackTrace();
 //                        there is no suppliered services with your search filters
@@ -23005,16 +23063,8 @@ public class APICall {
                             }
                         });
                     }else {
+                        showUnexpectedErrMsg(context,response_code);
 
-
-                        //------- another one has booked it-------------------
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-//                                API.NotAvlBookingDialog(context,"Alert!","This time is not available because another customer has booked it.");
-                                showUnexpectedErrMsg(context);
-                            }
-                        });
                         //---------------------------------------------------------
                     }
                 }catch (final JSONException je){
@@ -24071,7 +24121,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (JSONException e){
                     e.printStackTrace();
                     showUnexpectedErrMsg(context);
@@ -24509,7 +24559,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je)
                 {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -24640,7 +24690,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je)
                 {
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -24770,7 +24820,7 @@ public class APICall {
                             }
                         });
                     } else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
                 }catch (final JSONException je)
@@ -24934,7 +24984,7 @@ public class APICall {
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -25750,7 +25800,7 @@ public class APICall {
 
                     }
                     else  if (!msg.equals("there is no notifications"))
-                        showUnexpectedErrMsg(cont);
+                        showUnexpectedErrMsg(cont,response_code);
 
                 }
                 catch (JSONException e)
@@ -25933,7 +25983,7 @@ public class APICall {
 
                     }
                     else {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (JSONException je){
                     je.printStackTrace();
@@ -26145,16 +26195,16 @@ public class APICall {
         }
         catch (Exception e){}
 
-        JSONArray items = new JSONArray();
+       /* JSONArray items = new JSONArray();
         items.put(item);
         JSONObject postdata = new JSONObject();
         try {
             postdata .put("items",items);
 
         }
-        catch (Exception e){}
-        Log.e("DeleteFollower",postdata.toString());
-        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+        catch (Exception e){}*/
+        Log.e("DeleteFollower",item.toString());
+        RequestBody body = RequestBody.create(MEDIA_TYPE, item.toString());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(API_PREFIX_NAME+"/api/follower/deleteFollower")
@@ -26219,7 +26269,13 @@ public class APICall {
                     if(response_code.equals("211"))
                     {
                         allRelativesList.clear();
-                        RelativesActivity.relativesAdapter.notifyDataSetChanged();
+                        ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RelativesActivity.relativesAdapter.notifyDataSetChanged();
+                            }
+                        });
+
                         //---------------------call API for Services and get items-------------
                         APICall.getAllFollowers( cont);
                     }
@@ -26228,7 +26284,7 @@ public class APICall {
                         showSweetDialog(cont,R.string.SomethingWentWrongAlert);
                     }
                     else
-                        showUnexpectedErrMsg(cont);
+                        showUnexpectedErrMsg(cont,response_code);
 
 
                 }
@@ -26347,7 +26403,7 @@ public class APICall {
                         showSweetDialog(cont,R.string.SomethingWentWrongAlert);
                     }
                     else
-                        showUnexpectedErrMsg(cont);
+                        showUnexpectedErrMsg(cont,response_code);
 
 
                 }
@@ -26470,7 +26526,7 @@ public class APICall {
                         showSweetDialog(cont,R.string.SomethingWentWrongAlert);
                     }
                     else
-                        showUnexpectedErrMsg(cont);
+                        showUnexpectedErrMsg(cont,response_code);
 
 
                 }
@@ -26678,7 +26734,7 @@ public class APICall {
                         }
                     }
                     else
-                        showUnexpectedErrMsg(cont);
+                        showUnexpectedErrMsg(cont,response_code);
 
                 }
                 catch (JSONException e)
@@ -26815,7 +26871,7 @@ public class APICall {
 
                             }
                             else
-                                showUnexpectedErrMsg(cont);
+                                showUnexpectedErrMsg(cont,response_code);
                         }
                         catch (JSONException e)
                         {
@@ -26847,6 +26903,8 @@ public class APICall {
         try {
             postdata.put("bdb_fb_token",newToken);
             postdata.put("bdb_sys_type","0");
+            postdata.put("device_id",getDeviceId(context));
+
         }catch (Exception e){
             e.printStackTrace();
             Log.e("PostData ","errrrr"+e.getMessage());
@@ -26938,6 +26996,8 @@ public class APICall {
         try {
             postdata.put("bdb_fb_token",newToken);
             postdata.put("bdb_sys_type","0");
+            postdata.put("device_id",getDeviceId(context));
+
         }catch (Exception e){
             e.printStackTrace();
             Log.e("PostData ","errrrr"+e.getMessage());
@@ -27098,6 +27158,7 @@ public class APICall {
 
             postdata.put("bdb_fb_token",fbToken);
             postdata.put("bdb_server_key",server_key);
+            postdata.put("device_id",getDeviceId(context));
             postdata.put("bdb_sys_type","0");
         }catch (Exception e){
             e.printStackTrace();
@@ -27179,6 +27240,7 @@ public class APICall {
 
             postdata.put("bdb_fb_token",fbToken);
             postdata.put("bdb_server_key",server_key);
+            postdata.put("device_id",getDeviceId(context));
             postdata.put("bdb_sys_type","0");
         }catch (Exception e){
             e.printStackTrace();
@@ -27294,7 +27356,7 @@ public class APICall {
                     if (response_code.equals("20"))
                     ((AppCompatActivity) context).finish();
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (Exception e){
                     showUnexpectedErrMsg(context);
@@ -27447,7 +27509,7 @@ public class APICall {
                                 context.getResources().getString(R.string.try_again_later));
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -27597,7 +27659,7 @@ public class APICall {
                                 context.getResources().getString(R.string.try_again_later));
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     je.printStackTrace();
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -28031,7 +28093,7 @@ public class APICall {
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }
                 catch (final JSONException e)
                 {
@@ -28138,7 +28200,7 @@ public class APICall {
                                 showSweetDialog(context,message);
                             }});
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }
                 catch (final JSONException e)
@@ -28445,7 +28507,7 @@ public class APICall {
                         }
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
@@ -29162,7 +29224,10 @@ public class APICall {
                     if (success.equals("true")){
                         final JSONObject data=jsonrespone.getJSONObject("data");
                         final JSONArray booking=data.getJSONArray("booking");
-                        final String booking_type=data.getString("visit_type");
+                        final String visit_type=data.getString("visit_type");
+                        final String booking_type=data.getString("bdb_is_group_booking");
+                        final String bdb_start_time=data.getString("bdb_start_time");
+                        final String bdb_end_time=data.getString("bdb_end_time");
                         final String bdb_start_date=data.getString("bdb_start_date");
                         final String bdb_created_at=data.getString("bdb_created_at");
                         final String bdb_booking_place=data.getString("booking_place");
@@ -29185,6 +29250,7 @@ public class APICall {
                         final String status=data.getString("bdb_status");
                         final String specialization_ar=data.getString("specialization_ar");
                         final String specialization_en=data.getString("specialization_en");
+                        final String change_order=data.getString("change_order");
                         final String doctor_name=data.getString("doctor_name");
                         final String journey_cost=data.getString("journey_cost");
                         String logo_id=data.getString("bdb_health_center_logo_id");
@@ -29197,6 +29263,8 @@ public class APICall {
                             @Override
                             public void run() {
                                 ReservatoinDetailsActivity.phone_number.setText(salon_mobile);
+                                if(!change_order.equals("null"))
+                                    ReservatoinDetailsActivity.isEdited.setVisibility(View.VISIBLE);
                                 if(bdb_description.equals("")||bdb_description.equals("null"))
                                     ReservatoinDetailsActivity.description.setText(R.string.doesnt_exist);
                                 else
@@ -29212,6 +29280,25 @@ public class APICall {
                                     ReservatoinDetailsActivity.salonName.setText(health_center_ar);
 
                                 }
+
+                                ReservatoinDetailsActivity.startAt.setText(bdb_start_time);
+                                ReservatoinDetailsActivity.endAt.setText(bdb_end_time);
+
+                                if(booking_type.equals("20"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.indivappointmentOffer));
+                                else if(booking_type.equals("21"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.indivMultiappointment));
+                                else if(booking_type.equals("22"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.groupappointment));
+                                else if(booking_type.equals("23"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.indivappointmentOffer));
+                                else if(booking_type.equals("24"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.indivMultiappointmentOffer));
+                                else if(booking_type.equals("25"))
+                                    ReservatoinDetailsActivity.booktype.setText(context.getString(R.string.groupAppoinmentOffer));
+
+/*
+
                                 if(booking_type.equals("0"))
                                 {
                                     ReservatoinDetailsActivity.booktype.setText(R.string.newVisit);
@@ -29221,6 +29308,7 @@ public class APICall {
                                 else
                                     ReservatoinDetailsActivity.booktype.setText(R.string.unDeterminedVisit);
 
+*/
 
                                 ReservatoinDetailsActivity.start_date.setText(bdb_start_date);
                                 ReservatoinDetailsActivity.book_at.setText(bdb_created_at);
@@ -29267,18 +29355,23 @@ public class APICall {
                                 }else if (bdb_booking_place.equals("1")) {
                                     ReservatoinDetailsActivity.place.setText(R.string.home);
                                 }
-                                if(basic_price.equals("null"))
+                                if(basic_price.equals("null")||basic_price.equals("0"))
                                     ReservatoinDetailsActivity.price.setText(context.getString(R.string.unDeterminedPrice));
                                 else
                                 {
                                     int basicPrice=Integer.parseInt(basic_price);
                                     int servicesPrice=Integer.parseInt(services_price);
-                                    int all=basicPrice+servicesPrice;
+                                    int journey=0;
+                                    if(!journey_cost.equals("null")&&!journey_cost.equals("0"))
+                                         journey=Integer.parseInt(journey_cost);
+                                    int all=basicPrice+servicesPrice+journey;
                                     String s=all+" "+context.getString(R.string.ryal);
+                                    String b=basic_price+" "+context.getString(R.string.ryal);
                                     ReservatoinDetailsActivity.price.setText(s);
+                                    ReservatoinDetailsActivity.reviewCost.setText(b);
 
                                 }
-                                ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot,client_name,bdb_client_old,services_price);
+                                ReservatoinDetailsActivity.addHeaderLayout(ReservatoinDetailsActivity.myroot,client_name,bdb_client_old,services_price,doctor_name,specialization_ar,specialization_en);
                                 ReservatoinDetailsActivity.addStatusLayout(ReservatoinDetailsActivity.myroot,status);
 
 
@@ -29308,10 +29401,10 @@ public class APICall {
                                             Log.e("bookType","Single11");
                                             if (context.getResources().getString(R.string.locale).equals("ar"))
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
-                                                        service_ar_name, bdb_price);
+                                                        service_ar_name, bdb_price,booking_type);
                                             else
                                                 ReservatoinDetailsActivity.addMainLayout(ReservatoinDetailsActivity.myroot,
-                                                        service_en_name, bdb_price);
+                                                        service_en_name, bdb_price,booking_type);
                                         }
                                     });
 
@@ -30275,17 +30368,17 @@ public class APICall {
                                 MyReservationFragment.updateDeposit();
                             }
                         });
-                    }else if(jsonrespone.getString("response_code").equals("21")){
+                    }else if(response_code.equals("21")){
                         APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
                                 context.getResources().getString(R.string.try_again_later));
-                    }else if(jsonrespone.getString("response_code").equals("22")){
+                    }else if(response_code.equals("22")){
                         APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
                                 context.getResources().getString(R.string.try_again_later));
-                    }else if(jsonrespone.getString("response_code").equals("24")){
+                    }else if(response_code.equals("24")){
                         APICall.showNumberErrMsg(context,context.getResources().getString(R.string.there_is_an_err)+" "+response_code+". "+
                                 context.getResources().getString(R.string.try_again_later));
                     }else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
@@ -30507,7 +30600,7 @@ public class APICall {
                                 context.getResources().getString(R.string.try_again_later));
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
@@ -30687,7 +30780,7 @@ public class APICall {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
+                               /* if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
                                 {
                                     try {
                                         String s= context.getString(R.string.dr)+  clients.getJSONObject(0).getString("doctor_name")
@@ -30697,7 +30790,7 @@ public class APICall {
                                     catch (Exception e){}
 
                                 }
-                                else
+                                else*/
                                 {
                                     if(context.getString(R.string.locale).equals("en"))
                                         BookingRequestDetailsActivity.salonName.setText(healthCntr_en);
@@ -30764,41 +30857,12 @@ public class APICall {
                             BookingRequestDetailsActivity.place.setText(R.string.salon);
                         }else if (bdb_booking_place.equals("1")){
                             BookingRequestDetailsActivity.place.setText(R.string.home);
-                        }else if (bdb_booking_place.equals("2")){
-                            BookingRequestDetailsActivity.place.setText(R.string.hall);
-                        }else if (bdb_booking_place.equals("3")){
-                            BookingRequestDetailsActivity.place.setText(R.string.hotel);
                         }
-                        Log.e("FRAGMENT_NAME",BeautyMainPage.FRAGMENT_NAME);
-
-/*
-                        for (int i=0;i<clients.length();i++) {
-                            JSONObject object = clients.getJSONObject(i);
-                            String bdb_start_date = object.getString("bdb_start_date"),
-                                    bdb_end_date = object.getString("bdb_end_date"),
-                                    bdb_client_old = object.getString("bdb_client_old"),
-                                    bdb_is_current_user = object.getString("bdb_is_current_user"),
-                                    bdb_client_name = object.getString("bdb_client_name"),
-                                    bdb_client_phone = object.getString("bdb_client_phone");
-
-                            JSONArray ClientServices = object.getJSONArray("ClientServices");
-                            for(int k=0;k<ClientServices.length();k++){
-                                JSONObject object1 = ClientServices.getJSONObject(k);
-
-                                final String bdb_ser_id = object1.getString("bdb_ser_id"),
-                                        bdb_ser_sup_id = object1.getString("bdb_ser_sup_id"),
-                                        bdb_name = object1.getString("bdb_name"),
-                                        bdb_name_ar = object1.getString("bdb_name_ar"),
-                                        bdb_cat_id = object1.getString("bdb_cat_id");
-
-                                //
-                            }
-                        }
-*/
 
                         for (int i=0;i<clients.length();i++) {
                             JSONObject object = clients.getJSONObject(i);
                             final String bdb_start_date = object.getString("bdb_start_date"),
+                                    bdb_start_time = object.getString("bdb_start_time"),
                                     bdb_end_date = object.getString("bdb_end_date"),
                                     bdb_client_old = object.getString("bdb_client_old"),
                                     bdb_is_current_user = object.getString("bdb_is_current_user"),
@@ -30823,7 +30887,7 @@ public class APICall {
                             else
                                 age=context.getResources().getString(R.string.forAdults);
 
-                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_old,bdb_client_name+"",ClientServices,bdb_client_name+"",context.getResources().getString(R.string.age2)+bdb_client_old+" "+context.getResources().getString(R.string.years));
+                            BookingRequestDetailsActivity.addHeaderLayout(BookingRequestDetailsActivity.myroot,bdb_client_old,bdb_client_name+"",ClientServices,bdb_client_name+"",context.getResources().getString(R.string.age2)+bdb_client_old+" "+context.getResources().getString(R.string.years),health_record,specialization_name_ar,specialization_name_en,doctor_name,bdb_start_time);
                             //   Log.e("Bookings",bookings.toString());
                             String client_name="";
                             for (int j=0;j<ClientServices.length();j++){
@@ -30880,7 +30944,7 @@ public class APICall {
                             });
 
                         }
-                    }else if (jsonrespone.getString("response_code").equals("7")){
+                    }else if (response_code.equals("7")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -30888,7 +30952,7 @@ public class APICall {
                             }
                         });
                     }else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException e){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -30915,7 +30979,7 @@ public class APICall {
    // public static ArrayList<String> suppliersBooking=new ArrayList<>();
    // public static ArrayList<String> objectbrowseBoooking=new ArrayList<>();
 
-    public  static  void  requestsAutomatedBrowse(String language, String itemPerPage, String serviceId,String pageNum, String filter, String sort, final Context context, final int layout,String temp)
+    public  static  void  requestsAutomatedBrowse(String language, String itemPerPage, String serviceId,String pageNum, String filter, String sort, final Context context, final int layout,String temp,String order_ids)
     {
         requestArrayList.clear();
       //  suppliersBooking.clear();
@@ -30988,7 +31052,7 @@ public class APICall {
                     sID+
                     "\t\"ItemPerPage\":"+itemPerPage+"\n" +
                     "\t,\"PageNum\":\""+pageNum+"\"\n " +
-                    "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                    "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +order_ids+
                     "}";
         }else if (!filter.equals("")){
             if (sort.equals("")) {
@@ -31004,7 +31068,7 @@ public class APICall {
 
                         ""+
                         //                    "\t,\"Filter\":{\"num\":1,\"value1\":\""\"}\n" +
-                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
+                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +order_ids+
                         "}";
             }else {
                 tmp = "{\t\"lang\":\"" + language + "\",\n" +
@@ -31033,7 +31097,7 @@ public class APICall {
                     srdate+
                     btype+
                     ""+
-                    sort+
+                    sort+order_ids+
                     //                        "\t,\"sort\":{\"num\":1,\"by\":\"desc\"}\n" +
                     "}";
         }
@@ -31215,7 +31279,7 @@ public class APICall {
 
                               //  MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on));
                                 requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,clients.getJSONObject(0).getString("bdb_status"),bdb_pack_code
-                                ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq));
+                                ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq,bdb_start_timeReq));
 
 
 
@@ -31243,7 +31307,7 @@ public class APICall {
                             });
                         }
                     }
-                    else if (j.getString("response_code").equals("11")){
+                    else if (response_code.equals("11")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -31251,7 +31315,7 @@ public class APICall {
                             }
                         });
                     } else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (final JSONException je){
                     je.printStackTrace();
@@ -31584,7 +31648,7 @@ public class APICall {
 
                                 //  MyReservationFragment.bookingAutomatedBrowseData.add(new BookingAutomatedBrowseData(bdb_id, price, bdb_status, bdb_start_date, bdb_start_time, bdb_end_time+"", supplier_name, employee_name, service_en_name, service_ar_name, client_name, booking_price, totalItem,provider_rating,is_action_on));
                                 requestArrayList.add(new BookingRequestDataModel(bdb_id,bdb_booking_place,"h",bdb_journey_time,bdb_journey_cost,"",bdb_pack_code
-                                        ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq));
+                                        ,bdb_is_group_booking,total_cost,"",bdb_reject_reason,bdb_created_at,bdb_sup_id,supplier_name,logo_id,bdb_client_id,bdb_loc_lat,bdb_loc_long,clientsList,health_center_enReq,health_center_arReq,health_center_idReq,client_name,appointment_ids,bdb_start_dateReq,bdb_start_timeReq));
 
 
 
@@ -31837,7 +31901,7 @@ public class APICall {
                             }
 
                         }
-                    }else if(jsonObject.getString("response_code").equals("16")||jsonObject.getString("response_code").equals("15")){
+                    }else if(response_code.equals("16")||jsonObject.getString("response_code").equals("15")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -31846,7 +31910,7 @@ public class APICall {
                         });
                     }else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
                 }catch (final JSONException je){
@@ -32063,7 +32127,7 @@ public class APICall {
                             }
 
                         }
-                    }else if(jsonObject.getString("response_code").equals("16")||jsonObject.getString("response_code").equals("15")){
+                    }else if(response_code.equals("16")||response_code.equals("15")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -32296,7 +32360,7 @@ public class APICall {
                             }
 
                         }
-                    }else if(jsonObject.getString("response_code").equals("182")||jsonObject.getString("response_code").equals("181")){
+                    }else if(response_code.equals("182")||response_code.equals("181")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -32524,7 +32588,7 @@ public class APICall {
                             }
 
                         }
-                    }else if(jsonObject.getString("response_code").equals("182")||jsonObject.getString("response_code").equals("181")){
+                    }else if(response_code.equals("182")||response_code.equals("181")){
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -32533,7 +32597,7 @@ public class APICall {
                         });
                     }else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
                 }catch (final JSONException je){
@@ -32947,7 +33011,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
@@ -33143,7 +33207,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
@@ -33331,7 +33395,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
                 }catch (final JSONException je){
                     //there is no suppliered services with your search filters
@@ -33512,7 +33576,7 @@ Log.e("ERRR",e.getMessage());
                             }
                         });*/
                     }else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -33659,7 +33723,7 @@ Log.e("ERRR",e.getMessage());
 
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
 
 
@@ -33947,7 +34011,7 @@ Log.e("ERRR",e.getMessage());
                         });
                     }
                     else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (JSONException je){
                     je.printStackTrace();
@@ -34138,7 +34202,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -34276,7 +34340,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
 
@@ -34582,7 +34646,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
 
@@ -34784,7 +34848,7 @@ Log.e("ERRR",e.getMessage());
                         });                    }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
 
@@ -34964,7 +35028,7 @@ Log.e("ERRR",e.getMessage());
                         });                    }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
 
@@ -35168,7 +35232,7 @@ Log.e("ERRR",e.getMessage());
                         });                    }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                     }
 
@@ -35335,7 +35399,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -35490,7 +35554,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -35643,7 +35707,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -35801,7 +35865,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -35968,7 +36032,7 @@ Log.e("ERRR",e.getMessage());
                             }
                         });*/
                     }else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -36109,7 +36173,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -36284,13 +36348,8 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showUnexpectedErrMsg(context);
-                                // Toast.makeText(context,je.getMessage(),Toast.LENGTH_LONG).show();
-                            }
-                        });                    }
+                        showUnexpectedErrMsg(context,response_code);
+                    }
 
                 }catch (final JSONException je){
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -36465,7 +36524,7 @@ Log.e("ERRR",e.getMessage());
                             }
                         });*/
                     }else
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
 
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -36617,7 +36676,7 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -36783,13 +36842,8 @@ Log.e("ERRR",e.getMessage());
                     }
                     else
                     {
-                        ((AppCompatActivity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                showUnexpectedErrMsg(context);
+                                showUnexpectedErrMsg(context,response_code);
 
-                            }
-                        });
                     }
 
                 }catch (final JSONException je){
@@ -36924,7 +36978,7 @@ Log.e("ERRR",e.getMessage());
                         }
                     }
                     else {
-                        showUnexpectedErrMsg(context);
+                        showUnexpectedErrMsg(context,response_code);
                     }
 
                 }catch (final JSONException je){
@@ -37700,6 +37754,44 @@ Log.e("filters",filter);
         });
 
     }
+    public  static  void showUnexpectedErrMsg(final Context context,String response_code){
+
+        if(response_code.equals("255"))
+        {
+            showUnexpectedErrMsgWithLogout(context);
+        }
+        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dialog = new Dialog(context);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.sweet_dialog_layout_v34);
+                TextView websiteSupport = dialog.findViewById(R.id.confirm);
+                TextView whatsAppSupport = dialog.findViewById(R.id.cancel);
+                websiteSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(myAppLinkToMarket);
+
+
+                    }
+                });
+                whatsAppSupport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        SupportActivity.openWhatsappChat(context);
+                    }
+                });
+                dialog.show();
+            }
+//            }
+        });
+
+    }
     public  static  void showNumberErrMsg(final Context context, final String t){
 
         ((AppCompatActivity) context).runOnUiThread(new Runnable() {
@@ -37895,6 +37987,12 @@ Log.e("filters",filter);
 
         });
 
+    }
+    public static String getDeviceId(Context context)
+    {
+        String id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        return id;
     }
 }
 

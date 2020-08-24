@@ -57,7 +57,7 @@
     <string name="InvalidPassword">يجب أن يكون طول كلمة المرور 6 ، ويجب أن تحتوي كلمة المرور على حرف كبير واحد ورقم واحد على الأقل وحرف واحد
 صغير على الأقل
 </string>
-    <string name="SendNewPass">تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني, الرجاء التحقق</string>
+    <string name="SendNewPass"> تم إرسال رابط إعادة تعيين كلمة المرور إلى عنوان البريد الإلكتروني الخاص بك، ملاحظة: قد يصل الإيميل إلى الإيميلات الغير مرغوبة</string>
     <string name="numberNotActivatedAlert">هذا الرقم مسجل مسبقاً, يرجى تفعيله بإدخال رمز التحقق</string>
     <string name="CantFindNum">لم نستطع ايجاد حساب لهذا الرقم, يرجى التأكد</string>
 
@@ -273,6 +273,13 @@
     <string name="select_date">اختاري تاريخ</string>
     <string name="Phone_Number">رقم الجوال</string>
     <string name="client_name">اسم العميلة</string>
+    <string name="total_price">التكلفة الكلية :</string>
+    <string name="review_cost">تكلفة المراجعة</string>
+
+    <string name="ser_cost">تكلفة الخدمات :</string>
+    <string name="service_place">الموعد في :</string>
+    <string name="visit_type">نوع الزيارة :</string>
+
     <string name="services_dates">اختاري التاريخ</string>
     <string name="group_book_done">تم حجز العرض بنجاح</string>
     <string name="salon">المركز الصحي</string>
@@ -294,7 +301,7 @@
     <string name="Service_Place">تُقدَّم الخدمة الطبية في:</string>
     <string name="time">الوقت</string>
     <string name="end_time">وقت النهاية</string>
-    <string name="booked_at">حُجزت بتاريخ</string>
+    <string name="booked_at">حُجز بتاريخ</string>
     <string name="multi_booking_others">حجز جماعي للغير</string>
     <string name="offer_single_booking">عرض : حجز فردي </string>
     <string name="offer_single_multi_booking">حجز فردي متعدد</string>
@@ -333,7 +340,7 @@
     <string name="wrong">خطأ!</string>
     <string name="alert">تنبيه!</string>
     <string name="there_is_no_provider">لا يوجد مزودين بفلتر البحث الخاص بك</string>
-    <string name="there_is_no_doctors">لا يوجد أطباء في هذا المركز الصحي</string>
+    <string name="there_is_no_doctors">المركز الذي تم اختياره ليس فيه أطباء في الوقت الراهن</string>
     <string name="there_is_no_images">لا يوجد صور لهذا المركز الصحي</string>
     <string name="cant_insert_char">لا يمكنك إدخال احرف في رقم الهاتف</string>
     <string name="number_great_than_10">رقم الهاتف اكثر من 10 ارقام</string>
@@ -596,7 +603,7 @@
     <string name="cancelRequestAlert">إلغاء طلب الحجز ؟</string>
     <string name="noRequests">لا يوجد لديكِ طلبات للحجز</string>
     <string name="add_new_client">إضافة عميلة جديدة</string>
-    <string name="estimated_cost">السعر المقدّر :</string>
+    <string name="estimated_cost">الكلفة التقديرية :</string>
     <string name="lost_time_emp">الوقت الضائع للموظفات</string>
     <string name="journey_time_emp">وقت المشوار للموظفات</string>
 
@@ -619,6 +626,7 @@
     <string name="personalReserv">هذا الحجز شخصي</string>
     <string name="more_desc">وصف إضافي(اختياري)</string>
     <string name="more_desc2">وصف إضافي:</string>
+    <string name="appointment_desc">وصف الموعد:</string>
     <string name="requestDateFilter">تاريخ تنفيذ الطلب</string>
     <string name="appointmentDateFilter">تاريخ الموعد</string>
     <string name="appointmentcreationDateFilter">تاريخ الإنشاء</string>
@@ -845,7 +853,7 @@
 
     </string-array>
     <string name="Select_Time">اختر الوقت</string>
-    <string name="patient_name">اسم المريض/المريضة</string>
+    <string name="patient_name">اسم المريض/ة</string>
     <string name="patient_number">رقم الهاتف</string>
     <string name="dr">د.</string>
     <string name="healthCntrPix">صور المركز الصحي</string>
@@ -866,9 +874,12 @@
     <string name="newVisit">معاينة جديدة</string>
     <string name="oldVisit">مراجعة</string>
     <string name="unDeterminedVisit">نوع المعاينة غير محدد</string>
-    <string name="unDeterminedPrice">السعر غير محدد</string>
+    <string name="unDeterminedPrice">التكلفة غير محددة</string>
     <string name="isShifted">تمت إزاحة الموعد بمقدار:</string>
     <string name="exec_date">تاريخ التنفيذ</string>
+
+    <string name="start_at">يبدأ في</string>
+    <string name="end_at">ينتهي في</string>
     <string name="creation_date">تاريخ الإنشاء</string>
     <string name="edit_request_sent">تم إرسال طلب التعديل</string>
     <string name="edit_request_not_sent">لم يتم إرسال طلب التعديل</string>
@@ -930,4 +941,12 @@
     <string name="offer_price_desc">سعر العرض (تنازلياً)</string>
     <string name="offer_booking_count_asc">عدد مرات الحجز (تصاعدياً)</string>
     <string name="offer_booking_count_desc">عدد مرات الحجز (تنازلياً)</string>
+    <string name="indivMultiappointmentOffer">موعد عرض فردي</string>
+    <string name="groupappointment">موعد جماعي</string>
+    <string name="indivAppointment">موعد فردي</string>
+    <string name="indivMultiappointment">موعد فردي</string>
+    <string name="indivappointmentOffer">موعد عرض فردي</string>
+    <string name="groupAppoinmentOffer">موعد عرض جماعي</string>
+    <string name="appointmentDetails">تفاصيل الموعد</string>
+    <string name="requestDetails">تفاصيل الطلب</string>
 </resources>

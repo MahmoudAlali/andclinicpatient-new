@@ -25,6 +25,7 @@ import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BookingRequestDetailsActivity  extends AppCompatActivity {
@@ -157,8 +158,10 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         TextView rname,doctorName,statusTxt;
         TextView VCost;
         TextView requestedOnView;
+        LinearLayout priceLayout;
 
         ImageView categoryImg=layout2.findViewById(R.id.categoryImg);
+        priceLayout=layout2.findViewById(R.id.priceLayout);
         rname=layout2.findViewById(R.id.rname);
         doctorName=layout2.findViewById(R.id.doctorName);
         statusTxt=layout2.findViewById(R.id.status);
@@ -166,7 +169,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         VCost=layout2.findViewById(R.id.cost);
         String c =cost+context.getResources().getString(R.string.ryal);
         if(cost.equals("null"))
-            VCost.setText(R.string.unDeterminedPrice);
+            VCost.setText(R.string.undetermined);
         else
             VCost.setText(c);
         requestedOnView.setText(requestedOn);
@@ -175,14 +178,18 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
    //     categoryImg.setImageResource(categoryImages[index]);
 //        rname.setText(reservationName);
 //
-        if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
+        if(bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24")||bdb_is_group_booking.equals("25")) /// if isOffer
+        {
+            priceLayout.setVisibility(View.GONE);
+        }
+            if(bdb_is_group_booking.equals("20")||bdb_is_group_booking.equals("21")||bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24"))
         {
             doctorName.setVisibility(View.GONE);
               statusTxt.setVisibility(View.GONE);
         }
         else
         {
-            doctorName.setText(docName);
+            doctorName.setVisibility(View.GONE);
             if (status.equals("1")){
                 statusTxt.setText(R.string.approved);
             }else  if (status.equals("2")){
@@ -208,11 +215,29 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
 //
     }
 
-    public static void addHeaderLayout(final LinearLayout myroot, String old, String cname, JSONArray costtxt, String client_name, String client_old ){
+    public static void addHeaderLayout(final LinearLayout myroot, String old, String cname, JSONArray costtxt, String client_name, String client_old,String medId,String specialityAr,String specialityEn,String docname,String time ) throws JSONException
+    {
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.request_details_header_layout, myroot, false);
-        TextView client_details,c_name,c_old;
+        TextView client_details,c_name,c_old,specialityTxt,medIdTxt,docNameTxt,timeTxt;
         client_details=layout2.findViewById(R.id.client_details);
+        specialityTxt=layout2.findViewById(R.id.speciality);
+        docNameTxt=layout2.findViewById(R.id.doctorName);
+        medIdTxt=layout2.findViewById(R.id.medical_id);
+        timeTxt=layout2.findViewById(R.id.time);
+
+        if(context.getString(R.string.locale).equals("en"))
+            specialityTxt.setText(specialityEn);
+        else
+            specialityTxt.setText(specialityAr);
+
+        docNameTxt.setText(docname);
+        if(!medId.equals("null")&&!medId.equals(""))
+            medIdTxt.setText(medId);
+        else
+            medIdTxt.setText(R.string.undetermined);
+
+        timeTxt.setText(time);
         c_name=layout2.findViewById(R.id.c_name);
         c_old=layout2.findViewById(R.id.c_old);
         c_name.setText(context.getResources().getString(R.string.cname)+" "+cname);
@@ -229,7 +254,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
            c_old.setText(R.string.twoYears);
        else
            c_old.setText(client_old);
-        int costt=0;
+       /* int costt=0;
         for (int j=0;j<costtxt.length();j++){
 
 //
@@ -254,7 +279,7 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         }
         else
             client_details.setText(s);
-
+*/
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
             @Override
             public void run() {

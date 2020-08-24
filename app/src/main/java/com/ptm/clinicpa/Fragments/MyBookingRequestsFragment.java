@@ -175,24 +175,24 @@ public class MyBookingRequestsFragment extends Fragment {
 
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
-        String order_id="";
+        String order_ids="";
         if (bundle != null) {
-            if(bundle.getString("order_id")!=null)
-                order_id = bundle.getString("order_id");
+            if(bundle.getString("order_ids")!=null)
+                order_ids = bundle.getString("order_ids");
         }
 
-        if(!order_id.equals(""))
+        if(!order_ids.equals(""))
         {
 
             Bundle bundle2 = new Bundle();
-            bundle2.putString("order_id", order_id);
+            bundle2.putString("order_ids", order_ids);
             tabselected(oldRequests,newRequests,true);
             tab="2";
             fragment = new OldBookingRequestsFragment();
             fragment.setArguments(bundle2);
             fm = getFragmentManager();
             fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.replace(R.id.request_tabs_fragment, fragment);
             fragmentTransaction.commit();
         }
 
@@ -323,11 +323,11 @@ public class MyBookingRequestsFragment extends Fragment {
                       //  bookingRequestsAdapter.notifyDataSetChanged();
                         if (id==R.id.one){
                             APICall.sort=APICall.bookingSort("1","asc");
-                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout,tmp);
+                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout,tmp,"");
 
                         }else if (id==R.id.two) {
                             APICall.sort = APICall.bookingSort("1", "desc");
-                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout, tmp);
+                            APICall.requestsAutomatedBrowse("en", "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, APICall.sort, BeautyMainPage.context, APICall.layout, tmp,"");
                         }
                         Log.e("Sort1",APICall.sort);
                         Log.e("filter1",APICall.filter);

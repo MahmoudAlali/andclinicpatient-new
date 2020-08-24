@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/inner_res"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/automated_browse_back"
+
+            >
+            <TextView
+                android:id="@+id/booktype"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:lines="1"
+                android:gravity="center"
+                android:text="Booking type"
+                android:textStyle="bold"
+                android:textColor="@color/redClinic"
+                android:textSize="14dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/patientName"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:text="@string/client_name"
+                    android:gravity="center"
+                    android:textStyle="bold"
+
+                    android:textSize="14dp"
+                    android:textColor="@color/blueClinic"
+                    android:layout_height="@dimen/standard_30" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/book_details"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/res_info"
+                    />
+                <TextView
+                    android:id="@+id/booktime"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="Booking time"
+                    android:textColor="@color/blueClinic"
+                    android:textSize="14dp" />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/start_date"
+                    android:layout_width="match_parent"
+                    android:text="Start Date"
+                    android:textStyle="bold"
+
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/blueClinic"
+                    android:layout_height="30dp" />
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/standard_40">
+                <LinearLayout
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    >
+                    <!--                <android.support.v7.widget.CarView-->
+                    <!--                    android:id="@+id/myCardView"-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    app:cardCornerRadius="50dp"-->
+                    <!--                    android:layout_centerHorizontal="true"-->
+                    <!--                    android:layout_centerVertical="true"-->
+                    <!--                    >-->
+                    <ImageView
+                        android:id="@+id/logoImg"
+                        android:src="@drawable/clientlogo"
+                        android:layout_width="@dimen/standard_40"
+                        android:layout_height="@dimen/standard_40"
+                        android:scaleType="centerCrop"
+                        />
+                    <!--                </android.support.v7.widget.CarView>-->
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/client_name"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
+                    android:layout_height="@dimen/high_edit_text" />
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="90dp"
+                    android:layout_marginStart="5dp"
+
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+                    <ImageView
+                        android:id="@+id/place"
+                        android:layout_width="40dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_location_on_black_24dp"
+
+                        />
+                    <LinearLayout
+                        android:id="@+id/centerRatingStar"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="end"
+                        android:layout_marginEnd="7dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="7dp">
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_stars"
+
+                            />
+                        <!--<RatingBar
+                            android:scaleX="0.5"
+                            android:scaleY="0.5"
+                            android:id="@+id/service_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:rating="1"
+                            android:clickable="false"
+                            android:numStars="1" />-->
+
+                    </LinearLayout>
+                    <TextView
+                        android:gravity="start|center"
+                        android:id="@+id/provider_rate"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="0.0"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/standard_30"
+                    android:gravity="center"
+                    android:textStyle="bold"
+
+                    android:text="@string/speciality"
+                    android:textSize="14dp"
+                    android:id="@+id/specialization"
+                    android:textColor="@color/blueClinic"
+                    />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/visit_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textStyle="bold"
+
+                    android:gravity="center"
+                    android:text="visit type"
+                    android:textColor="@color/blueClinic"
+                    android:textSize="14dp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/automated_browse_back"
+
+            >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/standard_30"
+                    android:text="@string/total_price"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/blueClinic"
+                    android:textSize="14dp"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/service_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/standard_30"
+                    android:text="@string/ser_cost"
+                    android:gravity="center"
+                    android:textStyle="bold"
+
+                    android:layout_gravity="center"
+                    android:textColor="@color/blueClinic"
+                    android:textSize="14dp"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/doctorName"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="@color/blueClinic"
+                    android:textStyle="bold"
+                    android:layout_height="@dimen/high_edit_text" />
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="70dp"
+                    android:layout_marginStart="5dp"
+
+                    android:id="@+id/doctor_rateLayout"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="end"
+                        android:layout_marginEnd="7dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="7dp">
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_stars"
+
+                            />
+                        <!--<RatingBar
+                            android:scaleX="0.5"
+                            android:scaleY="0.5"
+                            android:id="@+id/service_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:rating="1"
+                            android:clickable="false"
+                            android:numStars="1" />-->
+
+                    </LinearLayout>
+                    <TextView
+                        android:gravity="start|center"
+                        android:id="@+id/doctor_rate"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:text="0.0"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/booking_place"
+                    android:layout_width="@dimen/standard_40"
+                    android:text="Start Date"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:src="@drawable/service_place_icon"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/booking_placeTxt"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/blueClinic"
+                    android:text="@string/service_place"
+                    android:layout_height="35dp" />
+                <ImageView
+                    android:padding="3dp"
+                    android:id="@+id/status"
+                    android:src="@drawable/appointment_done"
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+                <ImageView
+                    android:id="@+id/isEdited"
+                    android:padding="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="Place"
+                    android:src="@drawable/appointment_is_being_edited"
+                    android:textColor="#133277"
+                    android:textSize="16dp"
+                    />
+                <TextView
+                    android:id="@+id/bdb_expected_deposit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/appoint_being_edited"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/is_shifted"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/high_edit_text"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/reference_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="@color/blueClinic"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/isCheckedIn"
+                    android:layout_width="@dimen/standard_40"
+                    android:layout_height="match_parent"
+                    />
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/book_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:gravity="center"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="@color/blueClinic"
+                    android:textSize="16dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/show_description_etext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="3"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/description_etext"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/actions"
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="@drawable/automated_browse_btns_back"
+            android:id="@+id/time"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/high_edit_text"
+            android:text="@string/edit"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+        <Space
+            android:layout_width="5dp"
+            android:id="@+id/space"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/delay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/automated_browse_btns_back"
+            android:gravity="center"
+            android:text="Check in"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            />
+
+        <Space
+            android:layout_width="5dp"
+            android:id="@+id/space2"
+            android:layout_height="match_parent" />
+        <TextView
+            android:background="@drawable/automated_browse_btns_back"
+            android:id="@+id/refuse"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/cancel"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/myroot"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></LinearLayout>
+
+</LinearLayout>

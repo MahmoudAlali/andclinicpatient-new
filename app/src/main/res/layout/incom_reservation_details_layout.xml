@@ -5,7 +5,7 @@
 
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background"
+    android:background="@drawable/light_background"
     android:layout_gravity="center"
     android:layout_height="match_parent">
 
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="match_parent"
-        android:layout_marginBottom="45dp">
+        android:layout_marginBottom="15dp">
     <LinearLayout
 
         android:layout_marginLeft="10dp"
@@ -158,10 +158,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:id="@+id/ok"
+                            android:id="@+id/isEdited"
                             android:layout_width="35dp"
+                            android:visibility="gone"
                             android:layout_height="35dp"
-                            android:src="@drawable/service_place_icon"
+                            android:src="@drawable/appointment_is_being_edited"
                             android:layout_gravity="center|start"
                             android:layout_marginStart="3dp"
                             android:layout_marginLeft="3dp" />
@@ -182,11 +183,51 @@
                             android:textStyle="bold"
                             />
                         <TextView
-                            android:id="@+id/salon_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/appointmentDetails"
+                            android:textColor="@color/greenClinic"
+                            android:gravity="center"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            />
+
+                        </LinearLayout>
+                    </android.support.design.widget.CoordinatorLayout>
+                    <android.support.design.widget.CoordinatorLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/ok"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_location_on_black_24dp"
+                            android:layout_gravity="center|start"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginLeft="3dp" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="#a5587a"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:id="@+id/book_type"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="Value"
-                            android:textColor="#a5587a"
+                            android:textColor="@color/blueClinic"
                             android:gravity="center"
                             android:textSize="16dp"
                             android:textStyle="bold"
@@ -195,7 +236,7 @@
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="@dimen/standard_50"
-                            android:layout_height="match_parent"
+                            android:layout_height="@dimen/standard_50"
                             android:gravity="center"
                             android:layout_gravity="end|center"
                             >
@@ -221,17 +262,19 @@
                         </LinearLayout>
                     </android.support.design.widget.CoordinatorLayout>
                     <LinearLayout
+                        android:visibility="gone"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                     <TextView
                         android:lines="1"
-                        android:id="@+id/book_type"
+                        android:id="@+id/salon_name"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Booking Type"
+                        android:textColor="@color/blueClinic"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -245,7 +288,7 @@
                         android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/name"
-                        android:textColor="@color/pf_red"
+                        android:textColor="@color/redClinic"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -261,13 +304,14 @@
                             />
                         <TextView
                             android:id="@+id/phone_number"
-                            android:textColor="#a5587a"
+                            android:textColor="@color/redClinic"
                             android:layout_weight="1"
+                            android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:text="@string/phone"
                             android:gravity="center"
-                            android:textSize="16dp"
+                            android:textSize="14dp"
                             />
                     </LinearLayout>
 
@@ -299,13 +343,14 @@
                     android:layout_height="match_parent"
                     android:text="@string/booked_at"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:textSize="14dp"
                     android:textStyle="bold"
                     />
                 <ImageView
                     android:layout_width="@dimen/standard_30"
                     android:layout_height="@dimen/standard_30"
-                    android:src="@drawable/booked_at_icon"
+                    android:src="@drawable/filter_date_icon"
                     />
                 <TextView
                     android:id="@+id/book_at"
@@ -313,8 +358,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
+                    android:textColor="@color/black"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -330,14 +376,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/date"
+                    android:text="@string/exec_date"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="@dimen/standard_30"
                     android:layout_height="@dimen/standard_30"
-                    android:src="@drawable/booked_at_icon" />
+                    android:src="@drawable/filter_date_icon" />
                 <TextView
                     android:id="@+id/start_date"
                     android:layout_weight="1"
@@ -345,7 +392,73 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/book_time_layout"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/start_at"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    android:src="@drawable/start_at_icon" />
+                <TextView
+                    android:id="@+id/start_time"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="Value"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/end_at"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    android:src="@drawable/end_at_icon" />
+                <TextView
+                    android:id="@+id/end_time"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="Value"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -356,12 +469,46 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/Service_Place"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    android:src="@drawable/service_place_icon"
+                    />
+                <TextView
+                    android:id="@+id/place"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="Value"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
                     android:id="@+id/costTxt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/cost"
+                    android:text="@string/total_price"
                     android:gravity="center"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -376,7 +523,8 @@
                     android:layout_height="match_parent"
                     android:text="TotalPrice"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -391,7 +539,8 @@
                     android:layout_height="match_parent"
                     android:text="@string/journey_cost"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -406,7 +555,40 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="journey Price"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/reviewLayout"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/pf_5dp_space"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/review_cost"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/standard_30"
+                    android:layout_height="@dimen/standard_30"
+                    android:src="@drawable/reser_money_icon"
+                    />
+                <TextView
+                    android:id="@+id/review_price"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/high_edit_text"
+                    android:text="review Price"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -457,40 +639,11 @@
                 <TextView
                     android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/Service_Place"
-                    android:gravity="center"
-                    android:textSize="14dp"
-                    android:textStyle="bold"
-                    />
-                <ImageView
-                    android:layout_width="@dimen/standard_30"
-                    android:layout_height="@dimen/standard_30"
-                    android:src="@drawable/service_place_icon"
-                    />
-                <TextView
-                    android:id="@+id/place"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/high_edit_text"
-                    android:text="Value"
-                    android:gravity="center"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/pf_5dp_space"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
                     android:text="@string/ref_number"
                     android:gravity="center"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -506,7 +659,8 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -522,6 +676,7 @@
                     android:text="@string/reser_id"
                     android:gravity="center"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -536,7 +691,8 @@
                     android:layout_height="@dimen/high_edit_text"
                     android:text="Value"
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     />
             </LinearLayout>
@@ -552,6 +708,7 @@
                     android:text="@string/med_id"
                     android:gravity="center"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <ImageView
@@ -565,6 +722,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/high_edit_text"
                     android:text=""
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:textSize="14dp"
                     android:textStyle="bold"
@@ -583,6 +741,7 @@
                     android:text="@string/more_desc2"
                     android:gravity="center"
                     android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <TextView
@@ -592,7 +751,8 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:gravity="center"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
             </LinearLayout>

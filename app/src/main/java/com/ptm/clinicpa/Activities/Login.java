@@ -143,6 +143,8 @@ public class Login extends AppCompatActivity {
                 }
                 else {
                     Intent intent = new Intent(context, Register.class);
+                    intent.putExtra("key",key);
+                    intent.putExtra("value",value);
                     startActivity(intent);
                 }
             }

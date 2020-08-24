@@ -25,6 +25,7 @@ public class BookingRequestDataModel {
             healthCntr_ar,
             client_name,
             bdb_start_dateReq,
+            bdb_start_time,
             bdb_client_id;
 
 
@@ -62,7 +63,7 @@ public class BookingRequestDataModel {
                                    String bdb_name_booking, String bdb_reject_reason, String bdb_created_at,
                                    String bdb_sup_id,String supplier_name,String logo_id,  String bdb_client_id,String bdb_loc_lat,String bdb_loc_long
             ,ArrayList <BookingRequestClientDataModel> clients,String healthCenter_en,String healthCenter_ar,String healthCenter_ID
-                ,String client_name,ArrayList<String> appointmentsIds ,String bdb_start_dateReq)
+                ,String client_name,ArrayList<String> appointmentsIds ,String bdb_start_dateReq,String bdb_start_timeReq)
     {
         this.bdb_id=bdb_id;
         this.bdb_booking_place=bdb_booking_place;
@@ -89,6 +90,7 @@ public class BookingRequestDataModel {
         this.client_name=client_name;
         this.appointmentsIds=appointmentsIds;
         this.bdb_start_dateReq=bdb_start_dateReq;
+        this.bdb_start_time=bdb_start_timeReq;
     }
 
     public void setBdb_id(String bdb_id) {
@@ -265,5 +267,9 @@ public class BookingRequestDataModel {
 
     public String getBdb_start_dateReq() {
         return bdb_start_dateReq;
+    }
+
+    public String getBdb_start_time() {
+        return bdb_start_time;
     }
 }

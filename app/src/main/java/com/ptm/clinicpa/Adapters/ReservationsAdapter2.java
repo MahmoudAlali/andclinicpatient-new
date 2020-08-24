@@ -118,7 +118,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater= LayoutInflater.from(context);
-        View row=inflater.inflate(R.layout.incom_reservation_layout_ext,parent,false);
+        View row=inflater.inflate(R.layout.incom_reservation_layout_ext2,parent,false);
         Item item=new Item(row);
         return item;
 
@@ -169,12 +169,17 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
             final String vizitType=appointmentsDataModels.get(position).getVisit_type();
 
+            String visit=context.getString(R.string.visit_type);
             if(vizitType.equals("0"))
-                ((Item)holder).bookingType.setText(R.string.newVisit);
+                visit+=context.getString(R.string.newVisit);
             else if(vizitType.equals("1"))
-                ((Item)holder).bookingType.setText(R.string.oldVisit);
+                visit+=context.getString(R.string.oldVisit);
             else
-                ((Item)holder).bookingType.setText(R.string.unDeterminedVisit);
+                visit+=context.getString(R.string.unDeterminedVisit);
+
+            ((Item)holder).visitType.setText(visit);
+
+
 
 
             ((Item)holder).book_id.setText(context.getString(R.string.ref_number)+": "+appointmentsDataModels.get(position).getBdb_internally_number());
@@ -225,14 +230,29 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             Log.e("11111","333");
 
             ((Item)holder).date.setText(APICall.convertToArabic(appointmentsDataModels.get(position).getBdb_start_date()));
+            ((Item)holder).booktime.setText(APICall.convertToArabic(appointmentsDataModels.get(position).getBdb_start_time()));
+
+            String place=context.getString(R.string.service_place);
             if (appointmentsDataModels.get(position).getBooking_place().equals("0")) {
                 Log.e("11111","444");
                 ((Item) holder).booking_place.setImageResource(R.drawable.service_at_center);
+                place+=context.getString(R.string.salon);
             }else if (appointmentsDataModels.get(position).getBooking_place().equals("1")){
                 Log.e("11111","555");
-
+                place+=context.getString(R.string.home);
                 ((Item) holder).booking_place.setImageResource(R.drawable.service_at_home);
             }
+            ((Item) holder).bookPlaceTxt.setText(place);
+
+            String speciality;
+            if (context.getString(R.string.locale).equals("en"))
+             speciality=context.getString(R.string.speciality_points)+" "+appointmentsDataModels.get(position).getSpecialization_en();
+            else
+                speciality=context.getString(R.string.speciality_points)+" "+appointmentsDataModels.get(position).getSpecialization_ar();
+
+
+            ((Item) holder).speciality.setText(speciality);
+
 
             Log.e("11111","666");
 
@@ -240,7 +260,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             ((Item)holder).docName.setText(docN);
             Log.e("11111","777");
 
-            ((Item)holder).patName.setText(appointmentsDataModels.get(position).getClient_name());
+            String patientName=context.getString(R.string.patient_name)+": "+appointmentsDataModels.get(position).getClient_name();
+            ((Item)holder).patName.setText(patientName);
             Log.e("11111","888");
             int servicesPrice=0,basicPrice=0;
             try
@@ -256,16 +277,30 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             catch (Exception e){}
 
             int a=servicesPrice+basicPrice;
-            String allPrice=a+" "+context.getString(R.string.ryal);
-            if(appointmentsDataModels.get(position).getBasic_price().equals("null"))
+            final String appointmentType=appointmentsDataModels.get(position).getBdb_is_group_booking();
+            String name =context.getString(R.string.total_price);
+            String serPrieName =context.getString(R.string.ser_cost);
+            if(appointmentType.equals("23")||appointmentType.equals("24")||appointmentType.equals("25")) // offer appointment
+            {
+                name=context.getString(R.string.cost_offer);
+                ((Item)holder).ser_price.setVisibility(View.GONE);
+            }
+            String allPrice=name+a+" "+context.getString(R.string.ryal);
+            String allPrice2=serPrieName+servicesPrice+" "+context.getString(R.string.ryal);
+            if(appointmentsDataModels.get(position).getBasic_price().equals("null")||appointmentsDataModels.get(position).getBasic_price().equals("0"))
             {
                 ((Item)holder).totalPrice.setText(context.getString(R.string.unDeterminedPrice));
             }
             else
               ((Item)holder).totalPrice.setText(allPrice);
+            if(appointmentsDataModels.get(position).getServices_price().equals("null")||appointmentsDataModels.get(position).getServices_price().equals("0"))
+            {
+                ((Item)holder).ser_price.setText(context.getString(R.string.unDeterminedPrice));
+            }
+            else
+                ((Item)holder).ser_price.setText(allPrice2);
 
 
-            final String appointmentType=appointmentsDataModels.get(position).getBdb_is_group_booking();
 
             if(appointmentType.equals("20")||appointmentType.equals("23")||appointmentType.equals("24")||appointmentType.equals("21")) // individual appointment
             {
@@ -278,8 +313,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             {
                 //do nothing
             }
-
-            if(!isNew || appointmentsDataModels.get(position).getCan_cancel().equals("0"))
+                if(!isNew || appointmentsDataModels.get(position).getCan_cancel().equals("0"))
             {
                 ((Item) holder).refuse.setVisibility(View.GONE);
                 ((Item) holder).space2.setVisibility(View.GONE);
@@ -511,6 +545,20 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
             }
 
+
+            if(appointmentType.equals("20"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.indivappointmentOffer));
+            else if(appointmentType.equals("21"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.indivMultiappointment));
+            else if(appointmentType.equals("22"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.groupappointment));
+            else if(appointmentType.equals("23"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.indivappointmentOffer));
+            else if(appointmentType.equals("24"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.indivMultiappointmentOffer));
+            else if(appointmentType.equals("25"))
+                ((Item)holder).bookingType.setText(context.getString(R.string.groupAppoinmentOffer));
+
             APICall.getSalonLogoDltWhenEmpty(BeautyMainPage.context,appointmentsDataModels.get(position).getBdb_health_center_logo_id(),((Item)holder).logoImg);
 
             ((Item) holder).book_Details.setOnClickListener(new View.OnClickListener() {
@@ -573,7 +621,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView bookingType,book_id,bdb_expected_deposit,client_name,checkIn,reference_id, totalPrice,export_invoice,date,accept,refuse,edit,refundText;
+        TextView speciality,bookPlaceTxt,booktime,visitType,bookingType,book_id,bdb_expected_deposit,client_name,checkIn,reference_id, ser_price,totalPrice,export_invoice,date,accept,refuse,edit,refundText;
         ImageView book_Details,inner_res,logoImg,place,isChecked,booking_place,status,isEdited;
         ColorRatingBar rating;
         Space space,space2;
@@ -583,7 +631,10 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
         public Item(View itemView) {
             super(itemView);
             isEdited=itemView.findViewById(R.id.isEdited);
+            speciality=itemView.findViewById(R.id.specialization);
             bookingType=itemView.findViewById(R.id.booktype);
+            ser_price=itemView.findViewById(R.id.service_price);
+            visitType=itemView.findViewById(R.id.visit_type);
             myroot=itemView.findViewById(R.id.myroot);
             status=itemView.findViewById(R.id.status);
             checkIn=itemView.findViewById(R.id.delay);
@@ -599,7 +650,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
            // inner_res=itemView.findViewById(R.id.inner_res);
             client_name=itemView.findViewById(R.id.client_name);
             date=itemView.findViewById(R.id.start_date);
+            booktime=itemView.findViewById(R.id.booktime);
             booking_place=itemView.findViewById(R.id.booking_place);
+            bookPlaceTxt=itemView.findViewById(R.id.booking_placeTxt);
             book_Details=itemView.findViewById(R.id.book_details);
             refuse=itemView.findViewById(R.id.refuse);
 //            accept=itemView.findViewById(R.id.accept);

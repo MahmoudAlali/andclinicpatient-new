@@ -26,6 +26,8 @@ public class ConfirmAccountActivity extends AppCompatActivity {
     EditText num1,num2,num3,num4;
     Context context;
     String number,token;
+    String key="",value="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,8 @@ public class ConfirmAccountActivity extends AppCompatActivity {
         num3=findViewById(R.id.num3);
         num4=findViewById(R.id.num4);
         resend_code=findViewById(R.id.resend_code);
-
+        key=getIntent().getStringExtra("key");
+        value=getIntent().getStringExtra("value");
 
 
         number= getIntent().getStringExtra("phone");
@@ -204,10 +207,8 @@ public class ConfirmAccountActivity extends AppCompatActivity {
             String code=num1.getText().toString()+num2.getText().toString()+num3.getText().toString()+num4.getText().toString();
             APICall.activeAccount(APICall.API_PREFIX_NAME+"/api/user/register/activate",
                     code,
-                    context);
+                    context,key,value);
         }
-
-
 
     }
 }

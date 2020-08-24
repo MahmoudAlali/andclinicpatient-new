@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:layout_marginTop="5dp"
-    android:background="@drawable/shadow_edit_text3"
+    android:background="@drawable/green_button"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:layout_height="wrap_content">
@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
-            android:textSize="16dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
             android:text="Reservation Name"
             android:gravity="center"
             android:layout_marginTop="5dp"

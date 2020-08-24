@@ -130,23 +130,20 @@ public class OldBookingRequestsFragment extends Fragment {
         APICall.filter=APICall.Filter(filters);
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
-        String order_id="";
+        String order_ids="";
         if (bundle != null) {
-            order_id = bundle.getString("order_id");
-            Log.e("NotifDepoif",order_id);
+            order_ids = bundle.getString("order_ids");
+            Log.e("NotifDepoif",order_ids);
 
         }
 
-        if(!order_id.equals(""))
+        if(!order_ids.equals(""))
         {
-            /*bundle.putString("order_id", order_id);
-            Log.e("NotifDepo",order_id);
-            //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
-            Log.e("order_id",order_id);*/
-            Intent intent=new Intent(BeautyMainPage.context, BookingRequestDetailsActivity.class);
-            intent.putExtra("order_id",order_id);
-            startActivity(intent);
+            String o=",\"order_ide\":"+order_ids;
+            APICall.requestsAutomatedBrowse(APICall.ln, "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,o);
         }
+        else
+            APICall.requestsAutomatedBrowse(APICall.ln, "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,"");
 
 
         //endregion
@@ -160,7 +157,6 @@ public class OldBookingRequestsFragment extends Fragment {
 
         //---------wait confirm by provider
       //  if (MyBookingRequestsFragment.filtercheck==false) {
-            APICall.requestsAutomatedBrowse(APICall.ln, "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp);
         /*}else {
             MyBookingRequestsFragment.filtercheck=false;
         }*/

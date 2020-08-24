@@ -190,26 +190,34 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    BeautyMainPage.FRAGMENT_NAME="Offers";
-
-                    bestOItem=bestOfferItems.get(position);
-                    try{
-                        Log.e("bestOItem","is"+bestOItem);
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    if(APICall.isGuest(context).equals("1"))
+                    {
+                        APICall.showNeedToSignInDialog(context);
                     }
+                    else
+                    {
+                        BeautyMainPage.FRAGMENT_NAME="Offers";
 
-                    int[] location = new int[2];
-                    Log.e("ERR","GGGGG");
-                    v.getLocationOnScreen(location);
-                    //Initialize the Point with x, and y positions
-                    Point point = new Point();
-                    point.x = location[0];
-                    point.y = location[1];
-                    showInfoPopup(context,point,bestOfferItems.get(position).getProvider_id()
-                            ,bestOfferItems.get(position).getMax_age(),bestOfferItems.get(position).getMin_age(),
-                            bestOfferItems.get(position).getSupported_gender(),Offers.Lat,
-                            Offers.Long,bestOfferItems.get(position).getHealth_center_id(),bestOfferItems.get(position).getPack_code());
+                        bestOItem=bestOfferItems.get(position);
+                        try{
+                            Log.e("bestOItem","is"+bestOItem);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        int[] location = new int[2];
+                        Log.e("ERR","GGGGG");
+                        v.getLocationOnScreen(location);
+                        //Initialize the Point with x, and y positions
+                        Point point = new Point();
+                        point.x = location[0];
+                        point.y = location[1];
+                        showInfoPopup(context,point,bestOfferItems.get(position).getProvider_id()
+                                ,bestOfferItems.get(position).getMax_age(),bestOfferItems.get(position).getMin_age(),
+                                bestOfferItems.get(position).getSupported_gender(),Offers.Lat,
+                                Offers.Long,bestOfferItems.get(position).getHealth_center_id(),bestOfferItems.get(position).getPack_code());
+
+                    }
 
                 }
             });

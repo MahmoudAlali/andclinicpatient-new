@@ -24,7 +24,6 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_marginTop="@dimen/pf_5dp_space"
-                android:layout_marginBottom="@dimen/pf_5dp_space"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -33,10 +32,9 @@
                 >
                 <TextView
                     android:id="@+id/status"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:text="status 1"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -50,13 +48,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="2"
+                android:visibility="gone"
                 >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="@string/ServiceName" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                   />
                 <TextView
                     android:id="@+id/doctorName"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/prime"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:text="doctor Name 1"
                     android:gravity="center"
@@ -76,12 +89,25 @@
                 android:layout_weight="2"
                 >
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="@string/ServiceName" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    />
+                <TextView
                     android:id="@+id/rname"
-
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/prime"
-                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:text="Reservation 1"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -215,6 +241,7 @@
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/priceLayout"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -223,19 +250,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:text="@string/estimated_cost" />
                 <ImageView
                     android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/reser_money_icon"/>
                 <TextView
                     android:id="@+id/cost"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textSize="14dp"
                     android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:text="" />
 
             </LinearLayout>

@@ -284,17 +284,25 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void onClick(View v) {
 
-                int[] location = new int[2];
-                Log.e("ERR","GGGGG");
-                v.getLocationOnScreen(location);
-                //Initialize the Point with x, and y positions
-                Point point = new Point();
-                point.x = location[0];
-                point.y = location[1];
-                showInfoPopup(context,point,offers.get(position).getDoctor_id()
-                ,offers.get(position).getMaxAge(),offers.get(position).getMinAge(),
-                        offers.get(position).getSupported_gender(),MyOffersFragment.filterMyLocationLatNum,
-                        MyOffersFragment.filterMyLocationLngNum,offers.get(position).getHealth_center_id(),offers.get(position).getBdb_pack_code());
+                if(APICall.isGuest(context).equals("1"))
+                {
+                    APICall.showNeedToSignInDialog(context,"offer","1");
+                }
+                else
+                {
+                    int[] location = new int[2];
+                    Log.e("ERR","GGGGG");
+                    v.getLocationOnScreen(location);
+                    //Initialize the Point with x, and y positions
+                    Point point = new Point();
+                    point.x = location[0];
+                    point.y = location[1];
+                    showInfoPopup(context,point,offers.get(position).getDoctor_id()
+                            ,offers.get(position).getMaxAge(),offers.get(position).getMinAge(),
+                            offers.get(position).getSupported_gender(),MyOffersFragment.filterMyLocationLatNum,
+                            MyOffersFragment.filterMyLocationLngNum,offers.get(position).getHealth_center_id(),offers.get(position).getBdb_pack_code());
+
+                }
 
 
 

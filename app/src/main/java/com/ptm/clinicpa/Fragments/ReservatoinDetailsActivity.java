@@ -29,13 +29,13 @@ import org.json.JSONObject;
 
 public class ReservatoinDetailsActivity extends AppCompatActivity {
 //    View view;
-public static TextView costTxt,medFileNumber,journeyCost,description, id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse;
+public static TextView costTxt,medFileNumber,journeyCost,description, id,empname,booktype,journey_time,phone_number,start_date,ref_id,ac_total_price,salonName,client_name,time,price,place,descr,service_name,status,book_at,max,accept,refuse,startAt,endAt,reviewCost;
     public static LinearLayout jrCostLayout,jtime_lay,book_exec_layout, myroot;
     TextView v1,v2,v3,v4;
     RadioButton r1,r2,r3,r4;
     static  Context context;
     public static String logoId;
-    ImageView logoImg;
+    public  static ImageView logoImg,isEdited;
     public static Double lat,lang;
 
     @Override
@@ -46,6 +46,9 @@ public static TextView costTxt,medFileNumber,journeyCost,description, id,empname
 
          context=this;
         client_name=findViewById(R.id.name);
+        startAt=findViewById(R.id.start_time);
+        endAt=findViewById(R.id.end_time);
+        reviewCost=findViewById(R.id.review_price);
         myroot=findViewById(R.id.myroot);
         time=findViewById(R.id.date);
         price=findViewById(R.id.total_price);
@@ -58,6 +61,7 @@ public static TextView costTxt,medFileNumber,journeyCost,description, id,empname
         salonName=findViewById(R.id.salon_name);
         logoId="";
         logoImg=findViewById(R.id.logoImg);
+        isEdited=findViewById(R.id.isEdited);
         ref_id=findViewById(R.id.ref_id);
         id=findViewById(R.id.id);
         start_date=findViewById(R.id.start_date);
@@ -275,13 +279,22 @@ public static TextView costTxt,medFileNumber,journeyCost,description, id,empname
 //
     }
 */
-    public static void addHeaderLayout(final LinearLayout myroot, String client_name, String old , String price){
+    public static void addHeaderLayout(final LinearLayout myroot, String client_name, String old , String price,String docName,String specialityAr,String specialityEn){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_header_layout_ext, myroot, false);
-        TextView client_details;
+        TextView client_details,docNameTxt,speciality;
         client_details=layout2.findViewById(R.id.client_details);
+        docNameTxt=layout2.findViewById(R.id.doctorName);
+        speciality=layout2.findViewById(R.id.speciality);
         TextView c_old=layout2.findViewById(R.id.old);
         TextView cname=layout2.findViewById(R.id.cname);
+        if(context.getString(R.string.locale).equals("en"))
+        {
+            speciality.setText(specialityEn);
+        }
+        else
+            speciality.setText(specialityAr);
+        docNameTxt.setText(docName);
         String o=context.getResources().getString(R.string.age2)+old+" "+context.getResources().getString(R.string.years);
         if(old.equals("0"))
             c_old.setText(R.string.lessThanYear);
@@ -294,12 +307,12 @@ public static TextView costTxt,medFileNumber,journeyCost,description, id,empname
         String name=context.getResources().getString(R.string.cname)+" "+client_name;
         cname.setText(name);
 
-        int ptmp=0;
+       /* int ptmp=0;
         ptmp=Integer.parseInt(price);
         String s=price+" "+context.getResources().getString(R.string.ryal);
         if(ptmp!=0)
             client_details.setText(s);
-        else
+        else*/
             client_details.setVisibility(View.GONE);
 
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {
@@ -439,15 +452,20 @@ public static TextView costTxt,medFileNumber,journeyCost,description, id,empname
 //
     }
 */
-    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal){
+    public static void addMainLayout(final LinearLayout myroot,String reservationName,String priceVal,String bdb_is_group_booking){
         final View layout2;
         layout2 = LayoutInflater.from(BeautyMainPage.context).inflate(R.layout.incom_reservation_details_main_layout_ext_v1, myroot, false);
         TextView rname,price;
+        LinearLayout priceLayout=layout2.findViewById(R.id.priceLayout);
 
+        if(bdb_is_group_booking.equals("23")||bdb_is_group_booking.equals("24")||bdb_is_group_booking.equals("25")) /// if isOffer
+        {
+            priceLayout.setVisibility(View.GONE);
+        }
         price=layout2.findViewById(R.id.price);
         rname=layout2.findViewById(R.id.rname);
         rname.setText(reservationName);
-        if(priceVal.equals("null"))
+        if(priceVal.equals("null")||priceVal.equals("0"))
             price.setText(R.string.unDeterminedPrice);
         else
             price.setText(APICall.convertToArabic(priceVal)+((AppCompatActivity)BeautyMainPage.context).getResources().getString(R.string.ryal));
