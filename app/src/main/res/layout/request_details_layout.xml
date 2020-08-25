@@ -274,6 +274,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/costLayout"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/pf_5dp_space"
@@ -307,6 +308,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/jrcostLayout"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/pf_5dp_space"

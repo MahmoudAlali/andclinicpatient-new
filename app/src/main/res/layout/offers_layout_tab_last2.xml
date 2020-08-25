@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/add_offer_new"
+                android:src="@drawable/offer_add_new"
                 />
 
             <!--
@@ -103,7 +103,7 @@
                         android:id="@+id/pro_name"
                         android:text="Provider name"
                         android:layout_weight="1"
-                        android:textColor="@color/prime"
+                        android:textColor="@color/blueClinic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -140,7 +140,7 @@
                         android:id="@+id/doctorName"
                         android:text="Doctor name"
                         android:layout_weight="1"
-                        android:textColor="@color/prime"
+                        android:textColor="@color/blueClinic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -266,6 +266,7 @@
                         android:layout_weight="1"
                         android:id="@+id/age"
                         android:textSize="14dp"
+                        android:textColor="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -321,6 +322,7 @@
                         android:layout_marginEnd="10dp"
                         android:textSize="14sp"
                         android:text="@string/discount_percentage"
+                        android:textColor="@color/black"
                         android:layout_marginRight="10dp" />
                     <android.support.design.widget.CoordinatorLayout
                         android:layout_width="wrap_content"
@@ -335,6 +337,7 @@
                             android:id="@+id/disAmount"
 
                             android:text="50%"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -345,6 +348,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:layout_marginEnd="10dp"
                         android:layout_marginStart="10dp"
@@ -355,7 +359,7 @@
                         android:id="@+id/info"
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
-                        android:src="@drawable/offer_info_new"
+                        android:src="@drawable/book_details"
                         />
                     <!-- <LinearLayout
                          android:orientation="horizontal"
@@ -431,7 +435,7 @@
                         android:textSize="14dp"
                         android:gravity="center"/>
                     <View
-                        android:layout_width="@dimen/standard_30"
+                        android:layout_width="@dimen/standard_40"
                         android:layout_height="match_parent"></View>
 
                     <TextView
