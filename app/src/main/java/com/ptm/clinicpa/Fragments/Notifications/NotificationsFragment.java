@@ -20,7 +20,7 @@ import com.ptm.clinicpa.R;
 
 public class NotificationsFragment extends Fragment {
     RecyclerView recyclerView;
-    NotificationsAdapter notificationsAdapter;
+    public static NotificationsAdapter notificationsAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_notifications_main, container, false);

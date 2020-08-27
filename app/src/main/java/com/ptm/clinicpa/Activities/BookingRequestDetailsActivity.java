@@ -168,10 +168,13 @@ public class BookingRequestDetailsActivity  extends AppCompatActivity {
         requestedOnView=layout2.findViewById(R.id.book_at);
         VCost=layout2.findViewById(R.id.cost);
         String c =cost+context.getResources().getString(R.string.ryal);
-        if(cost.equals("null"))
+       /* if(cost.equals("null"))
             VCost.setText(R.string.undetermined);
         else
-            VCost.setText(c);
+            VCost.setText(c);*/
+
+        VCost.setText(R.string.undetermined);// in requests price is always not determined
+
         requestedOnView.setText(requestedOn);
         rname.setText(reservationName);
 //        int index =Integer.parseInt(catigoryVal);

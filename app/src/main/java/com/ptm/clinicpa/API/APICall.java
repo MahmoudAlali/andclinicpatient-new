@@ -108,6 +108,7 @@ import com.ptm.clinicpa.Activities.Offers;
 import com.ptm.clinicpa.Fragments.MyOffersFilters;
 import com.ptm.clinicpa.Fragments.MyOffersFragment;
 import com.ptm.clinicpa.Fragments.MyReservation.CancelReservationActivity;
+import com.ptm.clinicpa.Fragments.Notifications.NotificationsFragment;
 import com.ptm.clinicpa.Fragments.OffersForRequest;
 import com.ptm.clinicpa.Fragments.OldBookingRequestsFragment;
 import com.ptm.clinicpa.Fragments.PersonalIndivOfferRequest;
@@ -25982,6 +25983,17 @@ public class APICall {
                         }
 
                     }
+                    else if(response_code.equals("63"))
+                    {
+                        showSweetDialog(context,R.string.ExuseMeAlert,R.string.offer_not_found);
+                        ((AppCompatActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                APICall.GetUnreadNotifications(BeautyMainPage.context, NotificationsFragment.notificationsAdapter);
+                            }
+                        });
+
+                    }
                     else {
                         showUnexpectedErrMsg(context,response_code);
                     }
@@ -30851,7 +30863,7 @@ public class APICall {
                             });
 
                         }
-                        BookingRequestDetailsActivity.price.setText(totalCost);
+                        BookingRequestDetailsActivity.price.setText(R.string.undetermined);//in requests price always not determined
                         if (bdb_booking_place.equals("0")){
 //                            ReservationDetailsFragment.place.setText(context.getResources().getString(R.string.salontxt));
                             BookingRequestDetailsActivity.place.setText(R.string.salon);
