@@ -235,14 +235,12 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
             if(bestOfferItems.get(position).getOld_price().equals("null"))
             {
-                ((Item)holder).old_price.setVisibility(View.INVISIBLE);
-
+                ((Item)holder).old_price.setText(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% ");
             }
             else
             {
                 float old_prc=Float.parseFloat(bestOfferItems.get(position).getOld_price());
                 ((Item)holder).old_price.setText(old_prc+"");
-
             }
             //((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
             ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));

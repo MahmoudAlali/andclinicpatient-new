@@ -31625,7 +31625,7 @@ public class APICall {
                                     String bdb_client_old = jsonObject.getString("bdb_client_old");
                                     String bdb_is_current_user = jsonObject.getString("bdb_is_current_user");
                                     String bdb_client_name = jsonObject.getString("bdb_client_name");
-                                    String bdb_client_phone = jsonObject.getString("bdb_client_phone");
+                            //        String bdb_client_phone = jsonObject.getString("bdb_client_phone");
                                     String doctor_name = jsonObject.getString("doctor_name");
                                     String bdb_status = jsonObject.getString("bdb_status");
                                     String specialization_name_ar = jsonObject.getString("specialization_name_ar");

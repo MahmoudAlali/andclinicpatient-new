@@ -180,7 +180,7 @@
                     android:layout_width="240dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:text="@string/services"
+                    android:text="@string/servicesFav"
                     android:background="@android:color/transparent"
                     android:textStyle="bold"
                     android:textSize="16dp"
@@ -195,6 +195,8 @@
                     android:paddingBottom="1dp"
                     android:paddingTop="1dp"
                     android:layout_height="match_parent"
+                    android:src="@drawable/services"
+                    android:padding="8dp"
                     android:background="@drawable/filter_blue_back"
                      />
 

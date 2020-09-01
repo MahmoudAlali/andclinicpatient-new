@@ -138,8 +138,7 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         Log.e("old_prc","old_prc :"+offers.get(position).getOldPrice());
         if(offers.get(position).getOldPrice().equals("null"))
         {
-            ((Item)holder).old_price.setVisibility(View.INVISIBLE);
-
+            ((Item)holder).old_price.setText(doub.format(Double.parseDouble(offers.get(position).getDiscount() ))+ "% ");
         }
         else
         {

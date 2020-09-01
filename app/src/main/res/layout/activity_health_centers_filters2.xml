@@ -64,9 +64,9 @@
                     android:textAlignment="center"
                     />
                 <ImageView
+                    android:src="@drawable/distance_filter"
                     android:layout_width="58dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:padding="8dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/filter_grey_back"
                     />
@@ -164,8 +164,7 @@
                     android:textAlignment="center"/>
                 <ImageView
                     android:layout_width="58dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:padding="8dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/filter_green_back"
                     android:src="@drawable/distance_filter"
