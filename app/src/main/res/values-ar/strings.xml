@@ -240,7 +240,7 @@
     <string name="providersFav">الأطباء</string>
     <string name="servicesFav">الخدمات</string>
     <string name="centersFav">المراكز الصحية</string>
-
+    <string name="packCode">رقم العرض</string>
 
 
     <string name="Individual_booking">خدمات وعروض</string>

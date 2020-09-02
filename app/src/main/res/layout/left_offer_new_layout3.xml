@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="215dp"
     android:layoutDirection="ltr"
+    android:layout_marginBottom="@dimen/standard_20"
     android:background="@drawable/automated_browse_back"
     android:layout_marginLeft="@dimen/standard_20"
     android:layout_marginRight="@dimen/standard_20"
@@ -162,11 +163,13 @@
                 android:layout_width="190dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/standard_20"
+                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:orientation="vertical"
 
                 >
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -174,6 +177,7 @@
 
 
                     >
+
                     <TextView
 
                         android:layout_width="wrap_content"
@@ -189,7 +193,20 @@
                         android:gravity="center"
                         />
                 </LinearLayout>
+                <TextView
 
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="order number"
+                    android:id="@+id/packId"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/greenClinic"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -523,7 +540,7 @@
         android:layout_gravity="start"
         android:layout_height="35dp"
         android:layout_marginTop="43dp"
-        android:src="@drawable/add_offer_new"
+        android:src="@drawable/offer_add_new"
         />
     <ImageView
         android:id="@+id/info"
@@ -532,6 +549,6 @@
         android:layout_gravity="start"
         android:layout_height="35dp"
         android:layout_marginTop="80dp"
-        android:src="@drawable/offer_info_new"
+        android:src="@drawable/book_details"
         />
 </android.support.design.widget.CoordinatorLayout>

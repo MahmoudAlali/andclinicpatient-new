@@ -231,6 +231,9 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
         }else if (offers.get(position).getBdb_offer_type().equals("3") ||offers.get(position).getBdb_offer_type().equals("6")) {
             ((Item) holder).offer_type.setText(R.string.group_offer);
         }
+
+        String pack = context.getString(R.string.packCode)+": "+offers.get(position).getBdb_pack_code();
+        ((Item)holder).packId.setText(pack);
 //        ((Item)holder).offer_type.setText(offers.get(position).getBdb_offer_type());
         String on= context.getResources().getString(R.string.on);
         String sevices= context.getResources().getString(R.string.ser);
@@ -414,11 +417,12 @@ public class OffersAdapterTab extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public static class Item extends RecyclerView.ViewHolder {
 
-        TextView centerName,speciality,doctorName,morning_offer,new_price,supportedGender,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
+        TextView packId,centerName,speciality,doctorName,morning_offer,new_price,supportedGender,age,place,old_price,discount,offer_type,num_of_times,offer_end,total_dis,onServices,depositPrcntg;
         ImageView info,add_offer,placeL,health,exp,is_fav_center,is_fav_doctor;
         LinearLayout centerNameLayout;
         public Item(View itemView) {
             super(itemView);
+            packId = itemView.findViewById(R.id.packId);
             centerName = itemView.findViewById(R.id.pro_name);
             is_fav_center = itemView.findViewById(R.id.is_fav_center);
             is_fav_doctor = itemView.findViewById(R.id.is_fav_doctor);

@@ -722,6 +722,7 @@
     <string name="servicesFav">Services</string>
     <string name="centersFav">Health centers</string>
     <string name="Notifications">Notifications</string>
+    <string name="packCode">Offer number</string>
 
     <string name="current_points">Current points </string>
     <string name="used_points">Used points </string>

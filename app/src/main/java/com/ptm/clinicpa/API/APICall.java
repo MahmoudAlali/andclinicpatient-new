@@ -25419,7 +25419,7 @@ public class APICall {
                                         logoImg.setVisibility(View.VISIBLE);
                                         Log.e("OfferImageRes","TRUEEEE");
                                         try {
-                                            Offers.scaleImage(logoImg);
+                                          //  Offers.scaleImage(logoImg);
 
                                         }
                                         catch (NoSuchElementException e)

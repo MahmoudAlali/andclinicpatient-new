@@ -138,6 +138,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
 */
 
+            String pack = context.getString(R.string.packCode)+": "+bestOfferItems.get(position).getPack_code();
+            ((Item)holder).packId.setText(pack);
             DecimalFormat integer=new DecimalFormat("#");
             DecimalFormat doub=new DecimalFormat("#.##");
 //            float old_prc = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getOld_price()) ));
@@ -423,7 +425,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return st;
     }
     public static class Item extends RecyclerView.ViewHolder {
-        TextView speciality,centerName,textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
+        TextView packId,speciality,centerName,textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
         ImageView info,logoImg2,add,exp,health;
         SvgImageView logoImg;
         LinearLayout itemBackground;
@@ -451,6 +453,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             health = itemView.findViewById(R.id.health);
             centerName = itemView.findViewById(R.id.centerName);
             speciality = itemView.findViewById(R.id.speciality);
+            packId = itemView.findViewById(R.id.packId);
         }
     }
 }
