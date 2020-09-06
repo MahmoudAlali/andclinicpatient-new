@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/offer_image"/>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,8 +34,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
 
             >
+            <TextView
+                android:id="@+id/bestOffersTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/forYourbestOffers"
+                android:textColor="@color/redClinic"
+                android:textSize="14dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/pullToRefresh"
                 android:layout_width="match_parent"
@@ -60,6 +73,18 @@
             app:itemTextColor="@drawable/bottom_nav_selector"
             app:menu="@menu/service_offer_menu"
             ></android.support.design.widget.BottomNavigationView>-->
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/noOfferOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:text="@string/no_offer3"
+            android:textColor="@color/lightBordeaux"
+            />
 
     </android.support.design.widget.CoordinatorLayout>
 

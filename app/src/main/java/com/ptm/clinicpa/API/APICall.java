@@ -2663,7 +2663,7 @@ public class APICall {
 
 
     //   ------------------ Best Offer-------------------------
-    public  static  void bestOffer(final Context context,String lat,String lon)
+    public  static  void bestOffer(final Context context, String lat, String lon, final boolean isFake)
     {
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -2806,6 +2806,7 @@ public class APICall {
                            try {
                                deposit_percentage = pkg.getString("deposit_percentage");
                            }catch (Exception e){
+                               Log.e("ERR",e.getMessage());
                                e.getMessage();
                            }
                            String new_price=pkg.getString("new_price");
@@ -2822,18 +2823,23 @@ public class APICall {
                             @Override
                             public void run() {
                                 Offers.bestOffer.notifyDataSetChanged();
+                                Log.e("BstOffrsCount",Offers.bestOfferItems.size()+"h");
+                                if(isFake)
+                                    Offers.bestOffersTxt.setVisibility(View.VISIBLE);
 
                             }
                         });
 
                     }
-                    if (response_code.equals("54")) {
+                    else if (response_code.equals("54")) {
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                         if (BeautyMainPage.FRAGMENT_NAME.equals("Offers"))
-                                        showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.alert)
-                                                , ((AppCompatActivity) context).getResources().getString(R.string.no_offer));
+                                            Offers.noOfferOne.setVisibility(View.VISIBLE);
+/*
+                                showSweetDialog(context, ((AppCompatActivity) context).getResources().getString(R.string.alert)
+                                                , ((AppCompatActivity) context).getResources().getString(R.string.no_offer));*/
                             }
                         });
                     }
@@ -3743,7 +3749,7 @@ public class APICall {
                                         pd.dismiss();
                                     }
                                 });
-                                APICall.bestOffer(context,bdb_loc_lat,bdb_loc_lat);
+                               // APICall.bestOffer(context,bdb_loc_lat,bdb_loc_lat);
                                 Log.e("fifth","ok"+bdb_loc_lat+bdb_loc_lat);
 
                                 break;
@@ -37450,6 +37456,8 @@ Log.e("filters",filter);
                         Constants.filterMessageEn=data.getString("filter_message_en");
                         Constants.defaultDistance=data.getString("default_distance");
                         Constants.filterMessageAr=data.getString("filter_message_ar");
+                        Constants.longitude=data.getString("longitude");
+                        Constants.latitude=data.getString("latitude");
                         Offers.setOfferImage();
                         Log.e("TAG1", Constants.messageOfClientsNames_ar);
                         Log.e("TAG2", Constants.messageOfClientsNames_en);

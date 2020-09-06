@@ -723,6 +723,9 @@
     <string name="centersFav">Health centers</string>
     <string name="Notifications">Notifications</string>
     <string name="packCode">Offer number</string>
+    <string name="forYourbestOffers">To get the nearest best offers please turn ol location service and swipe down the view</string>
+    <string name="no_offer3">Offers are coming 😍👍 \n You can choose from UnaCita services</string>
+    <string name="locationMsg3">Please turn on location service to get the best offers for you.</string>
 
     <string name="current_points">Current points </string>
     <string name="used_points">Used points </string>

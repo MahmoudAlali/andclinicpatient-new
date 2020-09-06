@@ -76,6 +76,7 @@ public class Offers extends Fragment implements LocationListener ,
     Location mLastLocation;
     public static ArrayList<DataOffer.SupIdClass> sersup_ids;
     static ImageView offerImage;
+    public static TextView bestOffersTxt,noOfferOne;
 
 
 
@@ -87,8 +88,14 @@ public class Offers extends Fragment implements LocationListener ,
         toolbar = view.findViewById(R.id.toolbarm);
         BeautyMainPage.FRAGMENT_NAME = "Offers";
         offerImage= view.findViewById(R.id.offer_image);
+        noOfferOne= view.findViewById(R.id.noOfferOne);
+        bestOffersTxt= view.findViewById(R.id.bestOffersTxt);
+        bestOffersTxt.setVisibility(View.GONE);
+
         final Context context = getContext();
         check=false;
+
+        noOfferOne.setVisibility(View.GONE);
 
         try{
             bestOfferItems.clear();
@@ -97,7 +104,13 @@ public class Offers extends Fragment implements LocationListener ,
         }catch (Exception e){
             e.printStackTrace();
         }
+        recyclerView = view.findViewById(R.id.offers_recycleview);
+        recyclerView.setHasFixedSize(true);
+        bestOffer = new OffersAdapter(context, bestOfferItems);
+//        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
 
+        recyclerView.setAdapter(bestOffer);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +184,7 @@ public class Offers extends Fragment implements LocationListener ,
                             bestOffer.notifyDataSetChanged();
                             // APICall.detailsUser4(context);
                             if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
-                                APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                APICall.bestOffer(BeautyMainPage.context, Lat, Long,false);
                                 Log.e("first","ok"+Lat+Long);
 
                             }else {
@@ -230,7 +243,7 @@ public class Offers extends Fragment implements LocationListener ,
                                 // APICall.detailsUser4(context);
                                 bestOffer.notifyDataSetChanged();
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
-                                    APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                    APICall.bestOffer(BeautyMainPage.context, Lat, Long,false);
                                     Log.e("second","ok"+Lat+Long);
                                 }else {
                                     locationManager.removeUpdates(this);
@@ -267,6 +280,8 @@ public class Offers extends Fragment implements LocationListener ,
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                bestOffersTxt.setVisibility(View.GONE);
+
                 check=false;
                 try {
                     bestOfferItems.clear();
@@ -312,7 +327,7 @@ public class Offers extends Fragment implements LocationListener ,
                                 // APICall.detailsUser4(context);
                                 bestOffer.notifyDataSetChanged();
                                 if (BeautyMainPage.FRAGMENT_NAME.equals("Offers")) {
-                                    APICall.bestOffer(BeautyMainPage.context, Lat, Long);
+                                    APICall.bestOffer(BeautyMainPage.context, Lat, Long,false);
                                     Log.e("third","ok"+Lat+Long);
                                 }else {
                                     locationManager.removeUpdates(this);
@@ -355,13 +370,7 @@ public class Offers extends Fragment implements LocationListener ,
         }
 
 //        }
-        recyclerView = view.findViewById(R.id.offers_recycleview);
-        recyclerView.setHasFixedSize(true);
-        bestOffer = new OffersAdapter(BeautyMainPage.context, bestOfferItems);
-//        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(new LinearLayoutManager(BeautyMainPage.context));
 
-        recyclerView.setAdapter(bestOffer);
         //------------------------ call API bestOffers and get items-----------------
 //        APICall.bestOffer(Offers.this);
 
@@ -538,13 +547,13 @@ public class Offers extends Fragment implements LocationListener ,
     }
 
 
-    private void showLocationServiceMsg(final Context context)
+  /*  private void showLocationServiceMsg(final Context context)
     {
         final Dialog dialog=new Dialog(context);
         dialog.setContentView(R.layout.lcation_service_turnon_msg);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-       /* dialog.getWindow()
-                .setBackgroundResource(android.R.color.transparent);*/
+       *//* dialog.getWindow()
+                .setBackgroundResource(android.R.color.transparent);*//*
         TextView cancel=dialog.findViewById(R.id.cancel);
         TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
         TextView webSupport=dialog.findViewById(R.id.website_support);
@@ -575,7 +584,60 @@ public class Offers extends Fragment implements LocationListener ,
         dialog.show();
 
     }
+*/
+  private void showLocationServiceMsg(final Context context)
+  {
+      final Dialog dialog=new Dialog(context);
+      dialog.setContentView(R.layout.lcation_service_turnon_msg);
+      dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+       /* dialog.getWindow()
+                .setBackgroundResource(android.R.color.transparent);*/
+      TextView cancel=dialog.findViewById(R.id.cancel);
+      TextView whatsSupport=dialog.findViewById(R.id.whatsapp_support);
+      TextView webSupport=dialog.findViewById(R.id.website_support);
+      TextView ok=dialog.findViewById(R.id.ok);
+      cancel.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
 
+              Lat=Constants.latitude;
+              Long=Constants.longitude;
+              Log.e("LATLANG",Lat+":"+Long);
+              bestOfferItems.clear();
+              // APICall.detailsUser4(context);
+              bestOffer.notifyDataSetChanged();
+              APICall.bestOffer(BeautyMainPage.context, Lat, Long,true);
+
+              dialog.cancel();
+          }
+      });
+      ok.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              dialog.cancel();
+          }
+      });
+
+      webSupport.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              dialog.dismiss();
+              Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+              Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+              context.startActivity(myAppLinkToMarket);
+          }
+      });
+      whatsSupport.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              dialog.dismiss();
+              SupportActivity.openWhatsappChat(context);
+          }
+      });
+
+      dialog.show();
+
+  }
     public static void setOfferImage()
     {
         ((AppCompatActivity)BeautyMainPage.context).runOnUiThread(new Runnable() {

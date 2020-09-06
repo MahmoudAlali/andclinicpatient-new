@@ -137,6 +137,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((Item)holder).health.setImageResource(R.drawable.ic_health_care);
             }
 */
+           Log.e("ONBIND",position+" df");
 
             String pack = context.getString(R.string.packCode)+": "+bestOfferItems.get(position).getPack_code();
             ((Item)holder).packId.setText(pack);
@@ -147,6 +148,9 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //            float tot_dis = Float.parseFloat(nFormate(Double.parseDouble(bestOfferItems.get(position).getTotal_discount()) ));
 
 //        ((Item)holder).pack_code.setText("#"+bestOfferItems.get(position).getPack_code());
+
+            Log.e("ONBIND",position+" 2");
+
             String doctorName=context.getString(R.string.doctorName)+": "+bestOfferItems.get(position).getProvider_name();
             ((Item) holder).pro_name.setText(doctorName);
             if(context.getString(R.string.locale).equals("en"))
@@ -161,9 +165,10 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 center+=bestOfferItems.get(position).getHealth_center_ar();
             ((Item) holder).centerName.setText(center);
 
+            Log.e("ONBIND",position+" 3");
 
             // ((Item) holder).centerName.setText(bestOfferItems.get(position).getProvider_name());
-            String deposit= BeautyMainPage.context.getString(R.string.dep_prcntg)+bestOfferItems.get(position).getDeposit_prcntg()+" % ";
+            String deposit= context.getString(R.string.dep_prcntg)+bestOfferItems.get(position).getDeposit_prcntg()+" % ";
             ( (Item)holder).depositPrcntg.setText(deposit);
             //((Item) holder).depositPrcntg.setText(bestOfferItems.get(position).getDeposit_prcntg());
             ((Item) holder).pro_name.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +190,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
 
+            Log.e("ONBIND",position+" 4");
 
 
             ((Item)holder).
@@ -223,16 +229,17 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
                 }
             });
+            Log.e("ONBIND",position+" 5");
 
             APICall.getSalonLogoDltWhenEmpty(context,bestOfferItems.get(position).getProvider_logo_id(),((Item) holder).logoImg);
 
             if (bestOfferItems.get(position).getOffer_type().equals("1") ) {// individual
-                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
+                ((Item) holder).offer_type.setText(context.getResources().getString(R.string.indiv));
 
             }else if (bestOfferItems.get(position).getOffer_type().equals("2") ) {// multi dates individual
-                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.indiv));
+                ((Item) holder).offer_type.setText(context.getResources().getString(R.string.indiv));
             }else if (bestOfferItems.get(position).getOffer_type().equals("3") ) {// group
-                ((Item) holder).offer_type.setText(BeautyMainPage.context.getResources().getString(R.string.group));
+                ((Item) holder).offer_type.setText(context.getResources().getString(R.string.group));
             }
 //        ((Item)holder).ser_count.setText(bestOfferItems.get(position).getService_count());
             if(bestOfferItems.get(position).getOld_price().equals("null"))
@@ -244,6 +251,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 float old_prc=Float.parseFloat(bestOfferItems.get(position).getOld_price());
                 ((Item)holder).old_price.setText(old_prc+"");
             }
+            Log.e("ONBIND",position+" 6");
+
             //((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
             ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
             String on= context.getResources().getString(R.string.on);
@@ -257,6 +266,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((Item) holder).total_dis.setText(APICall.convertToArabic(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "));
             else
                 ((Item) holder).total_dis.setText(doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% ");
+            Log.e("ONBIND",position+" 7");
 
             ((Item) holder).info.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -301,6 +311,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((Item) holder).old_price.setPaintFlags(((Item) holder).old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         }catch (Exception e){
+            Log.e("ONBIND",position+ e.getMessage());
+
             e.printStackTrace();
         }
 
@@ -358,7 +370,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 b.putString("max_age",max_age);
                 b.putString("min_age",min_age);
                 fragment.setArguments(b);
-                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentManager fm = ((AppCompatActivity)context).getFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
@@ -383,7 +395,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 b.putString("max_age",max_age);
                 b.putString("min_age",min_age);
                 fragment.setArguments(b);
-                FragmentManager fm = ((AppCompatActivity)BeautyMainPage.context).getFragmentManager();
+                FragmentManager fm = ((AppCompatActivity)context).getFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, fragment);
                 fragmentTransaction.commit();
