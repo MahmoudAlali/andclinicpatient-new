@@ -736,6 +736,7 @@
     <string name="points_desc">Description</string>
     <string name="points_date">Date</string>
     <string name="points_updown">Points</string>
+    <string name="waffer">Save</string>
 
 
     <string name="searchLoc">Enter your location or region</string>

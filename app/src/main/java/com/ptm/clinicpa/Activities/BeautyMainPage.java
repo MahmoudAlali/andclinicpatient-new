@@ -297,6 +297,27 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             notificationPairs=getIntent().getStringExtra("notify_pairs");
             j=new JSONArray(notificationPairs);
             code = j.getJSONObject(0).getString("code");
+            if(!code.equals(""))
+            {
+                String notif_id="";
+                for (int i=0;i<j.length();i++)
+                {
+                    Log.e("Notif","i :"+i);
+                    try{
+                        JSONObject object = j.getJSONObject(i);
+                        notif_id = object.getString("notification_id");
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        Log.e("NotifErr",i+" : "+e.getMessage());
+
+                    }
+                }
+
+                if(!notif_id.equals(""))
+                    APICall.SetNotificationRead(context,notif_id);
+            }
         }
         catch (Exception e)
         {

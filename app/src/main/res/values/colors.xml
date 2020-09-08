@@ -44,5 +44,8 @@
     <color name="redClinic">#F01010</color>
     <color name="lightBlueClinic">#1070AE</color>
     <color name="translightBlueClinic">#CAA6D2EF</color>
+    <color name="backgroundGrey">#ECEDF6</color>
+    <color name="newBlue">#38539B</color>
+    <color name="newRed">#E50041</color>
 
 </resources>

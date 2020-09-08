@@ -118,6 +118,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             row = inflater.inflate(R.layout.left_offer_new_layout3, parent, false);
         else
             row = inflater.inflate(R.layout.right_offer_new_layout3, parent, false);
+            row = inflater.inflate(R.layout.offer_new_layout4, parent, false);
 
 
 
@@ -151,6 +152,8 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             Log.e("ONBIND",position+" 2");
 
+            String disAmountT=context.getString(R.string.waffer)+" "+bestOfferItems.get(position).getDiscount_val()+" "+context.getString(R.string.ryal);
+            ((Item) holder).disAmountText.setText(disAmountT);
             String doctorName=context.getString(R.string.doctorName)+": "+bestOfferItems.get(position).getProvider_name();
             ((Item) holder).pro_name.setText(doctorName);
             if(context.getString(R.string.locale).equals("en"))
@@ -254,10 +257,10 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Log.e("ONBIND",position+" 6");
 
             //((Item) holder).old_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getOld_price())) + ""));
-            ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + ""));
-            String on= context.getResources().getString(R.string.on);
+            ((Item) holder).new_price.setText(APICall.convertToArabic(integer.format(Double.parseDouble(bestOfferItems.get(position).getNew_price())) + " " +context.getString(R.string.ryal)));
+            String on= doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "+context.getResources().getString(R.string.on);
             String sevices= context.getResources().getString(R.string.ser);
-            String oneService= context.getResources().getString(R.string.oneService);
+            String oneService=doub.format(Double.parseDouble(bestOfferItems.get(position).getTotal_discount() ))+ "% "+ context.getResources().getString(R.string.oneService);
             if(bestOfferItems.get(position).getService_count().equals("1"))
                 ((Item) holder).onServices.setText(oneService );
             else
@@ -437,7 +440,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return st;
     }
     public static class Item extends RecyclerView.ViewHolder {
-        TextView packId,speciality,centerName,textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
+        TextView disAmountText,packId,speciality,centerName,textView,pack_code,rating,price,pro_name,offer_type,reserv_offer,ser_count,total_dis,new_price,old_price,onServices,depositPrcntg;
         ImageView info,logoImg2,add,exp,health;
         SvgImageView logoImg;
         LinearLayout itemBackground;
@@ -466,6 +469,7 @@ public  class OffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             centerName = itemView.findViewById(R.id.centerName);
             speciality = itemView.findViewById(R.id.speciality);
             packId = itemView.findViewById(R.id.packId);
+            disAmountText = itemView.findViewById(R.id.disAmountText);
         }
     }
 }

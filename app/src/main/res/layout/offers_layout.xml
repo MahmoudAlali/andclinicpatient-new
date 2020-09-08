@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Offers"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:background="@color/backgroundGrey"
     android:weightSum="10">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/end_gray"
+        android:background="@color/newBlue"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="@drawable/ic_menu_wihte_24dp"
@@ -23,8 +23,10 @@
         android:visibility="gone"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/offer_image"/>
 
     <android.support.design.widget.CoordinatorLayout

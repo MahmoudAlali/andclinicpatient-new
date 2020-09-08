@@ -2811,12 +2811,13 @@ public class APICall {
                            }
                            String new_price=pkg.getString("new_price");
                            String total_discount=pkg.getString("total_discount");
+                           String discount_val=pkg.getString("discount_value");
                            String bdb_has_experience_cer=pkg.getString("bdb_has_certificate");
                            String bdb_has_health_cer=pkg.getString("bdb_has_health_cer");
                            String offer_type=pkg.getString("offer_type");
                            JSONArray sersup_ids=pkg.getJSONArray("sersup_ids");
 //                            Log.e("pkg",pack_code+":"+service_count+":"+provider_name);
-                        Offers.bestOfferItems.add(new BestOfferItem(health_center_id,pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer,health_center_ar,health_center_en,speciality_ar,speciality_en,max_age,min_age,supported_gender));
+                        Offers.bestOfferItems.add(new BestOfferItem(health_center_id,pack_code,provider_id,service_count,provider_name,old_price,new_price,total_discount,sersup_ids,provider_logo_id,offer_type,bdb_booking_period,start_date,end_date,deposit_percentage,bdb_has_experience_cer,bdb_has_health_cer,health_center_ar,health_center_en,speciality_ar,speciality_en,max_age,min_age,supported_gender,discount_val));
 
                        }
                         ((AppCompatActivity)context).runOnUiThread(new Runnable() {
@@ -25661,7 +25662,7 @@ public class APICall {
 
                 }
                 else {
-                   showUnexpectedErrMsg(cont);
+                  // showUnexpectedErrMsg(cont);
                 }
             }
 
