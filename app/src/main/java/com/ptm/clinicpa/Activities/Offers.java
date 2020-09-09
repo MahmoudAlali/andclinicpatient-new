@@ -75,7 +75,7 @@ public class Offers extends Fragment implements LocationListener ,
     public static int bdb_booking_period;
     Location mLastLocation;
     public static ArrayList<DataOffer.SupIdClass> sersup_ids;
-    static ImageView offerImage;
+    public static ImageView offerImage,offerImage2;
     public static TextView bestOffersTxt,noOfferOne;
 
 
@@ -88,6 +88,7 @@ public class Offers extends Fragment implements LocationListener ,
         toolbar = view.findViewById(R.id.toolbarm);
         BeautyMainPage.FRAGMENT_NAME = "Offers";
         offerImage= view.findViewById(R.id.offer_image);
+        offerImage2= view.findViewById(R.id.offer_image2);
         noOfferOne= view.findViewById(R.id.noOfferOne);
         bestOffersTxt= view.findViewById(R.id.bestOffersTxt);
         bestOffersTxt.setVisibility(View.GONE);

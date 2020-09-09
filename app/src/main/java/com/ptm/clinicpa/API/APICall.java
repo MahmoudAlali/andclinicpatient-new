@@ -25427,6 +25427,7 @@ public class APICall {
                                         Log.e("OfferImageRes","TRUEEEE");
                                         try {
                                           //  Offers.scaleImage(logoImg);
+                                            Offers.offerImage2.setVisibility(View.VISIBLE);
 
                                         }
                                         catch (NoSuchElementException e)

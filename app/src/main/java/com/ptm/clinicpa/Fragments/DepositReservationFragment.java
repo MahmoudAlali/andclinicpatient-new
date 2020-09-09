@@ -34,6 +34,7 @@ public class DepositReservationFragment extends Fragment {
     Fragment fragment;
     FragmentManager fm;
     FragmentTransaction fragmentTransaction;
+    String filterFromNotification="";
 
     public static RecyclerView service_select;
     public static ReservationsAdapter2 reservationsAdapter2;
@@ -59,6 +60,7 @@ public class DepositReservationFragment extends Fragment {
         View view = inflater.inflate(R.layout.incom_reservatiom_fragment, container, false);
         pageNum=1;
 
+        filterFromNotification="";
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         MyReservationFragment.tab="2";
         MyReservationFragment.groupbooking="";
@@ -117,22 +119,47 @@ public class DepositReservationFragment extends Fragment {
         //region CHECK_NOTIFICATIONS
         Bundle bundle = this.getArguments();
         String book_id="";
-        if (bundle != null) {
-            book_id = bundle.getString("book_id");
-            Log.e("NotifDepoif",book_id);
+        try {
+            if (bundle != null) {
+                book_id = bundle.getString("book_id");
+                Log.e("NotifDepoif",book_id);
+
+            }
+
+            if(!book_id.equals(""))
+            {
+                bundle.putString("book_id", book_id);
+                Log.e("NotifDepo",book_id);
+                //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
+                Log.e("BookID",book_id);
+                Intent intent=new Intent(BeautyMainPage.context, ReservatoinDetailsActivity.class);
+                intent.putExtra("book_id",book_id);
+                startActivity(intent);
+            }
 
         }
-
-        if(!book_id.equals(""))
+        catch (Exception e)
         {
-            bundle.putString("book_id", book_id);
-            Log.e("NotifDepo",book_id);
-            //    MyReservationFragment.reservationsAdapter2.book_id=book_id;
-            Log.e("BookID",book_id);
-            Intent intent=new Intent(BeautyMainPage.context, ReservatoinDetailsActivity.class);
-            intent.putExtra("book_id",book_id);
-            startActivity(intent);
+
         }
+
+        String book_id_for_filter="";
+        try {
+            if (bundle != null) {
+                book_id_for_filter = bundle.getString("book_id_for_filter");
+                Log.e("NotifDepoif",book_id_for_filter);
+                Log.e("GOINGTODEPO","NotifDepoif");
+
+
+            }
+
+            if(!book_id_for_filter.equals(""))
+            {
+                filterFromNotification=APICall.Filter("56",book_id_for_filter,"0")+",";
+            }
+
+        }
+        catch (Exception e){}
 
 
         //endregion
@@ -145,7 +172,13 @@ public class DepositReservationFragment extends Fragment {
 //        filter=APICall.bookingFilter("1","4","0");
 
         APICall.filter= APICall.bookingFilterV1("1","7","0");
-        APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1",  APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
+        filter="\"Filter\":["+filterFromNotification+APICall.Filter("1","7","0")
+
+//        {\"num\":"+filterNum+",\"value1\":"+val1+",\"value2\":"+val2+"}
+                +"]";
+        Log.e("GOINGTODEPO","NotifDepoif"+filter);
+
+        APICall.appointmentsAutomatedBrowse(APICall.ln, "20", MyReservationFragment.serviceId, "1", filter, "", BeautyMainPage.context, APICall.layout,tmp,true);
 
         //---------wait confirm by provider
 //        service_select.setAdapter(MyReservationFragment.reservationsAdapter2);

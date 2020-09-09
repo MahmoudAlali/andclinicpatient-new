@@ -7,6 +7,7 @@
     tools:context=".Activities.Offers"
     android:orientation="vertical"
     android:background="@color/backgroundGrey"
+
     android:weightSum="10">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarm"
@@ -19,15 +20,30 @@
         app:popupTheme="@style/AppTheme"
         app:theme="@style/ToolbarColoredBackArrow"
         app:titleTextColor="#fff"/>
-    <ImageView
-        android:visibility="gone"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/offer_image"/>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:background="@drawable/center_offer_back"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/offer_image2"/>
+        <ImageView
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/offer_image"/>
+    </android.support.design.widget.CoordinatorLayout>
+
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -58,6 +74,7 @@
                     android:id="@+id/offers_recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp">
                 </android.support.v7.widget.RecyclerView>

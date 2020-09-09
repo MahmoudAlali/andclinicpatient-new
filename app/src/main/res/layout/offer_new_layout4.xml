@@ -8,8 +8,8 @@
     android:layoutDirection="ltr"
     android:layout_marginBottom="@dimen/standard_20"
     android:background="@drawable/offers_back"
-    android:layout_marginLeft="@dimen/standard_20"
-    android:layout_marginRight="@dimen/standard_20"
+    android:layout_marginLeft="@dimen/pf_25_txt_size"
+    android:layout_marginRight="@dimen/pf_25_txt_size"
     >
     <LinearLayout
         android:id="@+id/itemBackground"
@@ -349,8 +349,8 @@
                 <android.support.design.widget.CoordinatorLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
                     >
                     <ImageView
                         android:layout_width="match_parent"

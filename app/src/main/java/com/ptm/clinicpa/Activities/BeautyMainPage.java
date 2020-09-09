@@ -327,7 +327,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Log.e("NotifCode",code);
         Log.e("Notif", " pairs :"+notificationPairs);
 
-        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("36")||code.equals("37")
+        if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("37")
                 ||code.equals("23")||code.equals("22")||code.equals("25")||code.equals("28"))
         {
             String book_id="";
@@ -352,7 +352,38 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             (context).startActivity(detailsIntent);
 
         }
+        else if(code.equals("36"))
+        {
+            String book_id="";
+            for (int i=0;i<j.length();i++)
+            {
+                Log.e("Notif","i :"+i);
+                try{
+                    JSONObject object = j.getJSONObject(i);
+                    book_id = object.getString("appointment_id");
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Log.e("NotifErr",i+" : "+e.getMessage());
 
+                }
+            }
+            menu.findItem(R.id.services).setIcon(R.drawable.appointments_selected);
+            menu.findItem(R.id.reservations).setIcon(R.drawable.orders_grey);
+            menu.findItem(R.id.favorites).setIcon(R.drawable.offers_grey);
+            menu.findItem(R.id.centers).setIcon(R.drawable.centers_grey);
+            menu.findItem(R.id.main).setIcon(R.drawable.home_grey);
+            FRAGMENT_NAME = "";
+            fragment = new MyReservationFragment();
+            Bundle b= new Bundle();
+            b.putString("book_id_for_filter",book_id);
+            fm = getFragmentManager();
+            fragment.setArguments(b);
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, fragment);
+            fragmentTransaction.commit();
+        }
         else if(code.equals("29")||code.equals("30")||code.equals("31"))
         {
             String packCode="";

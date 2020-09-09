@@ -38,6 +38,7 @@ public class ExecutedReservationFragment extends Fragment {
     ReservationsAdapter2 reservationsAdapter2;
 
 
+    String filterFromNotification="";
     Boolean isScrolling=false;
     int curentItems,totalItems,scrollOutItems;
     LinearLayoutManager manager;
@@ -57,6 +58,7 @@ public class ExecutedReservationFragment extends Fragment {
         View view = inflater.inflate(R.layout.incom_reservatiom_fragment, container, false);
         pageNum=1;
 
+        filterFromNotification="";
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         MyReservationFragment.tab="3";
         MyReservationFragment.groupbooking="";
@@ -105,9 +107,24 @@ public class ExecutedReservationFragment extends Fragment {
 
         Log.e("ArraABLength",APICall.arrayAB.length()+"is");
 //        if (APICall.arrayAB==null)
-            APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
 
 
+        //region CHECK_NOTIFICATIONS
+        Bundle bundle = this.getArguments();
+        String book_id_for_filter="";
+        if (bundle != null) {
+            book_id_for_filter = bundle.getString("book_id_for_filter");
+            Log.e("NotifDepoif",book_id_for_filter);
+
+        }
+
+        if(!book_id_for_filter.equals(""))
+        {
+            filterFromNotification=APICall.Filter("56",book_id_for_filter,"0")+",";
+        }
+
+
+        //endregion
 
 
 
@@ -117,7 +134,7 @@ public class ExecutedReservationFragment extends Fragment {
 
         //---------wait confirm by provider
         APICall.filter=filter= APICall.bookingFilterV1("1","3","0");
-        filter="\"Filter\":["+APICall.Filter("1","3","0")+
+        filter="\"Filter\":["+filterFromNotification+APICall.Filter("1","3","0")+
                 OldAppointmentsFiltersActivity.filterCreateDate+
                 OldAppointmentsFiltersActivity.filterDoctorName+
                 OldAppointmentsFiltersActivity.filterExecDate+

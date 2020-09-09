@@ -255,6 +255,30 @@ public static ImageView sortbtn;
         }
 
 
+        String book_id_for_filter="";
+        if (bundle != null) {
+            if(bundle.getString("book_id_for_filter")!=null)
+                book_id_for_filter = bundle.getString("book_id_for_filter");
+        }
+
+        if(!book_id_for_filter.equals(""))
+        {
+
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("book_id_for_filter", book_id_for_filter);
+            Log.e("GOINGTODEPO","true");
+            tabselected(accept_reservation,incom_reservation,deposit_reservation,true);
+            tab="2";
+            tabselected(deposit_reservation,accept_reservation,incom_reservation,true);
+            fragment = new DepositReservationFragment();
+            fragment.setArguments(bundle2);
+            fm = getFragmentManager();
+            fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.tabs_fragment, fragment);
+            fragmentTransaction.commit();
+        }
+
+
         //endregion
 
 

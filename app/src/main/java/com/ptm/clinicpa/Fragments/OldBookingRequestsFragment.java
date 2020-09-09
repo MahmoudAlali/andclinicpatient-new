@@ -139,7 +139,7 @@ public class OldBookingRequestsFragment extends Fragment {
 
         if(!order_ids.equals(""))
         {
-            String o=",\"order_ide\":"+order_ids;
+            String o=",\"order_ids\":"+order_ids;
             APICall.requestsAutomatedBrowse(APICall.ln, "20", MyBookingRequestsFragment.serviceId, "1", APICall.filter, "", BeautyMainPage.context, APICall.layout,tmp,o);
         }
         else
