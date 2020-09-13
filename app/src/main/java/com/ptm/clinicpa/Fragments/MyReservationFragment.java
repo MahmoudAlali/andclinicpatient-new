@@ -5,10 +5,13 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,6 +46,7 @@ import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Activities.OldAppointmentsFiltersActivity;
 import com.ptm.clinicpa.Adapters.ReservationsAdapter2;
 import com.ptm.clinicpa.DataModel.BookingAutomatedBrowseData;
+import com.ptm.clinicpa.Dialog.Dialogs;
 import com.ptm.clinicpa.PayFort.PayTestActivity;
 import com.ptm.clinicpa.R;
 import com.savvi.rangedatepicker.CalendarPickerView;
@@ -57,6 +61,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.ptm.clinicpa.Adapters.ReservationsAdapter2.appointmentsDataModels;
 
 //import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
@@ -100,6 +106,7 @@ public static ImageView sortbtn;
 
     public  static String tmp="0";
     public static TextView note_cancel;
+    public static ImageView checkInImg;
 
 
     public  static TextView action_floating_btn;
@@ -138,6 +145,7 @@ public static ImageView sortbtn;
         BeautyMainPage.FRAGMENT_NAME="MYRESERVATIONFRAGMENT";
         incom_reservation=view.findViewById(R.id.incom_reservation);
         action_floating_btn=view.findViewById(R.id.action_button);
+        checkInImg=view.findViewById(R.id.checkInImg);
         //note_cancel=view.findViewById(R.id.note_cancel);
 //        floatingTextButton=view.findViewById(R.id.action_button);
         accept_reservation=view.findViewById(R.id.accept_reservation);
@@ -416,4 +424,32 @@ public static ImageView sortbtn;
             fragmentTransaction.commitAllowingStateLoss();
         }
     }
+    public  static  void showCheckInDialog(final Context context, final Bitmap bitmap, final String path){
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.check_in_dialog_layout);
+        //TextView message = dialog.findViewById(R.id.message);
+        //TextView title = dialog.findViewById(R.id.title);
+        TextView confirm = dialog.findViewById(R.id.confirm);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        ImageView checkInImg = dialog.findViewById(R.id.checkInImg);
+
+        checkInImg.setImageBitmap(bitmap);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APICall.CheckIn(context,ReservationsAdapter2.book_id,path,bitmap);
+                dialog.cancel();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+
+    }
+
 }

@@ -1,12 +1,22 @@
 package com.ptm.clinicpa.Fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -21,10 +31,16 @@ import android.widget.ImageView;
 
 import android.widget.TextView;
 
+import com.meg7.widget.CircleImageView;
 import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.BeautyMainPage;
 import com.ptm.clinicpa.Adapters.ReservationsAdapter2;
 import com.ptm.clinicpa.R;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //import com.dcoret.beautyclient.API.APICallCall;
 
@@ -38,6 +54,14 @@ public class DepositReservationFragment extends Fragment {
 
     public static RecyclerView service_select;
     public static ReservationsAdapter2 reservationsAdapter2;
+    private ArrayList permissionsToRequest;
+    private ArrayList permissionsRejected = new ArrayList();
+    private ArrayList permissions = new ArrayList();
+    Bitmap myBitmap;
+    Uri picUri;
+
+
+    private final static int ALL_PERMISSIONS_RESULT = 107;
 
     static String[] items={"Service 1","Service 2","Service 3","Service 4","Service 5","Service 6"};
 
@@ -193,6 +217,165 @@ public class DepositReservationFragment extends Fragment {
 
 
         }
+
+    public static Intent getPickImageChooserIntent() {
+
+        // Determine Uri of camera image to save.
+        Uri outputFileUri = getCaptureImageOutputUri();
+
+        List<Intent> allIntents = new ArrayList<>();
+        PackageManager packageManager = BeautyMainPage.context.getPackageManager();
+
+        // collect all camera intents
+        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+        for (ResolveInfo res : listCam) {
+            Intent intent = new Intent(captureIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            if (outputFileUri != null) {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            }
+            allIntents.add(intent);
+        }
+
+        // collect all gallery intents
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        List<ResolveInfo> listGallery = packageManager.queryIntentActivities(galleryIntent, 0);
+        for (ResolveInfo res : listGallery) {
+            Intent intent = new Intent(galleryIntent);
+            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+            intent.setPackage(res.activityInfo.packageName);
+            allIntents.add(intent);
+        }
+
+        // the main intent is the last in the list (fucking android) so pickup the useless one
+        Intent mainIntent = allIntents.get(allIntents.size() - 1);
+        for (Intent intent : allIntents) {
+            if (intent.getComponent().getClassName().equals("com.android.documentsui.DocumentsActivity")) {
+                mainIntent = intent;
+                break;
+            }
+        }
+        allIntents.remove(mainIntent);
+
+        // Create a chooser from the main intent
+        Intent chooserIntent = Intent.createChooser(mainIntent, "Select source");
+
+        // Add all other intents
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, allIntents.toArray(new Parcelable[allIntents.size()]));
+
+        return chooserIntent;
+    }
+
+    private static Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = BeautyMainPage.context.getExternalCacheDir();
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
+        }
+        return outputFileUri;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Bitmap bitmap;
+        if (resultCode == Activity.RESULT_OK) {
+
+            ImageView imageView = MyReservationFragment.checkInImg;
+            Log.e("onActivityResult","true");
+
+            if (getPickImageResultUri(data) != null) {
+                picUri = getPickImageResultUri(data);
+
+                try {
+                    myBitmap = MediaStore.Images.Media.getBitmap(BeautyMainPage.context.getContentResolver(), picUri);
+                    myBitmap = rotateImageIfRequired(myBitmap, picUri);
+                    myBitmap = getResizedBitmap(myBitmap, 500);
+
+                   // CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                   // croppedImageView.setImageBitmap(myBitmap);
+                    imageView.setImageBitmap(myBitmap);
+                    imageView.setVisibility(View.VISIBLE);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            } else {
+
+
+                bitmap = (Bitmap) data.getExtras().get("data");
+
+                myBitmap = bitmap;
+                //CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                /*if (croppedImageView != null) {
+                    croppedImageView.setImageBitmap(myBitmap);
+                }*/
+
+                imageView.setImageBitmap(myBitmap);
+                imageView.setVisibility(View.VISIBLE);
+
+
+            }
+
+        }
+
+    }
+    public Uri getPickImageResultUri(Intent data) {
+        boolean isCamera = true;
+        if (data != null) {
+            String action = data.getAction();
+            isCamera = action != null && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
+        }
+
+
+        return isCamera ? getCaptureImageOutputUri() : data.getData();
+    }
+
+    private static Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
+
+        ExifInterface ei = new ExifInterface(selectedImage.getPath());
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(img, 270);
+            default:
+                return img;
+        }
+    }
+
+    private static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
+    }
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+
 
 
 }

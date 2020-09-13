@@ -14,10 +14,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -43,6 +46,7 @@ import com.ptm.clinicpa.API.APICall;
 import com.ptm.clinicpa.Activities.support.SupportActivity;
 import com.ptm.clinicpa.Fragments.AccountFragment;
 //import com.dcoret.beautyclient.Fragments.MyFavorites.FavoriteFragment;
+import com.ptm.clinicpa.Fragments.DepositReservationFragment;
 import com.ptm.clinicpa.Fragments.FreeGroupBooking;
 import com.ptm.clinicpa.Fragments.GroupReservationFragment;
 //import com.dcoret.beautyclient.Fragments.Notifications.NotificationsFragment;
@@ -81,6 +85,8 @@ import com.ptm.clinicpa.Activities.SingleOffer.SingleDateOfferBooking;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 //------------------ main page---------------
@@ -1168,4 +1174,116 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static Bitmap getLogo(){
         return  ImageLogo;
     }
+
+    Bitmap myBitmap;
+    Uri picUri;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Bitmap bitmap;
+        if (resultCode == Activity.RESULT_OK) {
+
+            ImageView imageView = MyReservationFragment.checkInImg;
+            Log.e("onActivityResult","true");
+
+            if (getPickImageResultUri(data) != null) {
+                picUri = getPickImageResultUri(data);
+
+                try {
+                    myBitmap = MediaStore.Images.Media.getBitmap(BeautyMainPage.context.getContentResolver(), picUri);
+                    myBitmap = rotateImageIfRequired(myBitmap, picUri);
+                    myBitmap = getResizedBitmap(myBitmap, 600);
+
+                    // CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                    // croppedImageView.setImageBitmap(myBitmap);
+                    /*imageView.setImageBitmap(myBitmap);
+                    imageView.setVisibility(View.VISIBLE);*/
+                    MyReservationFragment.showCheckInDialog(context,myBitmap,picUri+"");
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            } else {
+
+
+                bitmap = (Bitmap) data.getExtras().get("data");
+
+                myBitmap = bitmap;
+                //CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                /*if (croppedImageView != null) {
+                    croppedImageView.setImageBitmap(myBitmap);
+                }*/
+
+                MyReservationFragment.showCheckInDialog(context,myBitmap,picUri+"");
+                /*imageView.setImageBitmap(myBitmap);
+                imageView.setVisibility(View.VISIBLE);
+*/
+
+            }
+
+        }
+
+    }
+    public Uri getPickImageResultUri(Intent data) {
+        boolean isCamera = true;
+        if (data != null) {
+            String action = data.getAction();
+            isCamera = action != null && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
+        }
+
+
+        return isCamera ? getCaptureImageOutputUri() : data.getData();
+    }
+
+    private static Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
+
+        ExifInterface ei = new ExifInterface(selectedImage.getPath());
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotateImage(img, 90);
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotateImage(img, 180);
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotateImage(img, 270);
+            default:
+                return img;
+        }
+    }
+
+    private static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
+    }
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 0) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    private static Uri getCaptureImageOutputUri() {
+        Uri outputFileUri = null;
+        File getImage = BeautyMainPage.context.getExternalCacheDir();
+        if (getImage != null) {
+            outputFileUri = Uri.fromFile(new File(getImage.getPath(), "profile.png"));
+        }
+        return outputFileUri;
+    }
+
 }

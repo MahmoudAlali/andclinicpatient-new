@@ -297,8 +297,10 @@
     <string name="Edit_time">تعديل الوقت</string>
     <string name="Reservations_received">الحجوزات الواردة</string>
     <string name="Acceptable_reservations">الحجوزات المقبولة</string>
-    <string name="Bookings_paid_DEPOSIT">انتظار التنفيذ والتقييم</string>
+    <string name="Bookings_paid_DEPOSIT">انتظار التنفيذ</string>
     <string name="cancel_req">طلب إلغاء</string>
+    <string name="check_in">قطع إيصال</string>
+    <string name="check_in_photo">صورة الإيصال</string>
     <string name="nobooking">لا يوجد حجوزات</string>
     <string name="nobookingyet">لا يوجد حجوزات بعد</string>
     <string name="Service_Place">تُقدَّم الخدمة الطبية في:</string>

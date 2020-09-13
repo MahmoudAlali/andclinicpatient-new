@@ -41,6 +41,7 @@ import com.ptm.clinicpa.DataModel.DateTimeModel;
 import com.ptm.clinicpa.DataModel.ReservationModel;
 import com.ptm.clinicpa.Dialog.Dialogs;
 import com.ptm.clinicpa.Dialog.MyRunnable;
+import com.ptm.clinicpa.Fragments.DepositReservationFragment;
 import com.ptm.clinicpa.Fragments.ExecuteBookActivity;
 import com.ptm.clinicpa.Fragments.MyReservation.CancelReservationActivity;
 import com.ptm.clinicpa.Fragments.MyReservationFragment;
@@ -93,7 +94,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public static Boolean isOffer=false;
     public static FragmentManager fm;
     public static FragmentTransaction fragmentTransaction;
-    public static String book_id="0",is_action_on="",logoId;
+    public static String book_id="0",is_action_on="",logoId,healthRecord="";
     public static int postionBook;
     public static AppointmentsDataModel reservationModel;
     boolean isNew;
@@ -353,7 +354,8 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         Log.e("CheckIn","ediiiiiiiiiiit..");
 
                         book_id=appointmentsDataModels.get(position).getBdb_appointment_id();
-                        if(appointmentsDataModels.get(position).getHealth_record().equals("")||appointmentsDataModels.get(position).getHealth_record().equals("null"))
+                        healthRecord=appointmentsDataModels.get(position).getHealth_record();
+                       /* if(appointmentsDataModels.get(position).getHealth_record().equals("")||appointmentsDataModels.get(position).getHealth_record().equals("null"))
                         {
                             Dialogs getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn,context.getString(R.string.med_id));
                             getReasonDialog.show();
@@ -361,7 +363,9 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         else
                         {
                             APICall.CheckIn(context,book_id,appointmentsDataModels.get(position).getHealth_record());
-                        }
+                        }*/
+                        ((AppCompatActivity)context).startActivityForResult(DepositReservationFragment.getPickImageChooserIntent(), 200);
+
 
 
                     }
@@ -738,7 +742,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     {
         @Override
         public void run() {
-            APICall.CheckIn(context,book_id,getValue());
+           // APICall.CheckIn(context,book_id,getValue());
 
         }
     };

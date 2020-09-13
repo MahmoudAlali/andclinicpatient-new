@@ -737,6 +737,8 @@
     <string name="points_date">Date</string>
     <string name="points_updown">Points</string>
     <string name="waffer">Save</string>
+    <string name="check_in">Check in</string>
+    <string name="check_in_photo">Check in photo</string>
 
 
     <string name="searchLoc">Enter your location or region</string>

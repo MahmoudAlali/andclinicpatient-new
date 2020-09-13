@@ -19,6 +19,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.ColorUtils;
@@ -27,6 +28,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -195,7 +197,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -215,6 +220,7 @@ import java.util.NoSuchElementException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 
@@ -37897,14 +37903,178 @@ Log.e("filters",filter);
 
     }
 
-    public static void CheckIn(final  Context cont,String bdb_appointment_id,String bdb_health_record)
+    public static void CheckIn(final  Context cont,String bdb_appointment_id,String pathImage,Bitmap bitmap)
     {
-        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            MediaType MEDIA_TYPE = MediaType.parse("application/json");
+            ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showDialog(cont);
+                }});
+
+            File image = new File(pathImage);
+            final File imageFile = new File(pathImage);
+
+            File filesDir = cont.getFilesDir();
+            File imageFile2 = new File(filesDir, "receipt_img" + ".jpg");
+
+            OutputStream os;
+            try {
+                os = new FileOutputStream(imageFile2);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                os.flush();
+                os.close();
+            } catch (Exception e) {
+                Log.e(cont.getClass().getSimpleName(), "Error writing bitmap", e);
+            }
+            Uri uris = Uri.fromFile(imageFile);
+            String fileExtension = MimeTypeMap.getFileExtensionFromUrl(uris.toString());
+            String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension.toLowerCase());
+            String imageName = imageFile.getName();
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("receipt_img", "receipt_img",
+                            RequestBody.create(MediaType.parse(mime), imageFile2))
+                    .addFormDataPart("bdb_appointment_id",bdb_appointment_id)
+                    .build();
+
+
+            //        String url = "http://clientapp.dcoret.com/api/service/Service";
+            OkHttpClient client = new OkHttpClient();
+            JSONObject postdata = new JSONObject();
+           /* File file=new File(context.getCacheDir(),"image.png");
+            if(!file.exists()){
+            writeToFile(file);
+            }else {
+                try {
+                    writeToFile(file);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            Log.e("fileEX",file.exists()+"");*/
+
+           /* try {
+                String fb_token=FirebaseInstanceId.getInstance().getToken();
+                String server_key=SERVER_KEY;
+//
+//                postdata.put("bdb_city", "1");
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }*/
+            final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+            if(image.exists()){
+                Log.e("exists",image.getAbsolutePath());
+            }else {
+                Log.e("Notexists",pathImage);
+            }
+            RequestBody bodypost = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+//            Log.e("postImage",((MultipartBody) body).boundary());
+            Log.e("postData",postdata.toString());
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(API_PREFIX_NAME+"/api/appointment/checkinAction")
+                    //.post(bodypost)
+                    //.post(body)
+                    // .post(logoBody)
+                    .post(requestBody)
+                    .addHeader("Content-Type","multipart/form-data")
+                    .addHeader("Accept","application/json")
+                    .header("Authorization", "Bearer "+gettoken(cont))
+                    .build();
+
+            Log.e("CheckIn", bdb_appointment_id+"appointment id");
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    mMessage = e.getMessage().toString();
+                    Log.e("CheckIn ERRR", mMessage);
+
+                    pd.dismiss();
+                    if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
+                    {
+//                        APICall.checkInternetConnectionDialog(BeautyMainPage.context,R.string.Null,R.string.check_internet_con);
+                        ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final Dialog dialog = new Dialog(cont);
+                                dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.setContentView(R.layout.check_internet_alert_dialog__layout);
+                                TextView confirm = dialog.findViewById(R.id.confirm);
+                                TextView message = dialog.findViewById(R.id.message);
+                                TextView title = dialog.findViewById(R.id.title);
+                                title.setText(R.string.Null);
+                                message.setText(R.string.check_internet_con);
+                                confirm.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.cancel();
+
+                                    }
+                                });
+                                dialog.show();
+
+                            }
+                        });
+
+
+                    }
+                    else {
+                        showUnexpectedErrMsg(cont);
+                    }
+                }
+
+                @Override
+                public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                    mMessage = response.body().string();
+                    Log.e("CheckIn", mMessage);
+
+                    pd.dismiss();
+                    try {
+                        JSONObject jsonrespone = new JSONObject(mMessage);
+                        String success=jsonrespone.getString("success");
+                        final String message=jsonrespone.getString("message");
+                        JSONObject data =jsonrespone.getJSONObject("data");
+                        final String message_ar=data.getString("message_ar");
+                        final String message_en=data.getString("message_en");
+                        ((AppCompatActivity) cont).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String mess ="";
+                                if(cont.getString(R.string.locale).equals("en"))
+                                {
+                                    mess=message_en +Constants.checkInMessageEn;
+                                }
+                                else
+                                    mess=message_ar +Constants.checkInMessageAr;
+                                Log.e("mess",mess);
+                                Log.e("checkInMessageAr",Constants.checkInMessageAr+"ffffffffff");
+                                showSweetDialog(cont, mess);
+                            }});
+
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                        Log.e("CheckIn",e.getMessage());
+
+                    }
+                }
+
+            });
+        }
+        /*MediaType MEDIA_TYPE = MediaType.parse("application/json");
         OkHttpClient client = new OkHttpClient();
         JSONObject item = new JSONObject();
         try {
             item .put("bdb_appointment_id",bdb_appointment_id);
-            item .put("bdb_health_record",bdb_health_record);
+           // item .put("bdb_health_record",bdb_health_record);
 
         }
         catch (Exception e){}
@@ -37919,8 +38089,8 @@ Log.e("filters",filter);
         catch (Exception e){}
         Log.e("CheckIn",postdata.toString());
         RequestBody body = RequestBody.create(MEDIA_TYPE, item.toString());
-
-        okhttp3.Request request = new okhttp3.Request.Builder()
+*/
+       /* okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(API_PREFIX_NAME+"/api/appointment/checkinAction")
                 .post(body)
                 .addHeader("Content-Type","application/json")
@@ -38008,7 +38178,7 @@ Log.e("filters",filter);
             }
 
         });
-
+*/
     }
     public static String getDeviceId(Context context)
     {

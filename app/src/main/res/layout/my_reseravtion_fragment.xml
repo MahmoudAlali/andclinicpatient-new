@@ -65,47 +65,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-<!--    <LinearLayout-->
-<!--        android:layout_marginTop="?attr/actionBarSize"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:background="@color/end_gray"-->
-<!--        android:layout_height="?attr/actionBarSize">-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-<!--            <TextView-->
-<!--                android:id="@+id/incom_reservation"-->
-<!--                android:layout_weight="1"-->
-<!--                android:textSize="12dp"-->
-<!--                android:gravity="center"-->
-<!--                android:textColor="#000"-->
-<!--                android:text="@string/Reservations_received"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent" />-->
-
-<!--            <TextView-->
-<!--                android:textColor="#000"-->
-
-<!--                android:id="@+id/accept_reservation"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="center"-->
-
-<!--                android:text="@string/Acceptable_reservations"-->
-<!--                android:textSize="12dp" />-->
-<!--            <TextView-->
-<!--                android:textColor="#000"-->
-
-<!--                android:id="@+id/deposited_reservation"-->
-<!--                android:layout_weight="1"-->
-<!--                android:textSize="12dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="@string/Bookings_paid_DEPOSIT"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent" />-->
-<!--        </LinearLayout>-->
-<!--    </LinearLayout>-->
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -174,78 +133,6 @@
 
     </LinearLayout>
 
-<!--
-    <LinearLayout
-        android:layout_marginTop="115dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_gravity="end"
-        android:layout_marginLeft="5dp"
-
-        android:padding="4dp"
-        android:background="@drawable/border_edit_text_v5"
-        android:gravity="center"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            >
-
-            <TextView
-                android:id="@+id/action_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@color/lightBordeaux"
-                android:textSize="@dimen/standard_20"
-                android:textStyle="bold" />
-            <ImageView
-                android:layout_width="@dimen/standard_45"
-                android:layout_height="@dimen/standard_45"
-                android:src="@drawable/reser_count_icon"/>
-        </LinearLayout>
-
-    </LinearLayout>
--->
-    <!--<LinearLayout
-        android:layout_marginTop="115dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_gravity="end"
-        android:layout_marginLeft="5dp"
-
-        android:padding="4dp"
-        android:background="@drawable/border_edit_text_v5"
-        android:gravity="center"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            >
-
-            <TextView
-                android:id="@+id/action_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="@color/lightBordeaux"
-                android:textSize="@dimen/standard_20"
-                android:textStyle="bold" />
-            <ImageView
-                android:layout_width="@dimen/standard_45"
-                android:layout_height="@dimen/standard_45"
-                android:src="@drawable/reser_count_icon"/>
-        </LinearLayout>
-
-    </LinearLayout>-->
     <LinearLayout
         android:layout_marginTop="115dp"
         android:layout_width="40dp"
@@ -316,109 +203,11 @@
 
     </FrameLayout>
 
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/myprofile"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-    <!--android:onClick="myprofile"-->
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:text="بروفايلي"-->
-    <!--android:textStyle="bold" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView32"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:onClick="pauseAccount"-->
-    <!--android:text="ايقاف حسابي"-->
-    <!--android:textStyle="bold" />-->
-
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_margin="10dp"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/shadow"-->
-    <!--android:elevation="16dp"-->
-    <!--android:orientation="horizontal">-->
-
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView31"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:text="حذف حسابي" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-
-    <!--android:layout_weight="1"-->
-
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="3">-->
-
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:orientation="horizontal"></LinearLayout>-->
-    <!--</LinearLayout>-->
+    <ImageView
+        android:id="@+id/checkInImg"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/black"
+        />
 </android.support.design.widget.CoordinatorLayout>
