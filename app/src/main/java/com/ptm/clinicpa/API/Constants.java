@@ -86,6 +86,8 @@ public class Constants {
     public static String defaultDistance="";
     public static String latitude="";
     public static String longitude="";
+    public static String checkin_msg_ar="";
+    public static String checkin_msg_en="";
 
     public static String[] effectValues = {"0","2.5","5","7.5","10"};
 }

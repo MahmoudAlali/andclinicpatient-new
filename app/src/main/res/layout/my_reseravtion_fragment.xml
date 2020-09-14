@@ -114,7 +114,6 @@
     </LinearLayout>
     <TextView
         android:layout_marginTop="100dp"
-        android:visibility="gone"
         android:id="@+id/cancelReserMsg"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -122,10 +121,19 @@
         android:textAlignment="center"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:textColor="#000"/>
+        android:textColor="@color/redClinic"/>
+    <TextView
+        android:layout_marginTop="135dp"
+        android:id="@+id/checkInMsg"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/redClinic"/>
 
     <LinearLayout
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="165dp"
         android:orientation="vertical"
         android:id="@+id/tabs_fragment"
         android:layout_width="match_parent"

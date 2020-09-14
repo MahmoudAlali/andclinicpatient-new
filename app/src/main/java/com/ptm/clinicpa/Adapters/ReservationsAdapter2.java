@@ -341,20 +341,28 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             }
 
 
-            if(!isNew || appointmentsDataModels.get(position).getCan_check_in().equals("0"))
+            if(isNew)
             {
-                ((Item) holder).checkIn.setVisibility(View.GONE);
-                ((Item) holder).space.setVisibility(View.GONE);
-            }
-            else
-            {
-                ((Item)holder).checkIn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e("CheckIn","ediiiiiiiiiiit..");
+                if( appointmentsDataModels.get(position).getCan_check_in().equals("0"))
+                {
+                    ((Item) holder).checkIn.setVisibility(View.GONE);
+                    ((Item) holder).space.setVisibility(View.GONE);
+                }
+                else if( appointmentsDataModels.get(position).getCan_check_in().equals("2"))
+                {
+                    ((Item) holder).checkIn.setVisibility(View.GONE);
+                    ((Item) holder).space.setVisibility(View.GONE);
+                    ((Item) holder).isBeingChecked.setVisibility(View.VISIBLE);
+                }
+                else if( appointmentsDataModels.get(position).getCan_check_in().equals("1"))
+                {
+                    ((Item)holder).checkIn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.e("CheckIn","ediiiiiiiiiiit..");
 
-                        book_id=appointmentsDataModels.get(position).getBdb_appointment_id();
-                        healthRecord=appointmentsDataModels.get(position).getHealth_record();
+                            book_id=appointmentsDataModels.get(position).getBdb_appointment_id();
+                            healthRecord=appointmentsDataModels.get(position).getHealth_record();
                        /* if(appointmentsDataModels.get(position).getHealth_record().equals("")||appointmentsDataModels.get(position).getHealth_record().equals("null"))
                         {
                             Dialogs getReasonDialog =new Dialogs(context, R.string.empty, R.string.enterReasonMsg, R.string.ok,OnClickCallMeBtn,context.getString(R.string.med_id));
@@ -364,13 +372,15 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         {
                             APICall.CheckIn(context,book_id,appointmentsDataModels.get(position).getHealth_record());
                         }*/
-                        ((AppCompatActivity)context).startActivityForResult(DepositReservationFragment.getPickImageChooserIntent(), 200);
+                            ((AppCompatActivity)context).startActivityForResult(DepositReservationFragment.getPickImageChooserIntent(), 200);
 
 
 
-                    }
-                });
+                        }
+                    });
+                }
             }
+
 
             if(isNew&&appointmentsDataModels.get(position).getCan_order_change().equals("1"))
             {
@@ -625,7 +635,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
     public class Item extends RecyclerView.ViewHolder {
 //        MyClickListener listener;
 
-        TextView speciality,bookPlaceTxt,booktime,visitType,bookingType,book_id,bdb_expected_deposit,client_name,checkIn,reference_id, ser_price,totalPrice,export_invoice,date,accept,refuse,edit,refundText;
+        TextView isBeingChecked,speciality,bookPlaceTxt,booktime,visitType,bookingType,book_id,bdb_expected_deposit,client_name,checkIn,reference_id, ser_price,totalPrice,export_invoice,date,accept,refuse,edit,refundText;
         ImageView book_Details,inner_res,logoImg,place,isChecked,booking_place,status,isEdited;
         ColorRatingBar rating;
         Space space,space2;
@@ -672,6 +682,7 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
             docName=itemView.findViewById(R.id.doctorName);
             patName=itemView.findViewById(R.id.patientName);
             actions=itemView.findViewById(R.id.actions);
+            isBeingChecked=itemView.findViewById(R.id.isBeingChecked);
 
         }
 

@@ -37466,6 +37466,8 @@ Log.e("filters",filter);
                         Constants.filterMessageAr=data.getString("filter_message_ar");
                         Constants.longitude=data.getString("longitude");
                         Constants.latitude=data.getString("latitude");
+                        Constants.checkin_msg_ar=data.getString("checkin_message_ar");
+                        Constants.checkin_msg_en=data.getString("checkin_message_en");
                         Offers.setOfferImage();
                         Log.e("TAG1", Constants.messageOfClientsNames_ar);
                         Log.e("TAG2", Constants.messageOfClientsNames_en);

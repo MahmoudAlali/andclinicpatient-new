@@ -739,6 +739,7 @@
     <string name="waffer">Save</string>
     <string name="check_in">Check in</string>
     <string name="check_in_photo">Check in photo</string>
+    <string name="check_in_photo_being_checked">Check in photo is being checked</string>
 
 
     <string name="searchLoc">Enter your location or region</string>

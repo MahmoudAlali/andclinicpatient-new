@@ -438,6 +438,19 @@
                     />
             </LinearLayout>
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/isBeingChecked"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:lines="1"
+                android:gravity="center"
+                android:text="@string/check_in_photo_being_checked"
+                android:textStyle="bold"
+                android:textColor="@color/redClinic"
+                android:textSize="14dp" />
+
             <LinearLayout
                 android:id="@+id/show_description_etext"
                 android:orientation="horizontal"
@@ -483,7 +496,7 @@
             android:layout_weight="1"
             android:background="@drawable/automated_browse_btns_back"
             android:gravity="center"
-            android:text="Check in"
+            android:text="@string/check_in"
             android:textColor="#fff"
             android:textSize="16dp"
             />

@@ -301,6 +301,7 @@
     <string name="cancel_req">طلب إلغاء</string>
     <string name="check_in">قطع إيصال</string>
     <string name="check_in_photo">صورة الإيصال</string>
+    <string name="check_in_photo_being_checked">صورة الإيصال تتم مراجعتها</string>
     <string name="nobooking">لا يوجد حجوزات</string>
     <string name="nobookingyet">لا يوجد حجوزات بعد</string>
     <string name="Service_Place">تُقدَّم الخدمة الطبية في:</string>

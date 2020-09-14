@@ -358,7 +358,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
             (context).startActivity(detailsIntent);
 
         }
-        else if(code.equals("36"))
+        else if(code.equals("36")||code.equals("47"))
         {
             String book_id="";
             for (int i=0;i<j.length();i++)

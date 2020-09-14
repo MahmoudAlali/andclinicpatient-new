@@ -105,7 +105,7 @@ public static ImageView sortbtn;
     public static int sryear,srmonth,srday,eryear,ermonth,erday;
 
     public  static String tmp="0";
-    public static TextView note_cancel;
+    public static TextView note_cancel,checkInMsg;
     public static ImageView checkInImg;
 
 
@@ -153,11 +153,16 @@ public static ImageView sortbtn;
 //        deposited_reservation=view.findViewById(R.id.deposited_reservation);
         filterbtn=view.findViewById(R.id.filter);
         note_cancel=view.findViewById(R.id.cancelReserMsg);
+        checkInMsg=view.findViewById(R.id.checkInMsg);
         /*if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
             note_cancel.setText(Constants.cancelReservationsEn);
         else
             note_cancel.setText(Constants.cancelReservationsAr);
 */
+        if(BeautyMainPage.context.getString(R.string.locale).equals("en"))
+            checkInMsg.setText(Constants.checkin_msg_en);
+        else
+            checkInMsg.setText(Constants.checkin_msg_ar);
         Toolbar toolbar;
         toolbar=view.findViewById(R.id.toolbarm);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
