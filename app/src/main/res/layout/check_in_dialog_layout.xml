@@ -21,12 +21,13 @@
 
             <TextView
                 android:id="@+id/title"
-                android:textColor="@color/pf_red"
+                android:textColor="@color/redClinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:text="@string/check_in_photo"
                 android:textSize="14dp" />
