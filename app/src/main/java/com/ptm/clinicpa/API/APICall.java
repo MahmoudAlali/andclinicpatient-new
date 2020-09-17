@@ -27289,8 +27289,8 @@ public class APICall {
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage().toString();
                 Log.e("guestToken ERRR", mMessage);
-                Intent i = new Intent(context, BeautyMainPage.class);
-                context.startActivity(i);
+//                Intent i = new Intent(context, BeautyMainPage.class);
+//                context.startActivity(i);
                 //showSweetDialog(context,context.getResources().getString(R.string.loginFailed),false);
             }
 
@@ -27311,6 +27311,7 @@ public class APICall {
                         editor.putString("token", token_temp);
                         editor.commit();
                         editor.apply();
+                        Log.e("getSystemInfo12","ok");
                         APICall.getSystemInfo(context);
 
                     }else if(success.equals("false")) {
@@ -37737,8 +37738,8 @@ Log.e("filters",filter);
                     ((AppCompatActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            BeautyMainPage.ImageLogo=bit;
-                            BeautyMainPage.setLogo(bit);
+//                            BeautyMainPage.ImageLogo=bit;
+//                            BeautyMainPage.setLogo(bit);
 //                            Log.e("LOGOIDSc","is"+  BeautyMainPage.ImageLogo.getByteCount());
                         }
                     });

@@ -1098,4 +1098,8 @@
     <string name="AllDevices">Logout from all devices</string>
     <string name="AllDevicesNotMe">Logout from all other devices except this device</string>
     <string name="DontLogout">Don\'t logout</string>
+    <string name="dismis">Dismiss</string>
+    <string name="gallary">Gallary</string>
+    <string name="camera">Camera</string>
+    <string name="select_way">Select way</string>
 </resources>

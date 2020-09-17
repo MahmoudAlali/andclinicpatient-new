@@ -7,10 +7,16 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -58,6 +65,7 @@ import com.ptm.clinicpa.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -372,7 +380,62 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
                         {
                             APICall.CheckIn(context,book_id,appointmentsDataModels.get(position).getHealth_record());
                         }*/
-                            ((AppCompatActivity)context).startActivityForResult(DepositReservationFragment.getPickImageChooserIntent(), 200);
+
+
+
+                            final BottomSheetDialog dialog=new BottomSheetDialog(context);
+                            dialog.setContentView(R.layout.camgall_dialog_main);
+                            dialog.getWindow()
+                                    .findViewById(R.id.design_bottom_sheet)
+                                    .setBackgroundResource(android.R.color.transparent);
+                            LinearLayout img1=dialog.findViewById(R.id.img1);
+//                TextView title=dialog.findViewById(R.id.title);
+                            LinearLayout img2=dialog.findViewById(R.id.img2);
+//                Button b1=dialog.findViewById(R.id.btn_option1);
+//                Button b2=dialog.findViewById(R.id.btn_option2);
+                            Button dismiss=dialog.findViewById(R.id.dismiss);
+//                b1.setText("camera");
+//                b2.setText("Gallary");
+//                title.setText("Select way");
+//                img1.setImageResource(image1);
+//                img2.setImageResource(image2);
+
+                            img1.setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.M)
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                    if(context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
+                                        sendTakePictureIntent();
+                                    }
+                                }
+                            });
+
+                            img2.setOnClickListener(new View.OnClickListener() {
+                                @RequiresApi(api = Build.VERSION_CODES.M)
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.cancel();
+                                    ((AppCompatActivity)context).startActivityForResult(DepositReservationFragment.getPickImageChooserIntent(), 200);
+
+//                                    ((AppCompatActivity)context).startActivityForResult(getPickImageChooserIntent(), PICK_IMAGE_REQUEST);
+
+
+                                }
+                            });
+
+                            dismiss.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//               ProviderMainPage.navigation.setSelectedItemId(layout);
+                                    dialog.cancel();
+
+                                }
+                            });
+
+
+                            dialog.show();
+
 
 
 
@@ -757,4 +820,42 @@ public class ReservationsAdapter2 extends RecyclerView.Adapter<RecyclerView.View
 
         }
     };
+
+
+
+
+    //------------------new way---------------
+    public static int REQUEST_PICTURE_CAPTURE=2;
+    void sendTakePictureIntent() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(context.getPackageManager()) != null) {
+//            startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
+
+            File pictureFile = null;
+            try {
+                pictureFile = getPictureFile();
+            } catch (IOException ex) {
+                Toast.makeText(context,
+                        "Photo file can't be created, please try again",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (pictureFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(context,
+                        "com.clinic.captureimage.fileprovider",
+                        pictureFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                ((AppCompatActivity)context).startActivityForResult(cameraIntent, REQUEST_PICTURE_CAPTURE);
+            }
+        }
+    }
+    public static String pictureFilePath;
+    private File getPictureFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String pictureFile = "clinic_" + timeStamp;
+        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(pictureFile,  ".jpg", storageDir);
+        pictureFilePath = image.getAbsolutePath();
+        return image;
+    }
 }

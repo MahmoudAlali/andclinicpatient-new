@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -226,18 +227,18 @@ public class DepositReservationFragment extends Fragment {
         List<Intent> allIntents = new ArrayList<>();
         PackageManager packageManager = BeautyMainPage.context.getPackageManager();
 
-        // collect all camera intents
-        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
-        for (ResolveInfo res : listCam) {
-            Intent intent = new Intent(captureIntent);
-            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
-            intent.setPackage(res.activityInfo.packageName);
-            if (outputFileUri != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-            }
-            allIntents.add(intent);
-        }
+//        // collect all camera intents
+//        Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//        List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+//        for (ResolveInfo res : listCam) {
+//            Intent intent = new Intent(captureIntent);
+//            intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+//            intent.setPackage(res.activityInfo.packageName);
+//            if (outputFileUri != null) {
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+//            }
+//            allIntents.add(intent);
+//        }
 
         // collect all gallery intents
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -283,47 +284,76 @@ public class DepositReservationFragment extends Fragment {
 
         Bitmap bitmap;
         if (resultCode == Activity.RESULT_OK) {
-
             ImageView imageView = MyReservationFragment.checkInImg;
-            Log.e("onActivityResult","true");
+            if (requestCode == 200) {
 
-            if (getPickImageResultUri(data) != null) {
-                picUri = getPickImageResultUri(data);
+                Log.e("onActivityResult", "true");
 
-                try {
-                    myBitmap = MediaStore.Images.Media.getBitmap(BeautyMainPage.context.getContentResolver(), picUri);
-                    myBitmap = rotateImageIfRequired(myBitmap, picUri);
-                    myBitmap = getResizedBitmap(myBitmap, 500);
+                if (getPickImageResultUri(data) != null) {
+                    picUri = getPickImageResultUri(data);
 
-                   // CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
-                   // croppedImageView.setImageBitmap(myBitmap);
-                    imageView.setImageBitmap(myBitmap);
-                    imageView.setVisibility(View.VISIBLE);
+                    try {
+                        myBitmap = MediaStore.Images.Media.getBitmap(BeautyMainPage.context.getContentResolver(), picUri);
+                        myBitmap = rotateImageIfRequired(myBitmap, picUri);
+                        myBitmap = getResizedBitmap(myBitmap, 500);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                        // CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                        // croppedImageView.setImageBitmap(myBitmap);
+                        imageView.setImageBitmap(myBitmap);
+                        imageView.setVisibility(View.VISIBLE);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
 
-            } else {
+                } else {
 
 
-                bitmap = (Bitmap) data.getExtras().get("data");
+                    bitmap = (Bitmap) data.getExtras().get("data");
 
-                myBitmap = bitmap;
-                //CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                    myBitmap = bitmap;
+                    //CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
                 /*if (croppedImageView != null) {
                     croppedImageView.setImageBitmap(myBitmap);
                 }*/
 
-                imageView.setImageBitmap(myBitmap);
-                imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageBitmap(myBitmap);
+                    imageView.setVisibility(View.VISIBLE);
 
+
+                }
 
             }
+            else if (requestCode == 2) {
+                File imgFile = new File(ReservationsAdapter2.pictureFilePath);
+                Log.e("pictureFilePath", "is" + imgFile.exists());
+                if (imgFile.exists()) {
 
+                    try {
+                        myBitmap = MediaStore.Images.Media.getBitmap(BeautyMainPage.context.getContentResolver(), picUri);
+                        myBitmap = rotateImageIfRequired(myBitmap, picUri);
+
+                        myBitmap = getResizedBitmap(myBitmap, 500);
+
+
+                        imageView.setImageBitmap(myBitmap);
+                        imageView.setVisibility(View.VISIBLE);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // CircleImageView croppedImageView = (CircleImageView) findViewById(R.id.img_profile);
+                    // croppedImageView.setImageBitmap(myBitmap);
+
+//                        image.setVisibility(View.VISIBLE);
+//                        image.setImageBitmap(BitmapFactory.decodeFile(pictureFilePath));
+//                        upload_photo.setText(imgFile.getName());
+//                    image.setImageURI();
+                }
+
+            }
         }
-
     }
     public Uri getPickImageResultUri(Intent data) {
         boolean isCamera = true;
@@ -352,14 +382,6 @@ public class DepositReservationFragment extends Fragment {
                 return img;
         }
     }
-
-    private static Bitmap rotateImage(Bitmap img, int degree) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
-        img.recycle();
-        return rotatedImg;
-    }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -373,6 +395,15 @@ public class DepositReservationFragment extends Fragment {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+
+    private static Bitmap rotateImage(Bitmap img, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+        img.recycle();
+        return rotatedImg;
     }
 
 

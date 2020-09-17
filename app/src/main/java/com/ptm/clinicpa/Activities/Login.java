@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,6 +59,7 @@ public class Login extends AppCompatActivity {
 
 
         //---------- get guest token-----then-- get sys info-----
+        Log.e("GET_GUEST_TOKEN","ok");
         APICall.getGuestTokenThenInfo(context, FirebaseInstanceId.getInstance().getToken());
 
 
@@ -177,6 +179,8 @@ public class Login extends AppCompatActivity {
         prefs.apply();
         prefs.commit();
         BeautyMainPage.bdb_is_guest="1";
+
+        Log.e("GET_GUEST_TOKEN0m","ok");
         APICall.getGuestToken(context,FirebaseInstanceId.getInstance().getToken());
 
     }

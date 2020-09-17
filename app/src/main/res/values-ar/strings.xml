@@ -956,4 +956,8 @@
     <string name="appointmentDetails">تفاصيل الموعد</string>
     <string name="requestDetails">تفاصيل الطلب</string>
     <string name="waffer">وفّر</string>
+    <string name="dismis">إلغاء</string>
+    <string name="gallary">Gallary</string>
+    <string name="camera">Camera</string>
+    <string name="select_way">Select way</string>
 </resources>
