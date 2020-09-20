@@ -5376,6 +5376,15 @@ public class APICall {
                             BeautyMainPage.client_name =bdb_name;
 
 
+                            //--------------------- addresses----------
+                            JSONArray addresses=object.getJSONArray("address");
+                            BeautyMainPage.lat=addresses.getJSONObject(0).getString("bdb_loc_lat");
+                            BeautyMainPage.lang=addresses.getJSONObject(0).getString("bdb_loc_long");
+
+
+
+
+
                             Log.d("MessageResponse",mMessage);
                             SharedPreferences settings = context.getSharedPreferences("LOGIN", context.MODE_PRIVATE);
                             SharedPreferences.Editor prefEditor = settings.edit();
@@ -33106,10 +33115,18 @@ Log.e("ERRR",e.getMessage());
 
         JSONObject postdata = new JSONObject();
         try {
-            if(!loc_lat.equals(""))
-                postdata.put("loc_lat",loc_lat);
-            if(!loc_long.equals(""))
-                postdata.put("loc_long",loc_long);
+            if (booking_place.equals("1")) {
+                if (!loc_lat.equals(""))
+                    postdata.put("loc_lat", BeautyMainPage.lat_out);
+                if (!loc_long.equals(""))
+                    postdata.put("loc_long", BeautyMainPage.lang_out);
+            }else  if (booking_place.equals("0")){
+                if (!BeautyMainPage.lat.equals(""))
+                    postdata.put("loc_lat", BeautyMainPage.lat);
+                if (!BeautyMainPage.lang.equals(""))
+                    postdata.put("loc_long", BeautyMainPage.lang);
+            }
+
             if(!bdb_pack_code.equals(""))
                 postdata.put("bdb_pack_code",bdb_pack_code);
             /*if(!sup_id.equals(""))
@@ -33146,7 +33163,12 @@ Log.e("ERRR",e.getMessage());
             public void onFailure(Call call, IOException e) {
                 mMessage = e.getMessage();
                 Log.w("failure Response", mMessage);
-                pd.dismiss();
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+                    }
+                });
                 //   TabOne.pullToRefresh.setRefreshing(false);
 
                 if (mMessage.equals("Unable to resolve host \"clientapp.dcoret.com\": No address associated with hostname"))
@@ -33193,6 +33215,12 @@ Log.e("ERRR",e.getMessage());
             public void onResponse(Call call, okhttp3.Response response) throws IOException {
                 mMessage = response.body().string();
                 Log.e("TAG123", mMessage);
+                ((AppCompatActivity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        pd.dismiss();
+                    }
+                });
 
 
                 try{
@@ -34411,6 +34439,7 @@ Log.e("ERRR",e.getMessage());
 
         okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(API_PREFIX_NAME+"/api/user/detailsUser")
+
                 .post(body)
                 .addHeader("Content-Type","application/json")
                 .header("Authorization", "Bearer "+gettoken(context))
@@ -34491,6 +34520,9 @@ Log.e("ERRR",e.getMessage());
                     if(success.equals("true"))
                     {
                         JSONObject data=j.getJSONObject("data");
+                        BeautyMainPage.clientId=data.getString("bdb_id");
+                        Log.e("clientId12121",BeautyMainPage.clientId+"is");
+
                         JSONArray health_records=data.getJSONArray("health_records");
                         for (int i=0;i<health_records.length();i++){
                             JSONObject jsonObject=health_records.getJSONObject(i);
@@ -34501,6 +34533,7 @@ Log.e("ERRR",e.getMessage());
                             String   health_record=jsonObject.getString("health_record");
                             String   name_ar=jsonObject.getString("health_center_name_ar");
                             String   name_en=jsonObject.getString("health_center_name_en");
+
 
                             allFileNumbers.add(new HealthCenterRecord( bdb_id,health_center_id,health_record,name_en,name_ar));
                         }
@@ -36247,7 +36280,7 @@ Log.e("ERRR",e.getMessage());
 
                       filter+=  "]}";
 
-        Log.e("getDoctorsPost",filter);
+        Log.e("getDoctorsPost1",filter);
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
 
 
@@ -36588,7 +36621,7 @@ Log.e("ERRR",e.getMessage());
 
                       filter+=  "]}";
 
-        Log.e("getDoctorsPost",filter);
+        Log.e("getDoctorsPost2",filter);
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
 
 
@@ -36748,7 +36781,7 @@ Log.e("ERRR",e.getMessage());
 
                       filter+=  "]}";
 
-        Log.e("getDoctorsPost",filter);
+        Log.e("getDoctorsPost3",filter);
         RequestBody body = RequestBody.create(MEDIA_TYPE, filter);
 
 

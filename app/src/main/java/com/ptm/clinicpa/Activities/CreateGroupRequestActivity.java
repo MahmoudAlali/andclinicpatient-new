@@ -284,9 +284,13 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     intent.putExtra("date", API.arabicToDecimal(add_date.getText().toString()));*//*
                     startActivity(intent);*/
                     if(FreeGroupBooking.lat==0.0 || FreeGroupBooking.lng==0.0)
-                        APICall.addGroupBookingRequest2( Offers.Lat,Offers.Long, CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+                        APICall.addGroupBookingRequest2(BeautyMainPage.lat_out+"",BeautyMainPage.lang_out+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+//                    Offers.Lat,Offers.Long
                     else
-                        APICall.addGroupBookingRequest2(FreeGroupBooking.lat+"",FreeGroupBooking.lng+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+                        APICall.addGroupBookingRequest2(BeautyMainPage.lat_out+"",BeautyMainPage.lang_out+"", CreateGroupRequestActivity.add_date.getText().toString()+"","center",CreateGroupRequestActivity.is_group_booking,getClients(1),context,description.getText().toString());
+//                    FreeGroupBooking.lat
+//                    FreeGroupBooking.lng
+
 
 
 //                    onBackPressed();
@@ -586,7 +590,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
 
                     String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
                     String filterGender=Filters.getString(Filters.PATIENT_GENDER,APICall.allRelativesList.get(index).getBdb_gender());
-                    String filterDate=Filters.getString(Filters.DATE,add_date.getText().toString());
+                    String filterDate=Filters.getStringdate(Filters.DATE,add_date.getText().toString());
                     String distance;
                     if(freeBookingFragment.filterDistance.equals(""))
                         distance="{\"num\":2,\"value1\":"+0+",\"value2\":"+10000+"}";
@@ -1364,7 +1368,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
 
                 Log.e("Client1","11");
                 client.put("client_name",clientsArrayList.get(i).getClientNameSearchable().getSelectedItem().toString());
-               // client.put("client_phone",clientsArrayList.get(i).getPhoneNumber().getText().toString());
+                client.put("user_level2_id",APICall.allRelativesList.get(clientsArrayList.get(i).getClientNameSearchable().getSelectedItemPosition()-1).getBdb_id());
                 if(clientsArrayList.get(i).getMedicalFileNumber().getText().toString().length()!=0)
                 {
                     client.put("health_record",clientsArrayList.get(i).getMedicalFileNumber().getText());

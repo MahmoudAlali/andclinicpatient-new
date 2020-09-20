@@ -26,4 +26,11 @@ public class Filters {
 
         return filter;
     }
+    public static String getStringdate(String filterNum,String val1){
+        String filter;
+        filter="{\"num\":"+filterNum+",\"value1\":\""+val1+"\",\"value2\":"+"0"+"}";
+//            }
+
+        return filter;
+    }
 }
