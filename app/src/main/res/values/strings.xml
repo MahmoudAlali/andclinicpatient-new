@@ -1101,4 +1101,8 @@
     <string name="insert_char_alert">You can\'t insert characters in phone number field</string>
     <string name="enter_ten_numbers">The phone number must be 10 Numbers</string>
     <string name="prefix_alert">The prefix must be 05</string>
+    <string name="dismis">Dismiss</string>
+    <string name="gallary">Gallary</string>
+    <string name="camera">Camera</string>
+    <string name="select_way">Select way</string>
 </resources>

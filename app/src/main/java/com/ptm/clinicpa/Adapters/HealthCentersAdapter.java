@@ -295,6 +295,8 @@ public class HealthCentersAdapter extends RecyclerView.Adapter<HealthCentersAdap
                 {
                     Intent i = new Intent(BeautyMainPage.context, CreateGroupRequestActivity.class);
                     i.putExtra("sup_id",itemArrayList.get(position).getHealthCntr_id());
+                    BeautyMainPage.lat_out=itemArrayList.get(position).getBdb_loc_lat();
+                    BeautyMainPage.lang_out=itemArrayList.get(position).getBdb_loc_long();
 
                    // HealthCentersFragment.bdb_booking_period=itemArrayList.get(position).getBdb_booking_period();
                     BeautyMainPage.context.startActivity(i);

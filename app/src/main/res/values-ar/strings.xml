@@ -959,4 +959,8 @@
     <string name="insert_char_alert">لا يمكنك إدراج أحرف مع رقم الهاتف</string>
     <string name="enter_ten_numbers">رقم الهاتف يجب ان يحتوي على 10 ارقام فقط</string>
     <string name="prefix_alert">البادئة يجب ان تكون 05</string>
+    <string name="dismis">إلغاء</string>
+    <string name="gallary">Gallary</string>
+    <string name="camera">Camera</string>
+    <string name="select_way">Select way</string>
 </resources>

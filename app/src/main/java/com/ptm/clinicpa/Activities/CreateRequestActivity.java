@@ -75,7 +75,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     public static EditText phoneNumber,ClientName,description,healthFileNum;
     int startWorkHour,startWorkMinutes;
     public static LinearLayout adding_service_layout,offerInfoLayout;
-    public static String age,gender,relation,health_record,client_name;
+    public static String age,gender,relation,health_record,clientId,client_name;
     public static TextView speciality,centerName,doctorName,title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,11 @@ public class CreateRequestActivity extends AppCompatActivity {
         gender =getIntent().getStringExtra("gender");
         health_record =getIntent().getStringExtra("health_record");
         client_name =getIntent().getStringExtra("client_name");
+        client_name =getIntent().getStringExtra("client_name");
+
+
+        Log.e("BCLIENTID","is"+BeautyMainPage.clientId);
+        clientId =BeautyMainPage.clientId;
 
 
         Toolbar toolbar=findViewById(R.id.toolbar);
@@ -682,7 +687,8 @@ public class CreateRequestActivity extends AppCompatActivity {
 
         client.put("client_name",client_name);
        // client.put("client_phone",phoneNumber.getText().toString());
-       // client.put("start_date",CreateRequestActivity.add_date.getText());
+        Log.e("clientID","is"+clientId);
+        client.put("user_level2_id",clientId);
         client.put("doctor_id",sup_id);
         try {
             if(!health_record.equals(""))

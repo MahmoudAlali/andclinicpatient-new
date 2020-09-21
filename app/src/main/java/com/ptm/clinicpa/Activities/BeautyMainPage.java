@@ -102,8 +102,13 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     private int READ_EXTERNAL_STORAGE=93;
     public static Boolean RELOADAPP=false;
     public static String client_name="";
+    public static String clientId="";
     public static String client_gender="";
     public static String client_number="";
+    public static String lat="";
+    public static String lat_out="";
+    public static String lang_out="";
+    public static String lang="";
     public static  IPaymentRequestCallBack iPaymentRequestCallBack;
 
     //--------------------- for call some of APIs for the first time ofopen app ---------------------

@@ -295,6 +295,9 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
                 i.putExtra("gender",PersonalIndivRequest.clientGender);
                 i.putExtra("client_name",PersonalIndivRequest.clientName);
 
+                BeautyMainPage.lat_out=itemArrayList.get(position).getBdb_loc_lat();
+                BeautyMainPage.lang_out=itemArrayList.get(position).getBdb_loc_long();
+
 
                /* Intent i = new Intent(context, RelativesActivity.class);
                 i.putExtra("sup_id",itemArrayList.get(position).getSup_id());

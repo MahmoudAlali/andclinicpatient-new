@@ -53,7 +53,7 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
     public static boolean isPersonalReser,skipDoctors,isOffer;
     static ArrayList<String> relativesList=new ArrayList<>();
     public static String sup_id,max_age,min_age,supported_gender;
-    public static String clientName,clientAge,clientGender,clientRelation,HealthRecord="";
+    public static String clientName,clientId,clientAge,clientGender,clientRelation,HealthRecord="";
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_free_booking_filters2, container, false);
         home=view.findViewById(R.id.home);
@@ -84,6 +84,7 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
 
         if(skipDoctors)
         {
+
             showDoctorsBtn.setText(R.string.next);
             showDoctorsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +123,9 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                     i.putExtra("relation",PersonalIndivRequest.clientRelation);
                     i.putExtra("gender",PersonalIndivRequest.clientGender);
                     i.putExtra("client_name",PersonalIndivRequest.clientName);
+                    Log.e("CLIENTID1221","is"+PersonalIndivRequest.clientId);
+                    BeautyMainPage.clientId=PersonalIndivRequest.clientId;
+
 
 
                /* Intent i = new Intent(context, RelativesActivity.class);
@@ -282,6 +286,7 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                         clientRelation=APICall.allRelativesList.get(index).getBdb_relation();
                         clientAge=APICall.allRelativesList.get(index).getBdb_old();
                         clientName=APICall.allRelativesList.get(index).getBdb_user_name();
+                        clientId=APICall.allRelativesList.get(index).getBdb_id();
                         filesList.clear();
                         filesList.add(BeautyMainPage.context.getString(R.string.med_id2));
 

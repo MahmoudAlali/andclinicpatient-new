@@ -190,15 +190,15 @@
                     >
 
                 </TextView>
-                <ImageView
-                    android:layout_width="58dp"
-                    android:paddingBottom="1dp"
-                    android:paddingTop="1dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/services"
-                    android:padding="8dp"
-                    android:background="@drawable/filter_blue_back"
-                     />
+<!--                <ImageView-->
+<!--                    android:layout_width="58dp"-->
+<!--                    android:paddingBottom="1dp"-->
+<!--                    android:paddingTop="1dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@drawable/services"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:background="@drawable/filter_blue_back"-->
+<!--                     />-->
 
             </LinearLayout>
             <LinearLayout
