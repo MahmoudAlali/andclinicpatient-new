@@ -688,6 +688,9 @@ public class CreateRequestActivity extends AppCompatActivity {
         client.put("client_name",client_name);
        // client.put("client_phone",phoneNumber.getText().toString());
         Log.e("clientID","is"+clientId);
+        if (clientId.equals("") || clientId.equals(null)){
+            client.put("user_level2_id",BeautyMainPage.user_level2_id);
+        }else
         client.put("user_level2_id",clientId);
         client.put("doctor_id",sup_id);
         try {

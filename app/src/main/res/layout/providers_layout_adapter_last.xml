@@ -2,15 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:background="@drawable/automated_browse_back"
+    android:layout_height="150dp"
+    android:orientation="vertical"
     android:layout_margin="5dp"
     >
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/place_out_disable"
+        android:text="@string/out_disable"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="@drawable/automated_browse_back"
         android:weightSum="5">
 
         <LinearLayout
@@ -19,6 +28,7 @@
             android:layout_weight="1"
             android:weightSum="3"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"

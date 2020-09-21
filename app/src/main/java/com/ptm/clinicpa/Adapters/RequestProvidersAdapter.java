@@ -27,6 +27,7 @@ import com.ptm.clinicpa.DataModel.Location_Beauty;
 import com.ptm.clinicpa.DataModel.RequestProviderItem;
 import com.ptm.clinicpa.Fragments.PersonalIndivRequest;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
+import com.ptm.clinicpa.Fragments.freeBookingFragment;
 import com.ptm.clinicpa.MapsActivityLocation;
 import com.ptm.clinicpa.R;
 
@@ -140,6 +141,11 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     if (itemArrayList.get(position).getBdb_has_health_cer().equals("1")){
         (holder).health.setImageResource(R.drawable.ic_health_care);
     }*/
+
+    if (freeBookingFragment.Place.equals("home") && itemArrayList.get(position).getIs_av_outside().equals("0")){
+        (holder).place_out_disable.setVisibility(View.VISIBLE);
+        (holder).addRequest.setVisibility(View.GONE);
+    }
 
     ( holder).providerName.setText(itemArrayList.get(position).getSup_name());
 
@@ -315,7 +321,7 @@ public void onBindViewHolder(@NonNull final ListHolder holder, final int positio
     });
 }
 public class ListHolder extends RecyclerView.ViewHolder {
-    TextView providerName,provider_rate,depositPrcntg,healthCntr,speciality;
+    TextView providerName,provider_rate,place_out_disable,depositPrcntg,healthCntr,speciality;
     ImageView addRequest,logo,place,health,exp,doctorFavorite,centerFavorite;
     CardView cardView;
     public ListHolder(View itemView) {
@@ -333,6 +339,7 @@ public class ListHolder extends RecyclerView.ViewHolder {
         speciality=itemView.findViewById(R.id.speciality);
         centerFavorite=itemView.findViewById(R.id.centerFavorite);
         doctorFavorite=itemView.findViewById(R.id.doctorFavorite);
+        place_out_disable=itemView.findViewById(R.id.place_out_disable);
     }
 }
     @Override

@@ -1105,4 +1105,5 @@
     <string name="gallary">Gallary</string>
     <string name="camera">Camera</string>
     <string name="select_way">Select way</string>
+    <string name="out_disable">Outside ordering is not available from your current location</string>
 </resources>

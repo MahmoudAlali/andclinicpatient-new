@@ -33,6 +33,32 @@ public class RequestProviderItem {
         this.supported_gender=supported_gender;
     }
 
+    String is_av_outside;
+    public RequestProviderItem(String is_av_outside,String max_age,String min_age,String supported_gender,String sup_id,String sup_name,String logo_id,String rating,String bdb_booking_period,String deposit_prcntg,String bdb_loc_lat,String bdb_loc_long,String bdb_has_experience_cer,String bdb_has_health_cer,String healthCntr ,String healthCntr_ar,String speciality,String speciality_ar ,String healthCntr_id,String gender,String is_fav_doctor,String is_fav_center)
+    {
+        this.sup_id=sup_id;
+        this.sup_name=sup_name;
+        this.is_av_outside=is_av_outside;
+        this.logo_id=logo_id;
+        this.rating=rating;
+        this.bdb_booking_period=bdb_booking_period;
+        this.deposit_prcntg=deposit_prcntg;
+        this.bdb_loc_lat=bdb_loc_lat;
+        this.bdb_loc_long=bdb_loc_long;
+        this.bdb_has_health_cer=bdb_has_health_cer;
+        this.bdb_has_experience_cer=bdb_has_experience_cer;
+        this.healthCntr=healthCntr;
+        this.healthCntr_ar=healthCntr_ar;
+        this.speciality_ar=speciality_ar;
+        this.speciality=speciality;
+        this.healthCntr_id=healthCntr_id;
+        this.gender=gender;
+        this.is_fav_center=is_fav_center;
+        this.is_fav_doctor=is_fav_doctor;
+        this.max_age=max_age;
+        this.min_age=min_age;
+        this.supported_gender=supported_gender;
+    }
     public RequestProviderItem(String sup_id,String logo_id,String rating,String bdb_booking_period,String bdb_loc_lat,String bdb_loc_long,String healthCntr ,String healthCntr_ar,String healthCntr_id,String is_fav_center,ArrayList featuresIds)
     {
         this.sup_id=sup_id;
@@ -169,6 +195,10 @@ public class RequestProviderItem {
 
     public String getMax_age() {
         return max_age;
+    }
+
+    public String getIs_av_outside() {
+        return is_av_outside;
     }
 
     public String getMin_age() {

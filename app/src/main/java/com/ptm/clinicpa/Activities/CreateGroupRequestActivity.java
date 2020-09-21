@@ -537,6 +537,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 if(position!=0 && cname.getSelectedItemPosition()!=0) {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
 
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
                     String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
                     APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs,filterAge);
 
@@ -566,42 +567,42 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         cname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("onItemSelected","Item "+position);
-                int index=relativesList.indexOf(parent.getItemAtPosition(position-1));
-                if(APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
+                if (position!=0){
+                Log.e("onItemSelected", "Item " + position);
+                int index = relativesList.indexOf(parent.getItemAtPosition(position));
+                if (APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
                     genderSpinner.setSelection(1);
                 else
                     genderSpinner.setSelection(2);
                 relativeSpinner.setSelection(Integer.parseInt(APICall.allRelativesList.get(index).getBdb_relation()));
-                if(!APICall.allRelativesList.get(index).getBdb_health_record().equals("null"))
-                {
+                if (!APICall.allRelativesList.get(index).getBdb_health_record().equals("null")) {
                     healthFileNum.setText(APICall.allRelativesList.get(index).getBdb_health_record());
                     healthFileNum.setEnabled(false);
 
                 }
                 {
-                    String s=APICall.allRelativesList.get(index).getBdb_old();
+                    String s = APICall.allRelativesList.get(index).getBdb_old();
                     ageRange.setText(s);
 
                 }
-                if( cname.getSelectedItemPosition()!=0) {
-                    String filterSpeciality="";
-                    if(doctorSpeciality.getSelectedItemPosition()!=0)
+                if (cname.getSelectedItemPosition() != 0) {
+                    String filterSpeciality = "";
+                    if (doctorSpeciality.getSelectedItemPosition() != 0)
                         filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(doctorSpeciality.getSelectedItemPosition() - 1).getBdb_ser_id());
 
-                    String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
-                    String filterGender=Filters.getString(Filters.PATIENT_GENDER,APICall.allRelativesList.get(index).getBdb_gender());
-                    String filterDate=Filters.getStringdate(Filters.DATE,add_date.getText().toString());
+                    String filterAge = Filters.getString(Filters.PATIENT_OLD, ageRange.getText().toString());
+                    String filterGender = Filters.getString(Filters.PATIENT_GENDER, APICall.allRelativesList.get(index).getBdb_gender());
+                    String filterDate = Filters.getStringdate(Filters.DATE, add_date.getText().toString());
                     String distance;
-                    if(freeBookingFragment.filterDistance.equals(""))
-                        distance="{\"num\":2,\"value1\":"+0+",\"value2\":"+10000+"}";
+                    if (freeBookingFragment.filterDistance.equals(""))
+                        distance = "{\"num\":2,\"value1\":" + 0 + ",\"value2\":" + 10000 + "}";
                     else
-                        distance=freeBookingFragment.filterDistance;
-                    APICall.getDoctors(true, context, "", "", distance, filterSpeciality, filterDate, filterGender,adapter3,docNames,allDocs,filterAge);
+                        distance = freeBookingFragment.filterDistance;
+                    APICall.getDoctors(true, context, "", "", distance, filterSpeciality, filterDate, filterGender, adapter3, docNames, allDocs, filterAge);
 
                 }
 
-
+            }
             }
 
             @Override
@@ -835,6 +836,9 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0 && cname.getSelectedItemPosition()!=0) {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
+
+
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
 
                     String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
                     APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs,filterAge);
@@ -1549,7 +1553,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                         String timeSelected=APICall.allAvailableTimes.get(selectedItemIndx-1);
                         time.setText(timeSelected);
                     }
-                    Log.e("name",":"+APICall.allRelativesList.get(selectedItemIndx-1).getBdb_user_name());
+//                    Log.e("name",":"+APICall.allRelativesList.get(selectedItemIndx-1).getBdb_user_name());
                    //addLayout2("",APICall.allRelativesList.get(selectedItemIndx-1).getBdb_user_name(),APICall.allRelativesList.get(selectedItemIndx-1).getBdb_relation(),APICall.allRelativesList.get(selectedItemIndx-1).getBdb_gender(),APICall.allRelativesList.get(selectedItemIndx-1).getBdb_old(),APICall.allRelativesList.get(selectedItemIndx-1).getBdb_health_record());
                     // bdb_name="\"SupplierId\":"+idsup+",";
                 }else {

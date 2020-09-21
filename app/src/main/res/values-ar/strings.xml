@@ -963,4 +963,5 @@
     <string name="gallary">Gallary</string>
     <string name="camera">Camera</string>
     <string name="select_way">Select way</string>
+    <string name="out_disable">الطلب خارج المركز غير متاح من موقعك الحالي</string>
 </resources>

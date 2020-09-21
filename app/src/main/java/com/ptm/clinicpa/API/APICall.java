@@ -2879,7 +2879,7 @@ public class APICall {
         OkHttpClient client = new OkHttpClient();
         JSONObject postdata = new JSONObject();
         try {
-            postdata.put("bdb_pack_code",packCode);
+                postdata.put("bdb_pack_code",packCode);
         }
         catch (Exception e){}
 
@@ -31899,6 +31899,7 @@ public class APICall {
                                 for (int i=0;i<suppliers.length();i++){
                                     JSONObject jarray = suppliers.getJSONObject(i);
                                     String sup_id=jarray.getString("sup_id");
+                                    String is_av_outside=jarray.getString("is_av_outside");
                                     String min_age=jarray.getString("min_age");
                                     String max_age=jarray.getString("max_age");
                                     String supported_gender=jarray.getString("supported_gender");
@@ -31920,7 +31921,7 @@ public class APICall {
                                     String is_fav_doctor=jarray.getString("is_fav_doctor");
                                     String is_fav_center=jarray.getString("is_fav_center");
 
-                                    RequestProviderItem provider = new RequestProviderItem(max_age,min_age,supported_gender,sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"",bdb_has_experience_cer,bdb_has_health_cer,health_center_en,health_center_ar,specialization_en,specialization_ar,health_center_id,gender,is_fav_doctor,is_fav_center);
+                                    RequestProviderItem provider = new RequestProviderItem(is_av_outside,max_age,min_age,supported_gender,sup_id,sup_name,logo_id,rating,bdb_booking_period,deposit_prcntg,bdb_loc_lat+"",bdb_loc_long+"",bdb_has_experience_cer,bdb_has_health_cer,health_center_en,health_center_ar,specialization_en,specialization_ar,health_center_id,gender,is_fav_doctor,is_fav_center);
                                    // Log.e("lat",latitude);
                                     RequestProvidersFragment.providerItems.add(provider);
 
@@ -33115,12 +33116,12 @@ Log.e("ERRR",e.getMessage());
 
         JSONObject postdata = new JSONObject();
         try {
-            if (booking_place.equals("1")) {
+            if (booking_place.equals("center")) {
                 if (!loc_lat.equals(""))
                     postdata.put("loc_lat", BeautyMainPage.lat_out);
                 if (!loc_long.equals(""))
                     postdata.put("loc_long", BeautyMainPage.lang_out);
-            }else  if (booking_place.equals("0")){
+            }else  if (booking_place.equals("home")){
                 if (!BeautyMainPage.lat.equals(""))
                     postdata.put("loc_lat", BeautyMainPage.lat);
                 if (!BeautyMainPage.lang.equals(""))
@@ -34520,9 +34521,8 @@ Log.e("ERRR",e.getMessage());
                     if(success.equals("true"))
                     {
                         JSONObject data=j.getJSONObject("data");
-                        BeautyMainPage.clientId=data.getString("bdb_id");
-                        Log.e("clientId12121",BeautyMainPage.clientId+"is");
-
+                        BeautyMainPage.user_level2_id=data.getString("user_level2_id");
+//                        Log.e("clientId12121",BeautyMainPage.clientId+"is");
                         JSONArray health_records=data.getJSONArray("health_records");
                         for (int i=0;i<health_records.length();i++){
                             JSONObject jsonObject=health_records.getJSONObject(i);

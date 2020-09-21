@@ -179,6 +179,7 @@ public class PersonalIndivRequest extends Fragment implements LocationListener,
                         Fragment fragment = new RequestProvidersFragment();
                         Bundle b= new Bundle();
                         b.putBoolean("isGroup",false);
+
                         FragmentManager fm = getActivity().getFragmentManager();
                         fragment.setArguments(b);
                         FragmentTransaction fragmentTransaction = fm.beginTransaction();
