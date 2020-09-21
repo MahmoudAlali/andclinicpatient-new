@@ -161,7 +161,8 @@ public class Login extends AppCompatActivity {
             APICall.showSweetDialog(Login.this,R.string.nice,R.string.EntermobnumberAlert);
         }else if (password.getText().toString().isEmpty()){
             APICall.showSweetDialog(Login.this,R.string.nice,R.string.EnterPassAlert);
-        }else {
+        }else if (checkPhoneNumber(username.getText().toString()))
+        {
             APICall.login(username.getText().toString(), password.getText().toString(), APICall.API_PREFIX_NAME+"/api/user/login", Login.this,key,value);
         }
         }
@@ -184,4 +185,37 @@ public class Login extends AppCompatActivity {
         APICall.getGuestToken(context,FirebaseInstanceId.getInstance().getToken());
 
     }
+    private boolean checkPhoneNumber(String phoneNumber)
+    {
+        Boolean check=false;
+        if(phoneNumber.length()==0 ||  phoneNumber.length()==1){
+            check=false;
+            APICall.showSweetDialog(context,  ((AppCompatActivity)context).getResources().getString(R.string.EntermobnumberAlert), false);
+
+        }else {
+            String prefix = phoneNumber.substring(0, 2);
+            //        String prefix=text.substring(0,1);
+            if (prefix.matches("05")) {
+                if (phoneNumber.matches(".*[A-Z].*") || phoneNumber.matches(".*[a-z].*")) {
+                    check = false;
+                    APICall.showSweetDialog(context,  context.getResources().getString(R.string.insert_char_alert), false);
+                } else {
+                    if (phoneNumber.matches(".*[0-9].*") && phoneNumber.length() == 10) {
+                        check = true;
+                    } else {
+                        APICall.showSweetDialog(context, context.getResources().getString(R.string.enter_ten_numbers) , false);
+                        check = false;
+                    }
+                }
+            } else {
+                APICall.showSweetDialog(context,  context.getResources().getString(R.string.prefix_alert), false);
+                check = false;
+            }
+            Log.e("Prefix", prefix);
+            Log.e("Prefix", phoneNumber.matches(".*[A-Z].*") + "");
+            Log.e("Prefixnum", phoneNumber.matches(".*[A-Z].*") + "");
+            Log.e("Prefix", prefix);
+            Log.e("CheckNumber", check + "");
+        }
+        return check;    }
 }

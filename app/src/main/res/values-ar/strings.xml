@@ -716,7 +716,7 @@
     <string name="resend_code">إعادة إرسال الرمز</string>
     <string name="second">ثانية</string>
     <string name="account_stop_alert">هذا الحساب متوقف, يرجى الضغط على اعادة التنشيط لتفعيل الحساب مجددا</string>
-    <string name="wrong_password">كلمة السر خاظئ</string>
+    <string name="wrong_password">كلمة المرور غير صحيحة</string>
     <string name="ur_acc_activated_pls_login_now">تم تفعيل حسابك, يرجى تسجيل الدخول</string>
     <string name="deposit_done">تمت عملية دفع العربون بنجاح</string>
     <string name="not_completly_executed">لم يتم التنفيذ بشكل كامل</string>
@@ -956,6 +956,9 @@
     <string name="appointmentDetails">تفاصيل الموعد</string>
     <string name="requestDetails">تفاصيل الطلب</string>
     <string name="waffer">وفّر</string>
+    <string name="insert_char_alert">لا يمكنك إدراج أحرف مع رقم الهاتف</string>
+    <string name="enter_ten_numbers">رقم الهاتف يجب ان يحتوي على 10 ارقام فقط</string>
+    <string name="prefix_alert">البادئة يجب ان تكون 05</string>
     <string name="dismis">إلغاء</string>
     <string name="gallary">Gallary</string>
     <string name="camera">Camera</string>

@@ -1098,6 +1098,9 @@
     <string name="AllDevices">Logout from all devices</string>
     <string name="AllDevicesNotMe">Logout from all other devices except this device</string>
     <string name="DontLogout">Don\'t logout</string>
+    <string name="insert_char_alert">You can\'t insert characters in phone number field</string>
+    <string name="enter_ten_numbers">The phone number must be 10 Numbers</string>
+    <string name="prefix_alert">The prefix must be 05</string>
     <string name="dismis">Dismiss</string>
     <string name="gallary">Gallary</string>
     <string name="camera">Camera</string>
