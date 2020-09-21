@@ -334,7 +334,7 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
         Log.e("Notif", " pairs :"+notificationPairs);
 
         if(code.equals("24")||code.equals("26")||code.equals("27")||code.equals("37")
-                ||code.equals("23")||code.equals("22")||code.equals("25")||code.equals("28"))
+                ||code.equals("23")||code.equals("22")||code.equals("25")||code.equals("28")||code.equals("48")||code.equals("49"))
         {
             String book_id="";
             for (int i=0;i<j.length();i++)

@@ -452,7 +452,7 @@ public class NotificationsBeauty {
         Log.e("Notif", " pairs :"+notificationPairs);
 
         if(code.equals("22")||code.equals("23")||code.equals("24")||code.equals("25")||code.equals("26")
-                ||code.equals("27")||code.equals("28")||code.equals("36")||code.equals("37")
+                ||code.equals("27")||code.equals("28")||code.equals("36")||code.equals("37")||code.equals("48")||code.equals("49")
         )
         {
             showBookingDetailsNotification(context,title,body,j,code);
