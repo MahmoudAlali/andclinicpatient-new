@@ -562,11 +562,12 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_dropdown_item_1line, relativesList);
         cname.setAdapter(adapter);
+
         cname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("onItemSelected","Item "+position);
-                int index=relativesList.indexOf(parent.getItemAtPosition(position));
+                int index=relativesList.indexOf(parent.getItemAtPosition(position-1));
                 if(APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
                     genderSpinner.setSelection(1);
                 else
