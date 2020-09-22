@@ -227,6 +227,8 @@ import okhttp3.RequestBody;
 public class APICall {
 
 
+    private static  String SUPPORT_MOBILE ="" ;
+    private static String API_SUPPORT_PREFIX ="" ;
     public static  String FRAGMENT_NAME ="" ;
     public static  int PERIOD_FOR_SER_OFR  ;
     public static String bdb_is_effects_on="0";
@@ -945,7 +947,7 @@ public class APICall {
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Uri uri = Uri.parse(API_SUPPORT_PREFIX);
                         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(myAppLinkToMarket);
 
@@ -37622,7 +37624,12 @@ Log.e("filters",filter);
                         GOOGLE_KEY=data.getString("google_key");
                         PROVIDER_SERVER_KEY=data.getString("provider_server_key");
                         LOGO_ID=data.getString("client_logo_id");
+                        APICall.SUPPORT_MOBILE=data.getString("support_mobile");
+                        APICall.API_SUPPORT_PREFIX=data.getString("support_url");
+//                        PROVIDER_SERVER_KEY=data.getString("provider_server_key");
 
+                        Log.e("support1",APICall.SUPPORT_MOBILE);
+                        Log.e("support2",APICall.API_SUPPORT_PREFIX);
                        /* String experince="",book_sol="";
                         if (ln.equals("ar")) {
                             experince = data.getString("previous_experience_ar");
@@ -37798,7 +37805,7 @@ Log.e("filters",filter);
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Uri uri = Uri.parse(API_SUPPORT_PREFIX);
                         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(myAppLinkToMarket);
 
@@ -37836,7 +37843,7 @@ Log.e("filters",filter);
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Uri uri = Uri.parse(API_SUPPORT_PREFIX);
                         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(myAppLinkToMarket);
 
@@ -37872,7 +37879,7 @@ Log.e("filters",filter);
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Uri uri = Uri.parse(API_SUPPORT_PREFIX);
                         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(myAppLinkToMarket);
 
@@ -37907,7 +37914,7 @@ Log.e("filters",filter);
                     @Override
                     public void onClick(View v) {
                         dialog.cancel();
-                        Uri uri = Uri.parse("http://vizagep.ptm.com.sa/contact.php");
+                        Uri uri = Uri.parse(API_SUPPORT_PREFIX);
                         Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(myAppLinkToMarket);
 
