@@ -194,6 +194,9 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
 //            APICall.details_user(APICall.API_PREFIX_NAME+"/api/auth/user/detailsUser", context);
 //        }else if(settings.getString("client_name","").equals("Guest"))
 //        {
+
+        APICall.getSystemInfoForLogo(context);
+
             APICall.details_user(APICall.API_PREFIX_NAME+"/api/user/detailsUser", context);
 //        }else {
             client_name=settings.getString("client_name","");

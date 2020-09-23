@@ -117,7 +117,7 @@ public class SupportActivity extends AppCompatActivity {
     public static void openWhatsappChat(Context context){
         try {
             String whatsAppRoot = "http://api.whatsapp.com/";
-            String number = "send?phone=966563434455"; //here the mobile number with its international prefix
+            String number = "send?phone="+APICall.SUPPORT_MOBILE.replace("+",""); //here the mobile number with its international prefix
             //String text = "&text=HERE YOUR TEXT";
             String uri = whatsAppRoot+number;
             Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -227,8 +227,8 @@ import okhttp3.RequestBody;
 public class APICall {
 
 
-    private static  String SUPPORT_MOBILE ="" ;
-    private static String API_SUPPORT_PREFIX ="" ;
+    public static  String SUPPORT_MOBILE ="" ;
+    public static String API_SUPPORT_PREFIX ="" ;
     public static  String FRAGMENT_NAME ="" ;
     public static  int PERIOD_FOR_SER_OFR  ;
     public static String bdb_is_effects_on="0";
