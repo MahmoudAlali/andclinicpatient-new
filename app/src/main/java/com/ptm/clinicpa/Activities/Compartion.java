@@ -19,6 +19,7 @@ import com.ptm.clinicpa.R;
 
 public class Compartion extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
