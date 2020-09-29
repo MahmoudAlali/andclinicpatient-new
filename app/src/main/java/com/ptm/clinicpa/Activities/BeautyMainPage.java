@@ -104,6 +104,8 @@ public class BeautyMainPage extends AppCompatActivity implements NavigationView.
     public static String client_name="";
     public static String clientId="";
     public static String user_level2_id="";
+    public static String user_l2_id="";
+
     public static String client_gender="";
     public static String client_number="";
     public static String lat="";

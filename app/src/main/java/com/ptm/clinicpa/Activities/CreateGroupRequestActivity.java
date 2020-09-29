@@ -42,6 +42,7 @@ import com.ptm.clinicpa.R;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -482,6 +483,30 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         start_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                JSONArray booked_time=null;
+                booked_time=new JSONArray();
+
+                Log.e("clientArrayList1","ok");
+                for (int i=0;i<clientsArrayList.size();i++){
+                    if (!clientsArrayList.get(i).getAppointmentTime().getText().toString().equals("00:00:00")) {
+
+                        JSONObject jsonObject=new JSONObject();
+                        try {
+                            jsonObject.put("doctor_id",clientsArrayList.get(i).getAllDoctors().get(clientsArrayList.get(i).getDoctorName().getSelectedItemPosition()).getBdb_ser_id());
+                            jsonObject.put("time",clientsArrayList.get(i).getAppointmentTime().getText().toString());
+                            jsonObject.put("user_level2_id",BeautyMainPage.user_l2_id);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        booked_time.put(jsonObject);
+
+
+                    }
+                    }
+
                 if (add_date.getText().toString().equals(BeautyMainPage.context.getResources().getString(R.string.select_date))) {
                     APICall.showSweetDialog(context,BeautyMainPage.context.getResources().getString(R.string.select_date_of_booking));
                 }
@@ -491,7 +516,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 }
                 else
 
-                APICall.getAvailableTimes(context,add_date.getText().toString(),APICall.allDoctors.get(doctorName.getSelectedItemPosition()).getBdb_ser_id(),getBookedTimes(),start_time);
+                APICall.getAvailableTimes(context,add_date.getText().toString(),APICall.allDoctors.get(doctorName.getSelectedItemPosition()).getBdb_ser_id(),getBookedTimes(),start_time,booked_time);
             }
         });
         Log.e("111","666");
@@ -569,7 +594,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
                 Log.e("onItemSelected", "Item " + position);
-                int index = relativesList.indexOf(parent.getItemAtPosition(position));
+                int index = relativesList.indexOf(parent.getItemAtPosition(position-1));
                 if (APICall.allRelativesList.get(index).getBdb_gender().equals("0"))
                     genderSpinner.setSelection(1);
                 else
@@ -784,6 +809,32 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
         start_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONArray booked_time=null;
+                booked_time=new JSONArray();
+                Log.e("clientArrayList0","ok");
+                //"doctor_id":"17",
+                //"time":"4:45 PM",
+                //"user_level2_id":"63"
+
+                for (int i=0;i<clientsArrayList.size();i++){
+                    if (!clientsArrayList.get(i).getAppointmentTime().getText().toString().equals("00:00:00")) {
+
+                        JSONObject jsonObject=new JSONObject();
+                        try {
+                            jsonObject.put("doctor_id",clientsArrayList.get(i).getAllDoctors().get(clientsArrayList.get(i).getDoctorName().getSelectedItemPosition()).getBdb_ser_id());
+                            jsonObject.put("time",clientsArrayList.get(i).getAppointmentTime().getText().toString());
+                            jsonObject.put("user_level2_id",BeautyMainPage.user_l2_id);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        booked_time.put(jsonObject);
+
+
+                    }
+                }
+
                 if (add_date.getText().toString().equals(BeautyMainPage.context.getResources().getString(R.string.select_date))) {
                     APICall.showSweetDialog(context,BeautyMainPage.context.getResources().getString(R.string.select_date_of_booking));
                 }
@@ -792,7 +843,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     APICall.showSweetDialog(context,BeautyMainPage.context.getResources().getString(R.string.relative_proceed));
                 }
                 else
-                    APICall.getAvailableTimes(context,add_date.getText().toString(),APICall.allDoctors.get(doctorName.getSelectedItemPosition()).getBdb_ser_id(),getBookedTimes(),start_time);
+                    APICall.getAvailableTimes(context,add_date.getText().toString(),APICall.allDoctors.get(doctorName.getSelectedItemPosition()).getBdb_ser_id(),getBookedTimes(),start_time,booked_time);
             }
         });
         if (specialitiesList.size()==0)

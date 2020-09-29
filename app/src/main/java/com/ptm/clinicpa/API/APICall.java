@@ -5370,12 +5370,14 @@ public class APICall {
                             String bdb_id=data.getString("bdb_id");
                             String bdb_gender=data.getString("bdb_gender");
                             String bdb_old=data.getString("bdb_old");
+                            String user_level2_id=data.getString("user_level2_id");
                             BeautyMainPage.client_number =bdb_mobile;
                             BeautyMainPage.client_gender =bdb_gender;
                             BeautyMainPage.bdb_is_guest =bdb_is_guest;
                             BeautyMainPage.bdb_id =bdb_id;
                             BeautyMainPage.bdb_old =bdb_old;
                             BeautyMainPage.client_name =bdb_name;
+                            BeautyMainPage.user_l2_id =user_level2_id;
 
 
                             //--------------------- addresses----------
@@ -34933,7 +34935,7 @@ Log.e("ERRR",e.getMessage());
     }
     public static ArrayList<String> allAvailableTimes=new ArrayList<>();
 
-    public  static  void  getAvailableTimes( final Context context,String date,String Id,JSONArray bookedTimes,final TextView time){
+    public  static  void  getAvailableTimes( final Context context,String date,String Id,JSONArray bookedTimes,final TextView time,JSONArray booked_time){
 
         allAvailableTimes.clear();
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
@@ -34952,6 +34954,8 @@ Log.e("ERRR",e.getMessage());
         try {
             postdata.put("doctor_id",Id);
             postdata.put("date",date);
+            postdata.put("booked_time",booked_time);
+            postdata.put("user_level2_id",BeautyMainPage.user_l2_id);
             if(bookedTimes.equals(""))
               postdata.put("booked_time",bookedTimes);
         }
