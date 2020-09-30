@@ -45,6 +45,7 @@ public class RequestProvidersFragment extends Fragment {
     public static LinearLayout previousPage,nextPage;
     public static TextView pageNumView;
 
+
     public static String bdb_booking_period;
     public static boolean isGroup;
     public static ImageView filter;
