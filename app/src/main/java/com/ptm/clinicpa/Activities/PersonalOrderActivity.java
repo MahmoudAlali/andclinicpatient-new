@@ -22,6 +22,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.API.Constants;
 import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.Fragments.RequestProvidersFragment;
 import com.ptm.clinicpa.Fragments.freeBookingFragment;
@@ -86,7 +87,7 @@ public class PersonalOrderActivity extends AppCompatActivity
 
                     freeBookingFragment.filterMyLocationLat="{\"num\":34,\"value1\":"+ Offers.Lat +",\"value2\":0}";
                     freeBookingFragment.filterMyLocationLng="{\"num\":35,\"value1\":"+Offers.Long+",\"value2\":0}";
-                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":"+ Constants.defaultDistance+"}";
                     if(medFileNum.getSelectedItemPosition()==0) {
                         APICall.showSweetDialog(context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.filenum_proceed));
                         return;
@@ -141,7 +142,7 @@ public class PersonalOrderActivity extends AppCompatActivity
 
                     freeBookingFragment.filterMyLocationLat="{\"num\":34,\"value1\":"+ Offers.Lat +",\"value2\":0}";
                     freeBookingFragment.filterMyLocationLng="{\"num\":35,\"value1\":"+Offers.Long+",\"value2\":0}";
-                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":"+Constants.defaultDistance+"}";
                     if(medFileNum.getSelectedItemPosition()==0) {
                         APICall.showSweetDialog(context, getResources().getString(R.string.ExuseMeAlert), getResources().getString(R.string.filenum_proceed));
                         return;

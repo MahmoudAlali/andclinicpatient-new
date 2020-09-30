@@ -111,7 +111,11 @@ public class RequestProvidersFragment extends Fragment {
                 providerItems.clear();
 
                 pageNum=1;
-                providersAdapter.notifyDataSetChanged();
+                try {
+                    providersAdapter.notifyDataSetChanged();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 //---------------------call API for Services and get items-------------
                 if(isGroup)
                     APICall.automatedCentersBrowseForGroupBooking( pageNum+"", BeautyMainPage.context);

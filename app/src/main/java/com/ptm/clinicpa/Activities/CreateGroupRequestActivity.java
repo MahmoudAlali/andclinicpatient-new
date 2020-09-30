@@ -29,6 +29,7 @@ import android.widget.TimePicker;
 
 import com.google.gson.JsonArray;
 import com.ptm.clinicpa.API.APICall;
+import com.ptm.clinicpa.API.Constants;
 import com.ptm.clinicpa.API.Filters;
 import com.ptm.clinicpa.API.HintArrayAdapter;
 import com.ptm.clinicpa.DataModel.ClientServiceDataModel;
@@ -562,7 +563,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                 if(position!=0 && cname.getSelectedItemPosition()!=0) {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
 
-                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":"+ Constants.defaultDistance+"}";
                     String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
                     APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs,filterAge);
 
@@ -889,7 +890,7 @@ public class CreateGroupRequestActivity extends AppCompatActivity {
                     String filterSpeciality = Filters.getString(Filters.SPECIALITY_ID, APICall.allSpecialities.get(position - 1).getBdb_ser_id());
 
 
-                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":100000}";
+                    freeBookingFragment.filterDistance="{\"num\":2,\"value1\":0,\"value2\":"+Constants.defaultDistance+"}";
 
                     String filterAge=Filters.getString(Filters.PATIENT_OLD,ageRange.getText().toString());
                     APICall.getDoctors(true, context, "", "", freeBookingFragment.filterDistance, filterSpeciality, "", "",adapter3,docNames,allDocs,filterAge);

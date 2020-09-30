@@ -61,7 +61,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class freeBookingFragment extends Fragment implements LocationListener ,
+public class freeBookingFragment extends Fragment implements LocationListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     LinearLayout  service_hair;
     Fragment fragment;
